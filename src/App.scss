@@ -1,3 +1,5 @@
+@use "./styles/breakpoints.scss" as bp;
+
 body {
     background-color: white;
     color: black;
@@ -6,4 +8,16 @@ body {
 body.dark {
     background-color: #050505;
     color: white;
+    @include bp.sm {
+        background-color: red;
+    }
+    @include bp.md {
+        background-color: yellow;
+    }
+    @include bp.lg {
+        background-color: orange;
+    }
+    @include bp.xl {
+        background-color: green;
+    }
 }
