@@ -1,12 +1,19 @@
+import { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Welcome from "./components/Welcome/Welcome";
+import Menu from "./components/Menu/Menu";
 import "./styles/palette.scss";
 import "./App.scss";
 
 function App() {
+    const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     return (
         <>
-            <Nav />
+            <Nav
+                setMobileMenuVisible={setMobileMenuVisible}
+                mobileMenuVisible={mobileMenuVisible}
+            />
+            {mobileMenuVisible && <Menu />}
             <Welcome />
             <div className="hero">
                 <p>

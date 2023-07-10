@@ -18,6 +18,8 @@ header {
     .burger {
         color: $white_5;
         font-size: $font_xl;
+        cursor: pointer;
+
         @include bp.sm {
             font-size: $font_xx;
         }

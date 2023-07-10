@@ -1,13 +1,28 @@
 import { RxHamburgerMenu } from "react-icons/rx";
-import { PiHamburgerDuotone } from "react-icons/pi";
+import { CgClose } from "react-icons/cg";
 import icon from "../../assets/images/icon.svg";
 import "./Nav.scss";
 
-const Nav = () => {
+interface Props {
+    setMobileMenuVisible: (visible: boolean) => void;
+    mobileMenuVisible: boolean;
+}
+
+const Nav = ({ setMobileMenuVisible, mobileMenuVisible }: Props) => {
     return (
         <header>
             <img className="t-logo" src={icon} alt="" />
-            <RxHamburgerMenu className="burger" />
+            {!mobileMenuVisible ? (
+                <RxHamburgerMenu
+                    className="burger"
+                    onClick={() => setMobileMenuVisible(true)}
+                />
+            ) : (
+                <CgClose
+                    className="burger"
+                    onClick={() => setMobileMenuVisible(false)}
+                />
+            )}
             <ul className="nav_links">
                 <li className="active">Home</li>
                 <li>About</li>
