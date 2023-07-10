@@ -1,5 +1,6 @@
 @use "./styles/breakpoints.scss" as bp;
 @import "./styles/palette.scss";
+@import "./styles/font_sizes.scss";
 
 body {
     background-color: white;
@@ -16,5 +17,30 @@ body.dark {
     @include bp.lg {
     }
     @include bp.xl {
+    }
+}
+
+
+
+// Temp
+header {
+    height: 5em;
+    border-bottom: 1px solid $black_2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5em;
+    @include bp.sm {
+    }
+    @include bp.md {
+    }
+    @include bp.lg {
+    }
+    @include bp.xl {
+    }
+
+    .logo {
+        color: #888;
+        font-size: $font_xx;
     }
 }

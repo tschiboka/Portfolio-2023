@@ -1,0 +1,31 @@
+@use "./styles/breakpoints.scss" as bp;
+@import "./styles/palette.scss";
+@import "./styles/font_sizes.scss";
+
+@font-face {
+    font-family: Helvetica_Light;
+    src: url("./assets/fonts/Helvetica_Light.otf");
+}
+
+@font-face {
+    font-family: Monospace_Light;
+    src: url("./assets/fonts/Monospace.ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica_Light, Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+    letter-spacing: 1px;
+}
+
+strong {
+    font-weight: bolder;
+}
+
+h1 {
+    color: white;
+    font-size: $font_lg;
+}
