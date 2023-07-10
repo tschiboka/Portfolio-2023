@@ -12,9 +12,11 @@
     @include bp.sm {
         padding: 2em 2em 0 2em;
     }
+    @include bp.lg {
+        padding: 2em 3em 0 3em;
+    }
 
     h1 {
-        font-family: Helvetica_Ultra_light;
         font-size: $font_md;
         color: $white_5;
 
@@ -53,6 +55,10 @@
             @include bp.sm {
                 margin-left: 2rem;    
             }
+            @include bp.lg {
+                margin-left: 3rem;    
+            }
+
         }
     }
     
