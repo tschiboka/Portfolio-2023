@@ -12,11 +12,36 @@ header {
         padding: 0 2em;
     }
 
-    .logo {
+    .logo, .burger {
         color: $white_5;
         font-size: $font_xl;
         @include bp.sm {
             font-size: $font_xx;
+        }
+    }
+
+    .burger {
+        @include bp.md {
+            display: none;
+        }
+    }
+
+    .nav_links {
+        display: none;
+        list-style: none;
+        @include bp.md {
+            display: flex;
+        }
+
+        li {
+            padding-left: 2rem;
+            color: $white_5;
+            font-size: $font_lg;
+            cursor: pointer;
+        }
+
+        li.active {
+            color: white;
         }
     }
 }

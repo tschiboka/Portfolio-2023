@@ -6,7 +6,13 @@ const Nav = () => {
     return (
         <header>
             <PiHamburgerDuotone className="logo" />
-            <RxHamburgerMenu className="logo" />
+            <RxHamburgerMenu className="burger" />
+            <ul className="nav_links">
+                <li className="active">Home</li>
+                <li>About</li>
+                <li>Projects</li>
+                <li>Contact</li>
+            </ul>
         </header>
     );
 };
