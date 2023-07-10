@@ -19,25 +19,3 @@ body.dark {
     @include bp.xl {
     }
 }
-
-
-
-// Temp
-header {
-    height: 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1.5rem;
-    @include bp.sm {
-        padding: 0 2em;
-    }
-
-    .logo {
-        color: $white_5;
-        font-size: $font_xl;
-        @include bp.sm {
-            font-size: $font_xx;
-        }
-    }
-}

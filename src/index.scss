@@ -3,14 +3,15 @@
 @import "./styles/font_sizes.scss";
 
 @font-face {
-    font-family: Helvetica_Light;
-    src: url("./assets/fonts/Helvetica_Light.otf");
+    font-family: Helvetica_Ultra_Light;
+    src: url("./assets/fonts/Helvetica_Ultra_Light.otf");
 }
 
 @font-face {
-    font-family: Monospace_Light;
-    src: url("./assets/fonts/Monospace.ttf");
+    font-family: Helvetica_Light;
+    src: url("./assets/fonts/Helvetica_Light.ttf");
 }
+
 
 * {
     margin: 0;
@@ -23,10 +24,14 @@
 }
 
 strong {
-    font-weight: bolder;
+    color: white;
 }
 
 h1 {
     color: white;
     font-size: $font_lg;
+    @include bp.md {
+        font-size: $font_xx;
+        color: red;
+    }
 }

@@ -14,15 +14,16 @@
     }
 
     h1 {
-      font-size: $font_md;
-      color: $white_1;
+        font-family: Helvetica_Ultra_light;
+        font-size: $font_md;
+        color: $white_5;
 
-      @include bp.sm {
-        font-size: $font_lg;
-      }
-      @include bp.md {
-        font-size: $font_xl;
-      }
+        @include bp.sm {
+            font-size: $font_lg;
+        }
+        @include bp.md {
+            font-size: $font_xl;
+        }
     }
     
     img {
