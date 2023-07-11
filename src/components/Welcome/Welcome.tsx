@@ -1,9 +1,13 @@
 import headshot from "../../assets/images/headshot_placeholder.png";
 import "./Welcome.scss";
 
-const Welcome = () => {
+interface Props {
+    subMenuVisible: boolean;
+}
+
+const Welcome = ({ subMenuVisible }: Props) => {
     return (
-        <div className="Welcome">
+        <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
             <img src={headshot} />
             <h1>
                 <strong>Tivadar Debnar</strong> | Web Developer

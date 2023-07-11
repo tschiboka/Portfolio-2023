@@ -1,32 +1,33 @@
-import { AiOutlineHome } from "react-icons/ai";
-import { TbInfoHexagon } from "react-icons/tb";
-import { BiMessageDetail, BiCodeAlt } from "react-icons/bi";
-import { BsSun, BsMoonStars } from "react-icons/bs";
+import { FaFacebookF } from "react-icons/fa";
+import { TbBrandGithubFilled } from "react-icons/tb";
+import { TfiLinkedin } from "react-icons/tfi";
 import "./Menu.scss";
 
-const Menu = () => {
+interface Props {
+    themeMode: string;
+    setThemeMode: (themeMode: string) => void;
+}
+
+const Menu = ({ themeMode, setThemeMode }: Props) => {
     return (
         <menu className="Menu">
-            <li className="active">
-                <AiOutlineHome className="menu-icon" />
-                <div className="text-wrapper">Home</div>
+            <li className="active">Home</li>
+            <li>About</li>
+            <li>Projects</li>
+            <li>Contact</li>
+            <li
+                onClick={() =>
+                    setThemeMode(themeMode === "dark" ? "light" : "dark")
+                }
+            >
+                Theme
             </li>
-            <li>
-                <TbInfoHexagon className="menu-icon" />
-                <div className="text-wrapper">About</div>
-            </li>
-            <li>
-                <BiCodeAlt className="menu-icon" />
-                <div className="text-wrapper">Projects</div>
-            </li>
-            <li>
-                <BiMessageDetail className="menu-icon" />
-                <div className="text-wrapper">Contact</div>
-            </li>
-            <li>
-                <BsSun className="menu-icon" />
-                <div className="text-wrapper">Theme</div>
-            </li>
+
+            <div className="social-links">
+                <FaFacebookF />
+                <TbBrandGithubFilled />
+                <TfiLinkedin />
+            </div>
         </menu>
     );
 };

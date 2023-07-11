@@ -3,11 +3,16 @@
 @import "../../styles/font_sizes.scss";
 
 .Header {
+    position: sticky;
+    top: 0;
     height: 5rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.5rem;
+    background-color: $black_1;
+    z-index: 1000;
+
     @include bp.sm {
         padding: 0 2rem;
     }
@@ -61,13 +66,14 @@
             cursor: pointer;
         }
 
-        li.active {
+        li.active, li:hover {
             color: white;
         }
     }
 }
 
 .light .Header {
+    background-color: $white_2;   
     .burger {
         color: $black_1;
     }

@@ -9,6 +9,8 @@ import "./App.scss";
 function App() {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [themeMode, setThemeMode] = useState("dark");
+    const [subMenuVisible, setSubMenuVisible] = useState(true);
+
     useEffect(() => {
         const body = document.getElementsByTagName("body")[0];
         body.className = themeMode;
@@ -17,13 +19,19 @@ function App() {
     return (
         <>
             <Nav
+                subMenuVisible={subMenuVisible}
+                setSubMenuVisible={setSubMenuVisible}
                 setMobileMenuVisible={setMobileMenuVisible}
                 mobileMenuVisible={mobileMenuVisible}
                 themeMode={themeMode}
             />
-            {mobileMenuVisible && <Menu />}
-            <Welcome />
-            <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
+            {mobileMenuVisible && (
+                <Menu themeMode={themeMode} setThemeMode={setThemeMode} />
+            )}
+            <Welcome subMenuVisible={subMenuVisible} />
+            {subMenuVisible && (
+                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
+            )}
             <div className="hero">
                 <p>
                     <strong>Hello there!&nbsp;</strong>
@@ -40,6 +48,8 @@ function App() {
                 to create impressive digital experiences that leave an impact
                 and projects I'm proud of.
             </p> */}
+            <div className="rectangle"></div>
+            <div className="rectangle"></div>
         </>
     );
 }

@@ -16,6 +16,10 @@
         padding: 2em 3em 0 3em;
     }
 
+    &.extended {
+        height: calc(100vh - 5rem);
+    }
+
     h1 {
         font-size: $font_md;
         color: $white_5;
