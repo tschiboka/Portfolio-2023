@@ -17,6 +17,7 @@ interface Props {
 const Welcome = ({ subMenuVisible }: Props) => {
     return (
         <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
+            <p className="hello">Hello!</p>
             <img src={headshot} />
             <h1>
                 <strong>Tivadar Debnar</strong>

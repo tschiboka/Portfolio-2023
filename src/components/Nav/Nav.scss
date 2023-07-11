@@ -69,6 +69,7 @@
 
         li.active, li:hover {
             color: white;
+            font-family: Roboto_Bold;
         }
         li:not(.active) .active-dot {
             display: none;
@@ -106,8 +107,10 @@
             color: black;
         }
         li.active {
-            font-family: Roboto_Medium;
-            text-decoration: underline;
+            font-family: Roboto_Bold;
         }
+    }
+    .active-dot {
+        background-color: black;
     }
 }

@@ -14,7 +14,7 @@ const SubNav = ({ themeMode, setThemeMode }: Props) => {
     return (
         <div className="SubNav">
             <div className="sublogo">
-                <span className="sublogo-text">Welcome to my website!</span>
+                <span className="sublogo-text">Welcome to tschiboka.co.uk</span>
             </div>
             <div className="social-links">
                 <div className="theme-toggle" title="Toggle Colour Theme">
