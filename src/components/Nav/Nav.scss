@@ -60,7 +60,8 @@
         }
 
         li {
-            padding-left: 2rem;
+            position: relative;
+            margin-left: 2rem;
             color: $white_5;
             font-size: $font_lg;
             cursor: pointer;
@@ -68,6 +69,23 @@
 
         li.active, li:hover {
             color: white;
+        }
+        li:not(.active) .active-dot {
+            display: none;
+        }
+    }
+
+    .active-dot {
+        display: none;
+        @include bp.md {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 100%;
         }
     }
 }

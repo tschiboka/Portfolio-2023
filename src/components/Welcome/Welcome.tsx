@@ -2,7 +2,6 @@ import headshot from "../../assets/images/headshot_placeholder.png";
 import {
     SiHtml5,
     SiCss3,
-    SiJavascript,
     SiReact,
     SiMongodb,
     SiAdobephotoshop,

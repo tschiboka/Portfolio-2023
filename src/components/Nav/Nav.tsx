@@ -43,10 +43,21 @@ const Nav = ({
                 />
             )}
             <ul className="nav_links">
-                <li className="active">Home</li>
-                <li>About</li>
-                <li>Projects</li>
-                <li>Contact</li>
+                <li className="active">
+                    <div className="active-dot"></div>
+                    Home
+                </li>
+                <li>
+                    <div className="active-dot"></div>
+                    About
+                </li>
+                <li>
+                    <div className="active-dot"></div>
+                    Projects
+                </li>
+                <li>
+                    <div className="active-dot"></div>Contact
+                </li>
                 <li onClick={() => setSubMenuVisible(!subMenuVisible)}>
                     <BsThreeDotsVertical title="Toggle Submenu Visibility" />
                 </li>
