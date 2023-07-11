@@ -2,11 +2,14 @@ import { useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Welcome from "./components/Welcome/Welcome";
 import Menu from "./components/Menu/Menu";
+import SubNav from "./components/SubNav/SubNav";
 import "./styles/palette.scss";
 import "./App.scss";
 
 function App() {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
+    const [themeMode, setThemeMode] = useState("dark");
+
     return (
         <>
             <Nav
@@ -15,6 +18,7 @@ function App() {
             />
             {mobileMenuVisible && <Menu />}
             <Welcome />
+            <SubNav />
             <div className="hero">
                 <p>
                     <strong>Hello there!&nbsp;</strong>

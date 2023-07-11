@@ -1,0 +1,28 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+.Toggle {
+    width: 90px;
+    height: 38px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    background: $black_2;
+    border: 2px solid $black_5;
+    cursor: pointer;
+
+    .Toggle__thumb {
+        height: 32px;
+        width: 32px;
+        border-radius: 100%;
+        background: $black_1;
+        border: 3px solid $black_5;
+        cursor: pointer;
+    }
+    
+    .Toggle__thumb:hover {
+        border: 3px solid aqua;
+    }
+}
