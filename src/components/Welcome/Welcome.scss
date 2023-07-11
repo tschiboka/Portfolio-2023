@@ -42,28 +42,8 @@
             height: 50vh;
         }
     }
-    
-    .hero {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        color: $white_3;
-        font-size: $font_md;
+}
 
-        @include bp.sm {
-            font-size: $font_lg;
-        }
-        @include bp.md {
-            font-size: $font_lg;
-        }
-        @include bp.lg {
-            border: 1px solid greenyellow;
-            font-size: $font_lg;
-        }
-        @include bp.xl {
-            border: 1px solid green;
-            font-size: $font_lg;
-        }
-    }
+.light .Welcome img {
+    opacity: 1;
 }

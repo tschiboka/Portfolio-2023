@@ -18,14 +18,19 @@
         padding: 0 4rem;
     }
 
-    .theme-toggle {
+    .sublogo {
         color: $black_3;
 
         .sublogo-text {
+            display: none;
             color: $white_5;
             font-size: $font_sm;
             letter-spacing: 0;
             font-style: italic;
+
+            @include bp.lg {
+                display: inline;
+            }
         }
     }
 
@@ -53,5 +58,18 @@
         &:hover {
             color: white;
         }
+    }
+}
+
+.light .SubNav {
+    color: black;
+    .sublogo-text {
+        color: $black_5;
+    }
+    .social-links > * {
+        color: $white_5;
+    }
+    .theme-icon {
+        color: $black_1;
     }
 }

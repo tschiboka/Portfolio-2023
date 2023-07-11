@@ -26,3 +26,14 @@
         border: 3px solid aqua;
     }
 }
+
+.light .Toggle {
+    background-color: transparent;
+    .Toggle__thumb {
+        background-color: $white_4;
+    }
+    .Toggle__thumb:hover {
+        border: 3px solid $black_1;
+        background-color: $accent_dark_3;
+    }
+}

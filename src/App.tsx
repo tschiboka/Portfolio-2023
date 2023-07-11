@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Nav from "./components/Nav/Nav";
 import Welcome from "./components/Welcome/Welcome";
 import Menu from "./components/Menu/Menu";
@@ -9,16 +9,21 @@ import "./App.scss";
 function App() {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [themeMode, setThemeMode] = useState("dark");
+    useEffect(() => {
+        const body = document.getElementsByTagName("body")[0];
+        body.className = themeMode;
+    }, [themeMode]);
 
     return (
         <>
             <Nav
                 setMobileMenuVisible={setMobileMenuVisible}
                 mobileMenuVisible={mobileMenuVisible}
+                themeMode={themeMode}
             />
             {mobileMenuVisible && <Menu />}
             <Welcome />
-            <SubNav />
+            <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             <div className="hero">
                 <p>
                     <strong>Hello there!&nbsp;</strong>

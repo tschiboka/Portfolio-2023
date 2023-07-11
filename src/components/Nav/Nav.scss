@@ -2,7 +2,7 @@
 @import "../../styles/palette.scss";
 @import "../../styles/font_sizes.scss";
 
-header {
+.Header {
     height: 5rem;
     display: flex;
     justify-content: space-between;
@@ -63,6 +63,27 @@ header {
 
         li.active {
             color: white;
+        }
+    }
+}
+
+.light .Header {
+    .burger {
+        color: $black_1;
+    }
+
+    .t-logo {
+        background-color: $black_5;
+        opacity: 1;
+    }
+
+    .nav_links {
+        li {
+            color: black;
+        }
+        li.active {
+            font-family: Roboto_Medium;
+            text-decoration: underline;
         }
     }
 }

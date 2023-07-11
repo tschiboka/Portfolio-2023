@@ -1,17 +1,20 @@
 import { RxHamburgerMenu } from "react-icons/rx";
 import { CgClose } from "react-icons/cg";
-import icon from "../../assets/images/icon.svg";
+import iconDark from "../../assets/images/icon.svg";
+import iconLight from "../../assets/images/icon-light.svg";
 import "./Nav.scss";
 
 interface Props {
     setMobileMenuVisible: (visible: boolean) => void;
     mobileMenuVisible: boolean;
+    themeMode: string;
 }
 
-const Nav = ({ setMobileMenuVisible, mobileMenuVisible }: Props) => {
+const Nav = ({ setMobileMenuVisible, mobileMenuVisible, themeMode }: Props) => {
+    const getIcon = () => (themeMode === "dark" ? iconDark : iconLight);
     return (
-        <header>
-            <img className="t-logo" src={icon} alt="" />
+        <header className="Header">
+            <img className="t-logo" src={getIcon()} alt="Logo" />
             {!mobileMenuVisible ? (
                 <RxHamburgerMenu
                     className="burger"

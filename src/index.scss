@@ -7,6 +7,16 @@
     src: url("./assets/fonts/Roboto-Light.ttf");
 }
 
+@font-face {
+    font-family: Roboto;
+    src: url("./assets/fonts/Roboto-Thin.ttf");
+}
+
+@font-face {
+    font-family: Roboto_Medium;
+    src: url("./assets/fonts/Roboto-Medium.ttf");
+}
+
 
 * {
     margin: 0;
@@ -15,18 +25,30 @@
     font-family: Roboto_Light, Arial, Helvetica, sans-serif;
     font-weight: lighter;
     letter-spacing: 1px;
-    text-shadow: 1px 1px black;
+}
+
+.light * {
+    font-family: Roboto_Thin, Arial, Helvetica, sans-serif;
 }
 
 strong {
     color: white;
 }
 
+.light strong {
+    color: black;
+}
+
+
 h1 {
     color: white;
     font-size: $font_lg;
     @include bp.md {
         font-size: $font_xx;
-        color: red;
     }
+}
+
+.light h1 {
+    color: $black_5;
+    text-shadow: none;
 }

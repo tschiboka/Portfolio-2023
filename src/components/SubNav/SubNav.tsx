@@ -5,16 +5,32 @@ import { BsSun, BsMoonStars } from "react-icons/bs";
 import Toggle from "../Toggle/Toggle";
 import "./SubNav.scss";
 
-const SubNav = () => {
+interface Props {
+    themeMode: string;
+    setThemeMode: (theme: string) => void;
+}
+
+const SubNav = ({ themeMode, setThemeMode }: Props) => {
     return (
         <div className="SubNav">
-            <div className="theme-toggle">
+            <div className="sublogo">
                 <span className="sublogo-text">Welcome to my website!</span>
             </div>
             <div className="social-links">
                 <div className="theme-toggle">
-                    <Toggle>
-                        <BsSun className="theme-icon" />
+                    <Toggle
+                        handleClick={() =>
+                            setThemeMode(
+                                themeMode === "dark" ? "light" : "dark"
+                            )
+                        }
+                        active={themeMode === "dark"}
+                    >
+                        {themeMode === "dark" ? (
+                            <BsSun className="theme-icon" />
+                        ) : (
+                            <BsMoonStars className="theme-icon" />
+                        )}
                     </Toggle>
                 </div>
                 <FaFacebookF />
