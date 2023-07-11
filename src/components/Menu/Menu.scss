@@ -55,3 +55,12 @@
     }
 }
 
+.Menu {
+    background-color: $white_2;
+    color: $black_2;
+
+    li.active, li.active .menu-icon {
+        color: black;
+    }
+}
+

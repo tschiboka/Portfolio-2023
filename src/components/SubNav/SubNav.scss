@@ -41,6 +41,13 @@
         cursor: pointer;
     }
 
+    .theme-toggle {
+        display: none;
+        @include bp.md {
+            display: flex;
+        }
+    }
+
     .theme-icon {
         height: 1.5rem;
         color: $white_3;
@@ -68,6 +75,9 @@
     }
     .social-links > * {
         color: $white_5;
+        &:hover {
+            color: black;
+        }
     }
     .theme-icon {
         color: $black_1;
