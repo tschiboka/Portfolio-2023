@@ -3,17 +3,18 @@
 @import "../../styles/font_sizes.scss";
 
 .Welcome {
+    position: relative;
     height: calc(100vh - 10rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1.5em 1.5em 0 1.5em;
+    padding: 1rem;
     @include bp.sm {
-        padding: 2em 2em 0 2em;
+        padding: 2rem;
     }
     @include bp.lg {
-        padding: 2em 3em 0 3em;
+        padding: 3rem;
     }
 
     &.extended {
@@ -21,33 +22,105 @@
     }
 
     h1 {
-        font-size: $font_md;
-        color: $white_5;
+        width: 19rem;
         margin-top: 3rem;
         margin-bottom: 3rem;
+        display: flex;
+        justify-content: space-between;
+        font-size: $font_md;
+        color: $white_5;
 
         @include bp.sm {
+            width: 24rem;
             font-size: $font_lg;
         }
-        @include bp.md {
+
+        @include bp.sm {
+            width: 25rem;
+            font-size: $font_lg;
+        }
+
+        @include bp.lg {
+            width: 32rem;
             font-size: $font_xl;
         }
     }
     
     img {
-        height: 37vh;
+        height: 19rem;
         border-radius: 100%;
+        border: 1px solid $black_5;
+        background-color: $black_2;
+        object-position: 0 20px ;
         filter: grayscale(1);
         opacity: 0.5;
+        @include bp.sm {
+            height: 24rem;
+        }
         @include bp.md {
-            height: 50vh;
+            height: 25rem;
         }
         @include bp.lg {
+            height: 32rem;
+        }
+    }
+
+    .dev-tools {
+        width: 19rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        list-style: none;
+        font-size: $font_lg;
+
+        @include bp.sm {
+            width: 24rem;
+        }
+
+        @include bp.md {
+            width: 25rem;
+        }
+
+        @include bp.lg {
+            margin-bottom: 0;
+            position: absolute;
+            flex-direction: column;
+            width: 3rem;
             height: 50vh;
+            right: 3rem;
+            font-size: $font_xl;
+        }
+        @include bp.xl {
+        }
+        
+        li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $black_5;
+        }
+        li:hover {
+            color: $accent_dark_3;
+            transform: scale(1.2);
+        }
+    }
+
+    .line {
+        position: absolute;
+        display: none;
+        width: 1px;
+        height: 55vh;
+        background-color: $black_3;
+        right: 4.5rem;
+        @include bp.lg {
+            display: block;
         }
     }
 }
 
 .light .Welcome img {
     opacity: 1;
+    background-color: $black_5;
+    border: 2px solid $black_1;
 }

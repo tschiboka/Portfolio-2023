@@ -17,7 +17,7 @@ const SubNav = ({ themeMode, setThemeMode }: Props) => {
                 <span className="sublogo-text">Welcome to my website!</span>
             </div>
             <div className="social-links">
-                <div className="theme-toggle">
+                <div className="theme-toggle" title="Toggle Colour Theme">
                     <Toggle
                         handleClick={() =>
                             setThemeMode(
@@ -33,9 +33,9 @@ const SubNav = ({ themeMode, setThemeMode }: Props) => {
                         )}
                     </Toggle>
                 </div>
-                <FaFacebookF />
-                <TbBrandGithubFilled />
-                <TfiLinkedin />
+                <FaFacebookF title="Facebook Link" />
+                <TbBrandGithubFilled title="Github Link" />
+                <TfiLinkedin title="LinkedIn Link" />
             </div>
         </div>
     );

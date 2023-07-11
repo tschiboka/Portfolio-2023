@@ -23,14 +23,21 @@ const Nav = ({
     const getIcon = () => (themeMode === "dark" ? iconDark : iconLight);
     return (
         <header className="Header">
-            <img className="t-logo" src={getIcon()} alt="Logo" />
+            <img
+                className="t-logo"
+                src={getIcon()}
+                alt="Logo"
+                title="Home Page"
+            />
             {!mobileMenuVisible ? (
                 <RxHamburgerMenu
                     className="burger"
+                    title="Extend Mobile Menu"
                     onClick={() => setMobileMenuVisible(true)}
                 />
             ) : (
                 <CgClose
+                    title="Close Mobile Menu"
                     className="burger"
                     onClick={() => setMobileMenuVisible(false)}
                 />
@@ -41,7 +48,7 @@ const Nav = ({
                 <li>Projects</li>
                 <li>Contact</li>
                 <li onClick={() => setSubMenuVisible(!subMenuVisible)}>
-                    <BsThreeDotsVertical />
+                    <BsThreeDotsVertical title="Toggle Submenu Visibility" />
                 </li>
             </ul>
         </header>
