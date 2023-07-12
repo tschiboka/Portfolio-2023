@@ -1,0 +1,8 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+
+p {
+    font-size: $font_sm;
+}

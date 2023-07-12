@@ -65,6 +65,10 @@
             color: $white_5;
             font-size: $font_lg;
             cursor: pointer;
+            opacity: 0;
+            animation: 
+                fade_in 200ms ease-out forwards,
+                from_above 200ms ease-in;
         }
 
         li.active, li:hover {
@@ -74,6 +78,11 @@
         li:not(.active) .active-dot {
             display: none;
         }
+        li:nth-child(1) { animation-delay: 500ms; }
+        li:nth-child(2) { animation-delay: 600ms; }
+        li:nth-child(3) { animation-delay: 700ms; }
+        li:nth-child(4) { animation-delay: 800ms; }
+        li:nth-child(5) { animation-delay: 900ms; }
     }
 
     .active-dot {

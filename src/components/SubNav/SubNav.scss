@@ -5,7 +5,7 @@
 .SubNav {
     top: 5rem;
     width: 100%;
-    height: 5rem;
+    height: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -14,6 +14,10 @@
     font-size: $font_lg;
     padding: 0 1.5rem;
     z-index: 1000;
+    opacity: 0;
+    animation: 
+        from_below 500ms 1200ms ease-in, 
+        fade_in 500ms 1200ms ease-out forwards;
 
     @include bp.sm {
         position: sticky;
