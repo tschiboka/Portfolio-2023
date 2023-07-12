@@ -63,3 +63,9 @@ h1 {
     color: $black_5;
     text-shadow: none;
 }
+
+hr {
+    height: 0;
+    background-color: transparent;
+    border: 1px solid $black_2;
+}

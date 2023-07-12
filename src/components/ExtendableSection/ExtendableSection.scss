@@ -1,0 +1,34 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+.ExtendableSection {
+    button {
+        padding: 1.5rem;
+        background-color: $black_1;
+        border: 1px solid $accent_dark_1;
+        border-radius: 5px;
+        color: $white_3;
+        font-size: $font_md;
+        margin-bottom: 3rem;
+    }
+    .delay-1 { animation-delay: 200ms, 200ms; }
+    .delay-2 { animation-delay: 400ms, 400ms; }
+    .delay-3 { animation-delay: 600ms, 600ms; }
+    .delay-4 { animation-delay: 800ms, 800ms; }
+    .delay-5 { animation-delay: 1000ms, 1000ms; }
+    .anim-fade-from-left {
+        opacity: 0;
+        animation-name: fade_in, from_left;
+        animation-duration: 500ms, 500ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-fill-mode: forwards, forwards;
+    }
+    .anim-fade-from-right {
+        opacity: 0;
+        animation-name: fade_in, from_right;
+        animation-duration: 500ms, 500ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-fill-mode: forwards, forwards;
+    }
+}
