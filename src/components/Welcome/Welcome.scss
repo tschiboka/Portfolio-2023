@@ -34,11 +34,8 @@
         fade_in 500ms ease-out forwards;
 
         @include bp.sm {
-            width: 24rem;
+            width: 25rem;
             font-size: $font_lg;
-        }
-
-        @include bp.md {
         }
 
         @include bp.lg {
@@ -58,9 +55,7 @@
         animation: 
             pop 2000ms ease-out forwards;
         @include bp.sm {
-            height: 24rem;
-        }
-        @include bp.md {
+            height: 23rem;
         }
         @include bp.lg {
             height: 50vh;
@@ -80,7 +75,7 @@
             fade_in 500ms 1000ms ease-in forwards;
 
         @include bp.sm {
-            width: 24rem;
+            width: 25rem;
         }
 
         @include bp.md {
@@ -130,7 +125,7 @@
         color: $white_2;
         color: $accent_dark_3;
         font-family: Roboto_Bold;
-        font-size: $font_lg;
+        font-size: $font_xx;
         opacity: 0;
         animation: 
                 fade_in 800ms ease-in forwards, 
@@ -162,6 +157,7 @@
         opacity: 1;
         background-color: $black_5;
         border: 2px solid $white_5;
+        filter: grayscale(0)
     }
     .hello {
         color: black;

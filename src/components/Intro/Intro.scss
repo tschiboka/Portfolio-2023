@@ -3,10 +3,9 @@
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
 
-
 p {
     font-size: $font_sm;
-    @include bp.md {
+    @include bp.sm {
         font-size: $font_md;
     }
 }

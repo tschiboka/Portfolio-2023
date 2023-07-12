@@ -1,6 +1,7 @@
 @use "../../styles/breakpoints.scss" as bp;
 @import "../../styles/palette.scss";
 @import "../../styles/font_sizes.scss";
+@import "../../styles/animations.scss";
 
 .Menu {
     position: sticky;
@@ -14,11 +15,17 @@
     color: $white_3;
     font-size: $font_lg;
     list-style: none;
-    z-index: 100;
+    z-index: 10000;
 
     @include bp.md {
         display: none;
     }
+
+    li:nth-child(1) { animation-delay: 0ms, 0ms; animation-name: from_above, fade_in; }
+    li:nth-child(2) { animation-delay: 100ms, 100ms; animation-name: from_above, fade_in; }
+    li:nth-child(3) { animation-delay: 200ms, 200ms; animation-name: from_above, fade_in; }
+    li:nth-child(4) { animation-delay: 300ms, 300ms; animation-name: from_above, fade_in; }
+    li:nth-child(5) { animation-delay: 400ms, 400ms; animation-name: from_above, fade_in; }
 
     li {
         display: flex;
@@ -26,6 +33,10 @@
         align-items: center;
         margin-top: 2.5rem;
         cursor: pointer;
+        opacity: 0;
+        animation-timing-function: ease-in, ease-out;
+        animation-duration: 500ms, 500ms;
+        animation-fill-mode: forwards, forwards;
     }
 
     li > * {

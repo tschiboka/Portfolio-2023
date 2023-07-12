@@ -69,3 +69,9 @@ hr {
     background-color: transparent;
     border: 1px solid $black_2;
 }
+
+main {
+    @include bp.lg {
+        padding: 10rem;
+    }
+}

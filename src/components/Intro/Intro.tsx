@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useState, ReactNode } from "react";
 import ExtendableSection from "../ExtendableSection/ExtendableSection";
 import HireIntro from "../HireIntro/HireIntro";
 import "./Intro.scss";
 
+export interface ExtendedItem {
+    title: string;
+    content: ReactNode;
+    extended: boolean;
+}
+
 const Intro = () => {
-    const [extendedSection, setExtendedSection] = useState(-1);
-    const extendedItems = [
+    const extendedItems: ExtendedItem[] = [
         {
             title: "Looking for a developer to join your team?",
             content: <HireIntro />,
+            extended: false,
         },
-        { title: "Looking for a programming buddy?", content: <HireIntro /> },
-        { title: "Looking for like-minded friends?", content: <HireIntro /> },
-        { title: "Just here to get to know me?", content: <HireIntro /> },
+        {
+            title: "Looking for a programming buddy?",
+            content: <HireIntro />,
+            extended: false,
+        },
+        {
+            title: "Looking for like-minded friends?",
+            content: <HireIntro />,
+            extended: false,
+        },
+        {
+            title: "Just here to get to know me?",
+            content: <HireIntro />,
+            extended: false,
+        },
     ];
+    const [extendedSection, setExtendedSection] =
+        useState<ExtendedItem[]>(extendedItems);
+
     return (
         <>
             <h1>Hello there!&nbsp;</h1>
@@ -39,10 +60,9 @@ const Intro = () => {
             {extendedItems.map((item, index) => (
                 <ExtendableSection
                     key={index}
-                    index={index}
-                    title={item.title}
-                    extended={extendedSection}
+                    item={extendedSection[index]}
                     setExtendedSection={setExtendedSection}
+                    extendedSection={extendedSection}
                 >
                     {item.content}
                 </ExtendableSection>

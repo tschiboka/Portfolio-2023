@@ -3,14 +3,37 @@
 @import "../../styles/font_sizes.scss";
 
 .ExtendableSection {
-    button {
+    & > button {
+        width: 100%;
         padding: 1.5rem;
         background-color: $black_1;
         border: 1px solid $accent_dark_1;
         border-radius: 5px;
         color: $white_3;
-        font-size: $font_md;
+        font-size: $font_sm;
         margin-bottom: 3rem;
+        cursor: pointer;
+
+        @include bp.sm {
+            font-size: $font_md;
+        }
+
+    }
+    & > button:hover {
+        background-color: $black_2;
+        color: white;
+    }
+    .chevron {
+        min-width: 30px;
+        font-size: $font_lg;
+    }
+    .chevron:hover {
+        color: $accent_dark_1;
+    }
+    .extendable__button-content {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
     }
     .delay-1 { animation-delay: 200ms, 200ms; }
     .delay-2 { animation-delay: 400ms, 400ms; }
@@ -30,5 +53,17 @@
         animation-duration: 500ms, 500ms;
         animation-timing-function: ease-out, ease-in;
         animation-fill-mode: forwards, forwards;
+    }
+}
+
+.light .ExtendableSection {
+    & > button {
+        color: white;
+        border-color: $white_5;
+        border-width: 3px;
+    }
+    & > button:hover {
+        color: $accent;
+        background-color: $black_3;       
     }
 }
