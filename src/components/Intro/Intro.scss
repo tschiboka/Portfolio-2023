@@ -3,9 +3,28 @@
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
 
+h2 {
+    margin: 1rem 0;
+    @include bp.md {
+        font-size: $font_xl;
+    }
+
+    @include bp.lg {
+        font-size: $font_xl;
+    }
+}
+
 p {
-    font-size: $font_sm;
+    font-size: $font_md;
     @include bp.sm {
         font-size: $font_md;
+    }
+
+    @include bp.sm {
+        font-size: $font_lg;
+    }
+
+    @include bp.lg {
+        font-size: $font_lg;
     }
 }

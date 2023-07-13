@@ -1,4 +1,4 @@
-import { RxHamburgerMenu } from "react-icons/rx";
+import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import iconDark from "../../assets/images/icon.svg";
@@ -30,7 +30,7 @@ const Nav = ({
                 title="Home Page"
             />
             {!mobileMenuVisible ? (
-                <RxHamburgerMenu
+                <HiMenuAlt3
                     className="burger"
                     title="Extend Mobile Menu"
                     onClick={() => setMobileMenuVisible(true)}

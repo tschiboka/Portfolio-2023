@@ -6,13 +6,14 @@
     top: 5rem;
     width: 100%;
     height: 3rem;
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: $black_1;
     color: $black_5;
     font-size: $font_lg;
-    padding: 0 1.5rem;
+    border-bottom: 1px solid $black_2;
     z-index: 1000;
     opacity: 0;
     animation: 
@@ -79,7 +80,7 @@
 
 .light .SubNav {
     color: black;
-    background-color: $white_2;
+    background-color: white;
     .sublogo-text {
         color: $black_5;
     }

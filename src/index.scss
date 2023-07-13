@@ -35,11 +35,6 @@ html {
     box-sizing: border-box;
     font-family: Roboto_Light, Arial, Helvetica, sans-serif;
     font-weight: lighter;
-    letter-spacing: 1px;
-}
-
-.light * {
-    font-family: Roboto_Thin, Arial, Helvetica, sans-serif;
 }
 
 strong {
@@ -59,6 +54,12 @@ h1 {
     }
 }
 
+h2 {
+    margin: 3rem 0;
+    color: $white_2;
+    font-family: Roboto_Bold;
+}
+
 .light h1 {
     color: $black_5;
     text-shadow: none;
@@ -70,8 +71,21 @@ hr {
     border: 1px solid $black_2;
 }
 
+.light hr {
+    border: 1px solid $white_5;
+}
+
 main {
-    @include bp.lg {
-        padding: 10rem;
+    @include bp.md {
+        padding: 3rem 5rem;
     }
+    @include bp.lg {
+        padding: 3rem 15%;
+    }
+}
+
+p {
+    margin: 3rem 0;
+    color: $white_3;
+    
 }

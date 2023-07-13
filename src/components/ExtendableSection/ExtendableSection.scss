@@ -5,19 +5,24 @@
 .ExtendableSection {
     & > button {
         width: 100%;
+        margin-bottom: 3rem;
         padding: 1.5rem;
         background-color: $black_1;
-        border: 1px solid $accent_dark_1;
-        border-radius: 5px;
+        border: 1px solid $accent_dark_2;
+        border-radius: 50px;
         color: $white_3;
-        font-size: $font_sm;
-        margin-bottom: 3rem;
+        font-size: $font_md;
+        text-align: left;
+        
         cursor: pointer;
 
         @include bp.sm {
-            font-size: $font_md;
+            font-size: $font_lg;
         }
 
+        @include bp.md {
+            font-size: $font_lg;
+        }
     }
     & > button:hover {
         background-color: $black_2;
@@ -32,7 +37,7 @@
     }
     .extendable__button-content {
         display: flex;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
     }
     .delay-1 { animation-delay: 200ms, 200ms; }
