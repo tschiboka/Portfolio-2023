@@ -1,3 +1,14 @@
+import {
+    SiHtml5,
+    SiCss3,
+    SiReact,
+    SiMongodb,
+    SiAdobephotoshop,
+    SiAdobeillustrator,
+    SiJavascript,
+} from "react-icons/si";
+import { FaNodeJs } from "react-icons/fa";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import "./HireIntro.scss";
 
 const HireIntro = () => {
@@ -26,6 +37,56 @@ const HireIntro = () => {
                 even during my years in college and university.
             </p>
             <h2>Skills</h2>
+            <section className="skills">
+                <ProgressBar
+                    percentage={75}
+                    title="HTML5"
+                    icon={<SiHtml5 />}
+                    color="#E34F26"
+                />
+                <ProgressBar
+                    percentage={70}
+                    title="CSS"
+                    icon={<SiCss3 />}
+                    color="#1572B6"
+                />
+                <ProgressBar
+                    percentage={85}
+                    title="JS"
+                    icon={<SiJavascript />}
+                    color="#F7DF1E"
+                />
+                <ProgressBar
+                    percentage={60}
+                    title="React"
+                    icon={<SiReact />}
+                    color="#61DAFB"
+                />
+                <ProgressBar
+                    percentage={50}
+                    title="NodeJs"
+                    icon={<FaNodeJs />}
+                    color="#339933"
+                />
+                <ProgressBar
+                    percentage={55}
+                    title="MongoDB"
+                    icon={<SiMongodb />}
+                    color="#47A248"
+                />
+                <ProgressBar
+                    percentage={40}
+                    title="PhotoShop"
+                    icon={<SiAdobephotoshop />}
+                    color="#E31A8FF"
+                />
+                <ProgressBar
+                    percentage={35}
+                    title="Illustrator"
+                    icon={<SiAdobeillustrator />}
+                    color="#FF9A00"
+                />
+            </section>
             <p className="delay-2 anim-fade-from-right">
                 I am excited to apply my skills and contribute to a dynamic
                 development team. If my profile aligns with your requirements

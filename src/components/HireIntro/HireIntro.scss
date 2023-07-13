@@ -1,3 +1,9 @@
 @use "../../styles/breakpoints.scss" as bp;
 @import "../../styles/palette.scss";
 @import "../../styles/font_sizes.scss";
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
