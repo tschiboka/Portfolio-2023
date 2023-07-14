@@ -10,17 +10,15 @@
     display: flex;
     background-color: $black_2;
     border: 1px solid $black_3;
-    border-radius: 5px;
+    border-radius: 50px;
     @include bp.sm {
         font-size: $font_md;
-    }
-
-    @include bp.sm {
+        padding: 0 1.5rem;
         height: 70px;
     }
-
+    
     @include bp.lg {
-        width: 50%;
+        width: 70%;
     }
 
     .ProgressBar__title {
@@ -29,6 +27,9 @@
         display: flex;
         align-items: center;
         color: $white_3;
+        @include bp.xl {
+            width: 20%;
+        }
     }
     
     .ProgressBar__icon {
@@ -49,6 +50,10 @@
         min-height: 100%;
         display: flex;
         align-items: center;
+
+        @include bp.xl {
+            width: 75%;
+        }
 
         .ProgressBar__track {
             width: 100%;
