@@ -2,6 +2,7 @@ import { useState, ReactNode } from "react";
 import ExtendableSection from "../ExtendableSection/ExtendableSection";
 import HireIntro from "../HireIntro/HireIntro";
 import ProgrammingBuddy from "../ProgrammingBuddy/ProgrammingBuddy";
+import GetToKnowMe from "../GetToKnowMe/GetToKnowMe";
 import "./Intro.scss";
 
 export interface ExtendedItem {
@@ -24,7 +25,7 @@ const Intro = () => {
         },
         {
             title: "Just here to get to know me?",
-            content: <HireIntro />,
+            content: <GetToKnowMe />,
             extended: false,
         },
     ];
