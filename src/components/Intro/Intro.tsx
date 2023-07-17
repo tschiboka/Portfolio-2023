@@ -1,6 +1,7 @@
 import { useState, ReactNode } from "react";
 import ExtendableSection from "../ExtendableSection/ExtendableSection";
 import HireIntro from "../HireIntro/HireIntro";
+import ProgrammingBuddy from "../ProgrammingBuddy/ProgrammingBuddy";
 import "./Intro.scss";
 
 export interface ExtendedItem {
@@ -18,12 +19,7 @@ const Intro = () => {
         },
         {
             title: "Looking for a programming buddy?",
-            content: <HireIntro />,
-            extended: false,
-        },
-        {
-            title: "Looking for like-minded friends?",
-            content: <HireIntro />,
+            content: <ProgrammingBuddy />,
             extended: false,
         },
         {
