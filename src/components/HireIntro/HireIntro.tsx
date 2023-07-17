@@ -8,6 +8,8 @@ import {
     SiJavascript,
 } from "react-icons/si";
 import { FaNodeJs } from "react-icons/fa";
+import { FiDownload } from "react-icons/fi";
+import { BiMessageDots } from "react-icons/bi";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import "./HireIntro.scss";
 
@@ -94,8 +96,14 @@ const HireIntro = () => {
                 thrilled to discuss further details. Please don't hesitate to
                 contact me.
             </p>
-            <button>Contact Tivadar</button>
-            <button>Download my CV</button>
+            <div className="button-wrapper">
+                <button>
+                    Contact Tivadar <BiMessageDots />
+                </button>
+                <button>
+                    Download my CV <FiDownload />
+                </button>
+            </div>
         </>
     );
 };
