@@ -89,6 +89,8 @@ const HireIntro = () => {
                     color="#FF9A00"
                 />
             </section>
+            <h2>I continue learning</h2>
+            <p></p>
             <p className="delay-2 anim-fade-from-right">
                 I am excited to apply my skills and contribute to a dynamic
                 development team. If my profile aligns with your requirements

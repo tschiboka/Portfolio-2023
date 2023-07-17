@@ -3,10 +3,13 @@ import ExtendableSection from "../ExtendableSection/ExtendableSection";
 import HireIntro from "../HireIntro/HireIntro";
 import ProgrammingBuddy from "../ProgrammingBuddy/ProgrammingBuddy";
 import GetToKnowMe from "../GetToKnowMe/GetToKnowMe";
+import { FaGlasses, FaCode } from "react-icons/fa";
+import { IoMdHand } from "react-icons/io";
 import "./Intro.scss";
 
 export interface ExtendedItem {
     title: string;
+    icon: ReactNode;
     content: ReactNode;
     extended: boolean;
 }
@@ -15,16 +18,19 @@ const Intro = () => {
     const extendedItems: ExtendedItem[] = [
         {
             title: "Looking for a developer to join your team?",
+            icon: <FaGlasses className="button__icon" />,
             content: <HireIntro />,
             extended: false,
         },
         {
             title: "Looking for a programming buddy?",
+            icon: <FaCode className="button__icon" />,
             content: <ProgrammingBuddy />,
             extended: false,
         },
         {
             title: "Just here to get to know me?",
+            icon: <IoMdHand className="button__icon" />,
             content: <GetToKnowMe />,
             extended: false,
         },

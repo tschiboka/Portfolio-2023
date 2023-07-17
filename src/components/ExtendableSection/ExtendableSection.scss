@@ -6,27 +6,41 @@
     & > button {
         width: 100%;
         margin-bottom: 3rem;
-        padding: 1.5rem;
+        padding: 1rem 1.5rem;
         background-color: $black_1;
         border: 1px solid $accent_dark_2;
         border-radius: 50px;
         color: $white_3;
         font-size: $font_md;
-        text-align: left;
-        
+        text-align: left;       
         cursor: pointer;
-
-        @include bp.sm {
-            font-size: $font_lg;
-        }
-
+        
         @include bp.md {
             font-size: $font_lg;
+        }
+        
+        .button__icon {
+            height: 40px;
+            display: none;
+            color: $white_3;
+            font-size: 2rem;
+            @include bp.md {
+                display: inline;
+                color: $accent_dark_3;
+            }
+            &:hover {
+                color: red;
+            }
         }
     }
     & > button:hover {
         background-color: $black_2;
         color: white;
+
+        .button__icon {
+            color: $accent_dark_1;
+            transform: scale(1.3);
+        }
     }
     .chevron {
         min-width: 30px;
