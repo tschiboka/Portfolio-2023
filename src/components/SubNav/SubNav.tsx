@@ -33,9 +33,15 @@ const SubNav = ({ themeMode, setThemeMode }: Props) => {
                         )}
                     </Toggle>
                 </div>
-                <FaFacebookF title="Facebook Link" />
-                <TbBrandGithubFilled title="Github Link" />
-                <TfiLinkedin title="LinkedIn Link" />
+                <a href="https://www.facebook.com/tschiboka/">
+                    <FaFacebookF title="Facebook Link" />
+                </a>
+                <a href="https://github.com/tschiboka">
+                    <TbBrandGithubFilled title="Github Link" />
+                </a>
+                <a href="https://www.linkedin.com/in/tivadar-debnar/">
+                    <TfiLinkedin title="LinkedIn Link" />
+                </a>
             </div>
         </div>
     );

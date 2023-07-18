@@ -95,6 +95,7 @@ const HireIntro = () => {
                 TypeScript and SaSS, and I also plan to continue my learning
                 journey with Test-Driven Development in Jest.
             </p>
+            <hr />
             <p className="delay-2 anim-fade-from-right">
                 I am excited to apply my skills and contribute to a dynamic
                 development team. If my profile aligns with your requirements

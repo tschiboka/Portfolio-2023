@@ -23,7 +23,9 @@
             height: 50px;
         }
     }
-    a {
+    a, .link {
+        color: inherit;
+        text-decoration: inherit;
         margin-bottom: 1.5rem;
         @include bp.md {
             font-size: 1.6rem;

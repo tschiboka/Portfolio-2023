@@ -47,10 +47,15 @@
         color: white;
     }
 
-    .link {
+    a, .link {
         color: inherit;
         text-decoration: inherit;
     }
+
+    a:hover, .link:hover {
+        color: white;
+    }
+
     .active .link {
         font-family: "Roboto_Bold";
     }

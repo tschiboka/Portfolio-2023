@@ -65,9 +65,15 @@ const Menu = ({
             </li>
 
             <div className="social-links">
-                <FaFacebookF />
-                <TbBrandGithubFilled />
-                <TfiLinkedin />
+                <a href="https://www.facebook.com/tschiboka/">
+                    <FaFacebookF title="Facebook Link" />
+                </a>
+                <a href="https://github.com/tschiboka">
+                    <TbBrandGithubFilled />
+                </a>
+                <a href="https://www.linkedin.com/in/tivadar-debnar/">
+                    <TfiLinkedin />
+                </a>
             </div>
         </menu>
     );
