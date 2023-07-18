@@ -35,7 +35,7 @@ const Footer = () => {
                     <TfiLinkedin title="LinkedIn Link" />
                 </a>
             </div>
-            <Link>TERMS AND CONDITIONS</Link>
+            <Link to="/privacy-policy">PRIVACY POLICY</Link>
 
             <p className="copyright">
                 &copy; <time>{year}</time> Tivadar Debnar. All rights reserved.{" "}

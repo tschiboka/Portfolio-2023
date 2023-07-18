@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Contact from "./components/Contact/Contact";
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import "./styles/palette.scss";
 import "./App.scss";
 
@@ -69,6 +70,21 @@ function App() {
                 element={
                     <Contact
                         pageName="contact"
+                        mobileMenuVisible={mobileMenuVisible}
+                        setMobileMenuVisible={setMobileMenuVisible}
+                        themeMode={themeMode}
+                        setThemeMode={setThemeMode}
+                        subMenuVisible={subMenuVisible}
+                        setSubMenuVisible={setSubMenuVisible}
+                    />
+                }
+            />
+
+            <Route
+                path="/privacy-policy"
+                element={
+                    <PrivacyPolicy
+                        pageName="privacy-policy"
                         mobileMenuVisible={mobileMenuVisible}
                         setMobileMenuVisible={setMobileMenuVisible}
                         themeMode={themeMode}
