@@ -60,7 +60,6 @@
         font-family: "Roboto_Bold";
     }
     .social-links {
-        margin-top: auto;
         margin-bottom: 5rem;
         padding-top: 3rem;
         display: flex;
@@ -69,9 +68,34 @@
         color: $black_5;
         cursor: pointer;
     }
-
+    
     .social-links > * {
         margin: 0 0.5rem;
+    }
+    
+    .languages {
+        margin-top: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-variant: small-caps;
+        font-size: $font_md;
+        font-family: "Roboto_Bold";
+        color: $black_2;
+        a {
+            margin: 0 0.5rem;
+            margin-bottom: 0;
+            font-family: "Roboto_Bold";
+            color: $black_3;
+        }
+        a.active {
+            color: $white_4;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: white;
+            cursor: pointer;
+        }
     }
 }
 

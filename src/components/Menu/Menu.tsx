@@ -64,6 +64,13 @@ const Menu = ({
                 Theme
             </li>
 
+            <div className="languages">
+                <a className="active" title="English">
+                    En
+                </a>
+                |<a title="Hungarian">Hu</a>|<a title="Italian">It</a>
+            </div>
+
             <div className="social-links">
                 <a href="https://www.facebook.com/tschiboka/">
                     <FaFacebookF title="Facebook Link" />

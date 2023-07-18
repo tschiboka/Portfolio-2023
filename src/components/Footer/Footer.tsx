@@ -18,16 +18,6 @@ const Footer = () => {
                 <span>Tivadar&nbsp;</span>
                 <span>Debnar</span>
             </span>
-            <Link className="link" to="/about">
-                ABOUT
-            </Link>
-            <Link className="link" to="/projects">
-                PROJECTS
-            </Link>
-            <Link className="link" to="/contact">
-                CONTACT
-            </Link>
-            <a>RESUME</a>
             <div className="social-links">
                 <a href="https://www.facebook.com/tschiboka/">
                     <FaFacebookF title="Facebook Link" />
@@ -39,7 +29,23 @@ const Footer = () => {
                     <TfiLinkedin title="LinkedIn Link" />
                 </a>
             </div>
+            <Link className="link" to="/about">
+                ABOUT
+            </Link>
+            <Link className="link" to="/projects">
+                PROJECTS
+            </Link>
+            <Link className="link" to="/contact">
+                CONTACT
+            </Link>
+            <a>RESUME</a>
             <Link to="/privacy-policy">PRIVACY POLICY</Link>
+            <div className="languages">
+                <a className="active" title="English">
+                    En
+                </a>
+                |<a title="Hungarian">Hu</a>|<a title="Italian">It</a>
+            </div>
 
             <p className="copyright">
                 &copy; <time>{year}</time> Tivadar Debnar. All rights reserved.{" "}
