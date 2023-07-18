@@ -5,7 +5,7 @@
 
 .Welcome {
     position: relative;
-    height: calc(100vh - 8rem);
+    height: calc(100vh - 10rem);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -43,23 +43,30 @@
             font-size: $font_xl;
         }
     }
+
+    .headshot-wrapper {
+        height: 20rem;
+        background: $black_1;
+        border-radius: 100%;
+        border: 4px dotted $black_2;
+        animation: pop 2000ms ease-out forwards;
+        opacity: 0.6;
+        @include bp.sm {
+            height: 23rem;
+        }
+        @include bp.lg {
+            height: 52vh;
+        }
+    }
     
-    img {
-        height: 19rem;
+    img.headshot {
+        height: calc(100% - 1rem);
+        margin: 0.5rem;
         border-radius: 100%;
         border: 1px solid $black_5;
         background-color: $black_2;
         object-position: 0 20px ;
         filter: grayscale(1);
-        opacity: 0.6;
-        animation: 
-            pop 2000ms ease-out forwards;
-        @include bp.sm {
-            height: 23rem;
-        }
-        @include bp.lg {
-            height: 50vh;
-        }
     }
 
     .dev-tools {

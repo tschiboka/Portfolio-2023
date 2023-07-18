@@ -89,8 +89,12 @@ const HireIntro = () => {
                     color="#FF9A00"
                 />
             </section>
-            <h2>I continue learning</h2>
-            <p></p>
+            <h2>I continuously learn new things</h2>
+            <p>
+                I am taking courses to further improve my skills in React 18,
+                TypeScript and SaSS, and I plan to continue my learning journey
+                with Jest.
+            </p>
             <p className="delay-2 anim-fade-from-right">
                 I am excited to apply my skills and contribute to a dynamic
                 development team. If my profile aligns with your requirements

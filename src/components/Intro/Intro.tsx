@@ -48,10 +48,11 @@ const Intro = () => {
             </p>
             <h2 className="right">Who is Tivadar?</h2>
             <p className="right">
-                I'm a dedicated web developer with a deep love for crafting
+                I'm a web developer based in London. I deeply love crafting
                 beautiful and functional websites and web applications. I strive
                 to create impressive digital experiences that leave an impact
-                and projects I'm proud of.
+                and projects I'm proud of. I am especially fascinated by modern
+                web design and digital user interfaces.
             </p>
             <hr></hr>
             <h2>How can I help you?</h2>

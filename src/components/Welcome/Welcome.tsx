@@ -18,7 +18,9 @@ const Welcome = ({ subMenuVisible }: Props) => {
     return (
         <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
             <p className="hello">Hello!</p>
-            <img src={headshot} />
+            <div className="headshot-wrapper">
+                <img className="headshot" src={headshot} />
+            </div>
             <h1>
                 <strong>Tivadar Debnar</strong>
                 <span>|</span>

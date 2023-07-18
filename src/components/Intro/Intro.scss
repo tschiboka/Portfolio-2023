@@ -3,6 +3,10 @@
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
 
+main {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
 h2 {
     margin: 1rem 0;
     @include bp.md {
