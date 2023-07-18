@@ -47,6 +47,13 @@
         color: white;
     }
 
+    .link {
+        color: inherit;
+        text-decoration: inherit;
+    }
+    .active .link {
+        font-family: "Roboto_Bold";
+    }
     .social-links {
         margin-top: auto;
         margin-bottom: 5rem;

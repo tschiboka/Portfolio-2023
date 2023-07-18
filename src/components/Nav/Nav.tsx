@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -6,6 +7,7 @@ import iconLight from "../../assets/images/icon-light.svg";
 import "./Nav.scss";
 
 interface Props {
+    pageName: string;
     setMobileMenuVisible: (visible: boolean) => void;
     mobileMenuVisible: boolean;
     themeMode: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 const Nav = ({
+    pageName,
     setMobileMenuVisible,
     mobileMenuVisible,
     themeMode,
@@ -43,20 +46,29 @@ const Nav = ({
                 />
             )}
             <ul className="nav_links">
-                <li className="active">
+                <li className={pageName === "home" ? "active" : ""}>
                     <div className="active-dot"></div>
-                    Home
+                    <Link className="link" to="/">
+                        Home
+                    </Link>
                 </li>
-                <li>
+                <li className={pageName === "about" ? "active" : ""}>
                     <div className="active-dot"></div>
-                    About
+                    <Link className="link" to="/about">
+                        About
+                    </Link>
                 </li>
-                <li>
+                <li className={pageName === "projects" ? "active" : ""}>
                     <div className="active-dot"></div>
-                    Projects
+                    <Link className="link" to="/projects">
+                        Projects
+                    </Link>
                 </li>
-                <li>
-                    <div className="active-dot"></div>Contact
+                <li className={pageName === "contact" ? "active" : ""}>
+                    <div className="active-dot"></div>
+                    <Link className="link" to="/contact">
+                        Contact
+                    </Link>
                 </li>
                 <li onClick={() => setSubMenuVisible(!subMenuVisible)}>
                     <BsThreeDotsVertical title="Toggle Submenu Visibility" />

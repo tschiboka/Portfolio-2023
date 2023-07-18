@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import Nav from "./components/Nav/Nav";
-import Welcome from "./components/Welcome/Welcome";
-import Menu from "./components/Menu/Menu";
-import SubNav from "./components/SubNav/SubNav";
-import Intro from "./components/Intro/Intro";
-import Footer from "./components/Footer/Footer";
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import About from "./components/About/About";
+import Projects from "./components/Projects/Projects";
+import Contact from "./components/Contact/Contact";
 import "./styles/palette.scss";
 import "./App.scss";
 
@@ -19,26 +18,67 @@ function App() {
     }, [themeMode]);
 
     return (
-        <>
-            <Nav
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
+        <Routes>
+            <Route
+                path="/"
+                element={
+                    <Home
+                        pageName="home"
+                        mobileMenuVisible={mobileMenuVisible}
+                        setMobileMenuVisible={setMobileMenuVisible}
+                        themeMode={themeMode}
+                        setThemeMode={setThemeMode}
+                        subMenuVisible={subMenuVisible}
+                        setSubMenuVisible={setSubMenuVisible}
+                    />
+                }
             />
-            {mobileMenuVisible && (
-                <Menu themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
-            <Welcome subMenuVisible={subMenuVisible} />
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
-            <main>
-                <Intro />
-            </main>
-            <Footer />
-        </>
+
+            <Route
+                path="/about"
+                element={
+                    <About
+                        pageName="about"
+                        mobileMenuVisible={mobileMenuVisible}
+                        setMobileMenuVisible={setMobileMenuVisible}
+                        themeMode={themeMode}
+                        setThemeMode={setThemeMode}
+                        subMenuVisible={subMenuVisible}
+                        setSubMenuVisible={setSubMenuVisible}
+                    />
+                }
+            />
+
+            <Route
+                path="/projects"
+                element={
+                    <Projects
+                        pageName="projects"
+                        mobileMenuVisible={mobileMenuVisible}
+                        setMobileMenuVisible={setMobileMenuVisible}
+                        themeMode={themeMode}
+                        setThemeMode={setThemeMode}
+                        subMenuVisible={subMenuVisible}
+                        setSubMenuVisible={setSubMenuVisible}
+                    />
+                }
+            />
+
+            <Route
+                path="/contact"
+                element={
+                    <Contact
+                        pageName="contact"
+                        mobileMenuVisible={mobileMenuVisible}
+                        setMobileMenuVisible={setMobileMenuVisible}
+                        themeMode={themeMode}
+                        setThemeMode={setThemeMode}
+                        subMenuVisible={subMenuVisible}
+                        setSubMenuVisible={setSubMenuVisible}
+                    />
+                }
+            />
+        </Routes>
     );
 }
 
