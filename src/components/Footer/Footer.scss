@@ -12,7 +12,7 @@
     .logo-wrapper {
         height: 70px;
         width: 70px;
-        margin-bottom: 3rem;
+        margin-bottom: 1.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -23,12 +23,29 @@
             height: 50px;
         }
     }
+    .name {
+        margin-bottom: 3rem;
+        color: $white_5;
+        font-size: 1.8rem;
+        letter-spacing: 0;
+        span {
+            font-family: "Roboto_Bold";
+            font-variant: small-caps;
+        }
+        span:last-child {
+            color: $black_3;
+        }
+
+        span:last-child {
+            color: $black_4;
+        }
+    }
     a, .link {
         color: inherit;
         text-decoration: inherit;
         margin-bottom: 1.5rem;
         @include bp.md {
-            font-size: 1.6rem;
+            font-size: $font_md;
         }
     }
     .social-links {

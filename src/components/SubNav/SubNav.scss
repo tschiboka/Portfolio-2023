@@ -34,12 +34,22 @@
         .sublogo-text {
             display: none;
             color: $white_5;
-            font-size: $font_sm;
+            font-size: 1.4rem;
             letter-spacing: 0;
-            font-style: italic;
-
+            
             @include bp.lg {
                 display: inline;
+            }
+            span {
+                font-family: "Roboto_Bold";
+                font-variant: small-caps;
+            }
+            span:last-child {
+                color: $black_3;
+            }
+
+            span:last-child {
+                color: $black_4;
             }
         }
     }

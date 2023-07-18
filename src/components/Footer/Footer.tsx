@@ -14,6 +14,10 @@ const Footer = () => {
             <div className="logo-wrapper">
                 <img src={logo} alt="" />
             </div>
+            <span className="name">
+                <span>Tivadar&nbsp;</span>
+                <span>Debnar</span>
+            </span>
             <Link className="link" to="/about">
                 ABOUT
             </Link>

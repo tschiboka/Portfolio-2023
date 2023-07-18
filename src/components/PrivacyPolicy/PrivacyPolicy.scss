@@ -9,9 +9,13 @@
         font-style: italic;
         font-size: $font_xs;
     }
-    font-size: $font_md;
+    font-size: $font_sm;
 
     a {
         color: $accent_dark_3;
+    }
+
+    a:hover {
+        color: $accent_dark_1;
     }
 }
