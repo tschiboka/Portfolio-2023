@@ -4,6 +4,7 @@ import Welcome from "./components/Welcome/Welcome";
 import Menu from "./components/Menu/Menu";
 import SubNav from "./components/SubNav/SubNav";
 import Intro from "./components/Intro/Intro";
+import Footer from "./components/Footer/Footer";
 import "./styles/palette.scss";
 import "./App.scss";
 
@@ -36,6 +37,7 @@ function App() {
             <main>
                 <Intro />
             </main>
+            <Footer />
         </>
     );
 }

@@ -7,8 +7,8 @@
         width: 100%;
         margin-bottom: 3rem;
         padding: 1rem 1.5rem;
-        background-color: $black_1;
-        border: 1px solid $accent_dark_2;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid $accent_dark_5;
         border-radius: 50px;
         color: $white_3;
         font-size: $font_md;
@@ -53,6 +53,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+    .extendable__button-text {
+        padding-left: 0.5em;
     }
     .delay-1 { animation-delay: 200ms, 200ms; }
     .delay-2 { animation-delay: 400ms, 400ms; }

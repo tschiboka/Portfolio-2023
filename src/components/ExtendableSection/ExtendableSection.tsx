@@ -28,7 +28,9 @@ const ExtendableSection = ({
             <button onClick={() => handleClick()}>
                 <div className="extendable__button-content">
                     {item.icon}
-                    <span>{item.title}</span>
+                    <span className="extendable__button-text">
+                        {item.title}
+                    </span>
                     {item.extended ? (
                         <FiChevronUp className="chevron" />
                     ) : (
