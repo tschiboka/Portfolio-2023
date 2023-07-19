@@ -8,14 +8,62 @@ h1 {
     text-align: center;
 }
 
+img.guitar-app--sm {
+    padding: 5px;
+    width: 100%;
+    object-fit: cover;
+    max-width: 500px;
+    background-color: #333;
+    @include bp.lg {
+        display: none;
+    }
+}
+
+img.guitar-app {
+    display: none;
+    @include bp.lg {
+        display: block;
+        padding: 5px;
+        width: 100%;
+        background-color: #333;
+    }
+}
+
 img.guitar {
     padding: 5px;
     width: 100%;
     background-color: #aaa;
+    @include bp.lg {
+        width: 50%;
+    }
+}
+
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    @include bp.lg {
+    }
 }
 
 figcaption {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
     color: $white_5;
     text-align: center;
     font-style: italic;
+}
+
+img {
+    max-width: 1000px;
 }

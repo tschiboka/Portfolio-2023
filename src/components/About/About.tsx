@@ -3,6 +3,8 @@ import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import Footer from "../Footer/Footer";
 import guitarImage from "../../assets/images/about/RiffMaster.png";
+import guitarAppImage from "../../assets/images/about/RiffMaster_App.png";
+import guitarAppImageSm from "../../assets/images/about/RiffMaster_App_Mobile.png";
 import "./About.scss";
 
 interface Props {
@@ -50,16 +52,16 @@ const About = ({
                 <h2>The beginnings</h2>
                 <p>
                     I often have nostalgic memories about the first time I
-                    immersed myself in a Pascal programming book and began
-                    tinkering with my computer, a Z80 Enterprise. My enthusiasm
-                    didn't wane regardless that most available books were
-                    English in the late 90s, and I was a Hungarian 13-year-old
-                    with a minimal English vocabulary. So equipped with a
-                    dictionary, I started deciphering my textbooks and creating
-                    my first text-based games. The early exposure to programming
-                    proved to be a perfect inspiration, fueling my love for
-                    languages of all kinds, whether spoken by humans or written
-                    in code.
+                    immersed myself in a Pascal programming book as a child and
+                    began tinkering with my computer, a Z80 Enterprise. My
+                    enthusiasm didn't wane regardless that most available books
+                    were English in the late 90s, and I was a Hungarian
+                    13-year-old with a minimal English vocabulary. So equipped
+                    with a dictionary, I started deciphering my textbooks and
+                    creating my first text-based games. The early exposure to
+                    programming proved to be a perfect inspiration, fueling my
+                    love for languages of all kinds, whether spoken by humans or
+                    written in code.
                 </p>
                 <h2>Self Study</h2>
                 <p>
@@ -95,21 +97,37 @@ const About = ({
                     Additionally, I concentrated every spare time on my
                     dissertation project, one of the most stimulating and
                     complex projects I have ever embarked on: a digital guitar
-                    console that can be played on a browser. This project
-                    involved nearly 800 hours of electric wiring, manufacturing,
-                    microcontroller programming, and extensive use of JavaScript
-                    / NodeJS for its user interface and server. The final
-                    product received an exceptional 90% mark and helped me
-                    towards a first-class degree with honours.
+                    console that can be played on a browser-based web
+                    application. This project involved nearly 800 hours of
+                    electric wiring, manufacturing, microcontroller programming,
+                    and extensive use of JavaScript / NodeJS for its user
+                    interface and server. The final product received an
+                    exceptional 90% mark and helped me towards a first-class
+                    degree with honours.
                 </p>
-                <figure>
-                    <img
-                        className="guitar"
-                        src={guitarImage}
-                        alt="Guitar Image"
-                    />
-                    <figcaption>Guitar Console Project</figcaption>
-                </figure>
+                <div className="image-container">
+                    <figure>
+                        <img
+                            className="guitar-app--sm"
+                            src={guitarAppImageSm}
+                            alt="Guitar App Image"
+                        />
+                        <img
+                            className="guitar-app"
+                            src={guitarAppImage}
+                            alt="Guitar App Image"
+                        />
+                        <figcaption>Guitar Music Studio App</figcaption>
+                    </figure>
+                    <figure>
+                        <img
+                            className="guitar"
+                            src={guitarImage}
+                            alt="Guitar Image"
+                        />
+                        <figcaption>Guitar Console Instrument</figcaption>
+                    </figure>
+                </div>
             </main>
             <Footer pageName={pageName} />
         </>
