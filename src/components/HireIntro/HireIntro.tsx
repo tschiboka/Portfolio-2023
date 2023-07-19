@@ -93,7 +93,7 @@ const HireIntro = () => {
             <p>
                 I am taking courses to further improve my skills in React-18,
                 TypeScript and SaSS, and I also plan to continue my learning
-                journey with Test-Driven Development in Jest.
+                journey with Redux and Test-Driven Development in Jest.
             </p>
             <hr />
             <p className="delay-2 anim-fade-from-right">

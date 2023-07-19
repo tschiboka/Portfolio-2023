@@ -40,7 +40,19 @@
             color: $black_4;
         }
     }
-    a, .link {
+    ul {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        color: $white_3;
+        border-top: 1px solid $black_2;
+        border-bottom: 1px solid $black_2;
+    }
+    a, .link, li {
         color: inherit;
         text-decoration: inherit;
         margin-bottom: 1.5rem;
@@ -48,10 +60,15 @@
             font-size: $font_md;
         }
     }
+    li:hover {
+        color: white;
+    }
+    li:last-child {
+        margin-bottom: 0;
+    }
     .social-links {
         margin: 0 0 3rem 0rem;
         padding-top: 1.5rem;
-        border-top: 1px solid $black_2;
         display: flex;
         justify-content: center;
         font-size: $font_lg;

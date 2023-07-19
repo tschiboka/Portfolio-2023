@@ -55,6 +55,7 @@
     .nav_links {
         display: none;
         list-style: none;
+        font-variant: small-caps;
         @include bp.md {
             display: flex;
         }

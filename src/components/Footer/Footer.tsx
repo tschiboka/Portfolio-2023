@@ -29,17 +29,31 @@ const Footer = () => {
                     <TfiLinkedin title="LinkedIn Link" />
                 </a>
             </div>
-            <Link className="link" to="/about">
-                ABOUT
-            </Link>
-            <Link className="link" to="/projects">
-                PROJECTS
-            </Link>
-            <Link className="link" to="/contact">
-                CONTACT
-            </Link>
-            <a>RESUME</a>
-            <Link to="/privacy-policy">PRIVACY POLICY</Link>
+            <ul>
+                <li>
+                    <Link className="link" to="/about" title="About Page">
+                        ABOUT
+                    </Link>
+                </li>
+                <li>
+                    <Link className="link" to="/projects" title="Projects Page">
+                        PROJECTS
+                    </Link>
+                </li>
+                <li>
+                    <Link className="link" to="/contact" title="Contact Me">
+                        CONTACT ME
+                    </Link>
+                </li>
+                <li>
+                    <a title="Download CV">RESUME</a>
+                </li>
+                <li>
+                    <Link to="/privacy-policy" title="Privacy Policy">
+                        PRIVACY POLICY
+                    </Link>
+                </li>
+            </ul>
             <div className="languages">
                 <a className="active" title="English">
                     En
