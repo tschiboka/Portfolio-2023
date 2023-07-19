@@ -27,8 +27,8 @@ const HireIntro = () => {
             <p className="delay-2 anim-fade-from-right">
                 Although I self-studied web development for many years prior, I
                 have recently completed my formal studies, graduating from
-                Falmouth University in Computing (BSc Hons, first). During my
-                academic journey, I consolidated my programming concepts and
+                Falmouth University in Computing (First Class Honours). During
+                my academic journey, I consolidated my programming concepts and
                 gained hands-on experience in various technologies and
                 languages, such as Python or C#.
             </p>

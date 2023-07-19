@@ -1,0 +1,9 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+h1 {
+    font-family: "Roboto_Bold";
+    font-size: $font_xl;
+    text-align: center;
+}
