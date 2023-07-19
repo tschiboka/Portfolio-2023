@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import Page from "./components/Page/Page";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
@@ -23,75 +24,85 @@ function App() {
             <Route
                 path="/"
                 element={
-                    <Home
-                        pageName="home"
-                        mobileMenuVisible={mobileMenuVisible}
-                        setMobileMenuVisible={setMobileMenuVisible}
-                        themeMode={themeMode}
-                        setThemeMode={setThemeMode}
-                        subMenuVisible={subMenuVisible}
-                        setSubMenuVisible={setSubMenuVisible}
-                    />
+                    <Page title="Tivadar Debnar | Home">
+                        <Home
+                            pageName="home"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
                 }
             />
 
             <Route
                 path="/about"
                 element={
-                    <About
-                        pageName="about"
-                        mobileMenuVisible={mobileMenuVisible}
-                        setMobileMenuVisible={setMobileMenuVisible}
-                        themeMode={themeMode}
-                        setThemeMode={setThemeMode}
-                        subMenuVisible={subMenuVisible}
-                        setSubMenuVisible={setSubMenuVisible}
-                    />
+                    <Page title="Tivadar Debnar | About">
+                        <About
+                            pageName="about"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
                 }
             />
 
             <Route
                 path="/projects"
                 element={
-                    <Projects
-                        pageName="projects"
-                        mobileMenuVisible={mobileMenuVisible}
-                        setMobileMenuVisible={setMobileMenuVisible}
-                        themeMode={themeMode}
-                        setThemeMode={setThemeMode}
-                        subMenuVisible={subMenuVisible}
-                        setSubMenuVisible={setSubMenuVisible}
-                    />
+                    <Page title="Tivadar Debnar | Projects">
+                        <Projects
+                            pageName="projects"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
                 }
             />
 
             <Route
                 path="/contact"
                 element={
-                    <Contact
-                        pageName="contact"
-                        mobileMenuVisible={mobileMenuVisible}
-                        setMobileMenuVisible={setMobileMenuVisible}
-                        themeMode={themeMode}
-                        setThemeMode={setThemeMode}
-                        subMenuVisible={subMenuVisible}
-                        setSubMenuVisible={setSubMenuVisible}
-                    />
+                    <Page title="Tivadar Debnar | Contact">
+                        <Contact
+                            pageName="contact"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
                 }
             />
 
             <Route
                 path="/privacy-policy"
                 element={
-                    <PrivacyPolicy
-                        pageName="privacy-policy"
-                        mobileMenuVisible={mobileMenuVisible}
-                        setMobileMenuVisible={setMobileMenuVisible}
-                        themeMode={themeMode}
-                        setThemeMode={setThemeMode}
-                        subMenuVisible={subMenuVisible}
-                        setSubMenuVisible={setSubMenuVisible}
-                    />
+                    <Page title="Tivadar Debnar | Privacy Policy">
+                        <PrivacyPolicy
+                            pageName="privacy-policy"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
                 }
             />
         </Routes>

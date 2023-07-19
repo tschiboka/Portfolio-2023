@@ -86,12 +86,14 @@ const PrivacyPolicy = ({
                     We take reasonable measures to protect your personal
                     information from unauthorized access or disclosure. However,
                     please note that no method of data transmission over the
-                    internet or electronic storage is entirely secure. Links to
-                    External Sites: Our website may contain links to external
-                    sites that are not operated by us. We are not responsible
-                    for the content or privacy practices of these third-party
-                    sites. We encourage you to review their respective privacy
-                    policies.
+                    internet or electronic storage is entirely secure.
+                </p>
+                <h2>Links to External Sites</h2>
+                <p>
+                    Our website may contain links to external sites that are not
+                    operated by us. We are not responsible for the content or
+                    privacy practices of these third-party sites. We encourage
+                    you to review their respective privacy policies.
                 </p>
                 <h2>Changes</h2>{" "}
                 <p>
