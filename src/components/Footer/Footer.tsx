@@ -5,7 +5,11 @@ import { TfiLinkedin } from "react-icons/tfi";
 import logo from "../../assets/images/icon-light.svg";
 import "./Footer.scss";
 
-const Footer = () => {
+interface Props {
+    pageName: string;
+}
+
+const Footer = ({ pageName }: Props) => {
     const date = new Date();
     const year = date.getFullYear();
 
@@ -30,17 +34,22 @@ const Footer = () => {
                 </a>
             </div>
             <ul>
-                <li>
+                <li className={pageName === "home" ? "hide" : ""}>
+                    <Link className="link" to="/" title="Home Page">
+                        HOME
+                    </Link>
+                </li>
+                <li className={pageName === "about" ? "hide" : ""}>
                     <Link className="link" to="/about" title="About Page">
                         ABOUT
                     </Link>
                 </li>
-                <li>
+                <li className={pageName === "projects" ? "hide" : ""}>
                     <Link className="link" to="/projects" title="Projects Page">
                         PROJECTS
                     </Link>
                 </li>
-                <li>
+                <li className={pageName === "contact" ? "hide" : ""}>
                     <Link className="link" to="/contact" title="Contact Me">
                         CONTACT ME
                     </Link>

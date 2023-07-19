@@ -7,3 +7,15 @@ h1 {
     font-size: $font_xl;
     text-align: center;
 }
+
+img.guitar {
+    padding: 5px;
+    width: 100%;
+    background-color: #aaa;
+}
+
+figcaption {
+    color: $white_5;
+    text-align: center;
+    font-style: italic;
+}

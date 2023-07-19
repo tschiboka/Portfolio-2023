@@ -2,6 +2,7 @@ import Nav from "../Nav/Nav";
 import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import Footer from "../Footer/Footer";
+import guitarImage from "../../assets/images/about/RiffMaster.png";
 import "./About.scss";
 
 interface Props {
@@ -101,8 +102,16 @@ const About = ({
                     product received an exceptional 90% mark and helped me
                     towards a first-class degree with honours.
                 </p>
+                <figure>
+                    <img
+                        className="guitar"
+                        src={guitarImage}
+                        alt="Guitar Image"
+                    />
+                    <figcaption>Guitar Console Project</figcaption>
+                </figure>
             </main>
-            <Footer />
+            <Footer pageName={pageName} />
         </>
     );
 };

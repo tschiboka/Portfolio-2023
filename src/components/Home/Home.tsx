@@ -49,7 +49,7 @@ const Home = ({
             <main>
                 <Intro />
             </main>
-            <Footer />
+            <Footer pageName={pageName} />
         </>
     );
 };
