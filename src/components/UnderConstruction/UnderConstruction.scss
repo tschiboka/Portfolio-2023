@@ -1,0 +1,72 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+.UnderConstruction {
+    height: 100vh;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    @include bp.md {
+        padding: 1.5rem 3rem;
+    }
+    p {
+        max-width: 700px;
+    }
+    h1 {
+        font-size: $font_xl;
+    }
+    h3 {
+        font-size: $font_lg;
+    }
+    .logo-wrapper {
+        height: 70px;
+        width: 70px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        background-color: rgba(255,255, 255, 0.05);
+        border: 2px solid $black_2;
+        img {
+            height: 50px;
+        }
+    }
+    .name {
+        margin-bottom: 1.5rem;
+        color: $white_5;
+        font-size: 1.8rem;
+        letter-spacing: 0;
+        span {
+            font-family: "Roboto_Bold";
+            font-variant: small-caps;
+        }
+        span:last-child {
+            color: $black_3;
+        }
+
+        span:last-child {
+            color: $black_4;
+        }
+    }
+    .social-links {
+        margin: 0 0 3rem 0rem;
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        font-size: $font_lg;
+        
+        & > * {
+            margin: 0 0.5rem;
+            color: $black_3;
+            cursor: pointer;
+        }
+        & > *:hover {
+            color: white;
+        }
+    }
+}

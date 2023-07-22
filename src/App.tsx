@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import UnderConstruction from "./components/UnderConstruction/UnderConstruction";
 import Page from "./components/Page/Page";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
@@ -13,11 +14,14 @@ function App() {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [themeMode, setThemeMode] = useState("dark");
     const [subMenuVisible, setSubMenuVisible] = useState(true);
+    const underConstruction = true;
 
     useEffect(() => {
         const body = document.getElementsByTagName("body")[0];
         body.className = themeMode;
     }, [themeMode]);
+
+    if (underConstruction) return <UnderConstruction />;
 
     return (
         <Routes>
