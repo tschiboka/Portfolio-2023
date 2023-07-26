@@ -67,3 +67,23 @@ figcaption {
 img {
     max-width: 1000px;
 }
+
+.link--inline {
+    color: $accent_dark_2;
+    font-size: $font_md;
+    @include bp.md {
+        font-size: $font_lg;
+    }
+}
+
+.certificates {
+    padding-left: 1.5rem; 
+    color: $white_3;
+    font-size: $font_md;
+    @include bp.md {
+        font-size: $font_lg;
+    }
+    li {
+        padding-bottom: 0.5rem;
+    }
+}

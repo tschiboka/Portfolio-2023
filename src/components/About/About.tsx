@@ -6,6 +6,7 @@ import guitarImage from "../../assets/images/about/RiffMaster.png";
 import guitarAppImage from "../../assets/images/about/RiffMaster_App.png";
 import guitarAppImageSm from "../../assets/images/about/RiffMaster_App_Mobile.png";
 import "./About.scss";
+import { Link } from "react-router-dom";
 
 interface Props {
     pageName: string;
@@ -128,6 +129,37 @@ const About = ({
                         <figcaption>Guitar Console Instrument</figcaption>
                     </figure>
                 </div>
+                <Link className="link--inline" to="">
+                    You can check out this guitar project in detail here.
+                </Link>
+                <h2>Continued Self Development</h2>
+                <p>
+                    I consider completing my bachelor's degree the beginning of
+                    my self-development and an exciting phase of a life-long
+                    professional development journey. I am now further expanding
+                    my skills by taking courses on TypeScript and refreshing my
+                    knowledge in React and Sass to consolidate my expertise in
+                    my current stack.
+                </p>
+                <h2>Accomplishments</h2>
+
+                <ul className="certificates">
+                    <li>
+                        BSc Software Engineering [First Class], Falmouth
+                        University, 2023
+                    </li>
+                    <li>HND Computing [Distinction], Icon College, 2022</li>
+                    <li>React Course, [Online - Mosh] 2023</li>
+                    <li>NodeJs Course, [Online - Mosh] 2022</li>
+                    <li>
+                        Front End Development Certificate, [Online -
+                        FreeCodeCamp], 2018
+                    </li>
+                    <li>
+                        Algorithms and Data Structures, [Online - FreeCodeCamp],
+                        2018
+                    </li>
+                </ul>
             </main>
             <Footer pageName={pageName} />
         </>

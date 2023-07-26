@@ -14,7 +14,8 @@ function App() {
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [themeMode, setThemeMode] = useState("dark");
     const [subMenuVisible, setSubMenuVisible] = useState(true);
-    const underConstruction = true;
+    // NOTE: Set Under Construction Display Manually
+    const underConstruction = false;
 
     useEffect(() => {
         const body = document.getElementsByTagName("body")[0];

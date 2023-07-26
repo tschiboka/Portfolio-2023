@@ -6,7 +6,7 @@ import logo from "../../assets/images/icon-light.svg";
 import "./Footer.scss";
 
 interface Props {
-    pageName: string;
+    pageName?: string;
 }
 
 const Footer = ({ pageName }: Props) => {
