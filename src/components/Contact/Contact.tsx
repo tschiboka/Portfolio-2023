@@ -2,6 +2,7 @@ import Nav from "../Nav/Nav";
 import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import "./Contact.scss";
+import Footer from "../Footer/Footer";
 
 interface Props {
     pageName: string;
@@ -43,6 +44,7 @@ const Contact = ({
             {subMenuVisible && (
                 <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             )}
+            <Footer pageName={pageName} />
         </>
     );
 };

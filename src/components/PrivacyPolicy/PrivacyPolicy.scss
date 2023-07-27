@@ -2,7 +2,17 @@
 @import "../../styles/palette.scss";
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
+@import "../../styles/animations.scss";
 
+// Take off animations
+.SubNav {
+    display: none;
+    animation: fade_in 500ms linear;
+    opacity: 1;
+    @include bp.md {
+        display: flex;
+    }
+}
 
 .privacy-policy {
     .updated-date {
