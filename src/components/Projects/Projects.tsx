@@ -3,7 +3,13 @@ import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import Footer from "../Footer/Footer";
-import riffMasterImg from "../../assets/images/about/RiffMaster.png";
+import riffMasterImg from "../../assets/images/projects/RiffMaster.png";
+import personalTrainerImg from "../../assets/images/projects/FrancescoLevo.png";
+import gradientGeneratorImg from "../../assets/images/projects/GradientGenerator.png";
+import rainCheckImg from "../../assets/images/projects/RainCheck.png";
+import greenRooftopImg from "../../assets/images/projects/GreenRooftop.png";
+import fruitsAndFlowersImg from "../../assets/images/projects/FruitsAndFlowers.png";
+import pocketTutorImg from "../../assets/images/projects/PocketTutor.png";
 import "./Projects.scss";
 
 interface Props {
@@ -30,20 +36,55 @@ const projects: Project[] = [
         title: "RiffMaster Guitar Studio",
         image: riffMasterImg,
         description: "An appropriate description for my project",
-        badges: [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "React",
-            "React Native",
-            "TypeScript",
-            "Sass",
-            "Arduino",
-            "NodeJs",
-            "Mongodb",
-            "PhotoShop",
-            "Illustrator",
-        ],
+        badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Personal Trainer Website",
+        image: personalTrainerImg,
+        description: "An appropriate description for my project",
+        badges: ["HTML", "CSS", "JavaScript", "NodeJs", "Mongodb"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Gradient & Pattern Generator",
+        image: gradientGeneratorImg,
+        description: "An appropriate description for my project",
+        badges: ["React", "CSS"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Raincheck Mobile Weather",
+        image: rainCheckImg,
+        description: "An appropriate description for my project",
+        badges: ["React Native"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Green Rooftop Device & App",
+        image: greenRooftopImg,
+        description: "An appropriate description for my project",
+        badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Fruits & Flowers Game",
+        image: fruitsAndFlowersImg,
+        description: "An appropriate description for my project",
+        badges: ["HTML", "Sass", "JavaScript"],
+        url: "",
+        github: "",
+    },
+    {
+        title: "Pocket Tutor App",
+        image: pocketTutorImg,
+        description: "An appropriate description for my project",
+        badges: ["HTML", "CSS", "React"],
         url: "",
         github: "",
     },
