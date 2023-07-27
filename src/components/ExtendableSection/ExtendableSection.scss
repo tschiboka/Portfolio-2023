@@ -76,16 +76,21 @@
         animation-timing-function: ease-out, ease-in;
         animation-fill-mode: forwards, forwards;
     }
+
+    p {
+       margin-top: 0; 
+    }
 }
 
 .light .ExtendableSection {
     & > button {
-        color: white;
-        border-color: $white_5;
+        color: black;
+        background-color: $white_2;       
+        border-color: $white_4;
         border-width: 3px;
     }
     & > button:hover {
         color: $accent;
-        background-color: $black_3;       
+        background-color: $black_1;       
     }
 }

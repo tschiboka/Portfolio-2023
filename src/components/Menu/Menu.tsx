@@ -57,6 +57,7 @@ const Menu = ({
                 </Link>
             </li>
             <li
+                className="link"
                 onClick={() =>
                     setThemeMode(themeMode === "dark" ? "light" : "dark")
                 }

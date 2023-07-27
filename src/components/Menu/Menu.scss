@@ -52,9 +52,10 @@
         color: inherit;
         text-decoration: inherit;
     }
-
+    
     a:hover, .link:hover {
         color: white;
+        transform: scale(1.1);
     }
 
     .active .link {
@@ -91,7 +92,6 @@
         }
         a.active {
             color: $white_4;
-            text-decoration: underline;
         }
         a:hover {
             color: white;
@@ -101,11 +101,27 @@
 }
 
 .light .Menu {
-    background-color: $white_2;
+    background: linear-gradient(315deg, $white_2 40%, $white_1 70%);
     color: $black_2;
+    li {
+        color: $black_5;
+    }
 
     li.active {
         color: black;
+    }
+
+    a:hover, .link:hover {
+        color: black;
+    }
+    .languages {
+        color: $white_5;
+        .active {
+            color: $black_1;
+        }
+        a {
+            color: $black_5;
+        }
     }
 }
 

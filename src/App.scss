@@ -3,17 +3,13 @@
 @import "./styles/font_sizes.scss";
 
 body {
-    background-color: white;
+    background-color: $white_1;
     color: black;
 }
 
 body.dark {
     background-color: $black_1;
     color: white;
-}
-
-main {
-    padding: 2rem 3rem 2rem 3rem;
 }
 
 br {

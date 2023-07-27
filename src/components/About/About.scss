@@ -84,6 +84,15 @@ img {
         font-size: $font_lg;
     }
     li {
-        padding-bottom: 0.5rem;
+        padding: 0.5rem 0;
+    }
+}
+
+.light {
+    .link--inline {
+        color: $accent_dark_3;
+    }
+    .certificates {
+        color: $black_2;
     }
 }

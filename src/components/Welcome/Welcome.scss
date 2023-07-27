@@ -48,7 +48,8 @@
         height: 20rem;
         background: $black_1;
         border-radius: 100%;
-        border: 4px dotted $black_2;
+        border: 10px solid $black_2;
+        background: linear-gradient(315deg, $black_1, $black_2);
         animation: pop 2000ms ease-out forwards;
         opacity: 0.6;
         @include bp.sm {
@@ -63,9 +64,13 @@
         height: calc(100% - 1rem);
         margin: 0.5rem;
         border-radius: 100%;
-        border: 1px solid $black_5;
+        border: 2px solid $black_2;
         background-color: $black_2;
+        background: linear-gradient(315deg, $black_2, $black_1);
         object-position: 0 20px ;
+        filter: grayscale(0);
+    }
+    img.headshot:hover {
         filter: grayscale(1);
     }
 
@@ -161,10 +166,15 @@
 }
 
 .light {
+    .headshot-wrapper {
+        opacity: 1;
+        border: 10px solid $white_1;
+        background: $white_2;
+    }
     .Welcome img {
         opacity: 1;
-        background-color: $black_5;
-        border: 2px solid $white_5;
+        background: linear-gradient(315deg, white, $white_3);
+        border: 2px solid $white_2;
         filter: grayscale(0)
     }
     .hello {

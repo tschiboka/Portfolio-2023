@@ -146,18 +146,18 @@ const About = ({
                 <ul className="certificates">
                     <li>
                         BSc Software Engineering [First Class], Falmouth
-                        University, 2023
+                        University, 2023.
                     </li>
-                    <li>HND Computing [Distinction], Icon College, 2022</li>
-                    <li>React Course, [Online - Mosh] 2023</li>
-                    <li>NodeJs Course, [Online - Mosh] 2022</li>
+                    <li>HND Computing [Distinction], Icon College, 2022.</li>
+                    <li>React Course [Online - Mosh], 2023.</li>
+                    <li>NodeJs Course [Online - Mosh], 2022.</li>
                     <li>
                         Front End Development Certificate, [Online -
-                        FreeCodeCamp], 2018
+                        FreeCodeCamp], 2018.
                     </li>
                     <li>
-                        Algorithms and Data Structures, [Online - FreeCodeCamp],
-                        2018
+                        Algorithms and Data Structures [Online - FreeCodeCamp],
+                        2018.
                     </li>
                 </ul>
             </main>

@@ -76,6 +76,8 @@
             color: white;
             font-family: Roboto_Bold;
         }
+        li.active:hover { transform: scale(1); }
+        li:hover { transform: scale(1.1); }
         li:not(.active) .active-dot {
             display: none;
         }
@@ -113,7 +115,7 @@
     }
 
     .t-logo {
-        background-color: $black_5;
+        background-color: $black_1;
         opacity: 1;
     }
 
