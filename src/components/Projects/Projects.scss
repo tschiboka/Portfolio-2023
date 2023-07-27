@@ -1,0 +1,12 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+.SubNav {
+    display: none;
+    animation: fade_in 500ms linear;
+    opacity: 1;
+    @include bp.md {
+        display: flex;
+    }
+}

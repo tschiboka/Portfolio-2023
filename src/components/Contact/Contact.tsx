@@ -1,5 +1,7 @@
 import Nav from "../Nav/Nav";
 import Menu from "../Menu/Menu";
+import SubNav from "../SubNav/SubNav";
+import "./Contact.scss";
 
 interface Props {
     pageName: string;
@@ -37,6 +39,9 @@ const Contact = ({
                     setThemeMode={setThemeMode}
                     setMobileMenuVisible={setMobileMenuVisible}
                 />
+            )}
+            {subMenuVisible && (
+                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             )}
         </>
     );

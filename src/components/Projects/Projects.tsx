@@ -1,5 +1,7 @@
 import Nav from "../Nav/Nav";
 import Menu from "../Menu/Menu";
+import "./Projects.scss";
+import SubNav from "../SubNav/SubNav";
 
 interface Props {
     pageName: string;
@@ -37,6 +39,9 @@ const Projects = ({
                     setThemeMode={setThemeMode}
                     setMobileMenuVisible={setMobileMenuVisible}
                 />
+            )}
+            {subMenuVisible && (
+                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             )}
         </>
     );
