@@ -27,8 +27,9 @@ export interface Project {
     image: string;
     description: string;
     badges: string[];
-    url: string;
-    github: string;
+    url?: string;
+    github?: string;
+    readMoreLink?: string;
 }
 
 const projects: Project[] = [
@@ -39,6 +40,7 @@ const projects: Project[] = [
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
         url: "",
         github: "",
+        readMoreLink: "",
     },
     {
         title: "Personal Trainer Website",
@@ -57,7 +59,7 @@ const projects: Project[] = [
         github: "",
     },
     {
-        title: "Raincheck Mobile Weather",
+        title: "Raincheck Mobile App",
         image: rainCheckImg,
         description: "An appropriate description for my project",
         badges: ["React Native"],
@@ -65,7 +67,7 @@ const projects: Project[] = [
         github: "",
     },
     {
-        title: "Green Rooftop Device & App",
+        title: "Green Rooftop IoT Device & App",
         image: greenRooftopImg,
         description: "An appropriate description for my project",
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],

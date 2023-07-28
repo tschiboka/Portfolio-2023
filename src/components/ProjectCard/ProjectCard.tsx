@@ -2,6 +2,7 @@ import type { Project } from "../Projects/Projects";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { TbWorldWww } from "react-icons/tb";
+import { FiMoreHorizontal } from "react-icons/fi";
 import "./ProjectCard.scss";
 
 interface Props {
@@ -39,8 +40,34 @@ function getColourName(str: string) {
     }
 }
 
+const renderLinks = (url?: string, github?: string, readMoreLink?: string) => {
+    if (url || github || readMoreLink)
+        return (
+            <>
+                <hr />
+                <div className="ProjectCard__links">
+                    {url && (
+                        <Link to={url}>
+                            <TbWorldWww />
+                        </Link>
+                    )}
+                    {github && (
+                        <Link to={github}>
+                            <FaGithub />
+                        </Link>
+                    )}
+                    {readMoreLink && (
+                        <Link to={readMoreLink}>
+                            <FiMoreHorizontal />
+                        </Link>
+                    )}
+                </div>
+            </>
+        );
+};
+
 const ProjectCard = ({
-    project: { title, image, description, badges, url, github },
+    project: { title, image, description, badges, url, github, readMoreLink },
 }: Props) => {
     return (
         <div className="ProjectCard">
@@ -59,15 +86,7 @@ const ProjectCard = ({
                     </span>
                 ))}
             </div>
-            <hr />
-            <div className="ProjectCard__links">
-                <Link to={url}>
-                    <TbWorldWww />
-                </Link>
-                <Link to={github}>
-                    <FaGithub />
-                </Link>
-            </div>
+            {renderLinks(url, github, readMoreLink)}
         </div>
     );
 };
