@@ -47,7 +47,8 @@ const projects: Project[] = [
     {
         title: "Personal Trainer Website",
         image: personalTrainerImg,
-        description: "An appropriate description for my project",
+        description:
+            "I crafted a sleek portfolio website for my personal trainer client to expand his reach. This website features a minimalist dark web design, a powerful logo representing his brand identity, seamless multiple language support, testimonials, personal statements, health and nutritional recommendations, a user-friendly Google Calendar integration for easy bookings, and a contact form to communicate with potential clients.",
         badges: ["HTML", "CSS", "JavaScript", "NodeJs", "Mongodb"],
         url: "",
         github: "",
@@ -55,7 +56,8 @@ const projects: Project[] = [
     {
         title: "Gradient & Pattern Generator",
         image: gradientGeneratorImg,
-        description: "An appropriate description for my project",
+        description:
+            "Generating intricate CSS code becomes a breeze. With a comprehensive range of linear and radial gradient tools and pattern samples, you can easily adjust your designs using intuitive sliders, bypassing the need for lengthy vendor-specific CSS code. Creating captivating CSS patterns has never been more straightforward, featuring a custom colour picker, with palettes of websafe colours (rgba, hsl and hex), and support for various CSS units and angles.",
         badges: ["React", "CSS"],
         url: "",
         github: "",
@@ -63,7 +65,8 @@ const projects: Project[] = [
     {
         title: "Raincheck Mobile App",
         image: rainCheckImg,
-        description: "An appropriate description for my project",
+        description:
+            "RainCheck is a comprehensive tool designed to provide users with relevant weather information at their fingertips. Offering user-friendly time and location formatting and essential weather features such as temperature, wind speed, precipitation, and humidity. With hourly and daily breakdowns, users can confidently plan their activities. Additionally, the app boasts a settings screen for metric/imperial toggling and location selection, all wrapped in straightforward navigation for seamless usability.",
         badges: ["React Native"],
         url: "",
         github: "",
@@ -71,7 +74,8 @@ const projects: Project[] = [
     {
         title: "Green Rooftop IoT Device & App",
         image: greenRooftopImg,
-        description: "An appropriate description for my project",
+        description:
+            "The GreenRoof project is dedicated to building a sustainable urban environment by offering an innovative IoT device that facilitates the monitoring and maintaining green rooftops. This cutting-edge technology allows rooftop owners and service providers to access real-time data on soil moisture, temperature, humidity, light, and rainwater tank status. The website complements the device by providing an intuitive interface for users to view their data effortlessly. GreenRoof is shaping a greener and more sustainable future for urban landscapes by promoting eco-awareness and natural living spaces.",
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
         url: "",
         github: "",
@@ -79,7 +83,8 @@ const projects: Project[] = [
     {
         title: "Fruits & Flowers Game",
         image: fruitsAndFlowersImg,
-        description: "An appropriate description for my project",
+        description:
+            "Fruits and Flowers began as a personal challenge to test my JavaScript skills and evolved into a captivating game with over 100 levels. Unlike traditional match-three games, Fruits and Flowers offers unique challenges with special gems, adding extra layers of complexity. Players can earn in-game points to acquire unique gems that provide advantages at tougher levels. While this early project may not adhere to all programming best practices, it holds a special place in my heart as a significant milestone in my development journey.",
         badges: ["HTML", "Sass", "JavaScript"],
         url: "",
         github: "",
@@ -87,7 +92,8 @@ const projects: Project[] = [
     {
         title: "Pocket Tutor App",
         image: pocketTutorImg,
-        description: "An appropriate description for my project",
+        description:
+            "Pocket Tutor is a versatile app that facilitates autodidactic learning through interactive flashcards, perfect for on-the-go practice. With the ability to create custom topic badges and flashcards, users can quickly test their knowledge anytime, anywhere. The flashcards support code snippets with syntax highlighting for HTML, CSS, and JavaScript, making them ideal for aspiring developers. To tailor their learning experience, users can set test difficulties and track their progress using insightful performance diagrams. Pocket Tutor empowers learners to take charge of their education and deepen their understanding.",
         badges: ["HTML", "CSS", "React"],
         url: "",
         github: "",
