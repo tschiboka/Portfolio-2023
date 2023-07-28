@@ -25,6 +25,7 @@ interface Props {
 export interface Project {
     title: string;
     image: string;
+    gallery?: [string];
     description: string;
     badges: string[];
     url?: string;
@@ -36,7 +37,8 @@ const projects: Project[] = [
     {
         title: "RiffMaster Guitar Studio",
         image: riffMasterImg,
-        description: "An appropriate description for my project",
+        description:
+            "My groundbreaking project aims to revolutionise how we learn and play the guitar. With a custom-designed digital guitar controller and an interactive web application, RiffMaster offers an entertaining and educative musical experience for both beginners and experienced guitarists. The platform provides comprehensive lessons and enables composing and playing real-time music games with RiffMaster's innovative hardware and software fusion.",
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
         url: "",
         github: "",
