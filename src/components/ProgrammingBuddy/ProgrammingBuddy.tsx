@@ -44,9 +44,8 @@ const ProgrammingBuddy = () => {
             </p>
             <p>
                 If you're as enthusiastic as I am about finding a programming
-                buddy, I'd love to hear from you. Feel free to email me at...
-                Let's join forces and make our coding journey even more
-                remarkable!
+                buddy, I'd love to hear from you. Feel free to contact me! Let's
+                join forces and make our coding journey even more remarkable!
             </p>
         </>
     );
