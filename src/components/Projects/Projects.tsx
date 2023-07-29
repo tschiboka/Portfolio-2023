@@ -6,6 +6,7 @@ import ProjectFilter from "../ProjectFilter/ProjectFilter";
 import Footer from "../Footer/Footer";
 import { getProjects } from "./getProjects";
 import "./Projects.scss";
+import { useState } from "react";
 
 interface Props {
     pageName: string;
@@ -38,6 +39,7 @@ const Projects = ({
     setSubMenuVisible,
 }: Props) => {
     const projects = getProjects();
+    const [filteredLanguage, setFilterLanguage] = useState<string>("");
     return (
         <>
             <Nav
@@ -76,7 +78,17 @@ const Projects = ({
                     <br />
                 </p>
 
-                <ProjectFilter />
+                <ProjectFilter
+                    filteredLanguage={filteredLanguage}
+                    setFilteredLanguage={setFilterLanguage}
+                />
+                {filteredLanguage && (
+                    <div className="button-wrapper--reset">
+                        <button onClick={() => setFilterLanguage("")}>
+                            Reset Filter
+                        </button>
+                    </div>
+                )}
                 <hr />
                 <section className="ProjectCard-wrapper">
                     {projects.map((project) => (
@@ -90,3 +102,6 @@ const Projects = ({
 };
 
 export default Projects;
+function setState(): [any, any] {
+    throw new Error("Function not implemented.");
+}

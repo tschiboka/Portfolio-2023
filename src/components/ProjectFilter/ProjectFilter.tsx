@@ -1,7 +1,14 @@
 import "./ProjectFilter.scss";
 import { getProjects, getColourName } from "../Projects/getProjects";
 
-const ProjectFilter = () => {
+interface Props {
+    filteredLanguage: string;
+    setFilteredLanguage: (language: string) => void;
+}
+
+const ProjectFilter = ({ filteredLanguage, setFilteredLanguage }: Props) => {
+    const isSelected = (badge: string) =>
+        filteredLanguage === badge ? "selected" : "";
     const projects = getProjects();
     // Create a Set of Project Languages
     const languagesSet: Set<string> = new Set();
@@ -9,14 +16,20 @@ const ProjectFilter = () => {
         project.badges.map((badge) => languagesSet.add(badge))
     );
     const languages = Array.from(languagesSet);
-    console.log(languages);
+
     return (
         <div className="ProjectFilter">
             {languages.map((badge) => (
                 <span
-                    key="badge"
-                    className={"badge " + getColourName(badge)}
+                    key={badge}
+                    className={
+                        "badge " +
+                        getColourName(badge) +
+                        " " +
+                        isSelected(badge)
+                    }
                     title={"Filter for " + badge}
+                    onClick={() => setFilteredLanguage(badge)}
                 >
                     {badge}
                 </span>

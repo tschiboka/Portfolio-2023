@@ -27,6 +27,10 @@
             padding: 0.5rem 1rem;
         }
     }
+
+    .selected {
+        opacity: 0.3;
+    }
     .badge.yellow { background-color: yellow; }
     .badge.orange { background-color: rgb(255, 183, 48); }
     .badge.pink { background-color: deeppink; }
