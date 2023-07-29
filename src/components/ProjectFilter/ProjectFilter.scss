@@ -40,3 +40,10 @@
     .badge.green { background-color: rgb(0, 255, 0); }
     .badge.pink { background-color: deeppink; }
 }
+
+.light .ProjectFilter {
+    background-color: $white_2;
+    .badge {
+        border: 1px solid $white_5;
+    }
+}

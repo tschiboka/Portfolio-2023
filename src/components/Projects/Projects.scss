@@ -33,6 +33,7 @@ h1 {
         border-radius: 50px;
         color: $white_2;
         font-size: $font_md;
+        font-weight: bold;
         @include bp.md {
             font-size: $font_lg;
         }
@@ -43,4 +44,12 @@ h1 {
             cursor: pointer;
         }
     }    
+}
+
+.light {
+    .button-wrapper--reset button {
+        background-color: $white_2;
+        border: 1px solid $black_5;
+        color: $black_2;
+    }
 }

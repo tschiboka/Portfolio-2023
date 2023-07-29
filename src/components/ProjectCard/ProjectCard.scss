@@ -97,3 +97,15 @@
         }
     }
 }
+
+.light .ProjectCard {
+    background-color: $white_2;
+    hr {
+        border-color: $white_3;
+    }
+    .ProjectCard__links {
+        & > * {
+            color: $black_5;
+        }
+    }
+}
