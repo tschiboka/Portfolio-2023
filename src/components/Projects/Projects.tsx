@@ -38,8 +38,13 @@ const Projects = ({
     subMenuVisible,
     setSubMenuVisible,
 }: Props) => {
-    const projects = getProjects();
     const [filteredLanguage, setFilterLanguage] = useState<string>("");
+
+    let projects = getProjects();
+    if (filteredLanguage)
+        projects = projects.filter((project) =>
+            project.badges.includes(filteredLanguage)
+        );
     return (
         <>
             <Nav
