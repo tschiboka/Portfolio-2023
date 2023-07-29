@@ -16,6 +16,7 @@
 
     @include bp.lg {
         width: calc(50% - 1rem);
+        padding: 1.5rem;
     }   
  
     h3 {
@@ -35,6 +36,7 @@
         object-position: center;
         background-color: $black_2;
         border: 1px solid $black_3;
+        border-radius: 20px;
         @include bp.md {
             min-height: 500px;
         }
@@ -48,12 +50,15 @@
         border-bottom: 1px solid $black_2;
     }
     p {
-        height: 100%;
         display: flex;
         align-items: center;
         font-size: $font_md;
-        padding: 0 0.5rem;
+        padding: 1rem 0;
         margin: 0;
+        @include bp.lg {
+            height: 100%;
+            font-size: $font_lg;
+        }
            
     }   
     .ProjectCard__badges {
@@ -85,6 +90,10 @@
             font-size: $font_lg;
             color: $white_5;
             margin: 0 0.5rem;
+        }
+        @include bp.lg {
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.4rem;
         }
     }
 }

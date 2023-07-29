@@ -4,40 +4,10 @@ import { FaGithub } from "react-icons/fa";
 import { TbWorldWww } from "react-icons/tb";
 import { FiMoreHorizontal } from "react-icons/fi";
 import "./ProjectCard.scss";
+import { getColourName } from "../Projects/getProjects";
 
 interface Props {
     project: Project;
-}
-
-function getColourName(str: string) {
-    switch (str.toLowerCase()) {
-        case "html":
-            return "orange";
-        case "css":
-            return "blue";
-        case "javascript":
-            return "yellow";
-        case "react":
-            return "light-blue";
-        case "react native":
-            return "light-blue";
-        case "typescript":
-            return "blue";
-        case "sass":
-            return "pink";
-        case "arduino":
-            return "light-blue";
-        case "nodejs":
-            return "light-green";
-        case "mongodb":
-            return "green";
-        case "photoshop":
-            return "light-blue";
-        case "illustrator":
-            return "orange";
-        default:
-            return "white";
-    }
 }
 
 const renderLinks = (url?: string, github?: string, readMoreLink?: string) => {
@@ -47,17 +17,17 @@ const renderLinks = (url?: string, github?: string, readMoreLink?: string) => {
                 <hr />
                 <div className="ProjectCard__links">
                     {url && (
-                        <Link to={url}>
+                        <Link to={url} title="View Project Website">
                             <TbWorldWww />
                         </Link>
                     )}
                     {github && (
-                        <Link to={github}>
+                        <Link to={github} title="Check Out Project Github">
                             <FaGithub />
                         </Link>
                     )}
                     {readMoreLink && (
-                        <Link to={readMoreLink}>
+                        <Link to={readMoreLink} title="Read More About Project">
                             <FiMoreHorizontal />
                         </Link>
                     )}
