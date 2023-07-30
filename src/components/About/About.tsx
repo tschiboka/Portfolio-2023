@@ -134,12 +134,12 @@ const About = ({
                 </Link>
                 <h2>Continued Self Development</h2>
                 <p>
-                    I consider completing my bachelor's degree the beginning of
-                    my self-development and an exciting phase of a life-long
-                    professional development journey. I am now further expanding
-                    my skills by taking courses on TypeScript and refreshing my
-                    knowledge in React and Sass to consolidate my expertise in
-                    my current stack.
+                    I consider the completiion of my bachelor's degree the
+                    beginning of my self-development and an exciting phase of a
+                    life-long professional development journey. I am now further
+                    expanding my skills by taking courses on TypeScript and Jest
+                    and refreshing my knowledge in React and Sass to consolidate
+                    my expertise in my current stack.
                 </p>
                 <h2>Accomplishments</h2>
 
