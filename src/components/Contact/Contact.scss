@@ -12,3 +12,137 @@
         display: flex;
     }
 }
+
+main.contact {
+    padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include bp.sm {
+        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    }
+}
+
+h1 {
+    margin: 1.5rem 0;
+}
+
+.contact hr {
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid $black_2;
+}
+
+ul.contacts {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1.5rem 0 3rem 0;
+    list-style: none;
+    font-size: $font_md;
+    font-variant: small-caps;
+    @include bp.md {
+        font-size: $font_lg
+    }
+    .icon {
+        color: $accent_dark_3;
+    }
+    .link {
+        margin-left: 20px;
+        color: white;
+    }
+    li {
+        display: flex;
+        align-items: center;
+        & * {
+            text-decoration: none;
+        }
+    }        
+}
+
+form {
+    width: 100%;
+    max-width: 1000px;
+    margin-bottom: 3rem;
+    padding: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: $black_1;
+    border: 1px solid $black_3;
+    border-radius: 20px;
+}
+
+fieldset {
+    width: 100%;
+    margin: 1rem 0;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    @include bp.md {
+        font-size: 1.5rem;
+    }
+}
+
+label {
+    color: $white_3;
+    span {
+        color: $accent_dark_3;
+    }
+}
+
+input, textarea {
+    width: 70%;
+    padding: 0 10px;
+    background-color: $black_2;
+    color: $white_3;
+    font-size: $font_sm;
+    border: 1px solid $black_3;
+    border-radius: 20px;
+    @include bp.md {
+        padding: 20px;
+    }
+}
+
+input:focus, textarea:focus, .submit-message:focus {
+    border-color: $accent_dark_3;
+    outline: none;
+}
+
+input {
+    height: 2rem;
+    @include bp.md {
+        height: 2.5rem;
+    }
+}
+
+textarea {
+    height: 8rem;
+    padding-top: 10px;
+}
+
+.submit-message {
+    height: 2rem;
+    width: 200px;
+    margin-top: 3rem;
+    background-color: $black_1;
+    border: 1px solid $black_3;
+    border-radius: 20px;
+    font-size: $font_sm;
+    color: white;
+    padding: 0 10px;
+    cursor: pointer;
+
+    @include bp.md {
+        height: 3rem;
+        width: 300px;
+        font-size: 1.5rem;
+    }
+}
