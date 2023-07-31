@@ -46,13 +46,17 @@ ul.contacts {
     font-size: $font_md;
     font-variant: small-caps;
     @include bp.md {
-        font-size: $font_lg
+        font-size: $font_lg;
+        flex-direction: row;
     }
     .icon {
         color: $accent_dark_3;
     }
     .link {
         margin-left: 20px;
+        color: $white_4;
+    }
+    .link:hover {
         color: white;
     }
     li {
@@ -61,7 +65,7 @@ ul.contacts {
         & * {
             text-decoration: none;
         }
-    }        
+    }
 }
 
 form {
@@ -145,4 +149,11 @@ textarea {
         width: 300px;
         font-size: 1.5rem;
     }
+}
+
+.error-message {
+    width: 100%;
+    padding: 0 2.5rem;
+    text-align: right;
+    color: deeppink;
 }
