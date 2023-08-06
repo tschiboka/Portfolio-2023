@@ -3,10 +3,11 @@ import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import Footer from "../Footer/Footer";
 import { MdAlternateEmail } from "react-icons/md";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
-import "./Contact.scss";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
+import "./Contact.scss";
 
 interface Props {
     pageName: string;
@@ -54,7 +55,7 @@ const validateTel = (tel: string): ValidationResult => {
 };
 
 const validateMessage = (message: string): ValidationResult => {
-    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()\[\]:;@'"-\s]*$/;
+    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\\[\]:;@'"-\s]*$/;
     if (message.length === 0)
         return { valid: false, error: "Cannot be Empty!" };
     if (message.length < 10)
@@ -86,6 +87,8 @@ const Contact = ({
     const [telError, setTelError] = useState("");
     const [messageError, setMessageError] = useState("");
     const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS);
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+    const [userMessage, setUserMessage] = useState("");
 
     const countCharacters = () => {
         const message = messageRef.current?.value ?? "";
@@ -93,19 +96,55 @@ const Contact = ({
         setCharactersLeft(left);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const name = nameRef.current?.value ?? "";
         const email = emailRef.current?.value ?? "";
         const tel = telRef.current?.value ?? "";
         const message = messageRef.current?.value ?? "";
 
         // Validate
-        setNameError(validateName(name).error);
-        setEmailError(validateEmail(email).error);
-        setTelError(validateTel(tel).error);
-        setMessageError(validateMessage(message).error);
+        const nameValidation = validateName(name);
+        const emailValidation = validateEmail(email);
+        const telValidation = validateTel(tel);
+        const messageValidation = validateMessage(message);
+        setNameError(nameValidation.error);
+        setEmailError(emailValidation.error);
+        setTelError(telValidation.error);
+        setMessageError(messageValidation.error);
 
-        // Submit Form
+        const inputValid =
+            nameValidation.valid &&
+            emailValidation.valid &&
+            telValidation.valid &&
+            messageValidation.valid;
+
+        if (inputValid) {
+            // Disable Submit Button
+            setSubmitDisabled(true);
+            setUserMessage("Sending Message...");
+
+            // Submit Form
+            const URL = "http://localhost:5000/message";
+            const options = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            };
+
+            try {
+                const response = await fetch(URL, options);
+                const responseJSON = await response.json();
+                if (responseJSON.success) {
+                    setUserMessage("Message Sent!");
+                    console.log(responseJSON);
+                } else setUserMessage("Error While Sending Message!");
+            } catch (err) {
+                setUserMessage("Error While Sending Message!");
+            } finally {
+                setSubmitDisabled(false);
+            }
+        }
     };
 
     const mail = "tibi.aki.tivadar@gmail.com";
@@ -247,9 +286,16 @@ const Contact = ({
                                 {messageError}
                             </span>
                         )}
+                        {submitDisabled && (
+                            <AiOutlineLoading3Quarters className="loading-indicator" />
+                        )}
+                        {userMessage && (
+                            <span className="user-message">{userMessage}</span>
+                        )}
                         <button
                             className="submit-message"
                             type="button"
+                            disabled={submitDisabled}
                             onClick={() => handleSubmit()}
                         >
                             Send Your Message
