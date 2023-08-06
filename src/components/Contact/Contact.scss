@@ -8,53 +8,62 @@
     display: none;
     animation: fade_in 500ms linear;
     opacity: 1;
-    @include bp.md {
+    @include bp.xl {
         display: flex;
     }
 }
 
 main.contact {
-    padding: 1.5rem 0.5rem 1.5rem 0.5rem;
+    width: 100%;
+    max-width: 2000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    @include bp.sm {
-        padding: 1.5rem 1.5rem 1.5rem 1.5rem;
-    }
 }
 
 h1 {
-    margin: 1.5rem 0;
+    margin: 0 0 3rem 0;
 }
 
-.contact hr {
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    max-width: 1000px;
-    border: 1px solid $black_2;
+ 
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 ul.contacts {
     width: 100%;
-    max-width: 1000px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     justify-content: space-between;
-    margin: 1.5rem 0 3rem 0;
+    margin: 1.5rem 0;
     list-style: none;
     font-size: $font_md;
     font-variant: small-caps;
-    @include bp.md {
-        font-size: $font_lg;
-        flex-direction: row;
-    }
     .icon {
         color: $accent_dark_3;
+        font-size: $font_md;
+        @include bp.md {
+            font-size: $font_lg;
+        }
     }
     .link {
-        margin-left: 20px;
         color: $white_4;
+        @include bp.md {
+            margin-left: 10px;
+        }
     }
     .link:hover {
         color: white;
@@ -70,16 +79,13 @@ ul.contacts {
 
 form {
     width: 100%;
-    max-width: 1000px;
+    max-width: 700px;
     margin-bottom: 3rem;
     padding: 1.5rem 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: $black_1;
-    border: 1px solid $black_3;
-    border-radius: 20px;
 }
 
 fieldset {
@@ -90,29 +96,16 @@ fieldset {
     justify-content: space-between;
     align-items: center;
     border: none;
-    @include bp.md {
-        font-size: 1.5rem;
-    }
-}
-
-label {
-    color: $white_3;
-    span {
-        color: $accent_dark_3;
-    }
 }
 
 input, textarea {
-    width: 70%;
-    padding: 0 10px;
-    background-color: $black_2;
+    width: 100%;
+    padding: 20px 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid $black_2;
     color: $white_3;
     font-size: $font_sm;
-    border: 1px solid $black_3;
-    border-radius: 20px;
-    @include bp.md {
-        padding: 20px;
-    }
 }
 
 input:focus, textarea:focus, .submit-message:focus {
@@ -122,9 +115,6 @@ input:focus, textarea:focus, .submit-message:focus {
 
 input {
     height: 2rem;
-    @include bp.md {
-        height: 2.5rem;
-    }
 }
 
 textarea {
@@ -133,27 +123,48 @@ textarea {
 }
 
 .submit-message {
-    height: 2rem;
-    width: 200px;
+    min-height: 3rem;
+    width: 300px;
     margin-top: 3rem;
     background-color: $black_1;
     border: 1px solid $black_3;
-    border-radius: 20px;
+    border-radius: 10px;
     font-size: $font_sm;
     color: white;
     padding: 0 10px;
     cursor: pointer;
-
-    @include bp.md {
-        height: 3rem;
-        width: 300px;
-        font-size: 1.5rem;
-    }
 }
 
 .error-message {
     width: 100%;
     padding: 0 2.5rem;
     text-align: right;
-    color: deeppink;
+    font-style: italic;
+    color: rgb(220, 19, 86);
+}
+
+.character-counter {
+    width: 100%;
+    padding: 0 2.5rem;
+    display: block;
+    text-align: right;
+    font-style: italic;
+    color: $black_5;
+}
+
+.light {
+    ul.contacts {
+        .icon {
+            color: $accent_dark_4;
+        }
+        .link {
+            color: $black_1;
+        }
+    }
+    input, textarea {
+        color: black;
+    }
+    .error-message {
+        color: red;
+    }
 }

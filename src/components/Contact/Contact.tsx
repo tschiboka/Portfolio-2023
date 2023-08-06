@@ -23,6 +23,8 @@ interface ValidationResult {
     error: string;
 }
 
+const MAX_MESSAGE_CHARACTERS = 1000;
+
 const validateName = (name: string): ValidationResult => {
     const nameRegex = /^[a-z \-']+$/i;
     if (name.length === 0) return { valid: false, error: "Cannot be Empty!" };
@@ -57,7 +59,8 @@ const validateMessage = (message: string): ValidationResult => {
         return { valid: false, error: "Cannot be Empty!" };
     if (message.length < 10)
         return { valid: false, error: "Min 10 Characters!" };
-    if (message.length > 3000) return { valid: false, error: "Too Long!" };
+    if (message.length > MAX_MESSAGE_CHARACTERS)
+        return { valid: false, error: "Too Long!" };
     if (!allowedCharactersRegex.test(message))
         return { valid: false, error: "Illegal Characters in Text!" };
     return { valid: true, error: "" };
@@ -76,33 +79,37 @@ const Contact = ({
     const emailRef = useRef<HTMLInputElement>(null);
     const telRef = useRef<HTMLInputElement>(null);
     const messageRef = useRef<HTMLTextAreaElement>(null);
+    const charCounterRef = useRef<HTMLSpanElement>(null);
 
     const [nameError, setNameError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [telError, setTelError] = useState("");
     const [messageError, setMessageError] = useState("");
+    const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS);
+
+    const countCharacters = () => {
+        const message = messageRef.current?.value ?? "";
+        const left = MAX_MESSAGE_CHARACTERS - message.length;
+        setCharactersLeft(left);
+    };
 
     const handleSubmit = () => {
-        // References
-        let name = "";
-        let email = "";
-        let tel = "";
-        let message = "";
-
-        if (nameRef.current) name = nameRef.current.value;
-        if (emailRef.current) email = emailRef.current.value;
-        if (telRef.current) tel = telRef.current.value;
-        if (messageRef.current) message = messageRef.current.value;
+        const name = nameRef.current?.value ?? "";
+        const email = emailRef.current?.value ?? "";
+        const tel = telRef.current?.value ?? "";
+        const message = messageRef.current?.value ?? "";
 
         // Validate
         setNameError(validateName(name).error);
         setEmailError(validateEmail(email).error);
         setTelError(validateTel(tel).error);
         setMessageError(validateMessage(message).error);
+
+        // Submit Form
     };
 
     const mail = "tibi.aki.tivadar@gmail.com";
-    const tel = "+447474999334";
+    const tel = "+44 7474 999 334";
     return (
         <>
             <Nav
@@ -125,82 +132,130 @@ const Contact = ({
                 <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             )}
             <main className="contact">
-                <h1>Get in Touch</h1>
-                <ul className="contacts">
-                    <li>
-                        <MdAlternateEmail className="icon" />
-                        <Link className="link" to={`mailto:${mail}`}>
-                            Tibi.Aki.Tivadar@Gmail.Com
-                        </Link>
-                    </li>
-                    <li>
-                        <FiPhone className="icon" />
-                        <a href={`tel:${tel}`} className="link">
-                            {tel}
-                        </a>
-                    </li>
-                </ul>
-                <hr />
-                <form>
-                    <fieldset>
-                        <label htmlFor="name">
-                            Name<span>*</span>
-                        </label>
-                        <input id="name" type="text" ref={nameRef} />
-                    </fieldset>
-                    {nameError && (
+                <h1>Get in Touch!</h1>
+                <section>
+                    <ul className="contacts">
+                        <li>
+                            <MdAlternateEmail className="icon" />
+                            <Link className="link" to={`mailto:${mail}`}>
+                                Tibi.Aki.Tivadar@Gmail.Com
+                            </Link>
+                        </li>
+                        <li>
+                            <FiPhone className="icon" />
+                            <a href={`tel:${tel}`} className="link">
+                                {tel}
+                            </a>
+                        </li>
+                    </ul>
+                    <form>
+                        <fieldset>
+                            <input
+                                id="name"
+                                type="text"
+                                placeholder="Full Name *"
+                                ref={nameRef}
+                                onBlur={() =>
+                                    setNameError(
+                                        validateName(
+                                            nameRef.current?.value || ""
+                                        ).error
+                                    )
+                                }
+                            />
+                        </fieldset>
+                        {nameError && (
+                            <span
+                                className="error-message"
+                                id="error-message--name"
+                            >
+                                {nameError}
+                            </span>
+                        )}
+                        <fieldset>
+                            <input
+                                id="email"
+                                type="text"
+                                placeholder="Email Address *"
+                                ref={emailRef}
+                                onBlur={() =>
+                                    setEmailError(
+                                        validateEmail(
+                                            emailRef.current?.value || ""
+                                        ).error
+                                    )
+                                }
+                            />
+                        </fieldset>
+                        {emailError && (
+                            <span
+                                className="error-message"
+                                id="error-message--email"
+                            >
+                                {emailError}
+                            </span>
+                        )}
+                        <fieldset>
+                            <input
+                                id="phone"
+                                type="text"
+                                placeholder="Phone"
+                                ref={telRef}
+                                onBlur={() =>
+                                    setTelError(
+                                        validateTel(telRef.current?.value || "")
+                                            .error
+                                    )
+                                }
+                            />
+                        </fieldset>
+                        {telError && (
+                            <span
+                                className="error-message"
+                                id="error-message--tel"
+                            >
+                                {telError}
+                            </span>
+                        )}
+                        <fieldset>
+                            <textarea
+                                id="name"
+                                placeholder="Your Message *"
+                                ref={messageRef}
+                                maxLength={MAX_MESSAGE_CHARACTERS}
+                                onChange={countCharacters}
+                                onBlur={() =>
+                                    setMessageError(
+                                        validateMessage(
+                                            messageRef.current?.value || ""
+                                        ).error
+                                    )
+                                }
+                            />
+                        </fieldset>
                         <span
-                            className="error-message"
-                            id="error-message--name"
+                            className="character-counter"
+                            ref={charCounterRef}
                         >
-                            {nameError}
+                            {charatersLeft} Characters Left
                         </span>
-                    )}
-                    <fieldset>
-                        <label htmlFor="name">
-                            Email<span>*</span>
-                        </label>
-                        <input id="email" type="text" ref={emailRef} />
-                    </fieldset>
-                    {emailError && (
-                        <span
-                            className="error-message"
-                            id="error-message--email"
+                        {messageError && (
+                            <span
+                                className="error-message"
+                                id="error-message--message"
+                            >
+                                {messageError}
+                            </span>
+                        )}
+                        <button
+                            className="submit-message"
+                            type="button"
+                            onClick={() => handleSubmit()}
                         >
-                            {emailError}
-                        </span>
-                    )}
-                    <fieldset>
-                        <label htmlFor="name">Phone</label>
-                        <input id="phone" type="text" ref={telRef} />
-                    </fieldset>
-                    {telError && (
-                        <span className="error-message" id="error-message--tel">
-                            {telError}
-                        </span>
-                    )}
-                    <fieldset>
-                        <label htmlFor="message">
-                            Message<span>*</span>
-                        </label>
-                        <textarea id="name" ref={messageRef} />
-                    </fieldset>
-                    {messageError && (
-                        <span
-                            className="error-message"
-                            id="error-message--message"
-                        >
-                            {messageError}
-                        </span>
-                    )}
-                    <button
-                        className="submit-message"
-                        type="button"
-                        onClick={() => handleSubmit()}
-                    >
-                        Send Your Message
-                    </button>
-                </form>
+                            Send Your Message
+                        </button>
+                    </form>
+                </section>
             </main>
             <Footer pageName={pageName} />
         </>
