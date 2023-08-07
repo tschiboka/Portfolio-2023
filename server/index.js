@@ -23,6 +23,6 @@ app.use("/message", message);
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => console.log(`Listening ${PORT}... `))
 
-mongoose.connect("mongodb://127.0.0.1:27017/portfolio-website")
+mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website
     .then(() => console.log("Connected to DB"))
     .catch(err => console.log(err));

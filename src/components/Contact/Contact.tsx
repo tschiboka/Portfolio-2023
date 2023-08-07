@@ -133,26 +133,18 @@ const Contact = ({
                 body: JSON.stringify({
                     name,
                     email,
-                    phone,
+                    phone: phone.replace(/\D/g, ""),
                     message,
                 }),
             };
-            console.log(
-                JSON.stringify({
-                    name,
-                    email,
-                    phone,
-                    message,
-                })
-            );
 
             try {
                 const response = await fetch(URL, options);
                 const responseJSON = await response.json();
+                console.log("RESPONSE", responseJSON);
                 if (responseJSON.success) {
                     setUserMessage("Message Sent!");
-                    console.log(responseJSON);
-                } else setUserMessage("Error While Sending Message!");
+                } else setUserMessage("Error While Sending Message! ");
             } catch (err) {
                 setUserMessage("Error While Sending Message!");
             } finally {
