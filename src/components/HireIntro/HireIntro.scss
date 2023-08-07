@@ -19,7 +19,7 @@
         justify-content: space-evenly;
     }
     
-    button {
+    .link {
         width: 100%;
         max-width: 400px;
         height: 3em;
@@ -33,6 +33,7 @@
         border-radius: 100px;
         font-size: $font_md;
         font-family: "Roboto_Bold";
+        text-decoration: none;
         cursor: pointer;
         & > * {
             margin-left: 0.5rem;
@@ -51,7 +52,7 @@
         }
     }
 
-    button:hover {
+    link:hover {
         background-color: $accent_dark_2;
     }
 }

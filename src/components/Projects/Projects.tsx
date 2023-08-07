@@ -107,6 +107,3 @@ const Projects = ({
 };
 
 export default Projects;
-function setState(): [any, any] {
-    throw new Error("Function not implemented.");
-}

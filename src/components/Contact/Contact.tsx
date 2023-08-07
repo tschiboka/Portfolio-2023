@@ -2,6 +2,7 @@ import Nav from "../Nav/Nav";
 import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import Footer from "../Footer/Footer";
+import MessageAcknowledgement from "../MessageAcknowledgement/MessageAcknowledgement";
 import { MdAlternateEmail } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
@@ -89,6 +90,7 @@ const Contact = ({
     const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS);
     const [submitDisabled, setSubmitDisabled] = useState(false);
     const [userMessage, setUserMessage] = useState("");
+    const [showMessageAck, setShowMessageAck] = useState(false);
 
     const countCharacters = () => {
         const message = messageRef.current?.value ?? "";
@@ -144,6 +146,7 @@ const Contact = ({
                 console.log("RESPONSE", responseJSON);
                 if (responseJSON.success) {
                     setUserMessage("Message Sent!");
+                    setShowMessageAck(true);
                 } else setUserMessage("Error While Sending Message! ");
             } catch (err) {
                 setUserMessage("Error While Sending Message!");
@@ -176,6 +179,9 @@ const Contact = ({
             {subMenuVisible && (
                 <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
             )}
+
+            {showMessageAck && <MessageAcknowledgement />}
+
             <main className="contact">
                 <h1>Get in Touch!</h1>
                 <section>

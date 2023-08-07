@@ -11,7 +11,9 @@ import { FaNodeJs } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 import { BiMessageDots } from "react-icons/bi";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import cv from "../../assets/files/Tivadar_Debnar_CV_2023.pdf";
 import "./HireIntro.scss";
+import { Link } from "react-router-dom";
 
 const HireIntro = () => {
     return (
@@ -104,12 +106,12 @@ const HireIntro = () => {
                 contact me.
             </p>
             <div className="button-wrapper">
-                <button>
+                <Link className="link" to="/contact">
                     Contact Tivadar <BiMessageDots />
-                </button>
-                <button>
+                </Link>
+                <a className="link" href={cv} download>
                     Download my CV <FiDownload />
-                </button>
+                </a>
             </div>
         </>
     );
