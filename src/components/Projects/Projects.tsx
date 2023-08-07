@@ -76,11 +76,11 @@ const Projects = ({
                     front-end designs with HTML, CSS, JavaScript and React to
                     back-end solutions with Node.js and Express, I've leveraged
                     many tools to bring these projects to life.
-                    <br />
-                    <hr />
+                </p>
+                <hr />
+                <p>
                     Also, feel free to filter my projects by technology you are
                     interested in!
-                    <br />
                 </p>
 
                 <ProjectFilter

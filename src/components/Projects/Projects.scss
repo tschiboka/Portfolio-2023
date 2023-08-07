@@ -15,8 +15,17 @@ h1 {
     margin-bottom: 3rem;
 }
 
+main {
+    width: 100vw;
+    @include bp.lg {
+        padding: 3rem 3rem;
+    }
+}
+
 .ProjectCard-wrapper {
     width: 100%;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
