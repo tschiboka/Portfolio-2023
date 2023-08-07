@@ -43,7 +43,7 @@ const validateEmail = (email: string): ValidationResult => {
     return { valid: true, error: "" };
 };
 
-const validateTel = (tel: string): ValidationResult => {
+const validatePhone = (tel: string): ValidationResult => {
     if (tel.length > 0) {
         // Let through empty tel nums
         if (!/^[0-9 ]+$/.test(tel))
@@ -78,7 +78,7 @@ const Contact = ({
 }: Props) => {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
-    const telRef = useRef<HTMLInputElement>(null);
+    const phoneRef = useRef<HTMLInputElement>(null);
     const messageRef = useRef<HTMLTextAreaElement>(null);
     const charCounterRef = useRef<HTMLSpanElement>(null);
 
@@ -99,23 +99,23 @@ const Contact = ({
     const handleSubmit = async () => {
         const name = nameRef.current?.value ?? "";
         const email = emailRef.current?.value ?? "";
-        const tel = telRef.current?.value ?? "";
+        const phone = phoneRef.current?.value ?? "";
         const message = messageRef.current?.value ?? "";
 
         // Validate
         const nameValidation = validateName(name);
         const emailValidation = validateEmail(email);
-        const telValidation = validateTel(tel);
+        const phoneValidation = validatePhone(phone);
         const messageValidation = validateMessage(message);
         setNameError(nameValidation.error);
         setEmailError(emailValidation.error);
-        setTelError(telValidation.error);
+        setTelError(phoneValidation.error);
         setMessageError(messageValidation.error);
 
         const inputValid =
             nameValidation.valid &&
             emailValidation.valid &&
-            telValidation.valid &&
+            phoneValidation.valid &&
             messageValidation.valid;
 
         if (inputValid) {
@@ -130,7 +130,21 @@ const Contact = ({
                 headers: {
                     "Content-Type": "application/json",
                 },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    message,
+                }),
             };
+            console.log(
+                JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    message,
+                })
+            );
 
             try {
                 const response = await fetch(URL, options);
@@ -147,7 +161,7 @@ const Contact = ({
         }
     };
 
-    const mail = "tibi.aki.tivadar@gmail.com";
+    const mail = "Dev@Tschiboka.Co.Uk";
     const tel = "+44 7474 999 334";
     return (
         <>
@@ -177,7 +191,7 @@ const Contact = ({
                         <li>
                             <MdAlternateEmail className="icon" />
                             <Link className="link" to={`mailto:${mail}`}>
-                                Tibi.Aki.Tivadar@Gmail.Com
+                                {mail}
                             </Link>
                         </li>
                         <li>
@@ -239,11 +253,12 @@ const Contact = ({
                                 id="phone"
                                 type="text"
                                 placeholder="Phone"
-                                ref={telRef}
+                                ref={phoneRef}
                                 onBlur={() =>
                                     setTelError(
-                                        validateTel(telRef.current?.value || "")
-                                            .error
+                                        validatePhone(
+                                            phoneRef.current?.value || ""
+                                        ).error
                                     )
                                 }
                             />

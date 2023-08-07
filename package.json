@@ -11,7 +11,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "config": "^3.3.9",
     "cors": "^2.8.5",
+    "joi": "^17.9.2",
+    "mongoose": "^7.4.2",
+    "nodemailer": "^6.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
