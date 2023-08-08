@@ -7,6 +7,7 @@ import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Contact from "./components/Contact/Contact";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
+import RiffMaster from "./components/RiffMaster/RiffMaster";
 import "./styles/palette.scss";
 import "./App.scss";
 
@@ -94,12 +95,31 @@ function App() {
                 }
             />
 
+            {/* Nested Subpages */}
+
             <Route
                 path="/privacy-policy"
                 element={
                     <Page title="Tivadar Debnar | Privacy Policy">
                         <PrivacyPolicy
                             pageName="privacy-policy"
+                            mobileMenuVisible={mobileMenuVisible}
+                            setMobileMenuVisible={setMobileMenuVisible}
+                            themeMode={themeMode}
+                            setThemeMode={setThemeMode}
+                            subMenuVisible={subMenuVisible}
+                            setSubMenuVisible={setSubMenuVisible}
+                        />
+                    </Page>
+                }
+            />
+
+            <Route
+                path="projects/riffmaster"
+                element={
+                    <Page title="Tivadar Debnar | RiffMaster">
+                        <RiffMaster
+                            pageName="riffmaster"
                             mobileMenuVisible={mobileMenuVisible}
                             setMobileMenuVisible={setMobileMenuVisible}
                             themeMode={themeMode}

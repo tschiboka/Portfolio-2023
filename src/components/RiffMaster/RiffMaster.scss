@@ -1,0 +1,21 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+@import "../../styles/animations.scss";
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    margin: 3rem 0;
+    color: $white_2;
+    font-size: $font_lg;
+    font-family: Roboto_Bold;
+}
+
+img.image-lrg {
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}

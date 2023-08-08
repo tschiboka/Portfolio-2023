@@ -16,7 +16,7 @@ const projects: Project[] = [
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
         url: "https://tschiboka.co.uk/projects/riffmaster/index.html",
         github: "https://github.com/tschiboka/RiffMaster",
-        readMoreLink: "",
+        readMoreLink: "/projects/riffmaster",
     },
     {
         title: "Personal Trainer Website",
