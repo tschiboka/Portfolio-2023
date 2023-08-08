@@ -46,6 +46,8 @@
 
     .headshot-wrapper {
         height: 20rem;
+        min-height: 20rem;
+        min-width: 20rem;
         background: $black_1;
         border-radius: 100%;
         border: 10px solid $black_2;
@@ -62,6 +64,7 @@
     
     img.headshot {
         height: calc(100% - 1rem);
+        min-height: 20rem;
         margin: 0.5rem;
         border-radius: 100%;
         border: 2px solid $black_2;

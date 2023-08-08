@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { FaFacebookF } from "react-icons/fa";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { TfiLinkedin } from "react-icons/tfi";
+import cv from "../../assets/files/Tivadar_Debnar_CV_2023.pdf";
 import logo from "../../assets/images/icon-light.svg";
 import "./Footer.scss";
 
@@ -55,7 +56,9 @@ const Footer = ({ pageName }: Props) => {
                     </Link>
                 </li>
                 <li>
-                    <a title="Download CV">RESUME</a>
+                    <a title="Download CV" href={cv} download>
+                        RESUME
+                    </a>
                 </li>
                 <li>
                     <Link to="/privacy-policy" title="Privacy Policy">

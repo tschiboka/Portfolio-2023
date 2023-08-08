@@ -129,7 +129,7 @@ const About = ({
                         <figcaption>Guitar Console Instrument</figcaption>
                     </figure>
                 </div>
-                <Link className="link--inline" to="">
+                <Link className="link--inline" to="/projects/riffmaster">
                     You can check out this guitar project in detail here.
                 </Link>
                 <h2>Continued Self Development</h2>
