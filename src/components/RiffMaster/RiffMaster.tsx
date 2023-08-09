@@ -35,6 +35,9 @@ import strumAssemblyImg2 from "../../assets/images/RiffMaster/StrumAssembly_3.pn
 import strumAssemblyImg3 from "../../assets/images/RiffMaster/StrumAssembly_2.png";
 import strumWiring from "../../assets/images/RiffMaster/StrumWiring.jpg";
 import strumDesignImg from "../../assets/images/RiffMaster/StrumDesign.png";
+import toggleLEDsDesignImg from "../../assets/images/RiffMaster/ToggleandLEDsDesign.png";
+import arduinoWiringImg from "../../assets/images/RiffMaster/ArduinoWiring.jpg";
+import toggleImg from "../../assets/images/RiffMaster/Toggle.jpg";
 import assembledStrumImg from "../../assets/images/RiffMaster/AssembledStrum.png";
 import protocolImg from "../../assets/images/RiffMaster/Protocol.png";
 import debounceImg from "../../assets/images/RiffMaster/Debounce.png";
@@ -731,6 +734,60 @@ const RiffMaster = ({
                         alt="Strum Wiring"
                     />
                     <figcaption>Strum Wiring</figcaption>
+                </figure>
+                <h3 className="riffmaster">Toggle and LEDs</h3>
+                <p>
+                    Users should interact with the device without disrupting
+                    traditional inputs, and USB keyboard communication may
+                    depend on the final communication protocol. The device must
+                    have an ON/OFF switch that disables any serial communication
+                    towards the computer. Additionally, three LEDs will provide
+                    further information about the device's state:
+                </p>
+                <ul className="ul--riffmaster-leds">
+                    <li>
+                        <div className="circle">
+                            <i className="red"></i>
+                        </div>
+                        <strong>Red</strong>: Device connected to USB,
+                    </li>
+                    <li>
+                        <div className="circle">
+                            <i className="green"></i>
+                        </div>
+                        <strong>Green</strong>: USB communication is ON,
+                    </li>
+                    <li>
+                        <div className="circle">
+                            <i className="blue"></i>
+                        </div>
+                        <strong>Blue</strong>: USB data transfer.
+                    </li>
+                </ul>
+                <br />
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={toggleLEDsDesignImg}
+                        alt="Toggle and Leds Wiring Design"
+                    />
+                    <figcaption>Toggle and Leds Wiring Design</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={arduinoWiringImg}
+                        alt="Arduino Wiring"
+                    />
+                    <figcaption>Arduino Wiring</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={toggleImg}
+                        alt="Toggle and Leds Wiring"
+                    />
+                    <figcaption>Toggle Wiring</figcaption>
                 </figure>
                 <p>Finally, we can string up the device.</p>
                 <figure>
