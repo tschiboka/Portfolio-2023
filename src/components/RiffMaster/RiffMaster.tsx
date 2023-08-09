@@ -1,7 +1,8 @@
-import Footer from "../Footer/Footer";
-import Menu from "../Menu/Menu";
 import Nav from "../Nav/Nav";
 import SubNav from "../SubNav/SubNav";
+import Menu from "../Menu/Menu";
+import BlogTimeStamp from "../BlogTimeStamp/BlogTimeStamp";
+import Footer from "../Footer/Footer";
 import { FiDownload } from "react-icons/fi";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -862,6 +863,8 @@ const RiffMaster = ({
                 >
                     {codeSnippetMessaging}
                 </SyntaxHighlighter>
+
+                <BlogTimeStamp created="09.08.2023" />
             </main>
             <Footer />
         </>
