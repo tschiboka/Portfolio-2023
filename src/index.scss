@@ -82,6 +82,27 @@ p {
     color: $white_3;
 }
 
+figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+figcaption {
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    color: $white_5;
+    text-align: center;
+    font-size: $font_md;
+    font-style: italic;
+    @include bp.lg {
+        font-size: $font_lg;
+    }
+}
+
+
 .light {
     h1, h2 {
         color: $black_2;

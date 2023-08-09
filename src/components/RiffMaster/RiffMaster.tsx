@@ -19,6 +19,25 @@ import fretMatrixImg from "../../assets/images/RiffMaster/FretMatrix.png";
 import fretWiringImg from "../../assets/images/RiffMaster/FretWiring.jpg";
 import completeFretWiringImg from "../../assets/images/RiffMaster/CompleteFretWiring.png";
 import neckDevelopmentImg from "../../assets/images/RiffMaster/NeckDevelopment_2.png";
+import bodyDesignImg from "../../assets/images/RiffMaster/BodyDesign.png";
+import bodySupportImg from "../../assets/images/RiffMaster/BodySupport.png";
+import bodyFrontCoverImg from "../../assets/images/RiffMaster/BodyFrontCover.jpg";
+import bendingImg from "../../assets/images/RiffMaster/Bending.jpg";
+import supportElementsImg from "../../assets/images/RiffMaster/SupportElements.jpg";
+import neckCoverImg from "../../assets/images/RiffMaster/NeckCovers.jpg";
+import neckBodyJointImg from "../../assets/images/RiffMaster/BodyNeckJoint.jpg";
+import paintedImg from "../../assets/images/RiffMaster/Pained.jpg";
+import strumMechanismImg from "../../assets/images/RiffMaster/StrumMechanism.png";
+import strumComponentsImg from "../../assets/images/RiffMaster/StrumComponents.png";
+import strumAssemblyImg1 from "../../assets/images/RiffMaster/StrumAssembly_1.png";
+import strumAssemblyImg2 from "../../assets/images/RiffMaster/StrumAssembly_3.png";
+import strumAssemblyImg3 from "../../assets/images/RiffMaster/StrumAssembly_2.png";
+import strumWiring from "../../assets/images/RiffMaster/StrumWiring.jpg";
+import strumDesignImg from "../../assets/images/RiffMaster/StrumDesign.png";
+import assembledStrumImg from "../../assets/images/RiffMaster/AssembledStrum.png";
+import protocolImg from "../../assets/images/RiffMaster/Protocol.png";
+import debounceImg from "../../assets/images/RiffMaster/Debounce.png";
+import controllerCode from "../../assets/files/projects/controller.txt";
 import "./RiffMaster.scss";
 
 interface Props {
@@ -54,12 +73,16 @@ bool oldFretState[ROW_LEN][COL_LEN] = {                              // Store Ol
 };
 `;
 
-const codeSnippetPinSetup = `// Run When USB Connected
-void setup() {
+const codeSnippetPinSetup = `void setup() {
     //  FRETS INIT 
     for (byte ci = 0; ci < COL_LEN; ci++) {                          // Cycle through Columns (Frets)
-        pinMode(COLUMN_PINS[ci], INPUT_PULLUP);                      // Column Pull-Up Resistor ON
-        digitalWrite(COLUMN_PINS[ci], HIGH);                         // Set Voltage High
+        pinMode(COLUMN_PINS[ci], INPUT_PULLUP);                      // Column Pull-Up Resistor ON   
+    	  digitalWrite(COLUMN_PINS[ci], HIGH);                         // Set Voltage High
+    }
+    
+    // STRING INIT
+    for (byte ri = 0; ri < ROW_LEN; ri++){                           // Cycle Rows (Strings)
+        pinMode(ROW_PINS[ri], OUTPUT);                               // Set Row as Output
     }
 `;
 
@@ -79,8 +102,88 @@ void printState(short frequency = 0) {
     }
     if (frequency) delay(frequency);                                 // Optionally Delay Frequency of Loop (Only for Testing Purposes)
 }
-
 `;
+
+const codeSnippetConstants = `// Global Variables
+const byte COLUMN_PINS[20] = {                                       // Column PINs (Frets): Put Voltage Through
+    16, 17, 18, 19, 20,                                              // PIN: 16 - 20  |  Fret:  1 - 5 
+    21, 22, 23, 24, 25,                                              //      21 - 25  |  Fret:  6 - 10
+    26, 27, 28, 29, 30,                                              //      26 - 30  |  Fret: 11 - 15
+    31, 32, 33, 34, 35 };                                            // 
+const byte ROW_PINS[6] = { 7, 6, 5, 4, 3, 2 };                       // Row PINs (Strings): Read Voltage on a Fret
+const byte STRUM_PINS[6]  = {A0, A1, A2, A3, A4, A5};                // Analogue Pins as Digital Pins
+const byte COL_LEN = sizeof(COLUMN_PINS);                            // Number of Frets
+const byte ROW_LEN = sizeof(ROW_PINS);                               // Number of Strings
+const int BAUD = 9600;//2000000;                                     // Serial Base-Clock Frequency (Highest)
+const byte BLU_LED = 13;                                             // Blue LED Pin (User Interaction: For Testing Purposes and for Fun)
+const byte GRE_LED = 12;                                             // Green LED Pin (Toggle Switch On)
+const byte RED_LED = 11;                                             // Red LED Pin (USB On)                                
+const byte TOG_IN  = 10;                                             // Toggle Switch Input Pin
+const byte TOG_OUT = 9;                                              // Toggle Switch Output Pin
+const int maxAllowedDebounceTime = 20;                               // Set the Debounce Time to Prevent Uninitiated Button Presses
+`;
+
+const codeSnippetStrumSetup = `// STRUM INIT
+for (byte i = 0; i < 6; i++) {                                   // Cycle Strum PINS
+    pinMode(STRUM_PINS[i], INPUT_PULLUP);                        // Built In Pullup On
+    digitalWrite(STRUM_PINS[i], HIGH);                           // Set Strum High as Default
+}`;
+
+const codeSnippetSetControllerState = `
+// Set the Controller's State Variables (Global Vars) and Detect Fret and Strum Presses
+void setState() {
+    transactionState = false;
+    for (byte ri = 0; ri < ROW_LEN; ri++) {                          // Traverse Rows (Strings)
+        digitalWrite(ROW_PINS[ri], LOW);                             // Set Row Voltage LOW
+        
+        for (byte ci = 0; ci < COL_LEN; ci++) {                      // Traverse Columns (Frets)
+            oldFretState[ri][ci] = newFretState[ri][ci];             // Store Previous State
+
+            const byte COL_READ = digitalRead(COLUMN_PINS[ci]);      // Read Column Voltage
+            newFretState[ri][ci] = COL_READ;                         // Set New Fret State
+
+            if (COL_READ == 0) transactionState = true;              // Set Blue LED ON when User Interacts with Fret Board
+        }
+  
+        digitalWrite(ROW_PINS[ri], HIGH);                            // Reset Row Voltage HIGH   
+    }
+
+    for (byte i = 0; i < 6; i++) {                                   // Traverse Strums
+        oldStrumState[i] = newStrumState[i];                         // Store Previous State
+        newStrumState[i] = digitalRead(STRUM_PINS[i]);               // Set New Strum State
+
+        if (newStrumState[i] == 0) transactionState = true;          // Set Blue LED ON when User Interacts with Fret Board
+    }
+}
+`;
+
+const codeSnippetMainLoop = `    if (onState && (fretStateChanged || strumStateChanged)) {        // If Communication is On and Either Input Changed
+    sendState();                                                   // Send Message Through USB Serial
+    //printState();                                                // Display State on Serial Monitor
+  }`;
+
+const codeSnippetMessaging = `const unsigned long currentTime = millis();                      // Get the Current Time
+// Read Fret State
+for (byte ri = 0; ri < ROW_LEN; ri++) {                          // Iterate Rows (Strings)
+    for (byte ci = 0; ci < COL_LEN; ci++) {                      // Iterate Columns (Frets)
+        bool oldState = oldFretState[ri][ci];                    // Get Old Fret Position
+        bool newState = newFretState[ri][ci];                    // Get New Fret Position
+        const unsigned long lastPressed = debounceFret[ri][ci];  // Read Last Time a Particular Fret Has Been Pressed
+        const unsigned long elapsedTime =  currentTime - lastPressed; // Calculate Elapsed Time   
+        if (oldState != newState) {
+            debounceFret[ri][ci] =  currentTime;                 // Register Fret Interaction Time for Debounce If State Changes
+            if (elapsedTime > maxAllowedDebounceTime) {          // Send Keyboard Presses
+            bool event = !newState;                              // Negate Pressed State to get HIGH = 1 and LOW = 0
+            int fret = ci + 1;                                   // Add One as Frets are Numbered from 1 - 20
+            int string = ri + 1;                                 // Add One as Strings are Numbered from 1 - 
+            Keyboard.print(event);                               // Add Event
+            if (fret < 10) Keyboard.print("0");                  // Pad Single Digits with a 0
+              Keyboard.print(fret);                              // Add Fret Number
+              Keyboard.println(string);                          // Add String Number
+            }        
+        }            
+    }
+}`;
 
 const RiffMaster = ({
     pageName,
@@ -232,7 +335,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={neckDesignImg}
                         alt="Neck Design"
                     />
@@ -247,7 +350,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={fretDesignImg}
                         alt="Fret Design"
                     />
@@ -273,7 +376,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={neckCoverDesignImg}
                         alt="Neck Cover Design"
                     />
@@ -297,7 +400,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={keyBoardScanningImg}
                         alt="Keyboard Scanning"
                     />
@@ -310,7 +413,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={fretMatrixImg}
                         alt="Fretboard Matrix"
                     />
@@ -342,7 +445,7 @@ const RiffMaster = ({
                 </p>
                 <figure>
                     <img
-                        className="image--lrg bg--white"
+                        className="image--med bg--white"
                         src={completeFretWiringImg}
                         alt="Complete Fret Wiring"
                     />
@@ -390,8 +493,10 @@ const RiffMaster = ({
                     {codeSnippetPinSetup}
                 </SyntaxHighlighter>
                 <p>
-                    We can test our buttons with the following code snippet on
-                    the serial monitor:
+                    We activate the column pins with each loop and read
+                    individual row values, updating the previous and current
+                    button states. We can test our buttons on the serial monitor
+                    with the following code snippet:
                 </p>
                 <SyntaxHighlighter
                     className="code"
@@ -401,6 +506,362 @@ const RiffMaster = ({
                     {codeSnippetFretTest}
                 </SyntaxHighlighter>
                 <h3 className="riffmaster">Building the Guitar Body</h3>
+                <p>
+                    The main right-hand component is the strum unit, which
+                    triggers events that produce sound effects or gameplay
+                    actions. But beyond the strum, the instrument's body must
+                    allocate a standard-size on/off toggle, LEDs, USB
+                    connection, and support elements to attach the neck, cover,
+                    and body. Hand manufacturing constraints the range of
+                    executable solutions, like bending perfect curves from
+                    plastic or creating parts that fit surgically together, and
+                    our design must consider an acceptable tolerance of ±1mm.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={bodyDesignImg}
+                        alt="Guitar Body Design"
+                    />
+                    <figcaption>Guitar Body Design</figcaption>
+                </figure>
+                <p>
+                    We cut two identical sheets for the guitar body's front and
+                    back cover, and the front piece must be drilled for the
+                    toggle switch and three LEDs.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={bodyFrontCoverImg}
+                        alt="Guitar Body Front Cover"
+                    />
+                    <figcaption>Guitar Body Front Cover</figcaption>
+                </figure>
+                <h3 className="riffmaster">Bending the Side Piece</h3>
+                <p>
+                    A wooden template body was created to bend the side walls to
+                    the appropriate curvatures because several attempts of
+                    free-handed bending resulted in broken pieces of already cut
+                    material. Although the polystyrene side piece reacted to the
+                    heat, I highly recommend using a hairdryer and proceeding
+                    very slowly with the bending.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={bendingImg}
+                        alt="Bending the Side Piece"
+                    />
+                    <figcaption>Bending the Side Piece</figcaption>
+                </figure>
+                <h3 className="riffmaster">Support Elements</h3>
+                <p>
+                    The body must be assembled in a way to allow disassembly for
+                    servicing. Support units with embedded nuts and screws will
+                    hold the body and cover together. These connectors reinforce
+                    the device's structural integrity, as the body may be under
+                    more stress than other electrical handheld devices. The body
+                    must withstand the pressure of the user's right arm's weight
+                    without damaging the open-cavity structure. One typical
+                    guitar design failure is the weak neck-body connection,
+                    resulting in bent or damaged guitar necks. Substantial
+                    pulling or pushing forces generate leverage that may easily
+                    deform or break the controller apart, and additional
+                    components will reinforce the neck to endure reasonable use.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={bodySupportImg}
+                        alt="Guitar Body Assembly Design"
+                    />
+                    <figcaption>Guitar Body Assembly Design</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={supportElementsImg}
+                        alt="Guitar Body Support Elements"
+                    />
+                    <figcaption>Guitar Body Support Elements</figcaption>
+                </figure>
+                <h3 className="riffmaster">Finalising the Neck Cover</h3>
+                <p>
+                    Assuming that we tested the fretboard buttons (and button
+                    press combinations), we can finalise the guitar neck with
+                    side walls and a removable cover. Not doing it right after
+                    the fretboard development and waiting to finish the body
+                    first gave me enough time to test the fretboard thoroughly.
+                    With the sidewalls, correcting wiring or replacing
+                    components in this tight circuit would be a nightmare.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={neckCoverImg}
+                        alt="Neck Cover"
+                    />
+                    <figcaption>Guitar Body and Finalised Neck</figcaption>
+                </figure>
+                <h3 className="riffmaster">Neck Body Attachment</h3>
+                <p>
+                    The neck attachment was the riskiest part of the assembly.
+                    Should the neck have failed to hold together precisely, the
+                    whole project might have been endangered, as Gorilla glue
+                    and CT1 cannot be removed without severe damage.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={neckBodyJointImg}
+                        alt="Body Neck Joint"
+                    />
+                    <figcaption>Joint Neck and Body</figcaption>
+                </figure>
+                <p>
+                    We can finish our lovely guitar with a lick of matt black
+                    paint.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={paintedImg}
+                        alt="Painted Guitar Console"
+                    />
+                    <figcaption>Painted Guitar Console</figcaption>
+                </figure>
+                <h3 className="riffmaster">Strum Unit</h3>
+                <p>
+                    Guitars are polyphonic instruments, and strings can be
+                    strummed simultaneously. Additionally, guitars produce sound
+                    when they are strummed, except hammer-on and pull-up sounds,
+                    which are beyond our project's scope. We need to find a
+                    straightforward solution to trigger a strum event. For
+                    authenticity, we can go one step ahead of Guitar Hero
+                    consoles that use swinging mechanical toggle switches for
+                    strums and equip our instrument with actual strings. The
+                    console strings are attached to fixed points, and one end
+                    features a momentary tactile switch, and the other may be
+                    set to a screw that adjusts the tension. The switch side can
+                    also apply a lever with adjustable tension.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumMechanismImg}
+                        alt="Strum Mechanism"
+                    />
+                    <figcaption>Strum Mechanism</figcaption>
+                </figure>
+                <p>
+                    Some of the other feasible solutions are vibration or
+                    pressure sensors, ideal for improved versions of the strum
+                    mechanism. These could be used as analogue inputs, and some
+                    additional features could be implemented, such as muting and
+                    strum force. In the future, I intend to experiment with
+                    these and create a working analogue solution.
+                </p>
+                <h3 className="riffmaster">Strum Unit Design</h3>
+                <p>
+                    The strum component is a separate serviceable unit that can
+                    be easily removed; therefore, we may create a frame
+                    scaffolding for our strings and a hull that hollows in the
+                    guitar body. This design assembles the unit from flat
+                    plastic pieces that can be pasted together:
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumComponentsImg}
+                        alt="Strum Components"
+                    />
+                    <figcaption>Strum Components</figcaption>
+                </figure>
+                <p>We can put our components together in the following way:</p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumDesignImg}
+                        alt="Strum Design"
+                    />
+                    <figcaption>Strum Design</figcaption>
+                </figure>
+                <h3 className="riffmaster">Strum Assembly</h3>
+                <p>
+                    The strum unit was reasonably straightforward to assemble;
+                    however, the screws, levers, and string tension adjustments
+                    were time-consuming.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumAssemblyImg1}
+                        alt="Strum Component Assembly"
+                    />
+                    <figcaption>Strum Component Assembly</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumAssemblyImg2}
+                        alt="Strum Switches"
+                    />
+                    <figcaption>Strum Switches</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumAssemblyImg3}
+                        alt="Strum Screws and Springs"
+                    />
+                    <figcaption>Strum Screws and Springs</figcaption>
+                </figure>
+                <p>
+                    We can wire up our unit and connect it to the Arduino. I
+                    used digital pins 16 to 35 for the column (fret) and 2 to 7
+                    for the column (row) wires. As I mentioned, my pin layout is
+                    affected by faulty digital pins.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={strumWiring}
+                        alt="Strum Wiring"
+                    />
+                    <figcaption>Strum Wiring</figcaption>
+                </figure>
+                <p>Finally, we can string up the device.</p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={assembledStrumImg}
+                        alt="Assembled Strum Unit"
+                    />
+                    <figcaption>Assembled Strum Unit</figcaption>
+                </figure>
+                <h3 className="riffmaster">Registering Strums</h3>
+                <p>
+                    For completeness and common ground, let me include my pin
+                    layout and variables that may appear in the upcoming code
+                    snippets. Alternatively, you can download the complete
+                    controller code{" "}
+                    <a className="inline" href={controllerCode} download>
+                        here
+                    </a>
+                    .
+                </p>
+                <SyntaxHighlighter
+                    className="code"
+                    language="arduino"
+                    style={atomOneDark}
+                >
+                    {codeSnippetConstants}
+                </SyntaxHighlighter>
+                <p>
+                    First, we need to initialise our pins in the setup function.
+                </p>
+                <SyntaxHighlighter
+                    className="code"
+                    language="arduino"
+                    style={atomOneDark}
+                >
+                    {codeSnippetStrumSetup}
+                </SyntaxHighlighter>
+                <p>
+                    We can flag cycles where a state change happens by setting a
+                    transaction variable false at the beginning of each cycle
+                    and flipping it to true whenever a fret change or a state
+                    change occurs. The possible state changes are the following:
+                    fretboard buttons are pressed/released, or strings are
+                    activated or in their default stationary position. These
+                    state changes must trigger a controller event by setting the
+                    device's transaction state to true.
+                </p>
+                <SyntaxHighlighter
+                    className="code"
+                    language="arduino"
+                    style={atomOneDark}
+                >
+                    {codeSnippetSetControllerState}
+                </SyntaxHighlighter>
+                <h3 className="riffmaster">Communication Protocol</h3>
+                <p>
+                    There are multiple ways to design device communication, such
+                    as MIDI or binary protocols; however, I sought an
+                    easy-to-implement version in this scenario. Our Arduino will
+                    be used as an external keyboard to communicate with our
+                    computer, transferring textual information. But there are
+                    over 252 possible state combinations and just 62
+                    alphanumeric values that can be safely used if we use both
+                    upper and lower case letters and digits. This means that we
+                    will send multiple keypress events. The fewer events are
+                    used, the more performant the communication will be, and we
+                    may easily fit an event into a two-character combination
+                    (3844). On the other hand, creating a logical mapping
+                    between character pairs and events is cumbersome, and I
+                    would rather see a solution with some relation to the
+                    physical state of the device. A more straightforward
+                    protocol could compromise with four characters using only
+                    digits. A flag for the event, a fret number, and a strum
+                    string number.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={protocolImg}
+                        alt="Communication Protocol"
+                    />
+                    <figcaption>Communication Protocol</figcaption>
+                </figure>
+                <h3 className="riffmaster">Debounce Handling</h3>
+                <p>
+                    Momentary tactile switches are not guaranteed to be immune
+                    to physical bouncing and may trigger unsolicited actions
+                    from the controller. Furthermore, our device has two types
+                    of inputs with directly opposing behaviour.
+                    <br />
+                    <strong className="bold">Fret Buttons </strong> From the
+                    traditional perspective, inputs register events when
+                    pressed, just like our fret switches. When activation
+                    happens, we assume that state changes are intentional after
+                    a particular interval, typically ~50-100ms.
+                    <br />
+                    <strong className="bold">Strum Switches</strong> Unlike
+                    frets, strum switches are activated after strings are put
+                    under pressure and released. We may also expect extra noise,
+                    as our switches use strings, levers and springs that may
+                    oscillate. After the first release, we measure the interval
+                    of state changes and register if the last change happened
+                    after the debounce time allowance.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={debounceImg}
+                        alt="Debounce"
+                    />
+                    <figcaption>Debounce on Frets and Strums</figcaption>
+                </figure>
+                <h3 className="riffmaster">Sending an Event Message</h3>
+                <p>
+                    Now that we have our communication protocol and are aware of
+                    the debounce issues, we can send a message from our device
+                    through keyboard presses. First, we must initialise a
+                    debounce array for strums and a 2D array for frets and
+                    measure time with the millis function. Then we traverse both
+                    the fret and strum states separately, and any change
+                    detected outside the debounce timing will send a four-digit
+                    keyboard sequence with the event, fret and strum information
+                    using the standard Keyboard library.
+                </p>
+                <SyntaxHighlighter
+                    className="code"
+                    language="arduino"
+                    style={atomOneDark}
+                >
+                    {codeSnippetMessaging}
+                </SyntaxHighlighter>
             </main>
             <Footer />
         </>

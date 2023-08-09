@@ -56,15 +56,16 @@
         opacity: 0.6;
         @include bp.sm {
             height: 23rem;
+            min-width: 23rem;
         }
         @include bp.lg {
             height: 52vh;
+            min-width: 52vh;
         }
     }
     
     img.headshot {
         height: calc(100% - 1rem);
-        min-height: 20rem;
         margin: 0.5rem;
         border-radius: 100%;
         border: 2px solid $black_2;

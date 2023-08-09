@@ -57,24 +57,6 @@ img.guitar {
     flex-direction: column;
 }
 
-figure {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    @include bp.lg {
-    }
-}
-
-figcaption {
-    margin-bottom: 1.5rem;
-    padding-top: 1.5rem;
-    color: $white_5;
-    text-align: center;
-    font-style: italic;
-}
-
 img {
     max-width: 1000px;
 }
