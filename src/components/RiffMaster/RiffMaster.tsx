@@ -41,6 +41,10 @@ import toggleImg from "../../assets/images/RiffMaster/Toggle.jpg";
 import assembledStrumImg from "../../assets/images/RiffMaster/AssembledStrum.png";
 import protocolImg from "../../assets/images/RiffMaster/Protocol.png";
 import debounceImg from "../../assets/images/RiffMaster/Debounce.png";
+import headStockDesignImg from "../../assets/images/RiffMaster/HeadStock.png";
+import headStockBackImg from "../../assets/images/RiffMaster/HeadStockBack.jpg";
+import headStockFrontImg from "../../assets/images/RiffMaster/HeadStockFront.jpg";
+import saddleImg from "../../assets/images/RiffMaster/Saddle.jpg";
 import controllerCode from "../../assets/files/projects/controller.txt";
 import "./RiffMaster.scss";
 
@@ -160,11 +164,6 @@ void setState() {
     }
 }
 `;
-
-const codeSnippetMainLoop = `    if (onState && (fretStateChanged || strumStateChanged)) {        // If Communication is On and Either Input Changed
-    sendState();                                                   // Send Message Through USB Serial
-    //printState();                                                // Display State on Serial Monitor
-  }`;
 
 const codeSnippetMessaging = `const unsigned long currentTime = millis();                      // Get the Current Time
 // Read Fret State
@@ -921,7 +920,75 @@ const RiffMaster = ({
                     {codeSnippetMessaging}
                 </SyntaxHighlighter>
 
-                <BlogTimeStamp created="06.08.2023" updated="09.08.2023" />
+                <h3 className="riffmaster">Head Stock</h3>
+                <p>
+                    Although users can interact with the fret by buttons and use
+                    chord patterns on the left-hand side, controls may not feel
+                    authentic enough. After testing the device for more complex
+                    chords and finger patterns, I came to the conclusion that
+                    finding the exact locations of fret positions is more
+                    problematic, even after equipping my buttons with button
+                    caps. Therefore, setting up our instrument with strings
+                    would hopefully help guide the user's hand naturally as
+                    guitar strings do. To set up the six strings on the
+                    fretboard, we have to create a headstock, which provides
+                    fixed positions to attach strings as guidelines. The
+                    headstock unit is an optional accessory and must be
+                    attachable/detachable to the neck.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={headStockDesignImg}
+                        alt="Head Stock Design"
+                    />
+                    <figcaption>Head Stock Design</figcaption>
+                </figure>
+                <p>
+                    Now that we have our headstock, we can set up our strings.
+                    Depending on the type of button caps used, modifications may
+                    be needed; the caps I ordered made the strings slip off from
+                    their place when pressed, so I grooved all 120 individually.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={headStockBackImg}
+                        alt="Head Stock from the Back"
+                    />
+                    <figcaption>Head Stock from the Back</figcaption>
+                </figure>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={headStockFrontImg}
+                        alt="Head Stock from the Front"
+                    />
+                    <figcaption>Head Stock from the Front</figcaption>
+                </figure>
+                <p>
+                    Lastly, similar to our fret design at the beginning of this
+                    post, we may create a saddle to hold our string in place.
+                </p>
+                <figure>
+                    <img
+                        className="image--med bg--white"
+                        src={saddleImg}
+                        alt="Saddle"
+                    />
+                    <figcaption>Saddle</figcaption>
+                </figure>
+                <p>
+                    Now that our guitar console is up and running, we are ready
+                    to develop our own guitar application. You can read my
+                    article about how to build your own guitar hero game
+                    prototype by clicking the link below.
+                    <br />
+                    <a className="inline" href="">
+                        How to build your guitar console application.
+                    </a>
+                </p>
+                <BlogTimeStamp created="06.08.2023" updated="11.08.2023" />
             </main>
             <Footer />
         </>
