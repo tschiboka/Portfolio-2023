@@ -126,7 +126,9 @@ const Contact = ({
             setUserMessage("Sending Message...");
 
             // Submit Form
-            const URL = "http://localhost:5000/message";
+            //const URLLocal = "http://localhost:5000/message";
+            const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/message";
+            const URL = URLLive;
             const options = {
                 method: "POST",
                 headers: {

@@ -21,8 +21,11 @@ app.use("/message", message);
 
 // Listen to Port
 const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => console.log(`Listening ${PORT}... `))
 
+// Cyclic Server Needs DB Connection First then Server Listen
 mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website
-    .then(() => console.log("Connected to DB"))
+    .then(() => {
+        console.log("Connected to DB");
+        app.listen(PORT, () => console.log(`Listening ${PORT}... `));
+    })
     .catch(err => console.log(err));
