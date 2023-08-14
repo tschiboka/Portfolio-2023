@@ -107,8 +107,28 @@
         }
     }
     .copyright {
-        font-style: italic;
-        color: $black_3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $black_5;
+        font-family: monospace;
+        font-size: $font_md;
+        & * {
+            margin: 0 5px;
+            font-family: monospace;
+            font-size: $font_md;
+        }
+        .copyright__icon {
+            fill: $gray_1;
+        }
+        time {
+            color: $gray_1;
+            font-size: $font_xs;
+            font-family: "Roboto_Bold";
+        }
+        .copyright__pipe {
+            margin-right: 10px;
+        }
     }
     .hide {
         display: none;

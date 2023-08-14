@@ -16,6 +16,7 @@ interface Props {
     setThemeMode: (mode: string) => void;
     subMenuVisible: boolean;
     setSubMenuVisible: (visible: boolean) => void;
+    path: string;
 }
 
 export interface Project {
@@ -37,6 +38,7 @@ const Projects = ({
     setThemeMode,
     subMenuVisible,
     setSubMenuVisible,
+    path,
 }: Props) => {
     const [filteredLanguage, setFilterLanguage] = useState<string>("");
 
@@ -101,7 +103,7 @@ const Projects = ({
                     ))}
                 </section>
             </main>
-            <Footer pageName={pageName} />
+            <Footer pageName={pageName} path={path} />
         </>
     );
 };

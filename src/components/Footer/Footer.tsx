@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import { FaFacebookF } from "react-icons/fa";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { TfiLinkedin } from "react-icons/tfi";
+import { MdCopyright } from "react-icons/md";
 import cv from "../../assets/files/Tivadar_Debnar_CV_2023.pdf";
 import logo from "../../assets/images/icon-light.svg";
 import "./Footer.scss";
 
 interface Props {
     pageName?: string;
+    path: string;
 }
 
-const Footer = ({ pageName }: Props) => {
+const Footer = ({ pageName, path }: Props) => {
     const date = new Date();
     const year = date.getFullYear();
 
@@ -73,8 +76,13 @@ const Footer = ({ pageName }: Props) => {
                 |<a title="Hungarian">Hu</a>|<a title="Italian">It</a>
             </div>
 
+            <Breadcrumb path={path} />
+
             <p className="copyright">
-                &copy; <time>{year}</time> Tivadar Debnar. All rights reserved.{" "}
+                <MdCopyright className="copyright__icon" />
+                <time>{year}</time>
+                <span className="copyright__pipe">|</span>
+                Tivadar Debnar. All rights reserved.{" "}
             </p>
         </footer>
     );

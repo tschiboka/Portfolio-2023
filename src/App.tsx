@@ -30,7 +30,7 @@ function App() {
             <Route
                 path="/"
                 element={
-                    <Page title="Tivadar Debnar | Home">
+                    <Page title="Tivadar Debnar | Home" path="/">
                         <Home
                             pageName="home"
                             mobileMenuVisible={mobileMenuVisible}
@@ -39,6 +39,7 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/"
                         />
                     </Page>
                 }
@@ -47,7 +48,7 @@ function App() {
             <Route
                 path="/about"
                 element={
-                    <Page title="Tivadar Debnar | About">
+                    <Page title="Tivadar Debnar | About" path="/about">
                         <About
                             pageName="about"
                             mobileMenuVisible={mobileMenuVisible}
@@ -56,6 +57,7 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/about"
                         />
                     </Page>
                 }
@@ -64,7 +66,7 @@ function App() {
             <Route
                 path="/projects"
                 element={
-                    <Page title="Tivadar Debnar | Projects">
+                    <Page title="Tivadar Debnar | Projects" path="/projects">
                         <Projects
                             pageName="projects"
                             mobileMenuVisible={mobileMenuVisible}
@@ -73,6 +75,7 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/projects"
                         />
                     </Page>
                 }
@@ -81,7 +84,7 @@ function App() {
             <Route
                 path="/contact"
                 element={
-                    <Page title="Tivadar Debnar | Contact">
+                    <Page title="Tivadar Debnar | Contact" path="/contact">
                         <Contact
                             pageName="contact"
                             mobileMenuVisible={mobileMenuVisible}
@@ -90,6 +93,7 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/contact"
                         />
                     </Page>
                 }
@@ -100,7 +104,10 @@ function App() {
             <Route
                 path="/privacy-policy"
                 element={
-                    <Page title="Tivadar Debnar | Privacy Policy">
+                    <Page
+                        title="Tivadar Debnar | Privacy Policy"
+                        path="/privacy-policy"
+                    >
                         <PrivacyPolicy
                             pageName="privacy-policy"
                             mobileMenuVisible={mobileMenuVisible}
@@ -109,15 +116,19 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/privacy-policy"
                         />
                     </Page>
                 }
             />
 
             <Route
-                path="projects/riffmaster"
+                path="/blog/riffmaster"
                 element={
-                    <Page title="Tivadar Debnar | RiffMaster">
+                    <Page
+                        title="Tivadar Debnar | RiffMaster"
+                        path="blog/riffmaster"
+                    >
                         <RiffMaster
                             pageName="riffmaster"
                             mobileMenuVisible={mobileMenuVisible}
@@ -126,6 +137,7 @@ function App() {
                             setThemeMode={setThemeMode}
                             subMenuVisible={subMenuVisible}
                             setSubMenuVisible={setSubMenuVisible}
+                            path="/blog/riffmaster"
                         />
                     </Page>
                 }

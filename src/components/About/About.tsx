@@ -16,6 +16,7 @@ interface Props {
     setThemeMode: (mode: string) => void;
     subMenuVisible: boolean;
     setSubMenuVisible: (visible: boolean) => void;
+    path: string;
 }
 
 const About = ({
@@ -26,6 +27,7 @@ const About = ({
     setThemeMode,
     subMenuVisible,
     setSubMenuVisible,
+    path,
 }: Props) => {
     return (
         <>
@@ -161,7 +163,7 @@ const About = ({
                     </li>
                 </ul>
             </main>
-            <Footer pageName={pageName} />
+            <Footer pageName={pageName} path={path} />
         </>
     );
 };

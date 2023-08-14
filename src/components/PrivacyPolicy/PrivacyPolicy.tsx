@@ -12,6 +12,7 @@ interface Props {
     setThemeMode: (mode: string) => void;
     subMenuVisible: boolean;
     setSubMenuVisible: (visible: boolean) => void;
+    path: string;
 }
 
 const PrivacyPolicy = ({
@@ -22,6 +23,7 @@ const PrivacyPolicy = ({
     setThemeMode,
     subMenuVisible,
     setSubMenuVisible,
+    path,
 }: Props) => {
     return (
         <>
@@ -111,7 +113,7 @@ const PrivacyPolicy = ({
                     this Privacy Policy.
                 </p>
             </main>
-            <Footer />
+            <Footer path={path} />
         </>
     );
 };

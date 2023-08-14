@@ -56,6 +56,7 @@ interface Props {
     setThemeMode: (mode: string) => void;
     subMenuVisible: boolean;
     setSubMenuVisible: (visible: boolean) => void;
+    path: string;
 }
 
 const codeSnippetArduinoInitialisation = `// Left Hand Inputs
@@ -196,6 +197,7 @@ const RiffMaster = ({
     setThemeMode,
     subMenuVisible,
     setSubMenuVisible,
+    path,
 }: Props) => {
     return (
         <>
@@ -990,7 +992,7 @@ const RiffMaster = ({
                 </p>
                 <BlogTimeStamp created="06.08.2023" updated="11.08.2023" />
             </main>
-            <Footer />
+            <Footer path={path} />
         </>
     );
 };

@@ -18,6 +18,7 @@ interface Props {
     setThemeMode: (mode: string) => void;
     subMenuVisible: boolean;
     setSubMenuVisible: (visible: boolean) => void;
+    path: string;
 }
 
 interface ValidationResult {
@@ -76,6 +77,7 @@ const Contact = ({
     setThemeMode,
     subMenuVisible,
     setSubMenuVisible,
+    path,
 }: Props) => {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -318,7 +320,7 @@ const Contact = ({
                     </form>
                 </section>
             </main>
-            <Footer pageName={pageName} />
+            <Footer pageName={pageName} path={path} />
         </>
     );
 };
