@@ -6,11 +6,38 @@ interface Props {
     path: string;
 }
 
+const recordVisit = async (path: string) => {
+    // Submit Form
+    //const URLLocal = "http://localhost:5000/visit";
+    const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
+    const URL = URLLive;
+    const options = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ path: path }),
+    };
+
+    console.log(options);
+
+    try {
+        const response = await fetch(URL, options);
+        const responseJSON = await response.json();
+        console.log("RESPONSE", responseJSON);
+        if (responseJSON.success) {
+            console.log("Visit Recorded");
+        } else console.log("Error While Sending Visit!", response);
+    } catch (err) {
+        console.log("Error While Sending Message!", err);
+    }
+};
+
 const Page = ({ children, title, path }: Props) => {
     useEffect(() => {
         document.title = title;
         window.scrollTo(0, 0);
-        console.log("PATH :", path);
+        recordVisit(path);
     });
     return <>{children}</>;
 };

@@ -9,7 +9,6 @@ interface Props {
 }
 
 const getVisits = (path: string) => {
-    console.log("VISITS ", path, 0);
     return 0;
 };
 
