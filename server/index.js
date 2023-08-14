@@ -4,14 +4,15 @@ const mongoose = require("mongoose");
 const cors = require('cors');                                      // CORS Settings
 const PORT = process.env.PORT || 5000;
 
-// Cross-Origin Shared Resources
 app.use(express.json({
     type: ['application/json', 'text/plain']
 }));
 
+// Cross-Origin Shared Resources
+const allowAllOrigin = true;
 app.use(cors({
     methods: 'GET, POST, PUT, DELETE',
-    origin: ['https://tschiboka.co.uk', 'http://127.0.0.1:5000', 'http://localhost:5000', 'localhost:5000', "localhost"] // Allowed Origins
+    origin: (allowAllOrigin ? "*" : ['https://tschiboka.co.uk'])
 }));
 
 // Routes
