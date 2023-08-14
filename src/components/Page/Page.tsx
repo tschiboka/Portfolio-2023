@@ -7,6 +7,10 @@ interface Props {
 }
 
 const recordVisit = async (path: string) => {
+    // Skip Posting Localhost Visits
+    const hostname = window.location.hostname; // Get the current hostname (domain) of the website
+    if (hostname === "localhost" || hostname === "127.0.0.1") return;
+
     // Submit Form
     //const URLLocal = "http://localhost:5000/visit";
     const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
@@ -18,8 +22,6 @@ const recordVisit = async (path: string) => {
         },
         body: JSON.stringify({ path: path }),
     };
-
-    console.log(options);
 
     try {
         const response = await fetch(URL, options);
