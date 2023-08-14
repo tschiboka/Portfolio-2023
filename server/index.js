@@ -11,7 +11,7 @@ app.use(express.json({
 
 app.use(cors({
     methods: 'GET, POST, PUT, DELETE',
-    origin: ['https://tschiboka.co.uk', 'http://127.0.0.1:5000', 'http://localhost:5000', 'localhost:5000'] // Allowed Origins
+    origin: ['https://tschiboka.co.uk', 'http://127.0.0.1:5000', 'http://localhost:5000', 'localhost:5000', "localhost"] // Allowed Origins
 }));
 
 // Routes
