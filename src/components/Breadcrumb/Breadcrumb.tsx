@@ -18,8 +18,8 @@ const Breadcrumb = ({ path }: Props) => {
     const breadcrumbPaths = noLeadingSlash.split("/");
 
     const getVisits = async (path: string) => {
-        const URLLocal = "http://localhost:5000/visit/";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit/";
+        //const URLLocal = "http://localhost:5000/visit";
+        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
         const URL = URLLive;
         const options = {
             method: "GET",
@@ -29,7 +29,7 @@ const Breadcrumb = ({ path }: Props) => {
         };
 
         try {
-            const response = await fetch(URL + path, options);
+            const response = await fetch(`${URL}?path=${path}`, options);
             const responseJSON = await response.json();
             if (responseJSON.success) {
                 console.log("Visit Recorded");

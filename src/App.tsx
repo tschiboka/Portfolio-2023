@@ -127,7 +127,7 @@ function App() {
                 element={
                     <Page
                         title="Tivadar Debnar | RiffMaster"
-                        path="blog/riffmaster"
+                        path="/blog/riffmaster"
                     >
                         <RiffMaster
                             pageName="riffmaster"

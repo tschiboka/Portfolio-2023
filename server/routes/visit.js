@@ -5,14 +5,10 @@ const { Visit, validateVisit } = require("../models/visit");
 
 
 router.get("/", async (req, res) => {  // Home Page Visits
-    const visits = await Visit.find({ path: "/" });
-    res.status(200).json({success: true, visits:visits.length});
+    const { path } = req.query;
+    const visits = await Visit.find({ path: path });
+    res.status(200).json({ success: true, visits: visits.length });
 });
-
-router.get("/:path", async (req, res) => { // Subpage Visits
-    const visits = await Visit.find({ path: req.params.path });
-    res.json({ success: true, visits: visits.length });
-})
 
 router.post("/", async (req, res) => {
     console.log(req.body)
