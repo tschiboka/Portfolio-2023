@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const cors = require('cors');                                      // CORS Settings
+const PORT = process.env.PORT || 5000;
 
 // Cross-Origin Shared Resources
 app.use(express.json({
@@ -10,7 +11,7 @@ app.use(express.json({
 
 app.use(cors({
     methods: 'GET, POST, PUT, DELETE',
-    origin: "*"
+    origin: ['https://tschiboka.co.uk', 'http://127.0.0.1:5000', 'http://localhost:5000', 'localhost:5000'] // Allowed Origins
 }));
 
 // Routes
@@ -19,8 +20,6 @@ const message = require("./routes/message");
 app.use("/", index);
 app.use("/message", message);
 
-// Listen to Port
-const PORT = process.env.PORT || 5000;
 
 // Cyclic Server Needs DB Connection First then Server Listen
 mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website
