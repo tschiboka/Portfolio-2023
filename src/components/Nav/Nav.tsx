@@ -5,24 +5,20 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import iconDark from "../../assets/images/icon.svg";
 import iconLight from "../../assets/images/icon-light.svg";
 import "./Nav.scss";
+import { useAppContext } from "../../context/AppContext";
 
 interface Props {
     pageName: string;
-    setMobileMenuVisible: (visible: boolean) => void;
-    mobileMenuVisible: boolean;
-    themeMode: string;
-    setSubMenuVisible: (visible: boolean) => void;
-    subMenuVisible: boolean;
 }
 
-const Nav = ({
-    pageName,
-    setMobileMenuVisible,
-    mobileMenuVisible,
-    themeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-}: Props) => {
+const Nav = ({ pageName }: Props) => {
+    const {
+        themeMode,
+        mobileMenuVisible,
+        setMobileMenuVisible,
+        subMenuVisible,
+        setSubMenuVisible,
+    } = useAppContext();
     const getIcon = () => (themeMode === "dark" ? iconDark : iconLight);
     return (
         <header className="Header">

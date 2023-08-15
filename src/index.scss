@@ -37,6 +37,20 @@ html {
     font-weight: lighter;
 }
 
+body {
+    background-color: $white_1;
+    color: black;
+}
+
+body.dark {
+    background-color: $black_1;
+    color: white;
+}
+
+br {
+    margin-bottom: 1.5rem;
+}
+
 strong {
     color: white;
 }
@@ -101,7 +115,6 @@ figcaption {
         font-size: $font_lg;
     }
 }
-
 
 .light {
     h1, h2 {

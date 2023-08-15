@@ -9,12 +9,11 @@ import {
 } from "react-icons/si";
 import { FaNodeJs } from "react-icons/fa";
 import "./Welcome.scss";
+import { useAppContext } from "../../context/AppContext";
 
-interface Props {
-    subMenuVisible: boolean;
-}
+const Welcome = () => {
+    const { subMenuVisible } = useAppContext();
 
-const Welcome = ({ subMenuVisible }: Props) => {
     return (
         <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
             <p className="hello">Hello!</p>

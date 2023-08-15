@@ -3,21 +3,14 @@ import { Link } from "react-router-dom";
 import { TbBrandGithubFilled } from "react-icons/tb";
 import { TfiLinkedin } from "react-icons/tfi";
 import "./Menu.scss";
+import { useAppContext } from "../../context/AppContext";
 
 interface Props {
     pageName: string;
-    themeMode: string;
-    setThemeMode: (themeMode: string) => void;
-    setMobileMenuVisible: (visible: boolean) => void;
 }
 
-const Menu = ({
-    pageName,
-    themeMode,
-    setThemeMode,
-    setMobileMenuVisible,
-}: Props) => {
-    console.log(pageName);
+const Menu = ({ pageName }: Props) => {
+    const { themeMode, setThemeMode, setMobileMenuVisible } = useAppContext();
     return (
         <menu className="Menu">
             <li className={pageName === "home" ? "active" : ""}>

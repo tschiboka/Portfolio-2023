@@ -7,15 +7,11 @@ import Footer from "../Footer/Footer";
 import { getProjects } from "./getProjects";
 import "./Projects.scss";
 import { useState } from "react";
+import { useAppContext } from "../../context/AppContext";
+import Page from "../Page/Page";
 
 interface Props {
     pageName: string;
-    mobileMenuVisible: boolean;
-    setMobileMenuVisible: (visible: boolean) => void;
-    themeMode: string;
-    setThemeMode: (mode: string) => void;
-    subMenuVisible: boolean;
-    setSubMenuVisible: (visible: boolean) => void;
     path: string;
 }
 
@@ -30,16 +26,8 @@ export interface Project {
     readMoreLink?: string;
 }
 
-const Projects = ({
-    pageName,
-    mobileMenuVisible,
-    setMobileMenuVisible,
-    themeMode,
-    setThemeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-    path,
-}: Props) => {
+const Projects = ({ pageName, path }: Props) => {
+    const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const [filteredLanguage, setFilterLanguage] = useState<string>("");
 
     let projects = getProjects();
@@ -48,26 +36,10 @@ const Projects = ({
             project.badges.includes(filteredLanguage)
         );
     return (
-        <>
-            <Nav
-                pageName={pageName}
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
-            />
-            {mobileMenuVisible && (
-                <Menu
-                    pageName="projects"
-                    themeMode={themeMode}
-                    setThemeMode={setThemeMode}
-                    setMobileMenuVisible={setMobileMenuVisible}
-                />
-            )}
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
+        <Page title="Tivadar Debnar | Projects" path="/projects">
+            <Nav pageName={pageName} />
+            {mobileMenuVisible && <Menu pageName="projects" />}
+            {subMenuVisible && <SubNav />}
             <main>
                 <h1>Projects</h1>
                 <p>
@@ -104,7 +76,7 @@ const Projects = ({
                 </section>
             </main>
             <Footer pageName={pageName} path={path} />
-        </>
+        </Page>
     );
 };
 

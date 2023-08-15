@@ -7,49 +7,21 @@ import guitarAppImage from "../../assets/images/about/RiffMaster_App.png";
 import guitarAppImageSm from "../../assets/images/about/RiffMaster_App_Mobile.png";
 import "./About.scss";
 import { Link } from "react-router-dom";
+import { useAppContext } from "../../context/AppContext";
+import Page from "../Page/Page";
 
 interface Props {
     pageName: string;
-    mobileMenuVisible: boolean;
-    setMobileMenuVisible: (visible: boolean) => void;
-    themeMode: string;
-    setThemeMode: (mode: string) => void;
-    subMenuVisible: boolean;
-    setSubMenuVisible: (visible: boolean) => void;
     path: string;
 }
 
-const About = ({
-    pageName,
-    mobileMenuVisible,
-    setMobileMenuVisible,
-    themeMode,
-    setThemeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-    path,
-}: Props) => {
+const About = ({ pageName, path }: Props) => {
+    const { mobileMenuVisible, subMenuVisible } = useAppContext();
     return (
-        <>
-            <Nav
-                pageName={pageName}
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
-            />
-            {mobileMenuVisible && (
-                <Menu
-                    pageName="about"
-                    themeMode={themeMode}
-                    setThemeMode={setThemeMode}
-                    setMobileMenuVisible={setMobileMenuVisible}
-                />
-            )}
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
+        <Page title="Tivadar Debnar | About" path="/about">
+            <Nav pageName={pageName} />
+            {mobileMenuVisible && <Menu pageName="about" />}
+            {subMenuVisible && <SubNav />}
             <main>
                 <h1>About Tivadar</h1>
                 <h2>The beginnings</h2>
@@ -164,7 +136,7 @@ const About = ({
                 </ul>
             </main>
             <Footer pageName={pageName} path={path} />
-        </>
+        </Page>
     );
 };
 

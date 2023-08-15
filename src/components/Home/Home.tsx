@@ -4,55 +4,28 @@ import Menu from "../Menu/Menu";
 import SubNav from "../SubNav/SubNav";
 import Intro from "../Intro/Intro";
 import Footer from "../Footer/Footer";
+import { useAppContext } from "../../context/AppContext";
+import Page from "../Page/Page";
 
 interface Props {
     pageName: string;
-    mobileMenuVisible: boolean;
-    setMobileMenuVisible: (visible: boolean) => void;
-    themeMode: string;
-    setThemeMode: (mode: string) => void;
-    subMenuVisible: boolean;
-    setSubMenuVisible: (visible: boolean) => void;
     path: string;
 }
 
-const Home = ({
-    pageName,
-    mobileMenuVisible,
-    setMobileMenuVisible,
-    themeMode,
-    setThemeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-    path,
-}: Props) => {
+const Home = ({ pageName, path }: Props) => {
+    const { mobileMenuVisible, subMenuVisible } = useAppContext();
+
     return (
-        <>
-            <Nav
-                pageName={pageName}
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
-            />
-            {mobileMenuVisible && (
-                <Menu
-                    pageName="home"
-                    themeMode={themeMode}
-                    setThemeMode={setThemeMode}
-                    setMobileMenuVisible={setMobileMenuVisible}
-                />
-            )}
-            <Welcome subMenuVisible={subMenuVisible} />
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
+        <Page title="Tivadar Debnar | Home" path="/">
+            <Nav pageName={pageName} />
+            {mobileMenuVisible && <Menu pageName="home" />}
+            <Welcome />
+            {subMenuVisible && <SubNav />}
             <main>
                 <Intro />
             </main>
             <Footer pageName={pageName} path={path} />
-        </>
+        </Page>
     );
 };
 

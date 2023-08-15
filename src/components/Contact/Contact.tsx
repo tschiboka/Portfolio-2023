@@ -9,15 +9,10 @@ import { FiPhone } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import "./Contact.scss";
+import { useAppContext } from "../../context/AppContext";
 
 interface Props {
     pageName: string;
-    mobileMenuVisible: boolean;
-    setMobileMenuVisible: (visible: boolean) => void;
-    themeMode: string;
-    setThemeMode: (mode: string) => void;
-    subMenuVisible: boolean;
-    setSubMenuVisible: (visible: boolean) => void;
     path: string;
 }
 
@@ -69,16 +64,8 @@ const validateMessage = (message: string): ValidationResult => {
     return { valid: true, error: "" };
 };
 
-const Contact = ({
-    pageName,
-    mobileMenuVisible,
-    setMobileMenuVisible,
-    themeMode,
-    setThemeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-    path,
-}: Props) => {
+const Contact = ({ pageName, path }: Props) => {
+    const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const phoneRef = useRef<HTMLInputElement>(null);
@@ -164,25 +151,9 @@ const Contact = ({
     const tel = "+44 7474 999 334";
     return (
         <>
-            <Nav
-                pageName={pageName}
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
-            />
-            {mobileMenuVisible && (
-                <Menu
-                    pageName="contact"
-                    themeMode={themeMode}
-                    setThemeMode={setThemeMode}
-                    setMobileMenuVisible={setMobileMenuVisible}
-                />
-            )}
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
+            <Nav pageName={pageName} />
+            {mobileMenuVisible && <Menu pageName="contact" />}
+            {subMenuVisible && <SubNav />}
 
             {showMessageAck && <MessageAcknowledgement />}
 

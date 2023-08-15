@@ -3,49 +3,20 @@ import SubNav from "../SubNav/SubNav";
 import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import "./PrivacyPolicy.scss";
+import { useAppContext } from "../../context/AppContext";
 
 interface Props {
     pageName: string;
-    mobileMenuVisible: boolean;
-    setMobileMenuVisible: (visible: boolean) => void;
-    themeMode: string;
-    setThemeMode: (mode: string) => void;
-    subMenuVisible: boolean;
-    setSubMenuVisible: (visible: boolean) => void;
     path: string;
 }
 
-const PrivacyPolicy = ({
-    pageName,
-    mobileMenuVisible,
-    setMobileMenuVisible,
-    themeMode,
-    setThemeMode,
-    subMenuVisible,
-    setSubMenuVisible,
-    path,
-}: Props) => {
+const PrivacyPolicy = ({ pageName, path }: Props) => {
+    const { mobileMenuVisible, subMenuVisible } = useAppContext();
     return (
         <>
-            <Nav
-                pageName={pageName}
-                subMenuVisible={subMenuVisible}
-                setSubMenuVisible={setSubMenuVisible}
-                setMobileMenuVisible={setMobileMenuVisible}
-                mobileMenuVisible={mobileMenuVisible}
-                themeMode={themeMode}
-            />
-            {subMenuVisible && (
-                <SubNav themeMode={themeMode} setThemeMode={setThemeMode} />
-            )}
-            {mobileMenuVisible && (
-                <Menu
-                    pageName="PrivacyPolicy"
-                    themeMode={themeMode}
-                    setThemeMode={setThemeMode}
-                    setMobileMenuVisible={setMobileMenuVisible}
-                />
-            )}
+            <Nav pageName={pageName} />
+            {subMenuVisible && <SubNav />}
+            {mobileMenuVisible && <Menu pageName="PrivacyPolicy" />}
             <main className="privacy-policy">
                 <p>
                     <span className="updated-date">
