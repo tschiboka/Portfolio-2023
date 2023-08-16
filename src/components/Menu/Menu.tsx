@@ -40,6 +40,15 @@ const Menu = ({ pageName }: Props) => {
                     Projects
                 </Link>
             </li>
+            <li className={pageName === "blog" ? "active" : ""}>
+                <Link
+                    className="link"
+                    to="/blog"
+                    onClick={() => setMobileMenuVisible(false)}
+                >
+                    Blog
+                </Link>
+            </li>
             <li className={pageName === "contact" ? "active" : ""}>
                 <Link
                     className="link"

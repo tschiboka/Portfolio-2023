@@ -8,7 +8,7 @@
     top: 5rem;
     height: calc(100vh - 5rem);
     width: 100%;
-    padding-top: 5rem;
+    padding-top: 1.5rem;
     display: flex;
     flex-direction: column;
     background-color: $black_1;
@@ -26,6 +26,7 @@
     li:nth-child(3) { animation-delay: 200ms, 200ms; animation-name: from_above, fade_in; }
     li:nth-child(4) { animation-delay: 300ms, 300ms; animation-name: from_above, fade_in; }
     li:nth-child(5) { animation-delay: 400ms, 400ms; animation-name: from_above, fade_in; }
+    li:nth-child(6) { animation-delay: 500ms, 500ms; animation-name: from_above, fade_in; }
 
     li {
         display: flex;

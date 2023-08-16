@@ -60,6 +60,12 @@ const Nav = ({ pageName }: Props) => {
                         Projects
                     </Link>
                 </li>
+                <li className={pageName === "blog" ? "active" : ""}>
+                    <div className="active-dot"></div>
+                    <Link className="link" to="/blog">
+                        Blog
+                    </Link>
+                </li>
                 <li className={pageName === "contact" ? "active" : ""}>
                     <div className="active-dot"></div>
                     <Link className="link" to="/contact">

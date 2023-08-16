@@ -69,6 +69,7 @@
     
     img.headshot {
         height: calc(100% - 1rem);
+        min-width: calc(100% - 1rem);
         margin: 0.5rem;
         border-radius: 100%;
         border: 2px solid $black_2;

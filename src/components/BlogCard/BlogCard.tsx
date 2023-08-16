@@ -1,4 +1,4 @@
-import { BlogArticle, blogArticles } from "../Blog/blogs";
+import { BlogArticle } from "../Blog/blogs";
 import { getColourName } from "../Projects/getProjects";
 import { useNavigate } from "react-router-dom";
 import "./BlogCard.scss";

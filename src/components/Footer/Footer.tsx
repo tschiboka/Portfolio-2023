@@ -53,6 +53,11 @@ const Footer = ({ pageName, path }: Props) => {
                         PROJECTS
                     </Link>
                 </li>
+                <li className={pageName === "blog" ? "hide" : ""}>
+                    <Link className="link" to="/blog" title="Blog Page">
+                        BLOG
+                    </Link>
+                </li>
                 <li className={pageName === "contact" ? "hide" : ""}>
                     <Link className="link" to="/contact" title="Contact Me">
                         CONTACT ME
