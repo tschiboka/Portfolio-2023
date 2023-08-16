@@ -159,6 +159,11 @@
     hr {
         border-color: $white_3;
     }
+    .ProjectCard__badges {
+        .badge {
+            border: 1px solid $black_3;
+        }
+    }
     .ProjectCard__links {
         & > * {
             color: $black_5;

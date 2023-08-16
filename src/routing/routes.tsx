@@ -6,12 +6,12 @@ import Contact from "../components/Contact/Contact";
 import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
 import RiffMaster from "../components/RiffMaster/RiffMaster";
 import RouteError from "../components/RouteError/RouteError";
+import Blog from "../components/Blog/Blog";
 
 export const routes = [
     {
         path: "/",
         element: <Home pageName="home" path="/" />,
-        children: [],
     },
     {
         path: "/about",
@@ -30,6 +30,10 @@ export const routes = [
         element: (
             <PrivacyPolicy pageName="privacy-policy" path="/privacy-policy" />
         ),
+    },
+    {
+        path: "/blog",
+        element: <Blog pageName="blog" path="/blog" />,
     },
     {
         path: "/blog/riffmaster",
