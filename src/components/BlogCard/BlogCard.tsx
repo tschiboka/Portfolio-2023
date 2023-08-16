@@ -1,24 +1,34 @@
-import riffmasterHardwareImg from "../../assets/images/blog/riffmasterHardware.png";
+import { BlogArticle, blogArticles } from "../Blog/blogs";
+import { getColourName } from "../Projects/getProjects";
+import { useNavigate } from "react-router-dom";
 import "./BlogCard.scss";
 
-const BlogCard = () => {
+interface Props {
+    blogArticle: BlogArticle;
+}
+
+const BlogCard = ({ blogArticle }: Props) => {
+    const navigate = useNavigate();
     return (
-        <article className="BlogCard">
+        <article className="BlogCard" onClick={() => navigate(blogArticle.to)}>
             <div className="BlogCard__img-wrapper">
-                <span className="badge yellow">JavaScript</span>
-                <img src={riffmasterHardwareImg} alt="guitar" />
+                <div className="BlogCard__badge-box">
+                    {blogArticle.badges.map((badge, index) => (
+                        <span
+                            key={badge + index}
+                            className={"badge " + getColourName(badge)}
+                        >
+                            {badge}
+                        </span>
+                    ))}
+                </div>
+
+                <img src={blogArticle.image} alt={blogArticle.imageAlt} />
             </div>
             <div className="BlogCard__text-wrapper">
-                <header className="BlogCard__title">
-                    Digital Guitar - Hardware
-                </header>
+                <header className="BlogCard__title">{blogArticle.title}</header>
 
-                <p className="BlogCard__abstract">
-                    Let's create a guitar console with Arduino that sends data
-                    through a USB cable using a keyboard library to build a
-                    guitar web application. Discover matrix wiring and keyboard
-                    debounce handling.
-                </p>
+                <p className="BlogCard__abstract">{blogArticle.abstract}</p>
             </div>
         </article>
     );

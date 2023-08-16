@@ -5,6 +5,7 @@ import Menu from "../Menu/Menu";
 import Nav from "../Nav/Nav";
 import Page from "../Page/Page";
 import SubNav from "../SubNav/SubNav";
+import { blogArticles } from "./blogs";
 import "./Blog.scss";
 
 interface Props {
@@ -20,7 +21,7 @@ const Blogs = ({ pageName, path }: Props) => {
             {mobileMenuVisible && <Menu pageName="blog" />}
             {subMenuVisible && <SubNav />}
             <main>
-                <h1>Blog</h1>
+                <h1 className="Blog__title">Blog</h1>
                 <p>
                     My blog is a way of giving back - and paying forward - all
                     the help I have been given through my programming learning
@@ -30,9 +31,9 @@ const Blogs = ({ pageName, path }: Props) => {
                     development and project walkthroughs. Happy Coding!
                 </p>
                 <div className="BlogList">
-                    <BlogCard />
-                    <BlogCard />
-                    <BlogCard />
+                    {blogArticles.map((article) => (
+                        <BlogCard key={article.title} blogArticle={article} />
+                    ))}
                 </div>
             </main>
             <Footer pageName={pageName} path={path} />

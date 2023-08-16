@@ -32,16 +32,16 @@
             width: 100%;
             max-width: 500px;
             @include bp.md {
-                width: 200px;
+                width: 250px;
             }
         }
     }
 
     .BlogCard__text-wrapper {
         @include bp.md {
+            width: 100%;
+            min-height: 250px;
             margin-left: 1.5rem;
-            display: flex;
-            flex-direction: column;
             p {
                 text-align: left;
             }
@@ -53,6 +53,8 @@
         color: $white_2;
         text-align: center;
         font-family: "Roboto_Bold";
+        border-bottom: 1px solid #222;
+        padding-bottom: 1.5rem;
         @include bp.md {
             text-align: left;
             font-size: $font_lg;
@@ -60,7 +62,15 @@
     }
 
     .BlogCard__abstract {
+        height: 100%;
         margin-bottom: 0;
+    }
+
+    .BlogCard__badge-box {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        bottom: 0px;
     }
 
     .badge.yellow { background-color: yellow; }
@@ -72,18 +82,54 @@
     .badge.green { background-color: rgb(0, 255, 0); }
 
     .badge {
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
         margin: 0.5rem;
         padding: 0.3rem 0.6rem;
         background-color: grey;
         border-radius: 20px;
+        border: 1px solid #222;
         color: black;
         font-size: 1rem;
         font-weight: bold;
         @include bp.md {
             padding: 0.5rem 1rem;
+        }
+    }
+
+    &:hover {
+        background-color: black;
+    }
+
+    &:hover .BlogCard__title {
+        color: white;
+    }
+
+    &:hover .BlogCard__abstract {
+        color: white;
+    }
+}
+
+.light {
+    .BlogCard {
+        background-color: $white_2;
+        border-color: $white_5;
+
+        &:hover {
+            background-color: $white_3;
+        }
+
+        .BlogCard__title {
+            color: $black_2;
+        }
+        
+        &:hover .BlogCard__title {
+            color: black;
+        }
+        
+        &:hover .BlogCard__abstract {
+            color: black;
+        }
+        .BlogCard__img-wrapper {
+            border: none;
         }
     }
 }

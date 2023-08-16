@@ -3,6 +3,12 @@
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
 
+.Blog__title {
+    @include bp.md {
+        margin: 3rem 0;
+    }
+}
+
 .BlogList {
     display: flex;
     flex-direction: column;
