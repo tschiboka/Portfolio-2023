@@ -1,0 +1,102 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+@import "../../styles/animations.scss";
+
+// Every common blog style here
+.blog-component {
+    article { 
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+    }
+    
+    h3 {
+        margin: 3rem 0;
+        color: $white_2;
+        font-size: $font_lg;
+        font-family: Roboto_Bold;
+    }
+    
+    img.image--lrg {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    img.image--med {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    img.bg--white {
+        background-color: white;
+    }
+    
+    a.inline {
+        color: $accent_dark_2;
+    }
+    
+    strong.bold {
+        font-family: "Roboto_Bold";
+    }
+    
+    p {
+        @include bp.xl {
+            text-align: justify;
+        }
+    }
+    
+    .code {
+        margin: 0 auto;
+        max-width: 1200px;
+        background-color: $black_1 !important;
+        border: 1px solid $black_3;
+        span {
+            font-family: monospace !important;
+            font-size: $font_md;
+            @include bp.lg {
+                font-size: $font_lg;
+            }
+        }
+    }
+    
+    .button {
+        width: 100%;
+        max-width: 400px;
+        height: 3em;
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $accent_dark_3;
+        color: $black_1;
+        border: 3px solid $black_3;
+        border-radius: 100px;
+        font-size: $font_md;
+        font-family: "Roboto_Bold";
+        text-decoration: none;
+        cursor: pointer;
+        & > * {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+            @include bp.lg {
+                margin-left: 1rem;
+                font-size: 2rem;
+            }
+        }
+    
+        @include bp.md {
+            width: 40%;
+        }
+        @include bp.lg {
+            font-size: $font_lg;
+        }
+    }
+}

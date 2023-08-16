@@ -95,7 +95,7 @@ const BlogTimeStamp = ({ created, updated }: Props) => {
         return (
             <div className="BlogTimeStamp">
                 <hr />
-                <p>
+                <p className="BlogTimeStamp__text">
                     This article was created on{" "}
                     <time dateTime={created}>{formatDate(created)}</time> and
                     last updated on{" "}
@@ -107,7 +107,7 @@ const BlogTimeStamp = ({ created, updated }: Props) => {
         return (
             <div className="BlogTimeStamp">
                 <hr />
-                <p>
+                <p className="BlogTimeStamp__text">
                     This article was created on{" "}
                     <time dateTime={created}>{formatDate(created)}</time>.
                 </p>

@@ -37,6 +37,6 @@ export const blogArticles: BlogArticle[] = [
         abstract:
             "I bumped into a problem involving JavaScript date validation, formatting and leap years. Let's explore our options.",
         badges: ["JavaScript"],
-        to: "/blog/date-validation",
+        to: "/blog/js-date-validation",
     },
 ];

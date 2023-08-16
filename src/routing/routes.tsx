@@ -4,9 +4,10 @@ import About from "../components/About/About";
 import Projects from "../components/Projects/Projects";
 import Contact from "../components/Contact/Contact";
 import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
-import RiffMaster from "../components/RiffMaster/RiffMaster";
+import RiffMaster from "../components/blogComponents/RiffMaster/RiffMaster";
 import RouteError from "../components/RouteError/RouteError";
 import Blog from "../components/Blog/Blog";
+import JsDateValidation from "../components/blogComponents/JsDateValidation/JsDateValidation";
 
 export const routes = [
     {
@@ -38,6 +39,15 @@ export const routes = [
     {
         path: "/blog/riffmaster",
         element: <RiffMaster pageName="riffmaster" path="/blog/riffmaster" />,
+    },
+    {
+        path: "/blog/js-date-validation",
+        element: (
+            <JsDateValidation
+                pageName="riffmaster"
+                path="/blog/js-date-validation"
+            />
+        ),
     },
     {
         path: "/*",
