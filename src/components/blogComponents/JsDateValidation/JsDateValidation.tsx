@@ -14,6 +14,7 @@ import calendarImg from "../../../assets/images/blog/js_date_validation/calendar
 import "../../References/References.scss";
 import "../blogComponents.scss";
 import "./JsDateValidation.scss";
+import Figure from "../../Figure/Figure";
 
 interface Props {
     pageName: string;
@@ -35,22 +36,19 @@ const JsDateValidation = ({ pageName, path }: Props) => {
         },
     ];
     return (
-        <Page title="Tivadar Debnar | About" path="/about">
+        <Page title="Tivadar Debnar | About" path="/blog/js-date-validation">
             <Nav pageName={pageName} />
-            {mobileMenuVisible && <Menu pageName="about" />}
+            {mobileMenuVisible && <Menu pageName="js-date-validation" />}
             {subMenuVisible && <SubNav />}
             <main className="blog-component">
                 <article>
                     <h1>Validating Dates with JavaScript</h1>
-
-                    <figure>
-                        <img
-                            className="image--med bg--white"
-                            src={calendarImg}
-                            alt="Calendar"
-                        />
-                        <figcaption>Date Validation</figcaption>
-                    </figure>
+                    <Figure
+                        image={calendarImg}
+                        className={"image--med bg--white"}
+                        alt={"Calendar"}
+                        caption={"Date Validation"}
+                    />
                     <p>
                         Date validation forms a cornerstone of programming tasks
                         beyond just JavaScript applications, and JavaScript
@@ -60,7 +58,6 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         attention. The fundamental approach that may resonate
                         with some:
                     </p>
-
                     <SyntaxHighlighter
                         className="code"
                         language="typescript"

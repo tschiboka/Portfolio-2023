@@ -49,6 +49,7 @@ import saddleImg from "../../../assets/images/RiffMaster/Saddle.jpg";
 import controllerCode from "../../../assets/files/projects/controller.txt";
 import codeSnippets from "./codeSnippets";
 import "./RiffMaster.scss";
+import Figure from "../../Figure/Figure";
 
 interface Props {
     pageName: string;
@@ -110,15 +111,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     communication (can act as an external keyboard).
                     Alternatively, Arduino Leonardo or Mega can also be used.
                 </p>
-                <figure>
-                    <img
-                        className="image--lrg guitar riffmaster"
-                        src={guitarImg}
-                        alt="RiffMaster Guitar"
-                    />
-                    <figcaption>The Final Guitar Instrument</figcaption>
-                </figure>
-
+                <Figure
+                    image={guitarImg}
+                    className="image--lrg guitar riffmaster"
+                    alt="The Final Guitar Instrument"
+                    caption="The Final Guitar Instrument"
+                />
                 <p>
                     I used a{" "}
                     <a
@@ -149,14 +147,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     is the standard 460mm, and the fret distances are calculated
                     with the golden ratio.
                 </p>
-                <figure>
-                    <img
-                        className="image--lrg bg--white"
-                        src={neckDistancesImg}
-                        alt="Neck Distances"
-                    />
-                    <figcaption>Guitar Neck Distances</figcaption>
-                </figure>
+                <Figure
+                    image={neckDistancesImg}
+                    className="image--lrg bg--white"
+                    alt="Guitar Neck Distances"
+                    caption="Guitar Neck Distances"
+                />
                 <p>
                     We will use polystyrene sheets for the prototype in two
                     thickness sizes: 2mm for bending and 3mm for structure.
@@ -167,27 +163,23 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     bending, but we can use the 2mm plastic to cut our template
                     to reduce the thickness of the neck.
                 </p>
-                <figure>
-                    <img
-                        className="image--lrg bg--white"
-                        src={fretArrangementsImg}
-                        alt="Fret Arrangements"
-                    />
-                    <figcaption>Fret Arrangements</figcaption>
-                </figure>
+                <Figure
+                    image={fretArrangementsImg}
+                    className="image--lrg bg--white"
+                    alt="Fret Arrangements"
+                    caption="Fret Arrangements"
+                />
                 <p>
                     The drill holes will be evenly allocated alongside the
                     fret's axis, distributing the buttons comfortably with 0.7mm
                     wide switch legs in rectangular arrangements.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={neckDesignImg}
-                        alt="Neck Design"
-                    />
-                    <figcaption>Neck Design</figcaption>
-                </figure>
+                <Figure
+                    image={neckDesignImg}
+                    className="image--lrg bg--white"
+                    alt="Neck Design"
+                    caption="Neck Design"
+                />
                 <p>
                     We also need 20 fret pieces from the 2mm material, so our
                     frets may receive string supports with grooves, which offer
@@ -195,22 +187,18 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     users' hands, and can keep actual strings in place for an
                     optional stringed solution.{" "}
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={fretDesignImg}
-                        alt="Fret Design"
-                    />
-                    <figcaption>Fret Design</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med"
-                        src={fretBoardDevelopmentImg}
-                        alt="Fretboard Development"
-                    />
-                    <figcaption>Fretboard Development</figcaption>
-                </figure>
+                <Figure
+                    image={fretDesignImg}
+                    className="image--med bg--white"
+                    alt="Fret Design"
+                    caption="Fret Design"
+                />
+                <Figure
+                    image={fretBoardDevelopmentImg}
+                    className="image--med"
+                    alt="Fretboard Development"
+                    caption="Fretboard Development"
+                />
                 <p>
                     The buttons will face towards the user's fingers; therefore,
                     no electronic components may be allocated to the otherwise
@@ -221,14 +209,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     required. Moreover, the neck length must be extended to hold
                     the neck in the instrument body securely.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={neckCoverDesignImg}
-                        alt="Neck Cover Design"
-                    />
-                    <figcaption>Neck Cover Design</figcaption>
-                </figure>
+                <Figure
+                    image={neckCoverDesignImg}
+                    className="image--med bg--white"
+                    alt="Neck Cover Design"
+                    caption="Neck Cover Design"
+                />
                 <h3 className="riffmaster">Wiring the Neck</h3>
                 <p>
                     As I mentioned, we will use mesh wiring for our buttons in a
@@ -245,27 +231,23 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     reengineering different matrix examples, I boiled down the
                     algorithms to this simple version:
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={keyBoardScanningImg}
-                        alt="Keyboard Scanning"
-                    />
-                    <figcaption>Keyboard Scanning</figcaption>
-                </figure>
+                <Figure
+                    image={keyBoardScanningImg}
+                    className="image--med bg--white"
+                    alt="Keyboard Scanning"
+                    caption="Keyboard Scanning"
+                />
                 <p>
                     We may wire up our button matrix with any N1 range diode to
                     eliminate keypress ghosting and masking issues. (I used
                     N14007 diodes).
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={fretMatrixImg}
-                        alt="Fretboard Matrix"
-                    />
-                    <figcaption>Fretboard Button Matrix</figcaption>
-                </figure>
+                <Figure
+                    image={fretMatrixImg}
+                    className="image--med bg--white"
+                    alt="Fretboard Matrix"
+                    caption="Fretboard Matrix"
+                />
                 <p>
                     I used universal PCBs pasted on the backside of the
                     fretboard to simplify soldering. Additionally, I used six
@@ -273,14 +255,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     amount of extra wiring. These stripped wires serve as buses
                     to the Arduino column digital pins.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={fretWiringImg}
-                        alt="Fret Wiring"
-                    />
-                    <figcaption>Fret Wiring</figcaption>
-                </figure>
+                <Figure
+                    image={fretWiringImg}
+                    className="image--med bg--white"
+                    alt="Fret Wiring"
+                    caption="Fret Wiring"
+                />
                 <p>
                     Finally, we can connect the row and column wires to our
                     Arduino. Although the choice of digital pins may seem
@@ -290,24 +270,18 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     close enough to tape them together. (Otherwise, there will
                     be a lot of messy wiring.)
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={completeFretWiringImg}
-                        alt="Complete Fret Wiring"
-                    />
-                    <figcaption>Complete Fret Wiring</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={neckDevelopmentImg}
-                        alt="Neck Development"
-                    />
-                    <figcaption>
-                        Lost my smile after 40+ hours of soldering
-                    </figcaption>
-                </figure>
+                <Figure
+                    image={completeFretWiringImg}
+                    className="image--med bg--white"
+                    alt="Complete Fret Wiring"
+                    caption="Complete Fret Wiring"
+                />
+                <Figure
+                    image={neckDevelopmentImg}
+                    className="image--med bg--white"
+                    alt="Neck Development"
+                    caption="Neck Development"
+                />
                 <h3 className="riffmaster">Testing the Fretboard</h3>
                 <p>
                     Our first milestone is to read the device's state. When
@@ -364,27 +338,23 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     plastic or creating parts that fit surgically together, and
                     our design must consider an acceptable tolerance of ±1mm.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={bodyDesignImg}
-                        alt="Guitar Body Design"
-                    />
-                    <figcaption>Guitar Body Design</figcaption>
-                </figure>
+                <Figure
+                    image={bodyDesignImg}
+                    className="image--med bg--white"
+                    alt="Guitar Body Design"
+                    caption="Guitar Body Design"
+                />
                 <p>
                     We cut two identical sheets for the guitar body's front and
                     back cover, and the front piece must be drilled for the
                     toggle switch and three LEDs.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={bodyFrontCoverImg}
-                        alt="Guitar Body Front Cover"
-                    />
-                    <figcaption>Guitar Body Front Cover</figcaption>
-                </figure>
+                <Figure
+                    image={bodyFrontCoverImg}
+                    className="image--med bg--white"
+                    alt="Guitar Body Front Cover"
+                    caption="Guitar Body Front Cover"
+                />
                 <h3 className="riffmaster">Bending the Side Piece</h3>
                 <p>
                     A wooden template body was created to bend the side walls to
@@ -394,14 +364,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     heat, I highly recommend using a hairdryer and proceeding
                     very slowly with the bending.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={bendingImg}
-                        alt="Bending the Side Piece"
-                    />
-                    <figcaption>Bending the Side Piece</figcaption>
-                </figure>
+                <Figure
+                    image={bendingImg}
+                    className="image--med bg--white"
+                    alt="Bending the Side Piece"
+                    caption="Bending the Side Piece"
+                />
                 <h3 className="riffmaster">Support Elements</h3>
                 <p>
                     The body must be assembled in a way to allow disassembly for
@@ -417,22 +385,18 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     deform or break the controller apart, and additional
                     components will reinforce the neck to endure reasonable use.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={bodySupportImg}
-                        alt="Guitar Body Assembly Design"
-                    />
-                    <figcaption>Guitar Body Assembly Design</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={supportElementsImg}
-                        alt="Guitar Body Support Elements"
-                    />
-                    <figcaption>Guitar Body Support Elements</figcaption>
-                </figure>
+                <Figure
+                    image={bodySupportImg}
+                    className="image--med bg--white"
+                    alt="Guitar Body Assembly Design"
+                    caption="Guitar Body Assembly Design"
+                />
+                <Figure
+                    image={supportElementsImg}
+                    className="image--med bg--white"
+                    alt="Guitar Body Support Elements"
+                    caption="Guitar Body Support Elements"
+                />
                 <h3 className="riffmaster">Finalising the Neck Cover</h3>
                 <p>
                     Assuming that we tested the fretboard buttons (and button
@@ -443,14 +407,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     With the sidewalls, correcting wiring or replacing
                     components in this tight circuit would be a nightmare.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={neckCoverImg}
-                        alt="Neck Cover"
-                    />
-                    <figcaption>Guitar Body and Finalised Neck</figcaption>
-                </figure>
+                <Figure
+                    image={neckCoverImg}
+                    className="image--med bg--white"
+                    alt="Neck Cover"
+                    caption="Neck Cover"
+                />
                 <h3 className="riffmaster">Neck Body Attachment</h3>
                 <p>
                     The neck attachment was the riskiest part of the assembly.
@@ -458,26 +420,22 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     whole project might have been endangered, as Gorilla glue
                     and CT1 cannot be removed without severe damage.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={neckBodyJointImg}
-                        alt="Body Neck Joint"
-                    />
-                    <figcaption>Joint Neck and Body</figcaption>
-                </figure>
+                <Figure
+                    image={neckBodyJointImg}
+                    className="image--med bg--white"
+                    alt="Body Neck Joint"
+                    caption="Body Neck Joint"
+                />
                 <p>
                     We can finish our lovely guitar with a lick of matt black
                     paint.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={paintedImg}
-                        alt="Painted Guitar Console"
-                    />
-                    <figcaption>Painted Guitar Console</figcaption>
-                </figure>
+                <Figure
+                    image={paintedImg}
+                    className="image--med bg--white"
+                    alt="Painted Guitar Console"
+                    caption="Painted Guitar Console"
+                />
                 <h3 className="riffmaster">Strum Unit</h3>
                 <p>
                     Guitars are polyphonic instruments, and strings can be
@@ -493,14 +451,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     set to a screw that adjusts the tension. The switch side can
                     also apply a lever with adjustable tension.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumMechanismImg}
-                        alt="Strum Mechanism"
-                    />
-                    <figcaption>Strum Mechanism</figcaption>
-                </figure>
+                <Figure
+                    image={strumMechanismImg}
+                    className="image--med bg--white"
+                    alt="Strum Mechanism"
+                    caption="Strum Mechanism"
+                />
                 <p>
                     Some of the other feasible solutions are vibration or
                     pressure sensors, ideal for improved versions of the strum
@@ -517,67 +473,55 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     guitar body. This design assembles the unit from flat
                     plastic pieces that can be pasted together:
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumComponentsImg}
-                        alt="Strum Components"
-                    />
-                    <figcaption>Strum Components</figcaption>
-                </figure>
+                <Figure
+                    image={strumComponentsImg}
+                    className="image--med bg--white"
+                    alt="Strum Components"
+                    caption="Strum Components"
+                />
                 <p>We can put our components together in the following way:</p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumDesignImg}
-                        alt="Strum Design"
-                    />
-                    <figcaption>Strum Design</figcaption>
-                </figure>
+                <Figure
+                    image={strumDesignImg}
+                    className="image--med bg--white"
+                    alt="Strum Design"
+                    caption="Strum Design"
+                />
                 <h3 className="riffmaster">Strum Assembly</h3>
                 <p>
                     The strum unit was reasonably straightforward to assemble;
                     however, the screws, levers, and string tension adjustments
                     were time-consuming.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumAssemblyImg1}
-                        alt="Strum Component Assembly"
-                    />
-                    <figcaption>Strum Component Assembly</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumAssemblyImg2}
-                        alt="Strum Switches"
-                    />
-                    <figcaption>Strum Switches</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumAssemblyImg3}
-                        alt="Strum Screws and Springs"
-                    />
-                    <figcaption>Strum Screws and Springs</figcaption>
-                </figure>
+                <Figure
+                    image={strumAssemblyImg1}
+                    className="image--med bg--white"
+                    alt="Strum Component Assembly"
+                    caption="Strum Component Assembly"
+                />
+                <Figure
+                    image={strumAssemblyImg2}
+                    className="image--med bg--white"
+                    alt="Strum Switches"
+                    caption="Strum Switches"
+                />
+                <Figure
+                    image={strumAssemblyImg3}
+                    className="image--med bg--white"
+                    alt="Strum Screws and Springs"
+                    caption="Strum Screws and Springs"
+                />
                 <p>
                     We can wire up our unit and connect it to the Arduino. I
                     used digital pins 16 to 35 for the column (fret) and 2 to 7
                     for the column (row) wires. As I mentioned, my pin layout is
                     affected by faulty digital pins.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={strumWiring}
-                        alt="Strum Wiring"
-                    />
-                    <figcaption>Strum Wiring</figcaption>
-                </figure>
+                <Figure
+                    image={strumWiring}
+                    className="image--med bg--white"
+                    alt="Strum Wiring"
+                    caption="Strum Wiring"
+                />
                 <h3 className="riffmaster">Toggle and LEDs</h3>
                 <p>
                     Users should interact with the device without disrupting
@@ -608,39 +552,31 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     </li>
                 </ul>
                 <br />
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={toggleLEDsDesignImg}
-                        alt="Toggle and Leds Wiring Design"
-                    />
-                    <figcaption>Toggle and Leds Wiring Design</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={arduinoWiringImg}
-                        alt="Arduino Wiring"
-                    />
-                    <figcaption>Arduino Wiring</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={toggleImg}
-                        alt="Toggle and Leds Wiring"
-                    />
-                    <figcaption>Toggle Wiring</figcaption>
-                </figure>
+                <Figure
+                    image={toggleLEDsDesignImg}
+                    className="image--med bg--white"
+                    alt="Toggle and Leds Wiring Design"
+                    caption="Toggle and Leds Wiring Design"
+                />
+                <Figure
+                    image={arduinoWiringImg}
+                    className="image--med bg--white"
+                    alt="Arduino Wiring"
+                    caption="Arduino Wiring"
+                />
+                <Figure
+                    image={toggleImg}
+                    className="image--med bg--white"
+                    alt="Toggle and Leds Wiring"
+                    caption="Toggle and Leds Wiring"
+                />
                 <p>Finally, we can string up the device.</p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={assembledStrumImg}
-                        alt="Assembled Strum Unit"
-                    />
-                    <figcaption>Assembled Strum Unit</figcaption>
-                </figure>
+                <Figure
+                    image={assembledStrumImg}
+                    className="image--med bg--white"
+                    alt="Assembled Strum Unit"
+                    caption="Assembled Strum Unit"
+                />
                 <h3 className="riffmaster">Registering Strums</h3>
                 <p>
                     For completeness and common ground, let me include my pin
@@ -707,14 +643,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     digits. A flag for the event, a fret number, and a strum
                     string number.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={protocolImg}
-                        alt="Communication Protocol"
-                    />
-                    <figcaption>Communication Protocol</figcaption>
-                </figure>
+                <Figure
+                    image={protocolImg}
+                    className="image--med bg--white"
+                    alt="Communication Protocol"
+                    caption="Communication Protocol"
+                />
                 <h3 className="riffmaster">Debounce Handling</h3>
                 <p>
                     Momentary tactile switches are not guaranteed to be immune
@@ -736,14 +670,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     of state changes and register if the last change happened
                     after the debounce time allowance.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={debounceImg}
-                        alt="Debounce"
-                    />
-                    <figcaption>Debounce on Frets and Strums</figcaption>
-                </figure>
+                <Figure
+                    image={debounceImg}
+                    className="image--med bg--white"
+                    alt="Debounce"
+                    caption="Debounce"
+                />
                 <h3 className="riffmaster">Sending an Event Message</h3>
                 <p>
                     Now that we have our communication protocol and are aware of
@@ -780,48 +712,40 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     headstock unit is an optional accessory and must be
                     attachable/detachable to the neck.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={headStockDesignImg}
-                        alt="Head Stock Design"
-                    />
-                    <figcaption>Head Stock Design</figcaption>
-                </figure>
+                <Figure
+                    image={headStockDesignImg}
+                    className="image--med bg--white"
+                    alt="Head Stock Design"
+                    caption="Head Stock Design"
+                />
                 <p>
                     Now that we have our headstock, we can set up our strings.
                     Depending on the type of button caps used, modifications may
                     be needed; the caps I ordered made the strings slip off from
                     their place when pressed, so I grooved all 120 individually.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={headStockBackImg}
-                        alt="Head Stock from the Back"
-                    />
-                    <figcaption>Head Stock from the Back</figcaption>
-                </figure>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={headStockFrontImg}
-                        alt="Head Stock from the Front"
-                    />
-                    <figcaption>Head Stock from the Front</figcaption>
-                </figure>
+                <Figure
+                    image={headStockBackImg}
+                    className="image--med bg--white"
+                    alt="Head Stock from the Back"
+                    caption="Head Stock from the Back"
+                />
+                <Figure
+                    image={headStockFrontImg}
+                    className="image--med bg--white"
+                    alt="Head Stock from the Front"
+                    caption="Head Stock from the Front"
+                />
                 <p>
                     Lastly, similar to our fret design at the beginning of this
                     post, we may create a saddle to hold our string in place.
                 </p>
-                <figure>
-                    <img
-                        className="image--med bg--white"
-                        src={saddleImg}
-                        alt="Saddle"
-                    />
-                    <figcaption>Saddle</figcaption>
-                </figure>
+                <Figure
+                    image={saddleImg}
+                    className="image--med bg--white"
+                    alt="Saddle"
+                    caption="Saddle"
+                />
                 <p>
                     Now that our guitar console is up and running, we are ready
                     to develop our own guitar application. You can read my

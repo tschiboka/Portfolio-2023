@@ -44,7 +44,7 @@ export const routes = [
         path: "/blog/js-date-validation",
         element: (
             <JsDateValidation
-                pageName="riffmaster"
+                pageName="js-date-validation"
                 path="/blog/js-date-validation"
             />
         ),
