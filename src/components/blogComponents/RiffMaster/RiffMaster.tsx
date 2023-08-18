@@ -50,6 +50,7 @@ import controllerCode from "../../../assets/files/projects/controller.txt";
 import codeSnippets from "./codeSnippets";
 import "./RiffMaster.scss";
 import Figure from "../../Figure/Figure";
+import Code from "../../Code/Code";
 
 interface Props {
     pageName: string;
@@ -294,38 +295,33 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     initial values are reversed as we used pull-up resistors:
                     zero means pressed, and one means released.
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.arduinoInitialisation}
-                </SyntaxHighlighter>
+                    content={codeSnippets.arduinoInitialisation}
+                />
+
                 <p>
                     Next, we need to initialise our digital pins. We may apply
                     Arduino's internal pull-up resistor because we did not use
                     resistors in our circuitry.
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.pinSetup}
-                </SyntaxHighlighter>
+                    content={codeSnippets.pinSetup}
+                />
                 <p>
                     We activate the column pins with each loop and read
                     individual row values, updating the previous and current
                     button states. We can test our buttons on the serial monitor
                     with the following code snippet:
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.fretTest}
-                </SyntaxHighlighter>
+                    content={codeSnippets.fretTest}
+                />
                 <h3 className="riffmaster">Building the Guitar Body</h3>
                 <p>
                     The main right-hand component is the strum unit, which
@@ -588,23 +584,19 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     </a>
                     .
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.constants}
-                </SyntaxHighlighter>
+                    content={codeSnippets.constants}
+                />
                 <p>
                     First, we need to initialise our pins in the setup function.
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.strumSetup}
-                </SyntaxHighlighter>
+                    content={codeSnippets.strumSetup}
+                />
                 <p>
                     We can flag cycles where a state change happens by setting a
                     transaction variable false at the beginning of each cycle
@@ -615,13 +607,11 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     state changes must trigger a controller event by setting the
                     device's transaction state to true.
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.setControllerState}
-                </SyntaxHighlighter>
+                    content={codeSnippets.setControllerState}
+                />
                 <h3 className="riffmaster">Communication Protocol</h3>
                 <p>
                     There are multiple ways to design device communication, such
@@ -688,14 +678,11 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     keyboard sequence with the event, fret and strum information
                     using the standard Keyboard library.
                 </p>
-                <SyntaxHighlighter
-                    className="code"
+                <Code
+                    fileName="controller.ino"
                     language="arduino"
-                    style={atomOneDark}
-                >
-                    {codeSnippets.messaging}
-                </SyntaxHighlighter>
-
+                    content={codeSnippets.messaging}
+                />
                 <h3 className="riffmaster">Head Stock</h3>
                 <p>
                     Although users can interact with the fret by buttons and use

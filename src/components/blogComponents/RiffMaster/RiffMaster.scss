@@ -94,20 +94,6 @@ p {
     }
 }
 
-.code {
-    margin: 0 auto;
-    max-width: 1200px;
-    background-color: $black_1 !important;
-    border: 1px solid $black_3;
-    span {
-        font-family: monospace !important;
-        font-size: $font_md;
-        @include bp.lg {
-            font-size: $font_lg;
-        }
-    }
-}
-
 .button {
     width: 100%;
     max-width: 400px;

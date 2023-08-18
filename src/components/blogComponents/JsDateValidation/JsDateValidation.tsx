@@ -15,6 +15,7 @@ import "../../References/References.scss";
 import "../blogComponents.scss";
 import "./JsDateValidation.scss";
 import Figure from "../../Figure/Figure";
+import Code from "../../Code/Code";
 
 interface Props {
     pageName: string;
@@ -58,14 +59,11 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         attention. The fundamental approach that may resonate
                         with some:
                     </p>
-                    <SyntaxHighlighter
-                        className="code"
-                        language="typescript"
-                        style={atomOneDark}
-                    >
-                        {codeSnippets.basicDateValidation}
-                    </SyntaxHighlighter>
-
+                    <Code
+                        fileName="controller.ino"
+                        language="arduino"
+                        content={codeSnippets.basicDateValidation}
+                    />
                     <p>
                         The getTime function returns a date object or Not a
                         Number (NaN) according to the date string. One
@@ -75,14 +73,11 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         Unfortunately, the date overflows on leap years, which
                         may be problematic when validating date strings.
                     </p>
-
-                    <SyntaxHighlighter
-                        className="code"
-                        language="typescript"
-                        style={atomOneDark}
-                    >
-                        {codeSnippets.dateOverFlow}
-                    </SyntaxHighlighter>
+                    <Code
+                        fileName="controller.ino"
+                        language="arduino"
+                        content={codeSnippets.dateOverFlow}
+                    />
                     <p>
                         As it turns out, according to MDN, "If you specify a
                         number outside the expected range, the date information
@@ -106,24 +101,20 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         We can match our string with a simple RegEx and extract
                         the day, month and year information as numbers.
                     </p>
-                    <SyntaxHighlighter
-                        className="code"
-                        language="typescript"
-                        style={atomOneDark}
-                    >
-                        {codeSnippets.regex}
-                    </SyntaxHighlighter>
+                    <Code
+                        fileName="controller.ino"
+                        language="arduino"
+                        content={codeSnippets.regex}
+                    />
                     <p>
                         The last day of each month can be assigned using an
                         array of numbers:
                     </p>
-                    <SyntaxHighlighter
-                        className="code"
-                        language="typescript"
-                        style={atomOneDark}
-                    >
-                        {codeSnippets.daysArray}
-                    </SyntaxHighlighter>
+                    <Code
+                        fileName="controller.ino"
+                        language="arduino"
+                        content={codeSnippets.daysArray}
+                    />
                     <p>
                         However, we must consider leap years for February (the
                         second item of the array day[1]). To check if a year is
@@ -146,13 +137,12 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         minimum and maximum for the accepted years if applicable
                         to our scenario.
                     </p>
-                    <SyntaxHighlighter
-                        className="code"
-                        language="typescript"
-                        style={atomOneDark}
-                    >
-                        {codeSnippets.finalSolution}
-                    </SyntaxHighlighter>
+                    <Code
+                        fileName="controller.ino"
+                        language="arduino"
+                        content={codeSnippets.finalSolution}
+                    />
+
                     <p>
                         Now, our date validation does not accept date strings
                         with day overflow.
