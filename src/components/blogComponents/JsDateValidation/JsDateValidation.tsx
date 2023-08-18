@@ -7,8 +7,6 @@ import References, { Reference } from "../../References/References";
 import { Link } from "react-router-dom";
 import SubNav from "../../SubNav/SubNav";
 import BlogTimeStamp from "../../BlogTimeStamp/BlogTimeStamp";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import codeSnippets from "./codeSnippets";
 import calendarImg from "../../../assets/images/blog/js_date_validation/calendar.jpg";
 import "../../References/References.scss";
@@ -60,7 +58,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         with some:
                     </p>
                     <Code
-                        fileName="controller.ino"
+                        fileName="validateDate.tsx"
                         language="arduino"
                         content={codeSnippets.basicDateValidation}
                     />
@@ -74,7 +72,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         may be problematic when validating date strings.
                     </p>
                     <Code
-                        fileName="controller.ino"
+                        fileName="validateDate.tsx"
                         language="arduino"
                         content={codeSnippets.dateOverFlow}
                     />
@@ -102,7 +100,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         the day, month and year information as numbers.
                     </p>
                     <Code
-                        fileName="controller.ino"
+                        fileName="validateDate.tsx"
                         language="arduino"
                         content={codeSnippets.regex}
                     />
@@ -111,7 +109,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         array of numbers:
                     </p>
                     <Code
-                        fileName="controller.ino"
+                        fileName="validateDate.tsx"
                         language="arduino"
                         content={codeSnippets.daysArray}
                     />
@@ -138,19 +136,19 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         to our scenario.
                     </p>
                     <Code
-                        fileName="controller.ino"
+                        fileName="validateDate.tsx"
                         language="arduino"
                         content={codeSnippets.finalSolution}
                     />
 
                     <p>
-                        Now, our date validation does not accept date strings
-                        with day overflow.
+                        Our date validation does not accept date strings with
+                        day overflow and returns false for all invalid dates.
                     </p>
                 </article>
 
                 <References references={references} />
-                <BlogTimeStamp created="15.08.2023" updated="16.08.2023" />
+                <BlogTimeStamp created="15.08.2023" updated="18.08.2023" />
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>

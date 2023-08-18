@@ -5,8 +5,6 @@ import Menu from "../../Menu/Menu";
 import BlogTimeStamp from "../../BlogTimeStamp/BlogTimeStamp";
 import Footer from "../../Footer/Footer";
 import { FiDownload } from "react-icons/fi";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import dissertation from "../../../assets/files/Dissertation_Online.pdf";
 import buildGiutarStockImg from "../../../assets/images/RiffMaster/BuildGuitarStockPhoto.png";
 import guitarImg from "../../../assets/images/about/RiffMaster.png";
@@ -51,6 +49,9 @@ import codeSnippets from "./codeSnippets";
 import "./RiffMaster.scss";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
+import Page from "../../Page/Page";
+import References, { Reference } from "../../References/References";
+import { Link } from "react-router-dom";
 
 interface Props {
     pageName: string;
@@ -59,11 +60,29 @@ interface Props {
 
 const RiffMaster = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
+    const references: Reference[] = [
+        {
+            title: "Keyboard Matrix, 2000",
+            author: "Dribin",
+            source: "https://www.dribin.org/dave/keyboard/one_html/",
+        },
+        {
+            title: "Exploring the Raspberry Pi 2 with C++. Springer, 2015",
+            author: "Warren",
+            source: "https://link.springer.com/book/10.1007/978-1-4842-1739-9",
+        },
+        {
+            title: "Gibson Les Paul Guitar Templates",
+            author: "Electric Herald",
+            source: "https://www.electricherald.com/gibson-les-paul-guitar-templates/",
+        },
+    ];
+
     return (
-        <>
+        <Page title="Tivadar Debnar | Guitar Console" path={path}>
             <Nav pageName={pageName} />
             {subMenuVisible && <SubNav />}
-            {mobileMenuVisible && <Menu pageName="projects/riffmaster" />}
+            {mobileMenuVisible && <Menu pageName={pageName} />}
             <main>
                 <h1>Project RiffMaster</h1>
                 <h2 className="riffmaster">
@@ -223,7 +242,10 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     consolidate greater numbers of switches to microcontroller
                     pins. When a key is pressed, a column wire contacts a row
                     wire and completes a circuit. The keyboard controller
-                    detects this closed circuit and registers it as a key press.
+                    detects this closed circuit and registers it as a key press.{" "}
+                    <Link className="Reference__Link" to={references[0].source}>
+                        ({references[0].author})
+                    </Link>{" "}
                     For example, PC keyboards usually range from 63 to 105 keys
                     arranged in a matrix. Meshing the switch wires would result
                     in a drastically reduced digital pin requirement. Matrix
@@ -641,6 +663,13 @@ const RiffMaster = ({ pageName, path }: Props) => {
                 />
                 <h3 className="riffmaster">Debounce Handling</h3>
                 <p>
+                    The physical action of pushing a button might require a
+                    half-second or so, so we tend to think in those terms. On
+                    the other hand, a digital circuit can react to a million of
+                    events in the same time frame.{" "}
+                    <Link className="Reference__Link" to={references[1].source}>
+                        ({references[1].author})
+                    </Link>{" "}
                     Momentary tactile switches are not guaranteed to be immune
                     to physical bouncing and may trigger unsolicited actions
                     from the controller. Furthermore, our device has two types
@@ -739,14 +768,15 @@ const RiffMaster = ({ pageName, path }: Props) => {
                     article about how to build your own guitar hero game
                     prototype by clicking the link below.
                     <br />
-                    <a className="inline" href="">
+                    <a className="inline" href="/#/blog/sounds-with-howler">
                         How to build your guitar console application.
                     </a>
                 </p>
+                <References references={references} />
                 <BlogTimeStamp created="06.08.2023" updated="11.08.2023" />
             </main>
             <Footer path={path} />
-        </>
+        </Page>
     );
 };
 

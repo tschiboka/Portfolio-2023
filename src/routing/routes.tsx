@@ -8,6 +8,7 @@ import RiffMaster from "../components/blogComponents/RiffMaster/RiffMaster";
 import RouteError from "../components/RouteError/RouteError";
 import Blog from "../components/Blog/Blog";
 import JsDateValidation from "../components/blogComponents/JsDateValidation/JsDateValidation";
+import SoundsWithHowler from "../components/blogComponents/SoundsWithHowler/SoundsWithHowler";
 
 export const routes = [
     {
@@ -39,6 +40,15 @@ export const routes = [
     {
         path: "/blog/riffmaster",
         element: <RiffMaster pageName="riffmaster" path="/blog/riffmaster" />,
+    },
+    {
+        path: "/blog/sounds-with-howler",
+        element: (
+            <SoundsWithHowler
+                pageName="sounds-with-howler"
+                path="/blog/sounds-with-howler"
+            />
+        ),
     },
     {
         path: "/blog/js-date-validation",

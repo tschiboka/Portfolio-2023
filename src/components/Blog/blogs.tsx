@@ -28,7 +28,7 @@ export const blogArticles: BlogArticle[] = [
         abstract:
             "In this article, we create a keyboard listener for our digital guitar and translate our protocols into appropriate notes. We'll also build a digital interface for our guitar jam page that displays the guitar fretboard and user actions.",
         badges: ["JavaScript", "CSS"],
-        to: "/blog/jamsession",
+        to: "/blog/sounds-with-howler",
     },
     {
         title: "Validating Dates with JavaScript",

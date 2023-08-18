@@ -31,12 +31,12 @@
                 min-width: 150px;
                 width: 150px;
                 padding-right: 10px;
-                display: inline-flex;
+                display: flex;
                 flex-direction: column;
                 border-right: 2px solid $black_2;
                 @include bp.md {
-                    width: 400px;
-                    min-width: 400px;
+                    width: 35vw;
+                    min-width: 35vw;
                     display: inline;
                 }
             }
@@ -83,8 +83,12 @@
 
     ul {
         li {
-            .References__index, .References__author, .References__title {
+            .References__index, .References__title {
                 color: $black_4;
+            }
+            .References__author {
+                color: $black_1;
+                font-weight: bold;
             }
             .References__title {
                 font-weight: bold;
