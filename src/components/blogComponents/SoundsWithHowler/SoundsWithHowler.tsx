@@ -10,7 +10,7 @@ import BlogTimeStamp from "../../BlogTimeStamp/BlogTimeStamp";
 import codeSnippets from "./codeSnipets";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import { BsSoundwave } from "react-icons/bs";
 import equalizerImg from "../../../assets/images/blog/soundsWithHowler/equalizer.jpg";
 import E2MP3 from "../../../assets/files/guitar-sounds/E2.mp3";

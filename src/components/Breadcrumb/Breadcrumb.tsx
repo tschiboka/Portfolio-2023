@@ -32,7 +32,8 @@ const Breadcrumb = ({ path }: Props) => {
             const response = await fetch(`${URL}?path=${path}`, options);
             const responseJSON = await response.json();
             if (responseJSON.success) {
-                setVisits(responseJSON.visits);
+                console.log(visits, responseJSON.visits);
+                //setVisits(responseJSON.visits);
             } else console.log("Error While Sending Visit!", response);
         } catch (err) {
             console.log("Error While Sending Message!", err);
