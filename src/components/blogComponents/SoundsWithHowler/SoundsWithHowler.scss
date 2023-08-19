@@ -3,3 +3,26 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
+.sound-btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 1rem;
+        padding: 0.5rem 1rem;
+        background-color: $black_1;
+        border: 2px solid $gray_1;
+        border-radius: 50px;
+        color: white;
+        font-size: $font-lg;
+        cursor: pointer;
+        span {
+            margin-right: 0.5rem;
+            color: $accent_dark_2;
+        }
+    }
+}

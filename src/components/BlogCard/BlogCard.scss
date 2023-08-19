@@ -43,22 +43,99 @@
             min-height: 250px;
             margin-left: 1.5rem;
             p {
+                margin-top: 1.5rem;
                 text-align: left;
             }
         }
     }
 
     .BlogCard__title {
-        font-size: $font-md;
-        color: $white_2;
-        text-align: center;
-        font-family: "Roboto_Bold";
-        border-bottom: 1px solid #222;
         padding-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #222;
         @include bp.md {
-            text-align: left;
-            font-size: $font_lg;
+            justify-content: flex-start;
+            font-size: $font_md;
         }
+        
+        .BlogCard__title-text {
+            color: white;
+            font-size: $font-lg;
+            font-variant: small-caps;
+            text-align: center; 
+            @include bp.md {
+                text-align: left;
+            }   
+        }
+
+        .BlogCard__info {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $accent_dark_3;
+
+            @include bp.md {
+                justify-content: flex-start;
+            }
+
+            & > * {
+                margin: 0 0.5rem;
+                font-weight: bold;
+                font-size: $font-sm;
+            }
+            span {
+                font-family: monospace;
+            }
+
+            & > span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                *:first-child {
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .BlogCard__info-datablock {
+                position: relative;
+                &:hover {
+                    .BlogCard__hint-text {
+                        display: inline;
+                    }
+                    .BlogCard__info-icon {
+                        color: $white_3;
+                    }
+                    .BlogCard__info-text {
+                        color: $accent_dark_1;
+                    }
+                }
+                .BlogCard__hint-text {
+                    position: absolute;
+                    display: none;
+                    left: 0;
+                    top: -2.5rem;
+                    min-width: 100%;
+                    padding: 0.5rem 1rem;
+                    background-color: black;
+                    border: 1px solid $white_5;
+                    color: $accent_dark_1;
+                    text-align: center;
+                }
+                .BlogCard__info-icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $black_3;
+                    font-size: $font_md;
+                    text-decoration: none;
+                }
+                .BlogCard__info-text {
+                    color: $accent_dark_3;
+                }
+            }
+        }    
     }
 
     .BlogCard__abstract {
@@ -70,6 +147,7 @@
         position: absolute;
         width: 100%;
         display: flex;
+        justify-content: flex-end;
         bottom: 0px;
     }
 
@@ -87,9 +165,11 @@
         background-color: grey;
         border-radius: 20px;
         border: 1px solid #222;
-        color: black;
+        color: $black_3;
         font-size: 1rem;
-        font-weight: bold;
+        font-style: italic;
+        font-variant: small-caps;
+        font-family: "Roboto_Bold";
         @include bp.md {
             padding: 0.5rem 1rem;
         }
@@ -97,15 +177,14 @@
 
     &:hover {
         background-color: black;
-    }
-
-    &:hover .BlogCard__title {
-        color: white;
-    }
-
-    &:hover .BlogCard__abstract {
-        color: white;
-    }
+        .BlogCard__title-text {
+            color: white;
+            text-decoration: underline;
+        }
+        .BlogCard__abstract {
+            color: white;
+        }
+    } 
 }
 
 .light {

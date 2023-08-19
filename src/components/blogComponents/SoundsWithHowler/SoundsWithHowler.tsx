@@ -10,7 +10,10 @@ import BlogTimeStamp from "../../BlogTimeStamp/BlogTimeStamp";
 import codeSnippets from "./codeSnipets";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
+import { Howl, Howler } from "howler";
+import { BsSoundwave } from "react-icons/bs";
 import equalizerImg from "../../../assets/images/blog/soundsWithHowler/equalizer.jpg";
+import E2MP3 from "../../../assets/files/guitar-sounds/E2.mp3";
 import riffMasterHomeImg from "../../../assets/images/blog/soundsWithHowler/RiffmasterHomePage.png";
 import fretboardNotes from "../../../assets/images/blog/soundsWithHowler/FretboardNotes.png";
 import "../../References/References.scss";
@@ -46,6 +49,9 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             source: "https://tschiboka.co.uk/files/guitar-sounds/guitar-sounds.zip",
         },
     ];
+
+    const audioE2 = new Howl({ src: E2MP3, html5: true });
+
     return (
         <Page title="Tivadar Debnar | Sounds with Howler" path={path}>
             <Nav pageName={pageName} />
@@ -162,6 +168,69 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                         </Link>
                         !
                     </p>
+                    <h3>Try them out!</h3>
+                    <div className="sound-btn-wrapper">
+                        <button onClick={() => audioE2.play()}>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                        <button>
+                            <span>Guitar Note E2</span>
+                            <BsSoundwave />
+                        </button>
+                    </div>
                     <h3>Reading Controller Messages</h3>
                 </article>
                 <References references={references} />
