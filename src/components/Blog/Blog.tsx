@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useAppContext } from "../../context/AppContext";
 import BlogCard from "../BlogCard/BlogCard";
 import Footer from "../Footer/Footer";
@@ -13,8 +14,45 @@ interface Props {
     path: string;
 }
 
+type VisitCount = { [path: string]: number };
+
 const Blogs = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
+    const [visits, setVisits] = useState<VisitCount | null>(null);
+    const [visitsLoaded, setVisitsLoaded] = useState(false);
+
+    const getVisits = async () => {
+        const URLLocal = "http://localhost:5000/visit";
+        //const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
+        const URL = URLLocal;
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        try {
+            const response = await fetch(`${URL}`, options);
+            const responseJSON = await response.json();
+            if (responseJSON.success) {
+                setVisitsLoaded(true);
+                const visits: VisitCount = responseJSON.visits;
+                setVisits(visits);
+            } else console.log("Error While Sending Visit!", response);
+        } catch (err) {
+            console.log("Error While Sending Message!", err);
+        }
+    };
+
+    useEffect(() => {
+        if (!visitsLoaded) getVisits();
+    }, [visits]);
+
+    if (visits) {
+        console.log(visits[blogArticles[0].to]);
+    }
+
     return (
         <Page title="Tivadar Debnar | Blog" path={path}>
             <Nav pageName={pageName} />
@@ -32,7 +70,13 @@ const Blogs = ({ pageName, path }: Props) => {
                 </p>
                 <div className="BlogList">
                     {blogArticles.map((article) => (
-                        <BlogCard key={article.title} blogArticle={article} />
+                        <BlogCard
+                            key={article.title}
+                            blogArticle={article}
+                            visits={visits ? visits[article.to] : 0}
+                            readingTime={article?.readingTime}
+                            codeTime={article?.codeTime}
+                        />
                     ))}
                 </div>
             </main>

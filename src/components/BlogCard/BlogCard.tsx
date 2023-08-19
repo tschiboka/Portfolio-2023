@@ -8,11 +8,14 @@ import "./BlogCard.scss";
 
 interface Props {
     blogArticle: BlogArticle;
+    visits: number;
+    readingTime?: string | undefined;
+    codeTime?: string | undefined;
 }
 
-const BlogCard = ({ blogArticle }: Props) => {
-    const visits = 0;
+const BlogCard = ({ blogArticle, visits, readingTime, codeTime }: Props) => {
     const navigate = useNavigate();
+
     return (
         <article className="BlogCard" onClick={() => navigate(blogArticle.to)}>
             <div className="BlogCard__img-wrapper">
@@ -37,14 +40,18 @@ const BlogCard = ({ blogArticle }: Props) => {
                     <span className="BlogCard__info">
                         <span className="BlogCard__info-datablock">
                             <BiSolidTimeFive className="BlogCard__info-icon" />
-                            <span className="BlogCard__info-text">5 min</span>
+                            <span className="BlogCard__info-text">
+                                {readingTime || "-"}
+                            </span>
                             <span className="BlogCard__hint-text">
                                 Reading&nbsp;Time
                             </span>
                         </span>
                         <span className="BlogCard__info-datablock">
                             <FaCode className="BlogCard__info-icon" />
-                            <span className="BlogCard__info-text">2 hour</span>
+                            <span className="BlogCard__info-text">
+                                {codeTime || "-"}
+                            </span>
                             <span className="BlogCard__hint-text">
                                 Code&nbsp;Time
                             </span>
@@ -53,14 +60,18 @@ const BlogCard = ({ blogArticle }: Props) => {
                         <span className="BlogCard__info-datablock">
                             <AiFillHeart className="BlogCard__info-icon" />
                             <span className="BlogCard__info-text">10102</span>
-                            <span className="BlogCard__hint-text">Liked</span>
+                            <span className="BlogCard__hint-text">
+                                Likes&nbsp;Given
+                            </span>
                         </span>
                         <span className="BlogCard__info-datablock">
                             <FaEye className="BlogCard__info-icon" />
                             <span className="BlogCard__info-text">
-                                {visits || "133484"}
+                                {visits || "-"}
                             </span>
-                            <span className="BlogCard__hint-text">Read</span>
+                            <span className="BlogCard__hint-text">
+                                Times&nbsp;Read
+                            </span>
                         </span>
                     </span>
                 </header>

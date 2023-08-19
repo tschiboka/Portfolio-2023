@@ -5,10 +5,16 @@ const { Visit, validateVisit } = require("../models/visit");
 
 
 router.get("/", async (req, res) => {  // Home Page Visits
-    const { path } = req.query;
-    const visits = await Visit.find({ path: path });
-    res.status(200).json({ success: true, visits: visits.length });
+    const visits = await Visit.find();
+    const groupedVisits = {};
+    visits.forEach(visit => {
+        if (!groupedVisits[visit.path]) groupedVisits[visit.path] = 1;
+        else groupedVisits[visit.path] = groupedVisits[visit.path] + 1;
+    })
+    res.status(200).json({ success: true, visits: groupedVisits });
 });
+
+
 
 router.post("/", async (req, res) => {
     console.log(req.body)
