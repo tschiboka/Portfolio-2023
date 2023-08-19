@@ -52,6 +52,7 @@ import Code from "../../Code/Code";
 import Page from "../../Page/Page";
 import References, { Reference } from "../../References/References";
 import { Link } from "react-router-dom";
+import LikeButton from "../../LikeButton/LikeButton";
 
 interface Props {
     pageName: string;
@@ -772,6 +773,7 @@ const RiffMaster = ({ pageName, path }: Props) => {
                         How to build your guitar console application.
                     </a>
                 </p>
+                <LikeButton path={path} />
                 <References references={references} />
                 <BlogTimeStamp created="06.08.2023" updated="11.08.2023" />
             </main>

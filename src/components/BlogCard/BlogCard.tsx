@@ -107,7 +107,8 @@ const BlogCard = ({
                                 }
                             />
                             <span className="BlogCard__info-text">
-                                {(!articleLiked ? likes : likes + 1) || "-"}
+                                {(!articleLiked ? likes : (likes || 0) + 1) ||
+                                    "-"}
                             </span>
                             <span className="BlogCard__hint-text">
                                 Likes&nbsp;Given

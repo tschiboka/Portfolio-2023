@@ -63,6 +63,7 @@ strong {
 h1 {
     color: white;
     font-size: $font_lg;
+    font-variant: small-caps;
     @include bp.md {
         font-size: $font_xx;
     }
@@ -71,7 +72,9 @@ h1 {
 h2 {
     margin: 3rem 0;
     color: $white_2;
-    font-family: Roboto_Bold;
+    font-size: $font_lg;
+    font-family: "Roboto_Bold";
+    font-variant: small-caps;
 }
 
 hr {

@@ -14,6 +14,7 @@ import "../blogComponents.scss";
 import "./JsDateValidation.scss";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
+import LikeButton from "../../LikeButton/LikeButton";
 
 interface Props {
     pageName: string;
@@ -146,7 +147,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                         day overflow and returns false for all invalid dates.
                     </p>
                 </article>
-
+                <LikeButton path={path} />
                 <References references={references} />
                 <BlogTimeStamp created="15.08.2023" updated="18.08.2023" />
             </main>

@@ -1,0 +1,62 @@
+@use "../../styles/breakpoints.scss" as bp;
+@import "../../styles/palette.scss";
+@import "../../styles/font_sizes.scss";
+
+.LikeButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0 2.5rem 0;
+    p {
+        margin: 0;
+        font-variant: small-caps;
+        text-align: center;
+    }
+    hr {
+        width: 100%;
+    }
+    .LikeButton__button-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.1);
+            .LikeButton__icon {
+                color: $white_3;
+            }    
+            span {
+                color: $accent_dark_1;
+            }
+        }
+        .LikeButton__icon {
+            margin-right: 0.5rem;
+            font-size: $font-lg;
+            color: $black_5;
+        }
+        .LikeButton__icon.disabled {
+            fill: deeppink;
+            opacity: 0.3;
+        }
+        span {
+            color: $accent_dark_3;
+            font-family: monospace;
+            font-size: $font-md;
+        }
+    }
+}
+
+.light {
+    .LikeButton {
+        .LikeButton__button-wrapper {
+            .LikeButton__icon:hover {
+                color: black;
+            }
+            .LikeButton__icon.disabled {
+                opacity: 1;
+            }
+        }
+    }
+}

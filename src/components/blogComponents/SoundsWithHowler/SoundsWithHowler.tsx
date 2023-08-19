@@ -19,6 +19,7 @@ import fretboardNotes from "../../../assets/images/blog/soundsWithHowler/Fretboa
 import "../../References/References.scss";
 import "../blogComponents.scss";
 import "./SoundsWithHowler.scss";
+import LikeButton from "../../LikeButton/LikeButton";
 
 interface Props {
     pageName: string;
@@ -233,6 +234,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                     </div>
                     <h3>Reading Controller Messages</h3>
                 </article>
+                <LikeButton path={path} />
                 <References references={references} />
                 <BlogTimeStamp created="18.08.2023" updated="18.08.2023" />
             </main>

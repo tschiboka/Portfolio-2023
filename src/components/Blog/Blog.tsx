@@ -15,7 +15,7 @@ interface Props {
 }
 
 type VisitCount = { [path: string]: number };
-type LikeCount = { [path: string]: number };
+export type LikeCount = { [path: string]: number };
 
 const Blogs = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext();

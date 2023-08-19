@@ -5,6 +5,10 @@
 
 // Every common blog style here
 .blog-component {
+    h1 {
+        font-variant: small-caps;
+        font-weight: normal;
+    }
     article { 
         margin: 0;
         padding: 0;
@@ -19,6 +23,7 @@
         color: $white_2;
         font-size: $font_lg;
         font-family: Roboto_Bold;
+        font-variant: small-caps;
     }
     
     img.image--lrg {

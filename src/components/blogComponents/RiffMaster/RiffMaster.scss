@@ -3,8 +3,14 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
+h1 {
+    font-variant: small-caps;
+}
+
 h2.riffmaster {
     text-align: center;
+    font-variant: small-caps;
+    font-size: $font_lg;
 }
 
 h3.riffmaster {
@@ -12,6 +18,7 @@ h3.riffmaster {
     color: $white_2;
     font-size: $font_lg;
     font-family: Roboto_Bold;
+    font-variant: small-caps;
 }
 
 img.image--lrg {
