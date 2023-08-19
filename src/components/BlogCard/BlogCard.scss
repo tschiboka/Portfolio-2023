@@ -134,6 +134,10 @@
                     font-size: $font_md;
                     text-decoration: none;
                 }
+                .BlogCard__info-icon.disabled {
+                    fill: deeppink;
+                    opacity: 0.3;
+                }
                 .BlogCard__info-text {
                     color: $accent_dark_3;
                 }

@@ -15,16 +15,19 @@ interface Props {
 }
 
 type VisitCount = { [path: string]: number };
+type LikeCount = { [path: string]: number };
 
 const Blogs = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const [visits, setVisits] = useState<VisitCount | null>(null);
     const [visitsLoaded, setVisitsLoaded] = useState(false);
+    const [likes, setLikes] = useState<LikeCount | null>(null);
+    const [likesLoaded, setLikesLoaded] = useState(false);
 
     const getVisits = async () => {
-        const URLLocal = "http://localhost:5000/visit";
-        //const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
-        const URL = URLLocal;
+        //const URLLocal = "http://localhost:5000/visit";
+        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
+        const URL = URLLive;
         const options = {
             method: "GET",
             headers: {
@@ -39,19 +42,40 @@ const Blogs = ({ pageName, path }: Props) => {
                 setVisitsLoaded(true);
                 const visits: VisitCount = responseJSON.visits;
                 setVisits(visits);
-            } else console.log("Error While Sending Visit!", response);
+            } else console.log("Error While Getting Visits Data!", response);
         } catch (err) {
-            console.log("Error While Sending Message!", err);
+            console.log("Error While Getting Visits Data!", err);
+        }
+    };
+
+    const getLikes = async () => {
+        //const URLLocal = "http://localhost:5000/like";
+        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
+        const URL = URLLive;
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        try {
+            const response = await fetch(`${URL}`, options);
+            const responseJSON = await response.json();
+            if (responseJSON.success) {
+                setLikesLoaded(true);
+                const likes: LikeCount = responseJSON.likes;
+                setLikes(likes);
+            } else console.log("Error While Getting Like Data!", response);
+        } catch (err) {
+            console.log("Error While Getting Like Data!", err);
         }
     };
 
     useEffect(() => {
         if (!visitsLoaded) getVisits();
-    }, [visits]);
-
-    if (visits) {
-        console.log(visits[blogArticles[0].to]);
-    }
+        if (!likesLoaded) getLikes();
+    }, [visits, likes]);
 
     return (
         <Page title="Tivadar Debnar | Blog" path={path}>
@@ -76,6 +100,8 @@ const Blogs = ({ pageName, path }: Props) => {
                             visits={visits ? visits[article.to] : 0}
                             readingTime={article?.readingTime}
                             codeTime={article?.codeTime}
+                            likes={likes ? likes[article.to] : 0}
+                            path={article.to}
                         />
                     ))}
                 </div>

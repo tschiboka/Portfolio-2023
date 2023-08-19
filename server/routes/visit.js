@@ -4,7 +4,7 @@ const { Visit, validateVisit } = require("../models/visit");
 
 
 
-router.get("/", async (req, res) => {  // Home Page Visits
+router.get("/", async (req, res) => {
     const path = req.query.path;
 
     if (!path) {
@@ -18,14 +18,12 @@ router.get("/", async (req, res) => {  // Home Page Visits
     }
     else {
         const visits = await Visit.find({path: path});
-        console.log(visits.length)
         res.status(200).json({ success: true, visits: visits.length });
     }
 });
 
 
 router.post("/", async (req, res) => {
-    console.log(req.body)
     if (!req.body) return res.status(400).json({ success: false, error: "Bad Content"} );
     
     const { error } = validateVisit(req.body);

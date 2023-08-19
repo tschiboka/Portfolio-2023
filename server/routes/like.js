@@ -1,31 +1,36 @@
 const express = require("express");
 const router = express.Router();
-// const { Visit, validateVisit } = require("../models/visit");
+const { Like, validateLike } = require("../models/like");
+
+router.get("/", async (req, res) => {
+    const path = req.query.path;
+
+    if (!path) {
+        const likes = await Like.find();
+        const groupedLikes = {};
+        likes.forEach(like => {    
+            if (!groupedLikes[like.path]) groupedLikes[like.path] = 1;
+            else groupedLikes[like.path] = groupedLikes[like.path] + 1;
+        });
+        res.status(200).json({ success: true, likes: groupedLikes });
+    }
+    else {
+        const likes = await Like.find({path: path});
+        res.status(200).json({ success: true, likes: likes.length });
+    }
+});
 
 
 
-// router.get("/", async (req, res) => {  // Home Page Visits
-//     const visits = await Visit.find();
-//     const groupedVisits = {};
-//     visits.forEach(visit => {
-//         if (!groupedVisits[visit.path]) groupedVisits[visit.path] = 1;
-//         else groupedVisits[visit.path] = groupedVisits[visit.path] + 1;
-//     })
-//     res.status(200).json({ success: true, visits: groupedVisits });
-// });
-
-
-
-// router.post("/", async (req, res) => {
-//     console.log(req.body)
-//     if (!req.body) return res.status(400).json({ success: false, error: "Bad Content"} );
+router.post("/", async (req, res) => {
+    if (!req.body) return res.status(400).json({ success: false, error: "Bad Content"} );
     
-//     const { error } = validateVisit(req.body);
-//     if (error) return res.status(422).json({ success: false, error: error.details[0].message });
-//     const visit = new Visit(req.body);  
+    const { error } = validateLike(req.body);
+    if (error) return res.status(422).json({ success: false, error: error.details[0].message });
+    const like = new Like(req.body);  
 
-//     await visit.save();
-//     res.status(200).json({ success: true, visit });
-// });
+    await like.save();
+    res.status(200).json({ success: true, like });
+});
 
 module.exports = router;

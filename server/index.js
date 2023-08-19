@@ -19,9 +19,11 @@ app.use(cors({
 const index = require("./routes/index");
 const message = require("./routes/message");
 const visit = require("./routes/visit");
+const like = require("./routes/like");
 app.use("/", index);
 app.use("/message", message);
 app.use("/visit", visit);
+app.use("/like", like);
 
 
 // Cyclic Server Needs DB Connection First then Server Listen

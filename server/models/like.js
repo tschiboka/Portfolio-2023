@@ -23,7 +23,7 @@ function validateLike(like) {
     return schema.validate(like);
 }
 
-const Like = mongoose.model("Visit", schema);
+const Like = mongoose.model("Like", schema);
 
-exports.Visit = Like;
+exports.Like = Like;
 exports.validateLike = validateLike;
