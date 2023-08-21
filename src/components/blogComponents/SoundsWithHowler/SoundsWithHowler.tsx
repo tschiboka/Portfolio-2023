@@ -4,6 +4,7 @@ import Menu from "../../Menu/Menu";
 import Nav from "../../Nav/Nav";
 import Page from "../../Page/Page";
 import References, { Reference } from "../../References/References";
+import LikeButton from "../../LikeButton/LikeButton";
 import { Link } from "react-router-dom";
 import SubNav from "../../SubNav/SubNav";
 import BlogTimeStamp from "../../BlogTimeStamp/BlogTimeStamp";
@@ -14,12 +15,32 @@ import { Howl } from "howler";
 import { BsSoundwave } from "react-icons/bs";
 import equalizerImg from "../../../assets/images/blog/soundsWithHowler/equalizer.jpg";
 import E2MP3 from "../../../assets/files/guitar-sounds/E2.mp3";
+import F2MP3 from "../../../assets/files/guitar-sounds/F2.mp3";
+import Fs2MP3 from "../../../assets/files/guitar-sounds/Fs2.mp3";
+import G2MP3 from "../../../assets/files/guitar-sounds/G2.mp3";
+import Gs2MP3 from "../../../assets/files/guitar-sounds/Gs2.mp3";
+import A2MP3 from "../../../assets/files/guitar-sounds/A2.mp3";
+import As2MP3 from "../../../assets/files/guitar-sounds/As2.mp3";
+import B2MP3 from "../../../assets/files/guitar-sounds/B2.mp3";
+import C3MP3 from "../../../assets/files/guitar-sounds/C3.mp3";
+import Cs3MP3 from "../../../assets/files/guitar-sounds/Cs3.mp3";
+import D3MP3 from "../../../assets/files/guitar-sounds/D3.mp3";
+import Ds3MP3 from "../../../assets/files/guitar-sounds/Ds3.mp3";
+import E3MP3 from "../../../assets/files/guitar-sounds/E3.mp3";
+import F3MP3 from "../../../assets/files/guitar-sounds/F3.mp3";
+import G3MP3 from "../../../assets/files/guitar-sounds/G3.mp3";
+import A3MP3 from "../../../assets/files/guitar-sounds/A3.mp3";
+import B3MP3 from "../../../assets/files/guitar-sounds/B3.mp3";
+import E4MP3 from "../../../assets/files/guitar-sounds/E4.mp3";
+import C4MP3 from "../../../assets/files/guitar-sounds/C4.mp3";
+import D4MP3 from "../../../assets/files/guitar-sounds/D4.mp3";
+import Fs4MP3 from "../../../assets/files/guitar-sounds/Fs4.mp3";
+import G4MP3 from "../../../assets/files/guitar-sounds/G4.mp3";
 import riffMasterHomeImg from "../../../assets/images/blog/soundsWithHowler/RiffmasterHomePage.png";
 import fretboardNotes from "../../../assets/images/blog/soundsWithHowler/FretboardNotes.png";
 import "../../References/References.scss";
 import "../blogComponents.scss";
 import "./SoundsWithHowler.scss";
-import LikeButton from "../../LikeButton/LikeButton";
 
 interface Props {
     pageName: string;
@@ -52,6 +73,26 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
     ];
 
     const audioE2 = new Howl({ src: E2MP3, html5: true });
+    const audioF2 = new Howl({ src: F2MP3, html5: true });
+    const audioFs2 = new Howl({ src: Fs2MP3, html5: true });
+    const audioG2 = new Howl({ src: G2MP3, html5: true });
+    const audioGs2 = new Howl({ src: Gs2MP3, html5: true });
+    const audioA2 = new Howl({ src: A2MP3, html5: true });
+    const audioAs2 = new Howl({ src: As2MP3, html5: true });
+    const audioB2 = new Howl({ src: B2MP3, html5: true });
+    const audioC3 = new Howl({ src: C3MP3, html5: true });
+    const audioCs3 = new Howl({ src: Cs3MP3, html5: true });
+    const audioD3 = new Howl({ src: D3MP3, html5: true });
+    const audioDs3 = new Howl({ src: Ds3MP3, html5: true });
+    const audioE3 = new Howl({ src: E3MP3, html5: true });
+    const audioG3 = new Howl({ src: G3MP3, html5: true });
+    const audioB3 = new Howl({ src: B3MP3, html5: true });
+    const audioE4 = new Howl({ src: E4MP3, html5: true });
+    const audioA3 = new Howl({ src: A3MP3, html5: true });
+    const audioC4 = new Howl({ src: C4MP3, html5: true });
+    const audioD4 = new Howl({ src: D4MP3, html5: true });
+    const audioFs4 = new Howl({ src: Fs4MP3, html5: true });
+    const audioG4 = new Howl({ src: G4MP3, html5: true });
 
     return (
         <Page title="Tivadar Debnar | Sounds with Howler" path={path}>
@@ -133,7 +174,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                         and the fretboard supports 20 frets on six strings, we
                         must have an extensive range of audio sounds available
                         for each possible note, from the lower E2 to the upper
-                        D6.
+                        C6.
                     </p>
                     <Figure
                         image={fretboardNotes}
@@ -175,64 +216,195 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                             <span>Guitar Note E2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioF2.play()}>
+                            <span>Guitar Note F2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioFs2.play()}>
+                            <span>Guitar Note F#2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioG2.play()}>
+                            <span>Guitar Note G2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioGs2.play()}>
+                            <span>Guitar Note G#2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioA2.play()}>
+                            <span>Guitar Note A2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioAs2.play()}>
+                            <span>Guitar Note A#2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioB2.play()}>
+                            <span>Guitar Note B2</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioC3.play()}>
+                            <span>Guitar Note C3</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioCs3.play()}>
+                            <span>Guitar Note C#3</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioD3.play()}>
+                            <span>Guitar Note D3</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioDs3.play()}>
+                            <span>Guitar Note D#3</span>
                             <BsSoundwave />
                         </button>
-                        <button>
-                            <span>Guitar Note E2</span>
-                            <BsSoundwave />
-                        </button>
-                        <button>
-                            <span>Guitar Note E2</span>
-                            <BsSoundwave />
-                        </button>
-                        <button>
-                            <span>Guitar Note E2</span>
+                        <button onClick={() => audioE3.play()}>
+                            <span>Guitar Note E3</span>
                             <BsSoundwave />
                         </button>
                     </div>
+                    <p>
+                        One of the great things about Howler JS is that it
+                        handles simultaneous audio playing easily, a crucial
+                        feature, as our digital guitar is a polyphonic
+                        instrument. Each string should provide its corresponding
+                        sound if activated; more often than not, guitarists play
+                        on multiple strings at one time. Let's see some basic
+                        chords.
+                    </p>
+                    <div className="sound-btn-wrapper">
+                        <button
+                            onClick={() => {
+                                audioE2.play();
+                                audioB2.play();
+                                audioE3.play();
+                                audioG3.play();
+                                audioB3.play();
+                                audioE4.play();
+                            }}
+                        >
+                            <span>Guitar Chord Em</span>
+                            <BsSoundwave />
+                        </button>
+                        <button
+                            onClick={() => {
+                                audioD3.play();
+                                audioA3.play();
+                                audioD4.play();
+                                audioFs4.play();
+                            }}
+                        >
+                            <span>Guitar Chord D</span>
+                            <BsSoundwave />
+                        </button>
+                        <button
+                            onClick={() => {
+                                audioC4.play();
+                                audioG3.play();
+                                audioE3.play();
+                                audioC3.play();
+                            }}
+                        >
+                            <span>Guitar Chord C</span>
+                            <BsSoundwave />
+                        </button>
+                        <button
+                            onClick={() => {
+                                audioG2.play();
+                                audioB2.play();
+                                audioD3.play();
+                                audioG3.play();
+                                audioB3.play();
+                                audioG4.play();
+                            }}
+                        >
+                            <span>Guitar Chord G</span>
+                            <BsSoundwave />
+                        </button>
+                        <button
+                            onClick={() => {
+                                audioB2.play();
+                                audioDs3.play();
+                                audioA3.play();
+                                audioB3.play();
+                                audioFs4.play();
+                            }}
+                        >
+                            <span>Guitar Chord B7</span>
+                            <BsSoundwave />
+                        </button>
+                    </div>
+                    <p>
+                        And yes, anyone with a sharp pitch, this is the chord
+                        progression from Metallica – Nothing else matters, so
+                        you are welcome!
+                    </p>
                     <h3>Reading Controller Messages</h3>
+                    <p>
+                        First, we need to be able to read keypresses from our
+                        instrument, and for that, we will create our controller
+                        listener function. This function is only responsible for
+                        listening to keypresses that are digits, and each
+                        message from our instrument consists of four digits. The
+                        first digit is the event, with possible values 0 and 1,
+                        released and pressed, respectively. The second and third
+                        digits represent our fret value, which may be between 0
+                        and 20. The fourth digit is the string number (1 - 6).
+                        On each keypress, the key is appended to the final
+                        controller message until the fourth digit, where we can
+                        trigger an action. Additionally, any invalid keys or
+                        digits out of the boundary of our protocol must be
+                        discarded, and the message should be cleared.
+                    </p>
+                    <p>
+                        The controller state has two properties: the message and
+                        the highest fret position, an array of six numbers. We
+                        need to store these values because when the user
+                        activates a string, multiple fret positions may be
+                        started on that string simultaneously. Guitars always
+                        play the highest sound on a given string, and our
+                        digital guitar should not be an exception. One way
+                        should be to set these restrictions on the hardware
+                        level and let only the highest notes trigger a message
+                        sequence. However, this would also restrict any future
+                        endeavour for, let's say, displaying a visual guide or a
+                        graphical UI that shows activated notes. Lastly,
+                        separation of concerns: the guitar controller is not
+                        responsible for the logic of how the messages are used
+                        and interpreted, and they should be implemented on the
+                        application level.
+                    </p>
+                    <Code
+                        fileName="controller.js"
+                        language="javascript"
+                        content={codeSnippets.controller}
+                    />
+                    <p>
+                        Each four-digit message invokes our translate function,
+                        which keeps our highest fret positions state up to date
+                        and triggers either a strum or a fret activation
+                        function. These functions are declared when a page
+                        loads, so each page may have different functionalities.
+                        For instance, a Jam Session plays the activated notes,
+                        and a Play Session may have a Guitar Hero-like game that
+                        handles controller events differently.
+                    </p>
+                    <Code
+                        fileName="controller.js"
+                        language="javascript"
+                        content={codeSnippets.translateMessages}
+                    />
+                    <p>
+                        Now we can include our controller listener in the html
+                        file.
+                    </p>
+                    <Code
+                        fileName="jam.html"
+                        language="html"
+                        content={codeSnippets.loadController}
+                    />
                 </article>
                 <LikeButton path={path} />
                 <References references={references} />

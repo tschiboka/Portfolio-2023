@@ -1,7 +1,7 @@
 const codeSnippets = {
     basicDateValidation: `const isValidDate = (date) =>  {
     const d = new Date(date);
-    console.log(d.getTime())
+    
     return d.getTime() === d.getTime();  // Return Date Object or NaN
 }
   

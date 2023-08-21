@@ -6,6 +6,22 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    @include bp.md {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
+
+h3.skill-header {
+    font-size: 1.4rem;
+    font-variant: small-caps;
+    margin-bottom: 1.5rem;
+    @include bp.md {
+        font-size: $font_lg;
+    }
 }
 
 .button-wrapper {

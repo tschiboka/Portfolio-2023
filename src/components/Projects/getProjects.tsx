@@ -79,7 +79,7 @@ export function getColourName(str: string) {
         case "html":
             return "orange";
         case "css":
-            return "blue";
+            return "purple";
         case "javascript":
             return "yellow";
         case "react":
@@ -87,17 +87,21 @@ export function getColourName(str: string) {
         case "react native":
             return "light-blue";
         case "typescript":
-            return "blue";
+            return "light-blue";
         case "sass":
             return "pink";
         case "arduino":
             return "light-blue";
         case "nodejs":
             return "light-green";
+        case "python":
+            return "light-green";
+        case "c#":
+            return "purple";
         case "mongodb":
-            return "green";
+            return "light-green";
         case "photoshop":
-            return "light-blue";
+            return "pink";
         case "illustrator":
             return "orange";
         default:

@@ -37,6 +37,12 @@ html {
     font-weight: lighter;
 }
 
+*:focus {
+    outline: 1px solid $accent_dark_3;
+    outline-offset: 8px;
+    border-radius: 20px;
+}
+
 body {
     background-color: $white_1;
     color: black;

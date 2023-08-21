@@ -65,7 +65,7 @@ const Footer = ({ pageName, path }: Props) => {
                 </li>
                 <li>
                     <a title="Download CV" href={cv} download>
-                        RESUME
+                        R&Egrave;SUM&Egrave;
                     </a>
                 </li>
                 <li>

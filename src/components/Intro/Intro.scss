@@ -32,3 +32,16 @@ p {
         font-size: $font_lg;
     }
 }
+
+.subtitle {
+    color: $white_3;
+    font-size: $font_xs;
+    font-variant: normal;
+    font-style: italic;
+}
+
+.light {
+    .subtitle {
+        color: $black_3;
+    }
+}

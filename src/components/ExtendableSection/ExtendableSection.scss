@@ -28,14 +28,12 @@
                 display: inline;
                 color: $accent_dark_3;
             }
-            &:hover {
-                color: red;
-            }
         }
     }
     & > button:hover {
-        background-color: $black_2;
         color: white;
+        font-weight: bold;
+        border-color: $accent_dark_3;
 
         .button__icon {
             color: $accent_dark_1;

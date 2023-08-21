@@ -18,10 +18,9 @@ const ProgressBar = ({ title, percentage, icon, color }: Props) => {
             <div className="ProgressBar__inner">
                 <div className="ProgressBar__track">
                     <div
-                        className="ProgressBar__thumb"
+                        className={"ProgressBar__thumb " + color}
                         style={{
                             width: `${percentage}%`,
-                            backgroundColor: `${color}`,
                         }}
                     ></div>
                 </div>

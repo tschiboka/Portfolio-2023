@@ -55,7 +55,11 @@ const Intro = () => {
                 web design and digital user interfaces.
             </p>
             <hr></hr>
-            <h2>How can I help you?</h2>
+            <h2>
+                How can I help you?
+                <br />
+                <span className="subtitle">Choose an Option</span>
+            </h2>
 
             {extendedItems.map((item, index) => (
                 <ExtendableSection

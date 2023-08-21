@@ -1,16 +1,21 @@
 import {
     SiHtml5,
     SiCss3,
-    SiReact,
     SiMongodb,
     SiAdobephotoshop,
     SiAdobeillustrator,
     SiJavascript,
+    SiTypescript,
+    SiCsharp,
+    SiPython,
 } from "react-icons/si";
+import { BiMessageDots, BiLogoSass } from "react-icons/bi";
 import { FaNodeJs } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
-import { BiMessageDots } from "react-icons/bi";
+import { TbBrandReactNative } from "react-icons/tb";
+import { RiReactjsLine } from "react-icons/ri";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import { getColourName } from "../Projects/getProjects";
 import cv from "../../assets/files/Tivadar_Debnar_CV_2023.pdf";
 import "./HireIntro.scss";
 import { Link } from "react-router-dom";
@@ -41,54 +46,95 @@ const HireIntro = () => {
                 even during my years in college and university.
             </p>
             <h2>Skills</h2>
+            <h3 className="skill-header">Frontend</h3>
             <section className="skills">
                 <ProgressBar
                     percentage={75}
                     title="HTML5"
                     icon={<SiHtml5 />}
-                    color="#E34F26"
+                    color={getColourName("html")}
                 />
                 <ProgressBar
-                    percentage={70}
+                    percentage={78}
                     title="CSS"
                     icon={<SiCss3 />}
-                    color="#1572B6"
+                    color={getColourName("css")}
                 />
                 <ProgressBar
                     percentage={85}
                     title="JS"
                     icon={<SiJavascript />}
-                    color="#F7DF1E"
+                    color={getColourName("javascript")}
+                />
+                <ProgressBar
+                    percentage={30}
+                    title="Sass"
+                    icon={<BiLogoSass />}
+                    color={getColourName("sass")}
                 />
                 <ProgressBar
                     percentage={60}
                     title="React"
-                    icon={<SiReact />}
-                    color="#61DAFB"
+                    icon={<RiReactjsLine />}
+                    color={getColourName("react")}
                 />
                 <ProgressBar
-                    percentage={50}
+                    percentage={55}
+                    title="TypeScript"
+                    icon={<SiTypescript />}
+                    color={getColourName("typescript")}
+                />
+            </section>
+
+            <h3 className="skill-header">Backend</h3>
+            <section className="skills">
+                <ProgressBar
+                    percentage={60}
                     title="NodeJs"
                     icon={<FaNodeJs />}
-                    color="#339933"
+                    color={getColourName("nodejs")}
                 />
                 <ProgressBar
                     percentage={55}
                     title="MongoDB"
                     icon={<SiMongodb />}
-                    color="#47A248"
-                />
-                <ProgressBar
-                    percentage={40}
-                    title="PhotoShop"
-                    icon={<SiAdobephotoshop />}
-                    color="#E31A8FF"
+                    color={getColourName("mongodb")}
                 />
                 <ProgressBar
                     percentage={35}
+                    title="C#"
+                    icon={<SiCsharp />}
+                    color={getColourName("C#")}
+                />
+                <ProgressBar
+                    percentage={25}
+                    title="Python"
+                    icon={<SiPython />}
+                    color={getColourName("python")}
+                />
+            </section>
+            <h3 className="skill-header">Mobile</h3>
+            <section className="skills">
+                <ProgressBar
+                    percentage={45}
+                    title="React Native"
+                    icon={<TbBrandReactNative />}
+                    color={getColourName("react native")}
+                />
+            </section>
+            <h3 className="skill-header">Design</h3>
+            <section className="skills">
+                <ProgressBar
+                    percentage={35}
+                    title="PhotoShop"
+                    icon={<SiAdobephotoshop />}
+                    color={getColourName("photoshop")}
+                />
+                <ProgressBar
+                    percentage={30}
                     title="Illustrator"
                     icon={<SiAdobeillustrator />}
-                    color="#FF9A00"
+                    color={getColourName("illustrator")}
                 />
             </section>
             <h2>I continuously learn new things</h2>
