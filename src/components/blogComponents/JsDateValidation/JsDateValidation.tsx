@@ -15,6 +15,7 @@ import "./JsDateValidation.scss";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
 import LikeButton from "../../LikeButton/LikeButton";
+import { blogArticles } from "../../Blog/blogs";
 
 interface Props {
     pageName: string;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const JsDateValidation = ({ pageName, path }: Props) => {
+    const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const references: Reference[] = [
         {
@@ -149,7 +151,12 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                 </article>
                 <LikeButton path={path} />
                 <References references={references} />
-                <BlogTimeStamp created="15.08.2023" updated="18.08.2023" />
+                {article && article.created && (
+                    <BlogTimeStamp
+                        created={article.created}
+                        updated={article.updated}
+                    />
+                )}
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>

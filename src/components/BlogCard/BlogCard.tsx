@@ -1,9 +1,10 @@
 import { BlogArticle } from "../Blog/blogs";
 import { getColourName } from "../Projects/getProjects";
 import { useNavigate } from "react-router-dom";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { FaEye, FaCode } from "react-icons/fa";
+import { BsFillCalendar2DateFill } from "react-icons/bs";
 import "./BlogCard.scss";
 import { useState } from "react";
 
@@ -14,6 +15,8 @@ interface Props {
     codeTime?: string | undefined;
     likes: number;
     path: string;
+    upcoming?: boolean;
+    newest: boolean;
 }
 
 const BlogCard = ({
@@ -23,6 +26,7 @@ const BlogCard = ({
     codeTime,
     likes,
     path,
+    newest,
 }: Props) => {
     const navigate = useNavigate();
     const [articleLiked, setArticleLiked] = useState(false);
@@ -53,6 +57,20 @@ const BlogCard = ({
     return (
         <article className="BlogCard" onClick={() => navigate(blogArticle.to)}>
             <div className="BlogCard__img-wrapper">
+                {blogArticle.upcoming && (
+                    <div className="BlogCard__upcoming-overlay">
+                        <BsFillCalendar2DateFill className="BlogCard__overlay-icon" />
+                        <span className="BlogCard__upcoming-date">
+                            {blogArticle.upcomingDate}
+                        </span>
+                    </div>
+                )}
+                {newest && (
+                    <div className="BlogCard__new-overlay">
+                        <AiFillStar className="BlogCard__overlay-icon--new" />
+                        <span className="BlogCard__new-text">New</span>
+                    </div>
+                )}
                 <div className="BlogCard__badge-box">
                     {blogArticle.badges.map((badge, index) => (
                         <span

@@ -53,6 +53,7 @@ import Page from "../../Page/Page";
 import References, { Reference } from "../../References/References";
 import { Link } from "react-router-dom";
 import LikeButton from "../../LikeButton/LikeButton";
+import { blogArticles } from "../../Blog/blogs";
 
 interface Props {
     pageName: string;
@@ -60,6 +61,7 @@ interface Props {
 }
 
 const RiffMaster = ({ pageName, path }: Props) => {
+    const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const references: Reference[] = [
         {
@@ -775,7 +777,12 @@ const RiffMaster = ({ pageName, path }: Props) => {
                 </p>
                 <LikeButton path={path} />
                 <References references={references} />
-                <BlogTimeStamp created="06.08.2023" updated="11.08.2023" />
+                {article && article.created && (
+                    <BlogTimeStamp
+                        created={article.created}
+                        updated={article.updated}
+                    />
+                )}
             </main>
             <Footer path={path} />
         </Page>

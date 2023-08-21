@@ -4,6 +4,9 @@ const codeSnippets = {
     integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" 
     crossorigin="anonymous" 
     referrerpolicy="no-referrer"></script>`,
+    npmHowler: `npm install howler           # Install Howler with NPM
+yarn add howler              # Install Howler with Yarn
+npm install -D @types/howler # Import TypeScript Types`,
     controller: `// Initialise App with an Empty Controller State
     function initialiseAppControllerState() {
         const controllerState = {
@@ -63,7 +66,7 @@ const codeSnippets = {
             positionsOnString.splice(index, 1);                                            // Remove Position
             app.controllerState.highestFretPositions[string - 1] = positionsOnString;
         }
-    
+        
         handleFretActivated(event, fret, string);
     }
         
@@ -78,6 +81,23 @@ const codeSnippets = {
         window.addEventListener("keydown", controllerListener);
         window.addEventListener("keyup", controllerListener);
     </script>`,
+    fretCallback: `function handleFretActivated(event, fret, string) {
+        if (fret === undefined || string === undefined) return;
+    
+        displayActionOnBoard(fret, string, -1, !event);
+        
+        if (event === 0) {                                                      // If Finger is Off Position 
+            const note = guitarNotes[strumOffsets[string - 1] + fret];          // Find Note
+            stopNote(note);                                                     // Stop the Note Playing
+        }
+        else {                                                                  // If Finger Presses Position
+            const positions = app.controllerState.highestFretPositions[string - 1];      // Find Positions Pressed on the String
+            const notes = positions.map(p => guitarNotes[strumOffsets[string - 1] + p]); // Corresponding Notes for Finger Positions
+            const playing = notes.filter(note => app.audio[note].playing());    // Find Playing Note
+            playing.forEach(pl => stopNote(pl));                                // Stop Note                
+        }
+    }
+    `,
 };
 
 export default codeSnippets;

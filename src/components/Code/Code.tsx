@@ -8,6 +8,7 @@ interface Props {
     fileName?: string;
     language: string;
     content: string;
+    highlightRow?: [number];
 }
 
 export async function copyTextToClipboard(text: string) {

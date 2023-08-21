@@ -24,6 +24,19 @@ const Blogs = ({ pageName, path }: Props) => {
     const [likes, setLikes] = useState<LikeCount | null>(null);
     const [likesLoaded, setLikesLoaded] = useState(false);
 
+    // Get Newest Article
+    const publishedArticles = blogArticles.filter(
+        (article) => !!article.created
+    );
+    const sortedArticles = publishedArticles.sort((a, b) => {
+        const dateA = a.created ? new Date(a.created) : new Date(0);
+        const dateB = b.created ? new Date(b.created) : new Date(0);
+        return dateB.getTime() - dateA.getTime();
+    });
+
+    const newArticle = sortedArticles[sortedArticles.length - 1];
+    console.log(newArticle);
+
     const getVisits = async () => {
         //const URLLocal = "http://localhost:5000/visit";
         const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
@@ -104,6 +117,7 @@ const Blogs = ({ pageName, path }: Props) => {
                                 codeTime={article?.codeTime}
                                 likes={likes ? likes[article.to] : 0}
                                 path={article.to}
+                                newest={article.to === newArticle.to}
                             />
                         ))}
                 </div>
@@ -121,6 +135,8 @@ const Blogs = ({ pageName, path }: Props) => {
                                 codeTime={article?.codeTime}
                                 likes={likes ? likes[article.to] : 0}
                                 path={article.to}
+                                upcoming={article.upcoming}
+                                newest={false}
                             />
                         ))}
                 </div>

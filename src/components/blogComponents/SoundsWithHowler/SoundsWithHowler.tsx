@@ -27,7 +27,6 @@ import Cs3MP3 from "../../../assets/files/guitar-sounds/Cs3.mp3";
 import D3MP3 from "../../../assets/files/guitar-sounds/D3.mp3";
 import Ds3MP3 from "../../../assets/files/guitar-sounds/Ds3.mp3";
 import E3MP3 from "../../../assets/files/guitar-sounds/E3.mp3";
-import F3MP3 from "../../../assets/files/guitar-sounds/F3.mp3";
 import G3MP3 from "../../../assets/files/guitar-sounds/G3.mp3";
 import A3MP3 from "../../../assets/files/guitar-sounds/A3.mp3";
 import B3MP3 from "../../../assets/files/guitar-sounds/B3.mp3";
@@ -41,6 +40,7 @@ import fretboardNotes from "../../../assets/images/blog/soundsWithHowler/Fretboa
 import "../../References/References.scss";
 import "../blogComponents.scss";
 import "./SoundsWithHowler.scss";
+import { blogArticles } from "../../Blog/blogs";
 
 interface Props {
     pageName: string;
@@ -48,6 +48,7 @@ interface Props {
 }
 
 const SoundsWithHowler = ({ pageName, path }: Props) => {
+    const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const references: Reference[] = [
         {
@@ -156,17 +157,28 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                         </Link>
                     </p>
                     <p>
-                        To use Howler.js, you include the library in your
-                        project, load audio files, and use the provided API to
-                        control and manage audio playback. So after creating the
-                        html boilerplate for our app, one of the first things we
-                        need to do is to import the Howler JS script in our
-                        header.
+                        To use Howler.js in your vanilla JS application, you
+                        include the library in your project, load audio files,
+                        and use the provided API to control and manage audio
+                        playback. So after creating the html boilerplate for our
+                        app, one of the first things we need to do is to import
+                        the Howler JS script in our header.
                     </p>
                     <Code
                         fileName="jam.html"
                         language="html"
                         content={codeSnippets.importHowler}
+                    />
+                    <p>
+                        However, for React users, installing the package through
+                        NPM or Yarn is the best way. If the application is
+                        written with TypeScript, the type definitions must also
+                        be installed for the TypeScript compiler.
+                    </p>
+                    <Code
+                        fileName="Terminal"
+                        language="powershell"
+                        content={codeSnippets.npmHowler}
                     />
                     <h3>Audio Files</h3>
                     <p>
@@ -199,16 +211,23 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                             [ {references[2].author} ]
                         </Link>
                         . However, I found collecting the full range of notes
-                        with the same instrument challenging, so I opted to
-                        record my own guitar sounds. So if you want to spare a
-                        couple of hours, feel free to use my audio library
+                        with the same instrument challenging and rather
+                        time-consuming, so I opted to record my own set of
+                        guitar sounds. If you want to spare a few hours, please
+                        use my audio library
                         <Link
                             className="Reference__Link"
                             to={references[3].source}
                         >
                             [ {references[3].author} ]
                         </Link>
-                        !
+                        !{" "}
+                        <span className="sidenote">
+                            (Please note my naming convention: uppercase note
+                            names, optional "S" for sharp notes as # is an
+                            illegal filename character, and respective note
+                            naming convention (2 - 6))
+                        </span>
                     </p>
                     <h3>Try them out!</h3>
                     <div className="sound-btn-wrapper">
@@ -404,11 +423,48 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                         fileName="jam.html"
                         language="html"
                         content={codeSnippets.loadController}
+                        highlightRow={[2]}
+                    />
+                    <h3>Reading the Fretboard</h3>
+                    <p>
+                        In our implementation, the guitar does not make any
+                        sound effects when a button on its fretboard is
+                        activated, as hammer-down or pull-up motions are out of
+                        the scope of this prototype. On the other hand, every
+                        fretboard event will update the guitar's state; namely,
+                        it sets the highest note position on a given string. One
+                        option might be to store the six strings as an array of
+                        numbers, and each activation or deactivation would
+                        compare and refresh the highest note. However, if the
+                        user interacts with multiple buttons on a string, any
+                        information about positions under the highest notes is
+                        lost.
+                    </p>
+                    <p>
+                        Alternatively, we can store individual string
+                        information as arrays of numbers and pop or push them on
+                        interaction. In this case, the default value of the
+                        string array would be [[0], [0], [0], [0], [0], [0]],
+                        where 0 means a guitar string without any notes
+                        registered. Similarly, reading the uppermost value can
+                        be done by either iterating through the individual
+                        strings and finding the highest number or saving a
+                        sorted array and referring to its last item.
+                    </p>
+                    <Code
+                        fileName="jam.html"
+                        language="javasrcipt"
+                        content={codeSnippets.fretCallback}
                     />
                 </article>
                 <LikeButton path={path} />
                 <References references={references} />
-                <BlogTimeStamp created="18.08.2023" updated="18.08.2023" />
+                {article && article.created && (
+                    <BlogTimeStamp
+                        created={article.created}
+                        updated={article.updated}
+                    />
+                )}
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>

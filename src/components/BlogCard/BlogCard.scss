@@ -159,6 +159,50 @@
         bottom: 0px;
     }
 
+    .BlogCard__upcoming-overlay {
+        position: absolute;
+        padding: 8px;
+        top: 0px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $black_1;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
+        .BlogCard__overlay-icon {
+            font-size: $font-lg;
+            color: $white_3;
+        }
+        .BlogCard__upcoming-date {
+            margin: 0 1.5rem 0 1rem;
+            font-family: monospace;
+            font-size: $font-md;
+            color: $accent_dark_1;
+        }
+    }
+
+    .BlogCard__new-overlay {
+        position: absolute;
+        padding: 8px;
+        top: 0px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $black_1;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
+        .BlogCard__overlay-icon--new {
+            font-size: $font-lg;
+            color: $accent_dark_3;
+        }
+        .BlogCard__new-text {
+            margin: 0 2rem 0 0.5rem;
+            color: white;
+            font-size: $font-lg;
+            font-weight: bold;
+            font-family: monospace;
+            font-variant: small-caps;
+        }
+    }
+
     .badge.yellow { background-color: yellow; }
     .badge.orange { background-color: rgb(255, 166, 0); }
     .badge.pink { background-color: deeppink; }

@@ -13,7 +13,10 @@ export interface BlogArticle {
     to: string;
     readingTime?: string;
     codeTime?: string;
+    created?: string;
+    updated?: string;
     upcoming?: boolean;
+    upcomingDate?: string;
 }
 
 export const blogArticles: BlogArticle[] = [
@@ -27,6 +30,8 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/riffmaster",
         readingTime: "13 mins",
         codeTime: "5 weeks",
+        created: "06.08.2023",
+        updated: "11.08.2023",
     },
     {
         title: "Digital Guitar - Make Guitar Sounds with Howler",
@@ -38,6 +43,8 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/sounds-with-howler",
         readingTime: "7 mins",
         codeTime: "2 hours",
+        created: "13.08.2023",
+        updated: "21.08.2023",
     },
     {
         title: "Validating Dates with JavaScript",
@@ -49,6 +56,8 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/js-date-validation",
         readingTime: "3 mins",
         codeTime: "15 mins",
+        created: "15.08.2023",
+        updated: "18.08.2023",
     },
     {
         title: "Recreating McDonald's Ordering Kiosk UI",
@@ -61,6 +70,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
+        upcomingDate: "27.08.2023",
     },
     {
         title: "JavaScript's Sorting - What's behind the Hood?",
@@ -73,5 +83,6 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
+        upcomingDate: "05.09.2023",
     },
 ];
