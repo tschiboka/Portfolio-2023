@@ -1,6 +1,8 @@
 import riffmasterHardwareImg from "../../assets/images/blog/riffmasterHardware.png";
 import riffMasterJamImg from "../../assets/images/blog/riffmasterJam.png";
 import calendarImg from "../../assets/images/blog/calendar.png";
+import mcdonaldsImg from "../../assets/images/blog/mcdonaldsNeon.png";
+import jsSortingImg from "../../assets/images/blog/jsSorting.png";
 
 export interface BlogArticle {
     title: string;
@@ -11,6 +13,7 @@ export interface BlogArticle {
     to: string;
     readingTime?: string;
     codeTime?: string;
+    upcoming?: boolean;
 }
 
 export const blogArticles: BlogArticle[] = [
@@ -23,7 +26,7 @@ export const blogArticles: BlogArticle[] = [
         badges: ["Arduino"],
         to: "/blog/riffmaster",
         readingTime: "13 mins",
-        codeTime: "3 hours",
+        codeTime: "5 weeks",
     },
     {
         title: "Digital Guitar - Make Guitar Sounds with Howler",
@@ -34,7 +37,7 @@ export const blogArticles: BlogArticle[] = [
         badges: ["JavaScript", "CSS"],
         to: "/blog/sounds-with-howler",
         readingTime: "7 mins",
-        codeTime: "1 hours",
+        codeTime: "2 hours",
     },
     {
         title: "Validating Dates with JavaScript",
@@ -45,6 +48,30 @@ export const blogArticles: BlogArticle[] = [
         badges: ["JavaScript"],
         to: "/blog/js-date-validation",
         readingTime: "3 mins",
-        codeTime: "20 mins",
+        codeTime: "15 mins",
+    },
+    {
+        title: "Recreating McDonald's Ordering Kiosk UI",
+        image: mcdonaldsImg,
+        imageAlt: "McDonalds",
+        abstract:
+            "Discover the secrets of user-friendly UI design as we recreate McDonald's ordering kiosk interface. Learn the techniques behind its user-friendly layout while learning the fundamentals of Flexbox.",
+        badges: ["HTML", "CSS"],
+        to: "",
+        readingTime: "",
+        codeTime: "",
+        upcoming: true,
+    },
+    {
+        title: "JavaScript's Sorting - What's behind the Hood?",
+        image: jsSortingImg,
+        imageAlt: "McDonalds",
+        abstract:
+            "Delve into the intricate inner workings of JavaScript's built-in sorting mechanism. Uncover the magic behind Array.sort() as we dissect the comparison functions, sorting stability, and optimisation strategies employed by the language.",
+        badges: ["javascript"],
+        to: "",
+        readingTime: "",
+        codeTime: "",
+        upcoming: true,
     },
 ];

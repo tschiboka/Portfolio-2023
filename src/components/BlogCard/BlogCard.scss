@@ -160,12 +160,11 @@
     }
 
     .badge.yellow { background-color: yellow; }
-    .badge.orange { background-color: rgb(255, 183, 48); }
+    .badge.orange { background-color: rgb(255, 166, 0); }
     .badge.pink { background-color: deeppink; }
+    .badge.purple { background-color: rgb(172, 0, 172); }
+    .badge.light-green { background-color: rgb(0, 226, 151); }
     .badge.light-blue { background-color: aqua; }
-    .badge.blue { background-color: #559ccb; }
-    .badge.light-green { background-color: rgb(0, 255, 170); }
-    .badge.green { background-color: rgb(0, 255, 0); }
 
     .badge {
         margin: 0.5rem;

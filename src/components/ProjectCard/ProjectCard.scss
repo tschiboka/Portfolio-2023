@@ -76,17 +76,21 @@
         padding: 0.25rem 0.5rem;
         background-color: grey;
         border-radius: 10px;
-        color: black;
-        font-weight: bold;
+        border: 1px solid #222;
+        color: $black_3;
+        font-size: 1rem;
+        font-style: italic;
+        font-variant: small-caps;
+        font-family: "Roboto_Bold";
+
+        &.yellow { background-color: yellow; }
+        &.orange { background-color: rgb(255, 166, 0); }
+        &.pink { background-color: deeppink; }
+        &.purple { background-color: rgb(172, 0, 172); }
+        &.light-green { background-color: rgb(0, 226, 151); }
+        &.light-blue { background-color: aqua; }
     }
-    .badge.yellow { background-color: yellow; }
-    .badge.orange { background-color: rgb(255, 183, 48); }
-    .badge.pink { background-color: deeppink; }
-    .badge.light-blue { background-color: aqua; }
-    .badge.blue { background-color: #559ccb; }
-    .badge.light-green { background-color: rgb(0, 255, 170); }
-    .badge.green { background-color: rgb(0, 255, 0); }
-    .badge.pink { background-color: deeppink; }
+    
 
     .ProjectCard__links {
         height: 100%;

@@ -93,17 +93,36 @@ const Blogs = ({ pageName, path }: Props) => {
                     development and project walkthroughs. Happy Coding!
                 </p>
                 <div className="BlogList">
-                    {blogArticles.map((article) => (
-                        <BlogCard
-                            key={article.title}
-                            blogArticle={article}
-                            visits={visits ? visits[article.to] : 0}
-                            readingTime={article?.readingTime}
-                            codeTime={article?.codeTime}
-                            likes={likes ? likes[article.to] : 0}
-                            path={article.to}
-                        />
-                    ))}
+                    {blogArticles
+                        .filter((article) => !article.upcoming)
+                        .map((article) => (
+                            <BlogCard
+                                key={article.title}
+                                blogArticle={article}
+                                visits={visits ? visits[article.to] : 0}
+                                readingTime={article?.readingTime}
+                                codeTime={article?.codeTime}
+                                likes={likes ? likes[article.to] : 0}
+                                path={article.to}
+                            />
+                        ))}
+                </div>
+                <hr className="BlogList__hr" />
+                <h3 className="BlogList__header">Coming Soon...</h3>
+                <div className="BlogList">
+                    {blogArticles
+                        .filter((article) => article.upcoming)
+                        .map((article) => (
+                            <BlogCard
+                                key={article.title}
+                                blogArticle={article}
+                                visits={visits ? visits[article.to] : 0}
+                                readingTime={article?.readingTime}
+                                codeTime={article?.codeTime}
+                                likes={likes ? likes[article.to] : 0}
+                                path={article.to}
+                            />
+                        ))}
                 </div>
             </main>
             <Footer pageName={pageName} path={path} />
