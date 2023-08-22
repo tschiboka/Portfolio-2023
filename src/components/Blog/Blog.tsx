@@ -35,7 +35,6 @@ const Blogs = ({ pageName, path }: Props) => {
     });
 
     const newArticle = sortedArticles[sortedArticles.length - 1];
-    console.log(newArticle);
 
     const getVisits = async () => {
         //const URLLocal = "http://localhost:5000/visit";

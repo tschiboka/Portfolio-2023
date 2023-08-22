@@ -15,12 +15,21 @@ import "./JsDateValidation.scss";
 import Figure from "../../Figure/Figure";
 import Code from "../../Code/Code";
 import LikeButton from "../../LikeButton/LikeButton";
+import { BsFillBookmarkFill, BsFillBookmarkStarFill } from "react-icons/bs";
+import { BiSolidUpArrowSquare } from "react-icons/bi";
+import { FaEye } from "react-icons/fa";
+import { AiFillHeart } from "react-icons/ai";
+import { HiShare } from "react-icons/hi";
 import { blogArticles } from "../../Blog/blogs";
 
 interface Props {
     pageName: string;
     path: string;
 }
+
+const scrollToTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+};
 
 const JsDateValidation = ({ pageName, path }: Props) => {
     const article = blogArticles.find((article) => article.to === path);
@@ -42,6 +51,20 @@ const JsDateValidation = ({ pageName, path }: Props) => {
             <Nav pageName={pageName} />
             {mobileMenuVisible && <Menu pageName="js-date-validation" />}
             {subMenuVisible && <SubNav />}
+            <aside className="blog-component--article">
+                <BsFillBookmarkFill
+                    className="aside-icon"
+                    title="Bookmark Page"
+                />
+                <HiShare className="aside-icon" title="Share" />
+                <FaEye className="aside-icon" title="Times Visited" />
+                <AiFillHeart className="aside-icon" title="Likes" />
+                <BiSolidUpArrowSquare
+                    className="aside-icon"
+                    title="Go to the Top of the Page"
+                    onClick={() => scrollToTop()}
+                />
+            </aside>
             <main className="blog-component">
                 <article>
                     <h1>Validating Dates with JavaScript</h1>

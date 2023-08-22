@@ -6,9 +6,13 @@
     padding: 1.5rem;
     padding-top: 3rem;
     padding-bottom: 0;
+    margin-bottom: 5vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    @include bp.md {
+        margin-bottom: 0;
+    }
     .logo-wrapper {
         height: 70px;
         width: 70px;

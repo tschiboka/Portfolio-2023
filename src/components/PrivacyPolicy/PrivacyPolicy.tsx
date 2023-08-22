@@ -4,6 +4,7 @@ import Menu from "../Menu/Menu";
 import Footer from "../Footer/Footer";
 import "./PrivacyPolicy.scss";
 import { useAppContext } from "../../context/AppContext";
+import Page from "../Page/Page";
 
 interface Props {
     pageName: string;
@@ -13,7 +14,7 @@ interface Props {
 const PrivacyPolicy = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     return (
-        <>
+        <Page title="Tivadar Debnar | Privacy Policy" path={path}>
             <Nav pageName={pageName} />
             {subMenuVisible && <SubNav />}
             {mobileMenuVisible && <Menu pageName="PrivacyPolicy" />}
@@ -85,7 +86,7 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
                 </p>
             </main>
             <Footer path={path} />
-        </>
+        </Page>
     );
 };
 

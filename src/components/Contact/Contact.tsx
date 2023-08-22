@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import "./Contact.scss";
 import { useAppContext } from "../../context/AppContext";
+import Page from "../Page/Page";
 
 interface Props {
     pageName: string;
@@ -150,7 +151,7 @@ const Contact = ({ pageName, path }: Props) => {
     const mail = "Dev@Tschiboka.Co.Uk";
     const tel = "+44 7474 999 334";
     return (
-        <>
+        <Page title={"Tivadar Debnar | Contact"} path={path}>
             <Nav pageName={pageName} />
             {mobileMenuVisible && <Menu pageName="contact" />}
             {subMenuVisible && <SubNav />}
@@ -292,7 +293,7 @@ const Contact = ({ pageName, path }: Props) => {
                 </section>
             </main>
             <Footer pageName={pageName} path={path} />
-        </>
+        </Page>
     );
 };
 

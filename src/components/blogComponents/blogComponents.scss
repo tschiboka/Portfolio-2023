@@ -3,6 +3,47 @@
 @import "../../styles/font_sizes.scss";
 @import "../../styles/animations.scss";
 
+aside.blog-component--article {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 5rem;
+    background-color: $black_1;
+    bottom: 0;
+    z-index: 100;
+    .aside-icon {
+        margin: 1.5rem 0;
+        color: $black_5;
+        font-size: $font-lg;
+        &:hover {
+            color: white;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+    @include bp.md {
+        width: 50px;
+        height: 80vh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        right: 3rem;
+        background-color: transparent;
+        .aside-icon {
+            margin: 1rem 0;
+            color: $black_5;
+            font-size: $font-xl;
+            &:hover {
+                color: white;
+                transform: scale(1.1);
+                cursor: pointer;
+            }
+        }
+    }
+}
 // Every common blog style here
 .blog-component {
     h1 {
@@ -13,11 +54,9 @@
         margin: 0;
         padding: 0;
     }
-
     h2 {
         text-align: center;
     }
-    
     h3 {
         margin: 3rem 0;
         color: $white_2;
@@ -25,7 +64,6 @@
         font-family: Roboto_Bold;
         font-variant: small-caps;
     }
-    
     img.image--lrg {
         max-width: 100%;
         margin: 0 auto;
@@ -109,5 +147,10 @@
 .light {
     h3 {
         color: $black_2;
+    }
+    aside {
+        * {
+            color: $white_5;
+        }
     }
 }

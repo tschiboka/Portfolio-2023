@@ -26,7 +26,6 @@ const recordVisit = async (path: string) => {
     try {
         const response = await fetch(URL, options);
         const responseJSON = await response.json();
-        console.log("RESPONSE", responseJSON);
         if (responseJSON.success) {
             console.log("Visit Recorded");
         } else console.log("Error While Sending Visit!", response);
