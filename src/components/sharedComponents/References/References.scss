@@ -1,0 +1,101 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.Reference__Link {
+    color: $accent_dark_2;
+    text-decoration: none;
+    font-style: italic;
+    font-weight: bold;
+    font-family: monospace;
+}
+
+.References {
+    h4 {
+        font-size: $font-lg;
+        font-style: italic;
+        font-weight: bold;
+        color: $white_2;
+        margin-bottom: 1.5rem;
+    }
+    ul {
+        max-width: 100%;
+        list-style: none;
+
+        li {
+            max-width: calc(100vw - 3rem);
+            display: inline-flex;
+
+            span.left {
+                min-width: 150px;
+                width: 150px;
+                padding-right: 10px;
+                display: flex;
+                flex-direction: column;
+                border-right: 2px solid $black_2;
+                @include bp.md {
+                    width: 35vw;
+                    min-width: 35vw;
+                    display: inline;
+                }
+            }
+        }
+
+        span, a {
+            max-width: 100%;
+            margin: 10px;
+            color: $white_5;
+            white-space: pre-wrap; /* CSS3 */    
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */    
+            white-space: -o-pre-wrap; /* Opera 7 */    
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+            overflow-y: auto;
+        }
+
+        .References__index {
+            font-style: italic;
+            font-weight: bold;
+            color: $white_3;
+        }
+
+        .References__author {
+            font-weight: bold;
+            color: $white_3;
+        }
+
+        .References__title {
+            font-style: italic;
+        }
+
+        a {
+            font-family: monospace;
+            font-size: $font-md;
+        }
+    }
+}
+
+.light {
+    h4 {
+        color: $black_4;
+    }
+
+    ul {
+        li {
+            .References__index, .References__title {
+                color: $black_4;
+            }
+            .References__author {
+                color: $black_1;
+                font-weight: bold;
+            }
+            .References__title {
+                font-weight: bold;
+            }
+            a {
+                color: $black_5;
+            }
+        }
+    }
+}

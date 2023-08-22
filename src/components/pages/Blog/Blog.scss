@@ -1,0 +1,27 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.Blog__title {
+    @include bp.md {
+        margin: 3rem 0;
+    }
+}
+
+.BlogList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3.BlogList__header {
+    font-size: $font-lg;
+    font-variant: small-caps;
+    margin-bottom: 1.5rem;
+}
+
+hr.BlogList__hr {
+    margin-top: 1.5rem;
+}

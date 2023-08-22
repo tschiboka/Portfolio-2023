@@ -1,0 +1,76 @@
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+
+.skills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    @include bp.md {
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
+
+h3.skill-header {
+    font-size: 1.4rem;
+    font-variant: small-caps;
+    margin-bottom: 1.5rem;
+    @include bp.md {
+        font-size: $font_lg;
+    }
+}
+
+.button-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    
+    @include bp.md {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+    .link {
+        width: 100%;
+        max-width: 400px;
+        height: 3em;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $accent_dark_3;
+        color: $black_1;
+        border: 3px solid $black_3;
+        border-radius: 100px;
+        font-size: $font_md;
+        font-family: "Roboto_Bold";
+        text-decoration: none;
+        cursor: pointer;
+        & > * {
+            margin-left: 0.5rem;
+            font-size: 1.5rem;
+            @include bp.lg {
+                margin-left: 1rem;
+                font-size: 2rem;
+            }
+        }
+
+        @include bp.md {
+            width: 40%;
+        }
+        @include bp.lg {
+            font-size: $font_lg;
+        }
+    }
+
+    link:hover {
+        background-color: $accent_dark_2;
+    }
+}

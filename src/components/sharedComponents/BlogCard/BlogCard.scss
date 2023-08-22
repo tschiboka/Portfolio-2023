@@ -1,0 +1,265 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.BlogCard {
+    width: 100%;
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $black_1;
+    border: 1px solid #222;
+    cursor: pointer;
+
+    @include bp.md {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .BlogCard__img-wrapper {
+        position: relative;
+        margin-bottom: 1.5rem;
+        border: 1px solid #222;
+
+        @include bp.md {
+            margin-bottom: 0;
+        }
+
+        img {
+            width: 100%;
+            max-width: 500px;
+            @include bp.md {
+                width: 250px;
+            }
+        }
+    }
+
+    .BlogCard__text-wrapper {
+        @include bp.md {
+            width: 100%;
+            min-height: 250px;
+            margin-left: 1.5rem;
+            p {
+                margin-top: 1.5rem;
+                text-align: left;
+            }
+        }
+    }
+
+    .BlogCard__title {
+        padding-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #222;
+        @include bp.md {
+            justify-content: flex-start;
+            font-size: $font_md;
+        }
+        
+        .BlogCard__title-text {
+            color: white;
+            font-size: $font-lg;
+            font-variant: small-caps;
+            text-align: center; 
+            @include bp.md {
+                text-align: left;
+            }   
+        }
+
+        .BlogCard__info {
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $accent_dark_3;
+
+            @include bp.md {
+                justify-content: flex-start;
+            }
+
+            & > * {
+                margin: 0 0.5rem;
+                font-weight: bold;
+                font-size: $font-sm;
+            }
+            span {
+                font-family: monospace;
+            }
+
+            & > span {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                *:first-child {
+                    margin-right: 0.5rem;
+                }
+            }
+
+            .BlogCard__info-datablock {
+                position: relative;
+                border-bottom: 1px solid transparent;
+                &:hover {
+                    border-bottom: 1px solid white;
+                    .BlogCard__hint-text {
+                        display: inline;
+                    }
+                    .BlogCard__info-icon {
+                        color: $white_3;
+                    }
+                    .BlogCard__info-text {
+                        color: $accent_dark_1;
+                    }
+                }
+                .BlogCard__hint-text {
+                    position: absolute;
+                    display: none;
+                    left: 0;
+                    top: -3rem;
+                    min-width: 100%;
+                    padding: 0.5rem 1rem;
+                    background-color: black;
+                    border: 1px solid $white_5;
+                    color: $accent_dark_1;
+                    text-align: center;
+                }
+                .BlogCard__info-icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $black_3;
+                    font-size: $font_md;
+                    text-decoration: none;
+                }
+                .BlogCard__info-icon.disabled {
+                    fill: deeppink;
+                    opacity: 0.3;
+                }
+                .BlogCard__info-text {
+                    color: $accent_dark_3;
+                }
+            }
+        }    
+    }
+
+    .BlogCard__abstract {
+        height: 100%;
+        margin: 0;
+        margin-top: 1.5rem;
+    }
+
+    .BlogCard__badge-box {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        bottom: 0px;
+    }
+
+    .BlogCard__upcoming-overlay {
+        position: absolute;
+        padding: 8px;
+        top: 0px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $black_1;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
+        .BlogCard__overlay-icon {
+            font-size: $font-lg;
+            color: $white_3;
+        }
+        .BlogCard__upcoming-date {
+            margin: 0 1.5rem 0 1rem;
+            font-family: monospace;
+            font-size: $font-md;
+            color: $accent_dark_1;
+        }
+    }
+
+    .BlogCard__new-overlay {
+        position: absolute;
+        padding: 8px;
+        top: 0px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: $black_1;
+        clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
+        .BlogCard__overlay-icon--new {
+            font-size: $font-lg;
+            color: $accent_dark_3;
+        }
+        .BlogCard__new-text {
+            margin: 0 2rem 0 0.5rem;
+            color: white;
+            font-size: $font-lg;
+            font-weight: bold;
+            font-family: monospace;
+            font-variant: small-caps;
+        }
+    }
+
+    .badge.yellow { background-color: yellow; }
+    .badge.orange { background-color: rgb(255, 166, 0); }
+    .badge.pink { background-color: deeppink; }
+    .badge.purple { background-color: rgb(172, 0, 172); }
+    .badge.light-green { background-color: rgb(0, 226, 151); }
+    .badge.light-blue { background-color: aqua; }
+
+    .badge {
+        margin: 0.5rem;
+        padding: 0.3rem 0.6rem;
+        background-color: grey;
+        border-radius: 20px;
+        border: 1px solid #222;
+        color: $black_3;
+        font-size: 1rem;
+        font-style: italic;
+        font-variant: small-caps;
+        font-family: "Roboto_Bold";
+        @include bp.md {
+            padding: 0.5rem 1rem;
+        }
+    }
+
+    &:hover {
+        background-color: black;
+        .BlogCard__title-text {
+            color: white;
+            text-decoration: underline;
+        }
+        .BlogCard__abstract {
+            color: white;
+        }
+    } 
+}
+
+.light {
+    .BlogCard {
+        background-color: $white_2;
+        border-color: $white_5;
+
+        &:hover {
+            background-color: $white_3;
+        }
+
+        .BlogCard__title-text {
+            color: $black_2;
+        }
+        
+        &:hover .BlogCard__title {
+            color: black;
+        }
+        
+        &:hover .BlogCard__abstract {
+            color: black;
+        }
+        .BlogCard__img-wrapper {
+            border: none;
+        }
+    }
+}

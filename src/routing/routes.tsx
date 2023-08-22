@@ -1,14 +1,14 @@
 import { createHashRouter } from "react-router-dom";
-import Home from "../components/Home/Home";
-import About from "../components/About/About";
-import Projects from "../components/Projects/Projects";
-import Contact from "../components/Contact/Contact";
-import PrivacyPolicy from "../components/PrivacyPolicy/PrivacyPolicy";
-import RiffMaster from "../components/blogComponents/RiffMaster/RiffMaster";
-import RouteError from "../components/RouteError/RouteError";
-import Blog from "../components/Blog/Blog";
-import JsDateValidation from "../components/blogComponents/JsDateValidation/JsDateValidation";
-import SoundsWithHowler from "../components/blogComponents/SoundsWithHowler/SoundsWithHowler";
+import Home from "../components/pages/Home/Home";
+import About from "../components/pages/About/About";
+import Projects from "../components/pages/Projects/Projects";
+import Contact from "../components/pages/Contact/Contact";
+import PrivacyPolicy from "../components/pages/PrivacyPolicy/PrivacyPolicy";
+import RiffMaster from "../components/articles/RiffMaster/RiffMaster";
+import RouteError from "../components/sharedComponents/RouteError/RouteError";
+import Blog from "../components/pages/Blog/Blog";
+import JsDateValidation from "../components/articles/JsDateValidation/JsDateValidation";
+import SoundsWithHowler from "../components/articles/SoundsWithHowler/SoundsWithHowler";
 
 export const routes = [
     {

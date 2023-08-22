@@ -1,0 +1,173 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+
+.Footer {
+    padding: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 0;
+    margin-bottom: 5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include bp.md {
+        margin-bottom: 0;
+    }
+    .logo-wrapper {
+        height: 70px;
+        width: 70px;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        background-color: rgba(255,255, 255, 0.05);
+        border: 2px solid $black_2;
+        img {
+            height: 50px;
+        }
+    }
+    .name {
+        margin-bottom: 1.5rem;
+        color: $white_5;
+        font-size: 1.8rem;
+        letter-spacing: 0;
+        span {
+            font-family: "Roboto_Bold";
+            font-variant: small-caps;
+        }
+        span:last-child {
+            color: $black_3;
+        }
+
+        span:last-child {
+            color: $black_4;
+        }
+    }
+    ul {
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        list-style: none;
+        color: $white_3;
+        border-top: 1px solid $black_2;
+        border-bottom: 1px solid $black_2;
+    }
+    a, .link, li {
+        color: inherit;
+        text-decoration: inherit;
+        margin-bottom: 1.5rem;
+        @include bp.md {
+            font-size: $font_md;
+        }
+    }
+    li:hover {
+        color: white;
+        transform: scale(1.1);
+    }
+    li:last-child {
+        margin-bottom: 0;
+    }
+    .social-links {
+        margin: 0 0 3rem 0rem;
+        padding-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        font-size: $font_lg;
+        
+        & > * {
+            margin: 0 0.5rem;
+            color: $black_3;
+            cursor: pointer;
+        }
+        & > *:hover {
+            color: white;
+        }
+    }
+    .languages {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-variant: small-caps;
+        font-size: $font_lg;
+        font-family: "Roboto_Bold";
+        color: $black_2;
+        a {
+            margin: 0 0.5rem;
+            margin-bottom: 0;
+            font-family: "Roboto_Bold";
+            color: $black_3;
+        }
+        a.active {
+            color: $white_4;
+        }
+        a:hover {
+            color: white;
+            cursor: pointer;
+        }
+    }
+    .copyright {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $black_5;
+        font-family: monospace;
+        font-size: $font_md;
+        & * {
+            margin: 0 5px;
+            font-family: monospace;
+            font-size: $font_md;
+        }
+        .copyright__icon {
+            fill: $gray_1;
+        }
+        time {
+            color: $gray_1;
+            font-size: $font_xs;
+            font-family: "Roboto_Bold";
+        }
+        .copyright__pipe {
+            margin-right: 10px;
+        }
+    }
+    .hide {
+        display: none;
+    }
+}
+
+.light {
+    .Footer {
+        background-color: $white_2;
+        &:hover {
+            color: black;
+        }
+        a, .link, li {
+            color: black;     
+        }
+        .logo-wrapper {
+            background-color: $accent_dark_2;
+        }
+        .social-links > * {
+            color: $black_5;
+        }
+        .social-links > *:hover {
+            color: black;
+        }
+        .languages {
+            color: $white_5;
+            a {
+                color: $black_5;
+            }
+            a.active {
+                color: $black_2;
+            }
+            a:hover {
+                color: black;
+            }
+        }
+    }
+}

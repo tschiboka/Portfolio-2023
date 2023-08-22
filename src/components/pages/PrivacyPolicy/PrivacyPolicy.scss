@@ -1,0 +1,30 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+// Take off animations
+.SubNav {
+    display: none;
+    animation: fade_in 500ms linear;
+    opacity: 1;
+    @include bp.md {
+        display: flex;
+    }
+}
+
+.privacy-policy {
+    .updated-date {
+        font-style: italic;
+        font-size: $font_xs;
+    }
+    font-size: $font_sm;
+
+    a {
+        color: $accent_dark_3;
+    }
+
+    a:hover {
+        color: $accent_dark_1;
+    }
+}

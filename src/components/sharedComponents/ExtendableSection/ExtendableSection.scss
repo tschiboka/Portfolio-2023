@@ -1,0 +1,94 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+
+.ExtendableSection {
+    & > button {
+        width: 100%;
+        margin-bottom: 3rem;
+        padding: 1rem 1.5rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid $accent_dark_5;
+        border-radius: 50px;
+        color: $white_3;
+        font-size: $font_md;
+        text-align: left;       
+        cursor: pointer;
+        
+        @include bp.md {
+            font-size: $font_lg;
+        }
+        
+        .button__icon {
+            height: 40px;
+            display: none;
+            color: $white_3;
+            font-size: 2rem;
+            @include bp.md {
+                display: inline;
+                color: $accent_dark_3;
+            }
+        }
+    }
+    & > button:hover {
+        color: white;
+        font-weight: bold;
+        border-color: $accent_dark_3;
+
+        .button__icon {
+            color: $accent_dark_1;
+            transform: scale(1.3);
+        }
+    }
+    .chevron {
+        min-width: 30px;
+        font-size: $font_lg;
+    }
+    .chevron:hover {
+        color: $accent_dark_1;
+    }
+    .extendable__button-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .extendable__button-text {
+        padding-left: 0.5em;
+    }
+    .delay-1 { animation-delay: 200ms, 200ms; }
+    .delay-2 { animation-delay: 400ms, 400ms; }
+    .delay-3 { animation-delay: 600ms, 600ms; }
+    .delay-4 { animation-delay: 800ms, 800ms; }
+    .delay-5 { animation-delay: 1000ms, 1000ms; }
+    .anim-fade-from-left {
+        opacity: 0;
+        animation-name: fade_in, from_left;
+        animation-duration: 500ms, 500ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-fill-mode: forwards, forwards;
+    }
+    .anim-fade-from-right {
+        opacity: 0;
+        animation-name: fade_in, from_right;
+        animation-duration: 500ms, 500ms;
+        animation-timing-function: ease-out, ease-in;
+        animation-fill-mode: forwards, forwards;
+    }
+
+    p {
+       margin-top: 0; 
+    }
+}
+
+.light .ExtendableSection {
+    & > button {
+        color: black;
+        background-color: $white_2;       
+        border-color: $white_4;
+        border-width: 3px;
+    }
+    & > button:hover {
+        color: $accent;
+        background-color: $black_1;       
+    }
+}
