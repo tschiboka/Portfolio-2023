@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useAppContext } from "../../../context/AppContext";
 
 // Components
@@ -27,6 +27,7 @@ import { blogArticles } from "../../pages/Blog/blogs";
 // Styles
 import "./Articles.scss";
 import ShareMenu from "../ShareMenu/ShareMenu";
+import { getLikes, postLike } from "../../../serverAPI/likes";
 
 // Functions
 const scrollToTop = () => {
@@ -56,10 +57,44 @@ interface Props {
 }
 
 const Article = ({ pageName, path, title, children }: Props) => {
+    const getVisits = async (path: string) => {
+        //const URLLocal = "http://localhost:5000/visit";
+        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
+        const URL = URLLive;
+        const options = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+
+        try {
+            const response = await fetch(`${URL}?path=${path}`, options);
+            const responseJSON = await response.json();
+            if (responseJSON.success) {
+                setVisits(responseJSON.visits);
+            } else console.log("Error While Sending Visit!", response);
+        } catch (err) {
+            console.log("Error While Sending Message!", err);
+        }
+    };
+
     const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const [sideMenuVisible, setSideMenuVisible] = useState(true);
     const [shareMenuVisible, setShareMenuVisible] = useState(false);
+    const [visits, setVisits] = useState(0);
+    const [articleLiked, setArticleLiked] = useState(false);
+    const [likes, setLikes] = useState(0);
+    const [likesLoaded, setLikesLoaded] = useState(false);
+
+    useEffect(() => {
+        if (!likesLoaded)
+            getLikes(path, (likes: number) => {
+                setLikesLoaded(true);
+                setLikes(likes);
+            });
+    }, [likes]);
 
     return (
         <Page title={"Tivadar Debnar | " + title} path={path}>
@@ -76,9 +111,29 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         title="Share"
                         onClick={() => setShareMenuVisible(!shareMenuVisible)}
                     />
-
                     <FaEye className="aside-icon" title="Times Visited" />
-                    <AiFillHeart className="aside-icon" title="Likes" />
+
+                    <div
+                        className="Article__icon-box"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            if (!articleLiked)
+                                postLike(path, () => setArticleLiked(true));
+                            return false;
+                        }}
+                    >
+                        <AiFillHeart
+                            className={
+                                "aside-icon " +
+                                (articleLiked ? "highlighted" : "")
+                            }
+                            title="Likes"
+                        />
+                        <span>
+                            {(!articleLiked ? likes : likes + 1) || "-"}
+                        </span>
+                    </div>
                     <BiSolidUpArrowSquare
                         className="aside-icon"
                         title="Go to the Top of the Page"
@@ -96,7 +151,12 @@ const Article = ({ pageName, path, title, children }: Props) => {
 
             <main className="blog-component">
                 <article>{children}</article>
-                <LikeButton path={path} />
+                <LikeButton
+                    path={path}
+                    likes={likes}
+                    articleLiked={articleLiked}
+                    setArticleLiked={setArticleLiked}
+                />
                 <References references={references} />
                 {article && article.created && (
                     <BlogTimeStamp

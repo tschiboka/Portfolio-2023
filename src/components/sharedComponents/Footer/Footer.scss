@@ -12,9 +12,9 @@
     flex-direction: column;
     background-color: $black_1;
     align-items: center;
-    z-index: 10000;
     @include bp.md {
         margin-bottom: 0;
+        z-index: 10000;
     }
     .logo-wrapper {
         height: 70px;

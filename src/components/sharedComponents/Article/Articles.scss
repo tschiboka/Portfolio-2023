@@ -84,7 +84,31 @@ aside.blog-component--article {
         width: 50px;
         height: 80vh;
     }
+    & div.Article__icon-box {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        span {
+            position: absolute;
+            color: $accent_dark_3;
+            font-family: monospace;
+            font-size: $font_md;
+            bottom: 0.5rem;
+            @include bp.lg {
+                bottom: -0.5rem;
+            }
+        }
+    }
+    & div.Article__icon-box:hover {
+        span {
+            color: $accent_dark_1;
+        }
+    }
 }
+
+
 // Every common blog style here
 .blog-component {
     h1 {

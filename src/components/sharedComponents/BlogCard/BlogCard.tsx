@@ -5,8 +5,9 @@ import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { BiSolidTimeFive } from "react-icons/bi";
 import { FaEye, FaCode } from "react-icons/fa";
 import { BsFillCalendar2DateFill } from "react-icons/bs";
-import "./BlogCard.scss";
 import { useState } from "react";
+import { postLike } from "../../../serverAPI/likes";
+import "./BlogCard.scss";
 
 interface Props {
     blogArticle: BlogArticle;
@@ -30,29 +31,6 @@ const BlogCard = ({
 }: Props) => {
     const navigate = useNavigate();
     const [articleLiked, setArticleLiked] = useState(false);
-
-    const postLike = async (path: string) => {
-        //const URLLocal = "http://localhost:5000/like";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
-        const URL = URLLive;
-        const options = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ path: path }),
-        };
-
-        try {
-            const response = await fetch(`${URL}`, options);
-            const responseJSON = await response.json();
-            if (responseJSON.success) {
-                setArticleLiked(true);
-            } else console.log("Error While Getting Like Data!", response);
-        } catch (err) {
-            console.log("Error While Getting Like Data!", err);
-        }
-    };
 
     return (
         <article className="BlogCard" onClick={() => navigate(blogArticle.to)}>
@@ -114,7 +92,8 @@ const BlogCard = ({
                             onClick={(event) => {
                                 event.preventDefault();
                                 event.stopPropagation();
-                                if (!articleLiked) postLike(path);
+                                if (!articleLiked)
+                                    postLike(path, () => setArticleLiked(true));
                                 return false;
                             }}
                         >

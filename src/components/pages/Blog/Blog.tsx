@@ -7,6 +7,7 @@ import Nav from "../../sharedComponents/Nav/Nav";
 import Page from "../../sharedComponents/Page/Page";
 import SubNav from "../../sharedComponents/SubNav/SubNav";
 import { blogArticles } from "./blogs";
+import { getLikeSummary } from "../../../serverAPI/likes";
 import "./Blog.scss";
 
 interface Props {
@@ -60,33 +61,14 @@ const Blogs = ({ pageName, path }: Props) => {
         }
     };
 
-    const getLikes = async () => {
-        //const URLLocal = "http://localhost:5000/like";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
-        const URL = URLLive;
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-
-        try {
-            const response = await fetch(`${URL}`, options);
-            const responseJSON = await response.json();
-            if (responseJSON.success) {
-                setLikesLoaded(true);
-                const likes: LikeCount = responseJSON.likes;
-                setLikes(likes);
-            } else console.log("Error While Getting Like Data!", response);
-        } catch (err) {
-            console.log("Error While Getting Like Data!", err);
-        }
-    };
-
     useEffect(() => {
         if (!visitsLoaded) getVisits();
-        if (!likesLoaded) getLikes();
+        if (!likesLoaded) {
+            getLikeSummary((likes: LikeCount | null) => {
+                setLikesLoaded(true);
+                setLikes(likes);
+            });
+        }
     }, [visits, likes]);
 
     return (

@@ -37,8 +37,7 @@
             color: $black_5;
         }
         .LikeButton__icon.disabled {
-            fill: deeppink;
-            opacity: 0.3;
+            color: white;
         }
         span {
             color: $accent_dark_3;
@@ -55,7 +54,7 @@
                 color: black;
             }
             .LikeButton__icon.disabled {
-                opacity: 1;
+                color: black;
             }
         }
     }

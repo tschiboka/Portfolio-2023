@@ -38,8 +38,9 @@ const Page = ({ children, title, path }: Props) => {
     useEffect(() => {
         document.title = title;
         window.scrollTo(0, 0);
+        console.log("SCROLL");
         recordVisit(path);
-    });
+    }, []);
     return <>{children}</>;
 };
 
