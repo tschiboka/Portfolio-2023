@@ -26,6 +26,7 @@ const Footer = ({ pageName, path }: Props) => {
                 <span>Tivadar&nbsp;</span>
                 <span>Debnar</span>
             </span>
+            <Breadcrumb path={path} />
             <div className="social-links">
                 <a href="https://www.facebook.com/tschiboka/">
                     <FaFacebookF title="Facebook Link" />
@@ -37,7 +38,7 @@ const Footer = ({ pageName, path }: Props) => {
                     <TfiLinkedin title="LinkedIn Link" />
                 </a>
             </div>
-            <ul>
+            <ul className="link-list">
                 <li className={pageName === "home" ? "hide" : ""}>
                     <Link className="link" to="/" title="Home Page">
                         HOME
@@ -80,8 +81,6 @@ const Footer = ({ pageName, path }: Props) => {
                 </a>
                 |<a title="Hungarian">Hu</a>|<a title="Italian">It</a>
             </div>
-
-            <Breadcrumb path={path} />
 
             <p className="copyright">
                 <MdCopyright className="copyright__icon" />

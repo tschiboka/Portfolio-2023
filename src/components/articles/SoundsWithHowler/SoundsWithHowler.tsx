@@ -39,36 +39,11 @@ import riffMasterHomeImg from "../../../assets/images/blog/soundsWithHowler/Riff
 import fretboardNotesImg from "../../../assets/images/blog/soundsWithHowler/FretboardNotes.png";
 
 // Other Assets
-import { blogArticles } from "../../pages/Blog/blogs";
 import codeSnippets from "./codeSnipets";
 
 // Styles
-import "../blogComponents.scss";
 import "./SoundsWithHowler.scss";
 import Article from "../../sharedComponents/Article/Article";
-
-// Audio Howler
-const audioE2 = new Howl({ src: E2MP3, html5: true });
-const audioF2 = new Howl({ src: F2MP3, html5: true });
-const audioFs2 = new Howl({ src: Fs2MP3, html5: true });
-const audioG2 = new Howl({ src: G2MP3, html5: true });
-const audioGs2 = new Howl({ src: Gs2MP3, html5: true });
-const audioA2 = new Howl({ src: A2MP3, html5: true });
-const audioAs2 = new Howl({ src: As2MP3, html5: true });
-const audioB2 = new Howl({ src: B2MP3, html5: true });
-const audioC3 = new Howl({ src: C3MP3, html5: true });
-const audioCs3 = new Howl({ src: Cs3MP3, html5: true });
-const audioD3 = new Howl({ src: D3MP3, html5: true });
-const audioDs3 = new Howl({ src: Ds3MP3, html5: true });
-const audioE3 = new Howl({ src: E3MP3, html5: true });
-const audioG3 = new Howl({ src: G3MP3, html5: true });
-const audioB3 = new Howl({ src: B3MP3, html5: true });
-const audioE4 = new Howl({ src: E4MP3, html5: true });
-const audioA3 = new Howl({ src: A3MP3, html5: true });
-const audioC4 = new Howl({ src: C4MP3, html5: true });
-const audioD4 = new Howl({ src: D4MP3, html5: true });
-const audioFs4 = new Howl({ src: Fs4MP3, html5: true });
-const audioG4 = new Howl({ src: G4MP3, html5: true });
 
 // References
 const references: Reference[] = [
@@ -100,6 +75,29 @@ interface Props {
 }
 
 const SoundsWithHowler = ({ pageName, path }: Props) => {
+    // Audio Howler
+    const audioE2 = new Howl({ src: E2MP3, html5: true });
+    const audioF2 = new Howl({ src: F2MP3, html5: true });
+    const audioFs2 = new Howl({ src: Fs2MP3, html5: true });
+    const audioG2 = new Howl({ src: G2MP3, html5: true });
+    const audioGs2 = new Howl({ src: Gs2MP3, html5: true });
+    const audioA2 = new Howl({ src: A2MP3, html5: true });
+    const audioAs2 = new Howl({ src: As2MP3, html5: true });
+    const audioB2 = new Howl({ src: B2MP3, html5: true });
+    const audioC3 = new Howl({ src: C3MP3, html5: true });
+    const audioCs3 = new Howl({ src: Cs3MP3, html5: true });
+    const audioD3 = new Howl({ src: D3MP3, html5: true });
+    const audioDs3 = new Howl({ src: Ds3MP3, html5: true });
+    const audioE3 = new Howl({ src: E3MP3, html5: true });
+    const audioG3 = new Howl({ src: G3MP3, html5: true });
+    const audioB3 = new Howl({ src: B3MP3, html5: true });
+    const audioE4 = new Howl({ src: E4MP3, html5: true });
+    const audioA3 = new Howl({ src: A3MP3, html5: true });
+    const audioC4 = new Howl({ src: C4MP3, html5: true });
+    const audioD4 = new Howl({ src: D4MP3, html5: true });
+    const audioFs4 = new Howl({ src: Fs4MP3, html5: true });
+    const audioG4 = new Howl({ src: G4MP3, html5: true });
+
     return (
         <Article path={path} pageName={pageName} title="Sounds with Howler">
             <h1>Creating Sounds with Howler</h1>

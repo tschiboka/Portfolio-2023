@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { useAppContext } from "../../../context/AppContext";
 
 // Components
@@ -12,19 +12,21 @@ import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
 import References, {
     Reference,
 } from "../../sharedComponents/References/References";
+import { EmailShareButton } from "react-share";
 
 // Icons
-import { BsFillBookmarkFill, BsFillBookmarkStarFill } from "react-icons/bs";
 import { BiSolidUpArrowSquare } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
 import { HiShare } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
 
 // Other Assets
 import { blogArticles } from "../../pages/Blog/blogs";
 
 // Styles
-import "../../articles/blogComponents.scss";
+import "./Articles.scss";
+import ShareMenu from "../ShareMenu/ShareMenu";
 
 // Functions
 const scrollToTop = () => {
@@ -56,25 +58,42 @@ interface Props {
 const Article = ({ pageName, path, title, children }: Props) => {
     const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
+    const [sideMenuVisible, setSideMenuVisible] = useState(true);
+    const [shareMenuVisible, setShareMenuVisible] = useState(false);
+
     return (
         <Page title={"Tivadar Debnar | " + title} path={path}>
             <Nav pageName={pageName} />
             {mobileMenuVisible && <Menu pageName="js-date-validation" />}
             {subMenuVisible && <SubNav />}
-            <aside className="blog-component--article">
-                <BsFillBookmarkFill
-                    className="aside-icon"
-                    title="Bookmark Page"
-                />
-                <HiShare className="aside-icon" title="Share" />
-                <FaEye className="aside-icon" title="Times Visited" />
-                <AiFillHeart className="aside-icon" title="Likes" />
-                <BiSolidUpArrowSquare
-                    className="aside-icon"
-                    title="Go to the Top of the Page"
-                    onClick={() => scrollToTop()}
-                />
-            </aside>
+            {sideMenuVisible && (
+                <aside className="blog-component--article">
+                    <HiShare
+                        className={
+                            "aside-icon " +
+                            (shareMenuVisible ? "highlighted" : "")
+                        }
+                        title="Share"
+                        onClick={() => setShareMenuVisible(!shareMenuVisible)}
+                    />
+
+                    <FaEye className="aside-icon" title="Times Visited" />
+                    <AiFillHeart className="aside-icon" title="Likes" />
+                    <BiSolidUpArrowSquare
+                        className="aside-icon"
+                        title="Go to the Top of the Page"
+                        onClick={() => scrollToTop()}
+                    />
+                    <IoMdClose
+                        className="aside-icon"
+                        title="Close Menu"
+                        onClick={() => setSideMenuVisible(false)}
+                    />
+                    <div className="line"></div>
+                    {shareMenuVisible && <ShareMenu path={path} />}
+                </aside>
+            )}
+
             <main className="blog-component">
                 <article>{children}</article>
                 <LikeButton path={path} />

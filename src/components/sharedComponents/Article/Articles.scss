@@ -1,7 +1,7 @@
-@use "../../styles/breakpoints.scss" as bp;
-@import "../../styles/palette.scss";
-@import "../../styles/font_sizes.scss";
-@import "../../styles/animations.scss";
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
 
 aside.blog-component--article {
     position: fixed;
@@ -9,28 +9,65 @@ aside.blog-component--article {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    bottom: 0;
     width: 100%;
     height: 5rem;
     background-color: $black_1;
-    bottom: 0;
     z-index: 100;
+    .line {
+        position: absolute;
+        display: none;
+        width: 1px;
+        height: 55vh;
+        background-color: $black_3;
+        right: 4.5rem;
+        opacity: 0;
+        animation: 
+            fade_in 300ms 900ms ease-out forwards,
+            from_above_far 1000ms 900ms ease-in;
+        @include bp.lg {
+            display: block;
+        }
+    }
     .aside-icon {
         margin: 1.5rem 0;
         color: $black_5;
         font-size: $font-lg;
+        opacity: 0;
+        animation: 
+                fade_in 200ms ease-out forwards,
+                from_above 200ms ease-in;
+        &:nth-child(1) { animation-delay: 500ms; }
+        &:nth-child(2) { animation-delay: 600ms; }
+        &:nth-child(3) { animation-delay: 700ms; }
+        &:nth-child(4) { animation-delay: 800ms; }
+        &:nth-child(5) { animation-delay: 900ms; }
+        &:nth-child(6) { animation-delay: 1000ms; }
+        @include bp.lg {
+            &:nth-child(1) { animation-delay: 1500ms; }
+            &:nth-child(2) { animation-delay: 1600ms; }
+            &:nth-child(3) { animation-delay: 1700ms; }
+            &:nth-child(4) { animation-delay: 1800ms; }
+            &:nth-child(5) { animation-delay: 1900ms; }
+            &:nth-child(6) { animation-delay: 11000ms; }
+        }
         &:hover {
             color: white;
             transform: scale(1.1);
             cursor: pointer;
         }
+        &.highlighted {
+            color: white;
+        }
     }
-    @include bp.md {
-        width: 50px;
+    @include bp.lg {
+        display: flex;
+        width: 30px;
         height: 80vh;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        right: 3rem;
+        right: 1.5rem;
         background-color: transparent;
         .aside-icon {
             margin: 1rem 0;
@@ -42,6 +79,10 @@ aside.blog-component--article {
                 cursor: pointer;
             }
         }
+    }
+    @include bp.xl {
+        width: 50px;
+        height: 80vh;
     }
 }
 // Every common blog style here

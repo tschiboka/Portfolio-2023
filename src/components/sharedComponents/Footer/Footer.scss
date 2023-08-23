@@ -3,13 +3,16 @@
 @import "../../../styles/font_sizes.scss";
 
 .Footer {
+    position: relative;
     padding: 1.5rem;
     padding-top: 3rem;
     padding-bottom: 0;
     margin-bottom: 5vh;
     display: flex;
     flex-direction: column;
+    background-color: $black_1;
     align-items: center;
+    z-index: 10000;
     @include bp.md {
         margin-bottom: 0;
     }
@@ -55,13 +58,33 @@
         color: $white_3;
         border-top: 1px solid $black_2;
         border-bottom: 1px solid $black_2;
+        @include bp.md {
+            width: 50%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
     }
     a, .link, li {
         color: inherit;
         text-decoration: inherit;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         @include bp.md {
             font-size: $font_md;
+        }
+    }
+    .link-list {
+        @include bp.md {
+            padding-top: 3rem;
+        }
+    }
+    .link-list > * {
+        @include bp.md {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
         }
     }
     li:hover {

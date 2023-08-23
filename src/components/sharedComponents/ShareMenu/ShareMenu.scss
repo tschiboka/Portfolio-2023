@@ -1,0 +1,48 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.ShareMenu {
+    position: absolute;
+    width: 100%;
+    height: 5rem;
+    bottom: 5rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $black_1;
+    
+    @include bp.lg {
+        height: 100%;
+        width: 5rem;
+        left: -7rem;
+        bottom: 0;
+        height: 80vh;
+        flex-direction: column;
+        justify-content: center;
+        background-color: transparent;
+    }
+    .ShareMenu__icon > * {
+        color: $black_5;
+        font-size: $font-lg;
+        opacity: 0;
+        animation: 
+            fade_in 200ms ease-out forwards,
+            from_above 200ms ease-in;
+        &:hover {
+            color: white;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+        @include bp.lg {
+            margin: 1rem 0;
+            font-size: $font-xl;
+        }
+    }
+    .ShareMenu__icon:nth-child(1) > * { animation-delay: 100ms; }
+    .ShareMenu__icon:nth-child(2) > * { animation-delay: 200ms; }
+    .ShareMenu__icon:nth-child(3) > * { animation-delay: 300ms; }
+    .ShareMenu__icon:nth-child(4) > * { animation-delay: 400ms; }
+    .ShareMenu__icon:nth-child(5) > * { animation-delay: 500ms; }
+}

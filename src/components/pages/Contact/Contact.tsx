@@ -163,12 +163,14 @@ const Contact = ({ pageName, path }: Props) => {
                 <section>
                     <ul className="contacts">
                         <li>
+                            <span>mail</span>
                             <MdAlternateEmail className="icon" />
                             <Link className="link" to={`mailto:${mail}`}>
                                 {mail}
                             </Link>
                         </li>
                         <li>
+                            <span>phone</span>
                             <FiPhone className="icon" />
                             <a href={`tel:${tel}`} className="link">
                                 {tel}
