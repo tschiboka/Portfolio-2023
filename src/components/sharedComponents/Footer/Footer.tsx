@@ -11,9 +11,11 @@ import "./Footer.scss";
 interface Props {
     pageName?: string;
     path: string;
+    visitsPreLoaded?: boolean;
+    visitCount?: number;
 }
 
-const Footer = ({ pageName, path }: Props) => {
+const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
     const date = new Date();
     const year = date.getFullYear();
 
@@ -26,7 +28,11 @@ const Footer = ({ pageName, path }: Props) => {
                 <span>Tivadar&nbsp;</span>
                 <span>Debnar</span>
             </span>
-            <Breadcrumb path={path} />
+            <Breadcrumb
+                path={path}
+                visitsPreLoaded={visitsPreLoaded}
+                visitCount={visitCount}
+            />
             <div className="social-links">
                 <a href="https://www.facebook.com/tschiboka/">
                     <FaFacebookF title="Facebook Link" />
