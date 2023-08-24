@@ -24,9 +24,8 @@ const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
         if (!visitsPreLoaded) {
             getVisits(path, (visits) => {
                 setVisits(visits);
-                console.log("FOOTER VISIT GET");
             });
-        }
+        } else setVisits(visitCount || 0);
     }, [visits]);
 
     return (

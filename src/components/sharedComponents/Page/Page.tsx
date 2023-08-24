@@ -15,6 +15,7 @@ const Page = ({ children, title, path }: Props) => {
         window.scrollTo(0, 0);
         postVisit(path);
     }, []);
+
     return (
         <>
             {children}

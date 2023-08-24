@@ -40,7 +40,15 @@ interface AppContextProviderProps {
 export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     children,
 }) => {
-    const [themeMode, setThemeMode] = useState("dark");
+    let storage = localStorage.getItem("tschiboka") || '{"theme": "dark"}';
+    if (
+        JSON.parse(storage).theme !== "dark" &&
+        JSON.parse(storage).theme !== "light"
+    )
+        storage = '{"theme": "dark"}';
+    const storageJSON = JSON.parse(storage || '{"theme": "dark"}');
+
+    const [themeMode, setThemeMode] = useState(storageJSON.theme);
     const [mainMenuVisible, setMainMenuVisible] = useState(true);
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
     const [subMenuVisible, setSubMenuVisible] = useState(true);
@@ -64,6 +72,10 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
 
     useEffect(() => {
         const body = document.getElementsByTagName("body")[0];
+        const storage = localStorage.getItem("tschiboka") || "{}";
+        const storageJSON = JSON.parse(storage);
+        const newStorage = { ...storageJSON, theme: themeMode };
+        localStorage.setItem("tschiboka", JSON.stringify(newStorage));
         body.className = themeMode;
     }, [themeMode]);
 

@@ -11,7 +11,10 @@
     align-items: center;
     background-color: white;
     img {
-        padding: 1.5rem;
+        padding: 0;
         object-fit: contain;
+        @include bp.md {
+            padding: 1.5rem;
+        }
     }
 }

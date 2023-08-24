@@ -72,7 +72,6 @@ const Article = ({ pageName, path, title, children }: Props) => {
             getVisits(path, (visits: number) => {
                 setVisitsLoaded(true);
                 setVisits(visits);
-                console.log("ARTICLE VISIT GET");
             });
         }
         if (!likesLoaded)
@@ -80,7 +79,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                 setLikesLoaded(true);
                 setLikes(likes);
             });
-    }, [likes]);
+    }, [likes, visits]);
 
     return (
         <Page title={"Tivadar Debnar | " + title} path={path}>
