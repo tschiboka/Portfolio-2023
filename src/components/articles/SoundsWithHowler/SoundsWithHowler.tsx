@@ -105,7 +105,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 image={equalizerImg}
                 className={"image--med bg--white"}
                 alt={"Equalizer"}
-                caption={"Create Sounds with Howler JS"}
+                zoomAllowed={false}
             />
             <p>
                 This article continues my previous blog post, where I provided a

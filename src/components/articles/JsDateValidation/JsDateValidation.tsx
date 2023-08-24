@@ -40,7 +40,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                 image={calendarImg}
                 className={"image--med bg--white"}
                 alt={"Calendar"}
-                caption={"Date Validation"}
+                zoomAllowed={false}
             />
             <p>
                 Date validation forms a cornerstone of programming tasks beyond

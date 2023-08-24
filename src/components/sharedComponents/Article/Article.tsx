@@ -12,7 +12,6 @@ import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
 import References, {
     Reference,
 } from "../../sharedComponents/References/References";
-import { EmailShareButton } from "react-share";
 
 // Icons
 import { BiSolidUpArrowSquare } from "react-icons/bi";
@@ -28,6 +27,7 @@ import { blogArticles } from "../../pages/Blog/blogs";
 import "./Articles.scss";
 import ShareMenu from "../ShareMenu/ShareMenu";
 import { getLikes, postLike } from "../../../serverAPI/likes";
+import { getVisits } from "../../../serverAPI/visits";
 
 // Functions
 const scrollToTop = () => {
@@ -57,38 +57,24 @@ interface Props {
 }
 
 const Article = ({ pageName, path, title, children }: Props) => {
-    const getVisits = async (path: string) => {
-        //const URLLocal = "http://localhost:5000/visit";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
-        const URL = URLLive;
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-
-        try {
-            const response = await fetch(`${URL}?path=${path}`, options);
-            const responseJSON = await response.json();
-            if (responseJSON.success) {
-                setVisits(responseJSON.visits);
-            } else console.log("Error While Sending Visit!", response);
-        } catch (err) {
-            console.log("Error While Sending Message!", err);
-        }
-    };
-
     const article = blogArticles.find((article) => article.to === path);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const [sideMenuVisible, setSideMenuVisible] = useState(true);
     const [shareMenuVisible, setShareMenuVisible] = useState(false);
+    const [visitsLoaded, setVisitsLoaded] = useState(false);
     const [visits, setVisits] = useState(0);
-    const [articleLiked, setArticleLiked] = useState(false);
-    const [likes, setLikes] = useState(0);
     const [likesLoaded, setLikesLoaded] = useState(false);
+    const [likes, setLikes] = useState(0);
+    const [articleLiked, setArticleLiked] = useState(false);
 
     useEffect(() => {
+        if (!visitsLoaded) {
+            getVisits(path, (visits: number) => {
+                setVisitsLoaded(true);
+                setVisits(visits);
+                console.log("ARTICLE VISIT GET");
+            });
+        }
         if (!likesLoaded)
             getLikes(path, (likes: number) => {
                 setLikesLoaded(true);
@@ -111,8 +97,19 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         title="Share"
                         onClick={() => setShareMenuVisible(!shareMenuVisible)}
                     />
-                    <FaEye className="aside-icon" title="Times Visited" />
-
+                    <div
+                        className="Article__icon-box"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            if (!articleLiked)
+                                postLike(path, () => setArticleLiked(true));
+                            return false;
+                        }}
+                    >
+                        <FaEye className="aside-icon" title="Times Visited" />
+                        <span>{visits !== 0 ? visits : "-"}</span>
+                    </div>
                     <div
                         className="Article__icon-box"
                         onClick={(event) => {
@@ -165,7 +162,12 @@ const Article = ({ pageName, path, title, children }: Props) => {
                     />
                 )}
             </main>
-            <Footer pageName={pageName} path={path} />
+            <Footer
+                pageName={pageName}
+                path={path}
+                visitsPreLoaded={true}
+                visitCount={visits}
+            />
         </Page>
     );
 };

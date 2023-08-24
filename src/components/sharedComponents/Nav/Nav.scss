@@ -11,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: $black_1;
-    z-index: 1000;
+    z-index: 90;
 
     @include bp.sm {
         padding: 0 2rem;

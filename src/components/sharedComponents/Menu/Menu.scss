@@ -15,7 +15,7 @@
     color: $white_3;
     font-size: $font_lg;
     list-style: none;
-    z-index: 10000;
+    z-index: 90;
 
     @include bp.md {
         display: none;

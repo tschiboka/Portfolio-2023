@@ -34,12 +34,17 @@ img.image--med {
     display: block;
 }
 
-img.guitar.riffmaster {
-    background-color: $black_3;
+figure div.guitar {
     max-width: 500px;
+    background-color: $white_3;
+    img {
+        max-width: 500px;
+        width: 100%;
+    }
+    
 }
 
-img.bg--white {
+div.bg--white {
     background-color: white;
 }
 

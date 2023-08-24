@@ -1,0 +1,24 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    z-index: 65;
+    background-color: $black_2;
+    & * {
+        max-width: 100vw;
+        max-height: 100vh;
+    }
+}
+
+.light .Overlay {
+    background-color: $white_1;
+}

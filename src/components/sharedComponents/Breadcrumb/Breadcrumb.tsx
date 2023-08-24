@@ -3,44 +3,30 @@ import "./Breadcrumb.scss";
 import { AiFillHome } from "react-icons/ai";
 import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { getVisits } from "../../../serverAPI/visits";
 
 interface Props {
     path: string;
+    visitsPreLoaded?: boolean;
+    visitCount?: number;
 }
 
 const getBreadCrumbPath = (breadcrumbs: string[], index: number) => {
     return "/" + breadcrumbs.filter((_, i) => i <= index).join("/");
 };
 
-const Breadcrumb = ({ path }: Props) => {
-    const [visits, setVisits] = useState(0);
+const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
+    const [visits, setVisits] = useState(visitCount || 0);
     const noLeadingSlash = path.replace("/", "");
     const breadcrumbPaths = noLeadingSlash.split("/");
 
-    const getVisits = async (path: string) => {
-        //const URLLocal = "http://localhost:5000/visit";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
-        const URL = URLLive;
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-
-        try {
-            const response = await fetch(`${URL}?path=${path}`, options);
-            const responseJSON = await response.json();
-            if (responseJSON.success) {
-                setVisits(responseJSON.visits);
-            } else console.log("Error While Sending Visit!", response);
-        } catch (err) {
-            console.log("Error While Sending Message!", err);
-        }
-    };
-
     useEffect(() => {
-        getVisits(path);
+        if (!visitsPreLoaded) {
+            getVisits(path, (visits) => {
+                setVisits(visits);
+                console.log("FOOTER VISIT GET");
+            });
+        }
     }, [visits]);
 
     return (

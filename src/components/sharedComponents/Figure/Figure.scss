@@ -3,3 +3,102 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
+.Figure {
+    margin: 0 auto;
+    div {
+        position: relative;
+        max-width: 100%;
+        width: auto;
+        height: 100%;
+        padding: 0;
+
+        .Figure__icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            margin: 0;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 50px;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $white_3;
+            font-size: $font-xl;
+        }
+        &:hover {
+            background-color: black;
+            color: white;
+        }
+
+        img {
+            max-width: 100%;
+            height: 100%;
+        }
+
+        img.bg--white {
+            background-color: white;
+        }
+        &:hover {
+            cursor: pointer;
+            .Figure__icon {
+                background-color: $black_1;
+            }
+        }
+    }
+    div.image--lrg {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    div.image--med {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    div.guitar {
+        max-width: 500px;
+        background-color: $white_3;
+        img {
+            max-width: 500px;
+            width: 100%;
+        }   
+    }
+    div.bg--white {
+        background-color: white;
+    }
+}
+
+
+.light {
+    .Figure {
+        .Figure__icon {
+            color: white;
+        }
+    }
+}
+
+.Figure__icon--close {
+    position: absolute;
+    margin: 1.5rem;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: $white_3;
+    font-size: $font-xl;
+    cursor: pointer;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+}
