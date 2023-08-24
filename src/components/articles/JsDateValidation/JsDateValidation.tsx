@@ -2,7 +2,6 @@
 import Article from "../../sharedComponents/Article/Article";
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
-import { Reference } from "../../sharedComponents/References/References";
 import { Link } from "react-router-dom";
 
 // Images
@@ -10,6 +9,7 @@ import calendarImg from "../../../assets/images/blog/js_date_validation/calendar
 
 // Other Assets
 import codeSnippets from "./codeSnippets";
+import { getReferenceList } from "../references";
 
 // Styles
 import "./JsDateValidation.scss";
@@ -19,20 +19,8 @@ interface Props {
     path: string;
 }
 
-const references: Reference[] = [
-    {
-        title: "Set Date Property Values",
-        author: "MND",
-        source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate#syntax",
-    },
-    {
-        title: "Calculating Leap Years",
-        author: "CueMath",
-        source: "https://www.cuemath.com/calculators/leap-year-calculator/",
-    },
-];
-
 const JsDateValidation = ({ pageName, path }: Props) => {
+    const references = getReferenceList(path);
     return (
         <Article pageName={pageName} path={path} title="JS Date Validation">
             <h1>Validating Dates with JavaScript</h1>

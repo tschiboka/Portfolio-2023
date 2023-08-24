@@ -1,5 +1,5 @@
 // Components
-import { Reference } from "../../sharedComponents/References/References";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
@@ -40,64 +40,59 @@ import fretboardNotesImg from "../../../assets/images/blog/soundsWithHowler/Fret
 
 // Other Assets
 import codeSnippets from "./codeSnipets";
+import { getReferenceList } from "../references";
 
 // Styles
 import "./SoundsWithHowler.scss";
 import Article from "../../sharedComponents/Article/Article";
-
-// References
-const references: Reference[] = [
-    {
-        title: "Howler Documentation",
-        author: "Howler",
-        source: "https://howlerjs.com/",
-    },
-    {
-        title: "Splice Audio Library",
-        author: "Splice",
-        source: "https://splice.com/features/sounds",
-    },
-    {
-        title: "MixKit Audio Library",
-        author: "MixKit",
-        source: "https://mixkit.co/free-sound-effects/guitar/",
-    },
-    {
-        title: "Tschiboka Audio Library",
-        author: "Tschiboka",
-        source: "https://tschiboka.co.uk/files/guitar-sounds/guitar-sounds.zip",
-    },
-];
 
 interface Props {
     pageName: string;
     path: string;
 }
 
-const SoundsWithHowler = ({ pageName, path }: Props) => {
-    // Audio Howler
-    const audioE2 = new Howl({ src: E2MP3, html5: true });
-    const audioF2 = new Howl({ src: F2MP3, html5: true });
-    const audioFs2 = new Howl({ src: Fs2MP3, html5: true });
-    const audioG2 = new Howl({ src: G2MP3, html5: true });
-    const audioGs2 = new Howl({ src: Gs2MP3, html5: true });
-    const audioA2 = new Howl({ src: A2MP3, html5: true });
-    const audioAs2 = new Howl({ src: As2MP3, html5: true });
-    const audioB2 = new Howl({ src: B2MP3, html5: true });
-    const audioC3 = new Howl({ src: C3MP3, html5: true });
-    const audioCs3 = new Howl({ src: Cs3MP3, html5: true });
-    const audioD3 = new Howl({ src: D3MP3, html5: true });
-    const audioDs3 = new Howl({ src: Ds3MP3, html5: true });
-    const audioE3 = new Howl({ src: E3MP3, html5: true });
-    const audioG3 = new Howl({ src: G3MP3, html5: true });
-    const audioB3 = new Howl({ src: B3MP3, html5: true });
-    const audioE4 = new Howl({ src: E4MP3, html5: true });
-    const audioA3 = new Howl({ src: A3MP3, html5: true });
-    const audioC4 = new Howl({ src: C4MP3, html5: true });
-    const audioD4 = new Howl({ src: D4MP3, html5: true });
-    const audioFs4 = new Howl({ src: Fs4MP3, html5: true });
-    const audioG4 = new Howl({ src: G4MP3, html5: true });
+const audioObject = () => {
+    return {
+        E2: new Howl({ src: E2MP3, html5: true }),
+        F2: new Howl({ src: F2MP3, html5: true }),
+        Fs2: new Howl({ src: Fs2MP3, html5: true }),
+        G2: new Howl({ src: G2MP3, html5: true }),
+        Gs2: new Howl({ src: Gs2MP3, html5: true }),
+        A2: new Howl({ src: A2MP3, html5: true }),
+        As2: new Howl({ src: As2MP3, html5: true }),
+        B2: new Howl({ src: B2MP3, html5: true }),
+        C3: new Howl({ src: C3MP3, html5: true }),
+        Cs3: new Howl({ src: Cs3MP3, html5: true }),
+        D3: new Howl({ src: D3MP3, html5: true }),
+        Ds3: new Howl({ src: Ds3MP3, html5: true }),
+        E3: new Howl({ src: E3MP3, html5: true }),
+        G3: new Howl({ src: G3MP3, html5: true }),
+        B3: new Howl({ src: B3MP3, html5: true }),
+        E4: new Howl({ src: E4MP3, html5: true }),
+        A3: new Howl({ src: A3MP3, html5: true }),
+        C4: new Howl({ src: C4MP3, html5: true }),
+        D4: new Howl({ src: D4MP3, html5: true }),
+        Fs4: new Howl({ src: Fs4MP3, html5: true }),
+        G4: new Howl({ src: G4MP3, html5: true }),
+    };
+};
 
+const SoundsWithHowler = ({ pageName, path }: Props) => {
+    const [audio, setAudio] = useState<Record<string, Howl> | null>(null);
+    const [firstAudio, setFirstAudio] = useState(""); // First Audio will Play After useEffect[audio]
+    const references = getReferenceList(path);
+    const playAudio = (audioName: string) => {
+        if (!audio) {
+            setAudio(audioObject);
+            setFirstAudio(audioName);
+        } else audio[audioName].play();
+    };
+
+    useEffect(() => {
+        if (audio) audio[firstAudio].play();
+    }, [audio]);
+
+    // Audio Howler
     return (
         <Article path={path} pageName={pageName} title="Sounds with Howler">
             <h1>Creating Sounds with Howler</h1>
@@ -208,55 +203,55 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             </p>
             <h3>Try them out!</h3>
             <div className="sound-btn-wrapper">
-                <button onClick={() => audioE2.play()}>
+                <button onClick={() => playAudio("E2")}>
                     <span>Guitar Note E2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioF2.play()}>
+                <button onClick={() => playAudio("F2")}>
                     <span>Guitar Note F2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioFs2.play()}>
+                <button onClick={() => playAudio("Fs2")}>
                     <span>Guitar Note F#2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioG2.play()}>
+                <button onClick={() => playAudio("G2")}>
                     <span>Guitar Note G2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioGs2.play()}>
+                <button onClick={() => playAudio("Gs2")}>
                     <span>Guitar Note G#2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioA2.play()}>
+                <button onClick={() => playAudio("A2")}>
                     <span>Guitar Note A2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioAs2.play()}>
+                <button onClick={() => playAudio("As2")}>
                     <span>Guitar Note A#2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioB2.play()}>
+                <button onClick={() => playAudio("B2")}>
                     <span>Guitar Note B2</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioC3.play()}>
+                <button onClick={() => playAudio("C3")}>
                     <span>Guitar Note C3</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioCs3.play()}>
+                <button onClick={() => playAudio("Cs3")}>
                     <span>Guitar Note C#3</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioD3.play()}>
+                <button onClick={() => playAudio("D3")}>
                     <span>Guitar Note D3</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioDs3.play()}>
+                <button onClick={() => playAudio("Ds3")}>
                     <span>Guitar Note D#3</span>
                     <BsSoundwave />
                 </button>
-                <button onClick={() => audioE3.play()}>
+                <button onClick={() => playAudio("E3")}>
                     <span>Guitar Note E3</span>
                     <BsSoundwave />
                 </button>
@@ -272,12 +267,12 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             <div className="sound-btn-wrapper">
                 <button
                     onClick={() => {
-                        audioE2.play();
-                        audioB2.play();
-                        audioE3.play();
-                        audioG3.play();
-                        audioB3.play();
-                        audioE4.play();
+                        playAudio("E2");
+                        playAudio("B2");
+                        playAudio("E3");
+                        playAudio("G3");
+                        playAudio("B3");
+                        playAudio("E4");
                     }}
                 >
                     <span>Guitar Chord Em</span>
@@ -285,10 +280,10 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 </button>
                 <button
                     onClick={() => {
-                        audioD3.play();
-                        audioA3.play();
-                        audioD4.play();
-                        audioFs4.play();
+                        playAudio("D3");
+                        playAudio("A3");
+                        playAudio("D4");
+                        playAudio("Fs4");
                     }}
                 >
                     <span>Guitar Chord D</span>
@@ -296,10 +291,10 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 </button>
                 <button
                     onClick={() => {
-                        audioC4.play();
-                        audioG3.play();
-                        audioE3.play();
-                        audioC3.play();
+                        playAudio("C4");
+                        playAudio("G3");
+                        playAudio("E3");
+                        playAudio("C3");
                     }}
                 >
                     <span>Guitar Chord C</span>
@@ -307,12 +302,12 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 </button>
                 <button
                     onClick={() => {
-                        audioG2.play();
-                        audioB2.play();
-                        audioD3.play();
-                        audioG3.play();
-                        audioB3.play();
-                        audioG4.play();
+                        playAudio("G2");
+                        playAudio("B2");
+                        playAudio("D3");
+                        playAudio("G3");
+                        playAudio("B3");
+                        playAudio("G4");
                     }}
                 >
                     <span>Guitar Chord G</span>
@@ -320,11 +315,11 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 </button>
                 <button
                     onClick={() => {
-                        audioB2.play();
-                        audioDs3.play();
-                        audioA3.play();
-                        audioB3.play();
-                        audioFs4.play();
+                        playAudio("B2");
+                        playAudio("Ds3");
+                        playAudio("A3");
+                        playAudio("B3");
+                        playAudio("Fs4");
                     }}
                 >
                     <span>Guitar Chord B7</span>
@@ -417,11 +412,89 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 finding the highest number or saving a sorted array and
                 referring to its last item.
             </p>
+            <p>
+                Lastly, we can initialise a display action on board function
+                that takes the fret, string and the event as arguments. This
+                function will be implemented when displaying our virtual guitar
+                board on the screen. The guitar note names will be calculated
+                relative to the lower E2 string, and each string has an offset
+                to adjust the fret number.
+            </p>
             <Code
-                fileName="jam.html"
-                language="javasrcipt"
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.guitarNotes}
+            />
+            <br />
+            <Code
+                fileName="jam.js"
+                language="javascript"
                 content={codeSnippets.fretCallback}
             />
+            <h3>Reading the Strums</h3>
+            <p>
+                Unlike the fretboard inputs, strum events activate audio, so
+                they must first find the uppermost activated note position on
+                the fretboard. In the case of a strum press, all notes on the
+                string must be stopped; otherwise, they must be played. The
+                highest note search is similar to the fretboard's; however, I
+                provided some extra branches for different displaying cases,
+                which will later be discussed.
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.strumCallback}
+            />
+            <h3>Creating Sounds</h3>
+            <p>
+                As we need to deal with many Howl objects, it is reasonable to
+                structure them into an audio object, where the key is the audio
+                name and the value is the How object itself. The most important
+                properties that Howler accepts are the source (src) path, volume
+                (default 1), HTML5, and preload. HTML5 property should be used
+                for large audio files so you don't have to wait for the complete
+                file to be downloaded and decoded before playing. Preload
+                property automatically begins downloading the audio file when
+                the Howl is defined. If using HTML5 Audio, you can set this to
+                'metadata' to only preload the file's metadata (to get its
+                duration without downloading the entire file, for example). For
+                the complete list of properties, see{" "}
+                <Link className="Reference__Link" to={references[4].source}>
+                    [ {references[4].author} ]
+                </Link>
+                .
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.audioObject}
+            />
+            <p>
+                One of the things that we must be careful of is that the
+                function preloading Howler audio needs to be user-initiated. The
+                reason is the current autoplay policy in most major browsers.
+                Web browsers are moving towards stricter autoplay policies to
+                improve the user experience, minimise incentives to install ad
+                blockers, and reduce data consumption on expensive and
+                constrained networks. These changes are intended to provide
+                further playback control to users and benefit publishers with
+                legitimate use cases.{" "}
+                <Link className="Reference__Link" to={references[5].source}>
+                    [ {references[5].author} ]
+                </Link>{" "}
+                Therefore, if you want to preload your audio variables, do it
+                after a click event.
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.playStopNotes}
+            />
+            <p>
+                You can manipulate audio play by simply calling play or stop
+                functions.
+            </p>
         </Article>
     );
 };

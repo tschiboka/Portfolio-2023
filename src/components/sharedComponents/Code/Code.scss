@@ -3,17 +3,20 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
+
 .Code {
     margin: 0 auto;
     max-width: 1200px;
-    background-color: $black_1 !important;
+    background-color: $black_1;
     border: 1px solid $black_3;
-    font-family: monospace !important;
-    span {
-        font-family: monospace !important;
-        font-size: $font_md;
+    font-family: "Fira", monospace;
+    
+    // Fix Up SyntaxHighlighter Library Errors when it Skips Styling
+    span, pre code {
+        font-family: "Fira", monospace;
+        font-size: $font_sm;
         @include bp.lg {
-            font-size: $font_lg;
+            font-size: 1.2rem;
         }
     }
     .Code__header {

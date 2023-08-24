@@ -9,9 +9,8 @@ import SubNav from "../../sharedComponents/SubNav/SubNav";
 import Footer from "../../sharedComponents/Footer/Footer";
 import LikeButton from "../../sharedComponents/LikeButton/LikeButton";
 import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
-import References, {
-    Reference,
-} from "../../sharedComponents/References/References";
+import References from "../../sharedComponents/References/References";
+import { getReferenceList } from "../../articles/references";
 
 // Icons
 import { BiSolidUpArrowSquare } from "react-icons/bi";
@@ -21,7 +20,7 @@ import { HiShare } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 
 // Other Assets
-import { blogArticles } from "../../pages/Blog/blogs";
+import { blogArticles } from "../../articles/artiles";
 
 // Styles
 import "./Articles.scss";
@@ -34,20 +33,6 @@ const scrollToTop = () => {
     console.log("Scroll");
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 };
-
-// References
-const references: Reference[] = [
-    {
-        title: "Set Date Property Values",
-        author: "MND",
-        source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/setDate#syntax",
-    },
-    {
-        title: "Calculating Leap Years",
-        author: "CueMath",
-        source: "https://www.cuemath.com/calculators/leap-year-calculator/",
-    },
-];
 
 interface Props {
     pageName: string;
@@ -66,7 +51,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
     const [likesLoaded, setLikesLoaded] = useState(false);
     const [likes, setLikes] = useState(0);
     const [articleLiked, setArticleLiked] = useState(false);
-
+    const references = getReferenceList(path);
     useEffect(() => {
         if (!visitsLoaded) {
             getVisits(path, (visits: number) => {

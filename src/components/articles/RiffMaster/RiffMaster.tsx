@@ -1,7 +1,6 @@
 // Components
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
-import { Reference } from "../../sharedComponents/References/References";
 import { Link } from "react-router-dom";
 import Article from "../../sharedComponents/Article/Article";
 
@@ -52,6 +51,7 @@ import saddleImg from "../../../assets/images/RiffMaster/Saddle.jpg";
 import controllerCode from "../../../assets/files/projects/controller.txt";
 import dissertation from "../../../assets/files/Dissertation_Online.pdf";
 import codeSnippets from "./codeSnippets";
+import { getReferenceList } from "../references";
 
 // Styles
 import "./RiffMaster.scss";
@@ -61,25 +61,8 @@ interface Props {
     path: string;
 }
 
-const references: Reference[] = [
-    {
-        title: "Keyboard Matrix, 2000",
-        author: "Dribin",
-        source: "https://www.dribin.org/dave/keyboard/one_html/",
-    },
-    {
-        title: "Exploring the Raspberry Pi 2 with C++. Springer, 2015",
-        author: "Warren",
-        source: "https://link.springer.com/book/10.1007/978-1-4842-1739-9",
-    },
-    {
-        title: "Gibson Les Paul Guitar Templates",
-        author: "Electric Herald",
-        source: "https://www.electricherald.com/gibson-les-paul-guitar-templates/",
-    },
-];
-
 const RiffMaster = ({ pageName, path }: Props) => {
+    const references = getReferenceList(path);
     return (
         <Article path={path} pageName={pageName} title="Guitar Console">
             <h1>Project RiffMaster</h1>

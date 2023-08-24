@@ -1,8 +1,8 @@
-import riffmasterHardwareImg from "../../../assets/images/blog/riffmasterHardware.png";
-import riffMasterJamImg from "../../../assets/images/blog/riffmasterJam.png";
-import calendarImg from "../../../assets/images/blog/calendar.png";
-import mcdonaldsImg from "../../../assets/images/blog/mcdonaldsNeon.png";
-import jsSortingImg from "../../../assets/images/blog/jsSorting.png";
+import riffmasterHardwareImg from "../../assets/images/blog/riffmasterHardware.png";
+import riffMasterJamImg from "../../assets/images/blog/riffmasterJam.png";
+import calendarImg from "../../assets/images/blog/calendar.png";
+import mcdonaldsImg from "../../assets/images/blog/mcdonaldsNeon.png";
+import jsSortingImg from "../../assets/images/blog/jsSorting.png";
 
 export interface BlogArticle {
     title: string;
@@ -44,7 +44,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "7 mins",
         codeTime: "2 hours",
         created: "13.08.2023",
-        updated: "21.08.2023",
+        updated: "24.08.2023",
     },
     {
         title: "Validating Dates with JavaScript",
