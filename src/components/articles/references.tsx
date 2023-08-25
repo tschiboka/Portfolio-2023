@@ -49,6 +49,11 @@ const references: Record<string, Reference[]> = {
             author: "Chrome",
             source: "https://developer.chrome.com/blog/autoplay/",
         },
+        {
+            title: "Calculating Fret Distances",
+            author: "Build Your Guitar",
+            source: "http://www.buildyourguitar.com/resources/tips/fretdist.htm",
+        },
     ],
     "/blog/js-date-validation": [
         {

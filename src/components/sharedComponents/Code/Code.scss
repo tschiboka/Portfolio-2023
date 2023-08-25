@@ -19,6 +19,10 @@
             font-size: 1.2rem;
         }
     }
+    pre {
+        max-height: 150vh;
+        overflow: auto;
+    }
     .Code__header {
         position: relative;
         width: 100%;

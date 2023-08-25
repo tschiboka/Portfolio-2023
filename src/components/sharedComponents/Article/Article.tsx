@@ -65,7 +65,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                 setLikes(likes);
             });
     }, [likes, visits]);
-
+    console.log(visits);
     return (
         <Page title={"Tivadar Debnar | " + title} path={path}>
             <Nav pageName={pageName} />

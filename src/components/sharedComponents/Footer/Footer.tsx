@@ -18,7 +18,7 @@ interface Props {
 const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
     const date = new Date();
     const year = date.getFullYear();
-
+    console.log(visitCount);
     return (
         <footer className="Footer">
             <div className="logo-wrapper">

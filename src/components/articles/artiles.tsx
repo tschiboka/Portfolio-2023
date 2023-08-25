@@ -41,7 +41,7 @@ export const blogArticles: BlogArticle[] = [
             "In this article, we create a keyboard listener for our digital guitar and translate our protocols into appropriate notes. We'll also build a digital interface for our guitar jam page that displays the guitar fretboard and user actions.",
         badges: ["JavaScript", "CSS"],
         to: "/blog/sounds-with-howler",
-        readingTime: "7 mins",
+        readingTime: "10 mins",
         codeTime: "2 hours",
         created: "13.08.2023",
         updated: "24.08.2023",

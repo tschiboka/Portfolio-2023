@@ -7,6 +7,8 @@ import { Howl } from "howler";
 
 // Images
 import equalizerImg from "../../../assets/images/blog/soundsWithHowler/equalizer.jpg";
+import fretBoardImg from "../../../assets/images/blog/soundsWithHowler/Fretboard.png";
+import highlightImg from "../../../assets/images/blog/soundsWithHowler/Highlighted.png";
 
 // Icons
 import { BsSoundwave } from "react-icons/bs";
@@ -98,7 +100,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             <h1>Creating Sounds with Howler</h1>
             <Figure
                 image={equalizerImg}
-                className={"image--med bg--white"}
+                className={"image--med"}
                 alt={"Equalizer"}
                 zoomAllowed={false}
             />
@@ -125,7 +127,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             </p>
             <Figure
                 image={riffMasterHomeImg}
-                className={"image--med bg--white"}
+                className={"image--med"}
                 alt={"Guitar App"}
                 caption={"RiffMaster Guitar App Home Page"}
             />
@@ -174,7 +176,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
             </p>
             <Figure
                 image={fretboardNotesImg}
-                className={"image--lrg bg--white"}
+                className={"image--lrg"}
                 alt={"Fret Board Notes"}
                 caption={"Fret Board Note Arrangement"}
             />
@@ -495,6 +497,109 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 You can manipulate audio play by simply calling play or stop
                 functions.
             </p>
+            <h3>Guitar Interface</h3>
+            <p>
+                I wanted to create a simple user interface for the digital
+                guitar so users could visually confirm every interaction, and
+                let's be honest, while the audio experience is fun, some visual
+                aid is necessary for these types of applications. The guitar UI
+                must have all the frets in a six by 20 matrix, with six strings
+                representing our physical guitar. Also, we must ensure that our
+                approach is user-friendly; hence, all notes, fret numbers, and
+                strings will also be textually represented. As the DOM
+                representation of a guitar requires hundreds of elements, and
+                these elements must be referred to for highlighting, we could
+                either use specific IDs for references or store our DOM elements
+                in arrays and refer them by the index.
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.domStorage}
+            />
+            <p>
+                If we want to create a more authentic guitar fretboard, we need
+                to be able to calculate the distances on the frets, just like
+                for the real instrument, where the spaces between frets decrease
+                from the neck to the saddle. These distances are calculated
+                iteratively. If we divide any scale length by the constant
+                17.817, we will get the distance from the front edge of the nut
+                to the first fret.{" "}
+                <Link className="Reference__Link" to={references[6].source}>
+                    [ {references[6].author} ]
+                </Link>{" "}
+                We can subtract this fret distance from the total and move to
+                the next fret until we reach the last one (20).
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.fretDistances}
+            />
+            <p>
+                We will create our guitar component with several different types
+                of DOM elements. The usual steps for appending an element are
+                straightforward. Create a child DOM element with an HTML tag
+                name, set its ID, class name or other attributes, get the parent
+                element, and append the child element to the parent. As this
+                step will heavily feature our guitar-building process, I made it
+                a one-liner utility function so that we can focus on the main
+                task.
+            </p>
+            <Code
+                fileName="util.js"
+                language="javascript"
+                content={codeSnippets.utilityAppend}
+            />
+            <p>
+                Now, we can create the guitar component by traversing seven rows
+                (the last row is for the fret numbering) and 21 fret columns
+                (again, the last one is the string component).
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.createGuitar}
+            />
+            <p>You can copy the following CSS code to have the same result.</p>
+            <Code
+                fileName="jam.css"
+                language="css"
+                content={codeSnippets.guitarCSS}
+            />
+            <p>The result is this simple GUI for our guitar.</p>
+            <Figure
+                image={fretBoardImg}
+                className={"image--lrg"}
+                alt={"Fret Board"}
+                caption={"Guitar GUI"}
+            />
+            <p>
+                Finally, we need to display the user interactions on the
+                fretboard. Our displayActionOnBoard function manages the visual
+                highlighting of the fret and string elements in the digital
+                guitar interface. Given inputs are finger position, string, and
+                strum activation and highlight. We can adjust the appearance of
+                corresponding elements to create different levels of highlights
+                (actively playing, just pressed). The remove highlight parameter
+                can reset the components to their normal state.
+            </p>
+            <Code
+                fileName="jam.js"
+                language="javascript"
+                content={codeSnippets.displayGuitar}
+            />
+            <p>
+                Let's test out our Guitar interface. The screenshot below shows
+                when the guitar is played on a barre D minor chord.
+            </p>
+            <Figure
+                image={highlightImg}
+                className={"image--lrg"}
+                alt={"Fret Board Highlights"}
+                caption={"Fret Board Highlights (D minor)"}
+            />
+            <p>Feel free to share your thoughts on potential improvements.</p>
         </Article>
     );
 };

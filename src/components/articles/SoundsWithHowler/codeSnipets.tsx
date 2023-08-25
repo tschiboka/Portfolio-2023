@@ -154,6 +154,291 @@ function getAudio() {
     });
     return audio;
 }`,
+    domStorage: `function getDOMElements() {
+    app.DOM.board_LI = [...$all("#guitar li.fret-note")];                   // List Element (Note)
+    app.DOM.board_SPAN = [...$all("#guitar span.fret-note")];               // Span Element (Note's Text)
+    app.DOM.board_BTN = [...$all("#guitar button")];                        // String Buttons
+    app.DOM.boardStrings = [...$all(".guitar__string")];                    // Strings
+}
+`,
+    createGuitar: `// Create the Guitar Body that Interacts with the User
+function createGuitar() {
+    const guitarDOM = $("#guitar");                                 // Get Guitar Element
+    const fretWidth = guitarDOM.offsetWidth - 400                   // Display Frets and Strings (40 is for the String Name)
+    const fretDistances = calculateFretDistances(fretWidth);        // Get an Int[20] of Fret Widths
+    const stringNames = ["e", "B", "G", "D", "A", "E", ""];         // From Highest to Lowest
+    const stringStarts = [24, 19, 15, 10, 5, 0];                    // Adjust Strings Starting Note to Notes
+    const ROWS = 7;                                                 // 7  Rows: 6 Strings and a Fret Numbering Element
+    const COLS = 22;                                                // 21 Columns: 20 Frets and Strings
+
+    // FRET ROWS
+    for (let row = 0; row < ROWS; row++) {                          // Iterate Rows
+        const rowDOM = $append({ tag: "ul", parent: guitarDOM });   // Create Row Element
+        // FRET COLUMNS
+        for (let col = 0; col < COLS; col++) {                      // Iterate Columns of a Row
+            const colDOM = $append({ tag: "li", parent: rowDOM });  // Create Row Element
+            colDOM.style.width = fretDistances[col - 1] + "px";
+            // LAST ROW TEXT
+            if (row === 6) colDOM.innerHTML = col === 21 ? "Strings": col; // Add Bottom Text
+            // OTHER ROWS FRET
+            else {                                                  // If Not Last Row
+                // STRING                                           
+                if (col == 21) {                                    // Last Column
+                    const stringBtn = $append({ tag: "button", parent: colDOM }); // Create String Button
+                    stringBtn.innerHTML = stringNames[row] + " String"; // Add String Name as the First Column
+                }
+                // FRET NOTE
+                else {                                              // If Fret Note
+                    const noteSpan = $append({ tag: "span", className: "fret-note", parent: colDOM });
+                    const note = guitarNotes[stringStarts[row] + col]; // Get the Note Name
+                    noteSpan.innerHTML = note.replace(/s/g, "#");   // Append Note Text
+                    colDOM.classList.add("fret-note");
+                }
+            }
+        }
+        if (row < 6) {                                               // Apart from Last Row
+            $append({ tag: "div", className: "guitar__string", parent: rowDOM }); // Create String Element
+        }
+    }
+}
+`,
+    fretDistances: `function calculateFretDistances(totalDistance) {
+    let distance = totalDistance;                                   // Initial Distance is the Total Distance
+    const RATIO = 17.817;                                           // Golden Ratio Used in Electric and Acounstic Guitars
+    const frets = 20;                                               // Total of 20 Frets
+    const fretDistances = [];                                       // Initial Result Array
+
+    for (let fret = 0; fret < frets; fret++) {                      // Iterate Frets
+        const prevDistance = distance;                              // Store Previous Distance
+        distance -= distance / RATIO;                               // Update Distance by Taking Off Golden Ratio
+        fretDistances.push(parseInt(prevDistance - distance));      // Append the Result Array
+    }
+    
+    fretDistances.push(parseInt(distance));                         // Last Item is the Leftover
+    return fretDistances;
+}
+`,
+    displayGuitar: `// Display Action on Board: Function Highlights Active Controller Inputs on the Guitar Board
+//     Fret:            Finger Position on the Fretboard (1 - 20)
+//     String:          String on Fret Board (0 - 5)
+//     Strum:           Which Strum is Activated (-1: No Strum Action, 0 - 5: Strummed String)
+//     RemoveHighLight: Resets DOM to Inactive Status
+function displayActionOnBoard(fret, string, strum, removeHighlight = false) {
+    const COLS = 21;                                                // 20 Frets in a Row Plus Fret 0
+    const TOT_STRINGS = 6;                                          // Total Number of Highlightable Rows 
+    const index = (TOT_STRINGS - string) * COLS + fret;             // Index in the List of DOM Elements
+    const fret_LI = app.DOM.board_LI[index];                        // Get Elements
+    const fret_SPAN = app.DOM.board_SPAN[index];
+    const fret_BTN = app.DOM.board_BTN[TOT_STRINGS - string];
+    const strings = app.DOM.boardStrings[TOT_STRINGS - string];
+    
+    fret_LI.classList.remove(...fret_LI.classList);                 // Remove ALL Classes as There are Multiple States (None, Semi-Highlight, Highlight)
+    fret_SPAN.classList.remove(...fret_SPAN.classList);
+    fret_BTN.classList.remove(...fret_BTN.classList);               
+    strings.classList.remove(...strings.classList);
+    strings.classList.add("guitar__string");               
+
+    if (!removeHighlight) {
+        if (strum == -1) {                                          // If Fret Board Action
+            fret_LI.classList.add("fret-note", "semi-highlight");   // Soft Highlight
+            fret_SPAN.classList.add("fret-note", "semi-highlight");
+        }
+        else {
+            fret_LI.classList.add("fret-note", "highlight");        // Bright Highlight
+            fret_SPAN.classList.add("fret-note", "highlight");
+
+            fret_BTN.classList.add("highlight");                    // Highlight Strum Button
+            strings.classList.add("highlight");                     // Highlight String
+        }
+    }
+
+    if (fret > 0) {                                                 // Remove Highlight from String 0 Fret
+        const baseStringIndex = (TOT_STRINGS - string) * COLS;      // Index in the List of DOM Elements
+        const baseString_LI = app.DOM.board_LI[baseStringIndex];    // Get Base DOM Element
+        //const baseString_SPAN = 
+        baseString_LI.classList.remove(...baseString_LI.classList); // Remove Highlight
+        baseString_LI.classList.add("fret-note");                   // Place Back Original Class
+    }
+}
+`,
+    utilityAppend: `// DOM Selection
+const $ = selector => document.querySelector(selector);                            // Select a Single DOM Element
+const $all = selector => document.querySelectorAll(selector);                      // Select ALL DOM Elements
+
+// Append a Child Element
+// Expect an Object as Parameter { tag: STR, className: STR, id: STR, parent: DOM, NS: bool }
+const $append = (props) => {
+    const { tag, className, id, parent, ns } = { ...props };                       // Deconstruct Parameters
+    const isDomElement = (e) => e instanceof Element || e instanceof HTMLDocument;
+    
+    if (!tag) throw Error("No TAG argument was given to create function.");        // Missing Tag
+    if (!parent) throw Error("No PARENT argument was given to create function.");  // Missing Parent
+    if (!isDomElement(parent)) throw Error("Parent is not a DOM Element.");        // Parent is NOT a DOM Element
+
+    const elem = ns                                                                // Has Different Name Space                                                          
+        ? document.createElementNS('http://www.w3.org/2000/svg', tag)              // Create SVG Elements (svg, circle, line...)
+        : document.createElement(tag);                                             // Create Standard HTML DOM Element
+
+    if (id) elem.id = id;                                                          // Add Id
+    if (className) elem.classList.add(className);                                  // Add Class
+    parent.appendChild(elem);                                                      // Append the Parent Element
+
+    return elem;                                                                   // Return with the Created DOM Element
+}`,
+    guitarCSS: `/* Guitar */
+#guitar {
+    min-width: 100%;
+    min-height: 280px;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);   
+    font-style: normal;
+    border-top: 1px solid #333;
+}
+
+#guitar ul {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#guitar ul:first-child {
+    border-top: 2px solid #333;
+}
+
+#guitar ul:nth-child(6) {
+    border-bottom: 2px solid #333;
+}
+
+#guitar ul li {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    color: #555;
+    font-family: monospace;
+    font-size: 18px;
+    border-right: 2px solid #333;
+
+}
+
+#guitar ul li.semi-highlight, #guitar ul li.highlight {
+    color: white;
+    border: 2px solid transparent;
+    z-index: 10;
+}
+
+#guitar ul:nth-child(1) li.semi-highlight { background-color: rgb(116, 116, 0); border-color: yellow; }
+#guitar ul:nth-child(2) li.semi-highlight { background-color: rgb(121, 74, 0); border-color: #fa9b00; }
+#guitar ul:nth-child(3) li.semi-highlight { background-color: rgb(127, 20, 77); border-color: #ff1493 ;}
+#guitar ul:nth-child(4) li.semi-highlight { background-color: rgb(96, 49, 108); border-color: #ba55d3; }
+#guitar ul:nth-child(5) li.semi-highlight { background-color: rgb(0, 85, 85); border-color: #00ffff; }
+#guitar ul:nth-child(6) li.semi-highlight { background-color: rgb(0, 89, 45); border-color: #00ff7f; }
+
+#guitar ul:nth-child(1) li.highlight { background-color: yellow; }
+#guitar ul:nth-child(2) li.highlight { background-color: rgb(250, 155, 0); }
+#guitar ul:nth-child(3) li.highlight { background-color: deeppink ;}
+#guitar ul:nth-child(4) li.highlight { background-color: mediumorchid; }
+#guitar ul:nth-child(5) li.highlight { background-color: aqua; }
+#guitar ul:nth-child(6) li.highlight { background-color: springgreen; }
+
+#guitar ul li span {
+    position: absolute;
+    width: 34px;
+    right: 2px;
+    padding: 0 2px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 10;
+}
+
+#guitar ul li span.semi-highlight, #guitar ul li span.highlight {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+#guitar ul li span.semi-highlight {
+    color: white;
+}
+
+#guitar ul li span.highlight {
+    color: black;
+}
+
+
+#guitar ul li:first-child {
+    color: #999;
+}
+
+#guitar ul li:nth-child(22) {
+    color: #999;
+    border: none;
+}
+
+#guitar ul li:hover {
+    color: #999;
+}
+
+#guitar ul li button {
+    width: 60%;
+    background-color: transparent;
+    font-family: monospace;
+    color: #000;
+    font-size: 18px;
+    font-weight: bolder;
+    z-index: 10;
+    cursor: pointer;
+}
+
+#guitar ul:nth-child(1) li button { background-color: rgb(116, 116, 0); border-color: yellow; }
+#guitar ul:nth-child(2) li button { background-color: rgb(121, 74, 0); border-color: rgb(250, 155, 0); }
+#guitar ul:nth-child(3) li button { background-color: rgb(127, 20, 77); border-color: deeppink ;}
+#guitar ul:nth-child(4) li button { background-color: rgb(96, 49, 108); border-color: mediumorchid; }
+#guitar ul:nth-child(5) li button { background-color: rgb(0, 85, 85); border-color: aqua; }
+#guitar ul:nth-child(6) li button { background-color: rgb(0, 89, 45); border-color: springgreen; }
+
+#guitar ul:nth-child(1) li button:hover, #guitar ul:nth-child(1) li button.highlight { background-color: yellow; }
+#guitar ul:nth-child(2) li button:hover, #guitar ul:nth-child(2) li button.highlight { background-color: rgb(250, 155, 0); }
+#guitar ul:nth-child(3) li button:hover, #guitar ul:nth-child(3) li button.highlight { background-color: deeppink ;}
+#guitar ul:nth-child(4) li button:hover, #guitar ul:nth-child(4) li button.highlight { background-color: mediumorchid; }
+#guitar ul:nth-child(5) li button:hover, #guitar ul:nth-child(5) li button.highlight { background-color: aqua; }
+#guitar ul:nth-child(6) li button:hover, #guitar ul:nth-child(6) li button.highlight { background-color: springgreen; }
+
+
+#guitar ul .guitar__string {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    opacity: 0.5;
+}
+
+#guitar ul:nth-child(1) .guitar__string { background-color: rgb(116, 116, 0); }
+#guitar ul:nth-child(2) .guitar__string { background-color: rgb(121, 74, 0); }
+#guitar ul:nth-child(3) .guitar__string { background-color: rgb(127, 20, 77); }
+#guitar ul:nth-child(4) .guitar__string { background-color: rgb(96, 49, 108); }
+#guitar ul:nth-child(5) .guitar__string { background-color: rgb(0, 85, 85); }
+#guitar ul:nth-child(6) .guitar__string { background-color: rgb(0, 89, 45); }
+
+
+#guitar ul:nth-child(1) .guitar__string.highlight { background-color: yellow; }
+#guitar ul:nth-child(2) .guitar__string.highlight { background-color: rgb(250, 155, 0); }
+#guitar ul:nth-child(3) .guitar__string.highlight { background-color: deeppink ;}
+#guitar ul:nth-child(4) .guitar__string.highlight { background-color: mediumorchid; }
+#guitar ul:nth-child(5) .guitar__string.highlight { background-color: aqua; }
+#guitar ul:nth-child(6) .guitar__string.highlight { background-color: springgreen; }
+`,
 };
 
 export default codeSnippets;

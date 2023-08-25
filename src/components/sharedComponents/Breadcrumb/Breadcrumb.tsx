@@ -19,14 +19,14 @@ const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
     const [visits, setVisits] = useState(visitCount || 0);
     const noLeadingSlash = path.replace("/", "");
     const breadcrumbPaths = noLeadingSlash.split("/");
-
+    console.log(visitCount);
     useEffect(() => {
         if (!visitsPreLoaded) {
             getVisits(path, (visits) => {
                 setVisits(visits);
             });
         } else setVisits(visitCount || 0);
-    }, [visits]);
+    }, [visits, visitCount]);
 
     return (
         <div className="Breadcrumb">
