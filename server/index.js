@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require('cors');                                      // CORS Settings
 const PORT = process.env.PORT || 5000;
+const cron = require("node-cron");
+const dailyEmail = require("./scheduled/dailyEmail");
 
 app.use(express.json({
     type: ['application/json', 'text/plain']
@@ -33,3 +35,10 @@ mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-w
         app.listen(PORT, () => console.log(`Listening ${PORT}... `));
     })
     .catch(err => console.log(err));
+
+
+// Email Scheduler
+cron.schedule('0 0 0 * * *', () => {
+    dailyEmail();
+});
+
