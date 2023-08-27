@@ -117,7 +117,7 @@ const sendEmail = async (message) => {
         from: fromEmailAddress,                                       
         to: [fromEmailAddress, toEmailAddress],
         subject: 'Breakdown Report | TSCHIBOKA.CO.UK',
-        html: message
+        html: "<h1>HERE</h1>"
     };
     console.log("HERE");
     const transporter = nodemailer.createTransport({
