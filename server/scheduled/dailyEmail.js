@@ -118,6 +118,7 @@ const sendEmail = async (message) => {
         subject: 'Breakdown Report | TSCHIBOKA.CO.UK',
         html: message
     };
+    console.log("Sending Email...");
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
@@ -130,9 +131,9 @@ const sendEmail = async (message) => {
     });
     
     await transporter.sendMail(mailOptions).then(info => {
-        console.log("Email Sent 1", info);
+        console.log("Email Info", info);
     }).catch(err => console.log(err));
-    console.log("Email Sent 2");
+    console.log("Email Sent...");
 }
 
 module.exports = dailyEmail;
