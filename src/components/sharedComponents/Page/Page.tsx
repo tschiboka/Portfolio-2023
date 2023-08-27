@@ -15,8 +15,8 @@ const Page = ({ children, title, path }: Props) => {
         document.title = title;
         window.scrollTo(0, 0);
 
-        // Do Not Record Visits in Incognito Mode
         detectIncognito().then((result) => {
+            // Do Not Record Visits in Incognito Mode
             if (!result.isPrivate) postVisit(path);
         });
     }, []);

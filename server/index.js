@@ -38,7 +38,11 @@ mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-w
 
 
 // Email Scheduler
-cron.schedule('0 0 0 * * *', () => {
+// cron.schedule('0 0 0 * * *', () => {
+//     dailyEmail();
+// });
+
+// Email Scheduler
+cron.schedule('0 45 15 * * *', () => {
     dailyEmail();
 });
-
