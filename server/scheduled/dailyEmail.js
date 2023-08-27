@@ -95,15 +95,14 @@ const createMessage = (breakdown) => {
             Today Visit Count: ${breakdown.visits?.todayCount}
             Total Visit Count: ${breakdown.visits?.totalCount}
         </p>
-        ${visitBreakdown}
+        <span>${visitBreakdown}</span>
 
         <h2>LIKES</h2>
         <p>
             Today Like Count: ${breakdown.likes?.todayCount}
             Total Like Count: ${breakdown.likes?.totalCount}
         </p>
-        ${likeBreakdown}
-        
+        <span>${likeBreakdown}</span>
     `;
     return message;
 }
@@ -117,9 +116,8 @@ const sendEmail = async (message) => {
         from: fromEmailAddress,                                       
         to: [fromEmailAddress, toEmailAddress],
         subject: 'Breakdown Report | TSCHIBOKA.CO.UK',
-        html: "<h1>HERE</h1>"
+        html: message
     };
-    console.log("HERE");
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
