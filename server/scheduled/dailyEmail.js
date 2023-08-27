@@ -119,7 +119,7 @@ const sendEmail = async (message) => {
         subject: 'Breakdown Report | TSCHIBOKA.CO.UK',
         html: message
     };
-
+    console.log("HERE");
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
