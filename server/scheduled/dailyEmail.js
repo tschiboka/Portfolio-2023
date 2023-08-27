@@ -12,7 +12,6 @@ async function dailyEmail() {
             $gte: new Date(todaysDate.setHours(0, 0, 0, 0)),     // Start of the day: YYYY-MM-DD 00:00:00:0000
             $lt: new Date(todaysDate.setHours(23, 59, 59, 999)), // End of the day:   YYYY-MM-DD 23:59:59:0000
         }});
-    const visitBreakdown = getPathBreakdown(todayVisits);
 
     // Get Like Statistics
     const totalLikes = await Like.find();                        // Get Every Like
@@ -21,7 +20,6 @@ async function dailyEmail() {
             $gte: new Date(todaysDate.setHours(0, 0, 0, 0)),     // Start of the day: YYYY-MM-DD 00:00:00:0000
             $lt: new Date(todaysDate.setHours(23, 59, 59, 999)), // End of the day:   YYYY-MM-DD 23:59:59:0000
         }});
-    const likeBreakdown = getPathBreakdown(todayLikes);
 
     // Breakdown
     const breakdown = {
@@ -134,6 +132,7 @@ const sendEmail = async (message) => {
     });
     
     await transporter.sendMail(mailOptions);
+    console.log("Email Sent");
 }
 
 module.exports = dailyEmail;
