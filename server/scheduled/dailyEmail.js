@@ -91,18 +91,18 @@ const createMessage = (breakdown) => {
 
                         //<span>${visitBreakdown}</span>
                         //<span>${likeBreakdown}</span>
+                        // <p>
+                        //     Today Visit Count: ${breakdown.visits?.todayCount}
+                        //     Total Visit Count: ${breakdown.visits?.totalCount}
+                        // </p>
+                    
+                        // <h2>LIKES</h2>
+                        // <p>
+                        //     Today Like Count: ${breakdown.likes?.todayCount}
+                        //     Total Like Count: ${breakdown.likes?.totalCount}
+                        // </p>
     const message = `
         <h2>VISITS</h2>
-        <p>
-            Today Visit Count: ${breakdown.visits?.todayCount}
-            Total Visit Count: ${breakdown.visits?.totalCount}
-        </p>
-
-        <h2>LIKES</h2>
-        <p>
-            Today Like Count: ${breakdown.likes?.todayCount}
-            Total Like Count: ${breakdown.likes?.totalCount}
-        </p>
     `;
     return message;
 }
