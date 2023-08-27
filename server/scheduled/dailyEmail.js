@@ -119,6 +119,7 @@ const sendEmail = async (message) => {
         html: message
     };
     console.log("Sending Email...");
+    console.log(message);
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
@@ -132,7 +133,7 @@ const sendEmail = async (message) => {
     
     await transporter.sendMail(mailOptions).then(info => {
         console.log("Email Info", info);
-    }).catch(err => console.log(err));
+    }).catch(err => console.log("Email Error", err));
     console.log("Email Sent...");
 }
 
