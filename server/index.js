@@ -22,10 +22,12 @@ const index = require("./routes/index");
 const message = require("./routes/message");
 const visit = require("./routes/visit");
 const like = require("./routes/like");
+const schedule = require("./routes/schedule");
 app.use("/", index);
 app.use("/message", message);
 app.use("/visit", visit);
 app.use("/like", like);
+app.use("/schedule", schedule);
 
 
 // Cyclic Server Needs DB Connection First then Server Listen
@@ -38,12 +40,7 @@ mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-w
 
 
 // Email Scheduler
+// Cron Scheduling Do Not Work in Cyclic's Serverless
 // cron.schedule('0 0 0 * * *', () => {
 //     dailyEmail();
 // });
-
-// Email Scheduler
-cron.schedule('0 0 16 * * *', () => {
-    dailyEmail();
-    console.log("HERE")
-}, {timezone: "Europe/London"});
