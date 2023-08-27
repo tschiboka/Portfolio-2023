@@ -108,7 +108,7 @@ const createMessage = (breakdown) => {
 
 const sendEmail = async (message) => {
     const fromEmailAddress = "tibi.aki.tivadar@gmail.com";
-    const toEmailAddress = "dev@tschiboka.co.uk";
+    const toEmailAddress = "tibi.aki.tivadar@gmail.com";
     const emailPassword = process.env.EMAIL_PASSWORD;
     
     const mailOptions = {                                          // Email Specifications
