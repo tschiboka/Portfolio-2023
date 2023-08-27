@@ -89,20 +89,20 @@ const createMessage = (breakdown) => {
                         .find(likeTot => likeTot.path === like.path)|| {count: 0}).count)
                         .join("<br />")}`;
 
+                        //<span>${visitBreakdown}</span>
+                        //<span>${likeBreakdown}</span>
     const message = `
         <h2>VISITS</h2>
         <p>
             Today Visit Count: ${breakdown.visits?.todayCount}
             Total Visit Count: ${breakdown.visits?.totalCount}
         </p>
-        <span>${visitBreakdown}</span>
 
         <h2>LIKES</h2>
         <p>
             Today Like Count: ${breakdown.likes?.todayCount}
             Total Like Count: ${breakdown.likes?.totalCount}
         </p>
-        <span>${likeBreakdown}</span>
     `;
     return message;
 }
