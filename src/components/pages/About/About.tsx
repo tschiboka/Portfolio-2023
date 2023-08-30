@@ -123,8 +123,15 @@ const About = ({ pageName, path }: Props) => {
                         University, 2023.
                     </li>
                     <li>HND Computing [Distinction], Icon College, 2022.</li>
+                    <li>TypeScript Course [Online - Mosh], 2023.</li>
                     <li>React Course [Online - Mosh], 2023.</li>
                     <li>NodeJs Course [Online - Mosh], 2022.</li>
+                    <li>
+                        Data Structures and Algorithms 2 [Online - Mosh], 2021
+                    </li>
+                    <li>
+                        Data Structures and Algorithms 1 [Online - Mosh], 2021
+                    </li>
                     <li>
                         Front End Development Certificate, [Online -
                         FreeCodeCamp], 2018.

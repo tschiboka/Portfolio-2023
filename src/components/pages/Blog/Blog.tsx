@@ -6,7 +6,7 @@ import Menu from "../../sharedComponents/Menu/Menu";
 import Nav from "../../sharedComponents/Nav/Nav";
 import Page from "../../sharedComponents/Page/Page";
 import SubNav from "../../sharedComponents/SubNav/SubNav";
-import { blogArticles } from "../../articles/artiles";
+import { blogArticles } from "../../articles/articles";
 import { getLikeSummary } from "../../../serverAPI/likes";
 import "./Blog.scss";
 

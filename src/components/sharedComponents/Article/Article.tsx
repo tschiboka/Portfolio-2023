@@ -20,7 +20,7 @@ import { HiShare } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 
 // Other Assets
-import { blogArticles } from "../../articles/artiles";
+import { blogArticles } from "../../articles/articles";
 
 // Styles
 import "./Articles.scss";

@@ -70,7 +70,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
-        upcomingDate: "27.08.2023",
+        upcomingDate: "05.09.2023",
     },
     {
         title: "JavaScript's Sorting - What's behind the Hood?",
@@ -83,6 +83,6 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
-        upcomingDate: "05.09.2023",
+        upcomingDate: "18.09.2023",
     },
 ];
