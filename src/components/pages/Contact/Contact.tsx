@@ -8,7 +8,7 @@ import { MdAlternateEmail } from "react-icons/md";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { useAppContext } from "../../../context/AppContext";
 import "./Contact.scss";
 
@@ -17,14 +17,14 @@ interface Props {
     path: string;
 }
 
-interface ValidationResult {
+export interface ValidationResult {
     valid: boolean;
     error: string;
 }
 
-const MAX_MESSAGE_CHARACTERS = 1000;
+export const MAX_MESSAGE_CHARACTERS = 1000;
 
-const validateName = (name: string): ValidationResult => {
+export const validateName = (name: string): ValidationResult => {
     const nameRegex = /^[a-z \-']+$/i;
     if (name.length === 0) return { valid: false, error: "Cannot be Empty!" };
     if (name.length > 50) return { valid: false, error: "Too Long!" };
@@ -33,15 +33,17 @@ const validateName = (name: string): ValidationResult => {
     return { valid: true, error: "" };
 };
 
-const validateEmail = (email: string): ValidationResult => {
+export const validateEmail = (email: string): ValidationResult => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (email.length === 0) return { valid: false, error: "Cannot be Empty!" };
+    if (email.length <= 5) return { valid: false, error: "Too Short!" };
+    if (email.length > 255) return { valid: false, error: "Too Long!" };
     if (!emailRegex.test(email))
         return { valid: false, error: "Invalid Email Format!" };
     return { valid: true, error: "" };
 };
 
-const validatePhone = (tel: string): ValidationResult => {
+export const validatePhone = (tel: string): ValidationResult => {
     if (tel.length > 0) {
         // Let through empty tel nums
         if (!/^[0-9 ]+$/.test(tel))
@@ -52,7 +54,7 @@ const validatePhone = (tel: string): ValidationResult => {
     return { valid: true, error: "" };
 };
 
-const validateMessage = (message: string): ValidationResult => {
+export const validateMessage = (message: string): ValidationResult => {
     const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\\[\]:;@'"-\s]*$/;
     if (message.length === 0)
         return { valid: false, error: "Cannot be Empty!" };
@@ -126,7 +128,7 @@ const Contact = ({ pageName, path }: Props) => {
                 },
                 body: JSON.stringify({
                     name,
-                    email,
+                    email: email.toLowerCase(),
                     phone: phone.replace(/\D/g, ""),
                     message,
                 }),
@@ -146,6 +148,28 @@ const Contact = ({ pageName, path }: Props) => {
                 setSubmitDisabled(false);
             }
         }
+    };
+
+    // ChangeEvent is more specialised than FocusEvent
+    // Lowercase Email Input Value on Input Change Rather than Just Focus Change
+    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target) {
+            const lowerCaseEmailText = event.target.value.toLowerCase();
+            event.target.value = lowerCaseEmailText;
+        }
+
+        setEmailError(validateEmail(emailRef.current?.value || "").error);
+    };
+
+    // Phone Numbers Are Filtered for Digits
+    const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target) {
+            const onlyDigits = event.target.value.replace(/\D/g, "");
+            console.log(onlyDigits);
+            event.target.value = onlyDigits;
+        }
+
+        setTelError(validatePhone(phoneRef.current?.value || "").error);
     };
 
     const mail = "Dev@Tschiboka.Co.Uk";
@@ -204,16 +228,10 @@ const Contact = ({ pageName, path }: Props) => {
                         <fieldset>
                             <input
                                 id="email"
-                                type="text"
+                                type="email"
                                 placeholder="Email Address *"
                                 ref={emailRef}
-                                onBlur={() =>
-                                    setEmailError(
-                                        validateEmail(
-                                            emailRef.current?.value || ""
-                                        ).error
-                                    )
-                                }
+                                onBlur={(event) => handleEmailChange(event)}
                             />
                         </fieldset>
                         {emailError && (
@@ -230,13 +248,7 @@ const Contact = ({ pageName, path }: Props) => {
                                 type="text"
                                 placeholder="Phone"
                                 ref={phoneRef}
-                                onBlur={() =>
-                                    setTelError(
-                                        validatePhone(
-                                            phoneRef.current?.value || ""
-                                        ).error
-                                    )
-                                }
+                                onBlur={(event) => handlePhoneChange(event)}
                             />
                         </fieldset>
                         {telError && (
