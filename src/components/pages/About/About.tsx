@@ -103,12 +103,12 @@ const About = ({ pageName, path }: Props) => {
                         <figcaption>Guitar Console Instrument</figcaption>
                     </figure>
                 </div>
-                <Link className="link--inline" to="/projects/riffmaster">
+                <Link className="link--inline" to="/blog/riffmaster">
                     You can check out this guitar project in detail here.
                 </Link>
                 <h2>Continued Self Development</h2>
                 <p>
-                    I consider the completiion of my bachelor's degree the
+                    I consider the completion of my bachelor's degree the
                     beginning of my self-development and an exciting phase of a
                     life-long professional development journey. I am now further
                     expanding my skills by taking courses on TypeScript and Jest

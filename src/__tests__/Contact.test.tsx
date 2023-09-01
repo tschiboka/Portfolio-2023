@@ -1,3 +1,4 @@
+import "@testing-library/jest-dom";
 const contact = require("../components/pages/Contact/Contact");
 
 // VALIDATE NAME

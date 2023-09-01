@@ -38,5 +38,4 @@ module.exports = {
       '\\.png$': '<rootDir>/file-mock.js',
       '\\.jpg$': '<rootDir>/file-mock.js',
     },
-  
   };

@@ -68,6 +68,7 @@ export const validateMessage = (message: string): ValidationResult => {
 };
 
 const Contact = ({ pageName, path }: Props) => {
+    console.log(path, pageName);
     const { mobileMenuVisible, subMenuVisible } = useAppContext();
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -298,6 +299,7 @@ const Contact = ({ pageName, path }: Props) => {
                         <button
                             className="submit-message"
                             type="button"
+                            name="submit"
                             disabled={submitDisabled}
                             onClick={() => handleSubmit()}
                         >
