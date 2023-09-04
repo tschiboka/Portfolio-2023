@@ -1,7 +1,8 @@
 import { getProjects } from "../components/pages/Projects/getProjects";
+import { getColourName } from "../components/pages/Projects/getProjects";
 
 // Get Project
-// Returns the list of projects with the following properties:
+// Returns a list of projects with the following properties:
 // Title, Description, Badges, Url, Github, Readmore
 describe("Get Projects", () => {
     const result = getProjects();
@@ -39,5 +40,23 @@ describe("Get Projects", () => {
         result.forEach((project) => {
             expect(project.badges.length).toBeGreaterThan(0);
         });
+    });
+});
+
+describe("Get Colours", () => {
+    it("Should Return a String", () => {
+        const result = getColourName("react");
+        expect(typeof result).toBe("string");
+    });
+
+    it("Should Be Case Insensitive", () => {
+        const resultUpper = getColourName("React");
+        const resultLower = getColourName("react");
+        expect(resultLower).toBe(resultUpper);
+    });
+
+    it("Should Return Default Color", () => {
+        const result = getColourName("A");
+        expect(result).toBe("white");
     });
 });
