@@ -28,6 +28,7 @@ import "./Articles.scss";
 import ShareMenu from "../ShareMenu/ShareMenu";
 import { getLikes, postLike } from "../../../serverAPI/likes";
 import { getVisits } from "../../../serverAPI/visits";
+import SuggestedArticles from "../SuggestedArticles/SuggestedArticles";
 
 // Functions
 const scrollToTop = () => {
@@ -147,6 +148,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                     />
                 )}
                 <Disclaimer />
+                <SuggestedArticles articles={article?.suggestedArticles} />
             </main>
             <Footer
                 pageName={pageName}

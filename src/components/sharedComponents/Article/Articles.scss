@@ -118,7 +118,7 @@ aside.blog-component--article {
         font-variant: small-caps;
         font-weight: normal;
     }
-    article { 
+    article:not(.BlogCard) { 
         margin: 0 auto;
         padding: 0;
         

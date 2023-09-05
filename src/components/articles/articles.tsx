@@ -13,6 +13,7 @@ export interface BlogArticle {
     to: string;
     readingTime?: string;
     codeTime?: string;
+    suggestedArticles?: string[];
     created?: string;
     updated?: string;
     upcoming?: boolean;
@@ -30,6 +31,7 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/riffmaster",
         readingTime: "13 mins",
         codeTime: "5 weeks",
+        suggestedArticles: ["/blog/sounds-with-howler"],
         created: "06.08.2023",
         updated: "11.08.2023",
     },
@@ -43,6 +45,7 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/sounds-with-howler",
         readingTime: "10 mins",
         codeTime: "2 hours",
+        suggestedArticles: ["/blog/riffmaster"],
         created: "13.08.2023",
         updated: "24.08.2023",
     },

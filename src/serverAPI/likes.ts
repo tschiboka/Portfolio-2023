@@ -1,12 +1,10 @@
+import { getURL } from "./getURL";
 import { LikeCount } from "../components/pages/Blog/Blog";
 
 export const getLikes = async (
     path: string,
     callback: (likes: number) => void
 ) => {
-    //const URLLocal = "http://localhost:5000/like";
-    const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
-    const URL = URLLive;
     const options = {
         method: "GET",
         headers: {
@@ -15,7 +13,7 @@ export const getLikes = async (
     };
 
     try {
-        const response = await fetch(`${URL}?path=${path}`, options);
+        const response = await fetch(`${getURL()}/like?path=${path}`, options);
         const responseJSON = await response.json();
         if (responseJSON.success) {
             callback(responseJSON.likes);
@@ -26,9 +24,6 @@ export const getLikes = async (
 };
 
 export const getLikeSummary = async (callback: (likes: LikeCount) => void) => {
-    //const URLLocal = "http://localhost:5000/like";
-    const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
-    const URL = URLLive;
     const options = {
         method: "GET",
         headers: {
@@ -37,7 +32,7 @@ export const getLikeSummary = async (callback: (likes: LikeCount) => void) => {
     };
 
     try {
-        const response = await fetch(`${URL}`, options);
+        const response = await fetch(`${getURL()}/like`, options);
         const responseJSON = await response.json();
 
         if (responseJSON.success) {

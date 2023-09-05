@@ -66,3 +66,21 @@
         }
     }
 }
+
+.light {
+    .Disclaimer {
+        background-color: $white_2;
+        border: 1px solid $black_5;
+        img {
+            background-color: black;
+        }
+        a.contact-link {
+            color: black;
+            background-color: $white_3;
+            border-color: $accent_dark_3;
+            &:hover {
+                background-color: $white_4;
+            }
+        }
+    }
+}

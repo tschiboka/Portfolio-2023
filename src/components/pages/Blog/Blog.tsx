@@ -9,13 +9,14 @@ import SubNav from "../../sharedComponents/SubNav/SubNav";
 import { blogArticles } from "../../articles/articles";
 import { getLikeSummary } from "../../../serverAPI/likes";
 import "./Blog.scss";
+import { getVisitSummary } from "../../../serverAPI/visits";
 
 interface Props {
     pageName: string;
     path: string;
 }
 
-type VisitCount = { [path: string]: number };
+export type VisitCount = { [path: string]: number };
 export type LikeCount = { [path: string]: number };
 
 const Blogs = ({ pageName, path }: Props) => {
@@ -37,32 +38,12 @@ const Blogs = ({ pageName, path }: Props) => {
 
     const newArticle = sortedArticles[sortedArticles.length - 1];
 
-    const getVisits = async () => {
-        //const URLLocal = "http://localhost:5000/visit";
-        const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/visit";
-        const URL = URLLive;
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        };
-
-        try {
-            const response = await fetch(`${URL}`, options);
-            const responseJSON = await response.json();
-            if (responseJSON.success) {
-                setVisitsLoaded(true);
-                const visits: VisitCount = responseJSON.visits;
-                setVisits(visits);
-            } else console.log("Error While Getting Visits Data!", response);
-        } catch (err) {
-            console.log("Error While Getting Visits Data!", err);
-        }
-    };
-
     useEffect(() => {
-        if (!visitsLoaded) getVisits();
+        if (!visitsLoaded)
+            getVisitSummary((visits: VisitCount | null) => {
+                setVisitsLoaded(true);
+                setVisits(visits);
+            });
         if (!likesLoaded) {
             getLikeSummary((likes: LikeCount | null) => {
                 setLikesLoaded(true);
