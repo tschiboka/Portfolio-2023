@@ -60,6 +60,18 @@ export const blogArticles: BlogArticle[] = [
         updated: "18.08.2023",
     },
     {
+        title: "JavaScript's Sorting - What's behind the Hood?",
+        image: jsSortingImg,
+        imageAlt: "Sorting",
+        abstract:
+            "Delve into the intricate inner workings of JavaScript's built-in sorting mechanism. Uncover the magic behind Array.sort() as we dissect the comparison functions, sorting stability, and optimisation strategies employed by the language.",
+        badges: ["javascript"],
+        to: "",
+        readingTime: "",
+        codeTime: "",
+        created: "05.09.2023",
+    },
+    {
         title: "Recreating McDonald's Ordering Kiosk UI",
         image: mcdonaldsImg,
         imageAlt: "McDonalds",
@@ -71,18 +83,5 @@ export const blogArticles: BlogArticle[] = [
         codeTime: "",
         upcoming: true,
         upcomingDate: "05.09.2023",
-    },
-    {
-        title: "JavaScript's Sorting - What's behind the Hood?",
-        image: jsSortingImg,
-        imageAlt: "McDonalds",
-        abstract:
-            "Delve into the intricate inner workings of JavaScript's built-in sorting mechanism. Uncover the magic behind Array.sort() as we dissect the comparison functions, sorting stability, and optimisation strategies employed by the language.",
-        badges: ["javascript"],
-        to: "",
-        readingTime: "",
-        codeTime: "",
-        upcoming: true,
-        upcomingDate: "18.09.2023",
     },
 ];

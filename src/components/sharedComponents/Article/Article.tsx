@@ -6,11 +6,12 @@ import Page from "../../sharedComponents/Page/Page";
 import Menu from "../../sharedComponents/Menu/Menu";
 import Nav from "../../sharedComponents/Nav/Nav";
 import SubNav from "../../sharedComponents/SubNav/SubNav";
-import Footer from "../../sharedComponents/Footer/Footer";
 import LikeButton from "../../sharedComponents/LikeButton/LikeButton";
-import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
 import References from "../../sharedComponents/References/References";
 import { getReferenceList } from "../../articles/references";
+import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
+import Disclaimer from "../Disclaimer/Disclaimer";
+import Footer from "../../sharedComponents/Footer/Footer";
 
 // Icons
 import { BiSolidUpArrowSquare } from "react-icons/bi";
@@ -145,6 +146,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         updated={article.updated}
                     />
                 )}
+                <Disclaimer />
             </main>
             <Footer
                 pageName={pageName}

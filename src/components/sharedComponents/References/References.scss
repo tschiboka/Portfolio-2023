@@ -22,36 +22,61 @@
     ul {
         max-width: 100%;
         list-style: none;
+        margin-bottom: 0;
+        @include bp.md {
+            margin-bottom: 1.5rem;
+        }
 
         li {
             max-width: calc(100vw - 3rem);
+            margin: 1.5rem;
+            margin-top: 0;
+            padding-bottom: 1.5rem;
             display: inline-flex;
+            flex-direction: column;
+            border-bottom: 2px solid $black_1;
+
+            &:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            
+            @include bp.md {
+                padding-bottom: 0;
+                margin-bottom: 0.5rem;
+                flex-direction: row;
+                border-bottom: none;
+                margin: 0;
+            }
 
             span.left {
-                min-width: 150px;
-                width: 150px;
-                padding-right: 10px;
-                display: flex;
-                flex-direction: column;
-                border-right: 2px solid $black_2;
                 @include bp.md {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
                     width: 35vw;
                     min-width: 35vw;
+                    padding: 1rem;
                     display: inline;
+                    border-right: 2px solid $black_2;
                 }
             }
         }
 
         span, a {
             max-width: 100%;
-            margin: 10px;
             color: $white_5;
+            padding-right: 10px;
             white-space: pre-wrap; /* CSS3 */    
             white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
             white-space: -pre-wrap; /* Opera 4-6 */    
             white-space: -o-pre-wrap; /* Opera 7 */    
             word-wrap: break-word; /* Internet Explorer 5.5+ */
             overflow-y: auto;
+            @include bp.md {
+                padding: 10px;
+            }
         }
 
         .References__index {
@@ -70,8 +95,17 @@
         }
 
         a {
-            font-family: monospace;
-            font-size: $font-md;
+            font-family: "Fira", monospace;
+            font-size: $font-xs;
+            font-weight: lighter;
+            padding-top: 1rem;
+            @include bp.md {
+                padding-left: 2rem;
+            }
+            &:hover {
+                color: $accent_dark_2;
+                transform: scale(1.05);
+            }
         }
     }
 }
@@ -83,6 +117,10 @@
 
     ul {
         li {
+            border-bottom: 2px solid $white_2;
+            @include bp.md {
+                border-bottom: none;
+            }
             .References__index, .References__title {
                 color: $black_4;
             }
@@ -95,6 +133,9 @@
             }
             a {
                 color: $black_5;
+                &:hover {
+                    color: $accent_dark_3;
+                }
             }
         }
     }

@@ -1,0 +1,68 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+
+.Disclaimer {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    padding: 1.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $black_1;
+
+    @include bp.md {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    img {
+        max-width: 250px;
+        padding: 20px 0 0 0;
+        margin-bottom: 1.5rem;
+        border-radius: 100%;
+        border: 1px solid $black_2;
+        filter: grayscale(1);
+        opacity: 0.8;
+        @include bp.lg {
+            margin-left: 1.5rem;
+            width: 250px;
+        }
+    }
+
+    p {
+        margin: 0;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+        font-size: $font_sm;
+        color: $white_5;
+        @include bp.md {
+            max-width: calc(100% - 250px - 1.5rem);
+            padding: 0 1.5rem;
+            font-size: $font-md;
+        }
+        @include bp.xl {
+            padding: 0 3rem;
+        }
+    }
+    a.contact-link {
+        max-width: 300px;
+        width: 100%;
+        padding: 0.5rem;
+        background-color: $black_1;
+        color: $white_2;
+        font-size: $font-md;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        border: 2px solid $accent_dark_2;
+        border-radius: 100px;
+        &:hover {
+            background-color: $accent_dark_2;
+            color: black;
+            cursor: pointer;
+        }
+    }
+}

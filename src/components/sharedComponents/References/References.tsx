@@ -21,7 +21,7 @@ const References = ({ references }: Props) => {
                     <li key={index}>
                         <span className="left">
                             <span className="References__index">
-                                [ {index} ]
+                                [ {index + 1} ]
                             </span>
                             <span className="References__author">
                                 {reference.author}
