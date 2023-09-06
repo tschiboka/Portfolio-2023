@@ -88,6 +88,16 @@ const references: Record<string, Reference[]> = {
             author: "ECMAScript Language Specification",
             source: "https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.sort",
         },
+        {
+            title: "String Prototype localeCompare()",
+            author: "MND",
+            source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare",
+        },
+        {
+            title: "Intl.Collator() Constructor",
+            author: "MND",
+            source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options",
+        },
     ],
 };
 

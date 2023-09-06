@@ -183,10 +183,85 @@ const JsSorting = ({ pageName, path }: Props) => {
                 In most cases, it does not matter which method we use. Reversing
                 the sorted array is an easy-to-read solution, but the second
                 version may fit better for performance-sensitive applications
-                with large arrays. While the complexity of our sorting function
-                is implementation-dependent, likely O (n log (n)), the reverse
-                has an additional O (n) complexity.
+                with large arrays. While the complexity of both of our sorting
+                functions is implementation-dependent, likely O (n log (n)), the
+                reverse has an additional O (n) complexity.
             </p>
+            <h3>Sorting Objects</h3>
+            <p>
+                Comparator functions offer much greater versatility than merely
+                using them for descending sorting. One of the most common use
+                cases for more complex sorts in web development is related to
+                sorting objects by one or more of their property value. Typical
+                scenarios include sorting users by their registration date,
+                organising products by price, or arranging posts by their
+                publication timestamps. Let's consider a simple scenario where
+                users are ordered by their registration date.
+            </p>
+            <Code
+                fileName="users.js"
+                language="javascript"
+                content={codeSnippets.users}
+            />
+            <p>
+                We can simply refer to the object property values in our
+                comparison function to sort users by name.
+            </p>
+            <Code
+                fileName="sortByName.js"
+                language="javascript"
+                content={codeSnippets.sortByName}
+            />
+            <p>
+                However, please beware of the string comparison because we
+                cannot rely on the subtraction operator, like "A" - "B" returns
+                NaN. To compare strings reliably, we must use the localCompare()
+                function. The localeCompare() method of String values returns a
+                number indicating whether this string comes before, or after, or
+                is the same as the given string in sort order.
+                <Link className="Reference__Link" to={references[3].source}>
+                    [ {references[4].author} ]
+                </Link>
+                Additionally, we can fine-tune our comparison by specifying the
+                language, base for accents and cases, or setting numeric options
+                to correct the already mentioned comparison problem. See details
+                here:
+                <Link className="Reference__Link" to={references[3].source}>
+                    [ {references[5].author} ]
+                </Link>
+            </p>
+            <Code
+                fileName="sortOptions.js"
+                language="javascript"
+                content={codeSnippets.localeCompare}
+            />
+            <p>
+                Lastly, we can sort our users by dates, for example, their date
+                of birth. In this case, we compare the returned number when
+                creating a new Date instance.
+            </p>
+            <Code
+                fileName="sortByDate.js"
+                language="javascript"
+                content={codeSnippets.sortByDate}
+            />
+            <h3>Edge Cases</h3>
+            <p>
+                Some edge cases have already been mentioned, like the
+                lexicographic sorting of numbers, language-specific issues like
+                accents, and case sensitivity. However, I want to call your
+                attention to some JavaScript-specific values we must account for
+                to create reliable code. Some falsy values, such as 0, false,
+                null and undefined, may behave unexpectedly. For instance, NaN
+                stayed in its original place at the beginning and the end of a
+                numeric sorting, but it was ordered lexicographically in string
+                conversion.
+            </p>
+            <Code
+                fileName="edgeCases.js"
+                language="javascript"
+                content={codeSnippets.edgeCases}
+            />
         </Article>
     );
 };
