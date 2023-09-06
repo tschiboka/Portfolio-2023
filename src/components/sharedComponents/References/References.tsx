@@ -12,30 +12,33 @@ interface Props {
 }
 
 const References = ({ references }: Props) => {
-    return (
-        <section className="References">
-            <hr />
-            <h4>References</h4>
-            <ul>
-                {references.map((reference, index) => (
-                    <li key={index}>
-                        <span className="left">
-                            <span className="References__index">
-                                [ {index + 1} ]
+    if (references && references.length)
+        return (
+            <section className="References">
+                <hr />
+                <h4>References</h4>
+                <ul>
+                    {references.map((reference, index) => (
+                        <li key={index}>
+                            <span className="left">
+                                <span className="References__index">
+                                    [ {index + 1} ]
+                                </span>
+                                <span className="References__author">
+                                    {reference.author}
+                                </span>
+                                <span className="References__title">
+                                    {reference.title}
+                                </span>
                             </span>
-                            <span className="References__author">
-                                {reference.author}
-                            </span>
-                            <span className="References__title">
-                                {reference.title}
-                            </span>
-                        </span>
-                        <Link to={reference.source}>{reference.source}</Link>
-                    </li>
-                ))}
-            </ul>
-        </section>
-    );
+                            <Link to={reference.source}>
+                                {reference.source}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            </section>
+        );
 };
 
 export default References;

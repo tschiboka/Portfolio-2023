@@ -1,14 +1,17 @@
 import { createHashRouter } from "react-router-dom";
+// Main Site Structure
 import Home from "../components/pages/Home/Home";
 import About from "../components/pages/About/About";
 import Projects from "../components/pages/Projects/Projects";
+import Blog from "../components/pages/Blog/Blog";
 import Contact from "../components/pages/Contact/Contact";
 import PrivacyPolicy from "../components/pages/PrivacyPolicy/PrivacyPolicy";
-import RiffMaster from "../components/articles/RiffMaster/RiffMaster";
 import RouteError from "../components/sharedComponents/RouteError/RouteError";
-import Blog from "../components/pages/Blog/Blog";
+// Blog Articles
+import RiffMaster from "../components/articles/RiffMaster/RiffMaster";
 import JsDateValidation from "../components/articles/JsDateValidation/JsDateValidation";
 import SoundsWithHowler from "../components/articles/SoundsWithHowler/SoundsWithHowler";
+import JsSorting from "../components/articles/JsSorting/JsSorting";
 
 export const routes = [
     {
@@ -58,6 +61,10 @@ export const routes = [
                 path="/blog/js-date-validation"
             />
         ),
+    },
+    {
+        path: "/blog/js-sorting",
+        element: <JsSorting pageName="js-sorting" path="/blog/js-sorting" />,
     },
     {
         path: "/*",

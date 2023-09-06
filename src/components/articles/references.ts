@@ -67,6 +67,28 @@ const references: Record<string, Reference[]> = {
             source: "https://www.cuemath.com/calculators/leap-year-calculator/",
         },
     ],
+    "/blog/js-sorting": [
+        {
+            title: "Array Prototype Sort",
+            author: "MDN",
+            source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+        },
+        {
+            title: "Using JavaScript's sort Method for Sorting Arrays of Strings",
+            author: "Digital Ocean",
+            source: "https://www.digitalocean.com/community/tutorials/js-array-sort-strings",
+        },
+        {
+            title: "An Introduction to the JavaScript Array Sort Method",
+            author: "HubSpot",
+            source: "https://blog.hubspot.com/website/sorting-javascript",
+        },
+        {
+            title: "Array Prototype Sort",
+            author: "ECMAScript Language Specification",
+            source: "https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.sort",
+        },
+    ],
 };
 
 export const getReferenceList = (path: string) => references[path];
