@@ -119,10 +119,10 @@ const About = ({ pageName, path }: Props) => {
 
                 <ul className="certificates">
                     <li>
-                        BSc Software Engineering [First Class], Falmouth
+                        BSc Hons Software Engineering (First Class), Falmouth
                         University, 2023.
                     </li>
-                    <li>HND Computing [Distinction], Icon College, 2022.</li>
+                    <li>HND Computing (Distinction), Icon College, 2022.</li>
                     <li>TypeScript Course [Online - Mosh], 2023.</li>
                     <li>React Course [Online - Mosh], 2023.</li>
                     <li>NodeJs Course [Online - Mosh], 2022.</li>

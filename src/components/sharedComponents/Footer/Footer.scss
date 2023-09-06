@@ -94,6 +94,16 @@
     li:last-child {
         margin-bottom: 0;
     }
+    .separator {
+        display: none;
+        @include bp.md {
+            font-size: $font_lg;
+            font-weight: bold;
+            color: $black_2;
+            display: inline;
+            margin-bottom: 1.25rem;
+        }
+    }
     .social-links {
         margin: 0 0 3rem 0rem;
         padding-top: 1.5rem;

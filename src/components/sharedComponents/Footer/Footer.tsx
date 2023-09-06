@@ -49,31 +49,37 @@ const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
                         HOME
                     </Link>
                 </li>
+                <span className="separator">|</span>
                 <li className={pageName === "about" ? "hide" : ""}>
                     <Link className="link" to="/about" title="About Page">
                         ABOUT
                     </Link>
                 </li>
+                <span className="separator">|</span>
                 <li className={pageName === "projects" ? "hide" : ""}>
                     <Link className="link" to="/projects" title="Projects Page">
                         PROJECTS
                     </Link>
                 </li>
+                <span className="separator">|</span>
                 <li className={pageName === "blog" ? "hide" : ""}>
                     <Link className="link" to="/blog" title="Blog Page">
                         BLOG
                     </Link>
                 </li>
+                <span className="separator">|</span>
                 <li className={pageName === "contact" ? "hide" : ""}>
                     <Link className="link" to="/contact" title="Contact Me">
                         CONTACT ME
                     </Link>
                 </li>
+                <span className="separator">|</span>
                 <li>
                     <a title="Download CV" href={cv} download>
                         R&Egrave;SUM&Egrave;
                     </a>
                 </li>
+                <span className="separator">|</span>
                 <li>
                     <Link to="/privacy-policy" title="Privacy Policy">
                         PRIVACY POLICY

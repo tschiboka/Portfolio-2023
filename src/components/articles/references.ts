@@ -75,12 +75,12 @@ const references: Record<string, Reference[]> = {
         },
         {
             title: "Using JavaScript's sort Method for Sorting Arrays of Strings",
-            author: "Digital Ocean",
+            author: "Adebiyi Adedotun",
             source: "https://www.digitalocean.com/community/tutorials/js-array-sort-strings",
         },
         {
             title: "An Introduction to the JavaScript Array Sort Method",
-            author: "HubSpot",
+            author: "Athena Ozanich",
             source: "https://blog.hubspot.com/website/sorting-javascript",
         },
         {
@@ -100,7 +100,7 @@ const references: Record<string, Reference[]> = {
         },
         {
             title: "Getting Things Sorted in V8",
-            author: "V8",
+            author: "Simon Zünd",
             source: "https://v8.dev/blog/array-sort",
         },
         {
