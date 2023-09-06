@@ -98,6 +98,26 @@ const references: Record<string, Reference[]> = {
             author: "MND",
             source: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator#options",
         },
+        {
+            title: "Getting Things Sorted in V8",
+            author: "V8",
+            source: "https://v8.dev/blog/array-sort",
+        },
+        {
+            title: "Stable and Unstable Sorting Algorithms",
+            author: "GeeksForGeeks",
+            source: "https://www.geeksforgeeks.org/stable-and-unstable-sorting-algorithms/",
+        },
+        {
+            title: "Sorting Algorithm Complexity Cheatsheet",
+            author: "BigOCheatSheet",
+            source: "https://www.bigocheatsheet.com/",
+        },
+        {
+            title: "Medium - The Case for Timsort",
+            author: "Richard Sheive",
+            source: "https://medium.com/@rscheiwe/the-case-for-timsort-349d5ce1e414",
+        },
     ],
 };
 

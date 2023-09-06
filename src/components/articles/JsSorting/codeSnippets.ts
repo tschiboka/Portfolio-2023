@@ -120,6 +120,24 @@ specialNumbers.sort((a, b) => a - b);
 console.log(specialNumbers);                 // Output: [ -Infinity, -2, -1, 0, -0, 1, Infinity ]
 const numbersWithNaN = [NaN, 2, 1, 0, -1, -2, NaN];
 numbersWithNaN.sort((a, b) => a - b);
-console.log(numbersWithNaN);                 // Output: [ NaN, -2, -1, 0, 1, 2, NaN ]`
+console.log(numbersWithNaN);                 // Output: [ NaN, -2, -1, 0, 1, 2, NaN ]`,
+    timSort: `const timsort = (arr) => {
+    const RUN = 64;                             // 32 or 64
+    const n = arr.length;
+    
+    for (let i = 0; i < n; i += RUN) {          // Sorting the Runs with Insertion Sort
+        insertionSort(arr, i, Math.min(i + RUN - 1, n - 1));
+    }
+
+    for (let size = RUN; size < n; size *= 2) { // Merging Runs
+      for (let left = 0; left < n; left += 2 * size) {
+          const mid = left + size - 1;
+          const right = Math.min(left + 2 * size - 1, n - 1);
+          mergeSort(arr, left, mid, right);
+      }
+    }
+
+    return arr;
+}`
   }
 export default codeSnippets;

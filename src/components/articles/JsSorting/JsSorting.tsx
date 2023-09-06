@@ -6,6 +6,7 @@ import Code from "../../sharedComponents/Code/Code";
 
 // Images
 import matryoshkaImg from "../../../assets/images/blog/js_sorting/Matryoshka.png";
+import sortingAlgoComplexityImg from "../../../assets/images/blog/js_sorting/SortingAlgoComplexities.png";
 
 // Other Assets
 import { getReferenceList } from "../references";
@@ -219,14 +220,14 @@ const JsSorting = ({ pageName, path }: Props) => {
                 function. The localeCompare() method of String values returns a
                 number indicating whether this string comes before, or after, or
                 is the same as the given string in sort order.
-                <Link className="Reference__Link" to={references[3].source}>
+                <Link className="Reference__Link" to={references[4].source}>
                     [ {references[4].author} ]
                 </Link>
                 Additionally, we can fine-tune our comparison by specifying the
                 language, base for accents and cases, or setting numeric options
                 to correct the already mentioned comparison problem. See details
                 here:
-                <Link className="Reference__Link" to={references[3].source}>
+                <Link className="Reference__Link" to={references[5].source}>
                     [ {references[5].author} ]
                 </Link>
             </p>
@@ -262,6 +263,80 @@ const JsSorting = ({ pageName, path }: Props) => {
                 language="javascript"
                 content={codeSnippets.edgeCases}
             />
+            <h3>Implementation Freedom</h3>
+            <p>
+                As I have written in the introduction, browsers have no
+                restrictions on how they implement their JavaScript sort
+                function as long as they adhere to the ECMAScript
+                specifications. This, of course, leaves us guessing what exactly
+                is going on behind the scenes, and as far as we are concerned,
+                they might use Bubble sort. But jokes apart, most browser sort
+                implementations are highly optimised. Historically, Array
+                prototype sort and Typed Array prototype sort relied on the same
+                Quicksort implementation written in JavaScript. The basis is a
+                Quicksort with an Insertion Sort fall-back for shorter arrays
+                (length &lt; 10).{" "}
+                <Link className="Reference__Link" to={references[6].source}>
+                    [ {references[6].author} ]
+                </Link>
+            </p>
+            <p>
+                However, while Insertion sort is a stable algorithm, Quicksort
+                is not, and sort stability (two objects with equal keys appear
+                in the same order in sorted output as they appear in the input
+                data set{" "}
+                <Link className="Reference__Link" to={references[7].source}>
+                    [ {references[7].author} ]
+                </Link>
+                ) was a long-desired feature of the JavaScript community.
+                Therefore, the latest browser implementations, such as Chrome's
+                V8 engine, use TimSort.
+            </p>
+            <h3>TimSort</h3>
+            <Figure
+                image={sortingAlgoComplexityImg}
+                className={"image--med bg--white"}
+                alt={"Algorithm Complexities"}
+                zoomAllowed={true}
+                caption="Array Sorting Algorithms"
+            />
+            <p>
+                TimSort is a stable hybrid algorithm combining Merge and
+                Insertion sort, and it takes advantage of the fact that
+                real-world data is often partially sorted. TimSort's time
+                complexity is recorded at O(n log (n)), making its average time
+                complexity equal to that of Quicksort and Mergesort; in
+                best-case scenarios, whether negligible or not, TimSort will
+                typically outperform both Quicksort and Mergesort in time
+                complexity, though it is arguably relegated to cases where data
+                is considered nearly sorted given TimSort's stable
+                characteristics.
+                <Link className="Reference__Link" to={references[7].source}>
+                    [ {references[7].author} ]
+                </Link>
+            </p>
+            <p>
+                First, the algorithm divides our array into groups called runs.
+                The size of the runs is typically the power of two (32 or 64)
+                for optimising Merge Sort's recursive tree. Initially, Insertion
+                Sort will sort the runs, as it performs when the size of the
+                given array is relatively small. When the runs are sorted, we
+                can merge them two by two iteratively until every run is merged.
+            </p>
+            <Code
+                fileName="timSort.js"
+                language="javascript"
+                content={codeSnippets.timSort}
+            />
+            <p>
+                In summary, JavaScript sorting is a versatile tool in web
+                development but comes with nuances. Be aware of browser-specific
+                variations and consider using custom comparator functions for
+                sorting objects. Watch out for edge cases, such as handling
+                falsy values and language-specific sorting challenges. Modern
+                JavaScript engines use efficient algorithms like TimSort for
+                optimisation.
+            </p>
         </Article>
     );
 };

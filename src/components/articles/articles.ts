@@ -71,7 +71,7 @@ export const blogArticles: BlogArticle[] = [
             "Delve into the intricate inner workings of JavaScript's built-in sorting mechanism. Uncover the magic behind Array.sort() as we dissect the comparison functions, sorting stability, and optimisation strategies employed by the language.",
         badges: ["javascript"],
         to: "/blog/js-sorting",
-        readingTime: "20 mins",
+        readingTime: "10 mins",
         suggestedArticles: ["/blog/js-date-validation"],
         codeTime: "",
         created: "05.09.2023",
