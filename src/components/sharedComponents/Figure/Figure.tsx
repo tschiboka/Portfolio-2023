@@ -25,22 +25,22 @@ const Figure = ({
         setSubMenuVisible,
     } = useAppContext();
     const displayZoomOverlay = () => {
-        setOverlayVisible(true);
-        setMainMenuVisible(false);
-        setSubMenuVisible(false);
+        const closeZoom = () => {
+            setOverlayContent(null);
+            setOverlayVisible(false);
+            setMainMenuVisible(true);
+            setSubMenuVisible(true);
+        };
+        if (zoomAllowed) {
+            setOverlayVisible(true);
+            setMainMenuVisible(false);
+            setSubMenuVisible(false);
+        }
 
         const content: React.ReactNode = (
-            <ZoomedImage>
+            <ZoomedImage handleClick={closeZoom} handleEscKeyPress={closeZoom}>
                 <img src={image} alt={alt} />
-                <TbZoomOutFilled
-                    className="Figure__icon Figure__icon--close"
-                    onClick={() => {
-                        setOverlayContent(null);
-                        setOverlayVisible(false);
-                        setMainMenuVisible(true);
-                        setSubMenuVisible(true);
-                    }}
-                />
+                <TbZoomOutFilled className="Figure__icon Figure__icon--close" />
             </ZoomedImage>
         );
 

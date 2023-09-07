@@ -29,7 +29,7 @@ const JsSorting = ({ pageName, path }: Props) => {
                 image={matryoshkaImg}
                 className={"image--med bg--white"}
                 alt={"Sorting"}
-                zoomAllowed={true}
+                zoomAllowed={false}
             />
             <p>
                 Sorting is a fundamental operation in computer science and
