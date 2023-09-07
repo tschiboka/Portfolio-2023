@@ -1,7 +1,9 @@
 import { useAppContext } from "../../../context/AppContext";
-import { TbZoomInFilled, TbZoomOutFilled } from "react-icons/tb";
-import "./Figure.scss";
 import ZoomedImage from "../ZoomedImage/ZoomedImage";
+import { TbZoomInFilled, TbZoomOutFilled } from "react-icons/tb";
+import { Reference } from "../References/References";
+import "./Figure.scss";
+import InlineReference from "../InlineReference/InlineReference";
 
 interface Props {
     image: string;
@@ -9,6 +11,7 @@ interface Props {
     alt: string;
     caption?: string;
     zoomAllowed?: boolean;
+    reference?: Reference;
 }
 
 const Figure = ({
@@ -17,6 +20,7 @@ const Figure = ({
     alt,
     caption,
     zoomAllowed = true,
+    reference,
 }: Props) => {
     const {
         setOverlayVisible,
@@ -53,7 +57,12 @@ const Figure = ({
                 {zoomAllowed && <TbZoomInFilled className="Figure__icon" />}
                 <img src={image} alt={alt} />
             </div>
-            {caption && <figcaption>{caption}</figcaption>}
+            {caption && (
+                <figcaption>
+                    {caption}
+                    {reference && <InlineReference reference={reference} />}
+                </figcaption>
+            )}
             <div className=""></div>
         </figure>
     );

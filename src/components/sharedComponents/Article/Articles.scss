@@ -134,6 +134,10 @@ aside.blog-component--article {
         font-family: Roboto_Bold;
         font-variant: small-caps;
     }
+    strong {
+        font-weight: bold;
+        color: $white_2;
+    }
     img.image--lrg {
         max-width: 100%;
         margin: 0 auto;
@@ -245,5 +249,8 @@ aside.blog-component--article {
         * {
             color: $white_5;
         }
+    }
+    strong {
+        color: black;
     }
 }

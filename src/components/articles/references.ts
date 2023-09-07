@@ -125,6 +125,16 @@ const references: Record<string, Reference[]> = {
             author: "WEF",
             source: "https://www3.weforum.org/docs/WEF_Harnessing_the_4IR_for_Sustainable_Emerging_Cities.pdf",
         },
+        {
+            title: "Arduino Rev 2 WiFi Spec",
+            author: "Arduino",
+            source: "https://store.arduino.cc/products/arduino-uno-wifi-rev2",
+        },
+        {
+            title: "Grove Moisture Sensor",
+            author: "Seeed",
+            source: "https://www.seeedstudio.com/Grove-Moisture-Sensor.html",
+        },
     ]
 };
 
