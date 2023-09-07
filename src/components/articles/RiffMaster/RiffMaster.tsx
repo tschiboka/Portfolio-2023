@@ -47,8 +47,8 @@ import headStockFrontImg from "../../../assets/images/blog/riffMaster/HeadStockF
 import saddleImg from "../../../assets/images/blog/riffMaster/Saddle.jpg";
 
 // Other Assets
-import controllerCode from "../../../assets/files/projects/controller.txt";
-import dissertation from "../../../assets/files/Dissertation_Online.pdf";
+import controllerCode from "../../../assets/files/blog/riffmaster/controller.txt";
+import dissertation from "../../../assets/files/blog/riffmaster/Dissertation_Online.pdf";
 import codeSnippets from "./codeSnippets";
 import { getReferenceList } from "../references";
 

@@ -53,6 +53,7 @@ const projects: Project[] = [
         badges: ["HTML", "CSS", "JavaScript", "Arduino", "NodeJs", "Mongodb"],
         url: "https://tschiboka.co.uk/projects/green-rooftop/index.html",
         github: "https://github.com/tschiboka/GreenRooftop",
+        readMoreLink: "/blog/green-rooftop",
     },
     {
         title: "Fruits & Flowers Game",

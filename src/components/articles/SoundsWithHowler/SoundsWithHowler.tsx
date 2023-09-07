@@ -14,27 +14,27 @@ import highlightImg from "../../../assets/images/blog/soundsWithHowler/Highlight
 import { BsSoundwave } from "react-icons/bs";
 
 // Audio
-import E2MP3 from "../../../assets/files/guitar-sounds/E2.mp3";
-import F2MP3 from "../../../assets/files/guitar-sounds/F2.mp3";
-import Fs2MP3 from "../../../assets/files/guitar-sounds/Fs2.mp3";
-import G2MP3 from "../../../assets/files/guitar-sounds/G2.mp3";
-import Gs2MP3 from "../../../assets/files/guitar-sounds/Gs2.mp3";
-import A2MP3 from "../../../assets/files/guitar-sounds/A2.mp3";
-import As2MP3 from "../../../assets/files/guitar-sounds/As2.mp3";
-import B2MP3 from "../../../assets/files/guitar-sounds/B2.mp3";
-import C3MP3 from "../../../assets/files/guitar-sounds/C3.mp3";
-import Cs3MP3 from "../../../assets/files/guitar-sounds/Cs3.mp3";
-import D3MP3 from "../../../assets/files/guitar-sounds/D3.mp3";
-import Ds3MP3 from "../../../assets/files/guitar-sounds/Ds3.mp3";
-import E3MP3 from "../../../assets/files/guitar-sounds/E3.mp3";
-import G3MP3 from "../../../assets/files/guitar-sounds/G3.mp3";
-import A3MP3 from "../../../assets/files/guitar-sounds/A3.mp3";
-import B3MP3 from "../../../assets/files/guitar-sounds/B3.mp3";
-import E4MP3 from "../../../assets/files/guitar-sounds/E4.mp3";
-import C4MP3 from "../../../assets/files/guitar-sounds/C4.mp3";
-import D4MP3 from "../../../assets/files/guitar-sounds/D4.mp3";
-import Fs4MP3 from "../../../assets/files/guitar-sounds/Fs4.mp3";
-import G4MP3 from "../../../assets/files/guitar-sounds/G4.mp3";
+import E2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/E2.mp3";
+import F2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/F2.mp3";
+import Fs2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/Fs2.mp3";
+import G2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/G2.mp3";
+import Gs2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/Gs2.mp3";
+import A2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/A2.mp3";
+import As2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/As2.mp3";
+import B2MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/B2.mp3";
+import C3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/C3.mp3";
+import Cs3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/Cs3.mp3";
+import D3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/D3.mp3";
+import Ds3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/Ds3.mp3";
+import E3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/E3.mp3";
+import G3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/G3.mp3";
+import A3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/A3.mp3";
+import B3MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/B3.mp3";
+import E4MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/E4.mp3";
+import C4MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/C4.mp3";
+import D4MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/D4.mp3";
+import Fs4MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/Fs4.mp3";
+import G4MP3 from "../../../assets/files/blog/sounds_with_howler/guitar-sounds/G4.mp3";
 
 // Images
 import riffMasterHomeImg from "../../../assets/images/blog/soundsWithHowler/RiffmasterHomePage.png";

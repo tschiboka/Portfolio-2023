@@ -171,6 +171,7 @@ aside.blog-component--article {
         color: $accent_dark_3;
         text-decoration: none;
         font-family: monospace;
+        cursor: pointer;
         &:hover {
             color: $accent_dark_1;
             transform: scale(1.05) translateY(-2px);

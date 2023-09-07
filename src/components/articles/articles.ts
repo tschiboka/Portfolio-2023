@@ -86,7 +86,8 @@ export const blogArticles: BlogArticle[] = [
         badges: ["Arduino", "NodeJs"],
         to: "/blog/green-rooftop",
         readingTime: "5 mins",
-        codeTime: "",
+        codeTime: "4 hours",
+        suggestedArticles: ["/blog/riffmaster"],
         created: "05.09.2023",
     },
     {
