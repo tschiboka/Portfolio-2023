@@ -23,8 +23,9 @@
     .BlogCard__img-wrapper {
         position: relative;
         margin-bottom: 1.5rem;
-        border: 1px solid #222;
-
+        max-height: 250px;
+        max-height: 500px;
+        
         @include bp.md {
             margin-bottom: 0;
         }
@@ -32,8 +33,11 @@
         img {
             width: 100%;
             max-width: 500px;
+            max-height: 500px;
+            height: auto;
             @include bp.md {
                 width: 250px;
+                height: 250px;
             }
         }
     }
@@ -97,13 +101,14 @@
                 *:first-child {
                     margin-right: 0.5rem;
                 }
+                &:first-child {
+                    margin-left: 0;
+                }
             }
 
             .BlogCard__info-datablock {
                 position: relative;
-                border-bottom: 1px solid transparent;
                 &:hover {
-                    border-bottom: 1px solid white;
                     .BlogCard__hint-text {
                         display: inline;
                     }
@@ -227,13 +232,16 @@
     }
 
     &:hover {
-        background-color: black;
+        background-color: rgba(0, 0, 0, 0.5);
         .BlogCard__title-text {
             color: white;
             text-decoration: underline;
         }
         .BlogCard__abstract {
             color: white;
+        }
+        .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
+            color: $accent_dark_2;
         }
     } 
 }
@@ -245,6 +253,20 @@
 
         &:hover {
             background-color: $white_3;
+            .BlogCard__title-text {
+                color: black;
+            }
+            .BlogCard__abstract {
+                color: black;
+            }
+            .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
+                color: $accent_dark_5;
+            }
+            .BlogCard__info .BlogCard__info-datablock:hover {
+                .BlogCard__info-icon {
+                    color: black;
+                }
+            }
         }
 
         .BlogCard__title-text {

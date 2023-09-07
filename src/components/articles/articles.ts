@@ -3,6 +3,7 @@ import riffMasterJamImg from "../../assets/images/blog/riffmasterJam.png";
 import calendarImg from "../../assets/images/blog/calendar.png";
 import mcdonaldsImg from "../../assets/images/blog/mcdonaldsNeon.png";
 import jsSortingImg from "../../assets/images/blog/jsSorting.png";
+import greenRooftopImg from "../../assets/images/blog/grass.png";
 
 export interface BlogArticle {
     title: string;
@@ -77,6 +78,18 @@ export const blogArticles: BlogArticle[] = [
         created: "05.09.2023",
     },
     {
+        title: "Green Rooftop - An Arduino IoT Project",
+        image: greenRooftopImg,
+        imageAlt: "Grass",
+        abstract:
+            "An ideal IoT project for beginners. Learn how to measure temperature, humidity, moisture, light, and water tank levels while creating a UI with buttons for easy navigation. We'll also use NodeJS to show you how to build a simple API to access real-time and historical sensory data.",
+        badges: ["Arduino", "NodeJs"],
+        to: "/blog/green-rooftop",
+        readingTime: "5 mins",
+        codeTime: "",
+        created: "05.09.2023",
+    },
+    {
         title: "Recreating McDonald's Ordering Kiosk UI",
         image: mcdonaldsImg,
         imageAlt: "McDonalds",
@@ -87,6 +100,6 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
-        upcomingDate: "05.09.2023",
+        upcomingDate: "10.10.2023",
     },
 ];
