@@ -2,7 +2,6 @@
 import Article from "../../sharedComponents/Article/Article";
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
-import { Link } from "react-router-dom";
 
 // Images
 import calendarImg from "../../../assets/images/blog/js_date_validation/calendar.jpg";
@@ -13,6 +12,7 @@ import { getReferenceList } from "../references";
 
 // Styles
 import "./JsDateValidation.scss";
+import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 interface Props {
     pageName: string;
@@ -63,9 +63,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                 holds June 1st, a dateValue of 40 changes the date to July 10th,
                 while a dateValue of 0 changes the date to the last day of the
                 previous month, May 31st".
-                <Link className="Reference__Link" to={references[0].source}>
-                    [ {references[0].author} ]
-                </Link>
+                <InlineReference reference={references[0]} />
                 This feature is bad news and means that we may just as well
                 validate our date strings ourselves.
             </p>
@@ -96,10 +94,7 @@ const JsDateValidation = ({ pageName, path }: Props) => {
                 leap year. For example, 2016 is divisible by 4, a leap year,
                 whereas 2015 is not. However, century years like 300, 700, 1900,
                 and 2000 need to be divided by 400 to check whether they are
-                leap years.{" "}
-                <Link className="Reference__Link" to={references[1].source}>
-                    [ {references[1].author} ]
-                </Link>
+                leap years. <InlineReference reference={references[1]} />
             </p>
             <p>
                 So, let's extend our code with some additional validation for

@@ -32,7 +32,7 @@ export const blogArticles: BlogArticle[] = [
         to: "/blog/riffmaster",
         readingTime: "13 mins",
         codeTime: "5 weeks",
-        suggestedArticles: ["/blog/sounds-with-howler"],
+        suggestedArticles: ["/blog/sounds-with-howler", "/blog/green-rooftop"],
         created: "06.08.2023",
         updated: "11.08.2023",
     },

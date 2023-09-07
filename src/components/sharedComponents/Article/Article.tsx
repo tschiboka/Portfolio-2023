@@ -7,7 +7,7 @@ import Menu from "../../sharedComponents/Menu/Menu";
 import Nav from "../../sharedComponents/Nav/Nav";
 import SubNav from "../../sharedComponents/SubNav/SubNav";
 import LikeButton from "../../sharedComponents/LikeButton/LikeButton";
-import References from "../../sharedComponents/References/References";
+import References from "../References/References";
 import { getReferenceList } from "../../articles/references";
 import BlogTimeStamp from "../../sharedComponents/BlogTimeStamp/BlogTimeStamp";
 import Disclaimer from "../Disclaimer/Disclaimer";

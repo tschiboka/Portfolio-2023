@@ -47,6 +47,7 @@ import { getReferenceList } from "../references";
 // Styles
 import "./SoundsWithHowler.scss";
 import Article from "../../sharedComponents/Article/Article";
+import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 interface Props {
     pageName: string;
@@ -139,10 +140,8 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 versatile tool for creating audio experiences on the web. It
                 offers cross-browser and mobile compatibility, supports many
                 audio formats (MP3, WAV, OGG), and features playback controls
-                (play, pause, stop), looping, positional audio and fade effects.{" "}
-                <Link className="Reference__Link" to={references[0].source}>
-                    [ {references[0].author} ]
-                </Link>
+                (play, pause, stop), looping, positional audio and fade effects.
+                <InlineReference reference={references[0]} />
             </p>
             <p>
                 To use Howler.js in your vanilla JS application, you include the
@@ -181,22 +180,15 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 caption={"Fret Board Note Arrangement"}
             />
             <p>
-                You can create your own audio or download guitar sounds from{" "}
-                <Link className="Reference__Link" to={references[1].source}>
-                    [ {references[1].author} ]
-                </Link>{" "}
-                or{" "}
-                <Link className="Reference__Link" to={references[2].source}>
-                    [ {references[2].author} ]
-                </Link>
+                You can create your own audio or download guitar sounds from
+                <InlineReference reference={references[1]} />
+                or
+                <InlineReference reference={references[2]} />
                 . However, I found collecting the full range of notes with the
                 same instrument challenging and rather time-consuming, so I
                 opted to record my own set of guitar sounds. If you want to
                 spare a few hours, please use my audio library
-                <Link className="Reference__Link" to={references[3].source}>
-                    [ {references[3].author} ]
-                </Link>
-                !{" "}
+                <InlineReference reference={references[3]} />!{" "}
                 <span className="sidenote">
                     (Please note my naming convention: uppercase note names,
                     optional "S" for sharp notes as # is an illegal filename
@@ -461,11 +453,8 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 the Howl is defined. If using HTML5 Audio, you can set this to
                 'metadata' to only preload the file's metadata (to get its
                 duration without downloading the entire file, for example). For
-                the complete list of properties, see{" "}
-                <Link className="Reference__Link" to={references[4].source}>
-                    [ {references[4].author} ]
-                </Link>
-                .
+                the complete list of properties, see
+                <InlineReference reference={references[4]} />.
             </p>
             <Code
                 fileName="jam.js"
@@ -481,10 +470,8 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 blockers, and reduce data consumption on expensive and
                 constrained networks. These changes are intended to provide
                 further playback control to users and benefit publishers with
-                legitimate use cases.{" "}
-                <Link className="Reference__Link" to={references[5].source}>
-                    [ {references[5].author} ]
-                </Link>{" "}
+                legitimate use cases.
+                <InlineReference reference={references[5]} />
                 Therefore, if you want to preload your audio variables, do it
                 after a click event.
             </p>
@@ -524,10 +511,7 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 from the neck to the saddle. These distances are calculated
                 iteratively. If we divide any scale length by the constant
                 17.817, we will get the distance from the front edge of the nut
-                to the first fret.{" "}
-                <Link className="Reference__Link" to={references[6].source}>
-                    [ {references[6].author} ]
-                </Link>{" "}
+                to the first fret. <InlineReference reference={references[6]} />
                 We can subtract this fret distance from the total and move to
                 the next fret until we reach the last one (20).
             </p>

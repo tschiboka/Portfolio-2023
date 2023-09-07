@@ -3,14 +3,6 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
-.Reference__Link {
-    color: $accent_dark_2;
-    text-decoration: none;
-    font-style: italic;
-    font-weight: bold;
-    font-family: monospace;
-}
-
 .References {
     h4 {
         font-size: $font-lg;
@@ -77,6 +69,10 @@
             @include bp.md {
                 padding: 10px;
             }
+        }
+
+        a {
+            word-break: break-all;
         }
 
         .References__index {

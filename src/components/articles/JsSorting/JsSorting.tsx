@@ -14,6 +14,7 @@ import codeSnippets from "./codeSnippets";
 
 // Styles
 import "./JsSorting.scss";
+import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 interface Props {
     pageName: string;
@@ -53,9 +54,7 @@ const JsSorting = ({ pageName, path }: Props) => {
                 sorted. The default sort order is ascending, built upon
                 converting the elements into strings and comparing their UTF-16
                 code unit value sequences.
-                <Link className="Reference__Link" to={references[0].source}>
-                    [ {references[0].author} ]
-                </Link>
+                <InlineReference reference={references[0]} />
             </p>
             <Code
                 fileName="sortMyDwarfs.js"
@@ -85,10 +84,8 @@ const JsSorting = ({ pageName, path }: Props) => {
                 case-sensitive. When strings are being compared, they are
                 converted to their equivalent Unicode value, unsurprisingly
                 numbers, then sorted sequentially, in ascending order by
-                default.{" "}
-                <Link className="Reference__Link" to={references[1].source}>
-                    [ {references[1].author} ]
-                </Link>{" "}
+                default.
+                <InlineReference reference={references[1]} />
                 The order is as follows: numbers, upper-case characters and
                 lower-case characters.
             </p>
@@ -113,9 +110,7 @@ const JsSorting = ({ pageName, path }: Props) => {
                 ["A", "AA", "B"], arrays containing numbers [2, 11, 1] will be
                 sorted into [1, 11, 2]. Fortunately, the sort method also
                 accepts an optional parameter for comparing array items.
-                <Link className="Reference__Link" to={references[2].source}>
-                    [ {references[2].author} ]
-                </Link>{" "}
+                <InlineReference reference={references[2]} />
                 The optional comparison function can be used to fine-tune our
                 sorting logic.
                 <br />
@@ -150,9 +145,7 @@ const JsSorting = ({ pageName, path }: Props) => {
                 should be a function that accepts two arguments, x and y and
                 returns a negative number if x &gt; y, a positive number if x
                 &lt; y, or a zero otherwise.
-                <Link className="Reference__Link" to={references[3].source}>
-                    [ {references[3].author} ]
-                </Link>
+                <InlineReference reference={references[3]} />
                 This means that comparator functions are highly customisable,
                 and we can use them for a broad range of scenarios.
             </p>
@@ -220,16 +213,12 @@ const JsSorting = ({ pageName, path }: Props) => {
                 function. The localeCompare() method of String values returns a
                 number indicating whether this string comes before, or after, or
                 is the same as the given string in sort order.
-                <Link className="Reference__Link" to={references[4].source}>
-                    [ {references[4].author} ]
-                </Link>
+                <InlineReference reference={references[4]} />
                 Additionally, we can fine-tune our comparison by specifying the
                 language, base for accents and cases, or setting numeric options
                 to correct the already mentioned comparison problem. See details
                 here:
-                <Link className="Reference__Link" to={references[5].source}>
-                    [ {references[5].author} ]
-                </Link>
+                <InlineReference reference={references[5]} />
             </p>
             <Code
                 fileName="sortOptions.js"
@@ -275,22 +264,16 @@ const JsSorting = ({ pageName, path }: Props) => {
                 prototype sort and Typed Array prototype sort relied on the same
                 Quicksort implementation written in JavaScript. The basis is a
                 Quicksort with an Insertion Sort fall-back for shorter arrays
-                (length &lt; 10).{" "}
-                <Link className="Reference__Link" to={references[6].source}>
-                    [ {references[6].author} ]
-                </Link>
+                (length &lt; 10). <InlineReference reference={references[6]} />
             </p>
             <p>
                 However, while Insertion sort is a stable algorithm, Quicksort
                 is not, and sort stability (two objects with equal keys appear
                 in the same order in sorted output as they appear in the input
-                data set{" "}
-                <Link className="Reference__Link" to={references[7].source}>
-                    [ {references[7].author} ]
-                </Link>
-                ) was a long-desired feature of the JavaScript community.
-                Therefore, the latest browser implementations, such as Chrome's
-                V8 engine, use TimSort.
+                data set <InlineReference reference={references[7]} />) was a
+                long-desired feature of the JavaScript community. Therefore, the
+                latest browser implementations, such as Chrome's V8 engine, use
+                TimSort.
             </p>
             <h3>TimSort</h3>
             <Figure
@@ -311,9 +294,7 @@ const JsSorting = ({ pageName, path }: Props) => {
                 complexity, though it is arguably relegated to cases where data
                 is considered nearly sorted given TimSort's stable
                 characteristics.
-                <Link className="Reference__Link" to={references[7].source}>
-                    [ {references[7].author} ]
-                </Link>
+                <InlineReference reference={references[9]} />
             </p>
             <p>
                 First, the algorithm divides our array into groups called runs.

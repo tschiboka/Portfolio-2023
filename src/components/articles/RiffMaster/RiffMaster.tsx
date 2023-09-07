@@ -1,51 +1,50 @@
 // Components
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
-import { Link } from "react-router-dom";
 import Article from "../../sharedComponents/Article/Article";
 
 // Icons
 import { FiDownload } from "react-icons/fi";
 
 // Imges
-import buildGiutarStockImg from "../../../assets/images/RiffMaster/BuildGuitarStockPhoto.png";
+import buildGiutarStockImg from "../../../assets/images/blog/riffMaster/BuildGuitarStockPhoto.png";
 import guitarImg from "../../../assets/images/about/RiffMaster.png";
-import neckDistancesImg from "../../../assets/images/RiffMaster/NeckDistances.png";
-import fretArrangementsImg from "../../../assets/images/RiffMaster/FretArrangements.png";
-import neckDesignImg from "../../../assets/images/RiffMaster/NeckDesign.png";
-import fretDesignImg from "../../../assets/images/RiffMaster/FretDesign.png";
-import neckCoverDesignImg from "../../../assets/images/RiffMaster/NeckCoverDesign.png";
-import keyBoardScanningImg from "../../../assets/images/RiffMaster/KeyboardScanning.png";
-import fretBoardDevelopmentImg from "../../../assets/images/RiffMaster/FretBoardDevelopment.jpg";
-import fretMatrixImg from "../../../assets/images/RiffMaster/FretMatrix.png";
-import fretWiringImg from "../../../assets/images/RiffMaster/FretWiring.jpg";
-import completeFretWiringImg from "../../../assets/images/RiffMaster/CompleteFretWiring.png";
-import neckDevelopmentImg from "../../../assets/images/RiffMaster/NeckDevelopment_2.png";
-import bodyDesignImg from "../../../assets/images/RiffMaster/BodyDesign.png";
-import bodySupportImg from "../../../assets/images/RiffMaster/BodySupport.png";
-import bodyFrontCoverImg from "../../../assets/images/RiffMaster/BodyFrontCover.jpg";
-import bendingImg from "../../../assets/images/RiffMaster/Bending.jpg";
-import supportElementsImg from "../../../assets/images/RiffMaster/SupportElements.jpg";
-import neckCoverImg from "../../../assets/images/RiffMaster/NeckCovers.jpg";
-import neckBodyJointImg from "../../../assets/images/RiffMaster/BodyNeckJoint.jpg";
-import paintedImg from "../../../assets/images/RiffMaster/Pained.jpg";
-import strumMechanismImg from "../../../assets/images/RiffMaster/StrumMechanism.png";
-import strumComponentsImg from "../../../assets/images/RiffMaster/StrumComponents.png";
-import strumAssemblyImg1 from "../../../assets/images/RiffMaster/StrumAssembly_1.png";
-import strumAssemblyImg2 from "../../../assets/images/RiffMaster/StrumAssembly_3.png";
-import strumAssemblyImg3 from "../../../assets/images/RiffMaster/StrumAssembly_2.png";
-import strumWiring from "../../../assets/images/RiffMaster/StrumWiring.jpg";
-import strumDesignImg from "../../../assets/images/RiffMaster/StrumDesign.png";
-import toggleLEDsDesignImg from "../../../assets/images/RiffMaster/ToggleandLEDsDesign.png";
-import arduinoWiringImg from "../../../assets/images/RiffMaster/ArduinoWiring.jpg";
-import toggleImg from "../../../assets/images/RiffMaster/Toggle.jpg";
-import assembledStrumImg from "../../../assets/images/RiffMaster/AssembledStrum.png";
-import protocolImg from "../../../assets/images/RiffMaster/Protocol.png";
-import debounceImg from "../../../assets/images/RiffMaster/Debounce.png";
-import headStockDesignImg from "../../../assets/images/RiffMaster/HeadStock.png";
-import headStockBackImg from "../../../assets/images/RiffMaster/HeadStockBack.jpg";
-import headStockFrontImg from "../../../assets/images/RiffMaster/HeadStockFront.jpg";
-import saddleImg from "../../../assets/images/RiffMaster/Saddle.jpg";
+import neckDistancesImg from "../../../assets/images/blog/riffMaster/NeckDistances.png";
+import fretArrangementsImg from "../../../assets/images/blog/riffMaster/FretArrangements.png";
+import neckDesignImg from "../../../assets/images/blog/riffMaster/NeckDesign.png";
+import fretDesignImg from "../../../assets/images/blog/riffMaster/FretDesign.png";
+import neckCoverDesignImg from "../../../assets/images/blog/riffMaster/NeckCoverDesign.png";
+import keyBoardScanningImg from "../../../assets/images/blog/riffMaster/KeyboardScanning.png";
+import fretBoardDevelopmentImg from "../../../assets/images/blog/riffMaster/FretBoardDevelopment.jpg";
+import fretMatrixImg from "../../../assets/images/blog/riffMaster/FretMatrix.png";
+import fretWiringImg from "../../../assets/images/blog/riffMaster/FretWiring.jpg";
+import completeFretWiringImg from "../../../assets/images/blog/riffMaster/CompleteFretWiring.png";
+import neckDevelopmentImg from "../../../assets/images/blog/riffMaster/NeckDevelopment_2.png";
+import bodyDesignImg from "../../../assets/images/blog/riffMaster/BodyDesign.png";
+import bodySupportImg from "../../../assets/images/blog/riffMaster/BodySupport.png";
+import bodyFrontCoverImg from "../../../assets/images/blog/riffMaster/BodyFrontCover.jpg";
+import bendingImg from "../../../assets/images/blog/riffMaster/Bending.jpg";
+import supportElementsImg from "../../../assets/images/blog/riffMaster/SupportElements.jpg";
+import neckCoverImg from "../../../assets/images/blog/riffMaster/NeckCovers.jpg";
+import neckBodyJointImg from "../../../assets/images/blog/riffMaster/BodyNeckJoint.jpg";
+import paintedImg from "../../../assets/images/blog/riffMaster/Pained.jpg";
+import strumMechanismImg from "../../../assets/images/blog/riffMaster/StrumMechanism.png";
+import strumComponentsImg from "../../../assets/images/blog/riffMaster/StrumComponents.png";
+import strumAssemblyImg1 from "../../../assets/images/blog/riffMaster/StrumAssembly_1.png";
+import strumAssemblyImg2 from "../../../assets/images/blog/riffMaster/StrumAssembly_3.png";
+import strumAssemblyImg3 from "../../../assets/images/blog/riffMaster/StrumAssembly_2.png";
+import strumWiring from "../../../assets/images/blog/riffMaster/StrumWiring.jpg";
+import strumDesignImg from "../../../assets/images/blog/riffMaster/StrumDesign.png";
+import toggleLEDsDesignImg from "../../../assets/images/blog/riffMaster/ToggleandLEDsDesign.png";
+import arduinoWiringImg from "../../../assets/images/blog/riffMaster/ArduinoWiring.jpg";
+import toggleImg from "../../../assets/images/blog/riffMaster/Toggle.jpg";
+import assembledStrumImg from "../../../assets/images/blog/riffMaster/AssembledStrum.png";
+import protocolImg from "../../../assets/images/blog/riffMaster/Protocol.png";
+import debounceImg from "../../../assets/images/blog/riffMaster/Debounce.png";
+import headStockDesignImg from "../../../assets/images/blog/riffMaster/HeadStock.png";
+import headStockBackImg from "../../../assets/images/blog/riffMaster/HeadStockBack.jpg";
+import headStockFrontImg from "../../../assets/images/blog/riffMaster/HeadStockFront.jpg";
+import saddleImg from "../../../assets/images/blog/riffMaster/Saddle.jpg";
 
 // Other Assets
 import controllerCode from "../../../assets/files/projects/controller.txt";
@@ -55,6 +54,7 @@ import { getReferenceList } from "../references";
 
 // Styles
 import "./RiffMaster.scss";
+import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 interface Props {
     pageName: string;
@@ -118,13 +118,8 @@ const RiffMaster = ({ pageName, path }: Props) => {
                 caption="The Final Guitar Instrument"
             />
             <p>
-                I used a{" "}
-                <a
-                    className="inline"
-                    href="https://www.electricherald.com/gibson-les-paul-guitar-templates/"
-                >
-                    Gibson Les Paul template
-                </a>{" "}
+                I used a Gibson Les Paul template
+                <InlineReference reference={references[2]} />
                 to ensure the instrument had appropriate dimensions and shape.
                 Although Les Paul is designed for electric guitars, we can build
                 it semi-acoustic to fit the electric components in the body
@@ -221,10 +216,8 @@ const RiffMaster = ({ pageName, path }: Props) => {
                 consolidate greater numbers of switches to microcontroller pins.
                 When a key is pressed, a column wire contacts a row wire and
                 completes a circuit. The keyboard controller detects this closed
-                circuit and registers it as a key press.{" "}
-                <Link className="Reference__Link" to={references[0].source}>
-                    ({references[0].author})
-                </Link>{" "}
+                circuit and registers it as a key press.
+                <InlineReference reference={references[0]} />
                 For example, PC keyboards usually range from 63 to 105 keys
                 arranged in a matrix. Meshing the switch wires would result in a
                 drastically reduced digital pin requirement. Matrix keyboards
@@ -636,10 +629,8 @@ const RiffMaster = ({ pageName, path }: Props) => {
                 The physical action of pushing a button might require a
                 half-second or so, so we tend to think in those terms. On the
                 other hand, a digital circuit can react to a million of events
-                in the same time frame.{" "}
-                <Link className="Reference__Link" to={references[1].source}>
-                    ({references[1].author})
-                </Link>{" "}
+                in the same time frame.
+                <InlineReference reference={references[1]} />
                 Momentary tactile switches are not guaranteed to be immune to
                 physical bouncing and may trigger unsolicited actions from the
                 controller. Furthermore, our device has two types of inputs with

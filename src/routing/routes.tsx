@@ -12,6 +12,7 @@ import RiffMaster from "../components/articles/RiffMaster/RiffMaster";
 import JsDateValidation from "../components/articles/JsDateValidation/JsDateValidation";
 import SoundsWithHowler from "../components/articles/SoundsWithHowler/SoundsWithHowler";
 import JsSorting from "../components/articles/JsSorting/JsSorting";
+import GreenRooftop from "../components/articles/GreenRooftop/GreenRooftop";
 
 export const routes = [
     {
@@ -65,6 +66,12 @@ export const routes = [
     {
         path: "/blog/js-sorting",
         element: <JsSorting pageName="js-sorting" path="/blog/js-sorting" />,
+    },
+    {
+        path: "/blog/green-rooftop",
+        element: (
+            <GreenRooftop pageName="green-rooftop" path="/blog/green-rooftop" />
+        ),
     },
     {
         path: "/*",

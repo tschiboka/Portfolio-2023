@@ -119,6 +119,13 @@ const references: Record<string, Reference[]> = {
             source: "https://medium.com/@rscheiwe/the-case-for-timsort-349d5ce1e414",
         },
     ],
+    "/blog/green-rooftop": [
+        {
+            title: "Harnessing the Fourth Industrial Revolution for Sustainable Development",
+            author: "WEF",
+            source: "https://www3.weforum.org/docs/WEF_Harnessing_the_4IR_for_Sustainable_Emerging_Cities.pdf",
+        },
+    ]
 };
 
 export const getReferenceList = (path: string) => references[path];

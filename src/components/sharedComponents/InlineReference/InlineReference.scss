@@ -1,0 +1,25 @@
+@use "../../../styles/breakpoints.scss" as bp;
+@import "../../../styles/palette.scss";
+@import "../../../styles/font_sizes.scss";
+
+.InlineReference {
+    height: 100%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    transform: translateY(-2px);
+    color: $accent_dark_3;
+    text-decoration: none;
+    font-family: monospace;
+    &:hover {
+        color: $accent_dark_1;
+        transform: scale(1.05) translateY(-2px);
+    }
+    
+    @include bp.sm {
+        margin: 0 0.5rem;
+        transform: translateY(-3px);
+        &:hover {
+            transform: scale(1.05) translateY(-3px);
+        }
+    }
+}

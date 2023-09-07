@@ -151,8 +151,31 @@ aside.blog-component--article {
         background-color: white;
     }
     
+    a.inline:before {
+        content: "[";
+    }
+
+    a.inline:after {
+        content: "]"
+    }
+
     a.inline {
-        color: $accent_dark_2;
+        height: 100%;
+        margin: 0 0.25rem;
+        display: inline-block;
+        transform: translateY(-2px);
+        color: $accent_dark_3;
+        text-decoration: none;
+        font-family: monospace;
+        &:hover {
+            color: $accent_dark_1;
+            transform: scale(1.05) translateY(-2px);
+        }
+
+        @include bp.sm {
+            margin: 0 0.5rem;
+            transform: translateY(-3px);
+        }
     }
     
     strong.bold {
