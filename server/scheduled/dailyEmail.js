@@ -119,7 +119,6 @@ const sendEmail = async (message) => {
         html: message
     };
     console.log("Sending Email...");
-    console.log(message);
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
@@ -131,10 +130,13 @@ const sendEmail = async (message) => {
         host: "smtp.gmail.com",
     });
     
-    await transporter.sendMail(mailOptions).then(info => {
+    try {
+        const info = await transporter.sendMail(mailOptions);
         console.log("Email Info", info);
-    }).catch(err => console.log("Email Error", err));
-    console.log("Email Sent...");
+        console.log("Email Sent...");
+    } catch (err) {
+        console.log("Email Error", err);
+    }
 }
 
 module.exports = dailyEmail;
