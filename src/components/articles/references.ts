@@ -135,6 +135,33 @@ const references: Record<string, Reference[]> = {
             author: "Seeed",
             source: "https://www.seeedstudio.com/Grove-Moisture-Sensor.html",
         },
+    ],
+    "/blog/cyclic-email-scheduling": [
+        {
+            title: "NodeMailer Tutorial: Sending an Email Using NodeMailer 101",
+            author: "Turing",
+            source: "https://www.turing.com/kb/comprehensive-guide-to-sending-an-email-using-nodemailer",
+        },
+        {
+            title: "How to run scheduled tasks with node-cron",
+            author: "Airplane.dev",
+            source: "https://www.airplane.dev/blog/how-to-run-scheduled-tasks-with-node-cron",
+        },
+        {
+            title: "Serverless / On Demand",
+            author: "Cyclic.sh",
+            source: "https://docs.cyclic.sh/serverless/on-demand",
+        },
+        {
+            title: "Cyclic / Deployment",
+            author: "Cyclic.sh",
+            source: "https://docs.cyclic.sh/overview/deploy",
+        },
+        {
+            title: "The Complete Guide to Cron Expressions",
+            author: "CronToGo",
+            source: "https://crontogo.com/blog/the-complete-guide-to-cron/",
+        },
     ]
 };
 

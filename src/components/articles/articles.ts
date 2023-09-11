@@ -4,6 +4,7 @@ import calendarImg from "../../assets/images/blog/calendar.png";
 import mcdonaldsImg from "../../assets/images/blog/mcdonaldsNeon.png";
 import jsSortingImg from "../../assets/images/blog/jsSorting.png";
 import greenRooftopImg from "../../assets/images/blog/grass.png";
+import emailImg from "../../assets/images/blog/email.png";
 
 export interface BlogArticle {
     title: string;
@@ -102,5 +103,18 @@ export const blogArticles: BlogArticle[] = [
         codeTime: "",
         upcoming: true,
         upcomingDate: "10.10.2023",
+    },
+    {
+        title: "Scheduling Emails with Cyclic",
+        image: emailImg,
+        imageAlt: "Email",
+        abstract:
+            "Discover a solution for scheduling emails with Node.js in unconventional hosting environments like Cyclic. Learn why traditional Node schedulers may not work and explore my workaround involving a separate post path for scheduling within your application and the Cron scheduler.",
+        badges: ["NodeJs", "Express"],
+        to: "/blog/cyclic-email-scheduling",
+        readingTime: "3 min",
+        codeTime: "15 min",
+        suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
+        created: "11.09.2023"
     },
 ];

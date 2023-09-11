@@ -95,6 +95,8 @@ export function getColourName(str: string) {
             return "light-blue";
         case "nodejs":
             return "light-green";
+        case "express":
+            return "orange";
         case "python":
             return "light-green";
         case "c#":

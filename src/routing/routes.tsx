@@ -13,6 +13,7 @@ import JsDateValidation from "../components/articles/JsDateValidation/JsDateVali
 import SoundsWithHowler from "../components/articles/SoundsWithHowler/SoundsWithHowler";
 import JsSorting from "../components/articles/JsSorting/JsSorting";
 import GreenRooftop from "../components/articles/GreenRooftop/GreenRooftop";
+import CycliecEmailScheduling from "../components/articles/CyclicEmailScheduling/CyclicEmailScheduling";
 
 export const routes = [
     {
@@ -71,6 +72,15 @@ export const routes = [
         path: "/blog/green-rooftop",
         element: (
             <GreenRooftop pageName="green-rooftop" path="/blog/green-rooftop" />
+        ),
+    },
+    {
+        path: "/blog/cyclic-email-scheduling",
+        element: (
+            <CycliecEmailScheduling
+                pageName="cyclic-email-scheduling"
+                path="/blog/cyclic-email-scheduling"
+            />
         ),
     },
     {

@@ -2,6 +2,7 @@
 import Article from "../../sharedComponents/Article/Article";
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
+import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 // Images
 import introImg from "../../../assets/images/blog/greenRooftop/intro.png";
@@ -39,8 +40,6 @@ import codeSnippets from "./codeSnippets";
 import greenRooftopCode from "../../../assets/files/blog/green-rooftop/green_rooftop.txt";
 
 // Styles
-import "./GreenRooftop.scss";
-import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 interface Props {
     pageName: string;
