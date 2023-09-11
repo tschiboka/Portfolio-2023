@@ -1,5 +1,4 @@
 // Components
-import { Link } from "react-router-dom";
 import Article from "../../sharedComponents/Article/Article";
 import Figure from "../../sharedComponents/Figure/Figure";
 import Code from "../../sharedComponents/Code/Code";
