@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { BiChevronDown } from "react-icons/bi";
 import iconDark from "../../../assets/images/icon.svg";
 import iconLight from "../../../assets/images/icon-light.svg";
 import "./Nav.scss";
 
 interface Props {
     pageName: string;
+    path?: string;
 }
 
-const Nav = ({ pageName }: Props) => {
+export const isArticle = (path: string | undefined): boolean =>
+    /^\/blog\//.test(path || "");
+
+const Nav = ({ pageName, path }: Props) => {
     const {
         themeMode,
         mainMenuVisible,
@@ -62,11 +67,22 @@ const Nav = ({ pageName }: Props) => {
                             Projects
                         </Link>
                     </li>
-                    <li className={pageName === "blog" ? "active" : ""}>
+                    <li
+                        className={
+                            pageName === "blog"
+                                ? "active"
+                                : isArticle(path)
+                                ? "extended"
+                                : ""
+                        }
+                    >
                         <div className="active-dot"></div>
                         <Link className="link" to="/blog">
                             Blog
                         </Link>
+                        {isArticle(path) && (
+                            <BiChevronDown className="chevron" />
+                        )}
                     </li>
                     <li className={pageName === "contact" ? "active" : ""}>
                         <div className="active-dot"></div>

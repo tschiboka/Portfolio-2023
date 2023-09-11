@@ -21,7 +21,7 @@ const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
     return (
         <footer className="Footer">
             <div className="logo-wrapper">
-                <img src={logo} alt="" />
+                <img src={logo} alt="Logo" />
             </div>
             <span className="name">
                 <span>Tivadar&nbsp;</span>

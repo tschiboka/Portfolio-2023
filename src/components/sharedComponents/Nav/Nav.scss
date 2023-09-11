@@ -84,7 +84,7 @@
                 from_above 200ms ease-in;
         }
 
-        li.active, li:hover {
+        li.active, li:hover, li.extended {
             color: white;
             font-family: Roboto_Bold;
         }
@@ -92,6 +92,11 @@
         li:hover { transform: scale(1.1); }
         li:not(.active) .active-dot {
             display: none;
+        }
+        li .chevron {
+            color: $white_5;
+            height: 70%;
+            transform: translateY(5px);
         }
         li:nth-child(1) { animation-delay: 500ms; }
         li:nth-child(2) { animation-delay: 600ms; }

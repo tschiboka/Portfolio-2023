@@ -70,7 +70,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
 
     return (
         <Page title={"Tivadar Debnar | " + title} path={path}>
-            <Nav pageName={pageName} />
+            <Nav pageName={pageName} path={path} />
             {mobileMenuVisible && <Menu pageName="js-date-validation" />}
             {subMenuVisible && <SubNav />}
             {sideMenuVisible && (
