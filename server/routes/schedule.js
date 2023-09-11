@@ -4,8 +4,8 @@ const route = express.Router();
 
 route.post("/daily-breakdown", async (req, res) => {
     console.log("Send Scheduled Daily Breakdown Email...");
-    await dailyEmail();
-    res.status(200).json({ success: true });
+    const result = await dailyEmail();
+    res.status(200).json(result);
 });
 
 module.exports = route;
