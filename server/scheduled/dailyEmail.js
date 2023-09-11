@@ -118,7 +118,7 @@ const sendEmail = async (message) => {
         subject: 'Breakdown Report | TSCHIBOKA.CO.UK',
         html: message
     };
-    console.log("Sending Email...");
+
     const transporter = nodemailer.createTransport({
         auth: {
             user: fromEmailAddress,
@@ -129,11 +129,9 @@ const sendEmail = async (message) => {
         tls: { rejectUnauthorized: false },
         host: "smtp.gmail.com",
     });
-    
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log("Email Info", info);
-        console.log("Email Sent...");
+        console.log("Email Successfully Sent\n", info);
     } catch (err) {
         console.log("Email Error", err);
     }

@@ -39,8 +39,9 @@ mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-w
     .catch(err => console.log(err));
 
 
-// Email Scheduler
-// Cron Scheduling Do Not Work in Cyclic's Serverless
-// cron.schedule('0 0 0 * * *', () => {
-//     dailyEmail();
-// });
+// Error Handling
+process.on('unhandledRejection', (reason, promise) => { 
+    console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+    // Handle the error or log it appropriately.
+});
+    
