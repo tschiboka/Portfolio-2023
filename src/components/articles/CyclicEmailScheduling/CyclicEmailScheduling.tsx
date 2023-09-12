@@ -46,16 +46,18 @@ const CycliecEmailScheduling = ({ pageName, path }: Props) => {
             </p>
             <p>
                 In NodeJs, scheduling emails can be done effortlessly using npm
-                NodeCron and NodeMailer. NodeMailer is a Node JS module that
-                allows you to send emails from your server easily. It is a
-                zero-dependency module for all Node JS-compatible applications.
-                The emails sent can be plain text, attachments, or HTML.
+                NodeCron and NodeMailer. <strong>NodeMailer</strong> is a Node
+                JS module that allows you to send emails from your server
+                easily. It is a zero-dependency module for all Node
+                JS-compatible applications. The emails sent can be plain text,
+                attachments, or HTML.
                 <InlineReference reference={references[0]} />
                 Cron is a job scheduling function that allows users to trigger
                 specific tasks at designated times. It is a background process
                 executing non-interactive jobs.
                 <InlineReference reference={references[1]} />
-                NodeCron is a cron task scheduler for NodeJs applications.
+                <strong>NodeCron</strong> is a cron task scheduler for NodeJs
+                applications.
             </p>
             <h3>Why NodeCron Doesn't Work on Cyclic?</h3>
             <p>A simple NodeCron solution looks like the following:</p>
