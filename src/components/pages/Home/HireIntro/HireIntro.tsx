@@ -95,12 +95,6 @@ const HireIntro = () => {
                     color={getColourName("nodejs")}
                 />
                 <ProgressBar
-                    percentage={55}
-                    title="MongoDB"
-                    icon={<SiMongodb />}
-                    color={getColourName("mongodb")}
-                />
-                <ProgressBar
                     percentage={35}
                     title="C#"
                     icon={<SiCsharp />}
@@ -113,6 +107,21 @@ const HireIntro = () => {
                     color={getColourName("python")}
                 />
             </section>
+            <h3 className="skill-header">Database</h3>
+            <section className="skills">
+                <ProgressBar
+                    percentage={55}
+                    title="MongoDB"
+                    icon={<SiMongodb />}
+                    color={getColourName("mongodb")}
+                />
+                <ProgressBar
+                    percentage={15}
+                    title="MySQL"
+                    icon={<SiMongodb />}
+                    color={getColourName("mysql")}
+                />
+            </section>
             <h3 className="skill-header">Mobile</h3>
             <section className="skills">
                 <ProgressBar
@@ -120,6 +129,21 @@ const HireIntro = () => {
                     title="React Native"
                     icon={<TbBrandReactNative />}
                     color={getColourName("react native")}
+                />
+            </section>
+            <h3 className="skill-header">Testing</h3>
+            <section className="skills">
+                <ProgressBar
+                    percentage={30}
+                    title="Jest"
+                    icon={<TbBrandReactNative />}
+                    color={getColourName("jest")}
+                />
+                <ProgressBar
+                    percentage={25}
+                    title="RTL"
+                    icon={<TbBrandReactNative />}
+                    color={getColourName("RTL")}
                 />
             </section>
             <h3 className="skill-header">Design</h3>

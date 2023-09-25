@@ -107,6 +107,12 @@ export function getColourName(str: string) {
             return "pink";
         case "illustrator":
             return "orange";
+        case "jest":
+            return "pink";
+        case "rtl":
+            return "purple";
+        case "mysql":
+            return "orange";
         default:
             return "white";
     }
