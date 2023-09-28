@@ -24,8 +24,8 @@ const projects: Project[] = [
         description:
             "I crafted a sleek portfolio website for my personal trainer client to expand his reach. This website features a minimalist dark web design, a powerful logo representing his brand identity, seamless multiple language support, testimonials, personal statements, health and nutritional recommendations, a user-friendly Google Calendar integration for easy bookings, and a contact form to communicate with potential clients.",
         badges: ["HTML", "CSS", "JavaScript", "NodeJs", "Mongodb"],
-        url: "",
-        github: "",
+        url: "https://tschiboka.co.uk/projects/Coach-Francesco-Levo/index.html",
+        github: "https://github.com/tschiboka/Coach-Francesco-Levo",
     },
     {
         title: "Gradient & Pattern Generator",

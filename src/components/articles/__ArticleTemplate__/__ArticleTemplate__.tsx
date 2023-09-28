@@ -8,7 +8,7 @@ import Article from "../../sharedComponents/Article/Article";
 
 // Other Assets
 //import codeSnippets from "./codeSnippets";
-import { getReferenceList } from "../references";
+//import { getReferenceList } from "../references";
 
 // Styles
 //import "./";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const __ArticleTemplate__ = ({ pageName, path }: Props) => {
-    const references = getReferenceList(path);
+    //const references = getReferenceList(path);
     return (
         <Article pageName={pageName} path={path} title="JS Date Validation">
             <h1>Template Header</h1>
