@@ -75,6 +75,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
         const storage = localStorage.getItem("tschiboka") || "{}";
         const storageJSON = JSON.parse(storage);
         const newStorage = { ...storageJSON, theme: themeMode };
+
         localStorage.setItem("tschiboka", JSON.stringify(newStorage));
         body.className = themeMode;
     }, [themeMode]);

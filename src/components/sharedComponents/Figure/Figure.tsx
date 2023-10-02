@@ -28,6 +28,7 @@ const Figure = ({
         setMainMenuVisible,
         setSubMenuVisible,
     } = useAppContext();
+
     const displayZoomOverlay = () => {
         const closeZoom = () => {
             setOverlayContent(null);

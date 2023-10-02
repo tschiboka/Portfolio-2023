@@ -6,13 +6,13 @@ import MoshIcon from "../../../assets/images/certificates/icons/mosh_icon.png";
 import FCCIcon from "../../../assets/images/certificates/icons/fcc_icon.webp";
 
 // Certificates
-import HNDImg from "../../../assets/images/certificates/HND_Computing_Diploma_Part_1.pdf";
-import ReacTestingImg from "../../../assets/images/certificates/Udemi_React_Testing_Library and Jest_Certificate.pdf";
-import TypeScriptImg from "../../../assets/images/certificates/Mosh_TypeScript_Certificate.pdf";
-import ReactImg from "../../../assets/images/certificates/Mosh_React_18_Certificate_1.pdf";
-import NodeJsImg from "../../../assets/images/certificates/Mosh_NodeJS_Certificate.pdf";
-import DataStructures3Img from "../../../assets/images/certificates/Mosh_Data_Structures_Certificate_3.pdf";
-import DataStructures1Img from "../../../assets/images/certificates/Mosh_Data_Structures_Certificate_1.pdf";
+import HNDImg from "../../../assets/images/certificates/HND_Computing_Diploma_Part_1.png";
+import ReacTestingImg from "../../../assets/images/certificates/Udemi_React_Testing_Library and Jest_Certificate.png";
+import TypeScriptImg from "../../../assets/images/certificates/Mosh_TypeScript_Certificate.png";
+import ReactImg from "../../../assets/images/certificates/Mosh_React_18_Certificate_1.png";
+import NodeJsImg from "../../../assets/images/certificates/Mosh_NodeJS_Certificate.png";
+import DataStructures3Img from "../../../assets/images/certificates/Mosh_Data_Structures_Certificate_3.png";
+import DataStructures1Img from "../../../assets/images/certificates/Mosh_Data_Structures_Certificate_1.png";
 import FCCImg from "../../../assets/images/certificates/FCC_Frontend_Certificate.png";
 import FCCAlgorithmsImg from "../../../assets/images/certificates/FCC_Data_Structures_and_Algorithms.png";
 

@@ -1,14 +1,52 @@
 import { Achievement } from "./Achievements";
-import { TbCertificate } from "react-icons/tb";
+import { TbCertificate, TbZoomOutFilled } from "react-icons/tb";
+import { useAppContext } from "../../../context/AppContext";
 import "./AchievementListItem.scss";
+import ZoomedImage from "../ZoomedImage/ZoomedImage";
 
 interface Props {
     achievement: Achievement;
 }
 
 const AchievementListItem = ({ achievement }: Props) => {
+    const {
+        setOverlayVisible,
+        setOverlayContent,
+        setMainMenuVisible,
+        setSubMenuVisible,
+    } = useAppContext();
+
+    const displayZoomOverlay = (image?: string) => {
+        console.log(image);
+        if (!image) return;
+
+        const closeZoom = () => {
+            setOverlayContent(null);
+            setOverlayVisible(false);
+            setMainMenuVisible(true);
+            setSubMenuVisible(true);
+        };
+
+        setOverlayVisible(true);
+        setMainMenuVisible(false);
+        setSubMenuVisible(false);
+
+        const content: React.ReactNode = (
+            <ZoomedImage handleClick={closeZoom} handleEscKeyPress={closeZoom}>
+                <img src={image} alt="Certificate" />
+                <TbZoomOutFilled className="Figure__icon Figure__icon--close" />
+            </ZoomedImage>
+        );
+
+        setOverlayContent(content);
+    };
     return (
-        <li className="AchievementListItem">
+        <li
+            className="AchievementListItem"
+            onClick={() => {
+                displayZoomOverlay(achievement?.certificate_img);
+            }}
+        >
             <img src={achievement.image} alt={achievement.image_alt} />
 
             <span>
