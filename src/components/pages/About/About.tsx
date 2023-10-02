@@ -2,6 +2,11 @@ import Nav from "../../sharedComponents/Nav/Nav";
 import Menu from "../../sharedComponents/Menu/Menu";
 import SubNav from "../../sharedComponents/SubNav/SubNav";
 import Footer from "../../sharedComponents/Footer/Footer";
+import AchievementList from "../../sharedComponents/AchievementList/AchievementList";
+import {
+    academicAchievements,
+    certificateAchievements,
+} from "../../sharedComponents/AchievementListItem/Achievements";
 import guitarImage from "../../../assets/images/about/RiffMaster.png";
 import guitarAppImage from "../../../assets/images/about/RiffMaster_App.png";
 import guitarAppImageSm from "../../../assets/images/about/RiffMaster_App_Mobile.png";
@@ -115,35 +120,10 @@ const About = ({ pageName, path }: Props) => {
                     and refreshing my knowledge in React and Sass to consolidate
                     my expertise in my current stack.
                 </p>
-                <h2>Accomplishments</h2>
-
-                <ul className="certificates">
-                    <li>
-                        BSc Hons Software Engineering (First Class), Falmouth
-                        University, 2023.
-                    </li>
-                    <li>HND Computing (Distinction), Icon College, 2022.</li>
-                    <li>
-                        React Testing Library and Jest [Online - Udemi], 2023
-                    </li>
-                    <li>TypeScript Course [Online - Mosh], 2023.</li>
-                    <li>React Course [Online - Mosh], 2023.</li>
-                    <li>NodeJs Course [Online - Mosh], 2022.</li>
-                    <li>
-                        Data Structures and Algorithms 2 [Online - Mosh], 2021
-                    </li>
-                    <li>
-                        Data Structures and Algorithms 1 [Online - Mosh], 2021
-                    </li>
-                    <li>
-                        Front End Development Certificate, [Online -
-                        FreeCodeCamp], 2018.
-                    </li>
-                    <li>
-                        Algorithms and Data Structures [Online - FreeCodeCamp],
-                        2018.
-                    </li>
-                </ul>
+                <h2>Academic Accomplishments</h2>
+                <AchievementList achievements={academicAchievements} />
+                <h2>Certificates</h2>
+                <AchievementList achievements={certificateAchievements} />
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>

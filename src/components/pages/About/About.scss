@@ -19,6 +19,14 @@ h1 {
     text-align: center;
 }
 
+h3 {
+    margin: 3rem 0;
+    color: $white_2;
+    font-size: $font_lg;
+    font-family: "Roboto_Bold";
+    font-variant: small-caps;
+}
+
 img.guitar-app--sm {
     padding: 5px;
     width: 100%;
@@ -66,18 +74,6 @@ img {
     font-size: $font_md;
     @include bp.md {
         font-size: $font_lg;
-    }
-}
-
-.certificates {
-    padding-left: 1.5rem; 
-    color: $white_3;
-    font-size: $font_md;
-    @include bp.md {
-        font-size: $font_lg;
-    }
-    li {
-        padding: 0.5rem 0;
     }
 }
 
