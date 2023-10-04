@@ -17,7 +17,6 @@ const AchievementListItem = ({ achievement }: Props) => {
     } = useAppContext();
 
     const displayZoomOverlay = (image?: string) => {
-        console.log(image);
         if (!image) return;
 
         const closeZoom = () => {
