@@ -1,4 +1,4 @@
-import { isArticle } from "../components/sharedComponents/Nav/Nav";
+import { isArticle } from "./Nav";
 
 describe("Is Article", () => {
     it("Should Return False for Undefined Input", () => {

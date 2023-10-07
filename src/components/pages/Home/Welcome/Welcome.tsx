@@ -18,7 +18,7 @@ const Welcome = () => {
         <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
             <p className="hello">Hello!</p>
             <div className="headshot-wrapper">
-                <img className="headshot" src={headshot} />
+                <img className="headshot" src={headshot} alt="Headshot Image" />
             </div>
             <h1>
                 <strong>Tivadar Debnar</strong>

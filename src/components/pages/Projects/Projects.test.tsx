@@ -1,5 +1,5 @@
-import { getProjects } from "../components/pages/Projects/getProjects";
-import { getColourName } from "../components/pages/Projects/getProjects";
+import { getProjects } from "./getProjects";
+import { getColourName } from "./getProjects";
 
 // Get Project
 // Returns a list of projects with the following properties:

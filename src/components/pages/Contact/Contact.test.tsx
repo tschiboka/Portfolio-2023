@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-const contact = require("../components/pages/Contact/Contact");
+const contact = require("./Contact");
 
 // VALIDATE NAME
 // Function Accepts a String
