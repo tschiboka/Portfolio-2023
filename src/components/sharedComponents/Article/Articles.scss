@@ -127,7 +127,7 @@ aside.blog-component--article {
     h2 {
         text-align: center;
     }
-    h3 {
+    h3, h4 {
         margin: 3rem 0;
         color: $white_2;
         font-size: $font_lg;
@@ -243,7 +243,7 @@ aside.blog-component--article {
 }
 
 .light {
-    h3 {
+    h3, h4 {
         color: $black_2;
     }
     aside {

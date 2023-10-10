@@ -162,7 +162,23 @@ const references: Record<string, Reference[]> = {
             author: "CronToGo",
             source: "https://crontogo.com/blog/the-complete-guide-to-cron/",
         },
-    ]
+    ], "/blog/brief-react-anatomy": [
+        {
+            title: "Difference Between Framework and Library",
+            author: "Sencha",
+            source: "https://www.sencha.com/blog/difference-between-framework-vs-library-snc/",
+        },
+        {
+            title: "What is the DOM",
+            author: "W3",
+            source: "https://www.w3.org/TR/REC-DOM-Level-1/introduction.html",
+        },
+        {
+            title: "Virtual DOM and Internals",
+            author: "ReactJs",
+            source: "https://legacy.reactjs.org/docs/faq-internals.html",
+        },
+    ],
 };
 
 export const getReferenceList = (path: string) => references[path];
