@@ -13,7 +13,8 @@ import JsDateValidation from "../components/articles/JsDateValidation/JsDateVali
 import SoundsWithHowler from "../components/articles/SoundsWithHowler/SoundsWithHowler";
 import JsSorting from "../components/articles/JsSorting/JsSorting";
 import GreenRooftop from "../components/articles/GreenRooftop/GreenRooftop";
-import CycliecEmailScheduling from "../components/articles/CyclicEmailScheduling/CyclicEmailScheduling";
+import CyclicEmailScheduling from "../components/articles/CyclicEmailScheduling/CyclicEmailScheduling";
+import ReactAnatomy from "../components/articles/ReactAnatomy/RactAnatomy";
 
 export const routes = [
     {
@@ -77,9 +78,18 @@ export const routes = [
     {
         path: "/blog/cyclic-email-scheduling",
         element: (
-            <CycliecEmailScheduling
+            <CyclicEmailScheduling
                 pageName="cyclic-email-scheduling"
                 path="/blog/cyclic-email-scheduling"
+            />
+        ),
+    },
+    {
+        path: "/blog/brief-react-anatomy",
+        element: (
+            <ReactAnatomy
+                pageName="brief-react-anatomy"
+                path="/blog/brief-react-anatomy"
             />
         ),
     },

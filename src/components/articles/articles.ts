@@ -5,6 +5,7 @@ import mcdonaldsImg from "../../assets/images/blog/mcdonaldsNeon.png";
 import jsSortingImg from "../../assets/images/blog/jsSorting.png";
 import greenRooftopImg from "../../assets/images/blog/grass.png";
 import emailImg from "../../assets/images/blog/email.png";
+import anatomyImg from "../../assets/images/blog/anatomy.png";
 
 export interface BlogArticle {
     title: string;
@@ -102,7 +103,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
-        upcomingDate: "10.10.2023",
+        upcomingDate: "10.11.2023",
     },
     {
         title: "Scheduling Emails with Cyclic",
@@ -116,5 +117,18 @@ export const blogArticles: BlogArticle[] = [
         codeTime: "15 min",
         suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
         created: "11.09.2023"
+    },
+    {
+        title: "Brief Anatomy of React",
+        image: anatomyImg,
+        imageAlt: "Anatomy",
+        abstract:
+            "My last interview questions drifted towards the exciting topics of how React works internally, so here is my brief research on this subject in hindsight. We'll cover virtual DOM, component architecture, JSX transformations, rendering processes, and more.",
+        badges: ["React"],
+        to: "/blog/brief-react-anatomy",
+        readingTime: "5 min",
+        codeTime: "",
+        suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
+        created: "10.10.2023"
     },
 ];
