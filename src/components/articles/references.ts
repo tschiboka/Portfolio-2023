@@ -169,6 +169,11 @@ const references: Record<string, Reference[]> = {
             source: "https://www.sencha.com/blog/difference-between-framework-vs-library-snc/",
         },
         {
+            title: "What is the Virtual DOM in React",
+            author: "LogRocket",
+            source: "https://blog.logrocket.com/virtual-dom-react/",
+        },
+        {
             title: "What is the DOM",
             author: "W3",
             source: "https://www.w3.org/TR/REC-DOM-Level-1/introduction.html",
@@ -177,6 +182,26 @@ const references: Record<string, Reference[]> = {
             title: "Virtual DOM and Internals",
             author: "ReactJs",
             source: "https://legacy.reactjs.org/docs/faq-internals.html",
+        },
+        {
+            title: "What is the Virtual DOM in React",
+            author: "Altogic",
+            source: "https://www.altogic.com/blog/what-is-the-virtual-dom-in-react-and-how-does-it-work",
+        },
+        {
+            title: "React Reconciliation Algorithm",
+            author: "Medium",
+            source: "https://medium.com/javarevisited/react-reconciliation-algorithm-86e3e22c1b40",
+        },
+        {
+            title: "Why React Stopped Using Stack Reconcilier",
+            author: "Dev",
+            source: "https://dev.to/thepurplecoder/why-react-stopped-using-stack-reconciler-blog-2-171p",
+        },
+        {
+            title: "Fiber Child and Sibling",
+            author: "JSPlainEnglish",
+            source: "https://javascript.plainenglish.io/understand-react-design-principles-af0051e272c3",
         },
     ],
 };
