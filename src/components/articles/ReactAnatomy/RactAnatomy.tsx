@@ -1,7 +1,7 @@
 // Components
 import Article from "../../sharedComponents/Article/Article";
 import Figure from "../../sharedComponents/Figure/Figure";
-// import Code from "../../sharedComponents/Code/Code";
+import Code from "../../sharedComponents/Code/Code";
 import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
 
 // Images
@@ -12,7 +12,7 @@ import StackReconciliationImg from "../../../assets/images/blog/react_anatomy/st
 import FiberImg from "../../../assets/images/blog/react_anatomy/fiber.png";
 
 // Other Assets
-//import codeSnippets from "./codeSnippets";
+import codeSnippets from "./codeSnippets";
 import { getReferenceList } from "../references";
 
 // Styles
@@ -27,7 +27,7 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
     const references = getReferenceList(path);
     return (
         <Article pageName={pageName} path={path} title="JS Date Validation">
-            <h1>Template Header</h1>
+            <h1>Brief Anatomy of React</h1>
             <Figure
                 image={ReactTitleImg}
                 className={"image--med bg--white"}
@@ -113,6 +113,7 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 alt={"DOM"}
                 zoomAllowed={true}
             />
+            <h3>Virtual DOM</h3>
             <p>
                 The virtual DOM (VDOM) is a programming concept where an ideal,
                 or "virtual", representation of a UI is kept in memory and
@@ -129,8 +130,10 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 especially in complex web applications with high interactivity
                 and frequent state changes. In contrast, React adopts the
                 virtual DOM concept during the rendering process, aligning with
-                its declarative approach. With this method, developers can
-                specify the desired UI state, and React takes care of the rest.
+                its declarative approach: you tell React what state you want the
+                UI to be in, and it makes sure the DOM matches that state. With
+                this method, developers can specify the desired UI state, and
+                React takes care of the rest.
             </p>
             <p>
                 After updating the virtual DOM, React compares it to a previous
@@ -154,7 +157,23 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 Thanks to the virtual DOM, developers are relieved from the
                 burden of managing state transitions. Once the state is updated,
                 React ensures that the DOM reflects that updated state
-                seamlessly.
+                seamlessly. The only disadvantage of VDOM is the higher memory
+                usage, as the diffing algorithms need to keep comparing the
+                elements to know which components need to be updated or changed.
+            </p>
+            <h3>Rendering Components</h3>
+            <p>
+                In React, the rendering occurs when a React component's render
+                method is called. This method returns a representation of the
+                user interface as a Virtual DOM (a lightweight copy of the
+                actual DOM). React then compares this Virtual DOM to the
+                previous one, identifying the differences or updates needed.
+                These updates are calculated efficiently, and only the necessary
+                changes are applied to the HTML DOM. This process, called
+                reconciliation, is a key part of what makes React efficient and
+                performant. It ensures the application's UI stays in sync with
+                its underlying data, providing a smooth and responsive user
+                experience.
             </p>
             <h3>How Reconciliation Works</h3>
             <p>
@@ -173,6 +192,7 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 both versions and then only updates the node which has changes
                 without any changes in the tree. The component will be updated
                 in the next lifecycle call.
+                <br />
                 <strong>Batching:</strong> React batches multiple changes into a
                 single update, reducing the number of updates to the virtual DOM
                 and, in turn, the real DOM.
@@ -307,12 +327,140 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 traversal is not recursive but uses a while loop.
             </p>
 
-            {/* <Code
-                fileName="validateDate.tsx"
-                language="arduino"
-                content={codeSnippets.basicDateValidation}
-              /> */}
-            {/* <InlineReference reference={references[0]} /> */}
+            <h3>Batching</h3>
+            <p>
+                React can face challenges in keeping pace with user inputs or
+                actions, mainly when several state updates are in play. For
+                instance, when a component needs to update two or more state
+                variables in response to user interactions, React may initiate
+                multiple rerenders, potentially leading to a less-than-smooth or
+                sluggish user experience. React uses a technique called
+                batching, which means that it groups together multiple state
+                updates into a single re-render for better performance.
+                <InlineReference reference={references[8]} />
+            </p>
+            <Code
+                fileName="batching.js"
+                language="javascript"
+                content={codeSnippets.batching}
+            />
+            <p>
+                Before React 18, not all state updates were batched, though. For
+                example, state updates using asynchronous code (e.g. Promise) or
+                third-party APIs (e.g. setTimeout) weren't batched and therefore
+                triggered two re-renderings (for two respective state updates)
+                of the component. However, with React's additions in React 18,
+                automatic batching became the default. If there are situations
+                where a React developer would want to opt out of batching, one
+                could use the flushSync top-level API of React.
+                <InlineReference reference={references[9]} />
+            </p>
+            <Code
+                fileName="flush.js"
+                language="javascript"
+                content={codeSnippets.flushedRender}
+            />
+
+            <h3>JSX</h3>
+            <p>
+                JavaScript XML (JSX) is a syntax extension for JavaScript often
+                used with the React library.
+                <InlineReference reference={references[10]} />
+                It allows you to write HTML-like code within JavaScript files.
+                JSX provides a more concise and readable way to describe the
+                structure of user interfaces. React components use JSX to define
+                the user interface's layout, structure, and appearance by
+                creating a hierarchy of virtual DOM elements that are later
+                rendered to the actual DOM. JSX code is transpiled into regular
+                JavaScript using tools like Babel, making it compatible with web
+                browsers. This approach simplifies the creation of dynamic and
+                interactive web applications, making it easier for developers to
+                work with the React library.
+            </p>
+
+            <p>
+                Fundamentally, JSX provides syntactic sugar for the
+                React.createElement(component, props, ...children) function.
+                React components use capitalised JSX tags, and native, built-in
+                components, such as a div, must be lowercase. Also, JSX accepts
+                dot notation; therefore, MyComponents.ColourPicker is a valid
+                JSX syntax and can be used to modularise complex components. A
+                closing tag can also be applied if a JSX component has no
+                children. Note that JSX must return a single root element, and
+                multiple root elements must be wrapped with a container
+                component or a fragment.
+            </p>
+
+            <p>
+                JSX also accepts any JavaScript expression to assign dynamic
+                properties using bracket notation. The default property value is
+                true if only the property name is applied. In JSX, JavaScript
+                expressions enclosed in curly braces can evaluate to strings,
+                React elements, or lists of these values, providing a versatile
+                way to define the structure and content of React components.
+                Additionally, the props.children prop works like any other prop,
+                allowing the passing of various data types, not limited to what
+                React typically renders. For instance, custom components can
+                receive callback functions or custom JSX structures as children,
+                adding flexibility and composability to React applications.
+            </p>
+            <h3>Babel and JSX Transpilation</h3>
+            <p>
+                Babel is a JavaScript compiler that is often used in React
+                development. It is crucial in transforming modern JavaScript
+                code, including JSX, into versions compatible with older
+                browsers and environments. Babel is essential in the React
+                ecosystem for the following reasons:
+                <br />
+                <strong>JSX Transformation: </strong>Babel is used to transpile
+                JSX code, allowing developers to write JSX syntax in their React
+                components. It converts JSX into standard JavaScript code that
+                browsers can understand.
+                <br />
+                <strong>ES6/ESNext Support: </strong>Babel enables modern
+                JavaScript features (ECMAScript 6 and beyond) in React
+                applications. It transforms code into ES5 or other compatible
+                versions, ensuring broad browser compatibility.
+                <br />
+                <strong>Optimising Code: </strong>Babel can optimise and
+                minimise the code, reducing its size and improving application
+                performance.
+                <br />
+                <strong>Plugin Ecosystem: </strong>Babel has a rich ecosystem of
+                plugins that can be added to tailor the transformation process
+                to specific project requirements. Developers can customise
+                Babel's behaviour with plugins and presets.
+            </p>
+
+            <h3>Class vs Functional Components</h3>
+            <p>
+                We can declare React components in two different ways, using
+                classes or functions. Functional components are some of the more
+                common components encountered while working in React. These are
+                simple JavaScript functions that return JSX. A class component
+                is a JavaScript class that extends React.Component which has a
+                render method.
+            </p>
+            <Code
+                fileName="component.js"
+                language="javascript"
+                content={codeSnippets.funtionalVsClass}
+            />
+            <h3>Hooks</h3>
+            <h3>setState and useState</h3>
+            <h3>useEffect</h3>
+            <h3>Component Lifecycle Methods</h3>
+            <h3>Mounting, Updating, and Unmounting</h3>
+            <h3>State versus Props</h3>
+            <h3>Event Handling</h3>
+            <h3>Delegation and Synthetic Events</h3>
+            <h3>ShouldComponentUpdate, PureComponent, React.memo</h3>
+            <h3>Context API</h3>
+            <h3>What is Redux</h3>
+            <h3>Concurrent Mode, Suspend and Lazy Loading</h3>
+            <h3>SSR</h3>
+            <h3>SSR and SEO</h3>
+            <h3>React Internals</h3>
         </Article>
     );
 };

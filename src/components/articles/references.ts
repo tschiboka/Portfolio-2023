@@ -203,6 +203,21 @@ const references: Record<string, Reference[]> = {
             author: "JSPlainEnglish",
             source: "https://javascript.plainenglish.io/understand-react-design-principles-af0051e272c3",
         },
+        {
+            title: "Use Automatic Batching in React to Optimize State Updates",
+            author: "Shevchuk, V",
+            source: "https://itnext.io/use-automatic-batching-in-react-to-optimize-state-updates-4829f1156b2f",
+        },
+        {
+            title: "React Batching",
+            author: "Wieruch, R",
+            source: "https://www.robinwieruch.de/react-batching/",
+        },
+        {
+            title: "JSX in Depth",
+            author: "React",
+            source: "https://legacy.reactjs.org/docs/jsx-in-depth.html",
+        },
     ],
 };
 

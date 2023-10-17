@@ -129,6 +129,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "5 min",
         codeTime: "",
         suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
-        created: "10.10.2023"
+        created: "10.10.2023",
+        updated: "12.10.2023"
     },
 ];
