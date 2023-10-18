@@ -26,7 +26,7 @@ interface Props {
 const ReactAnatomy = ({ pageName, path }: Props) => {
     const references = getReferenceList(path);
     return (
-        <Article pageName={pageName} path={path} title="JS Date Validation">
+        <Article pageName={pageName} path={path} title="Brief React Anatomy">
             <h1>Brief Anatomy of React</h1>
             <Figure
                 image={ReactTitleImg}
@@ -446,10 +446,94 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 language="javascript"
                 content={codeSnippets.funtionalVsClass}
             />
+            <p>
+                A class component requires you to import and extend the
+                Component class from React.Component and create a render
+                function which returns a React element. Using classes results in
+                additional boilerplate injected into the output compared to the
+                function example. Stateless components are the simplest
+                components in the React ecosystem; however, if we want to use
+                functional components statefully, we must use hooks. Transpiling
+                the hook-enabled function component adds significantly less
+                boilerplate to the transpiled code.
+            </p>
             <h3>Hooks</h3>
-            <h3>setState and useState</h3>
-            <h3>useEffect</h3>
+            <p>
+                With React Hooks, we can use state and other React features in a
+                functional component. It empowers developers to do functional
+                programming in React.
+                <InlineReference reference={references[11]} />
+                React Hooks let you "hook into" state and lifecycle features in
+                functional components. They were introduced in React 16.8 to
+                provide a way to use state, context, refs, and other React
+                features without the need for class components. React Hooks
+                offer several built-in functions, each designed for a specific
+                purpose:
+                <br />
+                <strong>useState: </strong>Allows functional components to
+                manage local state. It takes an initial state value and returns
+                an array with the current state and a function to update it.
+                <br />
+                <strong>useEffect:</strong>Enables functional components to
+                perform side effects, like data fetching or DOM manipulation,
+                after rendering. It replaces lifecycle methods like
+                componentDidMount and componentDidUpdate.
+                <br />
+                <strong>useContext: </strong>Provides access to the context API,
+                allowing components to consume context values.
+                <br />
+                <strong>useRef: </strong>Creates a mutable ref object that can
+                be used to directly access and interact with DOM elements or
+                store mutable values.
+                <br />
+                <strong>useReducer: </strong>Provides an alternative to useState
+                for managing more complex state logic using a reducer function.
+                <br />
+                <strong>useMemo and useCallback: </strong>Memorisation functions
+                that optimise performance by memorising values and functions to
+                prevent unnecessary re-renders.
+                <br />
+                Hooks allow functional components to maintain their state, side
+                effects, and other features previously only available in class
+                components. They make it easier to reuse stateful logic and
+                encourage the development of smaller, more focused components,
+                leading to cleaner, more maintainable code.
+            </p>
+
             <h3>Component Lifecycle Methods</h3>
+            <p>
+                In React class components, there are several lifecycle methods
+                that you can override to add functionality to your components at
+                different stages of their existence. Here is a list of the main
+                React lifecycle methods:
+                <br />
+                <strong>componentDidMount: </strong>This method is called after
+                the component is inserted into the DOM. It is often used for
+                initiating AJAX requests, adding event listeners, or setting up
+                timers.
+                <br />
+                <strong>componentDidUpdate: </strong>This method is called after
+                a component's updates are flushed to the DOM. It helps handle
+                updates or perform actions after a re-render.
+                <br />
+                <strong>componentWillUnmount: </strong>This method is called
+                just before the component is removed from the DOM. It's
+                typically used for cleanup, such as removing event listeners or
+                cancelling timers.
+                <br />
+                <strong>shouldComponentUpdate: </strong>This method allows you
+                to control whether the component should re-render. It returns a
+                Boolean value that determines whether the re-render should
+                proceed.
+            </p>
+            <p>
+                With the introduction of function components and React Hooks,
+                many lifecycle methods are used less frequently. Function
+                components often rely on the useEffect hook for side effects and
+                state management. Class components are still supported, but
+                functional components are favoured for their simplicity and
+                better encapsulation of concerns.
+            </p>
             <h3>Mounting, Updating, and Unmounting</h3>
             <h3>State versus Props</h3>
             <h3>Event Handling</h3>

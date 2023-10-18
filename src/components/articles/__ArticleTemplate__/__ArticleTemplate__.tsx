@@ -21,7 +21,7 @@ interface Props {
 const __ArticleTemplate__ = ({ pageName, path }: Props) => {
     //const references = getReferenceList(path);
     return (
-        <Article pageName={pageName} path={path} title="JS Date Validation">
+        <Article pageName={pageName} path={path} title="">
             <h1>Template Header</h1>
             {/* <Figure
                 image={calendarImg}

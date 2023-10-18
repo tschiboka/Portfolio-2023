@@ -27,7 +27,11 @@ interface Props {
 const CycliecEmailScheduling = ({ pageName, path }: Props) => {
     const references = getReferenceList(path);
     return (
-        <Article pageName={pageName} path={path} title="JS Date Validation">
+        <Article
+            pageName={pageName}
+            path={path}
+            title="Cyclic Email Scheduling"
+        >
             <h1>Sheduling Emails on Cyclic</h1>
             <Figure
                 image={cyclicImg}

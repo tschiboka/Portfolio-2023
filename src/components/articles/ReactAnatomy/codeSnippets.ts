@@ -43,13 +43,13 @@ const FunctionalComponent = () => { // ES6 Arrow Functions
 };
 
 function FunctionalComponent() {    // Regular Funtions
- return <h1>Hello, world</h1>;
+ return <h1>Happy Coding!</h1>;
 }
 
 // Class Components
 class ClassComponent extends Component {
  render() {
-   return <h1>Hello, world</h1>;
+   return <h1>Happy Coding!</h1>;
  }
 }`,
 }

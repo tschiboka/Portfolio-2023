@@ -49,7 +49,7 @@ interface Props {
 const GreenRooftop = ({ pageName, path }: Props) => {
     const references = getReferenceList(path);
     return (
-        <Article pageName={pageName} path={path} title="JS Date Validation">
+        <Article pageName={pageName} path={path} title="Green Rooftop">
             <h1>Green Rooftop - An Arduino IoT Project</h1>
             <Figure
                 image={introImg}
