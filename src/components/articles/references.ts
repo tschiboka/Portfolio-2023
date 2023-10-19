@@ -244,6 +244,23 @@ const references: Record<string, Reference[]> = {
             source: "https://www.freecodecamp.org/news/context-api-in-react/",
         },
     ],
+    "/blog/git-cheatsheet": [
+        {
+            title: "Intro Image: Black Withered Tree",
+            author: "Kyle Roxas",
+            source: "https://www.pexels.com/photo/black-withered-tree-surounded-by-body-of-water-2138922/",
+        },
+        {
+            title: "Git Downloads",
+            author: "Git",
+            source: "https://git-scm.com/downloads",
+        },
+        {
+            title: "Bourne Shell",
+            author: "Gillis, S.",
+            source: "https://www.techtarget.com/searchdatacenter/definition/Bourne-shell",
+        },
+    ]
 };
 
 export const getReferenceList = (path: string) => references[path];

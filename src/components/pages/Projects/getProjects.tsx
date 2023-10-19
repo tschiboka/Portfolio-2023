@@ -113,6 +113,8 @@ export function getColourName(str: string) {
             return "purple";
         case "mysql":
             return "orange";
+        case "git":
+            return "pink";
         default:
             return "white";
     }

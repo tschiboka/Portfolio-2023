@@ -15,6 +15,7 @@ import JsSorting from "../components/articles/JsSorting/JsSorting";
 import GreenRooftop from "../components/articles/GreenRooftop/GreenRooftop";
 import CyclicEmailScheduling from "../components/articles/CyclicEmailScheduling/CyclicEmailScheduling";
 import ReactAnatomy from "../components/articles/ReactAnatomy/RactAnatomy";
+import GitCheatsheet from "../components/articles/GitCheatsheet/GitCheatsheet";
 
 export const routes = [
     {
@@ -90,6 +91,15 @@ export const routes = [
             <ReactAnatomy
                 pageName="brief-react-anatomy"
                 path="/blog/brief-react-anatomy"
+            />
+        ),
+    },
+    {
+        path: "/blog/git-cheatsheet",
+        element: (
+            <GitCheatsheet
+                pageName="git-cheatsheet"
+                path="/blog/git-cheatsheet"
             />
         ),
     },

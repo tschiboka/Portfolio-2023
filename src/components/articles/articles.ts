@@ -6,6 +6,7 @@ import jsSortingImg from "../../assets/images/blog/jsSorting.png";
 import greenRooftopImg from "../../assets/images/blog/grass.png";
 import emailImg from "../../assets/images/blog/email.png";
 import anatomyImg from "../../assets/images/blog/anatomy.png";
+import gitSignImg from "../../assets/images/blog/git_sign.png";
 
 export interface BlogArticle {
     title: string;
@@ -126,10 +127,24 @@ export const blogArticles: BlogArticle[] = [
             "My last interview questions drifted towards the exciting topics of how React works internally, so here is my brief research on this subject in hindsight. We'll cover virtual DOM, component architecture, JSX transformations, rendering processes, and more.",
         badges: ["React"],
         to: "/blog/brief-react-anatomy",
+        readingTime: "10 min",
+        codeTime: "",
+        suggestedArticles: ["/blog/cyclic-email-scheduling", "/blog/js-sorting"],
+        created: "10.10.2023",
+        updated: "18.10.2023"
+    },
+    {
+        title: "Git Cheat Sheet",
+        image: gitSignImg,
+        imageAlt: "Git Sign",
+        abstract:
+            "Git is the ultimate weapon in every professional software engineer's arsenal, as it has become the standard software development tool in the industry for collaborating engineers. This comprehensive cheat sheet is your key to mastering Git, and I'm thrilled to share my personal collection of Git commands, tips and research with you.",
+        badges: ["Git"],
+        to: "/blog/git-cheatsheet",
         readingTime: "5 min",
         codeTime: "",
-        suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
-        created: "10.10.2023",
-        updated: "12.10.2023"
+        suggestedArticles: ["/blog/brief-react-anatomy", "/blog/js-sorting"],
+        created: "19.10.2023",
+        updated: "20.10.2023"
     },
 ];
