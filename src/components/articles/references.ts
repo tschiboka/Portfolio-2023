@@ -223,6 +223,26 @@ const references: Record<string, Reference[]> = {
             author: "Adhikary, T.",
             source: "https://www.freecodecamp.org/news/react-hooks-fundamentals/",
         },
+        {
+            title: "Intro to React Component Lifecycle",
+            author: "Cruz, R.",
+            source: "https://medium.com/@ralph1786/intro-to-react-component-lifecycle-ac52bf6340c",
+        },
+        {
+            title: "React: An Overview about SyntheticEvent",
+            author: "Britto, V.",
+            source: "https://medium.com/@vitorbritto/react-an-overview-about-syntheticevent-d3a6d35295f1",
+        },
+        {
+            title: "React useCallback Hook",
+            author: "W3School",
+            source: "https://www.w3schools.com/react/react_usecallback.asp",
+        },
+        {
+            title: "How to Use the React Context API in Your Projects",
+            author: "Boateng, D.",
+            source: "https://www.freecodecamp.org/news/context-api-in-react/",
+        },
     ],
 };
 

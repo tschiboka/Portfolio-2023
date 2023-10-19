@@ -10,6 +10,7 @@ import DOMImg from "../../../assets/images/blog/react_anatomy/DOM.png";
 import VDOMImg from "../../../assets/images/blog/react_anatomy/virtual-dom.png";
 import StackReconciliationImg from "../../../assets/images/blog/react_anatomy/stack-reconciliation.jpg";
 import FiberImg from "../../../assets/images/blog/react_anatomy/fiber.png";
+import LifeCycleMethodsImg from "../../../assets/images/blog/react_anatomy/component-lifecycle-methods.webp";
 
 // Other Assets
 import codeSnippets from "./codeSnippets";
@@ -527,24 +528,164 @@ const ReactAnatomy = ({ pageName, path }: Props) => {
                 proceed.
             </p>
             <p>
-                With the introduction of function components and React Hooks,
-                many lifecycle methods are used less frequently. Function
-                components often rely on the useEffect hook for side effects and
-                state management. Class components are still supported, but
-                functional components are favoured for their simplicity and
-                better encapsulation of concerns.
+                In a React class component, the order in which the lifecycle
+                methods are called follows a specific sequence. Here is the
+                typical order of component lifecycle methods:
             </p>
-            <h3>Mounting, Updating, and Unmounting</h3>
-            <h3>State versus Props</h3>
-            <h3>Event Handling</h3>
-            <h3>Delegation and Synthetic Events</h3>
-            <h3>ShouldComponentUpdate, PureComponent, React.memo</h3>
+            <p>
+                <strong>Constructor: </strong>This method is called when an
+                instance of the component is created. It's used for initializing
+                state and setting up initial values.
+                <br />
+                <strong>static getDerivedStateFromProps: </strong>This is a
+                static method that's called before `render`. It allows you to
+                update the component's state based on changes in props.
+                <br />
+                <strong>render: </strong>This is the core method for rendering
+                the component's UI. It should be a pure function without side
+                effects.
+                <br />
+                <strong>componentDidMount: </strong>This method is called after
+                the component is inserted into the DOM. It's often used for
+                initiating AJAX requests, adding event listeners, or setting up
+                timers.
+                <br />
+                <strong>shouldComponentUpdate: </strong>This method is called
+                before re-rendering to determine whether the component should
+                update. The subsequent lifecycle methods will not be invoked if
+                it returns' false'.
+                <br />
+                <strong>render: </strong>If `shouldComponentUpdate` allows the
+                update, `render` is called again to re-render the component's
+                UI.
+                <br />
+                <strong>componentDidUpdate: </strong>This method is called after
+                the component's updates are flushed to the DOM. It helps handle
+                updates or perform actions after a re-render.
+                <br />
+                <strong>componentWillUnmount: </strong>This method is called
+                just before the component is removed from the DOM. It's
+                typically used for cleanup, such as removing event listeners or
+                cancelling timers.
+            </p>
+            <Figure
+                image={LifeCycleMethodsImg}
+                className={"image--lrg bg--white"}
+                alt="Component Lifecycle Methods in Order"
+                caption="Component Lifecycle Methods in Order"
+                zoomAllowed={true}
+                reference={references[12]}
+            />
+            <p>
+                It's important to note that with the introduction of function
+                components and React Hooks, these lifecycle methods have
+                evolved. Function components rely on the `useEffect` hook for
+                handling side effects and state management. If you're using
+                function components, the order and usage of lifecycle methods
+                are quite different from class components.
+            </p>
+            <h3>Synthetic Events</h3>
+            <p>
+                JavaScript events serve as the means for users to engage with a
+                web application, enabling actions like capturing clicks, focus,
+                mouseover, and keypress interactions when they occur within the
+                web browser. Each JavaScript event is paired with an event
+                handler, which collaborates with an event listener. The event
+                listener's role is to observe a specific event's occurrence,
+                while the event handler is a function containing executable code
+                that triggers once the event is detected or activated.{" "}
+            </p>
+            <p>
+                React Synthetic Events are very similar to Native Events;
+                however, with Synthetic Events, the same API interface is
+                implemented across multiple browsers.
+                <InlineReference reference={references[13]} />
+                Both Synthetic Events and Native Events can implement the
+                preventDefault and stopPropagation methods. Synthetic events are
+                cross-browser, as they wrap the browser's native event through
+                the nativeEvent attribute and provide a uniform API and
+                consistent behaviour. Additionally, they perform better than
+                native events as synthetic events are delegated to document
+                through bubbling.
+            </p>
+            <h3>useCallback and useMemo</h3>
+            <p>
+                Both useCallback and useMemo are hooks in React that help
+                optimize performance by memoizing values and functions. They are
+                often used when you want to avoid unnecessary calculations or
+                re-renders. UseCallback is used to memorise functions. It
+                returns a memorised version of the function that only changes if
+                one of the dependencies passed to it has changed. UseCallback is
+                particularly useful when you pass functions as props to child
+                components to prevent unnecessary re-renders of those
+                components. We must remember that every time a component
+                re-renders, its functions get recreated. Because of this, our
+                function has changed because of the referential equality.
+            </p>
+            <Code
+                fileName="useCallback.js"
+                language="javascript"
+                content={codeSnippets.useCallbackSnippet}
+            />
+            <p>
+                UseMemo is used to memoize values. It takes a function and an
+                array of dependencies. It returns a memoized value recalculated
+                when a dependency has changed; it is useful when you want to
+                optimise expensive calculations in terms of time or computation.
+            </p>
+            <Code
+                fileName="useMemo.js"
+                language="javascript"
+                content={codeSnippets.useMemo}
+            />
+            <p>
+                The useCallback and useMemo Hooks are similar. The main
+                difference is that useMemo returns a memoized value and
+                useCallback returns a memoized function.
+                <InlineReference reference={references[14]} />
+            </p>
             <h3>Context API</h3>
-            <h3>What is Redux</h3>
-            <h3>Concurrent Mode, Suspend and Lazy Loading</h3>
-            <h3>SSR</h3>
-            <h3>SSR and SEO</h3>
-            <h3>React Internals</h3>
+            <p>
+                Effectively handling state is a fundamental aspect of building
+                applications with React. One prevalent method of state
+                management involves passing props between components. However,
+                when you find yourself repeatedly passing the same data to
+                numerous components or dealing with components scattered across
+                your application, it can become cumbersome and potentially lead
+                to performance issues, making your application less efficient
+                and more challenging to maintain. Passing props through multiple
+                levels of child components in React is called prop drilling or
+                prop threading. Context API allows data to be passed through a
+                component tree without having to pass props manually at every
+                level. This makes it easier to share data between components.
+                <InlineReference reference={references[15]} />
+            </p>
+            <p>
+                You start by creating a Context using the React.createContext()
+                function. This function returns an object with two properties:
+                Provider and Consumer. The Provider component wraps the part of
+                your component tree where you want to make certain data
+                available. It accepts a value prop: the data you want to share.
+                The Consumer component is used to access the data provided by
+                the Provider. It can be placed in any component that needs
+                access to the data, and it will automatically subscribe to
+                updates when the data changes.
+            </p>
+            <Code
+                fileName="context.js"
+                language="javascript"
+                content={codeSnippets.context}
+            />
+            <h3>Conclusion</h3>
+            <p>
+                In this journey through React, we've explored the core concepts
+                of rendering, delving into the virtual DOM, reconciliation,
+                component lifecycles and JSX. We've also uncovered the power of
+                React Hooks and introduced some state management techniques like
+                the Context API. This article is far from finished, and I will
+                extend its content as I go along on my personal learning
+                journey. I hope you found it useful.
+            </p>
         </Article>
     );
 };
