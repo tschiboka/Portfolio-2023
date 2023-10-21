@@ -75,6 +75,9 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            @include bp.md {
+                max-width: 35vw;
+            }
         }
 
         .References__index {

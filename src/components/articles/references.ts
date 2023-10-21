@@ -260,6 +260,31 @@ const references: Record<string, Reference[]> = {
             author: "Gillis, S.",
             source: "https://www.techtarget.com/searchdatacenter/definition/Bourne-shell",
         },
+        {
+            title: "Centralised versus Distributed Version Control",
+            author: "Feist, S.",
+            source: "https://www.researchgate.net/publication/316553817_Collaborative_Algorithmic-based_Building_Information_Modelling",
+        },
+        {
+            title: "Git Basics - Software Carpentry",
+            author: "Nicercode",
+            source: "http://nicercode.github.io/2014-02-13-UNSW/lessons/70-version-control/basics.html",
+        },
+        {
+            title: "How Snapshot and Delta Storage Differs",
+            author: "Määttä, A.",
+            source: "https://blog.git-init.com/snapshot-vs-delta-storage/",
+        },
+        {
+            title: "Git Add",
+            author: "Atlassian",
+            source: "https://www.atlassian.com/git/tutorials/saving-changes",
+        },
+        {
+            title: "Git Commit",
+            author: "GitTower",
+            source: "https://www.git-tower.com/learn/git/commands/git-commit",
+        },
     ]
 };
 
