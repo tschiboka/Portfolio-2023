@@ -39,12 +39,39 @@ html {
     box-sizing: border-box;
     font-family: Roboto_Light, Arial, Helvetica, sans-serif;
     font-weight: lighter;
+    scrollbar-color: $accent_dark_3 #888;
+    scrollbar-width: thin;
 }
 
 *:focus {
     outline: 1px solid $accent_dark_3;
     outline-offset: 8px;
     border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $accent_dark_3;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: $accent_dark_1;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 4px;
+    transition: width 0.5s;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: $accent_dark_1;
 }
 
 body {
