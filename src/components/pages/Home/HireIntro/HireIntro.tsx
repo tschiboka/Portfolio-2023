@@ -8,17 +8,17 @@ import {
     SiTypescript,
     SiCsharp,
     SiPython,
-} from "react-icons/si";
-import { BiMessageDots, BiLogoSass } from "react-icons/bi";
-import { FaNodeJs } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
-import { TbBrandReactNative } from "react-icons/tb";
-import { RiReactjsLine } from "react-icons/ri";
-import ProgressBar from "../../../sharedComponents/ProgressBar/ProgressBar";
-import { getColourName } from "../../Projects/getProjects";
-import { Link } from "react-router-dom";
-import cv from "../../../../assets/files/Tivadar_Debnar_CV_2023.pdf";
-import "./HireIntro.scss";
+} from 'react-icons/si'
+import { BiMessageDots, BiLogoSass } from 'react-icons/bi'
+import { FaNodeJs } from 'react-icons/fa'
+import { FiDownload } from 'react-icons/fi'
+import { TbBrandReactNative } from 'react-icons/tb'
+import { RiReactjsLine } from 'react-icons/ri'
+import ProgressBar from '../../../sharedComponents/ProgressBar/ProgressBar'
+import { getColourName } from '../../Projects/getProjects'
+import { Link } from 'react-router-dom'
+import cv from '../../../../assets/files/Tivadar_Debnar_CV_2023.pdf'
+import './HireIntro.scss'
 
 const HireIntro = () => {
     return (
@@ -52,37 +52,37 @@ const HireIntro = () => {
                     percentage={75}
                     title="HTML5"
                     icon={<SiHtml5 />}
-                    color={getColourName("html")}
+                    color={getColourName('html')}
                 />
                 <ProgressBar
                     percentage={78}
                     title="CSS"
                     icon={<SiCss3 />}
-                    color={getColourName("css")}
+                    color={getColourName('css')}
                 />
                 <ProgressBar
                     percentage={85}
                     title="JS"
                     icon={<SiJavascript />}
-                    color={getColourName("javascript")}
+                    color={getColourName('javascript')}
                 />
                 <ProgressBar
                     percentage={30}
                     title="Sass"
                     icon={<BiLogoSass />}
-                    color={getColourName("sass")}
+                    color={getColourName('sass')}
                 />
                 <ProgressBar
                     percentage={60}
                     title="React"
                     icon={<RiReactjsLine />}
-                    color={getColourName("react")}
+                    color={getColourName('react')}
                 />
                 <ProgressBar
                     percentage={55}
-                    title="TypeScript"
+                    title="TS"
                     icon={<SiTypescript />}
-                    color={getColourName("typescript")}
+                    color={getColourName('typescript')}
                 />
             </section>
 
@@ -92,19 +92,19 @@ const HireIntro = () => {
                     percentage={60}
                     title="NodeJs"
                     icon={<FaNodeJs />}
-                    color={getColourName("nodejs")}
+                    color={getColourName('nodejs')}
                 />
                 <ProgressBar
                     percentage={35}
                     title="C#"
                     icon={<SiCsharp />}
-                    color={getColourName("C#")}
+                    color={getColourName('C#')}
                 />
                 <ProgressBar
                     percentage={25}
                     title="Python"
                     icon={<SiPython />}
-                    color={getColourName("python")}
+                    color={getColourName('python')}
                 />
             </section>
             <h3 className="skill-header">Database</h3>
@@ -113,22 +113,22 @@ const HireIntro = () => {
                     percentage={55}
                     title="MongoDB"
                     icon={<SiMongodb />}
-                    color={getColourName("mongodb")}
+                    color={getColourName('mongodb')}
                 />
                 <ProgressBar
                     percentage={15}
                     title="MySQL"
                     icon={<SiMongodb />}
-                    color={getColourName("mysql")}
+                    color={getColourName('mysql')}
                 />
             </section>
             <h3 className="skill-header">Mobile</h3>
             <section className="skills">
                 <ProgressBar
                     percentage={45}
-                    title="React Native"
+                    title="Native"
                     icon={<TbBrandReactNative />}
-                    color={getColourName("react native")}
+                    color={getColourName('react native')}
                 />
             </section>
             <h3 className="skill-header">Testing</h3>
@@ -137,13 +137,13 @@ const HireIntro = () => {
                     percentage={30}
                     title="Jest"
                     icon={<TbBrandReactNative />}
-                    color={getColourName("jest")}
+                    color={getColourName('jest')}
                 />
                 <ProgressBar
                     percentage={25}
                     title="RTL"
                     icon={<TbBrandReactNative />}
-                    color={getColourName("RTL")}
+                    color={getColourName('RTL')}
                 />
             </section>
             <h3 className="skill-header">Design</h3>
@@ -152,13 +152,13 @@ const HireIntro = () => {
                     percentage={35}
                     title="PhotoShop"
                     icon={<SiAdobephotoshop />}
-                    color={getColourName("photoshop")}
+                    color={getColourName('photoshop')}
                 />
                 <ProgressBar
                     percentage={30}
                     title="Illustrator"
                     icon={<SiAdobeillustrator />}
-                    color={getColourName("illustrator")}
+                    color={getColourName('illustrator')}
                 />
             </section>
             <h2>I continuously learn new things</h2>
@@ -184,7 +184,7 @@ const HireIntro = () => {
                 </a>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default HireIntro;
+export default HireIntro
