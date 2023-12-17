@@ -1,17 +1,19 @@
-import { ReactNode, useEffect, useMemo, useRef } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { useAppContext } from '../../../context/AppContext'
 import { postVisit } from '../../../serverAPI/visits'
 import { detectIncognito } from 'detectincognitojs'
 import Overlay from '../Overlay/Overlay'
 import './Page.scss'
+import { Maybe } from 'monet'
 
 interface Props {
     children: ReactNode
     title: string
     path: string
+    className?: string
 }
 
-const Page = ({ children, title, path }: Props) => {
+const Page = ({ children, title, path, className }: Props) => {
     const {
         isPageScrolling,
         setIsPageScrolling,
@@ -62,8 +64,13 @@ const Page = ({ children, title, path }: Props) => {
         }
     }
 
+    const getClassName = (className?: string) =>
+        Maybe.fromUndefined(className)
+            .map((cls) => 'Page ' + cls)
+            .orSome('Page')
+
     return (
-        <div className="Page">
+        <div className={getClassName(className)}>
             {children}
             <Overlay></Overlay>
         </div>

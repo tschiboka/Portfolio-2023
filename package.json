@@ -5,7 +5,11 @@
   "authour": "Tivadar Debnar",
   "type": "module",
   "description": "Tivadar Debnar - Frontend Developer: Portfolio Website with Blog and Articles.",
-  "keywords": ["portfolio", "frontend", "react"],
+  "keywords": [
+    "portfolio",
+    "frontend",
+    "react"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/tschiboka/Portfolio-2023"
@@ -25,9 +29,11 @@
     "@types/jest": "^29.5.5",
     "detectincognitojs": "^1.3.0",
     "howler": "^2.2.3",
+    "monet": "^0.9.3",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.49.2",
     "react-icons": "^4.10.1",
     "react-router-dom": "^6.14.2",
     "react-share": "^4.4.1",

@@ -1,4 +1,4 @@
-import headshot from "../../../../assets/images/headshot_placeholder.png";
+import headshot from '../../../../assets/images/headshot_placeholder.png'
 import {
     SiHtml5,
     SiCss3,
@@ -6,24 +6,31 @@ import {
     SiMongodb,
     SiAdobephotoshop,
     SiAdobeillustrator,
-} from "react-icons/si";
-import { FaNodeJs } from "react-icons/fa";
-import { useAppContext } from "../../../../context/AppContext";
-import "./Welcome.scss";
+} from 'react-icons/si'
+import { FaNodeJs } from 'react-icons/fa'
+import { useAppContext } from '../../../../context/AppContext'
+import './Welcome.scss'
+import { useNavigate } from 'react-router-dom'
 
 const Welcome = () => {
-    const { subMenuVisible } = useAppContext();
+    const navigate = useNavigate()
+    const { subMenuVisible } = useAppContext()
 
     return (
-        <div className={"Welcome" + (!subMenuVisible ? " extended" : "")}>
+        <div className={'Welcome' + (!subMenuVisible ? ' extended' : '')}>
             <p className="hello">Hello!</p>
             <div className="headshot-wrapper">
-                <img className="headshot" src={headshot} alt="Headshot Image" />
+                <img
+                    className="headshot"
+                    src={headshot}
+                    alt="Headshot Image"
+                    onClick={() => navigate('./login')}
+                />
             </div>
             <h1>
                 <strong>Tivadar Debnar</strong>
                 <span>|</span>
-                <span>Web Developer</span>{" "}
+                <span>Web Developer</span>{' '}
             </h1>
             <div className="line"></div>
             <ul className="dev-tools">
@@ -50,7 +57,7 @@ const Welcome = () => {
                 </li>
             </ul>
         </div>
-    );
-};
+    )
+}
 
-export default Welcome;
+export default Welcome
