@@ -285,6 +285,16 @@ const references: Record<string, Reference[]> = {
             author: "GitTower",
             source: "https://www.git-tower.com/learn/git/commands/git-commit",
         },
+        {
+            title: "What is a Git Commit ID?",
+            author: "Hameed, S.",
+            source: "https://linuxhint.com/what-is-git-commit-id/#b2",
+        },
+        {
+            title: "What is a BLOB (Binary Large Object)?",
+            author: "Burchfiel, A.",
+            source: "https://www.tokenex.com/blog/ab-what-is-a-blob-binary-large-object-can-it-be-tokenized/",
+        },
     ]
 };
 

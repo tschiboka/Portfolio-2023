@@ -1,6 +1,6 @@
 const codeSnippets = {
     checkVersion: `git --version`,
-    configUserName: `git config --global user.name "Tivadar Debnar"\ngit config --global user.email your.email@gmail.com\ngit config --global core.editor "code --wait"`,
+    configUserName: `git config --global user.name "Tivadar Debnar"\ngit config --global user.email your.email@gmail.com\ngit config --global core.editor "code --wait"\ngit config --global diff.tool vscode\ngit config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"`,
     openConfig: `git config --global -e`,
     lineFeedWin: `git config --global core.autocrlf true`,
     lineFeedUnix: `git config --global core.autocrlf input`,
@@ -10,7 +10,17 @@ const codeSnippets = {
     add: `git add file1.txt           # Add Single File\ngit add file1.txt file2.txt # Multiple Files\ngit add *.txt               # Patterns\ngit add .                   # Entire Diractory\ngit add -A                  # Entire Repository`,
     modify: `echo world >> file2.txt # Use Two >> for Modifying Existing Files\ngit status`,
     commit: `git commit -m "Initial Commit"`,
-    commitWithVerboseMessage: `git commit\n\n# ********** Editor **********\n# Commit Message Title\n\n# Commit Message Body`
+    commitWithVerboseMessage: `git commit\n\n# ********** Editor **********\n# Commit Message Title\n\n# Commit Message Body`,
+    skippingStaging: `echo test >> file1.txt             # Make Changes in Working Directory\ngit commit -am "My Commit Message" # Add and Commit Simultaneously`,
+    removeFile: `rm file2.txt      # Linux Remove File 2\ndel file2.txt     # Windows Remove File 2\ngit status        # Review Changes\ngit ls-files      # List Staging Area Files\n#   file1.txt\n#   file2.txt     # File 2 is Still Present\ngit add file2.txt # Stage Changes\ngit ls-files      # Should Reflect Changes\n#   file1.txt\ngit status\ngit commit -m "Remove File 2"\n\n # Shorthand Syntax:\ngit rm file2.txt`,
+    renameFile: `mv file1.txt file1.js      # Linux Rename Command\nren file1.txt file1.js     # Windows Rename Command\ngit status\n# Changes not staged for commit:\n#   Deleted:         file1.txt\n#   Untracked files: file1.js\n\ngit add -A                 # Add All for Staging\ngit status\n#   Renamed: file1.txt -> file1.js\n\n# OR\ngit mv file1.txt file1.js  g# Git Shorthand for Renaming Files\ngit commit -m "Rename Files"`,
+    ignore: `echo secret > .env # Add an Env File\ngit status         # Check Changes\n# On branch master\n# Untracked files: .env\n\necho .env > .gitignore\ngit status         # Check Changes Again\n# On branch master\n# Untracked files: .gitignore\n# Git Does NOT Track the Env File Any Longer\n\ngit add .gitignore\ngit commit -m "Add a Gitignore File"`,
+    untrack: `git rm --cached -r unwanted_folder/`,
+    history: `git log                     # Verbose History\ngit log --oneline           # Short History\ngit log --oneline --reverse # Reverse Ordered History`,
+    show: `git show d6feb     # View a Specific Commit\ngit show HEAD      # Show Last Commit\ngit show HEAD~2    # Show 2 Steps Before Head\ngit ls-tree HEAD~2 # Show Complete File Structure\n# 100644 blob f2aa86d258996d05834897f0e3b668d342109bdc    file1.txt\n# 100644 blob 2fb9440b55a0a70e3b24cc4716d678b63dd685d5    file2.txt`,
+    unstaging: `git restore --staged file1.txt           # Unstage file1.txt\ngit restore --staged file1.txt file2.txt # Unstage Two Files\ngit restore --staged *.txt               # Unstage All Files with txt Extension\ngit restore --staged .                   # Unstage Everything`,
+    clean: `git restore . # Restore Everything\ngit clean -fd # Remove Everything\n`,
+    restoreLast: `git restore --source=HEAD~1 file1.txt`,
 };
 
 export default codeSnippets;

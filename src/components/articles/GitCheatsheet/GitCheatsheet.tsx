@@ -15,6 +15,9 @@ import SnapshotVsDeltaImg from "../../../assets/images/blog/git_cheatsheet/snaps
 import codeSnippets from "./codeSnippets";
 import { getReferenceList } from "../references";
 
+// Styles
+import "./GitCheatSheet.scss";
+
 interface Props {
     pageName: string;
     path: string;
@@ -321,7 +324,8 @@ const GitCheatsheet = ({ pageName, path }: Props) => {
             <p>
                 Let's make some changes to our project using the ECHO command.
                 To see the status of the working directory of the staging area,
-                we use the GIT STATUS.
+                we use the GIT STATUS. For shorter, less verbose status results,
+                we also can use GIT STATUS -S.
             </p>
             <Code
                 fileName="Staging"
@@ -427,6 +431,185 @@ const GitCheatsheet = ({ pageName, path }: Props) => {
                 errors before committing to reduce the likelihood of breaking
                 the build.
             </p>
+            <h3>Skipping Staging</h3>
+            <p>
+                The primary purpose of the Git staging area (also known as the
+                index) is to allow you to review and prepare the changes
+                committed to the repository. The staging area serves as an
+                intermediate step between your working directory and the Git
+                repository. It allows you to select changes (modifications,
+                additions, or deletions) from your working directory for
+                inclusion in the next commit.{" "}
+            </p>
+            <p>
+                However, if you are confident that the code to be committed does
+                not need to be reviewed, you can skip the staging area. Skipping
+                the staging area and making commits directly from your working
+                directory is a practice often referred to as a "direct commit"
+                or a "commit without staging". Skipping the staging area is
+                acceptable for minimal, self-contained changes ready to be
+                committed without further review. For example, fixing a simple
+                typo in a comment.
+            </p>
+            <p>
+                So after changes in the working directory, we use direct commit
+                all with a message instead of the ADD command (COMMIT -A -M or
+                COMMIT -AM).
+            </p>
+            <Code
+                fileName="Skipping Staging"
+                language="powershell"
+                content={codeSnippets.skippingStaging}
+            />
+            <h3>Removing Files</h3>
+            <p>
+                We can use the RM or DEL commands if we want to remove unwanted
+                files in our project. However, it is important to remember that
+                even though we removed the file from our working directory, it
+                will still be in the staging area. To confirm that, we can list
+                our files in the staging area with GIT LS-FILES. When we remove
+                files, we need to stage them with ADD command. As a shorthand,
+                we can use GIT RM instead of the plain Linux one.
+            </p>
+            <Code
+                fileName="Removing Files"
+                language="powershell"
+                content={codeSnippets.removeFile}
+            />
+            <h3>Renaming and Moving Files</h3>
+            <p>
+                Renaming can be done with the MV “move” command. If we run git
+                STATUS, we will see two changes: the file with the previous name
+                is deleted, and a new file with the current name is added. As
+                Git doesn't automatically track new files, we need to stage
+                these changes. Because renaming is a two-step operation, once we
+                modify the working directory, which stages both the deletion of
+                the old file and the addition of a new file, Git provides its
+                own MV function.
+            </p>
+            <Code
+                fileName="Renaming Files"
+                language="powershell"
+                content={codeSnippets.renameFile}
+            />
+            <h3>Git Ignore</h3>
+            <p>
+                For most projects, there will be files and folders that should
+                not be included or tracked in the repository. Such files either
+                do not add any value to our project or pose a security threat:
+                <ul></ul>
+                <li>
+                    Npm and Yarn: dependencies can be regenerated from the
+                    package JSON,
+                </li>
+                <li>
+                    Build and Dist folders: they are compiled from the source
+                    code,
+                </li>
+                <li>Development log files,</li>
+                <li>
+                    Environment configurations, such as .ENV files, may contain
+                    sensitive information, such as API keys and credentials, and
+                    exposing them may cause security breaches.
+                </li>
+            </p>
+            <Code
+                fileName="Git Ignore"
+                language="powershell"
+                content={codeSnippets.ignore}
+            />
+            <p>
+                However, if Git has already tracked a file, it won't be able to
+                ignore it anymore, and we need to remove it from the staging
+                area.
+            </p>
+            <Code
+                fileName="Git Untrack"
+                language="powershell"
+                content={codeSnippets.untrack}
+            />
+            <h3>Viewing History and Commits</h3>
+            <p>
+                Using the GIT LOG, we can list the history of all the commits
+                made to the repository. The listed commits are sorted from
+                latest to earliest and include the identifier, author and date.
+                The git identifier or a Git Commit ID is a unique 40-character
+                SHA-hash value generated automatically and assigned to commits
+                whenever a new commit is made to the repository. Commit ID is
+                used while merging commits or checking out files from different
+                commits.
+                <InlineReference reference={references[8]} />
+                To get a less verbose version of the history, we use the GIT LOG
+                with the --ONELINE flag, and to reverse the sorting of the list,
+                use the -REVERSE flag.
+            </p>
+            <Code
+                fileName="Git History"
+                language="powershell"
+                content={codeSnippets.history}
+            />
+            <p>
+                To inspect the changes in a commit, we type the GIT SHOW in the
+                terminal with the unique ID of the commit. There is no need to
+                type the complete ID. As long as there are no multiple matches,
+                the first few characters of the ID can identify a commit.
+                Alternatively, to see the last commit, use the HEAD and an
+                optional tilde ~ to signify how many steps need to go back.
+                Additionally, we can view the whole directory structure using
+                the LS-TREE command.
+            </p>
+            <Code
+                fileName="Git Show Commits"
+                language="powershell"
+                content={codeSnippets.show}
+            />
+            <p>
+                In Git the folders are represented as trees and the files as
+                blobs. BLOB is a “Binary Large Object,” a data type that stores
+                binary data. Binary Large Objects (BLOBs) can be complex files
+                like images or videos, unlike other data strings that only store
+                letters and numbers.
+                <InlineReference reference={references[9]} />A Git tree object
+                creates the hierarchy between files in a Git repository. You can
+                use the Git tree object to create the relationship between
+                directories and the files they contain. These endpoints allow
+                you to read and write tree objects to your Git database on
+                GitHub.
+            </p>
+            <h3>Unstaging and Restoring</h3>
+            <p>
+                Because every commit should be one logically comprehensible
+                unit, sometimes we need to unstage some of the changes we want
+                to omit from the next commit. We can undo the ADD operation with
+                the RESTORE function.
+            </p>
+            <Code
+                fileName="Git Unstaging"
+                language="powershell"
+                content={codeSnippets.unstaging}
+            />
+            <p>
+                We can also discard local changes in our working directory with
+                the GIT CLEAN command. This action would permanently delete the
+                files from our working directory, so we must use the -FORCE and
+                optional -D (directories) flags.
+            </p>
+            <Code
+                fileName="Git Clean"
+                language="powershell"
+                content={codeSnippets.clean}
+            />
+            <h3>Restoring Previous Versions</h3>
+            <p>
+                To restore the last commit, list the commits with the GIT LOG
+                -ONELINE to see the commit ID, or to restore the last commit,
+                use the HEAD~1.
+            </p>
+            <Code
+                fileName="Git Restore"
+                language="powershell"
+                content={codeSnippets.restoreLast}
+            />
         </Article>
     );
 };

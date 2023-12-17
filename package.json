@@ -1,8 +1,18 @@
 {
   "name": "portfolio-2023",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
+  "authour": "Tivadar Debnar",
   "type": "module",
+  "description": "Tivadar Debnar - Frontend Developer: Portfolio Website with Blog and Articles.",
+  "keywords": ["portfolio", "frontend", "react"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tschiboka/Portfolio-2023"
+  },
+  "bugs": {
+    "url": "https://github.com/tschiboka/Portfolio-2023/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -34,6 +44,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/sizzle": "^2.3.5",
     "@types/testing-library__react": "^10.2.0",
     "@types/unist": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
