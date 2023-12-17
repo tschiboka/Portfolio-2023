@@ -126,7 +126,7 @@ const HireIntro = () => {
             <section className="skills">
                 <ProgressBar
                     percentage={45}
-                    title="Native"
+                    title=" Native"
                     icon={<TbBrandReactNative />}
                     color={getColourName('react native')}
                 />
