@@ -1,17 +1,19 @@
-import { useForm } from 'react-hook-form'
-
-// Components
 import Page from '../../sharedComponents/Page/Page'
+import { Controller, useForm } from 'react-hook-form'
+import { loginSchema } from './Login.schema'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-// Styles
 import './Login.scss'
+import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 
 const Login = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+    const { control, handleSubmit } = useForm({
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+        resolver: yupResolver(loginSchema),
+    })
 
     const submitHandler = () => {
         console.log('HERE')
@@ -26,11 +28,15 @@ const Login = () => {
             <form onSubmit={handleSubmit(submitHandler)}>
                 <fieldset>
                     <label htmlFor="email">Email</label>
-                    <input {...register('email')} />
+                    <WrappedInput name="email" control={control} type="text" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password</label>
-                    <input type="password" {...register('password')} />
+                    <WrappedInput
+                        name="password"
+                        control={control}
+                        type="password"
+                    />
                 </fieldset>
                 <button className="submit-message" name="submit">
                     Login

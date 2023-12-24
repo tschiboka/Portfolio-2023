@@ -26,6 +26,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@types/jest": "^29.5.5",
     "detectincognitojs": "^1.3.0",
     "howler": "^2.2.3",
@@ -39,7 +40,8 @@
     "react-share": "^4.4.1",
     "react-syntax-highlighter": "^15.5.0",
     "sass": "^1.63.6",
-    "ts-jest": "^29.1.1"
+    "ts-jest": "^29.1.1",
+    "yup": "^1.3.3"
   },
   "devDependencies": {
     "@babel/preset-typescript": "^7.22.11",
