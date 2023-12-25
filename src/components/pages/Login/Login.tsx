@@ -1,10 +1,12 @@
 import Page from '../../sharedComponents/Page/Page'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import './Login.scss'
 import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
+import { LoginFormData } from './Login.types'
+import { useLoginForm } from './Login.query'
 
 const Login = () => {
     const { control, handleSubmit } = useForm({
@@ -15,8 +17,12 @@ const Login = () => {
         resolver: yupResolver(loginSchema),
     })
 
-    const submitHandler = () => {
-        console.log('HERE')
+    const submitHandler = (
+        data: LoginFormData,
+        event?: React.BaseSyntheticEvent,
+    ) => {
+        event?.preventDefault()
+        useLoginForm(data)
     }
 
     return (

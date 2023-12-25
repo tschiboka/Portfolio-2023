@@ -23,11 +23,14 @@ const message = require("./routes/message");
 const visit = require("./routes/visit");
 const like = require("./routes/like");
 const schedule = require("./routes/schedule");
+const settings = require("./routes/settings")
 app.use("/", index);
 app.use("/message", message);
 app.use("/visit", visit);
 app.use("/like", like);
 app.use("/schedule", schedule);
+app.use("/settings", settings);
+console.log("HERE")
 
 
 // Cyclic Server Needs DB Connection First then Server Listen
