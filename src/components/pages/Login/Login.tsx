@@ -8,9 +8,14 @@ import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/Wrapp
 import { LoginFormData } from './Login.types'
 import { useLoginForm, useSettingsResources } from './Login.query'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { useAppContext } from '../../../context/AppContext'
+import { useNavigate } from 'react-router-dom'
+
 import './Login.scss'
 
 const Login = () => {
+    const { setToken } = useAppContext()
+    const navigate = useNavigate()
     const { control, handleSubmit } = useForm({
         defaultValues: {
             email: '',
@@ -26,16 +31,22 @@ const Login = () => {
         queryFn: useSettingsResources,
     })
 
-    const submitHandler = (
+    const submitHandler = async (
         data: LoginFormData,
         event?: React.BaseSyntheticEvent,
     ) => {
         event?.preventDefault()
-        useLoginForm(data)
+        const response: AxiosResponse = await useLoginForm(data)
+
+        if (response) {
+            const token = response?.data.token
+            setToken(token)
+            navigate('/')
+        }
     }
 
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
-    console.log(settingsData?.data.data.enableUserRegistration)
+
     return (
         <Page className="Login" title="Tivadar Debnar | Login" path="/login">
             <div>

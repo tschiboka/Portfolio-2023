@@ -1,9 +1,10 @@
-import { LoginFormData, SettingsResources } from "./Login.types";
+import { LoginFormData } from "./Login.types";
 import { apiPathBuilder } from "../../../routing/apiPathBuilder";
 import axios from "axios";
 
-export const useLoginForm = (data: LoginFormData) => {
+export const useLoginForm = async (data: LoginFormData) => {
     const path = apiPathBuilder('LOGIN')
+    return await axios.post(path, data)
 }
 
 export const useSettingsResources = async () => {
