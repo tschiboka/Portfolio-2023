@@ -1,12 +1,14 @@
 import Page from '../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
+import { AxiosResponse } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-
-import './Login.scss'
+import { useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { LoginFormData } from './Login.types'
-import { useLoginForm } from './Login.query'
+import { useLoginForm, useSettingsResources } from './Login.query'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import './Login.scss'
 
 const Login = () => {
     const { control, handleSubmit } = useForm({
@@ -17,6 +19,15 @@ const Login = () => {
         resolver: yupResolver(loginSchema),
     })
 
+    const {
+        data: settingsData,
+        error: settingsError,
+        isLoading: settingsLoading,
+    } = useQuery<AxiosResponse<any, any>>({
+        queryKey: ['settings'],
+        queryFn: useSettingsResources,
+    })
+
     const submitHandler = (
         data: LoginFormData,
         event?: React.BaseSyntheticEvent,
@@ -25,6 +36,8 @@ const Login = () => {
         useLoginForm(data)
     }
 
+    const enableRegistration = settingsData?.data?.data?.enableUserRegistration
+    console.log(settingsData?.data.data.enableUserRegistration)
     return (
         <Page className="Login" title="Tivadar Debnar | Login" path="/login">
             <div>
@@ -34,7 +47,12 @@ const Login = () => {
             <form onSubmit={handleSubmit(submitHandler)}>
                 <fieldset>
                     <label htmlFor="email">Email</label>
-                    <WrappedInput name="email" control={control} type="text" />
+                    <WrappedInput
+                        name="email"
+                        control={control}
+                        type="text"
+                        autoComplete="true"
+                    />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password</label>
@@ -44,9 +62,13 @@ const Login = () => {
                         type="password"
                     />
                 </fieldset>
-                <button className="submit-message" name="submit">
-                    Login
-                </button>
+                {settingsLoading && (
+                    <AiOutlineLoading3Quarters className="loading-indicator" />
+                )}
+                <div className="button-box">
+                    <button name="submit">Login</button>
+                    {enableRegistration && <button>Register User</button>}
+                </div>
             </form>
         </Page>
     )

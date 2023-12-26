@@ -84,51 +84,66 @@
     input {
         height: 2rem;
     }    
-}
 
-.loading-indicator {
-    margin: 1.5rem 0;
-    font-size: $font_md;
-    color: $white_4;
-    animation: rotation 1s linear infinite;
-}
-
-.user-message {
-    margin: 1.5rem 0;
-    color: $white_4;
-    font-variant: small-caps;
-}
-
-.submit-message {
-    min-height: 3rem;
-    width: 300px;
-    margin-top: 3rem;
-    background-color: $accent_dark_1;
-    border: 2px solid transparent;
-    border-radius: 50px;
-    color: black;
-    font-size: $font_sm;
-    font-family: "Roboto_Bold";
-    padding: 0 10px;
-    cursor: pointer;
-    &:hover, &:active {
-        background-color: $accent_dark_4;
-        color: white;
+    .loading-indicator {
+        margin: 1.5rem 0;
+        font-size: $font_md;
+        color: $white_4;
+        animation: rotation 1s linear infinite;
     }
-    &:disabled {
-        border: 2px solid $black_3;
-        background-color: $accent_dark_5;
-        color: $accent_dark_4;
+    
+    .user-message {
+        margin: 1.5rem 0;
+        color: $white_4;
+        font-variant: small-caps;
     }
-}
-
-.error-message {
-    width: 100%;
-    padding: 0 2.5rem;
-    text-align: right;
-    font-style: italic;
-    font-variant: small-caps;
-    color: deeppink;
+    
+    .button-box {
+        width: 100%;
+        display: flex;
+        padding: 0 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        @include bp.md {
+            flex-direction: row;
+            justify-content: center;
+            button:nth-child(2) {
+                margin-left: auto;
+            }
+        }
+    }
+    
+    button {
+        min-height: 3rem;
+        width: 280px;
+        margin-top: 1.5rem;
+        background-color: $accent_dark_1;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        color: black;
+        font-size: $font_sm;
+        font-family: "Roboto_Bold";
+        padding: 0 10px;
+        cursor: pointer;
+        &:hover, &:active {
+            background-color: $accent_dark_4;
+            color: white;
+        }
+        &:disabled {
+            border: 2px solid $black_3;
+            background-color: $accent_dark_5;
+            color: $accent_dark_4;
+        }
+    }
+    
+    .error-message {
+        width: 100%;
+        padding: 0 2.5rem;
+        text-align: right;
+        font-style: italic;
+        font-variant: small-caps;
+        color: deeppink;
+    }
 }
 
 .dark {

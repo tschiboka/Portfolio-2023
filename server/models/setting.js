@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const schema = new mongoose.schema({
+const schema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false,
@@ -10,16 +10,16 @@ const schema = new mongoose.schema({
         type: Number,
         default: 1,
     },
-    enable_maintenance_mode: {
+    enableMaintenanceMode: {
         type: Boolean,
         default: false,
     },
-    enableUserRegistrantion: {
+    enableUserRegistration: {
         type: Boolean,
         default: false
     },
     enableAutomaticLogoff: {
-        type: String,
+        type: Boolean,
         default: false,
     },
     automaticLogOffTimeInMins: {
@@ -50,8 +50,8 @@ const validateSettings = (settings) => {
     const schema = Joi.object({
         isAdmin: Joi.boolean(),
         maxUsers: Joi.number().min(1),
-        enable_maintenance_mode: Joi.boolean(),
-        enableUserRegistrantion: Joi.boolean(),
+        enableMaintenanceMode: Joi.boolean(),
+        enableUserRegistration: Joi.boolean(),
         enableAutomaticLogoff: Joi.boolean(),
         automaticLogOffTimeInMins: Joi.number(),
         enableUserTheme: Joi.string(),

@@ -29,9 +29,7 @@ app.use("/message", message);
 app.use("/visit", visit);
 app.use("/like", like);
 app.use("/schedule", schedule);
-app.use("/settings", settings);
-console.log("HERE")
-
+app.use("/api/settings", settings);
 
 // Cyclic Server Needs DB Connection First then Server Listen
 mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website
