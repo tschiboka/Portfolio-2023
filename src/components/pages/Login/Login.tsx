@@ -19,11 +19,9 @@ const Login = () => {
         resolver: yupResolver(loginSchema),
     })
 
-    const {
-        data: settingsData,
-        error: settingsError,
-        isLoading: settingsLoading,
-    } = useQuery<AxiosResponse<any, any>>({
+    const { data: settingsData, isLoading: settingsLoading } = useQuery<
+        AxiosResponse<any, any>
+    >({
         queryKey: ['settings'],
         queryFn: useSettingsResources,
     })
