@@ -25,6 +25,7 @@ const like = require("./routes/like");
 const schedule = require("./routes/schedule");
 const settings = require("./routes/settings")
 const user = require("./routes/user");
+const login = require("./routes/login");
 app.use("/", index);
 app.use("/message", message);
 app.use("/visit", visit);
@@ -32,6 +33,7 @@ app.use("/like", like);
 app.use("/schedule", schedule);
 app.use("/api/settings", settings);
 app.use("/api/user", user)
+app.use("/api/login", login)
 
 // Cyclic Server Needs DB Connection First then Server Listen
 mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require("mongoose")
 const { User, validateUser } = require('../models/user')
+const bcrypt = require("bcrypt")
 
 router.get("/", async (req, res) => {
     const users = await User.find()
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     const valid = mongoose.Types.ObjectId.isValid(req.params.id);
     if (!valid) return res.status(400).json({ success: false, message: "Invalid user id: " + req.params.id }) 
-
+    
     const user = await User.findById(req.params.id)
     if (!user) return res.status(404).json({ success: false, message: "Content not Found" })
     res.status(200).json({ success: true, data: user })
@@ -22,8 +23,12 @@ router.post("/", async (req, res) => {
     const { error } = validateUser(req.body)
     if (error) return res.status(400).json({ success: false, message: error.details[0].message, error })
 
-    const user = await new User(req.body)
+    const salt = await bcrypt.genSalt(10)
+    const password = await bcrypt.hash(req.body.password, salt)
+    
+    const user = await new User({...req.body, password })
     await user.save()
+    user.password = undefined
     res.status(200).json({ success: true, user })
 })
 

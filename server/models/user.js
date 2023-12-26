@@ -19,7 +19,7 @@ const schema = mongoose.Schema({
         trim: true,
         lowercase: true,
     },
-    passwordHash: {
+    password: {
         type: String,   
         required: true,
         trim: true,
@@ -54,7 +54,7 @@ const validateUser = (user) => {
     const schema = Joi.object({
         userName: Joi.string().required().min(3).max(20),
         email: Joi.string().required().email({ tlds: { allow: false } }),
-        passwordHash: Joi.string().required(),
+        password: Joi.string().required(),
         fullName: Joi.string().required().min(3).max(50),
         isAdmin: Joi.boolean(),
         created: Joi.date(),
