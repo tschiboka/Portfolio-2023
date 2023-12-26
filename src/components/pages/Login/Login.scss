@@ -112,6 +112,29 @@
             }
         }
     }
+
+    .wrapped-input {
+        position: relative;
+    }
+
+    .reveal-password {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: calc(100% - 1rem);
+        width: 3rem;
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $accent_dark_3; 
+        font-size: $font_md;
+        border-left: 2px solid $black_3;
+        cursor: pointer;
+        &:hover {
+            color: $accent_dark_1;
+        }
+    }
     
     button {
         min-height: 3rem;

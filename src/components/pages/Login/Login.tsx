@@ -3,19 +3,20 @@ import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
 import { AxiosResponse } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { LoginFormData } from './Login.types'
-import { useLoginForm, useSettingsResources } from './Login.query'
+import { useLoginFormResources, useSettingsResources } from './Login.query'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useAppContext } from '../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
-
+import { useState } from 'react'
 import './Login.scss'
 
 const Login = () => {
     const { setToken } = useAppContext()
     const navigate = useNavigate()
+    const [revealPassword, setRevealPassword] = useState(false)
     const { control, handleSubmit } = useForm({
         defaultValues: {
             email: '',
@@ -24,11 +25,24 @@ const Login = () => {
         resolver: yupResolver(loginSchema),
     })
 
-    const { data: settingsData, isLoading: settingsLoading } = useQuery<
+    const { data: settingsData, isLoading: settingIsLoading } = useQuery<
         AxiosResponse<any, any>
     >({
         queryKey: ['settings'],
         queryFn: useSettingsResources,
+    })
+
+    const loginRequest = useMutation<
+        AxiosResponse<any, any>,
+        Error,
+        LoginFormData
+    >({
+        mutationFn: (data: LoginFormData) => useLoginFormResources(data),
+        onSuccess: (response) => {
+            const token = response.data.token
+            setToken(token)
+            navigate('/')
+        },
     })
 
     const submitHandler = async (
@@ -36,17 +50,11 @@ const Login = () => {
         event?: React.BaseSyntheticEvent,
     ) => {
         event?.preventDefault()
-        const response: AxiosResponse = await useLoginForm(data)
-
-        if (response) {
-            const token = response?.data.token
-            setToken(token)
-            navigate('/')
-        }
+        loginRequest.mutate(data)
     }
 
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
-
+    const isLoading = settingIsLoading || loginRequest.isPending
     return (
         <Page className="Login" title="Tivadar Debnar | Login" path="/login">
             <div>
@@ -69,9 +77,12 @@ const Login = () => {
                         name="password"
                         control={control}
                         type="password"
+                        addRevealPasswordIcon={true}
+                        revealPassword={revealPassword}
+                        setRevealPassword={setRevealPassword}
                     />
                 </fieldset>
-                {settingsLoading && (
+                {isLoading && (
                     <AiOutlineLoading3Quarters className="loading-indicator" />
                 )}
                 <div className="button-box">
