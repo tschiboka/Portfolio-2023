@@ -5,6 +5,7 @@ import React, {
     useState,
     ReactNode,
 } from 'react'
+import { User } from '../components/pages/Login/Login.types'
 
 interface AppContextValues {
     themeMode: string
@@ -25,6 +26,8 @@ interface AppContextValues {
     setScrollTimeElapsed: (time: number) => void
     token?: string
     setToken: (token: string) => void
+    user?: User
+    setUser: (user: User) => void
 }
 
 const AppContext = createContext<AppContextValues | undefined>(undefined)
@@ -63,6 +66,7 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     const [isPageScrolling, setIsPageScrolling] = useState(false)
     const [scrollTimeElapsed, setScrollTimeElapsed] = useState(0)
     const [token, setToken] = useState<string | undefined>(undefined)
+    const [user, setUser] = useState<User | undefined>(undefined)
 
     const contextValues: AppContextValues = {
         themeMode,
@@ -83,6 +87,8 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
         setScrollTimeElapsed,
         token,
         setToken,
+        user,
+        setUser,
     }
 
     useEffect(() => {

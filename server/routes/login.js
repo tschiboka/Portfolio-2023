@@ -19,8 +19,10 @@ router.post("/", async (req, res) => {
     if (!process.env.JWT_PRIVATE_KEY) res.status(404).json({ success: false, message: "JWT private key is not defined" })
     const { _id, isAdmin } = user;
 
+    user.password = undefined
+
     const token = jwt.sign({ id: _id, isAdmin }, process.env.JWT_PRIVATE_KEY)
-    res.status(200).header("x-auth-token", token).json({ success: true, token })
+    res.status(200).header("x-auth-token", token).json({ success: true, token, user })
 })
 
 module.exports = router

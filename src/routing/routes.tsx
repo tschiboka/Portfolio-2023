@@ -48,7 +48,7 @@ export const routes = [
     },
     {
         path: '/login',
-        element: <Login pageName="login" path="/login" />,
+        element: <Login path="/login" />,
     },
     {
         path: '/blog/riffmaster',

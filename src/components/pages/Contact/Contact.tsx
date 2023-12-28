@@ -1,182 +1,181 @@
-import Page from "../../sharedComponents/Page/Page";
-import Nav from "../../sharedComponents/Nav/Nav";
-import Menu from "../../sharedComponents/Menu/Menu";
-import SubNav from "../../sharedComponents/SubNav/SubNav";
-import Footer from "../../sharedComponents/Footer/Footer";
-import MessageAcknowledgement from "./MessageAcknowledgement/MessageAcknowledgement";
-import { MdAlternateEmail } from "react-icons/md";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { FiPhone } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { ChangeEvent, useRef, useState } from "react";
-import { useAppContext } from "../../../context/AppContext";
-import "./Contact.scss";
+import Page from '../../sharedComponents/Page/Page'
+import Nav from '../../sharedComponents/Nav/Nav'
+import Menu from '../../sharedComponents/Menu/Menu'
+import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Footer from '../../sharedComponents/Footer/Footer'
+import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgement'
+import { MdAlternateEmail } from 'react-icons/md'
+import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { FiPhone } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import { ChangeEvent, useRef, useState } from 'react'
+import { useAppContext } from '../../../context/AppContext'
+import './Contact.scss'
 
 interface Props {
-    pageName: string;
-    path: string;
+    pageName: string
+    path: string
 }
 
 export interface ValidationResult {
-    valid: boolean;
-    error: string;
+    valid: boolean
+    error: string
 }
 
-export const MAX_MESSAGE_CHARACTERS = 1000;
+export const MAX_MESSAGE_CHARACTERS = 1000
 
 export const validateName = (name: string): ValidationResult => {
-    const nameRegex = /^[a-z \-']+$/i;
-    if (name.length === 0) return { valid: false, error: "Cannot be Empty!" };
-    if (name.length > 50) return { valid: false, error: "Too Long!" };
+    const nameRegex = /^[a-z \-']+$/i
+    if (name.length === 0) return { valid: false, error: 'Cannot be Empty!' }
+    if (name.length > 50) return { valid: false, error: 'Too Long!' }
     if (!nameRegex.test(name))
-        return { valid: false, error: "No Special Characters!" };
-    return { valid: true, error: "" };
-};
+        return { valid: false, error: 'No Special Characters!' }
+    return { valid: true, error: '' }
+}
 
 export const validateEmail = (email: string): ValidationResult => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (email.length === 0) return { valid: false, error: "Cannot be Empty!" };
-    if (email.length <= 5) return { valid: false, error: "Too Short!" };
-    if (email.length > 255) return { valid: false, error: "Too Long!" };
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    if (email.length === 0) return { valid: false, error: 'Cannot be Empty!' }
+    if (email.length <= 5) return { valid: false, error: 'Too Short!' }
+    if (email.length > 255) return { valid: false, error: 'Too Long!' }
     if (!emailRegex.test(email))
-        return { valid: false, error: "Invalid Email Format!" };
-    return { valid: true, error: "" };
-};
+        return { valid: false, error: 'Invalid Email Format!' }
+    return { valid: true, error: '' }
+}
 
 export const validatePhone = (tel: string): ValidationResult => {
     if (tel.length > 0) {
         // Let through empty tel nums
         if (!/^[0-9 ]+$/.test(tel))
-            return { valid: false, error: "Only Numbers and Spaces Allowed!" };
-        if (tel.length < 10) return { valid: false, error: "Too Short!" };
-        if (tel.length > 16) return { valid: false, error: "Too Long!" };
+            return { valid: false, error: 'Only Numbers and Spaces Allowed!' }
+        if (tel.length < 10) return { valid: false, error: 'Too Short!' }
+        if (tel.length > 16) return { valid: false, error: 'Too Long!' }
     }
-    return { valid: true, error: "" };
-};
+    return { valid: true, error: '' }
+}
 
 export const validateMessage = (message: string): ValidationResult => {
-    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\\[\]:;@'"-\s]*$/;
-    if (message.length === 0)
-        return { valid: false, error: "Cannot be Empty!" };
+    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\\[\]:;@'"-\s]*$/
+    if (message.length === 0) return { valid: false, error: 'Cannot be Empty!' }
     if (message.length < 10)
-        return { valid: false, error: "Min 10 Characters!" };
+        return { valid: false, error: 'Min 10 Characters!' }
     if (message.length > MAX_MESSAGE_CHARACTERS)
-        return { valid: false, error: "Too Long!" };
+        return { valid: false, error: 'Too Long!' }
     if (!allowedCharactersRegex.test(message))
-        return { valid: false, error: "Illegal Characters in Text!" };
-    return { valid: true, error: "" };
-};
+        return { valid: false, error: 'Illegal Characters in Text!' }
+    return { valid: true, error: '' }
+}
 
 const Contact = ({ pageName, path }: Props) => {
-    console.log(path, pageName);
-    const { mobileMenuVisible, subMenuVisible } = useAppContext();
-    const nameRef = useRef<HTMLInputElement>(null);
-    const emailRef = useRef<HTMLInputElement>(null);
-    const phoneRef = useRef<HTMLInputElement>(null);
-    const messageRef = useRef<HTMLTextAreaElement>(null);
-    const charCounterRef = useRef<HTMLSpanElement>(null);
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
+    const nameRef = useRef<HTMLInputElement>(null)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const phoneRef = useRef<HTMLInputElement>(null)
+    const messageRef = useRef<HTMLTextAreaElement>(null)
+    const charCounterRef = useRef<HTMLSpanElement>(null)
 
-    const [nameError, setNameError] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [telError, setTelError] = useState("");
-    const [messageError, setMessageError] = useState("");
-    const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS);
-    const [submitDisabled, setSubmitDisabled] = useState(false);
-    const [userMessage, setUserMessage] = useState("");
-    const [showMessageAck, setShowMessageAck] = useState(false);
+    const [nameError, setNameError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [telError, setTelError] = useState('')
+    const [messageError, setMessageError] = useState('')
+    const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS)
+    const [submitDisabled, setSubmitDisabled] = useState(false)
+    const [userMessage, setUserMessage] = useState('')
+    const [showMessageAck, setShowMessageAck] = useState(false)
 
     const countCharacters = () => {
-        const message = messageRef.current?.value ?? "";
-        const left = MAX_MESSAGE_CHARACTERS - message.length;
-        setCharactersLeft(left);
-    };
+        const message = messageRef.current?.value ?? ''
+        const left = MAX_MESSAGE_CHARACTERS - message.length
+        setCharactersLeft(left)
+    }
 
     const handleSubmit = async () => {
-        const name = nameRef.current?.value ?? "";
-        const email = emailRef.current?.value ?? "";
-        const phone = phoneRef.current?.value ?? "";
-        const message = messageRef.current?.value ?? "";
+        const name = nameRef.current?.value ?? ''
+        const email = emailRef.current?.value ?? ''
+        const phone = phoneRef.current?.value ?? ''
+        const message = messageRef.current?.value ?? ''
 
         // Validate
-        const nameValidation = validateName(name);
-        const emailValidation = validateEmail(email);
-        const phoneValidation = validatePhone(phone);
-        const messageValidation = validateMessage(message);
-        setNameError(nameValidation.error);
-        setEmailError(emailValidation.error);
-        setTelError(phoneValidation.error);
-        setMessageError(messageValidation.error);
+        const nameValidation = validateName(name)
+        const emailValidation = validateEmail(email)
+        const phoneValidation = validatePhone(phone)
+        const messageValidation = validateMessage(message)
+        setNameError(nameValidation.error)
+        setEmailError(emailValidation.error)
+        setTelError(phoneValidation.error)
+        setMessageError(messageValidation.error)
 
         const inputValid =
             nameValidation.valid &&
             emailValidation.valid &&
             phoneValidation.valid &&
-            messageValidation.valid;
+            messageValidation.valid
 
         if (inputValid) {
             // Disable Submit Button
-            setSubmitDisabled(true);
-            setUserMessage("Sending Message...");
+            setSubmitDisabled(true)
+            setUserMessage('Sending Message...')
 
             // Submit Form
-            //const URLLocal = "http://localhost:5000/message";
-            const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/message";
-            const URL = URLLive;
+            // const URLLocal = 'http://localhost:5000/message'
+            // const URL = URLLocal
+            const URLLive = 'https://drab-rose-wombat-shoe.cyclic.app/message'
+            const URL = URLLive
             const options = {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     name,
                     email: email.toLowerCase(),
-                    phone: phone.replace(/\D/g, ""),
+                    phone: phone.replace(/\D/g, ''),
                     message,
                 }),
-            };
+            }
 
             try {
-                const response = await fetch(URL, options);
-                const responseJSON = await response.json();
-                console.log("RESPONSE", responseJSON);
+                const response = await fetch(URL, options)
+                const responseJSON = await response.json()
+                console.log('RESPONSE', responseJSON)
                 if (responseJSON.success) {
-                    setUserMessage("Message Sent!");
-                    setShowMessageAck(true);
-                } else setUserMessage("Error While Sending Message! ");
+                    setUserMessage('Message Sent!')
+                    setShowMessageAck(true)
+                } else setUserMessage('Error While Sending Message! ')
             } catch (err) {
-                setUserMessage("Error While Sending Message!");
+                setUserMessage('Error While Sending Message!')
             } finally {
-                setSubmitDisabled(false);
+                setSubmitDisabled(false)
             }
         }
-    };
+    }
 
     // ChangeEvent is more specialised than FocusEvent
     // Lowercase Email Input Value on Input Change Rather than Just Focus Change
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target) {
-            const lowerCaseEmailText = event.target.value.toLowerCase();
-            event.target.value = lowerCaseEmailText;
+            const lowerCaseEmailText = event.target.value.toLowerCase()
+            event.target.value = lowerCaseEmailText
         }
 
-        setEmailError(validateEmail(emailRef.current?.value || "").error);
-    };
+        setEmailError(validateEmail(emailRef.current?.value || '').error)
+    }
 
     // Phone Numbers Are Filtered for Digits
     const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target) {
-            const onlyDigits = event.target.value.replace(/\D/g, "");
-            console.log(onlyDigits);
-            event.target.value = onlyDigits;
+            const onlyDigits = event.target.value.replace(/\D/g, '')
+            console.log(onlyDigits)
+            event.target.value = onlyDigits
         }
 
-        setTelError(validatePhone(phoneRef.current?.value || "").error);
-    };
+        setTelError(validatePhone(phoneRef.current?.value || '').error)
+    }
 
-    const mail = "Dev@Tschiboka.Co.Uk";
-    const tel = "+44 7474 999 334";
+    const mail = 'Dev@Tschiboka.Co.Uk'
+    const tel = '+44 7474 999 334'
     return (
-        <Page title={"Tivadar Debnar | Contact"} path={path}>
+        <Page title={'Tivadar Debnar | Contact'} path={path}>
             <Nav pageName={pageName} />
             {mobileMenuVisible && <Menu pageName="contact" />}
             {subMenuVisible && <SubNav />}
@@ -212,8 +211,8 @@ const Contact = ({ pageName, path }: Props) => {
                                 onBlur={() =>
                                     setNameError(
                                         validateName(
-                                            nameRef.current?.value || ""
-                                        ).error
+                                            nameRef.current?.value || '',
+                                        ).error,
                                     )
                                 }
                             />
@@ -270,8 +269,8 @@ const Contact = ({ pageName, path }: Props) => {
                                 onBlur={() =>
                                     setMessageError(
                                         validateMessage(
-                                            messageRef.current?.value || ""
-                                        ).error
+                                            messageRef.current?.value || '',
+                                        ).error,
                                     )
                                 }
                             />
@@ -290,9 +289,7 @@ const Contact = ({ pageName, path }: Props) => {
                                 {messageError}
                             </span>
                         )}
-                        {submitDisabled && (
-                            <AiOutlineLoading3Quarters className="loading-indicator" />
-                        )}
+                        <LoadingIndicator show={submitDisabled} />
                         {userMessage && (
                             <span className="user-message">{userMessage}</span>
                         )}
@@ -310,7 +307,7 @@ const Contact = ({ pageName, path }: Props) => {
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>
-    );
-};
+    )
+}
 
-export default Contact;
+export default Contact

@@ -7,14 +7,18 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { LoginFormData } from './Login.types'
 import { useLoginFormResources, useSettingsResources } from './Login.query'
-import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useAppContext } from '../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
+import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
-const Login = () => {
-    const { setToken } = useAppContext()
+type LoginProps = {
+    path: string
+}
+
+const Login = ({ path }: LoginProps) => {
+    const { setToken, setUser } = useAppContext()
     const navigate = useNavigate()
     const [revealPassword, setRevealPassword] = useState(false)
     const { control, handleSubmit } = useForm({
@@ -39,8 +43,9 @@ const Login = () => {
     >({
         mutationFn: (data: LoginFormData) => useLoginFormResources(data),
         onSuccess: (response) => {
-            const token = response.data.token
+            const { token, user } = response.data
             setToken(token)
+            setUser(user)
             navigate('/')
         },
     })
@@ -56,7 +61,7 @@ const Login = () => {
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
     return (
-        <Page className="Login" title="Tivadar Debnar | Login" path="/login">
+        <Page className="Login" title="Tivadar Debnar | Login" path={path}>
             <div>
                 <h1>Login</h1>
                 <h2>Tschiboka Personal App</h2>
@@ -82,9 +87,7 @@ const Login = () => {
                         setRevealPassword={setRevealPassword}
                     />
                 </fieldset>
-                {isLoading && (
-                    <AiOutlineLoading3Quarters className="loading-indicator" />
-                )}
+                <LoadingIndicator show={isLoading} />
                 <div className="button-box">
                     <button name="submit">Login</button>
                     {enableRegistration && <button>Register User</button>}

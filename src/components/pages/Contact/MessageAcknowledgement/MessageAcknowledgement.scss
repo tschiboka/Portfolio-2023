@@ -6,9 +6,9 @@
 
 .MessageAcknowledgement {
     width: 100vw;
-    min-height: calc(100vh - 5vh);
-    position: sticky;
-    top: 5vh;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
     left: 0;
     padding: 1rem;
     display: flex;
@@ -16,6 +16,7 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: $black_1;
+    z-index: 10000;
     @include bp.md {
         padding: 1rem 3rem;
     }
@@ -52,6 +53,7 @@
         font-weight: bold;
         text-shadow: 2px 2px black;
         padding: 0 10px;
+        text-decoration: none;
         cursor: pointer;
         &:hover, &:active {
             background-color: $accent_dark_4;

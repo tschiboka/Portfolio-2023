@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const Joi = require("joi");
+const Joi = require('@hapi/joi')
+Joi.objectId = require('joi-objectid')(Joi)
 
 const schema = mongoose.Schema({
     userName: {
@@ -35,6 +36,10 @@ const schema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    avatarId: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: undefined,
+    },
     created: {
         type: Date,
         default: Date.now
@@ -57,6 +62,7 @@ const validateUser = (user) => {
         password: Joi.string().required(),
         fullName: Joi.string().required().min(3).max(50),
         isAdmin: Joi.boolean(),
+        avatarId: Joi.objectId(),
         created: Joi.date(),
         updated: Joi.date(),
         lastLogin: Joi.date().optional(),
