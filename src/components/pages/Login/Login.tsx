@@ -5,13 +5,13 @@ import { AxiosResponse } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
+import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { LoginFormData } from './Login.types'
 import { useLoginFormResources, useSettingsResources } from './Login.query'
 import { useAppContext } from '../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
-import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
 type LoginProps = {
     path: string
