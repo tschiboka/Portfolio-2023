@@ -5,6 +5,7 @@
 .Header {
     position: sticky;
     top: 0;
+    right: 0;
     height: 5rem;
     padding: 0 1.5rem;
     display: flex;
@@ -12,6 +13,7 @@
     align-items: center;
     background-color: $black_1;
     z-index: 90;
+    overflow: hidden;
 
     @include bp.sm {
         padding: 0 2rem;
