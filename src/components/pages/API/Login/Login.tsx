@@ -1,14 +1,14 @@
-import Page from '../../sharedComponents/Page/Page'
+import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
 import { AxiosResponse } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { WrappedInput } from '../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
-import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
+import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { LoginFormData } from './Login.types'
 import { useLoginFormResources, useSettingsResources } from './Login.query'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
@@ -46,7 +46,7 @@ const Login = ({ path }: LoginProps) => {
             const { token, user } = response.data
             setToken(token)
             setUser(user)
-            navigate('/')
+            navigate('/api/index')
         },
     })
 
@@ -90,7 +90,11 @@ const Login = ({ path }: LoginProps) => {
                 <LoadingIndicator show={isLoading} />
                 <div className="button-box">
                     <button name="submit">Login</button>
-                    {enableRegistration && <button>Register User</button>}
+                    {enableRegistration && (
+                        <button onClick={() => navigate('/api/register')}>
+                            Register User
+                        </button>
+                    )}
                 </div>
             </form>
         </Page>

@@ -1,9 +1,9 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+@import "../../../../styles/animations.scss";
 
-.Login {
+.Register {
     width: 100%;
     max-width: 2000px;
     padding: 20px;

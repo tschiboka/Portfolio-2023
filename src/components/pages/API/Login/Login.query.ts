@@ -1,5 +1,5 @@
 import { LoginFormData } from "./Login.types";
-import { apiPathBuilder } from "../../../routing/apiPathBuilder";
+import { apiPathBuilder } from "../../../../routing/apiPathBuilder";
 import { AxiosResponse } from 'axios'
 import axios from "axios";
 

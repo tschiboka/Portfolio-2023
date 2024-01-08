@@ -1,5 +1,5 @@
 import { createHashRouter } from 'react-router-dom'
-// Main Site Structure
+// Website Pages
 import Home from '../components/pages/Home/Home'
 import About from '../components/pages/About/About'
 import Projects from '../components/pages/Projects/Projects'
@@ -7,9 +7,7 @@ import Blog from '../components/pages/Blog/Blog'
 import Contact from '../components/pages/Contact/Contact'
 import PrivacyPolicy from '../components/pages/PrivacyPolicy/PrivacyPolicy'
 import RouteError from '../components/sharedComponents/RouteError/RouteError'
-// App
-import Login from '../components/pages/Login/Login'
-// Blog Articles
+// Blog Article Pages
 import RiffMaster from '../components/articles/RiffMaster/RiffMaster'
 import JsDateValidation from '../components/articles/JsDateValidation/JsDateValidation'
 import SoundsWithHowler from '../components/articles/SoundsWithHowler/SoundsWithHowler'
@@ -18,8 +16,13 @@ import GreenRooftop from '../components/articles/GreenRooftop/GreenRooftop'
 import CyclicEmailScheduling from '../components/articles/CyclicEmailScheduling/CyclicEmailScheduling'
 import ReactAnatomy from '../components/articles/ReactAnatomy/RactAnatomy'
 import GitCheatsheet from '../components/articles/GitCheatsheet/GitCheatsheet'
+// App Pages
+import Login from '../components/pages/API/Login/Login'
+import Index from '../components/pages/API/Index/Index'
+import Register from '../components/pages/API/Register/Register'
 
 export const routes = [
+    // Website Pages
     {
         path: '/',
         element: <Home pageName="home" path="/" />,
@@ -46,10 +49,7 @@ export const routes = [
         path: '/blog',
         element: <Blog pageName="blog" path="/blog" />,
     },
-    {
-        path: '/login',
-        element: <Login path="/login" />,
-    },
+    // Blog Article Pages
     {
         path: '/blog/riffmaster',
         element: <RiffMaster pageName="riffmaster" path="/blog/riffmaster" />,
@@ -109,6 +109,20 @@ export const routes = [
             />
         ),
     },
+    // API Routes
+    {
+        path: '/api/login',
+        element: <Login path="/api/login" />,
+    },
+    {
+        path: '/api/register',
+        element: <Register path="/api/register" />,
+    },
+    {
+        path: '/api/index',
+        element: <Index path="/api/index" />,
+    },
+    // Error
     {
         path: '/*',
         element: <RouteError />,

@@ -24,7 +24,7 @@ const Welcome = () => {
                     className="headshot"
                     src={headshot}
                     alt="Headshot Image"
-                    onClick={() => navigate('./login')}
+                    onClick={() => navigate('./api/login')}
                 />
             </div>
             <h1>

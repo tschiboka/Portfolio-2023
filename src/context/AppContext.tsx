@@ -5,7 +5,7 @@ import React, {
     useState,
     ReactNode,
 } from 'react'
-import { User } from '../components/pages/Login/Login.types'
+import { User } from '../components/pages/API/Login/Login.types'
 
 interface AppContextValues {
     themeMode: string
