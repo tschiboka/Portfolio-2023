@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
+const HALF_AN_HOUR_IN_SEC = 60 * 30
 
 const schema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         default: false,
     },
+    // Maximum number of users allowed to register to the app
     maxUsers: {
         type: Number,
         default: 1,
@@ -42,6 +44,14 @@ const schema = new mongoose.Schema({
         uppercase: true,
         trim: true,
     },
+    registrationTokensExpireInMs: {
+        type: Number,
+        default: 3600,
+    },
+    sessionTokensExpireInMs: {
+        type: Number,
+        default: 3600,
+    }
 })
 
 const Settings = mongoose.model("Settings", schema)
@@ -56,6 +66,8 @@ const validateSettings = (settings) => {
         automaticLogOffTimeInMins: Joi.number(),
         enableUserTheme: Joi.string(),
         enableFeature: Joi.string(),
+        registrationTokensExpireInMs: Joi.number().min(HALF_AN_HOUR_IN_MS),
+        sessionTokensExpireInMs: Joi.number().min(HALF_AN_HOUR_IN_MS),
     })
     
     return schema.validate(settings)
@@ -63,3 +75,4 @@ const validateSettings = (settings) => {
 
 module.exports.Settings = Settings
 module.exports.validateSettings = validateSettings
+module.exports.HALF_AN_HOUR_IN_SEC = HALF_AN_HOUR_IN_SEC

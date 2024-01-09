@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require("mongoose")
-const { User, validateUser } = require('../models/user')
+const { User, validateUser, generateToken } = require('../models/user')
 const bcrypt = require("bcrypt")
+const { Settings, HALF_AN_HOUR_IN_SEC } = require("../models/setting")
+const { Token, validateToken } = require("../models/token")
+const nodemailer = require("nodemailer");
 
 router.get("/", async (req, res) => {
     const users = await User.find()
@@ -23,13 +26,67 @@ router.post("/", async (req, res) => {
     const { error } = validateUser(req.body)
     if (error) return res.status(400).json({ success: false, message: error.details[0].message, error })
 
+    // Hash password
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(req.body.password, salt)
     
+    // Create user
     const user = await new User({...req.body, password })
+
+    // Get settings for session expiry duration and max users
+    const settingErrorMsg = "Could not find settings on database"
+    const settings = await Settings.find()
+    const setting = settings[0]
+    if (!setting) return res.status(404).json({ success: false, message: settingErrorMsg })
+    
+    const expiresErrorMsg = "Invalid expiration time in settings"
+    const {registrationTokensExpireInMs: expires, maxUsers} = setting
+    if (expires === undefined || expires < HALF_AN_HOUR_IN_SEC) return res.status(400).json({ success: false, message: expiresErrorMsg })
+    
+    const users = await User.find()
+    const maxUserMessage = "Registration failed: the application reached the maximum number of users"
+    if (users.length >= maxUsers) return res.status(403).json({ success: false, message: maxUserMessage })
+
+    // Generate and store token
+    const emailVerificationToken = generateToken(user, expires, false)
+    const token = new Token({userId: user._id, token: emailVerificationToken})
+    await token.save()
     await user.save()
-    user.password = undefined
-    res.status(200).json({ success: true, user })
+
+    // Send confirmation email
+    const emailMessage = `
+    <h1>Confirm Registration</h1>
+    <p>Please verify your registration on Tschiboka App by clicking on the link below:</p>
+    <p><a href=https://localhost/api/confirm-registration/${token}>
+    <strong>Verify registration</strong></a></p>`
+    
+    const fromEmailAddress = "tibi.aki.tivadar@gmail.com";
+    const toEmailAddress = "dev@tschiboka.co.uk";
+    const emailPassword = process.env.EMAIL_PASSWORD;
+    
+    const mailOptions = {                                          // Email Specifications
+        from: fromEmailAddress,                                       
+        to: [fromEmailAddress, toEmailAddress],
+        subject: 'Confirm Registration | TSCHIBOKA.CO.UK',
+        html: emailMessage
+    };
+
+    const transporter = nodemailer.createTransport({
+        auth: {
+            user: fromEmailAddress,
+            pass: emailPassword
+        },
+        secure: true,
+        port: 465,
+        tls: { rejectUnauthorized: false },
+        host: "smtp.gmail.com",
+    });
+    try {
+        const info = await transporter.sendMail(mailOptions);
+        return res.json({success: true});
+    } catch (err) {
+        return res.status(500).json({ success: false, message: "Could not send verification email" });
+    }
 })
 
 module.exports = router

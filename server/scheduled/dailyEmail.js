@@ -149,3 +149,4 @@ const sendEmail = async (message) => {
 }
 
 module.exports = dailyEmail;
+module.exports = sendEmail;

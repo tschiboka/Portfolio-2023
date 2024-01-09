@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require('@hapi/joi')
 Joi.objectId = require('joi-objectid')(Joi)
+const jwt = require("jsonwebtoken")
 
 const schema = mongoose.Schema({
     userName: {
@@ -40,6 +41,16 @@ const schema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         default: undefined,
     },
+    // Verified true after email verification
+    verified: { 
+        type: Boolean,
+        default: false,
+    },
+    // Active true after first login and set to false if user deletes profile
+    active: {
+        type: Boolean,
+        default: false,
+    },
     created: {
         type: Date,
         default: Date.now
@@ -70,5 +81,13 @@ const validateUser = (user) => {
     return schema.validate(user)
 }
 
+const generateToken = (user, exp, isAdmin) => {
+    const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
+    if (!JWT_PRIVATE_KEY) throw Error("Fatal error: JWT Private key is not defined!")
+
+    return jwt.sign({_id: user._id, exp, isAdmin}, JWT_PRIVATE_KEY)
+}
+
 exports.User = User,
 exports.validateUser = validateUser
+exports.generateToken = generateToken
