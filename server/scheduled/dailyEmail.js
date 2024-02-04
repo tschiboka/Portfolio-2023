@@ -140,13 +140,10 @@ const sendEmail = async (message) => {
     });
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log("Email Successfully Sent\n", info);
         return info;
     } catch (err) {
-        console.log("Email Error", err);
         return err;
     }
 }
 
 module.exports = dailyEmail;
-module.exports = sendEmail;

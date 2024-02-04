@@ -3,8 +3,6 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require('cors');                                      // CORS Settings
 const PORT = process.env.PORT || 5000;
-const cron = require("node-cron");
-const dailyEmail = require("./scheduled/dailyEmail");
 
 app.use(express.json({
     type: ['application/json', 'text/plain']
@@ -26,6 +24,7 @@ const schedule = require("./routes/schedule");
 const settings = require("./routes/settings")
 const user = require("./routes/user");
 const login = require("./routes/login");
+const confirm = require("./routes/confirm");
 app.use("/", index);
 app.use("/message", message);
 app.use("/visit", visit);
@@ -34,6 +33,7 @@ app.use("/schedule", schedule);
 app.use("/api/settings", settings);
 app.use("/api/user", user)
 app.use("/api/login", login)
+app.use("/api/confirm", confirm)
 
 // Cyclic Server Needs DB Connection First then Server Listen
 mongoose.connect(process.env.DB_STRING) // mongodb://127.0.0.1:27017/portfolio-website

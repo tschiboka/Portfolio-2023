@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
     
     const expiresErrorMsg = "Invalid expiration time in settings"
     const {registrationTokensExpireInMs: expires, maxUsers} = setting
+    const iat = Math.floor(Date.now() / 1000)
     if (expires === undefined || expires < HALF_AN_HOUR_IN_SEC) return res.status(400).json({ success: false, message: expiresErrorMsg })
     
     const users = await User.find()
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
     if (users.length >= maxUsers) return res.status(403).json({ success: false, message: maxUserMessage })
 
     // Generate and store token
-    const emailVerificationToken = generateToken(user, expires, false)
+    const emailVerificationToken = generateToken(user, iat + expires, false)
     const token = new Token({userId: user._id, token: emailVerificationToken})
     await token.save()
     await user.save()
@@ -56,9 +57,10 @@ router.post("/", async (req, res) => {
     // Send confirmation email
     const emailMessage = `
     <h1>Confirm Registration</h1>
-    <p>Please verify your registration on Tschiboka App by clicking on the link below:</p>
-    <p><a href=https://localhost/api/confirm-registration/${token}>
-    <strong>Verify registration</strong></a></p>`
+    <p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
+    <p><a href=https://localhost:5000/api/confirm/${emailVerificationToken}>
+        <strong>Verify registration</strong>
+    </a></p>`
     
     const fromEmailAddress = "tibi.aki.tivadar@gmail.com";
     const toEmailAddress = "dev@tschiboka.co.uk";
@@ -82,8 +84,8 @@ router.post("/", async (req, res) => {
         host: "smtp.gmail.com",
     });
     try {
-        const info = await transporter.sendMail(mailOptions);
-        return res.json({success: true});
+        await transporter.sendMail(mailOptions);
+        return res.json({success: true, message: "Confirmation email sent"});
     } catch (err) {
         return res.status(500).json({ success: false, message: "Could not send verification email" });
     }
