@@ -295,6 +295,48 @@ const references: Record<string, Reference[]> = {
             author: "Burchfiel, A.",
             source: "https://www.tokenex.com/blog/ab-what-is-a-blob-binary-large-object-can-it-be-tokenized/",
         },
+    ],
+    "/blog/maybe": [
+        {
+            title: "Cover Image: Houses of Parliament",
+            author: "Monet",
+            source: "https://www.gazette-drouot.com/en/article/art-market-overview-3A-the-invincible-claude-monet/38930",
+        },
+        {
+            title: "Monet.js Git Documentation",
+            author: "Monet.js",
+            source: "https://github.com/monet/monet.js/blob/develop/docs/MAYBE.md",
+        },
+        {
+            title: "Why Funtional Programming Should be the Future of Development",
+            author: "Spectrum",
+            source: "https://spectrum.ieee.org/functional-programming",
+        },
+        {
+            title: "Functors in JavaScript",
+            author: "Levelup",
+            source: "https://levelup.gitconnected.com/functors-in-javascript-5f3483ad0e13#:~:text=Jan%2022%2C%202023,a%20function%20to%20that%20value",
+        },
+        {
+            title: "Functional Programming in JS: Functor - Monad's little brother",
+            author: "dev",
+            source: "https://dev.to/mpodlasin/functional-programming-in-js-functor-monad-s-little-brother-3053",
+        },
+        {
+            title: "Billion Dollar Mistake",
+            author: "Medium",
+            source: "https://medium.com/@PurpleGreenLemon/how-null-references-became-the-billion-dollar-mistake-bcf0c0cc72ef",
+        },
+        {
+            title: "Monads",
+            author: "StudyMaster",
+            source: "https://www.studysmarter.co.uk/explanations/computer-science/functional-programming/monads/",
+        },
+        {
+            title: "Monet.js Documentation",
+            author: "Monet",
+            source: "https://github.com/monet/monet.js/blob/master/docs/MAYBE.md",
+        },
     ]
 };
 

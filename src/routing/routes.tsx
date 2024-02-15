@@ -20,6 +20,7 @@ import GitCheatsheet from '../components/articles/GitCheatsheet/GitCheatsheet'
 import Login from '../components/pages/API/Login/Login'
 import Index from '../components/pages/API/Index/Index'
 import Register from '../components/pages/API/Register/Register'
+import Maybe from '../components/articles/Maybe/Maybe'
 
 export const routes = [
     // Website Pages
@@ -108,6 +109,10 @@ export const routes = [
                 path="/blog/git-cheatsheet"
             />
         ),
+    },
+    {
+        path: '/blog/maybe',
+        element: <Maybe pageName="maybe" path="/blog/maybe" />,
     },
     // API Routes
     {

@@ -1,56 +1,57 @@
-import { useEffect, useState } from "react";
-import { useAppContext } from "../../../context/AppContext";
-import BlogCard from "../../sharedComponents/BlogCard/BlogCard";
-import Footer from "../../sharedComponents/Footer/Footer";
-import Menu from "../../sharedComponents/Menu/Menu";
-import Nav from "../../sharedComponents/Nav/Nav";
-import Page from "../../sharedComponents/Page/Page";
-import SubNav from "../../sharedComponents/SubNav/SubNav";
-import { blogArticles } from "../../articles/articles";
-import { getLikeSummary } from "../../../serverAPI/likes";
-import "./Blog.scss";
-import { getVisitSummary } from "../../../serverAPI/visits";
+import { useEffect, useState } from 'react'
+import { useAppContext } from '../../../context/AppContext'
+import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
+import Footer from '../../sharedComponents/Footer/Footer'
+import Menu from '../../sharedComponents/Menu/Menu'
+import Nav from '../../sharedComponents/Nav/Nav'
+import Page from '../../sharedComponents/Page/Page'
+import SubNav from '../../sharedComponents/SubNav/SubNav'
+import { blogArticles } from '../../articles/articles'
+import { getLikeSummary } from '../../../serverAPI/likes'
+import './Blog.scss'
+import { getVisitSummary } from '../../../serverAPI/visits'
 
 interface Props {
-    pageName: string;
-    path: string;
+    pageName: string
+    path: string
 }
 
-export type VisitCount = { [path: string]: number };
-export type LikeCount = { [path: string]: number };
+export type VisitCount = { [path: string]: number }
+export type LikeCount = { [path: string]: number }
 
 const Blogs = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext();
-    const [visits, setVisits] = useState<VisitCount | null>(null);
-    const [visitsLoaded, setVisitsLoaded] = useState(false);
-    const [likes, setLikes] = useState<LikeCount | null>(null);
-    const [likesLoaded, setLikesLoaded] = useState(false);
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
+    const [visits, setVisits] = useState<VisitCount | null>(null)
+    const [visitsLoaded, setVisitsLoaded] = useState(false)
+    const [likes, setLikes] = useState<LikeCount | null>(null)
+    const [likesLoaded, setLikesLoaded] = useState(false)
 
     // Get Newest Article
     const publishedArticles = blogArticles.filter(
-        (article) => !!article.created
-    );
+        (article) => !!article.created,
+    )
     const sortedArticles = publishedArticles.sort((a, b) => {
-        const dateA = a.created ? new Date(a.created) : new Date(0);
-        const dateB = b.created ? new Date(b.created) : new Date(0);
-        return dateB.getTime() - dateA.getTime();
-    });
+        const dateA = a.created ? new Date(a.created) : new Date(0)
+        const dateB = b.created ? new Date(b.created) : new Date(0)
+        return dateB.getDate() - dateA.getDate()
+    })
 
-    const newArticle = sortedArticles[sortedArticles.length - 1];
+    const newArticle = sortedArticles[sortedArticles.length - 1]
+    console.log(sortedArticles)
 
     useEffect(() => {
         if (!visitsLoaded)
             getVisitSummary((visits: VisitCount | null) => {
-                setVisitsLoaded(true);
-                setVisits(visits);
-            });
+                setVisitsLoaded(true)
+                setVisits(visits)
+            })
         if (!likesLoaded) {
             getLikeSummary((likes: LikeCount | null) => {
-                setLikesLoaded(true);
-                setLikes(likes);
-            });
+                setLikesLoaded(true)
+                setLikes(likes)
+            })
         }
-    }, [visits, likes]);
+    }, [visits, likes])
 
     return (
         <Page title="Tivadar Debnar | Blog" path={path}>
@@ -105,7 +106,7 @@ const Blogs = ({ pageName, path }: Props) => {
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>
-    );
-};
+    )
+}
 
-export default Blogs;
+export default Blogs

@@ -7,6 +7,7 @@ import greenRooftopImg from "../../assets/images/blog/grass.png";
 import emailImg from "../../assets/images/blog/email.png";
 import anatomyImg from "../../assets/images/blog/anatomy.png";
 import gitSignImg from "../../assets/images/blog/git_sign.png";
+import monetImg from "../../assets/images/blog/monet.jpg";
 
 export interface BlogArticle {
     title: string;
@@ -104,7 +105,7 @@ export const blogArticles: BlogArticle[] = [
         readingTime: "",
         codeTime: "",
         upcoming: true,
-        upcomingDate: "10.11.2023",
+        upcomingDate: "10.04.2024",
     },
     {
         title: "Scheduling Emails with Cyclic",
@@ -146,5 +147,18 @@ export const blogArticles: BlogArticle[] = [
         suggestedArticles: ["/blog/brief-react-anatomy", "/blog/js-sorting"],
         created: "19.10.2023",
         updated: "20.10.2023"
+    },
+    {
+        title: "Functional Programming with Monet.js",
+        image: monetImg,
+        imageAlt: "Monet",
+        abstract:
+            "I delved into the devine art of functional programming in JavaScript using Monet.js, and decided to create a pocket guide covering fundamental concepts, monads such as Identity, Maybe, and Either to create more robust, composable, and error-resistant code.",
+        badges: ["TypeScript"],
+        to: "/blog/maybe",
+        readingTime: "15 min",
+        codeTime: "",
+        suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
+        created: "03.02.2024"
     },
 ];
