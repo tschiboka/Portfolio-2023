@@ -1,12 +1,7 @@
 import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
-import { AxiosResponse } from 'axios'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
-import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
-import { useAppContext } from '../../../../context/AppContext'
-import { useNavigate } from 'react-router-dom'
+// import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useState } from 'react'
 import './Register.scss'
 
@@ -84,7 +79,7 @@ const Register = ({ path }: IndexProps) => {
                         setRevealPassword={setRevealPassword}
                     />
                 </fieldset>
-                {/* <LoadingIndicator show={isLoading} /> */}
+                {/*<LoadingIndicator show={isLoading} /> */}
                 <div className="button-box">
                     <button name="submit">Register User</button>
                 </div>

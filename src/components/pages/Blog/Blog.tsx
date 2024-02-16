@@ -37,7 +37,6 @@ const Blogs = ({ pageName, path }: Props) => {
     })
 
     const newArticle = sortedArticles[sortedArticles.length - 1]
-    console.log(sortedArticles)
 
     useEffect(() => {
         if (!visitsLoaded)

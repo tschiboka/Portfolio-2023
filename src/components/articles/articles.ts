@@ -8,6 +8,7 @@ import emailImg from "../../assets/images/blog/email.png";
 import anatomyImg from "../../assets/images/blog/anatomy.png";
 import gitSignImg from "../../assets/images/blog/git_sign.png";
 import monetImg from "../../assets/images/blog/monet.jpg";
+import hookimg from "../../assets/images/blog/hook.png";
 
 export interface BlogArticle {
     title: string;
@@ -160,5 +161,17 @@ export const blogArticles: BlogArticle[] = [
         codeTime: "",
         suggestedArticles: ["/blog/js-sorting", "/blog/js-date-validation"],
         created: "03.02.2024"
+    },
+    {
+        title: "React Custom Hook Pattern",
+        image: hookimg,
+        imageAlt: "Hook",
+        abstract: "I've often encountered challenges with React hooks when it came to nested functions. Yet, while pair programming with a senior frontend developer today, I discovered a pattern that would've been a lifesaver many times.",
+        badges: ["React"],
+        to: "/blog/hook-pattern",
+        readingTime: "3 min",
+        codeTime: "15 min",
+        suggestedArticles: ["/blog/maybe", "/blog/brief-react-anatomy"],
+        created: "15.02.2024"
     },
 ];

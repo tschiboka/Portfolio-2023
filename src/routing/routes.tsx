@@ -21,6 +21,7 @@ import Login from '../components/pages/API/Login/Login'
 import Index from '../components/pages/API/Index/Index'
 import Register from '../components/pages/API/Register/Register'
 import Maybe from '../components/articles/Maybe/Maybe'
+import HookPattern from '../components/articles/HookPattern/HookPattern'
 
 export const routes = [
     // Website Pages
@@ -114,6 +115,13 @@ export const routes = [
         path: '/blog/maybe',
         element: <Maybe pageName="maybe" path="/blog/maybe" />,
     },
+    {
+        path: '/blog/hook-pattern',
+        element: (
+            <HookPattern pageName="hook-pattern" path="/blog/hook-pattern" />
+        ),
+    },
+
     // API Routes
     {
         path: '/api/login',
