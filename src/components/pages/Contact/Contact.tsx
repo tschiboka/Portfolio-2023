@@ -74,14 +74,16 @@ const Contact = ({ pageName, path }: Props) => {
     const messageRef = useRef<HTMLTextAreaElement>(null)
     const charCounterRef = useRef<HTMLSpanElement>(null)
 
-    const [nameError, setNameError] = useState('')
-    const [emailError, setEmailError] = useState('')
-    const [telError, setTelError] = useState('')
-    const [messageError, setMessageError] = useState('')
-    const [charatersLeft, setCharactersLeft] = useState(MAX_MESSAGE_CHARACTERS)
-    const [submitDisabled, setSubmitDisabled] = useState(false)
-    const [userMessage, setUserMessage] = useState('')
-    const [showMessageAck, setShowMessageAck] = useState(false)
+    const [nameError, setNameError] = useState<string>('')
+    const [emailError, setEmailError] = useState<string>('')
+    const [telError, setTelError] = useState<string>('')
+    const [messageError, setMessageError] = useState<string>('')
+    const [charatersLeft, setCharactersLeft] = useState<number>(
+        MAX_MESSAGE_CHARACTERS,
+    )
+    const [submitDisabled, setSubmitDisabled] = useState<boolean>(false)
+    const [userMessage, setUserMessage] = useState<string>('')
+    const [showMessageAck, setShowMessageAck] = useState<boolean>(false)
 
     const countCharacters = () => {
         const message = messageRef.current?.value ?? ''

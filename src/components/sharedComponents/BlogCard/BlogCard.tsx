@@ -1,4 +1,4 @@
-import { BlogArticle, blogArticles } from '../../articles/articles'
+import { BlogArticle } from '../../articles/articles'
 import { getColourName } from '../../pages/Projects/getProjects'
 import { useNavigate } from 'react-router-dom'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'

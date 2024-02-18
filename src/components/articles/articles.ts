@@ -166,12 +166,13 @@ export const blogArticles: BlogArticle[] = [
         title: "React Custom Hook Pattern",
         image: hookimg,
         imageAlt: "Hook",
-        abstract: "I've often encountered challenges with React hooks when it came to nested functions. Yet, while pair programming with a senior frontend developer today, I discovered a pattern that would've been a lifesaver many times.",
+        abstract: "I've often encountered React hook errors when it came to working with nested functions and hooks together. Luckily, while pair programming with a senior frontend developer, I discovered a pattern that would've been a lifesaver many times to avoid these errors.",
         badges: ["React"],
         to: "/blog/hook-pattern",
         readingTime: "3 min",
         codeTime: "15 min",
         suggestedArticles: ["/blog/maybe", "/blog/brief-react-anatomy"],
-        created: "15.02.2024"
+        created: "15.02.2024",
+        updated: "17.02.2024"
     },
 ];
