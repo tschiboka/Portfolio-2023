@@ -6,8 +6,11 @@ interface IndexProps {
 
 const Index = ({ path }: IndexProps) => {
     return (
-        <Page title={'Tivadar Debnar | Index'} path={path}>
-            HERE
+        <Page title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
+            <button>Admin</button>
+            <button>Remote</button>
+            <button>Stats</button>
+            <button>Task Manager</button>
         </Page>
     )
 }

@@ -11,9 +11,16 @@ interface Props {
     title: string
     path: string
     className?: string
+    recordVisit?: boolean
 }
 
-const Page = ({ children, title, path, className }: Props) => {
+const Page = ({
+    children,
+    title,
+    path,
+    className,
+    recordVisit = true,
+}: Props) => {
     const {
         isPageScrolling,
         setIsPageScrolling,
@@ -35,7 +42,7 @@ const Page = ({ children, title, path, className }: Props) => {
 
         detectIncognito().then((result) => {
             // Do Not Record Visits in Incognito Mode
-            if (!result.isPrivate) postVisit(path)
+            if (!result.isPrivate && recordVisit) postVisit(path)
         })
 
         window.removeEventListener('scroll', handleScroll)

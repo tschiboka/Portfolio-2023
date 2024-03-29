@@ -61,7 +61,12 @@ const Login = ({ path }: LoginProps) => {
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
     return (
-        <Page className="Login" title="Tivadar Debnar | Login" path={path}>
+        <Page
+            className="Login"
+            title="Tivadar Debnar | Login"
+            path={path}
+            recordVisit={false}
+        >
             <div>
                 <h1>Login</h1>
                 <h2>Tschiboka Personal App</h2>
@@ -73,7 +78,7 @@ const Login = ({ path }: LoginProps) => {
                         name="email"
                         control={control}
                         type="text"
-                        autoComplete="true"
+                        autoComplete="email"
                     />
                 </fieldset>
                 <fieldset>

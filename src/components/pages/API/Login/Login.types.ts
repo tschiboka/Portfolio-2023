@@ -16,12 +16,12 @@ export type SettingsResources = {
 
 export type User = {
     userName: string,
-        email: string,
-        password: string,
-        fullName: string,
-        isAdmin?: boolean,
-        avatarId?: string,
-        created?: Date,
-        updated?: Date,
-        lastLogin?: Date,
+    email: string,
+    password: string,
+    fullName: string,
+    isAdmin?: boolean,
+    avatarId?: string,
+    created?: Date,
+    updated?: Date,
+    lastLogin?: Date,
 }

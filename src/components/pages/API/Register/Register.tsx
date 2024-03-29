@@ -1,9 +1,11 @@
 import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
-// import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useState } from 'react'
 import './Register.scss'
+import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { registrationSchema } from './Register.schema'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface IndexProps {
     path: string
@@ -18,8 +20,9 @@ const Register = ({ path }: IndexProps) => {
             userName: '',
             email: '',
             password: '',
-            confirm: '',
+            passwordConfirmation: '',
         },
+        resolver: yupResolver(registrationSchema),
     })
 
     const submitHandler = () => {
@@ -31,6 +34,7 @@ const Register = ({ path }: IndexProps) => {
             className="Register"
             title={'Tivadar Debnar | Register'}
             path={path}
+            recordVisit={false}
         >
             <div>
                 <h1>Register</h1>
@@ -43,6 +47,7 @@ const Register = ({ path }: IndexProps) => {
                         name="fullName"
                         control={control}
                         type="text"
+                        autoComplete="name"
                     />
                 </fieldset>
                 <fieldset>
@@ -55,7 +60,12 @@ const Register = ({ path }: IndexProps) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email">Email</label>
-                    <WrappedInput name="email" control={control} type="text" />
+                    <WrappedInput
+                        name="email"
+                        control={control}
+                        type="text"
+                        autoComplete="email"
+                    />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password</label>
@@ -69,9 +79,9 @@ const Register = ({ path }: IndexProps) => {
                     />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="confirm">Confirm</label>
+                    <label htmlFor="passwordConfirmation">Confirm</label>
                     <WrappedInput
-                        name="confirm"
+                        name="passwordConfirmation"
                         control={control}
                         type="password"
                         addRevealPasswordIcon={true}
@@ -79,7 +89,7 @@ const Register = ({ path }: IndexProps) => {
                         setRevealPassword={setRevealPassword}
                     />
                 </fieldset>
-                {/*<LoadingIndicator show={isLoading} /> */}
+                {/* <LoadingIndicator show={isLoading} /> */}
                 <div className="button-box">
                     <button name="submit">Register User</button>
                 </div>
