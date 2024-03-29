@@ -337,6 +337,13 @@ const references: Record<string, Reference[]> = {
             author: "Monet",
             source: "https://github.com/monet/monet.js/blob/master/docs/MAYBE.md",
         },
+    ],
+    "/blog/hook-pattern": [
+        {
+            title: "Why Do React Hooks Rely on Call Order?",
+            author: "Dan Abramov",
+            source: "https://overreacted.io/why-do-hooks-rely-on-call-order/",
+        },
     ]
 };
 

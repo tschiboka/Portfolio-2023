@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 import Article from '../../sharedComponents/Article/Article'
 import Figure from '../../sharedComponents/Figure/Figure'
 import Code from '../../sharedComponents/Code/Code'
-// import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
+import InlineReference from '../../sharedComponents/InlineReference/InlineReference'
 
 // Images
 import CoverImg from '../../../assets/images/blog/hook_pattern/cover.png'
@@ -12,7 +12,7 @@ import ErrorImg from '../../../assets/images/blog/hook_pattern/error_message.png
 
 // Other Assets
 import codeSnippets from './codeSnippets'
-//import { getReferenceList } from "../references";
+import { getReferenceList } from '../references'
 
 // Styles
 import './HookPattern.scss'
@@ -24,7 +24,7 @@ interface Props {
 }
 
 const HookPattern = ({ pageName, path }: Props) => {
-    //const references = getReferenceList(path);
+    const references = getReferenceList(path)
     const [value, setValue] = useState<boolean>()
 
     console.log('******************************')
@@ -55,11 +55,13 @@ const HookPattern = ({ pageName, path }: Props) => {
                 zoomAllowed={false}
             />
             <p>
-                In this article, I will discuss React hooks and fundamental
-                React hook patterns, as well as how to address the common error
-                message: “Uncaught error: React components can only be called
-                inside the body of a function component,” in a specific way that
-                caught my attention.
+                Have you ever encountered the following error message: “Uncaught
+                error: React components can only be called inside the body of a
+                function component”? If your answer is yes, and wondered what
+                the underlying issue that causes it, then this article is for
+                you. I will discuss some React hooks fundamentals, the the
+                sequence of how React hooks are called, and finally a React hook
+                pattern that addresses this common error message.
             </p>
             <p>
                 If you are new to the functional React style and have primarily
@@ -208,6 +210,11 @@ const HookPattern = ({ pageName, path }: Props) => {
                 React to properly maintain the state of each hook between
                 renders.
             </p>
+            <Code
+                fileName="hookRule1.tsx"
+                language="javascript"
+                content={codeSnippets.hookRule1}
+            />
             <p>
                 Hooks should only be called from{' '}
                 <strong>within functional components or custom hooks</strong>.
@@ -223,6 +230,28 @@ const HookPattern = ({ pageName, path }: Props) => {
                 hook itself if necessary. This ensures that hooks are called
                 consistently on every render, preventing bugs related to missing
                 or incorrect hook calls.
+            </p>
+            <p>
+                But why I cannot use hooks in conditions or loops? Internally
+                hooks are implemented like a queue (React refers to them as
+                memory cells) that rely on persistent call index between
+                re-renders, each representing a node that holds references to
+                the next one. Therefore the order of the hook calls must be
+                guaranteed.
+            </p>
+            <Code
+                fileName="hookRule1.tsx"
+                language="javascript"
+                content={codeSnippets.hookRule2}
+            />
+            <p>
+                Loops, conditions and nested function calls cannot guarantee a
+                persistent indexing between rerenders. For instance a condition
+                may skip one of the hook referencing, and React could not
+                directly associate the appropriate indices. If you are
+                interested in further explanation on why hook references are
+                indexed, check out this article:
+                <InlineReference reference={references[0]} />.
             </p>
             <h3>Invalid Hook Call Error</h3>
             <p>
@@ -316,9 +345,8 @@ const HookPattern = ({ pageName, path }: Props) => {
                 separation of concerns and improves code maintainability.
                 Unfortunately, I could not find the name of this pattern
                 throughout my research, so in case you know what this pattern is
-                called, please don’t hesitate to contact me. Happy coding!
+                called, please don't hesitate to contact me. Happy coding!
             </p>
-            {/* <InlineReference reference={references[0]} /> */}
         </Article>
     )
 }

@@ -2,11 +2,11 @@ const codeSnippets = {
     useState: `const [fullName, setFullName] = useState<string>("")
 const handleOnButtonClick = () => setFullName(firstName + lastName)
 `, 
-    useEffect: `useEffect(() => {})
+    useEffect: `useEffect(() => {})                                                 // Run on every render
 useEffect(() => { console.log('1. Mount') }, [])                    // Run once on mount
 useEffect(() => { console.log('2. Mount and every state change') }) // Run on every state change
 useEffect(() => { console.log('3. Update') }, [value])              // Run if dependency state change
-useEffect(() => () => console.log('4. Before unmount')              // Run on before component is removed
+useEffect(() => () => console.log('4. Before unmount'), [value])    // Run on before component is removed
 useEffect(() => () => console.log('5. Update or unmount'), [value]) // Run both on dependency change before component is removed`,
     useContext: `interface ThemeContextType {
     theme: string
@@ -31,7 +31,7 @@ export const useThemeContext = () => {
     return context
 }`,
     useRef: `const count = useRef(0)
-return <button onclick={() => count.current++}</button>`,
+return <button onclick={() => count.current++}></button>`,
     customHook: `const useFetchUser = (userId) => {            // Your custom fetch user hook
     const [user, setUser] = useState(null);   // Use state hook here
 
@@ -55,15 +55,13 @@ const onSubmit = () => {
 const displayAlbumsTable = (albums: Album[] | undefined) => (
     <table>
         <tbody>
-            {Maybe.fromNull(albums)
-                .map(R.pipe(R.take(10), R.map((album: Album) => (
-                    <tr key={album.id}>
-                        <td>{album.id}</td>
-                        <td>{album.userId}</td>
-                        <td>{album.title}</td>
-                    </tr>
-                )),),
-                ).orUndefined()}
+            {albums.map((album: Album) => (
+                <tr key={album.id}>
+                    <td>{album.id}</td>
+                    <td>{album.userId}</td>
+                    <td>{album.title}</td>
+                </tr>
+            ))}
         </tbody>
     </table>
 )
@@ -99,9 +97,7 @@ export const useFetchComments = (): UseQueryResult<Comment[], AxiosError> =>
     queryKey: ["comments"],
     queryFn: () => axios.get("https://jsonplaceholder.typicode.com/comments").then(data => data.data)
   });`,
-  errorLine: `const { data: albums, isLoading } = useAlbums()
-
-const onSubmit = () => {
+  errorLine: `const onSubmit = () => {
     const { data } = useFetchComments()  // I called a React hook within a regular JS function
 }`,
     wrappedHook: `export const useComments = () => {
@@ -115,6 +111,24 @@ const onSubmit = () => {
     fetch: `const { getComments } = useComments() // Object destruction to get function
 const onSubmit = () => {
     const comments = getComments()    // Use the function returned from the hook
+}`,
+hookRule1: `export const Component = () => {
+    const [value, setValue] = useState(0)                      // Top level of functional component
+    const fn = () => { const [value, setValue] = useState(0) } // This would throw, as this is not the top level of a function component
+    for (let i = 0; i < 10; i++) {
+        const [value, setValue] = useState(0)                  // This would throw, as hook used in a loop
+    }
+    if (x > 0) const [value, setValue] = useState(0)           // This would throw, as hook is in a condition
+}`,
+hookRule2: `export const Component1 = () => {
+    const [value0, setValue0] = useState(0)                      // Index 0
+    const [value1, setValue1] = useState(0)                      // Index 1
+    const [value2, setValue2] = useState(0)                      // Index 2
+}
+export const Component2 = () => {
+    const [value0, setValue0] = useState(0)                      // Index 0
+    if (value0 === 1) const [value1, setValue1] = useState(0)    // Now you messed up indexing, ta
+    const [value2, setValue2] = useState(0)                      // React says: Index what?
 }`
 }
 
