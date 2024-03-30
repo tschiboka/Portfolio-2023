@@ -89,12 +89,20 @@ router.post("/", async (req, res) => {
     }
 })
 
+const getUrl = () => {
+    const hostname = window.location.hostname; // Get the current hostname (domain) of the website
+    if (hostname === "localhost" || hostname === "127.0.0.1")
+        return "localhost:5173";
+    return "https://tschiboka.co.uk";
+}
+
 const getEmailContent = (token) => `
-<h1>Confirm Registration</h1>
-<p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
-<p><a href=localhost:5173/#/api/email-verification/${token}>
-    <strong>Verify registration</strong>
-</a></p>`
+    <h1>Confirm Registration</h1>
+    <p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
+    <p><a href=${getUrl()}/#/api/email-verification/${token}>
+        <strong>Verify registration</strong>
+    </a></p>`
+
 
 const getMailOptions = (from, to, content) => ({                                          // Email Specifications
     from: from,                                       
