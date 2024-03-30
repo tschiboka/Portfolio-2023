@@ -73,9 +73,9 @@ router.post("/", async (req, res) => {
     await token.save()
 
     // Email configuration
-    const emailContent = getEmailContent(token)
+    const emailContent = getEmailContent(tokenString)
     const from = "tibi.aki.tivadar@gmail.com";
-    const to = "dev@tschiboka.co.uk";
+    const to = userToken.email;
     const emailPassword = process.env.EMAIL_PASSWORD;
     const mailOptions = getMailOptions(from, to, emailContent)
     
@@ -89,12 +89,10 @@ router.post("/", async (req, res) => {
     }
 })
 
-const getUrl = () => {
-    const hostname = window.location.hostname; // Get the current hostname (domain) of the website
-    if (hostname === "localhost" || hostname === "127.0.0.1")
-        return "localhost:5173";
-    return "https://tschiboka.co.uk";
-}
+const getUrl = () => process.env.NODE_ENV === 'development'
+    ? "localhost:5173"
+    : "https://tschiboka.co.uk"
+
 
 const getEmailContent = (token) => `
     <h1>Confirm Registration</h1>
