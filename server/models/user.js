@@ -4,6 +4,13 @@ Joi.objectId = require('joi-objectid')(Joi)
 const jwt = require("jsonwebtoken")
 
 const schema = mongoose.Schema({
+    fullName: {
+        type: String,
+        required: true,
+        minLength: 5,
+        maxLength: 20,
+        trim: true,
+    },
     userName: {
         type: String,
         unique: true,
@@ -24,13 +31,6 @@ const schema = mongoose.Schema({
     password: {
         type: String,   
         required: true,
-        trim: true,
-    },
-    fullName: {
-        type: String,
-        required: true,
-        minLength: 3,
-        maxLength: 50,
         trim: true,
     },
     isAdmin: {
@@ -68,10 +68,10 @@ const User = new mongoose.model("User", schema)
 
 const validateUser = (user) => {
     const schema = Joi.object({
+        fullName: Joi.string().required().min(3).max(50),
         userName: Joi.string().required().min(3).max(20),
         email: Joi.string().required().email({ tlds: { allow: false } }),
         password: Joi.string().required(),
-        fullName: Joi.string().required().min(3).max(50),
         isAdmin: Joi.boolean(),
         avatarId: Joi.objectId(),
         created: Joi.date(),
@@ -81,11 +81,11 @@ const validateUser = (user) => {
     return schema.validate(user)
 }
 
-const generateToken = (user, exp, isAdmin) => {
+const generateToken = (userToken) => {
     const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
     if (!JWT_PRIVATE_KEY) throw Error("Fatal error: JWT Private key is not defined!")
 
-    return jwt.sign({_id: user._id, exp, isAdmin}, JWT_PRIVATE_KEY)
+    return jwt.sign(userToken, JWT_PRIVATE_KEY)
 }
 
 exports.User = User,

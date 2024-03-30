@@ -1,7 +1,7 @@
 import * as yup from 'yup'
-import { RegistrationForm } from './Register.types'
+import { RegistrationFormData } from './Register.types'
 
-export const registrationSchema: yup.ObjectSchema<RegistrationForm> = yup.object({
+export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.object({
     fullName: yup
         .string()
         .required()

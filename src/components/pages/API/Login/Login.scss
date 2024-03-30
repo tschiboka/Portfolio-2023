@@ -167,6 +167,18 @@
         font-variant: small-caps;
         color: deeppink;
     }
+    .submit-error-message {
+        padding: 0 2.5rem;
+        margin: 1rem;
+        text-align: center;
+        font-size: 1.4rem;
+        font-family: monospace;
+        font-variant: small-caps;
+        color: deeppink;
+        background-color: black;   
+        border: 1px solid $black_3;
+        border-radius: 5px;
+    }
 }
 
 .dark {

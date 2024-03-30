@@ -30,8 +30,13 @@ router.post("/", async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(req.body.password, salt)
     
-    // Create user
-    const user = await new User({...req.body, password })
+    // Check for duplicate user names
+    const duplicateUserName = await User.find({userName: req.body.userName})
+    if (duplicateUserName.length) return res.status(409).json({ success: false, message: "User name already in use" })
+    
+    // Check for duplicate email
+    const duplicateEmail = await User.find({email: req.body.email})
+    if (duplicateEmail.length) return res.status(409).json({ success: false, message: "Email already in use" })
 
     // Get settings for session expiry duration and max users
     const settingErrorMsg = "Could not find settings on database"
@@ -39,50 +44,43 @@ router.post("/", async (req, res) => {
     const setting = settings[0]
     if (!setting) return res.status(404).json({ success: false, message: settingErrorMsg })
     
+    // Add token expiration date
     const expiresErrorMsg = "Invalid expiration time in settings"
     const {registrationTokensExpireInMs: expires, maxUsers} = setting
     const iat = Math.floor(Date.now() / 1000)
     if (expires === undefined || expires < HALF_AN_HOUR_IN_SEC) return res.status(400).json({ success: false, message: expiresErrorMsg })
     
+    // Check app reached maximum number of users
     const users = await User.find()
     const maxUserMessage = "Registration failed: the application reached the maximum number of users"
     if (users.length >= maxUsers) return res.status(403).json({ success: false, message: maxUserMessage })
 
-    // Generate and store token
-    const emailVerificationToken = generateToken(user, iat + expires, false)
-    const token = new Token({userId: user._id, token: emailVerificationToken})
+    // Generate user token object
+    const userToken = {
+        expires: iat + expires,
+        fullName: req.body.fullName,
+        userName: req.body.userName,
+        email: req.body.email,
+        password,
+        isAdmin: false,
+        active: false,
+        verified: false,
+    }
+
+    // Generate token string and persist
+    const tokenString = generateToken(userToken, false)
+    const token = new Token({token: tokenString})
     await token.save()
-    await user.save()
 
-    // Send confirmation email
-    const emailMessage = `
-    <h1>Confirm Registration</h1>
-    <p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
-    <p><a href=https://localhost:5000/api/confirm/${emailVerificationToken}>
-        <strong>Verify registration</strong>
-    </a></p>`
-    
-    const fromEmailAddress = "tibi.aki.tivadar@gmail.com";
-    const toEmailAddress = "dev@tschiboka.co.uk";
+    // Email configuration
+    const emailContent = getEmailContent(token)
+    const from = "tibi.aki.tivadar@gmail.com";
+    const to = "dev@tschiboka.co.uk";
     const emailPassword = process.env.EMAIL_PASSWORD;
+    const mailOptions = getMailOptions(from, to, emailContent)
     
-    const mailOptions = {                                          // Email Specifications
-        from: fromEmailAddress,                                       
-        to: [fromEmailAddress, toEmailAddress],
-        subject: 'Confirm Registration | TSCHIBOKA.CO.UK',
-        html: emailMessage
-    };
-
-    const transporter = nodemailer.createTransport({
-        auth: {
-            user: fromEmailAddress,
-            pass: emailPassword
-        },
-        secure: true,
-        port: 465,
-        tls: { rejectUnauthorized: false },
-        host: "smtp.gmail.com",
-    });
+    // Send confirmation email
+    const transporter = getMailTransporter(from, emailPassword)
     try {
         await transporter.sendMail(mailOptions);
         return res.json({success: true, message: "Confirmation email sent"});
@@ -90,5 +88,30 @@ router.post("/", async (req, res) => {
         return res.status(500).json({ success: false, message: "Could not send verification email" });
     }
 })
+
+const getEmailContent = (token) => `
+<h1>Confirm Registration</h1>
+<p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
+<p><a href=localhost:5173/#/api/email-verification/${token}>
+    <strong>Verify registration</strong>
+</a></p>`
+
+const getMailOptions = (from, to, content) => ({                                          // Email Specifications
+    from: from,                                       
+    to: [from, to],
+    subject: 'Confirm Registration | TSCHIBOKA.CO.UK',
+    html: content
+});
+
+const getMailTransporter = (from, emailPassword) => nodemailer.createTransport({
+    auth: {
+        user: from,
+        pass: emailPassword
+    },
+    secure: true,
+    port: 465,
+    tls: { rejectUnauthorized: false },
+    host: "smtp.gmail.com",
+});
 
 module.exports = router

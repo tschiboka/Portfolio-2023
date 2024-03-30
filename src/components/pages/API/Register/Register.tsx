@@ -6,6 +6,10 @@ import './Register.scss'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { registrationSchema } from './Register.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { RegistrationFormData } from './Register.types'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError, AxiosResponse } from 'axios'
+import { useRegisterUserRequest } from './Register.query'
 
 interface IndexProps {
     path: string
@@ -13,6 +17,8 @@ interface IndexProps {
 
 const Register = ({ path }: IndexProps) => {
     const [revealPassword, setRevealPassword] = useState(false)
+    const [registrationErrorMessage, setRegistrationErrorMessage] = useState('')
+    const [successfulRegistration, setSuccessfulRegistration] = useState('')
 
     const { control, handleSubmit } = useForm({
         defaultValues: {
@@ -25,8 +31,31 @@ const Register = ({ path }: IndexProps) => {
         resolver: yupResolver(registrationSchema),
     })
 
-    const submitHandler = () => {
-        console.log('Submit')
+    const { mutate: registerUser, isPending } = useMutation<
+        AxiosResponse<{ message: string }>,
+        AxiosError,
+        RegistrationFormData
+    >({
+        mutationFn: (data: RegistrationFormData) =>
+            useRegisterUserRequest(data),
+        onSuccess: (res) => {
+            setRegistrationErrorMessage('')
+            setSuccessfulRegistration(res.data.message)
+        },
+        onError: (error: AxiosError<any>) => {
+            console.log(error.message)
+            setRegistrationErrorMessage(
+                error.response?.data?.message || error.message,
+            )
+        },
+    })
+
+    const submitHandler = async (
+        data: RegistrationFormData,
+        event?: React.BaseSyntheticEvent,
+    ) => {
+        event?.preventDefault()
+        registerUser(data)
     }
 
     return (
@@ -89,9 +118,24 @@ const Register = ({ path }: IndexProps) => {
                         setRevealPassword={setRevealPassword}
                     />
                 </fieldset>
-                {/* <LoadingIndicator show={isLoading} /> */}
+                <LoadingIndicator show={isPending} />
+                {registrationErrorMessage && (
+                    <p className="form-message submit-error-message">
+                        {registrationErrorMessage}
+                    </p>
+                )}
+                {successfulRegistration && (
+                    <p className="form-message submit-success-message">
+                        {successfulRegistration}
+                    </p>
+                )}
                 <div className="button-box">
-                    <button name="submit">Register User</button>
+                    <button
+                        disabled={Boolean(successfulRegistration)}
+                        name="submit"
+                    >
+                        Register User
+                    </button>
                 </div>
             </form>
         </Page>

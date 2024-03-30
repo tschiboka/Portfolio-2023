@@ -22,6 +22,7 @@ import Index from '../components/pages/API/Index/Index'
 import Register from '../components/pages/API/Register/Register'
 import Maybe from '../components/articles/Maybe/Maybe'
 import HookPattern from '../components/articles/HookPattern/HookPattern'
+import EmailVerification from '../components/pages/API/EmailVerification/EmailVerification'
 
 export const routes = [
     // Website Pages
@@ -134,6 +135,10 @@ export const routes = [
     {
         path: '/api/index',
         element: <Index path="/api/index" />,
+    },
+    {
+        path: '/api/email-verification/:verificationToken',
+        element: <EmailVerification path="/api/email-verification" />,
     },
     // Error
     {

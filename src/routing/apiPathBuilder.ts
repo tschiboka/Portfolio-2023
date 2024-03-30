@@ -1,8 +1,14 @@
+import { getURL } from "../serverAPI/getURL"
+
 export const apiPathBuilder = (pathName: string):string => {
+    const url = getURL();
+    
     const apiPaths:Record<string, string> = {
         LOGIN: `login`,
-        SETTINGS: 'settings'
+        SETTINGS: 'settings',
+        REGISTER_USER: 'user',
+        CONFIRM_REGISTRATION: 'confirm'
     }
-    
-    return "http://localhost:5000/api/" + apiPaths[pathName]
+    console.log(url + "/api/" + apiPaths[pathName])
+    return url + "/api/" + apiPaths[pathName]
 }

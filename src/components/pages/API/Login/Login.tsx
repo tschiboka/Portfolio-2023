@@ -1,7 +1,7 @@
 import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
@@ -12,6 +12,7 @@ import { useAppContext } from '../../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
+import { QUERY_KEYS } from '../../../../common/queryKeys'
 
 type LoginProps = {
     path: string
@@ -21,6 +22,7 @@ const Login = ({ path }: LoginProps) => {
     const { setToken, setUser } = useAppContext()
     const navigate = useNavigate()
     const [revealPassword, setRevealPassword] = useState(false)
+    const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { control, handleSubmit } = useForm({
         defaultValues: {
             email: '',
@@ -32,21 +34,25 @@ const Login = ({ path }: LoginProps) => {
     const { data: settingsData, isLoading: settingIsLoading } = useQuery<
         AxiosResponse<any, any>
     >({
-        queryKey: ['settings'],
+        queryKey: QUERY_KEYS.GET_APP_SETTINGS,
         queryFn: useSettingsResources,
     })
 
     const loginRequest = useMutation<
         AxiosResponse<any, any>,
-        Error,
+        AxiosError,
         LoginFormData
     >({
         mutationFn: (data: LoginFormData) => useLoginFormResources(data),
         onSuccess: (response) => {
+            setLoginErrorMessage('')
             const { token, user } = response.data
             setToken(token)
             setUser(user)
             navigate('/api/index')
+        },
+        onError: (error: AxiosError<any>) => {
+            setLoginErrorMessage(error.response?.data?.message || error.message)
         },
     })
 
@@ -93,6 +99,9 @@ const Login = ({ path }: LoginProps) => {
                     />
                 </fieldset>
                 <LoadingIndicator show={isLoading} />
+                {loginErrorMessage && (
+                    <p className="submit-error-message">{loginErrorMessage}</p>
+                )}
                 <div className="button-box">
                     <button name="submit">Login</button>
                     {enableRegistration && (
