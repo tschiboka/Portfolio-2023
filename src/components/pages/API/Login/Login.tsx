@@ -48,6 +48,7 @@ const Login = ({ path }: LoginProps) => {
             setLoginErrorMessage('')
             const { token, user } = response.data
             setToken(token)
+            console.log(token)
             setUser(user)
             navigate('/api/index')
         },
