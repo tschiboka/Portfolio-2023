@@ -16,13 +16,21 @@ import GreenRooftop from '../components/articles/GreenRooftop/GreenRooftop'
 import CyclicEmailScheduling from '../components/articles/CyclicEmailScheduling/CyclicEmailScheduling'
 import ReactAnatomy from '../components/articles/ReactAnatomy/RactAnatomy'
 import GitCheatsheet from '../components/articles/GitCheatsheet/GitCheatsheet'
+import Maybe from '../components/articles/Maybe/Maybe'
+import HookPattern from '../components/articles/HookPattern/HookPattern'
 // App Pages
 import Login from '../components/pages/API/Login/Login'
 import Index from '../components/pages/API/Index/Index'
 import Register from '../components/pages/API/Register/Register'
-import Maybe from '../components/articles/Maybe/Maybe'
-import HookPattern from '../components/articles/HookPattern/HookPattern'
 import EmailVerification from '../components/pages/API/EmailVerification/EmailVerification'
+import Stats from '../components/pages/API/Stats/Stats'
+import Record from '../components/pages/API/Record/Record'
+import Remote from '../components/pages/API/Remote/Remote'
+import Tasks from '../components/pages/API/Tasks/Tasks'
+import Activities from '../components/pages/API/Activities/Activities'
+import Events from '../components/pages/API/Events/Events'
+import User from '../components/pages/API/User/User'
+import Admin from '../components/pages/API/Admin/Admin'
 
 export const routes = [
     // Website Pages
@@ -139,6 +147,38 @@ export const routes = [
     {
         path: '/api/email-verification/:verificationToken',
         element: <EmailVerification path="/api/email-verification" />,
+    },
+    {
+        path: '/api/stats',
+        element: <Stats path="/api/stats" />,
+    },
+    {
+        path: '/api/record',
+        element: <Record path="/api/record" />,
+    },
+    {
+        path: '/api/remote',
+        element: <Remote path="/api/remote" />,
+    },
+    {
+        path: '/api/tasks',
+        element: <Tasks path="/api/tasks" />,
+    },
+    {
+        path: '/api/activities',
+        element: <Activities path="/api/activities" />,
+    },
+    {
+        path: '/api/events',
+        element: <Events path="/api/events" />,
+    },
+    {
+        path: '/api/user',
+        element: <User path="/api/user" />,
+    },
+    {
+        path: '/api/admin',
+        element: <Admin path="/api/admin" />,
     },
     // Error
     {

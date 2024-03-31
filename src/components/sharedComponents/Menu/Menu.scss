@@ -32,7 +32,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 2.5rem;
+        margin-top: 0.9rem;
+        margin-bottom: 0.9rem;
         font-variant: small-caps;
         opacity: 0;
         animation-timing-function: ease-in, ease-out;
@@ -63,8 +64,8 @@
         font-family: "Roboto_Bold";
     }
     .social-links {
-        margin-bottom: 5rem;
-        padding-top: 3rem;
+        margin-bottom: 1.5rem;
+        padding-top: 1.5rem;
         display: flex;
         justify-content: center;
         font-size: $font_md;

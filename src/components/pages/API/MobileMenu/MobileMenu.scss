@@ -1,0 +1,23 @@
+@import "../../../../styles/palette.scss";
+
+menu.Menu {
+    padding-top: 5rem;
+}
+
+.MobileMenu {
+    li {
+        margin-top: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+    .link {
+        position: relative;
+    }
+    
+    .chevron-wrapper {
+        display: flex;
+        position: absolute;
+        top: 0;
+        right: -1.6rem;
+        color: $black_4;
+    }
+}

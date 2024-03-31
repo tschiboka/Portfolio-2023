@@ -1,0 +1,14 @@
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+
+.nav_links {
+    margin-left: 0;
+    margin-top: 0;
+}
+
+li {
+    animation: none;
+    outline: none;
+    &:hover { transform: scale(1) !important; }
+}

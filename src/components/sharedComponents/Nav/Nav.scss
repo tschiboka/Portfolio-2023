@@ -58,9 +58,7 @@
     .burger {
         opacity: 0;
         animation: 
-            fade_in 200ms ease-out forwards,
-            from_left 200ms ease-in;
-        animation-delay: 1000ms;
+            fade_in 500ms ease-out forwards;
         @include bp.md {
             display: none;
         }

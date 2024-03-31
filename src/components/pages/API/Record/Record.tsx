@@ -3,20 +3,20 @@ import Page from '../../../sharedComponents/Page/Page'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import Nav from '../Nav/Nav'
 
-interface IndexProps {
+interface RecordProps {
     path: string
 }
 
-const Index = ({ path }: IndexProps) => {
+const Record = ({ path }: RecordProps) => {
     const { mobileMenuVisible } = useAppContext()
 
     return (
-        <Page title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
-            <Nav pageName="Home" />
-            {mobileMenuVisible && <MobileMenu pageName="Home" />}
-            <h1>Home</h1>
+        <Page title={'Tivadar Debnar | Record'} path={path} recordVisit={false}>
+            <Nav pageName="Record" />
+            {mobileMenuVisible && <MobileMenu pageName="Record" />}
+            <h1>Record</h1>
         </Page>
     )
 }
 
-export default Index
+export default Record

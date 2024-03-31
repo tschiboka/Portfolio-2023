@@ -43,11 +43,11 @@ html {
     scrollbar-width: thin;
 }
 
-*:focus {
-    outline: 1px solid $accent_dark_3;
-    outline-offset: 8px;
-    border-radius: 20px;
-}
+// *:focus {
+//     outline: 1px solid $accent_dark_3;
+//     outline-offset: 8px;
+//     border-radius: 20px;
+// }
 
 ::-webkit-scrollbar {
     width: 2px;
