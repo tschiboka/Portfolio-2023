@@ -15,7 +15,12 @@ const Admin = ({ path }: AdminProps) => {
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
-        <Page title={'Tivadar Debnar | Admin'} path={path} recordVisit={false}>
+        <Page
+            title={'Tivadar Debnar | Admin'}
+            path={path}
+            recordVisit={false}
+            loginRequired={true}
+        >
             <Nav
                 pageName="Admin"
                 submenuStack={submenuStack}

@@ -13,13 +13,14 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
 import { QUERY_KEYS } from '../../../../common/queryKeys'
+import { setToken } from './Login.utils'
 
 type LoginProps = {
     path: string
 }
 
 const Login = ({ path }: LoginProps) => {
-    const { setToken, setUser } = useAppContext()
+    const { setUser } = useAppContext()
     const navigate = useNavigate()
     const [revealPassword, setRevealPassword] = useState(false)
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
@@ -48,7 +49,6 @@ const Login = ({ path }: LoginProps) => {
             setLoginErrorMessage('')
             const { token, user } = response.data
             setToken(token)
-            console.log(token)
             setUser(user)
             navigate('/api/index')
         },

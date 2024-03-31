@@ -1,0 +1,43 @@
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+@import "../../../../styles/animations.scss";
+
+.Logout {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logout-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        @include bp.md {
+            width: 600px;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        
+        button {
+            height: 2.5rem;
+            width: 250px;
+            margin-bottom: 1rem;   
+            
+            @include bp.md {
+                height: auto;
+                padding: 0.5rem;
+            }
+        }
+
+        button:hover {
+            background-color: $accent_dark_1;
+        }
+    }
+    p {
+        text-align: center;
+    }
+}

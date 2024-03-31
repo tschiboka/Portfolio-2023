@@ -15,7 +15,12 @@ const Index = ({ path }: IndexProps) => {
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
-        <Page title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
+        <Page
+            title={'Tivadar Debnar | Index'}
+            path={path}
+            recordVisit={false}
+            loginRequired={true}
+        >
             <Nav
                 pageName="Home"
                 submenuStack={submenuStack}

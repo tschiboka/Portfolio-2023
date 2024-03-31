@@ -15,7 +15,12 @@ const Remote = ({ path }: RemoteProps) => {
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
-        <Page title={'Tivadar Debnar | Remote'} path={path} recordVisit={false}>
+        <Page
+            title={'Tivadar Debnar | Remote'}
+            path={path}
+            recordVisit={false}
+            loginRequired={true}
+        >
             <Nav
                 pageName="Remote"
                 submenuStack={submenuStack}

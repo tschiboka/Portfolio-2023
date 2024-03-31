@@ -15,7 +15,12 @@ const Record = ({ path }: RecordProps) => {
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
-        <Page title={'Tivadar Debnar | Record'} path={path} recordVisit={false}>
+        <Page
+            title={'Tivadar Debnar | Record'}
+            path={path}
+            recordVisit={false}
+            loginRequired={true}
+        >
             <Nav
                 pageName="Record"
                 submenuStack={submenuStack}

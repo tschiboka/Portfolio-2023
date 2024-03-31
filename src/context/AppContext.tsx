@@ -24,8 +24,6 @@ interface AppContextValues {
     setIsPageScrolling: (isScrolling: boolean) => void
     scrollTimeElapsed: number
     setScrollTimeElapsed: (time: number) => void
-    token?: string
-    setToken: (token: string) => void
     user?: User
     setUser: (user: User) => void
 }
@@ -65,7 +63,6 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     const [overlayContent, setOverlayContent] = useState<React.ReactNode>(null)
     const [isPageScrolling, setIsPageScrolling] = useState(false)
     const [scrollTimeElapsed, setScrollTimeElapsed] = useState(0)
-    const [token, setToken] = useState<string | undefined>(undefined)
     const [user, setUser] = useState<User | undefined>(undefined)
 
     const contextValues: AppContextValues = {
@@ -85,8 +82,6 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
         setIsPageScrolling,
         scrollTimeElapsed,
         setScrollTimeElapsed,
-        token,
-        setToken,
         user,
         setUser,
     }

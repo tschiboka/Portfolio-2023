@@ -9,6 +9,5 @@ export const apiPathBuilder = (pathName: string):string => {
         REGISTER_USER: 'user',
         CONFIRM_REGISTRATION: 'confirm'
     }
-    console.log(url + "/api/" + apiPaths[pathName])
     return url + "/api/" + apiPaths[pathName]
 }

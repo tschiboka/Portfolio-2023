@@ -31,6 +31,7 @@ import Activities from '../components/pages/API/Activities/Activities'
 import Events from '../components/pages/API/Events/Events'
 import User from '../components/pages/API/User/User'
 import Admin from '../components/pages/API/Admin/Admin'
+import Logout from '../components/pages/API/Logout/Logout'
 
 export const routes = [
     // Website Pages
@@ -179,6 +180,10 @@ export const routes = [
     {
         path: '/api/admin',
         element: <Admin path="/api/admin" />,
+    },
+    {
+        path: '/api/logout',
+        element: <Logout path="/api/logout" />,
     },
     // Error
     {

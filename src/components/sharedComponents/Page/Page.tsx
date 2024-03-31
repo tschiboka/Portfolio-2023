@@ -5,6 +5,8 @@ import { detectIncognito } from 'detectincognitojs'
 import Overlay from '../Overlay/Overlay'
 import './Page.scss'
 import { Maybe } from 'monet'
+import { useNavigate } from 'react-router-dom'
+import { getToken } from '../../pages/API/Login/Login.utils'
 
 interface Props {
     children: ReactNode
@@ -12,6 +14,7 @@ interface Props {
     path: string
     className?: string
     recordVisit?: boolean
+    loginRequired?: boolean
 }
 
 const Page = ({
@@ -20,6 +23,7 @@ const Page = ({
     path,
     className,
     recordVisit = true,
+    loginRequired = false,
 }: Props) => {
     const {
         isPageScrolling,
@@ -75,6 +79,13 @@ const Page = ({
         Maybe.fromUndefined(className)
             .map((cls) => 'Page ' + cls)
             .orSome('Page')
+
+    const navigate = useNavigate()
+    const token = getToken()
+
+    useEffect(() => {
+        !token && loginRequired && navigate('/')
+    }, [token])
 
     return (
         <div className={getClassName(className)}>
