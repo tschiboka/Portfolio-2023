@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { useAppContext } from '../../../../context/AppContext'
 import Page from '../../../sharedComponents/Page/Page'
 import MobileMenu from '../MobileMenu/MobileMenu'
 import Nav from '../Nav/Nav'
+import { Submenu } from '../Nav'
+import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 
 interface UserProps {
     path: string
@@ -9,10 +12,24 @@ interface UserProps {
 
 const User = ({ path }: UserProps) => {
     const { mobileMenuVisible } = useAppContext()
+    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
         <Page title={'Tivadar Debnar | User'} path={path} recordVisit={false}>
-            <Nav pageName="User" />
+            <Nav
+                pageName="User"
+                submenuStack={submenuStack}
+                setSubmenuStack={setSubmenuStack}
+            />
+            {submenuStack.map((sub) => (
+                <SubmenuPanel
+                    key={sub.parentLabel}
+                    submenu={sub}
+                    submenuStack={submenuStack}
+                    setSubmenuStack={setSubmenuStack}
+                    pageName="User"
+                />
+            ))}{' '}
             {mobileMenuVisible && <MobileMenu pageName="User" />}
             <h1>User</h1>
         </Page>

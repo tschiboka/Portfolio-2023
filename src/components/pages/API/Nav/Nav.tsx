@@ -1,51 +1,57 @@
-import { useAppContext } from '../../../../context/AppContext'
 import { Link } from 'react-router-dom'
-import { Menu, menu } from '.'
-import { HiMenuAlt3 } from 'react-icons/hi'
-import { CgClose } from 'react-icons/cg'
-import { BiChevronDown } from 'react-icons/bi'
-import iconDark from '../../../../assets/images/icon.svg'
 import './Nav.scss'
+import { Maybe } from 'monet'
+import Burger from './Burger'
+import Chevron from './Chevron'
+import Logo from './Logo'
+import { Menu, Submenu, isHighlighted, menu } from '.'
 
-type NavProps = { pageName: string }
+type NavProps = {
+    pageName: string
+    submenuStack: Submenu[]
+    setSubmenuStack: (submenu: Submenu[]) => void
+}
 
-const Nav = ({ pageName }: NavProps) => {
-    const { mobileMenuVisible, setMobileMenuVisible } = useAppContext()
+const Nav = ({ pageName, submenuStack, setSubmenuStack }: NavProps) => {
+    const handleItemClick = (item: Menu) => {
+        Maybe.fromNull(item.submenu).cata(
+            () => setSubmenuStack([]),
+            (sub) => {
+                if (submenuStack[0]?.parentLabel === item.label)
+                    setSubmenuStack([])
+                else
+                    setSubmenuStack([
+                        {
+                            parentLabel: item.label,
+                            options: sub,
+                        },
+                    ])
+            },
+        )
+    }
 
     return (
         <header className="Header">
-            <img
-                className="t-logo"
-                src={iconDark}
-                alt="Logo"
-                title="Home Page"
-            />
-            {!mobileMenuVisible ? (
-                <HiMenuAlt3
-                    className="burger"
-                    title="Extend Mobile Menu"
-                    onClick={() => setMobileMenuVisible(true)}
-                />
-            ) : (
-                <CgClose
-                    title="Close Mobile Menu"
-                    className="burger"
-                    onClick={() => setMobileMenuVisible(false)}
-                />
-            )}
+            <Logo />
+            <Burger />
             <ul className="nav_links">
                 {menu.map((item: Menu) => (
                     <li
                         key={item.label}
-                        className={pageName === item.label ? 'active' : ''}
-                        onClick={() => {}}
+                        id={item.label}
+                        onClick={() => handleItemClick(item)}
                     >
-                        <div className="active-dot"></div>
                         <Link className="link" to={item?.path || ''}>
-                            {item.label}
-                            {item.submenu && (
-                                <BiChevronDown className="chevron" />
-                            )}
+                            <span
+                                className={isHighlighted(
+                                    item,
+                                    pageName,
+                                    submenuStack?.[0],
+                                )}
+                            >
+                                {item.label}
+                            </span>
+                            <Chevron item={item} submenu={submenuStack?.[0]} />
                         </Link>
                     </li>
                 ))}

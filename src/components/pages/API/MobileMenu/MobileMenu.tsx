@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BiChevronRight } from 'react-icons/bi'
-import { menu } from '../Nav'
+import { isHighlighted, menu } from '../Nav'
 import './MobileMenu.scss'
 import { Maybe } from 'monet'
 import { useState } from 'react'
@@ -17,18 +17,18 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
         setMenuStack(append(menu)(menuStack))
 
     const handleBackClick = () => setMenuStack(dropLast(1, menuStack))
+    const handleItemClick = (item: Menu) => {
+        Maybe.fromNull(item.submenu).forEach(handleSubmenuClick)
+        item.path && setMobileMenuVisible(false)
+    }
 
-    console.log(menuStack)
     return (
         <menu className="Menu MobileMenu">
             {menuStack[menuStack.length - 1].map((item) => (
                 <li
                     key={item.label}
-                    className={pageName === item.label ? 'active' : ''}
-                    onClick={() => {
-                        Maybe.fromNull(item.submenu).forEach(handleSubmenuClick)
-                        item.path && setMobileMenuVisible(false)
-                    }}
+                    className={isHighlighted(item, pageName)}
+                    onClick={() => handleItemClick(item)}
                 >
                     <div className="active-dot"></div>
                     <Link className="link" to={item?.path || ''}>

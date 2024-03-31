@@ -1,4 +1,5 @@
-import { Menu } from '.'
+import { Maybe } from 'monet'
+import { Menu, Submenu } from '.'
 
 export const recordsMenu: Array<Menu> = [
     {
@@ -63,3 +64,12 @@ export const menu: Array<Menu> = [
         path: '/api/logout',
     },
 ]
+
+export const isHighlighted = (
+    item: Menu,
+    pageName: string,
+    submenu?: Submenu,
+) =>
+    Maybe.fromNull(submenu)
+        .map((sub) => (sub?.parentLabel === item?.label ? 'active' : ''))
+        .orSome(pageName === item.label && !submenu ? 'active' : '')
