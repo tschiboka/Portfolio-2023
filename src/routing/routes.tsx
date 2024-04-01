@@ -24,7 +24,9 @@ import Index from '../components/pages/API/Index/Index'
 import Register from '../components/pages/API/Register/Register'
 import EmailVerification from '../components/pages/API/EmailVerification/EmailVerification'
 import Stats from '../components/pages/API/Stats/Stats'
-import Record from '../components/pages/API/Record/Record'
+import AddRecord from '../components/pages/API/Record/AddRecords'
+import ViewRecords from '../components/pages/API/Record/ViewRecord'
+import UpdateRecords from '../components/pages/API/Record/UpdateRecords'
 import Remote from '../components/pages/API/Remote/Remote'
 import Tasks from '../components/pages/API/Tasks/Tasks'
 import Activities from '../components/pages/API/Activities/Activities'
@@ -154,8 +156,16 @@ export const routes = [
         element: <Stats path="/api/stats" />,
     },
     {
-        path: '/api/record',
-        element: <Record path="/api/record" />,
+        path: '/api/view-records',
+        element: <ViewRecords path="/api/view-records" />,
+    },
+    {
+        path: '/api/add-records',
+        element: <AddRecord path="/api/add-records" />,
+    },
+    {
+        path: '/api/update-records',
+        element: <UpdateRecords path="/api/update-records" />,
     },
     {
         path: '/api/remote',

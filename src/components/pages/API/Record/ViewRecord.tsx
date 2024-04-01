@@ -6,40 +6,42 @@ import Nav from '../Nav/Nav'
 import { Submenu } from '../Nav'
 import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 
-interface RecordProps {
+interface ViewRecordsProps {
     path: string
 }
 
-const Record = ({ path }: RecordProps) => {
+const ViewRecords = ({ path }: ViewRecordsProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
         <Page
-            title={'Tivadar Debnar | Record'}
+            title={'Tivadar Debnar | View Records'}
             path={path}
             recordVisit={false}
             loginRequired={true}
         >
             <Nav
-                pageName="Record"
+                pageName="View Records"
                 submenuStack={submenuStack}
                 setSubmenuStack={setSubmenuStack}
             />
-            {submenuStack.map((sub) => (
+            {Boolean(submenuStack.length) && (
                 <SubmenuPanel
-                    key={sub.parentLabel}
-                    submenu={sub}
+                    key={submenuStack[0].parentLabel}
+                    submenu={submenuStack[0]}
                     submenuStack={submenuStack}
                     setSubmenuStack={setSubmenuStack}
-                    pageName="Record"
+                    pageName="View records"
                 />
-            ))}
+            )}
 
-            {mobileMenuVisible && <MobileMenu pageName="Record" />}
-            <h1>Record</h1>
+            {mobileMenuVisible && <MobileMenu pageName="View Records" />}
+            <main>
+                <h1>View Records</h1>
+            </main>
         </Page>
     )
 }
 
-export default Record
+export default ViewRecords

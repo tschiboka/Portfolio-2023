@@ -26,15 +26,16 @@ const Index = ({ path }: IndexProps) => {
                 submenuStack={submenuStack}
                 setSubmenuStack={setSubmenuStack}
             />
-            {submenuStack.map((sub) => (
+
+            {Boolean(submenuStack.length) && (
                 <SubmenuPanel
-                    key={sub.parentLabel}
-                    submenu={sub}
+                    key={submenuStack[0].parentLabel}
+                    submenu={submenuStack[0]}
                     submenuStack={submenuStack}
                     setSubmenuStack={setSubmenuStack}
                     pageName="Home"
                 />
-            ))}
+            )}
             {mobileMenuVisible && <MobileMenu pageName="Home" />}
             <h1>Home</h1>
         </Page>

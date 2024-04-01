@@ -26,15 +26,15 @@ const Stats = ({ path }: StatProps) => {
                 submenuStack={submenuStack}
                 setSubmenuStack={setSubmenuStack}
             />
-            {submenuStack.map((sub) => (
+            {Boolean(submenuStack.length) && (
                 <SubmenuPanel
-                    key={sub.parentLabel}
-                    submenu={sub}
+                    key={submenuStack[0].parentLabel}
+                    submenu={submenuStack[0]}
                     submenuStack={submenuStack}
                     setSubmenuStack={setSubmenuStack}
                     pageName="Stats"
                 />
-            ))}
+            )}
             {mobileMenuVisible && <MobileMenu pageName="Stats" />}
             <h1>Stats</h1>
         </Page>

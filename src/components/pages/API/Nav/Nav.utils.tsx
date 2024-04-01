@@ -1,6 +1,21 @@
 import { Maybe } from 'monet'
 import { Menu, Submenu } from '.'
 
+export const manageRecordsMenu: Array<Menu> = [
+    {
+        label: 'View records',
+        path: '/api/view-records',
+    },
+    {
+        label: 'Add records',
+        path: '/api/add-records',
+    },
+    {
+        label: 'Update records',
+        path: '/api/update-records',
+    },
+]
+
 export const recordsMenu: Array<Menu> = [
     {
         label: 'Stats',
@@ -8,7 +23,7 @@ export const recordsMenu: Array<Menu> = [
     },
     {
         label: 'Record',
-        path: '/api/record',
+        submenu: manageRecordsMenu,
     },
     {
         label: 'Remote',

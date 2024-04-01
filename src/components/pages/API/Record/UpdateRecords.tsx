@@ -6,23 +6,23 @@ import Nav from '../Nav/Nav'
 import { Submenu } from '../Nav'
 import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 
-interface UserProps {
+interface UpdateRecordsProps {
     path: string
 }
 
-const User = ({ path }: UserProps) => {
+const UpdateRecords = ({ path }: UpdateRecordsProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
         <Page
-            title={'Tivadar Debnar | User'}
+            title={'Tivadar Debnar | Update Records'}
             path={path}
             recordVisit={false}
             loginRequired={true}
         >
             <Nav
-                pageName="User"
+                pageName="Update Records"
                 submenuStack={submenuStack}
                 setSubmenuStack={setSubmenuStack}
             />
@@ -32,13 +32,16 @@ const User = ({ path }: UserProps) => {
                     submenu={submenuStack[0]}
                     submenuStack={submenuStack}
                     setSubmenuStack={setSubmenuStack}
-                    pageName="User"
+                    pageName="Update records"
                 />
             )}
-            {mobileMenuVisible && <MobileMenu pageName="User" />}
-            <h1>User</h1>
+
+            {mobileMenuVisible && <MobileMenu pageName="Update Records" />}
+            <main>
+                <h1>Update Records</h1>
+            </main>
         </Page>
     )
 }
 
-export default User
+export default UpdateRecords

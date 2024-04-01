@@ -24,6 +24,7 @@ const Nav = ({ pageName, submenuStack, setSubmenuStack }: NavProps) => {
                         {
                             parentLabel: item.label,
                             options: sub,
+                            extended: false,
                         },
                     ])
             },

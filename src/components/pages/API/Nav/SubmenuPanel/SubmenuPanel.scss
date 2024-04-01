@@ -2,10 +2,10 @@
 @import "../../../../../styles/palette.scss";
 @import "../../../../../styles/font_sizes.scss";
 
-.SubmenuPanel {
+.SubmenuBasis {
     display: none;
     position: absolute;
-    background-color: black;
+    background-color: $black_1;
     padding: 1rem 2rem;
     list-style: none;
     flex-direction: column;
@@ -65,5 +65,32 @@
     }
     @include bp.lg {
         font-size: 0.9rem;
+    }
+
+    .MenuAccordion {
+        margin: 0;
+        margin-top: 1rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.2);
+        list-style: none;
+        border-left: 2px solid $black_2;
+    
+        li {
+            margin-left: 1rem;
+            padding: 0.1rem 0;
+            @include bp.md {
+                font-size: 1.4rem;
+            }
+            @include bp.lg {
+                font-size: 1.4rem;
+            }
+        
+        }
+        
+        span.active {
+            color: white;
+        }
     }
 }

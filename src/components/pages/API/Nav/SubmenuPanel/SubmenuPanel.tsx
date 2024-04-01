@@ -1,8 +1,11 @@
-import { Submenu } from '../Nav.types'
+import { Menu, Submenu } from '../Nav.types'
 import './SubmenuPanel.scss'
 import { useEffect, useState } from 'react'
 import { Coordinates, findParentMenuCoords } from './SubmenuPanel.utils'
 import { Link } from 'react-router-dom'
+import { append } from 'ramda'
+import { Maybe } from 'monet'
+import SubmenuBasis from './SubmenuBasis'
 
 type SubmenuPanelProps = {
     submenu?: Submenu
@@ -13,10 +16,11 @@ type SubmenuPanelProps = {
 
 const SubmenuPanel = ({
     submenu,
+    submenuStack,
     setSubmenuStack,
     pageName,
 }: SubmenuPanelProps) => {
-    const [coords, setCoords] = useState<Coordinates>(() =>
+    const [_, setCoords] = useState<Coordinates>(() =>
         findParentMenuCoords(submenu?.parentLabel),
     )
 
@@ -27,24 +31,13 @@ const SubmenuPanel = ({
         return () => window.removeEventListener('resize', updateCoords)
     }, [submenu?.parentLabel])
 
-    const handleItemClick = () => {
-        setSubmenuStack([])
-    }
-
     return (
-        <div className="SubmenuPanel" style={{ top: coords.y, left: coords.x }}>
-            {submenu?.options.map((item) => (
-                <li key={item.label} id={item.label} onClick={handleItemClick}>
-                    <Link className="link" to={item?.path || ''}>
-                        <span
-                            className={item.label === pageName ? 'active' : ''}
-                        >
-                            {item.label}
-                        </span>
-                    </Link>
-                </li>
-            ))}
-        </div>
+        <SubmenuBasis
+            submenu={submenu}
+            submenuStack={submenuStack}
+            setSubmenuStack={setSubmenuStack}
+            pageName={pageName}
+        />
     )
 }
 
