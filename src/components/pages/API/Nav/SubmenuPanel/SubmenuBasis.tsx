@@ -1,20 +1,8 @@
 import { Maybe } from 'monet'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Submenu } from '..'
-import {
-    append,
-    equals,
-    evolve,
-    find,
-    lensProp,
-    map,
-    not,
-    over,
-    pipe,
-    propEq,
-    when,
-} from 'ramda'
+import { find } from 'ramda'
 import {
     Coordinates,
     findParentMenuCoords,
@@ -22,7 +10,6 @@ import {
 } from './SubmenuPanel.utils'
 import './SubmenuPanel.scss'
 import Accordion from './MenuAccordion'
-import Chevron from '../Chevron'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 
 type SubmenuProps = {
@@ -64,9 +51,16 @@ const SubmenuBasis = ({
         }
     }
 
-    const [coords, _] = useState<Coordinates>(() =>
+    const [coords, setCoords] = useState<Coordinates>(() =>
         findParentMenuCoords(submenu?.parentLabel),
     )
+
+    useEffect(() => {
+        const updateCoords = () =>
+            setCoords(findParentMenuCoords(submenu?.parentLabel))
+        window.addEventListener('resize', updateCoords)
+        return () => window.removeEventListener('resize', updateCoords)
+    }, [submenu?.parentLabel])
 
     const isExtended = (label: string) =>
         submenuStack[1]?.extended && submenuStack[1].parentLabel === label

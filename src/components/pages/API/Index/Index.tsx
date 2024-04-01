@@ -37,7 +37,9 @@ const Index = ({ path }: IndexProps) => {
                 />
             )}
             {mobileMenuVisible && <MobileMenu pageName="Home" />}
-            <h1>Home</h1>
+            <main>
+                <h1>Home</h1>
+            </main>
         </Page>
     )
 }

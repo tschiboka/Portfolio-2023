@@ -83,6 +83,7 @@
     }
 
     .dev-tools {
+        margin-left: 0;
         width: 19rem;
         display: flex;
         justify-content: space-between;
@@ -129,9 +130,10 @@
         position: absolute;
         display: none;
         width: 1px;
-        height: 55vh;
+        height: 60vh;
         background-color: $black_3;
-        right: 3.25rem;
+        right: 4.5rem;
+        top: 11.5vh;
         opacity: 0;
         animation: 
             fade_in 300ms 900ms ease-out forwards,

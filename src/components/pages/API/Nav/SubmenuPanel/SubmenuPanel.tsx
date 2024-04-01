@@ -1,10 +1,7 @@
-import { Menu, Submenu } from '../Nav.types'
+import { Submenu } from '../Nav.types'
 import './SubmenuPanel.scss'
 import { useEffect, useState } from 'react'
 import { Coordinates, findParentMenuCoords } from './SubmenuPanel.utils'
-import { Link } from 'react-router-dom'
-import { append } from 'ramda'
-import { Maybe } from 'monet'
 import SubmenuBasis from './SubmenuBasis'
 
 type SubmenuPanelProps = {

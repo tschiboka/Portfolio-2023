@@ -75,6 +75,7 @@
         }
     }
     .link-list {
+        margin-left: 0;
         @include bp.md {
             padding-top: 3rem;
         }

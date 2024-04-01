@@ -14,6 +14,9 @@
 }
 
 .Header {
+    box-shadow: 5px 5px 5px black;
+    border: none;
+
     li:nth-child(1) { animation-delay: 100ms !important; }
     li:nth-child(2) { animation-delay: 200ms !important; }
     li:nth-child(3) { animation-delay: 300ms !important; }

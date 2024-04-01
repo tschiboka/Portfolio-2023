@@ -9,7 +9,9 @@
     padding: 1rem 2rem;
     list-style: none;
     flex-direction: column;
-    border: 1px solid $black_3;
+    border: 1px solid $black_2;
+    box-shadow: 5px 5px 5px black;
+    border-top: none;
     z-index: 100;
     transform: translateY(5vh);
 
