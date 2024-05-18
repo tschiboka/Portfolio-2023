@@ -19,7 +19,6 @@
     z-index: 80;
     opacity: 0.95;
     animation: 
-        from_below 500ms 1200ms ease-in, 
         fade_in_095 500ms 1200ms ease-out forwards;
 
     @include bp.sm {

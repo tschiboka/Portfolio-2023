@@ -39,6 +39,16 @@ const Index = ({ path }: IndexProps) => {
             {mobileMenuVisible && <MobileMenu pageName="Home" />}
             <main>
                 <h1>Home</h1>
+                <p>
+                    Welcome to tschiboka.co.uk app! This is my own life-style
+                    management application that you can use for keeping track of
+                    your personal improvement goals, let it be studying,
+                    training, keeping track of your daily activities or
+                    recording your performance. If you were invited, feel
+                    honored.
+                </p>
+                <h3>Your Upcoming Events</h3>
+                <p></p>
             </main>
         </Page>
     )
