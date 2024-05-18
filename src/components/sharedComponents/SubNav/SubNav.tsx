@@ -1,13 +1,13 @@
-import { FaFacebookF } from "react-icons/fa";
-import { TbBrandGithubFilled } from "react-icons/tb";
-import { TfiLinkedin } from "react-icons/tfi";
-import { BsSun, BsMoonStars } from "react-icons/bs";
-import Toggle from "../Toggle/Toggle";
-import "./SubNav.scss";
-import { useAppContext } from "../../../context/AppContext";
+import { FaFacebookF } from 'react-icons/fa'
+import { TbBrandGithubFilled } from 'react-icons/tb'
+import { TfiLinkedin } from 'react-icons/tfi'
+import { BsSun, BsMoonStars } from 'react-icons/bs'
+import Toggle from '../Toggle/Toggle'
+import './SubNav.scss'
+import { useAppContext } from '../../../context/AppContext'
 
 const SubNav = () => {
-    const { themeMode, setThemeMode } = useAppContext();
+    const { themeMode, setThemeMode } = useAppContext()
     return (
         <div className="SubNav">
             <div className="sublogo">
@@ -15,19 +15,18 @@ const SubNav = () => {
                     <span>Tivadar&nbsp;</span>
                     <span>Debnar</span>
                 </span>
-                {/* Welcome to tschiboka.co.uk */}
             </div>
             <div className="social-links">
                 <div className="theme-toggle" title="Toggle Colour Theme">
                     <Toggle
                         handleClick={() =>
                             setThemeMode(
-                                themeMode === "dark" ? "light" : "dark"
+                                themeMode === 'dark' ? 'light' : 'dark',
                             )
                         }
-                        active={themeMode === "dark"}
+                        active={themeMode === 'dark'}
                     >
-                        {themeMode === "dark" ? (
+                        {themeMode === 'dark' ? (
                             <BsSun className="theme-icon" />
                         ) : (
                             <BsMoonStars className="theme-icon" />
@@ -45,7 +44,7 @@ const SubNav = () => {
                 </a>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default SubNav;
+export default SubNav

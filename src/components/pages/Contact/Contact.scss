@@ -3,16 +3,6 @@
 @import "../../../styles/font_sizes.scss";
 @import "../../../styles/animations.scss";
 
-// Take off animations
-.SubNav {
-    display: none;
-    animation: fade_in 500ms linear;
-    opacity: 1;
-    @include bp.xl {
-        display: flex;
-    }
-}
-
 main.contact {
     width: 100%;
     max-width: 2000px;

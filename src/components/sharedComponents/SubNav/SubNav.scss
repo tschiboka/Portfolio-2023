@@ -1,6 +1,9 @@
 @use "../../../styles/breakpoints.scss" as bp;
+@use "../../../styles/mixins.scss" as *;
 @import "../../../styles/palette.scss";
 @import "../../../styles/font_sizes.scss";
+@import "../../../styles/animations.scss";
+@include fade_in_with_opacity(fade_in_095, 0.95);
 
 .SubNav {
     top: 5rem;
@@ -11,14 +14,13 @@
     justify-content: space-between;
     align-items: center;
     background-color: $black_1;
-    color: $black_5;
     font-size: $font_lg;
     border-bottom: 1px solid $black_2;
     z-index: 80;
-    opacity: 0;
+    opacity: 0.95;
     animation: 
         from_below 500ms 1200ms ease-in, 
-        fade_in 500ms 1200ms ease-out forwards;
+        fade_in_095 500ms 1200ms ease-out forwards;
 
     @include bp.sm {
         position: sticky;

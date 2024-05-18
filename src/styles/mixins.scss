@@ -1,0 +1,10 @@
+@mixin fade_in_with_opacity($name, $opacity) {
+    @keyframes #{$name} {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: $opacity;
+        }
+    }
+}
