@@ -58,9 +58,9 @@ const AddRecords = ({ path }: AddRecordProps) => {
                     <li>
                         <button className="button">Task</button>
                         <p className="small-text">
-                            An event that happens once, and it has a deadline or
-                            due date. You can keep track of individual actions
-                            or use it as a to-do list.
+                            An activity that happens once, and it has a deadline
+                            or due date. You can keep track of individual
+                            actions or use it as a to-do list.
                         </p>
                     </li>
                     <li>
@@ -68,7 +68,7 @@ const AddRecords = ({ path }: AddRecordProps) => {
                         <p className="small-text">
                             Put anything noteworthy here, such as birthdays or
                             special occasions, or use it as your personal diary
-                            and pour hour heart out.
+                            and pour your heart out.
                         </p>
                     </li>
                 </ul>
