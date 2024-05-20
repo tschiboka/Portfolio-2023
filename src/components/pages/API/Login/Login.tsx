@@ -11,9 +11,10 @@ import { useLoginFormResources, useSettingsResources } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import './Login.scss'
 import { QUERY_KEYS } from '../../../../common/queryKeys'
 import { setToken } from './Login.utils'
+import '../common/Form.scss'
+import './Login.scss'
 
 type LoginProps = {
     path: string

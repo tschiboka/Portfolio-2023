@@ -34,6 +34,7 @@ import Events from '../components/pages/API/Events/Events'
 import User from '../components/pages/API/User/User'
 import Admin from '../components/pages/API/Admin/Admin'
 import Logout from '../components/pages/API/Logout/Logout'
+import Topics from '../components/pages/API/Topics/Topics'
 
 export const routes = [
     // Website Pages
@@ -182,6 +183,10 @@ export const routes = [
     {
         path: '/api/events',
         element: <Events path="/api/events" />,
+    },
+    {
+        path: '/api/topics',
+        element: <Topics path="/api/topics" />,
     },
     {
         path: '/api/user',

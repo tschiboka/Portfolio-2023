@@ -41,9 +41,12 @@ const AddRecords = ({ path }: AddRecordProps) => {
             <main className="AddRecords">
                 <h1>Add Records</h1>
                 <p>
-                    Create your own types of activities! You can record an
+                    Record your own personalised activities! You can record an
                     event, a training session, a study class, your vitamin
-                    intake or whatever you fancy.
+                    intake or whatever you fancy. Don't forget that you need to
+                    create an action before you can record them. If you have not
+                    set up any actions yet, please head to the manager menupoint
+                    and choose the appropriate category.
                 </p>
                 <p>Please choose from the following categories:</p>
                 <ul>

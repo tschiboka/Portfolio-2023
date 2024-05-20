@@ -4,6 +4,7 @@
 
 
 .wrapped-component {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -19,5 +20,75 @@
     font-style: italic;
     font-variant: small-caps;
     color: deeppink;
+}
 
+.action-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: calc(100% - 1rem);
+    width: 3rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $accent_dark_3; 
+    font-size: $font_md;
+    border-left: 2px solid $black_3;
+    cursor: pointer;
+    &:hover {
+        color: $accent_dark_1;
+    }
+}
+
+.wrapped-component.open {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: 2px solid #333;
+    background-color: black;
+    .wrapped-input {
+        border: none;
+        & > input {
+            border: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-bottom: 2px solid #333;
+        }
+    }
+
+}
+
+.option-dropdown {
+    position: absolute;
+    top: calc(100% - 2px);
+    left: -2px;
+    min-height: 100%;
+    width: calc(100% + 4px);
+    padding: 1rem;
+    background-color: #111;
+    z-index: 10;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 2px solid #333;
+    overflow-y: auto;
+    max-height: 200px;
+
+    .option {
+        display: flex;
+        align-items: center;
+        padding: 0.25rem;
+        border-bottom: 1px solid $black_2;
+        color: $white_2;
+        font-variant: small-caps;
+        cursor: pointer;
+    }
+
+    .option:hover {
+        background-color: black;
+        color: white;
+    }
+
+    .option:last-of-type {
+        border-bottom: none;
+    }
 }

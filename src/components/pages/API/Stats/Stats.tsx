@@ -16,7 +16,7 @@ const Stats = ({ path }: StatProps) => {
 
     return (
         <Page
-            title={'Tivadar Debnar | Index'}
+            title={'Tivadar Debnar | Stats'}
             path={path}
             recordVisit={false}
             loginRequired={true}

@@ -1,0 +1,19 @@
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+@import "../../../../styles/animations.scss";
+
+.Tasks {
+    .form-container {
+        margin: 0.5rem;
+        @include bp.md {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        form {
+            max-width: 1000px;
+        }
+    }
+}
