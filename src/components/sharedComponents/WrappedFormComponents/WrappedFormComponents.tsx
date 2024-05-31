@@ -1,24 +1,33 @@
 import { Control, Controller, Path } from 'react-hook-form'
-import './WrappedFormComponents.scss'
 import { BsEye, BsEyeSlash, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import './WrappedFormComponents.scss'
 
 type FieldValues = Record<string, any>
-type Option = { name: string; value: ReactNode | string }
+export type SearchInputOption = {
+    name: string
+    value: string
+    icon?: ReactNode
+}
 
 type WrappedSearchInputProps<TFieldValues extends FieldValues = FieldValues> = {
     name: Path<TFieldValues>
+    options: SearchInputOption[]
+    icon?: ReactNode
     control: Control<TFieldValues>
     placeholder?: string
-    options: Option[]
+    highlightMatch?: boolean
     onSelect: (value: string) => void
 }
 
 export const WrappedSearchInput = <T extends FieldValues>({
     name,
-    control,
     options,
+    icon,
+    control,
     onSelect,
+    placeholder,
+    highlightMatch = false,
     ...rest
 }: WrappedSearchInputProps<T>) => {
     const [open, setOpen] = useState(false)
@@ -32,6 +41,22 @@ export const WrappedSearchInput = <T extends FieldValues>({
         ) {
             setOpen(false)
         }
+    }
+
+    const getHighlightedSearchOptionText = (
+        text: string,
+        input: string,
+    ): ReactNode => {
+        const prefix = text.split(input)[0]
+        const suffixIndex = prefix.length + input.length
+        const suffix = text.substr(suffixIndex)
+        return (
+            <span>
+                {prefix}
+                <span className="highlight">{input}</span>
+                {suffix}
+            </span>
+        )
     }
 
     useEffect(() => {
@@ -71,6 +96,7 @@ export const WrappedSearchInput = <T extends FieldValues>({
                                 id={name}
                                 type="text"
                                 value={value}
+                                placeholder={placeholder}
                                 onBlur={handleOnBlur}
                                 onChange={handleOnChange}
                                 {...rest}
@@ -101,7 +127,17 @@ export const WrappedSearchInput = <T extends FieldValues>({
                                                 onSelect(option.name)
                                             }
                                         >
-                                            {option.value}
+                                            {option.icon && (
+                                                <span className="icon">
+                                                    {option.icon}
+                                                </span>
+                                            )}
+                                            {highlightMatch
+                                                ? getHighlightedSearchOptionText(
+                                                      option.value,
+                                                      value,
+                                                  )
+                                                : option.value}
                                         </div>
                                     ))}
                             </div>

@@ -45,8 +45,8 @@ export const manageMenu: Array<Menu> = [
         path: '/api/events',
     },
     {
-        label: 'Topics',
-        path: '/api/topics',
+        label: 'Categories',
+        path: '/api/categories',
     },
 ]
 

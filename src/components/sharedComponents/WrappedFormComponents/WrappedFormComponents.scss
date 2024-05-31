@@ -81,6 +81,13 @@
         color: $white_2;
         font-variant: small-caps;
         cursor: pointer;
+        .icon {
+            margin-right: 20px;
+        }
+        .highlight {
+            color: $accent_dark_3;
+            font-weight: bolder;
+        }
     }
 
     .option:hover {

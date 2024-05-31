@@ -2,41 +2,40 @@ import { useAppContext } from '../../../../context/AppContext'
 import Page from '../../../sharedComponents/Page/Page'
 import Nav from '../Nav/Nav'
 import MobileMenu from '../MobileMenu/MobileMenu'
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Submenu } from '../Nav'
 import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import {
+    SearchInputOption,
     WrappedInput,
     WrappedSearchInput,
 } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useForm } from 'react-hook-form'
 import '../common/Form.scss'
-import './Topics.scss'
+import './Categories.scss'
 import { icons } from './icons'
 
-interface TopicsProps {
+interface CategoriesProps {
     path: string
 }
 
-type Option = { name: string; value: ReactNode }
-const iconOptions: Option[] = Object.keys(icons)
+const iconOptions: SearchInputOption[] = Object.keys(icons)
     .map((icon) => ({
         name: icon,
-        value: (
-            <span className="option" key={icon}>
-                {icons[icon]}
-                <span style={{ marginLeft: '20px' }}>{icon}</span>
-            </span>
-        ),
+        icon: icons[icon],
+        value: icon,
     }))
-    .sort((a: Option, b: Option) => a.name.localeCompare(b.name))
-const Topics = ({ path }: TopicsProps) => {
+    .sort((a: SearchInputOption, b: SearchInputOption) =>
+        a.name.localeCompare(b.name),
+    )
+
+const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     const { control, setValue, handleSubmit } = useForm({
         defaultValues: {
-            topicName: '',
+            name: '',
             description: '',
             icon: '',
             color: '',
@@ -46,13 +45,13 @@ const Topics = ({ path }: TopicsProps) => {
 
     return (
         <Page
-            title={'Tivadar Debnar | Topics'}
+            title={'Tivadar Debnar | Categories'}
             path={path}
             recordVisit={false}
             loginRequired={true}
         >
             <Nav
-                pageName="Topics"
+                pageName="Categories"
                 submenuStack={submenuStack}
                 setSubmenuStack={setSubmenuStack}
             />
@@ -65,48 +64,52 @@ const Topics = ({ path }: TopicsProps) => {
                     pageName="Stats"
                 />
             )}
-            {mobileMenuVisible && <MobileMenu pageName="Topics" />}
-            <main className="Topics">
-                <h1>Topics</h1>
+            {mobileMenuVisible && <MobileMenu pageName="Categories" />}
+            <main className="Categories">
+                <h1>Categories</h1>
                 <p>
-                    You can set a wide range of topics for your activities.
-                    Please note that each tasks and activities must have a topic
-                    assigned, and you can also set optional topics for your
-                    events.
+                    You can set a wide range of categories for your activities.
+                    Please note that each tasks and activities must have a
+                    category assigned to, and optionally, you set categories for
+                    your events as well.
                 </p>
-                <h2>Create a new topic</h2>
+                <h2>Create a new category</h2>
                 <p>
-                    Each topic must have a name, a description, an icon and
+                    Each category must have a name, a description, an icon and
                     colour. If you don't set your colour, it will be assigned a
                     random one.
                 </p>
                 <div className="form-container">
                     <form>
                         <fieldset>
-                            <label htmlFor="topicName">Name</label>
+                            <label htmlFor="categoryName">Name</label>
                             <WrappedInput
-                                name="topicName"
+                                name="name"
                                 control={control}
                                 type="text"
+                                placeholder="Displayed name"
                             />
                         </fieldset>
                         <fieldset>
                             <label htmlFor="description">Description</label>
-                            <WrappedSearchInput
+                            <WrappedInput
                                 name="description"
                                 control={control}
-                                options={iconOptions}
-                                onSelect={(value: string) =>
-                                    setValue('description', value)
-                                }
+                                type="text"
+                                placeholder="What do you use this category for"
                             />
                         </fieldset>
                         <fieldset>
                             <label htmlFor="icon">Icon</label>
-                            <WrappedInput
+                            <WrappedSearchInput
                                 name="icon"
                                 control={control}
-                                type="text"
+                                options={iconOptions}
+                                placeholder="Select your icon"
+                                highlightMatch
+                                onSelect={(value: string) =>
+                                    setValue('icon', value)
+                                }
                             />
                         </fieldset>
                         <fieldset>
@@ -115,15 +118,16 @@ const Topics = ({ path }: TopicsProps) => {
                                 name="color"
                                 control={control}
                                 type="text"
+                                placeholder="Select a color"
                             />
                         </fieldset>
                         <button name="submit">Submit</button>
                     </form>
                 </div>
-                <h2>See the list of topics</h2>
+                <h2>See the list of categories</h2>
             </main>
         </Page>
     )
 }
 
-export default Topics
+export default Categories
