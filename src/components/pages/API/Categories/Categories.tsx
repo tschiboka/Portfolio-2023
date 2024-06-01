@@ -14,6 +14,7 @@ import { useForm } from 'react-hook-form'
 import '../common/Form.scss'
 import './Categories.scss'
 import { icons } from './icons'
+import { colors } from './colors'
 
 interface CategoriesProps {
     path: string
@@ -29,11 +30,21 @@ const iconOptions: SearchInputOption[] = Object.keys(icons)
         a.name.localeCompare(b.name),
     )
 
+const colorOptions: SearchInputOption[] = Object.keys(colors)
+    .map((color) => ({
+        name: color,
+        icon: colors[color],
+        value: color,
+    }))
+    .sort((a: SearchInputOption, b: SearchInputOption) =>
+        a.name.localeCompare(b.name),
+    )
+
 const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
-    const { control, setValue, handleSubmit } = useForm({
+    const { control, setValue } = useForm({
         defaultValues: {
             name: '',
             description: '',
@@ -114,11 +125,15 @@ const Categories = ({ path }: CategoriesProps) => {
                         </fieldset>
                         <fieldset>
                             <label htmlFor="color">Colour</label>
-                            <WrappedInput
+                            <WrappedSearchInput
                                 name="color"
                                 control={control}
-                                type="text"
+                                options={colorOptions}
                                 placeholder="Select a color"
+                                highlightMatch
+                                onSelect={(value: string) =>
+                                    setValue('icon', value)
+                                }
                             />
                         </fieldset>
                         <button name="submit">Submit</button>

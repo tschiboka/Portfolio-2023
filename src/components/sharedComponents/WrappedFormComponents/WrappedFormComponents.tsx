@@ -43,13 +43,38 @@ export const WrappedSearchInput = <T extends FieldValues>({
         }
     }
 
+    const filteredOptions = (text: string) =>
+        options.filter((option) =>
+            option.name
+                .toUpperCase()
+                .replace(/\s/g, '')
+                .includes(text.replace(/\s/g, '').toUpperCase()),
+        )
+
+    const getOptions = (options: SearchInputOption[], input: string) =>
+        options.map((option) => (
+            <div
+                className="option"
+                key={option.name}
+                onClick={() => onSelect(option.name)}
+            >
+                {option.icon && <span className="icon">{option.icon}</span>}
+                {highlightMatch
+                    ? getHighlightedSearchOptionText(
+                          option.value.toLowerCase(),
+                          input.toLocaleLowerCase(),
+                      )
+                    : option.value}
+            </div>
+        ))
+
     const getHighlightedSearchOptionText = (
         text: string,
         input: string,
     ): ReactNode => {
         const prefix = text.split(input)[0]
         const suffixIndex = prefix.length + input.length
-        const suffix = text.substr(suffixIndex)
+        const suffix = text.substring(suffixIndex)
         return (
             <span>
                 {prefix}
@@ -108,38 +133,14 @@ export const WrappedSearchInput = <T extends FieldValues>({
                         </div>
                         {open && (
                             <div className="option-dropdown">
-                                {options
-                                    .filter((option) =>
-                                        option.name
-                                            .toUpperCase()
-                                            .replace(/\s/g, '')
-                                            .includes(
-                                                value
-                                                    .replace(/\s/g, '')
-                                                    .toUpperCase(),
-                                            ),
-                                    )
-                                    .map((option) => (
-                                        <div
-                                            className="option"
-                                            key={option.name}
-                                            onClick={() =>
-                                                onSelect(option.name)
-                                            }
-                                        >
-                                            {option.icon && (
-                                                <span className="icon">
-                                                    {option.icon}
-                                                </span>
-                                            )}
-                                            {highlightMatch
-                                                ? getHighlightedSearchOptionText(
-                                                      option.value,
-                                                      value,
-                                                  )
-                                                : option.value}
-                                        </div>
-                                    ))}
+                                {filteredOptions(value) &&
+                                filteredOptions(value).length > 0 ? (
+                                    getOptions(filteredOptions(value), value)
+                                ) : (
+                                    <div className="option">
+                                        No match in selection
+                                    </div>
+                                )}
                             </div>
                         )}
                         {fieldState.error && (
