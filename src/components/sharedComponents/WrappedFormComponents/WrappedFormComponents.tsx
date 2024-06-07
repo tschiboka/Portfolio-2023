@@ -3,7 +3,7 @@ import { BsEye, BsEyeSlash, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import './WrappedFormComponents.scss'
 
-type FieldValues = Record<string, any>
+export type FieldValues = Record<string, any>
 export type SearchInputOption = {
     name: string
     value: string
@@ -56,7 +56,10 @@ export const WrappedSearchInput = <T extends FieldValues>({
             <div
                 className="option"
                 key={option.name}
-                onClick={() => onSelect(option.name)}
+                onClick={() => {
+                    setOpen(false)
+                    onSelect(option.name)
+                }}
             >
                 {option.icon && <span className="icon">{option.icon}</span>}
                 {highlightMatch

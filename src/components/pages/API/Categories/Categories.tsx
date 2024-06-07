@@ -15,6 +15,8 @@ import '../common/Form.scss'
 import './Categories.scss'
 import { icons } from './icons'
 import { colors } from './colors'
+import { CategoriesFormData, categoriesSchema } from '.'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 interface CategoriesProps {
     path: string
@@ -44,15 +46,19 @@ const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
-    const { control, setValue } = useForm({
+    const { control, setValue, handleSubmit } = useForm<CategoriesFormData>({
         defaultValues: {
             name: '',
             description: '',
             icon: '',
             color: '',
         },
-        // resolver: yupResolver(loginSchema),
+        resolver: yupResolver(categoriesSchema),
     })
+
+    const submitHandler = (a: any) => {
+        console.log(a)
+    }
 
     return (
         <Page
@@ -91,7 +97,7 @@ const Categories = ({ path }: CategoriesProps) => {
                     random one.
                 </p>
                 <div className="form-container">
-                    <form>
+                    <form onSubmit={handleSubmit(submitHandler)}>
                         <fieldset>
                             <label htmlFor="categoryName">Name</label>
                             <WrappedInput
@@ -116,7 +122,7 @@ const Categories = ({ path }: CategoriesProps) => {
                                 name="icon"
                                 control={control}
                                 options={iconOptions}
-                                placeholder="Select your icon"
+                                placeholder="Select an icon"
                                 highlightMatch
                                 onSelect={(value: string) =>
                                     setValue('icon', value)
@@ -132,11 +138,13 @@ const Categories = ({ path }: CategoriesProps) => {
                                 placeholder="Select a color"
                                 highlightMatch
                                 onSelect={(value: string) =>
-                                    setValue('icon', value)
+                                    setValue('color', value)
                                 }
                             />
                         </fieldset>
-                        <button name="submit">Submit</button>
+                        <button name="submit" type="submit">
+                            Submit
+                        </button>
                     </form>
                 </div>
                 <h2>See the list of categories</h2>

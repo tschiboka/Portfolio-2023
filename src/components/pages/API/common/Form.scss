@@ -19,134 +19,141 @@ form {
         padding: 1.5rem;
         font-size: 1.3rem;
     }
-}
-    
-fieldset {
-    width: 100%;
-    margin: 1rem 0;
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    border: none;
-    @include bp.md {
-        padding: 0 1.5rem;
-    }
-}
-
-label {
-    margin-top: 14px;
-    min-width: 80px;
-    @include bp.md {
-        margin-top: 10px;
-        min-width: 100px;
-        margin-right: 20px;
-    }
-}
-
-input {
-    width: 100%;
-    padding: 20px 10px;
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-weight: bold;
-    font-size: $font_sm;
-    font-variant: small-caps;
-    border: 2px solid $black_3;
-    border-radius: 20px;
-    &::placeholder {
-        color: $black_5;
-        font-weight: normal;
-        opacity: 1;
-    }
-}
-
-input:focus {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-color: $accent_dark_3;
-    border-radius: 20px;
-    outline: none;
-}
-
-input {
-    height: 2rem;
-}    
-
-.loading-indicator {
-    margin: 1.5rem 0;
-    font-size: $font_md;
-    color: $white_4;
-    animation: rotation 1s linear infinite;
-}
-
-.user-message {
-    margin: 1.5rem 0;
-    color: $white_4;
-    font-variant: small-caps;
-}
-
-.button-box {
-    width: 100%;
-    display: flex;
-    padding: 0 1.5rem;
-    flex-direction: column;
-    align-items: center;
-    @include bp.md {
-        flex-direction: row;
-        justify-content: center;
-        button:nth-child(2) {
-            margin-left: auto;
+    fieldset {
+        width: 100%;
+        margin: 1rem 0;
+        padding: 0 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        border: none;
+        @include bp.md {
+            padding: 0 1.5rem;
         }
     }
-}
-
-.wrapped-input {
-    position: relative;
-}
-
-button {
-    min-height: 3rem;
-    width: 280px;
-    margin-top: 1.5rem;
-    background-color: $accent_dark_1;
-    border: 2px solid transparent;
-    border-radius: 50px;
-    color: black;
-    font-size: $font_sm;
-    font-family: "Roboto_Bold";
-    padding: 0 10px;
-    cursor: pointer;
-    &:hover, &:active {
-        background-color: $accent_dark_4;
+    
+    label {
+        margin-top: 14px;
+        min-width: 80px;
+        @include bp.md {
+            margin-top: 10px;
+            min-width: 100px;
+            margin-right: 20px;
+        }
+    }
+    
+    input {
+        width: 100%;
+        padding: 20px 10px;
+        background-color: transparent;
+        border: none;
         color: white;
-    }
-    &:disabled {
+        font-weight: bold;
+        font-size: $font_sm;
+        font-variant: small-caps;
         border: 2px solid $black_3;
-        background-color: $accent_dark_5;
-        color: $accent_dark_4;
+        border-radius: 20px;
+        &::placeholder {
+            color: $black_5;
+            font-weight: normal;
+            opacity: 1;
+        }
     }
-}
-
-.error-message {
-    width: 100%;
-    padding: 0 2.5rem;
-    text-align: right;
-    font-style: italic;
-    font-variant: small-caps;
-    color: deeppink;
-}
-.submit-error-message {
-    padding: 0 2.5rem;
-    margin: 1rem;
-    text-align: center;
-    font-size: 1.4rem;
-    font-family: monospace;
-    font-variant: small-caps;
-    color: deeppink;
-    background-color: black;   
-    border: 1px solid $black_3;
-    border-radius: 5px;
+    
+    input:focus {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-color: $accent_dark_3;
+        border-radius: 20px;
+        outline: none;
+    }
+    
+    input {
+        height: 2rem;
+    }    
+    
+    .loading-indicator {
+        margin: 1.5rem 0;
+        font-size: $font_md;
+        color: $white_4;
+        animation: rotation 1s linear infinite;
+    }
+    
+    .user-message {
+        margin: 1.5rem 0;
+        color: $white_4;
+        font-variant: small-caps;
+    }
+    
+    .button-box {
+        width: 100%;
+        display: flex;
+        padding: 0 1.5rem;
+        flex-direction: column;
+        align-items: center;
+        @include bp.md {
+            flex-direction: row;
+            justify-content: center;
+            button:nth-child(2) {
+                margin-left: auto;
+            }
+        }
+    }
+    
+    .wrapped-input {
+        position: relative;
+    }
+    
+    button {
+        min-height: 3rem;
+        width: 280px;
+        margin-top: 1.5rem;
+        background-color: $accent_dark_1;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        color: black;
+        font-size: $font_sm;
+        font-family: "Roboto_Bold";
+        padding: 0 10px;
+        cursor: pointer;
+        &:hover, &:active {
+            background-color: $accent_dark_4;
+            color: white;
+        }
+        &:disabled {
+            border: 2px solid $black_3;
+            background-color: $accent_dark_5;
+            color: $accent_dark_4;
+        }
+    }
+    
+    .error-message {
+        width: 100%;
+        padding: 0 2.5rem;
+        text-align: right;
+        font-style: italic;
+        font-variant: small-caps;
+        color: deeppink;
+    }
+    .submit-error-message {
+        padding: 0 2.5rem;
+        margin: 1rem;
+        text-align: center;
+        font-size: 1.4rem;
+        font-family: monospace;
+        font-variant: small-caps;
+        color: deeppink;
+        background-color: black;   
+        border: 1px solid $black_3;
+        border-radius: 5px;
+    }
+    
+    .error-message {
+        color: red;
+    }
+    
+    .user-message {
+        color: $black_1;
+    }
 }
 
 .dark {
@@ -187,11 +194,4 @@ button {
         -webkit-text-fill-color: $black_1;
         box-shadow: inset 0 0 20px 20px $white_3;
     }    
-}
-.error-message {
-    color: red;
-}
-
-.user-message {
-    color: $black_1;
 }
