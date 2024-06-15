@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 const createColorSign = (color: string) => (
     <div className="color" style={{ backgroundColor: color }}></div>
 )

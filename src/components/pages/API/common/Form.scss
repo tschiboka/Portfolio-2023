@@ -135,16 +135,29 @@ form {
         color: deeppink;
     }
     .submit-error-message {
-        padding: 0 2.5rem;
+        padding: 0.5rem 2.5rem;
         margin: 1rem;
         text-align: center;
         font-size: 1.4rem;
         font-family: monospace;
         font-variant: small-caps;
         color: deeppink;
-        background-color: black;   
+        background-color: rgba(0, 0, 0, 0.5);   
         border: 1px solid $black_3;
-        border-radius: 5px;
+        border-radius: 10px;
+    }
+
+    .submit-success-message {
+        padding: 0.5rem 2.5rem;
+        margin: 1rem;
+        text-align: center;
+        font-size: 1.4rem;
+        font-family: monospace;
+        font-variant: small-caps;
+        color: $accent_dark_2;
+        background-color: rgba(0, 0, 0, 0.5);   
+        border: 1px solid $black_3;
+        border-radius: 10px;
     }
     
     .error-message {

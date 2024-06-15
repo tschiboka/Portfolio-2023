@@ -1,33 +1,43 @@
 import { Maybe } from 'monet'
 import { Menu, Submenu } from '.'
 
+// Third level menues
+
 export const manageRecordsMenu: Array<Menu> = [
     {
         label: 'View records',
         path: '/api/view-records',
+        parent: 'Record',
     },
     {
         label: 'Add records',
         path: '/api/add-records',
+        parent: 'Record',
     },
     {
         label: 'Update records',
         path: '/api/update-records',
+        parent: 'Record',
     },
 ]
 
-export const recordsMenu: Array<Menu> = [
+// Second level menues
+
+export const dashboardMenu: Array<Menu> = [
     {
         label: 'Stats',
         path: '/api/stats',
+        parent: 'Dashboard',
     },
     {
         label: 'Record',
         submenu: manageRecordsMenu,
+        parent: 'Dashboard',
     },
     {
         label: 'Remote',
         path: '/api/remote',
+        parent: 'Dashboard',
     },
 ]
 
@@ -35,18 +45,22 @@ export const manageMenu: Array<Menu> = [
     {
         label: 'Tasks',
         path: '/api/tasks',
+        parent: 'Manage',
     },
     {
         label: 'Activities',
         path: '/api/activities',
+        parent: 'Manage',
     },
     {
         label: 'Events',
         path: '/api/events',
+        parent: 'Manage',
     },
     {
         label: 'Categories',
         path: '/api/categories',
+        parent: 'Manage',
     },
 ]
 
@@ -54,12 +68,16 @@ export const settingsMenu: Array<Menu> = [
     {
         label: 'User',
         path: '/api/user',
+        parent: 'Settings',
     },
     {
         label: 'Admin',
         path: '/api/admin',
+        parent: 'Settings',
     },
 ]
+
+// First level menu
 
 export const menu: Array<Menu> = [
     {
@@ -67,11 +85,11 @@ export const menu: Array<Menu> = [
         path: '/api/index',
     },
     {
-        label: 'Records',
-        submenu: recordsMenu,
+        label: 'Dashboard',
+        submenu: dashboardMenu,
     },
     {
-        label: 'Manager',
+        label: 'Manage',
         submenu: manageMenu,
     },
     {
@@ -82,6 +100,14 @@ export const menu: Array<Menu> = [
         label: 'Logout',
         path: '/api/logout',
     },
+]
+
+export const menuGroups: Menu[][] = [
+    menu,
+    settingsMenu,
+    manageMenu,
+    dashboardMenu,
+    manageRecordsMenu,
 ]
 
 export const isHighlighted = (

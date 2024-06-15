@@ -17,6 +17,8 @@ import { icons } from './icons'
 import { colors } from './colors'
 import { CategoriesFormData, categoriesSchema } from '.'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { usePostCategory } from './Categories.queries'
+import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
 interface CategoriesProps {
     path: string
@@ -56,8 +58,10 @@ const Categories = ({ path }: CategoriesProps) => {
         resolver: yupResolver(categoriesSchema),
     })
 
-    const submitHandler = (a: any) => {
-        console.log(a)
+    const { mutate: postCategory, ...categoryRequest } = usePostCategory()
+
+    const submitHandler = (formData: CategoriesFormData) => {
+        postCategory(formData)
     }
 
     return (
@@ -142,6 +146,17 @@ const Categories = ({ path }: CategoriesProps) => {
                                 }
                             />
                         </fieldset>
+                        <LoadingIndicator show={categoryRequest.isPending} />
+                        {categoryRequest.error && (
+                            <p className="submit-error-message">
+                                {categoryRequest.error.message}
+                            </p>
+                        )}
+                        {categoryRequest.isSuccess && (
+                            <p className="submit-success-message">
+                                Category submitted
+                            </p>
+                        )}
                         <button name="submit" type="submit">
                             Submit
                         </button>

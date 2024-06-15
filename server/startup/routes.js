@@ -9,6 +9,7 @@ const user = require("../routes/user");
 const login = require("../routes/login");
 const confirm = require("../routes/confirm");
 const log = require("../routes/log");
+const category = require("../routes/category")
 
 module.exports = function(app) {
     app.use("/", index);
@@ -21,4 +22,5 @@ module.exports = function(app) {
     app.use("/api/login", login);
     app.use("/api/confirm", confirm);
     app.use("/api/log", log)
+    app.use("/api/categories", category)
 }

@@ -88,6 +88,17 @@ const generateToken = (userToken) => {
     return jwt.sign(userToken, JWT_PRIVATE_KEY)
 }
 
+const getUserToken = async (req) => {
+    const userToken = req.headers['x-auth-token'];
+    console.log("HERE", userToken)
+    const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
+    if (!JWT_PRIVATE_KEY) throw Error("Fatal error: JWT Private key is not defined!")
+    
+    const token = jwt.decode(userToken, JWT_PRIVATE_KEY)
+    return await User.findById(token.id)
+}
+
 exports.User = User,
 exports.validateUser = validateUser
 exports.generateToken = generateToken
+exports.getUserToken = getUserToken

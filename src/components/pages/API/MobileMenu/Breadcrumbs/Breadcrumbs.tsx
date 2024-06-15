@@ -8,6 +8,7 @@ type BreadcrumbsProps = {
     setSubmenuStack: (items: string[]) => void
     menuStack: Menu[][]
     setMenuStack: (items: Array<Menu[]>) => void
+    pageName: string
 }
 
 const Breadcrumbs = ({
@@ -15,6 +16,7 @@ const Breadcrumbs = ({
     setSubmenuStack,
     menuStack,
     setMenuStack,
+    pageName,
 }: BreadcrumbsProps) => {
     const handleClick = (item: string) => {
         const index = stack.reverse().findIndex((i) => i === item)
@@ -32,17 +34,24 @@ const Breadcrumbs = ({
 
     return (
         <div className="Breadcrumbs">
-            {stack.length > 0 && (
-                <FaHome className="home-icon" onClick={handleClickHome} />
+            {stack.length === 0 ? (
+                <span className="crumb path">At: {pageName}</span>
+            ) : (
+                <>
+                    <FaHome className="home-icon" onClick={handleClickHome} />
+                    {stack.map((item) => (
+                        <div key={item} className="breadcrumb">
+                            <span className="slash">/</span>
+                            <span
+                                className="crumb"
+                                onClick={() => handleClick(item)}
+                            >
+                                {item}
+                            </span>
+                        </div>
+                    ))}
+                </>
             )}
-            {stack.map((item) => (
-                <div key={item} className="breadcrumb">
-                    <span className="slash">/</span>
-                    <span className="crumb" onClick={() => handleClick(item)}>
-                        {item}
-                    </span>
-                </div>
-            ))}
         </div>
     )
 }

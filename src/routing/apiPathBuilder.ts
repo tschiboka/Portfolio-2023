@@ -7,7 +7,8 @@ export const apiPathBuilder = (pathName: string):string => {
         LOGIN: `login`,
         SETTINGS: 'settings',
         REGISTER_USER: 'user',
-        CONFIRM_REGISTRATION: 'confirm'
+        CONFIRM_REGISTRATION: 'confirm',
+        CATEGORIES: 'categories'
     }
     return url + "/api/" + apiPaths[pathName]
 }
