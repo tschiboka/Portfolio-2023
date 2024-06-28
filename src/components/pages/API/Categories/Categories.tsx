@@ -18,10 +18,11 @@ import { icons } from './icons'
 import { colors } from './colors'
 import { categoriesSchema } from '.'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { usePostCategory } from './Categories.queries'
+import { useGetCategories, usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { getErrorMessage } from '../common/error'
 import { CategoryResource } from '../common/types'
+import { getParents } from './Categories.transformers'
 
 interface CategoriesProps {
     path: string
@@ -51,19 +52,22 @@ const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
     const [showParentInput, setShowParentInput] = useState(false)
+    const { data: categories, ...categoriesGetRequest } = useGetCategories()
 
-    const { control, setValue, getValues, handleSubmit } =
-        useForm<CategoryResource>({
-            defaultValues: {
-                name: '',
-                description: '',
-                isParent: false,
-                parent: '',
-                icon: '',
-                color: '',
-            },
-            resolver: yupResolver(categoriesSchema),
-        })
+    const { control, setValue, handleSubmit } = useForm<CategoryResource>({
+        defaultValues: {
+            name: '',
+            description: '',
+            isParent: false,
+            parent: '',
+            icon: '',
+            color: '',
+        },
+        resolver: yupResolver(categoriesSchema),
+    })
+
+    const parents = getParents.fromApi(categories?.data || [])
+    console.log(parents)
 
     const { mutate: postCategory, ...categoryRequest } = usePostCategory()
 
@@ -195,6 +199,14 @@ const Categories = ({ path }: CategoriesProps) => {
                                 {getErrorMessage(
                                     categoryRequest.error,
                                     "Couldn't post category",
+                                )}
+                            </p>
+                        )}
+                        {categoriesGetRequest.error && (
+                            <p className="submit-error-message">
+                                {getErrorMessage(
+                                    categoriesGetRequest.error,
+                                    "Couldn't fetch categories",
                                 )}
                             </p>
                         )}

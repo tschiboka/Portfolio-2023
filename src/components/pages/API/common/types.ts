@@ -8,3 +8,5 @@ export type CategoryResource = {
     icon: string,
     color?: string,
 }
+
+export type CategoryRequestResource = CategoryResource & { _id: string }

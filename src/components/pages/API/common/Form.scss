@@ -132,7 +132,8 @@ form {
     
     button {
         min-height: 3rem;
-        width: 100%;
+        width: calc(100% - 2rem);
+        margin: 0 1rem;
         margin-top: 1.5rem;
         background-color: $accent_dark_1;
         border: 2px solid transparent;
@@ -169,6 +170,7 @@ form {
         color: deeppink;
     }
     .submit-error-message {
+        width: calc(100% - 2rem);
         padding: 0.5rem 2.5rem;
         margin: 1rem;
         text-align: center;
@@ -179,6 +181,9 @@ form {
         background-color: rgba(0, 0, 0, 0.5);   
         border: 1px solid $black_3;
         border-radius: 10px;
+        @include bp.md {
+            width: 500px;
+        }
     }
 
     .submit-success-message {
@@ -195,7 +200,7 @@ form {
     }
     
     .error-message {
-        color: red;
+        color: deeppink;
     }
     
     .user-message {

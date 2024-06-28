@@ -7,6 +7,13 @@ export const getStorage = () => Maybe.fromNull(localStorage.getItem("tschiboka")
 
 export const useAPI = () => {
     return {
+        get: (url: string) => axios.get(
+            apiPathBuilder(url), 
+            { 
+                headers: {
+                    "x-auth-token": getStorage()?.token
+            }   
+        }),
         post: (url: string, payload: object) => axios.post(
             apiPathBuilder(url), 
             payload, 
@@ -14,6 +21,6 @@ export const useAPI = () => {
                 headers: {
                     "x-auth-token": getStorage()?.token
             }   
-        })
+        }),
     }
 }
