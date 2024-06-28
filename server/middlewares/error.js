@@ -19,8 +19,10 @@ module.exports = async function (err, req, res, next) {
         stack
     };
 
-    const log = await new Log(error);
+    const log = new Log(error);
     await log.save();
+
+    console.log(err)
     
     res.status(500).send({ success: false, message: 'Internal Server Error', error: err });
 }

@@ -25,7 +25,8 @@
         button {
             height: 2.5rem;
             width: 250px;
-            margin-bottom: 1rem;   
+            margin-bottom: 1rem;
+            font-variant: small-caps;   
             
             @include bp.md {
                 height: auto;

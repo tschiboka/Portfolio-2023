@@ -8,6 +8,7 @@ import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import {
     SearchInputOption,
     WrappedInput,
+    WrappedRadioButton,
     WrappedSearchInput,
 } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useForm } from 'react-hook-form'
@@ -15,10 +16,12 @@ import '../common/Form.scss'
 import './Categories.scss'
 import { icons } from './icons'
 import { colors } from './colors'
-import { CategoriesFormData, categoriesSchema } from '.'
+import { categoriesSchema } from '.'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { getErrorMessage } from '../common/error'
+import { CategoryResource } from '../common/types'
 
 interface CategoriesProps {
     path: string
@@ -47,20 +50,24 @@ const colorOptions: SearchInputOption[] = Object.keys(colors)
 const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
+    const [showParentInput, setShowParentInput] = useState(false)
 
-    const { control, setValue, handleSubmit } = useForm<CategoriesFormData>({
-        defaultValues: {
-            name: '',
-            description: '',
-            icon: '',
-            color: '',
-        },
-        resolver: yupResolver(categoriesSchema),
-    })
+    const { control, setValue, getValues, handleSubmit } =
+        useForm<CategoryResource>({
+            defaultValues: {
+                name: '',
+                description: '',
+                isParent: false,
+                parent: '',
+                icon: '',
+                color: '',
+            },
+            resolver: yupResolver(categoriesSchema),
+        })
 
     const { mutate: postCategory, ...categoryRequest } = usePostCategory()
 
-    const submitHandler = (formData: CategoriesFormData) => {
+    const submitHandler = (formData: CategoryResource) => {
         postCategory(formData)
     }
 
@@ -98,7 +105,8 @@ const Categories = ({ path }: CategoriesProps) => {
                 <p>
                     Each category must have a name, a description, an icon and
                     colour. If you don't set your colour, it will be assigned a
-                    random one.
+                    random one. Your category may also be a parent of other
+                    categories, be a child category, or a standalone.
                 </p>
                 <div className="form-container">
                     <form onSubmit={handleSubmit(submitHandler)}>
@@ -111,6 +119,41 @@ const Categories = ({ path }: CategoriesProps) => {
                                 placeholder="Displayed name"
                             />
                         </fieldset>
+                        <fieldset className="parent-radio">
+                            <label htmlFor="isParent">Parent</label>
+                            <div>
+                                <label htmlFor="isParent">No</label>
+                                <WrappedRadioButton
+                                    name="isParent"
+                                    control={control}
+                                    value={false}
+                                    onChange={() => {
+                                        setValue('parent', undefined)
+                                        setShowParentInput(false)
+                                    }}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="isParent">Yes</label>
+                                <WrappedRadioButton
+                                    name="isParent"
+                                    control={control}
+                                    value={true}
+                                    onChange={() => setShowParentInput(true)}
+                                />
+                            </div>
+                        </fieldset>
+                        {showParentInput && (
+                            <fieldset>
+                                <label htmlFor="parent">Parent</label>
+                                <WrappedInput
+                                    name="parent"
+                                    control={control}
+                                    type="text"
+                                    placeholder="Parent name"
+                                />
+                            </fieldset>
+                        )}
                         <fieldset>
                             <label htmlFor="description">Description</label>
                             <WrappedInput
@@ -149,7 +192,10 @@ const Categories = ({ path }: CategoriesProps) => {
                         <LoadingIndicator show={categoryRequest.isPending} />
                         {categoryRequest.error && (
                             <p className="submit-error-message">
-                                {categoryRequest.error.message}
+                                {getErrorMessage(
+                                    categoryRequest.error,
+                                    "Couldn't post category",
+                                )}
                             </p>
                         )}
                         {categoryRequest.isSuccess && (

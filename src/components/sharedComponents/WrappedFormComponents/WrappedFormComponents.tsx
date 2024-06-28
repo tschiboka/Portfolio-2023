@@ -10,6 +10,40 @@ export type SearchInputOption = {
     icon?: ReactNode
 }
 
+type WrappedRadioButtonProps<TFieldValues extends FieldValues = FieldValues> = {
+    name: Path<TFieldValues>
+    control: Control<TFieldValues>
+    value: string | boolean
+    onChange: () => void
+}
+
+export const WrappedRadioButton = <T extends FieldValues>({
+    name,
+    control,
+    value,
+    onChange,
+}: WrappedRadioButtonProps<T>) => {
+    return (
+        <Controller
+            name={name}
+            control={control}
+            render={({
+                field: { value: fieldValue, onChange: onChangeFn },
+            }) => (
+                <input
+                    type="radio"
+                    name={name}
+                    checked={fieldValue == value}
+                    onChange={() => {
+                        onChangeFn(value)
+                        onChange()
+                    }}
+                />
+            )}
+        />
+    )
+}
+
 type WrappedSearchInputProps<TFieldValues extends FieldValues = FieldValues> = {
     name: Path<TFieldValues>
     options: SearchInputOption[]

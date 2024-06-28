@@ -21,24 +21,31 @@ form {
     }
     fieldset {
         width: 100%;
-        margin: 1rem 0;
+        margin: 1rem;
         padding: 0 1rem;
         display: flex;
-        justify-content: space-between;
-        align-items: start;
+        flex-direction: column;
         border: none;
         @include bp.md {
+            margin: 1rem;
             padding: 0 1.5rem;
+            flex-direction: row;
+            align-items: start;
+            justify-content: space-between;
         }
     }
     
     label {
-        margin-top: 14px;
         min-width: 80px;
+        margin-right: 20px;
+        margin-bottom: 1rem;
+        font-variant: small-caps;
+        font-weight: bold;
+        color: $white_4;
         @include bp.md {
             margin-top: 10px;
+            margin-right: 5rem;
             min-width: 100px;
-            margin-right: 20px;
         }
     }
     
@@ -70,6 +77,26 @@ form {
     input {
         height: 2rem;
     }    
+
+        /* Hide the default checkbox */
+    input[type="radio"] {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        width: 2rem;
+        min-width: 2rem;
+        height: 2rem;
+        min-height: 2rem;
+        background-color: transparent;
+        border: 2px solid $black_3;
+        border-radius: 10px;
+        padding: 5px;
+        cursor: pointer;
+    }
+    
+    input[type="radio"]:checked {
+        background-color: $accent_dark_2;
+    }
     
     .loading-indicator {
         margin: 1.5rem 0;
@@ -105,7 +132,7 @@ form {
     
     button {
         min-height: 3rem;
-        width: 280px;
+        width: 100%;
         margin-top: 1.5rem;
         background-color: $accent_dark_1;
         border: 2px solid transparent;
@@ -113,12 +140,19 @@ form {
         color: black;
         font-size: $font_sm;
         font-family: "Roboto_Bold";
-        padding: 0 10px;
+        font-variant: small-caps;
         cursor: pointer;
+
+        @include bp.sm {
+            width: 280px;
+        }
+
         &:hover, &:active {
             background-color: $accent_dark_4;
+            border: 2px solid $accent_dark_3;
             color: white;
         }
+
         &:disabled {
             border: 2px solid $black_3;
             background-color: $accent_dark_5;
