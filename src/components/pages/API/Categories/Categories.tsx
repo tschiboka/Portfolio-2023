@@ -51,28 +51,30 @@ const colorOptions: SearchInputOption[] = Object.keys(colors)
 const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
+
     const [showParentInput, setShowParentInput] = useState(false)
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
 
-    const { control, setValue, handleSubmit } = useForm<CategoryResource>({
-        defaultValues: {
-            name: '',
-            description: '',
-            isParent: false,
-            parent: '',
-            icon: '',
-            color: '',
-        },
-        resolver: yupResolver(categoriesSchema),
-    })
+    const { control, setValue, handleSubmit, reset } =
+        useForm<CategoryResource>({
+            defaultValues: {
+                name: '',
+                description: '',
+                isParent: false,
+                parent: '',
+                icon: '',
+                color: '',
+            },
+            resolver: yupResolver(categoriesSchema),
+        })
 
-    const parents = getParents.fromApi(categories?.data || [])
-    console.log(parents)
+    const parentOptions = getParents.fromApi(categories?.data || [])
 
     const { mutate: postCategory, ...categoryRequest } = usePostCategory()
 
     const submitHandler = (formData: CategoryResource) => {
         postCategory(formData)
+        !categoryRequest.error && reset()
     }
 
     return (
@@ -126,35 +128,47 @@ const Categories = ({ path }: CategoriesProps) => {
                         <fieldset className="parent-radio">
                             <label htmlFor="isParent">Parent</label>
                             <div>
-                                <label htmlFor="isParent">No</label>
-                                <WrappedRadioButton
-                                    name="isParent"
-                                    control={control}
-                                    value={false}
-                                    onChange={() => {
-                                        setValue('parent', undefined)
-                                        setShowParentInput(false)
-                                    }}
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="isParent">Yes</label>
-                                <WrappedRadioButton
-                                    name="isParent"
-                                    control={control}
-                                    value={true}
-                                    onChange={() => setShowParentInput(true)}
-                                />
+                                <div>
+                                    <label htmlFor="isParent">No</label>
+                                    <WrappedRadioButton
+                                        name="isParent"
+                                        control={control}
+                                        value={false}
+                                        onChange={() => {
+                                            setValue('parent', undefined)
+                                            setShowParentInput(false)
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="isParent">Yes</label>
+                                    <WrappedRadioButton
+                                        name="isParent"
+                                        control={control}
+                                        value={true}
+                                        onChange={() =>
+                                            setShowParentInput(true)
+                                        }
+                                    />
+                                </div>
                             </div>
                         </fieldset>
                         {showParentInput && (
                             <fieldset>
-                                <label htmlFor="parent">Parent</label>
-                                <WrappedInput
+                                <label
+                                    htmlFor="parent"
+                                    className="hide--small-screen"
+                                ></label>
+                                <WrappedSearchInput
+                                    options={parentOptions}
                                     name="parent"
                                     control={control}
-                                    type="text"
-                                    placeholder="Parent name"
+                                    buttonIcon={'arrow'}
+                                    highlightMatch
+                                    onSelect={(value: string) =>
+                                        setValue('parent', value)
+                                    }
+                                    placeholder="Select Parent"
                                 />
                             </fieldset>
                         )}
@@ -215,7 +229,11 @@ const Categories = ({ path }: CategoriesProps) => {
                                 Category submitted
                             </p>
                         )}
-                        <button name="submit" type="submit">
+                        <button
+                            name="submit"
+                            type="submit"
+                            disabled={categoriesGetRequest.isLoading}
+                        >
                             Submit
                         </button>
                     </form>

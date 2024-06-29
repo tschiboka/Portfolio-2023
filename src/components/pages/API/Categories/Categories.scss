@@ -4,6 +4,12 @@
 @import "../../../../styles/animations.scss";
 
 .Categories {
+    .hide--small-screen {
+        display: none;
+        @include bp.md {
+            display: flex;
+        }
+    }
     .form-container {
         margin: 0.5rem;
         @include bp.md {
@@ -16,29 +22,55 @@
             max-width: 1000px;
             .parent-radio {
                 display: flex;
-                align-items: center;
-                align-items: center;
-                flex-direction: row;
+                flex-direction: column;
+                
                 @include bp.md {
+                    justify-content: start;
                     flex-direction: row;
                 }
+                
                 label {
-                    margin-bottom: 0;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 0;
+                    margin-bottom: 1rem;
                     @include bp.md {
-                        margin-bottom: 1rem;
+                        margin-bottom: 0;
                     }
                 }
+                
                 div {
+                    width: 100%;
                     display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    width: 80px;
-                    label {
-                        min-width: 0;
-                        display: block;
-                        margin-top: 0;
-                        margin-right: 0;
-                        margin-bottom: 0;
+                    justify-content: start;
+
+                    @include bp.sm {
+                        width: 80%;
+                        margin-left: 10%;
+                    }
+
+                    @include bp.md {
+                        width: 100%;
+                        margin-left: 0;
+                    }
+                    div {
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        width: 50%;
+                        margin-left: 0;
+                        
+                        label {
+                            min-width: 0;
+                            display: block;
+                            margin-top: 0;
+                            margin-right: 1rem;
+                            margin-bottom: 0;
+                        }
+                    }
+                    div:last-child {
+                        justify-content: end;
+                        border-left: 2px solid $black_2;
                     }
                 }
             }

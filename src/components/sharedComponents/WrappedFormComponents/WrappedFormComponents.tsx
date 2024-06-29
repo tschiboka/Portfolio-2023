@@ -1,13 +1,22 @@
 import { Control, Controller, Path } from 'react-hook-form'
-import { BsEye, BsEyeSlash, BsSearch } from 'react-icons/bs'
+import {
+    BsChevronBarDown,
+    BsChevronBarUp,
+    BsEye,
+    BsEyeSlash,
+    BsSearch,
+} from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import './WrappedFormComponents.scss'
+import { colors } from '../../pages/API/Categories/colors'
+import { o } from 'ramda'
 
 export type FieldValues = Record<string, any>
 export type SearchInputOption = {
     name: string
     value: string
     icon?: ReactNode
+    iconColor?: string
 }
 
 type WrappedRadioButtonProps<TFieldValues extends FieldValues = FieldValues> = {
@@ -44,29 +53,48 @@ export const WrappedRadioButton = <T extends FieldValues>({
     )
 }
 
-type WrappedSearchInputProps<TFieldValues extends FieldValues = FieldValues> = {
+type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'
+
+type WrappedSearchInputProps<TFieldValues extends FieldValues> = {
     name: Path<TFieldValues>
     options: SearchInputOption[]
+    buttonIcon?: SearchInputOptionButtonIcons
     icon?: ReactNode
+    showIconWithInput?: boolean
     control: Control<TFieldValues>
     placeholder?: string
     highlightMatch?: boolean
     onSelect: (value: string) => void
 }
 
-export const WrappedSearchInput = <T extends FieldValues>({
+export const WrappedSearchInput = <TFieldValues extends FieldValues>({
     name,
     options,
+    buttonIcon = 'magnifyingglass',
     icon,
+    showIconWithInput = true,
     control,
     onSelect,
     placeholder,
     highlightMatch = false,
     ...rest
-}: WrappedSearchInputProps<T>) => {
+}: WrappedSearchInputProps<TFieldValues>) => {
     const [open, setOpen] = useState(false)
     const openClassStr = open ? 'open' : 'closed'
     const containerRef = useRef<HTMLDivElement>(null)
+
+    const mapButtonIcon = (iconName: SearchInputOptionButtonIcons) => {
+        switch (iconName) {
+            case 'arrow':
+                return open ? (
+                    <BsChevronBarDown onClick={() => setOpen(!open)} />
+                ) : (
+                    <BsChevronBarUp onClick={() => setOpen(!open)} />
+                )
+            case 'magnifyingglass':
+                return <BsSearch onClick={() => setOpen(!open)} />
+        }
+    }
 
     const handleClickOutside = (event: MouseEvent) => {
         if (
@@ -95,13 +123,17 @@ export const WrappedSearchInput = <T extends FieldValues>({
                     onSelect(option.name)
                 }}
             >
-                {option.icon && <span className="icon">{option.icon}</span>}
+                {option.icon && (
+                    <span className="icon" style={{ color: option.iconColor }}>
+                        {option.icon}
+                    </span>
+                )}
                 {highlightMatch
                     ? getHighlightedSearchOptionText(
-                          option.value.toLowerCase(),
+                          option.name.toLowerCase(),
                           input.toLocaleLowerCase(),
                       )
-                    : option.value}
+                    : option.name}
             </div>
         ))
 
@@ -153,10 +185,27 @@ export const WrappedSearchInput = <T extends FieldValues>({
                         ref={containerRef}
                         className={'wrapped-component ' + openClassStr}
                     >
-                        <div className="wrapped-input">
+                        <div
+                            className={
+                                'wrapped-input' + showIconWithInput
+                                    ? 'show-input-icon'
+                                    : ''
+                            }
+                        >
+                            {(showIconWithInput && field.value === '') || (
+                                <div className="show-icon">
+                                    {options.find((o) => o.name === value)
+                                        ?.icon || colors[o.name]}
+                                </div>
+                            )}
                             <input
                                 id={name}
                                 type="text"
+                                className={
+                                    showIconWithInput && field.value
+                                        ? 'icon-padding'
+                                        : ''
+                                }
                                 value={value}
                                 placeholder={placeholder}
                                 onBlur={handleOnBlur}
@@ -165,7 +214,7 @@ export const WrappedSearchInput = <T extends FieldValues>({
                                 {...restFieldProps}
                             />
                             <div className="action-icon">
-                                <BsSearch onClick={() => setOpen(!open)} />
+                                {mapButtonIcon(buttonIcon)}
                             </div>
                         </div>
                         {open && (

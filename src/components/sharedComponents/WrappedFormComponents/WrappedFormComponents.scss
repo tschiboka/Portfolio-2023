@@ -8,6 +8,9 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    input {
+        border: 2px solid $black_2;
+    }
 }
 
 .error-msg {
@@ -33,28 +36,54 @@
     align-items: center;
     color: $accent_dark_3; 
     font-size: $font_md;
-    border-left: 2px solid $black_3;
+    border-left: 2px solid $black_2;
     cursor: pointer;
     &:hover {
         color: $accent_dark_1;
     }
 }
 
+.show-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: calc(100% - 1rem);
+    width: 3rem;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $black_2;
+    font-size: $font_md;
+    border-right: 2px solid $black_2;
+
+    .color {
+        min-width: 20px;
+        min-height: 20px;
+        border: 2px solid $black_5;
+        border-radius: 5px;
+    }
+}
+
+.show-input-icon {
+    .icon-padding {
+            padding-left: 60px;
+        }    
+    
+}
+
 .wrapped-component.open {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    border: 2px solid #333;
+    border: 2px solid $black_2;
     background-color: black;
-    .wrapped-input {
-        border: none;
-        & > input {
-            border: none;
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-            border-bottom: 2px solid #333;
-        }
-    }
 
+    input {
+        border: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: 2px solid $black_2;
+    }
 }
 
 .option-dropdown {
@@ -64,11 +93,11 @@
     min-height: 100%;
     width: calc(100% + 4px);
     padding: 1rem;
-    background-color: #111;
+    background-color: #0c0c0c;
     z-index: 10;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    border: 2px solid #333;
+    border: 2px solid $black_2;
     overflow-y: auto;
     max-height: 200px;
 
@@ -88,8 +117,8 @@
             font-weight: bolder;
         }
         .color {
-            width: 20px;
-            height: 20px;
+            min-width: 20px;
+            min-height: 20px;
             border: 2px solid $black_5;
             border-radius: 5px;
         }
