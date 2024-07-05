@@ -107,15 +107,24 @@ import {
     BsWindows,
 } from 'react-icons/bs'
 import {
+    FaAnchor,
+    FaAnkh,
     FaBook,
     FaCaravan,
+    FaChurch,
     FaCode,
     FaCodeBranch,
+    FaCross,
     FaFacebook,
     FaFile,
+    FaGem,
+    FaMosque,
     FaMusic,
+    FaRegLemon,
     FaRoad,
     FaRunning,
+    FaSkullCrossbones,
+    FaTheaterMasks,
     FaTwitter,
     FaUser,
     FaWalking,
@@ -235,21 +244,32 @@ import {
     IoWoman,
 } from 'react-icons/io5'
 import { RxLapTimer } from 'react-icons/rx'
-import { TbWorldWww } from 'react-icons/tb'
+import { TbTank, TbWorldWww } from 'react-icons/tb'
 import {
     FaBasketShopping,
     FaGuitar,
+    FaJetFighter,
     FaMessage,
+    FaPiggyBank,
     FaSailboat,
     FaShop,
+    FaUserDoctor,
     FaUserGraduate,
 } from 'react-icons/fa6'
-import { MdOutlineLuggage, MdOutlinePiano, MdOutlineSick } from 'react-icons/md'
+import {
+    MdLocalMovies,
+    MdOutlineLuggage,
+    MdOutlinePiano,
+    MdOutlineSick,
+    MdTempleBuddhist,
+} from 'react-icons/md'
 import { HiOfficeBuilding } from 'react-icons/hi'
 import { PiOfficeChairFill } from 'react-icons/pi'
 import { RiLuggageCartLine } from 'react-icons/ri'
 import { LiaBirthdayCakeSolid } from 'react-icons/lia'
 import {
+    IoIosCafe,
+    IoIosConstruct,
     IoLogoApple,
     IoLogoCss3,
     IoLogoHtml5,
@@ -371,6 +391,19 @@ export const icons: Record<string, ReactNode> = {
     leaf: <IoLeafSharp />,
     library: <IoLibraryOutline />,
     location: <IoLocateSharp />,
+    doctor: <FaUserDoctor />,
+    cross: <FaCross />,
+    skull: <FaSkullCrossbones />,
+    mosque: <FaMosque />,
+    church: <FaChurch />,
+    anchor: <FaAnchor />,
+    ankh: <FaAnkh />,
+    piggy_bank: <FaPiggyBank />,
+    buddha: <MdTempleBuddhist />,
+    gem: <FaGem />,
+    fighter_jet: <FaJetFighter />,
+    tank: <TbTank />,
+    coffee: <IoIosCafe />,
 
     // Body
     eye: <BsEye />,
@@ -414,6 +447,7 @@ export const icons: Record<string, ReactNode> = {
     info: <IoInformation />,
     language: <IoLanguage />,
     newspaper: <IoNewspaperOutline />,
+    movie: <MdLocalMovies />,
 
     // Time
     moon_outline: <IoMoonOutline />,
@@ -456,7 +490,7 @@ export const icons: Record<string, ReactNode> = {
     scale: <IoScaleOutline />,
     settings: <IoSettingsSharp />,
     shirt: <IoShirtOutline />,
-    skull: <IoSkullOutline />,
+    skull_outline: <IoSkullOutline />,
     snow: <IoSnowSharp />,
     charts: <IoStatsChart />,
     store: <IoStorefront />,
@@ -465,6 +499,9 @@ export const icons: Record<string, ReactNode> = {
     tennis: <IoTennisball />,
     terminal: <IoTerminal />,
     thermometer: <IoThermometerOutline />,
+    theatre: <FaTheaterMasks />,
+    construction: <IoIosConstruct />,
+    lemon: <FaRegLemon />,
     thumbs_down: <IoThumbsDown />,
     thumbs_down_outline: <IoThumbsDownOutline />,
     thumbs_up: <IoThumbsUp />,
@@ -508,7 +545,6 @@ export const icons: Record<string, ReactNode> = {
     magnet: <BsMagnetFill />,
     mega_phone: <BsMegaphone />,
     mouse: <BsMouse2 />,
-    piggy_bank: <BsPiggyBank />,
     plug: <BsPlugFill />,
     plus_minus: <BsPlusSlashMinus />,
     radio_active: <BsRadioactive />,

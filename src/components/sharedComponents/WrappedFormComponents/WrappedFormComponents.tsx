@@ -87,9 +87,9 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
         switch (iconName) {
             case 'arrow':
                 return open ? (
-                    <BsChevronBarDown onClick={() => setOpen(!open)} />
-                ) : (
                     <BsChevronBarUp onClick={() => setOpen(!open)} />
+                ) : (
+                    <BsChevronBarDown onClick={() => setOpen(!open)} />
                 )
             case 'magnifyingglass':
                 return <BsSearch onClick={() => setOpen(!open)} />
@@ -187,9 +187,8 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                     >
                         <div
                             className={
-                                'wrapped-input' + showIconWithInput
-                                    ? 'show-input-icon'
-                                    : ''
+                                'wrapped-input ' +
+                                (showIconWithInput ? 'show-input-icon' : '')
                             }
                         >
                             {(showIconWithInput && field.value === '') || (
@@ -229,7 +228,7 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                                 )}
                             </div>
                         )}
-                        {fieldState.error && (
+                        {!open && fieldState.error && (
                             <p className="error-msg">
                                 *{fieldState.error.message}
                             </p>
@@ -291,6 +290,52 @@ export const WrappedInput = <T extends FieldValues>({
                         </div>
                     )}
                 </div>
+                {fieldState.error && (
+                    <p className="error-msg">*{fieldState.error.message}</p>
+                )}
+            </div>
+        )}
+    />
+)
+
+type WrappedTextAreaProps<TFieldValues extends FieldValues = FieldValues> = {
+    name: Path<TFieldValues>
+    control: Control<TFieldValues>
+    placeholder?: string
+    maxLength?: number
+    rows?: number
+}
+
+export const WrappedTextArea = <T extends FieldValues>({
+    name,
+    control,
+    maxLength,
+    rows = 3,
+    ...rest
+}: WrappedTextAreaProps<T>) => (
+    <Controller
+        name={name}
+        control={control}
+        render={({ field, fieldState }) => (
+            <div className="wrapped-component wrapped-textarea">
+                <div className="wrapped-input">
+                    <textarea
+                        id={name}
+                        data-gramm="false"
+                        data-gramm_editor="false"
+                        data-enable-grammarly="false"
+                        maxLength={maxLength}
+                        rows={rows}
+                        {...rest}
+                        {...field}
+                    />
+                </div>
+                {maxLength && (
+                    <span className="textarea__info">
+                        <span className="highlight">{field.value.length} </span>
+                        of {maxLength} characters
+                    </span>
+                )}
                 {fieldState.error && (
                     <p className="error-msg">*{fieldState.error.message}</p>
                 )}

@@ -10,6 +10,7 @@ import {
     WrappedInput,
     WrappedRadioButton,
     WrappedSearchInput,
+    WrappedTextArea,
 } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useForm } from 'react-hook-form'
 import '../common/Form.scss'
@@ -174,11 +175,11 @@ const Categories = ({ path }: CategoriesProps) => {
                         )}
                         <fieldset>
                             <label htmlFor="description">Description</label>
-                            <WrappedInput
+                            <WrappedTextArea
                                 name="description"
                                 control={control}
-                                type="text"
                                 placeholder="What do you use this category for"
+                                maxLength={255}
                             />
                         </fieldset>
                         <fieldset>

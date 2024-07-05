@@ -10,9 +10,48 @@
     flex-direction: column;
     input {
         border: 2px solid $black_2;
+        background-color: #000;
     }
+
+    textarea {
+        width: 100%;
+        padding: 10px 10px;
+        background-color: #000;
+        color: $accent_dark_3;
+        font-size: $font_sm;
+        font-variant: small-caps;
+        border: 2px solid $black_2;
+        border-radius: 20px;
+        resize: none;
+    
+        &::placeholder {
+            color: $black_3;
+            font-weight: normal;
+            opacity: 1;
+        }
+    }
+    
+    textarea:focus {
+        background-color: rgba(0, 0, 0, 0.5);
+        border-color: $accent_dark_3;
+        border-radius: 20px;
+        outline: none;
+    }
+
 }
 
+.wrapped-textarea {
+    .textarea__info {
+        font-size: $font-xxs;
+        text-align: right;
+        color: $black_4;
+
+        .highlight {
+            color: $accent_dark_4;
+            font-weight: bolder;
+        }
+    }
+}
 .error-msg {
     margin: 0;
     margin-top: 1rem;
