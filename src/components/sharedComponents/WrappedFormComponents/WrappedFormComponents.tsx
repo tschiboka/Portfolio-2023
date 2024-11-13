@@ -212,7 +212,10 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                                         ? 'icon-padding'
                                         : ''
                                 }
-                                value={getLabel(options, field.value) || ''}
+                                value={
+                                    getLabel(options, field.value) ||
+                                    field.value
+                                }
                                 placeholder={placeholder}
                                 onBlur={handleOnBlur}
                                 onChange={handleOnChange}

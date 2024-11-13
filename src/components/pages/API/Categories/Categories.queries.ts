@@ -12,7 +12,7 @@ export const usePostCategory = ({onSuccess}: UsePostCategory) => {
     const { post } = useAPI()
     return useMutation<void, AxiosError<RequestError>, CategoryResource>({
     mutationFn: async (payload: CategoryResource) => { await post(ApiPaths.CATEGORIES, payload) },
-    onSuccess
+    onSuccess,
 })}
 
 export const useGetCategories = () => {

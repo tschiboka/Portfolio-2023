@@ -115,10 +115,12 @@ form {
         display: flex;
         padding: 0 1.5rem;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
         @include bp.md {
             flex-direction: row;
             justify-content: center;
+            align-items: center;
             button:nth-child(2) {
                 margin-left: auto;
             }
@@ -162,6 +164,12 @@ form {
         &[type="submit"] {
             margin-bottom: 1rem;
         }
+    }
+
+    button.secondary {
+        background-color: #000;
+        border: 2px solid $accent_dark_5;
+        color: white;
     }
     
     .error-message {

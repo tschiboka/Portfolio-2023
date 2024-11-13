@@ -56,7 +56,7 @@ const Categories = ({ path }: CategoriesProps) => {
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
     const parentOptions = getParents.fromApi(categories?.data || [])
 
-    const { control, setValue, getValues, handleSubmit, reset, resetField } =
+    const { control, setValue, handleSubmit, reset, resetField } =
         useForm<CategoryFormData>({
             defaultValues: {
                 name: '',
@@ -73,9 +73,10 @@ const Categories = ({ path }: CategoriesProps) => {
             mode: 'onChange',
         })
 
-    const { mutateAsync: postCategory, ...categoryRequest } = usePostCategory({
-        onSuccess: () => reset(),
-    })
+    const { mutateAsync: postCategory, ...categoryPostRequest } =
+        usePostCategory({
+            onSuccess: () => reset(),
+        })
 
     const submitHandler = async (formData: CategoryFormData) => {
         const parentId = parentOptions.find(
@@ -149,9 +150,9 @@ const Categories = ({ path }: CategoriesProps) => {
                                         name="isParent"
                                         control={control}
                                         value={false}
-                                        onChange={() => {
+                                        onChange={() =>
                                             setValue('isParent', false)
-                                        }}
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -250,35 +251,45 @@ const Categories = ({ path }: CategoriesProps) => {
                                 colorSelection={true}
                             />
                         </fieldset>
-                        <LoadingIndicator show={categoryRequest.isPending} />
-                        {categoryRequest.error && (
-                            <p className="submit-error-message">
+                        <LoadingIndicator
+                            show={categoryPostRequest.isPending}
+                        />
+                        {categoryPostRequest.error && (
+                            <p className="submit-error-message submit-mes">
                                 {getErrorMessage(
-                                    categoryRequest.error,
+                                    categoryPostRequest.error,
                                     "Couldn't post category",
                                 )}
                             </p>
                         )}
                         {categoriesGetRequest.error && (
-                            <p className="submit-error-message">
+                            <p className="submit-message submit-error-message">
                                 {getErrorMessage(
                                     categoriesGetRequest.error,
                                     "Couldn't fetch categories",
                                 )}
                             </p>
                         )}
-                        {categoryRequest.isSuccess && (
-                            <p className="submit-success-message">
-                                Category submitted
-                            </p>
+                        {categoryPostRequest.isSuccess && (
+                            <p className="submit-message">Category submitted</p>
                         )}
-                        <button
-                            name="submit"
-                            type="submit"
-                            disabled={categoriesGetRequest.isLoading}
-                        >
-                            Submit
-                        </button>
+                        <div className="button-container">
+                            <button
+                                name="reset"
+                                type="button"
+                                className="secondary"
+                                onClick={() => reset()}
+                            >
+                                Reset
+                            </button>
+                            <button
+                                name="submit"
+                                type="submit"
+                                disabled={categoriesGetRequest.isLoading}
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </form>
                 </div>
                 <h2>See the list of categories</h2>
