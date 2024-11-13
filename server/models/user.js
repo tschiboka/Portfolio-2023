@@ -24,18 +24,24 @@ const schema = mongoose.Schema({
         unique: true,   
         required: true,
         minLength: 8,
-        maxlength: 255,
+        maxLength: 255,
         trim: true,
         lowercase: true,
     },
     password: {
-        type: String,   
+        type: String, 
+        minLength: 8,
+        maxLength: 255,
         required: true,
         trim: true,
     },
     isAdmin: {
         type: Boolean,
         default: false,
+    },
+    capabilities: {
+        type: Array,
+        default: []
     },
     avatarId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -71,8 +77,9 @@ const validateUser = (user) => {
         fullName: Joi.string().required().min(3).max(50),
         userName: Joi.string().required().min(3).max(20),
         email: Joi.string().required().email({ tlds: { allow: false } }),
-        password: Joi.string().required(),
+        password: Joi.string().min(8).required(40),
         isAdmin: Joi.boolean(),
+        capabilities: Joi.array().items(Joi.string().min(5).max(20)),
         avatarId: Joi.objectId(),
         created: Joi.date(),
         updated: Joi.date(),

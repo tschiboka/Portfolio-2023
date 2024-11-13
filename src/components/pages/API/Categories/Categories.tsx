@@ -17,36 +17,35 @@ import '../common/Form.scss'
 import './Categories.scss'
 import { icons } from './icons'
 import { colors } from './colors'
-import { categoriesSchema } from '.'
+import { CategoryFormData, categoriesSchema } from '.'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useGetCategories, usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { getErrorMessage } from '../common/error'
-import { CategoryResource } from '../common/types'
 import { getParents } from './Categories.transformers'
 
-interface CategoriesProps {
+type CategoriesProps = {
     path: string
 }
 
 const iconOptions: SearchInputOption[] = Object.keys(icons)
     .map((icon) => ({
-        name: icon,
+        label: icon,
         icon: icons[icon],
         value: icon,
     }))
     .sort((a: SearchInputOption, b: SearchInputOption) =>
-        a.name.localeCompare(b.name),
+        a.label.localeCompare(b.label),
     )
 
 const colorOptions: SearchInputOption[] = Object.keys(colors)
     .map((color) => ({
-        name: color,
+        label: color,
         icon: colors[color],
         value: color,
     }))
     .sort((a: SearchInputOption, b: SearchInputOption) =>
-        a.name.localeCompare(b.name),
+        a.label.localeCompare(b.label),
     )
 
 const Categories = ({ path }: CategoriesProps) => {
@@ -55,27 +54,42 @@ const Categories = ({ path }: CategoriesProps) => {
 
     const [showParentInput, setShowParentInput] = useState(false)
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
+    const parentOptions = getParents.fromApi(categories?.data || [])
 
-    const { control, setValue, handleSubmit, reset } =
-        useForm<CategoryResource>({
+    const { control, setValue, getValues, handleSubmit, reset, resetField } =
+        useForm<CategoryFormData>({
             defaultValues: {
                 name: '',
                 description: '',
                 isParent: false,
                 parent: '',
+                hasParent: false,
                 icon: '',
                 color: '',
             },
-            resolver: yupResolver(categoriesSchema),
+            resolver: yupResolver(
+                categoriesSchema(parentOptions.map(({ label }) => label)),
+            ),
+            mode: 'onChange',
         })
 
-    const parentOptions = getParents.fromApi(categories?.data || [])
+    const { mutateAsync: postCategory, ...categoryRequest } = usePostCategory({
+        onSuccess: () => reset(),
+    })
 
-    const { mutate: postCategory, ...categoryRequest } = usePostCategory()
+    const submitHandler = async (formData: CategoryFormData) => {
+        const parentId = parentOptions.find(
+            ({ label }) => label === formData.parent,
+        )?.value
 
-    const submitHandler = (formData: CategoryResource) => {
-        postCategory(formData)
-        !categoryRequest.error && reset()
+        await postCategory({
+            name: formData.name,
+            isParent: formData.isParent,
+            description: formData.description,
+            icon: formData.icon,
+            color: formData.color,
+            parentId,
+        })
     }
 
     return (
@@ -127,29 +141,56 @@ const Categories = ({ path }: CategoriesProps) => {
                             />
                         </fieldset>
                         <fieldset className="parent-radio">
-                            <label htmlFor="isParent">Parent</label>
+                            <label htmlFor="isParent">Is Parent</label>
                             <div>
                                 <div>
-                                    <label htmlFor="isParent">No</label>
+                                    <label>No</label>
                                     <WrappedRadioButton
                                         name="isParent"
                                         control={control}
                                         value={false}
                                         onChange={() => {
-                                            setValue('parent', undefined)
-                                            setShowParentInput(false)
+                                            setValue('isParent', false)
                                         }}
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="isParent">Yes</label>
+                                    <label>Yes</label>
                                     <WrappedRadioButton
                                         name="isParent"
                                         control={control}
                                         value={true}
                                         onChange={() =>
-                                            setShowParentInput(true)
+                                            setValue('isParent', true)
                                         }
+                                    />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset className="parent-radio">
+                            <label htmlFor="hasParent">Has Parent</label>
+                            <div>
+                                <div>
+                                    <label>No</label>
+                                    <WrappedRadioButton
+                                        name="hasParent"
+                                        control={control}
+                                        value={false}
+                                        onChange={() => {
+                                            resetField('parent')
+                                            setShowParentInput(false)
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <label>Yes</label>
+                                    <WrappedRadioButton
+                                        name="hasParent"
+                                        control={control}
+                                        value={true}
+                                        onChange={() => {
+                                            setShowParentInput(true)
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -166,8 +207,8 @@ const Categories = ({ path }: CategoriesProps) => {
                                     control={control}
                                     buttonIcon={'arrow'}
                                     highlightMatch
-                                    onSelect={(value: string) =>
-                                        setValue('parent', value)
+                                    onSelect={(option: SearchInputOption) =>
+                                        setValue('parent', option.label)
                                     }
                                     placeholder="Select Parent"
                                 />
@@ -190,9 +231,9 @@ const Categories = ({ path }: CategoriesProps) => {
                                 options={iconOptions}
                                 placeholder="Select an icon"
                                 highlightMatch
-                                onSelect={(value: string) =>
-                                    setValue('icon', value)
-                                }
+                                onSelect={(option: SearchInputOption) => {
+                                    setValue('icon', option.label)
+                                }}
                             />
                         </fieldset>
                         <fieldset>
@@ -203,9 +244,10 @@ const Categories = ({ path }: CategoriesProps) => {
                                 options={colorOptions}
                                 placeholder="Select a color"
                                 highlightMatch
-                                onSelect={(value: string) =>
-                                    setValue('color', value)
-                                }
+                                onSelect={(option: SearchInputOption) => {
+                                    setValue('color', option.label)
+                                }}
+                                colorSelection={true}
                             />
                         </fieldset>
                         <LoadingIndicator show={categoryRequest.isPending} />

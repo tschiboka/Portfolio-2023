@@ -4,7 +4,7 @@ import { icons } from "./icons";
 
 export const getParents = {
     fromApi: (categories: CategoryRequestResource[]): SearchInputOption[] => categories.map(c => ({
-        name: c.name, 
+        label: c.name, 
         value: c._id,
         icon: icons[c.icon],
         iconColor: c.color

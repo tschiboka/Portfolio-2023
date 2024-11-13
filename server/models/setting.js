@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const HALF_AN_HOUR_IN_SEC = 60 * 30
+const HALF_AN_HOUR_IN_MS = 60 * 30 // TODO: Create a date utils file and store consts there
 
 const schema = new mongoose.Schema({
-    isAdmin: {
-        type: Boolean,
-        default: false,
-    },
     // Maximum number of users allowed to register to the app
     maxUsers: {
         type: Number,
@@ -24,33 +20,17 @@ const schema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    automaticLogOffTimeInMins: {
-        type: Number,
-        default: -1,
-    },
-    enableUserTheme: { // EG: Seasonal (Xmas, Events...)
-        type: String,
-        default: "DEFAULT",
-        minLength: 1,
-        maxLength: 20,
-        uppercase: true,
-        trim: true,
-    },
-    enableFeature: {
-        type: String,
-        default: "NONE",
-        minLength: 1,
-        maxLength: 20,
-        uppercase: true,
-        trim: true,
+    enabledFeatures: { // EG: ALLOW_TOPICS,
+        type: Array,
+        default: [],
     },
     registrationTokensExpireInMs: {
         type: Number,
-        default: 3600,
+        default: HALF_AN_HOUR_IN_MS,
     },
     sessionTokensExpireInMs: {
         type: Number,
-        default: 3600,
+        default: HALF_AN_HOUR_IN_MS,
     }
 })
 
@@ -58,14 +38,11 @@ const Settings = mongoose.model("Settings", schema)
 
 const validateSettings = (settings) => {
     const schema = Joi.object({
-        isAdmin: Joi.boolean(),
-        maxUsers: Joi.number().min(1),
+        maxUsers: Joi.number().min(1).positive(),
         enableMaintenanceMode: Joi.boolean(),
         enableUserRegistration: Joi.boolean(),
         enableAutomaticLogoff: Joi.boolean(),
-        automaticLogOffTimeInMins: Joi.number(),
-        enableUserTheme: Joi.string(),
-        enableFeature: Joi.string(),
+        enabledFeatures: Joi.array().items(Joi.string().min(5).max(20)),
         registrationTokensExpireInMs: Joi.number().min(HALF_AN_HOUR_IN_MS),
         sessionTokensExpireInMs: Joi.number().min(HALF_AN_HOUR_IN_MS),
     })
@@ -75,4 +52,4 @@ const validateSettings = (settings) => {
 
 module.exports.Settings = Settings
 module.exports.validateSettings = validateSettings
-module.exports.HALF_AN_HOUR_IN_SEC = HALF_AN_HOUR_IN_SEC
+module.exports.HALF_AN_HOUR_IN_MS = HALF_AN_HOUR_IN_MS

@@ -9,11 +9,10 @@ import {
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import './WrappedFormComponents.scss'
 import { colors } from '../../pages/API/Categories/colors'
-import { o } from 'ramda'
 
 export type FieldValues = Record<string, any>
 export type SearchInputOption = {
-    name: string
+    label: string
     value: string
     icon?: ReactNode
     iconColor?: string
@@ -23,7 +22,7 @@ type WrappedRadioButtonProps<TFieldValues extends FieldValues = FieldValues> = {
     name: Path<TFieldValues>
     control: Control<TFieldValues>
     value: string | boolean
-    onChange: () => void
+    onChange: (value?: string) => void
 }
 
 export const WrappedRadioButton = <T extends FieldValues>({
@@ -61,10 +60,11 @@ type WrappedSearchInputProps<TFieldValues extends FieldValues> = {
     buttonIcon?: SearchInputOptionButtonIcons
     icon?: ReactNode
     showIconWithInput?: boolean
+    colorSelection?: boolean
     control: Control<TFieldValues>
     placeholder?: string
     highlightMatch?: boolean
-    onSelect: (value: string) => void
+    onSelect: (option: SearchInputOption) => void
 }
 
 export const WrappedSearchInput = <TFieldValues extends FieldValues>({
@@ -73,6 +73,7 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
     buttonIcon = 'magnifyingglass',
     icon,
     showIconWithInput = true,
+    colorSelection = false,
     control,
     onSelect,
     placeholder,
@@ -105,9 +106,9 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
         }
     }
 
-    const filteredOptions = (text: string) =>
+    const filteredOptions = (text: string = '') =>
         options.filter((option) =>
-            option.name
+            (option.label || '')
                 .toUpperCase()
                 .replace(/\s/g, '')
                 .includes(text.replace(/\s/g, '').toUpperCase()),
@@ -117,10 +118,10 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
         options.map((option) => (
             <div
                 className="option"
-                key={option.name}
+                key={option.label}
                 onClick={() => {
                     setOpen(false)
-                    onSelect(option.name)
+                    onSelect(option)
                 }}
             >
                 {option.icon && (
@@ -130,10 +131,10 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                 )}
                 {highlightMatch
                     ? getHighlightedSearchOptionText(
-                          option.name.toLowerCase(),
-                          input.toLocaleLowerCase(),
+                          option.label.toLowerCase(),
+                          (input || '').toLocaleLowerCase(),
                       )
-                    : option.name}
+                    : option.label}
             </div>
         ))
 
@@ -152,6 +153,9 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
             </span>
         )
     }
+
+    const getLabel = (options: SearchInputOption[], value: string) =>
+        options.find((o) => o.label === value)?.label
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
@@ -191,21 +195,24 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                                 (showIconWithInput ? 'show-input-icon' : '')
                             }
                         >
-                            {(showIconWithInput && field.value === '') || (
-                                <div className="show-icon">
-                                    {options.find((o) => o.name === value)
-                                        ?.icon || colors[o.name]}
-                                </div>
-                            )}
+                            {showIconWithInput &&
+                                (open || (!open && field.value)) && (
+                                    <div className="show-icon">
+                                        {options.find(
+                                            (o: SearchInputOption) =>
+                                                o.label === value,
+                                        )?.icon || colors[field.value]}
+                                    </div>
+                                )}
                             <input
                                 id={name}
                                 type="text"
                                 className={
-                                    showIconWithInput && field.value
+                                    (showIconWithInput && field.value) || open
                                         ? 'icon-padding'
                                         : ''
                                 }
-                                value={value}
+                                value={getLabel(options, field.value) || ''}
                                 placeholder={placeholder}
                                 onBlur={handleOnBlur}
                                 onChange={handleOnChange}

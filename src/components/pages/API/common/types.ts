@@ -1,9 +1,9 @@
-// This file contains all the types that are sent or recieved to the API
+// This file contains all the types that are sent or recieved from the API
 
 export type CategoryResource = {
     name: string,
     isParent: boolean,
-    parent?: string,
+    parentId?: string,
     description: string,
     icon: string,
     color?: string,

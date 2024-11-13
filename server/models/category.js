@@ -9,7 +9,7 @@ const Category = mongoose.model('Category', {
         ref: 'User',
         required: true,
     },
-    description: { type: String, required: true },
+    description: { type: String, required: true, minLength: 10, maxLength: 255 },
     icon: String, 
     color: String,
     created_at: {
@@ -17,17 +17,17 @@ const Category = mongoose.model('Category', {
         default: Date.now()
     },
     isParent: { type: Boolean, required: true },
-    // parent: { type: String, maxLength: 20 } // TODO: Make it an objectID 
+    parentId: { type: mongoose.Schema.Types.ObjectId, default: null, ref: "Category" } 
 });
 
 function validateCategory(category) {
     const schema = Joi.object({
         name: Joi.string().max(20).required(),
-        description: Joi.string().max(255).required(),
+        description: Joi.string().min(10).max(255).required(),
         icon: Joi.string().required(),
         color: Joi.string(),
         isParent: Joi.boolean().required(),
-        // parent: Joi.string().max(20).optional(),
+        parentId: Joi.objectId().optional(),
     });
 
     return schema.validate(category);

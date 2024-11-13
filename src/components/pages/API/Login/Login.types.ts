@@ -9,7 +9,6 @@ export type SettingsResources = {
     enable_maintenance_mode: boolean,
     enableUserRegistrantion: boolean,
     enableAutomaticLogoff: boolean,
-    automaticLogOffTimeInMins: number,
     enableUserTheme: string,
     enableFeature: string,
 }

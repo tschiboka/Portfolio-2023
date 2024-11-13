@@ -19,8 +19,13 @@ router.post("/", [auth], async (req, res) => {
     
     // Find if category exists for user
     const categoryWithUser = await Category.find({ userId: user._id, name: req.body.name })
-    if (categoryWithUser.length) return res.status(409).json({error: { message: "Category exists for user" }})
+    if (categoryWithUser.length) return res.status(409).json({ error: { message: "Category exists for user" } })
         
+    // Find if parent category exists
+    let parent;
+    if (req.body.parent) {
+        console.log(parent)
+    }
     // Validate category
     const {error} = validateCategory({ ...req.body })
     if (error) return res.status(400).json({ error: { message: error.details[0].message }})

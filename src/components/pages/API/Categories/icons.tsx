@@ -1,4 +1,3 @@
-import { ReactNode } from 'react'
 import { BiSolidRadio } from 'react-icons/bi'
 import {
     BsCircle,
@@ -76,7 +75,6 @@ import {
     BsMagnetFill,
     BsMegaphone,
     BsMouse2,
-    BsPiggyBank,
     BsPlugFill,
     BsPlusSlashMinus,
     BsRadioactive,
@@ -282,8 +280,9 @@ import {
     IoLogoYoutube,
 } from 'react-icons/io'
 import { GoClockFill } from 'react-icons/go'
+import { Icon } from '.'
 
-export const icons: Record<string, ReactNode> = {
+export const icons: Icon = {
     // Shapes
     circle: <BsCircle />,
     circle_fill: <BsCircleFill />,

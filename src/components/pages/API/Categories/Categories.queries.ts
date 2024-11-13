@@ -5,10 +5,14 @@ import { AxiosError, AxiosResponse } from "axios";
 import { RequestError } from "../common/error";
 import { ApiPaths } from "../../../../routing/apiPathBuilder";
 
-export const usePostCategory = () => {
+type UsePostCategory = {
+    onSuccess: () => void
+}
+export const usePostCategory = ({onSuccess}: UsePostCategory) => {
     const { post } = useAPI()
     return useMutation<void, AxiosError<RequestError>, CategoryResource>({
-    mutationFn: async (payload: CategoryResource) => { await post(ApiPaths.CATEGORIES, payload) }
+    mutationFn: async (payload: CategoryResource) => { await post(ApiPaths.CATEGORIES, payload) },
+    onSuccess
 })}
 
 export const useGetCategories = () => {
