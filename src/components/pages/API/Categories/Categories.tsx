@@ -14,6 +14,7 @@ import {
 } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useForm } from 'react-hook-form'
 import '../common/Form.scss'
+import '../common/Table.scss'
 import './Categories.scss'
 import { icons } from './icons'
 import { colors } from './colors'
@@ -23,6 +24,7 @@ import { useGetCategories, usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { getErrorMessage } from '../common/error'
 import { getParents } from './Categories.transformers'
+import { Maybe } from 'monet'
 
 type CategoriesProps = {
     path: string
@@ -54,7 +56,9 @@ const Categories = ({ path }: CategoriesProps) => {
 
     const [showParentInput, setShowParentInput] = useState(false)
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
-    const parentOptions = getParents.fromApi(categories?.data || [])
+    const parentOptions = getParents.fromApi(
+        categories?.data.filter((category) => category.isParent) || [],
+    )
 
     const { control, setValue, handleSubmit, reset, resetField } =
         useForm<CategoryFormData>({
@@ -141,6 +145,15 @@ const Categories = ({ path }: CategoriesProps) => {
                                 placeholder="Displayed name"
                             />
                         </fieldset>
+                        <fieldset>
+                            <label htmlFor="description">Description</label>
+                            <WrappedTextArea
+                                name="description"
+                                control={control}
+                                placeholder="What do you use this category for"
+                                maxLength={255}
+                            />
+                        </fieldset>
                         <fieldset className="parent-radio">
                             <label htmlFor="isParent">Is Parent</label>
                             <div>
@@ -216,15 +229,6 @@ const Categories = ({ path }: CategoriesProps) => {
                             </fieldset>
                         )}
                         <fieldset>
-                            <label htmlFor="description">Description</label>
-                            <WrappedTextArea
-                                name="description"
-                                control={control}
-                                placeholder="What do you use this category for"
-                                maxLength={255}
-                            />
-                        </fieldset>
-                        <fieldset>
                             <label htmlFor="icon">Icon</label>
                             <WrappedSearchInput
                                 name="icon"
@@ -293,6 +297,73 @@ const Categories = ({ path }: CategoriesProps) => {
                     </form>
                 </div>
                 <h2>See the list of categories</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td className="sm"></td>
+                            <td className="sm">Name</td>
+                            <td className="sm">Status</td>
+                            <td className="md">Parent</td>
+                            <td className="md">Child</td>
+                            <td className="hide">Description</td>
+                            <td className="sm"></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {categories?.data.map(
+                            ({
+                                _id,
+                                icon,
+                                name,
+                                status,
+                                color,
+                                isParent,
+                                parentId,
+                                description,
+                            }) => (
+                                <>
+                                    <tr key={_id}>
+                                        <td className="sm">
+                                            <div
+                                                className="icon"
+                                                style={{ borderColor: color }}
+                                            >
+                                                {icons[icon]}
+                                            </div>
+                                        </td>
+                                        <td className="sm">{name}</td>
+                                        <td className="sm">{status}</td>
+                                        <td
+                                            className={`md icon ${
+                                                isParent ? 'green' : 'red'
+                                            }`}
+                                        >
+                                            {isParent
+                                                ? icons['check']
+                                                : icons['cancel']}
+                                        </td>
+                                        <td
+                                            className={`md icon ${
+                                                parentId ? 'green' : 'red'
+                                            }`}
+                                        >
+                                            {parentId
+                                                ? icons['check']
+                                                : icons['cancel']}
+                                        </td>
+                                        <td className="hide">{description}</td>
+                                        <td className="sm icon">
+                                            {icons['expand_more']}
+                                        </td>
+                                    </tr>
+                                    <tr className={'row-expand expanded'}>
+                                        <td></td>
+                                    </tr>
+                                </>
+                            ),
+                        )}
+                    </tbody>
+                </table>
             </main>
         </Page>
     )

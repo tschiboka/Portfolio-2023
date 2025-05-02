@@ -1,0 +1,82 @@
+@use "../../../../styles/breakpoints.scss" as bp;
+@import "../../../../styles/palette.scss";
+@import "../../../../styles/font_sizes.scss";
+@import "../../../../styles/animations.scss";
+
+table {
+    width: 100%;
+    max-width: 100vw;
+    background: #070707;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-variant: small-caps;
+    border-collapse: collapse;
+
+    td {
+        padding: 0.25rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    thead {
+        border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    thead tr:first-child {
+        td {
+            border-top: none;
+            padding: 1rem 0.25rem;
+        }
+    }
+
+    tbody tr td {
+        border-left: none;
+        border-right: none;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    td.icon {
+        width: 50px;
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    td.icon.green {
+        color: rgb(0, 149, 99);
+    }
+
+    td.icon.red {
+        color: rgb(202, 19, 67);
+    }
+
+    td div.icon {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-width: 2px;
+        border-style: solid;
+        border-radius: 100%;
+    }
+
+    td.md {
+        display: none;
+        @include bp.md {
+            display: table-cell;
+        }
+    }
+
+    td.lg {
+        display: none;
+        @include bp.lg {
+            display: table-cell;
+        }
+    }
+
+    td.hide {
+        display: none;  
+    }
+}

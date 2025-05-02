@@ -118,6 +118,7 @@ import {
     FaGem,
     FaMosque,
     FaMusic,
+    FaRegCheckCircle,
     FaRegLemon,
     FaRoad,
     FaRunning,
@@ -245,6 +246,7 @@ import { RxLapTimer } from 'react-icons/rx'
 import { TbTank, TbWorldWww } from 'react-icons/tb'
 import {
     FaBasketShopping,
+    FaCircleCheck,
     FaGuitar,
     FaJetFighter,
     FaMessage,
@@ -255,6 +257,9 @@ import {
     FaUserGraduate,
 } from 'react-icons/fa6'
 import {
+    MdCancel,
+    MdExpandLess,
+    MdExpandMore,
     MdLocalMovies,
     MdOutlineLuggage,
     MdOutlinePiano,
@@ -281,6 +286,7 @@ import {
 } from 'react-icons/io'
 import { GoClockFill } from 'react-icons/go'
 import { Icon } from '.'
+import { ImCancelCircle } from 'react-icons/im'
 
 export const icons: Icon = {
     // Shapes
@@ -297,6 +303,12 @@ export const icons: Icon = {
     pentagon: <BsPentagon />,
     pentagon_fill: <BsPentagonFill />,
     dot: <BsDot />,
+    cancel: <MdCancel />,
+    cancel_circle: <ImCancelCircle />,
+    check: <FaCircleCheck />,
+    check_circle: <FaRegCheckCircle />,
+    expand_less: <MdExpandLess />,
+    expand_more: <MdExpandMore />,
 
     // Tech
     code_1: <BsCode />,

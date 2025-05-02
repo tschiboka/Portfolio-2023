@@ -4,6 +4,7 @@ export type CategoryResource = {
     name: string,
     isParent: boolean,
     parentId?: string,
+    status?: string,
     description: string,
     icon: string,
     color?: string,

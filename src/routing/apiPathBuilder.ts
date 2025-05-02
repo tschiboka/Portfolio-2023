@@ -5,7 +5,7 @@ export const ApiPaths = {
     SETTINGS: 'SETTINGS',
     REGISTER_USER: 'USER',
     CONFIRM_REGISTRATION: 'CONFIRM',
-    CATEGORIES: "CATEGORIES"
+    CATEGORIES: "CATEGORIES",
 }
 
 export const apiPathBuilder = (pathName: string):string => {
@@ -16,7 +16,7 @@ export const apiPathBuilder = (pathName: string):string => {
         SETTINGS: 'settings',
         REGISTER_USER: 'user',
         CONFIRM_REGISTRATION: 'confirm',
-        CATEGORIES: 'categories'
+        CATEGORIES: 'categories',
     }
     return url + "/api/" + apiPaths[pathName]
 }
