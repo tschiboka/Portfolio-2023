@@ -1,10 +1,15 @@
-$screen-xs-min: 420px;      // Small mobiles
-$screen-sm-min: 576px;      // Small tablets and large smartphones (landscape view)
-$screen-md-min: 768px;      // Small tablets (portrait view)
-$screen-mx-min: 670px;      // Crossover between medium and large
-$screen-lg-min: 992px;      // Tablets and small desktops
-$screen-xl-min: 1200px;     // Large tablets and notebooks 
-$screen-xxl-min: 1580px;     // Laptops and desktops 
+// Minimum width screen size constants
+$screen-xxs-min: 375px;       // Extra small devices (iPhone SE)
+$screen-xs-min: 420px;        // Small mobiles
+$screen-sm-min: 576px;        // Small tablets and large smartphones (landscape view)
+$screen-md-min: 768px;        // Small tablets (portrait view)
+$screen-mx-min: 670px;        // Crossover between medium and large
+$screen-lg-min: 992px;        // Tablets and small desktops
+$screen-xl-min: 1200px;       // Large tablets and notebooks 
+$screen-xxl-min: 1580px;      // Laptops and desktops 
+
+// Minimum height screen size constants
+$screen-xxs-min-height: 670px; // Extra small devices (iPhone SE)
 
 @mixin xs {
     @media (max-width: #{$screen-xs-min}) {

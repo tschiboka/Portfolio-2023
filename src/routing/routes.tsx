@@ -35,6 +35,7 @@ import User from '../components/pages/API/User/User'
 import Admin from '../components/pages/API/Admin/Admin'
 import Logout from '../components/pages/API/Logout/Logout'
 import Categories from '../components/pages/API/Categories/Categories'
+import { Clock } from '../components/sharedComponents/Clock/Clock'
 
 export const routes = [
     // Website Pages
@@ -133,6 +134,10 @@ export const routes = [
         element: (
             <HookPattern pageName="hook-pattern" path="/blog/hook-pattern" />
         ),
+    },
+    {
+        path: '/clock',
+        element: <Clock />,
     },
 
     // API Routes
