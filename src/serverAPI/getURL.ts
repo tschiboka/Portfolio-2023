@@ -4,5 +4,5 @@ export const getURL = () => {
 
     if (hostname === "localhost" || hostname === "127.0.0.1")
         return "http://localhost:5000";
-    return "https://drab-rose-wombat-shoe.cyclic.app";
+    return "https://portfolio-2023-nf5z.onrender.com";
 };

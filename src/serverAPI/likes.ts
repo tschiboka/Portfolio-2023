@@ -45,7 +45,7 @@ export const getLikeSummary = async (callback: (likes: LikeCount) => void) => {
 
 export const postLike = async (path: string, callback: () => void) => {
     //const URLLocal = "http://localhost:5000/like";
-    const URLLive = "https://drab-rose-wombat-shoe.cyclic.app/like";
+    const URLLive = "https://portfolio-2023-nf5z.onrender.com/like";
     const URL = URLLive;
     const options = {
         method: "POST",

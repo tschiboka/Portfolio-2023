@@ -1,18 +1,18 @@
-import Nav from "../../sharedComponents/Nav/Nav";
-import SubNav from "../../sharedComponents/SubNav/SubNav";
-import Menu from "../../sharedComponents/Menu/Menu";
-import Footer from "../../sharedComponents/Footer/Footer";
-import Page from "../../sharedComponents/Page/Page";
-import { useAppContext } from "../../../context/AppContext";
-import "./PrivacyPolicy.scss";
+import Nav from '../../sharedComponents/Nav/Nav'
+import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Menu from '../../sharedComponents/Menu/Menu'
+import Footer from '../../sharedComponents/Footer/Footer'
+import Page from '../../sharedComponents/Page/Page'
+import { useAppContext } from '../../../context/AppContext'
+import './PrivacyPolicy.scss'
 
 interface Props {
-    pageName: string;
-    path: string;
+    pageName: string
+    path: string
 }
 
 const PrivacyPolicy = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext();
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     return (
         <Page title="Tivadar Debnar | Privacy Policy" path={path}>
             <Nav pageName={pageName} />
@@ -69,15 +69,17 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
                     privacy practices of these third-party sites. We encourage
                     you to review their respective privacy policies.
                 </p>
-                <h2>Changes</h2>{" "}
+                <h2>Changes</h2>{' '}
                 <p>
                     We may update this Privacy Policy from time to time. Any
                     changes will be posted on this page, and the "Last updated"
                     date will be revised accordingly. Contact Us: If you have
                     any questions or concerns about this Privacy Policy, please
-                    contact us at{" "}
-                    <a href="mailto:dev@tschiboka.co.uk">dev@tschiboka.co.uk</a>{" "}
-                    or{" "}
+                    contact us at{' '}
+                    <a href="mailto:tibi.aki.tivadar@gmail.com">
+                        tibi.aki.tivadar@gmail.com
+                    </a>{' '}
+                    or{' '}
                     <a href="mailto:tibi.aki.tivadar@gmail.com">
                         tibi.aki.tivadar@gmail.com
                     </a>
@@ -87,7 +89,7 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
             </main>
             <Footer path={path} />
         </Page>
-    );
-};
+    )
+}
 
-export default PrivacyPolicy;
+export default PrivacyPolicy
