@@ -8,7 +8,6 @@ import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import '../common/Form.scss'
 import './Tasks.scss'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
 interface TaskProps {
@@ -19,7 +18,7 @@ const Tasks = ({ path }: TaskProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
-    const { control, handleSubmit } = useForm({
+    const { control } = useForm({
         defaultValues: {
             taskName: '',
             activityType: '',

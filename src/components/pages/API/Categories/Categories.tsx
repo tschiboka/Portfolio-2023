@@ -24,7 +24,6 @@ import { useGetCategories, usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { getErrorMessage } from '../common/error'
 import { getParents } from './Categories.transformers'
-import { Maybe } from 'monet'
 
 type CategoriesProps = {
     path: string
