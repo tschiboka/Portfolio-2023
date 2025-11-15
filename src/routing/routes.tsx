@@ -36,6 +36,8 @@ import Admin from '../components/pages/API/Admin/Admin'
 import Logout from '../components/pages/API/Logout/Logout'
 import Categories from '../components/pages/API/Categories/Categories'
 import { Clock } from '../components/sharedComponents/Clock/Clock'
+// Misc Pages
+import Xmas2025 from '../components/pages/Misc/Xmas2025/Xmas2025'
 
 export const routes = [
     // Website Pages
@@ -204,6 +206,11 @@ export const routes = [
     {
         path: '/api/logout',
         element: <Logout path="/api/logout" />,
+    },
+    // Misc Pages (Side projects, etc.)
+    {
+        path: '/projects/xmas2025',
+        element: <Xmas2025 pageName="xmas2025" path="/projects/xmas2025" />,
     },
     // Error
     {

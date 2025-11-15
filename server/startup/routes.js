@@ -10,6 +10,7 @@ const login = require("../routes/login");
 const confirm = require("../routes/confirm");
 const log = require("../routes/log");
 const category = require("../routes/category")
+const xmas2025 = require("../projects/xmas_2025/routes")
 
 module.exports = function(app) {
     app.use("/", index);
@@ -23,4 +24,5 @@ module.exports = function(app) {
     app.use("/api/confirm", confirm);
     app.use("/api/log", log)
     app.use("/api/categories", category)
+    app.use("/projects/xmas_2025", xmas2025)
 }
