@@ -70,22 +70,39 @@ router.post("/", async (req, res) => {
     // Generate token string and persist
     const tokenString = generateToken(userToken, false)
     const token = new Token({token: tokenString})
-    await token.save()
-
-    // Email configuration
+    await token.save()    // Email configuration
     const emailContent = getEmailContent(tokenString)
     const from = "tibi.aki.tivadar@gmail.com";
     const to = userToken.email;
     const emailPassword = process.env.EMAIL_PASSWORD;
-    const mailOptions = getMailOptions(from, to, emailContent)
     
-    // Send confirmation email
+    // Debug logging for production
+    console.log('Email debug info:');
+    console.log('- From:', from);
+    console.log('- To:', to);
+    console.log('- Email password exists:', !!emailPassword);
+    console.log('- Email password length:', emailPassword ? emailPassword.length : 0);
+    console.log('- NODE_ENV:', process.env.NODE_ENV);
+    
+    const mailOptions = getMailOptions(from, to, emailContent)
+      // Send confirmation email
     const transporter = getMailTransporter(from, emailPassword)
+    
+    console.log('About to send email...');
     try {
+        console.log('Attempting to send email to:', to);
         await transporter.sendMail(mailOptions);
+        console.log('Email sent successfully!');
         return res.json({success: true, message: "Confirmation email sent"});
     } catch (err) {
-        return res.status(500).json({ success: false, message: "Could not send verification email" });
+        console.error('Email sending error details:', {
+            message: err.message,
+            code: err.code,
+            response: err.response,
+            responseCode: err.responseCode,
+            command: err.command
+        });
+        return res.status(500).json({ success: false, message: "Could not send verification email", error: err.message });
     }
 })
 

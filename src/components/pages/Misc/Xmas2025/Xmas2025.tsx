@@ -18,6 +18,7 @@ import { useLogout } from '../../API/Logout/Logout'
 import { xmasTransformer } from './Xmas2025.transformers'
 import Reindeer from '../../../../assets/images/projects/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
+import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
 
 interface Props {
     pageName: string
@@ -142,6 +143,9 @@ const Xmas2025 = ({ pageName, path }: Props) => {
                         </div>
                     </form>
                 </XmasFormCanvas>
+                <AccessGuard allowedRoles={['admin']}>
+                    <p>Message wall</p>
+                </AccessGuard>
             </main>
             <Footer
                 pageName={pageName}
