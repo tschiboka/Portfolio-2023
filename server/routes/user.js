@@ -5,7 +5,7 @@ const { User, validateUser, generateToken } = require('../models/user')
 const bcrypt = require("bcrypt")
 const { Settings, HALF_AN_HOUR_IN_SEC } = require("../models/setting")
 const { Token, validateToken } = require("../models/token")
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 router.get("/", async (req, res) => {
     const users = await User.find()
@@ -65,61 +65,41 @@ router.post("/", async (req, res) => {
         isAdmin: false,
         active: false,
         verified: false,
-    }
-
-    // Generate token string and persist
+    }    // Generate token string and persist
     const tokenString = generateToken(userToken, false)
     const token = new Token({token: tokenString})
     await token.save()    // Email configuration
     const emailContent = getEmailContent(tokenString)
-    const from = "tibi.aki.tivadar@gmail.com";
+    const from = "noreply@tschiboka.com";
     const to = userToken.email;
-    const emailPassword = process.env.EMAIL_PASSWORD;
+    const resendApiKey = process.env.RESEND_API_KEY;
     
     // Debug logging for production
     console.log('Email debug info:');
     console.log('- From:', from);
     console.log('- To:', to);
-    console.log('- Email password exists:', !!emailPassword);
-    console.log('- Email password length:', emailPassword ? emailPassword.length : 0);
-    console.log('- NODE_ENV:', process.env.NODE_ENV);    try {
-        const mailOptions = getMailOptions(from, to, emailContent)
-        const transporter = getMailTransporter(from, emailPassword)
+    console.log('- Resend API key exists:', !!resendApiKey);
+    console.log('- NODE_ENV:', process.env.NODE_ENV);
+    
+    try {
+        // Initialize Resend
+        const resend = new Resend(resendApiKey);
         
         console.log('About to send email...');
-        
-        // Verify transporter first (wrapped in promise for Vercel compatibility)
-        await new Promise((resolve, reject) => {
-            transporter.verify(function (error, success) {
-                if (error) {
-                    console.log('Transporter verification failed:', error);
-                    reject(error);
-                } else {
-                    console.log('Transporter is ready to send messages');
-                    resolve(success);
-                }
-            });
+          const { data, error } = await resend.emails.send({
+            from: from,
+            to: [to],
+            reply_to: "tibi.aki.tivadar@gmail.com",
+            subject: 'Confirm Registration | TSCHIBOKA.CO.UK',
+            html: emailContent,
         });
 
-        // Send email with proper promise handling for Vercel (no callback, return promise)
-        await new Promise((resolve, reject) => {
-            transporter.sendMail(mailOptions, (err, info) => {
-                if (err) {
-                    console.error('Email sending error details:', {
-                        message: err.message,
-                        code: err.code,
-                        response: err.response,
-                        responseCode: err.responseCode,
-                        command: err.command
-                    });
-                    reject(err);
-                } else {
-                    console.log('Email sent successfully:', info);
-                    resolve(info);
-                }
-            });
-        });
+        if (error) {
+            console.error('Resend API error:', error);
+            throw new Error(error.message || 'Email sending failed');
+        }
 
+        console.log('Email sent successfully:', data);
         return res.json({success: true, message: "Confirmation email sent"});
         
     } catch (err) {
@@ -133,36 +113,16 @@ router.post("/", async (req, res) => {
 })
 
 const getUrl = () => process.env.NODE_ENV === 'development'
-    ? "localhost:5173"
+    ? "http://localhost:5173"
     : "https://tschiboka.co.uk"
 
 
 const getEmailContent = (token) => `
     <h1>Confirm Registration</h1>
     <p>Please confirm your registration on Tschiboka App by clicking on the link below:</p>
-    <p><a href=${getUrl()}/#/api/email-verification/${token}>
+    <p><a href="${getUrl()}/#/api/email-verification/${token}">
         <strong>Verify registration</strong>
     </a></p>`
 
-
-const getMailOptions = (from, to, content) => ({                                          // Email Specifications
-    from: from,                                       
-    to: [from, to],
-    subject: 'Confirm Registration | TSCHIBOKA.CO.UK',
-    html: content
-});
-
-const getMailTransporter = (from, emailPassword) => nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: from,
-        pass: emailPassword
-    },
-    tls: { 
-        rejectUnauthorized: false 
-    }
-});
 
 module.exports = router
