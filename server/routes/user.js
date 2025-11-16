@@ -114,7 +114,7 @@ router.post("/", async (req, res) => {
 
 const getUrl = () => process.env.NODE_ENV === 'development'
     ? "http://localhost:5173"
-    : "https://tschiboka.co.uk"
+    : "https://tschiboka.com"
 
 
 const getEmailContent = (token) => `
