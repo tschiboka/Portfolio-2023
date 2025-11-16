@@ -19,7 +19,7 @@ const Stats = ({ path }: StatProps) => {
             title={'Tivadar Debnar | Stats'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Stats"

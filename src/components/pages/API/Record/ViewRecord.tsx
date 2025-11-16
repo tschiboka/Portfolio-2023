@@ -19,7 +19,7 @@ const ViewRecords = ({ path }: ViewRecordsProps) => {
             title={'Tivadar Debnar | View Records'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="View Records"

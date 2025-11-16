@@ -10,19 +10,25 @@ import { LoginFormData } from './Login.types'
 import { useLoginFormResources, useSettingsResources } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { QUERY_KEYS } from '../../../../common/queryKeys'
 import { setToken } from './Login.utils'
 import '../common/Form.scss'
 import './Login.scss'
+import Nav from '../../../sharedComponents/Nav/Nav'
+import Menu from '../../../sharedComponents/Menu/Menu'
+import SubNav from '../../../sharedComponents/SubNav/SubNav'
 
 type LoginProps = {
     path: string
+    pageName: string
 }
 
-const Login = ({ path }: LoginProps) => {
-    const { setUser } = useAppContext()
+const Login = ({ path, pageName }: LoginProps) => {
+    const { setUser, setSettings, mobileMenuVisible, subMenuVisible } =
+        useAppContext()
     const navigate = useNavigate()
+
     const [revealPassword, setRevealPassword] = useState(false)
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
     const { control, handleSubmit } = useForm({
@@ -68,6 +74,11 @@ const Login = ({ path }: LoginProps) => {
 
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
+
+    useEffect(() => {
+        setSettings(settingsData?.data?.data)
+    }, [settingsData, setSettings])
+
     return (
         <Page
             className="Login"
@@ -75,44 +86,51 @@ const Login = ({ path }: LoginProps) => {
             path={path}
             recordVisit={false}
         >
-            <div>
-                <h1>Login</h1>
-                <h2>Tschiboka Personal App</h2>
-            </div>
-            <form onSubmit={handleSubmit(submitHandler)}>
-                <fieldset>
-                    <label htmlFor="email">Email</label>
-                    <WrappedInput
-                        name="email"
-                        control={control}
-                        type="text"
-                        autoComplete="email"
-                    />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="password">Password</label>
-                    <WrappedInput
-                        name="password"
-                        control={control}
-                        type="password"
-                        addRevealPasswordIcon={true}
-                        revealPassword={revealPassword}
-                        setRevealPassword={setRevealPassword}
-                    />
-                </fieldset>
-                <LoadingIndicator show={isLoading} />
-                {loginErrorMessage && (
-                    <p className="submit-error-message">{loginErrorMessage}</p>
-                )}
-                <div className="button-box">
-                    <button name="submit">Login</button>
-                    {enableRegistration && (
-                        <button onClick={() => navigate('/api/register')}>
-                            Register User
-                        </button>
-                    )}
+            <Nav pageName={pageName} />
+            {mobileMenuVisible && <Menu pageName="home" />}
+            {subMenuVisible && <SubNav />}
+            <main>
+                <div>
+                    <h1>Login</h1>
+                    <h2>Tschiboka Personal App</h2>
                 </div>
-            </form>
+                <form onSubmit={handleSubmit(submitHandler)}>
+                    <fieldset>
+                        <label htmlFor="email">Email</label>
+                        <WrappedInput
+                            name="email"
+                            control={control}
+                            type="text"
+                            autoComplete="email"
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="password">Password</label>
+                        <WrappedInput
+                            name="password"
+                            control={control}
+                            type="password"
+                            addRevealPasswordIcon={true}
+                            revealPassword={revealPassword}
+                            setRevealPassword={setRevealPassword}
+                        />
+                    </fieldset>
+                    <LoadingIndicator show={isLoading} />
+                    {loginErrorMessage && (
+                        <p className="submit-error-message">
+                            {loginErrorMessage}
+                        </p>
+                    )}
+                    <div className="button-box">
+                        <button name="submit">Login</button>
+                        {enableRegistration && (
+                            <button onClick={() => navigate('/api/register')}>
+                                Register User
+                            </button>
+                        )}
+                    </div>
+                </form>
+            </main>
         </Page>
     )
 }

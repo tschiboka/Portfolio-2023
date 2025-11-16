@@ -19,7 +19,7 @@ const Events = ({ path }: EventsProp) => {
             title={'Tivadar Debnar | Events'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Events"

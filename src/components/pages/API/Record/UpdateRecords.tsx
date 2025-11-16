@@ -19,7 +19,7 @@ const UpdateRecords = ({ path }: UpdateRecordsProps) => {
             title={'Tivadar Debnar | Update Records'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Update Records"

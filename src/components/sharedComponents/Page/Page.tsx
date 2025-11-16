@@ -82,10 +82,13 @@ const Page = ({
 
     const navigate = useNavigate()
     const token = getToken()
+    const { user } = useAppContext()
 
     useEffect(() => {
-        !token && loginRequired && navigate('/')
-    }, [token])
+        if (loginRequired) {
+            if (!user || !token) navigate('/api/login')
+        }
+    })
 
     return (
         <div className={getClassName(className)}>

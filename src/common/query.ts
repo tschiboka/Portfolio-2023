@@ -9,18 +9,12 @@ export const useAPI = () => {
     return {
         get: (url: string) => axios.get(
             apiPathBuilder(url), 
-            { 
-                headers: {
-                    "x-auth-token": getStorage()?.token
-            }   
+            { headers: { "x-auth-token": getStorage()?.token }   
         }),
         post: (url: string, payload: object) => axios.post(
             apiPathBuilder(url), 
             payload, 
-            { 
-                headers: {
-                    "x-auth-token": getStorage()?.token
-            }   
+            { headers: { "x-auth-token": getStorage()?.token }   
         }),
     }
 }

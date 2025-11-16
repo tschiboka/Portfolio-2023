@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     user.password = undefined
 
     const token = jwt.sign({ id: _id, isAdmin }, process.env.JWT_PRIVATE_KEY)
-    res.status(200).header("x-auth-token", token).json({ success: true, token, user })
+    res.status(200).header("x-auth-token", token).json({ success: true, token, user: {id: _id, ...user.toObject()} })
 })
 
 module.exports = router

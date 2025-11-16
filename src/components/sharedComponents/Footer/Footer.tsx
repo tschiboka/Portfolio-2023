@@ -7,15 +7,23 @@ import { MdCopyright } from 'react-icons/md'
 import cv from '../../../assets/files/Tivadar_Debnar_CV_2023.pdf'
 import logo from '../../../assets/images/icon-light.svg'
 import './Footer.scss'
+import { ReactNode } from 'react'
 
 interface Props {
     pageName?: string
     path: string
     visitsPreLoaded?: boolean
     visitCount?: number
+    info?: ReactNode
 }
 
-const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
+const Footer = ({
+    pageName,
+    path,
+    visitsPreLoaded,
+    visitCount,
+    info,
+}: Props) => {
     const date = new Date()
     const year = date.getFullYear()
     return (
@@ -131,6 +139,7 @@ const Footer = ({ pageName, path, visitsPreLoaded, visitCount }: Props) => {
                 <span className="copyright__pipe">|</span>
                 Tivadar Debnar. All rights reserved.{' '}
             </p>
+            <div className="additional-info">{info}</div>
         </footer>
     )
 }

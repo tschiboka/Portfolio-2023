@@ -20,7 +20,7 @@ const AddRecords = ({ path }: AddRecordProps) => {
             title={'Tivadar Debnar | Add Records'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Add Records"

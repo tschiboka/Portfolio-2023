@@ -19,7 +19,7 @@ const Admin = ({ path }: AdminProps) => {
             title={'Tivadar Debnar | Admin'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Admin"

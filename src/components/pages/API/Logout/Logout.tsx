@@ -13,18 +13,29 @@ interface LogoutProps {
     path: string
 }
 
+export const useLogout = () => {
+    const navigate = useNavigate()
+    return () => {
+        dropToken()
+        navigate('/api/index')
+    }
+}
+
 const Logout = ({ path }: LogoutProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
     const navigate = useNavigate()
 
-    const handleLogoutClick = () => {
-        dropToken()
-        navigate('/api/index')
-    }
+    const logout = useLogout()
+    const handleLogoutClick = () => logout()
 
     return (
-        <Page title={'Tivadar Debnar | Logout'} path={path} recordVisit={false}>
+        <Page
+            title={'Tivadar Debnar | Logout'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+        >
             <Nav
                 pageName="Logout"
                 submenuStack={submenuStack}

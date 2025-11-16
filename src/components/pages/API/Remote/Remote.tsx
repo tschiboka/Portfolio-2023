@@ -19,7 +19,7 @@ const Remote = ({ path }: RemoteProps) => {
             title={'Tivadar Debnar | Remote'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Remote"

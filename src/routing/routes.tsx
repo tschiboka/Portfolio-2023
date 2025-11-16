@@ -145,7 +145,7 @@ export const routes = [
     // API Routes
     {
         path: '/api/login',
-        element: <Login path="/api/login" />,
+        element: <Login path="/api/login" pageName="login" />,
     },
     {
         path: '/api/register',

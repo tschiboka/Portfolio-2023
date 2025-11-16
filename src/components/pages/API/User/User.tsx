@@ -19,7 +19,7 @@ const User = ({ path }: UserProps) => {
             title={'Tivadar Debnar | User'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="User"

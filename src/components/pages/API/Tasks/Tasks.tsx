@@ -33,7 +33,7 @@ const Tasks = ({ path }: TaskProps) => {
             title={'Tivadar Debnar | Tasks'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Tasks"

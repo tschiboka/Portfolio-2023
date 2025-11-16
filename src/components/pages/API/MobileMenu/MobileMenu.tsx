@@ -9,6 +9,7 @@ import { Menu } from '../Nav/Nav.types'
 import { append, dropLast } from 'ramda'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 import moment from 'moment'
+import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
 
 type MobileMenuProps = { pageName: string }
 const MobileMenu = ({ pageName }: MobileMenuProps) => {
@@ -74,21 +75,26 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
                     pageName={pageName}
                 />
                 {menuStack[menuStack.length - 1].map((item) => (
-                    <li
+                    <AccessGuard
+                        allowedRoles={item.allowRoles}
                         key={item.label}
-                        className={isHighlighted(item, pageName)}
-                        onClick={() => handleItemClick(item)}
                     >
-                        <div className="active-dot"></div>
-                        <Link className="link" to={item?.path || ''}>
-                            {item.label}
-                            {item.submenu && (
-                                <div className="chevron-wrapper">
-                                    <BiChevronRight className="chevron" />
-                                </div>
-                            )}
-                        </Link>
-                    </li>
+                        <li
+                            key={item.label}
+                            className={isHighlighted(item, pageName)}
+                            onClick={() => handleItemClick(item)}
+                        >
+                            <div className="active-dot"></div>
+                            <Link className="link" to={item?.path || ''}>
+                                {item.label}
+                                {item.submenu && (
+                                    <div className="chevron-wrapper">
+                                        <BiChevronRight className="chevron" />
+                                    </div>
+                                )}
+                            </Link>
+                        </li>
+                    </AccessGuard>
                 ))}
                 {menuStack.length > 1 && (
                     <li key="back" onClick={handleBackClick}>

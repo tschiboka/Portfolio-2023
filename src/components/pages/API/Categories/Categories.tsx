@@ -101,7 +101,7 @@ const Categories = ({ path }: CategoriesProps) => {
             title={'Tivadar Debnar | Categories'}
             path={path}
             recordVisit={false}
-            loginRequired={true}
+            loginRequired
         >
             <Nav
                 pageName="Categories"

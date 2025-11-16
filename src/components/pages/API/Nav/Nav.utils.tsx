@@ -74,6 +74,7 @@ export const settingsMenu: Array<Menu> = [
         label: 'Admin',
         path: '/api/admin',
         parent: 'Settings',
+        allowRoles: ['admin'],
     },
 ]
 
@@ -85,12 +86,19 @@ export const menu: Array<Menu> = [
         path: '/api/index',
     },
     {
+        label: 'Xmas',
+        path: '/projects/xmas2025',
+        allowedFeatures: ['xmas2025'],
+    },
+    {
         label: 'Dashboard',
         submenu: dashboardMenu,
+        allowRoles: ['admin'],
     },
     {
         label: 'Manage',
         submenu: manageMenu,
+        allowRoles: ['admin'],
     },
     {
         label: 'Settings',

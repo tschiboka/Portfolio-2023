@@ -13,16 +13,21 @@ const category = require("../routes/category")
 const xmas2025 = require("../projects/xmas_2025/routes")
 
 module.exports = function(app) {
+    // Profile website routes
     app.use("/", index);
     app.use("/message", message);
     app.use("/visit", visit);
     app.use("/like", like);
     app.use("/schedule", schedule);
+
+    // API routes
     app.use("/api/settings", settings);
     app.use("/api/user", user);
     app.use("/api/login", login);
     app.use("/api/confirm", confirm);
     app.use("/api/log", log)
     app.use("/api/categories", category)
+
+    // Project routes
     app.use("/projects/xmas_2025", xmas2025)
-}
+1}

@@ -11,6 +11,7 @@ import {
 import './SubmenuPanel.scss'
 import Accordion from './MenuAccordion'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
+import { AccessGuard } from '../../../../../common/AccessGuard/AccessGuard'
 
 type SubmenuProps = {
     submenu?: Submenu
@@ -68,32 +69,33 @@ const SubmenuBasis = ({
     return (
         <div className="SubmenuBasis" style={{ top: '2.5rem', left: coords.x }}>
             {submenu?.options.map((item) => (
-                <li
-                    key={item.label}
-                    id={item.label}
-                    onClick={() => handleItemClick(item)}
-                >
-                    <Link className="link" to={item?.path || ''}>
-                        <span
-                            className={
-                                isParentMenu(item.label, submenuStack)
-                                    ? 'active'
-                                    : ''
-                            }
-                        >
-                            {item.label}
-                            {item.submenu &&
-                                (isExtended(item.label) ? (
-                                    <BiChevronUp className="chevron" />
-                                ) : (
-                                    <BiChevronDown className="chevron" />
-                                ))}
-                        </span>
-                    </Link>
-                    {isExtended(item.label) && (
-                        <Accordion items={item.submenu} pageName={pageName} />
-                    )}
-                </li>
+                <AccessGuard allowedRoles={item.allowRoles} key={item.label}>
+                    <li id={item.label} onClick={() => handleItemClick(item)}>
+                        <Link className="link" to={item?.path || ''}>
+                            <span
+                                className={
+                                    isParentMenu(item.label, submenuStack)
+                                        ? 'active'
+                                        : ''
+                                }
+                            >
+                                {item.label}
+                                {item.submenu &&
+                                    (isExtended(item.label) ? (
+                                        <BiChevronUp className="chevron" />
+                                    ) : (
+                                        <BiChevronDown className="chevron" />
+                                    ))}
+                            </span>
+                        </Link>
+                        {isExtended(item.label) && (
+                            <Accordion
+                                items={item.submenu}
+                                pageName={pageName}
+                            />
+                        )}
+                    </li>
+                </AccessGuard>
             ))}
         </div>
     )
