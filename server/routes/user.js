@@ -82,27 +82,53 @@ router.post("/", async (req, res) => {
     console.log('- To:', to);
     console.log('- Email password exists:', !!emailPassword);
     console.log('- Email password length:', emailPassword ? emailPassword.length : 0);
-    console.log('- NODE_ENV:', process.env.NODE_ENV);
-    
-    const mailOptions = getMailOptions(from, to, emailContent)
-      // Send confirmation email
-    const transporter = getMailTransporter(from, emailPassword)
-    
-    console.log('About to send email...');
-    try {
-        console.log('Attempting to send email to:', to);
-        await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully!');
-        return res.json({success: true, message: "Confirmation email sent"});
-    } catch (err) {
-        console.error('Email sending error details:', {
-            message: err.message,
-            code: err.code,
-            response: err.response,
-            responseCode: err.responseCode,
-            command: err.command
+    console.log('- NODE_ENV:', process.env.NODE_ENV);    try {
+        const mailOptions = getMailOptions(from, to, emailContent)
+        const transporter = getMailTransporter(from, emailPassword)
+        
+        console.log('About to send email...');
+        
+        // Verify transporter first (wrapped in promise for Vercel compatibility)
+        await new Promise((resolve, reject) => {
+            transporter.verify(function (error, success) {
+                if (error) {
+                    console.log('Transporter verification failed:', error);
+                    reject(error);
+                } else {
+                    console.log('Transporter is ready to send messages');
+                    resolve(success);
+                }
+            });
         });
-        return res.status(500).json({ success: false, message: "Could not send verification email", error: err.message });
+
+        // Send email with proper promise handling for Vercel (no callback, return promise)
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, (err, info) => {
+                if (err) {
+                    console.error('Email sending error details:', {
+                        message: err.message,
+                        code: err.code,
+                        response: err.response,
+                        responseCode: err.responseCode,
+                        command: err.command
+                    });
+                    reject(err);
+                } else {
+                    console.log('Email sent successfully:', info);
+                    resolve(info);
+                }
+            });
+        });
+
+        return res.json({success: true, message: "Confirmation email sent"});
+        
+    } catch (err) {
+        console.error('Email sending failed:', err);
+        return res.status(500).json({ 
+            success: false, 
+            message: "Could not send verification email", 
+            error: err.message 
+        });
     }
 })
 
@@ -127,14 +153,16 @@ const getMailOptions = (from, to, content) => ({                                
 });
 
 const getMailTransporter = (from, emailPassword) => nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
     auth: {
         user: from,
         pass: emailPassword
     },
-    secure: true,
-    port: 465,
-    tls: { rejectUnauthorized: false },
-    host: "smtp.gmail.com",
+    tls: { 
+        rejectUnauthorized: false 
+    }
 });
 
 module.exports = router
