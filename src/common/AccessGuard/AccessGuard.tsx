@@ -6,9 +6,9 @@ type AccessGuardProps = {
     allowedRoles?: Role[]
     allowedCapabilities?: string[] // Not implemented yet
     allowedFeatures?: string[]
-    deniedRoles?: string[] // Not implemented yet
+    deniedRoles?: Role[]
     deniedCapabilities?: string[] // Not implemented yet
-    deniedFeatures?: string[]
+    deniedFeatures?: string[] // Not implemented yet
 }
 
 const getAccess = (): AccessMap => {
@@ -27,11 +27,18 @@ const getAccess = (): AccessMap => {
 export const AccessGuard = ({
     children,
     allowedRoles,
+    deniedRoles,
     allowedFeatures,
 }: AccessGuardProps) => {
     const { roles, features } = getAccess()
-    const rolesGranted =
-        allowedRoles?.every((allowedRole) => roles[allowedRole as Role]) ?? true
+
+    const allowedRolesPass = allowedRoles
+        ? allowedRoles.every((allowedRole) => roles[allowedRole as Role])
+        : true
+    const deniedRolesPass = deniedRoles
+        ? !deniedRoles.some((deniedRole) => roles[deniedRole as Role])
+        : true
+    const rolesGranted = allowedRolesPass && deniedRolesPass
     const featuresGranted =
         allowedFeatures?.every((allowedFeature) => features[allowedFeature]) ??
         true

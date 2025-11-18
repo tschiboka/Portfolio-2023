@@ -1,3 +1,6 @@
 export const SECOND_IN_MILLIS = 1000
 export const MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60
 export const HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60
+
+export const DISPLAY_DATE_TIME_FORMAT = 'DD/MM/YYYY HH:mm'
+export const DISPLAY_DATE_FORMAT = 'DD/MM/YYYY'

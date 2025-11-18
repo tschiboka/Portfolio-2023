@@ -1,7 +1,11 @@
 import Footer from '../../../sharedComponents/Footer/Footer'
 import { useAppContext } from '../../../../context/AppContext'
 import Page from '../../../sharedComponents/Page/Page'
-import { useGetPagePingData, usePostMessage } from './Xmas2025.queries'
+import {
+    useGetMessages,
+    useGetPagePingData,
+    usePostMessage,
+} from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
 import { Submenu } from '../../API/Nav'
 import Nav from '../../API/Nav/Nav'
@@ -18,7 +22,8 @@ import { useLogout } from '../../API/Logout/Logout'
 import { xmasTransformer } from './Xmas2025.transformers'
 import Reindeer from '../../../../assets/images/projects/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
-import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
+import { MessageWall } from './MessageWall'
+import { YourMessages } from './YourMessages'
 
 interface Props {
     pageName: string
@@ -48,6 +53,7 @@ const Xmas2025 = ({ pageName, path }: Props) => {
     const { mutate: submitMessage, ...submitMessageResponse } = usePostMessage({
         onSuccess: () => reset(),
     })
+    const { data: messages } = useGetMessages({ userId: user?.id })
 
     const logout = useLogout()
     const submitHandler = (data: XmasFormData) =>
@@ -143,9 +149,8 @@ const Xmas2025 = ({ pageName, path }: Props) => {
                         </div>
                     </form>
                 </XmasFormCanvas>
-                <AccessGuard allowedRoles={['admin']}>
-                    <p>Message wall</p>
-                </AccessGuard>
+                <MessageWall messages={messages?.data.data} />
+                <YourMessages messages={messages?.data.data} />
             </main>
             <Footer
                 pageName={pageName}

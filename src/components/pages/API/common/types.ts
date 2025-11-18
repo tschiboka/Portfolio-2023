@@ -11,3 +11,11 @@ export type CategoryResource = {
 }
 
 export type CategoryRequestResource = CategoryResource & { _id: string }
+
+export type XmasMessageResponseResource = {
+    _id: string,
+    name: string,
+    message: string,
+    userId: string,
+    createdAt: Date,
+}

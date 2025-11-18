@@ -3,6 +3,7 @@ import axios from "axios";
 import { apiPathBuilder, ApiPaths } from "../../../../routing/apiPathBuilder";
 import { XmasMessageRequestResource } from "./Xmas2025.types";
 import { getStorage } from "../../../../common/query";
+import { XmasMessageResponseResource } from "../../API/common/types";
 
 export const useGetPagePingData = () => 
     useQuery({
@@ -17,7 +18,19 @@ export const usePostMessage = ({onSuccess}: UsePostMessage) =>  useMutation({
             await axios.post(
                 apiPathBuilder(ApiPaths.PROJECT_XMAS, { prefix: '' }) + "/message", 
                 payload,
-                { headers: { "x-auth-token": getStorage()?.token }}
+                { headers: { "x-auth-token": getStorage()?.token } }
             ),   
         onSuccess
+    })
+
+type UseGetMessages = { userId?: string }
+export const useGetMessages = ({userId}: UseGetMessages) =>  useQuery({
+        queryKey: ["xmas-message"],
+        queryFn: async () => 
+            await axios.get<{success: boolean, data: XmasMessageResponseResource[]}>(
+                apiPathBuilder(ApiPaths.PROJECT_XMAS, { prefix: '' }) + "/message",
+                { params: { userId },  headers: { "x-auth-token": getStorage()?.token }},
+                
+            ),
+        enabled: Boolean(userId)
     })
