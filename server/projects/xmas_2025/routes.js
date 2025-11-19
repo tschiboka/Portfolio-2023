@@ -25,7 +25,6 @@ router.get("/message", [auth], async (req, res) => {
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ success: false, message: "User not found" })
         
-    console.log(user)
     if (user.isAdmin) {
         const messages = await XmasMessage.find().sort({ createdAt: -1 });
         return res.status(200).json({ success: true, data: messages })
@@ -33,6 +32,11 @@ router.get("/message", [auth], async (req, res) => {
 
     const messages = await XmasMessage.find({ userId: user._id }).sort({ createdAt: -1 });
     res.status(200).json({ success: true, data: messages })
+})
+
+router.get("/message/device", async (_, res) => {
+    const messages = await XmasMessage.find().sort({ createdAt: -1 });
+    return res.status(200).json({ success: true, data: messages })
 })
 
 module.exports = router;
