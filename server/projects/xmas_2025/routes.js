@@ -35,7 +35,7 @@ router.get("/message", [auth], async (req, res) => {
 })
 
 router.get("/message/device", async (_, res) => {
-    const messages = await XmasMessage.find().sort({ createdAt: -1 });
+    const messages = await XmasMessage.find().sort({ createdAt: -1 }).limit(10);
     return res.status(200).json({ success: true, data: messages })
 })
 
