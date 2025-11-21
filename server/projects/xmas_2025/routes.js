@@ -37,7 +37,7 @@ router.get("/message", [auth], async (req, res) => {
 router.get("/message/device", async (_, res) => {
     const messages = await XmasMessage.find().sort({ createdAt: -1 }).limit(10);
     const textResponse = messages.map(msg => `${msg.name}: ${msg.message}`).join(', ');
-    return res.status(200).send(textResponse)
+    return res.status(200).send(`<<<${textResponse}>>>`)
 })
 
 module.exports = router;
