@@ -7,14 +7,14 @@ const xmasMessageSchema = mongoose.Schema({
         type: String,
         required: true,
         minLength: 4,
-        maxLength: 20,
+        maxLength: 16,
         trim: true,
     },
     message: {
         type: String,
         required: true,
         minLength: 1,
-        maxLength: 40,
+        maxLength: 50,
         trim: true,
     },
     userId: {
@@ -28,8 +28,8 @@ const XmasMessage = new mongoose.model("XmasMessage", xmasMessageSchema)
 
 function validateMessage(message) {
     const schema = Joi.object({
-        name: Joi.string().required().min(4).max(20),
-        message: Joi.string().required().min(1).max(40),
+        name: Joi.string().required().min(4).max(16),
+        message: Joi.string().required().min(1).max(50),
         userId: Joi.string().required(),
     });
 

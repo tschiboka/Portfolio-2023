@@ -46,7 +46,7 @@ const Xmas2025 = ({ pageName, path }: Props) => {
             message: '',
         },
         resolver: yupResolver(xmasSchema),
-        mode: 'onChange',
+        mode: 'onSubmit',
     })
 
     const { data: ping, ...pingResponse } = useGetPagePingData()
