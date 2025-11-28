@@ -1,17 +1,7 @@
-import { useState } from 'react'
-import { useAppContext } from '../../../../context/AppContext'
-import Page from '../../../sharedComponents/Page/Page'
-import MobileMenu from '../MobileMenu/MobileMenu'
-import Nav from '../Nav/Nav'
-import { Submenu } from '../Nav'
-import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import './Logout.scss'
 import { dropToken } from '../Login/Login.utils'
-
-interface LogoutProps {
-    path: string
-}
 
 export const useLogout = () => {
     const navigate = useNavigate()
@@ -21,53 +11,14 @@ export const useLogout = () => {
     }
 }
 
-const Logout = ({ path }: LogoutProps) => {
-    const { mobileMenuVisible } = useAppContext()
-    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
-    const navigate = useNavigate()
-
+const Logout = () => {
     const logout = useLogout()
-    const handleLogoutClick = () => logout()
 
-    return (
-        <Page
-            title={'Tivadar Debnar | Logout'}
-            path={path}
-            recordVisit={false}
-            loginRequired
-        >
-            <Nav
-                pageName="Logout"
-                submenuStack={submenuStack}
-                setSubmenuStack={setSubmenuStack}
-            />
-            {Boolean(submenuStack.length) && (
-                <SubmenuPanel
-                    key={submenuStack[0].parentLabel}
-                    submenu={submenuStack[0]}
-                    submenuStack={submenuStack}
-                    setSubmenuStack={setSubmenuStack}
-                    pageName="Logout"
-                />
-            )}
-            {mobileMenuVisible && <MobileMenu pageName="Logout" />}
-            <main className="Logout">
-                <h1>Logout</h1>
-                <p>Would you like to log out?</p>
-                <div className="logout-wrapper">
-                    <button className="button" onClick={handleLogoutClick}>
-                        Log me out
-                    </button>
-                    <button
-                        className="button"
-                        onClick={() => navigate('/api/index')}
-                    >
-                        Back to Home
-                    </button>
-                </div>
-            </main>
-        </Page>
-    )
+    useEffect(() => {
+        logout()
+    }, [logout])
+
+    return <></>
 }
 
 export default Logout

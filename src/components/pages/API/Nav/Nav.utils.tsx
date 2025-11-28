@@ -69,6 +69,7 @@ export const settingsMenu: Array<Menu> = [
         label: 'User',
         path: '/api/user',
         parent: 'Settings',
+        allowRoles: ['admin'],
     },
     {
         label: 'Admin',
@@ -103,6 +104,7 @@ export const menu: Array<Menu> = [
     {
         label: 'Settings',
         submenu: settingsMenu,
+        allowRoles: ['admin'],
     },
     {
         label: 'Logout',
