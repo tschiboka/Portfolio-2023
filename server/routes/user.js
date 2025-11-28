@@ -6,11 +6,20 @@ const bcrypt = require("bcrypt")
 const { Settings, HALF_AN_HOUR_IN_SEC } = require("../models/setting")
 const { Token, validateToken } = require("../models/token")
 const { Resend } = require("resend");
+const auth = require("../middlewares/auth");
 
 router.get("/", async (req, res) => {
     const users = await User.find()
     if (!users.length) return res.status(404).json({ success: false, message: "Content not Found" })
     res.status(200).json({ success: true, data: users })
+})
+
+router.get("/rehydrate", [auth], async (req, res) => {
+    const userId = req.user.id;
+    const user = await User.findById(userId).select('-password')
+    
+    if (!user) return res.status(404).json({ success: false, message: "User not found" })
+    res.status(200).json({ success: true, data: { user } })
 })
 
 router.get("/:id", async (req, res) => {
@@ -74,19 +83,10 @@ router.post("/", async (req, res) => {
     const to = userToken.email;
     const resendApiKey = process.env.RESEND_API_KEY;
     
-    // Debug logging for production
-    console.log('Email debug info:');
-    console.log('- From:', from);
-    console.log('- To:', to);
-    console.log('- Resend API key exists:', !!resendApiKey);
-    console.log('- NODE_ENV:', process.env.NODE_ENV);
-    
     try {
         // Initialize Resend
         const resend = new Resend(resendApiKey);
-        
-        console.log('About to send email...');
-          const { data, error } = await resend.emails.send({
+        const { data, error } = await resend.emails.send({
             from: from,
             to: [to],
             reply_to: "tibi.aki.tivadar@gmail.com",
@@ -99,11 +99,9 @@ router.post("/", async (req, res) => {
             throw new Error(error.message || 'Email sending failed');
         }
 
-        console.log('Email sent successfully:', data);
         return res.json({success: true, message: "Confirmation email sent"});
         
     } catch (err) {
-        console.error('Email sending failed:', err);
         return res.status(500).json({ 
             success: false, 
             message: "Could not send verification email", 

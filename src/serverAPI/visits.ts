@@ -15,9 +15,7 @@ export const getVisits = async (
     try {
         const response = await fetch(`${getURL()}/visit?path=${path}`, options);
         const responseJSON = await response.json();
-        if (responseJSON.success) {
-            callback(responseJSON.visits);
-        } else console.log("Error While Sending Visit!", response);
+        if (responseJSON.success) callback(responseJSON.visits)
     } catch (err) {
         console.log("Error While Sending Message!", err);
     }
@@ -36,9 +34,7 @@ export const getVisitSummary = async (
     try {
         const response = await fetch(`${getURL()}/visit`, options);
         const responseJSON = await response.json();
-        if (responseJSON.success) {
-            callback(responseJSON.visits);
-        } else console.log("Error While Getting Visits Data!", response);
+        if (responseJSON.success) callback(responseJSON.visits);
     } catch (err) {
         console.log("Error While Getting Visits Data!", err);
     }
@@ -64,9 +60,7 @@ export const postVisit = async (path: string) => {
     try {
         const response = await fetch(URL, options);
         const responseJSON = await response.json();
-        if (responseJSON.success) {
-            console.log("Visit Recorded");
-        } else console.log("Error While Sending Visit!", response);
+        if (responseJSON.success) console.log("Visit Recorded");
     } catch (err) {
         console.log("Error While Sending Message!", err);
     }

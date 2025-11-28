@@ -5,6 +5,7 @@ export const ApiPaths = {
     SETTINGS: 'SETTINGS',
     REGISTER_USER: 'USER',
     CONFIRM_REGISTRATION: 'CONFIRM',
+    REHYDRATE_SESSION: 'REHYDRATE_SESSION',
     CATEGORIES: "CATEGORIES",
     PROJECT_XMAS: "PROJECT_XMAS"
 }
@@ -21,6 +22,7 @@ export const apiPathBuilder = (pathName: string, options?: ApiPathBuilderOptions
         SETTINGS: 'settings',
         REGISTER_USER: 'user',
         CONFIRM_REGISTRATION: 'confirm',
+        REHYDRATE_SESSION: 'user/rehydrate',
         CATEGORIES: 'categories',
         PROJECT_XMAS: 'projects/xmas_2025',
     }

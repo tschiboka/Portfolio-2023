@@ -7,9 +7,7 @@ export const getLikes = async (
 ) => {
     const options = {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
     };
 
     try {
@@ -17,7 +15,7 @@ export const getLikes = async (
         const responseJSON = await response.json();
         if (responseJSON.success) {
             callback(responseJSON.likes);
-        } else console.log("Error While Getting Like Data!", response);
+        }
     } catch (err) {
         console.log("Error While Getting Like Data!", err);
     }
@@ -58,9 +56,7 @@ export const postLike = async (path: string, callback: () => void) => {
     try {
         const response = await fetch(`${URL}`, options);
         const responseJSON = await response.json();
-        if (responseJSON.success) {
-            callback();
-        } else console.log("Error While Getting Like Data!", response);
+        if (responseJSON.success) callback();
     } catch (err) {
         console.log("Error While Getting Like Data!", err);
     }

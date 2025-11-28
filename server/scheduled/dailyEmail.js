@@ -38,14 +38,11 @@ async function dailyEmail() {
     }
 
     const message = createMessage(breakdown);
-    console.log("Call SendEmail");
     try {
         await sendEmail(message);
-        console.log("Email Successfully Sent");
         return { success: true };
     }
     catch {
-        console.log("Error in Send Mail", err);
         return { success: false, error: err };
     }
 }

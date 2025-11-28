@@ -32,7 +32,6 @@ import SuggestedArticles from '../SuggestedArticles/SuggestedArticles'
 
 // Functions
 const scrollToTop = () => {
-    console.log('Scroll')
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 }
 

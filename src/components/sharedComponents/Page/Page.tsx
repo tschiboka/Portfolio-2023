@@ -6,7 +6,6 @@ import Overlay from '../Overlay/Overlay'
 import './Page.scss'
 import { Maybe } from 'monet'
 import { useNavigate } from 'react-router-dom'
-import { getToken } from '../../pages/API/Login/Login.utils'
 
 interface Props {
     children: ReactNode
@@ -81,14 +80,12 @@ const Page = ({
             .orSome('Page')
 
     const navigate = useNavigate()
-    const token = getToken()
-    const { user } = useAppContext()
+    const { isAuthenticated, isAuthLoading } = useAppContext()
 
     useEffect(() => {
-        if (loginRequired) {
-            if (!user || !token) navigate('/api/login')
-        }
-    })
+        if (loginRequired && !isAuthLoading && !isAuthenticated)
+            navigate('/api/login')
+    }, [loginRequired, isAuthenticated, isAuthLoading, navigate])
 
     return (
         <div className={getClassName(className)}>

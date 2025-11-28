@@ -9,6 +9,8 @@ import {
     SettingsResources,
     User,
 } from '../components/pages/API/Login/Login.types'
+import { useRehydrateSessionResources } from '../components/pages/API/Login/Login.query'
+import { getToken, dropToken } from '../components/pages/API/Login/Login.utils'
 
 interface AppContextValues {
     themeMode: string
@@ -31,6 +33,9 @@ interface AppContextValues {
     setUser: (user: User) => void
     settings?: SettingsResources
     setSettings: (settings: SettingsResources) => void
+    isAuthenticated: boolean
+    isAuthLoading: boolean
+    authError?: string
 }
 
 const AppContext = createContext<AppContextValues | undefined>(undefined)
@@ -71,6 +76,20 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     const [user, setUser] = useState<User>()
     const [settings, setSettings] = useState<SettingsResources>()
 
+    const token = getToken()
+    const {
+        data: rehydrateData,
+        isSuccess,
+        isError,
+        error,
+        isLoading,
+    } = useRehydrateSessionResources(token)
+    const isAuthLoading = !!token && (isLoading || !user) && !isError
+    const isAuthenticated = !!user && !!token
+    const authError = isError
+        ? error?.message || 'Authentication failed'
+        : undefined
+
     const contextValues: AppContextValues = {
         themeMode,
         setThemeMode,
@@ -92,17 +111,30 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
         setUser,
         settings,
         setSettings,
+        isAuthenticated,
+        isAuthLoading,
+        authError,
     }
 
     useEffect(() => {
         const body = document.getElementsByTagName('body')[0]
         const storage = localStorage.getItem('tschiboka') || '{}'
         const storageJSON = JSON.parse(storage)
-        const newStorage = { ...storageJSON, theme: themeMode }
+        const updatedStorage = { ...storageJSON, theme: themeMode }
 
-        localStorage.setItem('tschiboka', JSON.stringify(newStorage))
+        localStorage.setItem('tschiboka', JSON.stringify(updatedStorage))
         body.className = themeMode
     }, [themeMode])
+
+    useEffect(() => {
+        if (token && isSuccess && rehydrateData?.data?.data?.user) {
+            setUser(rehydrateData.data.data.user)
+        }
+        if (token && isError) {
+            dropToken()
+            setUser(undefined as any)
+        }
+    }, [token, user, isSuccess, isError, rehydrateData, isLoading])
 
     return (
         <AppContext.Provider value={contextValues}>

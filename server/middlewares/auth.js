@@ -6,8 +6,7 @@ module.exports = function auth(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
-
-        const expired = decoded.exp <= Date.now();
+        const expired = decoded.exp <= Math.floor(Date.now() / 1000);
         if (expired) return res.status(401).json({ success: false, message: 'Token expired!' })
 
         req.user = decoded;

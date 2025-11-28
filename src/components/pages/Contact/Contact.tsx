@@ -139,7 +139,6 @@ const Contact = ({ pageName, path }: Props) => {
             try {
                 const response = await fetch(URL, options)
                 const responseJSON = await response.json()
-                console.log('RESPONSE', responseJSON)
                 if (responseJSON.success) {
                     setUserMessage('Message Sent!')
                     setShowMessageAck(true)
@@ -167,7 +166,6 @@ const Contact = ({ pageName, path }: Props) => {
     const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target) {
             const onlyDigits = event.target.value.replace(/\D/g, '')
-            console.log(onlyDigits)
             event.target.value = onlyDigits
         }
 
