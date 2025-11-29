@@ -19,3 +19,13 @@ export type XmasMessageResponseResource = {
     userId: string,
     createdAt: Date,
 }
+
+export type SesttingResource = {
+    maxUsers: number,
+    enableMaintenanceMode: boolean,
+    enableUserRegistration: boolean,
+    enableAutomaticLogoff: boolean,
+    enabledFeatures: string[],
+    registrationTokensExpireInMs: number,
+    sessionTokensExpireInMs: number,
+}

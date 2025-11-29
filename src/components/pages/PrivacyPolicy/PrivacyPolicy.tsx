@@ -3,7 +3,7 @@ import SubNav from '../../sharedComponents/SubNav/SubNav'
 import Menu from '../../sharedComponents/Menu/Menu'
 import Footer from '../../sharedComponents/Footer/Footer'
 import Page from '../../sharedComponents/Page/Page'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 import './PrivacyPolicy.scss'
 
 interface Props {

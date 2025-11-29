@@ -9,7 +9,7 @@ import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingInd
 import { FiPhone } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { ChangeEvent, useRef, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 import './Contact.scss'
 
 interface Props {

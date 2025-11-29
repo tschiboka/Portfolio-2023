@@ -43,7 +43,6 @@ const Register = ({ path }: IndexProps) => {
             setSuccessfulRegistration(res.data.message)
         },
         onError: (error: AxiosError<any>) => {
-            console.log(error.message)
             setRegistrationErrorMessage(
                 error.response?.data?.message || error.message,
             )

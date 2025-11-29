@@ -1,5 +1,5 @@
 import Footer from '../../../sharedComponents/Footer/Footer'
-import { useAppContext } from '../../../../context/AppContext'
+import { useAppContext } from '../../../../context/AppContext/App.context'
 import Page from '../../../sharedComponents/Page/Page'
 import {
     useGetMessages,
@@ -24,6 +24,7 @@ import Reindeer from '../../../../assets/images/projects/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
+import { useSessionContext } from '../../../../context/SessionContext/Session.context'
 
 interface Props {
     pageName: string
@@ -31,7 +32,8 @@ interface Props {
 }
 
 const Xmas2025 = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, user } = useAppContext()
+    const { mobileMenuVisible } = useAppContext()
+    const { user } = useSessionContext().session || {}
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
     const [pagePingStatus, setPagePingStatus] = useState<string>('')
 

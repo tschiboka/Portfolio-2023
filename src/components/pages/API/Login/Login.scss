@@ -18,6 +18,12 @@
     } 
 }
 
+.light {
+    form {
+        background: $white_3;
+    }
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);

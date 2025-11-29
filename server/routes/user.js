@@ -14,14 +14,6 @@ router.get("/", async (req, res) => {
     res.status(200).json({ success: true, data: users })
 })
 
-router.get("/rehydrate", [auth], async (req, res) => {
-    const userId = req.user.id;
-    const user = await User.findById(userId).select('-password')
-    
-    if (!user) return res.status(404).json({ success: false, message: "User not found" })
-    res.status(200).json({ success: true, data: { user } })
-})
-
 router.get("/:id", async (req, res) => {
     const valid = mongoose.Types.ObjectId.isValid(req.params.id);
     if (!valid) return res.status(400).json({ success: false, message: "Invalid user id: " + req.params.id }) 

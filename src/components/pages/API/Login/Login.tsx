@@ -8,16 +8,16 @@ import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/Wr
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { LoginFormData } from './Login.types'
 import { useLoginFormResources, useSettingsResources } from './Login.query'
-import { useAppContext } from '../../../../context/AppContext'
+import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { QUERY_KEYS } from '../../../../common/queryKeys'
-import { setToken } from './Login.utils'
 import '../common/Form.scss'
 import './Login.scss'
 import Nav from '../../../sharedComponents/Nav/Nav'
 import Menu from '../../../sharedComponents/Menu/Menu'
 import SubNav from '../../../sharedComponents/SubNav/SubNav'
+import { useSessionContext } from '../../../../context/SessionContext/Session.context'
 
 type LoginProps = {
     path: string
@@ -25,8 +25,8 @@ type LoginProps = {
 }
 
 const Login = ({ path, pageName }: LoginProps) => {
-    const { setUser, setSettings, mobileMenuVisible, subMenuVisible } =
-        useAppContext()
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
+    const { setSession } = useSessionContext()
     const navigate = useNavigate()
 
     const [revealPassword, setRevealPassword] = useState(false)
@@ -54,9 +54,9 @@ const Login = ({ path, pageName }: LoginProps) => {
         mutationFn: (data: LoginFormData) => useLoginFormResources(data),
         onSuccess: (response) => {
             setLoginErrorMessage('')
-            const { token, user } = response.data
-            setToken(token)
-            setUser(user)
+            const { token, user, settings } = response.data || {}
+            const session = { token, user, settings }
+            setSession(session)
             navigate('/api/index')
         },
         onError: (error: AxiosError<any>) => {
@@ -74,10 +74,6 @@ const Login = ({ path, pageName }: LoginProps) => {
 
     const enableRegistration = settingsData?.data?.data?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
-
-    useEffect(() => {
-        setSettings(settingsData?.data?.data)
-    }, [settingsData, setSettings])
 
     return (
         <Page

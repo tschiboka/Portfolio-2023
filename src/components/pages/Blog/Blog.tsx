@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
 import Footer from '../../sharedComponents/Footer/Footer'
 import Menu from '../../sharedComponents/Menu/Menu'

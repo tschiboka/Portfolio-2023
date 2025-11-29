@@ -1,27 +1,27 @@
-import Nav from "../../sharedComponents/Nav/Nav";
-import Menu from "../../sharedComponents/Menu/Menu";
-import SubNav from "../../sharedComponents/SubNav/SubNav";
-import Footer from "../../sharedComponents/Footer/Footer";
-import AchievementList from "../../sharedComponents/AchievementList/AchievementList";
+import Nav from '../../sharedComponents/Nav/Nav'
+import Menu from '../../sharedComponents/Menu/Menu'
+import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Footer from '../../sharedComponents/Footer/Footer'
+import AchievementList from '../../sharedComponents/AchievementList/AchievementList'
 import {
     academicAchievements,
     certificateAchievements,
-} from "../../sharedComponents/AchievementListItem/Achievements";
-import guitarImage from "../../../assets/images/about/RiffMaster.png";
-import guitarAppImage from "../../../assets/images/about/RiffMaster_App.png";
-import guitarAppImageSm from "../../../assets/images/about/RiffMaster_App_Mobile.png";
-import { Link } from "react-router-dom";
-import { useAppContext } from "../../../context/AppContext";
-import Page from "../../sharedComponents/Page/Page";
-import "./About.scss";
+} from '../../sharedComponents/AchievementListItem/Achievements'
+import guitarImage from '../../../assets/images/about/RiffMaster.png'
+import guitarAppImage from '../../../assets/images/about/RiffMaster_App.png'
+import guitarAppImageSm from '../../../assets/images/about/RiffMaster_App_Mobile.png'
+import { Link } from 'react-router-dom'
+import { useAppContext } from '../../../context/AppContext/App.context'
+import Page from '../../sharedComponents/Page/Page'
+import './About.scss'
 
 interface Props {
-    pageName: string;
-    path: string;
+    pageName: string
+    path: string
 }
 
 const About = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext();
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     return (
         <Page title="Tivadar Debnar | About" path="/about">
             <Nav pageName={pageName} />
@@ -127,7 +127,7 @@ const About = ({ pageName, path }: Props) => {
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>
-    );
-};
+    )
+}
 
-export default About;
+export default About

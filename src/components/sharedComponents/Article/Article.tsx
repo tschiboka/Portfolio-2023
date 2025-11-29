@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 
 // Components
 import Page from '../../sharedComponents/Page/Page'

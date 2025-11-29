@@ -1,20 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import './Logout.scss'
-import { dropToken } from '../Login/Login.utils'
-import { useAppContext } from '../../../../context/AppContext'
-import { useQueryClient } from '@tanstack/react-query'
+import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { LocalSession } from '../../../../context/SessionContext/LocalSession'
 
 export const useLogout = () => {
     const navigate = useNavigate()
-    const { setUser } = useAppContext()
-    const queryClient = useQueryClient()
+    const { setSession } = useSessionContext()
 
     return () => {
-        dropToken()
-        setUser(undefined as any)
-        queryClient.invalidateQueries({ queryKey: ['rehydrateSession'] })
-        queryClient.clear()
+        LocalSession.getInstance().drop()
+        setSession(undefined)
         navigate('/api/index')
     }
 }

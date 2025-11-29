@@ -16,7 +16,7 @@ import { getReferenceList } from '../references'
 
 // Styles
 import './HookPattern.scss'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 
 interface Props {
     pageName: string

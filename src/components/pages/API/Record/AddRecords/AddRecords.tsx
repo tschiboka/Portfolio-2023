@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useAppContext } from '../../../../../context/AppContext'
+import { useAppContext } from '../../../../../context/AppContext/App.context'
 import Page from '../../../../sharedComponents/Page/Page'
 import MobileMenu from '../../MobileMenu/MobileMenu'
 import Nav from '../../Nav/Nav'

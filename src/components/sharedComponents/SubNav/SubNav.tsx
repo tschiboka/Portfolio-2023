@@ -4,7 +4,7 @@ import { TfiLinkedin } from 'react-icons/tfi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import Toggle from '../Toggle/Toggle'
 import './SubNav.scss'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 
 const SubNav = () => {
     const { themeMode, setThemeMode } = useAppContext()

@@ -1,4 +1,4 @@
-import { useAppContext } from '../../context/AppContext'
+import { useSessionContext } from '../../context/SessionContext/Session.context'
 import { AccessMap, Role } from './AccessGuard.types'
 
 type AccessGuardProps = {
@@ -12,7 +12,7 @@ type AccessGuardProps = {
 }
 
 const getAccess = (): AccessMap => {
-    const { user, settings } = useAppContext()
+    const { user, settings } = useSessionContext().session || {}
 
     return {
         features: {

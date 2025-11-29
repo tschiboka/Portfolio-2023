@@ -8,7 +8,7 @@ import {
     SiAdobeillustrator,
 } from 'react-icons/si'
 import { FaNodeJs } from 'react-icons/fa'
-import { useAppContext } from '../../../../context/AppContext'
+import { useAppContext } from '../../../../context/AppContext/App.context'
 import './Welcome.scss'
 import { useNavigate } from 'react-router-dom'
 

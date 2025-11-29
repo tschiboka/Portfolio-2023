@@ -1,20 +1,19 @@
 import axios from "axios";
-import { Maybe } from "monet";
 import { apiPathBuilder } from "../routing/apiPathBuilder";
-
-export const getStorage = () => Maybe.fromNull(localStorage.getItem("tschiboka")).map(JSON.parse).orUndefined()
-
+import { useSessionContext } from "../context/SessionContext/Session.context";
 
 export const useAPI = () => {
+    const token = useSessionContext().session?.token
+    
     return {
         get: (url: string) => axios.get(
             apiPathBuilder(url), 
-            { headers: { "x-auth-token": getStorage()?.token }   
+            { headers: { "x-auth-token": token }   
         }),
         post: (url: string, payload: object) => axios.post(
             apiPathBuilder(url), 
             payload, 
-            { headers: { "x-auth-token": getStorage()?.token }   
+            { headers: { "x-auth-token": token }   
         }),
     }
 }

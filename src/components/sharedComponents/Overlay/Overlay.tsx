@@ -1,10 +1,10 @@
-import "./Overlay.scss";
-import { useAppContext } from "../../../context/AppContext";
+import './Overlay.scss'
+import { useAppContext } from '../../../context/AppContext/App.context'
 
 const Overlay = () => {
-    const { overlayVisible, overlayContent } = useAppContext();
+    const { overlayVisible, overlayContent } = useAppContext()
 
-    if (overlayVisible) return <div className="Overlay">{overlayContent}</div>;
-};
+    if (overlayVisible) return <div className="Overlay">{overlayContent}</div>
+}
 
-export default Overlay;
+export default Overlay

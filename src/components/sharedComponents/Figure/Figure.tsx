@@ -1,17 +1,17 @@
-import { useAppContext } from "../../../context/AppContext";
-import ZoomedImage from "../ZoomedImage/ZoomedImage";
-import { TbZoomInFilled, TbZoomOutFilled } from "react-icons/tb";
-import { Reference } from "../References/References";
-import "./Figure.scss";
-import InlineReference from "../InlineReference/InlineReference";
+import { useAppContext } from '../../../context/AppContext/App.context'
+import ZoomedImage from '../ZoomedImage/ZoomedImage'
+import { TbZoomInFilled, TbZoomOutFilled } from 'react-icons/tb'
+import { Reference } from '../References/References'
+import './Figure.scss'
+import InlineReference from '../InlineReference/InlineReference'
 
 interface Props {
-    image: string;
-    className: string;
-    alt: string;
-    caption?: string;
-    zoomAllowed?: boolean;
-    reference?: Reference;
+    image: string
+    className: string
+    alt: string
+    caption?: string
+    zoomAllowed?: boolean
+    reference?: Reference
 }
 
 const Figure = ({
@@ -27,19 +27,19 @@ const Figure = ({
         setOverlayContent,
         setMainMenuVisible,
         setSubMenuVisible,
-    } = useAppContext();
+    } = useAppContext()
 
     const displayZoomOverlay = () => {
         const closeZoom = () => {
-            setOverlayContent(null);
-            setOverlayVisible(false);
-            setMainMenuVisible(true);
-            setSubMenuVisible(true);
-        };
+            setOverlayContent(null)
+            setOverlayVisible(false)
+            setMainMenuVisible(true)
+            setSubMenuVisible(true)
+        }
         if (zoomAllowed) {
-            setOverlayVisible(true);
-            setMainMenuVisible(false);
-            setSubMenuVisible(false);
+            setOverlayVisible(true)
+            setMainMenuVisible(false)
+            setSubMenuVisible(false)
         }
 
         const content: React.ReactNode = (
@@ -47,10 +47,10 @@ const Figure = ({
                 <img src={image} alt={alt} />
                 <TbZoomOutFilled className="Figure__icon Figure__icon--close" />
             </ZoomedImage>
-        );
+        )
 
-        setOverlayContent(content);
-    };
+        setOverlayContent(content)
+    }
 
     return (
         <figure className="Figure" onClick={() => displayZoomOverlay()}>
@@ -66,7 +66,7 @@ const Figure = ({
             )}
             <div className=""></div>
         </figure>
-    );
-};
+    )
+}
 
-export default Figure;
+export default Figure

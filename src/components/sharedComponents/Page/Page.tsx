@@ -1,11 +1,12 @@
 import { ReactNode, useEffect, useRef } from 'react'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 import { postVisit } from '../../../serverAPI/visits'
 import { detectIncognito } from 'detectincognitojs'
 import Overlay from '../Overlay/Overlay'
 import './Page.scss'
 import { Maybe } from 'monet'
 import { useNavigate } from 'react-router-dom'
+import { useSessionContext } from '../../../context/SessionContext/Session.context'
 
 interface Props {
     children: ReactNode
@@ -80,7 +81,7 @@ const Page = ({
             .orSome('Page')
 
     const navigate = useNavigate()
-    const { isAuthenticated, isAuthLoading } = useAppContext()
+    const { isAuthenticated, isAuthLoading } = useSessionContext()
 
     useEffect(() => {
         if (loginRequired && !isAuthLoading && !isAuthenticated)

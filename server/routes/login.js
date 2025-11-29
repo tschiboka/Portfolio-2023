@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const { validateLogin } = require("../models/login")
 const { User } = require('../models/user')
+const { Settings } = require("../models/setting")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
@@ -20,9 +21,16 @@ router.post("/", async (req, res) => {
     const { _id, isAdmin } = user;
 
     user.password = undefined
-
+    
+    const settings = await Settings.find()
     const token = jwt.sign({ id: _id, isAdmin }, process.env.JWT_PRIVATE_KEY)
-    res.status(200).header("x-auth-token", token).json({ success: true, token, user: {id: _id, ...user.toObject()} })
+    
+    res.status(200).header("x-auth-token", token).json({ 
+        success: true, 
+        token, 
+        user: {id: _id, ...user.toObject()},
+        settings
+     })
 })
 
 module.exports = router

@@ -1,40 +1,40 @@
-import Nav from "../../sharedComponents/Nav/Nav";
-import Menu from "../../sharedComponents/Menu/Menu";
-import SubNav from "../../sharedComponents/SubNav/SubNav";
-import ProjectCard from "./ProjectCard/ProjectCard";
-import ProjectFilter from "./ProjectFilter/ProjectFilter";
-import Footer from "../../sharedComponents/Footer/Footer";
-import { getProjects } from "./getProjects";
-import "./Projects.scss";
-import { useState } from "react";
-import { useAppContext } from "../../../context/AppContext";
-import Page from "../../sharedComponents/Page/Page";
+import Nav from '../../sharedComponents/Nav/Nav'
+import Menu from '../../sharedComponents/Menu/Menu'
+import SubNav from '../../sharedComponents/SubNav/SubNav'
+import ProjectCard from './ProjectCard/ProjectCard'
+import ProjectFilter from './ProjectFilter/ProjectFilter'
+import Footer from '../../sharedComponents/Footer/Footer'
+import { getProjects } from './getProjects'
+import './Projects.scss'
+import { useState } from 'react'
+import { useAppContext } from '../../../context/AppContext/App.context'
+import Page from '../../sharedComponents/Page/Page'
 
 interface Props {
-    pageName: string;
-    path: string;
+    pageName: string
+    path: string
 }
 
 export interface Project {
-    title: string;
-    image: string;
-    gallery?: [string];
-    description: string;
-    badges: string[];
-    url?: string;
-    github?: string;
-    readMoreLink?: string;
+    title: string
+    image: string
+    gallery?: [string]
+    description: string
+    badges: string[]
+    url?: string
+    github?: string
+    readMoreLink?: string
 }
 
 const Projects = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext();
-    const [filteredLanguage, setFilterLanguage] = useState<string>("");
+    const { mobileMenuVisible, subMenuVisible } = useAppContext()
+    const [filteredLanguage, setFilterLanguage] = useState<string>('')
 
-    let projects = getProjects();
+    let projects = getProjects()
     if (filteredLanguage)
         projects = projects.filter((project) =>
-            project.badges.includes(filteredLanguage)
-        );
+            project.badges.includes(filteredLanguage),
+        )
     return (
         <Page title="Tivadar Debnar | Projects" path="/projects">
             <Nav pageName={pageName} />
@@ -63,7 +63,7 @@ const Projects = ({ pageName, path }: Props) => {
                 />
                 {filteredLanguage && (
                     <div className="button-wrapper--reset">
-                        <button onClick={() => setFilterLanguage("")}>
+                        <button onClick={() => setFilterLanguage('')}>
                             Reset Filter
                         </button>
                     </div>
@@ -77,7 +77,7 @@ const Projects = ({ pageName, path }: Props) => {
             </main>
             <Footer pageName={pageName} path={path} />
         </Page>
-    );
-};
+    )
+}
 
-export default Projects;
+export default Projects

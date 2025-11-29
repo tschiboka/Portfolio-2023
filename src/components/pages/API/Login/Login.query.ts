@@ -14,7 +14,7 @@ export const useSettingsResources = async () => {
     return await axios.get(path)
 }
 
-export const useRehydrateSessionResources = (token: string) => {
+export const useRehydrateSessionResources = (token?: string) => {
     const path = apiPathBuilder('REHYDRATE_SESSION')
     
     return useQuery({

@@ -4,7 +4,7 @@ import Menu from '../../sharedComponents/Menu/Menu'
 import SubNav from '../../sharedComponents/SubNav/SubNav'
 import Intro from './Intro/Intro'
 import Footer from '../../sharedComponents/Footer/Footer'
-import { useAppContext } from '../../../context/AppContext'
+import { useAppContext } from '../../../context/AppContext/App.context'
 import Page from '../../sharedComponents/Page/Page'
 
 interface Props {

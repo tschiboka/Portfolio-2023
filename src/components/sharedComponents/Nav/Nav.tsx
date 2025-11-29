@@ -1,20 +1,20 @@
-import { useAppContext } from "../../../context/AppContext";
-import { Link } from "react-router-dom";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { CgClose } from "react-icons/cg";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { BiChevronDown } from "react-icons/bi";
-import iconDark from "../../../assets/images/icon.svg";
-import iconLight from "../../../assets/images/icon-light.svg";
-import "./Nav.scss";
+import { useAppContext } from '../../../context/AppContext/App.context'
+import { Link } from 'react-router-dom'
+import { HiMenuAlt3 } from 'react-icons/hi'
+import { CgClose } from 'react-icons/cg'
+import { BsThreeDotsVertical } from 'react-icons/bs'
+import { BiChevronDown } from 'react-icons/bi'
+import iconDark from '../../../assets/images/icon.svg'
+import iconLight from '../../../assets/images/icon-light.svg'
+import './Nav.scss'
 
 interface Props {
-    pageName: string;
-    path?: string;
+    pageName: string
+    path?: string
 }
 
 export const isArticle = (path: string | undefined): boolean =>
-    /^\/blog\//.test(path || "");
+    /^\/blog\//.test(path || '')
 
 const Nav = ({ pageName, path }: Props) => {
     const {
@@ -24,8 +24,8 @@ const Nav = ({ pageName, path }: Props) => {
         setMobileMenuVisible,
         subMenuVisible,
         setSubMenuVisible,
-    } = useAppContext();
-    const getIcon = () => (themeMode === "dark" ? iconDark : iconLight);
+    } = useAppContext()
+    const getIcon = () => (themeMode === 'dark' ? iconDark : iconLight)
     if (mainMenuVisible)
         return (
             <header className="Header">
@@ -49,19 +49,19 @@ const Nav = ({ pageName, path }: Props) => {
                     />
                 )}
                 <ul className="nav_links">
-                    <li className={pageName === "home" ? "active" : ""}>
+                    <li className={pageName === 'home' ? 'active' : ''}>
                         <div className="active-dot"></div>
                         <Link className="link" to="/">
                             Home
                         </Link>
                     </li>
-                    <li className={pageName === "about" ? "active" : ""}>
+                    <li className={pageName === 'about' ? 'active' : ''}>
                         <div className="active-dot"></div>
                         <Link className="link" to="/about">
                             About
                         </Link>
                     </li>
-                    <li className={pageName === "projects" ? "active" : ""}>
+                    <li className={pageName === 'projects' ? 'active' : ''}>
                         <div className="active-dot"></div>
                         <Link className="link" to="/projects">
                             Projects
@@ -69,11 +69,11 @@ const Nav = ({ pageName, path }: Props) => {
                     </li>
                     <li
                         className={
-                            pageName === "blog"
-                                ? "active"
+                            pageName === 'blog'
+                                ? 'active'
                                 : isArticle(path)
-                                ? "extended"
-                                : ""
+                                ? 'extended'
+                                : ''
                         }
                     >
                         <div className="active-dot"></div>
@@ -84,7 +84,7 @@ const Nav = ({ pageName, path }: Props) => {
                             <BiChevronDown className="chevron" />
                         )}
                     </li>
-                    <li className={pageName === "contact" ? "active" : ""}>
+                    <li className={pageName === 'contact' ? 'active' : ''}>
                         <div className="active-dot"></div>
                         <Link className="link" to="/contact">
                             Contact
@@ -95,7 +95,7 @@ const Nav = ({ pageName, path }: Props) => {
                     </li>
                 </ul>
             </header>
-        );
-};
+        )
+}
 
-export default Nav;
+export default Nav

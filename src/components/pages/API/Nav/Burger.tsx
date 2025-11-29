@@ -1,5 +1,5 @@
 import { HiMenuAlt3 } from 'react-icons/hi'
-import { useAppContext } from '../../../../context/AppContext'
+import { useAppContext } from '../../../../context/AppContext/App.context'
 import { CgClose } from 'react-icons/cg'
 
 const Burger = () => {

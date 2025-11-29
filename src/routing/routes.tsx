@@ -205,7 +205,7 @@ export const routes = [
     },
     {
         path: '/api/logout',
-        element: <Logout path="/api/logout" />,
+        element: <Logout />,
     },
     // Misc Pages (Side projects, etc.)
     {

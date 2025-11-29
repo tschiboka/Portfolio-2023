@@ -1,19 +1,19 @@
-import { FaFacebookF } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { TbBrandGithubFilled } from "react-icons/tb";
-import { TfiLinkedin } from "react-icons/tfi";
-import "./Menu.scss";
-import { useAppContext } from "../../../context/AppContext";
+import { FaFacebookF } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { TbBrandGithubFilled } from 'react-icons/tb'
+import { TfiLinkedin } from 'react-icons/tfi'
+import './Menu.scss'
+import { useAppContext } from '../../../context/AppContext/App.context'
 
 interface Props {
-    pageName: string;
+    pageName: string
 }
 
 const Menu = ({ pageName }: Props) => {
-    const { themeMode, setThemeMode, setMobileMenuVisible } = useAppContext();
+    const { themeMode, setThemeMode, setMobileMenuVisible } = useAppContext()
     return (
         <menu className="Menu">
-            <li className={pageName === "home" ? "active" : ""}>
+            <li className={pageName === 'home' ? 'active' : ''}>
                 <Link
                     className="link"
                     to="/"
@@ -22,7 +22,7 @@ const Menu = ({ pageName }: Props) => {
                     Home
                 </Link>
             </li>
-            <li className={pageName === "about" ? "active" : ""}>
+            <li className={pageName === 'about' ? 'active' : ''}>
                 <Link
                     className="link"
                     to="/about"
@@ -31,7 +31,7 @@ const Menu = ({ pageName }: Props) => {
                     About
                 </Link>
             </li>
-            <li className={pageName === "projects" ? "active" : ""}>
+            <li className={pageName === 'projects' ? 'active' : ''}>
                 <Link
                     className="link"
                     to="/projects"
@@ -40,7 +40,7 @@ const Menu = ({ pageName }: Props) => {
                     Projects
                 </Link>
             </li>
-            <li className={pageName === "blog" ? "active" : ""}>
+            <li className={pageName === 'blog' ? 'active' : ''}>
                 <Link
                     className="link"
                     to="/blog"
@@ -49,7 +49,7 @@ const Menu = ({ pageName }: Props) => {
                     Blog
                 </Link>
             </li>
-            <li className={pageName === "contact" ? "active" : ""}>
+            <li className={pageName === 'contact' ? 'active' : ''}>
                 <Link
                     className="link"
                     to="/contact"
@@ -61,7 +61,7 @@ const Menu = ({ pageName }: Props) => {
             <li
                 className="link"
                 onClick={() =>
-                    setThemeMode(themeMode === "dark" ? "light" : "dark")
+                    setThemeMode(themeMode === 'dark' ? 'light' : 'dark')
                 }
             >
                 Theme
@@ -86,7 +86,7 @@ const Menu = ({ pageName }: Props) => {
                 </a>
             </div>
         </menu>
-    );
-};
+    )
+}
 
-export default Menu;
+export default Menu

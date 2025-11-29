@@ -11,6 +11,7 @@ const confirm = require("../routes/confirm");
 const log = require("../routes/log");
 const category = require("../routes/category")
 const xmas2025 = require("../projects/xmas_2025/routes")
+const session = require("../routes/session")
 
 module.exports = function(app) {
     // Profile website routes
@@ -18,6 +19,7 @@ module.exports = function(app) {
     app.use("/message", message);
     app.use("/visit", visit);
     app.use("/like", like);
+    app.use('/api/session', session)
     app.use("/schedule", schedule);
 
     // API routes
@@ -30,4 +32,4 @@ module.exports = function(app) {
 
     // Project routes
     app.use("/projects/xmas_2025", xmas2025)
-1}
+}
