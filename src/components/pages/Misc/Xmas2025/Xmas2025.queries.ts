@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { apiPathBuilder, ApiPaths } from "../../../../routing/apiPathBuilder";
-import { XmasMessageRequestResource } from "./Xmas2025.types";
-import { XmasMessageResponseResource } from "../../API/common/types";
+import { CandleFormData, XmasMessageRequestResource } from "./Xmas2025.types";
+import { XmasCandlesResponseResource, XmasMessageResponseResource } from "../../API/common/types";
 import { useSessionContext } from "../../../../context/SessionContext/Session.context";
 
 export const useGetPagePingData = () => 
@@ -39,5 +39,33 @@ export const useGetMessages = ({userId}: UseGetMessages) => {
                 { params: { userId },  headers: { "x-auth-token": token }},
             ),
         enabled: Boolean(userId)
+    })
+}
+
+export const useGetCandles = () => {
+    const token = useSessionContext().session?.token
+
+    return useQuery({
+        queryKey: ["xmas-candles"],
+        queryFn: async () => 
+            await axios.get<{success: boolean, data: XmasCandlesResponseResource}>(
+                apiPathBuilder(ApiPaths.PROJECT_XMAS, { prefix: '' }) + "/candles",
+                { headers: { "x-auth-token": token }},
+            ),
+        enabled: Boolean(token)
+    })
+}
+
+export const usePutCandles = () => {
+    const token = useSessionContext().session?.token
+
+    return useMutation({
+        mutationKey: ["xmas-candles"],
+        mutationFn: async (payload: CandleFormData) => 
+            await axios.put<{success: boolean, data: XmasCandlesResponseResource}>(
+                apiPathBuilder(ApiPaths.PROJECT_XMAS, { prefix: '' }) + "/candles",
+                payload,
+                { headers: { "x-auth-token": token }},
+            )
     })
 }

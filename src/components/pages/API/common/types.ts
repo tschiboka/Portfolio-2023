@@ -20,6 +20,17 @@ export type XmasMessageResponseResource = {
     createdAt: Date,
 }
 
+export type XmasCandlesResponseResource = {
+    candles: {
+        _id: string,
+        candle1: boolean,
+        candle2: boolean,
+        candle3: boolean,
+        candle4: boolean,
+        __v?: number
+    }
+}
+
 export type SesttingResource = {
     maxUsers: number,
     enableMaintenanceMode: boolean,

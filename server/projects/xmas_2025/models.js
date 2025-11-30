@@ -36,5 +36,26 @@ function validateMessage(message) {
     return schema.validate(message);
 }
 
+const XmasCandleSchema = mongoose.Schema({
+    candle1: { type: Boolean, default: false },
+    candle2: { type: Boolean, default: false },
+    candle3: { type: Boolean, default: false },
+    candle4: { type: Boolean, default: false },
+})
+const XmasCandle = new mongoose.model("XmasCandle", XmasCandleSchema)
+
+function validateCandle(candle) {
+    const schema = Joi.object({
+        candle1: Joi.boolean().required(),
+        candle2: Joi.boolean().required(),
+        candle3: Joi.boolean().required(),
+        candle4: Joi.boolean().required(),
+    });
+
+    return schema.validate(candle);
+}
+
+exports.XmasCandle = XmasCandle;
 exports.validateMessage = validateMessage;
 exports.XmasMessage = XmasMessage;
+exports.validateCandle = validateCandle;

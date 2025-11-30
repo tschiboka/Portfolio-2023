@@ -10,7 +10,7 @@ export type YourMessagesProps = {
 export const YourMessages = ({ messages }: YourMessagesProps) =>
     messages ? (
         <AccessGuard deniedRoles={['admin']}>
-            <p>Your Messages</p>
+            <h2>Your Messages</h2>
             <table className="message-wall">
                 <thead>
                     <tr>

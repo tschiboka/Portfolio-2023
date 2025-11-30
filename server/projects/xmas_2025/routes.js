@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router()
 const auth = require("../../middlewares/auth");
-const { validateMessage, XmasMessage } = require("./models");
+const { validateMessage, XmasMessage, validateCandle, XmasCandle } = require("./models");
 const { User } = require("../../models/user");
 
 router.get("/", [], async (_, res) => {
@@ -39,5 +39,55 @@ router.get("/message/device", async (_, res) => {
     const textResponse = messages.map(msg => `${msg.name}: ${msg.message}`).join('|');
     return res.status(200).send(`<<<${textResponse}>>>`)
 })
+
+router.get("/candles", [auth], async (_, res) => {
+    const candles = await XmasCandle.find();
+
+    if (candles?.length === 0) {
+        const newCandle = new XmasCandle({
+            candle1: false,
+            candle2: false,
+            candle3: false,
+            candle4: false,
+        });
+        await newCandle.save();
+        return res.status(200).json({ success: true, data: { candles: newCandle } })
+    }
+    
+    res.status(200).json({ success: true, data: { candles: candles[0] } })
+})
+
+router.put("/candles", [auth], async (req, res) => {
+    const { error } = validateCandle(req.body)
+    if (error) return res.status(400).json({ success: false, message: error.details[0].message, error })
+
+    const candles = await XmasCandle.find();  
+    if (candles?.length === 0) {
+        return res.status(404).json({ success: false, message: "No candles found to update" })
+    }
+
+    const firstCandle = candles[0];
+    Object.assign(firstCandle, req.body);
+    await firstCandle.save();
+    
+    res.status(200).json({ success: true, data: { candles: firstCandle } })
+})
+
+
+
+router.get("/candles/device", async (_, res) => {
+    const candles = await XmasCandle.find();
+
+    if (candles?.length === 0) {
+        return res.status(200).send("<<<0000>>>")
+    }
+    const firstCandle = candles[0];
+    const candleState = [firstCandle.candle1, firstCandle.candle2, firstCandle.candle3, firstCandle.candle4]
+        .map(c => c ? '1' : '0')
+        .join('');
+    return res.status(200).send(`<<<${candleState}>>>`)
+})
+
+
 
 module.exports = router;

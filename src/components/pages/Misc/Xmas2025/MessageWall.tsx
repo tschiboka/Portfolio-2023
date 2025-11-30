@@ -10,7 +10,7 @@ export type MessageWallProps = {
 export const MessageWall = ({ messages }: MessageWallProps) =>
     messages ? (
         <AccessGuard allowedRoles={['admin']}>
-            <p>Messaging wall</p>
+            <h2>Messaging wall</h2>
             <table className="message-wall">
                 <thead>
                     <tr>

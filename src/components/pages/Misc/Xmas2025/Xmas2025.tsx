@@ -25,6 +25,7 @@ import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
 import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { CandlePanel } from './CandlePanel'
 
 interface Props {
     pageName: string
@@ -151,6 +152,9 @@ const Xmas2025 = ({ pageName, path }: Props) => {
                         </div>
                     </form>
                 </XmasFormCanvas>
+                <h2>Candles</h2>
+                <CandlePanel />
+                <p>Click on a candle to mess up my candle settings.</p>
                 <MessageWall messages={messages?.data.data} />
                 <YourMessages messages={messages?.data.data} />
             </main>
