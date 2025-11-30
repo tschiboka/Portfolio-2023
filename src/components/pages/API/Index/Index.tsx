@@ -46,10 +46,7 @@ const Index = ({ path, pageName }: IndexProps) => {
                 <AccessGuard allowedRoles={['admin']}>
                     <AdminIndex />
                 </AccessGuard>
-                <AccessGuard
-                    allowedFeatures={['xmas2025']}
-                    deniedRoles={['admin']}
-                >
+                <AccessGuard allowedFeatures={['xmas2025']}>
                     <GuestIndex />
                 </AccessGuard>
             </main>

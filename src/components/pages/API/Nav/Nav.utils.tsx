@@ -1,5 +1,15 @@
 import { Maybe } from 'monet'
 import { Menu, Submenu } from '.'
+import SantaHat from '../../../../assets/images/projects/xmas/santa_hat.png'
+
+export const getMenuItemImage = (imageName: string) => {
+    switch (imageName) {
+        case 'xmas_hat':
+            return <img className="xmas-hat" src={SantaHat} alt="Xmas Hat" />
+        default:
+            return null
+    }
+}
 
 // Third level menues
 
@@ -90,6 +100,7 @@ export const menu: Array<Menu> = [
         label: 'Xmas',
         path: '/projects/xmas2025',
         allowedFeatures: ['xmas2025'],
+        image: 'xmas_hat',
     },
     {
         label: 'Dashboard',

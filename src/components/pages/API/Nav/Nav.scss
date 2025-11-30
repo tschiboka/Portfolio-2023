@@ -2,9 +2,22 @@
 @import "../../../../styles/palette.scss";
 @import "../../../../styles/font_sizes.scss";
 
+.link {
+    position: relative;
+    .xmas-hat {
+        position: absolute;
+        width: 30px;
+        height: auto;
+        top: -3px;
+        right: -15px;
+        opacity: 0.8;
+    }
+}
+
 .nav_links {
     margin-left: 0;
     margin-top: 0;
+
     @include bp.md {
         font-size: 0.8rem;
     }

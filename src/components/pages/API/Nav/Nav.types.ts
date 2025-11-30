@@ -6,7 +6,9 @@ type MenuLabel = {
     parent?: string, 
     allowRoles?: Role[], 
     allowedFeatures?: Feature[]
+    image?: string,
 }
+
 type MenuWithoutChildren = MenuLabel & { path: string; submenu?: never }
 type MenuWithChildren = MenuLabel & { submenu: Menu[]; path?: never }
 export type Menu = MenuWithChildren | MenuWithoutChildren

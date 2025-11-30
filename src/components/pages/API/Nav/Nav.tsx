@@ -4,7 +4,7 @@ import { Maybe } from 'monet'
 import Burger from './Burger'
 import Chevron from './Chevron'
 import Logo from './Logo'
-import { Menu, Submenu, isHighlighted, menu } from '.'
+import { Menu, Submenu, getMenuItemImage, isHighlighted, menu } from '.'
 import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
 
 type NavProps = {
@@ -48,6 +48,7 @@ const Nav = ({ pageName, submenuStack, setSubmenuStack }: NavProps) => {
                             onClick={() => handleItemClick(item)}
                         >
                             <Link className="link" to={item?.path || ''}>
+                                {item.image && getMenuItemImage(item.image)}
                                 <span
                                     className={isHighlighted(
                                         item,

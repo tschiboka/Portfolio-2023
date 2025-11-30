@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BiChevronRight } from 'react-icons/bi'
-import { isHighlighted, menu, menuGroups } from '../Nav'
+import { getMenuItemImage, isHighlighted, menu, menuGroups } from '../Nav'
 import './MobileMenu.scss'
 import { Maybe } from 'monet'
 import { useEffect, useState } from 'react'
@@ -86,6 +86,7 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
                         >
                             <div className="active-dot"></div>
                             <Link className="link" to={item?.path || ''}>
+                                {item.image && getMenuItemImage(item.image)}
                                 {item.label}
                                 {item.submenu && (
                                     <div className="chevron-wrapper">
