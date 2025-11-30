@@ -153,7 +153,7 @@ export const routes = [
     },
     {
         path: '/api/index',
-        element: <Index path="/api/index" />,
+        element: <Index path="/api/index" pageName="index" />,
     },
     {
         path: '/api/email-verification/:verificationToken',

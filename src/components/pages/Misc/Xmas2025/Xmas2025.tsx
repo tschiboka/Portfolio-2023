@@ -90,7 +90,7 @@ const Xmas2025 = ({ pageName, path }: Props) => {
             title="Tivadar Debnar | Xmas 2025"
             path="/xmas2025"
             loginRequired
-            recordVisit={false}
+            recordVisit={true}
             className="Xmas"
         >
             {' '}

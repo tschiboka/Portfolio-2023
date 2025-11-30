@@ -8,12 +8,14 @@ import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
 import { AdminIndex } from './AdminIndex'
 import { GuestIndex } from './GuestIndex'
+import Footer from '../../../sharedComponents/Footer/Footer'
 
 interface IndexProps {
     path: string
+    pageName: string
 }
 
-const Index = ({ path }: IndexProps) => {
+const Index = ({ path, pageName }: IndexProps) => {
     const { mobileMenuVisible } = useAppContext()
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
@@ -21,7 +23,7 @@ const Index = ({ path }: IndexProps) => {
         <Page
             title={'Tivadar Debnar | Index'}
             path={path}
-            recordVisit={false}
+            recordVisit={true}
             loginRequired
         >
             <Nav
@@ -44,10 +46,18 @@ const Index = ({ path }: IndexProps) => {
                 <AccessGuard allowedRoles={['admin']}>
                     <AdminIndex />
                 </AccessGuard>
-                <AccessGuard allowedFeatures={['xmas2025']}>
+                <AccessGuard
+                    allowedFeatures={['xmas2025']}
+                    deniedRoles={['admin']}
+                >
                     <GuestIndex />
                 </AccessGuard>
             </main>
+            <Footer
+                pageName={pageName}
+                path={path}
+                info={<p>Xmas edition - 2025</p>}
+            />
         </Page>
     )
 }
