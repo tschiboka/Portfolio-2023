@@ -3,7 +3,7 @@ const router = express.Router()
 const auth = require("../../middlewares/auth");
 const { validateMessage, XmasMessage, validateCandle, XmasCandle } = require("./models");
 const { User } = require("../../models/user");
-const { tail } = require("ramda");
+const { last } = require("ramda");
 
 router.get("/", [], async (_, res) => {
     res.status(200).json({data: { message: "OK" }})
@@ -42,10 +42,11 @@ router.get("/message", [auth], async (req, res) => {
 
 router.get("/message/device", async (_, res) => {
     const messages = await XmasMessage.find();
+    console.log(messages);
     const unreadMessages = messages.filter(({ isRead }) => !isRead);
     
-    const lasMessage = tail(messages);
-    const responseMessages = unreadMessages.length ? unreadMessages : lasMessage;
+    const lastMessage = [last(messages)];
+    const responseMessages = unreadMessages.length ? unreadMessages : lastMessage;
     
     const textResponse = responseMessages.map(msg => `${msg.name}:${msg.message}:${!msg.isRead}`)[0];
     return res.status(200).send(`<<<${textResponse}>>>`)
