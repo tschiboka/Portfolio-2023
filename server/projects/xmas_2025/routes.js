@@ -47,7 +47,7 @@ router.get("/message/device", async (_, res) => {
     const lasMessage = tail(messages);
     const responseMessages = unreadMessages.length ? unreadMessages : lasMessage;
     
-    const textResponse = responseMessages.map(msg => `${msg.name}: ${msg.message}`)[0];
+    const textResponse = responseMessages.map(msg => `${msg.name}:${msg.message}:${!msg.isRead}`)[0];
     return res.status(200).send(`<<<${textResponse}>>>`)
 })
 
