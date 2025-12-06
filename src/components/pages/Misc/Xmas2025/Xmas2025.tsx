@@ -45,12 +45,16 @@ const Xmas2025 = ({ pageName, path }: Props) => {
         formState: { errors },
     } = useForm({
         defaultValues: {
-            name: '',
+            name: user?.userName || '',
             message: '',
         },
         resolver: yupResolver(xmasSchema),
         mode: 'onSubmit',
     })
+
+    useEffect(() => {
+        reset({ name: user?.userName || '' })
+    }, [user, reset])
 
     const { data: ping, ...pingResponse } = useGetPagePingData()
     const { mutate: submitMessage, ...submitMessageResponse } = usePostMessage({

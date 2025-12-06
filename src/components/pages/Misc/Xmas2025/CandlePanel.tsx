@@ -45,6 +45,7 @@ export const CandlePanel = () => {
                 <div key={index} className="candle">
                     {
                         <img
+                            className={state ? 'candle-lit' : 'candle-blown'}
                             src={state ? CandleLit : CandleBlown}
                             alt="Candle"
                             onClick={() => handleCandleClick(index)}

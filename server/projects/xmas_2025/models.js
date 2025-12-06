@@ -17,6 +17,10 @@ const xmasMessageSchema = mongoose.Schema({
         maxLength: 50,
         trim: true,
     },
+    isRead: {
+        type: Boolean,
+        default: false,
+    },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
@@ -30,6 +34,7 @@ function validateMessage(message) {
     const schema = Joi.object({
         name: Joi.string().required().min(4).max(16),
         message: Joi.string().required().min(1).max(50),
+        isRead: Joi.boolean(),
         userId: Joi.string().required(),
     });
 

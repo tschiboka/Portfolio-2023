@@ -3,10 +3,16 @@ const router = express.Router()
 const auth = require("../../middlewares/auth");
 const { validateMessage, XmasMessage, validateCandle, XmasCandle } = require("./models");
 const { User } = require("../../models/user");
+const { tail } = require("ramda");
 
 router.get("/", [], async (_, res) => {
     res.status(200).json({data: { message: "OK" }})
 })
+
+router.get("/device", [], async (_, res) => {
+    res.status(200).send("<<<OK>>>")
+})
+
 
 router.post("/message", [auth], async (req, res) => {
     const { error } = validateMessage(req.body)
@@ -35,8 +41,12 @@ router.get("/message", [auth], async (req, res) => {
 })
 
 router.get("/message/device", async (_, res) => {
-    const messages = await XmasMessage.find().sort({ createdAt: -1 }).limit(10);
-    const textResponse = messages.map(msg => `${msg.name}: ${msg.message}`).join('|');
+    const messages = await XmasMessage.find();
+    const unreadMessages = messages.filter(({ isRead }) => !isRead);
+    const lasMessage = tail(unreadMessages);
+    const responseMessages = unreadMessages.length ? unreadMessages : lasMessage;
+    
+    const textResponse = responseMessages.map(msg => `${msg.name}: ${msg.message}`).join('|');
     return res.status(200).send(`<<<${textResponse}>>>`)
 })
 
@@ -81,6 +91,7 @@ router.get("/candles/device", async (_, res) => {
     if (candles?.length === 0) {
         return res.status(200).send("<<<0000>>>")
     }
+
     const firstCandle = candles[0];
     const candleState = [firstCandle.candle1, firstCandle.candle2, firstCandle.candle3, firstCandle.candle4]
         .map(c => c ? '1' : '0')
