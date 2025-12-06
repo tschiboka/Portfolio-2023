@@ -44,11 +44,20 @@ router.get("/message/device", async (_, res) => {
     const messages = await XmasMessage.find();
     const unreadMessages = messages.filter(({ isRead }) => !isRead);
     
-    const lasMessage = tail(unreadMessages);
+    const lasMessage = tail(messages);
     const responseMessages = unreadMessages.length ? unreadMessages : lasMessage;
     
     const textResponse = responseMessages.map(msg => `${msg.name}: ${msg.message}`)[0];
     return res.status(200).send(`<<<${textResponse}>>>`)
+})
+
+router.put("/message/device/markread", async (_, res) => {
+    await XmasMessage.updateOne(
+        { isRead: { $ne: true } },
+        { $set: { isRead: true } }
+    );
+
+    res.status(200).send("<<<OK>>>");
 })
 
 router.get("/candles", [auth], async (_, res) => {
