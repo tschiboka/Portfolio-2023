@@ -43,10 +43,11 @@ router.get("/message", [auth], async (req, res) => {
 router.get("/message/device", async (_, res) => {
     const messages = await XmasMessage.find();
     const unreadMessages = messages.filter(({ isRead }) => !isRead);
+    
     const lasMessage = tail(unreadMessages);
     const responseMessages = unreadMessages.length ? unreadMessages : lasMessage;
     
-    const textResponse = responseMessages.map(msg => `${msg.name}: ${msg.message}`).join('|');
+    const textResponse = responseMessages.map(msg => `${msg.name}: ${msg.message}`)[0];
     return res.status(200).send(`<<<${textResponse}>>>`)
 })
 
