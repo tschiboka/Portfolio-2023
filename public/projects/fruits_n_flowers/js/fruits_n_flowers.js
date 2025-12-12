@@ -119,7 +119,7 @@ function preloadPics() {
             const picVarName = p.match(/\/.+/g)[0].match(/\w+/)[0],
                 img = new Image();
 
-            img.src = `https://tschiboka.com/projects/fruits_n_flowers_v2/images/${p}.png`;
+            img.src = `https://tschiboka.com/projects/fruits_n_flowers/images/${p}.png`;
             app.images[picVarName] = img;
         }); // end of forEach path
     } // end of try loading images
