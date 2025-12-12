@@ -1,0 +1,29 @@
+{
+  "name": "fruits_n_flowers_v2",
+  "version": "1.0.0",
+  "description": "My match three game rewritten from scratch, using different technologies, design and algorithm, creating a better UX, and modified game rules and exiting new levels",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tschiboka/fruits_n_flowers_v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tschiboka/fruits_n_flowers_v2/issues"
+  },
+  "homepage": "https://github.com/tschiboka/fruits_n_flowers_v2#readme",
+  "dependencies": {
+    "browserify": "^16.5.0",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.0",
+    "mongoose": "^5.7.1",
+    "winston": "^2.0.0"
+  },
+  "start": "backend/bundle.js"
+}

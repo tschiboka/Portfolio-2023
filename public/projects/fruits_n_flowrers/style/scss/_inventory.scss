@@ -1,0 +1,191 @@
+.game-board__inventory {
+    position: absolute;
+    width: 90%;
+    height: 10%;
+    top: 85%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.7);
+
+    .game-board__inventory__inner {
+        width: 100%;
+        height: 100%;
+        background: $horizontal-gradient;
+    }
+}
+
+.game-board__inventory__menu {
+    position: absolute;
+    width: 70%;
+    height: 60%;
+    top: 20%;
+    left: 15%;
+    background: $horizontal-gradient;
+    
+    .game-board__inventory__menu__arrow--left-box, .game-board__inventory__menu__arrow--right-box {
+        position: absolute;
+        top: 0;
+        width: 10%;
+        height: 100%;
+        border-radius: 5px;
+    }
+
+    .game-board__inventory__menu__arrow--left-box {
+        left: 0;
+    }
+
+    .game-board__inventory__menu__arrow--right-box {
+        right: 0;
+    }
+
+    .inventory-items {
+        position: absolute;
+        top: 0;
+        left: 10%;
+        width: 80%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        list-style: none;
+        background: rgba(255, 255, 255, 0.05);
+
+        .inventory-item {
+            width: calc(20% - 1px);
+            height: 100%;
+            margin: 0;
+
+            border-left: 1px solid rgba(160, 160, 160, 0.3);
+
+            &:first-child {
+                border-left: none;
+            }
+
+            .inventory-item-container {
+                margin: 10%;
+                width: 80%;
+                height: 80%;
+                background-size: 100% 100%;
+            }
+        }
+    }
+}
+
+.game-board__inventory__menu__arrow--left {
+    width: 100%;
+    height: 100%;
+    background: rgba(141, 238, 121, 0.2);
+    clip-path: polygon(
+        30% 50%,
+        70% 10%,
+        80% 10%,
+        55% 50%,
+        80% 90%,
+        70% 90%
+    );
+}
+
+.game-board__inventory__menu__arrow--right {
+    width: 100%;
+    height: 100%;
+    background: rgba(141, 238, 121, 0.2);
+    clip-path: polygon(
+        70% 50%,
+        30% 10%,
+        20% 10%,
+        45% 50%,
+        20% 90%,
+        30% 90%
+    );
+}
+
+.game-board__inventory__menu__arrow--left.active {
+    background: $green;
+}
+
+.game-board__inventory__menu__arrow--right.active {
+    background: $green;
+}
+
+.game-board__inventory__menu__indicator {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 5%;
+    bottom: -25%;
+    left: 0;
+    
+    div {
+        // width is calculated by js according the number of indicators
+        height: 100%;
+        margin-left: 1%;
+        margin-right: 1%;
+        background: rgba(141, 238, 121, 0.2);
+    }
+
+    .active {
+        background: $green;
+    }
+}
+
+#flower-counter-icon, #shop-icon {
+    position: absolute;
+    width: 8%;
+    height: 50%;
+    top: 25%;
+    background: transparent;
+    background-size: 100% 100%;
+}
+
+#flower-counter-icon {
+    left: 3%;
+    background-image: url("../../images/icons/flower-icon.png");
+}
+
+#shop-icon {
+    right: 3%; 
+    background-image: url("../../images/icons/shop-icon.png");
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1)
+    }
+
+    &:active {
+        background-color: rgba(19, 246, 242, 0.1);
+    }
+}
+
+#flower-counter {
+    position: absolute;
+    width: 6.7%;
+    height: 23%;
+    top: 5%;
+    left: 7%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15%;
+    border: #a0a0a0 solid 1px;
+    font-size: 2.5vh;
+    line-height: 2vh;
+    text-align: center;
+    color: $main-text-color;
+    text-shadow: none;
+}
+
+.inventory-item--clone {
+    position: absolute;
+    background-size: 100% 100%;
+    z-index: 9999;
+    pointer-events: none; // necessary because i need to determine which elements are under it
+    touch-action: none;
+}
+
+.cross-sight {
+    position: absolute;
+    pointer-events: none;
+    touch-action: none;
+}

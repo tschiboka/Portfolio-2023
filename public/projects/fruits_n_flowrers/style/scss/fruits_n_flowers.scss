@@ -1,0 +1,30 @@
+@font-face {
+    font-family: mario-style-font;
+    src: url(../../fonts/SuperMario256.ttf);
+}
+
+@font-face {
+    font-family: main-game-font;
+    src: url(../../fonts/MainGameFont.ttf);
+}
+
+@font-face {
+    font-family: mono;
+    src: url(../../fonts/SourceCodePro-ExtraLight.ttf);
+}
+
+@import "_main.scss";
+@import "_header.scss";
+@import "_logo.scss";
+@import "_levels.scss";
+@import "_menu.scss";
+@import "_game-board.scss";
+@import "_inventory.scss";
+@import "_shards.scss";
+@import "_bonus-gems.scss";
+@import "_messages_and_points";
+@import "_countback";
+@import "_end-of-level-stat";
+@import "_shop.scss";
+@import "_walkthrough.scss";
+@import "_about.scss";

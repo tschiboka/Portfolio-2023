@@ -1,0 +1,312 @@
+$green: rgb(141, 238, 121);
+
+.level-menu {
+    position: relative;
+    display: none;
+    margin: 10% 1%;
+    width: 98%;
+    height: 65%;
+    background: $panel-bg-color;
+    color: $green;
+    animation: level-menu-in-anim 0.3s ease-in;
+    clip-path: polygon(
+        5% 30%,
+        5% 5%,
+        10% 5%,
+        15% 0,
+        85% 0,
+        90% 5%,
+        95% 5%,
+        95% 30%,
+        100% 35%,
+        100% 65%,
+        95% 70%,
+        95% 95%,
+        90% 95%,
+        85% 100%,
+        15% 100%,
+        10% 95%,
+        5% 95%,
+        5% 70%,
+        0 65%,
+        0 35%
+    );
+
+
+    .level-menu__page {
+        position: absolute;
+        top: 8%;
+        left: 8%;
+        width: 84%;
+        height: 84%;
+        background: rgba(0, 0, 0, 0.5);
+        &.error--no-level {
+            padding: 5%;
+            font-size: 3em;
+            color: #f80c47;
+        }
+
+        .level-page {
+            height: 100%;
+            width: 100%;
+            border-collapse: collapse;
+
+            tr td {
+                width: 20%;
+                height: 20%;
+                border: 1px solid rgba(250, 250, 250, 0.2);
+                text-align: center;
+                color: $main-text-color;
+                font-size: 1.4rem;
+                cursor: pointer;
+
+                &.locked {
+                    background-image: url(../../images/icons/padlock-icon.png);
+                    background-position: 97% 13%;
+                    background-repeat: no-repeat;
+                    background-size: 30% 30%;
+                }
+                
+                div {
+                   position: relative;
+                   transform: translateY(-20%);
+                }
+
+                div .level-progressbar {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    top: 130%;
+                    left: 15%;
+                    width: 70%;
+                    height: 17%;
+                    background: rgba(255, 255, 255, 0.05);
+                    border-top: 1px solid rgb(90, 71, 104);
+                    border-bottom : 1px solid rgb(90, 71, 104);
+
+                    .progress {
+                        margin: 0;
+                        padding: 0;
+                        transform: translate(-0.25px, 0.5px); // progress bar had a wierd 1px gap so thats the only solution I found
+                        position: relative;
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1.15px;
+                        background: rgba(255, 255, 255, 0.3);
+                    }
+
+                    .zero {
+                        background: transparent;
+                    }
+
+                    .under-twentyfive-percent {
+                        background: #d684bbaf;
+                    }
+
+                    .under-fifty-percent {
+                        background: #ffd297d5;
+                    }
+
+                    .under-seventyfive-percent {
+                        background: #ffffa4af;
+                    }
+                    
+                    .under-hundred-percent {
+                        background: #9df5fdb0;
+                    }
+
+                    .maxed {
+                        background: $green;
+                    }
+                }
+            }
+        }
+
+        .level-page:not(.active-page) {
+            display: none;
+        }
+    }
+
+    .level-menu__header__level-indicator {
+        position: absolute;
+        top: 1%;
+        left: 12%;
+        width: 76%;
+        height: 4%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        box-shadow: 1px 1px 1px $panel-bg-color;
+        background: rgba(0, 0, 0, 0.5);
+        clip-path: polygon(
+            0 100%,
+            5% 0,
+            95% 0,
+            100% 100%
+            );
+        }
+        
+        .level-indicator {
+            position: relative;
+            margin: 0.2% 0.7%;
+            flex-grow: 1;
+            background-color: $panel-bg-color;
+            background: $horizontal-gradient;
+            cursor: pointer;
+
+        &:first-child {
+            margin-left: 0.2%;
+        }
+
+        &:last-child {
+            margin-right: 0.2%;
+        }
+
+        .level-light {
+            position: absolute;
+            top: 25%;
+            left: 40%;
+            width: 20%;
+            height: 50%;
+            background: $green;
+            opacity: 0.2;
+        }
+    }
+
+    .level-indicator {
+        .level-light--active {
+            opacity: 1;
+        }
+    }
+
+    .level-menu__footer {
+        position: absolute;
+        bottom: 1%;
+        left: 12%;
+        width: 76%;
+        height: 4%;
+        background: rgba(0, 0, 0, 0.5);
+        clip-path: polygon(
+            5% 100%,
+            0 0,
+            100% 0,
+            95% 100%
+        );
+        text-align: center; 
+        vertical-align: middle;
+        font-size: bold;
+        -webkit-text-stroke: 1px $green;
+        letter-spacing: -2px;
+
+        .level-menu__footer__text-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            background: $horizontal-gradient;
+            line-height: 100%;
+            text-align: center; 
+            font-size: 90%;
+            -webkit-text-stroke: 1px $green;
+            color: $green;
+        }
+    }
+    .level-menu__arrow-left {
+        position: absolute;
+        top: 32%;
+        left: 1%;
+        width: 4%;
+        height: 36%;
+        background: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        clip-path: polygon(
+            5% 11%,
+            100% 0,
+            100% 100%,
+            5% 89%
+        );
+
+        .level-menu__arrow__button-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: $vertical-gradient;
+
+            .level-arrow-left {
+                position: absolute;
+                width: 70%;
+                height: 30%;
+                top: 35%;
+                left: 5%;
+                background: rgba(141, 238, 121, 0.2);
+                clip-path: polygon(
+                    80% 0,
+                    100% 0,
+                    50% 50%,
+                    100% 100%,
+                    80% 100%,
+                    0 50%
+                );
+            }
+
+            .level-arrow-left--active {
+                background: $green;
+            }
+        }
+    }
+
+    .level-menu__arrow-right {
+        position: absolute;
+        top: 32%;
+        right: 1%;
+        width: 4%;
+        height: 36%;
+        background: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        clip-path: polygon(
+            0 0,
+            95% 11%,
+            95% 89%,
+            0% 100%,
+        );
+
+        .level-menu__arrow__button-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: $vertical-gradient;
+
+            .level-arrow-right {
+                position: absolute;
+                width: 70%;
+                height: 30%;
+                top: 35%;
+                left: 5%;
+                background: rgba(141, 238, 121, 0.2);
+                clip-path: polygon(
+                    0 0,
+                    20% 0,
+                    100% 50%,
+                    20% 100%,
+                    0 100%,
+                    50% 50%
+                );
+            }
+
+            .level-arrow-right--active {
+                background: $green;
+            }
+        }
+    }
+}
+
+@keyframes level-menu-in-anim {
+    0% {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

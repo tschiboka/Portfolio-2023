@@ -1,0 +1,110 @@
+.countback {
+    position: relative;
+    left: 5%;
+    top: 40%;
+    width: 90%;
+    height: 20%;
+}
+
+.countback__left {
+    position: absolute;
+    display: flex;
+    flex-direction: row;    
+    width: 40%;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    .countback-led {
+        width: 19%;
+        height: 100%;
+        margin-right: 2%;
+        border: black solid 1px;
+
+        &:first-child {
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+    }
+}
+
+.countback__right {
+    position: absolute;
+    display: flex;
+    flex-direction: row;    
+    width: 40%;
+    height: 100%;
+    right: 0;
+    top: 0;
+
+    .countback-led {
+        width: 19%;
+        height: 100%;
+        margin-left: 2%;
+        border: black solid 1px;
+
+        &:last-child {
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+    }
+}
+
+#counter {
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    top: 0;
+    left: 40%;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.3vh;
+    text-align: center;
+    color: $main-text-color;
+}
+
+#countback-led10:not(.led-off) {
+    background: #58E8F3;
+}
+
+#countback-led9:not(.led-off) {
+    background: #42EED0;
+}
+
+#countback-led8:not(.led-off) {
+    background: #2CF4AD;
+}
+
+#countback-led7:not(.led-off) {
+    background: #16F989;
+}
+
+#countback-led6:not(.led-off) {
+    background: #00FF66;
+}
+
+#countback-led5:not(.led-off) {
+    background: #FFCC66;
+}
+
+#countback-led4:not(.led-off) {
+    background: #FFB380;
+}
+
+#countback-led3:not(.led-off) {
+    background: #FF9999;
+}
+
+#countback-led2:not(.led-off) {
+    background: #FF80B3;
+}
+
+#countback-led1:not(.led-off) {
+    background: #FF66CC;
+}
+
+.led-off {
+    background: rgba(250, 250, 250, 0.15);
+}

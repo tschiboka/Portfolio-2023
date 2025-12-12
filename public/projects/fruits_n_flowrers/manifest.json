@@ -1,0 +1,50 @@
+{
+    "name": "Fruits n Flowers",
+    "short_name": "Fruits n Flowers",
+    "description": "logic game match three",
+    "background_color": "#130816cc",
+    "app": {
+        "urls": [
+            "http://tschiboka.co.uk/projects/fruits_n_flowers_v2/fruits_n_flowers.html"
+        ],
+        "launch": {
+            "web_url": "http://tschiboka.co.uk/projects/fruits_n_flowers_v2/fruits_n_flowers.html"
+        }
+    },
+    "icons": [
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "168x168",
+            "type": "image/png"
+        },
+        {
+            "src": "images/misc/diamond.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ],
+    "version": "0.0.0.1",
+    "manifest_version": 2,
+    "display": "fullscreen",
+    "orientation": "portrait"
+}

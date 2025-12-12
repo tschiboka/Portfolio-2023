@@ -1,0 +1,202 @@
+.shop {
+    position: absolute;
+    display: none;
+    top: 7%;
+    left: 5%;
+    width: 90%;
+    height: 88%;
+    background: rgba(20, 16, 23, 0.995);
+    color: $main-text-color;
+    font-size: 2.7vh;
+    z-index: 9999;
+
+    .shop-items {
+        position: relative;
+        margin: 2%;
+        margin-top: 3%;
+        width: 96%;
+        height: 96%;
+        border: 1px solid rgb(43, 34, 49);
+
+        .shop__fruit-and-bonus-section {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 40%;
+            
+            .shop__fruit-section, .shop__bonus-section {
+                margin: 2%;
+                padding: 2%;
+                width: 92%;
+                height: 90%;
+                
+                .shop__fruits-container, .shop__bonuses-container {
+                    position: relative;
+                    width: 100%;
+                    height: 85%;
+                    background: rgba(255, 255, 255, 0.02);
+                    border-right: 1px solid rgb(43, 34, 49);                    
+                }
+            }
+        }
+    }
+}
+
+.shop__text {
+    width: 100%;
+    text-align: center;
+}
+
+.shop__misc-section {
+    width: 96%;
+    height: 20%;
+    margin: 2%;
+    margin-top: 8%;
+    
+    .shop__misc-container {
+        display: flex;
+        width: 96%;
+        height: 60%;
+        margin: 2%;
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+
+        div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80%;
+            width: 40%;
+            margin: 2% 3%;
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 2vh;
+            border: 1px solid rgb(43, 34, 49);
+            border-left: none;
+            border-right: none;
+            cursor: pointer;
+        }
+
+        #shop__diamond {
+            width: 20%;
+            background-image: url(../../images/misc/diamond.png);
+            background-size: 60% 60%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}
+
+.shop__display {
+    width: 14%;
+    height: 10%;
+    margin: 8% 43%;
+    background-color: rgba(255, 255, 255, 0.02);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    border: 1px solid rgb(76, 59, 87);
+}
+
+.shop__footer {
+    display: flex;
+    flex-direction: row;
+    width: 96%;
+    height: 10%;
+    margin: 2%;
+    margin-top: 6%;
+
+    button {
+        font-family: "main-game-font";
+        color: $main-text-color;
+        font-size: 2.7vh;
+        cursor: pointer;
+    }
+
+    #shop__back {
+        width: 30%;
+        height: 100%;
+        border: 1px solid rgb(43, 34, 49);
+        background: transparent;
+        background: rgba(255, 255, 255, 0.02);
+        border-left: none;
+        border-bottom: none;
+    }
+
+    #shop__price {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 40%;
+        height: 98%;
+        border-top: 1px solid rgb(43, 34, 49);
+    }
+
+    #shop__buy {
+        width: 30%;
+        height: 100%;
+        border: 1px solid rgb(43, 34, 49);
+        background: rgba(255, 255, 255, 0.02);
+        border-right: none;
+        border-bottom: none;
+    }
+}
+
+
+.shop__fruits, .shop__bonuses {
+    position: absolute;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    
+    
+    & > div {
+        width: calc(31% - 2px);
+        height: calc(31% - 2px);
+        margin: 1%;
+        border: 1px solid rgb(54, 43, 61);
+        background: rgba(255, 255, 255, 0.01) center no-repeat;
+        background-size: 80% 80%;
+        cursor: pointer;
+        
+        // first 3 child
+        &:nth-child(-n+3) {
+            border-top: 1px solid transparent;
+        }
+
+        // every 3rd child reverse
+        &:nth-last-child(3n) {
+            border-left: 1px solid transparent;
+        }
+
+        // every 3rd child
+        &:nth-child(3n) {
+            border-right: 1px solid transparent;
+        }
+
+        // every child from 7th
+        &:nth-child(n+7) {
+            border-bottom: 1px solid transparent;
+        }
+    }
+}
+
+#shop__back, #shop__buy, 
+.shop__fruits > div, .shop__bonuses > div,
+#shop__fast-hint, #shop__best-hint, #shop__diamond {
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+        background: rgba(19, 246, 242, 0.95);
+        color: rgba(0, 0, 0, 0.9);
+    }
+}

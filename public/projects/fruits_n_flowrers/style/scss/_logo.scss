@@ -1,0 +1,89 @@
+.logo {
+    padding-top: 50%;
+    background-clip: text;
+    font-family: "mario-style-font";
+    -webkit-text-stroke: 5px #3a3a3a;
+    text-align: center;
+    text-shadow: 7px 7px 7px black;
+
+    @include breakpoint(sm) {
+        font-size: 17vw;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 80px;
+    }
+
+    .logo__fruits-txt {
+        animation: logo-fruittxt-anim 0.5s linear;
+        color: #febc63;
+    }
+
+    .logo__n-txt {
+        display: inline-block;
+        transform-origin: bottom left;
+        animation: logo-ntxt-anim 3s linear;
+        color: #8bd391;
+        opacity: 0;
+    }
+
+    .logo__flowers-txt {
+        animation: logo-flowertxt-anim 1.5s linear;
+        color: #00ffff;
+    }
+
+    @keyframes logo-fruittxt-anim {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes logo-ntxt-anim {
+        0% {
+            opacity: 0;
+        }
+        15% {
+            opacity: 0;
+        }
+        25% {
+            opacity: 1;
+        }
+        40% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(220deg);
+        }
+        60% {
+            transform: rotate(100deg);
+        }
+        70% {
+            transform: rotate(210deg);
+        }
+        75% {
+            transform: rotate(180deg) translateY(0px);
+        }
+        85% {
+            opacity: 1;
+        }
+        100% {
+            transform: rotate(180deg) translateY(-600px);
+            opacity: 0;
+        }
+    }
+
+    @keyframes logo-flowertxt-anim {
+        0% {
+            opacity: 0;
+        }
+        66% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}

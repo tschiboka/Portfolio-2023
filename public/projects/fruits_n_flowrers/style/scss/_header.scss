@@ -1,0 +1,141 @@
+header {
+    display: none;
+    padding-top: 20px;
+    font-family: "mario-style-font";
+    text-align: center;
+    -webkit-text-stroke: 2px #3a3a3a;
+    text-shadow: 3px 3px 3px black;
+    animation: header-in-anim 0.2s ease-in;
+
+    @include breakpoint(sm) {
+        font-size: 7vw;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 32px;
+    }
+
+    .header__fruits-txt {
+        color: #febc63;
+    }
+
+    .header__n-txt {
+        display: inline-block;
+        color: #8bd391;
+        animation: header-n-txt 2s linear infinite;
+    }
+
+    .header__flowers-txt {
+        color: #00ffff;
+        
+        .header__flowers--flower {
+            position: relative;
+            display: inline-block;
+            transform: translateY(5px);
+            transform-origin: center;
+            background-image: url(../../images/flowers/flower4.png);
+            background-position: center;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            animation: header-flower-anim 5s linear infinite;
+
+            @include breakpoint(sm) {
+                width: 7vw;
+                height: 7vw;
+            }
+        
+            @include breakpoint(lg) {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}
+
+.header--hidden {
+    display: none;
+}
+
+.header--visible {
+    display: block;
+}
+
+.header-out {
+    animation: header-out-anim 0.2s ease-in;
+    opacity: 0;
+    height: 0vw;
+    padding: 1%;
+}
+
+.header-in {
+    animation: header-in-anim 0.2s ease-in;
+    opacity: 1;
+    padding-top: 20px;
+
+    @include breakpoint(sm) {
+        font-size: 7vw;
+    }
+
+    @include breakpoint(lg) {
+        font-size: 32px;
+    }
+}
+
+@keyframes header-n-txt {
+    0% {
+        transform: rotate(5deg);
+    }
+    25% {
+        transform: rotate(0);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    75% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes header-flower-anim {
+    0% {
+        transform: translateY(5px) rotate(0);
+    }
+    100% {
+        transform: translateY(5px) rotate(359deg);
+    }
+}
+
+@keyframes header-in-anim {
+    0% {
+        transform: translateY(-60px);
+    }
+
+    80% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes header-out-anim {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(10px);
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        height: 0vw;
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+}

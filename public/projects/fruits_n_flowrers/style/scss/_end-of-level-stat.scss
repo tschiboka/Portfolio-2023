@@ -1,0 +1,128 @@
+.end-of-level-stat, .levelHasNotBeenCompletedDiv {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    // size is adjusted to level menu page
+    top: 8%;
+    left: 8%;
+    width: 84%;
+    height: 84%;
+    background: rgba(19, 8, 22, 0.9);
+    color: $main-text-color;
+    text-align: center;
+    font-size: 3vh;
+}
+
+
+.levelHasNotBeenCompletedDiv{
+    text-align: justify;
+    padding: 5%;
+    width: 74%;
+    height: 74%;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+
+.end-of-level-ok-btn {
+    width: 60%;
+    color: $main-text-color;
+    font-size: 3.4vh;
+    font-family: "main-game-font";
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgb(43, 34, 49);
+    border-left: none;
+    border-right: none;
+    
+    &:hover {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+        background: rgba(19, 246, 242, 0.95);
+        color: rgba(0, 0, 0, 0.9);
+    }
+}
+
+.end-of-level-stat {
+    div:nth-child(2n), button{
+        width: 90%;
+        color: $main-text-color;
+        font-size: 4vh;
+        font-family: "main-game-font";
+        background: rgba(255, 255, 255, 0.03);
+        border: 2px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+    }
+
+    button {
+        width: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        &:hover {
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        &:active {
+            background: rgba(19, 246, 242, 0.95);
+            color: rgba(0, 0, 0, 0.9);
+        }
+    }
+}
+
+
+
+.reward-gem-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 18%;
+    width: 90%;
+    margin: 0 5%; 
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px solid rgb(43, 34, 49);
+    border-left: none;
+    border-right: none;
+
+    .reward-gem {
+        margin: 0 2% 0 2%;
+        height: 75%;
+        width: 18%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 80% 80%;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgb(66, 57, 73);
+
+        &:first-child {
+            border-left: none;
+        }
+
+        &:last-child {
+            border-right: none;
+        }
+    }
+
+    button {
+        width: 11%;
+    }
+}
+
+
+.reward-div {
+    width: 84%;
+    height: 84%;
+    padding: 0;
+    font-size: 2.7vh;
+
+    & > div {
+        margin: 0 5%;
+    }
+}

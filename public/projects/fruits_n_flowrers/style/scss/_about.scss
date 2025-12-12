@@ -1,0 +1,262 @@
+.about {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    top: 0;
+    left: 0;
+    height: 95%;
+    width: 90%;
+    padding: 5%;
+    font-size: 2.6vh;
+    text-align: center;
+    background: rgba(20, 16, 23, 0.995);
+    color: $main-text-color;
+
+    .about-inner {
+        display: flex;
+        width: 90%;
+        height: 90%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;    
+        padding: 5%;
+        border: 1px solid rgb(43, 34, 49);
+
+        .highlight {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgb(43, 34, 49);
+            border-left: none;
+            border-right: none;     
+        }
+
+        .about-photo-box {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: none;
+            border: none;
+        }
+
+        .about-photo {
+            width: 200px;
+            height: 200px;
+            background-color: transparent;
+            border: none;
+            background-image: url(../../images/misc/photo.jpg);
+            background-position: center;
+            background-size: 90% 90%;
+            background-repeat: no-repeat;
+        }
+    }
+
+    .about-back-btn-box {
+        width: 100%;
+        height: 9%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.02); 
+        border: 1px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+    }
+
+    button {
+        width: 33%;
+        height: 75%;
+        margin: 2% 7%;
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+        color: $main-text-color;
+        font-family: "main-game-font";
+        font-size: 2.4vh;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        &:active {
+            background: rgba(19, 246, 242, 0.95);
+            color: rgba(0, 0, 0, 0.9);
+        }   
+    }
+
+
+    .anchor-div {
+        padding-top:0;
+        padding-bottom: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .anchor-underline {
+        width: 100;
+        background: red;
+        height: 1px;
+        background: linear-gradient(to right, #251e2a, #3b2f43, #52415d, #6a5479, #836896, #836896, #836896, #836896, #6a5479, #52415d, #3b2f43, #251e2a);
+        animation: anchor-underline-anim 5s ease-in-out infinite;
+    }
+
+
+    a {
+        text-decoration: none;
+        color: #fc41a3;
+        line-height: 2vh;
+        animation: anchor-anim 5s ease-in-out infinite;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .about-contact {
+        color: #fc41a3;
+    }
+
+    .stripe {
+        border: none;
+        position: absolute;
+        width: 0;
+        height: 0;
+    }
+
+    .stripe1 {
+        position: absolute;
+        top: 0;
+        left: calc(50% - 120px);
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(to left, #251e2a, #42354b, #624e70, #836896, #a684be);
+        animation: stripe-horizontal-anim 3s ease-in-out infinite;
+    }
+
+    .stripe2 {
+        position: absolute;
+        bottom: 0;
+        right: calc(50% - 120px);
+        width: 150px;
+        height: 1px;
+        background: linear-gradient(to right, #251e2a, #42354b, #624e70, #836896, #a684be);
+        animation: stripe-horizontal-anim 3s ease-in-out infinite;
+    }
+
+    .stripe3 {
+        position: absolute;
+        bottom: -7%;
+        right: calc(50% - 105px);
+        width: 1px;
+        height: 150px;
+        background: linear-gradient(to bottom, #251e2a, #42354b, #624e70, #836896, #a684be);
+        animation: stripe-vertical-anim 3s ease-in-out infinite;
+    }
+
+    .stripe4 {
+        position: absolute;
+        top: -7%;
+        left: calc(50% - 105px);
+        width: 1px;
+        height: 150px;
+        background: linear-gradient(to top, #251e2a, #42354b, #624e70, #836896, #a684be);
+        animation: stripe-vertical-anim 3s ease-in-out infinite;
+    }
+
+}
+
+.visitors-div {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #52415d;
+    font-size: 2.2vh;
+    span {
+        width: 47%;
+    }
+    span:first-child {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    span:nth-child(2) {
+        width: 6%;
+        text-align: center;
+    }
+    span:last-child {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
+
+@keyframes stripe-horizontal-anim {
+    0% {
+        width: 10px;
+        opacity: 0.4;
+    }
+
+    50% {
+        width: 240px;
+        opacity: 0.9;
+    }
+    100% {
+        width: 10px;
+        opacity: 0.4;
+    }
+}
+
+@keyframes stripe-vertical-anim {
+    0% {
+        height: 10px;
+        opacity: 0.4;
+    }
+
+    50% {
+        height: 230px;
+        opacity: 0.9;
+    }
+    100% {
+        height: 10px;
+        opacity: 0.4;
+    }
+}
+
+@keyframes anchor-anim {
+    0% {
+        color: #fc41a3;
+    }
+    50% {
+        color: #fdcde6;
+    }
+    100% {
+        color: #fc41a3;
+    }
+}
+
+@keyframes anchor-underline-anim {
+    0% {
+        width: 2%;
+        margin-left: 0;
+    }
+    25% {
+        width: 80%;
+        margin-left: 18%;
+    }
+    50% {
+        width: 2%;
+        margin-left: 98%;
+    }
+    75% {
+        width: 80%;
+        margin-left: 18%;
+    }
+    100% {
+        width: 2%;
+        margin-left: 0;
+    }
+}

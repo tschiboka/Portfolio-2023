@@ -1,0 +1,394 @@
+$scrollbar-color: $main-text-color;
+
+.offer-msg {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    width: 74%;
+    height: 74%;    
+    padding: 5%;
+    background: rgba(20, 16, 23, 0.995);
+    color: $main-text-color;
+    font-size: 2.7vh;
+    z-index: 12000;
+
+    .offer-msg-inner {
+        width: 90%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10% 5%;
+        border: 1px solid rgb(43, 34, 49);
+
+        .offer-msg-text {
+            width: 100%;
+            height: 100%;
+        }
+
+        .offer-msg-buttons-box {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgb(43, 34, 49);
+            border-left: none;
+            border-right: none;
+
+            button {
+                width: 33%;
+                height: 80%;
+                margin: 2% 7%;
+                background: rgba(0, 0, 0, 0.1);
+                border: 1px solid rgb(43, 34, 49);
+                color: $main-text-color;
+                font-family: "main-game-font";
+                font-size: 2.4vh;
+                cursor: pointer;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.05);
+                }
+
+                &:active {
+                    background: rgba(19, 246, 242, 0.95);
+                    color: rgba(0, 0, 0, 0.9);
+                }
+
+                &:first-child {
+                    border-left: none;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+        }
+    }
+}
+
+
+.walkthrough {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 90%;
+    width: 90%;
+    padding: 5%;
+    background: rgba(20, 16, 23, 0.995);
+    color: $main-text-color;
+
+    .walkthrough-back-btn-box {
+        width: 100%;
+        height: 9%;
+        margin-top: 2%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.02); 
+        border: 1px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+    }
+
+    button {
+        width: 33%;
+        height: 75%;
+        margin: 2% 7%;
+        background: rgba(0, 0, 0, 0.1);
+        border: 1px solid rgb(43, 34, 49);
+        border-left: none;
+        border-right: none;
+        color: $main-text-color;
+        font-family: "main-game-font";
+        font-size: 2.4vh;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        &:active {
+            background: rgba(19, 246, 242, 0.95);
+            color: rgba(0, 0, 0, 0.9);
+        }   
+    }
+
+    .walkthrough-inner {
+        width: 100%;
+        height: 90%;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        border: 1px solid rgb(43, 34, 49);
+
+        .walkthrough__content {
+            width: 100%;
+            padding-bottom: 50px;
+            text-align: justify;
+            overflow: hidden;
+
+            h2 {
+                display: flex;
+                justify-content: center;
+                font-size: 3vh;
+                text-align: center;
+            }
+
+            h2:before,
+            h2:after {
+                content: '';
+                border-top: 1px solid;
+                margin: 0 20px;
+                flex: 1 0 20px;
+                transform: translateY(50%);
+                opacity: 0.8;
+            }
+
+            p {
+                margin: 5%;
+                padding: 5%;
+                font-size: 2.3vh;
+                font-family: "mono",'Courier New', Courier, monospace;
+                background: rgba(255, 255, 255, 0.02);
+                border: 1px solid rgb(43, 34, 49);
+                border-left: none;
+                border-right: none;
+            }
+
+            div > img {
+                border-top: 2px solid #fc41a2da;
+                border-bottom: 2px solid #fc41a2da;
+                border-radius: 5px; 
+            }
+
+            .pic {
+                margin: 5%;
+                padding: 5%;
+                display: flex;
+                justify-content: space-evenly;
+                flex-direction: row;
+                align-items: center;
+                background: rgba(0, 0, 0, 0.075);
+                border: 1px solid rgb(43, 34, 49);
+                border-right: none;
+                border-left: none;
+            }
+        }
+
+        .walkthrough__scrollbar {
+            position: relative;
+            height: calc(100% - 20px);
+            width: 3px;
+            margin: 10px;
+            border: 1px solid rgb(79, 63, 90);
+            border: 1px solid $scrollbar-color;
+            background: rgb(43, 34, 49);
+            border-radius: 1px;
+
+            #scrollbar-thumb {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 3px;
+                height: 25%; // it changes by js
+                background: #fc41a3;
+                border-radius: 1px;
+            }
+
+            #scrollbar-btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 15px;
+                height: 50px;
+                background: $scrollbar-color;
+                transform: translate(-6px, 0);
+                clip-path: polygon(
+                    0 15%,
+                    25% 0,
+                    75% 0,
+                    100% 15%,
+                    100% 85%,
+                    75% 100%,
+                    25% 100%,
+                    0 85%
+                );
+
+                #scrollbar-btn__inner {
+                    position: relative;
+                    width: 11px;
+                    height: 46px;
+                    display: flex;
+                    margin-left: 2px;
+                    transform: translateY(2px);
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(20, 16, 23, 0.995);
+                    //border: 2px solid $main-text-color;
+                    cursor: pointer;
+    
+                    clip-path: polygon(
+                        0 15%,
+                        25% 0,
+                        75% 0,
+                        100% 15%,
+                        100% 85%,
+                        75% 100%,
+                        25% 100%,
+                        0 85%
+                    );
+                
+                
+                    .groove {
+                        width: 70%;
+                        height: 1px;
+                        margin: 15% 0;
+                        background: $scrollbar-color;
+                    }
+                }
+            }  
+        }    
+        .table {
+            width: 90%;
+            height: 65%;
+            margin-left: 5%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgb(43, 34, 49);
+            clip-path: polygon(
+                0 10%,
+                10% 0,
+                90% 0,
+                100% 10%,
+                100% 90%,
+                90% 101%,
+                10% 101%,
+                0 90% 
+            );
+
+            .table-caption {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 10%;
+            }
+
+            .table-body {
+                width: 80%;
+                height: 80%;
+                margin: 0 10%;
+                border: 1px solid rgb(43, 34, 49);
+                background: rgba(0, 0, 0, 0.25);
+
+                .page-tab-box {
+                    width: 100%;
+                    height: 4px;
+                    display: flex;
+                    justify-content: space-between;
+                    background: rgba(255, 255, 255, 0.06);
+                    border-bottom: 1px solid rgb(43, 34, 49);
+
+                    .page-tab {
+                        width: 13%;
+                        height: 4px;
+                        background: $main-text-color;
+                        opacity: 0.3;
+                    }
+
+                    .active {
+                        opacity: 1;
+                    }
+                }
+
+                .table-picture {
+                    width: 100%;
+                    height: calc(83% - 6px);
+                    background-image: url("https://tschiboka.co.uk/projects/fruits_n_flowers_v2/images/walkthrough/matches-I3.gif");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                .table-match-points-bonuses {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+                    width: 100%;
+                    height: 17%;
+                    
+                    .table-match-points {
+                        width: 48%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        border-right: 1px solid rgb(43, 34, 49);
+                    }
+
+                    .table-match-bonuses {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-around;
+                        width: 48%;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        align-items: center;
+                        border-left: 1px solid rgb(43, 34, 49);
+
+                        img {
+                            width: 35%;
+                            height: 95%;
+                            border: 1px solid rgb(43, 34, 49);
+                        }
+                    }
+                }
+            }
+
+            .table-button-box {
+                width: 80%;
+                height: calc(10% - 1px);
+                margin-left: 10%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                button {
+                    margin: 0;
+                    border: none;
+                    width: 49%;
+                    height: 100%;
+                    background: rgba(255, 255, 255, 0.02);
+
+                    &:first-child {
+                        border-right: 1px solid rgb(43, 34, 49);
+                        background: linear-gradient(to right, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.1));
+                    
+                        &:hover, &:active {
+                            background: linear-gradient(to right, rgba(255, 255, 255, 0.02), rgba(143, 221, 235, 0.5));
+                        }
+                    }
+
+                    &:last-child {
+                        border-left: 1px solid rgb(43, 34, 49);
+                        background: linear-gradient(to left, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.1));
+
+                        &:hover, &:active {
+                            background: linear-gradient(to left, rgba(255, 255, 255, 0.02), rgba(143, 221, 235, 0.5));
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,202 @@
+.menu {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 12%;
+    // here I test design with closed menu
+    height: 20px;
+    left: 0;
+    bottom: 0;
+    background: $panel-bg-color;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    clip-path: polygon(
+        0 20px,
+        5% 0,
+        95% 0,
+        100% 20px,
+        100% 100%,
+        0 100%
+    );
+
+    .menu__open-close-btn-box {
+        width: 98.5%;
+        height: 18px;
+        margin: 3px;
+        background: rgba(0, 0, 0, 0.5);
+        clip-path: polygon(
+            0 18px,
+            5% 0,
+            95% 0,
+            100% 18px,
+            100% 100%,
+            0 100%
+        );
+        cursor: pointer;
+
+        .menu__open-close-btn {
+            width: 100%;
+            height: 100%;
+            background: $horizontal-gradient;
+
+            .menu__open-close-arrow {
+                width: 100%;
+                height: 100%;
+                background: $green;
+                transform-origin: 0% 0%;
+                perspective: 200; 
+                perspective-origin: 50% 50%;
+                clip-path: polygon(
+                    43% 70%,
+                    50% 10%,
+                    57% 70%,
+                    57% 90%,
+                    50% 50%,
+                    43% 90%
+                );
+            }
+        }
+    }
+}
+
+.menu-box {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-content: stretch;
+    list-style: none;
+    background: rgba(0, 0, 0, 0.5);
+    color: $main-text-color;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+    .menu-btn {
+        width: 100%;
+        height: 100%;
+        border-left: 2px solid rgb(43, 34, 49);
+        background: $horizontal-gradient;
+        
+        &:first-child {
+            border-bottom-right-radius: 5px;
+        }
+
+        &:last-child{
+            border: none;
+            border-bottom-left-radius: 5px;
+        }
+        
+        div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-content: space-around;
+            justify-content: center;
+            text-align: center;
+            text-shadow: -2px -2px black;
+            cursor: pointer;
+            background-repeat: no-repeat;
+            background-position: top;
+            background-size: 60% 70%;
+            
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.05)
+            }
+
+            @include breakpoint(sm) {
+                font-size: 1.5em;
+            }
+
+            @include breakpoint(lg) {
+                font-size: 2.8em;
+            }
+        }
+    }
+}
+
+.back-btn {
+    background-image: url(../../images/icons/back-icon.png);
+}
+
+.pause-btn {
+    background-image: url(../../images/icons/pause-icon.png);
+}
+
+.restart-btn {
+    background-image: url(../../images/icons/restart-icon.png)
+}
+
+.intro-btn {
+    background-image: url(../../images/icons/intro-icon.png)
+}
+
+.info-btn {
+    background-image: url(../../images/icons/info-icon.png)
+}
+
+.menu-open {
+    height: 12%;
+    z-index: 11111;
+    animation: menu-up-anim 0.2s ease-out;
+}
+
+
+.menu-close {
+    height: 20px;
+    z-index: 11111;
+    animation: menu-down-anim 0.2s ease-out;
+}
+
+.arrow-open {
+    transform: rotateX(180deg) translateY(-20px);
+    animation: arrow-down-anim 0.2s ease-out;
+}
+
+.arrow-close {
+    transform: rotateX(0) translateY(0);
+    animation: arrow-down-anim 0.2s ease-out;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+@keyframes menu-up-anim {
+    0% {
+        height: 20px;
+    }
+    100% {
+        height: 12%;
+    }
+}
+
+@keyframes menu-down-anim {
+    0% {
+        height: 12%;
+    }
+    100% {
+        height: 20px;
+    }
+}
+
+@keyframes arrow-down-anim {
+    0% {
+        transform: rotateX(0) translateY(0);
+    }
+    100% {
+        transform: rotateX(180deg) translateY(-20px); 
+    }
+}
+
+@keyframes arrow-up-anim {
+    0% {
+        transform: rotateX(180deg) translateY(-20px); 
+    }
+    100% {
+        transform: rotateX(0) translateY(0);
+    }
+}
