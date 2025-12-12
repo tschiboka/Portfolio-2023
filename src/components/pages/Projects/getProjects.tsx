@@ -61,7 +61,7 @@ const projects: Project[] = [
         description:
             'Fruits and Flowers began as a personal challenge to test my JavaScript skills and evolved into a captivating game with over 100 levels. Unlike traditional match-three games, Fruits and Flowers offers unique challenges with special gems, adding extra layers of complexity. Players can earn in-game points to acquire unique gems that provide advantages at tougher levels. While this early project may not adhere to all programming best practices, it holds a special place in my heart as a significant milestone in my development journey.',
         badges: ['HTML', 'Sass', 'JavaScript'],
-        url: 'https://tschiboka.com/projects/fruits_n_flowers_v2/fruits_n_flowers.html',
+        url: 'https://tschiboka.com/projects/fruits_n_flowers/fruits_n_flowers.html',
         github: 'https://github.com/tschiboka/fruits_n_flowers_v2',
     },
     {
