@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 aside.blog-component--article {
     position: fixed;
@@ -12,18 +12,17 @@ aside.blog-component--article {
     bottom: 0;
     width: 100%;
     height: 5rem;
-    background-color: $black_1;
+    background-color: palette.$black_1;
     z-index: 60;
     .line {
         position: absolute;
         display: none;
         width: 1px;
         height: 55vh;
-        background-color: $black_3;
+        background-color: palette.$black_3;
         right: 4.5rem;
         opacity: 0;
-        animation: 
-            fade_in 300ms 900ms ease-out forwards,
+        animation: fade_in 300ms 900ms ease-out forwards,
             from_above_far 1000ms 900ms ease-in;
         @include bp.lg {
             display: block;
@@ -31,28 +30,50 @@ aside.blog-component--article {
     }
     & > * {
         opacity: 0;
-        animation: 
-                fade_in 200ms ease-out forwards,
-                from_above 200ms ease-in;
-        &:nth-child(1) { animation-delay: 500ms; }
-        &:nth-child(2) { animation-delay: 600ms; }
-        &:nth-child(3) { animation-delay: 700ms; }
-        &:nth-child(4) { animation-delay: 800ms; }
-        &:nth-child(5) { animation-delay: 900ms; }
-        &:nth-child(6) { animation-delay: 1000ms; }
+        animation: fade_in 200ms ease-out forwards, from_above 200ms ease-in;
+        &:nth-child(1) {
+            animation-delay: 500ms;
+        }
+        &:nth-child(2) {
+            animation-delay: 600ms;
+        }
+        &:nth-child(3) {
+            animation-delay: 700ms;
+        }
+        &:nth-child(4) {
+            animation-delay: 800ms;
+        }
+        &:nth-child(5) {
+            animation-delay: 900ms;
+        }
+        &:nth-child(6) {
+            animation-delay: 1000ms;
+        }
         @include bp.lg {
-            &:nth-child(1) { animation-delay: 1500ms; }
-            &:nth-child(2) { animation-delay: 1600ms; }
-            &:nth-child(3) { animation-delay: 1700ms; }
-            &:nth-child(4) { animation-delay: 1800ms; }
-            &:nth-child(5) { animation-delay: 1900ms; }
-            &:nth-child(6) { animation-delay: 1100ms; }
+            &:nth-child(1) {
+                animation-delay: 1500ms;
+            }
+            &:nth-child(2) {
+                animation-delay: 1600ms;
+            }
+            &:nth-child(3) {
+                animation-delay: 1700ms;
+            }
+            &:nth-child(4) {
+                animation-delay: 1800ms;
+            }
+            &:nth-child(5) {
+                animation-delay: 1900ms;
+            }
+            &:nth-child(6) {
+                animation-delay: 1100ms;
+            }
         }
     }
     .aside-icon {
         margin: 1.5rem 0;
-        color: $black_5;
-        font-size: $font-lg;
+        color: palette.$black_5;
+        font-size: font.$font_lg;
         &:hover {
             color: white;
             transform: scale(1.1);
@@ -74,8 +95,8 @@ aside.blog-component--article {
         z-index: 40;
         .aside-icon {
             margin: 1rem 0;
-            color: $black_5;
-            font-size: $font-xl;
+            color: palette.$black_5;
+            font-size: font.$font_lg;
             &:hover {
                 color: white;
                 transform: scale(1.1);
@@ -95,9 +116,9 @@ aside.blog-component--article {
         align-items: center;
         span {
             position: absolute;
-            color: $accent_dark_3;
+            color: palette.$accent_dark_3;
             font-family: monospace;
-            font-size: $font_md;
+            font-size: font.$font_md;
             bottom: 0.5rem;
             @include bp.lg {
                 bottom: -0.5rem;
@@ -106,11 +127,10 @@ aside.blog-component--article {
     }
     & div.Article__icon-box:hover {
         span {
-            color: $accent_dark_1;
+            color: palette.$accent_dark_1;
         }
     }
 }
-
 
 // Every common blog style here
 .blog-component {
@@ -118,49 +138,50 @@ aside.blog-component--article {
         font-variant: small-caps;
         font-weight: normal;
     }
-    article:not(.BlogCard) { 
+    article:not(.BlogCard) {
         margin: 0 auto;
         padding: 0;
-        
+
         max-width: 1200px;
     }
     h2 {
         text-align: center;
     }
-    h3, h4 {
+    h3,
+    h4 {
         margin: 3rem 0;
-        color: $white_2;
-        font-size: $font_lg;
+        color: palette.$white_2;
+        font-size: font.$font_lg;
         font-family: Roboto_Bold;
         font-variant: small-caps;
     }
     strong {
         font-weight: bold;
-        color: $white_2;
+        color: palette.$white_2;
     }
     img.image--lrg {
         max-width: 100%;
         margin: 0 auto;
         display: block;
     }
-    
+
     img.image--med {
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
         display: block;
     }
-    
+
     img.bg--white {
         background-color: white;
     }
-    
+
     a.inline:before {
-        content: "[";
+        content: '[';
     }
 
     a.inline:after {
-        content: "]"
+        content: ']';
     }
 
     a.inline {
@@ -168,12 +189,12 @@ aside.blog-component--article {
         margin: 0 0.25rem;
         display: inline-block;
         transform: translateY(-2px);
-        color: $accent_dark_3;
+        color: palette.$accent_dark_3;
         text-decoration: none;
         font-family: monospace;
         cursor: pointer;
         &:hover {
-            color: $accent_dark_1;
+            color: palette.$accent_dark_1;
             transform: scale(1.05) translateY(-2px);
         }
 
@@ -182,31 +203,31 @@ aside.blog-component--article {
             transform: translateY(-3px);
         }
     }
-    
+
     strong.bold {
-        font-family: "Roboto_Bold";
+        font-family: 'Roboto_Bold';
     }
-    
+
     p {
         @include bp.xl {
             text-align: justify;
         }
     }
-    
+
     .code {
         margin: 0 auto;
         max-width: 1200px;
-        background-color: $black_1 !important;
-        border: 1px solid $black_3;
+        background-color: palette.$black_1 !important;
+        border: 1px solid palette.$black_3;
         span {
             font-family: monospace !important;
-            font-size: $font_md;
+            font-size: font.$font_md;
             @include bp.lg {
-                font-size: $font_lg;
+                font-size: font.$font_lg;
             }
         }
     }
-    
+
     .button {
         width: 100%;
         max-width: 400px;
@@ -216,12 +237,12 @@ aside.blog-component--article {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $accent_dark_3;
-        color: $black_1;
-        border: 3px solid $black_3;
+        background-color: palette.$accent_dark_3;
+        color: palette.$black_1;
+        border: 3px solid palette.$black_3;
         border-radius: 100px;
-        font-size: $font_md;
-        font-family: "Roboto_Bold";
+        font-size: font.$font_md;
+        font-family: 'Roboto_Bold';
         text-decoration: none;
         cursor: pointer;
         & > * {
@@ -232,23 +253,24 @@ aside.blog-component--article {
                 font-size: 2rem;
             }
         }
-    
+
         @include bp.md {
             width: 40%;
         }
         @include bp.lg {
-            font-size: $font_lg;
+            font-size: font.$font_lg;
         }
     }
 }
 
 .light {
-    h3, h4 {
-        color: $black_2;
+    h3,
+    h4 {
+        color: palette.$black_2;
     }
     aside {
         * {
-            color: $white_5;
+            color: palette.$white_5;
         }
     }
     strong {

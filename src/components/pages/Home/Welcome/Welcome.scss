@@ -1,7 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .Welcome {
     position: relative;
@@ -29,21 +29,19 @@
         width: 19rem;
         display: flex;
         justify-content: space-between;
-        font-size: $font_md;
-        color: $white_5;
+        font-size: font.$font_md;
+        color: palette.$white_5;
         opacity: 0;
-        animation: 
-        from_below 500ms ease-in, 
-        fade_in 500ms ease-out forwards;
+        animation: from_below 500ms ease-in, fade_in 500ms ease-out forwards;
 
         @include bp.sm {
             width: 25rem;
-            font-size: $font_lg;
+            font-size: font.$font_lg;
         }
 
         @include bp.lg {
             width: 32rem;
-            font-size: $font_xl;
+            font-size: font.$font_xl;
         }
     }
 
@@ -51,10 +49,10 @@
         height: 20rem;
         min-height: 20rem;
         min-width: 20rem;
-        background: $black_1;
+        background: palette.$black_1;
         border-radius: 100%;
-        border: 10px solid $black_2;
-        background: linear-gradient(315deg, $black_1, $black_2);
+        border: 10px solid palette.$black_2;
+        background: linear-gradient(315deg, palette.$black_1, palette.$black_2);
         animation: pop 2000ms ease-out forwards;
         opacity: 0.6;
         @include bp.sm {
@@ -66,16 +64,16 @@
             min-width: 52vh;
         }
     }
-    
+
     img.headshot {
         height: calc(100% - 1rem);
         min-width: calc(100% - 1rem);
         margin: 0.5rem;
         border-radius: 100%;
-        border: 2px solid $black_2;
-        background-color: $black_2;
-        background: linear-gradient(315deg, $black_2, $black_1);
-        object-position: 0 20px ;
+        border: 2px solid palette.$black_2;
+        background-color: palette.$black_2;
+        background: linear-gradient(315deg, palette.$black_2, palette.$black_1);
+        object-position: 0 20px;
         filter: grayscale(0);
     }
     img.headshot:hover {
@@ -89,10 +87,9 @@
         justify-content: space-between;
         align-items: center;
         list-style: none;
-        font-size: $font_lg;
+        font-size: font.$font_lg;
         opacity: 0;
-        animation: 
-            from_right 500ms 1000ms ease-in,
+        animation: from_right 500ms 1000ms ease-in,
             fade_in 500ms 1000ms ease-in forwards;
 
         @include bp.sm {
@@ -109,19 +106,19 @@
             width: 3rem;
             height: 50vh;
             right: 3rem;
-            font-size: $font_xl;
+            font-size: font.$font_xl;
         }
         @include bp.xl {
         }
-        
+
         li {
             display: flex;
             justify-content: center;
             align-items: center;
-            color: $black_5;
+            color: palette.$black_5;
         }
         li:hover {
-            color: $accent_dark_3;
+            color: palette.$accent_dark_3;
             transform: scale(1.2);
         }
     }
@@ -131,12 +128,11 @@
         display: none;
         width: 1px;
         height: 60vh;
-        background-color: $black_3;
+        background-color: palette.$black_3;
         right: 4.5rem;
         top: 11.5vh;
         opacity: 0;
-        animation: 
-            fade_in 300ms 900ms ease-out forwards,
+        animation: fade_in 300ms 900ms ease-out forwards,
             from_above_far 1000ms 900ms ease-in;
         @include bp.lg {
             display: block;
@@ -145,15 +141,13 @@
 
     .hello {
         margin: 0;
-        color: $white_2;
-        color: $accent_dark_3;
+        color: palette.$white_2;
+        color: palette.$accent_dark_3;
         font-family: Roboto_Bold;
-        font-size: $font_xx;
+        font-size: font.$font_xx;
         opacity: 0;
-        animation: 
-                fade_in 800ms ease-in forwards, 
-                from_above 800ms ease-out;
-        
+        animation: fade_in 800ms ease-in forwards, from_above 800ms ease-out;
+
         @include bp.lg {
             font-size: 5rem;
             position: absolute;
@@ -165,9 +159,7 @@
             top: 30%;
             left: 3rem;
             opacity: 0;
-            animation: 
-                fade_in 800ms ease-in forwards, 
-                from_left 800ms ease-out;
+            animation: fade_in 800ms ease-in forwards, from_left 800ms ease-out;
         }
         @include bp.xl {
             font-size: 7rem;
@@ -178,19 +170,19 @@
 .light {
     .headshot-wrapper {
         opacity: 1;
-        border: 10px solid $white_1;
-        background: $white_2;
+        border: 10px solid palette.$white_1;
+        background: palette.$white_2;
     }
     .Welcome img {
         opacity: 1;
-        background: linear-gradient(315deg, white, $white_3);
-        border: 2px solid $white_2;
-        filter: grayscale(0)
+        background: linear-gradient(315deg, white, palette.$white_3);
+        border: 2px solid palette.$white_2;
+        filter: grayscale(0);
     }
     .hello {
         color: black;
     }
     .line {
-        background-color: $white_5;
+        background-color: palette.$white_5;
     }
 }

@@ -1,6 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 h1 {
     margin-bottom: 3rem;
@@ -28,28 +28,28 @@ main {
     justify-content: center;
     button {
         padding: 0.5rem 1.5rem;
-        background-color: $black_1;
-        border: 2px solid $black_3;
+        background-color: palette.$black_1;
+        border: 2px solid palette.$black_3;
         border-radius: 50px;
-        color: $white_2;
-        font-size: $font_md;
+        color: palette.$white_2;
+        font-size: font.$font_md;
         font-weight: bold;
         @include bp.md {
-            font-size: $font_lg;
+            font-size: font.$font_lg;
         }
         &:hover {
-            background-color: $black_2;
-            color: $accent_dark_2;
-            border: 2px solid $black_1;
+            background-color: palette.$black_2;
+            color: palette.$accent_dark_2;
+            border: 2px solid palette.$black_1;
             cursor: pointer;
         }
-    }    
+    }
 }
 
 .light {
     .button-wrapper--reset button {
-        background-color: $white_2;
-        border: 1px solid $black_5;
-        color: $black_2;
+        background-color: palette.$white_2;
+        border: 1px solid palette.$black_5;
+        color: palette.$black_2;
     }
 }

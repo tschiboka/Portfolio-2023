@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .Menu {
     position: sticky;
@@ -11,9 +11,9 @@
     padding-top: 1.5rem;
     display: flex;
     flex-direction: column;
-    background-color: $black_1;
-    color: $white_3;
-    font-size: $font_lg;
+    background-color: palette.$black_1;
+    color: palette.$white_3;
+    font-size: font.$font_lg;
     list-style: none;
     z-index: 90;
 
@@ -21,15 +21,42 @@
         display: none;
     }
 
-    li:nth-child(1) { animation-delay: 0ms, 0ms; animation-name: from_above, fade_in; }
-    li:nth-child(2) { animation-delay: 100ms, 100ms; animation-name: from_above, fade_in; }
-    li:nth-child(3) { animation-delay: 200ms, 200ms; animation-name: from_above, fade_in; }
-    li:nth-child(4) { animation-delay: 300ms, 300ms; animation-name: from_above, fade_in; }
-    li:nth-child(5) { animation-delay: 400ms, 400ms; animation-name: from_above, fade_in; }
-    li:nth-child(6) { animation-delay: 500ms, 500ms; animation-name: from_above, fade_in; }
-    li:nth-child(7) { animation-delay: 600ms, 600ms; animation-name: from_above, fade_in; }
-    li:nth-child(8) { animation-delay: 700ms, 700ms; animation-name: from_above, fade_in; }
-    li:nth-child(9) { animation-delay: 800ms, 800ms; animation-name: from_above, fade_in; }
+    li:nth-child(1) {
+        animation-delay: 0ms, 0ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(2) {
+        animation-delay: 100ms, 100ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(3) {
+        animation-delay: 200ms, 200ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(4) {
+        animation-delay: 300ms, 300ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(5) {
+        animation-delay: 400ms, 400ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(6) {
+        animation-delay: 500ms, 500ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(7) {
+        animation-delay: 600ms, 600ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(8) {
+        animation-delay: 700ms, 700ms;
+        animation-name: from_above, fade_in;
+    }
+    li:nth-child(9) {
+        animation-delay: 800ms, 800ms;
+        animation-name: from_above, fade_in;
+    }
 
     li {
         display: flex;
@@ -53,50 +80,52 @@
         color: white;
     }
 
-    a, .link {
+    a,
+    .link {
         color: inherit;
         text-decoration: inherit;
     }
-    
-    a:hover, .link:hover {
+
+    a:hover,
+    .link:hover {
         color: white;
         transform: scale(1.1);
     }
 
     .active .link {
-        font-family: "Roboto_Bold";
+        font-family: 'Roboto_Bold';
     }
     .social-links {
         margin-bottom: 1.5rem;
         padding-top: 1.5rem;
         display: flex;
         justify-content: center;
-        font-size: $font_md;
-        color: $black_5;
+        font-size: font.$font_md;
+        color: palette.$black_5;
         cursor: pointer;
     }
-    
+
     .social-links > * {
         margin: 0 0.5rem;
     }
-    
+
     .languages {
         margin-top: auto;
         display: flex;
         justify-content: center;
         align-items: center;
         font-variant: small-caps;
-        font-size: $font_md;
-        font-family: "Roboto_Bold";
-        color: $black_2;
+        font-size: font.$font_md;
+        font-family: 'Roboto_Bold';
+        color: palette.$black_2;
         a {
             margin: 0 0.5rem;
             margin-bottom: 0;
-            font-family: "Roboto_Bold";
-            color: $black_3;
+            font-family: 'Roboto_Bold';
+            color: palette.$black_3;
         }
         a.active {
-            color: $white_4;
+            color: palette.$white_4;
         }
         a:hover {
             color: white;
@@ -106,27 +135,27 @@
 }
 
 .light .Menu {
-    background: linear-gradient(315deg, $white_2 40%, $white_1 70%);
-    color: $black_2;
+    background: linear-gradient(315deg, palette.$white_2 40%, palette.$white_1 70%);
+    color: palette.$black_2;
     li {
-        color: $black_5;
+        color: palette.$black_5;
     }
 
     li.active {
         color: black;
     }
 
-    a:hover, .link:hover {
+    a:hover,
+    .link:hover {
         color: black;
     }
     .languages {
-        color: $white_5;
+        color: palette.$white_5;
         .active {
-            color: $black_1;
+            color: palette.$black_1;
         }
         a {
-            color: $black_5;
+            color: palette.$black_5;
         }
     }
 }
-

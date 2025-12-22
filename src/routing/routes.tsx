@@ -38,6 +38,7 @@ import Categories from '../components/pages/API/Categories/Categories'
 import { Clock } from '../components/sharedComponents/Clock/Clock'
 // Misc Pages
 import Xmas2025 from '../components/pages/Misc/Xmas2025/Xmas2025'
+import { WordDuelArena } from '../components/pages/Misc/WordDuelArena/WordDuelArena'
 
 export const routes = [
     // Website Pages
@@ -211,6 +212,10 @@ export const routes = [
     {
         path: '/projects/xmas2025',
         element: <Xmas2025 pageName="xmas2025" path="/projects/xmas2025" />,
+    },
+    {
+        path: '/projects/word-duel-arena',
+        element: <WordDuelArena />,
     },
     // Error
     {

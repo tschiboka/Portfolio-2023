@@ -1,20 +1,18 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .privacy-policy {
     .updated-date {
         font-style: italic;
-        font-size: $font_xs;
+        font-size: font.$font_xs;
     }
-    font-size: $font_sm;
+    font-size: font.$font_sm;
 
     a {
-        color: $accent_dark_3;
+        color: palette.$accent_dark_3;
     }
 
     a:hover {
-        color: $accent_dark_1;
+        color: palette.$accent_dark_1;
     }
 }

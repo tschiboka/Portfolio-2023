@@ -1,6 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .Footer {
     position: relative;
@@ -10,7 +10,7 @@
     margin-bottom: 5vh;
     display: flex;
     flex-direction: column;
-    background-color: $black_1;
+    background-color: palette.$black_1;
     align-items: center;
     @include bp.md {
         margin-bottom: 0;
@@ -24,27 +24,27 @@
         justify-content: center;
         align-items: center;
         border-radius: 100%;
-        background-color: rgba(255,255, 255, 0.05);
-        border: 2px solid $black_2;
+        background-color: rgba(255, 255, 255, 0.05);
+        border: 2px solid palette.$black_2;
         img {
             height: 50px;
         }
     }
     .name {
         margin-bottom: 1.5rem;
-        color: $white_5;
+        color: palette.$white_5;
         font-size: 1.8rem;
         letter-spacing: 0;
         span {
-            font-family: "Roboto_Bold";
+            font-family: 'Roboto_Bold';
             font-variant: small-caps;
         }
         span:last-child {
-            color: $black_3;
+            color: palette.$black_3;
         }
 
         span:last-child {
-            color: $black_4;
+            color: palette.$black_4;
         }
     }
     ul {
@@ -55,9 +55,9 @@
         justify-content: center;
         align-items: center;
         list-style: none;
-        color: $white_3;
-        border-top: 1px solid $black_2;
-        border-bottom: 1px solid $black_2;
+        color: palette.$white_3;
+        border-top: 1px solid palette.$black_2;
+        border-bottom: 1px solid palette.$black_2;
         @include bp.md {
             width: 50%;
             flex-direction: row;
@@ -66,12 +66,14 @@
             align-items: center;
         }
     }
-    a, .link, li {
+    a,
+    .link,
+    li {
         color: inherit;
         text-decoration: inherit;
         margin-bottom: 1rem;
         @include bp.md {
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
     }
     .link-list {
@@ -98,9 +100,9 @@
     .separator {
         display: none;
         @include bp.md {
-            font-size: $font_lg;
+            font-size: font.$font_lg;
             font-weight: bold;
-            color: $black_2;
+            color: palette.$black_2;
             display: inline;
             margin-bottom: 1.25rem;
         }
@@ -110,11 +112,11 @@
         padding-top: 1.5rem;
         display: flex;
         justify-content: center;
-        font-size: $font_lg;
-        
+        font-size: font.$font_lg;
+
         & > * {
             margin: 0 0.5rem;
-            color: $black_3;
+            color: palette.$black_3;
             cursor: pointer;
         }
         & > *:hover {
@@ -127,17 +129,17 @@
         justify-content: center;
         align-items: center;
         font-variant: small-caps;
-        font-size: $font_lg;
-        font-family: "Roboto_Bold";
-        color: $black_2;
+        font-size: font.$font_lg;
+        font-family: 'Roboto_Bold';
+        color: palette.$black_2;
         a {
             margin: 0 0.5rem;
             margin-bottom: 0;
-            font-family: "Roboto_Bold";
-            color: $black_3;
+            font-family: 'Roboto_Bold';
+            color: palette.$black_3;
         }
         a.active {
-            color: $white_4;
+            color: palette.$white_4;
         }
         a:hover {
             color: white;
@@ -148,21 +150,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: $black_5;
+        color: palette.$black_5;
         font-family: monospace;
-        font-size: $font_md;
+        font-size: font.$font_md;
         & * {
             margin: 0 5px;
             font-family: monospace;
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
         .copyright__icon {
-            fill: $gray_1;
+            fill: palette.$gray_1;
         }
         time {
-            color: $gray_1;
-            font-size: $font_xs;
-            font-family: "Roboto_Bold";
+            color: palette.$gray_1;
+            font-size: font.$font_xs;
+            font-family: 'Roboto_Bold';
         }
         .copyright__pipe {
             margin-right: 10px;
@@ -174,36 +176,38 @@
     .additional-info p {
         margin-top: 1.5rem;
         font-family: monospace;
-        color: $black_4;
-        font-size: $font_md;
+        color: palette.$black_4;
+        font-size: font.$font_md;
     }
 }
 
 .light {
     .Footer {
-        background-color: $white_2;
+        background-color: palette.$white_2;
         &:hover {
             color: black;
         }
-        a, .link, li {
-            color: black;     
+        a,
+        .link,
+        li {
+            color: black;
         }
         .logo-wrapper {
-            background-color: $accent_dark_2;
+            background-color: palette.$accent_dark_2;
         }
         .social-links > * {
-            color: $black_5;
+            color: palette.$black_5;
         }
         .social-links > *:hover {
             color: black;
         }
         .languages {
-            color: $white_5;
+            color: palette.$white_5;
             a {
-                color: $black_5;
+                color: palette.$black_5;
             }
             a.active {
-                color: $black_2;
+                color: palette.$black_2;
             }
             a:hover {
                 color: black;

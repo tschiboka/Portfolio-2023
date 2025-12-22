@@ -1,0 +1,15 @@
+.invitation-modal code.session-link {
+    display: block;
+    margin-bottom: var(--sp-lg);
+    padding: var(--sp-sm);
+    background-color: black;
+    color: var(--color-font-accent);
+    border: var(--border-normal);
+    border-radius: var(--border-radius-sm);
+    word-break: break-all;
+    font-family: monospace;
+    font-size: var(--font-sm);
+    user-select: all;
+    -webkit-user-select: all;
+    cursor: copy;  
+}

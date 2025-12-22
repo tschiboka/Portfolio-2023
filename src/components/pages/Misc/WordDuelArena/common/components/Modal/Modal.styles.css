@@ -1,0 +1,74 @@
+.modal-backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-backdrop > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    position: relative;
+    overflow: auto;
+    max-width: 90%;
+    max-height: 90%;
+    padding: var(--sp-lg);
+    background-color: var(--color-bg-dark);
+    border: var(--border-normal);
+}
+
+.modal-header {
+    margin: 0;
+    margin-bottom: var(--sp-lg);
+    display: flex;
+    justify-content: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    width: 100%;
+    padding: 0 var(--font-lg);
+    color: var(--color-font-accent);
+    font-family: var(--font-main);
+    font-size: var(--font-lg);
+    font-weight: var(--font-bold);
+    text-align: center;
+}
+
+.modal-header button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: var(--font-lg);
+    height: var(--font-lg);
+    background-color: var(--color-bg-dark);
+    color: var(--color-font-error);
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+    border: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    color: var(--color-font-light);
+    font-family: var(--font-main);
+    font-size: var(--font-md);
+    font-weight: var(--font-thin);
+    line-height: var(--sp-height-lg);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--sp-md);
+}       

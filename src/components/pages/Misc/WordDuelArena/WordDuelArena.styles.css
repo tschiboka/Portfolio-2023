@@ -1,0 +1,104 @@
+/*
+ * Use vanilla CSS for styling this component and any nested elements
+ * to make it easier to migrate cross-platform for React Native 
+ */
+
+/* Global constants */
+:root {
+  /* Fonts */
+  --font-main: 'Exo 2', sans-serif;
+  --font-lg: 2.5rem;
+  --font-md: 1.5rem;
+  --font-sm: 1rem;
+  --font-bold: 700;
+  --font-thin: 100;
+  
+  /* Colors */
+  --color-bg-dark: #070707;
+  --color-bg-medium: #111;
+  --color-bg-accent: aqua;
+  --color-font-light: white;
+  --color-font-medium: #666;
+  --color-font-dark: #070707;
+  --color-font-accent: aqua;
+  --color-font-error: deeppink;
+  
+  /* Spacing */
+  --sp-lg: 2rem;
+  --sp-md: 1rem;
+  --sp-sm: 0.5rem;
+  --sp-xs: 0.25rem;
+  --sp-height-lg: 1.5;
+
+  /* Borders */
+  --border-color: #222;
+  --border-width: 1px;
+  --border-style: solid;
+  --border-normal: var(--border-width) var(--border-style) var(--border-color);
+  --border-radius-sm: 5px;
+}
+
+/* Reset everything */
+.word-duel-arena * {
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;  
+}
+
+.word-duel-arena {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: var(--color-font-light);
+  font-family: var(--font-main);
+  font-size: var(--font-md);
+  font-weight: var(--font-thin);
+}
+
+.word-duel-arena > .app {
+    position: relative;
+    height: min(750px, 100vh);
+    width: min(500px, 100vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--sp-lg);
+    background-color: var(--color-bg-dark);
+    border: var(--border-normal);
+}
+
+.word-duel-arena h1 {
+    margin-bottom: var(--sp-lg);
+    color: var(--color-font-accent);
+    text-align: center;
+    font-size: var(--font-lg);
+    font-weight: var(--font-bold);
+    font-family: var(--font-main);
+}
+
+.word-duel-arena p {
+    margin: 0;
+    margin-bottom: var(--sp-lg);
+    text-align: center;
+    font-size: var(--font-md);
+    font-family: var(--font-main);
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    padding: var(--sp-sm);
+    margin: var(--sp-xs);
+    background-color: var(--color-bg-medium);
+    color: var(--color-font-accent);
+    font-family: var(--font-main);
+    font-size: var(--font-md);
+    font-weight: var(--font-bold);
+    border : var(--border-normal);
+    cursor: pointer;
+}

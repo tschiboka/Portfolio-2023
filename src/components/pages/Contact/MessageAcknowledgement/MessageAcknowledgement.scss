@@ -1,8 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
-
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .MessageAcknowledgement {
     width: 100vw;
@@ -15,7 +14,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: $black_1;
+    background-color: palette.$black_1;
     z-index: 10000;
     @include bp.md {
         padding: 1rem 3rem;
@@ -34,7 +33,7 @@
         margin: 1.5rem 0;
         max-width: 1000px;
         @include bp.sm {
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
     }
     .link {
@@ -45,24 +44,24 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $accent_dark_3;
+        background-color: palette.$accent_dark_3;
         border: 2px solid transparent;
         border-radius: 10px;
-        color: $white_1;
-        font-size: $font_sm;
+        color: palette.$white_1;
+        font-size: font.$font_sm;
         font-weight: bold;
         text-shadow: 2px 2px black;
         padding: 0 10px;
         text-decoration: none;
         cursor: pointer;
-        &:hover, &:active {
-            background-color: $accent_dark_4;
-            color: white;
+        &:hover,
+        &:active {
+            background-color: palette.$accent_dark_4;
+            color: palette.$white_1;
         }
     }
-
 }
 
 .light .MessageAcknowledgement {
-    background-color: $white_1;
+    background-color: palette.$white_1;
 }

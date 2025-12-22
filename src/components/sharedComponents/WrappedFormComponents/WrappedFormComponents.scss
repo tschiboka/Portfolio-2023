@@ -1,7 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .wrapped-component {
     position: relative;
@@ -9,7 +8,7 @@
     display: flex;
     flex-direction: column;
     input {
-        border: 2px solid $black_2;
+        border: 2px solid palette.$black_2;
         background-color: #000;
     }
 
@@ -17,37 +16,36 @@
         width: 100%;
         padding: 10px 10px;
         background-color: #000;
-        color: $accent_dark_3;
-        font-size: $font_sm;
+        color: palette.$accent_dark_3;
+        font-size: font.$font_sm;
         font-variant: small-caps;
-        border: 2px solid $black_2;
+        border: 2px solid palette.$black_2;
         border-radius: 20px;
         resize: none;
-    
+
         &::placeholder {
-            color: $black_3;
+            color: palette.$black_3;
             font-weight: normal;
             opacity: 1;
         }
     }
-    
+
     textarea:focus {
         background-color: rgba(0, 0, 0, 0.5);
-        border-color: $accent_dark_3;
+        border-color: palette.$accent_dark_3;
         border-radius: 20px;
         outline: none;
     }
-
 }
 
 .wrapped-textarea {
     .textarea__info {
-        font-size: $font-xxs;
+        font-size: font.$font_xxs;
         text-align: right;
-        color: $black_4;
+        color: palette.$black_4;
 
         .highlight {
-            color: $accent_dark_4;
+            color: palette.$accent_dark_4;
             font-weight: bolder;
         }
     }
@@ -57,7 +55,7 @@
     margin-top: 1rem;
     width: 100%;
     text-align: right;
-    font-size: $font-xs;
+    font-size: font.$font_xs;
     font-style: italic;
     font-variant: small-caps;
     color: deeppink;
@@ -73,12 +71,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $accent_dark_3; 
-    font-size: $font_md;
-    border-left: 2px solid $black_2;
+    color: palette.$accent_dark_3;
+    font-size: font.$font_md;
+    border-left: 2px solid palette.$black_2;
     cursor: pointer;
     &:hover {
-        color: $accent_dark_1;
+        color: palette.$accent_dark_1;
     }
 }
 
@@ -92,36 +90,35 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $black_2;
-    font-size: $font_md;
-    border-right: 2px solid $black_2;
+    color: palette.$black_2;
+    font-size: font.$font_md;
+    border-right: 2px solid palette.$black_2;
 
     .color {
         min-width: 20px;
         min-height: 20px;
-        border: 2px solid $black_5;
+        border: 2px solid palette.$black_5;
         border-radius: 5px;
     }
 }
 
 .show-input-icon {
     .icon-padding {
-            padding-left: 60px;
-        }    
-    
+        padding-left: 60px;
+    }
 }
 
 .wrapped-component.open {
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    border: 2px solid $black_2;
+    border: 2px solid palette.$black_2;
     background-color: black;
 
     input {
         border: none;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        border-bottom: 2px solid $black_2;
+        border-bottom: 2px solid palette.$black_2;
     }
 }
 
@@ -136,7 +133,7 @@
     z-index: 10;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    border: 2px solid $black_2;
+    border: 2px solid palette.$black_2;
     overflow-y: auto;
     max-height: 200px;
 
@@ -144,21 +141,21 @@
         display: flex;
         align-items: center;
         padding: 0.25rem;
-        border-bottom: 1px solid $black_2;
-        color: $white_2;
+        border-bottom: 1px solid palette.$black_2;
+        color: palette.$white_2;
         font-variant: small-caps;
         cursor: pointer;
         .icon {
             margin-right: 20px;
         }
         .highlight {
-            color: $accent_dark_3;
+            color: palette.$accent_dark_3;
             font-weight: bolder;
         }
         .color {
             min-width: 20px;
             min-height: 20px;
-            border: 2px solid $black_5;
+            border: 2px solid palette.$black_5;
             border-radius: 5px;
         }
     }

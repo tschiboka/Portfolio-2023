@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .ShareMenu {
     position: absolute;
@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: $black_1;
-    
+    background-color: palette.$black_1;
+
     @include bp.lg {
         height: 100%;
         width: 5rem;
@@ -24,12 +24,10 @@
         background-color: transparent;
     }
     .ShareMenu__icon > * {
-        color: $black_5;
-        font-size: $font-lg;
+        color: palette.$black_5;
+        font-size: font.$font_lg;
         opacity: 0;
-        animation: 
-            fade_in 200ms ease-out forwards,
-            from_above 200ms ease-in;
+        animation: fade_in 200ms ease-out forwards, from_above 200ms ease-in;
         &:hover {
             color: white;
             transform: scale(1.1);
@@ -37,12 +35,22 @@
         }
         @include bp.lg {
             margin: 1rem 0;
-            font-size: $font-xl;
+            font-size: font.$font_xl;
         }
     }
-    .ShareMenu__icon:nth-child(1) > * { animation-delay: 100ms; }
-    .ShareMenu__icon:nth-child(2) > * { animation-delay: 200ms; }
-    .ShareMenu__icon:nth-child(3) > * { animation-delay: 300ms; }
-    .ShareMenu__icon:nth-child(4) > * { animation-delay: 400ms; }
-    .ShareMenu__icon:nth-child(5) > * { animation-delay: 500ms; }
+    .ShareMenu__icon:nth-child(1) > * {
+        animation-delay: 100ms;
+    }
+    .ShareMenu__icon:nth-child(2) > * {
+        animation-delay: 200ms;
+    }
+    .ShareMenu__icon:nth-child(3) > * {
+        animation-delay: 300ms;
+    }
+    .ShareMenu__icon:nth-child(4) > * {
+        animation-delay: 400ms;
+    }
+    .ShareMenu__icon:nth-child(5) > * {
+        animation-delay: 500ms;
+    }
 }

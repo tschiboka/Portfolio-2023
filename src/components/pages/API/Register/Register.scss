@@ -1,7 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .Register {
     width: 100%;
@@ -25,14 +25,14 @@
         align-items: center;
         justify-content: center;
         background-color: rgba(0, 0, 0, 0.2);
-        border: 2px solid $black_3;
+        border: 2px solid palette.$black_3;
         border-radius: 20px;
         @include bp.md {
             padding: 1.5rem;
             font-size: 1.3rem;
         }
     }
-    
+
     fieldset {
         width: 100%;
         margin: 1rem 0;
@@ -55,7 +55,7 @@
             margin-right: 20px;
         }
     }
-    
+
     input {
         width: 100%;
         padding: 20px 10px;
@@ -63,41 +63,41 @@
         border: none;
         color: white;
         font-weight: bold;
-        font-size: $font_sm;
+        font-size: font.$font_sm;
         font-variant: small-caps;
-        border: 2px solid $black_3;
+        border: 2px solid palette.$black_3;
         border-radius: 20px;
         &::placeholder {
-            color: $white_3;
+            color: palette.$white_3;
             font-weight: normal;
             opacity: 1;
         }
     }
-    
+
     input:focus {
         background-color: rgba(0, 0, 0, 0.5);
-        border-color: $accent_dark_3;
+        border-color: palette.$accent_dark_3;
         border-radius: 20px;
         outline: none;
     }
 
     input {
         height: 2rem;
-    }    
+    }
 
     .loading-indicator {
         margin: 1.5rem 0;
-        font-size: $font_md;
-        color: $white_4;
+        font-size: font.$font_md;
+        color: palette.$white_4;
         animation: rotation 1s linear infinite;
     }
-    
+
     .user-message {
         margin: 1.5rem 0;
-        color: $white_4;
+        color: palette.$white_4;
         font-variant: small-caps;
     }
-    
+
     .button-box {
         width: 100%;
         display: flex;
@@ -127,38 +127,39 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        color: $accent_dark_3; 
-        font-size: $font_md;
-        border-left: 2px solid $black_3;
+        color: palette.$accent_dark_3;
+        font-size: font.$font_md;
+        border-left: 2px solid palette.$black_3;
         cursor: pointer;
         &:hover {
-            color: $accent_dark_1;
+            color: palette.$accent_dark_1;
         }
     }
-    
+
     button {
         min-height: 3rem;
         width: 280px;
         margin-top: 1.5rem;
-        background-color: $accent_dark_1;
+        background-color: palette.$accent_dark_1;
         border: 2px solid transparent;
         border-radius: 50px;
         color: black;
-        font-size: $font_sm;
-        font-family: "Roboto_Bold";
+        font-size: font.$font_sm;
+        font-family: 'Roboto_Bold';
         padding: 0 10px;
         cursor: pointer;
-        &:hover, &:active {
-            background-color: $accent_dark_4;
+        &:hover,
+        &:active {
+            background-color: palette.$accent_dark_4;
             color: white;
         }
         &:disabled {
-            border: 2px solid $black_3;
-            background-color: $accent_dark_5;
-            color: $accent_dark_4;
+            border: 2px solid palette.$black_3;
+            background-color: palette.$accent_dark_5;
+            color: palette.$accent_dark_4;
         }
     }
-    
+
     .error-message {
         width: 100%;
         padding: 0 2.5rem;
@@ -175,11 +176,11 @@
         font-size: 1.4rem;
         font-family: monospace;
         font-variant: small-caps;
-        background-color: black;   
-        border: 1px solid $black_3;
+        background-color: black;
+        border: 1px solid palette.$black_3;
         border-radius: 5px;
     }
-    
+
     .submit-error-message {
         color: deeppink;
     }
@@ -191,11 +192,11 @@
 
 .dark {
     input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus, 
-    input:-webkit-autofill:active{
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
         -webkit-background-clip: text;
-        -webkit-text-fill-color: $accent_dark_3;
+        -webkit-text-fill-color: palette.$accent_dark_3;
         transition: background-color 5000s ease-in-out 0s;
         box-shadow: inset 0 0 20px 20px #000;
     }
@@ -206,32 +207,32 @@
         input {
             color: black;
             font-weight: bold;
-            background-color: $white_3;
+            background-color: palette.$white_3;
 
             &::placeholder {
                 color: black;
             }
             &:focus {
-                background-color: $white_3;
+                background-color: palette.$white_3;
             }
         }
         input:focus {
-            background-color: $white_3;
+            background-color: palette.$white_3;
             transition: background-color 5000s ease-in-out 0s;
-            border-color: $accent_dark_3;
-            color: $black_1;
+            border-color: palette.$accent_dark_3;
+            color: palette.$black_1;
         }
-        input:-webkit-autofill:active{
+        input:-webkit-autofill:active {
             -webkit-background-clip: text;
-            -webkit-text-fill-color: $black_1;
-            box-shadow: inset 0 0 20px 20px $white_3;
-        }    
+            -webkit-text-fill-color: palette.$black_1;
+            box-shadow: inset 0 0 20px 20px palette.$white_3;
+        }
     }
     .error-message {
         color: red;
     }
     .user-message {
-        color: $black_1;
+        color: palette.$black_1;
     }
 }
 
@@ -241,5 +242,5 @@
     }
     to {
         transform: rotate(360deg);
-    }    
+    }
 }

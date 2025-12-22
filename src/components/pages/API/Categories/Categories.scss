@@ -1,7 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .Categories {
     .hide--small-screen {
@@ -23,12 +23,12 @@
             .parent-radio {
                 display: flex;
                 flex-direction: column;
-                
+
                 @include bp.md {
                     justify-content: start;
                     flex-direction: row;
                 }
-                
+
                 label {
                     display: flex;
                     align-items: center;
@@ -38,7 +38,7 @@
                         margin-bottom: 0;
                     }
                 }
-                
+
                 div {
                     width: 100%;
                     display: flex;
@@ -59,7 +59,7 @@
                         align-items: center;
                         width: 50%;
                         margin-left: 0;
-                        
+
                         label {
                             min-width: 0;
                             display: block;
@@ -70,7 +70,7 @@
                     }
                     div:last-child {
                         justify-content: end;
-                        border-left: 2px solid $black_2;
+                        border-left: 2px solid palette.$black_2;
                     }
                 }
             }
@@ -98,11 +98,11 @@
         font-size: 1.4rem;
         font-family: monospace;
         font-variant: small-caps;
-        color: $accent_dark_2;
-        background-color: rgba(0, 0, 0, 0.5);   
-        border: 1px solid $black_3;
+        color: palette.$accent_dark_2;
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid palette.$black_3;
         border-radius: 10px;
         width: calc(100% - 2rem);
-        background-color: $black_1;
+        background-color: palette.$black_1;
     }
 }

@@ -1,7 +1,5 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/font_sizes.scss' as font;
 
 .Blog__title {
     @include bp.md {
@@ -17,7 +15,7 @@
 }
 
 h3.BlogList__header {
-    font-size: $font-lg;
+    font-size: font.$font-lg;
     font-variant: small-caps;
     margin-bottom: 1.5rem;
 }

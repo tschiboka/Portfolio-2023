@@ -1,7 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .Logout {
     min-height: 95vh;
@@ -21,13 +21,13 @@
             flex-direction: row;
             justify-content: space-between;
         }
-        
+
         button {
             height: 2.5rem;
             width: 250px;
             margin-bottom: 1rem;
-            font-variant: small-caps;   
-            
+            font-variant: small-caps;
+
             @include bp.md {
                 height: auto;
                 padding: 0.5rem;
@@ -35,7 +35,7 @@
         }
 
         button:hover {
-            background-color: $accent_dark_1;
+            background-color: palette.$accent_dark_1;
         }
     }
     p {

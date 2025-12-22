@@ -1,8 +1,8 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@use "../../../styles/mixins.scss" as *;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/mixins.scss' as *;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 @include fade_in_with_opacity(fade_in_095, 0.95);
 
 .SubNav {
@@ -13,13 +13,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $black_1;
-    font-size: $font_lg;
-    border-bottom: 1px solid $black_2;
+    background-color: palette.$black_1;
+    font-size: font.$font_lg;
+    border-bottom: 1px solid palette.$black_2;
     z-index: 80;
     opacity: 0.95;
-    animation: 
-        fade_in_095 500ms 1200ms ease-out forwards;
+    animation: fade_in_095 500ms 1200ms ease-out forwards;
 
     @include bp.sm {
         position: sticky;
@@ -30,27 +29,27 @@
     }
 
     .sublogo {
-        color: $black_3;
+        color: palette.$black_3;
 
         .sublogo-text {
             display: none;
-            color: $white_5;
+            color: palette.$white_5;
             font-size: 1.4rem;
             letter-spacing: 0;
-            
+
             @include bp.lg {
                 display: inline;
             }
             span {
-                font-family: "Roboto_Bold";
+                font-family: 'Roboto_Bold';
                 font-variant: small-caps;
             }
             span:last-child {
-                color: $black_3;
+                color: palette.$black_3;
             }
 
             span:last-child {
-                color: $black_4;
+                color: palette.$black_4;
             }
         }
     }
@@ -71,14 +70,14 @@
 
     .theme-icon {
         height: 1.5rem;
-        color: $white_3;
+        color: palette.$white_3;
     }
 
     .social-links > * {
         align-items: center;
         margin-left: 0.5rem;
-        font-size: $font_md;
-        color: $black_3;
+        font-size: font.$font_md;
+        color: palette.$black_3;
         @include bp.md {
             margin-left: 1.5rem;
         }
@@ -92,17 +91,17 @@
 .light .SubNav {
     color: black;
     background-color: white;
-    border-bottom: 1px solid $white_3;
+    border-bottom: 1px solid palette.$white_3;
     .sublogo-text {
-        color: $black_5;
+        color: palette.$black_5;
     }
     .social-links > * {
-        color: $white_5;
+        color: palette.$white_5;
         &:hover {
             color: black;
         }
     }
     .theme-icon {
-        color: $black_1;
+        color: palette.$black_1;
     }
 }

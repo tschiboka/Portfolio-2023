@@ -1,7 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 main {
     background-color: rgba(255, 255, 255, 0.02);
@@ -10,38 +10,38 @@ main {
 h2 {
     margin: 1rem 0;
     @include bp.md {
-        font-size: $font_xl;
+        font-size: font.$font_xl;
     }
 
     @include bp.lg {
-        font-size: $font_xl;
+        font-size: font.$font_xl;
     }
 }
 
 p {
-    font-size: $font_md;
+    font-size: font.$font_md;
     @include bp.sm {
-        font-size: $font_md;
+        font-size: font.$font_md;
     }
 
     @include bp.sm {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 
     @include bp.lg {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }
 
 .subtitle {
-    color: $white_3;
-    font-size: $font_xs;
+    color: palette.$white_3;
+    font-size: font.$font_xs;
     font-variant: normal;
     font-style: italic;
 }
 
 .light {
     .subtitle {
-        color: $black_3;
+        color: palette.$black_3;
     }
 }

@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .BlogCard {
     width: 100%;
@@ -11,14 +11,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $black_1;
+    background-color: palette.$black_1;
     border: 1px solid #222;
     cursor: pointer;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 
     @include bp.md {
         flex-direction: row;
-        align-items: flex-start;    
+        align-items: flex-start;
     }
 
     .BlogCard__img-wrapper {
@@ -27,7 +27,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        
+
         .BlogCard__img-box {
             position: relative;
             display: flex;
@@ -55,7 +55,7 @@
                 width: 250px;
                 height: 250px;
             }
-        }             
+        }
     }
 
     .BlogCard__text-wrapper {
@@ -74,12 +74,12 @@
         display: flex;
         margin-top: 1rem;
         margin-left: 0;
-        font-size: $font-sm;
+        font-size: font.$font_sm;
         justify-content: center;
-        color: $black_4;
+        color: palette.$black_4;
         font-family: monospace;
         font-weight: bold;
-        
+
         @include bp.md {
             justify-content: flex-start;
         }
@@ -99,7 +99,7 @@
         @include bp.md {
             margin-top: 0;
             justify-content: flex-start;
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
 
         .BlogCard__title-wrapper {
@@ -113,17 +113,16 @@
                 justify-content: flex-start;
             }
 
-
             .BlogCard__title-text {
                 color: white;
                 max-width: 500px;
-                font-size: $font-lg;
+                font-size: font.$font_lg;
                 font-variant: small-caps;
-                text-align: center; 
+                text-align: center;
                 @include bp.md {
                     text-align: left;
-                }   
-            }    
+                }
+            }
         }
 
         .BlogCard__info {
@@ -132,8 +131,7 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            color: $accent_dark_3;
-
+            color: palette.$accent_dark_3;
 
             @include bp.md {
                 justify-content: flex-start;
@@ -142,7 +140,7 @@
 
             & > * {
                 font-weight: bold;
-                font-size: $font-sm;
+                font-size: font.$font_sm;
             }
             span {
                 font-family: monospace;
@@ -173,10 +171,10 @@
                         display: inline;
                     }
                     .BlogCard__info-icon {
-                        color: $white_3;
+                        color: palette.$white_3;
                     }
                     .BlogCard__info-text {
-                        color: $accent_dark_1;
+                        color: palette.$accent_dark_1;
                     }
                 }
                 .BlogCard__hint-text {
@@ -187,16 +185,16 @@
                     min-width: 100%;
                     padding: 0.5rem 1rem;
                     background-color: black;
-                    border: 1px solid $white_5;
-                    color: $accent_dark_1;
+                    border: 1px solid palette.$white_5;
+                    color: palette.$accent_dark_1;
                     text-align: center;
                 }
                 .BlogCard__info-icon {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    color: $black_3;
-                    font-size: $font_md;
+                    color: palette.$black_3;
+                    font-size: font.$font_md;
                     text-decoration: none;
                 }
                 .BlogCard__info-icon.disabled {
@@ -204,23 +202,23 @@
                     opacity: 0.3;
                 }
                 .BlogCard__info-text {
-                    color: $accent_dark_3;
+                    color: palette.$accent_dark_3;
                 }
             }
             span.BlogCard__created {
                 display: none;
                 text-align: right;
-                color: $black_4;
+                color: palette.$black_4;
                 padding: 0;
                 margin: 0;
                 margin-left: auto;
                 font-weight: bold;
-                
+
                 @include bp.xl {
                     display: flex;
                 }
             }
-        }    
+        }
     }
 
     .BlogCard__abstract {
@@ -244,17 +242,17 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        background-color: $black_1;
+        background-color: palette.$black_1;
         clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
         .BlogCard__overlay-icon {
-            font-size: $font-lg;
-            color: $white_3;
+            font-size: font.$font_lg;
+            color: palette.$white_3;
         }
         .BlogCard__upcoming-date {
             margin: 0 1.5rem 0 1rem;
             font-family: monospace;
-            font-size: $font-md;
-            color: $accent_dark_1;
+            font-size: font.$font_md;
+            color: palette.$accent_dark_1;
         }
     }
 
@@ -265,28 +263,40 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        background-color: $black_1;
+        background-color: palette.$black_1;
         clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
         .BlogCard__overlay-icon--new {
-            font-size: $font-lg;
-            color: $accent_dark_3;
+            font-size: font.$font_lg;
+            color: palette.$accent_dark_3;
         }
         .BlogCard__new-text {
             margin: 0 2rem 0 0.5rem;
             color: white;
-            font-size: $font-lg;
+            font-size: font.$font_lg;
             font-weight: bold;
             font-family: monospace;
             font-variant: small-caps;
         }
     }
 
-    .badge.yellow { background-color: yellow; }
-    .badge.orange { background-color: rgb(255, 166, 0); }
-    .badge.pink { background-color: deeppink; }
-    .badge.purple { background-color: rgb(172, 0, 172); }
-    .badge.light-green { background-color: rgb(0, 226, 151); }
-    .badge.light-blue { background-color: aqua; }
+    .badge.yellow {
+        background-color: yellow;
+    }
+    .badge.orange {
+        background-color: rgb(255, 166, 0);
+    }
+    .badge.pink {
+        background-color: deeppink;
+    }
+    .badge.purple {
+        background-color: rgb(172, 0, 172);
+    }
+    .badge.light-green {
+        background-color: rgb(0, 226, 151);
+    }
+    .badge.light-blue {
+        background-color: aqua;
+    }
 
     .badge {
         margin: 0.5rem;
@@ -294,11 +304,11 @@
         background-color: grey;
         border-radius: 20px;
         border: 1px solid #222;
-        color: $black_3;
+        color: palette.$black_3;
         font-size: 1rem;
         font-style: italic;
         font-variant: small-caps;
-        font-family: "Roboto_Bold";
+        font-family: 'Roboto_Bold';
         @include bp.md {
             padding: 0.5rem 1rem;
         }
@@ -314,21 +324,21 @@
             color: white;
         }
         .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
-            color: $accent_dark_2;
+            color: palette.$accent_dark_2;
         }
         span.BlogCard__created {
-            color: $accent_dark_3 !important;
+            color: palette.$accent_dark_3 !important;
         }
-    } 
+    }
 }
 
 .light {
     .BlogCard {
-        background-color: $white_2;
-        border-color: $white_5;
+        background-color: palette.$white_2;
+        border-color: palette.$white_5;
 
         &:hover {
-            background-color: $white_3;
+            background-color: palette.$white_3;
             .BlogCard__title-text {
                 color: black;
             }
@@ -336,7 +346,7 @@
                 color: black;
             }
             .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
-                color: $accent_dark_5;
+                color: palette.$accent_dark_5;
             }
             .BlogCard__info .BlogCard__info-datablock:hover {
                 .BlogCard__info-icon {
@@ -346,13 +356,13 @@
         }
 
         .BlogCard__title-text {
-            color: $black_2;
+            color: palette.$black_2;
         }
-        
+
         &:hover .BlogCard__title {
             color: black;
         }
-        
+
         &:hover .BlogCard__abstract {
             color: black;
         }

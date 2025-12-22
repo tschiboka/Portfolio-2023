@@ -1,35 +1,36 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
 
 .MobileMenu {
     height: calc(100vh - 6rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
     @include bp.md {
         display: none;
     }
 
-    & > li:hover, & > li *:hover {
-        color: $accent_dark_3 !important;
+    & > li:hover,
+    & > li *:hover {
+        color: palette.$accent_dark_3 !important;
     }
     li {
         margin-top: 1.2rem;
         margin-bottom: 1.2rem;
-        text-shadow: black 2px 2px 2px, $black_3 -1px -1px 1px;
+        text-shadow: black 2px 2px 2px, palette.$black_3 -1px -1px 1px;
     }
     .link {
         position: relative;
     }
-    
+
     .chevron-wrapper {
         display: flex;
         position: absolute;
         top: 0;
         right: -1.6rem;
-        color: $black_4;
+        color: palette.$black_4;
     }
     footer {
         max-height: 5rem;
@@ -44,10 +45,11 @@
         border-top: 2px solid #191919;
         border-radius: 5px;
 
-        div, div * {
+        div,
+        div * {
             font-family: monospace;
-            font-size: $font_xs;
-            color: $black_5;
+            font-size: font.$font_xs;
+            color: palette.$black_5;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

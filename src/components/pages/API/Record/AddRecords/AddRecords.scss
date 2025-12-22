@@ -1,18 +1,16 @@
-@use "../../../../../styles/breakpoints.scss" as bp;
-@import "../../../../../styles/palette.scss";
-@import "../../../../../styles/font_sizes.scss";
+@use '../../../../../styles/palette.scss' as palette;
 .AddRecords {
     ul {
         list-style: none;
     }
     li {
-        border-top: 1px solid $black_4;
+        border-top: 1px solid palette.$black_4;
         padding-top: 1.5rem;
     }
     button {
         height: 2.5em;
         margin-bottom: 0;
-        background-color: $accent_dark_1;
+        background-color: palette.$accent_dark_1;
         font-weight: bolder;
         border-radius: 100px;
         font-size: 1.2em;

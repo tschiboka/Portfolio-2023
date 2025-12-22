@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .AchievementListItem {
     position: relative;
@@ -10,8 +10,8 @@
     padding: 1rem 0;
     display: flex;
     align-items: center;
-    color: $white_1;
-    border-bottom: 1px solid $black_3;
+    color: palette.$white_1;
+    border-bottom: 1px solid palette.$black_3;
     cursor: pointer;
 
     @include bp.md {
@@ -23,19 +23,18 @@
     }
 
     &:hover {
-        background-color: $black_1;
-        border-color: $black_3;
+        background-color: palette.$black_1;
+        border-color: palette.$black_3;
     }
 
     &:hover .AchievementListItem__view {
-        color: $accent_dark_2;
+        color: palette.$accent_dark_2;
     }
-    
+
     span {
-        font-size: $font_sm;
-        
+        font-size: font.$font_sm;
         @include bp.sm {
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
     }
 
@@ -43,26 +42,27 @@
         width: 70px;
         height: 70px;
         margin-right: 1rem;
-        border: 1px solid $black_5;
+        border: 1px solid palette.$black_5;
         border-radius: 100%;
     }
 
     .AchievementListItem__title {
         font-weight: bold;
     }
-    
-    .AchievementListItem__detail, .AchievementListItem__year {
-        color: $white_3;
+
+    .AchievementListItem__detail,
+    .AchievementListItem__year {
+        color: palette.$white_3;
         font-style: italic;
     }
 
     .AchievementListItem__year {
-        color: $white_5;
+        color: palette.$white_5;
     }
 
     .AchievementListItem__view {
         margin-left: 0.5rem;
-        color: $black_3;
+        color: palette.$black_3;
         font-size: 30px;
 
         @include bp.md {
@@ -76,10 +76,10 @@
         right: 0;
         padding: 0.5rem 1.5rem;
         bottom: -1rem;
-        background-color: $black_1;
-        color: $accent_dark_3;
-        font-size: $font_sm;
-        border: 1px solid $black_3;
+        background-color: palette.$black_1;
+        color: palette.$accent_dark_3;
+        font-size: font.$font_sm;
+        border: 1px solid palette.$black_3;
         border-radius: 1rem;
     }
 
@@ -92,37 +92,37 @@
 
 .light {
     .AchievementListItem {
-        border-bottom: 1px solid $white_3;
-        color: $black_1;
+        border-bottom: 1px solid palette.$white_3;
+        color: palette.$black_1;
 
         &:last-child {
             border-color: transparent;
         }
 
         &:hover {
-            background-color: $white_2;
-            border-color: $white_3;
+            background-color: palette.$white_2;
+            border-color: palette.$white_3;
         }
 
         .AchievementListItem__detail {
-            color: $black_3;
+            color: palette.$black_3;
         }
-        
+
         .AchievementListItem__year {
-            color: $black_5;
+            color: palette.$black_5;
         }
 
         .AchievementListItem__view {
-            color: $black_5;
+            color: palette.$black_5;
         }
 
         &:hover .AchievementListItem__view {
-            color: $accent_dark_3;
+            color: palette.$accent_dark_3;
         }
 
         .AchievementListItem__hover-text {
-            background-color: $white_2;
-            border-color: $white_3;
+            background-color: palette.$white_2;
+            border-color: palette.$white_3;
         }
     }
 }

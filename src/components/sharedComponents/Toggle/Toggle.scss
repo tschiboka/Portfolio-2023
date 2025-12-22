@@ -1,6 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .Toggle {
     width: 90px;
@@ -9,19 +9,19 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 20px;
-    background: $black_2;
-    border: 2px solid $black_5;
+    background: palette.$black_2;
+    border: 2px solid palette.$black_5;
     cursor: pointer;
 
     .Toggle__thumb {
         height: 32px;
         width: 32px;
         border-radius: 100%;
-        background: $black_1;
-        border: 3px solid $black_5;
+        background: palette.$black_1;
+        border: 3px solid palette.$black_5;
         cursor: pointer;
     }
-    
+
     .Toggle__thumb:hover {
         border: 3px solid aqua;
     }
@@ -30,10 +30,10 @@
 .light .Toggle {
     background-color: transparent;
     .Toggle__thumb {
-        background-color: $white_4;
+        background-color: palette.$white_4;
     }
     .Toggle__thumb:hover {
-        border: 3px solid $black_1;
-        background-color: $accent_dark_3;
+        border: 3px solid palette.$black_1;
+        background-color: palette.$accent_dark_3;
     }
 }

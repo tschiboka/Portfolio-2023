@@ -1,6 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .Breadcrumb {
     display: flex;
@@ -8,33 +8,33 @@
     align-items: center;
     margin-bottom: 1.5rem;
     & * {
-        color: $black_5;
+        color: palette.$black_5;
     }
     & > * {
         margin: 0 5px;
         font-family: monospace;
-        font-size: $font_md;
+        font-size: font.$font_md;
     }
     .Breadcrumb__icon {
         margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: $font_md;
+        font-size: font.$font_md;
     }
     .Breadcrumb__icon--house:hover {
-        fill: $white_1;
+        fill: palette.$white_1;
         cursor: pointer;
     }
     .Breadcrumb__visits {
-        color: $accent_dark_3;
+        color: palette.$accent_dark_3;
     }
     .Breadcrumb__path {
         font-family: monospace;
-        font-size: $font_sm;
+        font-size: font.$font_sm;
     }
     .Breadcrumb__path:hover {
-        color: $white_3;
+        color: palette.$white_3;
         font-weight: bold;
         text-decoration: underline;
         cursor: pointer;
@@ -43,12 +43,12 @@
 
 .light {
     & > * {
-        color: $black_5;
+        color: palette.$black_5;
     }
     .Breadcrumb__icon--house:hover {
-        color: $black_2;
+        color: palette.$black_2;
     }
     .Breadcrumb__path:hover {
-        color: $black_2;
+        color: palette.$black_2;
     }
 }

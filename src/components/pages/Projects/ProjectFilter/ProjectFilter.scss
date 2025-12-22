@@ -1,16 +1,16 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .ProjectFilter {
     margin: 1.5rem 0.5rem 3rem 0.5rem;
     padding: 1.5rem 0.5rem;
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: $black_2;
-    border: 1px solid $black_5;
+    background-color: palette.$black_2;
+    border: 1px solid palette.$black_5;
     border-radius: 50px;
     cursor: pointer;
     @include bp.md {
@@ -22,11 +22,11 @@
         background-color: grey;
         border-radius: 20px;
         border: 1px solid #222;
-        color: $black_3;
+        color: palette.$black_3;
         font-size: 1rem;
         font-style: italic;
         font-variant: small-caps;
-        font-family: "Roboto_Bold";
+        font-family: 'Roboto_Bold';
         @include bp.md {
             padding: 0.5rem 1rem;
         }
@@ -35,17 +35,29 @@
     .selected {
         opacity: 0.3;
     }
-    .badge.yellow { background-color: yellow; }
-    .badge.orange { background-color: rgb(255, 166, 0); }
-    .badge.pink { background-color: deeppink; }
-    .badge.purple { background-color: rgb(172, 0, 172); }
-    .badge.light-green { background-color: rgb(0, 226, 151); }
-    .badge.light-blue { background-color: aqua; }
+    .badge.yellow {
+        background-color: yellow;
+    }
+    .badge.orange {
+        background-color: rgb(255, 166, 0);
+    }
+    .badge.pink {
+        background-color: deeppink;
+    }
+    .badge.purple {
+        background-color: rgb(172, 0, 172);
+    }
+    .badge.light-green {
+        background-color: rgb(0, 226, 151);
+    }
+    .badge.light-blue {
+        background-color: aqua;
+    }
 }
 
 .light .ProjectFilter {
-    background-color: $white_2;
+    background-color: palette.$white_2;
     .badge {
-        border: 1px solid $white_5;
+        border: 1px solid palette.$white_5;
     }
 }

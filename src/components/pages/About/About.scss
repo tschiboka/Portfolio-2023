@@ -1,19 +1,19 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 h1 {
-    font-family: "Roboto_Bold";
-    font-size: $font_xl;
+    font-family: 'Roboto_Bold';
+    font-size: font.$font_xl;
     text-align: center;
 }
 
 h3 {
     margin: 3rem 0;
-    color: $white_2;
-    font-size: $font_lg;
-    font-family: "Roboto_Bold";
+    color: palette.$white_2;
+    font-size: font.$font_lg;
+    font-family: 'Roboto_Bold';
     font-variant: small-caps;
 }
 
@@ -60,18 +60,18 @@ img {
 }
 
 .link--inline {
-    color: $accent_dark_2;
-    font-size: $font_md;
+    color: palette.$accent_dark_2;
+    font-size: font.$font_md;
     @include bp.md {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }
 
 .light {
     .link--inline {
-        color: $accent_dark_3;
+        color: palette.$accent_dark_3;
     }
     .certificates {
-        color: $black_2;
+        color: palette.$black_2;
     }
 }

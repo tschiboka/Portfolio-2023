@@ -1,14 +1,14 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .References {
     h4 {
-        font-size: $font-lg;
+        font-size: font.$font_lg;
         font-style: italic;
         font-weight: bold;
-        color: $white_2;
+        color: palette.$white_2;
         margin-bottom: 1.5rem;
     }
     ul {
@@ -26,14 +26,14 @@
             padding-bottom: 1.5rem;
             display: inline-flex;
             flex-direction: column;
-            border-bottom: 2px solid $black_1;
+            border-bottom: 2px solid palette.$black_1;
 
             &:last-child {
                 border-bottom: none;
                 margin-bottom: 0;
                 padding-bottom: 0;
             }
-            
+
             @include bp.md {
                 padding-bottom: 0;
                 margin-bottom: 0.5rem;
@@ -51,19 +51,20 @@
                     min-width: 35vw;
                     padding: 1rem;
                     display: inline;
-                    border-right: 2px solid $black_2;
+                    border-right: 2px solid palette.$black_2;
                 }
             }
         }
 
-        span, a {
+        span,
+        a {
             max-width: 100%;
-            color: $white_5;
+            color: palette.$white_5;
             padding-right: 10px;
-            white-space: pre-wrap; /* CSS3 */    
+            white-space: pre-wrap; /* CSS3 */
             white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-            white-space: -pre-wrap; /* Opera 4-6 */    
-            white-space: -o-pre-wrap; /* Opera 7 */    
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
             word-wrap: break-word; /* Internet Explorer 5.5+ */
             overflow-y: auto;
             @include bp.md {
@@ -83,12 +84,12 @@
         .References__index {
             font-style: italic;
             font-weight: bold;
-            color: $white_3;
+            color: palette.$white_3;
         }
 
         .References__author {
             font-weight: bold;
-            color: $white_3;
+            color: palette.$white_3;
         }
 
         .References__title {
@@ -96,15 +97,15 @@
         }
 
         a {
-            font-family: "Fira", monospace;
-            font-size: $font-xs;
+            font-family: 'Fira', monospace;
+            font-size: font.$font_xs;
             font-weight: lighter;
             padding-top: 1rem;
             @include bp.md {
                 padding-left: 2rem;
             }
             &:hover {
-                color: $accent_dark_2;
+                color: palette.$accent_dark_2;
                 transform: scale(1.05);
             }
         }
@@ -113,29 +114,30 @@
 
 .light {
     h4 {
-        color: $black_4;
+        color: palette.$black_4;
     }
 
     ul {
         li {
-            border-bottom: 2px solid $white_2;
+            border-bottom: 2px solid palette.$white_2;
             @include bp.md {
                 border-bottom: none;
             }
-            .References__index, .References__title {
-                color: $black_4;
+            .References__index,
+            .References__title {
+                color: palette.$black_4;
             }
             .References__author {
-                color: $black_1;
+                color: palette.$black_1;
                 font-weight: bold;
             }
             .References__title {
                 font-weight: bold;
             }
             a {
-                color: $black_5;
+                color: palette.$black_5;
                 &:hover {
-                    color: $accent_dark_3;
+                    color: palette.$accent_dark_3;
                 }
             }
         }

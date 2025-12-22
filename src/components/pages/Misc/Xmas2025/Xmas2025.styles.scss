@@ -1,8 +1,7 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
-@import "../../../../styles/animations.scss";
-
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
+@use '../../../../styles/animations.scss' as animations;
 
 .Xmas {
     main {
@@ -14,7 +13,7 @@
     }
     form {
         margin-bottom: 0;
-        border-radius: 5px; 
+        border-radius: 5px;
     }
     .reindeer-image {
         width: 150px;
@@ -39,9 +38,9 @@
         display: flex;
         justify-content: center;
         border-radius: 10px;
-        border: 2px solid $black_3;
-        background: $black_x;
-
+        border: 2px solid palette.$black_3;
+        background: palette.$black_x;
+ 
         .candle {
             width: 50px;
             height: auto;

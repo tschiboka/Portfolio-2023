@@ -1,15 +1,14 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .JsSorting__ol {
     margin-left: 3rem;
     margin-bottom: 1.5rem;
     margin-top: -1.5rem;
-    font-size: $font_md;
-    color: $white_3;
+    font-size: font.$font_md;
+    color: palette.$white_3;
     @include bp.sm {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }

@@ -1,0 +1,33 @@
+.option-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--sp-lg);
+    border: var(--border-normal)
+}
+
+.option-panel button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: var(--sp-sm);
+    margin: var(--sp-xs);
+    background-color: var(--color-bg-medium);
+    color: var(--color-font-accent);
+    font-family: var(--font-main);
+    font-size: var(--font-md);
+    font-weight: var(--font-bold);
+    border : var(--border-normal);
+    cursor: pointer;
+}
+
+.option-panel button:not(:disabled):hover {
+    background-color: var(--color-bg-accent);
+    color: var(--color-font-dark);
+}
+
+.option-panel button:disabled {
+    color: var(--color-font-medium);
+    cursor: not-allowed
+}

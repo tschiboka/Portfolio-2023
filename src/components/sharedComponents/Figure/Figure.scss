@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .Figure {
     margin: 0 auto;
@@ -24,15 +24,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: $white_3;
-            font-size: $font-xl;
+            color: palette.$white_3;
+            font-size: font.$font_xl;
         }
         &:hover {
             background-color: black;
             color: white;
         }
 
-        img {            
+        img {
             max-width: 100%;
             height: auto;
             margin: 0;
@@ -47,7 +47,7 @@
         &:hover {
             cursor: pointer;
             .Figure__icon {
-                background-color: $black_1;
+                background-color: palette.$black_1;
             }
         }
     }
@@ -56,7 +56,7 @@
         margin: 0 auto;
         display: block;
     }
-    
+
     div.image--med {
         width: 100%;
         max-width: 800px;
@@ -70,20 +70,19 @@
         margin: 0 auto;
         display: block;
     }
-    
+
     div.guitar {
         max-width: 500px;
-        background-color: $white_3;
+        background-color: palette.$white_3;
         img {
             max-width: 500px;
             width: 100%;
-        }   
+        }
     }
     div.bg--white {
         background-color: white;
     }
 }
-
 
 .light {
     .Figure {
@@ -105,8 +104,8 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
-    color: $white_3;
-    font-size: $font-xl;
+    color: palette.$white_3;
+    font-size: font.$font_xl;
     cursor: pointer;
     &:hover {
         background-color: black;

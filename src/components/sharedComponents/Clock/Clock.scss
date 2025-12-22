@@ -1,8 +1,8 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@use "../../../styles/shadows.scss" as shadows;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/shadows.scss' as shadows;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 $clock-container-max-size: 600px;
 
@@ -15,8 +15,8 @@ $clock-container-max-size: 600px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $black_1;
-    font-size: $font_sm;
+    background-color: palette.$black_1;
+    font-size: font.$font_sm;
 
     .ClockContainer {
         min-width: bp.$screen-xxs-min;
@@ -25,17 +25,17 @@ $clock-container-max-size: 600px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: $black_x;
+        background-color: palette.$black_x;
         border-radius: 100%;
-        border: 10px solid $black_1;
+        border: 10px solid palette.$black_1;
         box-shadow: shadows.quad-box-shadow(15px, 15px, 10px);
 
         @include bp.lg {
             min-width: $clock-container-max-size;
             min-height: $clock-container-max-size;
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
-        
+
         .ClockFace {
             width: calc(bp.$screen-xxs-min - 15vw);
             height: calc(bp.$screen-xxs-min - 15vw);
@@ -43,8 +43,8 @@ $clock-container-max-size: 600px;
             justify-content: center;
             align-items: center;
             border-radius: 100%;
-            border: 1px $black_1 solid;
-            
+            border: 1px palette.$black_1 solid;
+
             @include bp.lg {
                 width: calc($clock-container-max-size - 5vw);
                 height: calc($clock-container-max-size - 5vw);
@@ -53,11 +53,12 @@ $clock-container-max-size: 600px;
         }
     }
 
-    header, footer {
+    header,
+    footer {
         width: 100%;
         height: 100%;
     }
-    
+
     @media (orientation: landscape) {
         min-width: bp.$screen-xxs-min-height;
         min-height: bp.$screen-xxs-min;

@@ -7,7 +7,8 @@ export const ApiPaths = {
     CONFIRM_REGISTRATION: 'CONFIRM',
     REHYDRATE_SESSION: 'REHYDRATE_SESSION',
     CATEGORIES: "CATEGORIES",
-    PROJECT_XMAS: "PROJECT_XMAS"
+    PROJECT_XMAS: "PROJECT_XMAS",
+    PROJECT_WORD_DUEL_ARENA: "PROJECT_WORD_DUEL_ARENA"
 }
 
 type ApiPathBuilderOptions = {
@@ -25,6 +26,7 @@ export const apiPathBuilder = (pathName: string, options?: ApiPathBuilderOptions
         REHYDRATE_SESSION: 'session',
         CATEGORIES: 'categories',
         PROJECT_XMAS: 'projects/xmas_2025',
+        PROJECT_WORD_DUEL_ARENA: 'projects/word_duel_arena'
     }
 
     return`${url}${apiPrefix}/${apiPaths[pathName]}`

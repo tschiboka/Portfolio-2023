@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 .Disclaimer {
     max-width: 800px;
@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: $black_1;
+    background-color: palette.$black_1;
 
     @include bp.md {
         flex-direction: row;
@@ -23,7 +23,7 @@
         padding: 20px 0 0 0;
         margin-bottom: 1.5rem;
         border-radius: 100%;
-        border: 1px solid $black_2;
+        border: 1px solid palette.$black_2;
         filter: grayscale(1);
         opacity: 0.8;
         @include bp.lg {
@@ -36,12 +36,12 @@
         margin: 0;
         margin-bottom: 1.5rem;
         font-style: italic;
-        font-size: $font_sm;
-        color: $white_5;
+        font-size: font.$font_sm;
+        color: palette.$white_5;
         @include bp.md {
             max-width: calc(100% - 250px - 1.5rem);
             padding: 0 1.5rem;
-            font-size: $font-md;
+            font-size: font.$font_md;
         }
         @include bp.xl {
             padding: 0 3rem;
@@ -51,16 +51,16 @@
         max-width: 300px;
         width: 100%;
         padding: 0.5rem;
-        background-color: $black_1;
-        color: $white_2;
-        font-size: $font-md;
+        background-color: palette.$black_1;
+        color: palette.$white_2;
+        font-size: font.$font_md;
         font-weight: bold;
         text-decoration: none;
         text-align: center;
-        border: 2px solid $accent_dark_3;
+        border: 2px solid palette.$accent_dark_3;
         border-radius: 100px;
         &:hover {
-            background-color: $accent_dark_3;
+            background-color: palette.$accent_dark_3;
             color: black;
             cursor: pointer;
         }
@@ -69,17 +69,17 @@
 
 .light {
     .Disclaimer {
-        background-color: $white_2;
-        border: 1px solid $black_5;
+        background-color: palette.$white_2;
+        border: 1px solid palette.$black_5;
         img {
             background-color: black;
         }
         a.contact-link {
             color: black;
-            background-color: $white_3;
-            border-color: $accent_dark_3;
+            background-color: palette.$white_3;
+            border-color: palette.$accent_dark_3;
             &:hover {
-                background-color: $white_4;
+                background-color: palette.$white_4;
             }
         }
     }

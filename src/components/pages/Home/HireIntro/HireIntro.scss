@@ -1,6 +1,6 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
+@use '../../../../styles/breakpoints.scss' as bp;
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/font_sizes.scss' as font;
 
 .skills {
     display: flex;
@@ -20,7 +20,7 @@ h3.skill-header {
     font-variant: small-caps;
     margin-bottom: 1.5rem;
     @include bp.md {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }
 
@@ -31,12 +31,12 @@ h3.skill-header {
     justify-content: center;
     align-items: center;
     margin-bottom: 1.5rem;
-    
+
     @include bp.md {
         flex-direction: row;
         justify-content: space-evenly;
     }
-    
+
     .link {
         width: 100%;
         max-width: 400px;
@@ -45,12 +45,12 @@ h3.skill-header {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $accent_dark_3;
-        color: $black_1;
-        border: 3px solid $black_3;
+        background-color: palette.$accent_dark_3;
+        color: palette.$black_1;
+        border: 3px solid palette.$black_3;
         border-radius: 100px;
-        font-size: $font_md;
-        font-family: "Roboto_Bold";
+        font-size: font.$font_md;
+        font-family: 'Roboto_Bold';
         text-decoration: none;
         cursor: pointer;
         & > * {
@@ -66,11 +66,11 @@ h3.skill-header {
             width: 40%;
         }
         @include bp.lg {
-            font-size: $font_lg;
+            font-size: font.$font_lg;
         }
     }
 
     link:hover {
-        background-color: $accent_dark_2;
+        background-color: palette.$accent_dark_2;
     }
 }

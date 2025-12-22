@@ -1,6 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .ProgressBar {
     width: 100%;
@@ -10,15 +10,15 @@
     padding: 0.5rem;
     display: flex;
     flex-direction: column;
-    background-color: $black_2;
-    border: 1px solid $black_3;
+    background-color: palette.$black_2;
+    border: 1px solid palette.$black_3;
     border-radius: 50px;
 
     @include bp.sm {
         flex-direction: row;
     }
     @include bp.md {
-        margin: 1rem; 
+        margin: 1rem;
     }
 
     .ProgressBar__title-wrapper {
@@ -35,11 +35,11 @@
             justify-content: space-between;
         }
     }
-    
+
     .ProgressBar__title {
         display: flex;
         align-items: center;
-        color: $white_3;
+        color: palette.$white_3;
         margin: 0;
         font-size: 1.2rem;
         font-weight: bold;
@@ -47,16 +47,15 @@
         overflow: hidden; /* Hide any overflowing text */
         text-overflow: ellipsis; /* Display ellipsis (...) for overflowing text */
     }
-    
+
     .ProgressBar__icon {
         margin-right: 0.5rem;
         display: flex;
         justify-content: center;
         align-items: center;
-        color: $white_5;
-        font-size: $font_lg;
+        color: palette.$white_5;
+        font-size: font.$font_lg;
     }
-
 
     .ProgressBar__inner {
         padding: 0.5rem;
@@ -66,8 +65,8 @@
 
         .ProgressBar__track {
             width: 100%;
-            background-color: $black_1;
-            border: 2px solid $black_3;
+            background-color: palette.$black_1;
+            border: 2px solid palette.$black_3;
             border-radius: 100px;
             @include bp.md {
                 min-width: 400px;
@@ -76,15 +75,27 @@
             .ProgressBar__thumb {
                 height: 100%;
                 min-height: 10px;
-                background-color: $accent_dark_1;
-                border: 1px solid $black_3;
+                background-color: palette.$accent_dark_1;
+                border: 1px solid palette.$black_3;
                 border-radius: 100px;
-                &.yellow { background-color: yellow; }
-                &.orange { background-color: rgb(255, 166, 0); }
-                &.pink { background-color: deeppink; }
-                &.purple { background-color: rgb(172, 0, 172); }
-                &.light-green { background-color: rgb(0, 226, 151); }
-                &.light-blue { background-color: aqua; }
+                &.yellow {
+                    background-color: yellow;
+                }
+                &.orange {
+                    background-color: rgb(255, 166, 0);
+                }
+                &.pink {
+                    background-color: deeppink;
+                }
+                &.purple {
+                    background-color: rgb(172, 0, 172);
+                }
+                &.light-green {
+                    background-color: rgb(0, 226, 151);
+                }
+                &.light-blue {
+                    background-color: aqua;
+                }
             }
         }
     }
@@ -92,16 +103,16 @@
 
 .light {
     .ProgressBar {
-        background-color: $white_2;
-        border: 1px solid $white_5;
+        background-color: palette.$white_2;
+        border: 1px solid palette.$white_5;
 
         .ProgressBar__title {
             color: black;
         }
 
         .ProgressBar__track {
-            background-color: $gray_4;
-            border: 1px solid $black_3;
+            background-color: palette.$gray_4;
+            border: 1px solid palette.$black_3;
         }
         .ProgressBar__thumb {
             opacity: 0.8;

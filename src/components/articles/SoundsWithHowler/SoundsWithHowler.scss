@@ -1,7 +1,6 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
 
 .sound-btn-wrapper {
     width: 100%;
@@ -16,15 +15,15 @@
         align-items: center;
         margin: 1rem;
         padding: 0.5rem 1rem;
-        background-color: $black_1;
-        border: 2px solid $gray_1;
+        background-color: palette.$black_1;
+        border: 2px solid palette.$gray_1;
         border-radius: 50px;
         color: white;
-        font-size: $font-lg;
+        font-size: font.$font_lg;
         cursor: pointer;
         span {
             margin-right: 0.5rem;
-            color: $accent_dark_2;
+            color: palette.$accent_dark_2;
         }
     }
 }

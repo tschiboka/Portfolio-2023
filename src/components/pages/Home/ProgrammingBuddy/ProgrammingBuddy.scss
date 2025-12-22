@@ -1,6 +1,4 @@
-@use "../../../../styles/breakpoints.scss" as bp;
-@import "../../../../styles/palette.scss";
-@import "../../../../styles/font_sizes.scss";
+@use '../../../../styles/palette.scss' as palette;
 
 .codewars {
     display: flex;
@@ -10,13 +8,13 @@
 }
 
 .codewars-img {
-    max-width: 100%;;
+    max-width: 100%;
     width: 400px;
     margin: 3rem 0 0 0;
 }
 
 .codewars-link {
     margin-top: 1.5rem;
-    color: $accent_dark_2;
+    color: palette.$accent_dark_2;
     text-align: center;
 }

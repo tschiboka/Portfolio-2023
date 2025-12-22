@@ -1,7 +1,7 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/palette.scss' as palette;
+@use '../../../styles/font_sizes.scss' as font;
+@use '../../../styles/animations.scss' as animations;
 
 h1 {
     font-variant: small-caps;
@@ -10,13 +10,13 @@ h1 {
 h2.riffmaster {
     text-align: center;
     font-variant: small-caps;
-    font-size: $font_lg;
+    font-size: font.$font_lg;
 }
 
 h3.riffmaster {
     margin: 3rem 0;
-    color: $white_2;
-    font-size: $font_lg;
+    color: palette.$white_2;
+    font-size: font.$font_lg;
     font-family: Roboto_Bold;
     font-variant: small-caps;
 }
@@ -36,12 +36,11 @@ img.image--med {
 
 figure div.guitar {
     max-width: 500px;
-    background-color: $white_3;
+    background-color: palette.$white_3;
     img {
         max-width: 500px;
         width: 100%;
     }
-    
 }
 
 div.bg--white {
@@ -49,18 +48,18 @@ div.bg--white {
 }
 
 strong.bold {
-    font-family: "Roboto_Bold";
+    font-family: 'Roboto_Bold';
 }
 
 ul.ul--riffmaster-leds {
     display: flex;
     flex-direction: column;
-    color: $white_3;
-    font-size: $font_md;
+    color: palette.$white_3;
+    font-size: font.$font_md;
     margin-top: 1.5rem;
     list-style: none;
     @include bp.sm {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }
 
@@ -111,12 +110,12 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $accent_dark_3;
-    color: $black_1;
-    border: 3px solid $black_3;
+    background-color: palette.$accent_dark_3;
+    color: palette.$black_1;
+    border: 3px solid palette.$black_3;
     border-radius: 100px;
-    font-size: $font_md;
-    font-family: "Roboto_Bold";
+    font-size: font.$font_md;
+    font-family: 'Roboto_Bold';
     text-decoration: none;
     cursor: pointer;
     & > * {
@@ -132,12 +131,13 @@ p {
         width: 40%;
     }
     @include bp.lg {
-        font-size: $font_lg;
+        font-size: font.$font_lg;
     }
 }
 
 .light {
-    h3, ul.ul--riffmaster-leds  {
-        color: $black_2;
+    h3,
+    ul.ul--riffmaster-leds {
+        color: palette.$black_2;
     }
 }

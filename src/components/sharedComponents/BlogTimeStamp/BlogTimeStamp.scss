@@ -1,16 +1,14 @@
-@use "../../../styles/breakpoints.scss" as bp;
-@import "../../../styles/palette.scss";
-@import "../../../styles/font_sizes.scss";
-@import "../../../styles/animations.scss";
+@use '../../../styles/breakpoints.scss' as bp;
+@use '../../../styles/font_sizes.scss' as font;
 
 .BlogTimeStamp {
     margin: 3rem 0 0 0;
     p.BlogTimeStamp__text {
         text-align: center;
         font-style: italic;
-        font-size: $font_sm;
+        font-size: font.$font_sm;
         @include bp.lg {
-            font-size: $font_md;
+            font-size: font.$font_md;
         }
     }
     time {
