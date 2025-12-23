@@ -5,6 +5,7 @@ import rainCheckImg from '../../../assets/images/projects/RainCheck.png'
 import greenRooftopImg from '../../../assets/images/projects/GreenRooftop.png'
 import fruitsAndFlowersImg from '../../../assets/images/projects/FruitsAndFlowers.png'
 import pocketTutorImg from '../../../assets/images/projects/PocketTutor.png'
+import wordDuelArena from '../../../assets/images/projects/WordsDuelArena.jpg'
 import { Project } from './Projects'
 
 const projects: Project[] = [
@@ -72,6 +73,22 @@ const projects: Project[] = [
         badges: ['HTML', 'CSS', 'React'],
         url: 'https://tschiboka.com/projects/pocket-tutor/index.html',
         github: 'https://github.com/tschiboka/Pocket-Tutor',
+    },
+    {
+        title: 'Word Duel Arena',
+        image: wordDuelArena,
+        description:
+            'Word Duel Arena is an engaging multiplayer word game that challenges players to outwit their opponents by forming words from a shared set of letters. Players can join random matches or invite friends for a more personalized experience. The game features real-time turn-based gameplay, a dynamic scoring system based on word length and complexity, and a chat function for seamless communication. With its intuitive interface and competitive elements, Word Duel Arena offers endless fun and learning opportunities for word enthusiasts of all ages.',
+        badges: [
+            'React',
+            'TypeScript',
+            'NodeJs',
+            'Express',
+            'MongoDB',
+            'Jest',
+            'RTL',
+        ],
+        url: '/projects/word-duel-arena',
     },
 ]
 

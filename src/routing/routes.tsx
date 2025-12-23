@@ -39,6 +39,7 @@ import { Clock } from '../components/sharedComponents/Clock/Clock'
 // Misc Pages
 import Xmas2025 from '../components/pages/Misc/Xmas2025/Xmas2025'
 import { WordDuelArena } from '../components/pages/Misc/WordDuelArena/WordDuelArena'
+import { Session } from '../components/pages/Misc/WordDuelArena/Session/Session'
 
 export const routes = [
     // Website Pages
@@ -216,6 +217,10 @@ export const routes = [
     {
         path: '/projects/word-duel-arena',
         element: <WordDuelArena />,
+    },
+    {
+        path: '/projects/word-duel-arena/session/:sessionId',
+        element: <Session />,
     },
     // Error
     {

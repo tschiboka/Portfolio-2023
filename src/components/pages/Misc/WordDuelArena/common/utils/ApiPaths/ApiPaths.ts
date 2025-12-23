@@ -1,0 +1,38 @@
+import { ApiPathParams } from '.'
+
+export class ApiPaths {
+    static readonly Paths = {
+        SESSION: "session"
+    }
+    
+    static readonly API_STRING = "projects/word-duel-arena"
+    static readonly BE_URL = "https://portfolio-2023-nf5z.onrender.com";
+    
+    static get SESSION(): keyof typeof ApiPaths.Paths {
+        return "SESSION";
+    }
+
+    private static isLocalhost(): boolean {
+        const { hostname } = window.location;
+        return hostname === 'localhost' || hostname === '127.0.0.1';
+    }
+
+    private static getBasePath({ path, params, query }: ApiPathParams): string {
+        const { hostname } = window.location;
+        const apiPath = this.API_STRING + "/" + ApiPaths.Paths[path]
+        const base = ApiPaths.isLocalhost() ? { hostname, port: "5000" } : { hostname: ApiPaths.BE_URL, port: "5000" }
+        const pathString = params ? "/" + Object.values(params).map(String).join("/") : ""
+        const queryString = query  ? `?${new URLSearchParams(query).toString()}` : ""
+        return `${base.hostname}${base.port ? `:${base.port}` : ""}/${apiPath}${pathString}${queryString}`
+    }
+
+    static getPath({ path, params, query }: ApiPathParams): string {
+        const service = ApiPaths.isLocalhost() ? "http" : "https"
+        return `${service}://${ApiPaths.getBasePath({ path, params, query })}`
+    }       
+
+    static getWSPath({ path, params, query }: ApiPathParams): string {
+        const service = ApiPaths.isLocalhost() ? "ws" : "wss"
+        return `${service}://${ApiPaths.getBasePath({ path, params, query })}`
+    }
+}

@@ -10,8 +10,9 @@ const login = require("../routes/login");
 const confirm = require("../routes/confirm");
 const log = require("../routes/log");
 const category = require("../routes/category")
-const xmas2025 = require("../projects/xmas_2025/routes")
 const session = require("../routes/session")
+const xmas2025 = require("../projects/xmas_2025/routes")
+const word_duel_arena_session = require("../projects/word_duel_arena/routes/session")
 
 module.exports = function(app) {
     // Profile website routes
@@ -32,4 +33,5 @@ module.exports = function(app) {
 
     // Project routes
     app.use("/projects/xmas_2025", xmas2025)
+    app.use("/projects/word_duel_arena/session", word_duel_arena_session)
 }

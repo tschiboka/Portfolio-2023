@@ -29,7 +29,8 @@
     "node-cron": "^3.0.2",
     "nodemailer": "^6.9.4",
     "ramda": "^0.29.1",
-    "resend": "^6.4.2"
+    "resend": "^6.4.2",
+    "ws": "^8.18.3"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.14.6",

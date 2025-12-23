@@ -1,16 +1,40 @@
 import { useEffect, useState } from 'react'
-import { Modal, useModal } from '../../common/components'
-import { generateSessionPath } from '../../common/utils'
+import { Modal } from '../../common/components'
 import './InvitationModal.styles.css'
+import { useNavigate } from 'react-router-dom'
+import { Navigation } from '../../common/utils'
+import { nanoid } from 'nanoid'
 
 export const InvitationModal = () => {
-    const { setClose } = useModal()
-    const [sessionLink, setSessionLink] = useState('')
+    const navigate = useNavigate()
+    const sessionId = nanoid()
+
+    const [sessionLink, setSessionLink] = useState<string>('')
     const [copied, setCopied] = useState(false)
 
     const copySessionLink = async () => {
+        if (!sessionLink) return
+
         await navigator.clipboard.writeText(sessionLink)
         setCopied(true)
+    }
+
+    useEffect(() => {
+        const link = Navigation.generateShareableLink({
+            path: Navigation.SESSION,
+            params: { sessionId },
+        })
+        setSessionLink(link)
+    }, [])
+
+    const navigateToSession = () => {
+        if (!sessionId) return
+        navigate(
+            Navigation.createPath({
+                path: Navigation.SESSION,
+                params: { sessionId },
+            }),
+        )
     }
 
     const actions: ModalAction[] = [
@@ -18,10 +42,8 @@ export const InvitationModal = () => {
             label: 'Copy Link',
             onClick: copySessionLink,
         },
-        { label: 'Enter Game', onClick: setClose },
+        { label: 'Enter Game', onClick: navigateToSession },
     ]
-
-    useEffect(() => setSessionLink(generateSessionPath()), [])
 
     return (
         <div className="modal invitation-modal">
