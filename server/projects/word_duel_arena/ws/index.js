@@ -1,66 +1,48 @@
-const { WebSocketServer } = require("ws")
-const url = require("url")
+const { WebSocketServer } = require('ws');
+const url = require('url');
+const { getSession, cleanupSessionIfEmpty, initialiseSession } = require('./sessions');
+const { commitSessionState } = require('./broadcast');
+const routeMessage = require('./handlers');
+const { startPresenceLoop } = require('./presenceLoop');
 
 module.exports = function initWebSocket(server) {
-  const wss = new WebSocketServer({ server })
-  const sessions = {}
+  const wss = new WebSocketServer({ server });
+  startPresenceLoop();
 
-  wss.on("connection", (ws, req) => {
-    const { sessionId } = url.parse(req.url, true).query
+  wss.on('connection', (ws, req) => {
+    const { sessionId, deviceId } = url.parse(req.url, true).query;
 
-    if (!sessionId) {
-      ws.close()
-      return
+    if (!sessionId || !deviceId) {
+      ws.close();
+      return;
     }
 
-    // Create session if missing
-    if (!sessions[sessionId]) {
-      sessions[sessionId] = {
-        state: { counter: 0 },
-        connections: new Set(),
-      }
-    }
+    ws.sessionId = sessionId;
+    ws.deviceId = deviceId;
 
-    const session = sessions[sessionId]
-    session.connections.add(ws)
+    const session = getSession(sessionId);
+    session.connections.add(ws);
+    commitSessionState(session, initialiseSession(session, deviceId));
 
-    console.log("Connected to session:", sessionId)
-
-    // 1️⃣ Send current state immediately
-    ws.send(
-      JSON.stringify({
-        type: "state_update",
-        payload: session.state,
-      })
-    )
-
-    ws.on("message", (raw) => {
-      const msg = JSON.parse(raw.toString())
-
-      if (msg.type === "ping") {
-        session.state.counter += 1
-      }
-
-      const update = JSON.stringify({
-        type: "state_update",
-        payload: session.state,
-      })
-
-      for (const client of session.connections) {
-        if (client.readyState === client.OPEN) {
-          client.send(update)
+    ws.on('message', (raw) => {
+        let msg;
+        try {
+            msg = JSON.parse(raw.toString());
+        } catch {
+            console.warn('Invalid message', raw.toString());
+            return;
         }
-      }
-    })
 
-    ws.on("close", () => {
-      session.connections.delete(ws)
+        const didStateChange = routeMessage(session, ws, msg);
 
-      if (session.connections.size === 0) {
-        delete sessions[sessionId]
-      }
+        if (didStateChange) {
+            commitSessionState(session, session.state);
+        }
+    });
 
-      console.log("Disconnected from session:", sessionId)
-    })
-  })
-}
+    ws.on('close', () => {
+      session.connections.delete(ws);
+      cleanupSessionIfEmpty(sessionId);
+    });
+  });
+};
