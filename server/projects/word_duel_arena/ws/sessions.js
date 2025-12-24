@@ -84,8 +84,6 @@ function markAlive(draft, ws) {
 function handleMove(draft, payload) {
   if (draft.status !== 'ACTIVE') return;
 
-  console.log('Applying move for session:', draft.sessionId || 'unknown');
-
   // TODO: Apply the actual move logic here
   // Example: draft.wordWheel = payload.move;
 }

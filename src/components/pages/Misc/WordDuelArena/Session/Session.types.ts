@@ -1,6 +1,17 @@
+export type PlayerRole = 'player1' | 'player2' | null
+export type DerivedSessionState = {
+  me?: PlayerRole
+  opponent?: PlayerRole
+  meData?: Player
+  opponentData?: Player
+  completeSessionState?: WebSocketSessionState
+}
+
 export type SessionContextType = {
     sessionId: string
     deviceId: string
+    derivedState?: DerivedSessionState
+    setSessionState: (state: WebSocketSessionState) => void
 }
 
 // Client can send a variety of request types
@@ -57,7 +68,7 @@ export type Match = {
   reason: 'RESIGN' | 'TIMEOUT' | 'DRAW' | null;
 };
 
-export type SessionState = {
+export type WebSocketSessionState = {
   id: string;
   status: SessionStatuses;
   players: {
@@ -69,7 +80,7 @@ export type SessionState = {
   connections: Set<WebSocket>;
 }
 
-export type WebSocketResponse = { type: WebSocketResponseType; payload?: SessionState }
+export type WebSocketResponse = { type: WebSocketResponseType; payload?: WebSocketSessionState }
 export type WebSocketRequest =
   | { type: WebSocketRequestType.PING }
   | {
@@ -82,7 +93,7 @@ export type WebSocketRequest =
 
 export type WebSocketContextType = {
     send: (msg: WebSocketRequest) => void
-    lastMessage?: WebSocketResponse
+    lastState?: WebSocketResponse
     readyState: number
 }
 

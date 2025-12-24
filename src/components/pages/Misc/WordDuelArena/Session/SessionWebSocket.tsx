@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext, useEffect } from 'react'
 import useWebSocket from 'react-use-websocket'
 import { useSession } from './Session.context'
 import {
@@ -21,7 +21,7 @@ export const useSessionWS = () => {
 type Props = { children: ReactNode }
 
 export const SessionWebSocketProvider = ({ children }: Props) => {
-    const { sessionId, deviceId } = useSession()
+    const { sessionId, deviceId, setSessionState } = useSession()
 
     const wsUrl =
         sessionId && deviceId
@@ -41,11 +41,15 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
         sendJsonMessage(msg)
     }
 
+    useEffect(() => {
+        if (lastJsonMessage?.payload) setSessionState?.(lastJsonMessage.payload)
+    }, [lastJsonMessage])
+
     return (
         <WSContext.Provider
             value={{
                 send,
-                lastMessage: lastJsonMessage,
+                lastState: lastJsonMessage,
                 readyState,
             }}
         >
