@@ -4,10 +4,10 @@ export const SessionHeader = () => {
     return (
         <header className="session-header">
             <div className="session-header-player">
-                <SessionPlayerInfo playerNumber={1} />
+                <SessionPlayerInfo slot="me" />
             </div>
             <div className="session-header-player">
-                <SessionPlayerInfo playerNumber={2} />
+                <SessionPlayerInfo slot="opponent" />
             </div>
         </header>
     )

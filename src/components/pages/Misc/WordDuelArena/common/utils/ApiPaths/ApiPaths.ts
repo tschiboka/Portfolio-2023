@@ -6,7 +6,7 @@ export class ApiPaths {
     }
     
     static readonly API_STRING = "projects/word-duel-arena"
-    static readonly BE_URL = "https://portfolio-2023-nf5z.onrender.com";
+    static readonly BE_HOST = "portfolio-2023-nf5z.onrender.com";
     
     static get SESSION(): keyof typeof ApiPaths.Paths {
         return "SESSION";
@@ -18,13 +18,25 @@ export class ApiPaths {
     }
 
     private static getBasePath({ path, params, query }: ApiPathParams): string {
-        const { hostname } = window.location;
-        const apiPath = this.API_STRING + "/" + ApiPaths.Paths[path]
-        const base = ApiPaths.isLocalhost() ? { hostname, port: "5000" } : { hostname: ApiPaths.BE_URL, port: "5000" }
-        const pathString = params ? "/" + Object.values(params).map(String).join("/") : ""
-        const queryString = query  ? `?${new URLSearchParams(query).toString()}` : ""
-        return `${base.hostname}${base.port ? `:${base.port}` : ""}/${apiPath}${pathString}${queryString}`
-    }
+    const apiPath = `${this.API_STRING}/${ApiPaths.Paths[path]}`
+    const isLocal = ApiPaths.isLocalhost()
+
+    const hostname = isLocal
+        ? window.location.hostname
+        : ApiPaths.BE_HOST
+
+    const port = isLocal ? ":5000" : ""
+
+    const pathString = params
+        ? "/" + Object.values(params).map(String).join("/")
+        : ""
+
+    const queryString = query
+        ? `?${new URLSearchParams(query).toString()}`
+        : ""
+
+    return `${hostname}${port}/${apiPath}${pathString}${queryString}`
+}
 
     static getPath({ path, params, query }: ApiPathParams): string {
         const service = ApiPaths.isLocalhost() ? "http" : "https"
