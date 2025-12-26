@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Modal } from '../../common/components'
 import './InvitationModal.styles.css'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,8 @@ import { nanoid } from 'nanoid'
 
 export const InvitationModal = () => {
     const navigate = useNavigate()
-    const sessionId = nanoid()
+    const sessionIdRef = useRef(nanoid())
+    const sessionId = sessionIdRef.current
 
     const [sessionLink, setSessionLink] = useState<string>('')
     const [copied, setCopied] = useState(false)

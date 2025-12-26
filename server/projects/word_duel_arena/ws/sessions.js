@@ -31,29 +31,21 @@ function getSession(sessionId) {
  * Update or assign a seat to the deviceId
  * Returns the session object with seating arrangement.
  */
-const initialiseSession = (session, deviceId) => {
-    const defaultPlayer = {
-        deviceId,
-        lastActive: Date.now(),
-        connected: true,
-    };
+const initialiseSession = (session, deviceId) => 
+    produce(session.state, draft => {
+    if (draft.players.player1?.deviceId === deviceId) return
+    if (draft.players.player2?.deviceId === deviceId) return
 
-    return produce(session.state, draft => {
-        if (!draft.players?.player1) draft.players.player1 = defaultPlayer;
-        else if (!draft.players?.player2 && draft.players.player1.deviceId !== deviceId) draft.players.player2 = defaultPlayer;
-        draft.status = draft.players?.player1 && draft.players?.player2
-            ? SessionStatuses.ACTIVE
-            : SessionStatuses.LOBBY;
-
-        if (draft.players.player1?.deviceId === deviceId) {
-            draft.players.player1.lastActive = Date.now();
-            draft.players.player1.connected = true;
-        } else if (draft.players.player2?.deviceId === deviceId) {
-            draft.players.player2.lastActive = Date.now();
-            draft.players.player2.connected = true;
-        }
-    });
-};
+    if (!draft.players.player1) {
+        draft.players.player1 = { deviceId, lastActive: Date.now(), connected: true }
+    } else if (!draft.players.player2) {
+        draft.players.player2 = { deviceId, lastActive: Date.now(), connected: true }
+    }    
+    
+    draft.status = draft.players.player1 && draft.players.player2
+        ? SessionStatuses.ACTIVE
+        : SessionStatuses.LOBBY;
+});
 
 /**
  * Cleanup session if no connections remain

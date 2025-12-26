@@ -11,7 +11,7 @@ function broadcastSessionState(session, payload) {
 function commitSessionState(session, nextState) {
     if (nextState === session.state) return
     validateSessionState(nextState)
-
+    
     session.state = nextState
         broadcastSessionState(session, {
         type: 'state_update',
