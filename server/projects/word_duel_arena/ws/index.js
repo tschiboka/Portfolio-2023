@@ -1,6 +1,6 @@
 const { WebSocketServer } = require('ws');
 const url = require('url');
-const { getSession, cleanupSessionIfEmpty, initialiseSession } = require('./sessions');
+const { getSession, cleanupSessionIfEmpty, initialiseSession, markAlive } = require('./sessions');
 const { commitSessionState } = require('./broadcast');
 const routeMessage = require('./handlers');
 const { startPresenceLoop } = require('./presenceLoop');
@@ -22,6 +22,7 @@ module.exports = function initWebSocket(server) {
 
     const session = getSession(sessionId);
     session.connections.add(ws);
+
     commitSessionState(session, initialiseSession(session, deviceId));
 
     ws.on('message', (raw) => {

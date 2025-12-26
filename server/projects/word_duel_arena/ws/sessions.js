@@ -33,19 +33,24 @@ function getSession(sessionId) {
  */
 const initialiseSession = (session, deviceId) => 
     produce(session.state, draft => {
-    if (draft.players.player1?.deviceId === deviceId) return
-    if (draft.players.player2?.deviceId === deviceId) return
+        const { player1, player2 } = draft.players ?? {};
+        
+        if (player1?.deviceId === deviceId || player2?.deviceId === deviceId) 
+            markAliveByDevice(draft, deviceId)
+        else if (!player1) 
+            draft.players.player1 = { deviceId, lastActive: Date.now(), connected: true }
+        else if (!player2) 
+            draft.players.player2 = { deviceId, lastActive: Date.now(), connected: true }
 
-    if (!draft.players.player1) {
-        draft.players.player1 = { deviceId, lastActive: Date.now(), connected: true }
-    } else if (!draft.players.player2) {
-        draft.players.player2 = { deviceId, lastActive: Date.now(), connected: true }
-    }    
-    
-    draft.status = draft.players.player1 && draft.players.player2
-        ? SessionStatuses.ACTIVE
-        : SessionStatuses.LOBBY;
-});
+        draft.status = player1 && player2
+            ? SessionStatuses.ACTIVE
+            : SessionStatuses.LOBBY
+    }
+)
+
+function markAlive(draft, ws) {
+  markAliveByDevice(draft, ws.deviceId);
+}
 
 /**
  * Cleanup session if no connections remain
@@ -57,15 +62,15 @@ function cleanupSessionIfEmpty(sessionId) {
     }
 }
 
-function markAlive(draft, ws) {
+function markAliveByDevice(draft, deviceId) {
   const now = Date.now();
 
-  if (draft.player1?.deviceId === ws.deviceId) {
-    draft.player1.lastActive = now;
-    draft.player1.connected = true;
-  } else if (draft.player2?.deviceId === ws.deviceId) {
-    draft.player2.lastActive = now;
-    draft.player2.connected = true;
+  if (draft.players.player1?.deviceId === deviceId) {
+    draft.players.player1.lastActive = now;
+    draft.players.player1.connected = true;
+  } else if (draft.players.player2?.deviceId === deviceId) {
+    draft.players.player2.lastActive = now;
+    draft.players.player2.connected = true;
   }
 }
 
@@ -95,6 +100,7 @@ module.exports = {
     cleanupSessionIfEmpty,
     handleMove,
     markAlive,
+    markAliveByDevice,
     initialiseSession,
     updateState,
     sessions,
