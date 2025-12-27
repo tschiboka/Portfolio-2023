@@ -10,14 +10,17 @@ export type DerivedSessionState = {
 export type SessionContextType = {
     sessionId: string
     deviceId: string
+    allowKeyboardInput?: boolean
     derivedState?: DerivedSessionState
     setSessionState: (state: WebSocketSessionState) => void
 }
 
+
+
 // Client can send a variety of request types
 export enum WebSocketRequestType {
     PING = "ping",
-    MOVE = "move"
+    ATTEMPT_MOVE = "attempt_move"
 }
 
 // Server will only respond with state updates
@@ -84,9 +87,9 @@ export type WebSocketResponse = { type: WebSocketResponseType; payload?: WebSock
 export type WebSocketRequest =
   | { type: WebSocketRequestType.PING }
   | {
-      type: WebSocketRequestType.MOVE
+      type: WebSocketRequestType.ATTEMPT_MOVE
       payload: {
-        move: string
+        attempt: string
       }
     }
 

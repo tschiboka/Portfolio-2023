@@ -27,6 +27,7 @@ type SessionProviderProps = {
 export const SessionProvider = ({ children }: SessionProviderProps) => {
     const [derivedState, setDerivedState] =
         useState<DerivedSessionState>(defaultDerivedState)
+
     const deviceId = useRef(LocalStorage.getLocalStorage().deviceId).current
     const { sessionId } = useParams()
 
@@ -58,7 +59,13 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
 
     return (
         <SessionContext.Provider
-            value={{ sessionId, deviceId, derivedState, setSessionState }}
+            value={{
+                sessionId,
+                deviceId,
+                derivedState,
+                allowKeyboardInput: true,
+                setSessionState,
+            }}
         >
             {children}
         </SessionContext.Provider>

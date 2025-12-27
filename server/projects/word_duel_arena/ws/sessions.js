@@ -33,20 +33,18 @@ function getSession(sessionId) {
  */
 const initialiseSession = (session, deviceId) => 
     produce(session.state, draft => {
-        const { player1, player2 } = draft.players ?? {};
-        
-        if (player1?.deviceId === deviceId || player2?.deviceId === deviceId) 
-            markAliveByDevice(draft, deviceId)
-        else if (!player1) 
-            draft.players.player1 = { deviceId, lastActive: Date.now(), connected: true }
-        else if (!player2) 
-            draft.players.player2 = { deviceId, lastActive: Date.now(), connected: true }
+        if (draft.players.player1?.deviceId === deviceId || draft.players.player2?.deviceId === deviceId) {
+            markAliveByDevice(draft, deviceId);
+        } else if (!draft.players.player1) {
+            draft.players.player1 = { deviceId, lastActive: Date.now(), connected: true };
+        } else if (!draft.players.player2) {
+            draft.players.player2 = { deviceId, lastActive: Date.now(), connected: true };
+        }
 
-        draft.status = player1 && player2
+        draft.status = draft.players.player1 && draft.players.player2
             ? SessionStatuses.ACTIVE
-            : SessionStatuses.LOBBY
-    }
-)
+            : SessionStatuses.LOBBY;
+    });
 
 function markAlive(draft, ws) {
   markAliveByDevice(draft, ws.deviceId);
@@ -75,16 +73,6 @@ function markAliveByDevice(draft, deviceId) {
 }
 
 /**
- * Update session state immutably.
- * Returns the new state for broadcasting
- */
-function handleMove(draft, payload) {
-  if (draft.status !== 'ACTIVE') return;
-
-  // TODO: Apply the actual move logic here
-  // Example: draft.wordWheel = payload.move;
-}
-/**
  * Example: generic state updater for arbitrary actions
  */
 function updateState(sessionId, updater) {
@@ -98,7 +86,6 @@ function updateState(sessionId, updater) {
 module.exports = {
     getSession,
     cleanupSessionIfEmpty,
-    handleMove,
     markAlive,
     markAliveByDevice,
     initialiseSession,
