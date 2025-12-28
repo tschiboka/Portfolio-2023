@@ -1,4 +1,4 @@
-import { ApiPathParams } from '.'
+import { ApiPathParams } from './ApiPaths.types'
 
 export class ApiPaths {
     static readonly Paths = {

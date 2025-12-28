@@ -1,0 +1,77 @@
+.word-option-list {
+  margin: 0;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90vh;
+  overflow: auto;
+  border: var(--border-normal);
+  background-color: var(--color-bg-dark);
+}
+
+.word-option-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.word-option-list p {
+  text-align: center;
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  margin: var(--sp-sm) 0;
+}
+
+.word-option-list li {
+  list-style-type: none;
+  margin: 5px;
+  padding: 5px;
+  border: var(--border-normal);
+  cursor: pointer;
+}
+
+.word-option-list li:hover {
+  background-color: var(--color-bg-medium);
+  border-color: var(--color-font-accent);
+}
+
+.word-option-list li div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: var(--font-medium);
+}
+
+.word-option-list li div button {
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  padding: 0;
+  line-height: 30px;
+  border: var(--border-normal);
+  cursor: pointer;
+}
+
+.word-option-list li div button.remove-word {
+  color: var(--color-font-error);
+}
+
+.word-option-list li div button.add-word {
+  color: var(--color-font-success);
+}
+
+.word-option-list li div button:disabled {
+  cursor: not-allowed;
+  color: var(--color-font-medium);
+}
+
+.word-option-list li div span .word {
+  padding-right: var(--sp-sm);
+  font-weight: var(--font-bold);
+} 
+
+.word-option-list li div span .frequency {
+  color: var(--color-font-medium);
+  font-weight: var(--font-medium);
+}

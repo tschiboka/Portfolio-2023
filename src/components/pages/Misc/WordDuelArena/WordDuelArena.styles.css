@@ -10,18 +10,22 @@
   --font-lg: 2.5rem;
   --font-md: 1.5rem;
   --font-sm: 1rem;
+  --font-xs: 1rem;
   --font-bold: 700;
+  --font-medium: 400;
   --font-thin: 100;
   
   /* Colors */
   --color-bg-dark: #070707;
   --color-bg-medium: #111;
+  --color-bg-light: #222;
   --color-bg-accent: aqua;
   --color-font-light: white;
   --color-font-medium: #666;
   --color-font-dark: #070707;
   --color-font-accent: aqua;
   --color-font-error: deeppink;
+  --color-font-success: rgb(91, 242, 91);
   
   /* Spacing */
   --sp-lg: 2rem;

@@ -1,4 +1,5 @@
 import { createHashRouter } from 'react-router-dom'
+import { Suspense } from 'react'
 // Website Pages
 import Home from '../components/pages/Home/Home'
 import About from '../components/pages/About/About'
@@ -40,6 +41,13 @@ import { Clock } from '../components/sharedComponents/Clock/Clock'
 import Xmas2025 from '../components/pages/Misc/Xmas2025/Xmas2025'
 import { WordDuelArena } from '../components/pages/Misc/WordDuelArena/WordDuelArena'
 import { Session } from '../components/pages/Misc/WordDuelArena/Session/Session'
+import { lazy } from 'react'
+
+const LevelCreator = lazy(() =>
+    import(
+        '../components/pages/Misc/WordDuelArena/Session/LevelCreator/LevelCreator'
+    ).then((module) => ({ default: module.LevelCreator })),
+)
 
 export const routes = [
     // Website Pages
@@ -221,6 +229,14 @@ export const routes = [
     {
         path: '/projects/word-duel-arena/session/:sessionId',
         element: <Session />,
+    },
+    {
+        path: '/projects/wda-level-creator',
+        element: (
+            <Suspense fallback={<div>Loading...</div>}>
+                <LevelCreator />
+            </Suspense>
+        ),
     },
     // Error
     {

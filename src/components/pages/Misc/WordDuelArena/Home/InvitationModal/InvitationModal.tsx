@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Modal } from '../../common/components'
 import './InvitationModal.styles.css'
 import { useNavigate } from 'react-router-dom'
-import { Navigation } from '../../common/utils'
+import { Navigation } from '../../common/utils/Navigation'
 import { nanoid } from 'nanoid'
 
 export const InvitationModal = () => {
