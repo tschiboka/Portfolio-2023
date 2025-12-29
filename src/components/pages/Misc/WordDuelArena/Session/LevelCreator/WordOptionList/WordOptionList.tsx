@@ -56,7 +56,7 @@ const WordOption = ({
 }: WordOptionProps) => {
     const addWord = () => setSelectedWords([...selectedWords, word])
     const removeWord = () =>
-        setSelectedWords(selectedWords.filter((w) => w !== word))
+        setSelectedWords(selectedWords.filter((w) => w.word !== word.word))
 
     const hasMaxWords = selectedWords.length >= MAX_WORDS_PER_LEVEL
     const canAdd = !hasWord && !hasMaxWords
