@@ -13,7 +13,7 @@ router.get("/:name", [], async (req, res) => {
     const { name } = req.params;
     const level = await Level.findOne({ name });
     if (!level) {
-        return res.status(404).json({ error: "Level not found" });
+        return res.status(404).json({ error: "Level not found in DB" });
     }
     res.status(200).json(level);
 })

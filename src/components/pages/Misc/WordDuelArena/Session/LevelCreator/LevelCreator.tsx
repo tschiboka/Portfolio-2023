@@ -9,19 +9,24 @@ import {
 import { useGetLevelNames } from './LevelCreator.queries'
 import { LevelList } from './LevelList'
 import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { useFullScreen } from '../../common/utils'
 
 export const LevelCreator = () => {
     const { data, isLoading, error } = useGetLevelNames()
+    const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()
     const levelNames = data?.data?.levelNames
     const [levelName, setLevelName] = useState('')
     const [modalOpen, setModalOpen] = useState(false)
 
-    const handleNewLevelClick = () => setModalOpen(true)
+    const handleNewLevelClick = () => {
+        enterFullScreen()
+        setModalOpen(true)
+    }
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) =>
         setLevelName(e.target.value.toUpperCase())
 
     return (
-        <div className="level-creator">
+        <div className="level-creator" ref={ref}>
             <div className="app">
                 <h1>Level Creator</h1>
                 <div className="level-form">
@@ -42,6 +47,7 @@ export const LevelCreator = () => {
                     levelNames={levelNames || []}
                     setLevelName={setLevelName}
                     setModalOpen={setModalOpen}
+                    enterFullScreen={enterFullScreen}
                 />
                 {modalOpen && (
                     <LevelCreatorModal

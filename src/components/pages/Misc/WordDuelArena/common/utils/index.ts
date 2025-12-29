@@ -3,3 +3,4 @@ export * from "./LoaclStorage"
 export * from "./Navigation"
 export * from './Word'
 export * from './Types'
+export * from './FullScreen'

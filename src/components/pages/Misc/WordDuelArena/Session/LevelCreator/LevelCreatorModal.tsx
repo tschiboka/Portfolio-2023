@@ -68,7 +68,6 @@ export const LevelCreatorModal = ({
 
     useEffect(() => {
         if (postError) setValidationError(postError.message)
-        if (getError) setValidationError(getError.message)
     }, [postError, getError])
 
     const averageFrequency = () => {
@@ -118,7 +117,7 @@ export const LevelCreatorModal = ({
                     <p className="error-message">{validationError}</p>
                 )}
                 <LoadingIndicator show={isPending || isLoading} />
-                {!isPending && !isLoading && !validationError && (
+                {!isPending && !validationError && (
                     <div className="wheel"></div>
                 )}
             </div>
