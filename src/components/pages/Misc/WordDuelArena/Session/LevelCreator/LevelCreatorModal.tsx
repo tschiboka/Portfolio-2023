@@ -12,6 +12,7 @@ import {
 import { getPossibleWords } from '../../common/utils/Word/getPossibleWords'
 import { useGetLevel, usePostLevel } from './LevelCreator.queries'
 import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { useQueryClient } from '@tanstack/react-query'
 
 type LevelCreatorModalProps = {
     levelName: string
@@ -22,6 +23,7 @@ export const LevelCreatorModal = ({
     levelName,
     setModalOpen,
 }: LevelCreatorModalProps) => {
+    const queryClient = useQueryClient()
     const {
         mutate: postLevel,
         isPending,
@@ -29,6 +31,7 @@ export const LevelCreatorModal = ({
     } = usePostLevel({
         onSuccess: () => {
             setModalOpen(false)
+            queryClient.invalidateQueries({ queryKey: ['level-names'] })
         },
     })
 

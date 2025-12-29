@@ -24,17 +24,19 @@ export const WordOptionList = ({
             {wordGroups.map((words, index) => (
                 <ul key={wordGroupsByLength[index]}>
                     <p>{wordGroupsByLength[index]} Letter Words</p>
-                    {words.map((word) => (
-                        <WordOption
-                            key={word.word}
-                            word={word}
-                            hasWord={selectedWords.some(
-                                (sw) => sw.word === word.word,
-                            )}
-                            selectedWords={selectedWords}
-                            setSelectedWords={setSelectedWords}
-                        />
-                    ))}
+                    {words
+                        .sort((a, b) => a.word.localeCompare(b.word))
+                        .map((word) => (
+                            <WordOption
+                                key={word.word}
+                                word={word}
+                                hasWord={selectedWords.some(
+                                    (sw) => sw.word === word.word,
+                                )}
+                                selectedWords={selectedWords}
+                                setSelectedWords={setSelectedWords}
+                            />
+                        ))}
                 </ul>
             ))}
         </div>
@@ -54,7 +56,15 @@ const WordOption = ({
     selectedWords,
     setSelectedWords,
 }: WordOptionProps) => {
-    const addWord = () => setSelectedWords([...selectedWords, word])
+    const addWord = () =>
+        setSelectedWords(
+            [...selectedWords, word].sort((a, b) =>
+                a.word.length !== b.word.length
+                    ? a.word.length - b.word.length
+                    : a.word.localeCompare(b.word),
+            ),
+        )
+
     const removeWord = () =>
         setSelectedWords(selectedWords.filter((w) => w.word !== word.word))
 
