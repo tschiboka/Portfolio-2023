@@ -4,7 +4,7 @@ type AnagramMapType = {
 
 let anagramMapCache: AnagramMapType | null = null;
 
-async function loadAnagramMap(): Promise<AnagramMapType> {
+export async function loadAnagramMap(): Promise<AnagramMapType> {
   if (anagramMapCache) return anagramMapCache;
 
   const res = await fetch(`${import.meta.env.BASE_URL}projects/wda/anagramMap.json`)

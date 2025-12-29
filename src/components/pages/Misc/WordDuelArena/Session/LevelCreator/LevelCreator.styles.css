@@ -137,3 +137,55 @@
   color: var(--color-font-medium);
 }
 
+.level-creator-modal .validation-error {
+  margin-top: 10px;
+  color: var(--color-font-error);
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+  text-align: center;
+}
+
+.level-creator .level-list {
+  overflow: auto;
+  width: 100%;
+  height: 90vh;
+  padding: var(--sp-lg);
+  font-size: var(--font-sm);
+}
+
+.level-creator .level-list span {
+  display: block;
+  font-weight: var(--font-bold);
+  text-align: center;
+}
+
+.level-creator .level-list div {
+  width: 100%;
+  height: 40px;
+  margin-top: var(--sp-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-normal);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+}
+
+.level-creator .level-list div:hover {
+  background-color: var(--color-bg-medium);
+  border-color: var(--color-font-accent);
+}
+
+.level-creator .error-message {
+  width: 100%;
+  padding: 0.5rem 2.5rem;
+  margin: var(--sp-md);
+  text-align: center;
+  font-size: var(--font-sm);
+  font-family: monospace;
+  font-variant: small-caps;
+  color: deeppink;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: var(--border-normal);
+  border-radius: 10px;
+}

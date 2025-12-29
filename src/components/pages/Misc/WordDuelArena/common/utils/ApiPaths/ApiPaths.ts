@@ -2,7 +2,8 @@ import { ApiPathParams } from './ApiPaths.types'
 
 export class ApiPaths {
     static readonly Paths = {
-        SESSION: "session"
+        SESSION: "session",
+        LEVEL: "level",
     }
     
     static readonly API_STRING = "projects/word-duel-arena"

@@ -1,44 +1,24 @@
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/constants'
-import { getPossibleWords } from '../../../common/utils/Word/getPossibleWords'
 import './WordOptionList.styles.css'
 import {
     getWordGroups,
     getWordLengthGroups,
 } from '../../../common/utils/Word/wordGroups'
-import {
-    FrequencyType,
-    loadFrequencies,
-} from '../../../common/utils/Word/getWordFrequency'
-import { useEffect, useState } from 'react'
+import { LevelWord } from '../../../common/utils'
 
 type WordOptionListProps = {
-    anagram: string
-    selectedWords: string[]
-    setSelectedWords: (words: string[]) => void
+    possibleWords: LevelWord[]
+    selectedWords: LevelWord[]
+    setSelectedWords: (words: LevelWord[]) => void
 }
 
 export const WordOptionList = ({
-    anagram,
+    possibleWords,
     selectedWords,
     setSelectedWords,
 }: WordOptionListProps) => {
-    const [possibleWords, setPossibleWords] = useState<string[]>([])
-
-    useEffect(() => {
-        let cancelled = false
-
-        getPossibleWords(anagram).then((words) => {
-            if (!cancelled) setPossibleWords(words)
-        })
-
-        return () => {
-            cancelled = true
-        }
-    }, [anagram])
-
     const wordGroupsByLength = getWordLengthGroups()
     const wordGroups = getWordGroups(possibleWords)
-
     return (
         <div className="word-option-list">
             {wordGroups.map((words, index) => (
@@ -46,9 +26,11 @@ export const WordOptionList = ({
                     <p>{wordGroupsByLength[index]} Letter Words</p>
                     {words.map((word) => (
                         <WordOption
-                            key={word}
+                            key={word.word}
                             word={word}
-                            hasWord={selectedWords.includes(word)}
+                            hasWord={selectedWords.some(
+                                (sw) => sw.word === word.word,
+                            )}
                             selectedWords={selectedWords}
                             setSelectedWords={setSelectedWords}
                         />
@@ -60,10 +42,10 @@ export const WordOptionList = ({
 }
 
 type WordOptionProps = {
-    word: string
+    word: LevelWord
     hasWord: boolean
-    selectedWords: string[]
-    setSelectedWords: (words: string[]) => void
+    selectedWords: LevelWord[]
+    setSelectedWords: (words: LevelWord[]) => void
 }
 
 const WordOption = ({
@@ -72,7 +54,6 @@ const WordOption = ({
     selectedWords,
     setSelectedWords,
 }: WordOptionProps) => {
-    const [frequencies, setFrequencies] = useState<FrequencyType>()
     const addWord = () => setSelectedWords([...selectedWords, word])
     const removeWord = () =>
         setSelectedWords(selectedWords.filter((w) => w !== word))
@@ -86,18 +67,12 @@ const WordOption = ({
         else if (canAdd) addWord()
     }
 
-    useEffect(() => {
-        loadFrequencies().then(setFrequencies)
-    }, [])
-
-    const frequency = frequencies ? frequencies[word.toUpperCase()] ?? 0 : 0
-
     return (
         <li className="word-option" onClick={toggleWord}>
             <div>
                 <span>
-                    <span className="word">{word} </span>
-                    <span className="frequency">[{frequency}]</span>
+                    <span className="word">{word.word} </span>
+                    <span className="frequency">[{word.frequency}]</span>
                 </span>
                 <div>
                     <button

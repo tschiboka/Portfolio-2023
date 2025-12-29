@@ -1,8 +1,9 @@
+import { LevelWord } from "../Types"
 import { MAX_WORD_LENGTH } from "./constants"
 
-export const getWordGroups = (words: string[] = []) => 
+export const getWordGroups = (words: LevelWord[] = []) => 
     getWordLengthGroups()
-        .map((length) => words.filter((word) => word.length === length))
+        .map((length) => words.filter((word) => word.word.length === length))
         .map((words) => words.sort())
 
 export const getWordLengthGroups = () =>  Array.from(

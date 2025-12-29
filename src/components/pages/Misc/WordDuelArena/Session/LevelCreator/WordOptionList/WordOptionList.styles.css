@@ -2,10 +2,10 @@
   margin: 0;
   padding: 5px;
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 90vh;
+  top: 10vh;
+  left: 10vw;
+  width: 80vw;
+  height: 70vh;
   overflow: auto;
   border: var(--border-normal);
   background-color: var(--color-bg-dark);

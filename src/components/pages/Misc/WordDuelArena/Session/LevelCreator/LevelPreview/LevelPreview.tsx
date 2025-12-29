@@ -1,9 +1,10 @@
+import { LevelWord } from '../../../common/utils'
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/constants'
 import { getWordGroups } from '../../../common/utils/Word/wordGroups'
 import './LevelPreview.styles.css'
 
 type LevelPreviewProps = {
-    selectedWords: string[]
+    selectedWords: LevelWord[]
 }
 
 export const LevelPreview = ({ selectedWords }: LevelPreviewProps) => {
@@ -23,14 +24,14 @@ export const LevelPreview = ({ selectedWords }: LevelPreviewProps) => {
 }
 
 type PreviewColumnProps = {
-    words: string[]
+    words: LevelWord[]
 }
 
 const PreviewColumn = ({ words }: PreviewColumnProps) => (
     <div className="column">
         {words.flat().map((word) => (
-            <div className="word" key={word}>
-                {word.split('').map((char, index) => (
+            <div className="word" key={word.word}>
+                {word.word.split('').map((char, index) => (
                     <div className="letter" key={index}>
                         {char}
                     </div>

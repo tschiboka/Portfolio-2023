@@ -6,8 +6,13 @@ import {
     MAX_WORD_LENGTH,
     MIN_WORD_LENGTH,
 } from '../../common/utils/Word/constants'
+import { useGetLevelNames } from './LevelCreator.queries'
+import { LevelList } from './LevelList'
+import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
 export const LevelCreator = () => {
+    const { data, isLoading, error } = useGetLevelNames()
+    const levelNames = data?.data?.levelNames
     const [levelName, setLevelName] = useState('')
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -29,10 +34,15 @@ export const LevelCreator = () => {
                         maxLength={MAX_WORD_LENGTH}
                         onChange={handleInputChange}
                     />
-                    <button onClick={handleNewLevelClick}>
-                        Create New Level
-                    </button>
+                    <button onClick={handleNewLevelClick}>Create</button>
                 </div>
+                <LoadingIndicator show={isLoading} />
+                {error && <p className="error-message">{error.message}</p>}
+                <LevelList
+                    levelNames={levelNames || []}
+                    setLevelName={setLevelName}
+                    setModalOpen={setModalOpen}
+                />
                 {modalOpen && (
                     <LevelCreatorModal
                         levelName={getAnagramKey(levelName)}
