@@ -1,10 +1,16 @@
-import rawFrequencies from './frequency.json'
+export type FrequencyType = Record<string, number>;
 
-type FrequencyType = Record<string, number>
+let frequencyCache: FrequencyType | null = null;
 
-// if your bundler wraps default export
-const Frequencies: FrequencyType = (rawFrequencies as any).default ?? rawFrequencies
+export async function loadFrequencies(): Promise<FrequencyType> {
+  if (frequencyCache) return frequencyCache;
 
-export const getWordFrequency = (word: string) => {
-  return Frequencies[word.toUpperCase()] ?? 0
+  const res = await fetch(
+    `${import.meta.env.BASE_URL}projects/wda/frequency.json`
+  );
+
+
+  const json = await res.json();
+  frequencyCache = json as FrequencyType;
+  return frequencyCache;
 }

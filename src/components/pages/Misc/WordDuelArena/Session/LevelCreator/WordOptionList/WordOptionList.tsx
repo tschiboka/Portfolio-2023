@@ -5,7 +5,11 @@ import {
     getWordGroups,
     getWordLengthGroups,
 } from '../../../common/utils/Word/wordGroups'
-import { getWordFrequency } from '../../../common/utils/Word/getWordFrequency'
+import {
+    FrequencyType,
+    loadFrequencies,
+} from '../../../common/utils/Word/getWordFrequency'
+import { useEffect, useState } from 'react'
 
 type WordOptionListProps = {
     anagram: string
@@ -18,10 +22,22 @@ export const WordOptionList = ({
     selectedWords,
     setSelectedWords,
 }: WordOptionListProps) => {
-    const possibleWords = getPossibleWords(anagram)
+    const [possibleWords, setPossibleWords] = useState<string[]>([])
+
+    useEffect(() => {
+        let cancelled = false
+
+        getPossibleWords(anagram).then((words) => {
+            if (!cancelled) setPossibleWords(words)
+        })
+
+        return () => {
+            cancelled = true
+        }
+    }, [anagram])
+
     const wordGroupsByLength = getWordLengthGroups()
     const wordGroups = getWordGroups(possibleWords)
-    console.log({ possibleWords })
 
     return (
         <div className="word-option-list">
@@ -56,6 +72,7 @@ const WordOption = ({
     selectedWords,
     setSelectedWords,
 }: WordOptionProps) => {
+    const [frequencies, setFrequencies] = useState<FrequencyType>()
     const addWord = () => setSelectedWords([...selectedWords, word])
     const removeWord = () =>
         setSelectedWords(selectedWords.filter((w) => w !== word))
@@ -69,7 +86,11 @@ const WordOption = ({
         else if (canAdd) addWord()
     }
 
-    const frequency = getWordFrequency(word)
+    useEffect(() => {
+        loadFrequencies().then(setFrequencies)
+    }, [])
+
+    const frequency = frequencies ? frequencies[word.toUpperCase()] ?? 0 : 0
 
     return (
         <li className="word-option" onClick={toggleWord}>

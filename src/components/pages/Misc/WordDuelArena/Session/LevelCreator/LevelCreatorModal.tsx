@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
-import { getWordFrequency } from '../../common/utils'
+import { FrequencyType, loadFrequencies } from '../../common/utils'
 
 type LevelCreatorModalProps = {
     levelName: string
@@ -14,14 +14,19 @@ export const LevelCreatorModal = ({
 }: LevelCreatorModalProps) => {
     const [optionsOpen, setOptionsOpen] = useState(false)
     const [selectedWords, setSelectedWords] = useState<string[]>([])
+    const [frequencies, setFrequencies] = useState<FrequencyType>()
 
     const avgFreq =
         Math.round(
             selectedWords
-                ?.map((word) => getWordFrequency(word))
+                ?.map((word) => frequencies?.[word.toUpperCase()] || 0)
                 .reduce((a, b) => a + b, 0) / selectedWords.length,
         ) || 0
     const difficulty = 10 - Math.round(Math.min(Math.max(avgFreq / 10, 0), 9))
+
+    useEffect(() => {
+        loadFrequencies().then(setFrequencies)
+    }, [])
 
     return (
         <div className="level-creator-modal">
