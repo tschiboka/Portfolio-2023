@@ -12,7 +12,7 @@ const LevelWordSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 0,
-        max: 99,
+        max: 100,
     },
 }, { _id: false });
 
@@ -35,6 +35,8 @@ const levelSchema = new mongoose.Schema({
     difficulty: {   
         type: Number,
         required: true,
+        min: 1,
+        max: 10
     },
     tags: {
         type: [String],
@@ -56,14 +58,14 @@ const Level = mongoose.model("WDA_Level", levelSchema);
 function validateLevel(level) {
     const levelWordSchema = Joi.object({
         word: Joi.string().required(),
-        frequency: Joi.number().required(),
+        frequency: Joi.number().min(1).max(100).required(),
     });
 
     const schema = Joi.object({
         name: Joi.string().required().min(4).max(16),
         words: Joi.array().items(Joi.string()).required(),
         allowedWords: Joi.array().items(levelWordSchema).required(),
-        difficulty: Joi.number().required(),
+        difficulty: Joi.number().min(1).max(10).required(),
         tags: Joi.array().items(Joi.string()),
     });
 

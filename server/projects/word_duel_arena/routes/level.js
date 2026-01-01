@@ -23,7 +23,7 @@ router.post("/", [auth], async (req, res) => {
 
     const { error } = validateLevel(level);
     if (error) {
-        return res.status(400).json({ error: error.details[0].message });
+        return res.status(400).json({ message: error.details[0].message });
     }
 
     const updatedLevel = await Level.findOneAndUpdate(

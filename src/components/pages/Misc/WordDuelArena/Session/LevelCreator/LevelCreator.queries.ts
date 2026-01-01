@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Level } from "../../common/utils";
 import { useSessionContext } from "../../../../../../context/SessionContext/Session.context";
 import { apiPathBuilder, ApiPaths } from "../../../../../../routing/apiPathBuilder";
@@ -27,7 +27,7 @@ type UsePostLevel = { onSuccess: () => void }
 export const usePostLevel = ({onSuccess}: UsePostLevel) => {
     const token = useSessionContext().session?.token
 
-    return useMutation({
+    return useMutation<void, AxiosError, Level>({
         mutationKey: ["level-create"],
         mutationFn: async (payload: Level) => 
             await axios.post(
