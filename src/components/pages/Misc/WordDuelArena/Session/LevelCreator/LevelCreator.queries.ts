@@ -3,12 +3,13 @@ import axios, { AxiosError } from "axios";
 import { Level } from "../../common/utils";
 import { useSessionContext } from "../../../../../../context/SessionContext/Session.context";
 import { apiPathBuilder, ApiPaths } from "../../../../../../routing/apiPathBuilder";
+import { LevelNameResponse } from "../../common/utils/Types/Level";
 
 export const useGetLevelNames = () =>
     useQuery({  
         queryKey: ["level-names"],
         queryFn: async () =>
-            await axios.get<{ success: boolean; levelNames: string[] }>(
+            await axios.get<LevelNameResponse>(
                 apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, { prefix: '' }) + "/level/name",
             ),
     })

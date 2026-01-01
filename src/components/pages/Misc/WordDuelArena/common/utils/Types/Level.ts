@@ -10,3 +10,12 @@ export type Level = {
     difficulty: number
     tags: string[]
 }
+
+export type LevelName = {
+    name: string,
+    difficulty: number
+}
+
+export type LevelNameResponse = {
+    levels: LevelName[]
+}

@@ -14,7 +14,7 @@ import { useFullScreen } from '../../common/utils'
 export const LevelCreator = () => {
     const { data, isLoading, error } = useGetLevelNames()
     const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()
-    const levelNames = data?.data?.levelNames
+    const levels = data?.data?.levels
     const [levelName, setLevelName] = useState('')
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -44,7 +44,7 @@ export const LevelCreator = () => {
                 <LoadingIndicator show={isLoading} />
                 {error && <p className="error-message">{error.message}</p>}
                 <LevelList
-                    levelNames={levelNames || []}
+                    levels={levels || []}
                     setLevelName={setLevelName}
                     setModalOpen={setModalOpen}
                     enterFullScreen={enterFullScreen}

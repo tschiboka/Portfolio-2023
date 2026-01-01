@@ -1,12 +1,14 @@
+import { LevelName } from '../../common/utils/Types/Level'
+
 type LevelListProps = {
-    levelNames: string[]
+    levels: LevelName[]
     setLevelName: (levelName: string) => void
     setModalOpen: (open: boolean) => void
     enterFullScreen: () => void
 }
 
 export const LevelList = ({
-    levelNames,
+    levels,
     setLevelName,
     setModalOpen,
     enterFullScreen,
@@ -19,13 +21,16 @@ export const LevelList = ({
 
     return (
         <div className="level-list">
-            <span>Levels: {levelNames.length}</span>
-            {levelNames.map((levelName) => (
+            <span>Levels: {levels.length}</span>
+            {levels.map((level) => (
                 <div
-                    key={levelName}
-                    onClick={() => handleLevelClick(levelName)}
+                    key={level.name}
+                    onClick={() => handleLevelClick(level.name)}
                 >
-                    {levelName}
+                    <span>{level.name}</span>
+                    <span className="level-difficulty">
+                        [{level.difficulty}]
+                    </span>
                 </div>
             ))}
         </div>
