@@ -4,3 +4,4 @@ export * from "./Navigation"
 export * from './Word'
 export * from './Types'
 export * from './FullScreen'
+export * from './Orientation'

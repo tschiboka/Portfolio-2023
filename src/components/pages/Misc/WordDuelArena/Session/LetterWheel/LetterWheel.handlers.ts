@@ -38,14 +38,13 @@ type CreateHandleTouchProps = {
 export const createHandleTouchStart =
     ({ setTouchState }: CreateHandleTouchProps): EventListener =>
     (event: Event) => {
-        event.preventDefault()        
-
         const touchEvent = event as unknown as TouchEvent
         const touch = touchEvent.touches[0]
         const target = document.elementFromPoint(touch.clientX, touch.clientY)
         const letterComponent = getLetterComponent(target)
         
         if (letterComponent) {
+            event.preventDefault()
             const ids = parseInt(letterComponent.dataset.letterId!)
             const letter = letterComponent.dataset.letter!
             setTouchState({ touchedIds: [ids], touchedLetters: letter })
@@ -55,13 +54,13 @@ export const createHandleTouchStart =
 export const createHandleTouchMove = ({ 
     setTouchState
 }: CreateHandleTouchProps): EventListener => (event: Event) => {
-    event.preventDefault()
     const touchEvent = event as unknown as TouchEvent
     const touch = touchEvent.touches[0]
     const target = document.elementFromPoint(touch.clientX, touch.clientY)
     const letterComponent = getLetterComponent(target)
 
     if (letterComponent) {
+        event.preventDefault()
         const id = parseInt(letterComponent.dataset.letterId!)
         const letter = letterComponent.dataset.letter!
         
@@ -76,8 +75,7 @@ type CreateHandleTouchEndProps = {
 
 export const createHandleTouchEnd =
     ({ setTouchState, send }: CreateHandleTouchEndProps): EventListener =>
-    (event: Event) => {
-        event.preventDefault()
+    () => {
         setTouchState(prev => {
             submitMove({ letters: prev.touchedLetters, send, setTouchState })
             return { touchedIds: [], touchedLetters: '' }

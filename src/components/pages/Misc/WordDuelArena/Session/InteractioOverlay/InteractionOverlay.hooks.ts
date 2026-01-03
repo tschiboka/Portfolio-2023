@@ -1,14 +1,19 @@
-import { useFullScreen } from "../../common/utils"
 import { useSessionWS } from "../SessionWebSocket"
 import { InteractionModes, InteractionOverlayConfig } from "./InteractionOverlya.types"
 
-export const interactionOverlayState = (
+export const useGetInteractionOverlayState = (
     mode: InteractionModes,
-): InteractionOverlayConfig => {
+    enterFullScreen: () => void,
+) => {
     const { connect } = useSessionWS()
-    const { enterFullScreen } = useFullScreen()
 
-    switch (mode) {
+    const config: InteractionOverlayConfig = (() => {
+        switch (mode) {
+        case 'landscape':
+            return {
+                title: 'Landscape Mode Detected',
+                description: 'Please rotate your device to portrait mode for the best experience.',
+            }
         case 'connect':
             return {
                 title: 'Not Connected Yet',
@@ -38,4 +43,7 @@ export const interactionOverlayState = (
         default:
             return {}
     }
+    })()
+
+    return { ...config }
 }

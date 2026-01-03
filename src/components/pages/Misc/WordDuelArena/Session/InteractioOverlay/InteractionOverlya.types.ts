@@ -9,4 +9,4 @@ export type InteractionOverlayConfig = {
     actions?: InteractioinOverlayActions[]
 }
 
-export type InteractionModes = 'connect' | 'load-session' | 'wait-opponent' | 'none'
+export type InteractionModes = 'connect' | 'load-session' | 'wait-opponent' | "landscape" | 'none'

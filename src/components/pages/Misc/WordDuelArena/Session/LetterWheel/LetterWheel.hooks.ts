@@ -11,6 +11,7 @@ import { LetterPosition, TouchState } from './LetterWheel.types'
 
 type UseLetterWheelListenersProps = {
     containerRef: RefObject<HTMLDivElement>
+    wheelRef: RefObject<HTMLDivElement>
     inputLetters: string
     allowKeyboardInput: boolean
     touchState: TouchState
@@ -21,6 +22,7 @@ type UseLetterWheelListenersProps = {
 
 export const useLetterWheelListeners = ({
     containerRef,
+    wheelRef,
     inputLetters,
     touchState,
     allowKeyboardInput,
@@ -53,8 +55,8 @@ export const useLetterWheelListeners = ({
 
     // Touch
     useEffect(() => {
-        const container = containerRef.current
-        if (!container) return
+        const wheel = wheelRef.current
+        if (!wheel) return
 
         const handlers: Record<string, EventListener> = {
             touchstart: createHandleTouchStart({ setTouchState }),
@@ -63,12 +65,12 @@ export const useLetterWheelListeners = ({
         }
 
         Object.entries(handlers).forEach(([event, handler]) =>
-            container.addEventListener(event, handler)
+            wheel.addEventListener(event, handler)
         )
 
         return () =>
             Object.entries(handlers).forEach(([event, handler]) =>
-                container.removeEventListener(event, handler)
+                wheel.removeEventListener(event, handler)
             )
-    }, [setTouchState, send])
+    }, [setTouchState, send, wheelRef])
 }

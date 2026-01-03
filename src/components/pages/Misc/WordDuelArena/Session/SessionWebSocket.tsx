@@ -28,7 +28,7 @@ type Props = { children: ReactNode }
 
 export const SessionWebSocketProvider = ({ children }: Props) => {
     const { sessionId, deviceId, setSessionState } = useSession()
-    const [wsUrl, setWsUrl] = useState<string>('')
+    const [wsUrl, setWsUrl] = useState<string | null>(null)
 
     const targetUrl =
         sessionId && deviceId
@@ -36,7 +36,7 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
                   path: ApiPaths.SESSION,
                   query: { sessionId, deviceId },
               })
-            : ''
+            : null
 
     const connect = () => {
         if (targetUrl && !wsUrl) {

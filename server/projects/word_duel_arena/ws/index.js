@@ -18,7 +18,7 @@ module.exports = function initWebSocket(server) {
     }
 
     ws.sessionId = sessionId;
-    ws.deviceId = deviceId;
+    ws.deviceId = deviceId;                                               1
 
     const session = getSession(sessionId);
     session.connections.add(ws);

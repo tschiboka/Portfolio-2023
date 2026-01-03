@@ -17,6 +17,8 @@
   font-family: var(--font-main);
   font-size: var(--font-sm);
   font-weight: var(--font-thin);
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .session > .app {
@@ -76,6 +78,7 @@
 }
 
 .session-game {
+    height: 100%;
     width: 100%;
     flex: 1;
     display: flex;

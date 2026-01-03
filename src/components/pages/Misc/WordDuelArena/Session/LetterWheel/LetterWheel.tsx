@@ -14,6 +14,7 @@ type LetterWheelProps = {
 
 export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
+    const wheelRef = useRef<HTMLDivElement>(null)
     const [positions, setPositions] = useState<LetterPosition[]>([])
     const { allowKeyboardInput } = useSession()
     const { send } = useSessionWS()
@@ -27,6 +28,7 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
 
     useLetterWheelListeners({
         containerRef,
+        wheelRef,
         inputLetters,
         touchState,
         allowKeyboardInput,
@@ -38,7 +40,7 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
     return (
         <div className="letter-wheel-container" ref={containerRef}>
             <WordPreview letters={touchState.touchedLetters} />
-            <div className="letter-wheel">
+            <div className="letter-wheel" ref={wheelRef}>
                 {positions.map((letterPosition, i) => (
                     <Letter
                         key={i}

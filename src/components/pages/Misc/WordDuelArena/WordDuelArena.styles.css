@@ -42,11 +42,6 @@
   --border-radius-sm: 5px;
 }
 
-html, body {
-  overscroll-behavior: none;
-  touch-action: none;
-}
-
 /* Reset everything */
 .word-duel-arena * {
   box-sizing: border-box;
