@@ -33,15 +33,13 @@ export const createHandleKeyPress = ({
 
 type CreateHandleTouchProps = {
     setTouchState: Dispatch<SetStateAction<TouchState>>
-    enterFullScreen?: () => void
 }
 
 export const createHandleTouchStart =
-    ({ setTouchState, enterFullScreen }: CreateHandleTouchProps): EventListener =>
+    ({ setTouchState }: CreateHandleTouchProps): EventListener =>
     (event: Event) => {
         event.preventDefault()        
-        enterFullScreen?.()
-        
+
         const touchEvent = event as unknown as TouchEvent
         const touch = touchEvent.touches[0]
         const target = document.elementFromPoint(touch.clientX, touch.clientY)

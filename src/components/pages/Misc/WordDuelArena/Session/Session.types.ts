@@ -98,5 +98,6 @@ export type WebSocketContextType = {
     send: (msg: WebSocketRequest) => void
     lastState?: WebSocketResponse
     readyState: number
+    connect: () => void
 }
 

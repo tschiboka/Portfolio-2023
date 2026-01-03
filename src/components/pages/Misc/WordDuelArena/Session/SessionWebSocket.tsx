@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useEffect } from 'react'
+import {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from 'react'
 import useWebSocket from 'react-use-websocket'
 import { useSession } from './Session.context'
 import {
@@ -22,14 +28,21 @@ type Props = { children: ReactNode }
 
 export const SessionWebSocketProvider = ({ children }: Props) => {
     const { sessionId, deviceId, setSessionState } = useSession()
+    const [wsUrl, setWsUrl] = useState<string>('')
 
-    const wsUrl =
+    const targetUrl =
         sessionId && deviceId
             ? ApiPaths.getWSPath({
                   path: ApiPaths.SESSION,
                   query: { sessionId, deviceId },
               })
-            : null
+            : ''
+
+    const connect = () => {
+        if (targetUrl && !wsUrl) {
+            setWsUrl(targetUrl)
+        }
+    }
 
     const { sendJsonMessage, lastJsonMessage, readyState } =
         useWebSocket<WebSocketResponse>(wsUrl, {
@@ -51,6 +64,7 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
                 send,
                 lastState: lastJsonMessage,
                 readyState,
+                connect,
             }}
         >
             {children}
