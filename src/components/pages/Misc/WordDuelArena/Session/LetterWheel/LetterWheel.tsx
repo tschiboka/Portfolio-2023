@@ -1,38 +1,57 @@
-import { useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import { useSession } from '../Session.context'
 import { useSessionWS } from '../SessionWebSocket'
-import { WebSocketRequestType } from '../Session.types'
+import { useLetterWheelListeners } from './LetterWheel.hooks'
+import { Letter } from './Letter'
+import { LetterLines } from './LetterLines'
+import { LetterPosition, TouchState } from './LetterWheel.types'
+import { WordPreview } from './WordPreview'
+import './LetterWheel.styles.css'
 
-export const LetterWheel = () => {
+type LetterWheelProps = {
+    inputLetters: string
+}
+
+export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
+    const containerRef = useRef<HTMLDivElement>(null)
+    const [positions, setPositions] = useState<LetterPosition[]>([])
     const { allowKeyboardInput } = useSession()
     const { send } = useSessionWS()
-    const [value, setValue] = useState('')
-    const MAX_LETTERS = 7
 
-    useEffect(() => {
-        if (!allowKeyboardInput) return
+    const [touchState, setTouchState] = useState<TouchState>({
+        touchedIds: [],
+        touchedLetters: '',
+    })
 
-        const handleKey = (e: KeyboardEvent) => {
-            const isLetter = e.key.length === 1 && e.key.match(/[a-z]/i)
+    // Keyboard handler updates letters only
 
-            if (isLetter && value.length < MAX_LETTERS) {
-                setValue(value + e.key.toUpperCase())
-            }
-            if (e.key === 'Backspace') {
-                setValue(value.slice(0, -1))
-            }
-            if (e.key === 'Enter' || e.key === 'Return' || e.key === ' ') {
-                send({
-                    type: WebSocketRequestType.ATTEMPT_MOVE,
-                    payload: { attempt: value },
-                })
-                setValue('')
-            }
-        }
+    useLetterWheelListeners({
+        containerRef,
+        inputLetters,
+        touchState,
+        allowKeyboardInput,
+        send,
+        setPositions,
+        setTouchState,
+    })
 
-        window.addEventListener('keydown', handleKey)
-        return () => window.removeEventListener('keydown', handleKey)
-    }, [allowKeyboardInput, value])
-
-    return <div className="letter-wheel">{value}</div>
+    return (
+        <div className="letter-wheel-container" ref={containerRef}>
+            <WordPreview letters={touchState.touchedLetters} />
+            <div className="letter-wheel">
+                {positions.map((letterPosition, i) => (
+                    <Letter
+                        key={i}
+                        letterPosition={letterPosition}
+                        touchedIds={touchState.touchedIds}
+                        index={i}
+                    />
+                ))}
+                <LetterLines
+                    positions={positions}
+                    touchedIds={touchState.touchedIds}
+                />
+            </div>
+        </div>
+    )
 }

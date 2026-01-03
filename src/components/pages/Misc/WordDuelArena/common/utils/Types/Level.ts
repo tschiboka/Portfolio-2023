@@ -5,10 +5,8 @@ export type LevelWord = {
 
 export type Level = {
     name: string
-    words: string[]
-    allowedWords: LevelWord[]
+    targetWords: string[]
     difficulty: number
-    tags: string[]
 }
 
 export type LevelName = {

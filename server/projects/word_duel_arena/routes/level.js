@@ -6,7 +6,7 @@ const auth = require("../../../middlewares/auth");
 router.get("/name", [], async (_, res) => {
     const levels = await Level.find().sort({ createdAt: -1 });
     const result = levels.map((level) => ({
-        name: level.words[level.words.length - 1],
+        name: level.targetWords[level.targetWords.length - 1],
         difficulty: level.difficulty
     }));
     res.status(200).json({ levels: result });

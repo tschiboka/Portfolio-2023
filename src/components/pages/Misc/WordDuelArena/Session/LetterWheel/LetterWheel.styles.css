@@ -1,0 +1,75 @@
+.letter-wheel-container {
+  position: relative;
+  width: 27vh;
+  height: 27vh;
+  padding: var(--sp-md) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter-wheel {
+  position: relative;
+  width: 25vh;
+  min-width: 25vh;
+  height: 25vh;
+  min-height: 25vh;
+  border: var(--border-normal);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-background-light);
+}
+
+.letter-wheel .letter {
+  position: absolute;
+  width: 5.5vh;
+  height: 5.5vh;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center;
+  font-size: 3vh;
+  font-weight: var(--font-bold);
+  background-color: var(--color-bg-medium);
+  color: white;
+  border: var(--border-normal);
+  border-radius: 50%;
+  z-index: 20;
+}
+
+.letter-wheel .letter.highlighted {
+  background-color: var(--color-font-accent);
+  color: var(--color-bg-dark)
+}
+
+.letter-wheel .letter-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.letter-wheel .letter-lines line {
+    stroke: var(--color-font-accent);
+    stroke-width: 4;
+}
+
+.letter-wheel-container .word-preview {
+    position: absolute;
+    top: -10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--sp-sm) var(--sp-md);
+    background-color: var(--color-bg-medium);
+    color: var(--color-font-primary);
+    font-size: var(--font-sm);
+    font-weight: var(--font-bold);
+    border: var(--border-normal);
+    border-radius: 5vh;
+}

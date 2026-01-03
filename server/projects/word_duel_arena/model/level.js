@@ -2,20 +2,6 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 Joi.objectId = require('joi-objectid')(Joi);
 
-const LevelWordSchema = new mongoose.Schema({
-    word: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    frequency: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 100,
-    },
-}, { _id: false });
-
 const levelSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -24,11 +10,7 @@ const levelSchema = new mongoose.Schema({
         maxLength: 8,
         trim: true,
     },
-    allowedWords: {
-        type: [LevelWordSchema],
-        required: true,
-    },
-    words: {
+    targetWords: {
         type: [String],
         required: true,
     },
@@ -37,10 +19,6 @@ const levelSchema = new mongoose.Schema({
         required: true,
         min: 1,
         max: 10
-    },
-    tags: {
-        type: [String],
-        default: [],
     },
     createdAt: {
         type: Date,
@@ -56,17 +34,10 @@ const Level = mongoose.model("WDA_Level", levelSchema);
 
 // Joi validation
 function validateLevel(level) {
-    const levelWordSchema = Joi.object({
-        word: Joi.string().required(),
-        frequency: Joi.number().min(1).max(100).required(),
-    });
-
     const schema = Joi.object({
         name: Joi.string().required().min(4).max(16),
-        words: Joi.array().items(Joi.string()).required(),
-        allowedWords: Joi.array().items(levelWordSchema).required(),
+        targetWords: Joi.array().items(Joi.string()).required(),
         difficulty: Joi.number().min(1).max(10).required(),
-        tags: Joi.array().items(Joi.string()),
     });
 
     return schema.validate(level);

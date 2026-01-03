@@ -61,7 +61,7 @@ export const LevelCreatorModal = ({
             })
         }
         if (levelData && frequencies) {
-            const selectedWordSet = levelData.data.words.map((word) => ({
+            const selectedWordSet = levelData.data.targetWords.map((word) => ({
                 word,
                 frequency: frequencies[word.toUpperCase()] || 0,
             }))
@@ -100,10 +100,8 @@ export const LevelCreatorModal = ({
 
         const level: Level = {
             name: levelName,
-            words: selectedWords.map((word) => word.word),
-            allowedWords: possibleWords,
+            targetWords: selectedWords.map((word) => word.word),
             difficulty: avgDifficulty(),
-            tags: [],
         }
         postLevel(level)
     }

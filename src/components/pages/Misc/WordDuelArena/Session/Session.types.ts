@@ -10,7 +10,7 @@ export type DerivedSessionState = {
 export type SessionContextType = {
     sessionId: string
     deviceId: string
-    allowKeyboardInput?: boolean
+    allowKeyboardInput: boolean
     derivedState?: DerivedSessionState
     setSessionState: (state: WebSocketSessionState) => void
 }
