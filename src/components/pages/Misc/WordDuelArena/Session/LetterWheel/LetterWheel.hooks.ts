@@ -17,6 +17,7 @@ type UseLetterWheelListenersProps = {
     setTouchState: Dispatch<SetStateAction<TouchState>>
     setPositions: Dispatch<SetStateAction<LetterPosition[]>>
     send: (msg: WebSocketRequest) => void
+    enterFullScreen: () => void
 }
 
 export const useLetterWheelListeners = ({
@@ -27,6 +28,7 @@ export const useLetterWheelListeners = ({
     setPositions,
     setTouchState,
     send,
+    enterFullScreen,
 }: UseLetterWheelListenersProps
 ) => {
     // Keyboard
@@ -57,7 +59,7 @@ export const useLetterWheelListeners = ({
         if (!container) return
 
         const handlers: Record<string, EventListener> = {
-            touchstart: createHandleTouchStart({ setTouchState }),
+            touchstart: createHandleTouchStart({ setTouchState, enterFullScreen }),
             touchmove: createHandleTouchMove({ setTouchState }),
             touchend: createHandleTouchEnd({ setTouchState, send }),
         }

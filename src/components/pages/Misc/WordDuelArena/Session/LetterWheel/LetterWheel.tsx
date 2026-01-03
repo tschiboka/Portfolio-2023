@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useSession } from '../Session.context'
 import { useSessionWS } from '../SessionWebSocket'
 import { useLetterWheelListeners } from './LetterWheel.hooks'
+import { useFullScreen } from '../../common/utils'
 import { Letter } from './Letter'
 import { LetterLines } from './LetterLines'
 import { LetterPosition, TouchState } from './LetterWheel.types'
@@ -17,6 +18,7 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
     const [positions, setPositions] = useState<LetterPosition[]>([])
     const { allowKeyboardInput } = useSession()
     const { send } = useSessionWS()
+    const { enterFullScreen } = useFullScreen()
 
     const [touchState, setTouchState] = useState<TouchState>({
         touchedIds: [],
@@ -33,6 +35,7 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
         send,
         setPositions,
         setTouchState,
+        enterFullScreen,
     })
 
     return (
