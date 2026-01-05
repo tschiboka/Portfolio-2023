@@ -5,11 +5,15 @@ import { useFullScreen } from '../common/utils'
 import { SessionHeader } from './SessionHeader'
 
 export const SessionGame = () => {
-    const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()
+    const { ref, enterFullScreen, isFullscreen } =
+        useFullScreen<HTMLDivElement>()
 
     return (
         <div className="session-game" ref={ref}>
-            <InteractionOverlay enterFullScreen={enterFullScreen} />
+            <InteractionOverlay
+                enterFullScreen={enterFullScreen}
+                isFullscreen={isFullscreen}
+            />
             <>
                 <SessionHeader />
                 <SolutionBoard />

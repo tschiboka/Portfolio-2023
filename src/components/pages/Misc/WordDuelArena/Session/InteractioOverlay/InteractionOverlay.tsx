@@ -6,8 +6,10 @@ import { useOrientation } from '../../common/utils'
 
 export const InteractionOverlay = ({
     enterFullScreen,
+    isFullscreen,
 }: {
     enterFullScreen: () => void
+    isFullscreen: boolean
 }) => {
     const { orientation, isMobile } = useOrientation()
     const { derivedState } = useSession()
@@ -31,6 +33,8 @@ export const InteractionOverlay = ({
     let mode: InteractionModes = 'none'
     if (isMobile && orientation === 'landscape') mode = 'landscape'
     else if (!derivedState?.meData) mode = 'connect'
+    else if (derivedState?.meData && isMobile && !isFullscreen)
+        mode = 'no-fullscreen'
     else if (isWaitingForOpponent) mode = 'wait-opponent'
 
     const { title, description, actions } = useGetInteractionOverlayState(

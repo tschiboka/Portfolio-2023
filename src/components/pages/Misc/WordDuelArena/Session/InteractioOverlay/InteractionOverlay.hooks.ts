@@ -14,6 +14,17 @@ export const useGetInteractionOverlayState = (
                 title: 'Landscape Mode Detected',
                 description: 'Please rotate your device to portrait mode for the best experience.',
             }
+        case 'no-fullscreen':
+            return {
+                title: 'Fullscreen Mode Recommended',
+                description: 'Please enter fullscreen mode for the best experience.',
+                actions: [
+                    {
+                        label: 'Enter Fullscreen',
+                        onClick: enterFullScreen,
+                    },
+                ],
+            }
         case 'connect':
             return {
                 title: 'Not Connected Yet',
