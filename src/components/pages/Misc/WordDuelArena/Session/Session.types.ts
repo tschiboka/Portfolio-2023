@@ -1,31 +1,21 @@
 export type PlayerRole = 'player1' | 'player2' | null
-export type DerivedSessionState = {
-  me?: PlayerRole
-  opponent?: PlayerRole
-  meData?: Player
-  opponentData?: Player
-  completeSessionState?: WebSocketSessionState
-}
 
 export type SessionContextType = {
     sessionId: string
     deviceId: string
     allowKeyboardInput: boolean
-    derivedState?: DerivedSessionState
+    sessionState?: WebSocketSessionState
     setSessionState: (state: WebSocketSessionState) => void
 }
 
-
-
-// Client can send a variety of request types
 export enum WebSocketRequestType {
     PING = "ping",
     ATTEMPT_MOVE = "attempt_move"
 }
 
-// Server will only respond with state updates
 export enum WebSocketResponseType {
-    STATE_UPDATE = "state_update"  
+    STATE_UPDATE = "state_update",
+    ERROR = "error"
 }
 
 export enum SessionStatuses {
@@ -48,7 +38,6 @@ export enum PlayerDerivedStatus {
 }
 
 export type Player = {
-    deviceId: string;
     lastActive: number;
     connected: boolean;
 };
@@ -66,24 +55,23 @@ export type Match = {
     player1: MatchPlayerStatus;
     player2: MatchPlayerStatus;
   };
-  moves: any[]; // Replace `any` with your move type
   winner: 'player1' | 'player2' | null;
   reason: 'RESIGN' | 'TIMEOUT' | 'DRAW' | null;
 };
 
 export type WebSocketSessionState = {
   id: string;
+  role?: PlayerRole;
   status: SessionStatuses;
-  players: {
-    player1: Player;
-    player2: Player;
+  players?: {
+    player1?: Player;
+    player2?: Player;
   };
-  currentMatch: Match;
-  previousMatches: Match[];
-  connections: Set<WebSocket>;
+  currentMatch?: Match;
+  previousMatches?: Match[];
 }
 
-export type WebSocketResponse = { type: WebSocketResponseType; payload?: WebSocketSessionState }
+export type WebSocketResponse = { type: WebSocketResponseType; payload?: WebSocketSessionState; message: string }
 export type WebSocketRequest =
   | { type: WebSocketRequestType.PING }
   | {
@@ -95,9 +83,10 @@ export type WebSocketRequest =
 
 
 export type WebSocketContextType = {
-    send: (msg: WebSocketRequest) => void
-    lastState?: WebSocketResponse
-    readyState: number
-    connect: () => void
+  lastState?: WebSocketResponse
+  readyState: number
+  errorMessage: string | null
+  connect: () => void
+  send: (msg: WebSocketRequest) => void
 }
 

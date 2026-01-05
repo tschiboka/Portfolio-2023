@@ -72,23 +72,11 @@ function markAliveByDevice(draft, deviceId) {
   }
 }
 
-/**
- * Example: generic state updater for arbitrary actions
- */
-function updateState(sessionId, updater) {
-    const session = sessions[sessionId];
-    if (!session) throw new Error('Session not found');
-
-    session.state = produce(session.state, updater);
-    return session.state;
-}
-
 module.exports = {
     getSession,
     cleanupSessionIfEmpty,
     markAlive,
     markAliveByDevice,
     initialiseSession,
-    updateState,
     sessions,
 };

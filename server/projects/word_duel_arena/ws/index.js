@@ -4,26 +4,44 @@ const { getSession, cleanupSessionIfEmpty, initialiseSession, markAlive } = requ
 const { commitSessionState } = require('./broadcast');
 const routeMessage = require('./handlers');
 const { startPresenceLoop } = require('./presenceLoop');
+const { getLevel } = require('./level');
 
 module.exports = function initWebSocket(server) {
   const wss = new WebSocketServer({ server });
   startPresenceLoop();
 
   wss.on('connection', (ws, req) => {
-    const { sessionId, deviceId } = url.parse(req.url, true).query;
-
+    const { sessionId, deviceId } = url.parse(req.url, true).query
     if (!sessionId || !deviceId) {
-      ws.close();
-      return;
+        ws.close(1008, 'Missing sessionId or deviceId')
+        return
     }
 
-    ws.sessionId = sessionId;
-    ws.deviceId = deviceId;                                               1
+    const session = getSession(sessionId)
 
-    const session = getSession(sessionId);
-    session.connections.add(ws);
+    const { player1, player2 } = session.state.players
 
-    commitSessionState(session, initialiseSession(session, deviceId));
+    const isKnownDevice =
+        player1?.deviceId === deviceId ||
+        player2?.deviceId === deviceId
+
+    const hasFreeSeat = !player1 || !player2
+
+    if (!isKnownDevice && !hasFreeSeat) {
+        ws.send(JSON.stringify({
+          type: 'error',
+          message: 'This session is full.'
+        }));
+
+        setTimeout(() => ws.close(4001, 'SESSION_FULL'), 0);
+        return
+    }
+
+    ws.sessionId = sessionId
+    ws.deviceId = deviceId
+    session.connections.add(ws)
+
+    commitSessionState(session, initialiseSession(session, deviceId))
 
     ws.on('message', (raw) => {
         let msg;

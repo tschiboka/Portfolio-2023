@@ -9,18 +9,21 @@ type SessionPlayerInfoProps = {
 }
 
 export const SessionPlayerInfo = ({ slot }: SessionPlayerInfoProps) => {
-    const { derivedState } = useSession()
-    const { me, meData, opponentData } = derivedState ?? {}
+    const { sessionState } = useSession()
+    if (!sessionState?.players || !sessionState.role) return null
 
-    const playerData = slot === 'me' ? meData : opponentData
-    const role = slot === 'me' ? me : derivedState?.opponent
+    const { role, players } = sessionState
+    const playerRole =
+        slot === 'me' ? role : role === 'player1' ? 'player2' : 'player1'
 
-    const activeClass = playerData?.connected ? ' active' : ' inactive'
+    const player = players[playerRole]
+
+    const activeClass = player?.connected ? ' active' : ' inactive'
     const label = slot === 'me' ? 'You' : 'Opponent'
-    const avatar = role === 'player1' ? BoyAvatar : GirlAvatar
+    const avatar = playerRole === 'player1' ? BoyAvatar : GirlAvatar
 
     return (
-        <div className={`session-player-info${' ' + slot}${activeClass}`}>
+        <div className={`session-player-info ${slot}${activeClass}`}>
             <img className="avatar" src={avatar} alt={`Player ${role}`} />
             <span>{label}</span>
         </div>

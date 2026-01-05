@@ -1,10 +1,4 @@
-import {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import useWebSocket from 'react-use-websocket'
 import { useSession } from './Session.context'
 import {
@@ -29,6 +23,7 @@ type Props = { children: ReactNode }
 export const SessionWebSocketProvider = ({ children }: Props) => {
     const { sessionId, deviceId, setSessionState } = useSession()
     const [wsUrl, setWsUrl] = useState<string | null>(null)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
     const targetUrl =
         sessionId && deviceId
@@ -41,6 +36,7 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
     const connect = () => {
         if (targetUrl && !wsUrl) {
             setWsUrl(targetUrl)
+            setErrorMessage(null) // clear old errors when reconnecting
         }
     }
 
@@ -48,15 +44,20 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
         useWebSocket<WebSocketResponse>(wsUrl, {
             shouldReconnect: () => false,
             share: false,
+            onMessage: (event) => {
+                const data = JSON.parse(event.data) as WebSocketResponse
+                if (data.type === 'error') {
+                    setErrorMessage(data.message ?? 'Unknown error')
+                } else if (data.type === 'state_update' && data.payload) {
+                    setSessionState?.(data.payload)
+                    setErrorMessage(null)
+                }
+            },
         })
 
     const send = (msg: WebSocketRequest) => {
         sendJsonMessage(msg)
     }
-
-    useEffect(() => {
-        if (lastJsonMessage?.payload) setSessionState?.(lastJsonMessage.payload)
-    }, [lastJsonMessage])
 
     return (
         <WSContext.Provider
@@ -65,6 +66,7 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
                 lastState: lastJsonMessage,
                 readyState,
                 connect,
+                errorMessage,
             }}
         >
             {children}

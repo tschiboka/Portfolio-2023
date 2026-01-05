@@ -9,4 +9,11 @@ export type InteractionOverlayConfig = {
     actions?: InteractioinOverlayActions[]
 }
 
-export type InteractionModes = 'connect' | 'load-session' | "no-fullscreen"| 'wait-opponent' | "landscape" | 'none'
+export type InteractionModes = 
+    'connect' | 
+    'load-session' | 
+    "no-fullscreen"| 
+    'wait-opponent' | 
+    "landscape" | 
+    'error' | 
+    'none'

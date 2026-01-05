@@ -3,12 +3,18 @@ import { InteractionModes, InteractionOverlayConfig } from "./InteractionOverlya
 
 export const useGetInteractionOverlayState = (
     mode: InteractionModes,
+    errorMessage: string | null,
     enterFullScreen: () => void,
 ) => {
     const { connect } = useSessionWS()
 
     const config: InteractionOverlayConfig = (() => {
         switch (mode) {
+        case 'error':
+            return {
+                title: 'Server Error',
+                description: errorMessage || 'An error occurred.',
+            }
         case 'landscape':
             return {
                 title: 'Landscape Mode Detected',

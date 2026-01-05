@@ -3,6 +3,7 @@ import { InteractionModes } from './InteractionOverlya.types'
 import { useGetInteractionOverlayState } from './InteractionOverlay.hooks'
 import './InteractionOverlay.styles.css'
 import { useOrientation } from '../../common/utils'
+import { useSessionWS } from '../SessionWebSocket'
 
 export const InteractionOverlay = ({
     enterFullScreen,
@@ -12,33 +13,50 @@ export const InteractionOverlay = ({
     isFullscreen: boolean
 }) => {
     const { orientation, isMobile } = useOrientation()
-    const { derivedState } = useSession()
-    const meConnected = derivedState?.meData?.connected
-    const opponentConnected = derivedState?.opponentData?.connected
-    const isInLobby = derivedState?.completeSessionState?.status === 'LOBBY'
-    const isWaitingForOpponent = isInLobby && !opponentConnected && meConnected
-
-    console.log('InteractionOverlay Debug:', {
-        meConnected,
-        opponentConnected,
-        isInLobby,
-        isWaitingForOpponent,
-        mode: !derivedState?.meData
-            ? 'connect'
-            : isWaitingForOpponent
-            ? 'wait-opponent'
-            : 'none',
-    })
+    const { sessionState } = useSession()
+    const { errorMessage } = useSessionWS()
+    if (!sessionState) return null
 
     let mode: InteractionModes = 'none'
-    if (isMobile && orientation === 'landscape') mode = 'landscape'
-    else if (!derivedState?.meData) mode = 'connect'
-    else if (derivedState?.meData && isMobile && !isFullscreen)
-        mode = 'no-fullscreen'
-    else if (isWaitingForOpponent) mode = 'wait-opponent'
+
+    if (!sessionState?.players || !sessionState.role) mode = 'connect'
+    else {
+        const player =
+            sessionState?.players[
+                sessionState.role as keyof typeof sessionState.players
+            ]
+        const meConnected = player?.connected
+        const opponentConnected =
+            sessionState?.players[
+                sessionState.role === 'player1' ? 'player2' : 'player1'
+            ]?.connected
+        const isInLobby = sessionState?.status === 'LOBBY'
+        const isWaitingForOpponent =
+            isInLobby && !opponentConnected && meConnected
+
+        if (isMobile && orientation === 'landscape') mode = 'landscape'
+        else if (
+            !sessionState?.players[
+                sessionState.role as keyof typeof sessionState.players
+            ]
+        )
+            mode = 'connect'
+        else if (
+            sessionState?.players[
+                sessionState.role as keyof typeof sessionState.players
+            ] &&
+            isMobile &&
+            !isFullscreen
+        )
+            mode = 'no-fullscreen'
+        else if (isWaitingForOpponent) mode = 'wait-opponent'
+    }
+
+    if (errorMessage) mode = 'error'
 
     const { title, description, actions } = useGetInteractionOverlayState(
         mode,
+        errorMessage,
         enterFullScreen,
     )
 
