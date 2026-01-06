@@ -1,4 +1,4 @@
-const { validateSessionState } = require('./validate');
+const { validateSessionState } = require('./validation/validateSessionState');
 
 function broadcastSessionState(session) {
     for (const ws of session.connections) {

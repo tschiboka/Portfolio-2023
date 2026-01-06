@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { SessionStatuses, PlayerDerivedStatus } = require('./constants');
+const { SessionStatuses, PlayerDerivedStatus } = require('../constants');
 
 const PlayerSchema = Joi.object({
   deviceId: Joi.string().required(),

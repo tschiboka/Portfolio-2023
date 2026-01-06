@@ -54,7 +54,7 @@ export const InteractionOverlay = ({
 
     if (errorMessage) mode = 'error'
 
-    const { title, description, actions } = useGetInteractionOverlayState(
+    const { title, type, description, actions } = useGetInteractionOverlayState(
         mode,
         errorMessage,
         enterFullScreen,
@@ -62,7 +62,7 @@ export const InteractionOverlay = ({
 
     return (
         mode !== 'none' && (
-            <div className="interaction-overlay">
+            <div className={`interaction-overlay ${type || 'info'}`}>
                 {title && <h2>{title}</h2>}
                 {description && <p>{description}</p>}
                 {actions &&

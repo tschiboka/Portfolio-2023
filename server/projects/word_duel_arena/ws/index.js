@@ -5,6 +5,7 @@ const { commitSessionState } = require('./broadcast');
 const routeMessage = require('./handlers');
 const { startPresenceLoop } = require('./presenceLoop');
 const { getLevel } = require('./level');
+const { validateDeviceConnection } = require('./validation/validateDeviceConnection');
 
 module.exports = function initWebSocket(server) {
   const wss = new WebSocketServer({ server });
@@ -19,21 +20,11 @@ module.exports = function initWebSocket(server) {
 
     const session = getSession(sessionId)
 
-    const { player1, player2 } = session.state.players
-
-    const isKnownDevice =
-        player1?.deviceId === deviceId ||
-        player2?.deviceId === deviceId
-
-    const hasFreeSeat = !player1 || !player2
-
-    if (!isKnownDevice && !hasFreeSeat) {
-        ws.send(JSON.stringify({
-          type: 'error',
-          message: 'This session is full.'
-        }));
-
-        setTimeout(() => ws.close(4001, 'SESSION_FULL'), 0);
+    const { allowed, reason, message } = validateDeviceConnection(session, deviceId);
+    
+    if (!allowed) {
+        ws.send(JSON.stringify({ type: 'error', message }));
+        setTimeout(() => ws.close(4001, reason), 0);
         return
     }
 

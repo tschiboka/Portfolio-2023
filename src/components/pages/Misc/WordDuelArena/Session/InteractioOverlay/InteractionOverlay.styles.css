@@ -27,3 +27,7 @@
     font-size: var(--font-sm);
     text-align: center;
 }
+
+.interaction-overlay.error h2 {
+    color: var(--color-font-error);
+}

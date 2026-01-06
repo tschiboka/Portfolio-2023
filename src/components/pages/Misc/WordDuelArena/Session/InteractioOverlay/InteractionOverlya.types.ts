@@ -3,9 +3,12 @@ export type InteractioinOverlayActions = {
     onClick: () => void
 }
 
+export type InteractionOverlayConfigType = "info" | "warning" | "error"
+
 export type InteractionOverlayConfig = {
     title?: string
     description?: string
+    type?: InteractionOverlayConfigType
     actions?: InteractioinOverlayActions[]
 }
 
