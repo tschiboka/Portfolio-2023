@@ -69,15 +69,12 @@ export const createHandleTouchMove = ({
 }
 
 type CreateHandleTouchEndProps = {
+    touchState: TouchState
     setTouchState: Dispatch<SetStateAction<TouchState>>
     send: (msg: WebSocketRequest) => void
 }
 
 export const createHandleTouchEnd =
-    ({ setTouchState, send }: CreateHandleTouchEndProps): EventListener =>
-    () => {
-        setTouchState(prev => {
-            submitMove({ letters: prev.touchedLetters, send, setTouchState })
-            return { touchedIds: [], touchedLetters: '' }
-        })
-    }
+    ({ touchState, setTouchState, send }: CreateHandleTouchEndProps): EventListener =>
+    () => submitMove({ letters: touchState.touchedLetters, send, setTouchState });
+    

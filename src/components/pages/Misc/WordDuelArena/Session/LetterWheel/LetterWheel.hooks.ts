@@ -61,7 +61,7 @@ export const useLetterWheelListeners = ({
         const handlers: Record<string, EventListener> = {
             touchstart: createHandleTouchStart({ setTouchState }),
             touchmove: createHandleTouchMove({ setTouchState }),
-            touchend: createHandleTouchEnd({ setTouchState, send }),
+            touchend: createHandleTouchEnd({ touchState, setTouchState, send }),
         }
 
         Object.entries(handlers).forEach(([event, handler]) =>
@@ -72,5 +72,5 @@ export const useLetterWheelListeners = ({
             Object.entries(handlers).forEach(([event, handler]) =>
                 wheel.removeEventListener(event, handler)
             )
-    }, [setTouchState, send, wheelRef])
+    }, [touchState, setTouchState, send, wheelRef])
 }

@@ -26,7 +26,7 @@ require('./startup/prod')(app);
 app.use(error);
 
 const server = http.createServer(app); 
-require('./projects/word_duel_arena/ws')(server)
+require('./projects/word_duel_arena/transport/ws')(server)
 
 const PORT = process.env.PORT || 5000
 

@@ -1,4 +1,4 @@
-const { validateSessionState } = require('./validation/validateSessionState');
+const { validateSessionState } = require('./validation/session/sessionState');
 
 function broadcastSessionState(session) {
     for (const ws of session.connections) {
@@ -12,8 +12,39 @@ function broadcastSessionState(session) {
     }
 }
 
-function commitSessionState(session, nextState) {
-    if (nextState !== session.state) validateSessionState(nextState);
+function sendErrorToDevice(session, deviceId, message) {
+    for (const ws of session.connections) {
+        if (ws.deviceId === deviceId && ws.readyState === ws.OPEN) {
+            ws.send(JSON.stringify({
+                type: 'error',
+                message,
+            }));
+            return;
+        }
+    }
+}
+
+function commitSessionState(session, nextState, deviceId) {
+    if (nextState === session.state) return;
+
+    const { error } = validateSessionState(nextState);
+
+    if (error) {
+        console.log(
+          'Session state validation failed:',
+          error.details[0].message
+        );
+
+        if (deviceId) {
+            sendErrorToDevice(
+              session,
+              deviceId,
+              error.details[0].message
+            );
+        }
+
+        return;
+    }
 
     session.state = nextState;
     broadcastSessionState(session);

@@ -24,8 +24,6 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
         touchedLetters: '',
     })
 
-    // Keyboard handler updates letters only
-
     useLetterWheelListeners({
         containerRef,
         wheelRef,

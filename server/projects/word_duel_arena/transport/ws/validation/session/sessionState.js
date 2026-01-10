@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { SessionStatuses, PlayerDerivedStatus } = require('../constants');
+const { SessionStatuses, PlayerDerivedStatus } = require('../../../../config/constants');
 
 const PlayerSchema = Joi.object({
   deviceId: Joi.string().required(),
@@ -28,18 +28,15 @@ const SessionStateSchema = Joi.object({
   id: Joi.string().required(),
   status: Joi.string().valid(...Object.values(SessionStatuses)).required(),
   players: Joi.object({
-    player1: PlayerSchema.optional(),
-    player2: PlayerSchema.optional(),
+    player1: PlayerSchema.allow(null).optional(),
+    player2: PlayerSchema.allow(null).optional(),
   }).required(),
   currentMatch: MatchSchema.optional(),
   previousMatches: Joi.array().items(MatchSchema).optional(),
   connections: Joi.any(), // cannot validate Set<WebSocket> in Joi
 });
 
-function validateSessionState(state) {
-  const { error } = SessionStateSchema.validate(state);
-  if (error) throw new Error(`Invalid state: ${error.message}`);
-}
+const validateSessionState = (state) => SessionStateSchema.validate(state);
 
 module.exports = {
   validateSessionState,
