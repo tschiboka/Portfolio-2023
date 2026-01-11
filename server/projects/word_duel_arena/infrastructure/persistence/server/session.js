@@ -1,7 +1,5 @@
-const { SessionStatuses } = require("../../config/constants");
-
+const { SessionStatuses } = require("../../../config/constants/session");
 const sessions = {};
-
 
 function getDefaultSessionState(id) {
   return {

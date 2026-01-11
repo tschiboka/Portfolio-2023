@@ -4,7 +4,7 @@ const { handleListLevels, handleGetLevel, handleUpsertLevel } = require("../hand
 const auth = require("../../../../../middlewares/auth");
 
 router.get("/name", handleListLevels);
-router.get("/:name", handleGetLevel);
+router.get("/name/:name", handleGetLevel);
 router.post("/", [auth], handleUpsertLevel);
 
 module.exports = router;

@@ -27,7 +27,7 @@ export const LevelList = ({
                     key={level.name}
                     onClick={() => handleLevelClick(level.name)}
                 >
-                    <span>{level.name}</span>
+                    <span>{level.displayName}</span>
                     <span className="level-difficulty">
                         [{level.difficulty}]
                     </span>

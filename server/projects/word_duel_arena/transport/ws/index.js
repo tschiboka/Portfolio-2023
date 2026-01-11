@@ -3,14 +3,16 @@ const url = require('url');
 const { startPresenceLoop } = require('../../infrastructure/presence/loop');
 const { validateDeviceConnection } = require('./validation/connection/validateDevice');
 const routeMessage = require('./handlers');
-const { getSession, cleanupSessionIfEmpty } = require('../../infrastructure/persistence/sessionStore');
+const { getSession, cleanupSessionIfEmpty } = require('../../infrastructure/persistence/server/session');
+const { loadWordResources } = require('../../infrastructure/resources/word');
 
-module.exports = function initWebSocket(server) {
+module.exports = async function initWebSocket(server) {
   const wss = new WebSocketServer({ server });
+  await loadWordResources();
 
   startPresenceLoop();
 
-  wss.on('connection', (ws, req) => {
+  wss.on('connection', async (ws, req) => {
     const { sessionId, deviceId } = url.parse(req.url, true).query;
 
     if (!sessionId || !deviceId) {
@@ -31,11 +33,11 @@ module.exports = function initWebSocket(server) {
     ws.deviceId = deviceId;
     session.connections.add(ws);
 
-    routeMessage('join', { session, deviceId });
+    await routeMessage('join', { session, deviceId });
 
-    ws.on('message', (msg) => {
+    ws.on('message', async (msg) => {
       const message = JSON.parse(msg);
-      routeMessage(message.type, {
+      await routeMessage(message.type, {
         session,
         deviceId: ws.deviceId,
         payload: message.payload,

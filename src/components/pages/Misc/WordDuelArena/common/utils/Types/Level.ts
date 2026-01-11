@@ -11,6 +11,7 @@ export type Level = {
 
 export type LevelName = {
     name: string,
+    displayName: string,
     difficulty: number
 }
 

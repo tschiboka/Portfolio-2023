@@ -1,4 +1,4 @@
-const { validateSessionState } = require('./validation/session/sessionState');
+const { validateSession } = require('./validation/session/session');
 
 function broadcastSessionState(session) {
     for (const ws of session.connections) {
@@ -26,8 +26,7 @@ function sendErrorToDevice(session, deviceId, message) {
 
 function commitSessionState(session, nextState, deviceId) {
     if (nextState === session.state) return;
-
-    const { error } = validateSessionState(nextState);
+    const { error } = validateSession(nextState)
 
     if (error) {
         console.log(
@@ -64,6 +63,19 @@ function transformSessionForClient(state, requestingDeviceId) {
     return {
         id: state.id,
         status: state.status,
+        level: { 
+            ...state.level,
+            targetWords: state.level ? state.level.targetWords.map(word => ({
+                ...word,
+                word: word.status === 'SOLVED' ? word.word : undefined,
+                mask: word.status === 'SOLVED' ? undefined : word.mask,
+            })) : [],
+            extraWords: state.level ? state.level.extraWords.map(word => ({
+                ...word,
+                word: word.status === 'SOLVED' ? word.word : undefined,
+                mask: word.status === 'SOLVED' ? undefined : word.mask,
+            })) : [],
+        },
         players: {
             player1: toPublicPlayer(state.players.player1),
             player2: toPublicPlayer(state.players.player2),

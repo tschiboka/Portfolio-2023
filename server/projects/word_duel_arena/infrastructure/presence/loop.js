@@ -1,6 +1,6 @@
-const { sessions } = require('../persistence/sessionStore');
+const { sessions } = require('../persistence/server/session');
 const { commitSessionState } = require('../../transport/ws/broadcast');
-const { CHECK_INTERVAL, INACTIVE_TIMEOUT, SessionStatuses } = require('../../config/constants');
+const { CHECK_INTERVAL, INACTIVE_TIMEOUT, SessionStatuses } = require('../../config/constants/session');
 const { applyPresenceRules } = require('../../domain/session/presence');
 const { produce } = require('immer');
 

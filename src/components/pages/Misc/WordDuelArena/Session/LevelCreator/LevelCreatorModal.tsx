@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
+import { Level, LevelWord, mergeApiStatuses } from '../../common/utils'
+import { transformAnagramMap } from '../../common/utils/Word/getPossibleWords'
 import {
-    FrequencyType,
-    Level,
-    LevelWord,
-    loadFrequencies,
-    MAX_WORDS_PER_LEVEL,
-    MIN_WORDS_PER_LEVEL,
-} from '../../common/utils'
-import { getPossibleWords } from '../../common/utils/Word/getPossibleWords'
-import { useGetLevel, usePostLevel } from './LevelCreator.queries'
+    useGetAnagramMap,
+    useGetLevel,
+    useGetWordFrequencies,
+    usePostLevel,
+} from './LevelCreator.queries'
 import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useQueryClient } from '@tanstack/react-query'
+import { FrequencyType } from '../../common/utils/Types/Words'
+import { levelSchema } from './LevelCreator.schema'
 
 type LevelCreatorModalProps = {
     levelName: string
@@ -24,22 +24,25 @@ export const LevelCreatorModal = ({
     setModalOpen,
 }: LevelCreatorModalProps) => {
     const queryClient = useQueryClient()
-    const {
-        mutate: postLevel,
-        isPending,
-        error: postError,
-    } = usePostLevel({
+
+    const { data: levelData, ...levelDataResponse } = useGetLevel(levelName)
+    const { data: anagramMap, ...anagramMapResponse } = useGetAnagramMap()
+    const { data: wordFrequencies, ...wordFrequenciesResponse } =
+        useGetWordFrequencies()
+    const { mutate: postLevel, ...postLevelResponse } = usePostLevel({
         onSuccess: () => {
             setModalOpen(false)
             queryClient.invalidateQueries({ queryKey: ['level-names'] })
+            queryClient.invalidateQueries({ queryKey: ['level' + levelName] })
         },
     })
 
-    const {
-        data: levelData,
-        isLoading,
-        error: getError,
-    } = useGetLevel(levelName)
+    const { isLoading, isPending, error } = mergeApiStatuses([
+        levelDataResponse,
+        anagramMapResponse,
+        wordFrequenciesResponse,
+        postLevelResponse,
+    ])
 
     const [optionsOpen, setOptionsOpen] = useState(false)
     const [selectedWords, setSelectedWords] = useState<LevelWord[]>([])
@@ -48,30 +51,34 @@ export const LevelCreatorModal = ({
     const [validationError, setValidationError] = useState<string>('')
 
     useEffect(() => {
-        if (!frequencies) loadFrequencies().then(setFrequencies)
-        if (frequencies && possibleWords.length === 0) {
-            getPossibleWords(levelName).then((possibleWords) => {
+        if (wordFrequencies && !frequencies) {
+            setFrequencies(wordFrequencies)
+        }
+        if (frequencies && possibleWords.length === 0 && anagramMap) {
+            transformAnagramMap(levelName, anagramMap).then((possibleWords) => {
                 const newWordSet = possibleWords.map((word) => ({
                     word,
-                    frequency: frequencies
-                        ? frequencies[word.toUpperCase()] || 0
-                        : 0,
+                    frequency: frequencies[word.toUpperCase()] || 0,
                 }))
                 setPossibleWords(newWordSet)
             })
         }
         if (levelData && frequencies) {
-            const selectedWordSet = levelData.data.targetWords.map((word) => ({
+            const selectedWordSet = levelData.targetWords.map((word) => ({
                 word,
                 frequency: frequencies[word.toUpperCase()] || 0,
             }))
             setSelectedWords(selectedWordSet)
         }
-    }, [frequencies, possibleWords, levelData])
+    }, [frequencies, possibleWords, levelData, anagramMap, wordFrequencies])
 
     useEffect(() => {
-        if (postError) setValidationError(postError.message)
-    }, [postError, getError])
+        if (error) {
+            const errorMessage = error.response?.data?.message
+            const errorText = errorMessage || 'An error occurred'
+            setValidationError(errorText)
+        }
+    }, [error])
 
     const averageFrequency = () => {
         if (selectedWords.length === 0) return 0
@@ -88,16 +95,15 @@ export const LevelCreatorModal = ({
         return Math.round(Math.max(1, Math.min(10, rawDifficulty)))
     }
 
-    const onSave = () => {
-        if (
-            selectedWords.length < MIN_WORDS_PER_LEVEL ||
-            selectedWords.length > MAX_WORDS_PER_LEVEL
-        ) {
-            return setValidationError(
-                `Please select between ${MIN_WORDS_PER_LEVEL} and ${MAX_WORDS_PER_LEVEL} words. Currently selected: ${selectedWords.length}`,
-            )
-        } else setValidationError('')
+    const onSave = async () => {
+        const validation = await levelSchema
+            .validate({ selectedWords })
+            .then(() => null)
+            .catch((error) => error.message)
 
+        if (validation) return setValidationError(validation)
+
+        setValidationError('')
         const level: Level = {
             name: levelName,
             targetWords: selectedWords.map((word) => word.word),

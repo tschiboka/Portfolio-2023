@@ -13,6 +13,7 @@ const category = require("../routes/category")
 const session = require("../routes/session")
 const xmas2025 = require("../projects/xmas_2025/routes")
 const word_duel_arena_level = require("../projects/word_duel_arena/transport/http/routes/level")
+const word_duel_arena_words = require("../projects/word_duel_arena/transport/http/routes/word")
 
 
 module.exports = function(app) {
@@ -35,4 +36,5 @@ module.exports = function(app) {
     // Project routes
     app.use("/projects/xmas_2025", xmas2025)
     app.use("/projects/word_duel_arena/level", word_duel_arena_level)
+    app.use("/projects/word_duel_arena/word", word_duel_arena_words)
 }

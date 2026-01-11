@@ -1,9 +1,11 @@
 const { initialiseSession } = require('../../../domain/session/session');
+const { initialiseLevel } = require('../../../domain/session/level');
 const { commitSessionState } = require('../broadcast');
 
-function joinHandler({ session, deviceId }) {
-  const nextState = initialiseSession(session.state, deviceId);
-  commitSessionState(session, nextState, deviceId);
+async function joinHandler({ session, deviceId }) {
+  const nextStateSessionInit = initialiseSession(session.state, deviceId);
+  const nextStateLevelInit = await initialiseLevel(nextStateSessionInit, deviceId);
+  commitSessionState(session, nextStateLevelInit, deviceId);
 }
 
 module.exports = { joinHandler };

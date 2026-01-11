@@ -1,27 +1,8 @@
-type AnagramMapType = {
-  [key: string]: string[]
-}
+import { AnagramMapType } from "../Types";
 
-let anagramMapCache: AnagramMapType | null = null;
-
-export async function loadAnagramMap(): Promise<AnagramMapType> {
-  if (anagramMapCache) return anagramMapCache;
-
-  const res = await fetch(`${import.meta.env.BASE_URL}projects/wda/anagramMap.json`)
-  const json = await res.json();
-
-  anagramMapCache = json as AnagramMapType;
-  return anagramMapCache;
-}
-
-export const getPossibleWords = async (input: string): Promise<string[]> => {
-  const anagramMap = await loadAnagramMap()
+export const transformAnagramMap = async (input: string, anagramMap: AnagramMapType): Promise<string[]> => {
   const anagrams = getPossibleAnagrams(input)
-
-  const dictionary = anagrams.flatMap(
-    a => anagramMap[a] ?? []
-  )
-
+  const dictionary = anagrams.flatMap(a => anagramMap[a] ?? [])
   return Array.from(new Set(dictionary))
 }
 

@@ -90,3 +90,26 @@ export type WebSocketContextType = {
   send: (msg: WebSocketRequest) => void
 }
 
+export type UnsolvedLevelWord = {
+  status: "UNSOLVED";
+  mask: string;
+  solvedBy: PlayerRole | null;
+}
+
+export type SolvedLevelWord = {
+  status: "SOLVED";
+  word: string;
+  solvedBy: PlayerRole | null;
+}
+
+export type PlayableLevelWord = SolvedLevelWord | UnsolvedLevelWord;
+
+export type Level = {
+  id: string;
+  name: string;
+  difficulty: number;
+  targetWords: PlayableLevelWord[];
+  extraWords: PlayableLevelWord[];
+}
+
+export type LevelWordStatus = PlayableLevelWord['status']

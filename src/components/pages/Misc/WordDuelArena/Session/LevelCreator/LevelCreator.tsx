@@ -12,9 +12,11 @@ import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/L
 import { useFullScreen } from '../../common/utils'
 
 export const LevelCreator = () => {
-    const { data, isLoading, error } = useGetLevelNames()
     const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()
-    const levels = data?.data?.levels
+
+    const { data, isLoading, error } = useGetLevelNames()
+    const levels = data?.levels
+
     const [levelName, setLevelName] = useState('')
     const [modalOpen, setModalOpen] = useState(false)
 
@@ -42,7 +44,11 @@ export const LevelCreator = () => {
                     <button onClick={handleNewLevelClick}>Create</button>
                 </div>
                 <LoadingIndicator show={isLoading} />
-                {error && <p className="error-message">{error.message}</p>}
+                {error && (
+                    <p className="error-message">
+                        {error.response?.data?.message || error.message}
+                    </p>
+                )}
                 <LevelList
                     levels={levels || []}
                     setLevelName={setLevelName}

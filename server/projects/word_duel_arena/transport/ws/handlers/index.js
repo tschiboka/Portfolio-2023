@@ -1,10 +1,10 @@
 const { moveHandler } = require('./move');
 const { joinHandler } = require('./join');
 
-function routeMessage(type, ctx) {
+async function routeMessage(type, ctx) {
   switch (type) {
     case 'join':
-      return joinHandler(ctx);
+      return await joinHandler(ctx);
 
     case 'attempt_move':
       return moveHandler(ctx);
