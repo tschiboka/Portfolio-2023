@@ -67,6 +67,7 @@ export type WebSocketSessionState = {
     player1?: Player;
     player2?: Player;
   };
+  level?: Level;
   currentMatch?: Match;
   previousMatches?: Match[];
 }

@@ -1,15 +1,24 @@
 import { SessionProvider } from './Session.context'
 import { SessionGame } from './SessionGame'
 import { SessionWebSocketProvider } from './SessionWebSocket'
+import { useFullScreen } from '../common/utils'
 import './Sessions.styles.css'
 
-const SessionComponent = () => (
-    <div className="session">
-        <div className="app">
-            <SessionGame />
+const SessionComponent = () => {
+    const { ref, enterFullScreen, isFullscreen } =
+        useFullScreen<HTMLDivElement>()
+
+    return (
+        <div className="session" ref={ref}>
+            <div className="app">
+                <SessionGame
+                    enterFullScreen={enterFullScreen}
+                    isFullscreen={isFullscreen}
+                />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 export const Session = () => (
     <SessionProvider>

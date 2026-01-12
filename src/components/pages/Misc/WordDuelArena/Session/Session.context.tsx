@@ -15,6 +15,7 @@ const defaultState: WebSocketSessionState = {
         player1: undefined,
         player2: undefined,
     },
+    level: undefined,
     currentMatch: undefined,
     previousMatches: [],
 }

@@ -32,9 +32,18 @@
     border: var(--border-normal);
 }
 
+.session > .app:fullscreen,
+.session > .app:-webkit-full-screen,
+.session > .app:-moz-full-screen {
+    height: min(750px, 100vh);
+    width: min(500px, 100vw);
+    max-width: 500px;
+    max-height: 750px;
+}
+
 .session-header {
     width: 100%;
-    height: 10%;
+    height: 75px;
     flex-shrink: 0;
     display: flex;
     justify-content: space-between;
@@ -83,6 +92,6 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    overflow: hidden;
 }

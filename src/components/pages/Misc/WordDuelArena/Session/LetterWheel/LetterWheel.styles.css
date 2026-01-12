@@ -1,8 +1,8 @@
 .letter-wheel-container {
   position: relative;
-  width: 27vh;
-  height: 27vh;
-  padding: var(--sp-md) 0;
+  width: clamp(180px, 35vh, 250px);
+  height: clamp(180px, 35vh, 250px);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,10 +10,8 @@
 
 .letter-wheel {
   position: relative;
-  width: 25vh;
-  min-width: 25vh;
-  height: 25vh;
-  min-height: 25vh;
+  width: 90%;
+  height: 90%;
   border: var(--border-normal);
   border-radius: 50%;
   display: flex;
@@ -24,8 +22,8 @@
 
 .letter-wheel .letter {
   position: absolute;
-  width: 5.5vh;
-  height: 5.5vh;
+  width: clamp(35px, 5.5vh, 45px);
+  height: clamp(35px, 5.5vh, 45px);
   top: 50%;
   left: 50%;
   display: flex;
