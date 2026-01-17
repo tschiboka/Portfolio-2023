@@ -26,12 +26,20 @@ export const SolutionBoard = () => {
     }, [])
 
     const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
-    const column1 =
-        words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) || []
-    const column2 =
-        words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) || []
+
+    const columns = useMemo(() => {
+        const column1 =
+            words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) ||
+            []
+        const column2 =
+            words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) ||
+            []
+        return { column1, column2 }
+    }, [words, MAX_WORDS_PER_COLUMN])
 
     const columnConfig = useMemo(() => {
+        const { column1, column2 } = columns
+
         if (containerWidth === 0)
             return {
                 col1: { width: 50, letterSize: 20 },
@@ -93,19 +101,19 @@ export const SolutionBoard = () => {
                 letterSize: uniformLetterSize,
             },
         }
-    }, [column1, column2, containerWidth])
+    }, [columns, containerWidth])
 
     if (words.length === 0) return <div className="solution-board empty"></div>
 
     return (
         <div className="solution-board" ref={boardRef}>
             <SolutionBoardColumn
-                playableWords={column1}
+                playableWords={columns.column1}
                 width={columnConfig.col1.width}
                 letterSize={columnConfig.col1.letterSize}
             />
             <SolutionBoardColumn
-                playableWords={column2}
+                playableWords={columns.column2}
                 width={columnConfig.col2.width}
                 letterSize={columnConfig.col2.letterSize}
             />

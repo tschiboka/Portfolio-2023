@@ -14,28 +14,24 @@ export const calculateLetterPositions = ({
 }: CalculateLetterPositionsProps): LetterPosition[] => {
     if (!containerRef.current || letters.length === 0) return []
 
-    const { width, height } = containerRef.current.getBoundingClientRect()
-    const radius = Math.min(width, height) / 2 - height / 6
-    const centerX = width / 2
-    const centerY = height / 2
+    // Get the wheel element (child of container) for accurate positioning
+    const wheelEl = containerRef.current.querySelector('.letter-wheel')
+    if (!wheelEl) return []
+    
+    const wheelRect = wheelEl.getBoundingClientRect()
+    const size = wheelRect.width // width === height for circular wheel
+    const centerX = size / 2
+    const centerY = size / 2
+    const radius = size / 2 - size / 7 // Leave space for letter size
     const n = letters.length
 
     return letters.map((letter, index) => {
         const angle = (360 / n) * index
         const rad = (angle * Math.PI) / 180
 
-        const letterEl = containerRef.current?.querySelector(
-            `[data-letter-id="${index}"]`,
-        )
-        const letterRect = letterEl?.getBoundingClientRect()
-
+        // Calculate position relative to wheel center
         let cx = centerX - radius * Math.cos(rad)
         let cy = centerY - radius * Math.sin(rad)
-
-        if (letterRect) {
-            cx -= letterRect.width / 6
-            cy -= letterRect.height / 6
-        }
 
         const transform = `
             rotate(${angle}deg)
