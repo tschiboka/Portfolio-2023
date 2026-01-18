@@ -1,7 +1,7 @@
 .letter-wheel-container {
   position: relative;
-  width: clamp(180px, 35vh, 250px);
-  height: clamp(180px, 35vh, 250px);
+  width: clamp(180px, 35vh, 220px);
+  height: clamp(180px, 35vh, 220px);
   flex-shrink: 0;
   display: flex;
   align-items: center;

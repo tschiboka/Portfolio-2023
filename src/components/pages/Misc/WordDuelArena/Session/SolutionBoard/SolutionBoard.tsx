@@ -4,6 +4,7 @@ import { PlayableLevelWord } from '../Session.types'
 import { SolvedSolutionWord, UnsolvedSolutionWord } from './SolutionWord'
 import './SolutionBoard.styles.css'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { getColumnConfig } from './SolutionBoard.utils'
 
 export const SolutionBoard = () => {
     const { level } = useSession().sessionState || {}
@@ -23,7 +24,7 @@ export const SolutionBoard = () => {
         updateWidth()
         window.addEventListener('resize', updateWidth)
         return () => window.removeEventListener('resize', updateWidth)
-    }, [])
+    }, [boardRef.current])
 
     const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
 
@@ -37,71 +38,10 @@ export const SolutionBoard = () => {
         return { column1, column2 }
     }, [words, MAX_WORDS_PER_COLUMN])
 
-    const columnConfig = useMemo(() => {
-        const { column1, column2 } = columns
-
-        if (containerWidth === 0)
-            return {
-                col1: { width: 50, letterSize: 20 },
-                col2: { width: 50, letterSize: 20 },
-            }
-
-        const getWordLength = (w: PlayableLevelWord) =>
-            w.status === 'SOLVED' ? w.word.length : w.mask.length
-
-        const maxCol1 = Math.max(...column1.map(getWordLength), 0)
-        const maxCol2 = Math.max(...column2.map(getWordLength), 0)
-        const total = maxCol1 + maxCol2
-        if (total === 0)
-            return {
-                col1: { width: 50, letterSize: 20 },
-                col2: { width: 50, letterSize: 20 },
-            }
-
-        const col1WidthPercent = (maxCol1 / total) * 100
-        const col2WidthPercent = (maxCol2 / total) * 100
-
-        const boardPadding = 10
-        const gap = 5
-        const columnPadding = 10
-        const availableWidth = containerWidth - boardPadding - gap
-
-        const col1PixelWidth =
-            (availableWidth * col1WidthPercent) / 100 - columnPadding
-        const col2PixelWidth =
-            (availableWidth * col2WidthPercent) / 100 - columnPadding
-
-        const letterMargin = 2
-        const col1LetterSize =
-            maxCol1 > 0
-                ? Math.floor(
-                      (col1PixelWidth - letterMargin * maxCol1) / maxCol1,
-                  )
-                : 20
-        const col2LetterSize =
-            maxCol2 > 0
-                ? Math.floor(
-                      (col2PixelWidth - letterMargin * maxCol2) / maxCol2,
-                  )
-                : 20
-
-        // Use the minimum to ensure uniform letter size across both columns
-        const uniformLetterSize = Math.max(
-            16,
-            Math.min(col1LetterSize, col2LetterSize),
-        )
-
-        return {
-            col1: {
-                width: col1WidthPercent,
-                letterSize: uniformLetterSize,
-            },
-            col2: {
-                width: col2WidthPercent,
-                letterSize: uniformLetterSize,
-            },
-        }
-    }, [columns, containerWidth])
+    const columnConfig = useMemo(
+        () => getColumnConfig({ columns, containerWidth }),
+        [columns, containerWidth],
+    )
 
     if (words.length === 0) return <div className="solution-board empty"></div>
 
@@ -132,25 +72,19 @@ const SolutionBoardColumn = ({
     width,
     letterSize,
 }: SolutionBoardColumnProps) => (
-    <div
-        className="column"
-        style={
-            {
-                flexBasis: `${width}%`,
-                '--letter-size': `${letterSize}px`,
-            } as React.CSSProperties
-        }
-    >
+    <div className="column" style={{ flexBasis: `${width}%` }}>
         {playableWords.map((playableWord, index) =>
             playableWord.status === 'UNSOLVED' ? (
                 <UnsolvedSolutionWord
                     key={playableWord.mask + index}
                     playableWord={playableWord}
+                    letterSize={letterSize}
                 />
             ) : (
                 <SolvedSolutionWord
                     key={playableWord.word + index}
                     playableWord={playableWord}
+                    letterSize={letterSize}
                 />
             ),
         )}
