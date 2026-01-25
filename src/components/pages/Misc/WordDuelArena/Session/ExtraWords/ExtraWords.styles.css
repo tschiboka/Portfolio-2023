@@ -1,0 +1,40 @@
+.extra-words {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    top: 0; 
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 100;
+}
+
+.extra-words h1 {
+    margin: var(--sp-md);
+}
+
+.extra-words p {
+    margin: var(--sp-sm);
+    font-size: var(--font-sm);
+    font-weight: var(--font-bold);
+    text-align: center;
+}
+
+.extra-words .words-list {
+    width: 80%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: var(--sp-sm);
+}
+
+.extra-words .words-list.solved-by-player {
+    color: var(--color-font-accent);
+}
+
+.extra-words .words-list.solved-by-opponent {
+    color: var(--color-font-error);
+}

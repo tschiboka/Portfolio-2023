@@ -1,10 +1,11 @@
-import { LetterWheel } from './LetterWheel/LetterWheel'
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { InteractionOverlay } from './InteractioOverlay/InteractionOverlay'
 import { shuffleArray } from '../common/utils'
 import { SessionHeader } from './SessionHeader'
 import { useSession } from './Session.context'
 import { useEffect, useState } from 'react'
+import { GameControls } from './GameControls/GameControls'
+import { ExtraWords } from './ExtraWords/ExtraWords'
 
 type SessionGameProps = {
     enterFullScreen: () => void
@@ -18,6 +19,7 @@ export const SessionGame = ({
     const { level } = useSession().sessionState || {}
     const levelName = level?.name || ''
     const [inputLetters, setInputLetters] = useState<string>('')
+    const [extraWordsOpen, setExtraWordsOpen] = useState<boolean>(false)
 
     useEffect(() => {
         if (level) {
@@ -35,8 +37,16 @@ export const SessionGame = ({
             <>
                 <SessionHeader />
                 <SolutionBoard />
-                <LetterWheel inputLetters={inputLetters} />
+                <GameControls
+                    inputLetters={inputLetters}
+                    setInputLetters={setInputLetters}
+                    setExtraWordsOpen={setExtraWordsOpen}
+                />
             </>
+            <ExtraWords
+                isOpen={extraWordsOpen}
+                setExtraWordsOpen={setExtraWordsOpen}
+            />
         </div>
     )
 }

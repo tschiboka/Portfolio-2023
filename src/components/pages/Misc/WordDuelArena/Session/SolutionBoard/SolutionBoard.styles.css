@@ -53,7 +53,7 @@
     color: transparent;
   }
   
-  .solution-board div.column div.word.solved .letter.solved-by-player {
+.solution-board div.column div.word.solved .letter.solved-by-player {
     border-color: var(--color-font-accent);
     background-color: var(--color-bg-dark);
 }
