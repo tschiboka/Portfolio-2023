@@ -41,8 +41,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: calc(var(--letter-size, 20px) * 0.6);
-    font-weight: var(--font-medium);
+    font-size: calc(var(--letter-size, 20px) * 0.8);
+    font-weight: var(--font-bold);
     background-color: var(--color-bg-medium);
     border: var(--border-normal);
     border-radius: 3px;
@@ -51,4 +51,14 @@
 
 .solution-board div.column div.word.unsolved .letter {
     color: transparent;
+  }
+  
+  .solution-board div.column div.word.solved .letter.solved-by-player {
+    border-color: var(--color-font-accent);
+    background-color: var(--color-bg-dark);
+}
+
+.solution-board div.column div.word.solved .letter.solved-by-opponent {
+    border-color: var(--color-font-error);
+    background-color: var(--color-bg-dark);
 }

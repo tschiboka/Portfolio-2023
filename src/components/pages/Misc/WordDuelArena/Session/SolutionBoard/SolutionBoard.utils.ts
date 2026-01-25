@@ -22,13 +22,8 @@ export const getColumnConfig = ({
     const getWordLength = (w: PlayableLevelWord) =>
         w.status === 'SOLVED' ? w.word.length : w.mask.length
 
-    console.log(
-        'Calculating column config with containerWidth:',
-        containerWidth,
-    )
     const maxCol1 = Math.max(...column1.map(getWordLength), 0)
     const maxCol2 = Math.max(...column2.map(getWordLength), 0)
-    console.log('Max col letter lengths:', { maxCol1, maxCol2 })
     const total = maxCol1 + maxCol2
     if (total === 0)
         return {
@@ -56,7 +51,6 @@ export const getColumnConfig = ({
             ? Math.floor((col2PixelWidth - letterMargin * maxCol2) / maxCol2)
             : 20
 
-    // Use the minimum to ensure uniform letter size across both columns
     const uniformLetterSize = Math.max(
         16,
         Math.min(col1LetterSize, col2LetterSize),
