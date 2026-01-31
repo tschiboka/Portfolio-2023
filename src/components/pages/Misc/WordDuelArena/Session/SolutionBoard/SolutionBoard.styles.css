@@ -54,11 +54,13 @@
   }
   
 .solution-board div.column div.word.solved .letter.solved-by-player {
-    border-color: var(--color-font-accent);
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-font-accent);
+    color: var(--color-bg-dark);
+    font-weight: var(--font-bold);
 }
 
 .solution-board div.column div.word.solved .letter.solved-by-opponent {
-    border-color: var(--color-font-error);
-    background-color: var(--color-bg-dark);
+    background-color: var(--color-font-error);
+    color: var(--color-bg-dark);
+    font-weight: var(--font-bold);
 }

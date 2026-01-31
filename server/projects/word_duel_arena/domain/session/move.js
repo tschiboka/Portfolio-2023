@@ -1,3 +1,5 @@
+const { calculatePoints } = require('./points');
+
 function getSolutionState(draft, deviceId, payload) {
     console.log('Getting solution state...');
     console.log("Payload:", payload);
@@ -18,8 +20,9 @@ function getSolutionState(draft, deviceId, payload) {
     if (targetWord && targetWord.status === 'UNSOLVED') {
         targetWord.status = 'SOLVED';
         targetWord.solvedBy = playerKey;
-        console.log(`Player ${playerKey} solved the word: ${payload.attempt}`);
-        // Additional logic for scoring or tracking can be added here
+        
+        const player = draft.currentMatch.perPlayerStatus[playerKey];
+        player.points += calculatePoints(payload.attempt, true);
         return;
     }
 
@@ -29,8 +32,10 @@ function getSolutionState(draft, deviceId, payload) {
     if (extraWord && extraWord.status === 'UNSOLVED') {
         extraWord.status = 'SOLVED';
         extraWord.solvedBy = playerKey;
-        console.log(`Player ${playerKey} found an extra word: ${payload.attempt}`);
-        // Additional logic for scoring or tracking can be added here
+        
+        const player = draft.currentMatch.perPlayerStatus[playerKey];
+        player.points += calculatePoints(payload.attempt, false);
+
     }
 }
 

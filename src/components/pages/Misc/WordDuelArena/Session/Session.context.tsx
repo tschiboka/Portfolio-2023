@@ -31,6 +31,8 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
     const [sessionState, setSessionState] =
         useState<WebSocketSessionState>(defaultState)
 
+    console.log('SessionState:', sessionState)
+
     const deviceId = useRef(LocalStorage.getLocalStorage().deviceId).current
     const { sessionId } = useParams()
 

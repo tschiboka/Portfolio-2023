@@ -2,6 +2,7 @@ const { produce } = require('immer');
 const { levelPersistance } = require('../../infrastructure/persistence/db/level');
 const { LevelWordStatuses } = require('../../config/constants/game');
 const { getWordResources } = require('../../infrastructure/resources/word');
+const { getInitialMatchState } = require('./match');
 
 async function initialiseLevel(state, deviceId) {
     const hasTwoPlayers = Boolean(state.players.player1) && Boolean(state.players.player2);
@@ -12,7 +13,10 @@ async function initialiseLevel(state, deviceId) {
     
     const levelFromDb = await levelPersistance.findLevelForSession(state);
     const level = transformLevelFromDb(levelFromDb);
-    return produce(state, draft => { draft.level = level });
+    return produce(state, draft => { 
+        draft.level = level
+        draft.currentMatch = getInitialMatchState()
+    });
 }
 
 const transformLevelWord = (word) => ({

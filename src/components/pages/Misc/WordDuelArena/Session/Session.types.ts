@@ -46,6 +46,7 @@ export type MatchPlayerStatus = {
     derivedStatus: PlayerDerivedStatus;
     resigned: boolean;
     paused: boolean;
+    points: number;
 }
 
 export type Match = {

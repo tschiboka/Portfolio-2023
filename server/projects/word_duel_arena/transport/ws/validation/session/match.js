@@ -6,6 +6,7 @@ const MatchPlayerStatusSchema = Joi.object({
   derivedStatus: Joi.string().valid(...Object.values(PlayerDerivedStatus)).required(),
   resigned: Joi.boolean().required(),
   paused: Joi.boolean().required(),
+  points: Joi.number().required(),
 });
 
 const MatchSchema = Joi.object({
@@ -16,7 +17,7 @@ const MatchSchema = Joi.object({
     player2: MatchPlayerStatusSchema.required(),
   }).required(),
   moves: Joi.array().required(), // TODO
-  winner: Joi.string().valid('player1', 'player2').optional(),
+  winner: Joi.string().valid('player1', 'player2').allow(null).optional(),
 });
 
 module.exports = {

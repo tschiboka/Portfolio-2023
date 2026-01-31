@@ -80,6 +80,7 @@ function transformSessionForClient(state, requestingDeviceId) {
             player1: toPublicPlayer(state.players.player1),
             player2: toPublicPlayer(state.players.player2),
         },
+        currentMatch: state.currentMatch,
         role
     };
 }
