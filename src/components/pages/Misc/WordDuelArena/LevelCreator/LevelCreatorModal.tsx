@@ -1,17 +1,17 @@
 import { useEffect, useState } from 'react'
 import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
-import { Level, LevelWord, mergeApiStatuses } from '../../common/utils'
-import { transformAnagramMap } from '../../common/utils/Word/getPossibleWords'
+import { Level, LevelWord, mergeApiStatuses } from '../common/utils'
+import { transformAnagramMap } from '../common/utils/Word/getPossibleWords'
 import {
     useGetAnagramMap,
     useGetLevel,
     useGetWordFrequencies,
     usePostLevel,
 } from './LevelCreator.queries'
-import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useQueryClient } from '@tanstack/react-query'
-import { FrequencyType } from '../../common/utils/Types/Words'
+import { FrequencyType } from '../common/utils/Types/Words'
 import { levelSchema } from './LevelCreator.schema'
 
 type LevelCreatorModalProps = {

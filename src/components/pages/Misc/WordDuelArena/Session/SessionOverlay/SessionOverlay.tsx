@@ -1,7 +1,7 @@
 import { useSession } from '../Session.context'
-import { InteractionModes } from './InteractionOverlya.types'
-import { useGetInteractionOverlayState } from './InteractionOverlay.hooks'
-import './InteractionOverlay.styles.css'
+import { InteractionModes } from './SessionOverlay.types'
+import { useGetInteractionOverlayState } from './SessionOverlay.hooks'
+import './SessionOverlay.styles.css'
 import { useOrientation } from '../../common/utils'
 import { useSessionWS } from '../SessionWebSocket'
 

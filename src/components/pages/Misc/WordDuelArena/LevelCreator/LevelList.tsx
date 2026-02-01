@@ -1,4 +1,4 @@
-import { LevelName } from '../../common/utils/Types/Level'
+import { LevelName } from '../common/utils/Types/Level'
 
 type LevelListProps = {
     levels: LevelName[]

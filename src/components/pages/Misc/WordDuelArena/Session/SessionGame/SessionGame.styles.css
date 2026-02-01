@@ -1,0 +1,51 @@
+.session-game {
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.game-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sp-md);
+}
+
+.game-controls button {
+    position: relative;
+    background-color: var(--color-bg-medium);
+    border: var(--border-normal);
+    border-radius: 100%;
+    color: var(--color-font-light);
+    font-size: 30px;
+    margin-bottom: var(--sp-md);
+    cursor: pointer;
+}
+
+.game-controls .solved-by-counts {
+    position: absolute;
+    top: -60px;
+}
+
+.game-controls .solved-by-counts div {
+    width: 50px;
+    padding: 2px 5px;
+    font-size: var(--font-sm);
+    color: black;
+    font-weight: var(--font-bold);
+    border-radius: 10px;
+}
+
+.game-controls .solved-by-counts div.solved-by-player {
+    background-color: var(--color-font-accent);
+}
+
+.game-controls .solved-by-counts div.solved-by-opponent {
+    margin-top: 5px;
+    background-color: var(--color-font-error);
+}

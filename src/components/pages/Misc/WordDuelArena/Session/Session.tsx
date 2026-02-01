@@ -1,5 +1,5 @@
 import { SessionProvider } from './Session.context'
-import { SessionGame } from './SessionGame'
+import { SessionGame } from './SessionGame/SessionGame'
 import { SessionWebSocketProvider } from './SessionWebSocket'
 import { useFullScreen } from '../common/utils'
 import './Sessions.styles.css'

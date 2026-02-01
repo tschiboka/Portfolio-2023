@@ -1,11 +1,12 @@
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
-import { InteractionOverlay } from './InteractioOverlay/InteractionOverlay'
-import { shuffleArray } from '../common/utils'
-import { SessionHeader } from './SessionHeader'
-import { useSession } from './Session.context'
+import { InteractionOverlay } from '../SessionOverlay/SessionOverlay'
+import { shuffleArray } from '../../common/utils'
+import { SessionHeader } from '../SessionHeader/SessionHeader'
+import { useSession } from '../Session.context'
 import { useEffect, useState } from 'react'
 import { GameControls } from './GameControls/GameControls'
 import { ExtraWords } from './ExtraWords/ExtraWords'
+import './SessionGame.styles.css'
 
 type SessionGameProps = {
     enterFullScreen: () => void

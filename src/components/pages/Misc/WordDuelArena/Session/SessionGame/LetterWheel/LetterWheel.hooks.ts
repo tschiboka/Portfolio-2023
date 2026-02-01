@@ -6,7 +6,7 @@ import {
     createHandleTouchEnd,
 } from './LetterWheel.handlers'
 import {  recalculatePositions } from './LetterWheel.utils'
-import { WebSocketRequest } from '../Session.types'
+import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 
 type UseLetterWheelListenersProps = {

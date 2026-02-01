@@ -1,7 +1,7 @@
 import { LetterWheel } from '../LetterWheel/LetterWheel'
 import { FaBook, FaShuffle } from 'react-icons/fa6'
-import { useSession } from '../Session.context'
-import { shuffleArray } from '../../common/utils'
+import { useSession } from '../../Session.context'
+import { shuffleArray } from '../../../common/utils'
 
 type GameControlsProps = {
     inputLetters: string

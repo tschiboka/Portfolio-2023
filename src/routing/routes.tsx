@@ -44,9 +44,9 @@ import { Session } from '../components/pages/Misc/WordDuelArena/Session/Session'
 import { lazy } from 'react'
 
 const LevelCreator = lazy(() =>
-    import(
-        '../components/pages/Misc/WordDuelArena/Session/LevelCreator/LevelCreator'
-    ).then((module) => ({ default: module.LevelCreator })),
+    import('../components/pages/Misc/WordDuelArena/LevelCreator/LevelCreator').then(
+        (module) => ({ default: module.LevelCreator }),
+    ),
 )
 
 export const routes = [

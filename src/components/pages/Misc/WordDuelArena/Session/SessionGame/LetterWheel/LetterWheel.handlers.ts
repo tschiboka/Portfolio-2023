@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
-import { WebSocketRequest } from '../Session.types'
-import { MAX_WORD_LENGTH } from '../../common/utils'
+import { WebSocketRequest } from '../../Session.types'
+import { MAX_WORD_LENGTH } from '../../../common/utils'
 import {
     getLetterComponent,
     getTouchState,

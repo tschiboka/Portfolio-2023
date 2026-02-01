@@ -1,4 +1,4 @@
-import { PlayableLevelWord } from '../Session.types'
+import { PlayableLevelWord } from '../../Session.types'
 
 type GetColumnConfigProps = {
     columns: {

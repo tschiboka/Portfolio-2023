@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
-import { AnagramMapType, Level } from "../../common/utils";
-import { useSessionContext } from "../../../../../../context/SessionContext/Session.context";
-import { apiPathBuilder, ApiPaths } from "../../../../../../routing/apiPathBuilder";
-import { LevelNameResponse } from "../../common/utils/Types/Level";
-import { ErrorResponse } from "../../common/utils/Queries/Queries.types";
-import { FrequencyType } from "../../common/utils/Types/Words";
+import { AnagramMapType, Level } from "../common/utils";
+import { useSessionContext } from "../../../../../context/SessionContext/Session.context";
+import { apiPathBuilder, ApiPaths } from "../../../../../routing/apiPathBuilder";
+import { LevelNameResponse } from "../common/utils/Types/Level";
+import { ErrorResponse } from "../common/utils/Queries/Queries.types";
+import { FrequencyType } from "../common/utils/Types/Words";
 
 export const useGetLevelNames = () =>
     useQuery<LevelNameResponse, AxiosError<ErrorResponse>>({  

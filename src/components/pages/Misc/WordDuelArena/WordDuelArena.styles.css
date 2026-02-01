@@ -23,8 +23,8 @@
   --color-font-light: white;
   --color-font-medium: #666;
   --color-font-dark: #070707;
-  --color-font-accent: aqua;
-  --color-font-error: deeppink;
+  --color-font-accent: rgb(75, 255, 255);
+  --color-font-error: rgb(255, 91, 129);
   --color-font-success: rgb(91, 242, 91);
   
   /* Spacing */

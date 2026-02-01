@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
-import { WebSocketRequest, WebSocketRequestType } from '../Session.types'
+import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
-import { MIN_WORD_LENGTH } from '../../common/utils'
+import { MIN_WORD_LENGTH } from '../../../common/utils'
 
 type CalculateLetterPositionsProps = {
     letters: string[]

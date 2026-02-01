@@ -1,15 +1,15 @@
 import { ChangeEvent, useState } from 'react'
 import './LevelCreator.styles.css'
 import { LevelCreatorModal } from './LevelCreatorModal'
-import { getAnagramKey } from '../../common/utils/Word/getAnagramKey'
+import { getAnagramKey } from '../common/utils/Word/getAnagramKey'
 import {
     MAX_WORD_LENGTH,
     MIN_WORD_LENGTH,
-} from '../../common/utils/Word/constants'
+} from '../common/utils/Word/constants'
 import { useGetLevelNames } from './LevelCreator.queries'
 import { LevelList } from './LevelList'
-import LoadingIndicator from '../../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
-import { useFullScreen } from '../../common/utils'
+import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { useFullScreen } from '../common/utils/FullScreen/useFullScreen'
 
 export const LevelCreator = () => {
     const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()

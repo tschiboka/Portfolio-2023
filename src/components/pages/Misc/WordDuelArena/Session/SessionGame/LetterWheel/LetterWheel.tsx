@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
-import { useSession } from '../Session.context'
-import { useSessionWS } from '../SessionWebSocket'
+import { useSession } from '../../Session.context'
+import { useSessionWS } from '../../SessionWebSocket'
 import { useLetterWheelListeners } from './LetterWheel.hooks'
 import { Letter } from './Letter'
 import { LetterLines } from './LetterLines'

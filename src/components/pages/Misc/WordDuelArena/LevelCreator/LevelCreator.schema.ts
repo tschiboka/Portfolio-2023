@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { MIN_WORDS_PER_LEVEL, MAX_WORDS_PER_LEVEL, MAX_WORDS_IN_ROW_LENGTH } from '../../common/utils'
+import { MIN_WORDS_PER_LEVEL, MAX_WORDS_PER_LEVEL, MAX_WORDS_IN_ROW_LENGTH } from '../common/utils'
 
 const WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
 

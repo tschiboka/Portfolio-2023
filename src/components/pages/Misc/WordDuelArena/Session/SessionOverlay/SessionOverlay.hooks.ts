@@ -1,5 +1,5 @@
 import { useSessionWS } from "../SessionWebSocket"
-import { InteractionModes, InteractionOverlayConfig } from "./InteractionOverlya.types"
+import { InteractionModes, InteractionOverlayConfig } from "./SessionOverlay.types"
 
 export const useGetInteractionOverlayState = (
     mode: InteractionModes,

@@ -1,5 +1,5 @@
-import { SolvedLevelWord, UnsolvedLevelWord } from '../Session.types'
-import { useSession } from '../Session.context'
+import { SolvedLevelWord, UnsolvedLevelWord } from '../../Session.types'
+import { useSession } from '../../Session.context'
 
 type SolvedSolutionWordProps = {
     playableWord: SolvedLevelWord

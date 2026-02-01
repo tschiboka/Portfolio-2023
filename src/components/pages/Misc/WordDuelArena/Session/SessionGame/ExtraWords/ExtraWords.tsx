@@ -1,4 +1,4 @@
-import { useSession } from '../Session.context'
+import { useSession } from '../../Session.context'
 import './ExtraWords.styles.css'
 
 type ExtraWordsProps = {

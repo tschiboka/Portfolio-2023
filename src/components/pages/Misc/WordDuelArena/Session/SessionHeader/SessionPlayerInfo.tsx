@@ -1,6 +1,6 @@
-import BoyAvatar from '../../../../../assets/images/projects/wordduelarena/player_1.jpg'
-import GirlAvatar from '../../../../../assets/images/projects/wordduelarena/player_2.jpg'
-import { useSession } from './Session.context'
+import BoyAvatar from '../../../../../../assets/images/projects/wordduelarena/player_1.jpg'
+import GirlAvatar from '../../../../../../assets/images/projects/wordduelarena/player_2.jpg'
+import { useSession } from '../Session.context'
 
 type PlayerSlot = 'me' | 'opponent'
 
@@ -23,9 +23,7 @@ export const SessionPlayerInfo = ({ slot }: SessionPlayerInfoProps) => {
         sessionState.currentMatch?.perPlayerStatus[playerRole]?.points || 0
 
     return (
-        <div
-            className={`session-player-info-container ${slot}${activeClass} ${slot}`}
-        >
+        <div className={`session-player-info-container ${slot}${activeClass}`}>
             <img className="avatar" src={avatar} alt={`Player ${role}`} />
             <div className="session-player-info-details">
                 <div className="player-label">{playerLabel}</div>
