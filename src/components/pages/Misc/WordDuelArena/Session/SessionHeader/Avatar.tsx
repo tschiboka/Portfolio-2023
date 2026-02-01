@@ -8,7 +8,7 @@ type SessionPlayerInfoProps = {
     slot: PlayerSlot
 }
 
-export const SessionPlayerInfo = ({ slot }: SessionPlayerInfoProps) => {
+export const Avatar = ({ slot }: SessionPlayerInfoProps) => {
     const { sessionState } = useSession()
     if (!sessionState?.players || !sessionState.role) return null
 
@@ -16,19 +16,14 @@ export const SessionPlayerInfo = ({ slot }: SessionPlayerInfoProps) => {
     const playerRole =
         slot === 'me' ? role : role === 'player1' ? 'player2' : 'player1'
     const player = players[playerRole]
-    const activeClass = player?.connected ? ' active' : ' inactive'
-    const playerLabel = slot === 'me' ? 'You' : 'Opponent'
+    const activeClass = player?.connected ? 'active' : 'inactive'
     const avatar = playerRole === 'player1' ? BoyAvatar : GirlAvatar
-    const points =
-        sessionState.currentMatch?.perPlayerStatus[playerRole]?.points || 0
 
     return (
-        <div className={`session-player-info-container ${slot}${activeClass}`}>
+        <div
+            className={`session-player-avatar-container ${slot} ${activeClass}`}
+        >
             <img className="avatar" src={avatar} alt={`Player ${role}`} />
-            <div className="session-player-info-details">
-                <div className="player-label">{playerLabel}</div>
-                <div className="player-points">{points} pts</div>
-            </div>
         </div>
     )
 }

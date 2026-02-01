@@ -10,7 +10,7 @@
   --font-lg: 2.5rem;
   --font-md: 1.5rem;
   --font-sm: 1rem;
-  --font-xs: 1rem;
+  --font-xs: 0.8rem;
   --font-bold: 700;
   --font-medium: 400;
   --font-thin: 100;
@@ -25,7 +25,11 @@
   --color-font-dark: #070707;
   --color-font-accent: rgb(75, 255, 255);
   --color-font-error: rgb(255, 91, 129);
+  --color-font-error-dark: rgb(95, 0, 32);
   --color-font-success: rgb(91, 242, 91);
+  --color-font-success-dark: rgb(0, 71, 0);
+  --color-font-warning: rgb(255, 229, 91);
+  --color-font-warning-dark: rgb(71, 47, 0);
   
   /* Spacing */
   --sp-lg: 2rem;

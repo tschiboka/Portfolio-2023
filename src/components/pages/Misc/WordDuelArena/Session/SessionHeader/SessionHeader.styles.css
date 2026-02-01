@@ -1,32 +1,34 @@
 .session-header {
+    position: relative;
     width: 100%;
-    height: 80px;
+    height: 125px;
     display: flex;
     flex-direction: column;
 }
 
 .session-header-players {
     display: flex;
-    flex: 1;
     width: 100%;
-}
-
-.session-header-player {
-    display: flex;
     flex: 1;
 }
 
-.session-player-info-container {
+.session-player-avatar-container {
     display: flex;
-    width: 100%;
+    width: auto;
+    flex-shrink: 0;
     align-items: center;
     padding: var(--sp-sm);
-    font-family: var(--font-main);
-    font-size: var(--font-sm);
-    font-weight: var(--font-bold);
 }
 
-.session-player-info-container .avatar {
+.session-player-avatar-container.me {
+    border-right: var(--border-normal);
+}
+
+.session-player-avatar-container.opponent {
+    border-left: var(--border-normal);
+}
+
+.session-player-avatar-container .avatar {
     width: auto;
     height: 8vh;
     max-height: 60px;
@@ -39,39 +41,101 @@
     border-style: solid;
 }
 
-.session-player-info-container.active .avatar {
+.session-player-avatar-container.active .avatar {
     border-color: var(--color-font-success);
 }
 
-.session-player-info-container.opponent {
-    flex-direction: row-reverse;
-}
-
-.session-player-info-container .session-player-info-details {
+.session-player-info {
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-evenly;
+    justify-content: end;
 }
 
-.session-player-info-container .player-points,
-.session-player-info-container .player-label {
-    font-size: var(--font-sm);
+.session-header-difficulty {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: var(--border-normal);
+}
+
+.session-header-difficulty div {
     font-weight: var(--font-bold);
-}
-
-
-.session-player-info-container.opponent .session-player-info-details {
-    align-items: flex-end;
-}
-
-.session-player-info-container .session-player-info-details .player-label {
     color: var(--color-font-accent);
 }
 
-.session-player-info-container.opponent .session-player-info-details .player-label {
+.session-header-icons {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.session-header-icons div {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-header-score {
+    display: flex;
+    width: 100%;
+    height: 60px;
+}
+
+.session-player-info .player-score, .session-player-info .opponent-score {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-xs);
+}
+
+.player-score, .opponent-score {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-points, .opponent-points {
+    height: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.player-words, .opponent-words {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.player-words div, .opponent-words div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 var(--sp-xs);
+}
+
+.player-target-words {
+    color: var(--color-font-accent);
+    font-weight: var(--font-bold);
+}
+
+.opponent-target-words {
     color: var(--color-font-error);
+    font-weight: var(--font-bold);
+}
+
+.player-extra-words, .opponent-extra-words {
+    color: var(--color-font-medium);
+    font-weight: var(--font-bold);
 }
 
 .session-header .momentum-bar {
@@ -79,6 +143,7 @@
     height: 5px;
     display: flex;
     background-color: var(--color-bg-medium);
+    border: 1px solid var(--color-bg-dark);
     border-radius: 5px;
 }
 
@@ -90,8 +155,80 @@
 
 .session-header .momentum-bar .momentum-bar-fill.player {
     background-color: var(--color-font-accent);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .session-header .momentum-bar .momentum-bar-fill.opponent {
     background-color: var(--color-font-error);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.session-header .last-attempt {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-sm);
+    justify-content: space-between;
+    border-top: var(--border-normal);
+    border-radius: 2px;
+}
+
+.session-header .last-attempt > div {
+    display: flex;
+}
+
+.last-attempt-char {
+    margin-left: var(--sp-xs);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border-normal);
+    padding: 2px;
+    font-size: var(--font-xs);
+    font-weight: var(--font-bold);
+    background-color: var(--color-bg-medium);
+    border-width: 2px;
+    border-radius: 1px;
+    opacity: 0;
+    transform: scale(0.6);
+    animation: fadeInChar 0.2s ease-out forwards;
+}
+
+.last-attempt-char:nth-child(1) { animation-delay: 0s; }
+.last-attempt-char:nth-child(2) { animation-delay: 0.1s; }
+.last-attempt-char:nth-child(3) { animation-delay: 0.2s; }
+.last-attempt-char:nth-child(4) { animation-delay: 0.3s; }
+.last-attempt-char:nth-child(5) { animation-delay: 0.4s; }
+.last-attempt-char:nth-child(6) { animation-delay: 0.5s; }
+.last-attempt-char:nth-child(7) { animation-delay: 0.6s; }
+.last-attempt-char:nth-child(8) { animation-delay: 0.7s; }
+
+.last-attempt-char.target {
+    background-color: var(--color-font-success-dark);
+    border-color: var(--color-font-success);
+    color: white;
+}
+
+.last-attempt-char.extra {
+    background-color: var(--color-font-warning-dark);
+    border-color: var(--color-font-warning);
+    color: white;
+}
+
+.last-attempt-char.invalid {
+    background-color: var(--color-font-error-dark);
+    border-color: var(--color-font-error);
+    color: white;
+}
+
+@keyframes fadeInChar {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

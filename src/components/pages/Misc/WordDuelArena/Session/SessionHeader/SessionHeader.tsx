@@ -1,17 +1,17 @@
-import { SessionPlayerInfo } from './SessionPlayerInfo'
+import { Avatar } from './Avatar'
+import { Info } from './Info'
+import { LastAttempt } from './LastAttempt'
 import { MomentumBar } from './MomentumBar'
 import './SessionHeader.styles.css'
 
 export const SessionHeader = () => (
     <header className="session-header">
         <div className="session-header-players">
-            <div className="session-header-player">
-                <SessionPlayerInfo slot="me" />
-            </div>
-            <div className="session-header-player">
-                <SessionPlayerInfo slot="opponent" />
-            </div>
+            <Avatar slot="me" />
+            <Info />
+            <Avatar slot="opponent" />
         </div>
+        <LastAttempt />
         <MomentumBar />
     </header>
 )

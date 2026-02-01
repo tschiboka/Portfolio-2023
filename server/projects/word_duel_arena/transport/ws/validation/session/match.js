@@ -2,11 +2,18 @@ const Joi = require('joi');
 const { SessionStatuses } = require('../../../../config/constants/session');
 const { PlayerDerivedStatus } = require('../../../../config/constants/game');
 
+const LastWordAttemptSchema = Joi.object({
+  word: Joi.string().required(),
+  isTarget: Joi.boolean().required(),
+  isExtra: Joi.boolean().required(),
+}).allow(null);
+
 const MatchPlayerStatusSchema = Joi.object({
   derivedStatus: Joi.string().valid(...Object.values(PlayerDerivedStatus)).required(),
   resigned: Joi.boolean().required(),
   paused: Joi.boolean().required(),
   points: Joi.number().required(),
+  lastWordAttempt: LastWordAttemptSchema.optional(),
 });
 
 const MatchSchema = Joi.object({

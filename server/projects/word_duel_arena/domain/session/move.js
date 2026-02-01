@@ -23,6 +23,11 @@ function getSolutionState(draft, deviceId, payload) {
         
         const player = draft.currentMatch.perPlayerStatus[playerKey];
         player.points += calculatePoints(payload.attempt, true);
+        player.lastWordAttempt = {
+            word: payload.attempt,
+            isTarget: true,
+            isExtra: false,
+        };
         return;
     }
 
@@ -35,8 +40,21 @@ function getSolutionState(draft, deviceId, payload) {
         
         const player = draft.currentMatch.perPlayerStatus[playerKey];
         player.points += calculatePoints(payload.attempt, false);
-
+        player.lastWordAttempt = {
+            word: payload.attempt,
+            isTarget: false,
+            isExtra: true,
+        };
+        return;
     }
+
+    // If the word is neither a target nor an extra word, still track the attempt
+    const player = draft.currentMatch.perPlayerStatus[playerKey];
+    player.lastWordAttempt = {
+        word: payload.attempt,
+        isTarget: false,
+        isExtra: false,
+    };
 }
 
 module.exports = { getSolutionState };

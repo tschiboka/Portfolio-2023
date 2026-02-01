@@ -42,11 +42,18 @@ export type Player = {
     connected: boolean;
 };
 
+export type LastWordAttempt = {
+    word: string;
+    isTarget: boolean;
+    isExtra: boolean;
+};
+
 export type MatchPlayerStatus = {
     derivedStatus: PlayerDerivedStatus;
     resigned: boolean;
     paused: boolean;
     points: number;
+    lastWordAttempt?: LastWordAttempt | null;
 }
 
 export type Match = {

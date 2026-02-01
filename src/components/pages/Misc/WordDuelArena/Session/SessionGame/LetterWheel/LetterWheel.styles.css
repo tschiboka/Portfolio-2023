@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-background-light);
+  background-color: var(--color-bg-medium);
 }
 
 .letter-wheel .letter {
@@ -32,15 +32,16 @@
   transform-origin: center;
   font-size: 3vh;
   font-weight: var(--font-bold);
-  background-color: var(--color-bg-medium);
-  color: white;
-  border: var(--border-normal);
+  background-color: var(--color-bg-light);
+  color: var(--color-font-accent);
+  border: 2px solid var(--color-bg-dark);
   border-radius: 50%;
   z-index: 20;
 }
 
 .letter-wheel .letter.highlighted {
   background-color: var(--color-font-accent);
+  border-color: var(--color-font-accent);
   color: var(--color-bg-dark)
 }
 

@@ -26,26 +26,3 @@
     margin-bottom: var(--sp-md);
     cursor: pointer;
 }
-
-.game-controls .solved-by-counts {
-    position: absolute;
-    top: -60px;
-}
-
-.game-controls .solved-by-counts div {
-    width: 50px;
-    padding: 2px 5px;
-    font-size: var(--font-sm);
-    color: black;
-    font-weight: var(--font-bold);
-    border-radius: 10px;
-}
-
-.game-controls .solved-by-counts div.solved-by-player {
-    background-color: var(--color-font-accent);
-}
-
-.game-controls .solved-by-counts div.solved-by-opponent {
-    margin-top: 5px;
-    background-color: var(--color-font-error);
-}
