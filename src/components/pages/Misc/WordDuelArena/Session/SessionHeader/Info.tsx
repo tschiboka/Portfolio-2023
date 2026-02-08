@@ -1,41 +1,18 @@
 import { CheckMark, Coin, Star } from '../../common/components'
 import { useSession } from '../Session.context'
+import { getHeaderInfo } from './SessionHeader.selectors'
 
 export const Info = () => {
     const { sessionState } = useSession()
     if (!sessionState?.players || !sessionState.role) return null
 
-    const { role } = sessionState
-    const opponentRole = role === 'player1' ? 'player2' : 'player1'
+    const headerInfo = getHeaderInfo({ sessionState })
+    if (!headerInfo) return null
 
-    const playerPoints =
-        sessionState.currentMatch?.perPlayerStatus[role]?.points || '-'
-    const opponentPoints =
-        sessionState.currentMatch?.perPlayerStatus[opponentRole]?.points || '-'
-
-    const { level } = sessionState || {}
-    const targetWords = level?.targetWords || []
-    const extraWords = level?.extraWords || []
-
-    const playerTargetWords =
-        targetWords.filter(
-            (word) => word.status === 'SOLVED' && word.solvedBy === role,
-        ).length || '-'
-    const playerExtraWords =
-        extraWords.filter(
-            (word) => word.status === 'SOLVED' && word.solvedBy === role,
-        ).length || '-'
-
-    const opponentTargetWords =
-        targetWords.filter(
-            (word) =>
-                word.status === 'SOLVED' && word.solvedBy === opponentRole,
-        ).length || '-'
-    const opponentExtraWords =
-        extraWords.filter(
-            (word) =>
-                word.status === 'SOLVED' && word.solvedBy === opponentRole,
-        ).length || '-'
+    const playerWords =
+        headerInfo.player.targetWords + headerInfo.player.extraWords
+    const opponentWords =
+        headerInfo.opponent.targetWords + headerInfo.opponent.extraWords
 
     return (
         <div className="session-player-info">
@@ -50,16 +27,9 @@ export const Info = () => {
             <div className="session-header-score">
                 <div className="player-score">
                     <div className="player-points">
-                        <span>{playerPoints}</span>
+                        <span>{headerInfo.player.points}</span>
                     </div>
-                    <div className="player-words">
-                        <div className="player-target-words">
-                            {playerTargetWords}{' '}
-                        </div>
-                        <div className="player-extra-words">
-                            {playerExtraWords}
-                        </div>
-                    </div>
+                    <div className="player-words">{playerWords}</div>
                 </div>
                 <div className="session-header-icons">
                     <div>
@@ -71,16 +41,9 @@ export const Info = () => {
                 </div>
                 <div className="opponent-score">
                     <div className="opponent-points">
-                        <span>{opponentPoints}</span>
+                        <span>{headerInfo.opponent.points}</span>
                     </div>
-                    <div className="opponent-words">
-                        <div className="opponent-target-words">
-                            {opponentTargetWords}
-                        </div>
-                        <div className="opponent-extra-words">
-                            {opponentExtraWords}
-                        </div>
-                    </div>
+                    <div className="opponent-words">{opponentWords}</div>
                 </div>
             </div>
         </div>

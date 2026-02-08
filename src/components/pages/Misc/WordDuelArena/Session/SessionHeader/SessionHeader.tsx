@@ -1,6 +1,6 @@
 import { Avatar } from './Avatar'
 import { Info } from './Info'
-import { LastAttempt } from './LastAttempt'
+import { LastAttempts } from './LastAttempts'
 import { MomentumBar } from './MomentumBar'
 import './SessionHeader.styles.css'
 
@@ -11,7 +11,7 @@ export const SessionHeader = () => (
             <Info />
             <Avatar slot="opponent" />
         </div>
-        <LastAttempt />
+        <LastAttempts />
         <MomentumBar />
     </header>
 )

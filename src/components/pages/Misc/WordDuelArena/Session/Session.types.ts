@@ -1,4 +1,5 @@
-export type PlayerRole = 'player1' | 'player2' | null
+export type PlayerRole = 'player1' | 'player2'
+export type OptionalPlayerRole = PlayerRole | null
 
 export type SessionContextType = {
     sessionId: string
@@ -9,13 +10,13 @@ export type SessionContextType = {
 }
 
 export enum WebSocketRequestType {
-    PING = "ping",
-    ATTEMPT_MOVE = "attempt_move"
+    PING = 'ping',
+    ATTEMPT_MOVE = 'attempt_move',
 }
 
 export enum WebSocketResponseType {
-    STATE_UPDATE = "state_update",
-    ERROR = "error"
+    STATE_UPDATE = 'state_update',
+    ERROR = 'error',
 }
 
 export enum SessionStatuses {
@@ -38,87 +39,90 @@ export enum PlayerDerivedStatus {
 }
 
 export type Player = {
-    lastActive: number;
-    connected: boolean;
-};
+    lastActive: number
+    connected: boolean
+}
 
 export type LastWordAttempt = {
-    word: string;
-    isTarget: boolean;
-    isExtra: boolean;
-};
+    word: string
+    isTarget: boolean
+    isExtra: boolean
+}
 
 export type MatchPlayerStatus = {
-    derivedStatus: PlayerDerivedStatus;
-    resigned: boolean;
-    paused: boolean;
-    points: number;
-    lastWordAttempt?: LastWordAttempt | null;
+    derivedStatus: PlayerDerivedStatus
+    resigned: boolean
+    paused: boolean
+    points: number
+    lastWordAttempt?: LastWordAttempt
 }
 
 export type Match = {
-  id: string;
-  status: MatchStatuses;
-  perPlayerStatus: {
-    player1: MatchPlayerStatus;
-    player2: MatchPlayerStatus;
-  };
-  winner: 'player1' | 'player2' | null;
-  reason: 'RESIGN' | 'TIMEOUT' | 'DRAW' | null;
-};
-
-export type WebSocketSessionState = {
-  id: string;
-  role?: PlayerRole;
-  status: SessionStatuses;
-  players?: {
-    player1?: Player;
-    player2?: Player;
-  };
-  level?: Level;
-  currentMatch?: Match;
-  previousMatches?: Match[];
+    id: string
+    status: MatchStatuses
+    perPlayerStatus: {
+        player1: MatchPlayerStatus
+        player2: MatchPlayerStatus
+    }
+    winner: OptionalPlayerRole
+    reason: 'RESIGN' | 'TIMEOUT' | 'DRAW' | null
 }
 
-export type WebSocketResponse = { type: WebSocketResponseType; payload?: WebSocketSessionState; message: string }
-export type WebSocketRequest =
-  | { type: WebSocketRequestType.PING }
-  | {
-      type: WebSocketRequestType.ATTEMPT_MOVE
-      payload: {
-        attempt: string
-      }
+export type WebSocketSessionState = {
+    id: string
+    role?: OptionalPlayerRole
+    status: SessionStatuses
+    players?: {
+        player1?: Player
+        player2?: Player
     }
+    level?: Level
+    currentMatch?: Match
+    previousMatches?: Match[]
+}
 
+export type WebSocketResponse = {
+    type: WebSocketResponseType
+    payload?: WebSocketSessionState
+    message: string
+}
+export type WebSocketRequest =
+    | { type: WebSocketRequestType.PING }
+    | {
+          type: WebSocketRequestType.ATTEMPT_MOVE
+          payload: {
+              attempt: string
+          }
+      }
 
 export type WebSocketContextType = {
-  lastState?: WebSocketResponse
-  readyState: number
-  errorMessage: string | null
-  connect: () => void
-  send: (msg: WebSocketRequest) => void
+    lastState?: WebSocketResponse
+    readyState: number
+    errorMessage: string | null
+    connect: () => void
+    send: (msg: WebSocketRequest) => void
 }
 
 export type UnsolvedLevelWord = {
-  status: "UNSOLVED";
-  mask: string;
-  solvedBy: PlayerRole | null;
+    status: 'UNSOLVED'
+    mask: string
+    solvedBy: OptionalPlayerRole
 }
 
 export type SolvedLevelWord = {
-  status: "SOLVED";
-  word: string;
-  solvedBy: PlayerRole | null;
+    status: 'SOLVED'
+    word: string
+    solvedBy: OptionalPlayerRole
 }
 
-export type PlayableLevelWord = SolvedLevelWord | UnsolvedLevelWord;
+export type PlayableLevelWord = SolvedLevelWord | UnsolvedLevelWord
 
 export type Level = {
-  id: string;
-  name: string;
-  difficulty: number;
-  targetWords: PlayableLevelWord[];
-  extraWords: PlayableLevelWord[];
+    id: string
+    name: string
+    difficulty: number
+    targetWords: PlayableLevelWord[]
+    extraWords: PlayableLevelWord[]
 }
 
 export type LevelWordStatus = PlayableLevelWord['status']
