@@ -10,7 +10,7 @@
     div {
         height: 100%;
         width: 5px;
-        background-color: rgb(183, 183, 183);
+        background-color: currentColor;
         border-radius: 3px;
         opacity: 0.3;
         animation: loadingIndicatorBarAnimation 0.9s infinite;

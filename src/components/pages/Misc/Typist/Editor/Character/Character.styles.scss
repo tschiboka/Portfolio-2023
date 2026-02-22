@@ -1,0 +1,29 @@
+@use '../../../../../../styles/palette.scss' as palette;
+
+.Character {
+    width: 1ch;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    color: palette.$white_2;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+    border-bottom: 3px solid transparent;
+    transition: color 0.1s ease;
+    user-select: none;
+
+    &.active {
+        border-bottom: 3px solid palette.$accent;
+    }
+    &.active.incorrect {
+        border-bottom: 3px solid palette.$error;
+    }
+    &.correct {
+        color: palette.$black_5;
+    }
+    &.incorrect {
+        color: palette.$error;
+    }
+}

@@ -8,7 +8,7 @@ import { Maybe } from 'monet'
 import { useNavigate } from 'react-router-dom'
 import { useSessionContext } from '../../../context/SessionContext/Session.context'
 
-interface Props {
+type Props = {
     children: ReactNode
     title: string
     path: string

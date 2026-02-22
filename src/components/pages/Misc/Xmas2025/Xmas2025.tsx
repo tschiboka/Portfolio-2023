@@ -26,13 +26,9 @@ import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
 import { useSessionContext } from '../../../../context/SessionContext/Session.context'
 import { CandlePanel } from './CandlePanel'
+import { PageContainerProps } from '../../../sharedComponents/Page/Page.types'
 
-interface Props {
-    pageName: string
-    path: string
-}
-
-const Xmas2025 = ({ pageName, path }: Props) => {
+const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
     const { mobileMenuVisible } = useAppContext()
     const { user } = useSessionContext().session || {}
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])

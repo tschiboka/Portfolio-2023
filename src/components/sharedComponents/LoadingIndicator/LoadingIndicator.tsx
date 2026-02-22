@@ -2,12 +2,13 @@ import './LoadingIndicator.scss'
 
 type LoadingIndicatorProps = {
     show: boolean
+    color?: string
 }
 
-const LoadingIndicator = ({ show }: LoadingIndicatorProps) => {
+const LoadingIndicator = ({ show, color }: LoadingIndicatorProps) => {
     return (
         show && (
-            <div className="LoadingIndicator">
+            <div className="LoadingIndicator" style={{ color }}>
                 <div></div>
                 <div></div>
                 <div></div>

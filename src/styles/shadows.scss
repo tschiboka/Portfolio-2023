@@ -1,21 +1,27 @@
-@function dual-box-shadow($x, $y, $blur, $dark: black, $light: rgba(255, 255, 255, 0.01)) {
-    @return #{
-      #{$x} #{$y} #{$blur} #{$dark},
-      -#{$x} -#{$y} #{$blur} #{$light}
-    };
-  }
+@function dual-box-shadow(
+    $x,
+    $y,
+    $blur,
+    $dark: black,
+    $light: rgba(255, 255, 255, 0.01)
+) {
+    @return #{#{$x} #{$y} #{$blur} #{$dark}, -#{$x} -#{$y} #{$blur} #{$light}};
+}
 
-@function quad-box-shadow($x, $y, $blur, $dark: black, $light: rgba(255, 255, 255, 0.02)) {
+@function quad-box-shadow(
+    $x,
+    $y,
+    $blur,
+    $dark: black,
+    $light: rgba(255, 255, 255, 0.02)
+) {
     $blurInset: $blur * 2;
     $insetX: $x * 2;
     $insetY: $y * 2;
     $insetLight: rgba($light, 0.01);
     $insetDark: rgba($dark, 0.6);
 
-    @return #{
-      #{$x} #{$y} #{$blur} #{$dark},
-      -#{$x} -#{$y} #{$blur} #{$light},
-      inset -#{$insetX} -#{$insetY} #{$blurInset} #{$insetLight},
-      inset #{$insetX} #{$insetY} #{$blurInset} #{$insetDark},
-    };
-  }
+    @return #{#{$x} #{$y} #{$blur} #{$dark}, -#{$x} -#{$y} #{$blur} #{$light},
+        inset -#{$insetX} -#{$insetY} #{$blurInset} #{$insetLight},
+        inset #{$insetX} #{$insetY} #{$blurInset} #{$insetDark}, };
+}

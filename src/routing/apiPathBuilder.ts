@@ -1,4 +1,4 @@
-import { getURL } from "../serverAPI/getURL"
+import { getURL } from '../serverAPI/getURL'
 
 export const ApiPaths = {
     LOGIN: `LOGIN`,
@@ -6,19 +6,23 @@ export const ApiPaths = {
     REGISTER_USER: 'USER',
     CONFIRM_REGISTRATION: 'CONFIRM',
     REHYDRATE_SESSION: 'REHYDRATE_SESSION',
-    CATEGORIES: "CATEGORIES",
-    PROJECT_XMAS: "PROJECT_XMAS",
-    PROJECT_WORD_DUEL_ARENA: "PROJECT_WORD_DUEL_ARENA"
+    CATEGORIES: 'CATEGORIES',
+    PROJECT_XMAS: 'PROJECT_XMAS',
+    PROJECT_TYPIST: 'PROJECT_TYPIST',
+    PROJECT_WORD_DUEL_ARENA: 'PROJECT_WORD_DUEL_ARENA',
 }
 
 type ApiPathBuilderOptions = {
     prefix?: string
 }
 
-export const apiPathBuilder = (pathName: string, options?: ApiPathBuilderOptions):string => {
-    const url = getURL();
+export const apiPathBuilder = (
+    pathName: string,
+    options?: ApiPathBuilderOptions,
+): string => {
+    const url = getURL()
     const apiPrefix = options?.prefix ?? '/api'
-    const apiPaths:Record<string, string> = {
+    const apiPaths: Record<string, string> = {
         LOGIN: `login`,
         SETTINGS: 'settings',
         REGISTER_USER: 'user',
@@ -26,8 +30,9 @@ export const apiPathBuilder = (pathName: string, options?: ApiPathBuilderOptions
         REHYDRATE_SESSION: 'session',
         CATEGORIES: 'categories',
         PROJECT_XMAS: 'projects/xmas_2025',
-        PROJECT_WORD_DUEL_ARENA: 'projects/word_duel_arena'
+        PROJECT_TYPIST: 'projects/typist',
+        PROJECT_WORD_DUEL_ARENA: 'projects/word_duel_arena',
     }
 
-    return`${url}${apiPrefix}/${apiPaths[pathName]}`
+    return `${url}${apiPrefix}/${apiPaths[pathName]}`
 }

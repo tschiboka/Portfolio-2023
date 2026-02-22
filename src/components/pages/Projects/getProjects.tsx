@@ -6,6 +6,7 @@ import greenRooftopImg from '../../../assets/images/projects/GreenRooftop.png'
 import fruitsAndFlowersImg from '../../../assets/images/projects/FruitsAndFlowers.png'
 import pocketTutorImg from '../../../assets/images/projects/PocketTutor.png'
 import wordDuelArena from '../../../assets/images/projects/WordsDuelArena.jpg'
+import keyboardImg from '../../../assets/images/projects/FuturisticKeyboard.jpeg'
 import { Project } from './Projects'
 
 const projects: Project[] = [
@@ -89,6 +90,14 @@ const projects: Project[] = [
             'RTL',
         ],
         url: '/projects/word-duel-arena',
+    },
+    {
+        title: 'Typist',
+        image: keyboardImg,
+        description:
+            'Typist is a futuristic typing game that challenges players to improve their typing speed and accuracy. Players can track their progress and unlock new levels as they master their typing skills.',
+        badges: ['React', 'TypeScript', 'NodeJs', 'Express', 'MongoDB'],
+        url: '/projects/typist',
     },
 ]
 
