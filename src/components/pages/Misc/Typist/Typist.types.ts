@@ -19,11 +19,18 @@ export type Keystroke = {
 
 export type RoundResponse = {
     text: string
+    stats?: TypingStats
+}
+
+export type TypingStats = {
+    errorCombinations?: string[]
+    practiceMode: 'error' | 'target'
 }
 
 export type TypistEditorState = {
-    text: string
     status: TypistStatus
+    text: string
+    stats?: TypingStats
     cursorPosition: number
     lastEvent: TypistEvent
     words: EditorWord[]
@@ -34,7 +41,7 @@ export type EditorAction =
     | { type: 'KEYSTROKE'; key: string }
     | { type: 'END' }
     | { type: 'PAUSE' }
-    | { type: 'RESET'; text: string }
+    | { type: 'RESET'; text: string; stats?: TypingStats }
 
 export type TypistContextValues = {
     editorState: TypistEditorState

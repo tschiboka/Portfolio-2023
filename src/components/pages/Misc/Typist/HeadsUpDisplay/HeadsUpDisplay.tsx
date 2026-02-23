@@ -1,4 +1,5 @@
 import './HeadsUpDisplay.styles.scss'
+import { HeadsUpMetrics } from './HeadsUpMetrics/HeadsUpMetrics'
 import { LetterBox } from './LetterBox/LetterBox'
 
 export const HeadsUpDisplay = () => {
@@ -8,34 +9,10 @@ export const HeadsUpDisplay = () => {
         ...'0123456789'.split(''),
         ...'.!?,;:-\'"@&()'.split(''),
     ]
+
     return (
         <div className="HeadsUpDisplay">
-            <div className="HeadsUpDisplay__entry">
-                <div className="label">Metrics</div>
-                <div className="content metrics">
-                    <div className="errors">
-                        <span>Errors:</span>
-                        <LetterBox letter="A" proficiency="extreme" />
-                        <LetterBox letter="B" proficiency="outstanding" />
-                        <LetterBox letter="C" proficiency="high" />
-                        <LetterBox letter="D" proficiency="moderate" />
-                        <LetterBox letter="E" proficiency="low" />
-                        <LetterBox letter="F" />
-                    </div>
-                    <div>
-                        <span>Speed:</span>
-                        <span>72</span>
-                    </div>
-                    <div>
-                        <span>Accuracy:</span>
-                        <span>98%</span>
-                    </div>
-                    <div>
-                        <span>Score:</span>
-                        <span>98%</span>
-                    </div>
-                </div>
-            </div>
+            <HeadsUpMetrics />
             <div className="HeadsUpDisplay__entry">
                 <div className="label">Lower keys</div>
                 <div className="content keys">

@@ -9,7 +9,7 @@ const userSettings = {
     practiceMode: 'error', // "target" for letters and error for calculating the combinations
     difficulty: 80, // Cut off frequency percentile below for word selection
     avgWordLength: 5, // Average word length to target for selection
-    textLength: 35, // Target total text length in words for a round
+    textLength: 5, // Target total text length in words for a round
     targetLetter: 'A', // Only one letter to use in the words, empty for no restriction
     errorCombinations: ['TA'], // Only words containing this combination, empty for no restriction
     allowCapitalLetters: 0, // Percentage of words allowed to have capital letters
@@ -36,7 +36,9 @@ router.post('/round', [], async (req, res) => {
                         keystrokes.find(
                             (k) => k.charIndex === keystroke.charIndex - 1,
                         )?.expected ?? ''
-                    return previousChar + keystroke.expected
+
+                    // Trim in case previousChar is empty (for errors at the start of the text)
+                    return (previousChar + keystroke.expected).trim()
                 }
             })
             .filter(Boolean)
@@ -97,8 +99,10 @@ router.post('/round', [], async (req, res) => {
 
     res.status(200).json({
         text: responseWords.join(' '),
-        practiceMode: userSettings.practiceMode,
-        errorCombinations: uniqueErrorCombinations,
+        stats: {
+            practiceMode: userSettings.practiceMode,
+            errorCombinations: uniqueErrorCombinations,
+        },
     })
 })
 

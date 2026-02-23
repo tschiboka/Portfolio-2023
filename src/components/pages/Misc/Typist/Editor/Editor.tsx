@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { useTypistContext } from '../Typist.context'
+import { TypistContext } from '../Typist.context'
 import { Character } from './Character/Character'
 import { createEditorHandler } from './Editor.handlers'
 import './Editor.styles.scss'
 import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
 export const Editor = () => {
-    const { editorState, dispatch, isLoading } = useTypistContext()
+    const { editorState, dispatch, isLoading } = TypistContext.Use()
     const { words } = editorState
 
     useEffect(() => {

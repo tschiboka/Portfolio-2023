@@ -9,6 +9,7 @@ const initialState: TypistEditorState = {
     status: 'idle',
     lastEvent: 'none',
     text: '',
+    stats: { practiceMode: 'error' },
     cursorPosition: 0,
     words: textToWords(''),
     keystrokes: [],
@@ -21,11 +22,10 @@ const initialValues: TypistContextValues = {
     isLoading: false,
 }
 
-const {
-    Context,
-    Provider: TypistProviderBase,
-    Use,
-} = ContextBuilder.CreateContext<TypistContextValues>('Typist', initialValues)
+export const TypistContext = ContextBuilder.CreateContext<TypistContextValues>(
+    'Typist',
+    initialValues,
+)
 
 export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
@@ -46,11 +46,15 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
         if (isFreshlyLoaded || justEnded) {
             postRound(editorState.keystrokes, {
                 onSuccess: (data) => {
-                    dispatch({ type: 'RESET', text: data.text })
+                    dispatch({
+                        type: 'RESET',
+                        text: data.text,
+                        stats: data.stats,
+                    })
                 },
             })
         }
-    }, [editorState.status])
+    }, [editorState.status, postRound])
 
     const contextValue: TypistContextValues = {
         editorState,
@@ -58,8 +62,8 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
         isLoading: isPending,
     }
     return (
-        <TypistProviderBase value={contextValue}>{children}</TypistProviderBase>
+        <TypistContext.Provider value={contextValue}>
+            {children}
+        </TypistContext.Provider>
     )
 }
-
-export { Use as useTypistContext, Context as TypistContext }

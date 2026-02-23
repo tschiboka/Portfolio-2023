@@ -101,6 +101,7 @@ export const editorReducer = (
                 status: 'idle',
                 lastEvent: 'none',
                 text: action.text,
+                stats: action.stats,
                 cursorPosition: 0,
                 words: textToWords(action.text),
                 keystrokes: [],

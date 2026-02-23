@@ -4,14 +4,14 @@ import axios from 'axios'
 import { Keystroke, RoundResponse } from './Typist.types'
 
 export const usePostRound = () =>
-    useMutation({
+    useMutation<RoundResponse, Error, Keystroke[]>({
         mutationKey: ['typist-post-round'],
-        mutationFn: async (keystrokes: Keystroke[]) => {
-            const { data } = await axios.post<RoundResponse>(
-                apiPathBuilder(ApiPaths.PROJECT_TYPIST, { prefix: '' }) +
-                    '/round',
-                { keystrokes },
-            )
-            return data
-        },
+        mutationFn: async (keystrokes: Keystroke[]) =>
+            axios
+                .post<RoundResponse>(
+                    apiPathBuilder(ApiPaths.PROJECT_TYPIST, { prefix: '' }) +
+                        '/round',
+                    { keystrokes },
+                )
+                .then((res) => res.data),
     })
