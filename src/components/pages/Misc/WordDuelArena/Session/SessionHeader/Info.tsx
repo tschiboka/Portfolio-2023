@@ -1,4 +1,4 @@
-import { CheckMark, Coin, Star } from '../../common/components'
+import { CheckMark, Coin } from '../../common/components'
 import { useSession } from '../Session.context'
 import { getHeaderInfo } from './SessionHeader.selectors'
 
@@ -16,13 +16,9 @@ export const Info = () => {
 
     return (
         <div className="session-player-info">
-            <div className="session-header-difficulty">
-                <Star />
-                <Star />
-                <Star />
-                <Star />
-                <Star isFilled={false} />
-                <div></div>
+            <div className="session-header-names">
+                <div>You</div>
+                <div>Opponent</div>
             </div>
             <div className="session-header-score">
                 <div className="player-score">
