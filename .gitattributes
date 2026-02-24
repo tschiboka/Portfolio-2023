@@ -1,0 +1,14 @@
+# Set default behavior to automatically normalize line endings.
+* text=auto
+
+# Ensure binary files are never treated as text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.vsix binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
