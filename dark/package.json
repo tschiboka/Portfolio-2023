@@ -1,0 +1,27 @@
+{
+    "name": "tschiboka-dark",
+    "displayName": "Tschiboka Dark",
+    "description": "A dark theme with cyan, green, and pink accents",
+    "version": "0.0.6",
+    "publisher": "tschiboka",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tschiboka/Portfolio-2023",
+        "directory": "dark"
+    },
+    "engines": {
+        "vscode": "^1.109.0"
+    },
+    "categories": [
+        "Themes"
+    ],
+    "contributes": {
+        "themes": [
+            {
+                "label": "Tschiboka Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/Tschiboka Dark-color-theme.json"
+            }
+        ]
+    }
+}
