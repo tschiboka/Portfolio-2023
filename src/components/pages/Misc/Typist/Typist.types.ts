@@ -25,6 +25,12 @@ export type RoundResponse = {
 export type TypingStats = {
     errorCombinations?: string[]
     practiceMode: 'error' | 'target'
+    speed?: {
+        wpm: number
+        cpm: number
+    }
+    accuracy?: number
+    score?: number
 }
 
 export type TypistEditorState = {

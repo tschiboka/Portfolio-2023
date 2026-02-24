@@ -9,7 +9,7 @@ const userSettings = {
     practiceMode: 'error', // "target" for letters and error for calculating the combinations
     difficulty: 80, // Cut off frequency percentile below for word selection
     avgWordLength: 5, // Average word length to target for selection
-    textLength: 5, // Target total text length in words for a round
+    textLength: 20, // Target total text length in words for a round
     targetLetter: 'A', // Only one letter to use in the words, empty for no restriction
     errorCombinations: ['TA'], // Only words containing this combination, empty for no restriction
     allowCapitalLetters: 0, // Percentage of words allowed to have capital letters
@@ -97,11 +97,73 @@ router.post('/round', [], async (req, res) => {
         responseWords = responseWords.map((word) => word.toLowerCase())
     }
 
+    const calculateSpeed = () => {
+        const firstTime = keystrokes[0]?.timestamp
+        const lastTime = keystrokes[keystrokes.length - 1]?.timestamp
+        if (!firstTime || !lastTime) return { wpm: 0, cpm: 0 }
+
+        const totalMins = (lastTime - firstTime) / 60000
+        const totalCharsTyped = keystrokes.filter((k) => k.correct).length
+
+        return {
+            wpm: Math.round((totalCharsTyped / 5 / totalMins) * 10) / 10,
+            cpm: Math.round((totalCharsTyped / totalMins) * 10) / 10,
+        }
+    }
+
+    const calculateAccuracy = () => {
+        const totalTyped = keystrokes.length
+        const totalErrors = keystrokes.filter((k) => !k.correct).length
+        return totalTyped > 0
+            ? Math.round(((totalTyped - totalErrors) / totalTyped) * 1000) / 10
+            : 0
+    }
+
+    const calculateScore = () => {
+        const accuracy = calculateAccuracy()
+        const { wpm } = calculateSpeed()
+
+        const accuracyScore = accuracy / 100 // 0–1
+        const uniqueChars = new Set(keystrokes.map((k) => k.expected))
+
+        // WARNING: this value must be always in sync with FE
+        // 26 lowercase + 26 uppercase + 10 digits + 12 punctuation (.!?,;:-'"@&()) + space
+        const MAX_EXPECTED_UNIQUE = 75
+        const varietyScore = Math.min(uniqueChars.size / MAX_EXPECTED_UNIQUE, 1)
+
+        // Factor 3: Derived from settings: words × (avg word length + 1 for space separator)
+        const MAX_TEXT_LENGTH = 100 * 5
+        const textLength = keystrokes.filter((k) => k.correct).length
+        const lengthScore = Math.min(textLength / MAX_TEXT_LENGTH, 1)
+
+        // Factor 4: Speed in WPM (weight 0.15)
+        const MAX_WPM = 150 // WPM ceiling for score normalisation (professional typist benchmark)
+        const speedScore = Math.min(wpm / MAX_WPM, 1)
+
+        const WEIGHT = {
+            Accuracy: 0.35,
+            Variety: 0.2,
+            Length: 0.15,
+            Speed: 0.3,
+        }
+
+        const weighted =
+            WEIGHT.Accuracy * accuracyScore +
+            WEIGHT.Variety * varietyScore +
+            WEIGHT.Length * lengthScore +
+            WEIGHT.Speed * speedScore
+
+        return Math.round(weighted * 1000)
+    }
+
     res.status(200).json({
         text: responseWords.join(' '),
         stats: {
             practiceMode: userSettings.practiceMode,
             errorCombinations: uniqueErrorCombinations,
+            speed: calculateSpeed(),
+            accuracy: calculateAccuracy(),
+            score: calculateScore(),
         },
     })
 })
