@@ -38,19 +38,24 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
     const [editorState, dispatch] = useReducer(editorReducer, initialState)
     const prevStatusRef = useRef(editorState.status)
+    const editorStateRef = useRef(editorState)
+    editorStateRef.current = editorState
     const { mutate: postRound, isPending } = usePostRound()
 
     useEffect(() => {
         const prevStatus = prevStatusRef.current
         prevStatusRef.current = editorState.status
 
-        const { status, lastEvent } = editorState
-        const isFreshlyLoaded = status === 'idle' && lastEvent === 'none'
+        const { lastEvent, keystrokes } = editorStateRef.current
+        const isFreshlyLoaded =
+            editorState.status === 'idle' && lastEvent === 'none'
         const justEnded =
-            status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
+            editorState.status === 'idle' &&
+            lastEvent === 'ended' &&
+            prevStatus !== 'idle'
 
         if (isFreshlyLoaded || justEnded) {
-            postRound(editorState.keystrokes, {
+            postRound(keystrokes, {
                 onSuccess: (data) => {
                     dispatch({
                         type: 'RESET',

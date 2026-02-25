@@ -1,4 +1,5 @@
 const { calculatePoints } = require('./points')
+const { MatchStatuses } = require('../../config/constants/game')
 
 function getSolutionState(draft, deviceId, payload) {
     const playerKey =
@@ -28,6 +29,13 @@ function getSolutionState(draft, deviceId, payload) {
             isTarget: true,
             isExtra: false,
         }
+
+        // End the match when all target words have been found
+        const allTargetsSolved = targetWords.every((w) => w.status === 'SOLVED')
+        if (allTargetsSolved) {
+            draft.currentMatch.status = MatchStatuses.FINISHED
+        }
+
         return
     }
 

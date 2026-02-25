@@ -1,23 +1,23 @@
-const { nanoid } = require('nanoid');
-const { SessionStatuses } = require('../../config/constants/session');
+const { nanoid } = require('nanoid')
+const { MatchStatuses } = require('../../config/constants/game')
 
 const defaultPlayer = {
     derivedStatus: 'ACTIVE',
     resigned: false,
     paused: false,
-    points: 0
+    points: 0,
 }
 const getInitialMatchState = () => ({
     id: nanoid(),
-    status: SessionStatuses.ACTIVE,
+    status: MatchStatuses.ACTIVE,
     perPlayerStatus: {
         player1: { ...defaultPlayer },
-        player2: { ...defaultPlayer }
+        player2: { ...defaultPlayer },
     },
     moves: [],
-    winner: null
+    winner: null,
 })
 
 module.exports = {
-  getInitialMatchState,
-};
+    getInitialMatchState,
+}
