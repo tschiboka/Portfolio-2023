@@ -1,9 +1,12 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
+import { GetHealthResponse, TypedResponse } from '@common/types'
+import { HttpStatus } from '../common/HttpStatus/HttpStatus'
 
 const router = express.Router()
 
-router.get('/', (req: Request, res: Response) => {
-    return res.status(200).json({ success: true })
+type GetHealthRes = TypedResponse<GetHealthResponse>
+router.get('/', (_req, res: GetHealthRes) => {
+    return res.status(HttpStatus.OK).json({ success: true })
 })
 
 export default router

@@ -1,26 +1,45 @@
-import { Request, Response } from 'express'
+import { TypedRequest, TypedResponse } from '@common/types'
+import type {
+    WdaErrorResponse,
+    GetWdaWordListResponse,
+    GetWdaAnagramMapResponse,
+    GetWdaFrequenciesResponse,
+} from '@common/types'
 
 import { getWordResources } from '../../../infrastructure/resources/word'
+import { HttpStatus } from '../../../../../common/HttpStatus/HttpStatus'
 
-async function handleGetWordList(_req: Request, res: Response) {
+type GetWordListRes = TypedResponse<GetWdaWordListResponse | WdaErrorResponse>
+async function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {
     const resources = getWordResources()
-    if (!resources) return res.status(503).json({ message: 'Could not load resource: wordList' })
+    if (!resources)
+        return res
+            .status(HttpStatus.SERVICE_UNAVAILABLE)
+            .json({ message: 'Could not load resource: wordList' })
     const { wordList } = resources
 
     res.json(wordList)
 }
 
-async function handleGetAnagramMap(_req: Request, res: Response) {
+type GetAnagramMapRes = TypedResponse<GetWdaAnagramMapResponse | WdaErrorResponse>
+async function handleGetAnagramMap(_req: TypedRequest, res: GetAnagramMapRes) {
     const resources = getWordResources()
-    if (!resources) return res.status(503).json({ message: 'Could not load resource: anagramMap' })
+    if (!resources)
+        return res
+            .status(HttpStatus.SERVICE_UNAVAILABLE)
+            .json({ message: 'Could not load resource: anagramMap' })
     const { anagramMap } = resources
 
     res.json(anagramMap)
 }
 
-async function handleGetFrequencies(_req: Request, res: Response) {
+type GetFrequenciesRes = TypedResponse<GetWdaFrequenciesResponse | WdaErrorResponse>
+async function handleGetFrequencies(_req: TypedRequest, res: GetFrequenciesRes) {
     const resources = getWordResources()
-    if (!resources) return res.status(503).json({ message: 'Could not load resource: frequency' })
+    if (!resources)
+        return res
+            .status(HttpStatus.SERVICE_UNAVAILABLE)
+            .json({ message: 'Could not load resource: frequency' })
     const { frequency } = resources
 
     res.json(frequency)

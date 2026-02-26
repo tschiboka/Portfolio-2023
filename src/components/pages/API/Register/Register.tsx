@@ -9,7 +9,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { RegistrationFormData } from './Register.types'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
-import { useRegisterUserRequest } from './Register.query'
+import { registerUserRequest } from './Register.query'
+import { ErrorResponse, PostUserResponse } from '@common/types'
 
 interface IndexProps {
     path: string
@@ -32,27 +33,21 @@ const Register = ({ path }: IndexProps) => {
     })
 
     const { mutate: registerUser, isPending } = useMutation<
-        AxiosResponse<{ message: string }>,
-        AxiosError,
+        AxiosResponse<PostUserResponse>,
+        AxiosError<ErrorResponse>,
         RegistrationFormData
     >({
-        mutationFn: (data: RegistrationFormData) =>
-            useRegisterUserRequest(data),
+        mutationFn: registerUserRequest,
         onSuccess: (res) => {
             setRegistrationErrorMessage('')
             setSuccessfulRegistration(res.data.message)
         },
-        onError: (error: AxiosError<any>) => {
-            setRegistrationErrorMessage(
-                error.response?.data?.message || error.message,
-            )
+        onError: (error) => {
+            setRegistrationErrorMessage(error.response?.data?.message || error.message)
         },
     })
 
-    const submitHandler = async (
-        data: RegistrationFormData,
-        event?: React.BaseSyntheticEvent,
-    ) => {
+    const submitHandler = (data: RegistrationFormData, event?: React.BaseSyntheticEvent) => {
         event?.preventDefault()
         registerUser(data)
     }
@@ -80,20 +75,11 @@ const Register = ({ path }: IndexProps) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="userName">User name</label>
-                    <WrappedInput
-                        name="userName"
-                        control={control}
-                        type="text"
-                    />
+                    <WrappedInput name="userName" control={control} type="text" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email">Email</label>
-                    <WrappedInput
-                        name="email"
-                        control={control}
-                        type="text"
-                        autoComplete="email"
-                    />
+                    <WrappedInput name="email" control={control} type="text" autoComplete="email" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password</label>
@@ -119,20 +105,13 @@ const Register = ({ path }: IndexProps) => {
                 </fieldset>
                 <LoadingIndicator show={isPending} />
                 {registrationErrorMessage && (
-                    <p className="form-message submit-error-message">
-                        {registrationErrorMessage}
-                    </p>
+                    <p className="form-message submit-error-message">{registrationErrorMessage}</p>
                 )}
                 {successfulRegistration && (
-                    <p className="form-message submit-success-message">
-                        {successfulRegistration}
-                    </p>
+                    <p className="form-message submit-success-message">{successfulRegistration}</p>
                 )}
                 <div className="button-box">
-                    <button
-                        disabled={Boolean(successfulRegistration)}
-                        name="submit"
-                    >
+                    <button disabled={Boolean(successfulRegistration)} name="submit">
                         Register User
                     </button>
                 </div>

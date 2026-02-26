@@ -1,19 +1,5 @@
-const PlayerDerivedStatus = {
-    ACTIVE: 'ACTIVE',
-    IDLE: 'IDLE',
-    OFFLINE: 'OFFLINE',
-    RESIGNED: 'RESIGNED',
-    PAUSED: 'PAUSED',
-} as const
-
-const MatchStatuses = {
-    ACTIVE: 'ACTIVE',
-    FINISHED: 'FINISHED',
-} as const
-
-const LevelWordStatuses = {
-    SOLVED: 'SOLVED',
-    UNSOLVED: 'UNSOLVED',
-} as const
-
-export { PlayerDerivedStatus, MatchStatuses, LevelWordStatuses }
+export {
+    WdaPlayerDerivedStatuses as PlayerDerivedStatus,
+    WdaMatchStatuses as MatchStatuses,
+    WdaLevelWordStatuses as LevelWordStatuses,
+} from '@common/types/projects/wda'

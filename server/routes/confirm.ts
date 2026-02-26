@@ -1,17 +1,27 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import jwt from 'jsonwebtoken'
 import { omit, assoc } from 'ramda'
 import { Token } from '../models/token'
 import { User } from '../models/user'
+import {
+    PostConfirmRequest,
+    PostConfirmResponse,
+    ErrorResponse,
+    TypedRequest,
+    TypedResponse,
+} from '@common/types'
+import { HttpStatus } from '../common/HttpStatus/HttpStatus'
 
 const router = express.Router()
 
-router.post('/', async (req: Request, res: Response) => {
+type PostConfirmReq = TypedRequest<{ body: PostConfirmRequest }>
+type PostConfirmRes = TypedResponse<PostConfirmResponse | ErrorResponse>
+router.post('/', async (req: PostConfirmReq, res: PostConfirmRes) => {
     // Find verification token
     const { token: verificationToken } = req.body
     const token = await Token.findOne({ token: verificationToken })
     if (!token)
-        return res.status(404).json({
+        return res.status(HttpStatus.NOT_FOUND).json({
             success: false,
             message: 'Could not find verification token',
         })
@@ -31,17 +41,21 @@ router.post('/', async (req: Request, res: Response) => {
         userName: (activeUser as any).userName,
     })
     if (userNameExists.length)
-        return res.status(409).json({ success: false, message: 'User already registered' })
+        return res
+            .status(HttpStatus.CONFLICT)
+            .json({ success: false, message: 'User already registered' })
     const emalmailExists = await User.find({
         email: (activeUser as any).email,
     })
     if (emalmailExists.length)
-        return res.status(409).json({ success: false, message: 'User already registered' })
+        return res
+            .status(HttpStatus.CONFLICT)
+            .json({ success: false, message: 'User already registered' })
 
     // Create user
     const user = await new User(activeUser)
     await user.save()
-    res.status(200).json({ success: true, token })
+    res.status(HttpStatus.CREATED).json({ success: true, token })
 })
 
 export default router

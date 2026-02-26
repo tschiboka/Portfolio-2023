@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useRef } from 'react'
-import { TypistContextValues, TypistEditorState } from './Typist.types'
+import { RoundResponse, TypistContextValues, TypistEditorState } from './Typist.types'
 import { ContextBuilder } from '../../../../common/Context/ContextBuilder'
 import { textToWords } from './Typist.utils'
 import { usePostRound } from './Typist.queries'
@@ -33,9 +33,7 @@ export const TypistContext = ContextBuilder.CreateContext<TypistContextValues>(
     initialValues,
 )
 
-export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
-    children,
-}) => {
+export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [editorState, dispatch] = useReducer(editorReducer, initialState)
     const prevStatusRef = useRef(editorState.status)
     const editorStateRef = useRef(editorState)
@@ -47,16 +45,13 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
         prevStatusRef.current = editorState.status
 
         const { lastEvent, keystrokes } = editorStateRef.current
-        const isFreshlyLoaded =
-            editorState.status === 'idle' && lastEvent === 'none'
+        const isFreshlyLoaded = editorState.status === 'idle' && lastEvent === 'none'
         const justEnded =
-            editorState.status === 'idle' &&
-            lastEvent === 'ended' &&
-            prevStatus !== 'idle'
+            editorState.status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
 
         if (isFreshlyLoaded || justEnded) {
             postRound(keystrokes, {
-                onSuccess: (data) => {
+                onSuccess: (data: RoundResponse) => {
                     dispatch({
                         type: 'RESET',
                         text: data.text,
@@ -72,9 +67,5 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
         dispatch,
         isLoading: isPending,
     }
-    return (
-        <TypistContext.Provider value={contextValue}>
-            {children}
-        </TypistContext.Provider>
-    )
+    return <TypistContext.Provider value={contextValue}>{children}</TypistContext.Provider>
 }

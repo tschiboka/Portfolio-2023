@@ -1,10 +1,10 @@
 import moment from 'moment'
 import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
-import { XmasMessageResponseResource } from '../../API/common/types'
+import { XmasMessage } from '@common/types'
 import { DISPLAY_DATE_TIME_FORMAT } from '../../../../common/dateTime'
 
 export type MessageWallProps = {
-    messages?: XmasMessageResponseResource[]
+    messages?: XmasMessage[]
 }
 
 export const MessageWall = ({ messages }: MessageWallProps) =>
@@ -22,11 +22,7 @@ export const MessageWall = ({ messages }: MessageWallProps) =>
                 <tbody>
                     {messages.map((msg) => (
                         <tr key={msg._id}>
-                            <td>
-                                {moment(msg.createdAt).format(
-                                    DISPLAY_DATE_TIME_FORMAT,
-                                )}
-                            </td>
+                            <td>{moment(msg.createdAt).format(DISPLAY_DATE_TIME_FORMAT)}</td>
                             <td>{msg.name}</td>
                             <td>{msg.message}</td>
                         </tr>

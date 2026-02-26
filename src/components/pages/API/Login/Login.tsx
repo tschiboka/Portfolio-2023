@@ -6,8 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
-import { LoginFormData } from './Login.types'
-import { LoginResponse, ErrorResponse } from '../common/types'
+import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
 import { loginFormRequest, settingsRequest } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
@@ -48,8 +47,12 @@ const Login = ({ path, pageName }: LoginProps) => {
         },
     })
 
-    const loginRequest = useMutation<LoginResponse, AxiosError<ErrorResponse>, LoginFormData>({
-        mutationFn: async (data: LoginFormData) => {
+    const loginRequest = useMutation<
+        PostLoginResponse,
+        AxiosError<ErrorResponse>,
+        PostLoginRequest
+    >({
+        mutationFn: async (data: PostLoginRequest) => {
             const res = await loginFormRequest(data)
             return res.data
         },
@@ -65,7 +68,7 @@ const Login = ({ path, pageName }: LoginProps) => {
         },
     })
 
-    const submitHandler = (data: LoginFormData, event?: React.BaseSyntheticEvent) => {
+    const submitHandler = (data: PostLoginRequest, event?: React.BaseSyntheticEvent) => {
         event?.preventDefault()
         loginRequest.mutate(data)
     }
@@ -83,7 +86,7 @@ const Login = ({ path, pageName }: LoginProps) => {
                     <h1>Login</h1>
                     <h2>Tschiboka Personal App</h2>
                 </div>
-                <form onSubmit={(e) => void handleSubmit(submitHandler)(e)}>
+                <form onSubmit={handleSubmit(submitHandler)}>
                     <fieldset>
                         <label htmlFor="email">Email</label>
                         <WrappedInput

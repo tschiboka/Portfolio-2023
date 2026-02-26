@@ -6,14 +6,17 @@
         "allowJs": false,
         "checkJs": false,
         "outDir": "./dist",
-        "rootDir": ".",
+        "rootDir": "..",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "paths": {
+            "@common/*": ["../common/*"]
+        }
     },
-    "include": ["./**/*.ts"],
+    "include": ["./**/*.ts", "../common/**/*.ts"],
     "exclude": ["node_modules", "dist", "**/*.js"]
 }

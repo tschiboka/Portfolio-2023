@@ -7,23 +7,17 @@ type SessionContextProviderProps = {
     children: React.ReactNode
 }
 
-const SessionContext = createContext<SessionContextValues | undefined>(
-    undefined,
-)
+const SessionContext = createContext<SessionContextValues | undefined>(undefined)
 
 export const useSessionContext = () => {
     const context = useContext(SessionContext)
     if (!context) {
-        throw new Error(
-            'useSessionContext must be used within a SessionContextProvider',
-        )
+        throw new Error('useSessionContext must be used within a SessionContextProvider')
     }
     return context
 }
 
-export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({
-    children,
-}) => {
+export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ children }) => {
     const [session, setSession] = useState<Session>()
     const localSession = LocalSession.getInstance().get() || {}
 
@@ -51,20 +45,13 @@ export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({
     }, [session])
 
     useEffect(() => {
-        if (
-            token &&
-            sessionRehydrateResponse.isSuccess &&
-            sessionRehydrateData?.data?.data?.user
-        ) {
-            const user = sessionRehydrateData.data.data.user
-            const settings = sessionRehydrateData.data.data.settings
+        const response = sessionRehydrateData?.data?.data
+
+        if (token && sessionRehydrateResponse.isSuccess && response?.user) {
+            const { user, settings } = response
             setSession({ user, settings, token })
         }
     }, [token, sessionRehydrateResponse.isSuccess, sessionRehydrateData])
 
-    return (
-        <SessionContext.Provider value={contextValues}>
-            {children}
-        </SessionContext.Provider>
-    )
+    return <SessionContext.Provider value={contextValues}>{children}</SessionContext.Provider>
 }

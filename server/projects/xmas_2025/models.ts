@@ -6,6 +6,7 @@ interface IXmasMessage extends Document {
     message: string
     isRead: boolean
     userId: mongoose.Types.ObjectId
+    createdAt: Date
 }
 
 interface MessageInput {

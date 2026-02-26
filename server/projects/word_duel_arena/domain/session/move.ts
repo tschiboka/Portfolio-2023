@@ -1,11 +1,10 @@
 import type { SessionState, PlayerRole, LevelWord } from '../../types'
+import type { MovePayload } from '@common/types/projects/wda'
+
+export type { MovePayload }
 
 import { calculatePoints } from './points'
 import { MatchStatuses } from '../../config/constants/game'
-
-export type MovePayload = {
-    attempt: string
-}
 
 function getSolutionState(draft: SessionState, deviceId: string, payload: MovePayload): void {
     if (!draft.players.player1 || !draft.players.player2 || !draft.level || !draft.currentMatch)

@@ -1,7 +1,19 @@
 // Game state types for Word Duel Arena (server-side)
-// Keep in sync with FE: src/components/pages/Misc/WordDuelArena/Session/Session.types.ts
 
 import type WebSocket from 'ws'
+import type {
+    PlayerRole,
+    OptionalPlayerRole,
+    LastWordAttempt,
+    WdaSessionStatus,
+    WdaMatchStatus,
+    WdaPlayerDerivedStatus,
+    WdaLevelWordStatus,
+    WdaMatchPlayerStatus,
+    WdaMatchEndReason,
+} from '@common/types/projects/wda'
+
+export type { PlayerRole, OptionalPlayerRole, LastWordAttempt }
 
 // --- Session (server-level wrapper) ---
 
@@ -13,20 +25,14 @@ export type Session = {
 
 export type Sessions = Record<string, Session>
 
-export type PlayerRole = 'player1' | 'player2'
-export type OptionalPlayerRole = PlayerRole | null
+// --- Statuses (aliased from shared types) ---
 
-// --- Statuses ---
+export type SessionStatus = WdaSessionStatus
+export type MatchStatus = WdaMatchStatus
+export type PlayerDerivedStatus = WdaPlayerDerivedStatus
+export type LevelWordStatus = WdaLevelWordStatus
 
-export type SessionStatus = 'LOBBY' | 'ACTIVE'
-
-export type MatchStatus = 'ACTIVE' | 'FINISHED'
-
-export type PlayerDerivedStatus = 'ACTIVE' | 'IDLE' | 'OFFLINE' | 'RESIGNED' | 'PAUSED'
-
-export type LevelWordStatus = 'SOLVED' | 'UNSOLVED'
-
-// --- Player ---
+// --- Player (server-side includes deviceId) ---
 
 export type Player = {
     deviceId: string
@@ -34,21 +40,9 @@ export type Player = {
     connected: boolean
 }
 
-// --- Match ---
+// --- Match (server-side includes moves) ---
 
-export type LastWordAttempt = {
-    word: string
-    isTarget: boolean
-    isExtra: boolean
-}
-
-export type MatchPlayerStatus = {
-    derivedStatus: PlayerDerivedStatus
-    resigned: boolean
-    paused: boolean
-    points: number
-    lastWordAttempt?: LastWordAttempt | null
-}
+export type MatchPlayerStatus = WdaMatchPlayerStatus
 
 export type Match = {
     id: string
@@ -59,9 +53,10 @@ export type Match = {
     }
     moves: unknown[]
     winner: OptionalPlayerRole
+    reason: WdaMatchEndReason
 }
 
-// --- Level ---
+// --- Level (server-side always has both word and mask) ---
 
 export type LevelWord = {
     word: string
@@ -78,7 +73,7 @@ export type Level = {
     extraWords: LevelWord[]
 }
 
-// --- Session (top-level Immer draft) ---
+// --- Session State (top-level Immer draft) ---
 
 export type SessionState = {
     id: string

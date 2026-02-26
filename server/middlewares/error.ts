@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { Request, Response, NextFunction } from 'express'
 import { Log } from '../models/log'
+import { HttpStatus } from '../common/HttpStatus/HttpStatus'
 
 export default async function (err: Error, req: Request, res: Response, next: NextFunction) {
     process.on('uncaughtException', (ex) => {
@@ -25,7 +26,7 @@ export default async function (err: Error, req: Request, res: Response, next: Ne
 
     console.log(err)
 
-    res.status(500).send({
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
         success: false,
         message: 'Internal Server Error',
         error: err,

@@ -35,9 +35,7 @@ const iconOptions: SearchInputOption[] = Object.keys(icons)
         icon: icons[icon],
         value: icon,
     }))
-    .sort((a: SearchInputOption, b: SearchInputOption) =>
-        a.label.localeCompare(b.label),
-    )
+    .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))
 
 const colorOptions: SearchInputOption[] = Object.keys(colors)
     .map((color) => ({
@@ -45,9 +43,7 @@ const colorOptions: SearchInputOption[] = Object.keys(colors)
         icon: colors[color],
         value: color,
     }))
-    .sort((a: SearchInputOption, b: SearchInputOption) =>
-        a.label.localeCompare(b.label),
-    )
+    .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))
 
 const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
@@ -59,32 +55,26 @@ const Categories = ({ path }: CategoriesProps) => {
         categories?.data.filter((category) => category.isParent) || [],
     )
 
-    const { control, setValue, handleSubmit, reset, resetField } =
-        useForm<CategoryFormData>({
-            defaultValues: {
-                name: '',
-                description: '',
-                isParent: false,
-                parent: '',
-                hasParent: false,
-                icon: '',
-                color: '',
-            },
-            resolver: yupResolver(
-                categoriesSchema(parentOptions.map(({ label }) => label)),
-            ),
-            mode: 'onChange',
-        })
+    const { control, setValue, handleSubmit, reset, resetField } = useForm<CategoryFormData>({
+        defaultValues: {
+            name: '',
+            description: '',
+            isParent: false,
+            parent: '',
+            hasParent: false,
+            icon: '',
+            color: '',
+        },
+        resolver: yupResolver(categoriesSchema(parentOptions.map(({ label }) => label))),
+        mode: 'onChange',
+    })
 
-    const { mutateAsync: postCategory, ...categoryPostRequest } =
-        usePostCategory({
-            onSuccess: () => reset(),
-        })
+    const { mutateAsync: postCategory, ...categoryPostRequest } = usePostCategory({
+        onSuccess: () => reset(),
+    })
 
     const submitHandler = async (formData: CategoryFormData) => {
-        const parentId = parentOptions.find(
-            ({ label }) => label === formData.parent,
-        )?.value
+        const parentId = parentOptions.find(({ label }) => label === formData.parent)?.value
 
         await postCategory({
             name: formData.name,
@@ -97,12 +87,7 @@ const Categories = ({ path }: CategoriesProps) => {
     }
 
     return (
-        <Page
-            title={'Tivadar Debnar | Categories'}
-            path={path}
-            recordVisit={false}
-            loginRequired
-        >
+        <Page title={'Tivadar Debnar | Categories'} path={path} recordVisit={false} loginRequired>
             <Nav
                 pageName="Categories"
                 submenuStack={submenuStack}
@@ -121,17 +106,15 @@ const Categories = ({ path }: CategoriesProps) => {
             <main className="Categories">
                 <h1>Categories</h1>
                 <p>
-                    You can set a wide range of categories for your activities.
-                    Please note that each tasks and activities must have a
-                    category assigned to, and optionally, you set categories for
-                    your events as well.
+                    You can set a wide range of categories for your activities. Please note that
+                    each tasks and activities must have a category assigned to, and optionally, you
+                    set categories for your events as well.
                 </p>
                 <h2>Create a new category</h2>
                 <p>
-                    Each category must have a name, a description, an icon and
-                    colour. If you don't set your colour, it will be assigned a
-                    random one. Your category may also be a parent of other
-                    categories, be a child category, or a standalone.
+                    Each category must have a name, a description, an icon and colour. If you don't
+                    set your colour, it will be assigned a random one. Your category may also be a
+                    parent of other categories, be a child category, or a standalone.
                 </p>
                 <div className="form-container">
                     <form onSubmit={handleSubmit(submitHandler)}>
@@ -162,9 +145,7 @@ const Categories = ({ path }: CategoriesProps) => {
                                         name="isParent"
                                         control={control}
                                         value={false}
-                                        onChange={() =>
-                                            setValue('isParent', false)
-                                        }
+                                        onChange={() => setValue('isParent', false)}
                                     />
                                 </div>
                                 <div>
@@ -173,9 +154,7 @@ const Categories = ({ path }: CategoriesProps) => {
                                         name="isParent"
                                         control={control}
                                         value={true}
-                                        onChange={() =>
-                                            setValue('isParent', true)
-                                        }
+                                        onChange={() => setValue('isParent', true)}
                                     />
                                 </div>
                             </div>
@@ -210,10 +189,7 @@ const Categories = ({ path }: CategoriesProps) => {
                         </fieldset>
                         {showParentInput && (
                             <fieldset>
-                                <label
-                                    htmlFor="parent"
-                                    className="hide--small-screen"
-                                ></label>
+                                <label htmlFor="parent" className="hide--small-screen"></label>
                                 <WrappedSearchInput
                                     options={parentOptions}
                                     name="parent"
@@ -254,9 +230,7 @@ const Categories = ({ path }: CategoriesProps) => {
                                 colorSelection={true}
                             />
                         </fieldset>
-                        <LoadingIndicator
-                            show={categoryPostRequest.isPending}
-                        />
+                        <LoadingIndicator show={categoryPostRequest.isPending} />
                         {categoryPostRequest.error && (
                             <p className="submit-error-message submit-mes">
                                 {getErrorMessage(
@@ -323,37 +297,20 @@ const Categories = ({ path }: CategoriesProps) => {
                                 <>
                                     <tr key={_id}>
                                         <td className="sm">
-                                            <div
-                                                className="icon"
-                                                style={{ borderColor: color }}
-                                            >
+                                            <div className="icon" style={{ borderColor: color }}>
                                                 {icons[icon]}
                                             </div>
                                         </td>
                                         <td className="sm">{name}</td>
                                         <td className="sm">{status}</td>
-                                        <td
-                                            className={`md icon ${
-                                                isParent ? 'green' : 'red'
-                                            }`}
-                                        >
-                                            {isParent
-                                                ? icons['check']
-                                                : icons['cancel']}
+                                        <td className={`md icon ${isParent ? 'green' : 'red'}`}>
+                                            {isParent ? icons['check'] : icons['cancel']}
                                         </td>
-                                        <td
-                                            className={`md icon ${
-                                                parentId ? 'green' : 'red'
-                                            }`}
-                                        >
-                                            {parentId
-                                                ? icons['check']
-                                                : icons['cancel']}
+                                        <td className={`md icon ${parentId ? 'green' : 'red'}`}>
+                                            {parentId ? icons['check'] : icons['cancel']}
                                         </td>
                                         <td className="hide">{description}</td>
-                                        <td className="sm icon">
-                                            {icons['expand_more']}
-                                        </td>
+                                        <td className="sm icon">{icons['expand_more']}</td>
                                     </tr>
                                     <tr className={'row-expand expanded'}>
                                         <td></td>

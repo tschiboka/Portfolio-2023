@@ -1,4 +1,1 @@
-export type LoginFormData = {
-    email: string
-    password: string
-}
+export type { PostLoginRequest as LoginFormData } from '@common/types/app'

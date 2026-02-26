@@ -18,6 +18,7 @@ const getInitialMatchState = (): Match => ({
     },
     moves: [],
     winner: null,
+    reason: null,
 })
 
 export { getInitialMatchState }

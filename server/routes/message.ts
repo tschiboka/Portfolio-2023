@@ -1,15 +1,26 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import { Resend } from 'resend'
 import { Message, validateMessage } from '../models/message'
+import {
+    PostMessageError,
+    PostMessageRequest,
+    PostMessageResponse,
+    TypedRequest,
+    TypedResponse,
+} from '@common/types'
+import { HttpStatus } from '../common/HttpStatus/HttpStatus'
 
 const router = express.Router()
 
-router.post('/', async (req: Request, res: Response) => {
+type PostMessageReq = TypedRequest<{ body: PostMessageRequest }>
+type PostMessageRes = TypedResponse<PostMessageResponse | PostMessageError>
+
+router.post('/', async (req: PostMessageReq, res: PostMessageRes) => {
     const { name, email, phone, message } = req.body
     const { error } = validateMessage(req.body)
 
     if (error)
-        return res.json({
+        return res.status(HttpStatus.BAD_REQUEST).json({
             success: false,
             error: error.message,
         })
@@ -18,7 +29,7 @@ router.post('/', async (req: Request, res: Response) => {
     const messageEntry = new Message({
         name,
         email,
-        phone: phone.length === 0 ? undefined : phone,
+        phone: phone && phone.length > 0 ? phone : undefined,
         message,
     })
 
@@ -57,7 +68,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.error('Failed to send notification email:', err)
     }
 
-    return res.status(200).json({ success: true, message: 'Message Sent!' })
+    return res.status(HttpStatus.CREATED).json({ success: true, message: 'Message Sent!' })
 })
 
 export default router

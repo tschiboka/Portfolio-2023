@@ -1,36 +1,38 @@
-import BlogCard from "../BlogCard/BlogCard";
-import { blogArticles } from "../../articles/articles";
-import "./SuggestedArticle.scss";
-import { useEffect, useState } from "react";
-import { getVisitSummary } from "../../../serverAPI/visits";
-import { getLikeSummary } from "../../../serverAPI/likes";
-import { LikeCount, VisitCount } from "../../pages/Blog/Blog";
+import BlogCard from '../BlogCard/BlogCard'
+import { blogArticles } from '../../articles/articles'
+import './SuggestedArticle.scss'
+import { useEffect, useState } from 'react'
+import { getVisitSummary } from '../../../serverAPI/visits'
+import { getLikeSummary } from '../../../serverAPI/likes'
+import { LikeSummary, VisitSummary } from '@common/types'
 
 interface Props {
-    articles?: string[];
+    articles?: string[]
 }
 
 const SuggestedArticles = ({ articles }: Props) => {
-    const [visits, setVisits] = useState<VisitCount | null>(null);
-    const [visitsLoaded, setVisitsLoaded] = useState(false);
-    const [likes, setLikes] = useState<LikeCount | null>(null);
-    const [likesLoaded, setLikesLoaded] = useState(false);
+    const [visits, setVisits] = useState<VisitSummary | null>(null)
+    const [visitsLoaded, setVisitsLoaded] = useState(false)
+    const [likes, setLikes] = useState<LikeSummary | null>(null)
+    const [likesLoaded, setLikesLoaded] = useState(false)
 
     useEffect(() => {
         if (!visitsLoaded)
-            getVisitSummary((visits: VisitCount | null) => {
-                setVisitsLoaded(true);
-                setVisits(visits);
-            });
+            void getVisitSummary((visits: VisitSummary | null) => {
+                setVisitsLoaded(true)
+                setVisits(visits)
+            })
         if (!likesLoaded) {
-            getLikeSummary((likes: LikeCount | null) => {
-                setLikesLoaded(true);
-                setLikes(likes);
-            });
+            void getLikeSummary((likes: LikeSummary | null) => {
+                setLikesLoaded(true)
+                setLikes(likes)
+            })
         }
-    }, [visits, likes]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visits, likes])
+
     const getBlogArticle = (path: string) => {
-        const article = blogArticles.find((article) => article.to === path);
+        const article = blogArticles.find((article) => article.to === path)
         if (article?.title)
             return (
                 <BlogCard
@@ -43,8 +45,8 @@ const SuggestedArticles = ({ articles }: Props) => {
                     path={article.to}
                     newest={false}
                 />
-            );
-    };
+            )
+    }
 
     if (articles)
         return (
@@ -52,7 +54,7 @@ const SuggestedArticles = ({ articles }: Props) => {
                 <h3>Suggested Articles</h3>
                 {articles.map((article) => getBlogArticle(article))}
             </div>
-        );
-};
+        )
+}
 
-export default SuggestedArticles;
+export default SuggestedArticles

@@ -1,13 +1,14 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import { loadWordResources } from '../word_duel_arena/infrastructure/resources/word'
+import {
+    Keystroke,
+    PostTypistRoundRequest,
+    PostTypistRoundResponse,
+    TypedRequest,
+    TypedResponse,
+} from '@common/types'
+import { HttpStatus } from '../../common/HttpStatus/HttpStatus'
 const router = express.Router()
-
-interface Keystroke {
-    charIndex: number
-    expected: string
-    correct: boolean
-    timestamp: number
-}
 
 // WARNING: Temporarily use a hard-coded user settings
 const userSettings = {
@@ -18,10 +19,12 @@ const userSettings = {
     targetLetter: 'A', // Only one letter to use in the words, empty for no restriction
     errorCombinations: ['TA'], // Only words containing this combination, empty for no restriction
     allowCapitalLetters: 0, // Percentage of words allowed to have capital letters
-}
+} as const
 
-router.post('/round', [], async (req: Request, res: Response) => {
-    const { keystrokes }: { keystrokes: Keystroke[] } = req.body ?? {}
+type PostRoundReq = TypedRequest<PostTypistRoundRequest>
+type PostRoundRes = TypedResponse<PostTypistRoundResponse>
+router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
+    const { keystrokes } = req.body // fully typed now
 
     // TODO: Extract the whole logic into designated service functions and clean up the route handler to just call those functions and return the response Calculate the error combination if practice mode is set to error
     let errorCombinations: string[] = []
@@ -150,7 +153,7 @@ router.post('/round', [], async (req: Request, res: Response) => {
         return Math.round(weighted * 1000)
     }
 
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
         text: responseWords.join(' '),
         stats: {
             practiceMode: userSettings.practiceMode,

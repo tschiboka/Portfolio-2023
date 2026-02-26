@@ -1,128 +1,46 @@
-export type PlayerRole = 'player1' | 'player2'
-export type OptionalPlayerRole = PlayerRole | null
+import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@common/types/projects/wda'
+
+// Re-export shared types with local names
+export type {
+    PlayerRole,
+    OptionalPlayerRole,
+    LastWordAttempt,
+    WdaPublicPlayer as Player,
+    WdaMatchPlayerStatus as MatchPlayerStatus,
+    WdaMatch as Match,
+    WdaUnsolvedLevelWord as UnsolvedLevelWord,
+    WdaSolvedLevelWord as SolvedLevelWord,
+    WdaPlayableLevelWord as PlayableLevelWord,
+    WdaPlayableLevel as Level,
+    WdaLevelWordStatus as LevelWordStatus,
+    WdaClientSessionState as WebSocketSessionState,
+    WdaWsRequest as WebSocketRequest,
+    WdaWsResponse as WebSocketResponse,
+} from '@common/types/projects/wda'
+
+// Re-export shared constants with local names
+export {
+    WdaSessionStatuses as SessionStatuses,
+    WdaMatchStatuses as MatchStatuses,
+    WdaPlayerDerivedStatuses as PlayerDerivedStatus,
+    WdaWsRequestTypes as WebSocketRequestType,
+    WdaWsResponseTypes as WebSocketResponseType,
+} from '@common/types/projects/wda'
+
+// --- FE-only types ---
 
 export type SessionContextType = {
     sessionId: string
     deviceId: string
     allowKeyboardInput: boolean
-    sessionState?: WebSocketSessionState
-    setSessionState: (state: WebSocketSessionState) => void
+    sessionState?: WdaClientSessionState
+    setSessionState: (state: WdaClientSessionState) => void
 }
-
-export enum WebSocketRequestType {
-    PING = 'ping',
-    ATTEMPT_MOVE = 'attempt_move',
-}
-
-export enum WebSocketResponseType {
-    STATE_UPDATE = 'state_update',
-    ERROR = 'error',
-}
-
-export enum SessionStatuses {
-    LOBBY = 'LOBBY',
-    ACTIVE = 'ACTIVE',
-}
-
-export enum MatchStatuses {
-    WAITING = 'WAITING',
-    ACTIVE = 'ACTIVE',
-    FINISHED = 'FINISHED',
-}
-
-export enum PlayerDerivedStatus {
-    ACTIVE = 'ACTIVE',
-    IDLE = 'IDLE',
-    OFFLINE = 'OFFLINE',
-    RESIGNED = 'RESIGNED',
-    PAUSED = 'PAUSED',
-}
-
-export type Player = {
-    lastActive: number
-    connected: boolean
-}
-
-export type LastWordAttempt = {
-    word: string
-    isTarget: boolean
-    isExtra: boolean
-}
-
-export type MatchPlayerStatus = {
-    derivedStatus: PlayerDerivedStatus
-    resigned: boolean
-    paused: boolean
-    points: number
-    lastWordAttempt?: LastWordAttempt
-}
-
-export type Match = {
-    id: string
-    status: MatchStatuses
-    perPlayerStatus: {
-        player1: MatchPlayerStatus
-        player2: MatchPlayerStatus
-    }
-    winner: OptionalPlayerRole
-    reason: 'RESIGN' | 'TIMEOUT' | 'DRAW' | null
-}
-
-export type WebSocketSessionState = {
-    id: string
-    role?: OptionalPlayerRole
-    status: SessionStatuses
-    players?: {
-        player1?: Player
-        player2?: Player
-    }
-    level?: Level
-    currentMatch?: Match
-    previousMatches?: Match[]
-}
-
-export type WebSocketResponse = {
-    type: WebSocketResponseType
-    payload?: WebSocketSessionState
-    message: string
-}
-export type WebSocketRequest =
-    | { type: WebSocketRequestType.PING }
-    | {
-          type: WebSocketRequestType.ATTEMPT_MOVE
-          payload: {
-              attempt: string
-          }
-      }
 
 export type WebSocketContextType = {
-    lastState?: WebSocketResponse
+    lastState?: WdaWsResponse
     readyState: number
     errorMessage: string | null
     connect: () => void
-    send: (msg: WebSocketRequest) => void
+    send: (msg: WdaWsRequest) => void
 }
-
-export type UnsolvedLevelWord = {
-    status: 'UNSOLVED'
-    mask: string
-    solvedBy: OptionalPlayerRole
-}
-
-export type SolvedLevelWord = {
-    status: 'SOLVED'
-    word: string
-    solvedBy: OptionalPlayerRole
-}
-
-export type PlayableLevelWord = SolvedLevelWord | UnsolvedLevelWord
-
-export type Level = {
-    id: string
-    name: string
-    difficulty: number
-    targetWords: PlayableLevelWord[]
-    extraWords: PlayableLevelWord[]
-}
-
-export type LevelWordStatus = PlayableLevelWord['status']

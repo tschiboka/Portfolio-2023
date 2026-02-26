@@ -8,6 +8,7 @@ import Page from '../../sharedComponents/Page/Page'
 import SubNav from '../../sharedComponents/SubNav/SubNav'
 import { blogArticles } from '../../articles/articles'
 import { getLikeSummary } from '../../../serverAPI/likes'
+import { LikeSummary, VisitSummary } from '@common/types'
 import './Blog.scss'
 import { getVisitSummary } from '../../../serverAPI/visits'
 
@@ -16,20 +17,15 @@ interface Props {
     path: string
 }
 
-export type VisitCount = { [path: string]: number }
-export type LikeCount = { [path: string]: number }
-
 const Blogs = ({ pageName, path }: Props) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext()
-    const [visits, setVisits] = useState<VisitCount | null>(null)
+    const [visits, setVisits] = useState<VisitSummary | null>(null)
     const [visitsLoaded, setVisitsLoaded] = useState(false)
-    const [likes, setLikes] = useState<LikeCount | null>(null)
+    const [likes, setLikes] = useState<LikeSummary | null>(null)
     const [likesLoaded, setLikesLoaded] = useState(false)
 
     // Get Newest Article
-    const publishedArticles = blogArticles.filter(
-        (article) => !!article.created,
-    )
+    const publishedArticles = blogArticles.filter((article) => !!article.created)
     const sortedArticles = publishedArticles.sort((a, b) => {
         const dateA = a.created ? new Date(a.created) : new Date(0)
         const dateB = b.created ? new Date(b.created) : new Date(0)
@@ -40,16 +36,17 @@ const Blogs = ({ pageName, path }: Props) => {
 
     useEffect(() => {
         if (!visitsLoaded)
-            getVisitSummary((visits: VisitCount | null) => {
+            void getVisitSummary((visits: VisitSummary | null) => {
                 setVisitsLoaded(true)
                 setVisits(visits)
             })
         if (!likesLoaded) {
-            getLikeSummary((likes: LikeCount | null) => {
+            void getLikeSummary((likes: LikeSummary | null) => {
                 setLikesLoaded(true)
                 setLikes(likes)
             })
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [visits, likes])
 
     return (
@@ -60,12 +57,11 @@ const Blogs = ({ pageName, path }: Props) => {
             <main>
                 <h1 className="Blog__title">Blog</h1>
                 <p>
-                    My blog is a way of giving back - and paying forward - all
-                    the help I have been given through my programming learning
-                    journey. Feel free to browse my articles that cover some of
-                    my findings, solutions and tutorials on exciting and
-                    relevant topics, such as programming languages, web
-                    development and project walkthroughs. Happy Coding!
+                    My blog is a way of giving back - and paying forward - all the help I have been
+                    given through my programming learning journey. Feel free to browse my articles
+                    that cover some of my findings, solutions and tutorials on exciting and relevant
+                    topics, such as programming languages, web development and project walkthroughs.
+                    Happy Coding!
                 </p>
                 <div className="BlogList">
                     {blogArticles

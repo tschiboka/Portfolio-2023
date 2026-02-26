@@ -29,6 +29,7 @@ const MatchSchema = Joi.object({
     }).required(),
     moves: Joi.array().required(), // TODO
     winner: Joi.string().valid('player1', 'player2').allow(null).optional(),
+    reason: Joi.string().valid('RESIGN', 'TIMEOUT', 'DRAW').allow(null).optional(),
 })
 
 export { MatchSchema }

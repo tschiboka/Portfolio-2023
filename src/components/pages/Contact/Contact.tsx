@@ -11,6 +11,7 @@ import { FiPhone } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { ChangeEvent, useRef, useState } from 'react'
 import { useAppContext } from '../../../context/AppContext/App.context'
+import { PostMessageResponse } from '@common/types'
 import './Contact.scss'
 
 interface Props {
@@ -133,9 +134,7 @@ const Contact = ({ pageName, path }: Props) => {
 
             try {
                 const response = await fetch(URL, options)
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                const responseJSON = await response.json()
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                const responseJSON = (await response.json()) as PostMessageResponse
                 if (responseJSON.success) {
                     setUserMessage('Message Sent!')
                     setShowMessageAck(true)

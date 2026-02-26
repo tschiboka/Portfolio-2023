@@ -9,8 +9,7 @@ export const usePostRound = () =>
         mutationFn: async (keystrokes: Keystroke[]) =>
             axios
                 .post<RoundResponse>(
-                    apiPathBuilder(ApiPaths.PROJECT_TYPIST, { prefix: '' }) +
-                        '/round',
+                    apiPathBuilder(ApiPaths.PROJECT_TYPIST, { prefix: '' }) + '/round',
                     { keystrokes },
                 )
                 .then((res) => res.data),

@@ -1,37 +1,17 @@
 import { EditorWord } from './Editor/Character/Character.types'
+import {
+    Keystroke as SharedKeystroke,
+    RoundResponse,
+    TypingStats,
+} from '@common/types/projects/typist'
+
+export type { RoundResponse, TypingStats }
 
 export type TypistStatus = 'idle' | 'playing' | 'paused'
-export type TypistEvent =
-    | 'none'
-    | 'started'
-    | 'paused'
-    | 'ended'
-    | 'resumed'
-    | 'error'
+export type TypistEvent = 'none' | 'started' | 'paused' | 'ended' | 'resumed' | 'error'
 
-export type Keystroke = {
-    charIndex: number
-    expected: string
-    actual: string
-    correct: boolean
-    timestamp: number
-}
-
-export type RoundResponse = {
-    text: string
-    stats?: TypingStats
-}
-
-export type TypingStats = {
-    errorCombinations?: string[]
-    practiceMode: 'error' | 'target'
-    speed?: {
-        wpm: number
-        cpm: number
-    }
-    accuracy?: number
-    score?: number
-}
+// FE extends shared Keystroke: actual is always present on the client
+export type Keystroke = SharedKeystroke & { actual: string }
 
 export type TypistEditorState = {
     status: TypistStatus
