@@ -4,11 +4,9 @@
     "description": "logic game match three",
     "background_color": "#130816cc",
     "app": {
-        "urls": [
-            "http://tschiboka.co.uk/projects/fruits_n_flowers_v2/fruits_n_flowers.html"
-        ],
+        "urls": ["http://tschiboka.com/projects/fruits_n_flowers_v2/fruits_n_flowers.html"],
         "launch": {
-            "web_url": "http://tschiboka.co.uk/projects/fruits_n_flowers_v2/fruits_n_flowers.html"
+            "web_url": "http://tschiboka.com/projects/fruits_n_flowers_v2/fruits_n_flowers.html"
         }
     },
     "icons": [

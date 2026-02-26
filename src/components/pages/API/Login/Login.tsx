@@ -1,13 +1,14 @@
 import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { LoginFormData } from './Login.types'
-import { useLoginFormResources, useSettingsResources } from './Login.query'
+import { LoginResponse, ErrorResponse } from '../common/types'
+import { loginFormRequest, settingsRequest } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -39,49 +40,41 @@ const Login = ({ path, pageName }: LoginProps) => {
         resolver: yupResolver(loginSchema),
     })
 
-    const { data: settingsData, isLoading: settingIsLoading } = useQuery<
-        AxiosResponse<any, any>
-    >({
+    const { data: settingsData, isLoading: settingIsLoading } = useQuery({
         queryKey: QUERY_KEYS.GET_APP_SETTINGS,
-        queryFn: useSettingsResources,
+        queryFn: async () => {
+            const res = await settingsRequest()
+            return res.data
+        },
     })
 
-    const loginRequest = useMutation<
-        AxiosResponse<any, any>,
-        AxiosError,
-        LoginFormData
-    >({
-        mutationFn: (data: LoginFormData) => useLoginFormResources(data),
+    const loginRequest = useMutation<LoginResponse, AxiosError<ErrorResponse>, LoginFormData>({
+        mutationFn: async (data: LoginFormData) => {
+            const res = await loginFormRequest(data)
+            return res.data
+        },
         onSuccess: (response) => {
             setLoginErrorMessage('')
-            const { token, user, settings } = response.data || {}
-            const session = { token, user, settings }
+            const { token, user, settings } = response
+            const session = { token, user, settings: settings[0] }
             setSession(session)
             navigate('/api/index')
         },
-        onError: (error: AxiosError<any>) => {
-            setLoginErrorMessage(error.response?.data?.message || error.message)
+        onError: (error) => {
+            setLoginErrorMessage(error.response?.data?.message ?? error.message)
         },
     })
 
-    const submitHandler = async (
-        data: LoginFormData,
-        event?: React.BaseSyntheticEvent,
-    ) => {
+    const submitHandler = (data: LoginFormData, event?: React.BaseSyntheticEvent) => {
         event?.preventDefault()
         loginRequest.mutate(data)
     }
 
-    const enableRegistration = settingsData?.data?.data?.enableUserRegistration
+    const enableRegistration = settingsData?.data?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
 
     return (
-        <Page
-            className="Login"
-            title="Tivadar Debnar | Login"
-            path={path}
-            recordVisit={false}
-        >
+        <Page className="Login" title="Tivadar Debnar | Login" path={path} recordVisit={false}>
             <Nav pageName={pageName} />
             {mobileMenuVisible && <Menu pageName="home" />}
             {subMenuVisible && <SubNav />}
@@ -90,7 +83,7 @@ const Login = ({ path, pageName }: LoginProps) => {
                     <h1>Login</h1>
                     <h2>Tschiboka Personal App</h2>
                 </div>
-                <form onSubmit={handleSubmit(submitHandler)}>
+                <form onSubmit={(e) => void handleSubmit(submitHandler)(e)}>
                     <fieldset>
                         <label htmlFor="email">Email</label>
                         <WrappedInput
@@ -113,16 +106,12 @@ const Login = ({ path, pageName }: LoginProps) => {
                     </fieldset>
                     <LoadingIndicator show={isLoading} />
                     {loginErrorMessage && (
-                        <p className="submit-error-message">
-                            {loginErrorMessage}
-                        </p>
+                        <p className="submit-error-message">{loginErrorMessage}</p>
                     )}
                     <div className="button-box">
                         <button name="submit">Login</button>
                         {enableRegistration && (
-                            <button onClick={() => navigate('/api/register')}>
-                                Register User
-                            </button>
+                            <button onClick={() => navigate('/api/register')}>Register User</button>
                         )}
                     </div>
                 </form>

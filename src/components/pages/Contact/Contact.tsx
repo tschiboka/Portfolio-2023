@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import Page from '../../sharedComponents/Page/Page'
 import Nav from '../../sharedComponents/Nav/Nav'
 import Menu from '../../sharedComponents/Menu/Menu'
@@ -28,8 +29,7 @@ export const validateName = (name: string): ValidationResult => {
     const nameRegex = /^[a-z \-']+$/i
     if (name.length === 0) return { valid: false, error: 'Cannot be Empty!' }
     if (name.length > 50) return { valid: false, error: 'Too Long!' }
-    if (!nameRegex.test(name))
-        return { valid: false, error: 'No Special Characters!' }
+    if (!nameRegex.test(name)) return { valid: false, error: 'No Special Characters!' }
     return { valid: true, error: '' }
 }
 
@@ -38,8 +38,7 @@ export const validateEmail = (email: string): ValidationResult => {
     if (email.length === 0) return { valid: false, error: 'Cannot be Empty!' }
     if (email.length <= 5) return { valid: false, error: 'Too Short!' }
     if (email.length > 255) return { valid: false, error: 'Too Long!' }
-    if (!emailRegex.test(email))
-        return { valid: false, error: 'Invalid Email Format!' }
+    if (!emailRegex.test(email)) return { valid: false, error: 'Invalid Email Format!' }
     return { valid: true, error: '' }
 }
 
@@ -55,12 +54,10 @@ export const validatePhone = (tel: string): ValidationResult => {
 }
 
 export const validateMessage = (message: string): ValidationResult => {
-    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\\[\]:;@'"-\s]*$/
+    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"-\s]*$/
     if (message.length === 0) return { valid: false, error: 'Cannot be Empty!' }
-    if (message.length < 10)
-        return { valid: false, error: 'Min 10 Characters!' }
-    if (message.length > MAX_MESSAGE_CHARACTERS)
-        return { valid: false, error: 'Too Long!' }
+    if (message.length < 10) return { valid: false, error: 'Min 10 Characters!' }
+    if (message.length > MAX_MESSAGE_CHARACTERS) return { valid: false, error: 'Too Long!' }
     if (!allowedCharactersRegex.test(message))
         return { valid: false, error: 'Illegal Characters in Text!' }
     return { valid: true, error: '' }
@@ -78,9 +75,7 @@ const Contact = ({ pageName, path }: Props) => {
     const [emailError, setEmailError] = useState<string>('')
     const [telError, setTelError] = useState<string>('')
     const [messageError, setMessageError] = useState<string>('')
-    const [charatersLeft, setCharactersLeft] = useState<number>(
-        MAX_MESSAGE_CHARACTERS,
-    )
+    const [charatersLeft, setCharactersLeft] = useState<number>(MAX_MESSAGE_CHARACTERS)
     const [submitDisabled, setSubmitDisabled] = useState<boolean>(false)
     const [userMessage, setUserMessage] = useState<string>('')
     const [showMessageAck, setShowMessageAck] = useState<boolean>(false)
@@ -138,7 +133,9 @@ const Contact = ({ pageName, path }: Props) => {
 
             try {
                 const response = await fetch(URL, options)
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 const responseJSON = await response.json()
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
                 if (responseJSON.success) {
                     setUserMessage('Message Sent!')
                     setShowMessageAck(true)
@@ -172,7 +169,7 @@ const Contact = ({ pageName, path }: Props) => {
         setTelError(validatePhone(phoneRef.current?.value || '').error)
     }
 
-    const mail = 'Dev@Tschiboka.Co.Uk'
+    const mail = 'Dev@tschiboka.com'
     const tel = '+44 7474 999 334'
     return (
         <Page title={'Tivadar Debnar | Contact'} path={path}>
@@ -209,19 +206,12 @@ const Contact = ({ pageName, path }: Props) => {
                                 placeholder="Full Name *"
                                 ref={nameRef}
                                 onBlur={() =>
-                                    setNameError(
-                                        validateName(
-                                            nameRef.current?.value || '',
-                                        ).error,
-                                    )
+                                    setNameError(validateName(nameRef.current?.value || '').error)
                                 }
                             />
                         </fieldset>
                         {nameError && (
-                            <span
-                                className="error-message"
-                                id="error-message--name"
-                            >
+                            <span className="error-message" id="error-message--name">
                                 {nameError}
                             </span>
                         )}
@@ -235,10 +225,7 @@ const Contact = ({ pageName, path }: Props) => {
                             />
                         </fieldset>
                         {emailError && (
-                            <span
-                                className="error-message"
-                                id="error-message--email"
-                            >
+                            <span className="error-message" id="error-message--email">
                                 {emailError}
                             </span>
                         )}
@@ -252,10 +239,7 @@ const Contact = ({ pageName, path }: Props) => {
                             />
                         </fieldset>
                         {telError && (
-                            <span
-                                className="error-message"
-                                id="error-message--tel"
-                            >
+                            <span className="error-message" id="error-message--tel">
                                 {telError}
                             </span>
                         )}
@@ -268,37 +252,28 @@ const Contact = ({ pageName, path }: Props) => {
                                 onChange={countCharacters}
                                 onBlur={() =>
                                     setMessageError(
-                                        validateMessage(
-                                            messageRef.current?.value || '',
-                                        ).error,
+                                        validateMessage(messageRef.current?.value || '').error,
                                     )
                                 }
                             />
                         </fieldset>
-                        <span
-                            className="character-counter"
-                            ref={charCounterRef}
-                        >
+                        <span className="character-counter" ref={charCounterRef}>
                             {charatersLeft} Characters Left
                         </span>
                         {messageError && (
-                            <span
-                                className="error-message"
-                                id="error-message--message"
-                            >
+                            <span className="error-message" id="error-message--message">
                                 {messageError}
                             </span>
                         )}
                         <LoadingIndicator show={submitDisabled} />
-                        {userMessage && (
-                            <span className="user-message">{userMessage}</span>
-                        )}
+                        {userMessage && <span className="user-message">{userMessage}</span>}
                         <button
                             className="submit-message"
                             type="button"
                             name="submit"
                             disabled={submitDisabled}
-                            onClick={() => handleSubmit()}
+                            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                            onClick={handleSubmit}
                         >
                             Send Your Message
                         </button>

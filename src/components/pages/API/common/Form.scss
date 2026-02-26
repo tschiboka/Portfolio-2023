@@ -14,11 +14,8 @@ form {
     justify-content: center;
     background-color: #111;
     opacity: 1;
-    background-image: repeating-radial-gradient(
-            circle at 0 0,
-            transparent 0,
-            #0c0c0c 4px
-        ),
+    background-image:
+        repeating-radial-gradient(circle at 0 0, transparent 0, #0c0c0c 4px),
         repeating-linear-gradient(#07070755, #070707);
     border: 2px solid palette.$black_2;
     border-radius: 20px;
@@ -141,6 +138,9 @@ form {
         width: calc(100% - 2rem);
         margin: 0 1rem;
         margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: palette.$accent_dark_1;
         border: 2px solid transparent;
         border-radius: 50px;

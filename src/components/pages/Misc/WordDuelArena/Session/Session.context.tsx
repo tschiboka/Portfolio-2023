@@ -53,6 +53,7 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
     )
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSession = () => {
     const context = useContext(SessionContext)
 

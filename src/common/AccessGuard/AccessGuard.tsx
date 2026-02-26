@@ -12,11 +12,12 @@ type AccessGuardProps = {
 }
 
 const getAccess = (): AccessMap => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { user, settings } = useSessionContext().session || {}
 
     return {
         features: {
-            xmas2025: settings?.enableFeature,
+            xmas2025: settings?.enabledFeatures?.includes('xmas2025') || false,
         },
         roles: {
             admin: user?.isAdmin || false,
@@ -40,8 +41,7 @@ export const AccessGuard = ({
         : true
     const rolesGranted = allowedRolesPass && deniedRolesPass
     const featuresGranted =
-        allowedFeatures?.every((allowedFeature) => features[allowedFeature]) ??
-        true
+        allowedFeatures?.every((allowedFeature) => features[allowedFeature]) ?? true
     const isAccessGranted = rolesGranted && featuresGranted
 
     return isAccessGranted ? children : null

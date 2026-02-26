@@ -1,8 +1,8 @@
-import { SettingsResources, User } from "../../components/pages/API/Login/Login.types"
+import { SettingsResource, User } from '../../components/pages/API/common/types'
 
 export type Session = {
     user?: User
-    settings?: SettingsResources
+    settings?: SettingsResource
     token?: string
 }
 

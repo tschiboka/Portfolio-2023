@@ -164,6 +164,9 @@ ul.contacts {
     min-height: 3rem;
     width: 300px;
     margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: palette.$accent_dark_1;
     border: 2px solid transparent;
     border-radius: 50px;
