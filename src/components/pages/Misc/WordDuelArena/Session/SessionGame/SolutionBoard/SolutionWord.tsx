@@ -6,16 +6,10 @@ type SolvedSolutionWordProps = {
     letterSize?: number
 }
 
-export const SolvedSolutionWord = ({
-    playableWord,
-    letterSize,
-}: SolvedSolutionWordProps) => {
+export const SolvedSolutionWord = ({ playableWord, letterSize }: SolvedSolutionWordProps) => {
     const { sessionState } = useSession()
     const role = sessionState?.role
-    const solvedByClass =
-        role === playableWord.solvedBy
-            ? 'solved-by-player'
-            : 'solved-by-opponent'
+    const solvedByClass = role === playableWord.solvedBy ? 'solved-by-player' : 'solved-by-opponent'
 
     return (
         <div className="word solved">
@@ -37,15 +31,14 @@ type UnsolvedSolutionWordProps = {
     letterSize?: number
 }
 
-export const UnsolvedSolutionWord = ({
-    playableWord,
-    letterSize,
-}: UnsolvedSolutionWordProps) => {
+export const UnsolvedSolutionWord = ({ playableWord, letterSize }: UnsolvedSolutionWordProps) => {
+    const hintedIndices = playableWord.hintIndices
+
     return (
         <div className="word unsolved">
             {playableWord.mask.split('').map((char, index) => (
                 <div
-                    className="letter"
+                    className={`letter ${hintedIndices.includes(index) ? 'hinted' : ''}`}
                     key={index}
                     style={{ width: letterSize, height: letterSize }}
                 >

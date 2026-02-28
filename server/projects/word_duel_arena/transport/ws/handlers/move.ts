@@ -1,11 +1,11 @@
 import type { Session, SessionState } from '../../../types'
-
 import { produce } from 'immer'
 import { commitSessionState } from '../broadcast'
 import { markAliveByDevice } from '../../../domain/session/session'
 import { SessionStatuses } from '../../../config/constants/session'
 import { MatchStatuses } from '../../../config/constants/game'
-import { getSolutionState, type MovePayload } from '../../../domain/session/move'
+import { getSolutionState } from '../../../domain/session/move'
+import { MovePayload } from '@common/types'
 
 export type MoveHandlerParams = {
     session: Session

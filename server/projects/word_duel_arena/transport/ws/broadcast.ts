@@ -62,16 +62,20 @@ function toPublicPlayer(player: Player | null): WdaPublicPlayer | null {
     return player ? { connected: player.connected, lastActive: player.lastActive } : null
 }
 
-function toPublicMatch(match: Match): WdaMatch {
-    const { moves, ...publicMatch } = match
-    return publicMatch
-}
-
 function toPlayableLevelWord(word: LevelWord): WdaPlayableLevelWord {
     if (word.status === 'SOLVED') {
         return { status: 'SOLVED', word: word.word, solvedBy: word.solvedBy }
     }
-    return { status: 'UNSOLVED', mask: word.mask, solvedBy: word.solvedBy }
+    const mask = [...word.mask]
+        .map((ch, i) => (word.hintIndices.includes(i) ? word.word[i] : ch))
+        .join('')
+
+    return {
+        status: 'UNSOLVED',
+        mask,
+        hintIndices: word.hintIndices,
+        solvedBy: word.solvedBy,
+    }
 }
 
 function transformSessionForClient(
@@ -96,8 +100,8 @@ function transformSessionForClient(
             player1: toPublicPlayer(state.players.player1),
             player2: toPublicPlayer(state.players.player2),
         },
-        currentMatch: state.currentMatch ? toPublicMatch(state.currentMatch) : null,
-        previousMatches: state.previousMatches.map(toPublicMatch),
+        currentMatch: state.currentMatch,
+        previousMatches: state.previousMatches,
         role,
     }
 }

@@ -1,5 +1,4 @@
 import Joi from 'joi'
-
 import { PlayerDerivedStatus, MatchStatuses } from '../../../../config/constants/game'
 
 const LastWordAttemptSchema = Joi.object({
@@ -18,6 +17,14 @@ const MatchPlayerStatusSchema = Joi.object({
     lastWordAttempt: LastWordAttemptSchema.optional(),
 })
 
+const MoveSchema = Joi.object({
+    player: Joi.string().valid('player1', 'player2').required(),
+    word: Joi.string().required(),
+    isTarget: Joi.boolean().required(),
+    isExtra: Joi.boolean().required(),
+    timestamp: Joi.number().required(),
+})
+
 const MatchSchema = Joi.object({
     id: Joi.string().required(),
     status: Joi.string()
@@ -27,7 +34,7 @@ const MatchSchema = Joi.object({
         player1: MatchPlayerStatusSchema.required(),
         player2: MatchPlayerStatusSchema.required(),
     }).required(),
-    moves: Joi.array().required(), // TODO
+    moves: Joi.array().items(MoveSchema).required(),
     winner: Joi.string().valid('player1', 'player2').allow(null).optional(),
     reason: Joi.string().valid('RESIGN', 'TIMEOUT', 'DRAW').allow(null).optional(),
 })

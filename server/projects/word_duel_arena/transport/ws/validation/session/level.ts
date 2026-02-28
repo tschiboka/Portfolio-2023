@@ -7,6 +7,7 @@ const LevelWordSchema = Joi.object({
     status: Joi.string().valid('SOLVED', 'UNSOLVED').required(),
     word: Joi.string().required(),
     mask: Joi.string().required(),
+    hintIndices: Joi.array().items(Joi.number().integer().min(0)).required(),
     solvedBy: Joi.string()
         .valid(...PlayerRole)
         .allow(null),

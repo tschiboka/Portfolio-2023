@@ -99,6 +99,7 @@ export type WdaMatch = {
 export type WdaUnsolvedLevelWord = {
     status: 'UNSOLVED'
     mask: string
+    hintIndices: number[]
     solvedBy: OptionalPlayerRole
 }
 

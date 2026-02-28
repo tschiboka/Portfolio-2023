@@ -44,6 +44,14 @@ export type Player = {
 
 export type MatchPlayerStatus = WdaMatchPlayerStatus
 
+export type Move = {
+    player: PlayerRole
+    word: string
+    isTarget: boolean
+    isExtra: boolean
+    timestamp: number
+}
+
 export type Match = {
     id: string
     status: MatchStatus
@@ -51,7 +59,7 @@ export type Match = {
         player1: MatchPlayerStatus
         player2: MatchPlayerStatus
     }
-    moves: unknown[]
+    moves: Move[]
     winner: OptionalPlayerRole
     reason: WdaMatchEndReason
 }
@@ -62,6 +70,7 @@ export type LevelWord = {
     word: string
     mask: string
     status: LevelWordStatus
+    hintIndices: number[]
     solvedBy: OptionalPlayerRole
 }
 

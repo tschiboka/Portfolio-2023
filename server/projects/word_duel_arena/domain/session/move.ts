@@ -1,10 +1,8 @@
 import type { SessionState, PlayerRole, LevelWord } from '../../types'
 import type { MovePayload } from '@common/types/projects/wda'
-
-export type { MovePayload }
-
 import { calculatePoints } from './points'
 import { MatchStatuses } from '../../config/constants/game'
+import { getIsHintDue, getRandomUnsolvedWordIndex } from './hint'
 
 function getSolutionState(draft: SessionState, deviceId: string, payload: MovePayload): void {
     if (!draft.players.player1 || !draft.players.player2 || !draft.level || !draft.currentMatch)
@@ -24,11 +22,14 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
     }
 
     // Find the target word and mark it as solved if found
+    let foundTarget = false
+    let foundExtra = false
     const targetWords = draft.level.targetWords
     const targetWord = targetWords.find((w: LevelWord) => w.word === payload.attempt)
     if (targetWord && targetWord.status === 'UNSOLVED') {
         targetWord.status = 'SOLVED'
         targetWord.solvedBy = playerKey
+        foundTarget = true
 
         const player = draft.currentMatch.perPlayerStatus[playerKey]
         player.points += calculatePoints(payload.attempt, true)
@@ -43,8 +44,6 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
         if (allTargetsSolved) {
             draft.currentMatch.status = MatchStatuses.FINISHED
         }
-
-        return
     }
 
     // Check if the attempt is an extra word
@@ -53,6 +52,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
     if (extraWord && extraWord.status === 'UNSOLVED') {
         extraWord.status = 'SOLVED'
         extraWord.solvedBy = playerKey
+        foundExtra = true
 
         const player = draft.currentMatch.perPlayerStatus[playerKey]
         player.points += calculatePoints(payload.attempt, false)
@@ -61,16 +61,37 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
             isTarget: false,
             isExtra: true,
         }
-        return
     }
 
     // If the word is neither a target nor an extra word, still track the attempt
-    const player = draft.currentMatch.perPlayerStatus[playerKey]
-    player.lastWordAttempt = {
-        word: payload.attempt,
-        isTarget: false,
-        isExtra: false,
+    if (!foundTarget && !foundExtra) {
+        const player = draft.currentMatch.perPlayerStatus[playerKey]
+        player.lastWordAttempt = {
+            word: payload.attempt,
+            isTarget: false,
+            isExtra: false,
+        }
+
+        const isHintDue = getIsHintDue(draft, payload)
+        if (isHintDue) {
+            const hintIndex = getRandomUnsolvedWordIndex(draft)
+            if (hintIndex !== undefined) {
+                const targetWord = draft.level.targetWords[hintIndex]
+                const nextIndex = targetWord.hintIndices.length // 0, 1, 2, ...
+                if (nextIndex < targetWord.word.length) {
+                    targetWord.hintIndices.push(nextIndex)
+                }
+            }
+        }
     }
+
+    draft.currentMatch.moves.push({
+        player: playerKey,
+        word: payload.attempt,
+        isTarget: foundTarget,
+        isExtra: foundExtra,
+        timestamp: Date.now(),
+    })
 }
 
 export { getSolutionState }

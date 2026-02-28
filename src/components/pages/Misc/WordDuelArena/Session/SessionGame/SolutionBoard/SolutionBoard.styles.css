@@ -12,23 +12,23 @@
 }
 
 .solution-board div.column {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: start;
-  padding: 5px;
-  box-sizing: border-box;
-  overflow-y: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    padding: 5px;
+    box-sizing: border-box;
+    overflow-y: none;
 }
 
 .solution-board div.column div.word {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 2px 0;
-  margin: 1px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    margin: 1px 0;
 }
 
 .solution-board div.column div.word .letter {
@@ -51,16 +51,22 @@
 
 .solution-board div.column div.word.unsolved .letter {
     color: transparent;
-  }
-  
+}
+
+.solution-board div.column div.word.unsolved .letter.hinted {
+    background-color: var(--color-font-warning);
+    color: var(--color-font-warning-dark);
+    font-weight: var(--font-bold);
+}
+
 .solution-board div.column div.word.solved .letter.solved-by-player {
     background-color: var(--color-font-accent);
-    color: var(--color-bg-dark);
+    color: var(--color-font-accent-dark);
     font-weight: var(--font-bold);
 }
 
 .solution-board div.column div.word.solved .letter.solved-by-opponent {
     background-color: var(--color-font-error);
-    color: var(--color-bg-dark);
+    color: var(--color-font-error-dark);
     font-weight: var(--font-bold);
 }

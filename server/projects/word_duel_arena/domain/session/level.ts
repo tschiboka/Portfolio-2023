@@ -34,6 +34,7 @@ const transformLevelWord = (word: string): LevelWord => ({
     status: LevelWordStatuses.UNSOLVED,
     mask: '*'.repeat(word.length),
     word: word,
+    hintIndices: [],
     solvedBy: null,
 })
 
