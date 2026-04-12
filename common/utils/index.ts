@@ -1,5 +1,6 @@
 export * from './AccessGuard'
 export * from './Browser'
+export * from './Canvas'
 export * from './DateTime'
 export * from './Predicate'
 export * from './Version'

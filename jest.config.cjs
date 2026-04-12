@@ -6,6 +6,8 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     moduleNameMapper: {
         '^@common/(.*)$': '<rootDir>/common/$1',
+        '^react-syntax-highlighter/dist/esm/styles/(.*)$': '<rootDir>/file-mock.js',
+        '^react-syntax-highlighter$': '<rootDir>/__mocks__/react-syntax-highlighter.js',
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg$': '<rootDir>/file-mock.js',
         '\\.pdf$': '<rootDir>/file-mock.js',

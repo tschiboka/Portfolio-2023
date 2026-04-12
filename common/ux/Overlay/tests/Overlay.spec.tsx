@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { Overlay } from '../index'
 import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
@@ -182,9 +183,10 @@ describe('Overlay.Popup', () => {
             expect(screen.getByLabelText('Overlay Close')).toBeInTheDocument()
         })
 
-        it('should call onClose when close button is clicked', () => {
+        it('should call onClose when close button is clicked', async () => {
+            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            fireEvent.click(screen.getByLabelText('Overlay Close'))
+            await user.click(screen.getByLabelText('Overlay Close'))
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
@@ -219,12 +221,13 @@ describe('Overlay.Popup', () => {
             expect(screen.getByText('Confirm')).toBeInTheDocument()
         })
 
-        it('should call action onClick when clicked', () => {
+        it('should call action onClick when clicked', async () => {
+            const user = userEvent.setup()
             const onClick = jest.fn()
             renderPopup({
                 actions: [{ label: 'Confirm', onClick }],
             })
-            fireEvent.click(screen.getByText('Confirm'))
+            await user.click(screen.getByText('Confirm'))
             expect(onClick).toHaveBeenCalledTimes(1)
         })
 
@@ -285,16 +288,18 @@ describe('Overlay.Popup', () => {
     })
 
     describe('backdrop', () => {
-        it('should call onClose when backdrop is clicked', () => {
+        it('should call onClose when backdrop is clicked', async () => {
+            const user = userEvent.setup()
             const { onClose } = renderPopup()
             const backdrop = document.querySelector('.Overlay--popup__backdrop')!
-            fireEvent.click(backdrop)
+            await user.click(backdrop)
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
-        it('should not call onClose when popup body is clicked', () => {
+        it('should not call onClose when popup body is clicked', async () => {
+            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            fireEvent.click(screen.getByRole('dialog'))
+            await user.click(screen.getByRole('dialog'))
             expect(onClose).not.toHaveBeenCalled()
         })
     })

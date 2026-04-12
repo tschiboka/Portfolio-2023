@@ -28,7 +28,13 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['.eslintrc.cjs', 'jest.config.cjs', 'vite.config.ts', 'scripts/**/*.js'],
+            files: [
+                '.eslintrc.cjs',
+                'jest.config.cjs',
+                'vite.config.ts',
+                'scripts/**/*.js',
+                '__mocks__/**/*.js',
+            ],
             parserOptions: {
                 project: null,
             },

@@ -1,9 +1,10 @@
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 import { AiFillSave } from 'react-icons/ai'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import './Code.scss'
 import { useState } from 'react'
 import { Browser } from '@common/utils/Browser'
+import { DateTime } from '@common/utils'
+import './Code.styles.css'
 
 interface Props {
     fileName?: string
@@ -12,7 +13,7 @@ interface Props {
     highlightRow?: [number]
 }
 
-const Code = ({ fileName, language, content }: Props) => {
+export const Code = ({ fileName, language, content }: Props) => {
     const [showCopyMessage, setShowCopyMessage] = useState(false)
     return (
         <div className="Code">
@@ -27,7 +28,7 @@ const Code = ({ fileName, language, content }: Props) => {
                         const messageDelay = setTimeout(() => {
                             setShowCopyMessage(false)
                             clearTimeout(messageDelay)
-                        }, 2000)
+                        }, DateTime.Units.Ms.fromSec(2))
                         void Browser.copyToClipboard(content)
                     }}
                 />
@@ -38,5 +39,3 @@ const Code = ({ fileName, language, content }: Props) => {
         </div>
     )
 }
-
-export default Code

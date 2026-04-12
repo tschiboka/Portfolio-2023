@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { DisabledRenderer } from '../renderers/DisabledRenderer'
 import { HiddenRenderer } from '../renderers/HiddenRenderer'
 import { TooltipRenderer } from '../renderers/TooltipRenderer'
@@ -133,15 +134,17 @@ describe('SoftDisabledRenderer', () => {
     })
 
     describe('click interaction', () => {
-        it('should show popup when trigger is clicked', () => {
+        it('should show popup when trigger is clicked', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByRole('dialog')).toBeInTheDocument()
         })
 
-        it('should set aria-expanded="true" when popup is shown', () => {
+        it('should set aria-expanded="true" when popup is shown', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByRole('button', { name: /click me/i })).toHaveAttribute(
                 'aria-expanded',
                 'true',
@@ -150,77 +153,91 @@ describe('SoftDisabledRenderer', () => {
     })
 
     describe('keyboard interaction', () => {
-        it('should show popup on Enter key', () => {
+        it('should show popup on Enter key', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.keyDown(screen.getByRole('button', { name: /click me/i }), { key: 'Enter' })
+            screen.getByRole('button', { name: /click me/i }).focus()
+            await user.keyboard('{Enter}')
             expect(screen.getByRole('dialog')).toBeInTheDocument()
         })
 
-        it('should show popup on Space key', () => {
+        it('should show popup on Space key', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.keyDown(screen.getByRole('button', { name: /click me/i }), { key: ' ' })
+            screen.getByRole('button', { name: /click me/i }).focus()
+            await user.keyboard('{ }')
             expect(screen.getByRole('dialog')).toBeInTheDocument()
         })
 
-        it('should dismiss popup on Escape key on trigger', () => {
+        it('should dismiss popup on Escape key on trigger', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
             const trigger = screen.getByRole('button', { name: /click me/i })
-            fireEvent.click(trigger)
+            await user.click(trigger)
             expect(screen.getByRole('dialog')).toBeInTheDocument()
-            fireEvent.keyDown(trigger, { key: 'Escape' })
+            trigger.focus()
+            await user.keyboard('{Escape}')
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
         })
 
-        it('should not show popup on other keys', () => {
+        it('should not show popup on other keys', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.keyDown(screen.getByRole('button', { name: /click me/i }), { key: 'Tab' })
+            screen.getByRole('button', { name: /click me/i }).focus()
+            await user.keyboard('{Tab}')
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
         })
     })
 
     describe('popup props', () => {
-        it('should use default title "Not Available"', () => {
+        it('should use default title "Not Available"', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByText('Not Available')).toBeInTheDocument()
         })
 
-        it('should forward custom title', () => {
+        it('should forward custom title', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer title="Custom Title">Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByText('Custom Title')).toBeInTheDocument()
         })
 
-        it('should forward message', () => {
+        it('should forward message', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer message="Upgrade required">Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByText('Upgrade required')).toBeInTheDocument()
         })
 
-        it('should forward custom icon', () => {
+        it('should forward custom icon', async () => {
+            const user = userEvent.setup()
             render(
                 <SoftDisabledRenderer icon={<span data-testid="icon">🔒</span>}>
                     Click me
                 </SoftDisabledRenderer>,
             )
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByTestId('icon')).toBeInTheDocument()
         })
     })
 
     describe('popup dismissal', () => {
-        it('should dismiss popup when backdrop is clicked', () => {
+        it('should dismiss popup when backdrop is clicked', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByRole('dialog')).toBeInTheDocument()
             const backdrop = document.querySelector('.Overlay--popup__backdrop')!
-            fireEvent.click(backdrop)
+            await user.click(backdrop)
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
         })
 
-        it('should dismiss popup on Escape key', () => {
+        it('should dismiss popup on Escape key', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByRole('dialog')).toBeInTheDocument()
             fireEvent.keyDown(document, { key: 'Escape' })
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
@@ -228,31 +245,34 @@ describe('SoftDisabledRenderer', () => {
     })
 
     describe('actions mapping', () => {
-        it('should render mapped action buttons', () => {
+        it('should render mapped action buttons', async () => {
+            const user = userEvent.setup()
             const onClick = jest.fn()
             render(
                 <SoftDisabledRenderer actions={[{ label: 'Upgrade', onClick }]}>
                     Click me
                 </SoftDisabledRenderer>,
             )
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByText('Upgrade')).toBeInTheDocument()
         })
 
-        it('should call action onClick and dismiss popup when action is clicked', () => {
+        it('should call action onClick and dismiss popup when action is clicked', async () => {
+            const user = userEvent.setup()
             const onClick = jest.fn()
             render(
                 <SoftDisabledRenderer actions={[{ label: 'Upgrade', onClick }]}>
                     Click me
                 </SoftDisabledRenderer>,
             )
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
-            fireEvent.click(screen.getByText('Upgrade'))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByText('Upgrade'))
             expect(onClick).toHaveBeenCalledTimes(1)
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
         })
 
-        it('should hide disabled actions via when: false', () => {
+        it('should hide disabled actions via when: false', async () => {
+            const user = userEvent.setup()
             render(
                 <SoftDisabledRenderer
                     actions={[{ label: 'Disabled', onClick: jest.fn(), disabled: true }]}
@@ -260,11 +280,12 @@ describe('SoftDisabledRenderer', () => {
                     Click me
                 </SoftDisabledRenderer>,
             )
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.queryByText('Disabled')).not.toBeInTheDocument()
         })
 
-        it('should show non-disabled actions', () => {
+        it('should show non-disabled actions', async () => {
+            const user = userEvent.setup()
             render(
                 <SoftDisabledRenderer
                     actions={[{ label: 'Enabled', onClick: jest.fn(), disabled: false }]}
@@ -272,13 +293,14 @@ describe('SoftDisabledRenderer', () => {
                     Click me
                 </SoftDisabledRenderer>,
             )
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByText('Enabled')).toBeInTheDocument()
         })
 
-        it('should not render actions area when no actions are provided', () => {
+        it('should not render actions area when no actions are provided', async () => {
+            const user = userEvent.setup()
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
-            fireEvent.click(screen.getByRole('button', { name: /click me/i }))
+            await user.click(screen.getByRole('button', { name: /click me/i }))
             // Only the auto-appended Close button from showClose should exist
             const actionBtns = document.querySelectorAll('.Overlay--popup__action-btn')
             expect(actionBtns.length).toBe(1) // Just the auto-appended Close

@@ -1,7 +1,6 @@
 import moment from 'moment'
 import { ClockData } from '.'
-import { Canvas, Centre, Line } from '../../../common/Canvas'
-import { DateTime } from '@common/utils'
+import { CanvasType, Centre, DateTime, Line } from '@common/utils'
 
 export const getDateTime = (): ClockData => {
     const dateTime = Date.now()
@@ -48,7 +47,7 @@ const getHands = ({ sec, min, hour }: ClockData) => [
     },
 ]
 
-export const drawHands = (clock: ClockData, canvasObj: Canvas) => {
+export const drawHands = (clock: ClockData, canvasObj: CanvasType) => {
     const { radius, centre, line } = canvasObj
 
     const hands = getHands(clock)
@@ -89,7 +88,7 @@ const drawLineFromCentre = (
 }
 
 const drawFromCentre = (
-    canvasObj: Canvas,
+    canvasObj: CanvasType,
     radius: number,
     width: number,
     color: string,
@@ -107,7 +106,7 @@ const drawFromCentre = (
     circle(props)
 }
 
-export const drawGrooves = (canvasObj: Canvas) => {
+export const drawGrooves = (canvasObj: CanvasType) => {
     const { radius, centre, line } = canvasObj
 
     const degreesMin = [...Array(60).keys()]
