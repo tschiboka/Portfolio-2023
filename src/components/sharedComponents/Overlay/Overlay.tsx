@@ -1,10 +1,9 @@
 import './Overlay.scss'
+import { Overlay } from '@common/ux'
 import { useAppContext } from '../../../context/AppContext/App.context'
 
-const Overlay = () => {
+export const FullScreenOverlay = () => {
     const { overlayVisible, overlayContent } = useAppContext()
 
-    if (overlayVisible) return <div className="Overlay">{overlayContent}</div>
+    if (overlayVisible) return <Overlay.FullScreen>{overlayContent}</Overlay.FullScreen>
 }
-
-export default Overlay

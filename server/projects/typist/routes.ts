@@ -8,6 +8,7 @@ import {
     TypedResponse,
 } from '@common/types'
 import { HttpStatus } from '../../common/HttpStatus/HttpStatus'
+import { isTruthy, isNonEmpty } from '@common/utils/Predicate'
 const router = express.Router()
 
 // WARNING: Temporarily use a hard-coded user settings
@@ -45,7 +46,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
                     return (previousChar + keystroke.expected).trim()
                 }
             })
-            .filter(Boolean) as string[]
+            .filter(isTruthy)
     }
 
     const uniqueErrorCombinations = [...new Set(errorCombinations)]
@@ -54,7 +55,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
     const { frequency } = await loadWordResources()
     const words = Object.keys(frequency)
     const hasTargetFilteringCriteria =
-        userSettings.targetLetter || uniqueErrorCombinations.length > 0
+        userSettings.targetLetter || isNonEmpty(uniqueErrorCombinations)
 
     // Pre-compute the frequency cutoff value at the difficulty percentile
     const sortedFrequencies = Object.values(frequency).sort((a: number, b: number) => a - b)
@@ -70,12 +71,11 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
               //   const meetsLetterCriteria = userSettings.targetLetter
               //       ? word.includes(userSettings.targetLetter)
               //       : true
-              const meetsCombinationCriteria =
-                  uniqueErrorCombinations.length > 0
-                      ? uniqueErrorCombinations.some((combination: string) =>
-                            word.toLowerCase().includes(combination.toLowerCase()),
-                        )
-                      : true
+              const meetsCombinationCriteria = isNonEmpty(uniqueErrorCombinations)
+                  ? uniqueErrorCombinations.some((combination: string) =>
+                        word.toLowerCase().includes(combination.toLowerCase()),
+                    )
+                  : true
               return meetsCombinationCriteria
           })
         : filteredByDifficulty

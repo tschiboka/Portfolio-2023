@@ -2,11 +2,11 @@ import { ReactNode, useEffect, useRef } from 'react'
 import { useAppContext } from '../../../context/AppContext/App.context'
 import { postVisit } from '../../../serverAPI/visits'
 import { detectIncognito } from 'detectincognitojs'
-import Overlay from '../Overlay/Overlay'
 import './Page.scss'
 import { Maybe } from 'monet'
 import { useNavigate } from 'react-router-dom'
-import { useSessionContext } from '../../../context/SessionContext/Session.context'
+import { Session } from '../../../context/SessionContext'
+import { FullScreenOverlay } from '../Overlay/Overlay'
 
 type Props = {
     children: ReactNode
@@ -25,12 +25,8 @@ const Page = ({
     recordVisit = true,
     loginRequired = false,
 }: Props) => {
-    const {
-        isPageScrolling,
-        setIsPageScrolling,
-        scrollTimeElapsed,
-        setScrollTimeElapsed,
-    } = useAppContext()
+    const { isPageScrolling, setIsPageScrolling, scrollTimeElapsed, setScrollTimeElapsed } =
+        useAppContext()
     const isPageScrollingRef = useRef(isPageScrolling)
     const setIsPageScrollingRef = useRef(setIsPageScrolling)
     const scrollTimeElapsedRef = useRef(scrollTimeElapsed)
@@ -44,9 +40,9 @@ const Page = ({
     useEffect(() => {
         document.title = title
 
-        detectIncognito().then((result) => {
+        void detectIncognito().then((result) => {
             // Do Not Record Visits in Incognito Mode
-            if (!result.isPrivate && recordVisit) postVisit(path)
+            if (!result.isPrivate && recordVisit) void postVisit(path)
         })
 
         window.removeEventListener('scroll', handleScroll)
@@ -81,17 +77,16 @@ const Page = ({
             .orSome('Page')
 
     const navigate = useNavigate()
-    const { isAuthenticated, isAuthLoading } = useSessionContext()
+    const { isAuthenticated, isAuthLoading } = Session.useContext()
 
     useEffect(() => {
-        if (loginRequired && !isAuthLoading && !isAuthenticated)
-            navigate('/api/login')
+        if (loginRequired && !isAuthLoading && !isAuthenticated) navigate('/api/login')
     }, [loginRequired, isAuthenticated, isAuthLoading, navigate])
 
     return (
         <div className={getClassName(className)}>
             {children}
-            <Overlay></Overlay>
+            <FullScreenOverlay></FullScreenOverlay>
         </div>
     )
 }

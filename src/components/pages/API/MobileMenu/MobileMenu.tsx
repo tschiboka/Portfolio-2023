@@ -7,9 +7,10 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import { Menu } from '../Nav/Nav.types'
 import { append, dropLast } from 'ramda'
+import { isTruthy } from '@common/utils/Predicate'
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs'
 import moment from 'moment'
-import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
+import { AccessGuard } from '@common/utils/AccessGuard'
 
 type MobileMenuProps = { pageName: string }
 const MobileMenu = ({ pageName }: MobileMenuProps) => {
@@ -24,8 +25,7 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
         return () => clearInterval(timer)
     }, [])
 
-    const handleSubmenuClick = (menu: Menu[]) =>
-        setMenuStack(append(menu)(menuStack))
+    const handleSubmenuClick = (menu: Menu[]) => setMenuStack(append(menu)(menuStack))
 
     const handleBackClick = () => {
         setMenuStack(dropLast(1, menuStack))
@@ -37,20 +37,14 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
         setSubmenuStack(append(item.label)(submenuStack))
     }
 
-    const getMenuItemParent = (
-        childLabel: string,
-        parents: string[] = [],
-    ): string[] => {
+    const getMenuItemParent = (childLabel: string, parents: string[] = []): string[] => {
         if (!childLabel) return parents
 
         const parent = menuGroups
             .map((menuGroup) =>
-                menuGroup.find(
-                    (menu) =>
-                        menu.label.toLowerCase() === childLabel?.toLowerCase(),
-                ),
+                menuGroup.find((menu) => menu.label.toLowerCase() === childLabel?.toLowerCase()),
             )
-            .filter(Boolean)?.[0]?.parent
+            .filter(isTruthy)?.[0]?.parent
 
         if (parent) {
             parents.push(parent)
@@ -60,10 +54,7 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
         return parents.reverse()
     }
 
-    const originPath = dropLast(1, [
-        ...getMenuItemParent(pageName),
-        pageName,
-    ]).join(' / ')
+    const originPath = dropLast(1, [...getMenuItemParent(pageName), pageName]).join(' / ')
     return (
         <>
             <menu className="Menu MobileMenu">
@@ -76,7 +67,16 @@ const MobileMenu = ({ pageName }: MobileMenuProps) => {
                 />
                 {menuStack[menuStack.length - 1].map((item) => (
                     <AccessGuard
-                        allowedRoles={item.allowRoles}
+                        guards={[
+                            {
+                                when: { type: 'capability', capabilities: item.allowCapabilities },
+                                then: { mode: 'hidden' },
+                            },
+                            {
+                                when: { type: 'feature', features: item.allowedFeatures },
+                                then: { mode: 'hidden' },
+                            },
+                        ]}
                         key={item.label}
                     >
                         <li

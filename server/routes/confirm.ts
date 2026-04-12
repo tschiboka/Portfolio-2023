@@ -1,6 +1,7 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import { omit, assoc } from 'ramda'
+import { isFalsy } from '@common/utils/Predicate'
 import { Token } from '../models/token'
 import { User } from '../models/user'
 import {
@@ -20,7 +21,7 @@ router.post('/', async (req: PostConfirmReq, res: PostConfirmRes) => {
     // Find verification token
     const { token: verificationToken } = req.body
     const token = await Token.findOne({ token: verificationToken })
-    if (!token)
+    if (isFalsy(token))
         return res.status(HttpStatus.NOT_FOUND).json({
             success: false,
             message: 'Could not find verification token',
@@ -28,7 +29,7 @@ router.post('/', async (req: PostConfirmReq, res: PostConfirmRes) => {
 
     // Decode token
     const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY
-    if (!JWT_PRIVATE_KEY) throw Error('Fatal error: JWT Private key is not defined!')
+    if (isFalsy(JWT_PRIVATE_KEY)) throw Error('Fatal error: JWT Private key is not defined!')
     const decoded = jwt.verify(token.token, JWT_PRIVATE_KEY)
 
     // Activate user

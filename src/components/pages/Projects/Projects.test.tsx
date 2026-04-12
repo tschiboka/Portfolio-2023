@@ -1,62 +1,65 @@
-import { getProjects } from "./getProjects";
-import { getColourName } from "./getProjects";
+import { getProjects } from './getProjects'
+import { getColourName } from './getProjects'
+import { isArray } from '@common/utils/Predicate'
 
 // Get Project
 // Returns a list of projects with the following properties:
 // Title, Description, Badges, Url, Github, Readmore
-describe("Get Projects", () => {
-    const result = getProjects();
-    it("Sould Return an Array", () => {
-        expect(Array.isArray(result)).toBe(true);
-    });
+describe('Get Projects', () => {
+    const result = getProjects()
+    it('Sould Return an Array', () => {
+        expect(isArray(result)).toBe(true)
+    })
 
-    it("Should Return an Array with Length Greater than 0", () => {
-        expect(result.length).toBeGreaterThan(0);
-    });
+    it('Should Return an Array with Length Greater than 0', () => {
+        expect(result.length).toBeGreaterThan(0)
+    })
 
-    it("Should Have Title, Description and Badges Property", () => {
-        const props = ["title", "description", "badges"];
-        result.forEach((project) =>
-            props.forEach((prop) => expect(project).toHaveProperty(prop))
-        );
-    });
+    it('Should Have Title, Description and Badges Property', () => {
+        const props = ['title', 'description', 'badges']
+        result.forEach((project) => props.forEach((prop) => expect(project).toHaveProperty(prop)))
+    })
 
-    it("Should Have Unique Title Properties", () => {
-        const titles = result.map((t) => t.title);
-        const unique = new Set(titles);
-        expect(titles.length).toBe(unique.size);
-    });
+    it('Should Have Unique Title Properties', () => {
+        const titles = result.map((t) => t.title)
+        const unique = new Set(titles)
+        expect(titles.length).toBe(unique.size)
+    })
 
-    it("Should Have Valid GitHub and URL Strings if Provided", () => {
+    it('Should Have Valid GitHub and URL Strings if Provided', () => {
         const urlRegExp =
-            /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
+            /^(http(s):\/\/.)[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$/
+        const relativeUrlRegExp = /^\/[-a-zA-Z0-9@:%._+~#?&//=]*$/
         result.forEach((project) => {
-            if (project.github) expect(project.github).toMatch(urlRegExp);
-            if (project.url) expect(project.url).toMatch(urlRegExp);
-        });
-    });
+            if (project.github) expect(project.github).toMatch(urlRegExp)
+            if (project.url)
+                expect(project.url).toMatch(
+                    new RegExp(`${urlRegExp.source}|${relativeUrlRegExp.source}`),
+                )
+        })
+    })
 
-    it("Should Have a Badge Property of Array with at Least One Property", () => {
+    it('Should Have a Badge Property of Array with at Least One Property', () => {
         result.forEach((project) => {
-            expect(project.badges.length).toBeGreaterThan(0);
-        });
-    });
-});
+            expect(project.badges.length).toBeGreaterThan(0)
+        })
+    })
+})
 
-describe("Get Colours", () => {
-    it("Should Return a String", () => {
-        const result = getColourName("react");
-        expect(typeof result).toBe("string");
-    });
+describe('Get Colours', () => {
+    it('Should Return a String', () => {
+        const result = getColourName('react')
+        expect(typeof result).toBe('string')
+    })
 
-    it("Should Be Case Insensitive", () => {
-        const resultUpper = getColourName("React");
-        const resultLower = getColourName("react");
-        expect(resultLower).toBe(resultUpper);
-    });
+    it('Should Be Case Insensitive', () => {
+        const resultUpper = getColourName('React')
+        const resultLower = getColourName('react')
+        expect(resultLower).toBe(resultUpper)
+    })
 
-    it("Should Return Default Color", () => {
-        const result = getColourName("A");
-        expect(result).toBe("white");
-    });
-});
+    it('Should Return Default Color', () => {
+        const result = getColourName('A')
+        expect(result).toBe('white')
+    })
+})

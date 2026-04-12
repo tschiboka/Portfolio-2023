@@ -1,0 +1,360 @@
+@import '../index.css';
+
+.Overlay {
+    position: fixed;
+    inset: 0;
+    overflow: auto;
+    z-index: 65;
+}
+
+.Overlay > * {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.Overlay--popup__backdrop {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 64;
+}
+
+.Overlay--popup {
+    position: relative;
+    z-index: 65;
+    box-sizing: border-box;
+    padding: var(--space-24);
+    border-radius: var(--space-8);
+    background: var(--black-1);
+    border: 1px solid var(--black-3);
+    /* box-shadow removed to avoid visual clipping at viewport edges */
+    color: var(--white-1);
+}
+
+.Overlay--popup__close {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--gray-4);
+    font-size: var(--font-md);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 var(--space-8);
+}
+
+.Overlay--popup__close:hover {
+    color: var(--white-1);
+}
+
+.Overlay--popup__header {
+    margin-bottom: var(--space-12);
+}
+
+.Overlay--popup__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-40);
+    height: var(--space-40);
+    font-size: var(--font-md);
+    line-height: 1;
+    flex-shrink: 0;
+    background: var(--black-x);
+    border-radius: var(--space-8);
+}
+
+.Overlay--popup__title {
+    margin: 0;
+    font-size: var(--font-md);
+    font-weight: 600;
+}
+
+.Overlay--popup__message {
+    margin: 0 0 var(--space-16) 0;
+    font-size: var(--font-sm);
+    opacity: 0.85;
+}
+
+.Overlay--popup__actions {
+    margin-top: var(--space-16);
+}
+
+.Overlay--popup__action-btn {
+    padding: var(--space-8) var(--space-16);
+    font-size: var(--font-xs);
+    border-radius: var(--space-4);
+    border: 1px solid var(--black-5);
+    background: var(--black-3);
+    color: var(--white-1);
+    cursor: pointer;
+}
+
+.Overlay--popup__action-btn:hover {
+    background: var(--black-4);
+}
+
+/* Arrow ────────────────────────────────────────────────────────────────────── */
+
+.Overlay--popup__arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+/* Outer border triangle + inner fill via ::after */
+.Overlay--popup__arrow::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* Arrow pointing UP (popup is below trigger) */
+.Overlay--popup__arrow--top {
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--black-3);
+}
+
+.Overlay--popup__arrow--top::after {
+    top: 2px;
+    left: -7px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid var(--black-1);
+}
+
+/* Arrow pointing DOWN (popup is above trigger) */
+.Overlay--popup__arrow--bottom {
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--black-3);
+}
+
+.Overlay--popup__arrow--bottom::after {
+    bottom: 2px;
+    left: -7px;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid var(--black-1);
+}
+
+/* Arrow pointing LEFT (popup is to the right of trigger) */
+.Overlay--popup__arrow--left {
+    left: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid var(--black-3);
+}
+
+.Overlay--popup__arrow--left::after {
+    left: 2px;
+    top: -7px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid var(--black-1);
+}
+
+/* Arrow pointing RIGHT (popup is to the left of trigger) */
+.Overlay--popup__arrow--right {
+    right: -8px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid var(--black-3);
+}
+
+.Overlay--popup__arrow--right::after {
+    right: 2px;
+    top: -7px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 7px solid var(--black-1);
+}
+
+/* Arrow inherits mode border color */
+.Overlay--popup--primary .Overlay--popup__arrow--top {
+    border-bottom-color: var(--accent-dark-1);
+}
+.Overlay--popup--primary .Overlay--popup__arrow--bottom {
+    border-top-color: var(--accent-dark-1);
+}
+.Overlay--popup--primary .Overlay--popup__arrow--left {
+    border-right-color: var(--accent-dark-1);
+}
+.Overlay--popup--primary .Overlay--popup__arrow--right {
+    border-left-color: var(--accent-dark-1);
+}
+
+.Overlay--popup--warning .Overlay--popup__arrow--top {
+    border-bottom-color: var(--yellow-dark-1);
+}
+.Overlay--popup--warning .Overlay--popup__arrow--bottom {
+    border-top-color: var(--yellow-dark-1);
+}
+.Overlay--popup--warning .Overlay--popup__arrow--left {
+    border-right-color: var(--yellow-dark-1);
+}
+.Overlay--popup--warning .Overlay--popup__arrow--right {
+    border-left-color: var(--yellow-dark-1);
+}
+
+.Overlay--popup--danger .Overlay--popup__arrow--top {
+    border-bottom-color: var(--error-dark-1);
+}
+.Overlay--popup--danger .Overlay--popup__arrow--bottom {
+    border-top-color: var(--error-dark-1);
+}
+.Overlay--popup--danger .Overlay--popup__arrow--left {
+    border-right-color: var(--error-dark-1);
+}
+.Overlay--popup--danger .Overlay--popup__arrow--right {
+    border-left-color: var(--error-dark-1);
+}
+
+.Overlay--popup--info .Overlay--popup__arrow--top {
+    border-bottom-color: var(--accent-dark-3);
+}
+.Overlay--popup--info .Overlay--popup__arrow--bottom {
+    border-top-color: var(--accent-dark-3);
+}
+.Overlay--popup--info .Overlay--popup__arrow--left {
+    border-right-color: var(--accent-dark-3);
+}
+.Overlay--popup--info .Overlay--popup__arrow--right {
+    border-left-color: var(--accent-dark-3);
+}
+
+/* Mode: primary (default) */
+.Overlay--popup--primary {
+    border-color: var(--accent-dark-1);
+}
+
+.Overlay--popup--primary .Overlay--popup__icon {
+    color: var(--accent);
+    background: var(--accent-dark-5);
+}
+
+.Overlay--popup--primary .Overlay--popup__action-btn {
+    background: transparent;
+    border-color: var(--accent-dark-1);
+    color: var(--accent-dark-1);
+}
+
+.Overlay--popup--primary .Overlay--popup__action-btn:hover {
+    background: var(--accent-dark-5);
+}
+
+.Overlay--popup--primary .Overlay--popup__action-btn--secondary {
+    background: var(--accent-dark-1);
+    border-color: var(--accent-dark-1);
+    color: var(--black-x);
+}
+
+.Overlay--popup--primary .Overlay--popup__action-btn--secondary:hover {
+    background: var(--accent-dark-2);
+}
+
+/* Mode: warning */
+.Overlay--popup--warning {
+    border-color: var(--yellow-dark-1);
+}
+
+.Overlay--popup--warning .Overlay--popup__icon {
+    color: var(--yellow);
+    background: var(--yellow-dark-5);
+}
+
+.Overlay--popup--warning .Overlay--popup__action-btn {
+    background: transparent;
+    border-color: var(--yellow-dark-1);
+    color: var(--yellow-dark-1);
+}
+
+.Overlay--popup--warning .Overlay--popup__action-btn:hover {
+    background: var(--yellow-dark-5);
+}
+
+.Overlay--popup--warning .Overlay--popup__action-btn--secondary {
+    background: var(--yellow-dark-1);
+    border-color: var(--yellow-dark-1);
+    color: var(--black-x);
+}
+
+.Overlay--popup--warning .Overlay--popup__action-btn--secondary:hover {
+    background: var(--yellow-dark-2);
+}
+
+/* Mode: danger */
+.Overlay--popup--danger {
+    border-color: var(--error-dark-1);
+}
+
+.Overlay--popup--danger .Overlay--popup__icon {
+    color: var(--error);
+    background: var(--error-dark-5);
+}
+
+.Overlay--popup--danger .Overlay--popup__action-btn {
+    background: transparent;
+    border-color: var(--error-dark-1);
+    color: var(--error-dark-1);
+}
+
+.Overlay--popup--danger .Overlay--popup__action-btn:hover {
+    background: var(--error-dark-5);
+}
+
+.Overlay--popup--danger .Overlay--popup__action-btn--secondary {
+    background: var(--error-dark-1);
+    border-color: var(--error-dark-1);
+    color: var(--white-1);
+}
+
+.Overlay--popup--danger .Overlay--popup__action-btn--secondary:hover {
+    background: var(--error-dark-2);
+}
+
+/* Mode: info */
+.Overlay--popup--info {
+    border-color: var(--accent-dark-3);
+}
+
+.Overlay--popup--info .Overlay--popup__icon {
+    color: var(--accent-dark-1);
+    background: var(--accent-dark-5);
+}
+
+.Overlay--popup--info .Overlay--popup__action-btn {
+    background: transparent;
+    border-color: var(--accent-dark-3);
+    color: var(--accent-dark-3);
+}
+
+.Overlay--popup--info .Overlay--popup__action-btn:hover {
+    background: var(--accent-dark-5);
+}
+
+.Overlay--popup--info .Overlay--popup__action-btn--secondary {
+    background: var(--accent-dark-3);
+    border-color: var(--accent-dark-3);
+    color: var(--white-1);
+}
+
+.Overlay--popup--info .Overlay--popup__action-btn--secondary:hover {
+    background: var(--accent-dark-4);
+}

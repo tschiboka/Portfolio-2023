@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import { Resend } from 'resend'
+import { isUndefined } from '@common/utils/Predicate'
 import { User, validateUser, generateToken } from '../models/user'
 import { Settings, HALF_AN_HOUR_IN_MS } from '../models/setting'
 import { Token } from '../models/token'
@@ -93,7 +94,7 @@ router.post('/', async (req: PostUserReq, res: PostUserRes) => {
     const expiresErrorMsg = 'Invalid expiration time in settings'
     const { registrationTokensExpireInMs: expires, maxUsers } = setting
     const iat = Math.floor(Date.now() / 1000)
-    if (expires === undefined || expires < HALF_AN_HOUR_IN_MS)
+    if (isUndefined(expires) || expires < HALF_AN_HOUR_IN_MS)
         return res.status(HttpStatus.BAD_REQUEST).json({ success: false, message: expiresErrorMsg })
 
     // Check app reached maximum number of users

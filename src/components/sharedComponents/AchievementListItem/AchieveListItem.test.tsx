@@ -3,7 +3,7 @@ import user from '@testing-library/user-event'
 import { AppContextProvider } from '../../../context/AppContext/App.context'
 import AchievementListItem from './AchievementListItem'
 import Achievement from './Achievements'
-import Overlay from '../Overlay/Overlay'
+import { FullScreenOverlay } from '../Overlay/Overlay'
 
 const achievement: Achievement = {
     title: 'Achievement_Certificate_Title',
@@ -68,7 +68,7 @@ describe('Achievement List Item', () => {
     test('Should Display a Certificate Image Overlay When Clicked', async () => {
         render(
             <AppContextProvider>
-                <Overlay></Overlay>
+                <FullScreenOverlay></FullScreenOverlay>
                 <AchievementListItem achievement={achievement} />
             </AppContextProvider>,
         )

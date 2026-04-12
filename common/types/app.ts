@@ -27,6 +27,9 @@
 // If two endpoints genuinely share the same shape, create a core entity type
 // and compose endpoint-specific types from it (e.g. via intersection or Pick/Omit).
 
+export type Capability = 'admin'
+export type Feature = 'xmas2025'
+
 // CATEGORY TYPES
 export type Category = {
     name: string

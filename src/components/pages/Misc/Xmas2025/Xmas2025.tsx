@@ -1,11 +1,7 @@
 import Footer from '../../../sharedComponents/Footer/Footer'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import Page from '../../../sharedComponents/Page/Page'
-import {
-    useGetMessages,
-    useGetPagePingData,
-    usePostMessage,
-} from './Xmas2025.queries'
+import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
 import { Submenu } from '../../API/Nav'
 import Nav from '../../API/Nav/Nav'
@@ -24,13 +20,13 @@ import Reindeer from '../../../../assets/images/projects/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
-import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
 import { PageContainerProps } from '../../../sharedComponents/Page/Page.types'
 
 const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
     const { mobileMenuVisible } = useAppContext()
-    const { user } = useSessionContext().session || {}
+    const { user } = Session.useContext().session || {}
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
     const [pagePingStatus, setPagePingStatus] = useState<string>('')
 
@@ -64,10 +60,8 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
 
     useEffect(() => {
         const loadingMessage = pingResponse.isLoading && 'LOADING...'
-        const errorMsg =
-            pingResponse.error && `ERROR: ${pingResponse.error.message}`
-        const successMessage =
-            pingResponse.isSuccess && ping?.data?.data?.message
+        const errorMsg = pingResponse.error && `ERROR: ${pingResponse.error.message}`
+        const successMessage = pingResponse.isSuccess && ping?.data?.data?.message
         setPagePingStatus(loadingMessage || errorMsg || successMessage || '')
     }, [ping, pingResponse])
 
@@ -95,11 +89,7 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
             className="Xmas"
         >
             {' '}
-            <Nav
-                pageName="Xmas"
-                submenuStack={submenuStack}
-                setSubmenuStack={setSubmenuStack}
-            />
+            <Nav pageName="Xmas" submenuStack={submenuStack} setSubmenuStack={setSubmenuStack} />
             {Boolean(submenuStack.length) && (
                 <SubmenuPanel
                     key={submenuStack[0].parentLabel}
@@ -111,41 +101,25 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
             )}
             {mobileMenuVisible && <MobileMenu pageName="Xmas" />}
             <main>
-                <img
-                    className="reindeer-image"
-                    src={Reindeer}
-                    alt="Reindeer Image"
-                />
+                <img className="reindeer-image" src={Reindeer} alt="Reindeer Image" />
                 <XmasFormCanvas lightCount={30} lightSize={6}>
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <fieldset>
                             <label htmlFor="name">Name</label>
-                            <WrappedInput
-                                name="name"
-                                control={control}
-                                type="text"
-                            />
+                            <WrappedInput name="name" control={control} type="text" />
                         </fieldset>
                         <fieldset>
                             <label htmlFor="message">Message</label>
-                            <WrappedInput
-                                name="message"
-                                control={control}
-                                type="text"
-                            />
+                            <WrappedInput name="message" control={control} type="text" />
                         </fieldset>
-                        <LoadingIndicator
-                            show={submitMessageResponse.isPending}
-                        />
+                        <LoadingIndicator show={submitMessageResponse.isPending} />
                         {submitMessageResponse.isError && (
                             <p className="submit-error-message">
                                 {submitMessageResponse.error?.message}
                             </p>
                         )}
                         {submitMessageResponse.isSuccess && (
-                            <p className="submit-success-message">
-                                Successful submission
-                            </p>
+                            <p className="submit-success-message">Successful submission</p>
                         )}
                         <div className="button-box">
                             <button name="submit">Submit</button>

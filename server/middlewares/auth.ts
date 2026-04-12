@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
+import { isFalsy } from '@common/utils/Predicate'
 import { HttpStatus } from '../common/HttpStatus/HttpStatus'
 
 export default function auth(req: Request, res: Response, next: NextFunction) {
     const token = req.header('x-auth-token')
-    if (!token)
+    if (isFalsy(token))
         return res.status(HttpStatus.UNAUTHORIZED).json({
             success: false,
             message: 'Access denied: no JWT token is provided!',

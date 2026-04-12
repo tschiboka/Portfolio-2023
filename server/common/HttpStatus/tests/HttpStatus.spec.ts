@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { isNumber } from '@common/utils/Predicate'
 import { HttpStatus } from '../HttpStatus'
 
 describe('HttpStatus', () => {
@@ -100,19 +101,19 @@ describe('HttpStatus', () => {
 
     describe('structural guarantees', () => {
         it('should have all values as numbers', () => {
-            const values = Object.values(HttpStatus).filter((v) => typeof v === 'number')
+            const values = Object.values(HttpStatus).filter(isNumber)
             expect(values.length).toBeGreaterThan(0)
             values.forEach((v) => expect(v).toBeGreaterThanOrEqual(100))
             values.forEach((v) => expect(v).toBeLessThan(600))
         })
 
         it('should have no duplicate values', () => {
-            const values = Object.values(HttpStatus).filter((v) => typeof v === 'number')
+            const values = Object.values(HttpStatus).filter(isNumber)
             expect(new Set(values).size).toBe(values.length)
         })
 
         it('should have exactly 61 status codes', () => {
-            const values = Object.values(HttpStatus).filter((v) => typeof v === 'number')
+            const values = Object.values(HttpStatus).filter(isNumber)
             expect(values.length).toBe(61)
         })
     })

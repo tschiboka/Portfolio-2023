@@ -17,7 +17,7 @@ import './Login.scss'
 import Nav from '../../../sharedComponents/Nav/Nav'
 import Menu from '../../../sharedComponents/Menu/Menu'
 import SubNav from '../../../sharedComponents/SubNav/SubNav'
-import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { Session } from '../../../../context/SessionContext'
 
 type LoginProps = {
     path: string
@@ -26,7 +26,7 @@ type LoginProps = {
 
 const Login = ({ path, pageName }: LoginProps) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext()
-    const { setSession } = useSessionContext()
+    const { setSession } = Session.useContext()
     const navigate = useNavigate()
 
     const [revealPassword, setRevealPassword] = useState(false)

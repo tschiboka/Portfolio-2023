@@ -1,12 +1,15 @@
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { AppContextProvider } from '../../../../context/AppContext/App.context'
 import Welcome from './Welcome'
 
 function renderComponent() {
     render(
-        <AppContextProvider>
-            <Welcome />
-        </AppContextProvider>,
+        <MemoryRouter>
+            <AppContextProvider>
+                <Welcome />
+            </AppContextProvider>
+        </MemoryRouter>,
     )
 }
 

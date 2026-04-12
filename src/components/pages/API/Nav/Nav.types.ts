@@ -1,12 +1,12 @@
-import { Feature, Role } from "../../../../common/AccessGuard/AccessGuard.types";
+import { Capability, Feature } from '../../../../../common/types'
 
-type MenuLabel = { 
-    label: string, 
-    extended?: boolean, 
-    parent?: string, 
-    allowRoles?: Role[], 
+type MenuLabel = {
+    label: string
+    extended?: boolean
+    parent?: string
+    allowCapabilities?: Capability[]
     allowedFeatures?: Feature[]
-    image?: string,
+    image?: string
 }
 
 type MenuWithoutChildren = MenuLabel & { path: string; submenu?: never }
@@ -18,4 +18,3 @@ export type Submenu = {
     options: Menu[]
     extended: boolean
 }
-

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { GetVersionResponse } from '../../common/types'
-import { MINUTE_IN_MILLIS } from './dateTime'
+import { DateTime } from '@common/utils'
+import { GetVersionResponse } from '../../types'
 
 export const useVersionCheck = () => {
     const [isStale, setIsStale] = useState(false)
@@ -42,7 +42,7 @@ export const useVersionCheck = () => {
             checkVersion().catch((error: unknown) =>
                 console.error('Error checking app version:', error),
             )
-        }, MINUTE_IN_MILLIS * 10)
+        }, DateTime.Units.Ms.fromMin(10))
         return () => clearInterval(id)
     }, [])
 

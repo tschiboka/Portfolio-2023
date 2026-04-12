@@ -1,12 +1,7 @@
 import { Control, Controller, Path } from 'react-hook-form'
-import {
-    BsChevronBarDown,
-    BsChevronBarUp,
-    BsEye,
-    BsEyeSlash,
-    BsSearch,
-} from 'react-icons/bs'
+import { BsChevronBarDown, BsChevronBarUp, BsEye, BsEyeSlash, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import { hasLength } from '@common/utils/Predicate'
 import './WrappedFormComponents.scss'
 import { colors } from '../../pages/API/Categories/colors'
 
@@ -35,9 +30,7 @@ export const WrappedRadioButton = <T extends FieldValues>({
         <Controller
             name={name}
             control={control}
-            render={({
-                field: { value: fieldValue, onChange: onChangeFn },
-            }) => (
+            render={({ field: { value: fieldValue, onChange: onChangeFn } }) => (
                 <input
                     type="radio"
                     name={name}
@@ -98,15 +91,12 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (
-            containerRef.current &&
-            !containerRef.current.contains(event.target as Node)
-        ) {
+        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
             setOpen(false)
         }
     }
 
-    const filteredOptions = (text: string = '') =>
+    const filteredOptions = (text = '') =>
         options.filter((option) =>
             (option.label || '')
                 .toUpperCase()
@@ -138,10 +128,7 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
             </div>
         ))
 
-    const getHighlightedSearchOptionText = (
-        text: string,
-        input: string,
-    ): ReactNode => {
+    const getHighlightedSearchOptionText = (text: string, input: string): ReactNode => {
         const prefix = text.split(input)[0]
         const suffixIndex = prefix.length + input.length
         const suffix = text.substring(suffixIndex)
@@ -177,71 +164,50 @@ export const WrappedSearchInput = <TFieldValues extends FieldValues>({
                 } = field
 
                 const handleOnBlur = () => fieldOnBlur?.()
-                const handleOnChange = (
-                    event: ChangeEvent<HTMLInputElement>,
-                ) => {
+                const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
                     fieldOnChange?.(event)
                     setOpen(true)
                 }
 
                 return (
-                    <div
-                        ref={containerRef}
-                        className={'wrapped-component ' + openClassStr}
-                    >
+                    <div ref={containerRef} className={'wrapped-component ' + openClassStr}>
                         <div
                             className={
-                                'wrapped-input ' +
-                                (showIconWithInput ? 'show-input-icon' : '')
+                                'wrapped-input ' + (showIconWithInput ? 'show-input-icon' : '')
                             }
                         >
-                            {showIconWithInput &&
-                                (open || (!open && field.value)) && (
-                                    <div className="show-icon">
-                                        {options.find(
-                                            (o: SearchInputOption) =>
-                                                o.label === value,
-                                        )?.icon || colors[field.value]}
-                                    </div>
-                                )}
+                            {showIconWithInput && (open || (!open && field.value)) && (
+                                <div className="show-icon">
+                                    {options.find((o: SearchInputOption) => o.label === value)
+                                        ?.icon || colors[field.value]}
+                                </div>
+                            )}
                             <input
                                 id={name}
                                 type="text"
                                 className={
-                                    (showIconWithInput && field.value) || open
-                                        ? 'icon-padding'
-                                        : ''
+                                    (showIconWithInput && field.value) || open ? 'icon-padding' : ''
                                 }
-                                value={
-                                    getLabel(options, field.value) ||
-                                    field.value
-                                }
+                                value={getLabel(options, field.value) || field.value}
                                 placeholder={placeholder}
                                 onBlur={handleOnBlur}
                                 onChange={handleOnChange}
                                 {...rest}
                                 {...restFieldProps}
                             />
-                            <div className="action-icon">
-                                {mapButtonIcon(buttonIcon)}
-                            </div>
+                            <div className="action-icon">{mapButtonIcon(buttonIcon)}</div>
                         </div>
                         {open && (
                             <div className="option-dropdown">
-                                {filteredOptions(value) &&
-                                filteredOptions(value).length > 0 ? (
+                                {filteredOptions(value) && hasLength(filteredOptions(value)) ? (
                                     getOptions(filteredOptions(value), value)
                                 ) : (
-                                    <div className="option">
-                                        No match in selection
-                                    </div>
+                                    <div className="option">No match in selection</div>
                                 )}
                             </div>
                         )}
                         {!open && fieldState.error && (
-                            <p className="error-msg">
-                                *{fieldState.error.message}
-                            </p>
+                            <p className="error-msg">*{fieldState.error.message}</p>
                         )}
                     </div>
                 )
@@ -280,11 +246,7 @@ export const WrappedInput = <T extends FieldValues>({
                     <input
                         id={name}
                         autoComplete={autoComplete}
-                        type={
-                            type === 'password' && revealPassword
-                                ? 'text'
-                                : type
-                        }
+                        type={type === 'password' && revealPassword ? 'text' : type}
                         {...rest}
                         {...field}
                     />
@@ -292,17 +254,14 @@ export const WrappedInput = <T extends FieldValues>({
                         <div
                             className="action-icon"
                             onClick={() => {
-                                setRevealPassword &&
-                                    setRevealPassword(!revealPassword)
+                                setRevealPassword && setRevealPassword(!revealPassword)
                             }}
                         >
                             {revealPassword ? <BsEyeSlash /> : <BsEye />}
                         </div>
                     )}
                 </div>
-                {fieldState.error && (
-                    <p className="error-msg">*{fieldState.error.message}</p>
-                )}
+                {fieldState.error && <p className="error-msg">*{fieldState.error.message}</p>}
             </div>
         )}
     />
@@ -346,9 +305,7 @@ export const WrappedTextArea = <T extends FieldValues>({
                         of {maxLength} characters
                     </span>
                 )}
-                {fieldState.error && (
-                    <p className="error-msg">*{fieldState.error.message}</p>
-                )}
+                {fieldState.error && <p className="error-msg">*{fieldState.error.message}</p>}
             </div>
         )}
     />

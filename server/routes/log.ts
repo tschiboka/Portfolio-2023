@@ -1,6 +1,7 @@
 import express from 'express'
 import auth from '../middlewares/auth'
 import admin from '../middlewares/admin'
+import { isEmpty } from '@common/utils/Predicate'
 import { Log } from '../models/log'
 import {
     DeleteLogResponse,
@@ -19,7 +20,7 @@ type GetLogReq = TypedRequest<{ query: GetLogQuery }>
 type GetLogRes = TypedResponse<GetLogTableResponse | GetLogResponse>
 
 router.get('/', [auth, admin], async (req: GetLogReq, res: GetLogRes) => {
-    if (Object.keys(req.query).length === 0) {
+    if (isEmpty(req.query)) {
         const logs = await Log.find()
         return res.status(HttpStatus.OK).json({ table: logs, success: true })
     }

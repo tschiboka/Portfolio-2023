@@ -1,0 +1,103 @@
+:root {
+    /* Black */
+    --black-x: #0a0a0a;
+    --black-1: #111;
+    --black-2: #222;
+    --black-3: #333;
+    --black-4: #444;
+    --black-5: #555;
+
+    /* Gray */
+    --gray-1: #666;
+    --gray-2: #777;
+    --gray-3: #888;
+    --gray-4: #999;
+
+    /* White */
+    --white-1: #eee;
+    --white-2: #d8d8d8;
+    --white-3: #bbb;
+    --white-4: #a8a8a8;
+    --white-5: #888;
+
+    /* Accent */
+    --accent: #00ffff;
+    --accent-dark-1: #00cece;
+    --accent-dark-2: #00b5b5;
+    --accent-dark-3: #007676;
+    --accent-dark-4: #005151;
+    --accent-dark-5: #003434;
+
+    /* Error */
+    --error: #ff0080;
+    --error-dark-1: #e80074;
+    --error-dark-2: #bd015f;
+    --error-dark-3: #870043;
+    --error-dark-4: #530029;
+    --error-dark-5: #3a001d;
+
+    /* Success */
+    --success: #00e676;
+    --success-dark-1: #00d06b;
+    --success-dark-2: #00bd61;
+    --success-dark-3: #009624;
+    --success-dark-4: #006400;
+    --success-dark-5: #003200;
+
+    /* Warning */
+    --yellow: #ffd740;
+    --yellow-dark-1: #e9b300;
+    --yellow-dark-2: #d09100;
+    --yellow-dark-3: #c17a00;
+    --yellow-dark-4: #844b01;
+    --yellow-dark-5: #4c2100;
+
+    /* Orange */
+    --orange: #ff8000;
+    --orange-dark-1: #e67300;
+    --orange-dark-2: #bf6600;
+    --orange-dark-3: #994d00;
+    --orange-dark-4: #733300;
+    --orange-dark-5: #4d1a00;
+
+    /* Purple */
+    --purple: #e040fb;
+    --purple-dark-1: #c43de2;
+    --purple-dark-2: #a338c2;
+    --purple-dark-3: #7f2f99;
+    --purple-dark-4: #5b2370;
+    --purple-dark-5: #3b1748;
+
+    /* Spacing */
+    --space-2: 2px;
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-20: 20px;
+    --space-24: 24px;
+    --space-32: 32px;
+    --space-40: 40px;
+    --space-48: 48px;
+    --space-56: 56px;
+    --space-64: 64px;
+
+    /* Breakpoints */
+    --bp-xxs: 375px;
+    --bp-xs: 420px;
+    --bp-sm: 576px;
+    --bp-mx: 670px;
+    --bp-md: 768px;
+    --bp-lg: 992px;
+    --bp-xl: 1200px;
+    --bp-xxl: 1580px;
+
+    /* Font Sizes */
+    --font-xxs: 0.7em;
+    --font-xs: 0.8em;
+    --font-sm: 1em;
+    --font-md: 1.2em;
+    --font-lg: 1.6em;
+    --font-xl: 2.2em;
+    --font-xx: 3em;
+}

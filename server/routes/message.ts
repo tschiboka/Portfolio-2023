@@ -1,5 +1,6 @@
 import express from 'express'
 import { Resend } from 'resend'
+import { hasLength } from '@common/utils/Predicate'
 import { Message, validateMessage } from '../models/message'
 import {
     PostMessageError,
@@ -29,7 +30,7 @@ router.post('/', async (req: PostMessageReq, res: PostMessageRes) => {
     const messageEntry = new Message({
         name,
         email,
-        phone: phone && phone.length > 0 ? phone : undefined,
+        phone: hasLength(phone) ? phone : undefined,
         message,
     })
 

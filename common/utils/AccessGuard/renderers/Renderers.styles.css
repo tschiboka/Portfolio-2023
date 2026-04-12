@@ -1,0 +1,101 @@
+/* ── DisabledRenderer ─────────────────────────────────────────────────────── */
+
+.access-guard-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* ── TooltipRenderer ──────────────────────────────────────────────────────── */
+
+.access-guard-tooltip {
+    opacity: 0.5;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.access-guard-tooltip__content {
+    pointer-events: none;
+}
+
+/* ── SoftDisabledRenderer ─────────────────────────────────────────────────── */
+
+.access-guard-soft-disabled {
+    position: relative;
+    display: inline-block;
+}
+
+.access-guard-soft-disabled__trigger {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.access-guard-soft-disabled__popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    padding: 16px;
+    background: #1a1a2e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    min-width: 240px;
+    color: #e0e0e0;
+}
+
+.access-guard-soft-disabled__title {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.access-guard-soft-disabled__message {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.access-guard-soft-disabled__actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.access-guard-soft-disabled__action-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+}
+
+.access-guard-soft-disabled__action-btn--primary {
+    background: #4a6cf7;
+}
+
+.access-guard-soft-disabled__action-btn--danger {
+    background: #e74c3c;
+}
+
+.access-guard-soft-disabled__action-btn--default {
+    background: #333;
+}
+
+.access-guard-soft-disabled__action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.access-guard-soft-disabled__dismiss-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #555;
+    background: transparent;
+    color: #aaa;
+    cursor: pointer;
+}

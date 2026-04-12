@@ -3,15 +3,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Submenu } from '..'
 import { find } from 'ramda'
-import {
-    Coordinates,
-    findParentMenuCoords,
-    isParentMenu,
-} from './SubmenuPanel.utils'
+import { Coordinates, findParentMenuCoords, isParentMenu } from './SubmenuPanel.utils'
 import './SubmenuPanel.scss'
 import Accordion from './MenuAccordion'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
-import { AccessGuard } from '../../../../../common/AccessGuard/AccessGuard'
+import { AccessGuard } from '@common/utils/AccessGuard'
 
 type SubmenuProps = {
     submenu?: Submenu
@@ -20,18 +16,12 @@ type SubmenuProps = {
     pageName: string
 }
 
-const SubmenuBasis = ({
-    submenu,
-    submenuStack,
-    setSubmenuStack,
-    pageName,
-}: SubmenuProps) => {
+const SubmenuBasis = ({ submenu, submenuStack, setSubmenuStack, pageName }: SubmenuProps) => {
     const handleItemClick = (item: Menu) => {
         Maybe.fromNull(item.submenu).cata(
             () => setSubmenuStack([]),
             (sub) => {
-                if (submenuStack[0]?.parentLabel === item.label)
-                    setSubmenuStack([])
+                if (submenuStack[0]?.parentLabel === item.label) setSubmenuStack([])
                 else if (submenuStack.length >= 1) {
                     const newSubmenuItem = {
                         parentLabel: item.label,
@@ -43,9 +33,7 @@ const SubmenuBasis = ({
             },
         )
 
-        const parentItem = find(
-            (sub: Submenu) => sub.parentLabel === item.label,
-        )(submenuStack)
+        const parentItem = find((sub: Submenu) => sub.parentLabel === item.label)(submenuStack)
         if (parentItem) {
             parentItem.extended = !parentItem.extended
             setSubmenuStack([submenuStack[0], parentItem])
@@ -57,8 +45,7 @@ const SubmenuBasis = ({
     )
 
     useEffect(() => {
-        const updateCoords = () =>
-            setCoords(findParentMenuCoords(submenu?.parentLabel))
+        const updateCoords = () => setCoords(findParentMenuCoords(submenu?.parentLabel))
         window.addEventListener('resize', updateCoords)
         return () => window.removeEventListener('resize', updateCoords)
     }, [submenu?.parentLabel])
@@ -69,15 +56,23 @@ const SubmenuBasis = ({
     return (
         <div className="SubmenuBasis" style={{ top: '2.5rem', left: coords.x }}>
             {submenu?.options.map((item) => (
-                <AccessGuard allowedRoles={item.allowRoles} key={item.label}>
+                <AccessGuard
+                    guards={[
+                        {
+                            when: { type: 'capability', capabilities: item.allowCapabilities },
+                            then: { mode: 'hidden' },
+                        },
+                        {
+                            when: { type: 'feature', features: item.allowedFeatures },
+                            then: { mode: 'hidden' },
+                        },
+                    ]}
+                    key={item.label}
+                >
                     <li id={item.label} onClick={() => handleItemClick(item)}>
                         <Link className="link" to={item?.path || ''}>
                             <span
-                                className={
-                                    isParentMenu(item.label, submenuStack)
-                                        ? 'active'
-                                        : ''
-                                }
+                                className={isParentMenu(item.label, submenuStack) ? 'active' : ''}
                             >
                                 {item.label}
                                 {item.submenu &&
@@ -89,10 +84,7 @@ const SubmenuBasis = ({
                             </span>
                         </Link>
                         {isExtended(item.label) && (
-                            <Accordion
-                                items={item.submenu}
-                                pageName={pageName}
-                            />
+                            <Accordion items={item.submenu} pageName={pageName} />
                         )}
                     </li>
                 </AccessGuard>

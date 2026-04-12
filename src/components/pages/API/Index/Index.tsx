@@ -5,7 +5,7 @@ import MobileMenu from '../MobileMenu/MobileMenu'
 import Nav from '../Nav/Nav'
 import { Submenu } from '../Nav'
 import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
-import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
+import { AccessGuard } from '@common/utils/AccessGuard'
 import { AdminIndex } from './AdminIndex'
 import { GuestIndex } from './GuestIndex'
 import Footer from '../../../sharedComponents/Footer/Footer'
@@ -20,17 +20,8 @@ const Index = ({ path, pageName }: IndexProps) => {
     const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
 
     return (
-        <Page
-            title={'Tivadar Debnar | Index'}
-            path={path}
-            recordVisit={true}
-            loginRequired
-        >
-            <Nav
-                pageName="Home"
-                submenuStack={submenuStack}
-                setSubmenuStack={setSubmenuStack}
-            />
+        <Page title={'Tivadar Debnar | Index'} path={path} recordVisit={true} loginRequired>
+            <Nav pageName="Home" submenuStack={submenuStack} setSubmenuStack={setSubmenuStack} />
             {Boolean(submenuStack.length) && (
                 <SubmenuPanel
                     key={submenuStack[0].parentLabel}
@@ -43,18 +34,28 @@ const Index = ({ path, pageName }: IndexProps) => {
             {mobileMenuVisible && <MobileMenu pageName="Home" />}
             <main>
                 <h1>Home</h1>
-                <AccessGuard allowedRoles={['admin']}>
+                <AccessGuard
+                    guards={[
+                        {
+                            when: { type: 'capability', capabilities: ['admin'] },
+                            then: { mode: 'hidden' },
+                        },
+                    ]}
+                >
                     <AdminIndex />
                 </AccessGuard>
-                <AccessGuard allowedFeatures={['xmas2025']}>
+                <AccessGuard
+                    guards={[
+                        {
+                            when: { type: 'feature', features: ['xmas2025'] },
+                            then: { mode: 'hidden' },
+                        },
+                    ]}
+                >
                     <GuestIndex />
                 </AccessGuard>
             </main>
-            <Footer
-                pageName={pageName}
-                path={path}
-                info={<p>Xmas edition - 2025</p>}
-            />
+            <Footer pageName={pageName} path={path} info={<p>Xmas edition - 2025</p>} />
         </Page>
     )
 }

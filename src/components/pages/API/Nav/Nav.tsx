@@ -5,7 +5,7 @@ import Burger from './Burger'
 import Chevron from './Chevron'
 import Logo from './Logo'
 import { Menu, Submenu, getMenuItemImage, isHighlighted, menu } from '.'
-import { AccessGuard } from '../../../../common/AccessGuard/AccessGuard'
+import { AccessGuard } from '@common/utils/AccessGuard'
 
 type NavProps = {
     pageName: string
@@ -18,8 +18,7 @@ const Nav = ({ pageName, submenuStack, setSubmenuStack }: NavProps) => {
         Maybe.fromNull(item.submenu).cata(
             () => setSubmenuStack([]),
             (sub) => {
-                if (submenuStack[0]?.parentLabel === item.label)
-                    setSubmenuStack([])
+                if (submenuStack[0]?.parentLabel === item.label) setSubmenuStack([])
                 else
                     setSubmenuStack([
                         {
@@ -39,29 +38,25 @@ const Nav = ({ pageName, submenuStack, setSubmenuStack }: NavProps) => {
             <ul className="nav_links">
                 {menu.map((item: Menu) => (
                     <AccessGuard
-                        allowedRoles={item.allowRoles}
-                        allowedFeatures={item.allowedFeatures}
+                        guards={[
+                            {
+                                when: { type: 'capability', capabilities: item.allowCapabilities },
+                                then: { mode: 'hidden' },
+                            },
+                            {
+                                when: { type: 'feature', features: item.allowedFeatures },
+                                then: { mode: 'hidden' },
+                            },
+                        ]}
                         key={item.label}
                     >
-                        <li
-                            id={item.label}
-                            onClick={() => handleItemClick(item)}
-                        >
+                        <li id={item.label} onClick={() => handleItemClick(item)}>
                             <Link className="link" to={item?.path || ''}>
                                 {item.image && getMenuItemImage(item.image)}
-                                <span
-                                    className={isHighlighted(
-                                        item,
-                                        pageName,
-                                        submenuStack?.[0],
-                                    )}
-                                >
+                                <span className={isHighlighted(item, pageName, submenuStack?.[0])}>
                                     {item.label}
                                 </span>
-                                <Chevron
-                                    item={item}
-                                    submenu={submenuStack?.[0]}
-                                />
+                                <Chevron item={item} submenu={submenuStack?.[0]} />
                             </Link>
                         </li>
                     </AccessGuard>

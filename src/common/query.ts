@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { apiPathBuilder } from '../routing/apiPathBuilder'
-import { useSessionContext } from '../context/SessionContext/Session.context'
+import { Session } from '../context/SessionContext'
 
 export const useAPI = () => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return {
         get: <T = unknown>(url: string) =>

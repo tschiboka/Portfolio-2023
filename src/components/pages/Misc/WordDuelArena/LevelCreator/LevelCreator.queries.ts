@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios, { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
-import { useSessionContext } from '../../../../../context/SessionContext/Session.context'
+import { Session } from '../../../../../context/SessionContext'
 import { apiPathBuilder, ApiPaths } from '../../../../../routing/apiPathBuilder'
 import { LevelNameResponse } from '../common/utils/Types/Level'
 import { ErrorResponse } from '../common/utils/Queries/Queries.types'
@@ -37,7 +37,7 @@ export const useGetLevel = (name: string) =>
 
 type UsePostLevel = { onSuccess: () => void }
 export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useMutation<void, AxiosError<ErrorResponse>, Level>({
         mutationKey: ['level-create'],
@@ -55,7 +55,7 @@ export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
 }
 
 export const useGetAnagramMap = () => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useQuery<AnagramMapType, AxiosError<ErrorResponse>>({
         queryKey: ['word-anagram-map'],
@@ -72,7 +72,7 @@ export const useGetAnagramMap = () => {
 }
 
 export const useGetWordFrequencies = () => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useQuery<FrequencyType, AxiosError<ErrorResponse>>({
         queryKey: ['word-frequencies'],

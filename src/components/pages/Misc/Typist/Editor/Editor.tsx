@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { TypistContext } from '../Typist.context'
 import { Character } from './Character/Character'
 import { createEditorHandler } from './Editor.handlers'
+import { isTruthy } from '@common/utils/Predicate'
 import './Editor.styles.scss'
 import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 
@@ -22,10 +23,7 @@ export const Editor = () => {
             <div className="Editor__content">
                 {showOverlay && (
                     <div className="Editor__overlay">
-                        <LoadingIndicator
-                            show={Boolean(isLoading)}
-                            color="aqua"
-                        />
+                        <LoadingIndicator show={Boolean(isLoading)} color="aqua" />
                         {editorState.status === 'paused' && (
                             <span>Paused — press Esc to resume</span>
                         )}
@@ -34,23 +32,14 @@ export const Editor = () => {
                 {words.map((word, wordIndex) => (
                     <span className="Editor__word" key={wordIndex}>
                         {word.chars.map((ch) => {
-                            const isActive =
-                                ch.index === editorState.cursorPosition
+                            const isActive = ch.index === editorState.cursorPosition
                             const classes = [
                                 isActive ? 'active' : '',
-                                ch.status && ch.status !== 'pending'
-                                    ? ch.status
-                                    : '',
+                                ch.status && ch.status !== 'pending' ? ch.status : '',
                             ]
-                                .filter(Boolean)
+                                .filter(isTruthy)
                                 .join(' ')
-                            return (
-                                <Character
-                                    key={ch.index}
-                                    className={classes}
-                                    char={ch.char}
-                                />
-                            )
+                            return <Character key={ch.index} className={classes} char={ch.char} />
                         })}
                     </span>
                 ))}

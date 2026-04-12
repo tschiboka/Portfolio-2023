@@ -9,7 +9,7 @@ import {
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
 } from '@common/types'
-import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { Session } from '../../../../context/SessionContext'
 import axios from 'axios'
 
 export const useGetPagePingData = () =>
@@ -23,7 +23,7 @@ export const useGetPagePingData = () =>
 
 type UsePostMessage = { onSuccess: () => void }
 export const usePostMessage = ({ onSuccess }: UsePostMessage) => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useMutation({
         mutationKey: ['xmas-message'],
@@ -39,7 +39,7 @@ export const usePostMessage = ({ onSuccess }: UsePostMessage) => {
 
 type UseGetMessages = { userId?: string }
 export const useGetMessages = ({ userId }: UseGetMessages) => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useQuery({
         queryKey: ['xmas-message'],
@@ -53,7 +53,7 @@ export const useGetMessages = ({ userId }: UseGetMessages) => {
 }
 
 export const useGetCandles = () => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useQuery({
         queryKey: ['xmas-candles'],
@@ -67,7 +67,7 @@ export const useGetCandles = () => {
 }
 
 export const usePutCandles = () => {
-    const token = useSessionContext().session?.token
+    const token = Session.useContext().session?.token
 
     return useMutation({
         mutationKey: ['xmas-candles'],

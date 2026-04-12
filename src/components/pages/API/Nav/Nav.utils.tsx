@@ -79,13 +79,13 @@ export const settingsMenu: Array<Menu> = [
         label: 'User',
         path: '/api/user',
         parent: 'Settings',
-        allowRoles: ['admin'],
+        allowCapabilities: ['admin'],
     },
     {
         label: 'Admin',
         path: '/api/admin',
         parent: 'Settings',
-        allowRoles: ['admin'],
+        allowCapabilities: ['admin'],
     },
 ]
 
@@ -105,17 +105,17 @@ export const menu: Array<Menu> = [
     {
         label: 'Dashboard',
         submenu: dashboardMenu,
-        allowRoles: ['admin'],
+        allowCapabilities: ['admin'],
     },
     {
         label: 'Manage',
         submenu: manageMenu,
-        allowRoles: ['admin'],
+        allowCapabilities: ['admin'],
     },
     {
         label: 'Settings',
         submenu: settingsMenu,
-        allowRoles: ['admin'],
+        allowCapabilities: ['admin'],
     },
     {
         label: 'Logout',
@@ -131,11 +131,7 @@ export const menuGroups: Menu[][] = [
     manageRecordsMenu,
 ]
 
-export const isHighlighted = (
-    item: Menu,
-    pageName: string,
-    submenu?: Submenu,
-) =>
+export const isHighlighted = (item: Menu, pageName: string, submenu?: Submenu) =>
     Maybe.fromNull(submenu)
         .map((sub) => (sub?.parentLabel === item?.label ? 'active' : ''))
         .orSome(pageName === item.label && !submenu ? 'active' : '')

@@ -1,5 +1,6 @@
 import type { SessionState, Level, LevelWord } from '../../types'
 
+import { isDefined } from '@common/utils/Predicate'
 import { produce } from 'immer'
 import { levelPersistance } from '../../infrastructure/persistence/db/level'
 import { LevelWordStatuses } from '../../config/constants/game'
@@ -15,7 +16,7 @@ type DbLevel = {
 
 async function initialiseLevel(state: SessionState, deviceId: string): Promise<SessionState> {
     const hasTwoPlayers = Boolean(state.players.player1) && Boolean(state.players.player2)
-    const hasLevelAssigned = state.level !== null && state.level !== undefined
+    const hasLevelAssigned = isDefined(state.level)
     const shouldInitialiseLevel = hasTwoPlayers && !hasLevelAssigned
 
     if (!shouldInitialiseLevel) return state

@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import './Logout.scss'
-import { useSessionContext } from '../../../../context/SessionContext/Session.context'
+import { Session } from '../../../../context/SessionContext'
 import { LocalSession } from '../../../../context/SessionContext/LocalSession'
 
 export const useLogout = () => {
     const navigate = useNavigate()
-    const { setSession } = useSessionContext()
+    const { setSession } = Session.useContext()
 
     return () => {
         LocalSession.getInstance().drop()

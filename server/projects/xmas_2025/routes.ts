@@ -18,6 +18,7 @@ import type {
     PutXmasCandlesResponse,
 } from '@common/types'
 import { HttpStatus } from '../../common/HttpStatus/HttpStatus'
+import { isEmpty } from '@common/utils/Predicate'
 
 const router = express.Router()
 
@@ -96,7 +97,7 @@ type GetCandlesRes = TypedResponse<GetXmasCandlesResponse>
 router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
     const candles = await XmasCandle.find().lean<XmasCandles[]>()
 
-    if (candles?.length === 0) {
+    if (isEmpty(candles)) {
         const newCandle = new XmasCandle({
             candle1: false,
             candle2: false,
@@ -123,7 +124,7 @@ router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
             .json({ success: false, message: error.details[0].message })
 
     const candles = await XmasCandle.find()
-    if (candles?.length === 0) {
+    if (isEmpty(candles)) {
         return res
             .status(HttpStatus.NOT_FOUND)
             .json({ success: false, message: 'No candles found to update' })
@@ -142,7 +143,7 @@ router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
 router.get('/candles/device', async (_req: TypedRequest, res) => {
     const candles = await XmasCandle.find()
 
-    if (candles?.length === 0) {
+    if (isEmpty(candles)) {
         return res.status(HttpStatus.OK).send('<<<0000>>>')
     }
 
