@@ -7,17 +7,17 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
-import { loginFormRequest, settingsRequest } from './Login.query'
+import { useLoginApi } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { QUERY_KEYS } from '../../../../common/queryKeys'
 import '../common/Form.scss'
 import './Login.scss'
 import Nav from '../../../sharedComponents/Nav/Nav'
 import Menu from '../../../sharedComponents/Menu/Menu'
 import SubNav from '../../../sharedComponents/SubNav/SubNav'
 import { Session } from '../../../../context/SessionContext'
+import { QueryKey } from '@common/utils'
 
 type LoginProps = {
     path: string
@@ -28,6 +28,7 @@ const Login = ({ path, pageName }: LoginProps) => {
     const { mobileMenuVisible, subMenuVisible } = useAppContext()
     const { setSession } = Session.useContext()
     const navigate = useNavigate()
+    const { loginFormRequest, settingsRequest } = useLoginApi()
 
     const [revealPassword, setRevealPassword] = useState(false)
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
@@ -40,7 +41,7 @@ const Login = ({ path, pageName }: LoginProps) => {
     })
 
     const { data: settingsData, isLoading: settingIsLoading } = useQuery({
-        queryKey: QUERY_KEYS.GET_APP_SETTINGS,
+        queryKey: QueryKey.AppSettings.build(),
         queryFn: async () => {
             const res = await settingsRequest()
             return res.data

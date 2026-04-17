@@ -1,8 +1,8 @@
-import { apiPathBuilder } from "../../../../routing/apiPathBuilder";
+import { Paths } from '@common/utils'
+import { RequestBuilder } from '@common/utils/Query/Query'
 import { AxiosResponse } from 'axios'
-import axios from "axios";
 
-export const useVerifyEmailRequest: (data: { token: string }) => Promise<AxiosResponse<{token: string}, any>> = async (data) => {
-    const path = apiPathBuilder('CONFIRM_REGISTRATION')
-    return await axios.post(path, data)
-}
+export const useVerifyEmailRequest: (data: {
+    token: string
+}) => Promise<AxiosResponse<{ token: string }, any>> = async (data) =>
+    new RequestBuilder(Paths.Api.ConfirmRegistration).build().post(data)

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { DisabledRenderer } from '../renderers/DisabledRenderer'
 import { HiddenRenderer } from '../renderers/HiddenRenderer'
@@ -239,7 +239,7 @@ describe('SoftDisabledRenderer', () => {
             render(<SoftDisabledRenderer>Click me</SoftDisabledRenderer>)
             await user.click(screen.getByRole('button', { name: /click me/i }))
             expect(screen.getByRole('dialog')).toBeInTheDocument()
-            fireEvent.keyDown(document, { key: 'Escape' })
+            await user.keyboard('{Escape}')
             expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
         })
     })

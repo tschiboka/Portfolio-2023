@@ -1,88 +1,70 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
-import { Session } from '../../../../../context/SessionContext'
-import { apiPathBuilder, ApiPaths } from '../../../../../routing/apiPathBuilder'
+import { Paths, QueryKey } from '@common/utils'
+import { useApi } from '@common/utils/Query/Query'
 import { LevelNameResponse } from '../common/utils/Types/Level'
 import { ErrorResponse } from '../common/utils/Queries/Queries.types'
 import { FrequencyType } from '../common/utils/Types/Words'
 
-export const useGetLevelNames = () =>
-    useQuery<LevelNameResponse, AxiosError<ErrorResponse>>({
-        queryKey: ['level-names'],
-        queryFn: async () => {
-            const response = await axios.get<LevelNameResponse>(
-                apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, {
-                    prefix: '',
-                }) + '/level/name',
-            )
-            return response.data
-        },
-    })
+export const useGetLevelNames = () => {
+    const api = useApi(Paths.Projects.WordDuelArena).setPath('/level/name').build()
 
-export const useGetLevel = (name: string) =>
-    useQuery<Level, AxiosError<ErrorResponse>>({
-        queryKey: ['level' + name],
+    return useQuery<LevelNameResponse, AxiosError<ErrorResponse>>({
+        queryKey: QueryKey.LevelNames.build(),
         queryFn: async () => {
-            const response = await axios.get<Level>(
-                apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, {
-                    prefix: '',
-                }) +
-                    '/level/name/' +
-                    name,
-            )
+            const response = await api.get<LevelNameResponse>()
             return response.data
         },
     })
+}
+
+export const useGetLevel = (name: string) => {
+    const api = useApi(Paths.Projects.WordDuelArena)
+        .setPath('/level/name/' + name)
+        .build()
+
+    return useQuery<Level, AxiosError<ErrorResponse>>({
+        queryKey: QueryKey.Level.byId(name).build(),
+        queryFn: async () => {
+            const response = await api.get<Level>()
+            return response.data
+        },
+    })
+}
 
 type UsePostLevel = { onSuccess: () => void }
 export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
-    const token = Session.useContext().session?.token
+    const api = useApi(Paths.Projects.WordDuelArena).setPath('/level').setToken().build()
 
     return useMutation<void, AxiosError<ErrorResponse>, Level>({
-        mutationKey: ['level-create'],
+        mutationKey: QueryKey.LevelCreate.build(),
         mutationFn: async (payload: Level) => {
-            await axios.post<void>(
-                apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, {
-                    prefix: '',
-                }) + '/level',
-                payload,
-                { headers: { 'x-auth-token': token } },
-            )
+            await api.post(payload)
         },
         onSuccess,
     })
 }
 
 export const useGetAnagramMap = () => {
-    const token = Session.useContext().session?.token
+    const api = useApi(Paths.Projects.WordDuelArena).setPath('/word/anagrams').setToken().build()
 
     return useQuery<AnagramMapType, AxiosError<ErrorResponse>>({
-        queryKey: ['word-anagram-map'],
+        queryKey: QueryKey.AnagramMap.build(),
         queryFn: async () => {
-            const response = await axios.get<AnagramMapType>(
-                apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, {
-                    prefix: '',
-                }) + '/word/anagrams',
-                { headers: { 'x-auth-token': token } },
-            )
+            const response = await api.get<AnagramMapType>()
             return response.data
         },
     })
 }
 
 export const useGetWordFrequencies = () => {
-    const token = Session.useContext().session?.token
+    const api = useApi(Paths.Projects.WordDuelArena).setPath('/word/frequencies').setToken().build()
 
     return useQuery<FrequencyType, AxiosError<ErrorResponse>>({
-        queryKey: ['word-frequencies'],
+        queryKey: QueryKey.WordFrequencies.build(),
         queryFn: async () => {
-            const response = await axios.get<FrequencyType>(
-                apiPathBuilder(ApiPaths.PROJECT_WORD_DUEL_ARENA, {
-                    prefix: '',
-                }) + '/word/frequencies',
-                { headers: { 'x-auth-token': token } },
-            )
+            const response = await api.get<FrequencyType>()
             return response.data
         },
     })

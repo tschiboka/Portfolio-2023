@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef } from 'react'
 import { RoundResponse, TypistContextValues, TypistEditorState } from './Typist.types'
-import { ContextBuilder } from '../../../../common/Context/ContextBuilder'
+import { ContextBuilder } from '@common/utils'
 import { textToWords } from './Typist.utils'
 import { usePostRound } from './Typist.queries'
 import { editorReducer } from './Editor/Editor.reducer'

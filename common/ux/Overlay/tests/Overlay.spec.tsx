@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { Overlay } from '../index'
@@ -305,15 +305,17 @@ describe('Overlay.Popup', () => {
     })
 
     describe('Escape key', () => {
-        it('should call onClose when Escape is pressed', () => {
+        it('should call onClose when Escape is pressed', async () => {
+            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            fireEvent.keyDown(document, { key: 'Escape' })
+            await user.keyboard('{Escape}')
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
-        it('should not call onClose for other keys', () => {
+        it('should not call onClose for other keys', async () => {
+            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            fireEvent.keyDown(document, { key: 'Enter' })
+            await user.keyboard('{Enter}')
             expect(onClose).not.toHaveBeenCalled()
         })
     })

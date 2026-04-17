@@ -11,6 +11,7 @@ import {
 } from './LevelCreator.queries'
 import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useQueryClient } from '@tanstack/react-query'
+import { QueryKey } from '@common/utils'
 import { FrequencyType } from '../common/utils/Types/Words'
 import { levelSchema } from './LevelCreator.schema'
 
@@ -19,21 +20,19 @@ type LevelCreatorModalProps = {
     setModalOpen: (open: boolean) => void
 }
 
-export const LevelCreatorModal = ({
-    levelName,
-    setModalOpen,
-}: LevelCreatorModalProps) => {
+export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModalProps) => {
     const queryClient = useQueryClient()
 
     const { data: levelData, ...levelDataResponse } = useGetLevel(levelName)
     const { data: anagramMap, ...anagramMapResponse } = useGetAnagramMap()
-    const { data: wordFrequencies, ...wordFrequenciesResponse } =
-        useGetWordFrequencies()
+    const { data: wordFrequencies, ...wordFrequenciesResponse } = useGetWordFrequencies()
     const { mutate: postLevel, ...postLevelResponse } = usePostLevel({
         onSuccess: () => {
             setModalOpen(false)
-            queryClient.invalidateQueries({ queryKey: ['level-names'] })
-            queryClient.invalidateQueries({ queryKey: ['level' + levelName] })
+            void queryClient.invalidateQueries({ queryKey: QueryKey.LevelNames.build() })
+            void queryClient.invalidateQueries({
+                queryKey: QueryKey.Level.byId(levelName).build(),
+            })
         },
     })
 
@@ -55,7 +54,7 @@ export const LevelCreatorModal = ({
             setFrequencies(wordFrequencies)
         }
         if (frequencies && possibleWords.length === 0 && anagramMap) {
-            transformAnagramMap(levelName, anagramMap).then((possibleWords) => {
+            void transformAnagramMap(levelName, anagramMap).then((possibleWords) => {
                 const newWordSet = possibleWords.map((word) => ({
                     word,
                     frequency: frequencies[word.toUpperCase()] || 0,
@@ -70,7 +69,7 @@ export const LevelCreatorModal = ({
             }))
             setSelectedWords(selectedWordSet)
         }
-    }, [frequencies, possibleWords, levelData, anagramMap, wordFrequencies])
+    }, [frequencies, possibleWords, levelData, anagramMap, wordFrequencies, levelName])
 
     useEffect(() => {
         if (error) {
@@ -82,10 +81,7 @@ export const LevelCreatorModal = ({
 
     const averageFrequency = () => {
         if (selectedWords.length === 0) return 0
-        const total = selectedWords.reduce(
-            (sum, word) => sum + word.frequency,
-            0,
-        )
+        const total = selectedWords.reduce((sum, word) => sum + word.frequency, 0)
         return total / selectedWords.length
     }
 
@@ -96,10 +92,10 @@ export const LevelCreatorModal = ({
     }
 
     const onSave = async () => {
-        const validation = await levelSchema
+        const validation: string | null = await levelSchema
             .validate({ selectedWords })
             .then(() => null)
-            .catch((error) => error.message)
+            .catch((error: Error) => error.message)
 
         if (validation) return setValidationError(validation)
 
@@ -120,13 +116,9 @@ export const LevelCreatorModal = ({
             </h1>
             <LevelPreview selectedWords={selectedWords} />
             <div className="wheel-container">
-                {validationError && (
-                    <p className="error-message">{validationError}</p>
-                )}
+                {validationError && <p className="error-message">{validationError}</p>}
                 <LoadingIndicator show={isPending || isLoading} />
-                {!isPending && !validationError && (
-                    <div className="wheel"></div>
-                )}
+                {!isPending && !validationError && <div className="wheel"></div>}
             </div>
             <footer>
                 <button onClick={() => setOptionsOpen(!optionsOpen)}>
@@ -135,10 +127,7 @@ export const LevelCreatorModal = ({
                 <button disabled={optionsOpen} onClick={onSave}>
                     Save
                 </button>
-                <button
-                    onClick={() => setModalOpen(false)}
-                    disabled={optionsOpen}
-                >
+                <button onClick={() => setModalOpen(false)} disabled={optionsOpen}>
                     Close
                 </button>
             </footer>

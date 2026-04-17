@@ -1,4 +1,4 @@
-import { getURL } from './getURL'
+import { getURL } from '../../common/utils/Path/getURL'
 import {
     GetVisitByPathQuery,
     GetVisitResponse,
