@@ -8,7 +8,7 @@ import Nav from '../../sharedComponents/Nav/Nav'
 import SubNav from '../../sharedComponents/SubNav/SubNav'
 import LikeButton from '../../sharedComponents/LikeButton/LikeButton'
 import References from '../References/References'
-import { getReferenceList } from '../../articles/references'
+import { getReferenceList } from '../../../articles/references'
 import BlogTimeStamp from '../../sharedComponents/BlogTimeStamp/BlogTimeStamp'
 import Disclaimer from '../Disclaimer/Disclaimer'
 import Footer from '../../sharedComponents/Footer/Footer'
@@ -21,7 +21,7 @@ import { HiShare } from 'react-icons/hi'
 import { IoMdClose } from 'react-icons/io'
 
 // Other Assets
-import { blogArticles } from '../../articles/articles'
+import { blogArticles } from '../../../articles/articles'
 
 // Styles
 import './Articles.scss'
@@ -75,10 +75,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
             {sideMenuVisible && (
                 <aside className="blog-component--article">
                     <HiShare
-                        className={
-                            'aside-icon ' +
-                            (shareMenuVisible ? 'highlighted' : '')
-                        }
+                        className={'aside-icon ' + (shareMenuVisible ? 'highlighted' : '')}
                         title="Share"
                         onClick={() => setShareMenuVisible(!shareMenuVisible)}
                     />
@@ -87,8 +84,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         onClick={(event) => {
                             event.preventDefault()
                             event.stopPropagation()
-                            if (!articleLiked)
-                                postLike(path, () => setArticleLiked(true))
+                            if (!articleLiked) postLike(path, () => setArticleLiked(true))
                             return false
                         }}
                     >
@@ -100,21 +96,15 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         onClick={(event) => {
                             event.preventDefault()
                             event.stopPropagation()
-                            if (!articleLiked)
-                                postLike(path, () => setArticleLiked(true))
+                            if (!articleLiked) postLike(path, () => setArticleLiked(true))
                             return false
                         }}
                     >
                         <AiFillHeart
-                            className={
-                                'aside-icon ' +
-                                (articleLiked ? 'highlighted' : '')
-                            }
+                            className={'aside-icon ' + (articleLiked ? 'highlighted' : '')}
                             title="Likes"
                         />
-                        <span>
-                            {(!articleLiked ? likes : likes + 1) || '-'}
-                        </span>
+                        <span>{(!articleLiked ? likes : likes + 1) || '-'}</span>
                     </div>
                     <BiSolidUpArrowSquare
                         className="aside-icon"
@@ -142,20 +132,12 @@ const Article = ({ pageName, path, title, children }: Props) => {
                 />
                 <References references={references} />
                 {article && article.created && (
-                    <BlogTimeStamp
-                        created={article.created}
-                        updated={article.updated}
-                    />
+                    <BlogTimeStamp created={article.created} updated={article.updated} />
                 )}
                 <Disclaimer />
                 <SuggestedArticles articles={article?.suggestedArticles} />
             </main>
-            <Footer
-                pageName={pageName}
-                path={path}
-                visitsPreLoaded={true}
-                visitCount={visits}
-            />
+            <Footer pageName={pageName} path={path} visitsPreLoaded={true} visitCount={visits} />
         </Page>
     )
 }

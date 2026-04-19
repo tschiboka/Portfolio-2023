@@ -124,6 +124,7 @@ import {
     FaRunning,
     FaSkullCrossbones,
     FaTheaterMasks,
+    FaTooth,
     FaTwitter,
     FaUser,
     FaWalking,
@@ -243,7 +244,7 @@ import {
     IoWoman,
 } from 'react-icons/io5'
 import { RxLapTimer } from 'react-icons/rx'
-import { TbTank, TbWorldWww } from 'react-icons/tb'
+import { TbKarate, TbTank, TbWorldWww } from 'react-icons/tb'
 import {
     FaBasketShopping,
     FaCircleCheck,
@@ -255,6 +256,7 @@ import {
     FaShop,
     FaUserDoctor,
     FaUserGraduate,
+    FaYinYang,
 } from 'react-icons/fa6'
 import {
     MdCancel,
@@ -268,7 +270,7 @@ import {
 } from 'react-icons/md'
 import { HiOfficeBuilding } from 'react-icons/hi'
 import { PiOfficeChairFill } from 'react-icons/pi'
-import { RiLuggageCartLine } from 'react-icons/ri'
+import { RiBoxingFill, RiLuggageCartLine } from 'react-icons/ri'
 import { LiaBirthdayCakeSolid } from 'react-icons/lia'
 import {
     IoIosCafe,
@@ -425,6 +427,7 @@ export const icons: Icon = {
     foot_steps: <IoFootsteps />,
     hand: <IoHandRight />,
     heart: <IoHeart />,
+    tooth: <FaTooth />,
 
     // Activities
     xbox: <BsXbox />,
@@ -459,6 +462,9 @@ export const icons: Icon = {
     language: <IoLanguage />,
     newspaper: <IoNewspaperOutline />,
     movie: <MdLocalMovies />,
+    boxing: <RiBoxingFill />,
+    karate: <TbKarate />,
+    yinyang: <FaYinYang />,
 
     // Time
     moon_outline: <IoMoonOutline />,

@@ -4,14 +4,13 @@ import { loginSchema } from './Login.schema'
 import { AxiosError } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
+import { Form } from '@common/ux'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
 import { useLoginApi } from './Login.query'
 import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import '../common/Form.scss'
 import './Login.scss'
 import Nav from '../../../sharedComponents/Nav/Nav'
 import Menu from '../../../sharedComponents/Menu/Menu'
@@ -90,7 +89,7 @@ const Login = ({ path, pageName }: LoginProps) => {
                 <form onSubmit={handleSubmit(submitHandler)}>
                     <fieldset>
                         <label htmlFor="email">Email</label>
-                        <WrappedInput
+                        <Form.Input
                             name="email"
                             control={control}
                             type="text"
@@ -99,7 +98,7 @@ const Login = ({ path, pageName }: LoginProps) => {
                     </fieldset>
                     <fieldset>
                         <label htmlFor="password">Password</label>
-                        <WrappedInput
+                        <Form.Input
                             name="password"
                             control={control}
                             type="password"

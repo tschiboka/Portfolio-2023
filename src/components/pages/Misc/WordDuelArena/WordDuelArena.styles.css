@@ -98,7 +98,7 @@
     font-family: var(--font-main);
 }
 
-button {
+.word-duel-arena button {
     display: flex;
     justify-content: center;
     padding: var(--sp-sm);

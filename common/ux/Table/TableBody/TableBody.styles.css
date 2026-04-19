@@ -1,0 +1,112 @@
+table td.icon {
+    width: 50px;
+    font-size: var(--space-16);
+    text-align: center;
+}
+
+table td.icon.green {
+    color: var(--success-dark-1);
+}
+
+table td.icon.red {
+    color: var(--error-dark-1);
+}
+
+table td div.icon {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 100%;
+}
+
+table td.xxs {
+    display: none;
+}
+
+table td.xs {
+    display: none;
+}
+
+table td.sm {
+    display: none;
+}
+
+table td.mx {
+    display: none;
+}
+
+table td.md {
+    display: none;
+}
+
+table td.lg {
+    display: none;
+}
+
+table td.xl {
+    display: none;
+}
+
+table td.xxl {
+    display: none;
+}
+
+table td.accordion {
+    display: none;
+}
+
+table td.hide {
+    display: none;
+}
+
+@media (min-width: 375px) {
+    table td.xxs {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 420px) {
+    table td.xs {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 576px) {
+    table td.sm {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 670px) {
+    table td.mx {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 768px) {
+    table td.md {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 992px) {
+    table td.lg {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1200px) {
+    table td.xl {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1580px) {
+    table td.xxl {
+        display: table-cell;
+    }
+}

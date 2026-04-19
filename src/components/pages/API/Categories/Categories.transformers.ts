@@ -1,6 +1,6 @@
-import { SearchInputOption } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { GetCategoryResponse } from '@common/types'
 import { icons } from './icons'
+import { SearchInputOption } from '@common/ux'
 
 export const getParents = {
     fromApi: (categories: GetCategoryResponse[]): SearchInputOption[] =>

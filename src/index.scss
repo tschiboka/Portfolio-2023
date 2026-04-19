@@ -42,6 +42,14 @@ html {
     scrollbar-width: thin;
 }
 
+code {
+    font-family: Fira, monospace;
+    font-size: font.$font_xs;
+    background-color: palette.$black_2;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
 // *:focus {
 //     outline: 1px solid palette.$accent_dark_3;
 //     outline-offset: 8px;
@@ -159,6 +167,26 @@ span.sidenote {
     font-style: italic;
 }
 
+a {
+    color: palette.$accent_dark_1;
+    text-decoration: none;
+    font-size: font.$font_md;
+    transition: color 0.2s;
+
+    &:hover {
+        color: palette.$accent;
+        text-decoration: underline;
+    }
+
+    &:visited {
+        color: palette.$accent_dark_3;
+    }
+
+    &:active {
+        color: palette.$accent_dark_2;
+    }
+}
+
 .light {
     h1,
     h2 {
@@ -170,5 +198,20 @@ span.sidenote {
     }
     p {
         color: black;
+    }
+    a {
+        color: palette.$accent_dark_3;
+
+        &:hover {
+            color: palette.$accent_dark_2;
+        }
+
+        &:visited {
+            color: palette.$accent_dark_4;
+        }
+
+        &:active {
+            color: palette.$accent_dark_5;
+        }
     }
 }

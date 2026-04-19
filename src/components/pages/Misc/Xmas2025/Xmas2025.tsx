@@ -7,7 +7,6 @@ import { Submenu } from '../../API/Nav'
 import Nav from '../../API/Nav/Nav'
 import SubmenuPanel from '../../API/Nav/SubmenuPanel/SubmenuPanel'
 import MobileMenu from '../../API/MobileMenu/MobileMenu'
-import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -23,6 +22,7 @@ import { YourMessages } from './YourMessages'
 import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
 import { PageContainerProps } from '../../../sharedComponents/Page/Page.types'
+import { Form } from '@common/ux'
 
 const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
     const { mobileMenuVisible } = useAppContext()
@@ -106,11 +106,11 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <fieldset>
                             <label htmlFor="name">Name</label>
-                            <WrappedInput name="name" control={control} type="text" />
+                            <Form.Input name="name" control={control} type="text" />
                         </fieldset>
                         <fieldset>
                             <label htmlFor="message">Message</label>
-                            <WrappedInput name="message" control={control} type="text" />
+                            <Form.Input name="message" control={control} type="text" />
                         </fieldset>
                         <LoadingIndicator show={submitMessageResponse.isPending} />
                         {submitMessageResponse.isError && (

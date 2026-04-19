@@ -1,5 +1,5 @@
 .Code {
-    margin: 0 auto;
+    margin: var(--space-16) auto;
     max-width: 1200px;
     background-color: var(--black-1);
     border: 1px solid var(--black-3);

@@ -1,5 +1,5 @@
 import BlogCard from '../BlogCard/BlogCard'
-import { blogArticles } from '../../articles/articles'
+import { blogArticles } from '../../../articles/articles'
 import './SuggestedArticle.scss'
 import { useEffect, useState } from 'react'
 import { getVisitSummary } from '../../../serverAPI/visits'

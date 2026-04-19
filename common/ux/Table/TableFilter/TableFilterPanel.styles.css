@@ -1,0 +1,12 @@
+.table-filter-panel {
+    padding: var(--space-12) 0;
+    border-bottom: 1px solid var(--black-2);
+    margin-bottom: var(--space-12);
+}
+
+.table-filter-panel__inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-12);
+    align-items: end;
+}

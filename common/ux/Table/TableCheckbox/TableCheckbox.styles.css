@@ -1,0 +1,48 @@
+table thead th.select-col,
+table th.select-col,
+table td.select-col {
+    width: 32px;
+    padding: 0;
+    text-align: center;
+}
+
+table .select-checkbox {
+    appearance: none;
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--accent-dark-3);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+table .select-checkbox:checked {
+    background: var(--accent-dark-3);
+    border-color: var(--accent-dark-3);
+}
+
+table .select-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 9px;
+    border: solid var(--bg);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+table .select-checkbox:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+table .select-checkbox:hover:not(:disabled) {
+    border-color: var(--accent);
+}

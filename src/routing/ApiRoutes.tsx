@@ -14,7 +14,7 @@ import User from '../components/pages/API/User/User'
 import Admin from '../components/pages/API/Admin/Admin'
 import Logout from '../components/pages/API/Logout/Logout'
 import Categories from '../components/pages/API/Categories/Categories'
-import { UxStories } from '../components/pages/API/UxStories/UxStories'
+import { UxStories, AccessGuards, Tables, Overlays } from '../components/pages/API/UxStories'
 
 export const ApiRoutes = [
     {
@@ -84,5 +84,17 @@ export const ApiRoutes = [
     {
         path: '/api/ux-stories',
         element: <UxStories path="/api/ux-stories" />,
+    },
+    {
+        path: '/api/ux-stories/access-guards',
+        element: <AccessGuards path="/api/ux-stories/access-guards" />,
+    },
+    {
+        path: '/api/ux-stories/overlays',
+        element: <Overlays path="/api/ux-stories/overlays" />,
+    },
+    {
+        path: '/api/ux-stories/tables',
+        element: <Tables path="/api/ux-stories/tables" />,
     },
 ]

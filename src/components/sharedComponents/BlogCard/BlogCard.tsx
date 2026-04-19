@@ -1,4 +1,4 @@
-import { BlogArticle } from '../../articles/articles'
+import { BlogArticle } from '../../../articles/articles'
 import { getColourName } from '../../pages/Projects/getProjects'
 import { useNavigate } from 'react-router-dom'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'
@@ -20,15 +20,7 @@ interface Props {
     newest: boolean
 }
 
-const BlogCard = ({
-    blogArticle,
-    visits,
-    readingTime,
-    codeTime,
-    likes,
-    path,
-    newest,
-}: Props) => {
+const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, newest }: Props) => {
     const navigate = useNavigate()
     const [articleLiked, setArticleLiked] = useState(false)
 
@@ -52,10 +44,7 @@ const BlogCard = ({
                     )}
                     <div className="BlogCard__badge-box">
                         {blogArticle.badges.map((badge, index) => (
-                            <span
-                                key={badge + index}
-                                className={'badge ' + getColourName(badge)}
-                            >
+                            <span key={badge + index} className={'badge ' + getColourName(badge)}>
                                 {badge}
                             </span>
                         ))}
@@ -67,9 +56,7 @@ const BlogCard = ({
             <div className="BlogCard__text-wrapper">
                 <header className="BlogCard__title">
                     <div className="BlogCard__title-wrapper">
-                        <span className="BlogCard__title-text">
-                            {blogArticle.title}
-                        </span>
+                        <span className="BlogCard__title-text">{blogArticle.title}</span>
                     </div>
                     <div className="BlogCard__info-main">
                         <span className="BlogCard__info">
@@ -79,19 +66,13 @@ const BlogCard = ({
                                     <span className="BlogCard__info-text">
                                         {readingTime || '-'}
                                     </span>
-                                    <span className="BlogCard__hint-text">
-                                        Reading&nbsp;Time
-                                    </span>
+                                    <span className="BlogCard__hint-text">Reading&nbsp;Time</span>
                                 </span>
 
                                 <span className="BlogCard__info-datablock">
                                     <FaCode className="BlogCard__info-icon" />
-                                    <span className="BlogCard__info-text">
-                                        {codeTime || '-'}
-                                    </span>
-                                    <span className="BlogCard__hint-text">
-                                        Code&nbsp;Time
-                                    </span>
+                                    <span className="BlogCard__info-text">{codeTime || '-'}</span>
+                                    <span className="BlogCard__hint-text">Code&nbsp;Time</span>
                                 </span>
                             </span>
 
@@ -102,9 +83,7 @@ const BlogCard = ({
                                         event.preventDefault()
                                         event.stopPropagation()
                                         if (!articleLiked)
-                                            postLike(path, () =>
-                                                setArticleLiked(true),
-                                            )
+                                            postLike(path, () => setArticleLiked(true))
                                         return false
                                     }}
                                 >
@@ -115,33 +94,21 @@ const BlogCard = ({
                                         }
                                     />
                                     <span className="BlogCard__info-text">
-                                        {(!articleLiked
-                                            ? likes
-                                            : (likes || 0) + 1) || '-'}
+                                        {(!articleLiked ? likes : (likes || 0) + 1) || '-'}
                                     </span>
-                                    <span className="BlogCard__hint-text">
-                                        Likes&nbsp;Given
-                                    </span>
+                                    <span className="BlogCard__hint-text">Likes&nbsp;Given</span>
                                 </span>
                                 <span className="BlogCard__info-datablock">
                                     <FaEye className="BlogCard__info-icon" />
-                                    <span className="BlogCard__info-text">
-                                        {visits || '-'}
-                                    </span>
-                                    <span className="BlogCard__hint-text">
-                                        Times&nbsp;Read
-                                    </span>
+                                    <span className="BlogCard__info-text">{visits || '-'}</span>
+                                    <span className="BlogCard__hint-text">Times&nbsp;Read</span>
                                 </span>
                             </span>
 
-                            <span className="BlogCard__created">
-                                {blogArticle.created}
-                            </span>
+                            <span className="BlogCard__created">{blogArticle.created}</span>
                         </span>
                     </div>
-                    <span className="BlogCard__created">
-                        {blogArticle.created}
-                    </span>
+                    <span className="BlogCard__created">{blogArticle.created}</span>
                 </header>
                 <p className="BlogCard__abstract">{blogArticle.abstract}</p>
             </div>

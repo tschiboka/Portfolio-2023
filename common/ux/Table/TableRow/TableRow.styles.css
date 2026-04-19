@@ -1,0 +1,78 @@
+/* Row cell padding */
+table tbody tr:first-child td {
+    padding-top: var(--space-12);
+}
+
+table tbody tr td {
+    padding: var(--space-8) var(--space-12);
+}
+
+/* Variants */
+table td.variant-disabled {
+    color: var(--gray-1);
+}
+
+table td.variant-primary {
+    color: var(--accent);
+}
+
+table td.variant-secondary {
+    color: var(--accent-dark-2);
+}
+
+table td.variant-danger {
+    color: var(--error);
+}
+
+/* Expand caret column */
+table th.expand-col,
+table td.expand-col {
+    width: 32px;
+    padding: 0;
+    text-align: center;
+}
+
+table .expand-btn {
+    background: none;
+    border: none;
+    color: var(--accent-dark-3);
+    cursor: pointer;
+    font-size: 10px;
+    padding: var(--space-4);
+    transition: transform 0.2s ease;
+    line-height: 1;
+}
+
+table .expand-btn.expanded {
+    transform: rotate(90deg);
+}
+
+table .expand-btn:hover {
+    color: var(--white-2);
+}
+
+/* Expanded row */
+table tr.expanded-row td {
+    padding: var(--space-8) var(--space-8);
+}
+
+table tr.expanded-row td.expanded-row-content {
+    border-left: 1px solid var(--black-2);
+}
+
+table .expanded-row-list {
+    margin: 0;
+}
+
+table .expanded-row-item dt {
+    color: var(--accent-dark-3);
+    font-family: 'Roboto_Bold';
+}
+
+table .expanded-row-item dt::after {
+    content: ':';
+}
+
+table .expanded-row-item dd {
+    margin: 0;
+}

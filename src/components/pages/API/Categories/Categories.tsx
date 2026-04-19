@@ -5,45 +5,23 @@ import MobileMenu from '../MobileMenu/MobileMenu'
 import { useState } from 'react'
 import { Submenu } from '../Nav'
 import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
-import {
-    SearchInputOption,
-    WrappedInput,
-    WrappedRadioButton,
-    WrappedSearchInput,
-    WrappedTextArea,
-} from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useForm } from 'react-hook-form'
-import '../common/Form.scss'
-import '../common/Table.scss'
 import './Categories.scss'
-import { icons } from './icons'
-import { colors } from './colors'
 import { CategoryFormData, categoriesSchema } from '.'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useGetCategories, usePostCategory } from './Categories.queries'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { getErrorMessage } from '../common/error'
 import { getParents } from './Categories.transformers'
+import { Form, SearchInputOption } from '@common/ux'
+import { colorOptions, iconOptions } from './Categories.utils'
+import { Table } from '@common/ux/Table'
+import { GetCategoryResponse } from '@common/types'
+import { columns } from './Categories.columns'
 
 type CategoriesProps = {
     path: string
 }
-
-const iconOptions: SearchInputOption[] = Object.keys(icons)
-    .map((icon) => ({
-        label: icon,
-        icon: icons[icon],
-        value: icon,
-    }))
-    .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))
-
-const colorOptions: SearchInputOption[] = Object.keys(colors)
-    .map((color) => ({
-        label: color,
-        icon: colors[color],
-        value: color,
-    }))
-    .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))
 
 const Categories = ({ path }: CategoriesProps) => {
     const { mobileMenuVisible } = useAppContext()
@@ -51,15 +29,12 @@ const Categories = ({ path }: CategoriesProps) => {
 
     const [showParentInput, setShowParentInput] = useState(false)
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
-    const parentOptions = getParents.fromApi(
-        categories?.data.filter((category) => category.isParent) || [],
-    )
+    const parentOptions = getParents.fromApi(categories?.data || [])
 
     const { control, setValue, handleSubmit, reset, resetField } = useForm<CategoryFormData>({
         defaultValues: {
             name: '',
             description: '',
-            isParent: false,
             parent: '',
             hasParent: false,
             icon: '',
@@ -78,7 +53,6 @@ const Categories = ({ path }: CategoriesProps) => {
 
         await postCategory({
             name: formData.name,
-            isParent: formData.isParent,
             description: formData.description,
             icon: formData.icon,
             color: formData.color,
@@ -119,8 +93,8 @@ const Categories = ({ path }: CategoriesProps) => {
                 <div className="form-container">
                     <form onSubmit={handleSubmit(submitHandler)}>
                         <fieldset>
-                            <label htmlFor="categoryName">Name</label>
-                            <WrappedInput
+                            <Form.Label for="categoryName">Name</Form.Label>
+                            <Form.Input
                                 name="name"
                                 control={control}
                                 type="text"
@@ -128,8 +102,8 @@ const Categories = ({ path }: CategoriesProps) => {
                             />
                         </fieldset>
                         <fieldset>
-                            <label htmlFor="description">Description</label>
-                            <WrappedTextArea
+                            <Form.Label for="description">Description</Form.Label>
+                            <Form.TextArea
                                 name="description"
                                 control={control}
                                 placeholder="What do you use this category for"
@@ -137,34 +111,11 @@ const Categories = ({ path }: CategoriesProps) => {
                             />
                         </fieldset>
                         <fieldset className="parent-radio">
-                            <label htmlFor="isParent">Is Parent</label>
+                            <Form.Label for="hasParent">Has Parent</Form.Label>
                             <div>
                                 <div>
-                                    <label>No</label>
-                                    <WrappedRadioButton
-                                        name="isParent"
-                                        control={control}
-                                        value={false}
-                                        onChange={() => setValue('isParent', false)}
-                                    />
-                                </div>
-                                <div>
-                                    <label>Yes</label>
-                                    <WrappedRadioButton
-                                        name="isParent"
-                                        control={control}
-                                        value={true}
-                                        onChange={() => setValue('isParent', true)}
-                                    />
-                                </div>
-                            </div>
-                        </fieldset>
-                        <fieldset className="parent-radio">
-                            <label htmlFor="hasParent">Has Parent</label>
-                            <div>
-                                <div>
-                                    <label>No</label>
-                                    <WrappedRadioButton
+                                    <Form.Label for="hasParentNo">No</Form.Label>
+                                    <Form.RadioButton
                                         name="hasParent"
                                         control={control}
                                         value={false}
@@ -175,8 +126,8 @@ const Categories = ({ path }: CategoriesProps) => {
                                     />
                                 </div>
                                 <div>
-                                    <label>Yes</label>
-                                    <WrappedRadioButton
+                                    <Form.Label for="hasParentYes">Yes</Form.Label>
+                                    <Form.RadioButton
                                         name="hasParent"
                                         control={control}
                                         value={true}
@@ -189,8 +140,11 @@ const Categories = ({ path }: CategoriesProps) => {
                         </fieldset>
                         {showParentInput && (
                             <fieldset>
-                                <label htmlFor="parent" className="hide--small-screen"></label>
-                                <WrappedSearchInput
+                                <Form.Label
+                                    for="parent"
+                                    className="hide--small-screen"
+                                ></Form.Label>
+                                <Form.SearchInput
                                     options={parentOptions}
                                     name="parent"
                                     control={control}
@@ -204,8 +158,8 @@ const Categories = ({ path }: CategoriesProps) => {
                             </fieldset>
                         )}
                         <fieldset>
-                            <label htmlFor="icon">Icon</label>
-                            <WrappedSearchInput
+                            <Form.Label for="icon">Icon</Form.Label>
+                            <Form.SearchInput
                                 name="icon"
                                 control={control}
                                 options={iconOptions}
@@ -217,8 +171,8 @@ const Categories = ({ path }: CategoriesProps) => {
                             />
                         </fieldset>
                         <fieldset>
-                            <label htmlFor="color">Colour</label>
-                            <WrappedSearchInput
+                            <Form.Label for="color">Colour</Form.Label>
+                            <Form.SearchInput
                                 name="color"
                                 control={control}
                                 options={colorOptions}
@@ -269,8 +223,15 @@ const Categories = ({ path }: CategoriesProps) => {
                         </div>
                     </form>
                 </div>
-                <h2>See the list of categories</h2>
-                <table>
+                <Table<GetCategoryResponse, unknown>
+                    id="categories-table"
+                    title="See the list of categories"
+                    ariaLabel="Categories table"
+                    data={categories?.data || []}
+                    columns={columns}
+                />
+                {/* <h2>See the list of categories</h2> */}
+                {/* <table>
                     <thead>
                         <tr>
                             <td className="sm"></td>
@@ -284,16 +245,7 @@ const Categories = ({ path }: CategoriesProps) => {
                     </thead>
                     <tbody>
                         {categories?.data.map(
-                            ({
-                                _id,
-                                icon,
-                                name,
-                                status,
-                                color,
-                                isParent,
-                                parentId,
-                                description,
-                            }) => (
+                            ({ _id, icon, name, status, color, parentId, description }) => (
                                 <>
                                     <tr key={_id}>
                                         <td className="sm">
@@ -303,9 +255,6 @@ const Categories = ({ path }: CategoriesProps) => {
                                         </td>
                                         <td className="sm">{name}</td>
                                         <td className="sm">{status}</td>
-                                        <td className={`md icon ${isParent ? 'green' : 'red'}`}>
-                                            {isParent ? icons['check'] : icons['cancel']}
-                                        </td>
                                         <td className={`md icon ${parentId ? 'green' : 'red'}`}>
                                             {parentId ? icons['check'] : icons['cancel']}
                                         </td>
@@ -319,7 +268,7 @@ const Categories = ({ path }: CategoriesProps) => {
                             ),
                         )}
                     </tbody>
-                </table>
+                </table> */}
             </main>
         </Page>
     )

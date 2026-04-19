@@ -1,6 +1,5 @@
 import Page from '../../../sharedComponents/Page/Page'
 import { useForm } from 'react-hook-form'
-import { WrappedInput } from '../../../sharedComponents/WrappedFormComponents/WrappedFormComponents'
 import { useState } from 'react'
 import './Register.scss'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
@@ -11,6 +10,7 @@ import { useMutation } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { registerUserRequest } from './Register.query'
 import { ErrorResponse, PostUserResponse } from '@common/types'
+import { Form } from '@common/ux'
 
 interface IndexProps {
     path: string
@@ -66,24 +66,19 @@ const Register = ({ path }: IndexProps) => {
             <form onSubmit={handleSubmit(submitHandler)}>
                 <fieldset>
                     <label htmlFor="fullName">Full name</label>
-                    <WrappedInput
-                        name="fullName"
-                        control={control}
-                        type="text"
-                        autoComplete="name"
-                    />
+                    <Form.Input name="fullName" control={control} type="text" autoComplete="name" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="userName">User name</label>
-                    <WrappedInput name="userName" control={control} type="text" />
+                    <Form.Input name="userName" control={control} type="text" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email">Email</label>
-                    <WrappedInput name="email" control={control} type="text" autoComplete="email" />
+                    <Form.Input name="email" control={control} type="text" autoComplete="email" />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="password">Password</label>
-                    <WrappedInput
+                    <Form.Input
                         name="password"
                         control={control}
                         type="password"
@@ -94,7 +89,7 @@ const Register = ({ path }: IndexProps) => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="passwordConfirmation">Confirm</label>
-                    <WrappedInput
+                    <Form.Input
                         name="passwordConfirmation"
                         control={control}
                         type="password"

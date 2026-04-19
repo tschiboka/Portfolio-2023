@@ -37,7 +37,6 @@ const Category = mongoose.model<ICategory>(
             type: Date,
             default: Date.now(),
         },
-        isParent: { type: Boolean, required: true },
         parentId: {
             type: mongoose.Schema.Types.ObjectId,
             default: null,
@@ -52,7 +51,6 @@ interface CategoryInput {
     icon: string
     color?: string
     status?: string
-    isParent: boolean
     parentId?: string
 }
 
@@ -63,7 +61,6 @@ function validateCategory(category: CategoryInput) {
         icon: Joi.string().required(),
         color: Joi.string(),
         status: Joi.string().valid('active', 'inactive', 'deleted'),
-        isParent: Joi.boolean().required(),
         parentId: (Joi as any).objectId().optional(),
     })
 

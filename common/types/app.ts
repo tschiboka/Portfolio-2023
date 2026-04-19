@@ -33,7 +33,6 @@ export type Feature = 'xmas2025'
 // CATEGORY TYPES
 export type Category = {
     name: string
-    isParent: boolean
     parentId?: string
     status?: string
     description: string

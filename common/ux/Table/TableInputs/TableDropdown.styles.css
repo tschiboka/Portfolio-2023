@@ -1,0 +1,114 @@
+.table-dropdown {
+    position: relative;
+    display: inline-flex;
+}
+
+.table-dropdown__trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    background: var(--black-2);
+    color: var(--white-3);
+    border: 1px solid var(--black-4);
+    border-radius: 4px;
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-xs);
+    font-family: inherit;
+    font-variant: small-caps;
+    cursor: pointer;
+    min-width: 48px;
+    justify-content: space-between;
+    transition:
+        border-color 0.15s,
+        background-color 0.15s;
+}
+
+.table-dropdown__trigger:hover {
+    border-color: var(--accent-dark-3);
+    background-color: var(--black-3);
+}
+
+.table-dropdown__arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--gray-2);
+    margin-left: var(--space-4);
+}
+
+.table-dropdown__menu {
+    position: absolute;
+    right: 0;
+    padding: var(--space-4) 0;
+    list-style: none;
+    background: var(--black-2);
+    border: 1px solid var(--black-4);
+    border-radius: 4px;
+    min-width: 48px;
+    z-index: 10;
+}
+
+.table-dropdown--up .table-dropdown__menu {
+    bottom: 100%;
+    margin: 0;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.table-dropdown--down .table-dropdown__menu {
+    top: 100%;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.table-dropdown__menu li {
+    padding: var(--space-4) var(--space-12);
+    color: var(--white-3);
+    font-size: var(--font-xs);
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+    transition:
+        background 0.1s,
+        color 0.1s;
+}
+
+.table-dropdown__menu li:hover {
+    background: var(--black-4);
+    color: var(--accent);
+}
+
+.table-dropdown__menu li.active {
+    color: var(--accent);
+    background: var(--accent-dark-5);
+}
+
+/* Ghost variant */
+
+.table-dropdown--ghost .table-dropdown__trigger {
+    background: none;
+    border: 1px solid var(--black-3);
+    border-radius: 6px;
+    color: var(--accent-dark-3);
+    min-width: unset;
+    font-size: var(--font-sm);
+}
+
+.table-dropdown--ghost .table-dropdown__trigger:hover {
+    color: var(--accent);
+    border-color: var(--accent-dark-3);
+    background: none;
+}
+
+.table-dropdown--ghost .table-dropdown__menu {
+    background: var(--black-1);
+    border: 1px solid var(--black-3);
+    border-radius: 6px;
+}
+
+.table-dropdown--ghost .table-dropdown__menu li {
+    font-size: var(--font-sm);
+    text-align: start;
+    padding: var(--space-4) var(--space-12);
+}

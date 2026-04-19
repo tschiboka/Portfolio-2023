@@ -1,0 +1,85 @@
+.table-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-12) 0 0;
+    font-size: var(--font-xs);
+    color: var(--gray-2);
+    font-variant: small-caps;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+}
+
+.table-pagination__info {
+    white-space: nowrap;
+}
+
+.table-pagination__range,
+.table-pagination__total {
+    font-family: 'Roboto_Bold';
+    color: var(--white-5);
+}
+
+.table-pagination__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    flex-wrap: wrap;
+}
+
+.table-pagination__size {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    color: var(--gray-2);
+}
+
+.table-pagination__nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+.table-pagination__nav button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--black-2);
+    color: var(--white-3);
+    border: 1px solid var(--black-4);
+    border-radius: 4px;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 var(--space-4);
+    cursor: pointer;
+    font-size: var(--font-xs);
+    transition:
+        background 0.15s,
+        color 0.15s,
+        border-color 0.15s;
+}
+
+.table-pagination__nav button[aria-label='First page'],
+.table-pagination__nav button[aria-label='Last page'],
+.table-pagination__nav button[aria-label='Previous page'],
+.table-pagination__nav button[aria-label='Next page'] {
+    font-size: var(--font-md);
+    line-height: 1;
+}
+
+.table-pagination__nav button:hover:not(:disabled) {
+    background: var(--black-4);
+    border-color: var(--accent-dark-3);
+    color: var(--accent);
+}
+
+.table-pagination__nav button.active {
+    background: var(--accent-dark-4);
+    border-color: var(--accent-dark-2);
+    color: var(--accent);
+}
+
+.table-pagination__nav button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}

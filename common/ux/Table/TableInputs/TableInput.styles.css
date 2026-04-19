@@ -1,0 +1,80 @@
+.table-filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.table-filter-field label {
+    font-size: var(--font-xs);
+    color: var(--gray-2);
+    font-variant: small-caps;
+}
+
+.table-filter-field input,
+.table-filter-field select {
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--black-2);
+    color: var(--white-3);
+    border: 1px solid var(--black-4);
+    border-radius: 4px;
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--font-xs);
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.table-filter-field input:focus,
+.table-filter-field select:focus {
+    border-color: var(--accent-dark-3);
+}
+
+.table-filter-field input::placeholder {
+    color: var(--gray-1);
+}
+
+.table-filter-field .table-dropdown {
+    display: flex;
+    width: 100%;
+}
+
+.table-filter-field .table-dropdown__trigger {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.table-filter-field .table-dropdown__menu {
+    left: 0;
+    right: 0;
+}
+
+.table-filter-field--checkbox {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-8);
+    padding-bottom: var(--space-4);
+    align-self: end;
+}
+
+.table-filter-field--checkbox input[type='checkbox'] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--accent-dark-3);
+    border-radius: 3px;
+    background: transparent;
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.table-filter-field--checkbox input[type='checkbox']:checked {
+    background: var(--accent-dark-3);
+    border-color: var(--accent-dark-3);
+}
+
+.table-filter-field--checkbox input[type='checkbox']:hover {
+    border-color: var(--accent);
+}

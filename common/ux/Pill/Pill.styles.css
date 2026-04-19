@@ -1,0 +1,49 @@
+.Pill {
+    display: inline-block;
+    padding: var(--space-4) var(--space-12);
+    border-radius: 5px;
+    font-size: var(--font-xs);
+    font-weight: bold;
+}
+
+.Pill--accent {
+    background: var(--accent-dark-5);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.Pill--error {
+    background: var(--error-dark-5);
+    color: var(--error);
+    border: 1px solid var(--error);
+}
+
+.Pill--success {
+    background: var(--success-dark-5);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.Pill--yellow {
+    background: var(--yellow-dark-5);
+    color: var(--yellow);
+    border: 1px solid var(--yellow);
+}
+
+.Pill--orange {
+    background: var(--orange-dark-5);
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
+
+.Pill--purple {
+    background: var(--purple-dark-5);
+    color: var(--purple);
+    border: 1px solid var(--purple);
+}
+
+.Pill--gray {
+    background: var(--black-5);
+    color: var(--white-1);
+    border: 1px solid var(--white-1);
+}

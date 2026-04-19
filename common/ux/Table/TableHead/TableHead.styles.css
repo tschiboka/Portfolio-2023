@@ -1,0 +1,169 @@
+table thead th {
+    color: var(--accent-dark-3);
+    font-family: 'Roboto_Bold';
+    padding: var(--space-8) var(--space-12);
+}
+
+table thead tr:first-child th {
+    text-align: start;
+    border-top: none;
+    border-bottom: 1px solid var(--black-2);
+}
+
+table thead tr:first-child th.select-col,
+table thead tr:first-child th.expand-col {
+    text-align: center;
+}
+
+/* Sorting */
+
+table thead th.sortable {
+    padding: 0;
+    text-align: start;
+}
+
+table thead th .sort-button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+    padding: var(--space-8) var(--space-12);
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    text-align: start;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+
+table thead th .sort-button:hover {
+    color: var(--accent);
+}
+
+table thead th.sorted .sort-button {
+    color: var(--accent);
+}
+
+table thead th .sort-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+table thead th .sort-icon::before,
+table thead th .sort-icon::after {
+    content: '';
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    transition: opacity 0.15s;
+}
+
+table thead th .sort-icon::before {
+    border-bottom: 5px solid var(--gray-4);
+}
+
+table thead th .sort-icon::after {
+    border-top: 5px solid var(--gray-4);
+}
+
+table thead th.sorted-asc .sort-icon::before {
+    border-bottom-color: var(--accent);
+}
+
+table thead th.sorted-asc .sort-icon::after {
+    opacity: 0.3;
+}
+
+table thead th.sorted-desc .sort-icon::after {
+    border-top-color: var(--accent);
+}
+
+table thead th.sorted-desc .sort-icon::before {
+    opacity: 0.3;
+}
+
+table th.xxs {
+    display: none;
+}
+
+table th.xs {
+    display: none;
+}
+
+table th.sm {
+    display: none;
+}
+
+table th.mx {
+    display: none;
+}
+
+table th.md {
+    display: none;
+}
+
+table th.lg {
+    display: none;
+}
+
+table th.xl {
+    display: none;
+}
+
+table th.xxl {
+    display: none;
+}
+
+table th.accordion {
+    display: none;
+}
+
+@media (min-width: 375px) {
+    table th.xxs {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 420px) {
+    table th.xs {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 576px) {
+    table th.sm {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 670px) {
+    table th.mx {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 768px) {
+    table th.md {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 992px) {
+    table th.lg {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1200px) {
+    table th.xl {
+        display: table-cell;
+    }
+}
+
+@media (min-width: 1580px) {
+    table th.xxl {
+        display: table-cell;
+    }
+}
