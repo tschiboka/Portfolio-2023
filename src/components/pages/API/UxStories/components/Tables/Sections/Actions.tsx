@@ -106,8 +106,9 @@ export const Actions = () => (
         <section>
             <h3>filter</h3>
             <p>
-                An action with a <code>filter</code> function. The action is hidden entirely for the
-                row that doesn't match the condition.
+                An action with a <code>filter</code> function. The action is hidden from the menu
+                for rows that don&apos;t match the condition. When all actions are filtered out the
+                menu button is disabled.
             </p>
             <Table<ActionRow>
                 title="filter"

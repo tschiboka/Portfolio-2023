@@ -39,9 +39,10 @@ export const Variants = () => (
             <p>
                 The <code>rowVariant</code> prop accepts a function that receives the row meta and
                 returns a variant. Every cell in the row inherits the colour unless overridden by a
-                column-level or cell-level variant. In this example rows with an <code>error</code>{' '}
-                status turn <code>danger</code> and <code>inactive</code> rows turn{' '}
-                <code>disabled</code>.
+                column-level or cell-level variant. In this example each status maps to a matching
+                variant: <code>active</code> → <code>primary</code>, <code>pending</code> →{' '}
+                <code>secondary</code>, <code>error</code> → <code>danger</code>, and{' '}
+                <code>inactive</code> → <code>disabled</code>.
             </p>
             <Table<VariantRow>
                 title="Row Variants"

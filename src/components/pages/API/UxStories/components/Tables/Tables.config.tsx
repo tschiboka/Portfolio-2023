@@ -32,6 +32,7 @@ export const renderBadge = (cell: CellValue<Row>): ReactNode => (
 
 export const statusToVariant: Record<string, CellVariant> = {
     active: 'primary',
+    pending: 'secondary',
     inactive: 'disabled',
     error: 'danger',
 }
@@ -42,7 +43,7 @@ export const cellVariantFn = (
 ): CellVariant | undefined => statusToVariant[meta.row.status]
 
 export const rowVariantFn = (meta: CellMeta<VariantRow>): CellVariant | undefined =>
-    meta.row.status === 'error' ? 'danger' : meta.row.status === 'inactive' ? 'disabled' : undefined
+    statusToVariant[meta.row.status]
 
 // ── Action Configs ───────────────────────────────────────────────────────────
 

@@ -113,33 +113,35 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
                     resetKey={filterResetKey}
                 />
             )}
-            <table
-                aria-label={titleId ? undefined : ariaLabel}
-                aria-labelledby={titleId}
-                aria-describedby={descriptionId}
-            >
-                <TableHead
-                    columns={columns}
-                    hasBreakpoints={hasHiddenColumns}
-                    hasActions={isNonEmpty(actions)}
-                    selection={selection}
-                    sorting={sorting}
-                    data={data}
-                    context={context}
-                />
-                <TableBody
-                    data={data}
-                    columns={columns}
-                    context={context}
-                    rowAriaLabel={rowAriaLabel}
-                    hasBreakpoints={hasHiddenColumns}
-                    hiddenColumns={hiddenColumns}
-                    actions={actions}
-                    emptyState={emptyState}
-                    rowVariant={rowVariant}
-                    selection={selection}
-                />
-            </table>
+            <div className="table-scroll-wrapper">
+                <table
+                    aria-label={titleId ? undefined : ariaLabel}
+                    aria-labelledby={titleId}
+                    aria-describedby={descriptionId}
+                >
+                    <TableHead
+                        columns={columns}
+                        hasBreakpoints={hasHiddenColumns}
+                        hasActions={isNonEmpty(actions)}
+                        selection={selection}
+                        sorting={sorting}
+                        data={data}
+                        context={context}
+                    />
+                    <TableBody
+                        data={data}
+                        columns={columns}
+                        context={context}
+                        rowAriaLabel={rowAriaLabel}
+                        hasBreakpoints={hasHiddenColumns}
+                        hiddenColumns={hiddenColumns}
+                        actions={actions}
+                        emptyState={emptyState}
+                        rowVariant={rowVariant}
+                        selection={selection}
+                    />
+                </table>
+            </div>
             {pagination && <TablePagination {...pagination} />}
         </div>
     )

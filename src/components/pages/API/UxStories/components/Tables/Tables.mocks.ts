@@ -67,7 +67,7 @@ export const variantRows: VariantRow[] = [
         label: 'Default',
         variant: 'none',
         description: 'Inherits the standard text colour',
-        status: 'active',
+        status: 'standard',
     },
     {
         label: 'Primary',
@@ -79,7 +79,7 @@ export const variantRows: VariantRow[] = [
         label: 'Secondary',
         variant: 'secondary',
         description: 'Darker accent for supporting info',
-        status: 'inactive',
+        status: 'pending',
     },
     {
         label: 'Danger',
