@@ -8,16 +8,12 @@ import { SoftDisabledRenderer } from '../renderers/SoftDisabledRenderer'
 // jsdom does not implement window.scrollTo
 window.scrollTo = jest.fn()
 
-// ── HiddenRenderer ───────────────────────────────────────────────────────────
-
 describe('HiddenRenderer', () => {
     it('should render nothing', () => {
         const { container } = render(<HiddenRenderer />)
         expect(container.innerHTML).toBe('')
     })
 })
-
-// ── DisabledRenderer ─────────────────────────────────────────────────────────
 
 describe('DisabledRenderer', () => {
     it('should render children', () => {
@@ -50,8 +46,6 @@ describe('DisabledRenderer', () => {
     })
 })
 
-// ── TooltipRenderer ──────────────────────────────────────────────────────────
-
 describe('TooltipRenderer', () => {
     it('should render children', () => {
         render(<TooltipRenderer text="Tip">Content</TooltipRenderer>)
@@ -80,8 +74,6 @@ describe('TooltipRenderer', () => {
         expect(screen.getByTitle('Helpful tip')).toBeInTheDocument()
     })
 })
-
-// ── SoftDisabledRenderer ─────────────────────────────────────────────────────
 
 describe('SoftDisabledRenderer', () => {
     describe('initial state', () => {

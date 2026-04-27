@@ -14,7 +14,16 @@ import User from '../components/pages/API/User/User'
 import Admin from '../components/pages/API/Admin/Admin'
 import Logout from '../components/pages/API/Logout/Logout'
 import Categories from '../components/pages/API/Categories/Categories'
-import { UxStories, AccessGuards, Tables, Overlays } from '../components/pages/API/UxStories'
+import {
+    UxStories,
+    AccessGuards,
+    CodeBlocks,
+    Forms,
+    Pills,
+    Stacks,
+    Tables,
+    Overlays,
+} from '../components/pages/API/UxStories'
 
 export const ApiRoutes = [
     {
@@ -90,8 +99,24 @@ export const ApiRoutes = [
         element: <AccessGuards path="/api/ux-stories/access-guards" />,
     },
     {
+        path: '/api/ux-stories/code-blocks',
+        element: <CodeBlocks path="/api/ux-stories/code-blocks" />,
+    },
+    {
+        path: '/api/ux-stories/forms',
+        element: <Forms path="/api/ux-stories/forms" />,
+    },
+    {
         path: '/api/ux-stories/overlays',
         element: <Overlays path="/api/ux-stories/overlays" />,
+    },
+    {
+        path: '/api/ux-stories/pills',
+        element: <Pills path="/api/ux-stories/pills" />,
+    },
+    {
+        path: '/api/ux-stories/stacks',
+        element: <Stacks path="/api/ux-stories/stacks" />,
     },
     {
         path: '/api/ux-stories/tables',

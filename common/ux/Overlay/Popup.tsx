@@ -2,9 +2,8 @@ import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
-import { PopupProps } from './Overlay.types'
+import type { AnchorResult, PopupProps } from './Overlay.types'
 import {
-    AnchorResult,
     ArrowClass,
     DefaultIcon,
     ModeClass,
@@ -73,7 +72,9 @@ export const Popup = ({
                 className={className ?? `Overlay--popup ${ModeClass[mode]}`}
                 style={{
                     ...SizeStyle[size],
-                    ...(anchorResult ? anchorResult.style : measureStyle),
+                    ...(anchorResult
+                        ? { ...anchorResult.style, ...anchorResult.cornerStyle }
+                        : measureStyle),
                     ...style,
                 }}
                 onClick={(e) => e.stopPropagation()}
@@ -81,11 +82,7 @@ export const Popup = ({
                 {anchorResult && (
                     <span
                         className={`Overlay--popup__arrow ${ArrowClass[anchorResult.arrow]}`}
-                        style={
-                            anchorResult.arrowOffset !== 0
-                                ? { left: `calc(50% + ${anchorResult.arrowOffset}px)` }
-                                : undefined
-                        }
+                        style={anchorResult.arrowStyle}
                     />
                 )}
                 {(resolvedIcon || title || showClose) && (

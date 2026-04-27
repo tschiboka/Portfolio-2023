@@ -1,13 +1,9 @@
-// ── Types ────────────────────────────────────────────────────────────────────
-
 type Nil = null | undefined
 type Defined<T> = Exclude<T, Nil>
 type Falsy = false | 0 | '' | Nil
 type Truthy<T> = Exclude<T, Falsy>
 type Emptiable = unknown[] | string | Record<string, unknown> | Nil
 type Primitive = string | number | boolean | Nil
-
-// ── Nullish & Existence ──────────────────────────────────────────────────────
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.
@@ -47,8 +43,6 @@ export const isUndefined = (value: unknown): value is undefined => value === und
  */
 export const isNull = (value: unknown): value is null => value === null
 
-// ── Truthiness ───────────────────────────────────────────────────────────────
-
 /**
  * Type guard that checks whether a value is truthy.
  *
@@ -74,8 +68,6 @@ export const isTruthy = <T>(value: T): value is Truthy<T> => Boolean(value)
  * @returns `true` if the value is falsy.
  */
 export const isFalsy = (value: unknown): value is Falsy => !value
-
-// ── Primitive Type Guards ────────────────────────────────────────────────────
 
 /**
  * Type guard that checks whether a value is a `boolean`.
@@ -163,8 +155,6 @@ export const isFunction = (value: unknown): value is (...args: unknown[]) => unk
 export const isFiniteNumber = (value: unknown): value is number =>
     typeof value === 'number' && Number.isFinite(value)
 
-// ── Structural Type Guards ───────────────────────────────────────────────────
-
 /**
  * Type guard that checks whether a value is an array.
  *
@@ -211,8 +201,6 @@ export const isPlainObject = (value: unknown): value is Record<string, unknown> 
     const proto: unknown = Object.getPrototypeOf(value)
     return proto === Object.prototype || proto === null
 }
-
-// ── Collection Checks ────────────────────────────────────────────────────────
 
 /**
  * Checks whether a value has a `length` property greater than zero.
@@ -296,8 +284,6 @@ export const isNested = (value: unknown[] | Record<string, unknown>): boolean =>
     return values.some((v) => typeof v === 'object' && v !== null)
 }
 
-// ── Property Checks ─────────────────────────────────────────────────────────
-
 /**
  * Type guard that checks whether an object has a specific own property.
  *
@@ -341,7 +327,6 @@ export const hasValue = (
     return Object.values(collection).includes(value)
 }
 
-// ── Membership ───────────────────────────────────────────────────────────────
 
 /**
  * Type guard that checks whether a value is one of the given options.
@@ -358,7 +343,6 @@ export const hasValue = (
 export const isOneOf = <T>(value: unknown, options: readonly T[]): value is T =>
     options.includes(value as T)
 
-// ── Equality & Uniqueness ────────────────────────────────────────────────────
 
 /**
  * Shallow equality check for two values.
@@ -443,7 +427,6 @@ export const isEqual = (a: unknown, b: unknown): boolean => {
  */
 export const isUnique = (value: unknown[]): boolean => new Set(value).size === value.length
 
-// ── Instance Check ───────────────────────────────────────────────────────────
 
 /**
  * Type guard that checks whether a value is an instance of a given constructor.
@@ -462,7 +445,6 @@ export const isInstanceOf = <T>(
     constructor: new (...args: never[]) => T,
 ): value is T => value instanceof constructor
 
-// ── Built-in Type Guards ─────────────────────────────────────────────────────
 
 /**
  * Type guard that checks whether a value is a `Date` instance and is valid.
@@ -536,7 +518,6 @@ export const isThenable = (value: unknown): value is PromiseLike<unknown> =>
     value !== null &&
     typeof (value as Record<string, unknown>).then === 'function'
 
-// ── Predicate Combinators ────────────────────────────────────────────────────
 
 /**
  * Creates a predicate that checks if **all** elements in an array satisfy a type guard.

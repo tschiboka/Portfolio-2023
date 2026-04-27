@@ -1,4 +1,3 @@
-// ── Basic ────────────────────────────────────────────────────────────────────
 
 export type Row = {
     name: string
@@ -14,7 +13,6 @@ export const rows: Row[] = [
     { name: 'Delta', value: '40', status: 'pending', note: '' },
 ]
 
-// ── Breakpoints ──────────────────────────────────────────────────────────────
 
 export type BreakpointRow = {
     property: string
@@ -53,7 +51,6 @@ export const breakpointData: BreakpointRow[] = [
     },
 ]
 
-// ── Variants ─────────────────────────────────────────────────────────────────
 
 export type VariantRow = {
     label: string
@@ -95,7 +92,6 @@ export const variantRows: VariantRow[] = [
     },
 ]
 
-// ── ARIA ─────────────────────────────────────────────────────────────────────
 
 export type AriaRow = {
     component: string
@@ -245,7 +241,6 @@ export const ariaReferenceRows: AriaRow[] = [
     },
 ]
 
-// ── Actions ──────────────────────────────────────────────────────────────────
 
 export type ActionRow = {
     name: string
@@ -289,7 +284,6 @@ export const variantData: ActionRow[] = [
     { name: 'Variants', function: 'primary, secondary, danger, and default colours' },
 ]
 
-// ── Selection ────────────────────────────────────────────────────────────────
 
 export type SelectionRow = {
     id: string
@@ -306,7 +300,6 @@ export const selectionRows: SelectionRow[] = [
     { id: '5', name: 'Eve', role: 'Viewer', status: 'inactive' },
 ]
 
-// ── All Features Combined ────────────────────────────────────────────────────
 
 export type AllFeaturesRow = {
     id: string
@@ -504,7 +497,6 @@ export const allFeaturesData: AllFeaturesRow[] = [
     },
 ]
 
-// ── Pagination ───────────────────────────────────────────────────────────────
 
 export type PaginationRow = { id: string; name: string; value: string }
 
@@ -520,7 +512,6 @@ export const paginationColumns = [
     { header: 'Value', accessor: 'value' as const },
 ]
 
-// ── Sorting ──────────────────────────────────────────────────────────────────
 
 export type SortingRow = {
     name: string

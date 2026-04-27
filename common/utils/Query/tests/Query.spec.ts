@@ -19,7 +19,6 @@ jest.mock('../../Path/apiPathBuilder', () => ({
 
 const mockedAxios = axios as jest.Mocked<typeof axios>
 
-// ── RequestBuilder ───────────────────────────────────────────────────────────
 
 describe('RequestBuilder', () => {
     beforeEach(() => {

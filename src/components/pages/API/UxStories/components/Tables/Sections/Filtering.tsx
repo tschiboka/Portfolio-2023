@@ -10,8 +10,9 @@ export const Filtering = () => (
         <p>
             The <code>filtering</code> prop adds a slider icon to the header. Clicking it toggles a
             filter panel with accessible inputs. Each input has a <code>type</code> that determines
-            the control rendered. The <code>onFilter</code> callback fires on every change with all
-            current values.
+            the control rendered. The <code>onFilter</code> callback fires when the user clicks the{' '}
+            <strong>Filter</strong> button. A <strong>Reset</strong> button restores all inputs to
+            their defaults and re-fires <code>onFilter</code>.
         </p>
         <section>
             <h3>Filtering — Text</h3>
@@ -75,8 +76,8 @@ export const Filtering = () => (
         <section>
             <h3>Filtering — Search</h3>
             <p>
-                A search input (shows a browser-native clear button). Fires on every keystroke for
-                live filtering.
+                A search input with a browser-native clear button. Like all filter types, the value
+                is submitted when the user clicks <strong>Filter</strong>.
             </p>
             <Table<Row>
                 title="Search Filter"

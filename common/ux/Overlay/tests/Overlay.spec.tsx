@@ -1,11 +1,11 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
 import { Overlay } from '../index'
+import type { ActionMenuItem, ActionMenuProps } from '../ActionMenu'
 import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
 // jsdom does not implement window.scrollTo
 window.scrollTo = jest.fn()
-// ── Helpers ──────────────────────────────────────────────────────────────────
 
 const mockAnchorRef = () => {
     const ref = createRef<HTMLButtonElement>()
@@ -35,8 +35,6 @@ const renderPopup = (props: Partial<React.ComponentProps<typeof Overlay.Popup>> 
     return { ...result, onClose, anchorRef: ref }
 }
 
-// ── FullScreen ───────────────────────────────────────────────────────────────
-
 describe('Overlay.FullScreen', () => {
     it('should render children', () => {
         render(<Overlay.FullScreen>Content</Overlay.FullScreen>)
@@ -59,7 +57,204 @@ describe('Overlay.FullScreen', () => {
     })
 })
 
-// ── Popup ────────────────────────────────────────────────────────────────────
+const defaultItems: ActionMenuItem[] = [
+    { id: 'edit', label: 'Edit', onClick: jest.fn() },
+    { id: 'delete', label: 'Delete', onClick: jest.fn() },
+]
+
+const renderActionMenu = (overrides: Partial<ActionMenuProps> = {}) => {
+    const { ref, Wrapper } = mockAnchorRef()
+    const onClose = jest.fn()
+    const items = overrides.items ?? defaultItems.map((i) => ({ ...i, onClick: jest.fn() }))
+    const result = render(
+        <Wrapper>
+            <Overlay.ActionMenu anchorRef={ref} items={items} onClose={onClose} {...overrides} />
+        </Wrapper>,
+    )
+    return { ...result, onClose, anchorRef: ref, items }
+}
+
+describe('Overlay.ActionMenu', () => {
+    describe('rendering', () => {
+        it('should render as a portal to document.body', () => {
+            renderActionMenu()
+            const menu = screen.getByRole('menu')
+            expect(menu.closest('body')).toBe(document.body)
+        })
+
+        it('should render with role="menu"', () => {
+            renderActionMenu()
+            expect(screen.getByRole('menu')).toBeInTheDocument()
+        })
+
+        it('should use "Action menu" as default aria-label', () => {
+            renderActionMenu()
+            expect(screen.getByRole('menu')).toHaveAttribute('aria-label', 'Action menu')
+        })
+
+        it('should use custom ariaLabel when provided', () => {
+            renderActionMenu({ ariaLabel: 'User actions' })
+            expect(screen.getByRole('menu')).toHaveAttribute('aria-label', 'User actions')
+        })
+
+        it('should apply the Overlay--action-menu class', () => {
+            renderActionMenu()
+            expect(screen.getByRole('menu')).toHaveClass('Overlay--action-menu')
+        })
+    })
+
+    describe('items', () => {
+        it('should render all items as menuitems', () => {
+            renderActionMenu()
+            expect(screen.getAllByRole('menuitem')).toHaveLength(2)
+        })
+
+        it('should render item labels', () => {
+            renderActionMenu()
+            expect(screen.getByRole('menuitem', { name: 'Edit' })).toBeInTheDocument()
+            expect(screen.getByRole('menuitem', { name: 'Delete' })).toBeInTheDocument()
+        })
+
+        it('should render item icon when provided', () => {
+            const items: ActionMenuItem[] = [
+                {
+                    id: 'star',
+                    label: 'Star',
+                    icon: <span data-testid="star-icon">★</span>,
+                    onClick: jest.fn(),
+                },
+            ]
+            renderActionMenu({ items })
+            expect(screen.getByTestId('star-icon')).toBeInTheDocument()
+        })
+
+        it('should wrap items in li with role="none"', () => {
+            renderActionMenu()
+            const listItems = screen.getByRole('menu').querySelectorAll('li')
+            listItems.forEach((li) => {
+                expect(li).toHaveAttribute('role', 'none')
+            })
+        })
+
+        it('should render items as buttons', () => {
+            renderActionMenu()
+            const menuItems = screen.getAllByRole('menuitem')
+            menuItems.forEach((item) => {
+                expect(item.tagName).toBe('BUTTON')
+                expect(item).toHaveAttribute('type', 'button')
+            })
+        })
+
+        it('should apply variant class when provided', () => {
+            const items: ActionMenuItem[] = [
+                { id: 'a', label: 'Danger action', variant: 'danger', onClick: jest.fn() },
+            ]
+            renderActionMenu({ items })
+            expect(screen.getByRole('menuitem', { name: 'Danger action' })).toHaveClass('danger')
+        })
+
+        it('should disable item when disabled is true', () => {
+            const items: ActionMenuItem[] = [
+                { id: 'a', label: 'Locked', disabled: true, onClick: jest.fn() },
+            ]
+            renderActionMenu({ items })
+            expect(screen.getByRole('menuitem', { name: 'Locked' })).toBeDisabled()
+        })
+
+        it('should not disable item when disabled is false', () => {
+            const items: ActionMenuItem[] = [
+                { id: 'a', label: 'Active', disabled: false, onClick: jest.fn() },
+            ]
+            renderActionMenu({ items })
+            expect(screen.getByRole('menuitem', { name: 'Active' })).not.toBeDisabled()
+        })
+    })
+
+    describe('onClick', () => {
+        it('should call item onClick when clicked', async () => {
+            const user = userEvent.setup()
+            const onClick = jest.fn()
+            const items: ActionMenuItem[] = [{ id: 'a', label: 'Do it', onClick }]
+            renderActionMenu({ items })
+            await user.click(screen.getByRole('menuitem', { name: 'Do it' }))
+            expect(onClick).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call onClose after clicking an item', async () => {
+            const user = userEvent.setup()
+            const { onClose } = renderActionMenu()
+            await user.click(screen.getAllByRole('menuitem')[0])
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call both item onClick and onClose', async () => {
+            const user = userEvent.setup()
+            const onClick = jest.fn()
+            const items: ActionMenuItem[] = [{ id: 'a', label: 'Go', onClick }]
+            const { onClose } = renderActionMenu({ items })
+            await user.click(screen.getByRole('menuitem', { name: 'Go' }))
+            expect(onClick).toHaveBeenCalledTimes(1)
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+    })
+
+    describe('close behaviour', () => {
+        it('should call onClose when Escape is pressed', async () => {
+            const user = userEvent.setup()
+            const { onClose } = renderActionMenu()
+            await user.keyboard('{Escape}')
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should not call onClose for other keys', async () => {
+            const user = userEvent.setup()
+            const { onClose } = renderActionMenu()
+            await user.keyboard('{Enter}')
+            expect(onClose).not.toHaveBeenCalled()
+        })
+
+        it('should call onClose when clicking outside', async () => {
+            const user = userEvent.setup()
+            const { onClose } = renderActionMenu()
+            await user.click(document.body)
+            expect(onClose).toHaveBeenCalled()
+        })
+
+        it('should not call onClose when clicking inside the menu', () => {
+            const { onClose } = renderActionMenu()
+            fireEvent.mouseDown(screen.getByRole('menu'))
+            expect(onClose).not.toHaveBeenCalled()
+        })
+
+        it('should not call onClose when clicking the anchor', () => {
+            const { onClose } = renderActionMenu()
+            const trigger = screen.getByText('trigger')
+            fireEvent.mouseDown(trigger)
+            expect(onClose).not.toHaveBeenCalled()
+        })
+
+        it('should call onClose on window resize', () => {
+            const { onClose } = renderActionMenu()
+            fireEvent(window, new Event('resize'))
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call onClose on window scroll', () => {
+            const { onClose } = renderActionMenu()
+            fireEvent.scroll(window)
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should remove event listeners on unmount', () => {
+            const { onClose, unmount } = renderActionMenu()
+            unmount()
+            fireEvent(window, new Event('resize'))
+            fireEvent.scroll(window)
+            fireEvent(document, new KeyboardEvent('keydown', { key: 'Escape' }))
+            expect(onClose).not.toHaveBeenCalled()
+        })
+    })
+})
 
 describe('Overlay.Popup', () => {
     describe('rendering', () => {
@@ -364,8 +559,6 @@ describe('Overlay.Popup', () => {
     })
 })
 
-// ── Popup.utils ──────────────────────────────────────────────────────────────
-
 describe('getAnchorPosition', () => {
     const mockAnchorEl = (rect: Partial<DOMRect>) => {
         const el = document.createElement('button')
@@ -505,8 +698,8 @@ describe('getAnchorPosition', () => {
         })
     })
 
-    describe('arrowOffset', () => {
-        it('should be 0 when popup is centered on anchor', () => {
+    describe('arrowStyle', () => {
+        it('should have no offset when popup is centered on anchor', () => {
             const anchor = mockAnchorEl({
                 top: 100,
                 bottom: 120,
@@ -516,10 +709,10 @@ describe('getAnchorPosition', () => {
             })
             const popup = mockPopupEl({ width: 200, height: 100 })
             const result = getAnchorPosition(anchor, popup)
-            expect(result.arrowOffset).toBe(0)
+            expect(result.arrowStyle).toEqual({})
         })
 
-        it('should be non-zero when popup was clamped horizontally', () => {
+        it('should have offset when popup was clamped horizontally', () => {
             const anchor = mockAnchorEl({
                 top: 100,
                 bottom: 120,
@@ -529,7 +722,34 @@ describe('getAnchorPosition', () => {
             })
             const popup = mockPopupEl({ width: 300, height: 100 })
             const result = getAnchorPosition(anchor, popup)
-            expect(result.arrowOffset).not.toBe(0)
+            expect(result.arrowStyle.left).toBeDefined()
+        })
+
+        it('should use right: 0 when align is end', () => {
+            const anchor = mockAnchorEl({
+                top: 100,
+                bottom: 120,
+                left: 400,
+                right: 500,
+                width: 100,
+            })
+            const popup = mockPopupEl({ width: 200, height: 100 })
+            const result = getAnchorPosition(anchor, popup, 'end')
+            expect(result.arrowStyle.right).toBe(0)
+            expect(result.arrowStyle.left).toBe('auto')
+        })
+
+        it('should use left: 0 when align is start', () => {
+            const anchor = mockAnchorEl({
+                top: 100,
+                bottom: 120,
+                left: 400,
+                right: 500,
+                width: 100,
+            })
+            const popup = mockPopupEl({ width: 200, height: 100 })
+            const result = getAnchorPosition(anchor, popup, 'start')
+            expect(result.arrowStyle.left).toBe(0)
         })
     })
 
@@ -562,8 +782,6 @@ describe('getAnchorPosition', () => {
     })
 })
 
-// ── ArrowClass mapping ───────────────────────────────────────────────────────
-
 describe('ArrowClass', () => {
     it('should map "top" to arrow--bottom class (popup above, arrow points down)', () => {
         expect(ArrowClass.top).toBe('Overlay--popup__arrow--bottom')
@@ -582,8 +800,6 @@ describe('ArrowClass', () => {
     })
 })
 
-// ── ModeClass mapping ────────────────────────────────────────────────────────
-
 describe('ModeClass', () => {
     const expected: Record<string, string> = {
         primary: 'Overlay--popup--primary',
@@ -598,8 +814,6 @@ describe('ModeClass', () => {
         })
     })
 })
-
-// ── SizeStyle mapping ────────────────────────────────────────────────────────
 
 describe('SizeStyle', () => {
     it('should define sm with minWidth 280 and maxWidth 360', () => {

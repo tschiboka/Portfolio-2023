@@ -1,12 +1,8 @@
-/* ── DisabledRenderer ─────────────────────────────────────────────────────── */
-
 .access-guard-disabled {
     opacity: 0.4;
     pointer-events: none;
     cursor: not-allowed;
 }
-
-/* ── TooltipRenderer ──────────────────────────────────────────────────────── */
 
 .access-guard-tooltip {
     opacity: 0.5;
@@ -17,8 +13,6 @@
 .access-guard-tooltip__content {
     pointer-events: none;
 }
-
-/* ── SoftDisabledRenderer ─────────────────────────────────────────────────── */
 
 .access-guard-soft-disabled {
     position: relative;

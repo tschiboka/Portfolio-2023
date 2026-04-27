@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react'
 import { useLayoutEffect } from 'react'
-import { PopupArrow, PopupMode, PopupSize } from './Overlay.types'
+import { PopupArrow, PopupMode, PopupSize, AnchorAlign, AnchorResult } from './Overlay.types'
 import { FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaLock } from 'react-icons/fa'
 
 const ARROW_GAP = 10
@@ -32,13 +32,11 @@ export const ArrowClass: Record<PopupArrow, string> = {
     right: 'Overlay--popup__arrow--left',
 }
 
-export interface AnchorResult {
-    style: CSSProperties
-    arrow: PopupArrow
-    arrowOffset: number
-}
-
-export const getAnchorPosition = (anchorEl: HTMLElement, popupEl: HTMLElement): AnchorResult => {
+export const getAnchorPosition = (
+    anchorEl: HTMLElement,
+    popupEl: HTMLElement,
+    align: AnchorAlign = 'center',
+): AnchorResult => {
     const anchor = anchorEl.getBoundingClientRect()
     // Scroll is locked before this runs, so clientWidth is stable (no scrollbar shift)
     const vw = document.documentElement.clientWidth
@@ -66,15 +64,49 @@ export const getAnchorPosition = (anchorEl: HTMLElement, popupEl: HTMLElement): 
     } else {
         top = anchor.top - h - ARROW_GAP
     }
-    left = anchor.left + anchor.width / 2 - w / 2
 
-    const rawLeft = left
+    if (align === 'end') {
+        left = anchor.right - w
+    } else if (align === 'start') {
+        left = anchor.left
+    } else {
+        left = anchor.left + anchor.width / 2 - w / 2
+    }
 
     // Clamp so the popup stays fully within the viewport
     top = Math.max(0, Math.min(top, vh - h))
     left = Math.max(0, Math.min(left, vw - w))
 
-    const arrowOffset = rawLeft - left
+    // Compute arrow inline style.
+    // For 'end'/'start' the arrow sits flush at the corresponding edge.
+    // For 'center' it stays at 50% with an offset if clamping shifted the menu.
+    const arrowStyle: CSSProperties = {}
+    if (align === 'end') {
+        arrowStyle.left = 'auto'
+        arrowStyle.right = 0
+        arrowStyle.transform = 'none'
+    } else if (align === 'start') {
+        arrowStyle.left = 0
+        arrowStyle.transform = 'none'
+    } else {
+        const anchorCenter = anchor.left + anchor.width / 2
+        const menuCenter = left + w / 2
+        const arrowOffset = anchorCenter - menuCenter
+        if (arrowOffset !== 0) {
+            arrowStyle.left = `calc(50% + ${arrowOffset}px)`
+        }
+    }
+
+    // Zero out the corner radius on the side where the arrow sits.
+    // With align="end" the arrow is near the right edge, with "start" near the left.
+    const cornerStyle: CSSProperties = {}
+    if (align === 'end') {
+        if (arrow === 'bottom') cornerStyle.borderTopRightRadius = 0
+        else cornerStyle.borderBottomRightRadius = 0
+    } else if (align === 'start') {
+        if (arrow === 'bottom') cornerStyle.borderTopLeftRadius = 0
+        else cornerStyle.borderBottomLeftRadius = 0
+    }
 
     // Tighten maxWidth to the remaining space from final left
     const finalMaxWidth = vw - left
@@ -88,7 +120,8 @@ export const getAnchorPosition = (anchorEl: HTMLElement, popupEl: HTMLElement): 
             minWidth: 0,
         },
         arrow,
-        arrowOffset,
+        arrowStyle,
+        cornerStyle,
     }
 }
 

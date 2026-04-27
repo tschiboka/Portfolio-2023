@@ -36,7 +36,6 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = (): void => {}
 
-// ── Nullish & Existence ──────────────────────────────────────────────────────
 
 describe('isDefined', () => {
     it('returns true for non-null, non-undefined values', () => {
@@ -94,7 +93,6 @@ describe('isNull', () => {
     })
 })
 
-// ── Truthiness ───────────────────────────────────────────────────────────────
 
 describe('isTruthy', () => {
     it('returns true for truthy values', () => {
@@ -138,7 +136,6 @@ describe('isFalsy', () => {
     })
 })
 
-// ── Primitive Type Guards ────────────────────────────────────────────────────
 
 describe('isBoolean', () => {
     it('returns true for booleans', () => {
@@ -247,7 +244,6 @@ describe('isFiniteNumber', () => {
     })
 })
 
-// ── Structural Type Guards ───────────────────────────────────────────────────
 
 describe('isArray', () => {
     it('returns true for arrays', () => {
@@ -313,7 +309,6 @@ describe('isPlainObject', () => {
     })
 })
 
-// ── Collection Checks ────────────────────────────────────────────────────────
 
 describe('hasLength', () => {
     it('returns true for non-empty arrays', () => {
@@ -431,7 +426,6 @@ describe('isNested', () => {
     })
 })
 
-// ── Property Checks ─────────────────────────────────────────────────────────
 
 describe('hasProperty', () => {
     it('returns true when object has the property', () => {
@@ -492,7 +486,6 @@ describe('hasValue', () => {
     })
 })
 
-// ── Membership ───────────────────────────────────────────────────────────────
 
 describe('isOneOf', () => {
     const statuses = ['active', 'inactive'] as const
@@ -512,7 +505,6 @@ describe('isOneOf', () => {
     })
 })
 
-// ── Equality & Uniqueness ────────────────────────────────────────────────────
 
 describe('isShallowEqual', () => {
     it('returns true for identical primitives', () => {
@@ -620,7 +612,6 @@ describe('isUnique', () => {
     })
 })
 
-// ── Instance Check ───────────────────────────────────────────────────────────
 
 describe('isInstanceOf', () => {
     it('returns true for matching instances', () => {
@@ -639,7 +630,6 @@ describe('isInstanceOf', () => {
     })
 })
 
-// ── Built-in Type Guards ─────────────────────────────────────────────────────
 
 describe('isDate', () => {
     it('returns true for valid dates', () => {
@@ -731,7 +721,6 @@ describe('isThenable', () => {
     })
 })
 
-// ── Predicate Combinators ────────────────────────────────────────────────────
 
 describe('isAll', () => {
     const allStrings = isAll(isString)

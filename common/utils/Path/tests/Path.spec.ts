@@ -2,8 +2,6 @@ import { apiPathBuilder } from '../apiPathBuilder'
 import { Paths, apiRoutes, projectRoutes } from '../Path'
 import { getURL } from '../getURL'
 
-// ── getURL ───────────────────────────────────────────────────────────────────
-
 describe('getURL', () => {
     const originalHostname = window.location.hostname
 
@@ -39,8 +37,6 @@ describe('getURL', () => {
     })
 })
 
-// ── Paths ────────────────────────────────────────────────────────────────────
-
 describe('Paths', () => {
     it('should have Api namespace with all keys', () => {
         expect(Paths.Api).toEqual({
@@ -61,8 +57,6 @@ describe('Paths', () => {
         })
     })
 })
-
-// ── apiRoutes / projectRoutes ────────────────────────────────────────────────
 
 describe('apiRoutes', () => {
     it('should map every Paths.Api key to a route segment', () => {
@@ -98,8 +92,6 @@ describe('projectRoutes', () => {
         expect(projectRoutes[key]).toBe(route)
     })
 })
-
-// ── apiPathBuilder ───────────────────────────────────────────────────────────
 
 describe('apiPathBuilder', () => {
     it.each([

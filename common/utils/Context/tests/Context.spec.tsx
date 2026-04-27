@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { ContextBuilder } from '../index'
 
-// ── ContextBuilder.CreateContext ──────────────────────────────────────────────
-
 describe('ContextBuilder.CreateContext', () => {
     interface TestCtx {
         name: string

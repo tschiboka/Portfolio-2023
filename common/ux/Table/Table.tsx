@@ -1,11 +1,11 @@
-import { type ReactNode, useId, useState } from 'react'
+import { type ReactNode, useId, useRef, useState } from 'react'
 import { BsInfoCircle, BsSliders2 } from 'react-icons/bs'
 import type { Table as TableProps } from './Table.types'
 import { useHiddenBreakpoints } from './Table.hooks'
 import { TableBody } from './TableBody/TableBody'
 import { TableHead } from './TableHead/TableHead'
 import { TableDownloadButton } from './TableDownload/TableDownload'
-import { TableFilterPanel } from './TableFilter/TableFilterPanel'
+import { TableFilterPanel, type TableFilterPanelHandle } from './TableFilter/TableFilterPanel'
 import { TablePagination } from './TablePagination/TablePagination'
 import './Table.styles.css'
 import { isNonEmpty } from '@common/utils'
@@ -43,7 +43,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     const filterPanelId = `${baseId}-filters`
     const hasHeader = title || description || onInfo || filtering || download
     const [filtersOpen, setFiltersOpen] = useState(false)
-    const [filterResetKey, setFilterResetKey] = useState(0)
+    const filterPanelRef = useRef<TableFilterPanelHandle>(null)
 
     return (
         <div
@@ -78,16 +78,24 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
                     </div>
                     <div className="table-header__end">
                         {filtering && filtersOpen && (
-                            <button
-                                type="button"
-                                className="table-filter-reset"
-                                aria-label="Reset filters"
-                                onClick={() => {
-                                    setFilterResetKey((k) => k + 1)
-                                }}
-                            >
-                                Reset
-                            </button>
+                            <>
+                                <button
+                                    type="button"
+                                    className="table-filter-submit"
+                                    aria-label="Apply filters"
+                                    onClick={() => filterPanelRef.current?.submit()}
+                                >
+                                    Filter
+                                </button>
+                                <button
+                                    type="button"
+                                    className="table-filter-reset"
+                                    aria-label="Reset filters"
+                                    onClick={() => filterPanelRef.current?.reset()}
+                                >
+                                    Reset
+                                </button>
+                            </>
                         )}
                         {filtering && (
                             <button
@@ -107,11 +115,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
             )}
             {legend && <div className="table-legend">{legend}</div>}
             {filtering && filtersOpen && (
-                <TableFilterPanel
-                    id={filterPanelId}
-                    filtering={filtering}
-                    resetKey={filterResetKey}
-                />
+                <TableFilterPanel ref={filterPanelRef} id={filterPanelId} filtering={filtering} />
             )}
             <div className="table-scroll-wrapper">
                 <table

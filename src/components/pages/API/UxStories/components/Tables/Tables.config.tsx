@@ -9,7 +9,6 @@ import type {
 import { Pill } from '@common/ux'
 import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.mocks'
 
-// ── Shared ───────────────────────────────────────────────────────────────────
 
 export const statusPillColors: Record<string, 'success' | 'error' | 'orange'> = {
     active: 'success',
@@ -18,7 +17,6 @@ export const statusPillColors: Record<string, 'success' | 'error' | 'orange'> = 
     error: 'error',
 }
 
-// ── Basic Renderers ──────────────────────────────────────────────────────────
 
 export const renderStatus = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
@@ -28,7 +26,6 @@ export const renderBadge = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell)} color="purple" />
 )
 
-// ── Variant Functions ────────────────────────────────────────────────────────
 
 export const statusToVariant: Record<string, CellVariant> = {
     active: 'primary',
@@ -45,7 +42,6 @@ export const cellVariantFn = (
 export const rowVariantFn = (meta: CellMeta<VariantRow>): CellVariant | undefined =>
     statusToVariant[meta.row.status]
 
-// ── Action Configs ───────────────────────────────────────────────────────────
 
 export const clickAction: TableAction<ActionRow>[] = [
     {
@@ -113,7 +109,6 @@ export const allActions: TableAction<Row>[] = [
     },
 ]
 
-// ── Selection ────────────────────────────────────────────────────────────────
 
 export const getSelectionRowId = (row: SelectionRow) => row.id
 
@@ -132,7 +127,6 @@ export const selectionActions: TableAction<SelectionRow>[] = [
     },
 ]
 
-// ── All Features Combined ────────────────────────────────────────────────────
 
 export const allFeaturesStatusPill = (cell: CellValue<AllFeaturesRow>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
@@ -180,7 +174,6 @@ export const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
     },
 ]
 
-// ── Sorting ──────────────────────────────────────────────────────────────────
 
 export const sortRows = <T extends Record<string, ReactNode>>(
     data: T[],

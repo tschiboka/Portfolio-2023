@@ -20,7 +20,11 @@ export const UxStories = ({ path }: UxStoriesProps) => {
                     </p>
                     <h2>Choose component</h2>
                     <Link to="/api/ux-stories/access-guards">Access Guards</Link>
+                    <Link to="/api/ux-stories/code-blocks">Code Blocks</Link>
+                    <Link to="/api/ux-stories/forms">Forms</Link>
                     <Link to="/api/ux-stories/overlays">Overlays</Link>
+                    <Link to="/api/ux-stories/pills">Pills</Link>
+                    <Link to="/api/ux-stories/stacks">Stacks</Link>
                     <Link to="/api/ux-stories/tables">Tables</Link>
                 </Stack.Vertical>
             </main>

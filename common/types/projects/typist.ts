@@ -24,6 +24,5 @@ export type RoundResponse = {
     stats?: TypingStats
 }
 
-// ── POST /round ──────────────────────────────────────────────
 export type PostTypistRoundRequest = { body: { keystrokes: Keystroke[] } }
 export type PostTypistRoundResponse = RoundResponse

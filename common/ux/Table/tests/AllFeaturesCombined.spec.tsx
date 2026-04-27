@@ -1,0 +1,431 @@
+import { Test } from '@common/ux'
+import { screen, within } from '@testing-library/react'
+
+describe('Table — Combined Features', () => {
+    type FullRow = {
+        id: string
+        name: string
+        email: string
+        role: string
+        status: string
+        note: string
+    }
+
+    const fullData: FullRow[] = [
+        {
+            id: '1',
+            name: 'Alice',
+            email: 'alice@test.com',
+            role: 'Admin',
+            status: 'active',
+            note: 'Lead',
+        },
+        { id: '2', name: 'Bob', email: 'bob@test.com', role: 'Editor', status: 'active', note: '' },
+        {
+            id: '3',
+            name: 'Charlie',
+            email: 'charlie@test.com',
+            role: 'Viewer',
+            status: 'inactive',
+            note: 'On leave',
+        },
+        {
+            id: '4',
+            name: 'Diana',
+            email: 'diana@test.com',
+            role: 'Editor',
+            status: 'pending',
+            note: '',
+        },
+        {
+            id: '5',
+            name: 'Eve',
+            email: 'eve@test.com',
+            role: 'Viewer',
+            status: 'active',
+            note: 'New hire',
+        },
+    ]
+
+    const fullColumns = [
+        { header: 'Name', accessor: 'name' as const, isSortable: true },
+        { header: 'Email', accessor: 'email' as const, breakpoint: 'lg' as const },
+        { header: 'Role', accessor: 'role' as const, isSortable: true },
+        { header: 'Status', accessor: 'status' as const },
+        {
+            header: 'Note',
+            accessor: 'note' as const,
+            defaultValue: 'N/A',
+            breakpoint: 'xl' as const,
+        },
+    ]
+
+    it('renders table with title, description, legend, data, actions, selection, sorting, filtering, download, and pagination', () => {
+        Test.Table.Set.mock<FullRow>({
+            id: 'full-table',
+            title: 'Combined Table',
+            description: 'All features at once',
+            onInfo: jest.fn(),
+            legend: <span>Legend</span>,
+            ariaLabel: 'Full feature table',
+            rowAriaLabel: 'User row',
+            data: fullData,
+            columns: fullColumns,
+            rowVariant: ({ row }) => (row.status === 'inactive' ? 'disabled' : undefined),
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: [],
+                onChange: jest.fn(),
+                isRowSelectable: ({ row }) => row.status !== 'inactive',
+            },
+            actions: [
+                { id: 'edit', label: 'Edit', variant: 'primary', onClick: jest.fn() },
+                {
+                    id: 'delete',
+                    label: 'Delete',
+                    variant: 'danger',
+                    isDisabled: ({ row }) => row.status === 'active',
+                },
+                {
+                    id: 'activate',
+                    label: 'Activate',
+                    filter: ({ row }) => row.status !== 'active',
+                },
+            ],
+            sorting: {
+                column: 'name',
+                direction: 'asc',
+                onSortChange: jest.fn(),
+            },
+            filtering: {
+                inputs: [
+                    { key: 'name', label: 'Name', type: 'search', placeholder: 'Search…' },
+                    {
+                        key: 'status',
+                        label: 'Status',
+                        type: 'option',
+                        options: [
+                            { value: 'active', label: 'Active' },
+                            { value: 'inactive', label: 'Inactive' },
+                        ],
+                    },
+                    { key: 'hasNote', label: 'Has Note', type: 'checkbox' },
+                ],
+                onFilter: jest.fn(),
+            },
+            download: {
+                options: [
+                    { value: 'csv', label: 'CSV' },
+                    { value: 'pdf', label: 'PDF' },
+                ],
+                onDownload: jest.fn(),
+            },
+            pagination: {
+                page: 1,
+                totalPages: 2,
+                pageSize: 3,
+                pageSizeOptions: [3, 5, 10],
+                totalItems: 5,
+                onPageChange: jest.fn(),
+                onPageSizeChange: jest.fn(),
+            },
+        })
+        // Region & title
+        expect(Test.Table.Get.region('Combined Table')).toBeInTheDocument()
+        expect(Test.Table.Get.heading('Combined Table')).toBeInTheDocument()
+        expect(screen.getByText('All features at once')).toBeInTheDocument()
+        expect(screen.getByText('Legend')).toBeInTheDocument()
+        expect(Test.Table.Get.infoButton()).toBeInTheDocument()
+        // Table data
+        expect(screen.getByText('Alice')).toBeInTheDocument()
+        expect(screen.getByText('Bob')).toBeInTheDocument()
+        // Selection checkboxes
+        expect(Test.Table.Get.selectAll()).toBeInTheDocument()
+        // Sorting
+        expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
+        // Actions
+        expect(Test.Table.Get.actionButtons()).toHaveLength(fullData.length)
+        // Filtering
+        expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
+        // Download
+        expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+        // Pagination
+        expect(Test.Table.Get.pagination()).toBeInTheDocument()
+        // Expand (breakpoints exist)
+        expect(Test.Table.Get.expandButtons()).toHaveLength(fullData.length)
+    })
+
+    it('selection works alongside actions — selecting rows does not affect action menus', async () => {
+        const onChange = jest.fn()
+        const onEdit = jest.fn()
+
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData.slice(0, 2),
+            columns: [
+                { header: 'Name', accessor: 'name' },
+                { header: 'Status', accessor: 'status' },
+            ],
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: [],
+                onChange,
+            },
+            actions: [{ id: 'edit', label: 'Edit', onClick: onEdit }],
+        })
+        // Select first row
+        await Test.Table.Click.selectRow(1)
+        expect(onChange).toHaveBeenCalledWith(['1'])
+
+        // Open action menu on second row
+        await Test.Table.Act.clickAction('Edit', 1)
+        expect(onEdit).toHaveBeenCalledWith(expect.objectContaining({ row: fullData[1] }))
+    })
+
+    it('sorting and selection preserve selected state', () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData,
+            columns: [
+                { header: 'Name', accessor: 'name', isSortable: true },
+                { header: 'Status', accessor: 'status' },
+            ],
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: ['1', '3'],
+                onChange: jest.fn(),
+            },
+            sorting: {
+                column: 'name',
+                direction: 'asc',
+                onSortChange: jest.fn(),
+            },
+        })
+        // Alice (id=1) and Charlie (id=3) should be selected
+        expect(Test.Table.Get.selectRow(1)).toBeChecked()
+        expect(Test.Table.Get.selectRow(3)).toBeChecked()
+        expect(Test.Table.Get.selectRow(2)).not.toBeChecked()
+    })
+
+    it('filter action hides actions only for matching rows in combined table', async () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData.slice(0, 2),
+            columns: [
+                { header: 'Name', accessor: 'name' },
+                { header: 'Status', accessor: 'status' },
+            ],
+            actions: [
+                {
+                    id: 'activate',
+                    label: 'Activate',
+                    filter: ({ row }) => row.status !== 'active',
+                },
+                { id: 'edit', label: 'Edit', onClick: jest.fn() },
+            ],
+        })
+        // Alice is active — Activate should be filtered out
+        await Test.Table.Act.openActionMenu(0)
+        expect(Test.Table.Query.menuItem('Activate')).not.toBeInTheDocument()
+        expect(Test.Table.Get.menuItem('Edit')).toBeInTheDocument()
+    })
+
+    it('isActionDisabled disables entire menu when column condition is met', () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: [fullData[2]], // Charlie, inactive
+            columns: [
+                {
+                    header: 'Note',
+                    accessor: 'note',
+                    isActionDisabled: ({ row }) => row.status === 'inactive',
+                },
+            ],
+            actions: [{ id: 'edit', label: 'Edit' }],
+        })
+        expect(Test.Table.Get.actionButton()).toBeDisabled()
+    })
+
+    it('expanded row shows hidden column with defaultValue when value is empty', async () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: [fullData[1]], // Bob, note is empty
+            columns: [
+                { header: 'Name', accessor: 'name' },
+                {
+                    header: 'Note',
+                    accessor: 'note',
+                    defaultValue: 'N/A',
+                    breakpoint: 'xxl',
+                },
+            ],
+        })
+        await Test.Table.Act.expandRow(0)
+        const expandedRow = Test.Table.Get.expandedRow(1)
+        expect(within(expandedRow).getByText('N/A')).toBeInTheDocument()
+    })
+
+    it('selection with isRowSelectable and actions work together', async () => {
+        const onChange = jest.fn()
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData,
+            columns: [
+                { header: 'Name', accessor: 'name' },
+                { header: 'Status', accessor: 'status' },
+            ],
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: [],
+                onChange,
+                isRowSelectable: ({ row }) => row.status !== 'inactive',
+            },
+            actions: [{ id: 'edit', label: 'Edit', onClick: jest.fn() }],
+        })
+        // Charlie (row 3) is inactive — checkbox should be disabled
+        expect(Test.Table.Get.selectRow(3)).toBeDisabled()
+        // But action menu should still be accessible
+        await Test.Table.Act.openActionMenu(2)
+        expect(Test.Table.Get.menuItem('Edit')).toBeInTheDocument()
+    })
+
+    it('row variant + column variant + cell variant: column function variant wins', () => {
+        const { container } = Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: [fullData[0]],
+            columns: [
+                {
+                    header: 'Status',
+                    accessor: 'status',
+                    variant: () => 'secondary',
+                },
+                { header: 'Name', accessor: 'name' },
+            ],
+            rowVariant: () => 'danger',
+        })
+        const cells = container.querySelectorAll('tbody td')
+        // Status cell — function variant wins
+        expect(cells[0]).toHaveClass('variant-secondary')
+        // Name cell — no column variant, rowVariant fallback
+        expect(cells[1]).toHaveClass('variant-danger')
+    })
+
+    it('download receives correct data even when pagination is used', async () => {
+        const onDownload = jest.fn()
+        const pageData = fullData.slice(0, 3)
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: pageData,
+            columns: [
+                { header: 'Name', accessor: 'name' },
+                { header: 'Status', accessor: 'status' },
+            ],
+            download: { onDownload, label: 'Export' },
+            pagination: {
+                page: 1,
+                totalPages: 2,
+                pageSize: 3,
+                totalItems: 5,
+                onPageChange: jest.fn(),
+                onPageSizeChange: jest.fn(),
+            },
+        })
+        await Test.Table.Click.downloadButton('Export')
+        expect(onDownload).toHaveBeenCalledWith(pageData)
+    })
+
+    it('combined: sorting headers + selection header + expand + action column all render correctly', () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData.slice(0, 2),
+            columns: [
+                { header: 'Name', accessor: 'name', isSortable: true },
+                { header: 'Email', accessor: 'email', breakpoint: 'xxl' },
+                { header: 'Status', accessor: 'status' },
+            ],
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: [],
+                onChange: jest.fn(),
+            },
+            actions: [{ id: 'edit', label: 'Edit' }],
+            sorting: {
+                column: 'name',
+                direction: 'asc',
+                onSortChange: jest.fn(),
+            },
+        })
+        const headers = Test.Table.Get.columnHeaders()
+        // Expand + Select + Name (sortable) + Email + Status + Actions = 6
+        expect(headers).toHaveLength(6)
+        expect(headers[0]).toHaveAttribute('aria-label', 'Expand')
+        expect(headers[headers.length - 1]).toHaveAttribute('aria-label', 'Actions')
+    })
+
+    it('filter panel + pagination + sorting all visible simultaneously', async () => {
+        Test.Table.Set.mock<FullRow>({
+            ariaLabel: 'test',
+            data: fullData,
+            columns: [
+                { header: 'Name', accessor: 'name', isSortable: true },
+                { header: 'Status', accessor: 'status' },
+            ],
+            sorting: {
+                column: 'name',
+                direction: 'asc',
+                onSortChange: jest.fn(),
+            },
+            filtering: {
+                inputs: [{ key: 'name', label: 'Name Filter', type: 'text' }],
+                onFilter: jest.fn(),
+            },
+            pagination: {
+                page: 1,
+                totalPages: 2,
+                onPageChange: jest.fn(),
+                onPageSizeChange: jest.fn(),
+            },
+        })
+        // Open filters
+        await Test.Table.Act.openFilters()
+
+        // All three features visible
+        expect(Test.Table.Get.filterPanel()).toBeInTheDocument()
+        expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
+        expect(Test.Table.Get.pagination()).toBeInTheDocument()
+    })
+
+    it('empty data with all features shows empty state and still renders header/pagination', () => {
+        Test.Table.Set.mock<FullRow>({
+            title: 'Empty Combined',
+            ariaLabel: 'test',
+            data: [],
+            columns: fullColumns,
+            selection: {
+                getRowId: (r) => r.id,
+                selectedRowIds: [],
+                onChange: jest.fn(),
+            },
+            actions: [{ id: 'edit', label: 'Edit' }],
+            sorting: {
+                column: 'name',
+                direction: 'asc',
+                onSortChange: jest.fn(),
+            },
+            filtering: {
+                inputs: [{ key: 'name', label: 'Name', type: 'text' }],
+                onFilter: jest.fn(),
+            },
+            download: { onDownload: jest.fn() },
+            pagination: {
+                page: 1,
+                totalPages: 0,
+                onPageChange: jest.fn(),
+                onPageSizeChange: jest.fn(),
+            },
+        })
+        expect(screen.getByText('No data')).toBeInTheDocument()
+        expect(Test.Table.Get.heading('Empty Combined')).toBeInTheDocument()
+        expect(Test.Table.Query.pagination()).toBeInTheDocument()
+    })
+})

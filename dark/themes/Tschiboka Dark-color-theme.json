@@ -187,7 +187,6 @@
         "settings.textInputBackground": "#0a0a0a",
         "settings.numberInputBackground": "#0a0a0a",
 
-        // ── Editor Errors / Warnings / Info ──
         "editorError.foreground": "#ff0080",
         "editorError.border": "#ff008000",
         "editorWarning.foreground": "#ff8000",
@@ -196,13 +195,11 @@
         "editorInfo.border": "#00ffff00",
         "editorHint.foreground": "#00e676",
 
-        // ── Editor Gutter ──
         "editorGutter.addedBackground": "#00e676",
         "editorGutter.modifiedBackground": "#ffcc00",
         "editorGutter.deletedBackground": "#ff0080",
         "editorGutter.foldingControlForeground": "#eeeeee80",
 
-        // ── Editor Overview Ruler (scrollbar markers) ──
         "editorOverviewRuler.errorForeground": "#ff0080",
         "editorOverviewRuler.warningForeground": "#ff8000",
         "editorOverviewRuler.infoForeground": "#00ffff",
@@ -214,7 +211,6 @@
         "editorOverviewRuler.bracketMatchForeground": "#00e676",
         "editorOverviewRuler.wordHighlightForeground": "#00ffff50",
 
-        // ── Minimap ──
         "minimap.background": "#0a0a0a",
         "minimap.findMatchHighlight": "#00ffff77",
         "minimap.selectionHighlight": "#00ffff30",
@@ -227,7 +223,6 @@
         "minimapGutter.modifiedBackground": "#ffcc00",
         "minimapGutter.deletedBackground": "#ff0080",
 
-        // ── Terminal ──
         "terminal.background": "#0a0a0a",        "terminal.foreground": "#d8d8d8",
         "terminal.selectionBackground": "#00ffff30",
         "terminalCursor.foreground": "#00ffff",
@@ -249,21 +244,18 @@
         "terminal.ansiBrightCyan": "#84ffff",
         "terminal.ansiBrightWhite": "#ffffff",
 
-        // ── Diff Editor ──
         "diffEditor.insertedTextBackground": "#00e67620",
         "diffEditor.removedTextBackground": "#ff008020",
         "diffEditor.insertedTextBorder": "#00e67600",
         "diffEditor.removedTextBorder": "#ff008000",
         "diffEditor.diagonalFill": "#33333380",
 
-        // ── Merge Conflicts ──
         "merge.currentHeaderBackground": "#00ffff40",
         "merge.currentContentBackground": "#00ffff20",
         "merge.incomingHeaderBackground": "#00e67640",
         "merge.incomingContentBackground": "#00e67620",
         "merge.border": "#33333300",
 
-        // ── Editor Extras ──
         "editor.foldBackground": "#00ffff10",
         "editor.linkedEditingBackground": "#00ffff20",
         "editor.snippetTabstopHighlightBackground": "#00ffff20",
@@ -272,7 +264,6 @@
         "editorStickyScroll.background": "#0a0a0a",
         "editor.inactiveSelectionBackground": "#00ffff15",
 
-        // ── Debug ──
         "debugConsole.infoForeground": "#00ffff",
         "debugConsole.warningForeground": "#ff8000",
         "debugConsole.errorForeground": "#ff0080",
@@ -285,7 +276,6 @@
         "debugTokenExpression.number": "#ffcc00",
         "debugTokenExpression.boolean": "#ff8000",
 
-        // ── Menus & Menubar ──
         "menu.background": "#0a0a0a",
         "menu.foreground": "#eeeeee",
         "menu.selectionBackground": "#00ffff3B",
@@ -294,41 +284,34 @@
         "menubar.selectionBackground": "#00ffff3B",
         "menubar.selectionForeground": "#eeeeee",
 
-        // ── Testing ──
         "testing.iconPassed": "#00e676",
         "testing.iconFailed": "#ff0080",
         "testing.iconErrored": "#ff8000",
         "testing.iconSkipped": "#555555",
 
-        // ── Keybinding Labels ──
         "keybindingLabel.background": "#00ffff15",
         "keybindingLabel.foreground": "#eeeeee",
         "keybindingLabel.border": "#00ffff40",
         "keybindingLabel.bottomBorder": "#00ffff60"
     },
     "semanticTokenColors": {
-        // ── Variables ──
         "variable": "#ffffff",
         "variable.readonly": "#ff0080",
         "variable.defaultLibrary": "#ff0080",
 
-        // ── Properties ──
         "property": "#ff8000",
         "property.readonly": "#ff8000",
         "property.declaration": "#ff8000",
 
-        // ── Parameters ──
         "parameter": "#d8d8d8",
         "parameter.declaration": "#d8d8d8",
 
-        // ── Functions & Methods ──
         "function": "#00ffff",
         "function.declaration": "#00ffff",
         "function.defaultLibrary": "#00e676",
         "method": "#00ffff",
         "method.declaration": "#00ffff",
 
-        // ── Classes, Types & Interfaces ──
         "class": "#ffcc00",
         "class.declaration": "#ffcc00",
         "class.defaultLibrary": "#ffcc00",
@@ -338,23 +321,19 @@
         "type.declaration": "#ffcc00",
         "typeParameter": "#ffcc00",
 
-        // ── Enums ──
         "enum": "#ffcc00",
         "enum.declaration": "#ffcc00",
         "enumMember": "#ff8000",
         "enumMember.declaration": "#ff8000",
 
-        // ── Namespace & Module ──
         "namespace": "#ffcc00",
 
-        // ── Keywords & Operators ──
         "keyword": { 
             "foreground": "#e040fb", 
             "fontStyle": "italic" 
         },
         "operator": "#00cece",
 
-        // ── Literals ──
         "number": "#ff8000",
         "string": { 
             "foreground": "#00e676", 
@@ -363,16 +342,13 @@
         },
         "regexp": "#00bd61",
 
-        // ── Decorators ──
         "decorator": "#00cece",
 
-        // ── Comments ──
         "comment": { 
             "foreground": "#005151", 
             "fontStyle": "italic" 
         },
 
-        // ── Macro / Label ──
         "macro": "#e040fb",
         "label": "#d8d8d8"
     },

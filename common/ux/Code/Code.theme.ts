@@ -34,16 +34,14 @@ import type { CSSProperties } from 'react'
 type HljsStyle = Record<string, CSSProperties>
 
 export const tschibokaDark: HljsStyle = {
-    // ── Base ──────────────────────────────────────────────
     hljs: {
         display: 'block',
         overflowX: 'auto',
         padding: '1em',
-        background: '#111111',
+        background: '#0a0a0a',
         color: '#d8d8d8',
     },
 
-    // ── Comments ─────────────────────────────────────────
     'hljs-comment': {
         color: '#005151',
         fontStyle: 'italic',
@@ -53,7 +51,6 @@ export const tschibokaDark: HljsStyle = {
         fontStyle: 'italic',
     },
 
-    // ── Strings ──────────────────────────────────────────
     'hljs-string': {
         color: '#00e676',
         fontStyle: 'italic',
@@ -62,7 +59,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#00e676',
     },
 
-    // ── Numbers / Constants ──────────────────────────────
     'hljs-number': {
         color: '#ff8000',
     },
@@ -71,18 +67,15 @@ export const tschibokaDark: HljsStyle = {
         fontStyle: 'italic',
     },
 
-    // ── Keywords / Storage ───────────────────────────────
     'hljs-keyword': {
         color: '#e040fb',
         fontStyle: 'italic',
     },
 
-    // ── Operators ────────────────────────────────────────
     'hljs-operator': {
         color: '#00cece',
     },
 
-    // ── Functions ────────────────────────────────────────
     'hljs-title': {
         color: '#00ffff',
     },
@@ -93,7 +86,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#ffcc00',
     },
 
-    // ── Built-ins / Library ──────────────────────────────
     'hljs-built_in': {
         color: '#00e676',
     },
@@ -101,7 +93,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#ffcc00',
     },
 
-    // ── Variables ────────────────────────────────────────
     'hljs-variable': {
         color: '#ff0080',
     },
@@ -112,12 +103,10 @@ export const tschibokaDark: HljsStyle = {
         color: '#ff8000',
     },
 
-    // ── Function Parameters ──────────────────────────────
     'hljs-params': {
         color: '#d8d8d8',
     },
 
-    // ── Properties / Attributes ──────────────────────────
     'hljs-property': {
         color: '#ff8000',
     },
@@ -130,7 +119,6 @@ export const tschibokaDark: HljsStyle = {
         fontStyle: 'italic',
     },
 
-    // ── HTML/XML Tags ────────────────────────────────────
     'hljs-tag': {
         color: '#d8d8d8',
     },
@@ -138,7 +126,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#ff0080',
     },
 
-    // ── CSS ──────────────────────────────────────────────
     'hljs-selector-class': {
         color: '#00ffff',
     },
@@ -155,7 +142,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#e040fb',
     },
 
-    // ── Template / Substitution ──────────────────────────
     'hljs-subst': {
         color: '#00cece',
     },
@@ -166,7 +152,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#e040fb',
     },
 
-    // ── Symbols / Misc ───────────────────────────────────
     'hljs-symbol': {
         color: '#ff8000',
     },
@@ -183,7 +168,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#00ffff',
     },
 
-    // ── Markdown / Diff ──────────────────────────────────
     'hljs-section': {
         color: '#ff0080',
     },
@@ -200,7 +184,6 @@ export const tschibokaDark: HljsStyle = {
         color: '#ff0080',
     },
 
-    // ── DocTags ──────────────────────────────────────────
     'hljs-doctag': {
         color: '#ffcc00',
     },

@@ -2,7 +2,6 @@ import { render, screen, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Code } from '..'
 
-// ── Mocks ────────────────────────────────────────────────────────────────────
 jest.mock('react-syntax-highlighter', () => {
     const MockHighlighter = ({ children, language }: { children: string; language: string }) => (
         <pre data-testid="syntax-highlighter" data-language={language}>
@@ -47,7 +46,6 @@ describe('Code', () => {
         jest.useRealTimers()
     })
 
-    // ── Rendering ────────────────────────────────────────────────────────
     describe('rendering', () => {
         it('should render the root .Code container', () => {
             const { container } = render(<Code language="javascript" content="const x = 1" />)
@@ -107,7 +105,6 @@ describe('Code', () => {
         })
     })
 
-    // ── Copy behaviour ───────────────────────────────────────────────────
     describe('copy behaviour', () => {
         it('should call copyToClipboard with content when icon is clicked', async () => {
             const content = 'const myCode = true'
@@ -195,7 +192,6 @@ describe('Code', () => {
         })
     })
 
-    // ── Header structure ─────────────────────────────────────────────────
     describe('header structure', () => {
         it('should render the header container', () => {
             const { container } = render(
@@ -215,7 +211,6 @@ describe('Code', () => {
         })
     })
 
-    // ── Different content / languages ────────────────────────────────────
     describe('with various languages and content', () => {
         it('should render with HTML language', () => {
             render(<Code language="html" content="<div>Hello</div>" />)

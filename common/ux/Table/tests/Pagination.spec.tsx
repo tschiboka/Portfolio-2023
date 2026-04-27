@@ -1,0 +1,347 @@
+import { screen } from '@testing-library/react'
+import {
+    getPageWindow,
+    isFirstPage,
+    isLastPage,
+    DEFAULT_PAGE_SIZE,
+    DEFAULT_PAGE_SIZE_OPTIONS,
+} from '../TablePagination/TablePagination.utils'
+import { Test } from '@common/ux'
+import { Row } from './Table.spec.types'
+import { basicColumns, rows } from './Table.mocks'
+
+describe('Table — Pagination', () => {
+    describe('Basic rendering', () => {
+        it('renders pagination navigation', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 3,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.pagination()).toBeInTheDocument()
+        })
+
+        it('does not render pagination when prop is omitted', () => {
+            Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
+            expect(Test.Table.Query.pagination()).not.toBeInTheDocument()
+        })
+
+        it('renders page buttons for the window', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 3,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.pageButton(1)).toBeInTheDocument()
+            expect(Test.Table.Get.pageButton(2)).toBeInTheDocument()
+            expect(Test.Table.Get.pageButton(3)).toBeInTheDocument()
+        })
+    })
+
+    describe('Page navigation', () => {
+        it('calls onPageChange with page number when page button is clicked', async () => {
+            const onPageChange = jest.fn()
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 3,
+                    onPageChange,
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            await Test.Table.Click.pageButton(2)
+            expect(onPageChange).toHaveBeenCalledWith(2)
+        })
+
+        it('calls onPageChange(1) when First page is clicked', async () => {
+            const onPageChange = jest.fn()
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 3,
+                    totalPages: 5,
+                    onPageChange,
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            await Test.Table.Click.firstPage()
+            expect(onPageChange).toHaveBeenCalledWith(1)
+        })
+
+        it('calls onPageChange(page-1) when Previous page is clicked', async () => {
+            const onPageChange = jest.fn()
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 3,
+                    totalPages: 5,
+                    onPageChange,
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            await Test.Table.Click.prevPage()
+            expect(onPageChange).toHaveBeenCalledWith(2)
+        })
+
+        it('calls onPageChange(page+1) when Next page is clicked', async () => {
+            const onPageChange = jest.fn()
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 3,
+                    totalPages: 5,
+                    onPageChange,
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            await Test.Table.Click.nextPage()
+            expect(onPageChange).toHaveBeenCalledWith(4)
+        })
+
+        it('calls onPageChange(totalPages) when Last page is clicked', async () => {
+            const onPageChange = jest.fn()
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 3,
+                    totalPages: 5,
+                    onPageChange,
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            await Test.Table.Click.lastPage()
+            expect(onPageChange).toHaveBeenCalledWith(5)
+        })
+    })
+
+    describe('First/Last page disabled states', () => {
+        it('disables First and Previous on page 1', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 5,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.firstPage()).toBeDisabled()
+            expect(Test.Table.Get.prevPage()).toBeDisabled()
+            expect(Test.Table.Get.nextPage()).not.toBeDisabled()
+            expect(Test.Table.Get.lastPage()).not.toBeDisabled()
+        })
+
+        it('disables Next and Last on last page', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 5,
+                    totalPages: 5,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.firstPage()).not.toBeDisabled()
+            expect(Test.Table.Get.prevPage()).not.toBeDisabled()
+            expect(Test.Table.Get.nextPage()).toBeDisabled()
+            expect(Test.Table.Get.lastPage()).toBeDisabled()
+        })
+
+        it('all nav buttons disabled when there is only one page', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 1,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.firstPage()).toBeDisabled()
+            expect(Test.Table.Get.prevPage()).toBeDisabled()
+            expect(Test.Table.Get.nextPage()).toBeDisabled()
+            expect(Test.Table.Get.lastPage()).toBeDisabled()
+        })
+    })
+
+    describe('Current page highlighting', () => {
+        it('active page button has "active" class', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 2,
+                    totalPages: 3,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.pageButton(2)).toHaveClass('active')
+        })
+
+        it('non-active page buttons do not have "active" class', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 2,
+                    totalPages: 3,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(Test.Table.Get.pageButton(1)).not.toHaveClass('active')
+            expect(Test.Table.Get.pageButton(3)).not.toHaveClass('active')
+        })
+    })
+
+    describe('Total items info', () => {
+        it('shows item range and total when totalItems is provided', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 3,
+                    pageSize: 10,
+                    totalItems: 25,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            expect(screen.getByText('25')).toBeInTheDocument()
+        })
+
+        it('does not show item info when totalItems is not provided', () => {
+            const { container } = Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 1,
+                    totalPages: 3,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            const info = container.querySelector('.table-pagination__info')
+            expect(info?.textContent).toBe('')
+        })
+
+        it('caps the end at totalItems on the last page', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                pagination: {
+                    page: 3,
+                    totalPages: 3,
+                    pageSize: 10,
+                    totalItems: 25,
+                    onPageChange: jest.fn(),
+                    onPageSizeChange: jest.fn(),
+                },
+            })
+            // Page 3 of 25 items at size 10 = items 21–25
+            expect(screen.getByLabelText('Items 21 to 25')).toBeInTheDocument()
+        })
+    })
+
+    describe('Pagination utilities', () => {
+        it('DEFAULT_PAGE_SIZE is 10', () => {
+            expect(DEFAULT_PAGE_SIZE).toBe(10)
+        })
+
+        it('DEFAULT_PAGE_SIZE_OPTIONS is [10, 25, 50, 100]', () => {
+            expect(DEFAULT_PAGE_SIZE_OPTIONS).toEqual([10, 25, 50, 100])
+        })
+
+        describe('getPageWindow', () => {
+            it('returns all pages when totalPages <= 3', () => {
+                expect(getPageWindow(1, 1)).toEqual([1])
+                expect(getPageWindow(1, 2)).toEqual([1, 2])
+                expect(getPageWindow(1, 3)).toEqual([1, 2, 3])
+            })
+
+            it('returns first 3 pages when on first page', () => {
+                expect(getPageWindow(1, 10)).toEqual([1, 2, 3])
+            })
+
+            it('returns last 3 pages when on last page', () => {
+                expect(getPageWindow(10, 10)).toEqual([8, 9, 10])
+            })
+
+            it('returns centered window when in the middle', () => {
+                expect(getPageWindow(5, 10)).toEqual([4, 5, 6])
+            })
+
+            it('returns first window when on page 2', () => {
+                expect(getPageWindow(2, 10)).toEqual([1, 2, 3])
+            })
+
+            it('returns last window when on second-to-last page', () => {
+                expect(getPageWindow(9, 10)).toEqual([8, 9, 10])
+            })
+        })
+
+        describe('isFirstPage', () => {
+            it('returns true for page 1', () => {
+                expect(isFirstPage(1)).toBe(true)
+            })
+
+            it('returns true for page 0', () => {
+                expect(isFirstPage(0)).toBe(true)
+            })
+
+            it('returns false for page 2', () => {
+                expect(isFirstPage(2)).toBe(false)
+            })
+        })
+
+        describe('isLastPage', () => {
+            it('returns true when page equals totalPages', () => {
+                expect(isLastPage(5, 5)).toBe(true)
+            })
+
+            it('returns true when page exceeds totalPages', () => {
+                expect(isLastPage(6, 5)).toBe(true)
+            })
+
+            it('returns false when page is less than totalPages', () => {
+                expect(isLastPage(3, 5)).toBe(false)
+            })
+        })
+    })
+})

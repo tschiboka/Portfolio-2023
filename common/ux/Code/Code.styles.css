@@ -4,6 +4,14 @@
     background-color: var(--black-1);
     border: 1px solid var(--black-3);
     font-family: 'Fira', monospace;
+    padding: var(--space-24);
+    background: var(--black-x);
+    border-radius: 20px;
+    border: 2px solid var(--black-2);
+    box-shadow:
+        10px 10px 30px rgba(0, 0, 0, 0.7),
+        -5px -5px 5px rgba(255, 255, 255, 0.02),
+        inset 10px 10px 20px black;
 }
 
 /* Fix Up SyntaxHighlighter Library Errors when it Skips Styling */
@@ -11,6 +19,7 @@
 .Code pre code {
     font-family: 'Fira', monospace;
     font-size: var(--font-sm);
+    background: var(--black-x);
 }
 
 @media (min-width: 992px) {
@@ -23,6 +32,7 @@
 .Code pre {
     max-height: 150vh;
     overflow: auto;
+    background: var(--black-x);
 }
 
 .Code__header {
@@ -31,9 +41,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #191b21;
     padding: 7px;
-    border-bottom: 2px solid var(--black-3);
+    border-bottom: 1px solid var(--black-2);
 }
 
 .Code__file-name {
@@ -48,13 +57,13 @@
 
 .Code__copy-icon {
     margin-left: auto;
-    color: var(--white-5);
+    color: var(--accent-dark-3);
     font-size: 24px;
     cursor: pointer;
 }
 
 .Code__copy-icon:hover {
-    color: white;
+    color: var(--accent);
 }
 
 .Code__copy-message {

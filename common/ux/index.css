@@ -90,4 +90,14 @@
     --font-lg: 1.6em;
     --font-xl: 2.2em;
     --font-xx: 3em;
+
+    /* Breakpoints */
+    --bp-xxs: 375px;
+    --bp-xs: 420px;
+    --bp-sm: 576px;
+    --bp-mx: 670px;
+    --bp-md: 768px;
+    --bp-lg: 992px;
+    --bp-xl: 1200px;
+    --bp-xxl: 1580px;
 }

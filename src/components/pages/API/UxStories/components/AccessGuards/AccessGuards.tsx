@@ -1,8 +1,9 @@
 import { AccessGuard } from '@common/utils'
 import { useForm } from 'react-hook-form'
 import { Guards } from './Guards'
-import { Form, Stack } from '@common/ux'
+import { Code, Form, Stack } from '@common/ux'
 import Page from '../../../../../sharedComponents/Page/Page'
+import { Code as Snippets } from './AccessGuards.code'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards
 
@@ -58,6 +59,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
+                    <Code language="tsx" content={Snippets.hidden} />
                 </section>
                 <section>
                     <h3>Visible Mode</h3>
@@ -83,6 +85,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
+                    <Code language="tsx" content={Snippets.visible} />
                 </section>
                 <section>
                     <h3>Disabled Mode</h3>
@@ -108,6 +111,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
+                    <Code language="tsx" content={Snippets.disabled} />
                 </section>
                 <section>
                     <h3>Soft-Disabled Mode</h3>
@@ -131,6 +135,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
+                    <Code language="tsx" content={Snippets.softDisabled} />
                 </section>
                 <section>
                     <h3>Tooltip Mode</h3>
@@ -154,6 +159,16 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
+                    <Code language="tsx" content={Snippets.tooltip} />
+                </section>
+                <section>
+                    <h3>Condition Types</h3>
+                    <p>
+                        Guards support three condition types: <code>capability</code>,{' '}
+                        <code>feature</code>, and <code>custom</code>. Use <code>unless</code>{' '}
+                        instead of <code>when</code> to invert the condition.
+                    </p>
+                    <Code language="tsx" content={Snippets.conditionTypes} />
                 </section>
             </main>
         </Page>

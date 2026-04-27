@@ -33,8 +33,6 @@ describe('isConditionDenied', () => {
         })
     })
 
-    // ── feature conditions ─────────────────────────────────────────────────
-
     describe('feature condition', () => {
         const condition: GuardCondition = { type: 'feature', features: ['xmas2025'] }
 

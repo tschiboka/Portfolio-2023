@@ -79,6 +79,7 @@ type FilteringInputBase = {
     key: string
     label: string
     required?: boolean
+    span?: 1 | 2 | 3 | 4
 }
 
 type FilteringTextInput = FilteringInputBase & {

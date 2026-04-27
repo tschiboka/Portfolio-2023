@@ -2,7 +2,6 @@ import { renderHook } from '@testing-library/react'
 import { Canvas } from '..'
 import { RefObject } from 'react'
 
-// ── Mock Canvas Context ─────────────────────────────────────────────────────
 type MockCtx = {
     beginPath: jest.Mock
     moveTo: jest.Mock
@@ -29,7 +28,6 @@ const createMockCtx = (): MockCtx => ({
     lineWidth: 0,
 })
 
-// ── Mock HTMLCanvasElement ──────────────────────────────────────────────────
 const createMockCanvas = (
     overrides: {
         parentWidth?: number
@@ -67,12 +65,7 @@ const createMockCanvas = (
 const makeRef = (canvas: HTMLCanvasElement | null): RefObject<HTMLCanvasElement> =>
     ({ current: canvas }) as RefObject<HTMLCanvasElement>
 
-// ═════════════════════════════════════════════════════════════════════════════
-// Tests
-// ═════════════════════════════════════════════════════════════════════════════
-
 describe('Canvas.useCanvas', () => {
-    // ── Null / Missing References ────────────────────────────────────────
     describe('when ref.current is null', () => {
         it('should return undefined ctx', () => {
             const ref = makeRef(null)
@@ -132,7 +125,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── Successful Initialisation ────────────────────────────────────────
     describe('when canvas is fully available', () => {
         const parentWidth = 400
         const parentHeight = 200
@@ -208,7 +200,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── line() ───────────────────────────────────────────────────────────
     describe('line()', () => {
         const parentWidth = 400
         const parentHeight = 200
@@ -336,7 +327,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── circle() ─────────────────────────────────────────────────────────
     describe('circle()', () => {
         const parentWidth = 400
         const parentHeight = 200
@@ -463,7 +453,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── getPoint (internal) via line/circle ──────────────────────────────
     describe('getPoint behaviour (tested via line/circle)', () => {
         const parentWidth = 500
         const parentHeight = 250
@@ -553,7 +542,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── Return shape ─────────────────────────────────────────────────────
     describe('return shape', () => {
         it('should return all expected properties', () => {
             const { canvas } = createMockCanvas()
@@ -581,7 +569,6 @@ describe('Canvas.useCanvas', () => {
         })
     })
 
-    // ── Multiple calls ───────────────────────────────────────────────────
     describe('multiple drawing calls', () => {
         it('should call beginPath for each line call', () => {
             const mockCtx = createMockCtx()

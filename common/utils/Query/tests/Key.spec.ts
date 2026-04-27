@@ -1,6 +1,5 @@
 import { CacheKeyBuilder, QueryKey } from '../Key'
 
-// ── CacheKeyBuilder ──────────────────────────────────────────────────────────
 
 describe('CacheKeyBuilder', () => {
     describe('build (base key only)', () => {
@@ -175,7 +174,6 @@ describe('CacheKeyBuilder', () => {
     })
 })
 
-// ── QueryKey (getter-based registry) ─────────────────────────────────────────
 
 describe('QueryKey', () => {
     const expectedKeys: Record<string, string> = {
