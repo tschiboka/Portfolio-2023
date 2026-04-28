@@ -57,7 +57,7 @@ unsigned long startTime = 0;                                       // Measured t
 
 // Communication
 char SSID[] = "Tivadar's Galaxy A12";                              // WIFI NAME
-char WIFI_PASSWORD[] = "Puncika123";                               // WIFI PASSWORD
+char WIFI_PASSWORD[] = "";                                         // WIFI PASSWORD
 int status = WL_IDLE_STATUS;                                       // WiFi Radio Status
 char URL[] = "wild-plum-chipmunk-veil.cyclic.app";                 // Server URL the Device Sends POST Requests
 int PORT = 443;                                                    // HTTP with SSL Uses Port 443

@@ -8,11 +8,10 @@ import { RadioButton } from './RadioButton'
 export type { SearchInputOption } from './SearchInput'
 export type { FieldValues } from './Form.types'
 
-export const Form = {
-    Form: FormElement,
+export const Form = Object.assign(FormElement, {
     Input,
     Label,
     TextArea,
     SearchInput,
     RadioButton,
-}
+})

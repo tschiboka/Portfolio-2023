@@ -1,15 +1,15 @@
 export const Code = {
     FormElement: {
-        basic: `<Form.Form onSubmit={handleSubmit(onSubmit)}>
+        basic: `<Form onSubmit={handleSubmit(onSubmit)}>
     <fieldset>
         <Form.Label for="email">Email</Form.Label>
         <Form.Input name="email" control={control} type="email" />
     </fieldset>
     <button type="submit">Submit</button>
-</Form.Form>`,
-        ariaLabel: `<Form.Form ariaLabel="Login form" onSubmit={handleSubmit(onSubmit)}>
+</Form>`,
+        ariaLabel: `<Form ariaLabel="Login form" onSubmit={handleSubmit(onSubmit)}>
     ...
-</Form.Form>`,
+</Form>`,
     },
     Label: {
         basic: `<Form.Label for="email">Email</Form.Label>`,
@@ -128,7 +128,7 @@ export const Code = {
     defaultValues: { name: '', email: '', bio: '', role: 'user' },
 })
 
-<Form.Form onSubmit={handleSubmit(onSubmit)}>
+<Form onSubmit={handleSubmit(onSubmit)}>
     <fieldset>
         <Form.Label for="name">Name</Form.Label>
         <Form.Input name="name" control={control} type="text" />
@@ -147,6 +147,6 @@ export const Code = {
         <Form.RadioButton name="role" control={control} value="user" onChange={() => {}} />
     </fieldset>
     <button type="submit">Submit</button>
-</Form.Form>`,
+</Form>`,
     },
 }

@@ -56,7 +56,7 @@ export const Forms = ({ path }: FormsProps) => {
                 </p>
 
                 <section>
-                    <h2>Form.Form</h2>
+                    <h2>Form</h2>
                     <p>
                         A thin wrapper around <code>&lt;form&gt;</code> that forwards all native
                         form attributes and adds <code>ariaLabel</code>, <code>className</code> and{' '}
@@ -89,62 +89,55 @@ export const Forms = ({ path }: FormsProps) => {
                         field.
                     </p>
 
-                    <h3>Text</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="name">Name</Form.Label>
-                        <Form.Input
-                            name="name"
-                            control={control}
-                            type="text"
-                            placeholder="Enter name…"
-                        />
-                    </fieldset>
+                    <Form ariaLabel="Input demos">
+                        <fieldset>
+                            <Form.Label for="name">Name</Form.Label>
+                            <Form.Input
+                                name="name"
+                                control={control}
+                                type="text"
+                                placeholder="Enter name…"
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <Form.Label for="email">Email</Form.Label>
+                            <Form.Input
+                                name="email"
+                                control={control}
+                                type="email"
+                                autoComplete="email"
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <Form.Label for="password">Password</Form.Label>
+                            <Form.Input
+                                name="password"
+                                control={control}
+                                type="password"
+                                addRevealPasswordIcon
+                                revealPassword={revealPassword}
+                                setRevealPassword={setRevealPassword}
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <Form.Label for="age">Age</Form.Label>
+                            <Form.Input name="age" control={control} type="number" />
+                        </fieldset>
+
+                        <fieldset>
+                            <Form.Label for="dob">Date of Birth</Form.Label>
+                            <Form.Input name="dob" control={control} type="date" />
+                        </fieldset>
+                    </Form>
+
                     <Code language="tsx" content={Snippets.Input.text} />
-
-                    <h3>Email</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="email">Email</Form.Label>
-                        <Form.Input
-                            name="email"
-                            control={control}
-                            type="email"
-                            autoComplete="email"
-                        />
-                    </fieldset>
                     <Code language="tsx" content={Snippets.Input.email} />
-
-                    <h3>Password with reveal toggle</h3>
-                    <p>
-                        Set <code>addRevealPasswordIcon</code> to show an eye icon that toggles
-                        between masked and plain text.
-                    </p>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="password">Password</Form.Label>
-                        <Form.Input
-                            name="password"
-                            control={control}
-                            type="password"
-                            addRevealPasswordIcon
-                            revealPassword={revealPassword}
-                            setRevealPassword={setRevealPassword}
-                        />
-                    </fieldset>
                     <Code language="tsx" content={Snippets.Input.password} />
-
-                    <h3>Number</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="age">Age</Form.Label>
-                        <Form.Input name="age" control={control} type="number" />
-                    </fieldset>
                     <Code language="tsx" content={Snippets.Input.number} />
-
-                    <h3>Date</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="dob">Date of Birth</Form.Label>
-                        <Form.Input name="dob" control={control} type="date" />
-                    </fieldset>
                     <Code language="tsx" content={Snippets.Input.date} />
-
                     <Code language="tsx" content={Snippets.Input.types} />
                 </section>
 
@@ -155,28 +148,29 @@ export const Forms = ({ path }: FormsProps) => {
                         a live character counter. The <code>rows</code> prop defaults to 3.
                     </p>
 
-                    <h3>Basic</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="bio">Bio</Form.Label>
-                        <Form.TextArea
-                            name="bio"
-                            control={control}
-                            placeholder="Tell us about yourself…"
-                        />
-                    </fieldset>
-                    <Code language="tsx" content={Snippets.TextArea.basic} />
+                    <Form ariaLabel="TextArea demos">
+                        <fieldset>
+                            <Form.Label for="bio">Bio</Form.Label>
+                            <Form.TextArea
+                                name="bio"
+                                control={control}
+                                placeholder="Tell us about yourself…"
+                            />
+                        </fieldset>
 
-                    <h3>With character limit</h3>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="description">Description</Form.Label>
-                        <Form.TextArea
-                            name="description"
-                            control={control}
-                            placeholder="Describe the item…"
-                            maxLength={255}
-                            rows={5}
-                        />
-                    </fieldset>
+                        <fieldset>
+                            <Form.Label for="description">Description</Form.Label>
+                            <Form.TextArea
+                                name="description"
+                                control={control}
+                                placeholder="Describe the item…"
+                                maxLength={255}
+                                rows={5}
+                            />
+                        </fieldset>
+                    </Form>
+
+                    <Code language="tsx" content={Snippets.TextArea.basic} />
                     <Code language="tsx" content={Snippets.TextArea.maxLength} />
                 </section>
 
@@ -187,29 +181,32 @@ export const Forms = ({ path }: FormsProps) => {
                         <code>value</code> and an <code>onChange</code> callback for side-effects
                         when the selection changes.
                     </p>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="role">Role</Form.Label>
-                        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                <Form.RadioButton
-                                    name="role"
-                                    control={control}
-                                    value="admin"
-                                    onChange={() => {}}
-                                />
-                                <Form.Label for="roleAdmin">Admin</Form.Label>
+                    <Form ariaLabel="RadioButton demos">
+                        <fieldset>
+                            <Form.Label for="role">Role</Form.Label>
+                            <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                    <Form.RadioButton
+                                        name="role"
+                                        control={control}
+                                        value="admin"
+                                        onChange={() => undefined}
+                                    />
+                                    <Form.Label for="roleAdmin">Admin</Form.Label>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                                    <Form.RadioButton
+                                        name="role"
+                                        control={control}
+                                        value="user"
+                                        onChange={() => undefined}
+                                    />
+                                    <Form.Label for="roleUser">User</Form.Label>
+                                </div>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                                <Form.RadioButton
-                                    name="role"
-                                    control={control}
-                                    value="user"
-                                    onChange={() => {}}
-                                />
-                                <Form.Label for="roleUser">User</Form.Label>
-                            </div>
-                        </div>
-                    </fieldset>
+                        </fieldset>
+                    </Form>
+
                     <Code language="tsx" content={Snippets.RadioButton.basic} />
                     <Code language="tsx" content={Snippets.RadioButton.boolean} />
                 </section>
@@ -221,18 +218,21 @@ export const Forms = ({ path }: FormsProps) => {
                         optional icons and colour selection. Opens on typing or clicking the toggle
                         icon. Closes on click-outside.
                     </p>
-                    <fieldset style={{ border: 'none', padding: 0 }}>
-                        <Form.Label for="framework">Framework</Form.Label>
-                        <Form.SearchInput
-                            name="framework"
-                            control={control}
-                            options={frameworkOptions}
-                            placeholder="Select framework"
-                            highlightMatch
-                            buttonIcon="arrow"
-                            onSelect={(option) => setValue('framework', option.label)}
-                        />
-                    </fieldset>
+                    <Form ariaLabel="SearchInput demos">
+                        <fieldset>
+                            <Form.Label for="framework">Framework</Form.Label>
+                            <Form.SearchInput
+                                name="framework"
+                                control={control}
+                                options={frameworkOptions}
+                                placeholder="Select framework"
+                                highlightMatch
+                                buttonIcon="arrow"
+                                onSelect={(option) => setValue('framework', option.label)}
+                            />
+                        </fieldset>
+                    </Form>
+
                     <Code language="tsx" content={Snippets.SearchInput.basic} />
                     <Code language="tsx" content={Snippets.SearchInput.icons} />
                 </section>
@@ -240,7 +240,7 @@ export const Forms = ({ path }: FormsProps) => {
                 <section>
                     <h2>Full Form Example</h2>
                     <p>
-                        Combine all sub-components inside <code>Form.Form</code> with{' '}
+                        Combine all sub-components inside <code>Form</code> with{' '}
                         <code>react-hook-form</code> for a complete form.
                     </p>
                     <Code language="tsx" content={Snippets.FullForm.demo} />

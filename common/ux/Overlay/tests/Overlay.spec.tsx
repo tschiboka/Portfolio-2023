@@ -1,9 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { createRef } from 'react'
+import { Test } from '../../Test'
 import { Overlay } from '../index'
 import type { ActionMenuItem, ActionMenuProps } from '../ActionMenu'
 import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
+
+const { Overlay: O } = Test
 // jsdom does not implement window.scrollTo
 window.scrollTo = jest.fn()
 
@@ -38,22 +41,22 @@ const renderPopup = (props: Partial<React.ComponentProps<typeof Overlay.Popup>> 
 describe('Overlay.FullScreen', () => {
     it('should render children', () => {
         render(<Overlay.FullScreen>Content</Overlay.FullScreen>)
-        expect(screen.getByText('Content')).toBeInTheDocument()
+        expect(O.Get.text('Content')).toBeInTheDocument()
     })
 
     it('should use the default "Overlay" class', () => {
         render(<Overlay.FullScreen>Content</Overlay.FullScreen>)
-        expect(screen.getByText('Content')).toHaveClass('Overlay')
+        expect(O.Get.text('Content')).toHaveClass('Overlay')
     })
 
     it('should apply custom className', () => {
         render(<Overlay.FullScreen className="custom">Content</Overlay.FullScreen>)
-        expect(screen.getByText('Content')).toHaveClass('custom')
+        expect(O.Get.text('Content')).toHaveClass('custom')
     })
 
     it('should apply ariaLabel', () => {
         render(<Overlay.FullScreen ariaLabel="overlay">Content</Overlay.FullScreen>)
-        expect(screen.getByLabelText('overlay')).toBeInTheDocument()
+        expect(O.Get.byLabel('overlay')).toBeInTheDocument()
     })
 })
 
@@ -78,41 +81,41 @@ describe('Overlay.ActionMenu', () => {
     describe('rendering', () => {
         it('should render as a portal to document.body', () => {
             renderActionMenu()
-            const menu = screen.getByRole('menu')
+            const menu = O.Get.menu()
             expect(menu.closest('body')).toBe(document.body)
         })
 
         it('should render with role="menu"', () => {
             renderActionMenu()
-            expect(screen.getByRole('menu')).toBeInTheDocument()
+            expect(O.Get.menu()).toBeInTheDocument()
         })
 
         it('should use "Action menu" as default aria-label', () => {
             renderActionMenu()
-            expect(screen.getByRole('menu')).toHaveAttribute('aria-label', 'Action menu')
+            expect(O.Get.menu()).toHaveAttribute('aria-label', 'Action menu')
         })
 
         it('should use custom ariaLabel when provided', () => {
             renderActionMenu({ ariaLabel: 'User actions' })
-            expect(screen.getByRole('menu')).toHaveAttribute('aria-label', 'User actions')
+            expect(O.Get.menu()).toHaveAttribute('aria-label', 'User actions')
         })
 
         it('should apply the Overlay--action-menu class', () => {
             renderActionMenu()
-            expect(screen.getByRole('menu')).toHaveClass('Overlay--action-menu')
+            expect(O.Get.menu()).toHaveClass('Overlay--action-menu')
         })
     })
 
     describe('items', () => {
         it('should render all items as menuitems', () => {
             renderActionMenu()
-            expect(screen.getAllByRole('menuitem')).toHaveLength(2)
+            expect(O.Get.menuItems()).toHaveLength(2)
         })
 
         it('should render item labels', () => {
             renderActionMenu()
-            expect(screen.getByRole('menuitem', { name: 'Edit' })).toBeInTheDocument()
-            expect(screen.getByRole('menuitem', { name: 'Delete' })).toBeInTheDocument()
+            expect(O.Get.menuItem('Edit')).toBeInTheDocument()
+            expect(O.Get.menuItem('Delete')).toBeInTheDocument()
         })
 
         it('should render item icon when provided', () => {
@@ -125,12 +128,12 @@ describe('Overlay.ActionMenu', () => {
                 },
             ]
             renderActionMenu({ items })
-            expect(screen.getByTestId('star-icon')).toBeInTheDocument()
+            expect(O.Get.byTestId('star-icon')).toBeInTheDocument()
         })
 
         it('should wrap items in li with role="none"', () => {
             renderActionMenu()
-            const listItems = screen.getByRole('menu').querySelectorAll('li')
+            const listItems = O.Get.menu().querySelectorAll('li')
             listItems.forEach((li) => {
                 expect(li).toHaveAttribute('role', 'none')
             })
@@ -138,7 +141,7 @@ describe('Overlay.ActionMenu', () => {
 
         it('should render items as buttons', () => {
             renderActionMenu()
-            const menuItems = screen.getAllByRole('menuitem')
+            const menuItems = O.Get.menuItems()
             menuItems.forEach((item) => {
                 expect(item.tagName).toBe('BUTTON')
                 expect(item).toHaveAttribute('type', 'button')
@@ -150,7 +153,7 @@ describe('Overlay.ActionMenu', () => {
                 { id: 'a', label: 'Danger action', variant: 'danger', onClick: jest.fn() },
             ]
             renderActionMenu({ items })
-            expect(screen.getByRole('menuitem', { name: 'Danger action' })).toHaveClass('danger')
+            expect(O.Get.menuItem('Danger action')).toHaveClass('danger')
         })
 
         it('should disable item when disabled is true', () => {
@@ -158,7 +161,7 @@ describe('Overlay.ActionMenu', () => {
                 { id: 'a', label: 'Locked', disabled: true, onClick: jest.fn() },
             ]
             renderActionMenu({ items })
-            expect(screen.getByRole('menuitem', { name: 'Locked' })).toBeDisabled()
+            expect(O.Get.menuItem('Locked')).toBeDisabled()
         })
 
         it('should not disable item when disabled is false', () => {
@@ -166,33 +169,30 @@ describe('Overlay.ActionMenu', () => {
                 { id: 'a', label: 'Active', disabled: false, onClick: jest.fn() },
             ]
             renderActionMenu({ items })
-            expect(screen.getByRole('menuitem', { name: 'Active' })).not.toBeDisabled()
+            expect(O.Get.menuItem('Active')).not.toBeDisabled()
         })
     })
 
     describe('onClick', () => {
         it('should call item onClick when clicked', async () => {
-            const user = userEvent.setup()
             const onClick = jest.fn()
             const items: ActionMenuItem[] = [{ id: 'a', label: 'Do it', onClick }]
             renderActionMenu({ items })
-            await user.click(screen.getByRole('menuitem', { name: 'Do it' }))
+            await O.Act.selectMenuItem('Do it')
             expect(onClick).toHaveBeenCalledTimes(1)
         })
 
         it('should call onClose after clicking an item', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderActionMenu()
-            await user.click(screen.getAllByRole('menuitem')[0])
+            await O.Click.menuItem('Edit')
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
         it('should call both item onClick and onClose', async () => {
-            const user = userEvent.setup()
             const onClick = jest.fn()
             const items: ActionMenuItem[] = [{ id: 'a', label: 'Go', onClick }]
             const { onClose } = renderActionMenu({ items })
-            await user.click(screen.getByRole('menuitem', { name: 'Go' }))
+            await O.Act.selectMenuItem('Go')
             expect(onClick).toHaveBeenCalledTimes(1)
             expect(onClose).toHaveBeenCalledTimes(1)
         })
@@ -200,9 +200,8 @@ describe('Overlay.ActionMenu', () => {
 
     describe('close behaviour', () => {
         it('should call onClose when Escape is pressed', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderActionMenu()
-            await user.keyboard('{Escape}')
+            await O.Act.dismiss()
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
@@ -214,21 +213,20 @@ describe('Overlay.ActionMenu', () => {
         })
 
         it('should call onClose when clicking outside', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderActionMenu()
-            await user.click(document.body)
+            await O.Act.clickOutside()
             expect(onClose).toHaveBeenCalled()
         })
 
         it('should not call onClose when clicking inside the menu', () => {
             const { onClose } = renderActionMenu()
-            fireEvent.mouseDown(screen.getByRole('menu'))
+            fireEvent.mouseDown(O.Get.menu())
             expect(onClose).not.toHaveBeenCalled()
         })
 
         it('should not call onClose when clicking the anchor', () => {
             const { onClose } = renderActionMenu()
-            const trigger = screen.getByText('trigger')
+            const trigger = O.Get.text('trigger')
             fireEvent.mouseDown(trigger)
             expect(onClose).not.toHaveBeenCalled()
         })
@@ -260,78 +258,78 @@ describe('Overlay.Popup', () => {
     describe('rendering', () => {
         it('should render as a portal to document.body', () => {
             renderPopup()
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog.closest('body')).toBe(document.body)
         })
 
         it('should render with role="dialog" and aria-modal="true"', () => {
             renderPopup()
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog).toHaveAttribute('aria-modal', 'true')
         })
 
         it('should use title as aria-label by default', () => {
             renderPopup({ title: 'My Title' })
-            expect(screen.getByRole('dialog')).toHaveAttribute('aria-label', 'My Title')
+            expect(O.Get.dialog()).toHaveAttribute('aria-label', 'My Title')
         })
 
         it('should prefer ariaLabel over title for aria-label', () => {
             renderPopup({ title: 'My Title', ariaLabel: 'Custom Label' })
-            expect(screen.getByRole('dialog')).toHaveAttribute('aria-label', 'Custom Label')
+            expect(O.Get.dialog()).toHaveAttribute('aria-label', 'Custom Label')
         })
     })
 
     describe('title', () => {
         it('should render the title', () => {
             renderPopup({ title: 'Hello' })
-            expect(screen.getByText('Hello')).toBeInTheDocument()
+            expect(O.Get.text('Hello')).toBeInTheDocument()
         })
 
         it('should render the title in an h3', () => {
             renderPopup({ title: 'Hello' })
-            expect(screen.getByText('Hello').tagName).toBe('H3')
+            expect(O.Get.text('Hello').tagName).toBe('H3')
         })
 
         it('should not render a title when not provided', () => {
             renderPopup({ title: undefined })
-            expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+            expect(O.Query.heading()).not.toBeInTheDocument()
         })
     })
 
     describe('message', () => {
         it('should render the message text', () => {
             renderPopup({ message: 'A message' })
-            expect(screen.getByText('A message')).toBeInTheDocument()
+            expect(O.Get.text('A message')).toBeInTheDocument()
         })
 
         it('should render ReactNode as message', () => {
             renderPopup({ message: <span data-testid="custom-msg">Rich</span> })
-            expect(screen.getByTestId('custom-msg')).toBeInTheDocument()
+            expect(O.Get.byTestId('custom-msg')).toBeInTheDocument()
         })
 
         it('should not render message area when not provided', () => {
             renderPopup({ message: undefined })
-            expect(screen.queryByText('Test message')).not.toBeInTheDocument()
+            expect(O.Query.text('Test message')).not.toBeInTheDocument()
         })
     })
 
     describe('children', () => {
         it('should render custom children', () => {
             renderPopup({ children: <div data-testid="child">Custom</div> })
-            expect(screen.getByTestId('child')).toBeInTheDocument()
+            expect(O.Get.byTestId('child')).toBeInTheDocument()
         })
     })
 
     describe('icon', () => {
         it('should render default icon per mode', () => {
             renderPopup({ mode: 'primary' })
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog.querySelector('.Overlay--popup__icon')).toBeInTheDocument()
         })
 
         it('should render custom icon when provided', () => {
             renderPopup({ icon: <span data-testid="custom-icon">★</span> })
-            expect(screen.getByTestId('custom-icon')).toBeInTheDocument()
+            expect(O.Get.byTestId('custom-icon')).toBeInTheDocument()
         })
     })
 
@@ -341,14 +339,14 @@ describe('Overlay.Popup', () => {
         modes.forEach((mode) => {
             it(`should apply ${mode} mode class`, () => {
                 renderPopup({ mode })
-                const dialog = screen.getByRole('dialog')
+                const dialog = O.Get.dialog()
                 expect(dialog).toHaveClass(ModeClass[mode])
             })
         })
 
         it('should default to primary mode', () => {
             renderPopup()
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog).toHaveClass(ModeClass.primary)
         })
     })
@@ -359,7 +357,7 @@ describe('Overlay.Popup', () => {
         sizes.forEach((size) => {
             it(`should apply ${size} size styles`, () => {
                 renderPopup({ size })
-                const dialog = screen.getByRole('dialog')
+                const dialog = O.Get.dialog()
                 expect(dialog.style.minWidth).toBeDefined()
                 expect(dialog.style.maxWidth).toBeDefined()
             })
@@ -367,42 +365,40 @@ describe('Overlay.Popup', () => {
 
         it('should default to md size', () => {
             renderPopup()
-            // md is the default — popup renders, no error
-            expect(screen.getByRole('dialog')).toBeInTheDocument()
+            expect(O.Get.dialog()).toBeInTheDocument()
         })
     })
 
     describe('close button (showClose)', () => {
         it('should render close button by default', () => {
             renderPopup()
-            expect(screen.getByLabelText('Overlay Close')).toBeInTheDocument()
+            expect(O.Get.closeButton()).toBeInTheDocument()
         })
 
         it('should call onClose when close button is clicked', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            await user.click(screen.getByLabelText('Overlay Close'))
+            await O.Click.closeButton()
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
         it('should hide close button when showClose is false', () => {
             renderPopup({ showClose: false })
-            expect(screen.queryByLabelText('Overlay Close')).not.toBeInTheDocument()
+            expect(O.Query.closeButton()).not.toBeInTheDocument()
         })
 
         it('should append a Close action button when showClose is true', () => {
             renderPopup({ showClose: true, actions: [] })
-            expect(screen.getByText('Close')).toBeInTheDocument()
+            expect(O.Get.text('Close')).toBeInTheDocument()
         })
 
         it('should not append Close action when showClose is false', () => {
             renderPopup({ showClose: false, actions: [] })
-            expect(screen.queryByText('Close')).not.toBeInTheDocument()
+            expect(O.Query.text('Close')).not.toBeInTheDocument()
         })
 
         it('should render the auto-appended Close button as secondary variant', () => {
             renderPopup({ showClose: true, actions: [] })
-            const closeBtn = screen.getByText('Close')
+            const closeBtn = O.Get.text('Close')
             expect(closeBtn).toHaveClass('Overlay--popup__action-btn--secondary')
         })
     })
@@ -413,16 +409,15 @@ describe('Overlay.Popup', () => {
             renderPopup({
                 actions: [{ label: 'Confirm', onClick }],
             })
-            expect(screen.getByText('Confirm')).toBeInTheDocument()
+            expect(O.Get.text('Confirm')).toBeInTheDocument()
         })
 
         it('should call action onClick when clicked', async () => {
-            const user = userEvent.setup()
             const onClick = jest.fn()
             renderPopup({
                 actions: [{ label: 'Confirm', onClick }],
             })
-            await user.click(screen.getByText('Confirm'))
+            await O.Click.actionButton('Confirm')
             expect(onClick).toHaveBeenCalledTimes(1)
         })
 
@@ -430,28 +425,28 @@ describe('Overlay.Popup', () => {
             renderPopup({
                 actions: [{ label: 'Cancel', variant: 'secondary', onClick: jest.fn() }],
             })
-            expect(screen.getByText('Cancel')).toHaveClass('Overlay--popup__action-btn--secondary')
+            expect(O.Get.text('Cancel')).toHaveClass('Overlay--popup__action-btn--secondary')
         })
 
         it('should not apply secondary class for primary variant', () => {
             renderPopup({
                 actions: [{ label: 'OK', variant: 'primary', onClick: jest.fn() }],
             })
-            expect(screen.getByText('OK')).not.toHaveClass('Overlay--popup__action-btn--secondary')
+            expect(O.Get.text('OK')).not.toHaveClass('Overlay--popup__action-btn--secondary')
         })
 
         it('should hide actions with when: false', () => {
             renderPopup({
                 actions: [{ label: 'Hidden', when: false, onClick: jest.fn() }],
             })
-            expect(screen.queryByText('Hidden')).not.toBeInTheDocument()
+            expect(O.Query.text('Hidden')).not.toBeInTheDocument()
         })
 
         it('should show actions with when: true', () => {
             renderPopup({
                 actions: [{ label: 'Visible', when: true, onClick: jest.fn() }],
             })
-            expect(screen.getByText('Visible')).toBeInTheDocument()
+            expect(O.Get.text('Visible')).toBeInTheDocument()
         })
 
         it('should render multiple actions in order', () => {
@@ -461,10 +456,7 @@ describe('Overlay.Popup', () => {
                     { label: 'Second', onClick: jest.fn() },
                 ],
             })
-            const buttons = screen
-                .getAllByRole('button')
-                .filter((b) => b.classList.contains('Overlay--popup__action-btn'))
-            const labels = buttons.map((b) => b.textContent)
+            const labels = O.Get.actionButtons().map((b) => b.textContent)
             expect(labels).toContain('First')
             expect(labels).toContain('Second')
         })
@@ -474,36 +466,30 @@ describe('Overlay.Popup', () => {
                 showClose: true,
                 actions: [{ label: 'Confirm', onClick: jest.fn() }],
             })
-            const buttons = screen
-                .getAllByRole('button')
-                .filter((b) => b.classList.contains('Overlay--popup__action-btn'))
-            const labels = buttons.map((b) => b.textContent)
+            const labels = O.Get.actionButtons().map((b) => b.textContent)
             expect(labels.indexOf('Confirm')).toBeLessThan(labels.indexOf('Close'))
         })
     })
 
     describe('backdrop', () => {
         it('should call onClose when backdrop is clicked', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            const backdrop = document.querySelector('.Overlay--popup__backdrop')!
-            await user.click(backdrop)
+            await O.Act.dismissByBackdrop()
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
         it('should not call onClose when popup body is clicked', async () => {
             const user = userEvent.setup()
             const { onClose } = renderPopup()
-            await user.click(screen.getByRole('dialog'))
+            await user.click(O.Get.dialog())
             expect(onClose).not.toHaveBeenCalled()
         })
     })
 
     describe('Escape key', () => {
         it('should call onClose when Escape is pressed', async () => {
-            const user = userEvent.setup()
             const { onClose } = renderPopup()
-            await user.keyboard('{Escape}')
+            await O.Act.dismiss()
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
@@ -547,13 +533,13 @@ describe('Overlay.Popup', () => {
     describe('custom className and style', () => {
         it('should apply custom className', () => {
             renderPopup({ className: 'my-popup' })
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog).toHaveClass('my-popup')
         })
 
         it('should apply custom style', () => {
             renderPopup({ style: { border: '2px solid red' } })
-            const dialog = screen.getByRole('dialog')
+            const dialog = O.Get.dialog()
             expect(dialog.style.border).toBe('2px solid red')
         })
     })
