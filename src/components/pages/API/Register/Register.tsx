@@ -105,11 +105,11 @@ const Register = ({ path }: IndexProps) => {
                 {successfulRegistration && (
                     <p className="form-message submit-success-message">{successfulRegistration}</p>
                 )}
-                <div className="button-box">
-                    <button disabled={Boolean(successfulRegistration)} name="submit">
+                <Form.ButtonGroup>
+                    <Form.Button type="submit" disabled={Boolean(successfulRegistration)}>
                         Register User
-                    </button>
-                </div>
+                    </Form.Button>
+                </Form.ButtonGroup>
             </form>
         </Page>
     )

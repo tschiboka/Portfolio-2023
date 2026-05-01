@@ -2,12 +2,9 @@
     width: 100%;
     padding: var(--space-24);
     background: var(--black-x);
-    border-radius: 20px;
-    border: 2px solid var(--black-2);
-    box-shadow:
-        10px 10px 30px rgba(0, 0, 0, 0.7),
-        -5px -5px 5px rgba(255, 255, 255, 0.02),
-        inset 10px 10px 20px black;
+    border-radius: var(--panel-radius);
+    border: var(--panel-border);
+    box-shadow: var(--panel-shadow);
 }
 
 .table-container h2 {

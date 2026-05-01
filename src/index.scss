@@ -38,7 +38,7 @@ html {
     box-sizing: border-box;
     font-family: Roboto_Light, Arial, Helvetica, sans-serif;
     font-weight: lighter;
-    scrollbar-color: palette.$accent_dark_3 #888;
+    scrollbar-color: palette.$accent_dark_3 palette.$black_1;
     scrollbar-width: thin;
 }
 
@@ -61,7 +61,7 @@ code {
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+    background: palette.$black_x;
 }
 
 ::-webkit-scrollbar-thumb {

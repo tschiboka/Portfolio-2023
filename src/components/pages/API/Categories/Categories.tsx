@@ -109,40 +109,22 @@ const Categories = ({ path }: CategoriesProps) => {
                                 maxLength={255}
                             />
                         </fieldset>
-                        <fieldset className="parent-radio">
-                            <Form.Label for="hasParent">Has Parent</Form.Label>
-                            <div>
-                                <div>
-                                    <Form.Label for="hasParentNo">No</Form.Label>
-                                    <Form.RadioButton
-                                        name="hasParent"
-                                        control={control}
-                                        value={false}
-                                        onChange={() => {
-                                            resetField('parent')
-                                            setShowParentInput(false)
-                                        }}
-                                    />
-                                </div>
-                                <div>
-                                    <Form.Label for="hasParentYes">Yes</Form.Label>
-                                    <Form.RadioButton
-                                        name="hasParent"
-                                        control={control}
-                                        value={true}
-                                        onChange={() => {
-                                            setShowParentInput(true)
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                        <fieldset>
+                            <Form.Checkbox
+                                name="hasParent"
+                                control={control}
+                                label="Has Parent"
+                                onChange={(checked) => {
+                                    if (!checked) resetField('parent')
+                                    setShowParentInput(checked)
+                                }}
+                            />
                         </fieldset>
                         {showParentInput && (
                             <fieldset>
-                                <Form.Label
-                                    for="parent"
-                                    className="hide--small-screen"
-                                ></Form.Label>
+                                <Form.Label for="parent" className="hide--small-screen">
+                                    Parent
+                                </Form.Label>
                                 <Form.SearchInput
                                     options={parentOptions}
                                     name="parent"
@@ -204,21 +186,12 @@ const Categories = ({ path }: CategoriesProps) => {
                             <p className="submit-message">Category submitted</p>
                         )}
                         <div className="button-container">
-                            <button
-                                name="reset"
-                                type="button"
-                                className="secondary"
-                                onClick={() => reset()}
-                            >
+                            <Form.Button variant="secondary" onClick={() => reset()}>
                                 Reset
-                            </button>
-                            <button
-                                name="submit"
-                                type="submit"
-                                disabled={categoriesGetRequest.isLoading}
-                            >
+                            </Form.Button>
+                            <Form.Button type="submit" disabled={categoriesGetRequest.isLoading}>
                                 Submit
-                            </button>
+                            </Form.Button>
                         </div>
                     </form>
                 </div>

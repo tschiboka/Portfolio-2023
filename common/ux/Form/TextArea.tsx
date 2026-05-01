@@ -44,13 +44,16 @@ export const TextArea = <T extends FieldValues>({
                         {...field}
                     />
                 </div>
-                {maxLength && (
-                    <span className="textarea__info">
-                        <span className="highlight">{field.value.length} </span>
-                        of {maxLength} characters
-                    </span>
+                {fieldState.error ? (
+                    <p className="error-msg">*{fieldState.error.message}</p>
+                ) : (
+                    maxLength && (
+                        <span className="textarea__info">
+                            <span className="highlight">{field.value.length} </span>
+                            of {maxLength} chars
+                        </span>
+                    )
                 )}
-                {fieldState.error && <p className="error-msg">*{fieldState.error.message}</p>}
             </div>
         )}
     />

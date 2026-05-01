@@ -72,7 +72,7 @@ const Tasks = ({ path }: TaskProps) => {
                             <label htmlFor="alarm">Alarm</label>
                             <Form.Input name="alarm" control={control} type="text" />
                         </fieldset>
-                        <button name="submit">Submit</button>
+                        <Form.Button type="submit">Submit</Form.Button>
                     </form>
                 </div>
                 <h2>See previously set tasks</h2>

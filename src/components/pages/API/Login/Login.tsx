@@ -86,18 +86,18 @@ const Login = ({ path, pageName }: LoginProps) => {
                     <h1>Login</h1>
                     <h2>Tschiboka Personal App</h2>
                 </div>
-                <form onSubmit={handleSubmit(submitHandler)}>
-                    <fieldset>
-                        <label htmlFor="email">Email</label>
+                <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Login form">
+                    <Form.Fieldset>
+                        <Form.Label for="email">Email</Form.Label>
                         <Form.Input
                             name="email"
                             control={control}
                             type="text"
                             autoComplete="email"
                         />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="password">Password</label>
+                    </Form.Fieldset>
+                    <Form.Fieldset>
+                        <Form.Label for="password">Password</Form.Label>
                         <Form.Input
                             name="password"
                             control={control}
@@ -106,18 +106,23 @@ const Login = ({ path, pageName }: LoginProps) => {
                             revealPassword={revealPassword}
                             setRevealPassword={setRevealPassword}
                         />
-                    </fieldset>
+                    </Form.Fieldset>
                     <LoadingIndicator show={isLoading} />
                     {loginErrorMessage && (
                         <p className="submit-error-message">{loginErrorMessage}</p>
                     )}
-                    <div className="button-box">
-                        <button name="submit">Login</button>
+                    <Form.ButtonGroup>
+                        <Form.Button type="submit">Login</Form.Button>
                         {enableRegistration && (
-                            <button onClick={() => navigate('/api/register')}>Register User</button>
+                            <Form.Button
+                                variant="secondary"
+                                onClick={() => navigate('/api/register')}
+                            >
+                                Register User
+                            </Form.Button>
                         )}
-                    </div>
-                </form>
+                    </Form.ButtonGroup>
+                </Form>
             </main>
         </Page>
     )

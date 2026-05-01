@@ -5,4 +5,6 @@ export type FormValues = {
     description: string
     option: string
     toggle: boolean
+    accepted: boolean
+    dob: string
 }

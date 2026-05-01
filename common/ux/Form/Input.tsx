@@ -38,6 +38,7 @@ export const Input = <T extends FieldValues>({
                         id={name}
                         autoComplete={autoComplete}
                         type={type === 'password' && revealPassword ? 'text' : type}
+                        className={type === 'date' && field.value ? 'has-value' : undefined}
                         {...rest}
                         {...field}
                     />
