@@ -1,11 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext/App.context'
 
 // Components
-import Page from '../../sharedComponents/Page/Page'
-import Menu from '../../sharedComponents/Menu/Menu'
-import Nav from '../../sharedComponents/Nav/Nav'
-import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Page from '../../../../common/ux/Page/Page'
 import LikeButton from '../../sharedComponents/LikeButton/LikeButton'
 import References from '../References/References'
 import { getReferenceList } from '../../../articles/references'
@@ -44,7 +40,6 @@ interface Props {
 
 const Article = ({ pageName, path, title, children }: Props) => {
     const article = blogArticles.find((article) => article.to === path)
-    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     const [sideMenuVisible, setSideMenuVisible] = useState(true)
     const [shareMenuVisible, setShareMenuVisible] = useState(false)
     const [visitsLoaded, setVisitsLoaded] = useState(false)
@@ -55,23 +50,25 @@ const Article = ({ pageName, path, title, children }: Props) => {
     const references = getReferenceList(path)
     useEffect(() => {
         if (!visitsLoaded) {
-            getVisits(path, (visits: number) => {
+            void getVisits(path, (visits: number) => {
                 setVisitsLoaded(true)
                 setVisits(visits)
             })
         }
         if (!likesLoaded)
-            getLikes(path, (likes: number) => {
+            void getLikes(path, (likes: number) => {
                 setLikesLoaded(true)
                 setLikes(likes)
             })
-    }, [likes, visits])
+    }, [likes, visits, likesLoaded, visitsLoaded, path])
 
     return (
-        <Page title={'Tivadar Debnar | ' + title} path={path}>
-            <Nav pageName={pageName} path={path} />
-            {mobileMenuVisible && <Menu pageName="js-date-validation" />}
-            {subMenuVisible && <SubNav />}
+        <Page
+            title={'Tivadar Debnar | ' + title}
+            path={path}
+            variant="portfolio"
+            pageName={pageName}
+        >
             {sideMenuVisible && (
                 <aside className="blog-component--article">
                     <HiShare
@@ -84,7 +81,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         onClick={(event) => {
                             event.preventDefault()
                             event.stopPropagation()
-                            if (!articleLiked) postLike(path, () => setArticleLiked(true))
+                            if (!articleLiked) void postLike(path, () => setArticleLiked(true))
                             return false
                         }}
                     >
@@ -96,7 +93,7 @@ const Article = ({ pageName, path, title, children }: Props) => {
                         onClick={(event) => {
                             event.preventDefault()
                             event.stopPropagation()
-                            if (!articleLiked) postLike(path, () => setArticleLiked(true))
+                            if (!articleLiked) void postLike(path, () => setArticleLiked(true))
                             return false
                         }}
                     >

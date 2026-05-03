@@ -1,41 +1,19 @@
-import { useState } from 'react'
-import { useAppContext } from '../../../../context/AppContext/App.context'
-import Page from '../../../sharedComponents/Page/Page'
-import MobileMenu from '../MobileMenu/MobileMenu'
-import Nav from '../Nav/Nav'
-import { Submenu } from '../Nav'
-import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
+import Page from '../../../../../common/ux/Page/Page'
 
 interface EventsProp {
     path: string
 }
 
 const Events = ({ path }: EventsProp) => {
-    const { mobileMenuVisible } = useAppContext()
-    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
-
     return (
         <Page
             title={'Tivadar Debnar | Events'}
             path={path}
             recordVisit={false}
             loginRequired
+            variant="api"
+            pageName="Events"
         >
-            <Nav
-                pageName="Events"
-                submenuStack={submenuStack}
-                setSubmenuStack={setSubmenuStack}
-            />
-            {Boolean(submenuStack.length) && (
-                <SubmenuPanel
-                    key={submenuStack[0].parentLabel}
-                    submenu={submenuStack[0]}
-                    submenuStack={submenuStack}
-                    setSubmenuStack={setSubmenuStack}
-                    pageName="Events"
-                />
-            )}
-            {mobileMenuVisible && <MobileMenu pageName="Events" />}
             <h1>Events</h1>
         </Page>
     )

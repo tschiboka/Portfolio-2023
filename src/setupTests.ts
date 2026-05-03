@@ -1,5 +1,13 @@
 import '@testing-library/jest-dom'
 
+// detectincognitojs does not work in jsdom — stub it globally
+jest.mock('detectincognitojs', () => ({
+    detectIncognito: () => Promise.resolve({ isPrivate: false }),
+}))
+
+// jsdom does not implement window.scrollTo
+window.scrollTo = jest.fn() as unknown as typeof window.scrollTo
+
 // jsdom does not implement window.matchMedia — provide a minimal stub
 // so any component that uses matchMedia (e.g. responsive hooks) won't crash.
 Object.defineProperty(window, 'matchMedia', {

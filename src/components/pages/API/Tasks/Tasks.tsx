@@ -1,10 +1,4 @@
-import { useState } from 'react'
-import { useAppContext } from '../../../../context/AppContext/App.context'
-import Page from '../../../sharedComponents/Page/Page'
-import MobileMenu from '../MobileMenu/MobileMenu'
-import Nav from '../Nav/Nav'
-import { Submenu } from '../Nav'
-import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
+import Page from '../../../../../common/ux/Page/Page'
 import './Tasks.scss'
 import { useForm } from 'react-hook-form'
 import { Form } from '@common/ux'
@@ -14,9 +8,6 @@ interface TaskProps {
 }
 
 const Tasks = ({ path }: TaskProps) => {
-    const { mobileMenuVisible } = useAppContext()
-    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
-
     const { control } = useForm({
         defaultValues: {
             taskName: '',
@@ -28,18 +19,14 @@ const Tasks = ({ path }: TaskProps) => {
     })
 
     return (
-        <Page title={'Tivadar Debnar | Tasks'} path={path} recordVisit={false} loginRequired>
-            <Nav pageName="Tasks" submenuStack={submenuStack} setSubmenuStack={setSubmenuStack} />
-            {Boolean(submenuStack.length) && (
-                <SubmenuPanel
-                    key={submenuStack[0].parentLabel}
-                    submenu={submenuStack[0]}
-                    submenuStack={submenuStack}
-                    setSubmenuStack={setSubmenuStack}
-                    pageName="Tasks"
-                />
-            )}
-            {mobileMenuVisible && <MobileMenu pageName="Tasks" />}
+        <Page
+            title={'Tivadar Debnar | Tasks'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Tasks"
+        >
             <main className="Tasks">
                 <h1>Tasks</h1>
                 <p>

@@ -108,7 +108,7 @@ h1 {
     font-size: font.$font_lg;
     font-variant: small-caps;
     @include bp.md {
-        font-size: font.$font_xx;
+        font-size: font.$font_2xl;
     }
 }
 

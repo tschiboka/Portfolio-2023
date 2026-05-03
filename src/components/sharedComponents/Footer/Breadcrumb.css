@@ -1,0 +1,58 @@
+.Breadcrumb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.Breadcrumb * {
+    color: #555;
+}
+
+.Breadcrumb > * {
+    margin: 0 5px;
+    font-family: monospace;
+    font-size: 1.2em;
+}
+
+.Breadcrumb .Breadcrumb__icon {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.Breadcrumb .Breadcrumb__icon--house:hover {
+    fill: #ddd;
+    cursor: pointer;
+}
+
+.Breadcrumb .Breadcrumb__visits {
+    color: #007676;
+}
+
+.Breadcrumb .Breadcrumb__path {
+    font-family: monospace;
+    font-size: 1em;
+}
+
+.Breadcrumb .Breadcrumb__path:hover {
+    color: #aaa;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Light theme */
+.light .Breadcrumb > * {
+    color: #555;
+}
+
+.light .Breadcrumb .Breadcrumb__icon--house:hover {
+    color: #222;
+}
+
+.light .Breadcrumb .Breadcrumb__path:hover {
+    color: #222;
+}

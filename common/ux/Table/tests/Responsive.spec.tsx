@@ -1,4 +1,4 @@
-import { Test } from '@common/ux'
+import { Test } from '@common/ux/Test'
 import { screen, within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
@@ -11,7 +11,7 @@ describe('Table — Responsive / Breakpoints', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             expect(Test.Table.Get.expandButtons()).toHaveLength(rows.length)
@@ -30,7 +30,7 @@ describe('Table — Responsive / Breakpoints', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             await Test.Table.Click.expandButton(0)
@@ -43,7 +43,7 @@ describe('Table — Responsive / Breakpoints', () => {
                 data: [{ name: 'Alpha', value: '10', status: 'active', note: '' }],
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             await Test.Table.Click.expandButton(0)
@@ -57,7 +57,7 @@ describe('Table — Responsive / Breakpoints', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             const user = await Test.Table.Click.expandButton(0)
@@ -73,7 +73,7 @@ describe('Table — Responsive / Breakpoints', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             const user = await Test.Table.Click.expandButton(0)

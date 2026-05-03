@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext/App.context'
 import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
 import Footer from '../../sharedComponents/Footer/Footer'
-import Menu from '../../sharedComponents/Menu/Menu'
-import Nav from '../../sharedComponents/Nav/Nav'
-import Page from '../../sharedComponents/Page/Page'
-import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Page from '../../../../common/ux/Page/Page'
 import { blogArticles } from '../../../articles/articles'
 import { getLikeSummary } from '../../../serverAPI/likes'
 import { LikeSummary, VisitSummary } from '@common/types'
@@ -18,7 +14,6 @@ interface Props {
 }
 
 const Blogs = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     const [visits, setVisits] = useState<VisitSummary | null>(null)
     const [visitsLoaded, setVisitsLoaded] = useState(false)
     const [likes, setLikes] = useState<LikeSummary | null>(null)
@@ -50,10 +45,7 @@ const Blogs = ({ pageName, path }: Props) => {
     }, [visits, likes])
 
     return (
-        <Page title="Tivadar Debnar | Blog" path={path}>
-            <Nav pageName={pageName} />
-            {mobileMenuVisible && <Menu pageName="blog" />}
-            {subMenuVisible && <SubNav />}
+        <Page title="Tivadar Debnar | Blog" path={path} variant="portfolio" pageName={pageName}>
             <main>
                 <h1 className="Blog__title">Blog</h1>
                 <p>

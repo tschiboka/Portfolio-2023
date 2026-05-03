@@ -1,7 +1,7 @@
-import Home from "../../pages/Home/Home";
+import Home from '../../pages/Home/Home'
 
 const RouteError = () => {
-    return <Home pageName="home" path="/" />;
-};
+    return <Home pageName="Home" path="/" />
+}
 
-export default RouteError;
+export default RouteError

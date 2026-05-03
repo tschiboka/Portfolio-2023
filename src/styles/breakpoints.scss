@@ -1,60 +1,60 @@
 // Minimum width screen size constants
-$screen-xxs-min: 375px;       // Extra small devices (iPhone SE)
-$screen-xs-min: 420px;        // Small mobiles
-$screen-sm-min: 576px;        // Small tablets and large smartphones (landscape view)
-$screen-md-min: 768px;        // Small tablets (portrait view)
-$screen-mx-min: 670px;        // Crossover between medium and large
-$screen-lg-min: 992px;        // Tablets and small desktops
-$screen-xl-min: 1200px;       // Large tablets and notebooks 
-$screen-xxl-min: 1580px;      // Laptops and desktops 
+$screen-2xs-min: 375px; // Extra small devices (iPhone SE)
+$screen-xs-min: 420px; // Small mobiles
+$screen-sm-min: 576px; // Small tablets and large smartphones (landscape view)
+$screen-md-min: 768px; // Small tablets (portrait view)
+$screen-mx-min: 670px; // Crossover between medium and large
+$screen-lg-min: 992px; // Tablets and small desktops
+$screen-xl-min: 1200px; // Large tablets and notebooks
+$screen-2xl-min: 1580px; // Laptops and desktops
 
 // Minimum height screen size constants
-$screen-xxs-min-height: 670px; // Extra small devices (iPhone SE)
+$screen-2xs-min-height: 670px; // Extra small devices (iPhone SE)
 
 @mixin xs {
     @media (max-width: #{$screen-xs-min}) {
         @content;
     }
- }
+}
 
 // Small devices
 @mixin sm {
     @media (min-width: #{$screen-sm-min}) {
         @content;
     }
- }
- 
- // Medium devices
- @mixin md {
-    @media (min-width: #{$screen-md-min}) {
-        @content;
-    }
- }
- 
- // Medium to large crossover
- @mixin mx {
-    @media (min-width: #{$screen-md-min}) {
-        @content;
-    }
- }
+}
 
- // Large devices
- @mixin lg {
+// Medium devices
+@mixin md {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+
+// Medium to large crossover
+@mixin mx {
+    @media (min-width: #{$screen-md-min}) {
+        @content;
+    }
+}
+
+// Large devices
+@mixin lg {
     @media (min-width: #{$screen-lg-min}) {
         @content;
     }
- }
- 
- // Extra large devices
- @mixin xl {
-    @media (min-width: #{$screen-xl-min}) {
-        @content;
-    }
- }
+}
 
- // Full screen extra large devices
- @mixin xxl {
+// Extra large devices
+@mixin xl {
     @media (min-width: #{$screen-xl-min}) {
         @content;
     }
- }
+}
+
+// Full screen extra large devices
+@mixin full {
+    @media (min-width: #{$screen-2xl-min}) {
+        @content;
+    }
+}

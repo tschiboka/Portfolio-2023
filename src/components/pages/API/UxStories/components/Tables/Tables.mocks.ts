@@ -1,4 +1,3 @@
-
 export type Row = {
     name: string
     value: string
@@ -13,44 +12,42 @@ export const rows: Row[] = [
     { name: 'Delta', value: '40', status: 'pending', note: '' },
 ]
 
-
 export type BreakpointRow = {
     property: string
-    xxs: string
+    '2xs': string
     xs: string
     sm: string
     mx: string
     md: string
     lg: string
     xl: string
-    xxl: string
+    '2xl': string
 }
 
 export const breakpointData: BreakpointRow[] = [
     {
         property: 'Min Width',
-        xxs: '375px',
+        '2xs': '375px',
         xs: '420px',
         sm: '576px',
         mx: '670px',
         md: '768px',
         lg: '992px',
         xl: '1200px',
-        xxl: '1580px',
+        '2xl': '1580px',
     },
     {
         property: 'Device',
-        xxs: 'Small mobile',
+        '2xs': 'Small mobile',
         xs: 'Mobile',
         sm: 'Mobile landscape',
         mx: 'Phablet',
         md: 'Tablet',
         lg: 'Small desktop',
         xl: 'Large desktop',
-        xxl: 'Wide desktop',
+        '2xl': 'Wide desktop',
     },
 ]
-
 
 export type VariantRow = {
     label: string
@@ -91,7 +88,6 @@ export const variantRows: VariantRow[] = [
         status: 'inactive',
     },
 ]
-
 
 export type AriaRow = {
     component: string
@@ -241,7 +237,6 @@ export const ariaReferenceRows: AriaRow[] = [
     },
 ]
 
-
 export type ActionRow = {
     name: string
     function: string
@@ -284,7 +279,6 @@ export const variantData: ActionRow[] = [
     { name: 'Variants', function: 'primary, secondary, danger, and default colours' },
 ]
 
-
 export type SelectionRow = {
     id: string
     name: string
@@ -299,7 +293,6 @@ export const selectionRows: SelectionRow[] = [
     { id: '4', name: 'Diana', role: 'Editor', status: 'active' },
     { id: '5', name: 'Eve', role: 'Viewer', status: 'inactive' },
 ]
-
 
 export type AllFeaturesRow = {
     id: string
@@ -497,7 +490,6 @@ export const allFeaturesData: AllFeaturesRow[] = [
     },
 ]
 
-
 export type PaginationRow = { id: string; name: string; value: string }
 
 export const allPaginationRows: PaginationRow[] = Array.from({ length: 87 }, (_, i) => ({
@@ -511,7 +503,6 @@ export const paginationColumns = [
     { header: 'Name', accessor: 'name' as const },
     { header: 'Value', accessor: 'value' as const },
 ]
-
 
 export type SortingRow = {
     name: string

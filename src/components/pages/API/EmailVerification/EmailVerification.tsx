@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
-import Page from '../../../sharedComponents/Page/Page'
+import Page from '../../../../../common/ux/Page/Page'
 import './EmailVerification.scss'
 import { useVerifyEmailRequest } from './EmailVerification.query'
 import { AxiosError, AxiosResponse } from 'axios'

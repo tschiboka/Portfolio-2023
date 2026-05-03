@@ -3,11 +3,13 @@
 import { Code } from './Code/Code'
 import { Form } from './Form/Form'
 import { Overlay } from './Overlay/Overlay'
+import { Page } from './Page/Page'
 import { Table } from './Table/Table'
 
 export const Test = {
     Code,
     Form,
     Overlay,
+    Page,
     Table,
 }

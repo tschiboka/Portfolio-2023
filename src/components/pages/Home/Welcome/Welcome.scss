@@ -5,7 +5,7 @@
 
 .Welcome {
     position: relative;
-    height: calc(100vh - 5rem);
+    height: calc(100vh - 4rem);
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -15,14 +15,14 @@
         padding: 0 2rem;
     }
     @include bp.md {
-        height: calc(100vh - 10rem);
+        height: calc(100vh - 8rem);
     }
     @include bp.lg {
         padding: 0 3rem;
     }
 
     &.extended {
-        height: calc(100vh - 5rem);
+        height: calc(100vh - 4rem);
     }
 
     h1 {
@@ -32,7 +32,9 @@
         font-size: font.$font_md;
         color: palette.$white_5;
         opacity: 0;
-        animation: from_below 500ms ease-in, fade_in 500ms ease-out forwards;
+        animation:
+            from_below 500ms ease-in,
+            fade_in 500ms ease-out forwards;
 
         @include bp.sm {
             width: 25rem;
@@ -89,7 +91,8 @@
         list-style: none;
         font-size: font.$font_lg;
         opacity: 0;
-        animation: from_right 500ms 1000ms ease-in,
+        animation:
+            from_right 500ms 1000ms ease-in,
             fade_in 500ms 1000ms ease-in forwards;
 
         @include bp.sm {
@@ -132,7 +135,8 @@
         right: 4.5rem;
         top: 11.5vh;
         opacity: 0;
-        animation: fade_in 300ms 900ms ease-out forwards,
+        animation:
+            fade_in 300ms 900ms ease-out forwards,
             from_above_far 1000ms 900ms ease-in;
         @include bp.lg {
             display: block;
@@ -144,9 +148,11 @@
         color: palette.$white_2;
         color: palette.$accent_dark_3;
         font-family: Roboto_Bold;
-        font-size: font.$font_xx;
+        font-size: font.$font_2xl;
         opacity: 0;
-        animation: fade_in 800ms ease-in forwards, from_above 800ms ease-out;
+        animation:
+            fade_in 800ms ease-in forwards,
+            from_above 800ms ease-out;
 
         @include bp.lg {
             font-size: 5rem;
@@ -159,7 +165,9 @@
             top: 30%;
             left: 3rem;
             opacity: 0;
-            animation: fade_in 800ms ease-in forwards, from_left 800ms ease-out;
+            animation:
+                fade_in 800ms ease-in forwards,
+                from_left 800ms ease-out;
         }
         @include bp.xl {
             font-size: 7rem;

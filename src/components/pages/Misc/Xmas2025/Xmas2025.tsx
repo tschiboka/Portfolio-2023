@@ -1,12 +1,7 @@
 import Footer from '../../../sharedComponents/Footer/Footer'
-import { useAppContext } from '../../../../context/AppContext/App.context'
-import Page from '../../../sharedComponents/Page/Page'
+import Page from '../../../../../common/ux/Page/Page'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
-import { Submenu } from '../../API/Nav'
-import Nav from '../../API/Nav/Nav'
-import SubmenuPanel from '../../API/Nav/SubmenuPanel/SubmenuPanel'
-import MobileMenu from '../../API/MobileMenu/MobileMenu'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -21,13 +16,11 @@ import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
 import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
-import { PageContainerProps } from '../../../sharedComponents/Page/Page.types'
+import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
 import { Form } from '@common/ux'
 
 const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
-    const { mobileMenuVisible } = useAppContext()
     const { user } = Session.useContext().session || {}
-    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
     const [pagePingStatus, setPagePingStatus] = useState<string>('')
 
     const {
@@ -87,19 +80,9 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
             loginRequired
             recordVisit={true}
             className="Xmas"
+            variant="api"
+            pageName="Xmas"
         >
-            {' '}
-            <Nav pageName="Xmas" submenuStack={submenuStack} setSubmenuStack={setSubmenuStack} />
-            {Boolean(submenuStack.length) && (
-                <SubmenuPanel
-                    key={submenuStack[0].parentLabel}
-                    submenu={submenuStack[0]}
-                    submenuStack={submenuStack}
-                    setSubmenuStack={setSubmenuStack}
-                    pageName="Xmas 2025"
-                />
-            )}
-            {mobileMenuVisible && <MobileMenu pageName="Xmas" />}
             <main>
                 <img className="reindeer-image" src={Reindeer} alt="Reindeer Image" />
                 <XmasFormCanvas lightCount={30} lightSize={6}>

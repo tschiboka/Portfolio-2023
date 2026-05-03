@@ -22,14 +22,14 @@ export const Responsive = () => (
                 data={breakpointData}
                 columns={[
                     { header: 'Property', accessor: 'property' },
-                    { header: 'xxs', accessor: 'xxs', breakpoint: 'xxs' },
+                    { header: '2xs', accessor: '2xs', breakpoint: '2xs' },
                     { header: 'xs', accessor: 'xs', breakpoint: 'xs' },
                     { header: 'sm', accessor: 'sm', breakpoint: 'sm' },
                     { header: 'mx', accessor: 'mx', breakpoint: 'mx' },
                     { header: 'md', accessor: 'md', breakpoint: 'md' },
                     { header: 'lg', accessor: 'lg', breakpoint: 'lg' },
                     { header: 'xl', accessor: 'xl', breakpoint: 'xl' },
-                    { header: 'xxl', accessor: 'xxl', breakpoint: 'xxl' },
+                    { header: '2xl', accessor: '2xl', breakpoint: '2xl' },
                 ]}
             />
             <Code language="tsx" content={Snippets.Responsive.breakpoints} />

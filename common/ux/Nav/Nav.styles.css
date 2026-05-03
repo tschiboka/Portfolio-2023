@@ -1,0 +1,160 @@
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    z-index: 90;
+    overflow: hidden;
+}
+
+@media (min-width: 168px) {
+    .Header {
+        padding: 0 1.2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .Header {
+        padding: 0 1.5rem;
+    }
+}
+
+.Header .burger {
+    color: #aaa;
+    font-size: 1.8em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 576px) {
+    .Header .burger {
+        font-size: 2.4em;
+    }
+}
+
+@media (min-width: 768px) {
+    .Header .burger {
+        display: none;
+    }
+}
+
+.Header .t-logo {
+    height: 30px;
+    width: 30px;
+    padding: 3px;
+    border-radius: 100%;
+    background-color: #007676;
+    cursor: pointer;
+}
+
+@media (min-width: 576px) {
+    .Header .t-logo {
+        height: 40px;
+        width: 40px;
+    }
+}
+
+.Header .nav_links {
+    display: none;
+    list-style: none;
+    font-variant: small-caps;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .Header .nav_links {
+        display: flex;
+    }
+}
+
+.Header .nav_links li {
+    position: relative;
+    margin-left: 1.2rem;
+    color: #888;
+    font-size: 1.1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.Header .nav_links li.active,
+.Header .nav_links li:hover,
+.Header .nav_links li.extended {
+    color: white;
+    font-family: Roboto_Bold;
+}
+
+.Header .nav_links li.active:hover {
+    transform: scale(1);
+}
+
+.Header .nav_links li:hover {
+    transform: scale(1.1);
+}
+
+.Header .nav_links li:not(.active) .active-dot {
+    display: none;
+}
+
+.Header .nav_links li .chevron {
+    color: #888;
+    height: 70%;
+    transform: translateY(5px);
+}
+
+.Header .nav_links .link {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.Header .active-dot {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .Header .active-dot {
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        display: block;
+        width: 6px;
+        height: 6px;
+        background-color: white;
+        border-radius: 100%;
+    }
+}
+
+/* Light theme */
+.light .Header {
+    background-color: white;
+}
+
+.light .Header .burger {
+    color: #111;
+}
+
+.light .Header .t-logo {
+    background-color: #111;
+    opacity: 1;
+}
+
+.light .Header .nav_links li {
+    color: black;
+}
+
+.light .Header .nav_links li.active {
+    font-family: Roboto_Bold;
+}
+
+.light .Header .active-dot {
+    background-color: black;
+}

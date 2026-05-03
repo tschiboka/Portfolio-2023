@@ -1,5 +1,5 @@
 import { Code, Pill, Stack } from '@common/ux'
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import { Code as Snippets } from './Stacks.code'
 
 type StacksProps = { path: string }

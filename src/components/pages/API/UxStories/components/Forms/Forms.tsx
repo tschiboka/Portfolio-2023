@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Code, Form } from '@common/ux'
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import { Code as Snippets } from './Forms.code'
 
 type FormsProps = { path: string }
@@ -856,114 +856,108 @@ export const Forms = ({ path }: FormsProps) => {
                         <code>cursor: not-allowed</code>.
                     </p>
                     <Form autoComplete="off" ariaLabel="Disabled states empty">
-                        <fieldset disabled>
-                            <Form.Fieldset>
-                                <Form.Label for="name">Name</Form.Label>
-                                <Form.Input
-                                    name="name"
+                        <Form.Fieldset disabled>
+                            <Form.Label for="name">Name</Form.Label>
+                            <Form.Input
+                                name="name"
+                                control={disabledControl}
+                                type="text"
+                                placeholder="Enter name…"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="email">Email</Form.Label>
+                            <Form.Input
+                                name="email"
+                                control={disabledControl}
+                                type="email"
+                                autoComplete="one-time-code"
+                                placeholder="Enter email…"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="password">Password</Form.Label>
+                            <Form.Input
+                                name="password"
+                                control={disabledControl}
+                                type="password"
+                                autoComplete="one-time-code"
+                                placeholder="Enter password…"
+                                addRevealPasswordIcon
+                                revealPassword={revealPassword}
+                                setRevealPassword={setRevealPassword}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="dob">Date of Birth</Form.Label>
+                            <Form.DateInput name="dob" control={disabledControl} />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="dobNative">Date (Native)</Form.Label>
+                            <Form.Input name="dobNative" control={disabledControl} type="date" />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="bio">Bio</Form.Label>
+                            <Form.TextArea
+                                name="bio"
+                                control={disabledControl}
+                                placeholder="Tell us about yourself…"
+                                maxLength={200}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.RadioGroup label="Role" htmlFor="role">
+                                <Form.RadioButton
+                                    name="role"
                                     control={disabledControl}
-                                    type="text"
-                                    placeholder="Enter name…"
+                                    value="admin"
+                                    onChange={() => undefined}
                                 />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="email">Email</Form.Label>
-                                <Form.Input
-                                    name="email"
+                                <Form.Label for="roleAdmin">Admin</Form.Label>
+                                <Form.RadioButton
+                                    name="role"
                                     control={disabledControl}
-                                    type="email"
-                                    autoComplete="one-time-code"
-                                    placeholder="Enter email…"
+                                    value="user"
+                                    onChange={() => undefined}
                                 />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="password">Password</Form.Label>
-                                <Form.Input
-                                    name="password"
-                                    control={disabledControl}
-                                    type="password"
-                                    autoComplete="one-time-code"
-                                    placeholder="Enter password…"
-                                    addRevealPasswordIcon
-                                    revealPassword={revealPassword}
-                                    setRevealPassword={setRevealPassword}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="dob">Date of Birth</Form.Label>
-                                <Form.DateInput name="dob" control={disabledControl} />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="dobNative">Date (Native)</Form.Label>
-                                <Form.Input
-                                    name="dobNative"
-                                    control={disabledControl}
-                                    type="date"
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="bio">Bio</Form.Label>
-                                <Form.TextArea
-                                    name="bio"
-                                    control={disabledControl}
-                                    placeholder="Tell us about yourself…"
-                                    maxLength={200}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.RadioGroup label="Role" htmlFor="role">
-                                    <Form.RadioButton
-                                        name="role"
-                                        control={disabledControl}
-                                        value="admin"
-                                        onChange={() => undefined}
-                                    />
-                                    <Form.Label for="roleAdmin">Admin</Form.Label>
-                                    <Form.RadioButton
-                                        name="role"
-                                        control={disabledControl}
-                                        value="user"
-                                        onChange={() => undefined}
-                                    />
-                                    <Form.Label for="roleUser">User</Form.Label>
-                                </Form.RadioGroup>
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Checkbox
-                                    name="terms"
-                                    control={disabledControl}
-                                    label="I agree to the terms"
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="framework">Framework</Form.Label>
-                                <Form.SearchInput
-                                    name="framework"
-                                    control={disabledControl}
-                                    options={frameworkOptions}
-                                    placeholder="Select framework"
-                                    buttonIcon="arrow"
-                                    onSelect={() => undefined}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="language">Language</Form.Label>
-                                <Form.SearchInput
-                                    name="language"
-                                    control={disabledControl}
-                                    options={languageOptions}
-                                    placeholder="Search language"
-                                    highlightMatch
-                                    onSelect={() => undefined}
-                                />
-                            </Form.Fieldset>
-                            <Form.ButtonGroup>
-                                <Form.Button variant="secondary" disabled>
-                                    Cancel
-                                </Form.Button>
-                                <Form.Button disabled>Submit</Form.Button>
-                            </Form.ButtonGroup>
-                        </fieldset>
+                                <Form.Label for="roleUser">User</Form.Label>
+                            </Form.RadioGroup>
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Checkbox
+                                name="terms"
+                                control={disabledControl}
+                                label="I agree to the terms"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="framework">Framework</Form.Label>
+                            <Form.SearchInput
+                                name="framework"
+                                control={disabledControl}
+                                options={frameworkOptions}
+                                placeholder="Select framework"
+                                buttonIcon="arrow"
+                                onSelect={() => undefined}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="language">Language</Form.Label>
+                            <Form.SearchInput
+                                name="language"
+                                control={disabledControl}
+                                options={languageOptions}
+                                placeholder="Search language"
+                                highlightMatch
+                                onSelect={() => undefined}
+                            />
+                        </Form.Fieldset>
+                        <Form.ButtonGroup>
+                            <Form.Button variant="secondary" disabled>
+                                Cancel
+                            </Form.Button>
+                            <Form.Button disabled>Submit</Form.Button>
+                        </Form.ButtonGroup>
                     </Form>
                     <Code language="tsx" content={Snippets.DisabledStates.demo} />
                 </section>
@@ -972,114 +966,112 @@ export const Forms = ({ path }: FormsProps) => {
                 <section>
                     <h2>Disabled States — With Values</h2>
                     <Form autoComplete="off" ariaLabel="Disabled states filled">
-                        <fieldset disabled>
-                            <Form.Fieldset>
-                                <Form.Label for="name">Name</Form.Label>
-                                <Form.Input
-                                    name="name"
+                        <Form.Fieldset disabled>
+                            <Form.Label for="name">Name</Form.Label>
+                            <Form.Input
+                                name="name"
+                                control={disabledFilledControl}
+                                type="text"
+                                placeholder="Enter name…"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="email">Email</Form.Label>
+                            <Form.Input
+                                name="email"
+                                control={disabledFilledControl}
+                                type="email"
+                                autoComplete="one-time-code"
+                                placeholder="Enter email…"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="password">Password</Form.Label>
+                            <Form.Input
+                                name="password"
+                                control={disabledFilledControl}
+                                type="password"
+                                autoComplete="one-time-code"
+                                placeholder="Enter password…"
+                                addRevealPasswordIcon
+                                revealPassword={revealPassword}
+                                setRevealPassword={setRevealPassword}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="dob">Date of Birth</Form.Label>
+                            <Form.DateInput name="dob" control={disabledFilledControl} />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="dobNative">Date (Native)</Form.Label>
+                            <Form.Input
+                                name="dobNative"
+                                control={disabledFilledControl}
+                                type="date"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="bio">Bio</Form.Label>
+                            <Form.TextArea
+                                name="bio"
+                                control={disabledFilledControl}
+                                placeholder="Tell us about yourself…"
+                                maxLength={200}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.RadioGroup label="Role" htmlFor="role">
+                                <Form.RadioButton
+                                    name="role"
                                     control={disabledFilledControl}
-                                    type="text"
-                                    placeholder="Enter name…"
+                                    value="admin"
+                                    onChange={() => undefined}
                                 />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="email">Email</Form.Label>
-                                <Form.Input
-                                    name="email"
+                                <Form.Label for="roleAdmin">Admin</Form.Label>
+                                <Form.RadioButton
+                                    name="role"
                                     control={disabledFilledControl}
-                                    type="email"
-                                    autoComplete="one-time-code"
-                                    placeholder="Enter email…"
+                                    value="user"
+                                    onChange={() => undefined}
                                 />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="password">Password</Form.Label>
-                                <Form.Input
-                                    name="password"
-                                    control={disabledFilledControl}
-                                    type="password"
-                                    autoComplete="one-time-code"
-                                    placeholder="Enter password…"
-                                    addRevealPasswordIcon
-                                    revealPassword={revealPassword}
-                                    setRevealPassword={setRevealPassword}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="dob">Date of Birth</Form.Label>
-                                <Form.DateInput name="dob" control={disabledFilledControl} />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="dobNative">Date (Native)</Form.Label>
-                                <Form.Input
-                                    name="dobNative"
-                                    control={disabledFilledControl}
-                                    type="date"
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="bio">Bio</Form.Label>
-                                <Form.TextArea
-                                    name="bio"
-                                    control={disabledFilledControl}
-                                    placeholder="Tell us about yourself…"
-                                    maxLength={200}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.RadioGroup label="Role" htmlFor="role">
-                                    <Form.RadioButton
-                                        name="role"
-                                        control={disabledFilledControl}
-                                        value="admin"
-                                        onChange={() => undefined}
-                                    />
-                                    <Form.Label for="roleAdmin">Admin</Form.Label>
-                                    <Form.RadioButton
-                                        name="role"
-                                        control={disabledFilledControl}
-                                        value="user"
-                                        onChange={() => undefined}
-                                    />
-                                    <Form.Label for="roleUser">User</Form.Label>
-                                </Form.RadioGroup>
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Checkbox
-                                    name="terms"
-                                    control={disabledFilledControl}
-                                    label="I agree to the terms"
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="framework">Framework</Form.Label>
-                                <Form.SearchInput
-                                    name="framework"
-                                    control={disabledFilledControl}
-                                    options={frameworkOptions}
-                                    placeholder="Select framework"
-                                    buttonIcon="arrow"
-                                    onSelect={() => undefined}
-                                />
-                            </Form.Fieldset>
-                            <Form.Fieldset>
-                                <Form.Label for="language">Language</Form.Label>
-                                <Form.SearchInput
-                                    name="language"
-                                    control={disabledFilledControl}
-                                    options={languageOptions}
-                                    placeholder="Search language"
-                                    highlightMatch
-                                    onSelect={() => undefined}
-                                />
-                            </Form.Fieldset>
-                            <Form.ButtonGroup>
-                                <Form.Button variant="secondary" disabled>
-                                    Cancel
-                                </Form.Button>
-                                <Form.Button disabled>Submit</Form.Button>
-                            </Form.ButtonGroup>
-                        </fieldset>
+                                <Form.Label for="roleUser">User</Form.Label>
+                            </Form.RadioGroup>
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Checkbox
+                                name="terms"
+                                control={disabledFilledControl}
+                                label="I agree to the terms"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="framework">Framework</Form.Label>
+                            <Form.SearchInput
+                                name="framework"
+                                control={disabledFilledControl}
+                                options={frameworkOptions}
+                                placeholder="Select framework"
+                                buttonIcon="arrow"
+                                onSelect={() => undefined}
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset disabled>
+                            <Form.Label for="language">Language</Form.Label>
+                            <Form.SearchInput
+                                name="language"
+                                control={disabledFilledControl}
+                                options={languageOptions}
+                                placeholder="Search language"
+                                highlightMatch
+                                onSelect={() => undefined}
+                            />
+                        </Form.Fieldset>
+                        <Form.ButtonGroup>
+                            <Form.Button variant="secondary" disabled>
+                                Cancel
+                            </Form.Button>
+                            <Form.Button disabled>Submit</Form.Button>
+                        </Form.ButtonGroup>
                     </Form>
                 </section>
             </main>

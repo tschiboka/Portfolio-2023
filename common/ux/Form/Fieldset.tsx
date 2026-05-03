@@ -4,10 +4,11 @@ import './Form.styles.css'
 
 type FieldsetProps = AccessibleProps & {
     children: ReactNode
+    disabled?: boolean
 }
 
-export const Fieldset = ({ children, ariaLabel, className, style }: FieldsetProps) => (
-    <fieldset className={className} aria-label={ariaLabel} style={style}>
+export const Fieldset = ({ children, ariaLabel, className, style, disabled }: FieldsetProps) => (
+    <fieldset className={className} aria-label={ariaLabel} style={style} disabled={disabled}>
         {children}
     </fieldset>
 )

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { Code, Overlay, Stack } from '@common/ux'
 import { PopupMode, PopupSize } from '@common/ux/Overlay/Overlay.types'
 import type { ActionMenuItem } from '@common/ux/Overlay/ActionMenu'
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import { Code as Snippets } from './Overlays.code'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']

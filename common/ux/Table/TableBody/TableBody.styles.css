@@ -23,7 +23,7 @@ table td div.icon {
     border-radius: 100%;
 }
 
-table td.xxs {
+table td.\32 xs {
     display: none;
 }
 
@@ -51,7 +51,7 @@ table td.xl {
     display: none;
 }
 
-table td.xxl {
+table td.\32xl {
     display: none;
 }
 
@@ -64,7 +64,7 @@ table td.hide {
 }
 
 @media (min-width: 375px) {
-    table td.xxs {
+    table td.\32xs {
         display: table-cell;
     }
 }
@@ -106,7 +106,7 @@ table td.hide {
 }
 
 @media (min-width: 1580px) {
-    table td.xxl {
+    table td.\32xl {
         display: table-cell;
     }
 }

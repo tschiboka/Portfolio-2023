@@ -1,7 +1,7 @@
 import { screen, within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
-import { Test } from '@common/ux'
+import { Test } from '@common/ux/Test'
 
 describe('Table — Accessibility', () => {
     describe('Region wrapper', () => {
@@ -156,7 +156,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             expect(screen.getByRole('columnheader', { name: 'Expand' })).toBeInTheDocument()
@@ -218,7 +218,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             const expandBtns = Test.Table.Get.expandButtons()
@@ -231,7 +231,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             const btn = Test.Table.Get.expandButton(0)
@@ -245,7 +245,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             const btn = Test.Table.Get.expandButton(0)
@@ -262,7 +262,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             await Test.Table.Act.expandRow(0)
@@ -275,7 +275,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             await Test.Table.Act.expandRow(0)
@@ -291,7 +291,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: [
                     { header: 'Name', accessor: 'name' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxl' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
             await Test.Table.Act.expandRow(2)

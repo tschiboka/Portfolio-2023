@@ -1,5 +1,5 @@
 import { Code } from '@common/ux'
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import { Code as Snippets } from './CodeBlocks.code'
 
 type CodeBlocksProps = { path: string }

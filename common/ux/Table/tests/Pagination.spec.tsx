@@ -6,7 +6,7 @@ import {
     DEFAULT_PAGE_SIZE,
     DEFAULT_PAGE_SIZE_OPTIONS,
 } from '../TablePagination/TablePagination.utils'
-import { Test } from '@common/ux'
+import { Test } from '@common/ux/Test'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 

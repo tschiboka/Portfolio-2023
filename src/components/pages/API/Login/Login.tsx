@@ -1,4 +1,4 @@
-import Page from '../../../sharedComponents/Page/Page'
+import Page from '../../../../../common/ux/Page/Page'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
 import { AxiosError } from 'axios'
@@ -8,13 +8,9 @@ import { Form } from '@common/ux'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
 import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
 import { useLoginApi } from './Login.query'
-import { useAppContext } from '../../../../context/AppContext/App.context'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import './Login.scss'
-import Nav from '../../../sharedComponents/Nav/Nav'
-import Menu from '../../../sharedComponents/Menu/Menu'
-import SubNav from '../../../sharedComponents/SubNav/SubNav'
 import { Session } from '../../../../context/SessionContext'
 import { QueryKey } from '@common/utils'
 
@@ -24,7 +20,6 @@ type LoginProps = {
 }
 
 const Login = ({ path, pageName }: LoginProps) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     const { setSession } = Session.useContext()
     const navigate = useNavigate()
     const { loginFormRequest, settingsRequest } = useLoginApi()
@@ -77,10 +72,14 @@ const Login = ({ path, pageName }: LoginProps) => {
     const isLoading = settingIsLoading || loginRequest.isPending
 
     return (
-        <Page className="Login" title="Tivadar Debnar | Login" path={path} recordVisit={false}>
-            <Nav pageName={pageName} />
-            {mobileMenuVisible && <Menu pageName="home" />}
-            {subMenuVisible && <SubNav />}
+        <Page
+            className="Login"
+            title="Tivadar Debnar | Login"
+            path={path}
+            recordVisit={false}
+            variant="portfolio"
+            pageName={pageName}
+        >
             <main>
                 <div>
                     <h1>Login</h1>

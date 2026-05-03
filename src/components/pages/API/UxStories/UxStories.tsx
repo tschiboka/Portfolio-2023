@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Page from '../../../sharedComponents/Page/Page'
+import Page from '../../../../../common/ux/Page/Page'
 import { Stack } from '@common/ux'
 
 interface UxStoriesProps {

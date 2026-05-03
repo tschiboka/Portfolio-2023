@@ -2,6 +2,7 @@ import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties, ReactNode, RefObject } from 'react'
+import type { AccessibleProps } from '../index.types'
 import type { AnchorResult } from './Overlay.types'
 import { ArrowClass, getAnchorPosition } from './Popup.utils'
 
@@ -14,11 +15,10 @@ export type ActionMenuItem = {
     onClick: () => void
 }
 
-export type ActionMenuProps = {
+export type ActionMenuProps = AccessibleProps & {
     anchorRef: RefObject<HTMLElement | null>
     items: ActionMenuItem[]
     align?: 'center' | 'start' | 'end'
-    ariaLabel?: string
     onClose: () => void
 }
 
@@ -27,6 +27,8 @@ export const ActionMenu = ({
     items,
     align = 'center',
     ariaLabel,
+    className,
+    style: styleProp,
     onClose,
 }: ActionMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null)
@@ -73,11 +75,13 @@ export const ActionMenu = ({
     return createPortal(
         <div
             ref={menuRef}
-            className="Overlay--action-menu"
+            className={['Overlay--action-menu', className].filter(Boolean).join(' ')}
             role="menu"
             aria-label={ariaLabel ?? 'Action menu'}
             style={
-                anchorResult ? { ...anchorResult.style, ...anchorResult.cornerStyle } : measureStyle
+                anchorResult
+                    ? { ...anchorResult.style, ...anchorResult.cornerStyle, ...styleProp }
+                    : measureStyle
             }
         >
             {anchorResult && (

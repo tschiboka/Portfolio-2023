@@ -277,19 +277,19 @@ export const AllFeaturesCombinedDemo = () => {
                     header: 'Joined',
                     accessor: 'joined',
                     defaultValue: 'N/A',
-                    breakpoint: 'xxl',
+                    breakpoint: '2xl',
                 },
                 {
                     header: 'Phone',
                     accessor: 'phone',
                     defaultValue: 'N/A',
-                    breakpoint: 'xxl',
+                    breakpoint: '2xl',
                 },
                 {
                     header: 'Location',
                     accessor: 'location',
                     defaultValue: 'N/A',
-                    breakpoint: 'xxl',
+                    breakpoint: '2xl',
                 },
                 {
                     header: 'Note',

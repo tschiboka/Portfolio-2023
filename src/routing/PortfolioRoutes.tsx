@@ -21,19 +21,19 @@ import { Clock } from '../components/sharedComponents/Clock/Clock'
 export const PortfolioRoutes = [
     {
         path: '/',
-        element: <Home pageName="home" path="/" />,
+        element: <Home pageName="Home" path="/" />,
     },
     {
         path: '/about',
-        element: <About pageName="about" path="/about" />,
+        element: <About pageName="About" path="/about" />,
     },
     {
         path: '/projects',
-        element: <Projects pageName="projects" path="/projects" />,
+        element: <Projects pageName="Projects" path="/projects" />,
     },
     {
         path: '/contact',
-        element: <Contact pageName="contact" path="/contact" />,
+        element: <Contact pageName="Contact" path="/contact" />,
     },
     {
         path: '/privacy-policy',
@@ -41,7 +41,7 @@ export const PortfolioRoutes = [
     },
     {
         path: '/blog',
-        element: <Blog pageName="blog" path="/blog" />,
+        element: <Blog pageName="Blog" path="/blog" />,
     },
     // Blog Article Pages
     {

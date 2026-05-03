@@ -1,4 +1,4 @@
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import {
     Fundamentals,
     Filtering,

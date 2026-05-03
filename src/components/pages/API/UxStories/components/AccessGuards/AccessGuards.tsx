@@ -2,7 +2,7 @@ import { AccessGuard } from '@common/utils'
 import { useForm } from 'react-hook-form'
 import { Guards } from './Guards'
 import { Code, Form, Stack } from '@common/ux'
-import Page from '../../../../../sharedComponents/Page/Page'
+import Page from '../../../../../../../common/ux/Page/Page'
 import { Code as Snippets } from './AccessGuards.code'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards

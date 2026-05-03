@@ -84,7 +84,7 @@ table thead th.sorted-desc .sort-icon::before {
     opacity: 0.3;
 }
 
-table th.xxs {
+table th.\32xs {
     display: none;
 }
 
@@ -112,7 +112,7 @@ table th.xl {
     display: none;
 }
 
-table th.xxl {
+table th.\32xl {
     display: none;
 }
 
@@ -121,7 +121,7 @@ table th.accordion {
 }
 
 @media (min-width: 375px) {
-    table th.xxs {
+    table th.\32xs {
         display: table-cell;
     }
 }
@@ -163,7 +163,7 @@ table th.accordion {
 }
 
 @media (min-width: 1580px) {
-    table th.xxl {
+    table th.\32xl {
         display: table-cell;
     }
 }

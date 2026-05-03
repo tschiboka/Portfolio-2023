@@ -1,4 +1,4 @@
-import { Test } from '@common/ux'
+import { Test } from '@common/ux/Test'
 import { screen, within } from '@testing-library/react'
 
 describe('Table — Combined Features', () => {
@@ -256,7 +256,7 @@ describe('Table — Combined Features', () => {
                     header: 'Note',
                     accessor: 'note',
                     defaultValue: 'N/A',
-                    breakpoint: 'xxl',
+                    breakpoint: '2xl',
                 },
             ],
         })
@@ -340,7 +340,7 @@ describe('Table — Combined Features', () => {
             data: fullData.slice(0, 2),
             columns: [
                 { header: 'Name', accessor: 'name', isSortable: true },
-                { header: 'Email', accessor: 'email', breakpoint: 'xxl' },
+                { header: 'Email', accessor: 'email', breakpoint: '2xl' },
                 { header: 'Status', accessor: 'status' },
             ],
             selection: {

@@ -1,10 +1,5 @@
-import { useAppContext } from '../../../../context/AppContext/App.context'
-import Page from '../../../sharedComponents/Page/Page'
-import Nav from '../Nav/Nav'
-import MobileMenu from '../MobileMenu/MobileMenu'
+import Page from '../../../../../common/ux/Page/Page'
 import { useState } from 'react'
-import { Submenu } from '../Nav'
-import SubmenuPanel from '../Nav/SubmenuPanel/SubmenuPanel'
 import { useForm } from 'react-hook-form'
 import './Categories.scss'
 import { CategoryFormData, categoriesSchema } from '.'
@@ -23,9 +18,6 @@ type CategoriesProps = {
 }
 
 const Categories = ({ path }: CategoriesProps) => {
-    const { mobileMenuVisible } = useAppContext()
-    const [submenuStack, setSubmenuStack] = useState<Submenu[]>([])
-
     const [showParentInput, setShowParentInput] = useState(false)
     const { data: categories, ...categoriesGetRequest } = useGetCategories()
     const parentOptions = getParents.fromApi(categories?.data || [])
@@ -60,22 +52,14 @@ const Categories = ({ path }: CategoriesProps) => {
     }
 
     return (
-        <Page title={'Tivadar Debnar | Categories'} path={path} recordVisit={false} loginRequired>
-            <Nav
-                pageName="Categories"
-                submenuStack={submenuStack}
-                setSubmenuStack={setSubmenuStack}
-            />
-            {Boolean(submenuStack.length) && (
-                <SubmenuPanel
-                    key={submenuStack[0].parentLabel}
-                    submenu={submenuStack[0]}
-                    submenuStack={submenuStack}
-                    setSubmenuStack={setSubmenuStack}
-                    pageName="Stats"
-                />
-            )}
-            {mobileMenuVisible && <MobileMenu pageName="Categories" />}
+        <Page
+            title={'Tivadar Debnar | Categories'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Categories"
+        >
             <main className="Categories">
                 <h1>Categories</h1>
                 <p>

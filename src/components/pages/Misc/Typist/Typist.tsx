@@ -1,16 +1,11 @@
-import { useAppContext } from '../../../../context/AppContext/App.context'
 import Footer from '../../../sharedComponents/Footer/Footer'
-import Page from '../../../sharedComponents/Page/Page'
-import Nav from '../../../sharedComponents/Nav/Nav'
-import { PageContainerProps } from '../../../sharedComponents/Page/Page.types'
-import Menu from '../../../sharedComponents/Menu/Menu'
+import Page from '../../../../../common/ux/Page/Page'
+import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
 import { Editor } from './Editor/Editor'
 import { TypistContextProvider } from './Typist.context'
 import { HeadsUpDisplay } from './HeadsUpDisplay/HeadsUpDisplay'
 
 export const Typist = ({ pageName, path }: PageContainerProps) => {
-    const { mobileMenuVisible } = useAppContext()
-
     return (
         <TypistContextProvider>
             <Page
@@ -18,9 +13,9 @@ export const Typist = ({ pageName, path }: PageContainerProps) => {
                 path="/projects/typist"
                 recordVisit={true}
                 className="Typist"
+                variant="portfolio"
+                pageName={pageName}
             >
-                <Nav pageName={pageName} />
-                {mobileMenuVisible && <Menu pageName={pageName} />}
                 <main>
                     <HeadsUpDisplay />
                     <Editor />

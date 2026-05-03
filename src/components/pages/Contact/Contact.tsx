@@ -1,8 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import Page from '../../sharedComponents/Page/Page'
-import Nav from '../../sharedComponents/Nav/Nav'
-import Menu from '../../sharedComponents/Menu/Menu'
-import SubNav from '../../sharedComponents/SubNav/SubNav'
+import Page from '../../../../common/ux/Page/Page'
 import Footer from '../../sharedComponents/Footer/Footer'
 import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgement'
 import { MdAlternateEmail } from 'react-icons/md'
@@ -10,7 +7,6 @@ import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingInd
 import { FiPhone } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { ChangeEvent, useRef, useState } from 'react'
-import { useAppContext } from '../../../context/AppContext/App.context'
 import { PostMessageResponse } from '@common/types'
 import './Contact.scss'
 
@@ -65,7 +61,6 @@ export const validateMessage = (message: string): ValidationResult => {
 }
 
 const Contact = ({ pageName, path }: Props) => {
-    const { mobileMenuVisible, subMenuVisible } = useAppContext()
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const phoneRef = useRef<HTMLInputElement>(null)
@@ -171,11 +166,12 @@ const Contact = ({ pageName, path }: Props) => {
     const mail = 'Dev@tschiboka.com'
     const tel = '+44 7474 999 334'
     return (
-        <Page title={'Tivadar Debnar | Contact'} path={path}>
-            <Nav pageName={pageName} />
-            {mobileMenuVisible && <Menu pageName="contact" />}
-            {subMenuVisible && <SubNav />}
-
+        <Page
+            title={'Tivadar Debnar | Contact'}
+            path={path}
+            variant="portfolio"
+            pageName={pageName}
+        >
             {showMessageAck && <MessageAcknowledgement />}
 
             <main className="contact">

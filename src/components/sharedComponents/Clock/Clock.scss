@@ -9,8 +9,8 @@ $clock-container-max-size: 600px;
 .ClockWidget {
     width: 100vw;
     height: 100vh;
-    min-width: bp.$screen-xxs-min;
-    min-height: bp.$screen-xxs-min-height;
+    min-width: bp.$screen-2xs-min;
+    min-height: bp.$screen-2xs-min-height;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,8 +19,8 @@ $clock-container-max-size: 600px;
     font-size: font.$font_sm;
 
     .ClockContainer {
-        min-width: bp.$screen-xxs-min;
-        min-height: bp.$screen-xxs-min;
+        min-width: bp.$screen-2xs-min;
+        min-height: bp.$screen-2xs-min;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -37,8 +37,8 @@ $clock-container-max-size: 600px;
         }
 
         .ClockFace {
-            width: calc(bp.$screen-xxs-min - 15vw);
-            height: calc(bp.$screen-xxs-min - 15vw);
+            width: calc(bp.$screen-2xs-min - 15vw);
+            height: calc(bp.$screen-2xs-min - 15vw);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -60,8 +60,8 @@ $clock-container-max-size: 600px;
     }
 
     @media (orientation: landscape) {
-        min-width: bp.$screen-xxs-min-height;
-        min-height: bp.$screen-xxs-min;
+        min-width: bp.$screen-2xs-min-height;
+        min-height: bp.$screen-2xs-min;
         flex-direction: row;
     }
 }

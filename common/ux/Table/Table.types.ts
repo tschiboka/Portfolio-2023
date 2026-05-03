@@ -3,7 +3,7 @@ import type { AccessibleProps } from '../index.types'
 
 import type { DropdownOption } from './TableInputs/TableDropdown'
 
-export type TableBreakpoint = 'xxs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | 'xxl' | 'accordion'
+export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'
 
 export type CellValue<TData extends Record<string, ReactNode>> = TData[keyof TData]
 

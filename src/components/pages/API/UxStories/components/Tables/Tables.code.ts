@@ -130,10 +130,10 @@ download={{
     Responsive: {
         breakpoints: `columns={[
     { header: 'Property', accessor: 'property' },
-    { header: 'xxs', accessor: 'xxs', breakpoint: 'xxs' },
+    { header: '2xs', accessor: '2xs', breakpoint: '2xs' },
     { header: 'xs', accessor: 'xs', breakpoint: 'xs' },
     { header: 'sm', accessor: 'sm', breakpoint: 'sm' },
-    // mx, md, lg, xl, xxl...
+    // mx, md, lg, xl, 2xl...
 ]}`,
         accordion: `columns={[
     { header: 'Name', accessor: 'name' },
@@ -385,8 +385,8 @@ actions={[
 // Spacer <td>: aria-hidden="true"
 columns={[
     { header: 'Name', accessor: 'name' },
-    { header: 'Value', accessor: 'value', breakpoint: 'xxs' },
-    { header: 'Status', accessor: 'status', breakpoint: 'xxs' },
+    { header: 'Value', accessor: 'value', breakpoint: '2xs' },
+    { header: 'Status', accessor: 'status', breakpoint: '2xs' },
 ]}`,
         emptyStateRole: `// Empty placeholder cell gets role="status"
 <Table

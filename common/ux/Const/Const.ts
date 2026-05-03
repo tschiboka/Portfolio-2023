@@ -86,23 +86,23 @@ export const Spacing = {
 } as const
 
 export const Breakpoint = {
-    xxs: 375,
+    '2xs': 375,
     xs: 420,
     sm: 576,
     mx: 670,
     md: 768,
     lg: 992,
     xl: 1200,
-    xxl: 1580,
+    '2xl': 1580,
     accordion: Infinity,
 } as const
 
 export const Font = {
-    xxs: '0.7em',
+    '2xs': '0.7em',
     xs: '0.8em',
     sm: '1em',
     md: '1.2em',
     lg: '1.6em',
     xl: '2.2em',
-    xxl: '3em',
+    '2xl': '3em',
 } as const

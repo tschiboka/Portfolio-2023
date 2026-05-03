@@ -151,7 +151,7 @@ export const Accessibility = () => (
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Value', accessor: 'value', variant: 'primary' },
-                    { header: 'Status', accessor: 'status', breakpoint: 'xxs' },
+                    { header: 'Status', accessor: 'status', breakpoint: '2xs' },
                 ]}
                 actions={[
                     {
@@ -215,11 +215,11 @@ export const Accessibility = () => (
                 data={rows.slice(0, 2)}
                 columns={[
                     { header: 'Name', accessor: 'name', variant: 'primary' },
-                    { header: 'Value', accessor: 'value', breakpoint: 'xxs' },
+                    { header: 'Value', accessor: 'value', breakpoint: '2xs' },
                     {
                         header: 'Status',
                         accessor: 'status',
-                        breakpoint: 'xxs',
+                        breakpoint: '2xs',
                         variant: 'danger',
                     },
                 ]}

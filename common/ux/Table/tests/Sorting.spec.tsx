@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { getNextSortDirection } from '../TableHead/TableHead.utils'
-import { Test } from '@common/ux'
+import { Test } from '@common/ux/Test'
 import { Row } from './Table.spec.types'
 import { rows } from './Table.mocks'
 
