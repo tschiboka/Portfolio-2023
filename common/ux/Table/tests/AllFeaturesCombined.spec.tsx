@@ -65,7 +65,7 @@ describe('Table — Combined Features', () => {
             id: 'full-table',
             title: 'Combined Table',
             description: 'All features at once',
-            onInfo: jest.fn(),
+            onInfo: vi.fn(),
             legend: <span>Legend</span>,
             ariaLabel: 'Full feature table',
             rowAriaLabel: 'User row',
@@ -75,11 +75,11 @@ describe('Table — Combined Features', () => {
             selection: {
                 getRowId: (r) => r.id,
                 selectedRowIds: [],
-                onChange: jest.fn(),
+                onChange: vi.fn(),
                 isRowSelectable: ({ row }) => row.status !== 'inactive',
             },
             actions: [
-                { id: 'edit', label: 'Edit', variant: 'primary', onClick: jest.fn() },
+                { id: 'edit', label: 'Edit', variant: 'primary', onClick: vi.fn() },
                 {
                     id: 'delete',
                     label: 'Delete',
@@ -95,7 +95,7 @@ describe('Table — Combined Features', () => {
             sorting: {
                 column: 'name',
                 direction: 'asc',
-                onSortChange: jest.fn(),
+                onSortChange: vi.fn(),
             },
             filtering: {
                 inputs: [
@@ -111,14 +111,14 @@ describe('Table — Combined Features', () => {
                     },
                     { key: 'hasNote', label: 'Has Note', type: 'checkbox' },
                 ],
-                onFilter: jest.fn(),
+                onFilter: vi.fn(),
             },
             download: {
                 options: [
                     { value: 'csv', label: 'CSV' },
                     { value: 'pdf', label: 'PDF' },
                 ],
-                onDownload: jest.fn(),
+                onDownload: vi.fn(),
             },
             pagination: {
                 page: 1,
@@ -126,8 +126,8 @@ describe('Table — Combined Features', () => {
                 pageSize: 3,
                 pageSizeOptions: [3, 5, 10],
                 totalItems: 5,
-                onPageChange: jest.fn(),
-                onPageSizeChange: jest.fn(),
+                onPageChange: vi.fn(),
+                onPageSizeChange: vi.fn(),
             },
         })
         // Region & title
@@ -156,8 +156,8 @@ describe('Table — Combined Features', () => {
     })
 
     it('selection works alongside actions — selecting rows does not affect action menus', async () => {
-        const onChange = jest.fn()
-        const onEdit = jest.fn()
+        const onChange = vi.fn()
+        const onEdit = vi.fn()
 
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
@@ -193,12 +193,12 @@ describe('Table — Combined Features', () => {
             selection: {
                 getRowId: (r) => r.id,
                 selectedRowIds: ['1', '3'],
-                onChange: jest.fn(),
+                onChange: vi.fn(),
             },
             sorting: {
                 column: 'name',
                 direction: 'asc',
-                onSortChange: jest.fn(),
+                onSortChange: vi.fn(),
             },
         })
         // Alice (id=1) and Charlie (id=3) should be selected
@@ -221,7 +221,7 @@ describe('Table — Combined Features', () => {
                     label: 'Activate',
                     filter: ({ row }) => row.status !== 'active',
                 },
-                { id: 'edit', label: 'Edit', onClick: jest.fn() },
+                { id: 'edit', label: 'Edit', onClick: vi.fn() },
             ],
         })
         // Alice is active — Activate should be filtered out
@@ -266,7 +266,7 @@ describe('Table — Combined Features', () => {
     })
 
     it('selection with isRowSelectable and actions work together', async () => {
-        const onChange = jest.fn()
+        const onChange = vi.fn()
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: fullData,
@@ -280,7 +280,7 @@ describe('Table — Combined Features', () => {
                 onChange,
                 isRowSelectable: ({ row }) => row.status !== 'inactive',
             },
-            actions: [{ id: 'edit', label: 'Edit', onClick: jest.fn() }],
+            actions: [{ id: 'edit', label: 'Edit', onClick: vi.fn() }],
         })
         // Charlie (row 3) is inactive — checkbox should be disabled
         expect(Test.Table.Get.selectRow(3)).toBeDisabled()
@@ -311,7 +311,7 @@ describe('Table — Combined Features', () => {
     })
 
     it('download receives correct data even when pagination is used', async () => {
-        const onDownload = jest.fn()
+        const onDownload = vi.fn()
         const pageData = fullData.slice(0, 3)
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
@@ -326,8 +326,8 @@ describe('Table — Combined Features', () => {
                 totalPages: 2,
                 pageSize: 3,
                 totalItems: 5,
-                onPageChange: jest.fn(),
-                onPageSizeChange: jest.fn(),
+                onPageChange: vi.fn(),
+                onPageSizeChange: vi.fn(),
             },
         })
         await Test.Table.Click.downloadButton('Export')
@@ -346,13 +346,13 @@ describe('Table — Combined Features', () => {
             selection: {
                 getRowId: (r) => r.id,
                 selectedRowIds: [],
-                onChange: jest.fn(),
+                onChange: vi.fn(),
             },
             actions: [{ id: 'edit', label: 'Edit' }],
             sorting: {
                 column: 'name',
                 direction: 'asc',
-                onSortChange: jest.fn(),
+                onSortChange: vi.fn(),
             },
         })
         const headers = Test.Table.Get.columnHeaders()
@@ -373,17 +373,17 @@ describe('Table — Combined Features', () => {
             sorting: {
                 column: 'name',
                 direction: 'asc',
-                onSortChange: jest.fn(),
+                onSortChange: vi.fn(),
             },
             filtering: {
                 inputs: [{ key: 'name', label: 'Name Filter', type: 'text' }],
-                onFilter: jest.fn(),
+                onFilter: vi.fn(),
             },
             pagination: {
                 page: 1,
                 totalPages: 2,
-                onPageChange: jest.fn(),
-                onPageSizeChange: jest.fn(),
+                onPageChange: vi.fn(),
+                onPageSizeChange: vi.fn(),
             },
         })
         // Open filters
@@ -404,24 +404,24 @@ describe('Table — Combined Features', () => {
             selection: {
                 getRowId: (r) => r.id,
                 selectedRowIds: [],
-                onChange: jest.fn(),
+                onChange: vi.fn(),
             },
             actions: [{ id: 'edit', label: 'Edit' }],
             sorting: {
                 column: 'name',
                 direction: 'asc',
-                onSortChange: jest.fn(),
+                onSortChange: vi.fn(),
             },
             filtering: {
                 inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                onFilter: jest.fn(),
+                onFilter: vi.fn(),
             },
-            download: { onDownload: jest.fn() },
+            download: { onDownload: vi.fn() },
             pagination: {
                 page: 1,
                 totalPages: 0,
-                onPageChange: jest.fn(),
-                onPageSizeChange: jest.fn(),
+                onPageChange: vi.fn(),
+                onPageSizeChange: vi.fn(),
             },
         })
         expect(screen.getByText('No data')).toBeInTheDocument()

@@ -20,8 +20,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 1,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pagination()).toBeInTheDocument()
@@ -40,8 +40,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 1,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(1)).toBeInTheDocument()
@@ -52,7 +52,7 @@ describe('Table — Pagination', () => {
 
     describe('Page navigation', () => {
         it('calls onPageChange with page number when page button is clicked', async () => {
-            const onPageChange = jest.fn()
+            const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -61,7 +61,7 @@ describe('Table — Pagination', () => {
                     page: 1,
                     totalPages: 3,
                     onPageChange,
-                    onPageSizeChange: jest.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             await Test.Table.Click.pageButton(2)
@@ -69,7 +69,7 @@ describe('Table — Pagination', () => {
         })
 
         it('calls onPageChange(1) when First page is clicked', async () => {
-            const onPageChange = jest.fn()
+            const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -78,7 +78,7 @@ describe('Table — Pagination', () => {
                     page: 3,
                     totalPages: 5,
                     onPageChange,
-                    onPageSizeChange: jest.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             await Test.Table.Click.firstPage()
@@ -86,7 +86,7 @@ describe('Table — Pagination', () => {
         })
 
         it('calls onPageChange(page-1) when Previous page is clicked', async () => {
-            const onPageChange = jest.fn()
+            const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -95,7 +95,7 @@ describe('Table — Pagination', () => {
                     page: 3,
                     totalPages: 5,
                     onPageChange,
-                    onPageSizeChange: jest.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             await Test.Table.Click.prevPage()
@@ -103,7 +103,7 @@ describe('Table — Pagination', () => {
         })
 
         it('calls onPageChange(page+1) when Next page is clicked', async () => {
-            const onPageChange = jest.fn()
+            const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -112,7 +112,7 @@ describe('Table — Pagination', () => {
                     page: 3,
                     totalPages: 5,
                     onPageChange,
-                    onPageSizeChange: jest.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             await Test.Table.Click.nextPage()
@@ -120,7 +120,7 @@ describe('Table — Pagination', () => {
         })
 
         it('calls onPageChange(totalPages) when Last page is clicked', async () => {
-            const onPageChange = jest.fn()
+            const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -129,7 +129,7 @@ describe('Table — Pagination', () => {
                     page: 3,
                     totalPages: 5,
                     onPageChange,
-                    onPageSizeChange: jest.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             await Test.Table.Click.lastPage()
@@ -146,8 +146,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 1,
                     totalPages: 5,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.firstPage()).toBeDisabled()
@@ -164,8 +164,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 5,
                     totalPages: 5,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.firstPage()).not.toBeDisabled()
@@ -182,8 +182,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 1,
                     totalPages: 1,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.firstPage()).toBeDisabled()
@@ -202,8 +202,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 2,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(2)).toHaveClass('active')
@@ -217,8 +217,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 2,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(1)).not.toHaveClass('active')
@@ -237,8 +237,8 @@ describe('Table — Pagination', () => {
                     totalPages: 3,
                     pageSize: 10,
                     totalItems: 25,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(screen.getByText('25')).toBeInTheDocument()
@@ -252,8 +252,8 @@ describe('Table — Pagination', () => {
                 pagination: {
                     page: 1,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             const info = container.querySelector('.table-pagination__info')
@@ -270,8 +270,8 @@ describe('Table — Pagination', () => {
                     totalPages: 3,
                     pageSize: 10,
                     totalItems: 25,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             // Page 3 of 25 items at size 10 = items 21–25

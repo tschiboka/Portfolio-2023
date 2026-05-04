@@ -8,9 +8,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #111;
+    background-color: var(--black-1);
     z-index: 90;
     overflow: hidden;
+    user-select: none;
 }
 
 @media (min-width: 168px) {
@@ -26,7 +27,7 @@
 }
 
 .Header .burger {
-    color: #aaa;
+    color: var(--gray-4);
     font-size: 1.8em;
     cursor: pointer;
     display: flex;
@@ -50,7 +51,7 @@
     width: 30px;
     padding: 3px;
     border-radius: 100%;
-    background-color: #007676;
+    background-color: var(--accent-dark-3);
     cursor: pointer;
 }
 
@@ -79,7 +80,7 @@
 .Header .nav_links li {
     position: relative;
     margin-left: 1.2rem;
-    color: #888;
+    color: var(--gray-3);
     font-size: 1.1em;
     cursor: pointer;
     display: flex;
@@ -98,15 +99,11 @@
 }
 
 .Header .nav_links li:hover {
-    transform: scale(1.1);
-}
-
-.Header .nav_links li:not(.active) .active-dot {
-    display: none;
+    transform: scale(1.05);
 }
 
 .Header .nav_links li .chevron {
-    color: #888;
+    color: var(--gray-3);
     height: 70%;
     transform: translateY(5px);
 }
@@ -116,34 +113,17 @@
     text-decoration: inherit;
 }
 
-.Header .active-dot {
-    display: none;
-}
-
-@media (min-width: 768px) {
-    .Header .active-dot {
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        display: block;
-        width: 6px;
-        height: 6px;
-        background-color: white;
-        border-radius: 100%;
-    }
-}
-
 /* Light theme */
 .light .Header {
     background-color: white;
 }
 
 .light .Header .burger {
-    color: #111;
+    color: var(--black-1);
 }
 
 .light .Header .t-logo {
-    background-color: #111;
+    background-color: var(--black-1);
     opacity: 1;
 }
 
@@ -153,8 +133,4 @@
 
 .light .Header .nav_links li.active {
     font-family: Roboto_Bold;
-}
-
-.light .Header .active-dot {
-    background-color: black;
 }

@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface ViewRecordsProps {
     path: string
@@ -6,7 +6,7 @@ interface ViewRecordsProps {
 
 const ViewRecords = ({ path }: ViewRecordsProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | View Records'}
             path={path}
             recordVisit={false}
@@ -17,7 +17,7 @@ const ViewRecords = ({ path }: ViewRecordsProps) => {
             <main>
                 <h1>View Records</h1>
             </main>
-        </Page>
+        </Screen>
     )
 }
 

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Code, Form } from '@common/ux'
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Forms.code'
 
 type FormsProps = { path: string }
@@ -145,8 +147,17 @@ export const Forms = ({ path }: FormsProps) => {
     }, [setError, setErrorFilled])
 
     return (
-        <Page title={'Tivadar Debnar | Forms'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Forms'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
+                <StoryNav />
                 <h1>Form</h1>
                 <p>
                     The <code>Form</code> namespace groups all form-related primitives. Every
@@ -1075,6 +1086,6 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                 </section>
             </main>
-        </Page>
+        </Screen>
     )
 }

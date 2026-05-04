@@ -72,7 +72,7 @@ describe('Table — Fundamentals', () => {
         it('renders info button when onInfo is provided', () => {
             Test.Table.Set.mock<Row>({
                 title: 'T',
-                onInfo: jest.fn(),
+                onInfo: vi.fn(),
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
@@ -81,7 +81,7 @@ describe('Table — Fundamentals', () => {
         })
 
         it('calls onInfo when clicked', async () => {
-            const onInfo = jest.fn()
+            const onInfo = vi.fn()
             Test.Table.Set.mock<Row>({
                 title: 'T',
                 onInfo: onInfo,
@@ -171,7 +171,7 @@ describe('Table — Fundamentals', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.emptyState()).toHaveAttribute(

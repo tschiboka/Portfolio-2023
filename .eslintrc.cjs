@@ -31,6 +31,7 @@ module.exports = {
             files: [
                 '.eslintrc.cjs',
                 'jest.config.cjs',
+                'jest.resolver.cjs',
                 'vite.config.ts',
                 'scripts/**/*.js',
                 '__mocks__/**/*.js',

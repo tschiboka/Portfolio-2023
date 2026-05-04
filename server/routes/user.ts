@@ -16,7 +16,7 @@ import {
     TypedRequest,
     TypedResponse,
 } from '@common/types'
-import { HttpStatus } from '../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 const router = express.Router()
 

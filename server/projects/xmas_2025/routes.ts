@@ -17,7 +17,7 @@ import type {
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
 } from '@common/types'
-import { HttpStatus } from '../../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../../common/utils/Server/HttpStatus'
 import { isEmpty } from '@common/utils/Predicate'
 
 const router = express.Router()

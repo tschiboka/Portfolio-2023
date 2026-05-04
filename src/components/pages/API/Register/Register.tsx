@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import './Register.scss'
@@ -53,7 +53,7 @@ const Register = ({ path }: IndexProps) => {
     }
 
     return (
-        <Page
+        <Screen
             className="Register"
             title={'Tivadar Debnar | Register'}
             path={path}
@@ -111,7 +111,7 @@ const Register = ({ path }: IndexProps) => {
                     </Form.Button>
                 </Form.ButtonGroup>
             </form>
-        </Page>
+        </Screen>
     )
 }
 

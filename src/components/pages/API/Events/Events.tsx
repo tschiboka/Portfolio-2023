@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface EventsProp {
     path: string
@@ -6,7 +6,7 @@ interface EventsProp {
 
 const Events = ({ path }: EventsProp) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Events'}
             path={path}
             recordVisit={false}
@@ -15,7 +15,7 @@ const Events = ({ path }: EventsProp) => {
             pageName="Events"
         >
             <h1>Events</h1>
-        </Page>
+        </Screen>
     )
 }
 

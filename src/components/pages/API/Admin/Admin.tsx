@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface AdminProps {
     path: string
@@ -6,7 +6,7 @@ interface AdminProps {
 
 const Admin = ({ path }: AdminProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Admin'}
             path={path}
             recordVisit={false}
@@ -15,7 +15,7 @@ const Admin = ({ path }: AdminProps) => {
             pageName="Admin"
         >
             <h1>Admin</h1>
-        </Page>
+        </Screen>
     )
 }
 

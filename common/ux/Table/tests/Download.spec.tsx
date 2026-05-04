@@ -10,13 +10,13 @@ describe('Table — Download', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { onDownload: jest.fn() },
+                download: { onDownload: vi.fn() },
             })
             expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
         })
 
         it('calls onDownload with current data', async () => {
-            const onDownload = jest.fn()
+            const onDownload = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -32,7 +32,7 @@ describe('Table — Download', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { label: 'Export CSV', onDownload: jest.fn() },
+                download: { label: 'Export CSV', onDownload: vi.fn() },
             })
             expect(screen.getByText('Export CSV')).toBeInTheDocument()
         })
@@ -42,7 +42,7 @@ describe('Table — Download', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { onDownload: jest.fn() },
+                download: { onDownload: vi.fn() },
             })
             expect(container.querySelector('.download-label')).not.toBeInTheDocument()
         })
@@ -59,7 +59,7 @@ describe('Table — Download', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
@@ -75,7 +75,7 @@ describe('Table — Download', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             await Test.Table.Click.downloadButton()
@@ -84,7 +84,7 @@ describe('Table — Download', () => {
         })
 
         it('calls onDownload with selected format and data', async () => {
-            const onDownload = jest.fn()
+            const onDownload = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -109,7 +109,7 @@ describe('Table — Download', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { onDownload: jest.fn() },
+                download: { onDownload: vi.fn() },
             })
             expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
         })

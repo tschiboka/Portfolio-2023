@@ -18,7 +18,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             rows.forEach((_, i) => {
@@ -34,14 +34,14 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.selectAll()).toBeInTheDocument()
         })
 
         it('calls onChange with row id when a row checkbox is clicked', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -57,7 +57,7 @@ describe('Table — Selection', () => {
         })
 
         it('calls onChange removing id when already selected row is deselected', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -73,7 +73,7 @@ describe('Table — Selection', () => {
         })
 
         it('select-all selects all rows', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -89,7 +89,7 @@ describe('Table — Selection', () => {
         })
 
         it('select-all deselects all when all are selected', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -112,7 +112,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: rows.map((r) => r.name),
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.selectAll()).toBeChecked()
@@ -126,7 +126,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: ['Alpha'],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.selectAll()).not.toBeChecked()
@@ -140,7 +140,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: ['Beta'],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.selectRow(2)).toBeChecked()
@@ -148,7 +148,7 @@ describe('Table — Selection', () => {
         })
 
         it('adds to existing selection when selecting another row', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -174,7 +174,7 @@ describe('Table — Selection', () => {
                     mode: 'single',
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(
@@ -183,7 +183,7 @@ describe('Table — Selection', () => {
         })
 
         it('selects only the clicked row', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -200,7 +200,7 @@ describe('Table — Selection', () => {
         })
 
         it('deselects the row when clicking already selected', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -226,7 +226,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
@@ -242,7 +242,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
@@ -251,7 +251,7 @@ describe('Table — Selection', () => {
         })
 
         it('select-all only selects selectable rows', async () => {
-            const onChange = jest.fn()
+            const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -279,7 +279,7 @@ describe('Table — Selection', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                     isRowSelectable: () => false,
                 },
             })
@@ -297,7 +297,7 @@ describe('Table — Selection', () => {
         const baseSelection = {
             getRowId: (r: Row) => r.name,
             selectedRowIds: [] as string[],
-            onChange: jest.fn(),
+            onChange: vi.fn(),
         }
 
         it('getSelectableRows returns all rows when no isRowSelectable', () => {

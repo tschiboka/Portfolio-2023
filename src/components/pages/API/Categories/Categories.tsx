@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import './Categories.scss'
@@ -52,7 +52,7 @@ const Categories = ({ path }: CategoriesProps) => {
     }
 
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Categories'}
             path={path}
             recordVisit={false}
@@ -226,7 +226,7 @@ const Categories = ({ path }: CategoriesProps) => {
                     </tbody>
                 </table> */}
             </main>
-        </Page>
+        </Screen>
     )
 }
 

@@ -181,7 +181,7 @@ describe('Table — Accessibility', () => {
                     mode: 'single',
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(screen.getByRole('columnheader', { name: 'Select' })).toBeInTheDocument()
@@ -410,7 +410,7 @@ describe('Table — Accessibility', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.selectAll()).toBeInTheDocument()
@@ -425,7 +425,7 @@ describe('Table — Accessibility', () => {
                     mode: 'single',
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             expect(
@@ -441,7 +441,7 @@ describe('Table — Accessibility', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                 },
             })
             rows.forEach((_, i) => {
@@ -457,7 +457,7 @@ describe('Table — Accessibility', () => {
                 selection: {
                     getRowId: (r) => r.name,
                     selectedRowIds: [],
-                    onChange: jest.fn(),
+                    onChange: vi.fn(),
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
@@ -479,7 +479,7 @@ describe('Table — Accessibility', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const nameHeader = screen.getByRole('columnheader', { name: /Name/i })
@@ -497,7 +497,7 @@ describe('Table — Accessibility', () => {
                 sorting: {
                     column: 'name',
                     direction: 'desc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const nameHeader = screen.getByRole('columnheader', { name: /Name/i })
@@ -515,7 +515,7 @@ describe('Table — Accessibility', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const valueHeader = screen.getByRole('columnheader', { name: /Value/i })
@@ -533,7 +533,7 @@ describe('Table — Accessibility', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
@@ -548,7 +548,7 @@ describe('Table — Accessibility', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const btn = Test.Table.Get.sortButton('Name')
@@ -593,7 +593,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
@@ -606,7 +606,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             expect(Test.Table.Get.filterToggle()).toHaveAttribute('aria-expanded', 'false')
@@ -619,7 +619,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Act.openFilters()
@@ -633,7 +633,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Act.openFilters()
@@ -650,7 +650,7 @@ describe('Table — Accessibility', () => {
                         { key: 'name', label: 'Name', type: 'text' },
                         { key: 'value', label: 'Min Value', type: 'number' },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Act.openFilters()
@@ -668,8 +668,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 1,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pagination()).toBeInTheDocument()
@@ -683,8 +683,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 1,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(1)).toBeInTheDocument()
@@ -700,8 +700,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 2,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(2)).toHaveAttribute('aria-current', 'page')
@@ -715,8 +715,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 2,
                     totalPages: 3,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.pageButton(1)).not.toHaveAttribute('aria-current')
@@ -730,8 +730,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 2,
                     totalPages: 5,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.firstPage()).toBeInTheDocument()
@@ -748,8 +748,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 1,
                     totalPages: 5,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.firstPage()).toBeDisabled()
@@ -764,8 +764,8 @@ describe('Table — Accessibility', () => {
                 pagination: {
                     page: 5,
                     totalPages: 5,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.nextPage()).toBeDisabled()
@@ -782,8 +782,8 @@ describe('Table — Accessibility', () => {
                     totalPages: 3,
                     pageSize: 10,
                     totalItems: 25,
-                    onPageChange: jest.fn(),
-                    onPageSizeChange: jest.fn(),
+                    onPageChange: vi.fn(),
+                    onPageSizeChange: vi.fn(),
                 },
             })
             expect(screen.getByLabelText('Items 1 to 10')).toBeInTheDocument()
@@ -797,7 +797,7 @@ describe('Table — Accessibility', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { onDownload: jest.fn() },
+                download: { onDownload: vi.fn() },
             })
             expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
         })
@@ -807,7 +807,7 @@ describe('Table — Accessibility', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                download: { label: 'Export CSV', onDownload: jest.fn() },
+                download: { label: 'Export CSV', onDownload: vi.fn() },
             })
             expect(Test.Table.Get.downloadButton('Export CSV')).toBeInTheDocument()
         })
@@ -822,7 +822,7 @@ describe('Table — Accessibility', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
@@ -838,7 +838,7 @@ describe('Table — Accessibility', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             expect(Test.Table.Get.downloadButton()).toHaveAttribute('aria-haspopup', 'listbox')
@@ -852,7 +852,7 @@ describe('Table — Accessibility', () => {
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                onInfo: jest.fn(),
+                onInfo: vi.fn(),
             })
             expect(Test.Table.Get.infoButton()).toBeInTheDocument()
         })
@@ -921,7 +921,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             const toggle = Test.Table.Get.filterToggle()
@@ -939,7 +939,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Act.openFilters()
@@ -976,7 +976,7 @@ describe('Table — Accessibility', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             const trigger = Test.Table.Get.downloadButton()
@@ -1013,7 +1013,7 @@ describe('Table — Accessibility', () => {
                         { value: 'csv', label: 'CSV' },
                         { value: 'pdf', label: 'PDF' },
                     ],
-                    onDownload: jest.fn(),
+                    onDownload: vi.fn(),
                 },
             })
             const trigger = Test.Table.Get.downloadButton()

@@ -6,7 +6,7 @@ import { TooltipRenderer } from '../renderers/TooltipRenderer'
 import { SoftDisabledRenderer } from '../renderers/SoftDisabledRenderer'
 
 // jsdom does not implement window.scrollTo
-window.scrollTo = jest.fn()
+window.scrollTo = vi.fn()
 
 describe('HiddenRenderer', () => {
     it('should render nothing', () => {
@@ -239,7 +239,7 @@ describe('SoftDisabledRenderer', () => {
     describe('actions mapping', () => {
         it('should render mapped action buttons', async () => {
             const user = userEvent.setup()
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             render(
                 <SoftDisabledRenderer actions={[{ label: 'Upgrade', onClick }]}>
                     Click me
@@ -251,7 +251,7 @@ describe('SoftDisabledRenderer', () => {
 
         it('should call action onClick and dismiss popup when action is clicked', async () => {
             const user = userEvent.setup()
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             render(
                 <SoftDisabledRenderer actions={[{ label: 'Upgrade', onClick }]}>
                     Click me
@@ -267,7 +267,7 @@ describe('SoftDisabledRenderer', () => {
             const user = userEvent.setup()
             render(
                 <SoftDisabledRenderer
-                    actions={[{ label: 'Disabled', onClick: jest.fn(), disabled: true }]}
+                    actions={[{ label: 'Disabled', onClick: vi.fn(), disabled: true }]}
                 >
                     Click me
                 </SoftDisabledRenderer>,
@@ -280,7 +280,7 @@ describe('SoftDisabledRenderer', () => {
             const user = userEvent.setup()
             render(
                 <SoftDisabledRenderer
-                    actions={[{ label: 'Enabled', onClick: jest.fn(), disabled: false }]}
+                    actions={[{ label: 'Enabled', onClick: vi.fn(), disabled: false }]}
                 >
                     Click me
                 </SoftDisabledRenderer>,

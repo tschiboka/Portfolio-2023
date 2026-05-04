@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { HttpStatus } from '../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 export default function (req: Request, res: Response, next: NextFunction) {
     if (!(req as any).user.isAdmin)

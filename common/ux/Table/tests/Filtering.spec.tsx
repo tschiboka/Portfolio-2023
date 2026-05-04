@@ -12,7 +12,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
@@ -25,7 +25,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             expect(Test.Table.Query.filterPanel()).not.toBeInTheDocument()
@@ -38,7 +38,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -52,7 +52,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -67,7 +67,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -90,7 +90,7 @@ describe('Table — Filtering', () => {
                             placeholder: 'Enter name…',
                         },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -100,7 +100,7 @@ describe('Table — Filtering', () => {
         })
 
         it('calls onFilter with text value on input', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -125,7 +125,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'min', label: 'Min Value', type: 'number', min: 0, max: 100 }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -136,7 +136,7 @@ describe('Table — Filtering', () => {
         })
 
         it('calls onFilter with numeric value', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -161,7 +161,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'q', label: 'Search', type: 'search', placeholder: 'Search…' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -185,7 +185,7 @@ describe('Table — Filtering', () => {
                             max: '2026-12-31',
                         },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -204,7 +204,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'active', label: 'Active only', type: 'checkbox' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -212,7 +212,7 @@ describe('Table — Filtering', () => {
         })
 
         it('calls onFilter with boolean value', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -229,7 +229,7 @@ describe('Table — Filtering', () => {
         })
 
         it('toggles checkbox back to false', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -266,7 +266,7 @@ describe('Table — Filtering', () => {
                             ],
                         },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -290,7 +290,7 @@ describe('Table — Filtering', () => {
                             ],
                         },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             const user = await Test.Table.Click.filterToggle()
@@ -313,7 +313,7 @@ describe('Table — Filtering', () => {
                         { key: 'min', label: 'Min', type: 'number' },
                         { key: 'active', label: 'Active', type: 'checkbox' },
                     ],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             await Test.Table.Click.filterToggle()
@@ -323,7 +323,7 @@ describe('Table — Filtering', () => {
         })
 
         it('onFilter receives all current filter values', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -358,7 +358,7 @@ describe('Table — Filtering', () => {
                 columns: basicColumns,
                 filtering: {
                     inputs: [{ key: 'name', label: 'Name', type: 'text' }],
-                    onFilter: jest.fn(),
+                    onFilter: vi.fn(),
                 },
             })
             expect(Test.Table.Query.resetFilters()).not.toBeInTheDocument()
@@ -367,7 +367,7 @@ describe('Table — Filtering', () => {
         })
 
         it('resets filter values when Reset is clicked', async () => {
-            const onFilter = jest.fn()
+            const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,

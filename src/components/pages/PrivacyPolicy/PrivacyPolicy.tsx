@@ -1,5 +1,6 @@
 import Footer from '../../sharedComponents/Footer/Footer'
-import Page from '../../../../common/ux/Page/Page'
+import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
+import { Screen } from '../../sharedComponents/Screen/Screen'
 import './PrivacyPolicy.scss'
 
 interface Props {
@@ -9,11 +10,12 @@ interface Props {
 
 const PrivacyPolicy = ({ pageName, path }: Props) => {
     return (
-        <Page
+        <Screen
             title="Tivadar Debnar | Privacy Policy"
             path={path}
             variant="portfolio"
             pageName={pageName}
+            sideMenu={<PageSideMenu />}
         >
             <main className="privacy-policy">
                 <p>
@@ -71,7 +73,7 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
                 </p>
             </main>
             <Footer path={path} />
-        </Page>
+        </Screen>
     )
 }
 

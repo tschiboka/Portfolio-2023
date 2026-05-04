@@ -51,7 +51,7 @@ describe('Table — Cell Rendering & Defaults', () => {
 
     describe('Custom cell renderer', () => {
         it('calls cell function with value and meta', () => {
-            const cellFn = jest.fn((val) => <strong>{String(val).toUpperCase()}</strong>)
+            const cellFn = vi.fn((val) => <strong>{String(val).toUpperCase()}</strong>)
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'alpha', value: '1', status: 'ok', note: '' }],
@@ -62,7 +62,7 @@ describe('Table — Cell Rendering & Defaults', () => {
         })
 
         it('cell function receives correct meta fields', () => {
-            const cellFn = jest.fn((_val, meta: CellMeta<Row>) => <span>{meta.index}</span>)
+            const cellFn = vi.fn((_val, meta: CellMeta<Row>) => <span>{meta.index}</span>)
             const data = [{ name: 'A', value: '1', status: 'x', note: '' }]
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -77,7 +77,7 @@ describe('Table — Cell Rendering & Defaults', () => {
         })
 
         it('cell function receives context when provided', () => {
-            const cellFn = jest.fn((_val, meta: CellMeta<Row, string>) => (
+            const cellFn = vi.fn((_val, meta: CellMeta<Row, string>) => (
                 <span>{String(meta.context)}</span>
             ))
             Test.Table.Set.mock<Row, string>({

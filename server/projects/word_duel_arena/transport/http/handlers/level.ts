@@ -9,7 +9,7 @@ import type {
 } from '@common/types'
 import { validateLevel } from '../validation/level'
 import { levelPersistance } from '../../../infrastructure/persistence/db/level'
-import { HttpStatus } from '../../../../../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../../../../../common/utils/Server/HttpStatus'
 
 type GetLevelsRes = TypedResponse<GetWdaLevelsResponse | WdaErrorResponse>
 async function handleListLevels(_req: TypedRequest, res: GetLevelsRes) {

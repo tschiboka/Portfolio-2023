@@ -7,7 +7,7 @@ import {
     TypedRequest,
     TypedResponse,
 } from '@common/types'
-import { HttpStatus } from '../../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../../common/utils/Server/HttpStatus'
 import { isTruthy, isNonEmpty } from '@common/utils/Predicate'
 const router = express.Router()
 

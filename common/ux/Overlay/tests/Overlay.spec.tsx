@@ -8,7 +8,7 @@ import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.ut
 
 const { Overlay: O } = Test
 // jsdom does not implement window.scrollTo
-window.scrollTo = jest.fn()
+window.scrollTo = vi.fn()
 
 const mockAnchorRef = () => {
     const ref = createRef<HTMLButtonElement>()
@@ -23,7 +23,7 @@ const mockAnchorRef = () => {
 
 const renderPopup = (props: Partial<React.ComponentProps<typeof Overlay.Popup>> = {}) => {
     const { ref, Wrapper } = mockAnchorRef()
-    const onClose = jest.fn()
+    const onClose = vi.fn()
     const result = render(
         <Wrapper>
             <Overlay.Popup
@@ -61,14 +61,14 @@ describe('Overlay.FullScreen', () => {
 })
 
 const defaultItems: ActionMenuItem[] = [
-    { id: 'edit', label: 'Edit', onClick: jest.fn() },
-    { id: 'delete', label: 'Delete', onClick: jest.fn() },
+    { id: 'edit', label: 'Edit', onClick: vi.fn() },
+    { id: 'delete', label: 'Delete', onClick: vi.fn() },
 ]
 
 const renderActionMenu = (overrides: Partial<ActionMenuProps> = {}) => {
     const { ref, Wrapper } = mockAnchorRef()
-    const onClose = jest.fn()
-    const items = overrides.items ?? defaultItems.map((i) => ({ ...i, onClick: jest.fn() }))
+    const onClose = vi.fn()
+    const items = overrides.items ?? defaultItems.map((i) => ({ ...i, onClick: vi.fn() }))
     const result = render(
         <Wrapper>
             <Overlay.ActionMenu anchorRef={ref} items={items} onClose={onClose} {...overrides} />
@@ -124,7 +124,7 @@ describe('Overlay.ActionMenu', () => {
                     id: 'star',
                     label: 'Star',
                     icon: <span data-testid="star-icon">★</span>,
-                    onClick: jest.fn(),
+                    onClick: vi.fn(),
                 },
             ]
             renderActionMenu({ items })
@@ -150,7 +150,7 @@ describe('Overlay.ActionMenu', () => {
 
         it('should apply variant class when provided', () => {
             const items: ActionMenuItem[] = [
-                { id: 'a', label: 'Danger action', variant: 'danger', onClick: jest.fn() },
+                { id: 'a', label: 'Danger action', variant: 'danger', onClick: vi.fn() },
             ]
             renderActionMenu({ items })
             expect(O.Get.menuItem('Danger action')).toHaveClass('danger')
@@ -158,7 +158,7 @@ describe('Overlay.ActionMenu', () => {
 
         it('should disable item when disabled is true', () => {
             const items: ActionMenuItem[] = [
-                { id: 'a', label: 'Locked', disabled: true, onClick: jest.fn() },
+                { id: 'a', label: 'Locked', disabled: true, onClick: vi.fn() },
             ]
             renderActionMenu({ items })
             expect(O.Get.menuItem('Locked')).toBeDisabled()
@@ -166,7 +166,7 @@ describe('Overlay.ActionMenu', () => {
 
         it('should not disable item when disabled is false', () => {
             const items: ActionMenuItem[] = [
-                { id: 'a', label: 'Active', disabled: false, onClick: jest.fn() },
+                { id: 'a', label: 'Active', disabled: false, onClick: vi.fn() },
             ]
             renderActionMenu({ items })
             expect(O.Get.menuItem('Active')).not.toBeDisabled()
@@ -175,7 +175,7 @@ describe('Overlay.ActionMenu', () => {
 
     describe('onClick', () => {
         it('should call item onClick when clicked', async () => {
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             const items: ActionMenuItem[] = [{ id: 'a', label: 'Do it', onClick }]
             renderActionMenu({ items })
             await O.Act.selectMenuItem('Do it')
@@ -189,7 +189,7 @@ describe('Overlay.ActionMenu', () => {
         })
 
         it('should call both item onClick and onClose', async () => {
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             const items: ActionMenuItem[] = [{ id: 'a', label: 'Go', onClick }]
             const { onClose } = renderActionMenu({ items })
             await O.Act.selectMenuItem('Go')
@@ -405,7 +405,7 @@ describe('Overlay.Popup', () => {
 
     describe('actions', () => {
         it('should render action buttons', () => {
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             renderPopup({
                 actions: [{ label: 'Confirm', onClick }],
             })
@@ -413,7 +413,7 @@ describe('Overlay.Popup', () => {
         })
 
         it('should call action onClick when clicked', async () => {
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             renderPopup({
                 actions: [{ label: 'Confirm', onClick }],
             })
@@ -423,28 +423,28 @@ describe('Overlay.Popup', () => {
 
         it('should apply secondary variant class', () => {
             renderPopup({
-                actions: [{ label: 'Cancel', variant: 'secondary', onClick: jest.fn() }],
+                actions: [{ label: 'Cancel', variant: 'secondary', onClick: vi.fn() }],
             })
             expect(O.Get.text('Cancel')).toHaveClass('Overlay--popup__action-btn--secondary')
         })
 
         it('should not apply secondary class for primary variant', () => {
             renderPopup({
-                actions: [{ label: 'OK', variant: 'primary', onClick: jest.fn() }],
+                actions: [{ label: 'OK', variant: 'primary', onClick: vi.fn() }],
             })
             expect(O.Get.text('OK')).not.toHaveClass('Overlay--popup__action-btn--secondary')
         })
 
         it('should hide actions with when: false', () => {
             renderPopup({
-                actions: [{ label: 'Hidden', when: false, onClick: jest.fn() }],
+                actions: [{ label: 'Hidden', when: false, onClick: vi.fn() }],
             })
             expect(O.Query.text('Hidden')).not.toBeInTheDocument()
         })
 
         it('should show actions with when: true', () => {
             renderPopup({
-                actions: [{ label: 'Visible', when: true, onClick: jest.fn() }],
+                actions: [{ label: 'Visible', when: true, onClick: vi.fn() }],
             })
             expect(O.Get.text('Visible')).toBeInTheDocument()
         })
@@ -452,8 +452,8 @@ describe('Overlay.Popup', () => {
         it('should render multiple actions in order', () => {
             renderPopup({
                 actions: [
-                    { label: 'First', onClick: jest.fn() },
-                    { label: 'Second', onClick: jest.fn() },
+                    { label: 'First', onClick: vi.fn() },
+                    { label: 'Second', onClick: vi.fn() },
                 ],
             })
             const labels = O.Get.actionButtons().map((b) => b.textContent)
@@ -464,7 +464,7 @@ describe('Overlay.Popup', () => {
         it('should place auto-appended Close after custom actions', () => {
             renderPopup({
                 showClose: true,
-                actions: [{ label: 'Confirm', onClick: jest.fn() }],
+                actions: [{ label: 'Confirm', onClick: vi.fn() }],
             })
             const labels = O.Get.actionButtons().map((b) => b.textContent)
             expect(labels.indexOf('Confirm')).toBeLessThan(labels.indexOf('Close'))

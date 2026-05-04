@@ -1,10 +1,11 @@
 import ProjectCard from './ProjectCard/ProjectCard'
 import ProjectFilter from './ProjectFilter/ProjectFilter'
 import Footer from '../../sharedComponents/Footer/Footer'
+import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { getProjects } from './getProjects'
 import './Projects.scss'
 import { useState } from 'react'
-import Page from '../../../../common/ux/Page/Page'
+import { Screen } from '../../sharedComponents/Screen/Screen'
 
 interface Props {
     pageName: string
@@ -29,11 +30,12 @@ const Projects = ({ pageName, path }: Props) => {
     if (filteredLanguage)
         projects = projects.filter((project) => project.badges.includes(filteredLanguage))
     return (
-        <Page
+        <Screen
             title="Tivadar Debnar | Projects"
             path="/projects"
             variant="portfolio"
             pageName={pageName}
+            sideMenu={<PageSideMenu />}
         >
             <main>
                 <h1>Projects</h1>
@@ -64,7 +66,7 @@ const Projects = ({ pageName, path }: Props) => {
                 </section>
             </main>
             <Footer pageName={pageName} path={path} />
-        </Page>
+        </Screen>
     )
 }
 

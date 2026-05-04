@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
-import Page from '../../../../common/ux/Page/Page'
+import { Screen } from '../../sharedComponents/Screen/Screen'
 import Footer from '../../sharedComponents/Footer/Footer'
+import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgement'
 import { MdAlternateEmail } from 'react-icons/md'
 import LoadingIndicator from '../../sharedComponents/LoadingIndicator/LoadingIndicator'
@@ -166,11 +167,12 @@ const Contact = ({ pageName, path }: Props) => {
     const mail = 'Dev@tschiboka.com'
     const tel = '+44 7474 999 334'
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Contact'}
             path={path}
             variant="portfolio"
             pageName={pageName}
+            sideMenu={<PageSideMenu />}
         >
             {showMessageAck && <MessageAcknowledgement />}
 
@@ -276,7 +278,7 @@ const Contact = ({ pageName, path }: Props) => {
                 </section>
             </main>
             <Footer pageName={pageName} path={path} />
-        </Page>
+        </Screen>
     )
 }
 

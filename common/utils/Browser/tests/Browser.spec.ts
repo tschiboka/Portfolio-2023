@@ -1,3 +1,4 @@
+import type { MockInstance } from 'vitest'
 import { Browser } from '../index'
 
 const { copyToClipboard } = Browser
@@ -5,11 +6,11 @@ const { copyToClipboard } = Browser
 describe('Browser', () => {
     describe('copyToClipboard', () => {
         afterEach(() => {
-            jest.restoreAllMocks()
+            vi.restoreAllMocks()
         })
 
         describe('when navigator.clipboard is available', () => {
-            const writeTextMock = jest.fn().mockResolvedValue(undefined)
+            const writeTextMock = vi.fn().mockResolvedValue(undefined)
 
             beforeEach(() => {
                 Object.assign(navigator, {
@@ -37,13 +38,13 @@ describe('Browser', () => {
         })
 
         describe('when navigator.clipboard is NOT available', () => {
-            let execCommandMock: jest.SpyInstance
+            let execCommandMock: MockInstance
 
             beforeEach(() => {
                 // Remove clipboard to trigger fallback
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
                 delete (navigator as any).clipboard
-                execCommandMock = jest.fn().mockReturnValue(true) as unknown as jest.SpyInstance
+                execCommandMock = vi.fn().mockReturnValue(true) as unknown as MockInstance
                 document.execCommand = execCommandMock as unknown as typeof document.execCommand
             })
 

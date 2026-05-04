@@ -1,13 +1,13 @@
 import { createHashRouter } from 'react-router-dom'
 import RouteError from '../components/sharedComponents/RouteError/RouteError'
-import { ApiRoutes } from './ApiRoutes'
+import { ApiRoutesList } from './ApiRoutes'
 import { ProjectRoutes } from './ProjectRoutes'
 import { PortfolioRoutes } from './PortfolioRoutes'
 
 export const routes = [
     ...PortfolioRoutes,
     ...ProjectRoutes,
-    ...ApiRoutes,
+    ...ApiRoutesList,
     {
         path: '/*',
         element: <RouteError />,

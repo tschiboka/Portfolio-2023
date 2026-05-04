@@ -23,6 +23,6 @@ export type SubmenuState = {
 export type NavProps = AccessibleProps & {
     visible?: boolean
     children: ReactNode
+    logo?: ReactNode
+    burger?: ReactNode
 }
-
-export type PageVariant = 'portfolio' | 'api'

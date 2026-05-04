@@ -1,5 +1,5 @@
 import Footer from '../../../sharedComponents/Footer/Footer'
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
@@ -74,7 +74,7 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
     ])
 
     return (
-        <Page
+        <Screen
             title="Tivadar Debnar | Xmas 2025"
             path="/xmas2025"
             loginRequired
@@ -120,7 +120,7 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
                 path={path}
                 info={<p>Page ping message: {pagePingStatus}</p>}
             />
-        </Page>
+        </Screen>
     )
 }
 

@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface RemoteProps {
     path: string
@@ -6,7 +6,7 @@ interface RemoteProps {
 
 const Remote = ({ path }: RemoteProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Remote'}
             path={path}
             recordVisit={false}
@@ -15,7 +15,7 @@ const Remote = ({ path }: RemoteProps) => {
             pageName="Remote"
         >
             <h1>Remote</h1>
-        </Page>
+        </Screen>
     )
 }
 

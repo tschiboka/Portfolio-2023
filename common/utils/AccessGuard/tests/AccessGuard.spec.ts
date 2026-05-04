@@ -105,7 +105,7 @@ describe('isConditionDenied', () => {
         })
 
         it('should pass the access map to the predicate', () => {
-            const predicate = jest.fn().mockReturnValue(true)
+            const predicate = vi.fn().mockReturnValue(true)
             const condition: GuardCondition = { type: 'custom', predicate }
             isConditionDenied(condition, fullAccess)
             expect(predicate).toHaveBeenCalledWith(fullAccess)
@@ -320,7 +320,7 @@ describe('resolveGuards', () => {
                     mode: 'soft-disabled',
                     title: 'Locked',
                     message: 'You need a subscription',
-                    actions: [{ label: 'Upgrade', onClick: jest.fn() }],
+                    actions: [{ label: 'Upgrade', onClick: vi.fn() }],
                 },
             },
             { name: 'tooltip', config: { mode: 'tooltip', text: 'Not available' } },

@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './Tasks.scss'
 import { useForm } from 'react-hook-form'
 import { Form } from '@common/ux'
@@ -19,7 +19,7 @@ const Tasks = ({ path }: TaskProps) => {
     })
 
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Tasks'}
             path={path}
             recordVisit={false}
@@ -64,7 +64,7 @@ const Tasks = ({ path }: TaskProps) => {
                 </div>
                 <h2>See previously set tasks</h2>
             </main>
-        </Page>
+        </Screen>
     )
 }
 

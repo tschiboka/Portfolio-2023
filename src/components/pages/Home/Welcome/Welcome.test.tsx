@@ -14,14 +14,6 @@ function renderComponent() {
 }
 
 describe('Welcome', () => {
-    test('Should Render a Paragraph with Hello', () => {
-        renderComponent()
-
-        const hello = screen.getByText(/hello/i)
-        expect(hello).toBeInTheDocument()
-        expect(hello).toHaveClass('hello')
-    })
-
     test('Should Render a Headshot Image', () => {
         renderComponent()
 
@@ -42,16 +34,5 @@ describe('Welcome', () => {
 
         const title = screen.getByText(/web developer/i)
         expect(title).toBeInTheDocument()
-    })
-
-    test('Should Render a List with Seven Items', () => {
-        renderComponent()
-
-        const list = screen.getByRole('list')
-        expect(list).toBeInTheDocument()
-        expect(list).toHaveClass('dev-tools')
-
-        const listItems = screen.getAllByRole('listitem')
-        expect(listItems).toHaveLength(7)
     })
 })

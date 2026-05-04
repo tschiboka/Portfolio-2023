@@ -4,6 +4,8 @@ module.exports = {
     testEnvironment: 'jsdom',
     testRegex: '(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$',
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    resolver: '<rootDir>/jest.resolver.cjs',
+    setupFiles: ['<rootDir>/jest.polyfills.cjs'],
     moduleNameMapper: {
         '^@common/(.*)$': '<rootDir>/common/$1',
         '^react-syntax-highlighter/dist/esm/styles/(.*)$': '<rootDir>/file-mock.js',

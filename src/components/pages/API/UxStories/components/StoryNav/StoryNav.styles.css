@@ -1,0 +1,57 @@
+.StoryNav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--black-3);
+}
+
+.StoryNav__back {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--accent-dark-3);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.StoryNav__back:hover {
+    text-decoration: underline;
+    color: var(--accent);
+}
+
+.StoryNav__pager {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+.StoryNav__link {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--black-5);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 150ms;
+}
+
+.StoryNav__link:hover {
+    color: var(--accent);
+}
+
+/* Light theme */
+.light .StoryNav {
+    border-bottom-color: var(--gray-3);
+}
+
+.light .StoryNav__link {
+    color: var(--gray-5);
+}
+
+.light .StoryNav__link:hover {
+    color: var(--black-1);
+}

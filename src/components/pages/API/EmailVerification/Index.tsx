@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface IndexProps {
     path: string
@@ -6,12 +6,12 @@ interface IndexProps {
 
 const Index = ({ path }: IndexProps) => {
     return (
-        <Page title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
+        <Screen title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
             <button>Admin</button>
             <button>Remote</button>
             <button>Stats</button>
             <button>Task Manager</button>
-        </Page>
+        </Screen>
     )
 }
 

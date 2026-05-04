@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
 import Footer from '../../sharedComponents/Footer/Footer'
-import Page from '../../../../common/ux/Page/Page'
+import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
+import { Screen } from '../../sharedComponents/Screen/Screen'
 import { blogArticles } from '../../../articles/articles'
 import { getLikeSummary } from '../../../serverAPI/likes'
 import { LikeSummary, VisitSummary } from '@common/types'
@@ -45,7 +46,13 @@ const Blogs = ({ pageName, path }: Props) => {
     }, [visits, likes])
 
     return (
-        <Page title="Tivadar Debnar | Blog" path={path} variant="portfolio" pageName={pageName}>
+        <Screen
+            title="Tivadar Debnar | Blog"
+            path={path}
+            variant="portfolio"
+            pageName={pageName}
+            sideMenu={<PageSideMenu />}
+        >
             <main>
                 <h1 className="Blog__title">Blog</h1>
                 <p>
@@ -92,7 +99,7 @@ const Blogs = ({ pageName, path }: Props) => {
                 </div>
             </main>
             <Footer pageName={pageName} path={path} />
-        </Page>
+        </Screen>
     )
 }
 

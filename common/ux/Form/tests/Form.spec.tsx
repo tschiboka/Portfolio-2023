@@ -5,7 +5,7 @@ import { Set } from './Form.spec.utils'
 import { iconOptions } from './Form.spec.mocks'
 
 beforeAll(() => {
-    Element.prototype.scrollIntoView = jest.fn()
+    Element.prototype.scrollIntoView = vi.fn()
 })
 
 const { Form } = Test
@@ -34,7 +34,7 @@ describe('Input', () => {
     })
 
     it('should toggle password visibility when reveal icon is clicked', () => {
-        const setReveal = jest.fn()
+        const setReveal = vi.fn()
         Set.password({ revealPassword: false, setRevealPassword: setReveal })
         const icon = Form.Get.actionIcon()!
         icon.dispatchEvent(new MouseEvent('click', { bubbles: true }))
@@ -96,7 +96,7 @@ describe('RadioButton', () => {
     })
 
     it('should call onChange when selected', async () => {
-        const onChange = jest.fn()
+        const onChange = vi.fn()
         Set.radioButton({ onChange })
         await Form.Click.radio(1)
         expect(onChange).toHaveBeenCalled()
@@ -128,14 +128,14 @@ describe('Checkbox', () => {
     })
 
     it('should call onChange with true when checked', async () => {
-        const onChange = jest.fn()
+        const onChange = vi.fn()
         Set.checkbox({ onChange })
         await Form.Click.checkbox()
         expect(onChange).toHaveBeenCalledWith(true)
     })
 
     it('should call onChange with false when unchecked', async () => {
-        const onChange = jest.fn()
+        const onChange = vi.fn()
         Set.checkbox({ onChange })
         await Form.Click.checkbox()
         await Form.Click.checkbox()
@@ -170,7 +170,7 @@ describe('Button', () => {
     })
 
     it('should call onClick when clicked', async () => {
-        const onClick = jest.fn()
+        const onClick = vi.fn()
         Set.button({ onClick })
         await Form.Click.button('Click me')
         expect(onClick).toHaveBeenCalledTimes(1)
@@ -182,7 +182,7 @@ describe('Button', () => {
     })
 
     it('should not call onClick when disabled', () => {
-        const onClick = jest.fn()
+        const onClick = vi.fn()
         Set.button({ disabled: true, onClick })
         expect(Form.Get.button('Click me')).toBeDisabled()
     })
@@ -199,7 +199,7 @@ describe('Button', () => {
 
     it('should apply inline style', () => {
         Set.button({ style: { color: 'red' } })
-        expect(Form.Get.button('Click me')).toHaveStyle({ color: 'red' })
+        expect(Form.Get.button('Click me')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
     })
 })
 
@@ -285,7 +285,7 @@ describe('SearchInput', () => {
     })
 
     it('should call onSelect when an option is clicked', async () => {
-        const onSelectSpy = jest.fn()
+        const onSelectSpy = vi.fn()
         Set.searchInput({ onSelectSpy })
         await Form.Search.Act.selectOption('Select an option', 'app', /apple/i)
         expect(onSelectSpy).toHaveBeenCalledWith(
@@ -366,7 +366,7 @@ describe('Label', () => {
 
     it('should apply inline style', () => {
         Set.label({ for: 'name', style: { color: 'red' }, children: 'Name' })
-        expect(Form.Get.text('Name')).toHaveStyle({ color: 'red' })
+        expect(Form.Get.text('Name')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
     })
 
     it('should render without children', () => {
@@ -411,7 +411,7 @@ describe('FormElement', () => {
     })
 
     it('should call onSubmit when submitted', async () => {
-        const onSubmit = jest.fn((e: React.FormEvent) => e.preventDefault())
+        const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault())
         Set.formElement({
             onSubmit,
             children: <button type="submit">Submit</button>,

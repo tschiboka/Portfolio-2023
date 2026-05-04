@@ -2,7 +2,9 @@ import { AccessGuard } from '@common/utils'
 import { useForm } from 'react-hook-form'
 import { Guards } from './Guards'
 import { Code, Form, Stack } from '@common/ux'
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './AccessGuards.code'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards
@@ -22,15 +24,18 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
     })
 
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Access Guards'}
             path={path}
             recordVisit={false}
             loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
         >
             <main>
-                {' '}
-                <h2>AccessGuards</h2>
+                <StoryNav />
+                <h1>AccessGuards</h1>
                 <p>
                     AccessGuards are a utility I created to manage access control in my
                     applications. They allow me to define granulated access rules based on user
@@ -171,6 +176,6 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                     <Code language="tsx" content={Snippets.conditionTypes} />
                 </section>
             </main>
-        </Page>
+        </Screen>
     )
 }

@@ -32,18 +32,11 @@
         font-size: font.$font_md;
         color: palette.$white_5;
         opacity: 0;
-        animation:
-            from_below 500ms ease-in,
-            fade_in 500ms ease-out forwards;
-
-        @include bp.sm {
-            width: 25rem;
-            font-size: font.$font_lg;
-        }
+        animation: fade_in 500ms ease-out forwards;
 
         @include bp.lg {
-            width: 32rem;
-            font-size: font.$font_xl;
+            width: 24rem;
+            font-size: font.$font_lg;
         }
     }
 
@@ -55,8 +48,8 @@
         border-radius: 100%;
         border: 10px solid palette.$black_2;
         background: linear-gradient(315deg, palette.$black_1, palette.$black_2);
-        animation: pop 2000ms ease-out forwards;
-        opacity: 0.6;
+        animation: fade_in 2000ms ease-out forwards;
+        opacity: 0;
         @include bp.sm {
             height: 23rem;
             min-width: 23rem;
@@ -76,102 +69,10 @@
         background-color: palette.$black_2;
         background: linear-gradient(315deg, palette.$black_2, palette.$black_1);
         object-position: 0 20px;
-        filter: grayscale(0);
-    }
-    img.headshot:hover {
         filter: grayscale(1);
     }
-
-    .dev-tools {
-        margin-left: 0;
-        width: 19rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        font-size: font.$font_lg;
-        opacity: 0;
-        animation:
-            from_right 500ms 1000ms ease-in,
-            fade_in 500ms 1000ms ease-in forwards;
-
-        @include bp.sm {
-            width: 25rem;
-        }
-
-        @include bp.md {
-        }
-
-        @include bp.lg {
-            margin-bottom: 0;
-            position: absolute;
-            flex-direction: column;
-            width: 3rem;
-            height: 50vh;
-            right: 3rem;
-            font-size: font.$font_xl;
-        }
-        @include bp.xl {
-        }
-
-        li {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: palette.$black_5;
-        }
-        li:hover {
-            color: palette.$accent_dark_3;
-            transform: scale(1.2);
-        }
-    }
-
-    .line {
-        position: absolute;
-        display: none;
-        width: 1px;
-        height: 60vh;
-        background-color: palette.$black_3;
-        right: 4.5rem;
-        top: 11.5vh;
-        opacity: 0;
-        animation:
-            fade_in 300ms 900ms ease-out forwards,
-            from_above_far 1000ms 900ms ease-in;
-        @include bp.lg {
-            display: block;
-        }
-    }
-
-    .hello {
-        margin: 0;
-        color: palette.$white_2;
-        color: palette.$accent_dark_3;
-        font-family: Roboto_Bold;
-        font-size: font.$font_2xl;
-        opacity: 0;
-        animation:
-            fade_in 800ms ease-in forwards,
-            from_above 800ms ease-out;
-
-        @include bp.lg {
-            font-size: 5rem;
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            width: 25vw;
-            top: 30%;
-            left: 3rem;
-            opacity: 0;
-            animation:
-                fade_in 800ms ease-in forwards,
-                from_left 800ms ease-out;
-        }
-        @include bp.xl {
-            font-size: 7rem;
-        }
+    img.headshot:hover {
+        filter: grayscale(0);
     }
 }
 
@@ -186,11 +87,5 @@
         background: linear-gradient(315deg, white, palette.$white_3);
         border: 2px solid palette.$white_2;
         filter: grayscale(0);
-    }
-    .hello {
-        color: black;
-    }
-    .line {
-        background-color: palette.$white_5;
     }
 }

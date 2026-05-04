@@ -1,5 +1,7 @@
 import { Code } from '@common/ux'
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './CodeBlocks.code'
 
 type CodeBlocksProps = { path: string }
@@ -47,8 +49,17 @@ npm test -- --coverage`
 
 export const CodeBlocks = ({ path }: CodeBlocksProps) => {
     return (
-        <Page title={'Tivadar Debnar | Code Blocks'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Code Blocks'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
+                <StoryNav />
                 <h1>Code</h1>
                 <p>
                     The <code>Code</code> component renders syntax-highlighted code blocks using a
@@ -149,6 +160,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => {
                     <Code language="tsx" content={Snippets.CustomStyling.style} />
                 </section>
             </main>
-        </Page>
+        </Screen>
     )
 }

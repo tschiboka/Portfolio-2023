@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { AccessGuard } from '@common/utils/AccessGuard'
 import { AdminIndex } from './AdminIndex'
 import { GuestIndex } from './GuestIndex'
@@ -11,7 +11,7 @@ interface IndexProps {
 
 const Index = ({ path, pageName }: IndexProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Index'}
             path={path}
             recordVisit={true}
@@ -43,7 +43,7 @@ const Index = ({ path, pageName }: IndexProps) => {
                 </AccessGuard>
             </main>
             <Footer pageName={pageName} path={path} info={<p>Xmas edition - 2025</p>} />
-        </Page>
+        </Screen>
     )
 }
 

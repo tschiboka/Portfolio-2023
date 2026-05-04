@@ -13,7 +13,7 @@ const mockVersion = (overrides: Partial<GetVersionResponse> = {}): GetVersionRes
 })
 
 const mockFetch = (body: GetVersionResponse, ok = true) => {
-    global.fetch = jest.fn().mockResolvedValue({
+    global.fetch = vi.fn().mockResolvedValue({
         ok,
         json: () => Promise.resolve(body),
     })
@@ -21,16 +21,16 @@ const mockFetch = (body: GetVersionResponse, ok = true) => {
 
 describe('useVersionCheck', () => {
     beforeEach(() => {
-        jest.useFakeTimers()
-        jest.spyOn(console, 'log').mockImplementation()
-        jest.spyOn(console, 'warn').mockImplementation()
-        jest.spyOn(console, 'info').mockImplementation()
-        jest.spyOn(console, 'error').mockImplementation()
+        vi.useFakeTimers({ shouldAdvanceTime: true })
+        vi.spyOn(console, 'log').mockImplementation(() => {})
+        vi.spyOn(console, 'warn').mockImplementation(() => {})
+        vi.spyOn(console, 'info').mockImplementation(() => {})
+        vi.spyOn(console, 'error').mockImplementation(() => {})
     })
 
     afterEach(() => {
-        jest.useRealTimers()
-        jest.restoreAllMocks()
+        vi.useRealTimers()
+        vi.restoreAllMocks()
     })
 
     it('should return isStale as false initially', () => {
@@ -70,7 +70,7 @@ describe('useVersionCheck', () => {
         })
 
         // Advance interval — same sha returned
-        jest.advanceTimersByTime(600_000)
+        vi.advanceTimersByTime(600_000)
 
         await waitFor(() => {
             expect(result.current.isStale).toBe(false)
@@ -87,7 +87,7 @@ describe('useVersionCheck', () => {
 
         // Return different sha on next poll
         mockFetch(mockVersion({ sha: OTHER_SHA }))
-        jest.advanceTimersByTime(600_000)
+        vi.advanceTimersByTime(600_000)
 
         await waitFor(() => {
             expect(result.current.isStale).toBe(true)
@@ -124,7 +124,7 @@ describe('useVersionCheck', () => {
     })
 
     it('should handle fetch errors gracefully', async () => {
-        global.fetch = jest.fn().mockRejectedValue(new Error('Network error'))
+        global.fetch = vi.fn().mockRejectedValue(new Error('Network error'))
         const { result } = renderHook(() => useVersionCheck())
 
         await waitFor(() => {
@@ -144,12 +144,12 @@ describe('useVersionCheck', () => {
             expect(global.fetch).toHaveBeenCalledTimes(1)
         })
 
-        jest.advanceTimersByTime(600_000)
+        vi.advanceTimersByTime(600_000)
         await waitFor(() => {
             expect(global.fetch).toHaveBeenCalledTimes(2)
         })
 
-        jest.advanceTimersByTime(600_000)
+        vi.advanceTimersByTime(600_000)
         await waitFor(() => {
             expect(global.fetch).toHaveBeenCalledTimes(3)
         })
@@ -164,7 +164,7 @@ describe('useVersionCheck', () => {
         })
 
         unmount()
-        jest.advanceTimersByTime(600_000)
+        vi.advanceTimersByTime(600_000)
         // No additional fetch after unmount
         expect(global.fetch).toHaveBeenCalledTimes(1)
     })

@@ -1,7 +1,7 @@
 .SubmenuBasis {
     display: none;
     position: fixed;
-    background-color: #111;
+    background-color: var(--black-1);
     padding: 1rem 2rem;
     list-style: none;
     flex-direction: column;
@@ -27,7 +27,7 @@
 .SubmenuBasis li {
     position: relative;
     margin-bottom: 1rem;
-    color: #888;
+    color: var(--gray-3);
     font-size: 1.1em;
     cursor: pointer;
     opacity: 0;
@@ -53,12 +53,8 @@
     transform-origin: left center;
 }
 
-.SubmenuBasis li:not(.active) .active-dot {
-    display: none;
-}
-
 .SubmenuBasis li .chevron {
-    color: #888;
+    color: var(--gray-3);
     height: 70%;
     transform: translateY(5px);
 }
@@ -96,7 +92,7 @@
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.2);
     list-style: none;
-    border-left: 2px solid #222;
+    border-left: 2px solid var(--black-2);
 }
 
 @media (min-width: 768px) {
@@ -113,13 +109,13 @@
 
 /* Light theme */
 .light .SubmenuBasis {
-    background-color: #f5f5f5;
+    background-color: var(--white-1);
     box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
-    border: 1px solid #ddd;
+    border: 1px solid var(--white-2);
 }
 
 .light .SubmenuBasis li {
-    color: #555;
+    color: var(--black-5);
 }
 
 .light .SubmenuBasis li.active,
@@ -129,12 +125,12 @@
 }
 
 .light .SubmenuBasis li .chevron {
-    color: #888;
+    color: var(--gray-3);
 }
 
 .light .SubmenuBasis .MenuAccordion {
     background-color: rgba(0, 0, 0, 0.04);
-    border-left: 2px solid #ccc;
+    border-left: 2px solid var(--white-2);
 }
 
 .light .SubmenuBasis .MenuAccordion span.active {

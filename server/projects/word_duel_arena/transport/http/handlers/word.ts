@@ -7,7 +7,7 @@ import type {
 } from '@common/types'
 
 import { getWordResources } from '../../../infrastructure/resources/word'
-import { HttpStatus } from '../../../../../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../../../../../common/utils/Server/HttpStatus'
 
 type GetWordListRes = TypedResponse<GetWdaWordListResponse | WdaErrorResponse>
 async function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {

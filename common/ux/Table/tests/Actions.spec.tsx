@@ -33,7 +33,7 @@ describe('Table — Actions', () => {
 
     describe('onClick action', () => {
         it('calls onClick with correct meta when action is clicked', async () => {
-            const onClick = jest.fn()
+            const onClick = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -55,7 +55,7 @@ describe('Table — Actions', () => {
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
                 columns: basicColumns,
-                actions: [{ id: 'edit', label: 'Edit', onClick: jest.fn() }],
+                actions: [{ id: 'edit', label: 'Edit', onClick: vi.fn() }],
             })
             await Test.Table.Act.clickAction('Edit')
             expect(Test.Table.Query.menu()).not.toBeInTheDocument()

@@ -1,4 +1,6 @@
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import {
     Fundamentals,
     Filtering,
@@ -25,10 +27,18 @@ export const Tables = ({ path }: TablesProps) => {
     }
 
     return (
-        <Page title={'Tivadar Debnar | Tables'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Tables'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
-                {' '}
-                <h2>Tables</h2>
+                <StoryNav />
+                <h1>Tables</h1>
                 <p>
                     The <code>Table</code> component renders data in a structured grid with support
                     for custom cell renderers, breakpoints, default values, context passing, and
@@ -117,6 +127,6 @@ export const Tables = ({ path }: TablesProps) => {
                 <Accessibility />
                 <AllFeaturesCombined />
             </main>
-        </Page>
+        </Screen>
     )
 }

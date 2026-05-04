@@ -1,23 +1,21 @@
-import { FaFacebookF } from 'react-icons/fa'
-import { TbBrandGithubFilled } from 'react-icons/tb'
-import { TfiLinkedin } from 'react-icons/tfi'
+import { ReactNode } from 'react'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import Toggle from '../../../../src/components/sharedComponents/Toggle/Toggle'
 import { useAppContext } from '../../../../src/context/AppContext/App.context'
 import './SubNav.styles.css'
 
-export const SubNav = () => {
+export type SubNavProps = {
+    title?: ReactNode
+    links?: ReactNode
+}
+
+export const SubNav = ({ title, links }: SubNavProps) => {
     const { themeMode, setThemeMode, subMenuVisible } = useAppContext()
 
     if (!subMenuVisible) return null
     return (
         <div className="SubNav">
-            <div className="sublogo">
-                <span className="sublogo-text">
-                    <span>Tivadar&nbsp;</span>
-                    <span>Debnar</span>
-                </span>
-            </div>
+            <div className="sublogo">{title && <span className="sublogo-text">{title}</span>}</div>
             <div className="social-links">
                 <div className="theme-toggle" title="Toggle Colour Theme">
                     <Toggle
@@ -31,15 +29,7 @@ export const SubNav = () => {
                         )}
                     </Toggle>
                 </div>
-                <a href="https://www.facebook.com/tschiboka/">
-                    <FaFacebookF title="Facebook Link" />
-                </a>
-                <a href="https://github.com/tschiboka">
-                    <TbBrandGithubFilled title="Github Link" />
-                </a>
-                <a href="https://www.linkedin.com/in/tivadar-debnar/">
-                    <TfiLinkedin title="LinkedIn Link" />
-                </a>
+                {links}
             </div>
         </div>
     )

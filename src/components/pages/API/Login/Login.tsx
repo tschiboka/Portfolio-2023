@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
 import { AxiosError } from 'axios'
@@ -72,7 +72,7 @@ const Login = ({ path, pageName }: LoginProps) => {
     const isLoading = settingIsLoading || loginRequest.isPending
 
     return (
-        <Page
+        <Screen
             className="Login"
             title="Tivadar Debnar | Login"
             path={path}
@@ -111,7 +111,6 @@ const Login = ({ path, pageName }: LoginProps) => {
                         <p className="submit-error-message">{loginErrorMessage}</p>
                     )}
                     <Form.ButtonGroup>
-                        <Form.Button type="submit">Login</Form.Button>
                         {enableRegistration && (
                             <Form.Button
                                 variant="secondary"
@@ -120,10 +119,11 @@ const Login = ({ path, pageName }: LoginProps) => {
                                 Register User
                             </Form.Button>
                         )}
+                        <Form.Button type="submit">Login</Form.Button>
                     </Form.ButtonGroup>
                 </Form>
             </main>
-        </Page>
+        </Screen>
     )
 }
 

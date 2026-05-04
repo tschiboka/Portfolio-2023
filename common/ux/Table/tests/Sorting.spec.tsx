@@ -17,7 +17,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
@@ -34,7 +34,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             expect(Test.Table.Query.sortButton('Value')).not.toBeInTheDocument()
@@ -51,7 +51,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const valueHeader = screen
@@ -64,7 +64,7 @@ describe('Table — Sorting', () => {
 
     describe('Sort interactions', () => {
         it('calls onSortChange when a sortable header is clicked', async () => {
-            const onSortChange = jest.fn()
+            const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -83,7 +83,7 @@ describe('Table — Sorting', () => {
         })
 
         it('toggles to desc when clicking the currently asc-sorted column', async () => {
-            const onSortChange = jest.fn()
+            const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -99,7 +99,7 @@ describe('Table — Sorting', () => {
         })
 
         it('sorts asc when clicking a different column', async () => {
-            const onSortChange = jest.fn()
+            const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -118,7 +118,7 @@ describe('Table — Sorting', () => {
         })
 
         it('sorts asc when clicking current column that is desc', async () => {
-            const onSortChange = jest.fn()
+            const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -143,7 +143,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const th = screen.getByRole('columnheader', { name: /Name/ })
@@ -159,7 +159,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'desc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const th = screen.getByRole('columnheader', { name: /Name/ })
@@ -178,7 +178,7 @@ describe('Table — Sorting', () => {
                 sorting: {
                     column: 'name',
                     direction: 'asc',
-                    onSortChange: jest.fn(),
+                    onSortChange: vi.fn(),
                 },
             })
             const th = screen.getByRole('columnheader', { name: /Value/ })

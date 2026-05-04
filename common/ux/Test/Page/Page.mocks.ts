@@ -1,11 +1,14 @@
+import { vi, type Mock } from 'vitest'
 import { DefaultOptions } from '@tanstack/react-query'
 import { SessionContextValues } from '../../../../src/context/SessionContext/SessionContext.types'
+
+export const mockNavigate = (globalThis as Record<string, unknown>).mockNavigate as Mock
 
 export const mockDefaultSessionContext: SessionContextValues = {
     session: undefined,
     isAuthLoading: false,
     isAuthenticated: false,
-    setSession: jest.fn(),
+    setSession: vi.fn(),
 }
 
 export const mockDefaultQueryOptions: DefaultOptions = {

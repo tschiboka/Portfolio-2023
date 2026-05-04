@@ -1,6 +1,7 @@
 export { AccessGuards } from './AccessGuards/AccessGuards'
 export { CodeBlocks } from './CodeBlocks/CodeBlocks'
 export { Forms } from './Forms/Forms'
+export { NavStory } from './Nav/Nav'
 export { Overlays } from './Overlays/Overlays'
 export { Pills } from './Pills/Pills'
 export { Stacks } from './Stacks/Stacks'

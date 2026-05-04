@@ -1,5 +1,7 @@
 import { Code, Pill, Stack } from '@common/ux'
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Pills.code'
 
 type PillsProps = { path: string }
@@ -8,8 +10,17 @@ const colors = ['accent', 'error', 'success', 'yellow', 'orange', 'purple', 'gra
 
 export const Pills = ({ path }: PillsProps) => {
     return (
-        <Page title={'Tivadar Debnar | Pills'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Pills'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
+                <StoryNav />
                 <h1>Pill</h1>
                 <p>
                     The <code>Pill</code> component renders a small inline badge with coloured text,
@@ -111,6 +122,6 @@ export const Pills = ({ path }: PillsProps) => {
                     <Code language="tsx" content={Snippets.CustomStyling.style} />
                 </section>
             </main>
-        </Page>
+        </Screen>
     )
 }

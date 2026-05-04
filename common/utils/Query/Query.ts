@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestConfig } from 'axios'
 import { Session } from '../../../src/context/SessionContext'
 import { apiPathBuilder } from '../Path/apiPathBuilder'
+import { hasLength } from '../Predicate'
 
 export class RequestBuilder {
     private url: string
@@ -32,7 +33,7 @@ export class RequestBuilder {
 
     build() {
         const config: AxiosRequestConfig = {}
-        if (Object.keys(this.headers).length) config.headers = this.headers
+        if (hasLength(Object.keys(this.headers))) config.headers = this.headers
         if (this.queryParams) config.params = this.queryParams
 
         const url = this.url

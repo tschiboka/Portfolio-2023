@@ -1,0 +1,30 @@
+.PageSideMenu .ShareMenu {
+    position: fixed;
+    bottom: 4rem;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    z-index: 59;
+}
+
+.PageSideMenu .ShareMenu .ShareMenu__icon > * {
+    font-size: 1.4rem;
+}
+
+@media (min-width: 992px) {
+    .PageSideMenu .ShareMenu {
+        width: 5rem;
+        height: 80vh;
+        left: auto;
+        right: 40px;
+        bottom: auto;
+        top: 50%;
+        transform: translateY(-50%);
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .PageSideMenu .ShareMenu .ShareMenu__icon > * {
+        font-size: 1.4rem;
+    }
+}

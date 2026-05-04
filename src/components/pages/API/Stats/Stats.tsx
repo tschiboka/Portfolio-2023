@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface StatProps {
     path: string
@@ -6,7 +6,7 @@ interface StatProps {
 
 const Stats = ({ path }: StatProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Stats'}
             path={path}
             recordVisit={false}
@@ -15,7 +15,7 @@ const Stats = ({ path }: StatProps) => {
             pageName="Stats"
         >
             <h1>Stats</h1>
-        </Page>
+        </Screen>
     )
 }
 

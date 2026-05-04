@@ -1,0 +1,45 @@
+.NavDemo {
+    position: relative;
+    border: 1px solid var(--black-3);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 1rem 0;
+}
+
+.NavDemo .Header {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+}
+
+.NavDemo .SubNav {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex !important;
+}
+
+.NavDemo .nav_links {
+    display: flex !important;
+}
+
+.NavDemo .MobileMenu {
+    position: relative;
+    top: auto;
+    left: auto;
+    height: 300px;
+    display: flex;
+}
+
+.NavDemo--mobile {
+    max-width: 375px;
+}
+
+.NavDemo--mobile .nav_links {
+    display: none !important;
+}
+
+.NavDemo--mobile .burger {
+    display: flex !important;
+}

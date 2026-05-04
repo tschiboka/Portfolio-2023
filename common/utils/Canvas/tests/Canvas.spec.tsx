@@ -1,28 +1,29 @@
+import type { Mock } from 'vitest'
 import { renderHook } from '@testing-library/react'
 import { Canvas } from '..'
 import { RefObject } from 'react'
 
 type MockCtx = {
-    beginPath: jest.Mock
-    moveTo: jest.Mock
-    lineTo: jest.Mock
-    stroke: jest.Mock
-    fill: jest.Mock
-    arc: jest.Mock
-    clearRect: jest.Mock
+    beginPath: Mock
+    moveTo: Mock
+    lineTo: Mock
+    stroke: Mock
+    fill: Mock
+    arc: Mock
+    clearRect: Mock
     strokeStyle: string
     fillStyle: string
     lineWidth: number
 }
 
 const createMockCtx = (): MockCtx => ({
-    beginPath: jest.fn(),
-    moveTo: jest.fn(),
-    lineTo: jest.fn(),
-    stroke: jest.fn(),
-    fill: jest.fn(),
-    arc: jest.fn(),
-    clearRect: jest.fn(),
+    beginPath: vi.fn(),
+    moveTo: vi.fn(),
+    lineTo: vi.fn(),
+    stroke: vi.fn(),
+    fill: vi.fn(),
+    arc: vi.fn(),
+    clearRect: vi.fn(),
     strokeStyle: '',
     fillStyle: '',
     lineWidth: 0,
@@ -51,7 +52,7 @@ const createMockCanvas = (
 
     const parent = noParent ? undefined : ({ parentElement: grandparent } as HTMLElement)
 
-    const getContext = jest.fn().mockReturnValue(ctx)
+    const getContext = vi.fn().mockReturnValue(ctx)
     const canvas = {
         width: 0,
         height: 0,

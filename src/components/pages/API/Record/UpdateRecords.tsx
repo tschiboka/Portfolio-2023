@@ -1,4 +1,4 @@
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 
 interface UpdateRecordsProps {
     path: string
@@ -6,7 +6,7 @@ interface UpdateRecordsProps {
 
 const UpdateRecords = ({ path }: UpdateRecordsProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Update Records'}
             path={path}
             recordVisit={false}
@@ -17,7 +17,7 @@ const UpdateRecords = ({ path }: UpdateRecordsProps) => {
             <main>
                 <h1>Update Records</h1>
             </main>
-        </Page>
+        </Screen>
     )
 }
 

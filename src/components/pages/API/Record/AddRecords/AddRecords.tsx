@@ -1,4 +1,4 @@
-import Page from '../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../sharedComponents/Screen/Screen'
 import './AddRecords.scss'
 
 interface AddRecordProps {
@@ -7,7 +7,7 @@ interface AddRecordProps {
 
 const AddRecords = ({ path }: AddRecordProps) => {
     return (
-        <Page
+        <Screen
             title={'Tivadar Debnar | Add Records'}
             path={path}
             recordVisit={false}
@@ -49,7 +49,7 @@ const AddRecords = ({ path }: AddRecordProps) => {
                     </li>
                 </ul>
             </main>
-        </Page>
+        </Screen>
     )
 }
 

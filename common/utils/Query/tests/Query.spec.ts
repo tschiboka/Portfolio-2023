@@ -1,31 +1,39 @@
-/* eslint-disable @typescript-eslint/unbound-method */
+import type { MockInstance } from 'vitest'
+/* eslint-disable @typescript-eslint/unbound-method, @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios'
+import * as apiPathBuilderModule from '../../Path/apiPathBuilder'
 import { RequestBuilder } from '../Query'
 
-jest.mock('axios')
-jest.mock('../../Path/apiPathBuilder', () => ({
-    apiPathBuilder: (pathName: string) => {
-        const apiRoutes: Record<string, string> = {
-            ApiRouteA: 'route-a',
-            ApiRouteB: 'route-b',
-        }
-        const projectRoutes: Record<string, string> = {
-            ProjectA: 'projects/project-a',
-        }
+const mockedAxios = axios as unknown as {
+    get: MockInstance
+    post: MockInstance
+    put: MockInstance
+}
+
+function mockApiPathBuilder() {
+    const apiRoutes: Record<string, string> = {
+        ApiRouteA: 'route-a',
+        ApiRouteB: 'route-b',
+    }
+    const projectRoutes: Record<string, string> = {
+        ProjectA: 'projects/project-a',
+    }
+    vi.spyOn(apiPathBuilderModule, 'apiPathBuilder').mockImplementation((pathName: string) => {
         if (pathName in projectRoutes) return `http://localhost:5000/${projectRoutes[pathName]}`
         return `http://localhost:5000/api/${apiRoutes[pathName]}`
-    },
-}))
-
-const mockedAxios = axios as jest.Mocked<typeof axios>
-
+    })
+}
 
 describe('RequestBuilder', () => {
     beforeEach(() => {
-        jest.clearAllMocks()
-        mockedAxios.get.mockResolvedValue({ data: {} })
-        mockedAxios.post.mockResolvedValue({ data: {} })
-        mockedAxios.put.mockResolvedValue({ data: {} })
+        vi.spyOn(axios, 'get').mockResolvedValue({ data: {} })
+        vi.spyOn(axios, 'post').mockResolvedValue({ data: {} })
+        vi.spyOn(axios, 'put').mockResolvedValue({ data: {} })
+        mockApiPathBuilder()
+    })
+
+    afterEach(() => {
+        vi.restoreAllMocks()
     })
 
     describe('build', () => {

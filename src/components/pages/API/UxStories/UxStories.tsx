@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom'
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
+import { Table } from '@common/ux/Table'
+import { PageSideMenu } from '../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { stories } from './stories'
 import { Stack } from '@common/ux'
+import './UxStories.styles.css'
+
+type StoryRow = { name: string; description: string; path: string }
+
+const data: StoryRow[] = stories.map((s) => ({
+    name: s.label,
+    description: s.description ?? '',
+    path: s.path,
+}))
 
 interface UxStoriesProps {
     path: string
@@ -8,7 +20,15 @@ interface UxStoriesProps {
 
 export const UxStories = ({ path }: UxStoriesProps) => {
     return (
-        <Page title={'Tivadar Debnar | Ux Stories'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Ux Stories'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
                 <Stack.Vertical gap="12">
                     <h1>UX Stories</h1>
@@ -18,16 +38,22 @@ export const UxStories = ({ path }: UxStoriesProps) => {
                         pattern in action, allowing you to explore their features and behaviors in a
                         real-world context.
                     </p>
-                    <h2>Choose component</h2>
-                    <Link to="/api/ux-stories/access-guards">Access Guards</Link>
-                    <Link to="/api/ux-stories/code-blocks">Code Blocks</Link>
-                    <Link to="/api/ux-stories/forms">Forms</Link>
-                    <Link to="/api/ux-stories/overlays">Overlays</Link>
-                    <Link to="/api/ux-stories/pills">Pills</Link>
-                    <Link to="/api/ux-stories/stacks">Stacks</Link>
-                    <Link to="/api/ux-stories/tables">Tables</Link>
+                    <div className="UxStories__table">
+                        <Table<StoryRow>
+                            ariaLabel="UX Stories"
+                            data={data}
+                            columns={[
+                                {
+                                    header: 'Component',
+                                    accessor: 'name',
+                                    cell: (_val, { row }) => <Link to={row.path}>{row.name}</Link>,
+                                },
+                                { header: 'Description', accessor: 'description' },
+                            ]}
+                        />
+                    </div>
                 </Stack.Vertical>
             </main>
-        </Page>
+        </Screen>
     )
 }

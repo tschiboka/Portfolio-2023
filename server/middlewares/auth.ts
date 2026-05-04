@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { Request, Response, NextFunction } from 'express'
 import { isFalsy } from '@common/utils/Predicate'
-import { HttpStatus } from '../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 export default function auth(req: Request, res: Response, next: NextFunction) {
     const token = req.header('x-auth-token')

@@ -1,3 +1,4 @@
+import type { Mock } from 'vitest'
 import React from 'react'
 import { render } from '@testing-library/react'
 import { useForm } from 'react-hook-form'
@@ -32,7 +33,7 @@ const InputWrapper = (props: Partial<Parameters<typeof Input<FormValues>>[0]>) =
 
 const PasswordWrapper = ({
     revealPassword = false,
-    setRevealPassword = jest.fn(),
+    setRevealPassword = vi.fn(),
 }: {
     revealPassword?: boolean
     setRevealPassword?: (reveal: boolean) => void
@@ -56,7 +57,7 @@ const TextAreaWrapper = (props: Partial<Parameters<typeof TextArea<FormValues>>[
     return <TextArea name="description" control={control} {...props} />
 }
 
-const RadioButtonWrapper = ({ onChange = jest.fn() }: { onChange?: () => void }) => {
+const RadioButtonWrapper = ({ onChange = vi.fn() }: { onChange?: () => void }) => {
     const { control } = useForm<FormValues>({ defaultValues: { toggle: false } })
     return (
         <div>
@@ -67,7 +68,7 @@ const RadioButtonWrapper = ({ onChange = jest.fn() }: { onChange?: () => void })
 }
 
 const CheckboxWrapper = ({
-    onChange = jest.fn(),
+    onChange = vi.fn(),
     ...props
 }: Partial<Parameters<typeof Checkbox<FormValues>>[0]> & {
     onChange?: (checked: boolean) => void
@@ -88,10 +89,10 @@ const SearchInputWrapper = ({
     onSelectSpy,
     ...props
 }: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
-    onSelectSpy?: jest.Mock
+    onSelectSpy?: Mock
 }) => {
     const { control, setValue } = useForm<FormValues>({ defaultValues: { option: '' } })
-    const onSelect = onSelectSpy ?? jest.fn()
+    const onSelect = onSelectSpy ?? vi.fn()
     return (
         <SearchInput
             name="option"
@@ -154,7 +155,7 @@ const DateInputWithErrorWrapper = (props: Partial<Parameters<typeof DateInput<Fo
 }
 
 const SearchInputWithErrorWrapper = (
-    props: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & { onSelectSpy?: jest.Mock },
+    props: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & { onSelectSpy?: Mock },
 ) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { option: '' } })
     React.useEffect(() => {
@@ -165,7 +166,7 @@ const SearchInputWithErrorWrapper = (
             name="option"
             control={control}
             options={testOptions}
-            onSelect={props.onSelectSpy ?? jest.fn()}
+            onSelect={props.onSelectSpy ?? vi.fn()}
             placeholder="Select an option"
             {...props}
         />
@@ -211,7 +212,7 @@ export const Set = {
     ) => render(<CheckboxWrapper {...props} />),
     searchInput: (
         props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
-            onSelectSpy?: jest.Mock
+            onSelectSpy?: Mock
         },
     ) => render(<SearchInputWrapper {...props} />),
     dateInput: (props?: Partial<Parameters<typeof DateInput<FormValues>>[0]>) =>
@@ -254,7 +255,7 @@ export const Set = {
         render(<DateInputWithErrorWrapper {...props} />),
     searchInputWithError: (
         props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
-            onSelectSpy?: jest.Mock
+            onSelectSpy?: Mock
         },
     ) => render(<SearchInputWithErrorWrapper {...props} />),
     checkboxWithError: () => render(<CheckboxWithErrorWrapper />),

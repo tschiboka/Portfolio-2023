@@ -1,35 +1,10 @@
 import { act } from '@testing-library/react'
+import { Browser } from '@common/utils/Browser'
 import { Test } from '../../Test'
 
 const { Code } = Test
 
-jest.mock('react-syntax-highlighter', () => {
-    const MockHighlighter = ({ children, language }: { children: string; language: string }) => (
-        <pre data-testid="syntax-highlighter" data-language={language}>
-            {children}
-        </pre>
-    )
-    MockHighlighter.displayName = 'SyntaxHighlighter'
-    return { __esModule: true, default: MockHighlighter }
-})
-
-jest.mock('react-syntax-highlighter/dist/esm/styles/hljs', () => ({
-    atomOneDark: {},
-}))
-
-jest.mock('react-icons/ai', () => ({
-    AiFillSave: (props: React.HTMLAttributes<HTMLSpanElement>) => (
-        <span data-testid="copy-icon" {...props} />
-    ),
-}))
-
-const mockCopyToClipboard = jest.fn().mockResolvedValue(undefined)
-jest.mock('@common/utils/Browser', () => ({
-    Browser: {
-        copyToClipboard: (...args: unknown[]): Promise<void> =>
-            mockCopyToClipboard(...args) as Promise<void>,
-    },
-}))
+const mockCopyToClipboard = vi.fn().mockResolvedValue(undefined)
 
 // ═════════════════════════════════════════════════════════════════════════════
 // Tests
@@ -37,12 +12,14 @@ jest.mock('@common/utils/Browser', () => ({
 
 describe('Code', () => {
     beforeEach(() => {
-        jest.useFakeTimers()
+        vi.useFakeTimers({ shouldAdvanceTime: true })
         mockCopyToClipboard.mockClear()
+        vi.spyOn(Browser, 'copyToClipboard').mockImplementation(mockCopyToClipboard)
     })
 
     afterEach(() => {
-        jest.useRealTimers()
+        vi.restoreAllMocks()
+        vi.useRealTimers()
     })
 
     describe('rendering', () => {
@@ -83,7 +60,7 @@ describe('Code', () => {
 
         it('should pass language to SyntaxHighlighter', () => {
             Code.Set.mock({ language: 'ruby', content: "puts 'hi'" })
-            expect(Code.Get.highlighter()).toHaveAttribute('data-language', 'ruby')
+            expect(Code.Get.highlighterCode()).toHaveClass('language-ruby')
         })
 
         it('should render the copy icon', () => {
@@ -145,7 +122,7 @@ describe('Code', () => {
             expect(Code.Get.text('Copied')).toBeInTheDocument()
 
             act(() => {
-                jest.advanceTimersByTime(2000)
+                vi.advanceTimersByTime(2000)
             })
 
             expect(Code.Query.copyMessage()).not.toBeInTheDocument()
@@ -157,7 +134,7 @@ describe('Code', () => {
             await Code.Click.copyIcon()
 
             act(() => {
-                jest.advanceTimersByTime(1999)
+                vi.advanceTimersByTime(1900)
             })
 
             expect(Code.Get.text('Copied')).toBeInTheDocument()
@@ -170,7 +147,7 @@ describe('Code', () => {
             expect(Code.Get.text('Copied')).toBeInTheDocument()
 
             act(() => {
-                jest.advanceTimersByTime(1000)
+                vi.advanceTimersByTime(1000)
             })
 
             await Code.Click.copyIcon()
@@ -216,7 +193,7 @@ describe('Code', () => {
         it('should render with HTML language', () => {
             Code.Set.mock({ language: 'html', content: '<div>Hello</div>' })
             expect(Code.Get.text('[html]')).toBeInTheDocument()
-            expect(Code.Get.highlighter()).toHaveAttribute('data-language', 'html')
+            expect(Code.Get.highlighterCode()).toHaveClass('language-html')
         })
 
         it('should render with CSS language', () => {

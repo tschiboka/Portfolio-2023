@@ -1,16 +1,6 @@
-import { Maybe } from 'monet'
-import { MenuItem, SubmenuState } from './Nav.types'
-import SantaHat from '../../../src/assets/images/projects/xmas/santa_hat.png'
-
-export const isArticle = (path: string | undefined): boolean => /^\/blog\//.test(path || '')
-
-export const isActive = (label: string, pageName: string) =>
-    label.toLowerCase() === pageName.toLowerCase() ? 'active' : ''
-
-export const isHighlighted = (item: MenuItem, pageName: string, submenu?: SubmenuState) =>
-    Maybe.fromNull(submenu)
-        .map((sub) => (sub?.parentLabel === item?.label ? 'active' : ''))
-        .orSome(!submenu ? isActive(item.label, pageName) : '')
+import { MenuItem } from '@common/ux/Nav/Nav.types'
+import { collectMenuGroups } from '@common/ux/Nav/Nav.utils'
+import SantaHat from '../../assets/images/projects/xmas/santa_hat.png'
 
 export const portfolioMenu: MenuItem[] = [
     { label: 'Home', path: '/' },
@@ -64,6 +54,13 @@ export const apiMenu: MenuItem[] = [
         ],
         allowCapabilities: ['admin'],
     },
+    {
+        label: 'Projects',
+        submenu: [
+            { label: 'UX Stories', path: '/api/ux-stories', parent: 'Projects' },
+            { label: 'WDA Level Creator', path: '/projects/wda-level-creator', parent: 'Projects' },
+        ],
+    },
     { label: 'Logout', path: '/api/logout' },
     { label: '', showSubmenuToggle: true },
 ]
@@ -75,14 +72,6 @@ export const getMenuItemImage = (imageName: string) => {
         default:
             return null
     }
-}
-
-const collectMenuGroups = (menu: MenuItem[]): MenuItem[][] => {
-    const groups: MenuItem[][] = [menu]
-    for (const item of menu) {
-        if (item.submenu) groups.push(...collectMenuGroups(item.submenu))
-    }
-    return groups
 }
 
 export const apiMenuGroups: MenuItem[][] = collectMenuGroups(apiMenu)

@@ -54,7 +54,7 @@ describe('ContextBuilder.CreateContext', () => {
     describe('Use hook', () => {
         it('should throw when used outside of Provider', () => {
             // Suppress React error boundary / console.error noise
-            const spy = jest.spyOn(console, 'error').mockImplementation(jest.fn())
+            const spy = vi.spyOn(console, 'error').mockImplementation(vi.fn())
 
             expect(() => render(<Consumer />)).toThrow(
                 'Test context must be used within its Provider',

@@ -1,7 +1,7 @@
 import express from 'express'
 import dailyEmail from '../scheduled/dailyEmail'
 import { PostDailyBreakdownResponse, TypedRequest, TypedResponse } from '@common/types'
-import { HttpStatus } from '../common/HttpStatus/HttpStatus'
+import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 const route = express.Router()
 

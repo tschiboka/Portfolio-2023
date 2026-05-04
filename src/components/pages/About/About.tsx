@@ -8,7 +8,8 @@ import guitarImage from '../../../assets/images/about/RiffMaster.png'
 import guitarAppImage from '../../../assets/images/about/RiffMaster_App.png'
 import guitarAppImageSm from '../../../assets/images/about/RiffMaster_App_Mobile.png'
 import { Link } from 'react-router-dom'
-import Page from '../../../../common/ux/Page/Page'
+import { Screen } from '../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import './About.scss'
 
 interface Props {
@@ -18,7 +19,13 @@ interface Props {
 
 const About = ({ pageName, path }: Props) => {
     return (
-        <Page title="Tivadar Debnar | About" path="/about" variant="portfolio" pageName={pageName}>
+        <Screen
+            title="Tivadar Debnar | About"
+            path="/about"
+            variant="portfolio"
+            pageName={pageName}
+            sideMenu={<PageSideMenu />}
+        >
             <main>
                 <h1>About Tivadar</h1>
                 <h2>The beginnings</h2>
@@ -98,7 +105,7 @@ const About = ({ pageName, path }: Props) => {
                 <AchievementList achievements={certificateAchievements} />
             </main>
             <Footer pageName={pageName} path={path} />
-        </Page>
+        </Screen>
     )
 }
 

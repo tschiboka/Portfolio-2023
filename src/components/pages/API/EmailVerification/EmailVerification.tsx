@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
-import Page from '../../../../../common/ux/Page/Page'
+import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './EmailVerification.scss'
 import { useVerifyEmailRequest } from './EmailVerification.query'
 import { AxiosError, AxiosResponse } from 'axios'
@@ -37,7 +37,7 @@ const EmailVerification = ({ path }: IndexProps) => {
     }, [])
 
     return (
-        <Page
+        <Screen
             className="EmailVerification"
             title={'Tivadar Debnar | Email Verification'}
             path={path}
@@ -46,7 +46,7 @@ const EmailVerification = ({ path }: IndexProps) => {
             <h1>Verifing your email address</h1>
             <LoadingIndicator show={isPending} />
             {message && <h2>{message}</h2>}
-        </Page>
+        </Screen>
     )
 }
 

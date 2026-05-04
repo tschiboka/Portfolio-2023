@@ -2,7 +2,9 @@ import { useRef, useState } from 'react'
 import { Code, Overlay, Stack } from '@common/ux'
 import { PopupMode, PopupSize } from '@common/ux/Overlay/Overlay.types'
 import type { ActionMenuItem } from '@common/ux/Overlay/ActionMenu'
-import Page from '../../../../../../../common/ux/Page/Page'
+import { Screen } from '../../../../../sharedComponents/Screen/Screen'
+import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
+import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Overlays.code'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']
@@ -55,9 +57,18 @@ export const Overlays = ({ path }: OverlaysProps) => {
     ]
 
     return (
-        <Page title={'Tivadar Debnar | Overlays'} path={path} recordVisit={false} loginRequired>
+        <Screen
+            title={'Tivadar Debnar | Overlays'}
+            path={path}
+            recordVisit={false}
+            loginRequired
+            variant="api"
+            pageName="Projects"
+            sideMenu={<PageSideMenu />}
+        >
             <main>
-                <h2>Overlays</h2>
+                <StoryNav />
+                <h1>Overlays</h1>
                 <p>
                     Overlay components provide modal dialogs and portaled menus for user
                     interaction. The <code>Popup</code> variant supports modes, sizes, actions, and
@@ -338,6 +349,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <Code language="tsx" content={Snippets.ActionMenu.ariaLabel} />
                 </section>
             </main>
-        </Page>
+        </Screen>
     )
 }
