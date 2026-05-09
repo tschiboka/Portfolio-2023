@@ -24,12 +24,12 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pagination()).toBeInTheDocument()
+            expect(Test.Table('test').Get.pagination()).toBeInTheDocument()
         })
 
         it('does not render pagination when prop is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(Test.Table.Query.pagination()).not.toBeInTheDocument()
+            expect(Test.Table('test').Has.pagination()).toBe(false)
         })
 
         it('renders page buttons for the window', () => {
@@ -44,9 +44,10 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(1)).toBeInTheDocument()
-            expect(Test.Table.Get.pageButton(2)).toBeInTheDocument()
-            expect(Test.Table.Get.pageButton(3)).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.pageButton(1)).toBeInTheDocument()
+            expect(table.Get.pageButton(2)).toBeInTheDocument()
+            expect(table.Get.pageButton(3)).toBeInTheDocument()
         })
     })
 
@@ -64,7 +65,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            await Test.Table.Click.pageButton(2)
+            await Test.Table('test').Do.goToPage(2)
             expect(onPageChange).toHaveBeenCalledWith(2)
         })
 
@@ -81,7 +82,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            await Test.Table.Click.firstPage()
+            await Test.Table('test').Do.goToFirstPage()
             expect(onPageChange).toHaveBeenCalledWith(1)
         })
 
@@ -98,7 +99,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            await Test.Table.Click.prevPage()
+            await Test.Table('test').Do.goToPrevPage()
             expect(onPageChange).toHaveBeenCalledWith(2)
         })
 
@@ -115,7 +116,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            await Test.Table.Click.nextPage()
+            await Test.Table('test').Do.goToNextPage()
             expect(onPageChange).toHaveBeenCalledWith(4)
         })
 
@@ -132,7 +133,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            await Test.Table.Click.lastPage()
+            await Test.Table('test').Do.goToLastPage()
             expect(onPageChange).toHaveBeenCalledWith(5)
         })
     })
@@ -150,10 +151,11 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.firstPage()).toBeDisabled()
-            expect(Test.Table.Get.prevPage()).toBeDisabled()
-            expect(Test.Table.Get.nextPage()).not.toBeDisabled()
-            expect(Test.Table.Get.lastPage()).not.toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.firstPage()).toBeDisabled()
+            expect(table.Get.prevPage()).toBeDisabled()
+            expect(table.Get.nextPage()).not.toBeDisabled()
+            expect(table.Get.lastPage()).not.toBeDisabled()
         })
 
         it('disables Next and Last on last page', () => {
@@ -168,10 +170,11 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.firstPage()).not.toBeDisabled()
-            expect(Test.Table.Get.prevPage()).not.toBeDisabled()
-            expect(Test.Table.Get.nextPage()).toBeDisabled()
-            expect(Test.Table.Get.lastPage()).toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.firstPage()).not.toBeDisabled()
+            expect(table.Get.prevPage()).not.toBeDisabled()
+            expect(table.Get.nextPage()).toBeDisabled()
+            expect(table.Get.lastPage()).toBeDisabled()
         })
 
         it('all nav buttons disabled when there is only one page', () => {
@@ -186,10 +189,11 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.firstPage()).toBeDisabled()
-            expect(Test.Table.Get.prevPage()).toBeDisabled()
-            expect(Test.Table.Get.nextPage()).toBeDisabled()
-            expect(Test.Table.Get.lastPage()).toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.firstPage()).toBeDisabled()
+            expect(table.Get.prevPage()).toBeDisabled()
+            expect(table.Get.nextPage()).toBeDisabled()
+            expect(table.Get.lastPage()).toBeDisabled()
         })
     })
 
@@ -206,7 +210,7 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(2)).toHaveClass('active')
+            expect(Test.Table('test').Get.pageButton(2)).toHaveClass('active')
         })
 
         it('non-active page buttons do not have "active" class', () => {
@@ -221,8 +225,9 @@ describe('Table — Pagination', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(1)).not.toHaveClass('active')
-            expect(Test.Table.Get.pageButton(3)).not.toHaveClass('active')
+            const table = Test.Table('test')
+            expect(table.Get.pageButton(1)).not.toHaveClass('active')
+            expect(table.Get.pageButton(3)).not.toHaveClass('active')
         })
     })
 

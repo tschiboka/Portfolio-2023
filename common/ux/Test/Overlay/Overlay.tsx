@@ -1,74 +1,53 @@
-import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { Accessor } from '../Accessor/Accessor'
 
-export const Overlay = {
-    Get: {
-        // ActionMenu
-        menu: () => screen.getByRole('menu'),
-        menuItems: () => screen.getAllByRole('menuitem'),
-        menuItem: (label: string) => screen.getByRole('menuitem', { name: label }),
+export class OverlayAccessor extends Accessor {
+    get Get() {
+        return {
+            ...super.Get,
+            // ActionMenu
+            menu: () => this.element,
+            menuItems: () => this.scope.getAllByRole('menuitem'),
+            menuItem: (label: string) => this.scope.getByRole('menuitem', { name: label }),
 
-        // Popup
-        dialog: () => screen.getByRole('dialog'),
-        closeButton: () => screen.getByLabelText('Overlay Close'),
-        backdrop: () => document.querySelector('.Overlay--popup__backdrop'),
-        heading: () => screen.getByRole('heading'),
-        text: (text: string | RegExp) => screen.getByText(text),
-        byLabel: (label: string) => screen.getByLabelText(label),
-        byTestId: (id: string) => screen.getByTestId(id),
-        actionButtons: () =>
-            screen
-                .getAllByRole('button')
-                .filter((b) => b.classList.contains('Overlay--popup__action-btn')),
-    },
+            // Popup
+            dialog: () => this.element,
+            closeButton: () => this.scope.getByLabelText('Overlay Close'),
+            backdrop: () => this.element.closest('.Overlay--popup__backdrop'),
+            heading: () => this.scope.getByRole('heading'),
+            byTestId: (id: string) => this.scope.getByTestId(id),
+            actionButtons: () =>
+                this.scope
+                    .getAllByRole('button')
+                    .filter((b) => b.classList.contains('Overlay--popup__action-btn')),
+        }
+    }
 
-    Query: {
-        menu: () => screen.queryByRole('menu'),
-        dialog: () => screen.queryByRole('dialog'),
-        closeButton: () => screen.queryByLabelText('Overlay Close'),
-        heading: () => screen.queryByRole('heading'),
-        text: (text: string | RegExp) => screen.queryByText(text),
-    },
+    get Do() {
+        return {
+            ...super.Do,
+            close: async () => {
+                await Accessor.user.click(this.Get.closeButton())
+            },
+            clickMenuItem: async (label: string) => {
+                await Accessor.user.click(this.Get.menuItem(label))
+            },
+            clickBackdrop: async () => {
+                await Accessor.user.click(this.Get.backdrop()!)
+            },
+            clickActionButton: async (label: string) => {
+                await Accessor.user.click(this.Get.byText(label))
+            },
+            dismiss: async () => {
+                await Accessor.user.keyboard('{Escape}')
+            },
+            clickOutside: async () => {
+                await Accessor.user.click(document.body)
+            },
+        }
+    }
+}
 
-    Click: {
-        closeButton: async () => {
-            const user = userEvent.setup()
-            await user.click(Overlay.Get.closeButton())
-            return user
-        },
-        menuItem: async (label: string) => {
-            const user = userEvent.setup()
-            await user.click(Overlay.Get.menuItem(label))
-            return user
-        },
-        backdrop: async () => {
-            const user = userEvent.setup()
-            await user.click(Overlay.Get.backdrop()!)
-            return user
-        },
-        actionButton: async (label: string) => {
-            const user = userEvent.setup()
-            await user.click(Overlay.Get.text(label))
-            return user
-        },
-    },
-
-    Act: {
-        dismiss: async () => {
-            const user = userEvent.setup()
-            await user.keyboard('{Escape}')
-            return user
-        },
-        dismissByBackdrop: async () => {
-            return Overlay.Click.backdrop()
-        },
-        selectMenuItem: async (label: string) => {
-            return Overlay.Click.menuItem(label)
-        },
-        clickOutside: async () => {
-            const user = userEvent.setup()
-            await user.click(document.body)
-            return user
-        },
-    },
+export const Overlay = (label: string): OverlayAccessor => {
+    const element = Accessor.screen.getByLabelText(label)
+    return new OverlayAccessor(element, `Overlay('${label}')`)
 }

@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { LoadingIndicator } from '@common/ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './EmailVerification.scss'
 import { useVerifyEmailRequest } from './EmailVerification.query'

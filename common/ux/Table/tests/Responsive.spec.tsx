@@ -1,9 +1,11 @@
-import { Test } from '@common/ux/Test'
-import { screen, within } from '@testing-library/react'
+import { Accessor, Test } from '@common/ux/Test'
+import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 
 describe('Table — Responsive / Breakpoints', () => {
+    const table = () => Test.Table('test')
+
     describe('Expand button', () => {
         it('renders expand buttons when columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({
@@ -14,12 +16,12 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            expect(Test.Table.Get.expandButtons()).toHaveLength(rows.length)
+            expect(table().Get.expandButtons()).toHaveLength(rows.length)
         })
 
         it('does not render expand buttons when no columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(Test.Table.Query.expandButton()).not.toBeInTheDocument()
+            expect(table().Has.expandButton()).toBe(false)
         })
     })
 
@@ -33,8 +35,8 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await Test.Table.Click.expandButton(0)
-            expect(Test.Table.Get.expandedRow(1)).toBeInTheDocument()
+            await table().Do.expandRow(0)
+            expect(table().Get.expandedRow(1)).toBeInTheDocument()
         })
 
         it('expanded row shows hidden column headers and values', async () => {
@@ -46,8 +48,8 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await Test.Table.Click.expandButton(0)
-            const expandedRow = Test.Table.Get.expandedRow(1)
+            await table().Do.expandRow(0)
+            const expandedRow = table().Get.expandedRow(1)
             expect(within(expandedRow).getByText('Status')).toBeInTheDocument()
         })
 
@@ -60,11 +62,9 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            const user = await Test.Table.Click.expandButton(0)
-            await user.click(screen.getByRole('button', { name: 'Collapse row' }))
-            expect(
-                screen.queryByRole('row', { name: 'Expanded details for row 1' }),
-            ).not.toBeInTheDocument()
+            await table().Do.expandRow(0)
+            await Accessor.user.click(Accessor.screen.getByRole('button', { name: 'Collapse row' }))
+            expect(table().Has.expandedRow(1)).toBe(false)
         })
 
         it('multiple rows can be expanded simultaneously', async () => {
@@ -76,10 +76,10 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            const user = await Test.Table.Click.expandButton(0)
-            await user.click(Test.Table.Get.expandButton(0))
-            expect(Test.Table.Get.expandedRow(1)).toBeInTheDocument()
-            expect(Test.Table.Get.expandedRow(2)).toBeInTheDocument()
+            await table().Do.expandRow(0)
+            await table().Do.expandRow(0)
+            expect(table().Get.expandedRow(1)).toBeInTheDocument()
+            expect(table().Get.expandedRow(2)).toBeInTheDocument()
         })
     })
 
@@ -108,8 +108,8 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: 'lg' },
                 ],
             })
-            const statusHeader = screen
-                .getAllByRole('columnheader')
+            const statusHeader = table()
+                .Get.columnHeaders()
                 .find((th) => th.textContent === 'Status')
             expect(statusHeader).toHaveClass('lg')
         })

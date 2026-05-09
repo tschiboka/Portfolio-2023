@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
-import { Test } from '@common/ux/Test'
+import { Test, Accessor } from '@common/ux/Test'
 
 describe('Table — Download', () => {
     describe('Single download', () => {
@@ -12,7 +12,7 @@ describe('Table — Download', () => {
                 columns: basicColumns,
                 download: { onDownload: vi.fn() },
             })
-            expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
         it('calls onDownload with current data', async () => {
@@ -23,7 +23,7 @@ describe('Table — Download', () => {
                 columns: basicColumns,
                 download: { onDownload },
             })
-            await Test.Table.Click.downloadButton()
+            await Test.Table('test').Do.download()
             expect(onDownload).toHaveBeenCalledWith(rows)
         })
 
@@ -62,7 +62,7 @@ describe('Table — Download', () => {
                     onDownload: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
         it('shows options when dropdown is opened', async () => {
@@ -78,7 +78,7 @@ describe('Table — Download', () => {
                     onDownload: vi.fn(),
                 },
             })
-            await Test.Table.Click.downloadButton()
+            await Test.Table('test').Do.download()
             expect(screen.getByRole('option', { name: 'CSV' })).toBeInTheDocument()
             expect(screen.getByRole('option', { name: 'PDF' })).toBeInTheDocument()
         })
@@ -97,8 +97,8 @@ describe('Table — Download', () => {
                     onDownload,
                 },
             })
-            const user = await Test.Table.Click.downloadButton()
-            await user.click(screen.getByRole('option', { name: 'CSV' }))
+            await Test.Table('test').Do.download()
+            await Accessor.user.click(screen.getByRole('option', { name: 'CSV' }))
             expect(onDownload).toHaveBeenCalledWith('csv', rows)
         })
     })
@@ -111,7 +111,7 @@ describe('Table — Download', () => {
                 columns: basicColumns,
                 download: { onDownload: vi.fn() },
             })
-            expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
     })
 })

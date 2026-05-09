@@ -1,40 +1,45 @@
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { Accessor } from '../Accessor/Accessor'
 import { SideMenu as SideMenuComponent } from '../../SideMenu/SideMenu'
 import type { SideMenuProps } from '../../SideMenu/SideMenu.types'
 
-export const SideMenu = {
-    Get: {
-        aside: () => screen.getByRole('complementary'),
-        items: () => document.querySelectorAll('.SideMenu__item'),
-        item: (title: string) => screen.getByTitle(title),
-        badge: () => document.querySelector('.SideMenu__badge'),
-        badges: () => document.querySelectorAll('.SideMenu__badge'),
-        closeButton: () => screen.getByTitle('Close Menu'),
-        highlighted: () => document.querySelector('.SideMenu__item--highlighted'),
-    },
+class SideMenuAccessor extends Accessor {
+    get Get() {
+        return {
+            ...super.Get,
+            items: () => this.element.querySelectorAll('.SideMenu__item'),
+            item: (title: string) => this.scope.getByTitle(title),
+            badge: () => this.element.querySelector('.SideMenu__badge'),
+            badges: () => this.element.querySelectorAll('.SideMenu__badge'),
+            closeButton: () => this.scope.getByTitle('Close Menu'),
+            highlighted: () => this.element.querySelector('.SideMenu__item--highlighted'),
+        }
+    }
 
-    Query: {
-        aside: () => screen.queryByRole('complementary'),
-        closeButton: () => screen.queryByTitle('Close Menu'),
-        badge: () => document.querySelector('.SideMenu__badge'),
-        highlighted: () => document.querySelector('.SideMenu__item--highlighted'),
-    },
-
-    Click: {
-        item: async (title: string) => {
-            const user = userEvent.setup()
-            await user.click(SideMenu.Get.item(title))
-            return user
-        },
-        close: async () => {
-            const user = userEvent.setup()
-            await user.click(SideMenu.Get.closeButton())
-            return user
-        },
-    },
-
-    Set: {
-        mock: (props: SideMenuProps) => render(<SideMenuComponent {...props} />),
-    },
+    get Do() {
+        return {
+            ...super.Do,
+            clickItem: async (title: string) => {
+                await Accessor.user.click(this.Get.item(title))
+            },
+            close: async () => {
+                await Accessor.user.click(this.Get.closeButton())
+            },
+        }
+    }
 }
+
+// Set is static (renders the component), Get/Do are instance-level (require a rendered element)
+export const SideMenu = Object.assign(
+    (label?: string): SideMenuAccessor => {
+        const element = label
+            ? screen.getByRole('complementary', { name: label })
+            : screen.getByRole('complementary')
+        return new SideMenuAccessor(element, label ? `SideMenu('${label}')` : 'SideMenu()')
+    },
+    {
+        Set: {
+            mock: (props: SideMenuProps) => render(<SideMenuComponent {...props} />),
+        },
+    },
+)

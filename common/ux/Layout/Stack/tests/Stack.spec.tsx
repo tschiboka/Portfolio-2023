@@ -1,6 +1,34 @@
 import { render, screen } from '@testing-library/react'
 import { Stack } from '../Stack'
 import { selectAlign, selectJustify } from '../Stack.selectors'
+import { StackProps } from '../Stack.types'
+import { Accessor } from '../../../Test'
+
+type SetProps = Omit<StackProps, 'ariaLabel' | 'children'> & {
+    ariaLabel: string
+    children?: React.ReactNode
+}
+
+const Set = {
+    stack: ({ children, ...props }: SetProps) => {
+        render(<Stack {...props}>{children ?? <span>x</span>}</Stack>)
+        return new Accessor(screen.getByLabelText(props.ariaLabel), `Stack(${props.ariaLabel})`)
+    },
+    vertical: ({ children, ...props }: SetProps) => {
+        render(<Stack.Vertical {...props}>{children ?? <span>x</span>}</Stack.Vertical>)
+        return new Accessor(
+            screen.getByLabelText(props.ariaLabel),
+            `Stack.Vertical(${props.ariaLabel})`,
+        )
+    },
+    horizontal: ({ children, ...props }: SetProps) => {
+        render(<Stack.Horizontal {...props}>{children ?? <span>x</span>}</Stack.Horizontal>)
+        return new Accessor(
+            screen.getByLabelText(props.ariaLabel),
+            `Stack.Horizontal(${props.ariaLabel})`,
+        )
+    },
+}
 
 describe('Stack', () => {
     describe('selectAlign', () => {
@@ -42,42 +70,23 @@ describe('Stack', () => {
 
     describe('rendering', () => {
         it('should render children', () => {
-            render(
-                <Stack>
-                    <span>child</span>
-                </Stack>,
-            )
-            expect(screen.getByText('child')).toBeInTheDocument()
+            const stack = Set.stack({ ariaLabel: 'children', children: <span>child</span> })
+            expect(stack.Get.byText('child')).toBeInTheDocument()
         })
 
         it('should default to column direction', () => {
-            render(
-                <Stack>
-                    <span>col</span>
-                </Stack>,
-            )
-            const el = screen.getByText('col').parentElement!
-            expect(el.style.flexDirection).toBe('column')
+            const stack = Set.stack({ ariaLabel: 'col' })
+            expect(stack.Get.style().flexDirection).toBe('column')
         })
 
         it('should render as div by default', () => {
-            render(
-                <Stack ariaLabel="def">
-                    <span>div</span>
-                </Stack>,
-            )
-            const el = screen.getByLabelText('def')
-            expect(el.tagName).toBe('DIV')
+            const stack = Set.stack({ ariaLabel: 'def' })
+            expect(stack.Get.tagName()).toBe('DIV')
         })
 
         it('should render as a custom element via "as" prop', () => {
-            render(
-                <Stack as="section" ariaLabel="sec">
-                    <span>as</span>
-                </Stack>,
-            )
-            const el = screen.getByLabelText('sec')
-            expect(el.tagName).toBe('SECTION')
+            const stack = Set.stack({ as: 'section', ariaLabel: 'sec' })
+            expect(stack.Get.tagName()).toBe('SECTION')
         })
     })
 
@@ -91,12 +100,8 @@ describe('Stack', () => {
 
         alignCases.forEach(({ align, expected }) => {
             it(`should set alignItems to "${expected}" when align="${align}"`, () => {
-                render(
-                    <Stack align={align} ariaLabel={`a-${align}`}>
-                        <span>a</span>
-                    </Stack>,
-                )
-                expect(screen.getByLabelText(`a-${align}`).style.alignItems).toBe(expected)
+                const stack = Set.stack({ align, ariaLabel: `a-${align}` })
+                expect(stack.Get.style().alignItems).toBe(expected)
             })
         })
 
@@ -113,147 +118,95 @@ describe('Stack', () => {
 
         justifyCases.forEach(({ justify, expected }) => {
             it(`should set justifyContent to "${expected}" when justify="${justify}"`, () => {
-                render(
-                    <Stack justify={justify} ariaLabel={`j-${justify}`}>
-                        <span>j</span>
-                    </Stack>,
-                )
-                expect(screen.getByLabelText(`j-${justify}`).style.justifyContent).toBe(expected)
+                const stack = Set.stack({ justify, ariaLabel: `j-${justify}` })
+                expect(stack.Get.style().justifyContent).toBe(expected)
             })
         })
     })
 
     describe('gap', () => {
         it('should not set gap when not provided', () => {
-            render(
-                <Stack>
-                    <span>gap</span>
-                </Stack>,
-            )
-            const el = screen.getByText('gap').parentElement!
-            expect(el.style.gap).toBe('')
+            const stack = Set.stack({ ariaLabel: 'gap' })
+            expect(stack.Get.style().gap).toBe('')
         })
 
         it('should apply custom gap', () => {
-            render(
-                <Stack gap="8">
-                    <span>g8</span>
-                </Stack>,
-            )
-            const el = screen.getByText('g8').parentElement!
-            expect(el.style.gap).toBe('8px')
+            const stack = Set.stack({ gap: '8', ariaLabel: 'g8' })
+            expect(stack.Get.style().gap).toBe('8px')
         })
     })
 
     describe('wrap', () => {
         it('should apply wrap', () => {
-            render(
-                <Stack wrap>
-                    <span>w</span>
-                </Stack>,
-            )
-            const el = screen.getByText('w').parentElement!
-            expect(el.style.flexWrap).toBe('wrap')
+            const stack = Set.stack({ wrap: true, ariaLabel: 'w' })
+            expect(stack.Get.style().flexWrap).toBe('wrap')
         })
 
         it('should not set flexWrap when wrap is false', () => {
-            render(
-                <Stack>
-                    <span>nw</span>
-                </Stack>,
-            )
-            const el = screen.getByText('nw').parentElement!
-            expect(el.style.flexWrap).toBe('')
+            const stack = Set.stack({ ariaLabel: 'nw' })
+            expect(stack.Get.style().flexWrap).toBe('')
         })
     })
 
     describe('html attributes', () => {
         it('should apply ariaLabel', () => {
-            render(
-                <Stack ariaLabel="test-label">
-                    <span>a</span>
-                </Stack>,
-            )
+            Set.stack({ ariaLabel: 'test-label' })
             expect(screen.getByLabelText('test-label')).toBeInTheDocument()
         })
 
         it('should apply className', () => {
-            render(
-                <Stack className="my-stack">
-                    <span>cls</span>
-                </Stack>,
-            )
-            const el = screen.getByText('cls').parentElement!
-            expect(el.className).toBe('my-stack')
+            const stack = Set.stack({ className: 'my-stack', ariaLabel: 'cls' })
+            expect(stack.Get.className()).toBe('my-stack')
         })
 
         it('should apply custom style', () => {
-            render(
-                <Stack style={{ background: 'red' }}>
-                    <span>st</span>
-                </Stack>,
-            )
-            const el = screen.getByText('st').parentElement!
-            expect(el.style.background).toBe('red')
+            const stack = Set.stack({ style: { background: 'red' }, ariaLabel: 'st' })
+            expect(stack.Get.style().background).toBe('red')
         })
     })
 
     describe('Vertical', () => {
         it('should render with column direction', () => {
-            render(
-                <Stack.Vertical>
-                    <span>vert</span>
-                </Stack.Vertical>,
-            )
-            const el = screen.getByText('vert').parentElement!
-            expect(el.style.flexDirection).toBe('column')
+            const stack = Set.vertical({ ariaLabel: 'vert' })
+            expect(stack.Get.style().flexDirection).toBe('column')
         })
 
         it('should pass through all props', () => {
-            render(
-                <Stack.Vertical align="end" justify="center" gap={'4'} wrap ariaLabel="vert-stack">
-                    <span>vp</span>
-                </Stack.Vertical>,
-            )
-            const el = screen.getByLabelText('vert-stack')
-            expect(el.style.alignItems).toBe('flex-end')
-            expect(el.style.justifyContent).toBe('center')
-            expect(el.style.gap).toBe('4px')
-            expect(el.style.flexWrap).toBe('wrap')
+            const stack = Set.vertical({
+                align: 'end',
+                justify: 'center',
+                gap: '4',
+                wrap: true,
+                ariaLabel: 'vert-stack',
+            })
+            expect(stack.Get.style().alignItems).toBe('flex-end')
+            expect(stack.Get.style().justifyContent).toBe('center')
+            expect(stack.Get.style().gap).toBe('4px')
+            expect(stack.Get.style().flexWrap).toBe('wrap')
         })
     })
 
     describe('Horizontal', () => {
         it('should render with row direction', () => {
-            render(
-                <Stack.Horizontal>
-                    <span>horiz</span>
-                </Stack.Horizontal>,
-            )
-            const el = screen.getByText('horiz').parentElement!
-            expect(el.style.flexDirection).toBe('row')
+            const stack = Set.horizontal({ ariaLabel: 'horiz' })
+            expect(stack.Get.style().flexDirection).toBe('row')
         })
 
         it('should pass through all props', () => {
-            render(
-                <Stack.Horizontal align="start" justify="around" gap={'24'} ariaLabel="horiz-stack">
-                    <span>hp</span>
-                </Stack.Horizontal>,
-            )
-            const el = screen.getByLabelText('horiz-stack')
-            expect(el.style.alignItems).toBe('flex-start')
-            expect(el.style.justifyContent).toBe('space-around')
-            expect(el.style.gap).toBe('24px')
+            const stack = Set.horizontal({
+                align: 'start',
+                justify: 'around',
+                gap: '24',
+                ariaLabel: 'horiz-stack',
+            })
+            expect(stack.Get.style().alignItems).toBe('flex-start')
+            expect(stack.Get.style().justifyContent).toBe('space-around')
+            expect(stack.Get.style().gap).toBe('24px')
         })
 
         it('should render as a custom element', () => {
-            render(
-                <Stack.Horizontal as="nav" ariaLabel="nav-stack">
-                    <span>n</span>
-                </Stack.Horizontal>,
-            )
-            const el = screen.getByLabelText('nav-stack')
-            expect(el.tagName).toBe('NAV')
+            const stack = Set.horizontal({ as: 'nav', ariaLabel: 'nav-stack' })
+            expect(stack.Get.tagName()).toBe('NAV')
         })
     })
 })

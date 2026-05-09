@@ -170,7 +170,9 @@ export const SearchInput = <TFieldValues extends FieldValues>({
                                 {...rest}
                                 {...restFieldProps}
                             />
-                            <div className="action-icon">{mapButtonIcon(buttonIcon)}</div>
+                            <div className="action-icon" role="button" aria-label="Search action">
+                                {mapButtonIcon(buttonIcon)}
+                            </div>
                         </div>
                         {open && (
                             <div className="option-dropdown">
@@ -182,7 +184,9 @@ export const SearchInput = <TFieldValues extends FieldValues>({
                             </div>
                         )}
                         {!open && fieldState.error && (
-                            <p className="error-msg">*{fieldState.error.message}</p>
+                            <p className="error-msg" role="alert">
+                                *{fieldState.error.message}
+                            </p>
                         )}
                     </div>
                 )

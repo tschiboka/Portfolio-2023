@@ -9,7 +9,7 @@ import {
     useGetWordFrequencies,
     usePostLevel,
 } from './LevelCreator.queries'
-import LoadingIndicator from '../../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { LoadingIndicator } from '@common/ux'
 import { useQueryClient } from '@tanstack/react-query'
 import { QueryKey } from '@common/utils'
 import { FrequencyType } from '../common/utils/Types/Words'

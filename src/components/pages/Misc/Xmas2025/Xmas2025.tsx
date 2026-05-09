@@ -2,7 +2,7 @@ import Footer from '../../../sharedComponents/Footer/Footer'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
-import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { Form, LoadingIndicator } from '@common/ux'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { xmasSchema } from './Xmas2025.schema'
@@ -17,7 +17,6 @@ import { YourMessages } from './YourMessages'
 import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
 import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
-import { Form } from '@common/ux'
 
 const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
     const { user } = Session.useContext().session || {}

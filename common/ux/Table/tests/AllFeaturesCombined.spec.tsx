@@ -131,28 +131,29 @@ describe('Table — Combined Features', () => {
             },
         })
         // Region & title
-        expect(Test.Table.Get.region('Combined Table')).toBeInTheDocument()
-        expect(Test.Table.Get.heading('Combined Table')).toBeInTheDocument()
+        const table = Test.Table('Combined Table')
+        expect(table.Get.tagName()).toBeDefined()
+        expect(table.Get.heading('Combined Table')).toBeInTheDocument()
         expect(screen.getByText('All features at once')).toBeInTheDocument()
         expect(screen.getByText('Legend')).toBeInTheDocument()
-        expect(Test.Table.Get.infoButton()).toBeInTheDocument()
+        expect(table.Get.infoButton()).toBeInTheDocument()
         // Table data
         expect(screen.getByText('Alice')).toBeInTheDocument()
         expect(screen.getByText('Bob')).toBeInTheDocument()
         // Selection checkboxes
-        expect(Test.Table.Get.selectAll()).toBeInTheDocument()
+        expect(table.Get.selectAll()).toBeInTheDocument()
         // Sorting
-        expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
+        expect(table.Get.sortButton('Name')).toBeInTheDocument()
         // Actions
-        expect(Test.Table.Get.actionButtons()).toHaveLength(fullData.length)
+        expect(table.Get.actionButtons()).toHaveLength(fullData.length)
         // Filtering
-        expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
+        expect(table.Get.filterToggle()).toBeInTheDocument()
         // Download
-        expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+        expect(table.Get.downloadButton()).toBeInTheDocument()
         // Pagination
-        expect(Test.Table.Get.pagination()).toBeInTheDocument()
+        expect(table.Get.pagination()).toBeInTheDocument()
         // Expand (breakpoints exist)
-        expect(Test.Table.Get.expandButtons()).toHaveLength(fullData.length)
+        expect(table.Get.expandButtons()).toHaveLength(fullData.length)
     })
 
     it('selection works alongside actions — selecting rows does not affect action menus', async () => {
@@ -173,12 +174,13 @@ describe('Table — Combined Features', () => {
             },
             actions: [{ id: 'edit', label: 'Edit', onClick: onEdit }],
         })
+        const table = Test.Table('test')
         // Select first row
-        await Test.Table.Click.selectRow(1)
+        await table.Do.selectRow(1)
         expect(onChange).toHaveBeenCalledWith(['1'])
 
         // Open action menu on second row
-        await Test.Table.Act.clickAction('Edit', 1)
+        await table.Do.clickAction('Edit', 1)
         expect(onEdit).toHaveBeenCalledWith(expect.objectContaining({ row: fullData[1] }))
     })
 
@@ -201,10 +203,11 @@ describe('Table — Combined Features', () => {
                 onSortChange: vi.fn(),
             },
         })
+        const table = Test.Table('test')
         // Alice (id=1) and Charlie (id=3) should be selected
-        expect(Test.Table.Get.selectRow(1)).toBeChecked()
-        expect(Test.Table.Get.selectRow(3)).toBeChecked()
-        expect(Test.Table.Get.selectRow(2)).not.toBeChecked()
+        expect(table.Get.selectRow(1)).toBeChecked()
+        expect(table.Get.selectRow(3)).toBeChecked()
+        expect(table.Get.selectRow(2)).not.toBeChecked()
     })
 
     it('filter action hides actions only for matching rows in combined table', async () => {
@@ -224,10 +227,11 @@ describe('Table — Combined Features', () => {
                 { id: 'edit', label: 'Edit', onClick: vi.fn() },
             ],
         })
+        const table = Test.Table('test')
         // Alice is active — Activate should be filtered out
-        await Test.Table.Act.openActionMenu(0)
-        expect(Test.Table.Query.menuItem('Activate')).not.toBeInTheDocument()
-        expect(Test.Table.Get.menuItem('Edit')).toBeInTheDocument()
+        await table.Do.clickActionButton(0)
+        expect(table.Has.menuItem('Activate')).toBe(false)
+        expect(table.Get.menuItem('Edit')).toBeInTheDocument()
     })
 
     it('isActionDisabled disables entire menu when column condition is met', () => {
@@ -243,7 +247,7 @@ describe('Table — Combined Features', () => {
             ],
             actions: [{ id: 'edit', label: 'Edit' }],
         })
-        expect(Test.Table.Get.actionButton()).toBeDisabled()
+        expect(Test.Table('test').Get.actionButton()).toBeDisabled()
     })
 
     it('expanded row shows hidden column with defaultValue when value is empty', async () => {
@@ -260,8 +264,9 @@ describe('Table — Combined Features', () => {
                 },
             ],
         })
-        await Test.Table.Act.expandRow(0)
-        const expandedRow = Test.Table.Get.expandedRow(1)
+        const table = Test.Table('test')
+        await table.Do.expandRow(0)
+        const expandedRow = table.Get.expandedRow(1)
         expect(within(expandedRow).getByText('N/A')).toBeInTheDocument()
     })
 
@@ -282,11 +287,12 @@ describe('Table — Combined Features', () => {
             },
             actions: [{ id: 'edit', label: 'Edit', onClick: vi.fn() }],
         })
+        const table = Test.Table('test')
         // Charlie (row 3) is inactive — checkbox should be disabled
-        expect(Test.Table.Get.selectRow(3)).toBeDisabled()
+        expect(table.Get.selectRow(3)).toBeDisabled()
         // But action menu should still be accessible
-        await Test.Table.Act.openActionMenu(2)
-        expect(Test.Table.Get.menuItem('Edit')).toBeInTheDocument()
+        await table.Do.clickActionButton(2)
+        expect(table.Get.menuItem('Edit')).toBeInTheDocument()
     })
 
     it('row variant + column variant + cell variant: column function variant wins', () => {
@@ -330,7 +336,8 @@ describe('Table — Combined Features', () => {
                 onPageSizeChange: vi.fn(),
             },
         })
-        await Test.Table.Click.downloadButton('Export')
+        const table = Test.Table('test')
+        await table.Do.download('Export')
         expect(onDownload).toHaveBeenCalledWith(pageData)
     })
 
@@ -355,7 +362,8 @@ describe('Table — Combined Features', () => {
                 onSortChange: vi.fn(),
             },
         })
-        const headers = Test.Table.Get.columnHeaders()
+        const table = Test.Table('test')
+        const headers = table.Get.columnHeaders()
         // Expand + Select + Name (sortable) + Email + Status + Actions = 6
         expect(headers).toHaveLength(6)
         expect(headers[0]).toHaveAttribute('aria-label', 'Expand')
@@ -386,13 +394,14 @@ describe('Table — Combined Features', () => {
                 onPageSizeChange: vi.fn(),
             },
         })
+        const table = Test.Table('test')
         // Open filters
-        await Test.Table.Act.openFilters()
+        await table.Do.toggleFilters()
 
         // All three features visible
-        expect(Test.Table.Get.filterPanel()).toBeInTheDocument()
-        expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
-        expect(Test.Table.Get.pagination()).toBeInTheDocument()
+        expect(table.Get.filterPanel()).toBeInTheDocument()
+        expect(table.Get.sortButton('Name')).toBeInTheDocument()
+        expect(table.Get.pagination()).toBeInTheDocument()
     })
 
     it('empty data with all features shows empty state and still renders header/pagination', () => {
@@ -424,8 +433,9 @@ describe('Table — Combined Features', () => {
                 onPageSizeChange: vi.fn(),
             },
         })
+        const table = Test.Table('Empty Combined')
         expect(screen.getByText('No data')).toBeInTheDocument()
-        expect(Test.Table.Get.heading('Empty Combined')).toBeInTheDocument()
-        expect(Test.Table.Query.pagination()).toBeInTheDocument()
+        expect(table.Get.heading('Empty Combined')).toBeInTheDocument()
+        expect(table.Get.pagination()).toBeInTheDocument()
     })
 })

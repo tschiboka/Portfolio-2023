@@ -1,144 +1,176 @@
 import React from 'react'
-import userEvent from '@testing-library/user-event'
-import { Test } from '../../Test'
-import { Set } from './Form.spec.utils'
+import { screen } from '@testing-library/react'
+import { Test, Accessor } from '../../Test'
+import { Set, FORM_LABEL } from './Form.spec.utils'
 import { iconOptions } from './Form.spec.mocks'
 
 beforeAll(() => {
     Element.prototype.scrollIntoView = vi.fn()
 })
 
-const { Form } = Test
-
 describe('Input', () => {
     it('should render a text input', () => {
-        Set.input({ placeholder: 'Enter text' })
-        expect(Form.Get.byPlaceholder('Enter text')).toBeInTheDocument()
+        Set.input()
+        const form = Test.Form(FORM_LABEL)
+        const input = form.Input('Text')
+        expect(input.Get.type()).toBe('text')
     })
 
     it('should accept user input', async () => {
-        Set.input({ placeholder: 'Enter text' })
-        const input = await Form.Act.type('Enter text', 'hello')
-        expect(input).toHaveValue('hello')
+        Set.input()
+        const form = Test.Form(FORM_LABEL)
+        const input = form.Input('Text')
+        await input.Do.type('hello')
+        expect(input.Get.value()).toBe('hello')
     })
 
     it('should render with the correct type', () => {
-        Set.input({ type: 'email', placeholder: 'Enter email' })
-        expect(Form.Get.byPlaceholder('Enter email')).toHaveAttribute('type', 'email')
+        Set.input({ type: 'email' })
+        const form = Test.Form(FORM_LABEL)
+        const input = form.Input('Text')
+        expect(input.Get.type()).toBe('email')
     })
 
     it('should render reveal password icon when addRevealPasswordIcon is true', () => {
         Set.password()
-        expect(Form.Get.byPlaceholder('Enter password')).toHaveAttribute('type', 'password')
-        expect(Form.Get.actionIcon()).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const input = form.Input('Password')
+        expect(input.Get.type()).toBe('password')
+        expect(form.Get.byLabel('Toggle password visibility')).toBeInTheDocument()
     })
 
-    it('should toggle password visibility when reveal icon is clicked', () => {
+    it('should toggle password visibility when reveal icon is clicked', async () => {
         const setReveal = vi.fn()
         Set.password({ revealPassword: false, setRevealPassword: setReveal })
-        const icon = Form.Get.actionIcon()!
-        icon.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+        const form = Test.Form(FORM_LABEL)
+        const toggle = form.Button('Toggle password visibility')
+        await toggle.Do.click()
         expect(setReveal).toHaveBeenCalledWith(true)
     })
 
     it('should show text type when revealPassword is true', () => {
         Set.password({ revealPassword: true })
-        expect(Form.Get.byPlaceholder('Enter password')).toHaveAttribute('type', 'text')
+        const form = Test.Form(FORM_LABEL)
+        const input = form.Input('Password')
+        expect(input.Get.type()).toBe('text')
     })
 })
 
 describe('TextArea', () => {
     it('should render a textarea', () => {
         Set.textArea({ placeholder: 'Enter description' })
-        expect(Form.Get.byPlaceholder('Enter description')).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Enter description')).toBeInTheDocument()
     })
 
     it('should accept user input', async () => {
-        Set.textArea({ placeholder: 'Enter description' })
-        const textarea = await Form.Act.type('Enter description', 'test content')
-        expect(textarea).toHaveValue('test content')
+        Set.textArea()
+        const form = Test.Form(FORM_LABEL)
+        const textarea = form.Input('Description')
+        await textarea.Do.type('test content')
+        expect(textarea.Get.value()).toBe('test content')
     })
 
     it('should show character count when maxLength is set', async () => {
-        Set.textArea({ placeholder: 'Enter description', maxLength: 255 })
-        await Form.Act.type('Enter description', 'hello')
-        expect(Form.Get.text('5')).toBeInTheDocument()
-        expect(Form.Get.text(/of 255 chars/)).toBeInTheDocument()
+        Set.textArea({ maxLength: 255 })
+        const form = Test.Form(FORM_LABEL)
+        const textarea = form.Input('Description')
+        await textarea.Do.type('hello')
+        expect(form.Get.byText('5')).toBeInTheDocument()
+        expect(form.Get.byText(/of 255 chars/)).toBeInTheDocument()
     })
 
     it('should not show character count when maxLength is not set', () => {
-        Set.textArea({ placeholder: 'Enter description' })
-        expect(Form.Query.text(/characters/)).not.toBeInTheDocument()
+        Set.textArea()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Has.byText(/characters/)).toBe(false)
     })
 
     it('should render with custom rows', () => {
-        Set.textArea({ placeholder: 'Enter description', rows: 5 })
-        expect(Form.Get.byPlaceholder('Enter description')).toHaveAttribute('rows', '5')
+        Set.textArea({ rows: 5 })
+        const form = Test.Form(FORM_LABEL)
+        const textarea = form.Input('Description')
+        expect(textarea.Get.attribute('rows')).toBe('5')
     })
 
     it('should default to 3 rows', () => {
-        Set.textArea({ placeholder: 'Enter description' })
-        expect(Form.Get.byPlaceholder('Enter description')).toHaveAttribute('rows', '3')
+        Set.textArea()
+        const form = Test.Form(FORM_LABEL)
+        const textarea = form.Input('Description')
+        expect(textarea.Get.attribute('rows')).toBe('3')
     })
 })
 
 describe('RadioButton', () => {
     it('should render two radio buttons', () => {
         Set.radioButton()
-        expect(Form.Get.radios()).toHaveLength(2)
+        expect(screen.getAllByRole('radio')).toHaveLength(2)
     })
 
     it('should have the first option checked by default', () => {
         Set.radioButton()
-        const radios = Form.Get.radios()
-        expect(radios[0]).toBeChecked()
-        expect(radios[1]).not.toBeChecked()
+        const form = Test.Form(FORM_LABEL)
+        const radioA = form.Radio('Option A')
+        const radioB = form.Radio('Option B')
+        expect(radioA.Get.isChecked()).toBe(true)
+        expect(radioB.Get.isChecked()).toBe(false)
     })
 
     it('should call onChange when selected', async () => {
         const onChange = vi.fn()
         Set.radioButton({ onChange })
-        await Form.Click.radio(1)
+        const form = Test.Form(FORM_LABEL)
+        const radioB = form.Radio('Option B')
+        await radioB.Do.select()
         expect(onChange).toHaveBeenCalled()
     })
 
     it('should update checked state when clicked', async () => {
         Set.radioButton()
-        const radios = Form.Get.radios()
-        await Form.Click.radio(1)
-        expect(radios[1]).toBeChecked()
+        const form = Test.Form(FORM_LABEL)
+        const radioB = form.Radio('Option B')
+        await radioB.Do.select()
+        expect(radioB.Get.isChecked()).toBe(true)
     })
 })
 
 describe('Checkbox', () => {
     it('should render an unchecked checkbox', () => {
         Set.checkbox()
-        expect(Form.Get.checkbox()).not.toBeChecked()
+        const form = Test.Form(FORM_LABEL)
+        const checkbox = form.Checkbox('Accept terms')
+        expect(checkbox.Get.isChecked()).toBe(false)
     })
 
     it('should render with a label', () => {
         Set.checkbox()
-        expect(Form.Get.text('Accept terms')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('Accept terms')).toBeInTheDocument()
     })
 
     it('should toggle checked state when clicked', async () => {
         Set.checkbox()
-        await Form.Click.checkbox()
-        expect(Form.Get.checkbox()).toBeChecked()
+        const form = Test.Form(FORM_LABEL)
+        const checkbox = form.Checkbox('Accept terms')
+        await checkbox.Do.toggle()
+        expect(checkbox.Get.isChecked()).toBe(true)
     })
 
     it('should call onChange with true when checked', async () => {
         const onChange = vi.fn()
         Set.checkbox({ onChange })
-        await Form.Click.checkbox()
+        const form = Test.Form(FORM_LABEL)
+        const checkbox = form.Checkbox('Accept terms')
+        await checkbox.Do.toggle()
         expect(onChange).toHaveBeenCalledWith(true)
     })
 
     it('should call onChange with false when unchecked', async () => {
         const onChange = vi.fn()
         Set.checkbox({ onChange })
-        await Form.Click.checkbox()
-        await Form.Click.checkbox()
+        const form = Test.Form(FORM_LABEL)
+        const checkbox = form.Checkbox('Accept terms')
+        await checkbox.Do.toggle()
+        await checkbox.Do.toggle()
         expect(onChange).toHaveBeenLastCalledWith(false)
     })
 })
@@ -146,148 +178,179 @@ describe('Checkbox', () => {
 describe('Button', () => {
     it('should render with children text', () => {
         Set.button({ children: 'Submit' })
-        expect(Form.Get.button('Submit')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Submit')
+        expect(button.Get.textContent()).toBe('Submit')
     })
 
     it('should default to type="button"', () => {
         Set.button()
-        expect(Form.Get.button('Click me')).toHaveAttribute('type', 'button')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.attribute('type')).toBe('button')
     })
 
     it('should accept type="submit"', () => {
         Set.button({ type: 'submit', children: 'Send' })
-        expect(Form.Get.button('Send')).toHaveAttribute('type', 'submit')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Send')
+        expect(button.Get.attribute('type')).toBe('submit')
     })
 
     it('should apply secondary class for variant="secondary"', () => {
         Set.button({ variant: 'secondary' })
-        expect(Form.Get.button('Click me')).toHaveClass('secondary')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.className()).toContain('secondary')
     })
 
     it('should not apply secondary class for primary variant', () => {
         Set.button({ variant: 'primary' })
-        expect(Form.Get.button('Click me')).not.toHaveClass('secondary')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.className()).not.toContain('secondary')
     })
 
     it('should call onClick when clicked', async () => {
         const onClick = vi.fn()
         Set.button({ onClick })
-        await Form.Click.button('Click me')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        await button.Do.click()
         expect(onClick).toHaveBeenCalledTimes(1)
     })
 
     it('should be disabled when disabled prop is true', () => {
         Set.button({ disabled: true })
-        expect(Form.Get.button('Click me')).toBeDisabled()
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.isDisabled()).toBe(true)
     })
 
     it('should not call onClick when disabled', () => {
         const onClick = vi.fn()
         Set.button({ disabled: true, onClick })
-        expect(Form.Get.button('Click me')).toBeDisabled()
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.isDisabled()).toBe(true)
     })
 
     it('should set aria-label', () => {
         Set.button({ ariaLabel: 'Submit form' })
-        expect(Form.Get.byLabel('Submit form')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byLabel('Submit form')).toBeInTheDocument()
     })
 
     it('should apply custom className', () => {
         Set.button({ className: 'custom' })
-        expect(Form.Get.button('Click me')).toHaveClass('custom')
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.className()).toContain('custom')
     })
 
     it('should apply inline style', () => {
         Set.button({ style: { color: 'red' } })
-        expect(Form.Get.button('Click me')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
+        const form = Test.Form(FORM_LABEL)
+        const button = form.Button('Click me')
+        expect(button.Get.style().color).toBe('red')
     })
 })
 
 describe('ButtonGroup', () => {
     it('should render children buttons', () => {
         Set.buttonGroup()
-        expect(Form.Get.buttons()).toHaveLength(2)
+        expect(screen.getAllByRole('button')).toHaveLength(2)
     })
 
     it('should have the button-group class', () => {
         const { container } = Set.buttonGroup()
-        expect(Form.Get.buttonGroup(container)).toBeInTheDocument()
+        expect(container.querySelector('.button-group')).toBeInTheDocument()
     })
 
     it('should set aria-label', () => {
         Set.buttonGroup({ ariaLabel: 'Form actions' })
-        expect(Form.Get.byLabel('Form actions')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byLabel('Form actions')).toBeInTheDocument()
     })
 
     it('should apply custom className', () => {
         const { container } = Set.buttonGroup({ className: 'custom' })
-        const group = Form.Get.buttonGroup(container)
+        const group = container.querySelector('.button-group')
         expect(group).toHaveClass('button-group')
         expect(group).toHaveClass('custom')
     })
 
     it('should apply inline style', () => {
         const { container } = Set.buttonGroup({ style: { gap: '2rem' } })
-        expect(Form.Get.buttonGroup(container)).toHaveStyle({ gap: '2rem' })
+        expect(container.querySelector('.button-group')).toHaveStyle({ gap: '2rem' })
     })
 })
 
 describe('Fieldset', () => {
     it('should render children', () => {
         Set.fieldset()
-        expect(Form.Get.text('content')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('content')).toBeInTheDocument()
     })
 
     it('should render a fieldset element', () => {
         const { container } = Set.fieldset()
-        expect(Form.Get.fieldset(container)).toBeInTheDocument()
+        expect(container.querySelector('fieldset')).toBeInTheDocument()
     })
 
     it('should set aria-label', () => {
         Set.fieldset({ ariaLabel: 'Email field' })
-        expect(Form.Get.byLabel('Email field')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byLabel('Email field')).toBeInTheDocument()
     })
 
     it('should apply custom className', () => {
         const { container } = Set.fieldset({ className: 'custom' })
-        expect(Form.Get.fieldset(container)).toHaveClass('custom')
+        expect(container.querySelector('fieldset')).toHaveClass('custom')
     })
 
     it('should apply inline style', () => {
         const { container } = Set.fieldset({ style: { padding: '2rem' } })
-        expect(Form.Get.fieldset(container)).toHaveStyle({ padding: '2rem' })
+        expect(container.querySelector('fieldset')).toHaveStyle({ padding: '2rem' })
     })
 })
 
 describe('SearchInput', () => {
     it('should render with placeholder', () => {
         Set.searchInput()
-        expect(Form.Get.byPlaceholder('Select an option')).toBeInTheDocument()
+        expect(screen.getByPlaceholderText('Select an option')).toBeInTheDocument()
     })
 
     it('should show dropdown when typing', async () => {
         Set.searchInput()
-        await Form.Act.type('Select an option', 'a')
-        expect(Form.Search.Get.dropdown()).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'a')
+        expect(search.Get.dropdown()).toBeInTheDocument()
     })
 
     it('should filter options based on input', async () => {
         Set.searchInput()
-        await Form.Act.type('Select an option', 'ban')
-        expect(Form.Get.text(/banana/i)).toBeInTheDocument()
-        expect(Form.Query.text(/cherry/i)).not.toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'ban')
+        expect(form.Get.byText(/banana/i)).toBeInTheDocument()
+        expect(screen.queryByText(/cherry/i)).not.toBeInTheDocument()
     })
 
     it('should show "No match in selection" when no options match', async () => {
         Set.searchInput()
-        await Form.Act.type('Select an option', 'xyz')
-        expect(Form.Get.text('No match in selection')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'xyz')
+        expect(form.Get.byText('No match in selection')).toBeInTheDocument()
     })
 
     it('should call onSelect when an option is clicked', async () => {
         const onSelectSpy = vi.fn()
         Set.searchInput({ onSelectSpy })
-        await Form.Search.Act.selectOption('Select an option', 'app', /apple/i)
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'app')
+        await Accessor.user.click(search.Get.byText(/apple/i))
         expect(onSelectSpy).toHaveBeenCalledWith(
             expect.objectContaining({ label: 'Apple', value: 'apple' }),
         )
@@ -295,83 +358,101 @@ describe('SearchInput', () => {
 
     it('should close dropdown after selecting an option', async () => {
         Set.searchInput()
-        await Form.Search.Act.selectOption('Select an option', 'a', /apple/i)
-        expect(Form.Search.Query.dropdown()).not.toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'a')
+        await Accessor.user.click(search.Get.byText(/apple/i))
+        expect(search.Has.dropdown()).toBe(false)
     })
 
     it('should close dropdown when clicking outside', async () => {
         Set.searchInput()
-        await Form.Act.type('Select an option', 'a')
-        expect(Form.Search.Get.dropdown()).toBeInTheDocument()
-        await Form.Act.clickOutside()
-        expect(Form.Search.Query.dropdown()).not.toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'a')
+        expect(search.Get.dropdown()).toBeInTheDocument()
+        await Accessor.user.click(document.body)
+        expect(search.Has.dropdown()).toBe(false)
     })
 
     it('should toggle dropdown with arrow button icon', async () => {
         Set.searchInput({ buttonIcon: 'arrow' })
-        await Form.Search.Click.icon()
-        expect(Form.Search.Get.dropdown()).toBeInTheDocument()
-        await Form.Search.Click.icon()
-        expect(Form.Search.Query.dropdown()).not.toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await search.Do.clickIcon()
+        expect(search.Get.dropdown()).toBeInTheDocument()
+        await search.Do.clickIcon()
+        expect(search.Has.dropdown()).toBe(false)
     })
 
     it('should render option icons when provided', async () => {
         Set.searchInput({ options: iconOptions })
-        await Form.Act.type('Select an option', 'h')
-        expect(Form.Get.byTestId('icon-home')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'h')
+        expect(form.Get.byTestId('icon-home')).toBeInTheDocument()
     })
 
     it('should highlight matching text when highlightMatch is true', async () => {
         Set.searchInput({ highlightMatch: true })
-        await Form.Act.type('Select an option', 'app')
-        const highlight = Form.Search.Get.highlight()
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await Accessor.user.type(screen.getByPlaceholderText('Select an option'), 'app')
+        const highlight = search.Get.highlight()
         expect(highlight).toBeInTheDocument()
         expect(highlight?.textContent).toBe('app')
     })
 
     it('should show all options when input is empty and dropdown is opened', async () => {
         Set.searchInput({ buttonIcon: 'arrow' })
-        await Form.Search.Click.icon()
-        expect(Form.Search.Get.options()).toHaveLength(3)
+        const form = Test.Form(FORM_LABEL)
+        const search = form.Search('Option')
+        await search.Do.clickIcon()
+        expect(search.Get.options()).toHaveLength(3)
     })
 })
 
 describe('Label', () => {
     it('should render with children text', () => {
         Set.label({ for: 'name', children: 'Name' })
-        expect(Form.Get.text('Name')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('Name')).toBeInTheDocument()
     })
 
     it('should set htmlFor attribute', () => {
         Set.label({ for: 'email', children: 'Email' })
-        expect(Form.Get.text('Email')).toHaveAttribute('for', 'email')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('Email')).toHaveAttribute('for', 'email')
     })
 
     it('should apply the default form-label class', () => {
         Set.label({ for: 'name', children: 'Name' })
-        expect(Form.Get.text('Name')).toHaveClass('form-label')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('Name')).toHaveClass('form-label')
     })
 
     it('should append custom className', () => {
         Set.label({ for: 'name', className: 'custom', children: 'Name' })
-        const label = Form.Get.text('Name')
+        const form = Test.Form(FORM_LABEL)
+        const label = form.Get.byText('Name')
         expect(label).toHaveClass('form-label')
         expect(label).toHaveClass('custom')
     })
 
     it('should set aria-label', () => {
         Set.label({ for: 'name', ariaLabel: 'Name field label', children: 'Name' })
-        expect(Form.Get.byLabel('Name field label')).toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byLabel('Name field label')).toBeInTheDocument()
     })
 
     it('should apply inline style', () => {
         Set.label({ for: 'name', style: { color: 'red' }, children: 'Name' })
-        expect(Form.Get.text('Name')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.byText('Name')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
     })
 
     it('should render without children', () => {
         const { container } = Set.label({ for: 'empty' })
-        const label = Form.Get.label(container)
+        const label = container.querySelector('label')
         expect(label).toBeInTheDocument()
         expect(label).toHaveAttribute('for', 'empty')
         expect(label?.textContent).toBe('')
@@ -381,17 +462,17 @@ describe('Label', () => {
 describe('FormElement', () => {
     it('should render children', () => {
         Set.formElement({ children: <span>child</span> })
-        expect(Form.Get.text('child')).toBeInTheDocument()
+        expect(screen.getByText('child')).toBeInTheDocument()
     })
 
     it('should render a form element', () => {
         const { container } = Set.formElement({ children: <span>child</span> })
-        expect(Form.Get.form(container)).toBeInTheDocument()
+        expect(container.querySelector('form')).toBeInTheDocument()
     })
 
     it('should set aria-label', () => {
         Set.formElement({ ariaLabel: 'Login form', children: <span>child</span> })
-        expect(Form.Get.byLabel('Login form')).toBeInTheDocument()
+        expect(screen.getByLabelText('Login form')).toBeInTheDocument()
     })
 
     it('should apply className', () => {
@@ -399,7 +480,7 @@ describe('FormElement', () => {
             className: 'custom-form',
             children: <span>child</span>,
         })
-        expect(Form.Get.form(container)).toHaveClass('custom-form')
+        expect(container.querySelector('form')).toHaveClass('custom-form')
     })
 
     it('should apply inline style', () => {
@@ -407,7 +488,7 @@ describe('FormElement', () => {
             style: { maxWidth: '500px' },
             children: <span>child</span>,
         })
-        expect(Form.Get.form(container)).toHaveStyle({ maxWidth: '500px' })
+        expect(container.querySelector('form')).toHaveStyle({ maxWidth: '500px' })
     })
 
     it('should call onSubmit when submitted', async () => {
@@ -416,7 +497,7 @@ describe('FormElement', () => {
             onSubmit,
             children: <button type="submit">Submit</button>,
         })
-        await Form.Act.clickText('Submit')
+        await Accessor.user.click(screen.getByText('Submit'))
         expect(onSubmit).toHaveBeenCalledTimes(1)
     })
 
@@ -426,7 +507,7 @@ describe('FormElement', () => {
             noValidate: true,
             children: <span>child</span>,
         })
-        const form = Form.Get.form(container)
+        const form = container.querySelector('form')
         expect(form).toHaveAttribute('autocomplete', 'off')
         expect(form).toHaveAttribute('novalidate')
     })
@@ -436,97 +517,120 @@ describe('DateInput', () => {
     describe('Rendering', () => {
         it('should render with default placeholder', () => {
             Set.dateInput()
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toBeInTheDocument()
+            expect(screen.getByPlaceholderText('dd/mm/yyyy')).toBeInTheDocument()
         })
 
         it('should render with custom placeholder', () => {
             Set.dateInput({ placeholder: 'Select date' })
-            expect(Form.Get.byPlaceholder('Select date')).toBeInTheDocument()
+            expect(screen.getByPlaceholderText('Select date')).toBeInTheDocument()
         })
 
         it('should show calendar icon', () => {
             Set.dateInput()
-            expect(Form.Date.Get.icon()).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            expect(dateInput.Get.icon()).toBeInTheDocument()
         })
 
         it('should display value from form default', () => {
             Set.dateInputWithValue()
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/05/1990')
+            expect(screen.getByPlaceholderText('dd/mm/yyyy')).toHaveValue('15/05/1990')
         })
 
         it('should apply custom className', () => {
             Set.dateInput({ className: 'custom' })
-            expect(Form.Date.Get.input()).toHaveClass('custom')
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            expect(dateInput.Get.className()).toContain('custom')
         })
 
         it('should set aria-label', () => {
             Set.dateInput({ ariaLabel: 'Date of birth' })
-            expect(Form.Get.byLabel('Date of birth')).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            expect(form.Get.byLabel('Date of birth')).toBeInTheDocument()
         })
     })
 
     describe('Calendar open/close', () => {
         it('should open calendar when icon is clicked', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            expect(Form.Date.Get.calendar()).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            expect(dateInput.Get.calendar()).toBeInTheDocument()
         })
 
         it('should close calendar when icon is clicked again', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.icon()
-            expect(Form.Date.Query.calendar()).not.toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.toggleCalendar()
+            expect(dateInput.Has.calendar()).toBe(false)
         })
 
         it('should close calendar when clicking outside', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            expect(Form.Date.Get.calendar()).toBeInTheDocument()
-            await Form.Act.clickOutside()
-            expect(Form.Date.Query.calendar()).not.toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            expect(dateInput.Get.calendar()).toBeInTheDocument()
+            await Accessor.user.click(document.body)
+            expect(dateInput.Has.calendar()).toBe(false)
         })
 
         it('should close calendar after selecting a day', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.day(14)
-            expect(Form.Date.Query.calendar()).not.toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.selectDay(14)
+            expect(dateInput.Has.calendar()).toBe(false)
         })
 
         it('should close calendar after clicking Today', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.today()
-            expect(Form.Date.Query.calendar()).not.toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.selectToday()
+            expect(dateInput.Has.calendar()).toBe(false)
         })
     })
 
     describe('Calendar content', () => {
         it('should display day headers', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            expect(Form.Get.text('Mo')).toBeInTheDocument()
-            expect(Form.Get.text('Su')).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            expect(form.Get.byText('Mo')).toBeInTheDocument()
+            expect(form.Get.byText('Su')).toBeInTheDocument()
         })
 
         it('should display days in the current month', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            const days = Form.Date.Get.days()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const days = dateInput.Get.days()
             expect(days.length).toBeGreaterThan(27)
             expect(days.length).toBeLessThanOrEqual(31)
         })
 
         it('should highlight today', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            expect(Form.Date.Get.todayDay()).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            expect(dateInput.Get.todayDay()).toBeInTheDocument()
         })
 
         it('should highlight selected day when value exists', async () => {
             Set.dateInputWithValue()
-            await Form.Date.Click.icon()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
             // Value is 1990-05-15 so we need to navigate to that month first
             // Default opens to current month, so selected won't show unless we navigate
             // But the selected class is based on field.value matching
@@ -534,8 +638,10 @@ describe('DateInput', () => {
 
         it('should show month and year in header', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            const btn = Form.Date.Get.monthYearBtn()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const btn = dateInput.Get.monthYearBtn()
             expect(btn).toBeInTheDocument()
             expect(btn!.textContent).toMatch(/\w+ \d{4}/)
         })
@@ -544,17 +650,21 @@ describe('DateInput', () => {
     describe('Day selection', () => {
         it('should set input value when a day is clicked', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.day(0)
-            const input = Form.Get.byPlaceholder('dd/mm/yyyy')
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.selectDay(0)
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
             expect((input as HTMLInputElement).value).toMatch(/^01\//)
         })
 
         it('should set today date when Today button is clicked', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.today()
-            const input = Form.Get.byPlaceholder('dd/mm/yyyy')
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.selectToday()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
             const today = new Date()
             const dd = String(today.getDate()).padStart(2, '0')
             const mm = String(today.getMonth() + 1).padStart(2, '0')
@@ -564,19 +674,23 @@ describe('DateInput', () => {
 
         it('should clear input when Clear button is clicked', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.today()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.selectToday()
             // Now textValue is set, re-open and clear
-            await Form.Date.Click.icon()
-            await Form.Date.Click.clear()
-            const input = Form.Get.byPlaceholder('dd/mm/yyyy')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clear()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
             expect(input).toHaveValue('')
         })
 
         it('should not select day before min date', async () => {
             // min is 2024-05-10, so day 1 (index 0) should be disabled
             Set.dateInput({ min: '2024-05-10' })
-            await Form.Date.Click.icon()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
             // Navigate to May 2024
             // The calendar opens on current month, so we can't easily test this
             // without navigating. We'll verify disabled class exists instead.
@@ -588,8 +702,10 @@ describe('DateInput', () => {
             const mm = String(today.getMonth() + 1).padStart(2, '0')
             // Set max to the 5th of current month
             Set.dateInput({ max: `${yyyy}-${mm}-05` })
-            await Form.Date.Click.icon()
-            const disabledDays = Form.Date.Get.disabledDays()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const disabledDays = dateInput.Get.disabledDays()
             expect(disabledDays.length).toBeGreaterThan(0)
         })
     })
@@ -597,40 +713,48 @@ describe('DateInput', () => {
     describe('Text input', () => {
         it('should format typed input with slashes', async () => {
             Set.dateInput()
-            await Form.Act.type('dd/mm/yyyy', '15052024')
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/05/2024')
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '15052024')
+            expect(input).toHaveValue('15/05/2024')
         })
 
         it('should auto-add slash after day digits', async () => {
             Set.dateInput()
-            await Form.Act.type('dd/mm/yyyy', '15')
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/')
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '15')
+            expect(input).toHaveValue('15/')
         })
 
         it('should auto-add slash after month digits', async () => {
             Set.dateInput()
-            await Form.Act.type('dd/mm/yyyy', '1505')
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/05/')
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '1505')
+            expect(input).toHaveValue('15/05/')
         })
 
         it('should not accept more than 8 digits', async () => {
             Set.dateInput()
-            await Form.Act.type('dd/mm/yyyy', '150520241')
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/05/2024')
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '150520241')
+            expect(input).toHaveValue('15/05/2024')
         })
 
         it('should strip non-digit characters', async () => {
             Set.dateInput()
-            await Form.Act.type('dd/mm/yyyy', '1a5b0c5d2024')
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '1a5b0c5d2024')
             // Only digits extracted: 15052024
-            expect(Form.Get.byPlaceholder('dd/mm/yyyy')).toHaveValue('15/05/2024')
+            expect(input).toHaveValue('15/05/2024')
         })
 
         it('should sync calendar view when valid date is typed', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Act.type('dd/mm/yyyy', '15012000')
-            const btn = Form.Date.Get.monthYearBtn()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '15012000')
+            const btn = dateInput.Get.monthYearBtn()
             expect(btn!.textContent).toContain('Jan')
             expect(btn!.textContent).toContain('2000')
         })
@@ -639,59 +763,71 @@ describe('DateInput', () => {
     describe('Month navigation', () => {
         it('should navigate to next month', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            const before = Form.Date.Get.monthYearBtn()!.textContent
-            await Form.Date.Click.nextMonth()
-            const after = Form.Date.Get.monthYearBtn()!.textContent
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const before = dateInput.Get.monthYearBtn()!.textContent
+            await dateInput.Do.nextMonth()
+            const after = dateInput.Get.monthYearBtn()!.textContent
             expect(after).not.toBe(before)
         })
 
         it('should navigate to previous month', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            const before = Form.Date.Get.monthYearBtn()!.textContent
-            await Form.Date.Click.prevMonth()
-            const after = Form.Date.Get.monthYearBtn()!.textContent
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const before = dateInput.Get.monthYearBtn()!.textContent
+            await dateInput.Do.prevMonth()
+            const after = dateInput.Get.monthYearBtn()!.textContent
             expect(after).not.toBe(before)
         })
 
         it('should wrap from January to December of previous year', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            // Navigate back enough months to reach January then go prev
-            // Simpler: type a January date to sync, then go prev
-            await Form.Act.type('dd/mm/yyyy', '15012024')
-            const btn = Form.Date.Get.monthYearBtn()!
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '15012024')
+            const btn = dateInput.Get.monthYearBtn()!
             expect(btn.textContent).toContain('Jan')
-            await Form.Date.Click.prevMonth()
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('Dec')
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('2023')
+            await dateInput.Do.prevMonth()
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('Dec')
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('2023')
         })
 
         it('should wrap from December to January of next year', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Act.type('dd/mm/yyyy', '15122024')
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('Dec')
-            await Form.Date.Click.nextMonth()
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('Jan')
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('2025')
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '15122024')
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('Dec')
+            await dateInput.Do.nextMonth()
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('Jan')
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('2025')
         })
     })
 
     describe('Year picker', () => {
         it('should open year picker when month-year button is clicked', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.monthYearBtn()
-            expect(Form.Date.Get.yearPicker()).toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clickMonthYear()
+            expect(dateInput.Get.yearPicker()).toBeInTheDocument()
         })
 
         it('should show year options from 1900 to 2100', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.monthYearBtn()
-            const years = Form.Date.Get.yearOptions()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clickMonthYear()
+            const years = dateInput.Get.yearOptions()
             expect(years.length).toBe(201)
             expect(years[0].textContent).toBe('1900')
             expect(years[200].textContent).toBe('2100')
@@ -699,43 +835,49 @@ describe('DateInput', () => {
 
         it('should highlight current view year as selected', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.monthYearBtn()
-            const selected = Form.Date.Get.selectedYear()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clickMonthYear()
+            const selected = dateInput.Get.selectedYear()
             expect(selected).toBeInTheDocument()
             expect(selected!.textContent).toBe(String(new Date().getFullYear()))
         })
 
         it('should show all 12 months', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.monthYearBtn()
-            const months = Form.Date.Get.monthOptions()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clickMonthYear()
+            const months = dateInput.Get.monthOptions()
             expect(months.length).toBe(12)
         })
 
         it('should close year picker and show calendar when month is selected', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            await Form.Date.Click.monthYearBtn()
-            const months = Form.Date.Get.monthOptions()
-            const user = userEvent.setup()
-            await user.click(months[0]) // Select Jan
-            expect(Form.Date.Query.yearPicker()).not.toBeInTheDocument()
-            expect(Form.Date.Get.calendar()).toBeInTheDocument()
-            expect(Form.Date.Get.monthYearBtn()!.textContent).toContain('Jan')
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            await dateInput.Do.clickMonthYear()
+            const months = dateInput.Get.monthOptions()
+            await Accessor.user.click(months[0]) // Select Jan
+            expect(dateInput.Has.yearPicker()).toBe(false)
+            expect(dateInput.Get.calendar()).toBeInTheDocument()
+            expect(dateInput.Get.monthYearBtn()!.textContent).toContain('Jan')
         })
     })
 
     describe('Keyboard navigation', () => {
         it('should close calendar on Escape from input', async () => {
             Set.dateInput()
-            await Form.Date.Click.icon()
-            expect(Form.Date.Get.calendar()).toBeInTheDocument()
-            const user = userEvent.setup()
-            const input = Form.Get.byPlaceholder('dd/mm/yyyy')
-            await user.type(input, '{Escape}')
-            expect(Form.Date.Query.calendar()).not.toBeInTheDocument()
+            const form = Test.Form(FORM_LABEL)
+            const dateInput = form.Date('DOB')
+            await dateInput.Do.toggleCalendar()
+            expect(dateInput.Get.calendar()).toBeInTheDocument()
+            const input = screen.getByPlaceholderText('dd/mm/yyyy')
+            await Accessor.user.type(input, '{Escape}')
+            expect(dateInput.Has.calendar()).toBe(false)
         })
     })
 })
@@ -743,43 +885,50 @@ describe('DateInput', () => {
 describe('Error rendering', () => {
     it('should show error message on Input', () => {
         Set.inputWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*Field is required')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*Field is required')
     })
 
     it('should show error message on TextArea', () => {
         Set.textAreaWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*Too long')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*Too long')
     })
 
     it('should show error message on DateInput', () => {
         Set.dateInputWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*Date is required')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*Date is required')
     })
 
     it('should show error message on SearchInput', () => {
         Set.searchInputWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*Selection required')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*Selection required')
     })
 
     it('should show error message on Checkbox', () => {
         Set.checkboxWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*You must agree')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*You must agree')
     })
 
     it('should show error message on RadioGroup', () => {
         Set.radioGroupWithError()
-        expect(Form.Get.errorMsg()).toBeInTheDocument()
-        expect(Form.Get.errorMsg()!.textContent).toBe('*Please select an option')
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.errorMsg()).toBeInTheDocument()
+        expect(form.Get.errorMsg()!.textContent).toBe('*Please select an option')
     })
 
     it('should not show error when there is none', () => {
         Set.input()
-        expect(Form.Query.errorMsg()).not.toBeInTheDocument()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Has.errorMsg()).toBe(false)
     })
 })
 

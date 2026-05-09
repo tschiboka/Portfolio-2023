@@ -45,6 +45,11 @@ export const stories: StoryEntry[] = [
         path: '/api/ux-stories/tables',
         description: 'Data grids with sorting, filtering, pagination, and selection.',
     },
+    {
+        label: 'Test Accessor',
+        path: '/api/ux-stories/test-accessor',
+        description: 'Structured test utility layer for consistent component testing.',
+    },
 ]
 
 export const STORIES_INDEX_PATH = '/api/ux-stories'

@@ -1,15 +1,15 @@
 import React from 'react'
-import { render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, waitFor } from '@testing-library/react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router-dom'
 import { SessionContext } from '../../../../src/context/SessionContext/Session.context'
 import { AppContextProvider } from '../../../../src/context/AppContext/App.context'
 import { PageSetupOptions } from './Page.types'
-import { mockDefaultQueryOptions, mockDefaultSessionContext } from './Page.mocks'
-import { Table } from '../Table/Table'
+import type { Buildable } from '../Server/RequestBuilder'
+import { mockDefaultQueryOptions, mockDefaultSessionContext, mockNavigate } from './Page.mocks'
 import { ApiRoute } from '../../../../src/routing/ApiRoutes'
 import { server } from '../Server'
+import { TestError } from '../Accessor/Accessor'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: mockDefaultQueryOptions })
 
@@ -41,26 +41,36 @@ const withPageProviders = (options: PageSetupOptions) => {
 }
 
 export const Page = {
-    render: (options: PageSetupOptions) => {
-        if (options.handlers?.length) server.use(...options.handlers)
-        options.beforeRender?.()
-        const Wrapper = withPageProviders(options)
-        const ui = resolveElement(options)
-        return render(ui, { wrapper: Wrapper, ...options.renderOptions })
+    Get: {
+        navigatedTo: () => mockNavigate.mock.lastCall?.[0] as string | undefined,
     },
-    setup: (options: PageSetupOptions) => {
-        const view = Page.render(options)
-        const user = userEvent.setup()
-
-        return {
-            view,
-            user,
-            Table,
-        }
+    Has: {
+        navigated: () => mockNavigate.mock.calls.length > 0,
+    },
+    Wait: {
+        navigatedTo: async (path: string) => {
+            await waitFor(() => {
+                if (!mockNavigate.mock.calls.some(([p]: unknown[]) => p === path)) {
+                    const actual = mockNavigate.mock.lastCall?.[0] as string | undefined
+                    throw TestError.navigation(path, actual)
+                }
+            })
+        },
     },
     Set: {
-        handlers: (...handlers: Parameters<typeof server.use>) => {
-            server.use(...handlers)
+        handlers: (...handlers: Buildable[]) => {
+            server.use(...handlers.map((h) => h.build()))
+        },
+    },
+    Do: {
+        render: (options: PageSetupOptions) => {
+            if (options.handlers?.length) {
+                server.use(...options.handlers.map((h) => h.build()))
+            }
+            options.beforeRender?.()
+            const Wrapper = withPageProviders(options)
+            const ui = resolveElement(options)
+            return render(ui, { wrapper: Wrapper, ...options.renderOptions })
         },
     },
 }

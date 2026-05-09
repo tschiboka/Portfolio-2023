@@ -32,10 +32,11 @@ export const Input = <T extends FieldValues>({
         name={name}
         control={control}
         render={({ field, fieldState }) => (
-            <div aria-label={ariaLabel} className={className ?? 'wrapped-component'} style={style}>
+            <div className={className ?? 'wrapped-component'} style={style}>
                 <div className="wrapped-input">
                     <input
                         id={name}
+                        aria-label={ariaLabel}
                         autoComplete={autoComplete}
                         type={type === 'password' && revealPassword ? 'text' : type}
                         className={type === 'date' && field.value ? 'has-value' : undefined}
@@ -45,6 +46,8 @@ export const Input = <T extends FieldValues>({
                     {addRevealPasswordIcon && (
                         <div
                             className="action-icon"
+                            role="button"
+                            aria-label="Toggle password visibility"
                             onClick={() => {
                                 setRevealPassword && setRevealPassword(!revealPassword)
                             }}
@@ -53,7 +56,11 @@ export const Input = <T extends FieldValues>({
                         </div>
                     )}
                 </div>
-                {fieldState.error && <p className="error-msg">*{fieldState.error.message}</p>}
+                {fieldState.error && (
+                    <p className="error-msg" role="alert">
+                        *{fieldState.error.message}
+                    </p>
+                )}
             </div>
         )}
     />

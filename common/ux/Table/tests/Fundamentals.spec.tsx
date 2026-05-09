@@ -16,12 +16,12 @@ describe('Table — Fundamentals', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table.Get.heading('Users')).toBeInTheDocument()
+            expect(Test.Table('Users').Get.heading('Users')).toBeInTheDocument()
         })
 
         it('does not render a heading when title is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(Test.Table.Query.heading()).not.toBeInTheDocument()
+            expect(screen.queryByRole('heading')).not.toBeInTheDocument()
         })
 
         it('does not render header section when no title, description, onInfo, filtering, or download', () => {
@@ -77,7 +77,7 @@ describe('Table — Fundamentals', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table.Get.infoButton()).toBeInTheDocument()
+            expect(Test.Table('T').Get.infoButton()).toBeInTheDocument()
         })
 
         it('calls onInfo when clicked', async () => {
@@ -89,7 +89,7 @@ describe('Table — Fundamentals', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            await Test.Table.Click.infoButton()
+            await Test.Table('T').Do.clickInfoButton()
             expect(onInfo).toHaveBeenCalledTimes(1)
         })
     })
@@ -144,7 +144,7 @@ describe('Table — Fundamentals', () => {
 
         it('empty state cell spans all columns', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
-            expect(Test.Table.Get.emptyState()).toHaveAttribute(
+            expect(Test.Table('test').Get.emptyState()).toHaveAttribute(
                 'colspan',
                 String(basicColumns.length),
             )
@@ -157,7 +157,7 @@ describe('Table — Fundamentals', () => {
                 columns: basicColumns,
                 actions: [{ id: 'x', label: 'X' }],
             })
-            expect(Test.Table.Get.emptyState()).toHaveAttribute(
+            expect(Test.Table('test').Get.emptyState()).toHaveAttribute(
                 'colspan',
                 String(basicColumns.length + 1),
             )
@@ -174,7 +174,7 @@ describe('Table — Fundamentals', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.emptyState()).toHaveAttribute(
+            expect(Test.Table('test').Get.emptyState()).toHaveAttribute(
                 'colspan',
                 String(basicColumns.length + 1),
             )

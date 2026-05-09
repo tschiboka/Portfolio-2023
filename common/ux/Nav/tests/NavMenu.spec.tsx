@@ -78,7 +78,7 @@ describe('NavMenu', () => {
             const onItemClick = vi.fn()
             TestNav.Set.mockMenu({ ...defaultProps, onItemClick })
 
-            await TestNav.Click.text('About')
+            await TestNav().Do.clickLink('About')
 
             expect(onItemClick).toHaveBeenCalledWith(baseItems[1])
         })
@@ -98,7 +98,7 @@ describe('NavMenu', () => {
             const toggle = screen.getByTitle('Toggle Submenu Visibility')
             expect(toggle).toBeInTheDocument()
 
-            await TestNav.Click.text('Toggle Submenu Visibility')
+            await TestNav().Do.toggle('Toggle Submenu Visibility')
 
             expect(onSubmenuToggle).toHaveBeenCalled()
         })

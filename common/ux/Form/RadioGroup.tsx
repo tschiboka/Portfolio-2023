@@ -26,6 +26,10 @@ export const RadioGroup = ({
     >
         <label htmlFor={htmlFor}>{label}</label>
         {children}
-        {error && <p className="error-msg">*{error}</p>}
+        {error && (
+            <p className="error-msg" role="alert">
+                *{error}
+            </p>
+        )}
     </div>
 )

@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
-import { screen, act } from '@testing-library/react'
-import { Page as TestPage } from '../../Test/Page/Page'
-import { mockNavigate } from '../../Test/Page/Page.mocks'
+import { act } from '@testing-library/react'
+import { Test, Accessor } from '../../Test'
 import { postVisit } from '../../../../src/serverAPI/visits'
 import Page from '../Page'
 
@@ -12,7 +11,7 @@ beforeEach(() => {
 describe('Page', () => {
     describe('Document title', () => {
         it('sets the document title on mount', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="My Page" path="/test">
@@ -27,7 +26,7 @@ describe('Page', () => {
 
     describe('Content', () => {
         it('renders children', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="Test" path="/test">
@@ -36,13 +35,13 @@ describe('Page', () => {
                 ),
             })
 
-            expect(screen.getByText('Hello World')).toBeInTheDocument()
+            expect(Accessor.screen.getByText('Hello World')).toBeInTheDocument()
         })
     })
 
     describe('CSS class', () => {
         it('has the base Page class', () => {
-            const { container } = TestPage.render({
+            const { container } = Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="Test" path="/test">
@@ -55,7 +54,7 @@ describe('Page', () => {
         })
 
         it('applies custom className', () => {
-            const { container } = TestPage.render({
+            const { container } = Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="Test" path="/test" className="CustomPage">
@@ -68,7 +67,7 @@ describe('Page', () => {
         })
 
         it('adds submenu-open class when subMenuVisible is true', () => {
-            const { container } = TestPage.render({
+            const { container } = Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="Test" path="/test">
@@ -84,7 +83,7 @@ describe('Page', () => {
 
     describe('Visit recording', () => {
         it('records a visit by default', async () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/home',
                 children: (
                     <Page title="Test" path="/home">
@@ -101,7 +100,7 @@ describe('Page', () => {
         })
 
         it('skips visit recording when recordVisit is false', async () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/home',
                 children: (
                     <Page title="Test" path="/home" recordVisit={false}>
@@ -120,7 +119,7 @@ describe('Page', () => {
 
     describe('Login redirect', () => {
         it('redirects to /api/login when loginRequired and not authenticated', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/admin',
                 children: (
                     <Page title="Test" path="/admin" loginRequired>
@@ -130,11 +129,11 @@ describe('Page', () => {
                 session: { isAuthenticated: false, isAuthLoading: false },
             })
 
-            expect(mockNavigate).toHaveBeenCalledWith('/api/login')
+            expect(Test.Page.Get.navigatedTo()).toBe('/api/login')
         })
 
         it('does not redirect when loginRequired and authenticated', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/admin',
                 children: (
                     <Page title="Test" path="/admin" loginRequired>
@@ -144,12 +143,12 @@ describe('Page', () => {
                 session: { isAuthenticated: true, isAuthLoading: false },
             })
 
-            expect(mockNavigate).not.toHaveBeenCalled()
-            expect(screen.getByText('Protected')).toBeInTheDocument()
+            expect(Test.Page.Has.navigated()).toBe(false)
+            expect(Accessor.screen.getByText('Protected')).toBeInTheDocument()
         })
 
         it('does not redirect when loginRequired is false (default)', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/public',
                 children: (
                     <Page title="Test" path="/public">
@@ -159,14 +158,14 @@ describe('Page', () => {
                 session: { isAuthenticated: false, isAuthLoading: false },
             })
 
-            expect(mockNavigate).not.toHaveBeenCalled()
-            expect(screen.getByText('Public')).toBeInTheDocument()
+            expect(Test.Page.Has.navigated()).toBe(false)
+            expect(Accessor.screen.getByText('Public')).toBeInTheDocument()
         })
     })
 
     describe('Scroll', () => {
         it('scrolls to top on mount', () => {
-            TestPage.render({
+            Test.Page.Do.render({
                 path: '/test',
                 children: (
                     <Page title="Test" path="/test">

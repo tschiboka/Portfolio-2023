@@ -3,7 +3,7 @@ import { SessionContextValues } from '../../../../src/context/SessionContext/Ses
 import { AppContextValues } from '../../../../src/context/AppContext/AppContext.types'
 import { RenderOptions } from '@testing-library/react'
 import { ApiRoute } from '../../../../src/routing/ApiRoutes'
-import { RequestHandler } from 'msw'
+import type { Buildable } from '../Server/RequestBuilder'
 
 export type PageRenderOptions = {
     route?: MemoryRouterProps['initialEntries']
@@ -15,6 +15,6 @@ export type PageRenderOptions = {
 export type PageSetupOptions = PageRenderOptions & {
     path: string | ApiRoute
     children?: React.ReactElement
-    handlers?: RequestHandler[]
+    handlers?: Buildable[]
     beforeRender?: () => void
 }

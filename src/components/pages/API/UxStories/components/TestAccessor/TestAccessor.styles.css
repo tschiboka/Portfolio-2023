@@ -1,0 +1,33 @@
+.TestAccessor p,
+.TestAccessor li,
+.TestAccessor td,
+.TestAccessor th,
+.TestAccessor blockquote {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.TestAccessor h2 {
+    margin-top: 2.5rem;
+}
+
+.TestAccessor h3 {
+    margin-top: 1.75rem;
+}
+
+.TestAccessor blockquote {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--accent-dark-3);
+    font-style: italic;
+}
+
+.TestAccessor ol,
+.TestAccessor ul {
+    padding-left: 1.5rem;
+}
+
+.TestAccessor nav ul {
+    font-size: 1.05rem;
+    line-height: 2;
+}

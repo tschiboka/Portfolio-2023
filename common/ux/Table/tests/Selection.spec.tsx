@@ -21,8 +21,9 @@ describe('Table — Selection', () => {
                     onChange: vi.fn(),
                 },
             })
+            const table = Test.Table('test')
             rows.forEach((_, i) => {
-                expect(Test.Table.Get.selectRow(i + 1)).toBeInTheDocument()
+                expect(table.Get.selectRow(i + 1)).toBeInTheDocument()
             })
         })
 
@@ -37,7 +38,7 @@ describe('Table — Selection', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.selectAll()).toBeInTheDocument()
+            expect(Test.Table('test').Get.selectAll()).toBeInTheDocument()
         })
 
         it('calls onChange with row id when a row checkbox is clicked', async () => {
@@ -52,7 +53,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectRow(1)
+            await Test.Table('test').Do.selectRow(1)
             expect(onChange).toHaveBeenCalledWith(['Alpha'])
         })
 
@@ -68,7 +69,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectRow(1)
+            await Test.Table('test').Do.selectRow(1)
             expect(onChange).toHaveBeenCalledWith([])
         })
 
@@ -84,7 +85,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectAll()
+            await Test.Table('test').Do.selectAll()
             expect(onChange).toHaveBeenCalledWith(rows.map((r) => r.name))
         })
 
@@ -100,7 +101,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectAll()
+            await Test.Table('test').Do.selectAll()
             expect(onChange).toHaveBeenCalledWith([])
         })
 
@@ -115,7 +116,7 @@ describe('Table — Selection', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.selectAll()).toBeChecked()
+            expect(Test.Table('test').Get.selectAll()).toBeChecked()
         })
 
         it('select-all checkbox is unchecked when not all rows are selected', () => {
@@ -129,7 +130,7 @@ describe('Table — Selection', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.selectAll()).not.toBeChecked()
+            expect(Test.Table('test').Get.selectAll()).not.toBeChecked()
         })
 
         it('row checkbox is checked when its id is in selectedRowIds', () => {
@@ -143,8 +144,9 @@ describe('Table — Selection', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.selectRow(2)).toBeChecked()
-            expect(Test.Table.Get.selectRow(1)).not.toBeChecked()
+            const table = Test.Table('test')
+            expect(table.Get.selectRow(2)).toBeChecked()
+            expect(table.Get.selectRow(1)).not.toBeChecked()
         })
 
         it('adds to existing selection when selecting another row', async () => {
@@ -159,7 +161,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectRow(2)
+            await Test.Table('test').Do.selectRow(2)
             expect(onChange).toHaveBeenCalledWith(['Alpha', 'Beta'])
         })
     })
@@ -195,7 +197,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectRow(1)
+            await Test.Table('test').Do.selectRow(1)
             expect(onChange).toHaveBeenCalledWith(['Alpha'])
         })
 
@@ -212,7 +214,7 @@ describe('Table — Selection', () => {
                     onChange,
                 },
             })
-            await Test.Table.Click.selectRow(1)
+            await Test.Table('test').Do.selectRow(1)
             expect(onChange).toHaveBeenCalledWith([])
         })
     })
@@ -231,7 +233,7 @@ describe('Table — Selection', () => {
                 },
             })
             // Beta (index 1) is inactive
-            expect(Test.Table.Get.selectRow(2)).toBeDisabled()
+            expect(Test.Table('test').Get.selectRow(2)).toBeDisabled()
         })
 
         it('enables checkbox for selectable rows', () => {
@@ -246,8 +248,9 @@ describe('Table — Selection', () => {
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
-            expect(Test.Table.Get.selectRow(1)).not.toBeDisabled()
-            expect(Test.Table.Get.selectRow(3)).not.toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.selectRow(1)).not.toBeDisabled()
+            expect(table.Get.selectRow(3)).not.toBeDisabled()
         })
 
         it('select-all only selects selectable rows', async () => {
@@ -263,7 +266,7 @@ describe('Table — Selection', () => {
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
-            await Test.Table.Click.selectAll()
+            await Test.Table('test').Do.selectAll()
             // Beta is inactive, should not be in the list
             expect(onChange).toHaveBeenCalledWith(expect.not.arrayContaining(['Beta']))
             expect(onChange).toHaveBeenCalledWith(
@@ -283,7 +286,7 @@ describe('Table — Selection', () => {
                     isRowSelectable: () => false,
                 },
             })
-            expect(Test.Table.Get.selectAll()).toBeDisabled()
+            expect(Test.Table('test').Get.selectAll()).toBeDisabled()
         })
     })
 

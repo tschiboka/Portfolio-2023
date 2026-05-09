@@ -239,7 +239,12 @@ export const DateInput = <T extends FieldValues>({
                                 onChange={(e) => handleTextChange(e.target.value, field.onChange)}
                                 onKeyDown={handleInputKeyDown}
                             />
-                            <div className="action-icon date-input__icon" onClick={handleOpen}>
+                            <div
+                                className="action-icon date-input__icon"
+                                role="button"
+                                aria-label="Toggle calendar"
+                                onClick={handleOpen}
+                            >
                                 <BsCalendar3 />
                             </div>
                         </div>
@@ -373,7 +378,9 @@ export const DateInput = <T extends FieldValues>({
                             </div>
                         )}
                         {fieldState.error && (
-                            <p className="error-msg">*{fieldState.error.message}</p>
+                            <p className="error-msg" role="alert">
+                                *{fieldState.error.message}
+                            </p>
                         )}
                     </div>
                 )

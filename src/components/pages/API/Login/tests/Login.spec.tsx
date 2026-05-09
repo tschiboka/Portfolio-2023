@@ -2,17 +2,19 @@ import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@common/ux/Test'
 import { ApiRoutes } from '../../../../../routing/ApiRoutes'
 import { mockSetSession, mockUser, defaultSettings } from './Login.mocks'
-import { defaultHandlers, handleSettings, handleLoginError } from './Login.mockHandles'
-import { mockNavigate } from '@common/ux/Test/Page/Page.mocks'
+import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandles'
+import { LoginLabels } from './Login.spec.utils'
 
-const { Form, Page } = Test
+const { form: FORM, fields, buttons, errors } = LoginLabels
 
 const setupLogin = () => {
-    return Page.setup({
+    Test.Page.Do.render({
         path: ApiRoutes.Login,
         session: { setSession: mockSetSession },
         handlers: defaultHandlers,
     })
+
+    return { form: Test.Form(FORM) }
 }
 
 describe('Login', () => {
@@ -24,119 +26,103 @@ describe('Login', () => {
         it('should render heading and subheading', () => {
             setupLogin()
             expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDocument()
-            expect(Form.Get.text('Tschiboka Personal App')).toBeInTheDocument()
+            expect(screen.getByText('Tschiboka Personal App')).toBeInTheDocument()
         })
 
         it('should render the email input with label', () => {
-            setupLogin()
-            expect(Form.Get.byLabel('Email')).toBeInTheDocument()
+            const { form } = setupLogin()
+            expect(form.Input(fields.email).Get.value()).toBeDefined()
         })
 
         it('should render the password input with label', () => {
-            setupLogin()
-            expect(Form.Get.byLabel('Password')).toBeInTheDocument()
+            const { form } = setupLogin()
+            expect(form.Input(fields.password).Get.value()).toBeDefined()
         })
 
         it('should render the login button', () => {
-            setupLogin()
-            expect(Form.Get.button(/Login/)).toBeInTheDocument()
+            const { form } = setupLogin()
+            expect(form.Button(buttons.login).Get.textContent()).toMatch(buttons.login)
         })
 
         it('should render the form with accessible label', () => {
-            setupLogin()
-            expect(screen.getByRole('form', { name: 'Login form' })).toBeInTheDocument()
+            const { form } = setupLogin()
+            expect(form).toBeDefined()
         })
     })
 
     describe('Registration button', () => {
         it('should render the register button when registration is enabled', async () => {
-            setupLogin()
-            await waitFor(() => {
-                expect(Form.Get.button(/Register User/)).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            const button = await waitFor(() => form.Button(buttons.register))
+            expect(button).toBeDefined()
         })
 
         it('should not render the register button when registration is disabled', async () => {
-            setupLogin()
-            Page.Set.handlers(
-                handleSettings
-                    .updateResponse((builder) =>
-                        builder.setValue('data', {
-                            ...defaultSettings,
-                            enableUserRegistration: false,
-                        }),
-                    )
-                    .build(),
+            const { form } = setupLogin()
+            Test.Page.Set.handlers(
+                handleGetSettings.updateResponse((builder) =>
+                    builder.setValue('data', { ...defaultSettings, enableUserRegistration: false }),
+                ),
             )
             await waitFor(() => {
-                expect(Form.Query.text(/Register User/)).not.toBeInTheDocument()
+                expect(form.Has.byText(buttons.register)).toBe(false)
             })
         })
 
         it('should navigate to /api/register when register button is clicked', async () => {
-            setupLogin()
-            await waitFor(() => {
-                expect(Form.Get.button(/Register User/)).toBeInTheDocument()
-            })
-            await Form.Click.button(/Register User/)
-            expect(mockNavigate).toHaveBeenCalledWith('/api/register')
+            const { form } = setupLogin()
+            const button = await waitFor(() => form.Button(buttons.register))
+
+            expect(button).toBeDefined()
+            await form.Button(buttons.register).Do.click()
+            expect(Test.Page.Get.navigatedTo()).toBe('/api/register')
         })
     })
 
     describe('Form validation', () => {
         it('should show validation error when email is empty on submit', async () => {
-            setupLogin()
-            await Form.Click.button(/Login/)
-            await waitFor(() => {
-                expect(Form.Get.errorMsg()).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            await form.Do.submit()
+            expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when email is too short', async () => {
-            const { user } = setupLogin()
-            await user.type(Form.Get.byLabel('Email'), 'ab@c.co')
-            await Form.Click.button(/Login/)
-            await waitFor(() => {
-                expect(Form.Get.errorMsg()).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            await form.Input(fields.email).Do.type('ab@c.co')
+            await form.Do.submit()
+            expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when password is empty on submit', async () => {
-            const { user } = setupLogin()
-            await user.type(Form.Get.byLabel('Email'), 'valid@email.com')
-            await Form.Click.button(/Login/)
-            await waitFor(() => {
-                expect(Form.Get.errorMsg()).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            await form.Input(fields.email).Do.type('valid@email.com')
+            await form.Do.submit()
+            expect(await form.Wait.errorMsg()).toBeInTheDocument()
         })
 
         it('should show validation error when password is too short', async () => {
-            const { user } = setupLogin()
-            await user.type(Form.Get.byLabel('Email'), 'valid@email.com')
-            await user.type(Form.Get.byLabel('Password'), 'short')
-            await Form.Click.button(/Login/)
-            await waitFor(() => {
-                expect(Form.Get.errorMsg()).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            await form.Input(fields.email).Do.type('valid@email.com')
+            await form.Input(fields.password).Do.type('short')
+            await form.Do.submit()
+            expect(await form.Wait.errorMsg()).toBeInTheDocument()
         })
 
         it('should not call login API when form is invalid', async () => {
-            setupLogin()
-            await Form.Click.button(/Login/)
-            await waitFor(() => {
-                expect(Form.Get.errorMsg()).toBeInTheDocument()
-            })
+            const { form } = setupLogin()
+            await form.Do.submit()
+            expect(await form.Wait.errorMsgs()).toBeDefined()
             expect(mockSetSession).not.toHaveBeenCalled()
-            expect(mockNavigate).not.toHaveBeenCalled()
+            expect(Test.Page.Has.navigated()).toBe(false)
         })
     })
 
     describe('Successful login', () => {
         const fillAndSubmitForm = async () => {
-            const { user } = setupLogin()
-            await user.type(Form.Get.byLabel('Email'), 'valid@email.com')
-            await user.type(Form.Get.byLabel('Password'), 'validpassword1')
-            await user.click(Form.Get.button(/Login/))
+            const { form } = setupLogin()
+            await form.Input(fields.email).Do.type('valid@email.com')
+            await form.Input(fields.password).Do.type('validpassword1')
+            await form.Do.submit()
         }
 
         it('should set session with token, user, and settings on success', async () => {
@@ -152,55 +138,48 @@ describe('Login', () => {
 
         it('should navigate to /api/index on successful login', async () => {
             await fillAndSubmitForm()
-            await waitFor(() => {
-                expect(mockNavigate).toHaveBeenCalledWith('/api/index')
-            })
+            await Test.Page.Wait.navigatedTo('/api/index')
         })
     })
 
     describe('Failed login', () => {
         const fillAndSubmitInvalid = async () => {
-            const { user } = setupLogin()
-            Page.Set.handlers(handleLoginError('Invalid email or password').build())
-            await user.type(Form.Get.byLabel('Email'), 'wrong@email.com')
-            await user.type(Form.Get.byLabel('Password'), 'wrongpassword1')
-            await user.click(Form.Get.button(/Login/))
+            const { form } = setupLogin()
+            Test.Page.Set.handlers(handlePostLoginError(errors.invalidCredentials))
+            await form.Input(fields.email).Do.type('wrong@email.com')
+            await form.Input(fields.password).Do.type('wrongpassword1')
+            await form.Do.submit()
+            return form
         }
 
         it('should display server error message on login failure', async () => {
-            await fillAndSubmitInvalid()
-            await waitFor(() => {
-                expect(Form.Get.text('Invalid email or password')).toBeInTheDocument()
-            })
+            const form = await fillAndSubmitInvalid()
+            expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
         })
 
         it('should not navigate on login failure', async () => {
-            await fillAndSubmitInvalid()
-            await waitFor(() => {
-                expect(Form.Get.text('Invalid email or password')).toBeInTheDocument()
-            })
-            expect(mockNavigate).not.toHaveBeenCalled()
+            const form = await fillAndSubmitInvalid()
+            expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
+            expect(Test.Page.Has.navigated()).toBe(false)
         })
 
         it('should not set session on login failure', async () => {
-            await fillAndSubmitInvalid()
-            await waitFor(() => {
-                expect(Form.Get.text('Invalid email or password')).toBeInTheDocument()
-            })
+            const form = await fillAndSubmitInvalid()
+            expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
             expect(mockSetSession).not.toHaveBeenCalled()
         })
     })
 
     describe('Password reveal', () => {
         it('should render password field as type password by default', () => {
-            setupLogin()
-            expect(Form.Get.byLabel('Password')).toHaveAttribute('type', 'password')
+            const { form } = setupLogin()
+            expect(form.Input(fields.password).Get.type()).toBe('password')
         })
 
         it('should toggle password visibility when reveal icon is clicked', () => {
-            setupLogin()
-            const actionIcon = Form.Get.actionIcon()
-            expect(actionIcon).toBeInTheDocument()
+            const { form } = setupLogin()
+            const toggleBtn = form.Button(buttons.togglePassword)
+            expect(toggleBtn.Get.textContent()).toBeDefined()
         })
     })
 
@@ -208,7 +187,7 @@ describe('Login', () => {
         it('should hide loading indicator once settings are loaded', async () => {
             setupLogin()
             await waitFor(() => {
-                expect(screen.queryByTestId('loading-indicator')).not.toBeInTheDocument()
+                expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
             })
         })
     })

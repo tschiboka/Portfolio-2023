@@ -24,6 +24,7 @@ import {
     Stacks,
     Tables,
     Overlays,
+    TestAccessor,
 } from '../components/pages/API/UxStories'
 import { ReactElement } from 'react'
 
@@ -158,6 +159,11 @@ export const ApiRoutes = {
         name: 'Tables',
         path: '/api/ux-stories/tables',
         element: <Tables path="/api/ux-stories/tables" />,
+    },
+    TestAccessor: {
+        name: 'Test Accessor',
+        path: '/api/ux-stories/test-accessor',
+        element: <TestAccessor path="/api/ux-stories/test-accessor" />,
     },
 } satisfies Record<string, ApiRoute>
 

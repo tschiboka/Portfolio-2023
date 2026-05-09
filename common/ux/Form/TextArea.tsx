@@ -27,14 +27,11 @@ export const TextArea = <T extends FieldValues>({
         name={name}
         control={control}
         render={({ field, fieldState }) => (
-            <div
-                aria-label={ariaLabel}
-                className={className ?? 'wrapped-component wrapped-textarea'}
-                style={style}
-            >
+            <div className={className ?? 'wrapped-component wrapped-textarea'} style={style}>
                 <div className="wrapped-input">
                     <textarea
                         id={name}
+                        aria-label={ariaLabel}
                         data-gramm="false"
                         data-gramm_editor="false"
                         data-enable-grammarly="false"
@@ -45,7 +42,9 @@ export const TextArea = <T extends FieldValues>({
                     />
                 </div>
                 {fieldState.error ? (
-                    <p className="error-msg">*{fieldState.error.message}</p>
+                    <p className="error-msg" role="alert">
+                        *{fieldState.error.message}
+                    </p>
                 ) : (
                     maxLength && (
                         <span className="textarea__info">

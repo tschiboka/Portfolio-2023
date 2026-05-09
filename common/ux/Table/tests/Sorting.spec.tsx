@@ -20,7 +20,7 @@ describe('Table — Sorting', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
+            expect(Test.Table('test').Get.sortButton('Name')).toBeInTheDocument()
         })
 
         it('does not render sort button for non-sortable columns', () => {
@@ -37,7 +37,7 @@ describe('Table — Sorting', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Query.sortButton('Value')).not.toBeInTheDocument()
+            expect(Test.Table('test').Has.sortButton('Value')).toBe(false)
         })
 
         it('renders non-sortable column header as plain text', () => {
@@ -78,7 +78,7 @@ describe('Table — Sorting', () => {
                     onSortChange,
                 },
             })
-            await Test.Table.Click.sortButton('Name')
+            await Test.Table('test').Do.sortBy('Name')
             expect(onSortChange).toHaveBeenCalledTimes(1)
         })
 
@@ -94,7 +94,7 @@ describe('Table — Sorting', () => {
                     onSortChange,
                 },
             })
-            await Test.Table.Click.sortButton('Name')
+            await Test.Table('test').Do.sortBy('Name')
             expect(onSortChange).toHaveBeenCalledWith('name', 'desc')
         })
 
@@ -113,7 +113,7 @@ describe('Table — Sorting', () => {
                     onSortChange,
                 },
             })
-            await Test.Table.Click.sortButton('Value')
+            await Test.Table('test').Do.sortBy('Value')
             expect(onSortChange).toHaveBeenCalledWith('value', 'asc')
         })
 
@@ -129,7 +129,7 @@ describe('Table — Sorting', () => {
                     onSortChange,
                 },
             })
-            await Test.Table.Click.sortButton('Name')
+            await Test.Table('test').Do.sortBy('Name')
             expect(onSortChange).toHaveBeenCalledWith('name', 'asc')
         })
     })

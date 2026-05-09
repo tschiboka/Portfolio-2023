@@ -1,13 +1,13 @@
-import { screen, within } from '@testing-library/react'
+import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
-import { Test } from '@common/ux/Test'
+import { Test, Accessor } from '@common/ux/Test'
 
 describe('Table — Accessibility', () => {
     describe('Region wrapper', () => {
         it('renders a region role on the container', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'Users', data: rows, columns: basicColumns })
-            expect(Test.Table.Get.region('Users')).toBeInTheDocument()
+            expect(Test.Table('Users').Get.tagName()).toBeDefined()
         })
 
         it('sets aria-label from the ariaLabel prop', () => {
@@ -16,7 +16,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table.Get.region()).toHaveAttribute('aria-label', 'Custom label')
+            expect(Test.Table('Custom label').Get.attribute('aria-label')).toBe('Custom label')
         })
 
         it('sets aria-labelledby pointing to the title when title is provided', () => {
@@ -26,14 +26,14 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const heading = Test.Table.Get.heading('My Table')
-            const region = Test.Table.Get.region()
-            expect(region).toHaveAttribute('aria-labelledby', heading.id)
+            const table = Test.Table('My Table')
+            const heading = table.Get.heading('My Table')
+            expect(table.Get.attribute('aria-labelledby')).toBe(heading.id)
         })
 
         it('does not set aria-labelledby when no title is given', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'No title', data: rows, columns: basicColumns })
-            expect(Test.Table.Get.region()).not.toHaveAttribute('aria-labelledby')
+            expect(Test.Table('No title').Get.attribute('aria-labelledby')).toBeNull()
         })
     })
 
@@ -56,9 +56,9 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const table = screen.getByRole('table')
-            const heading = Test.Table.Get.heading('Titled')
-            expect(table).toHaveAttribute('aria-labelledby', heading.id)
+            const table = Test.Table('Titled')
+            const heading = table.Get.heading('Titled')
+            expect(table.Get.table()).toHaveAttribute('aria-labelledby', heading.id)
         })
 
         it('generates an auto-id for aria-labelledby when no id prop is given but title exists', () => {
@@ -68,9 +68,9 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const table = screen.getByRole('table')
-            const heading = Test.Table.Get.heading('Auto ID')
-            expect(table).toHaveAttribute('aria-labelledby', heading.id)
+            const table = Test.Table('Auto ID')
+            const heading = table.Get.heading('Auto ID')
+            expect(table.Get.table()).toHaveAttribute('aria-labelledby', heading.id)
             expect(heading.id).toBeTruthy()
         })
     })
@@ -83,7 +83,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table.Get.region()).toHaveClass('custom-class')
+            expect(Test.Table('test').Get.className()).toContain('custom-class')
         })
 
         it('keeps the base table-container class alongside custom class', () => {
@@ -93,14 +93,14 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const region = Test.Table.Get.region()
-            expect(region).toHaveClass('table-container')
-            expect(region).toHaveClass('my-table')
+            const table = Test.Table('test')
+            expect(table.Get.className()).toContain('table-container')
+            expect(table.Get.className()).toContain('my-table')
         })
 
         it('renders without extra classes when className is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(Test.Table.Get.region().className).toContain('table-container')
+            expect(Test.Table('test').Get.className()).toContain('table-container')
         })
     })
 
@@ -112,14 +112,14 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table.Get.region().style.border).toBe('2px solid red')
+            expect(Test.Table('test').Get.style().border).toBe('2px solid red')
         })
     })
 
     describe('table element', () => {
         it('renders a <table> element', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(screen.getByRole('table')).toBeInTheDocument()
+            expect(Test.Table('test').Get.table()).toBeInTheDocument()
         })
 
         it('links table via aria-labelledby to the title heading', () => {
@@ -129,25 +129,28 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const heading = Test.Table.Get.heading('Linked')
-            expect(screen.getByRole('table')).toHaveAttribute('aria-labelledby', heading.id)
+            const table = Test.Table('Linked')
+            const heading = table.Get.heading('Linked')
+            expect(table.Get.table()).toHaveAttribute('aria-labelledby', heading.id)
         })
     })
 
     describe('Column headers', () => {
         it('renders th elements with scope="col"', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            const headers = Test.Table.Get.columnHeaders()
-            headers.forEach((th) => {
-                expect(th).toHaveAttribute('scope', 'col')
-            })
+            Test.Table('test')
+                .Get.columnHeaders()
+                .forEach((th) => {
+                    expect(th).toHaveAttribute('scope', 'col')
+                })
         })
 
         it('renders column header text for each column', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(screen.getByText('Name')).toBeInTheDocument()
-            expect(screen.getByText('Value')).toBeInTheDocument()
-            expect(screen.getByText('Status')).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.byText('Name')).toBeInTheDocument()
+            expect(table.Get.byText('Value')).toBeInTheDocument()
+            expect(table.Get.byText('Status')).toBeInTheDocument()
         })
 
         it('renders expand column header with aria-label "Expand" when breakpoints are present', () => {
@@ -159,7 +162,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            expect(screen.getByRole('columnheader', { name: 'Expand' })).toBeInTheDocument()
+            expect(
+                Accessor.screen.getByRole('columnheader', { name: 'Expand' }),
+            ).toBeInTheDocument()
         })
 
         it('renders action column header with aria-label "Actions" when actions are present', () => {
@@ -169,7 +174,9 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            expect(screen.getByRole('columnheader', { name: 'Actions' })).toBeInTheDocument()
+            expect(
+                Accessor.screen.getByRole('columnheader', { name: 'Actions' }),
+            ).toBeInTheDocument()
         })
 
         it('renders select column header with aria-label "Select" for single selection', () => {
@@ -184,7 +191,9 @@ describe('Table — Accessibility', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(screen.getByRole('columnheader', { name: 'Select' })).toBeInTheDocument()
+            expect(
+                Accessor.screen.getByRole('columnheader', { name: 'Select' }),
+            ).toBeInTheDocument()
         })
     })
 
@@ -196,7 +205,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const bodyRows = screen
+            const bodyRows = Accessor.screen
                 .getAllByRole('row')
                 .filter((row) => row.getAttribute('aria-label') === 'Data row')
             expect(bodyRows).toHaveLength(rows.length)
@@ -204,8 +213,7 @@ describe('Table — Accessibility', () => {
 
         it('does not set aria-label on rows when rowAriaLabel is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            const bodyRows = screen.getAllByRole('row')
-            // Header row + body rows; body rows should have no aria-label
+            const bodyRows = Accessor.screen.getAllByRole('row')
             const labeled = bodyRows.filter((row) => row.hasAttribute('aria-label'))
             expect(labeled).toHaveLength(0)
         })
@@ -221,8 +229,7 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            const expandBtns = Test.Table.Get.expandButtons()
-            expect(expandBtns).toHaveLength(rows.length)
+            expect(Test.Table('test').Get.expandButtons()).toHaveLength(rows.length)
         })
 
         it('changes aria-label to "Collapse row" after expanding', async () => {
@@ -234,8 +241,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            const btn = Test.Table.Get.expandButton(0)
-            await Test.Table.Click.expandButton(0)
+            const table = Test.Table('test')
+            const btn = table.Get.expandButton(0)
+            await table.Do.expandRow(0)
             expect(btn).toHaveAttribute('aria-label', 'Collapse row')
         })
 
@@ -248,9 +256,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            const btn = Test.Table.Get.expandButton(0)
-            const user = await Test.Table.Click.expandButton(0)
-            await user.click(btn)
+            const btn = Test.Table('test').Get.expandButton(0)
+            await Accessor.user.click(btn)
+            await Accessor.user.click(btn)
             expect(btn).toHaveAttribute('aria-label', 'Expand row')
         })
     })
@@ -265,8 +273,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await Test.Table.Act.expandRow(0)
-            expect(Test.Table.Get.expandedRow(1)).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.expandRow(0)
+            expect(table.Get.expandedRow(1)).toBeInTheDocument()
         })
 
         it('expanded row contains aria-hidden spacer cells', async () => {
@@ -278,8 +287,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await Test.Table.Act.expandRow(0)
-            const expandedRow = Test.Table.Get.expandedRow(1)
+            const table = Test.Table('test')
+            await table.Do.expandRow(0)
+            const expandedRow = table.Get.expandedRow(1)
             const hiddenCells = within(expandedRow).getAllByRole('cell', { hidden: true })
             const ariaHidden = hiddenCells.filter((c) => c.getAttribute('aria-hidden') === 'true')
             expect(ariaHidden.length).toBeGreaterThanOrEqual(1)
@@ -294,8 +304,9 @@ describe('Table — Accessibility', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await Test.Table.Act.expandRow(2)
-            expect(Test.Table.Get.expandedRow(3)).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.expandRow(2)
+            expect(table.Get.expandedRow(3)).toBeInTheDocument()
         })
     })
 
@@ -307,8 +318,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const buttons = Test.Table.Get.actionButtons()
-            expect(buttons).toHaveLength(rows.length)
+            expect(Test.Table('test').Get.actionButtons()).toHaveLength(rows.length)
         })
 
         it('action button has aria-haspopup="true"', () => {
@@ -318,8 +328,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
-            expect(btn).toHaveAttribute('aria-haspopup', 'true')
+            expect(Test.Table('test').Get.actionButton()).toHaveAttribute('aria-haspopup', 'true')
         })
 
         it('action button starts with aria-expanded="false"', () => {
@@ -329,8 +338,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
-            expect(btn).toHaveAttribute('aria-expanded', 'false')
+            expect(Test.Table('test').Get.actionButton()).toHaveAttribute('aria-expanded', 'false')
         })
 
         it('action button toggles aria-expanded to "true" when opened', async () => {
@@ -340,8 +348,9 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
-            await Test.Table.Act.openActionMenu()
+            const table = Test.Table('test')
+            const btn = table.Get.actionButton()
+            await table.Do.clickActionButton()
             expect(btn).toHaveAttribute('aria-expanded', 'true')
         })
 
@@ -352,9 +361,10 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            await Test.Table.Act.openActionMenu()
-            const menu = screen.getByRole('menu', { name: 'Row actions menu' })
-            expect(menu).toBeInTheDocument()
+            await Test.Table('test').Do.clickActionButton()
+            expect(
+                Accessor.screen.getByRole('menu', { name: 'Row actions menu' }),
+            ).toBeInTheDocument()
         })
 
         it('action items have role="menuitem" with aria-label matching the action label', async () => {
@@ -367,9 +377,10 @@ describe('Table — Accessibility', () => {
                     { id: 'delete', label: 'Delete' },
                 ],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menuItem('Edit')).toBeInTheDocument()
-            expect(Test.Table.Get.menuItem('Delete')).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menuItem('Edit')).toBeInTheDocument()
+            expect(table.Get.menuItem('Delete')).toBeInTheDocument()
         })
 
         it('list items wrapping menuitems have role="none"', async () => {
@@ -379,8 +390,9 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            await Test.Table.Act.openActionMenu()
-            const menu = Test.Table.Get.menu()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            const menu = table.Get.menu()
             const listItems = menu.querySelectorAll('li')
             listItems.forEach((li) => {
                 expect(li).toHaveAttribute('role', 'none')
@@ -397,7 +409,7 @@ describe('Table — Accessibility', () => {
                     { id: 'delete', label: 'Delete', filter: () => false },
                 ],
             })
-            expect(Test.Table.Get.actionButton()).toBeDisabled()
+            expect(Test.Table('test').Get.actionButton()).toBeDisabled()
         })
     })
 
@@ -413,7 +425,7 @@ describe('Table — Accessibility', () => {
                     onChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.selectAll()).toBeInTheDocument()
+            expect(Test.Table('test').Get.selectAll()).toBeInTheDocument()
         })
 
         it('does not render "Select all rows" checkbox for single mode', () => {
@@ -429,7 +441,7 @@ describe('Table — Accessibility', () => {
                 },
             })
             expect(
-                screen.queryByRole('checkbox', { name: 'Select all rows' }),
+                Accessor.screen.queryByRole('checkbox', { name: 'Select all rows' }),
             ).not.toBeInTheDocument()
         })
 
@@ -444,8 +456,9 @@ describe('Table — Accessibility', () => {
                     onChange: vi.fn(),
                 },
             })
+            const table = Test.Table('test')
             rows.forEach((_, i) => {
-                expect(Test.Table.Get.selectRow(i + 1)).toBeInTheDocument()
+                expect(table.Get.selectRow(i + 1)).toBeInTheDocument()
             })
         })
 
@@ -461,9 +474,9 @@ describe('Table — Accessibility', () => {
                     isRowSelectable: ({ row }) => row.status !== 'inactive',
                 },
             })
-            // Row 2 (Beta, inactive) should be disabled
-            expect(Test.Table.Get.selectRow(2)).toBeDisabled()
-            expect(Test.Table.Get.selectRow(1)).not.toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.selectRow(2)).toBeDisabled()
+            expect(table.Get.selectRow(1)).not.toBeDisabled()
         })
     })
 
@@ -482,8 +495,10 @@ describe('Table — Accessibility', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            const nameHeader = screen.getByRole('columnheader', { name: /Name/i })
-            expect(nameHeader).toHaveAttribute('aria-sort', 'ascending')
+            expect(Accessor.screen.getByRole('columnheader', { name: /Name/i })).toHaveAttribute(
+                'aria-sort',
+                'ascending',
+            )
         })
 
         it('sortable column has aria-sort="descending" when sorted desc', () => {
@@ -500,8 +515,10 @@ describe('Table — Accessibility', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            const nameHeader = screen.getByRole('columnheader', { name: /Name/i })
-            expect(nameHeader).toHaveAttribute('aria-sort', 'descending')
+            expect(Accessor.screen.getByRole('columnheader', { name: /Name/i })).toHaveAttribute(
+                'aria-sort',
+                'descending',
+            )
         })
 
         it('non-sorted sortable column does not have aria-sort', () => {
@@ -518,8 +535,9 @@ describe('Table — Accessibility', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            const valueHeader = screen.getByRole('columnheader', { name: /Value/i })
-            expect(valueHeader).not.toHaveAttribute('aria-sort')
+            expect(
+                Accessor.screen.getByRole('columnheader', { name: /Value/i }),
+            ).not.toHaveAttribute('aria-sort')
         })
 
         it('sort buttons have aria-label "Sort by {header}"', () => {
@@ -536,8 +554,9 @@ describe('Table — Accessibility', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.sortButton('Name')).toBeInTheDocument()
-            expect(Test.Table.Get.sortButton('Value')).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.sortButton('Name')).toBeInTheDocument()
+            expect(table.Get.sortButton('Value')).toBeInTheDocument()
         })
 
         it('sort icon has aria-hidden="true"', () => {
@@ -551,7 +570,7 @@ describe('Table — Accessibility', () => {
                     onSortChange: vi.fn(),
                 },
             })
-            const btn = Test.Table.Get.sortButton('Name')
+            const btn = Test.Table('test').Get.sortButton('Name')
             const icon = btn.querySelector('.sort-icon')
             expect(icon).toHaveAttribute('aria-hidden', 'true')
         })
@@ -560,12 +579,12 @@ describe('Table — Accessibility', () => {
     describe('Empty state ARIA', () => {
         it('empty cell has role="status"', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
-            expect(Test.Table.Get.emptyState()).toBeInTheDocument()
+            expect(Test.Table('test').Get.emptyState()).toBeInTheDocument()
         })
 
         it('empty cell shows default "No data" text', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
-            expect(screen.getByText('No data')).toBeInTheDocument()
+            expect(Test.Table('test').Get.byText('No data')).toBeInTheDocument()
         })
 
         it('empty cell shows custom emptyState content', () => {
@@ -575,13 +594,15 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 emptyState: <span>Nothing here</span>,
             })
-            expect(screen.getByText('Nothing here')).toBeInTheDocument()
+            expect(Test.Table('test').Get.byText('Nothing here')).toBeInTheDocument()
         })
 
         it('empty cell colspan spans all columns', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
-            const cell = Test.Table.Get.emptyState()
-            expect(cell).toHaveAttribute('colspan', String(basicColumns.length))
+            expect(Test.Table('test').Get.emptyState()).toHaveAttribute(
+                'colspan',
+                String(basicColumns.length),
+            )
         })
     })
 
@@ -596,7 +617,7 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
+            expect(Test.Table('test').Get.filterToggle()).toBeInTheDocument()
         })
 
         it('filter toggle starts with aria-expanded="false"', () => {
@@ -609,7 +630,7 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.filterToggle()).toHaveAttribute('aria-expanded', 'false')
+            expect(Test.Table('test').Get.filterToggle()).toHaveAttribute('aria-expanded', 'false')
         })
 
         it('filter toggle sets aria-expanded="true" when open', async () => {
@@ -622,8 +643,9 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Act.openFilters()
-            expect(Test.Table.Get.filterToggle()).toHaveAttribute('aria-expanded', 'true')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.filterToggle()).toHaveAttribute('aria-expanded', 'true')
         })
 
         it('filter panel has role="search" and aria-label "Table filters"', async () => {
@@ -636,8 +658,9 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Act.openFilters()
-            expect(Test.Table.Get.filterPanel()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.filterPanel()).toBeInTheDocument()
         })
 
         it('filter inputs have associated labels', async () => {
@@ -653,9 +676,10 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Act.openFilters()
-            expect(screen.getByLabelText('Name')).toBeInTheDocument()
-            expect(screen.getByLabelText('Min Value')).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.byLabel('Name')).toBeInTheDocument()
+            expect(table.Get.byLabel('Min Value')).toBeInTheDocument()
         })
     })
 
@@ -672,7 +696,7 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pagination()).toBeInTheDocument()
+            expect(Test.Table('test').Get.pagination()).toBeInTheDocument()
         })
 
         it('page buttons have aria-label "Page N"', () => {
@@ -687,9 +711,10 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(1)).toBeInTheDocument()
-            expect(Test.Table.Get.pageButton(2)).toBeInTheDocument()
-            expect(Test.Table.Get.pageButton(3)).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.pageButton(1)).toBeInTheDocument()
+            expect(table.Get.pageButton(2)).toBeInTheDocument()
+            expect(table.Get.pageButton(3)).toBeInTheDocument()
         })
 
         it('current page button has aria-current="page"', () => {
@@ -704,7 +729,7 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(2)).toHaveAttribute('aria-current', 'page')
+            expect(Test.Table('test').Get.pageButton(2)).toHaveAttribute('aria-current', 'page')
         })
 
         it('non-current page buttons do not have aria-current', () => {
@@ -719,7 +744,7 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.pageButton(1)).not.toHaveAttribute('aria-current')
+            expect(Test.Table('test').Get.pageButton(1)).not.toHaveAttribute('aria-current')
         })
 
         it('first/previous/next/last buttons have correct aria-labels', () => {
@@ -734,10 +759,11 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.firstPage()).toBeInTheDocument()
-            expect(Test.Table.Get.prevPage()).toBeInTheDocument()
-            expect(Test.Table.Get.nextPage()).toBeInTheDocument()
-            expect(Test.Table.Get.lastPage()).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.firstPage()).toBeInTheDocument()
+            expect(table.Get.prevPage()).toBeInTheDocument()
+            expect(table.Get.nextPage()).toBeInTheDocument()
+            expect(table.Get.lastPage()).toBeInTheDocument()
         })
 
         it('first/previous buttons are disabled on page 1', () => {
@@ -752,8 +778,9 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.firstPage()).toBeDisabled()
-            expect(Test.Table.Get.prevPage()).toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.firstPage()).toBeDisabled()
+            expect(table.Get.prevPage()).toBeDisabled()
         })
 
         it('next/last buttons are disabled on last page', () => {
@@ -768,8 +795,9 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.nextPage()).toBeDisabled()
-            expect(Test.Table.Get.lastPage()).toBeDisabled()
+            const table = Test.Table('test')
+            expect(table.Get.nextPage()).toBeDisabled()
+            expect(table.Get.lastPage()).toBeDisabled()
         })
 
         it('shows item range when totalItems is provided', () => {
@@ -786,8 +814,8 @@ describe('Table — Accessibility', () => {
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(screen.getByLabelText('Items 1 to 10')).toBeInTheDocument()
-            expect(screen.getByLabelText('Total items: 25')).toBeInTheDocument()
+            expect(Accessor.screen.getByLabelText('Items 1 to 10')).toBeInTheDocument()
+            expect(Accessor.screen.getByLabelText('Total items: 25')).toBeInTheDocument()
         })
     })
 
@@ -799,7 +827,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 download: { onDownload: vi.fn() },
             })
-            expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
         it('single download button uses custom label as aria-label', () => {
@@ -809,7 +837,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 download: { label: 'Export CSV', onDownload: vi.fn() },
             })
-            expect(Test.Table.Get.downloadButton('Export CSV')).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton('Export CSV')).toBeInTheDocument()
         })
 
         it('multi-option download trigger has aria-label "Download"', () => {
@@ -825,7 +853,7 @@ describe('Table — Accessibility', () => {
                     onDownload: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.downloadButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
         it('multi-option dropdown has aria-haspopup="listbox"', () => {
@@ -841,7 +869,10 @@ describe('Table — Accessibility', () => {
                     onDownload: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.downloadButton()).toHaveAttribute('aria-haspopup', 'listbox')
+            expect(Test.Table('test').Get.downloadButton()).toHaveAttribute(
+                'aria-haspopup',
+                'listbox',
+            )
         })
     })
 
@@ -854,7 +885,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 onInfo: vi.fn(),
             })
-            expect(Test.Table.Get.infoButton()).toBeInTheDocument()
+            expect(Test.Table('Info').Get.infoButton()).toBeInTheDocument()
         })
 
         it('does not render info button when onInfo is not provided', () => {
@@ -865,7 +896,7 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
             })
             expect(
-                screen.queryByRole('button', { name: 'More information' }),
+                Accessor.screen.queryByRole('button', { name: 'More information' }),
             ).not.toBeInTheDocument()
         })
     })
@@ -877,7 +908,10 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(screen.getByRole('table')).toHaveAttribute('aria-label', 'Fallback label')
+            expect(Test.Table('Fallback label').Get.table()).toHaveAttribute(
+                'aria-label',
+                'Fallback label',
+            )
         })
 
         it('table element does not have aria-label when title provides aria-labelledby', () => {
@@ -887,7 +921,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            expect(screen.getByRole('table')).not.toHaveAttribute('aria-label')
+            expect(Test.Table('Titled').Get.table()).not.toHaveAttribute('aria-label')
         })
     })
 
@@ -899,8 +933,9 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
             })
-            const table = screen.getByRole('table')
-            const descId = table.getAttribute('aria-describedby')
+            const table = Test.Table('test')
+            const tableEl = table.Get.table()
+            const descId = tableEl.getAttribute('aria-describedby')
             expect(descId).toBeTruthy()
             const descEl = document.getElementById(descId!)
             expect(descEl).toBeInTheDocument()
@@ -909,7 +944,7 @@ describe('Table — Accessibility', () => {
 
         it('table does not have aria-describedby when no description', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(screen.getByRole('table')).not.toHaveAttribute('aria-describedby')
+            expect(Test.Table('test').Get.table()).not.toHaveAttribute('aria-describedby')
         })
     })
 
@@ -924,11 +959,12 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            const toggle = Test.Table.Get.filterToggle()
+            const table = Test.Table('test')
+            const toggle = table.Get.filterToggle()
             const controlsId = toggle.getAttribute('aria-controls')
             expect(controlsId).toBeTruthy()
-            await Test.Table.Act.openFilters()
-            const panel = Test.Table.Get.filterPanel()
+            await table.Do.toggleFilters()
+            const panel = table.Get.filterPanel()
             expect(panel).toHaveAttribute('id', controlsId)
         })
 
@@ -942,8 +978,9 @@ describe('Table — Accessibility', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Act.openFilters()
-            expect(Test.Table.Get.resetFilters()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.resetFilters()).toBeInTheDocument()
         })
     })
 
@@ -955,13 +992,15 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
+            const table = Test.Table('test')
+            const btn = table.Get.actionButton()
             expect(btn).toHaveAttribute('aria-haspopup', 'true')
             expect(btn).toHaveAttribute('aria-expanded', 'false')
-            await Test.Table.Act.openActionMenu()
+            await table.Do.clickActionButton()
             expect(btn).toHaveAttribute('aria-expanded', 'true')
-            const menu = screen.getByRole('menu', { name: 'Row actions menu' })
-            expect(menu).toBeInTheDocument()
+            expect(
+                Accessor.screen.getByRole('menu', { name: 'Row actions menu' }),
+            ).toBeInTheDocument()
         })
     })
 
@@ -979,12 +1018,15 @@ describe('Table — Accessibility', () => {
                     onDownload: vi.fn(),
                 },
             })
-            const trigger = Test.Table.Get.downloadButton()
+            const table = Test.Table('test')
+            const trigger = table.Get.downloadButton()
             const controlsId = trigger.getAttribute('aria-controls')
             expect(controlsId).toBeTruthy()
-            await Test.Table.Click.downloadButton()
-            const listbox = screen.getByRole('listbox', { name: 'Download' })
-            expect(listbox).toHaveAttribute('id', controlsId)
+            await table.Do.download()
+            expect(Accessor.screen.getByRole('listbox', { name: 'Download' })).toHaveAttribute(
+                'id',
+                controlsId,
+            )
         })
     })
 
@@ -996,10 +1038,11 @@ describe('Table — Accessibility', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
-            const user = await Test.Table.Act.openActionMenu()
+            const table = Test.Table('test')
+            const btn = table.Get.actionButton()
+            await table.Do.clickActionButton()
             expect(btn).toHaveAttribute('aria-expanded', 'true')
-            await user.keyboard('{Escape}')
+            await table.Do.keyboard('{Escape}')
             expect(btn).toHaveAttribute('aria-expanded', 'false')
         })
 
@@ -1016,10 +1059,11 @@ describe('Table — Accessibility', () => {
                     onDownload: vi.fn(),
                 },
             })
-            const trigger = Test.Table.Get.downloadButton()
-            const user = await Test.Table.Click.downloadButton()
+            const table = Test.Table('test')
+            const trigger = table.Get.downloadButton()
+            await table.Do.download()
             expect(trigger).toHaveAttribute('aria-expanded', 'true')
-            await user.keyboard('{Escape}')
+            await table.Do.keyboard('{Escape}')
             expect(trigger).toHaveAttribute('aria-expanded', 'false')
         })
     })

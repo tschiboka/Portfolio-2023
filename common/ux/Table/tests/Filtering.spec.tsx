@@ -1,5 +1,4 @@
-import { Test } from '@common/ux/Test'
-import { screen } from '@testing-library/react'
+import { Test, Accessor } from '@common/ux/Test'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 
@@ -15,7 +14,8 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            expect(Test.Table.Get.filterToggle()).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Get.filterToggle()).toBeInTheDocument()
         })
 
         it('does not show filter panel initially', () => {
@@ -28,7 +28,8 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            expect(Test.Table.Query.filterPanel()).not.toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Has.filterPanel()).toBe(false)
         })
 
         it('shows filter panel after clicking toggle', async () => {
@@ -41,8 +42,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(Test.Table.Get.filterPanel()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.filterPanel()).toBeInTheDocument()
         })
 
         it('hides filter panel when toggled off', async () => {
@@ -55,9 +57,10 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            await Test.Table.Click.filterToggle()
-            expect(Test.Table.Query.filterPanel()).not.toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await table.Do.toggleFilters()
+            expect(table.Has.filterPanel()).toBe(false)
         })
 
         it('adds active class when filter panel is open', async () => {
@@ -70,8 +73,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(Test.Table.Get.filterToggle()).toHaveClass('active')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(table.Get.filterToggle()).toHaveClass('active')
         })
     })
 
@@ -93,8 +97,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            const input = screen.getByLabelText('Name')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            const input = Accessor.screen.getByLabelText('Name')
             expect(input).toHaveAttribute('type', 'text')
             expect(input).toHaveAttribute('placeholder', 'Enter name…')
         })
@@ -110,9 +115,10 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.type(screen.getByLabelText('Name'), 'Alpha')
-            await Test.Table.Act.applyFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.type(Accessor.screen.getByLabelText('Name'), 'Alpha')
+            await table.Do.applyFilters()
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ name: 'Alpha' }))
         })
     })
@@ -128,8 +134,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            const input = screen.getByLabelText('Min Value')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            const input = Accessor.screen.getByLabelText('Min Value')
             expect(input).toHaveAttribute('type', 'number')
             expect(input).toHaveAttribute('min', '0')
             expect(input).toHaveAttribute('max', '100')
@@ -146,9 +153,10 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.type(screen.getByLabelText('Min'), '42')
-            await Test.Table.Act.applyFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.type(Accessor.screen.getByLabelText('Min'), '42')
+            await table.Do.applyFilters()
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ min: 42 }))
         })
     })
@@ -164,8 +172,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(screen.getByLabelText('Search')).toHaveAttribute('type', 'search')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(Accessor.screen.getByLabelText('Search')).toHaveAttribute('type', 'search')
         })
     })
 
@@ -188,8 +197,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            const input = screen.getByLabelText('From')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            const input = Accessor.screen.getByLabelText('From')
             expect(input).toHaveAttribute('type', 'date')
             expect(input).toHaveAttribute('min', '2020-01-01')
             expect(input).toHaveAttribute('max', '2026-12-31')
@@ -207,8 +217,12 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(screen.getByLabelText('Active only')).toHaveAttribute('type', 'checkbox')
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(Accessor.screen.getByLabelText('Active only')).toHaveAttribute(
+                'type',
+                'checkbox',
+            )
         })
 
         it('calls onFilter with boolean value', async () => {
@@ -222,9 +236,10 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.click(screen.getByLabelText('Active only'))
-            await Test.Table.Act.applyFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.click(Accessor.screen.getByLabelText('Active only'))
+            await table.Do.applyFilters()
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ active: true }))
         })
 
@@ -239,11 +254,12 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            const checkbox = screen.getByLabelText('Active only')
-            await user.click(checkbox)
-            await user.click(checkbox)
-            await Test.Table.Act.applyFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            const checkbox = Accessor.screen.getByLabelText('Active only')
+            await Accessor.user.click(checkbox)
+            await Accessor.user.click(checkbox)
+            await table.Do.applyFilters()
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ active: false }))
         })
     })
@@ -269,8 +285,9 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(screen.getByRole('button', { name: 'Status' })).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(Accessor.screen.getByRole('button', { name: 'Status' })).toBeInTheDocument()
         })
 
         it('shows options including "All" when dropdown is opened', async () => {
@@ -293,11 +310,12 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.click(screen.getByRole('button', { name: 'Status' }))
-            expect(screen.getByRole('option', { name: 'All' })).toBeInTheDocument()
-            expect(screen.getByRole('option', { name: 'Active' })).toBeInTheDocument()
-            expect(screen.getByRole('option', { name: 'Inactive' })).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.click(Accessor.screen.getByRole('button', { name: 'Status' }))
+            expect(Accessor.screen.getByRole('option', { name: 'All' })).toBeInTheDocument()
+            expect(Accessor.screen.getByRole('option', { name: 'Active' })).toBeInTheDocument()
+            expect(Accessor.screen.getByRole('option', { name: 'Inactive' })).toBeInTheDocument()
         })
     })
 
@@ -316,10 +334,11 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            await Test.Table.Click.filterToggle()
-            expect(screen.getByLabelText('Name')).toBeInTheDocument()
-            expect(screen.getByLabelText('Min')).toBeInTheDocument()
-            expect(screen.getByLabelText('Active')).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            expect(Accessor.screen.getByLabelText('Name')).toBeInTheDocument()
+            expect(Accessor.screen.getByLabelText('Min')).toBeInTheDocument()
+            expect(Accessor.screen.getByLabelText('Active')).toBeInTheDocument()
         })
 
         it('onFilter receives all current filter values', async () => {
@@ -336,9 +355,10 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.type(screen.getByLabelText('Name'), 'X')
-            await Test.Table.Act.applyFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.type(Accessor.screen.getByLabelText('Name'), 'X')
+            await table.Do.applyFilters()
             // The onFilter receives both keys
             // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as Record<
@@ -361,9 +381,10 @@ describe('Table — Filtering', () => {
                     onFilter: vi.fn(),
                 },
             })
-            expect(Test.Table.Query.resetFilters()).not.toBeInTheDocument()
-            await Test.Table.Click.filterToggle()
-            expect(Test.Table.Get.resetFilters()).toBeInTheDocument()
+            const table = Test.Table('test')
+            expect(table.Has.resetFilters()).toBe(false)
+            await table.Do.toggleFilters()
+            expect(table.Get.resetFilters()).toBeInTheDocument()
         })
 
         it('resets filter values when Reset is clicked', async () => {
@@ -377,9 +398,10 @@ describe('Table — Filtering', () => {
                     onFilter,
                 },
             })
-            const user = await Test.Table.Click.filterToggle()
-            await user.type(screen.getByLabelText('Name'), 'hello')
-            await Test.Table.Click.resetFilters()
+            const table = Test.Table('test')
+            await table.Do.toggleFilters()
+            await Accessor.user.type(Accessor.screen.getByLabelText('Name'), 'hello')
+            await table.Do.resetFilters()
             // After reset, onFilter is called with default values
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ name: '' }))
         })

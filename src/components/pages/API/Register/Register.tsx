@@ -2,7 +2,7 @@ import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import './Register.scss'
-import LoadingIndicator from '../../../sharedComponents/LoadingIndicator/LoadingIndicator'
+import { Form, LoadingIndicator } from '@common/ux'
 import { registrationSchema } from './Register.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegistrationFormData } from './Register.types'
@@ -10,7 +10,6 @@ import { useMutation } from '@tanstack/react-query'
 import { AxiosError, AxiosResponse } from 'axios'
 import { registerUserRequest } from './Register.query'
 import { ErrorResponse, PostUserResponse } from '@common/types'
-import { Form } from '@common/ux'
 
 interface IndexProps {
     path: string

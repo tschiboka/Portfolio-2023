@@ -12,12 +12,12 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            expect(Test.Table.Get.actionButton()).toBeInTheDocument()
+            expect(Test.Table('test').Get.actionButton()).toBeInTheDocument()
         })
 
         it('does not render action column when no actions', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(Test.Table.Query.actionButton()).not.toBeInTheDocument()
+            expect(Test.Table('test').Has.actionButton()).toBe(false)
         })
 
         it('renders one action button per row', () => {
@@ -27,7 +27,7 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            expect(Test.Table.Get.actionButtons()).toHaveLength(rows.length)
+            expect(Test.Table('test').Get.actionButtons()).toHaveLength(rows.length)
         })
     })
 
@@ -40,7 +40,8 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit', onClick }],
             })
-            await Test.Table.Act.clickAction('Edit')
+            const table = Test.Table('test')
+            await table.Do.clickAction('Edit')
             expect(onClick).toHaveBeenCalledTimes(1)
             expect(onClick).toHaveBeenCalledWith(
                 expect.objectContaining({
@@ -57,8 +58,9 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit', onClick: vi.fn() }],
             })
-            await Test.Table.Act.clickAction('Edit')
-            expect(Test.Table.Query.menu()).not.toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickAction('Edit')
+            expect(table.Has.menu()).toBe(false)
         })
     })
 
@@ -77,7 +79,8 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
-            await Test.Table.Act.clickAction('View')
+            const table = Test.Table('test')
+            await table.Do.clickAction('View')
             // jsdom doesn't navigate, but we can check the location was set
             expect(window.location.href).toContain('alpha')
             // Restore
@@ -102,9 +105,10 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
+            const table = Test.Table('test')
             // First row — action filtered out (active)
-            await Test.Table.Act.openActionMenu(0)
-            expect(Test.Table.Query.menuItem('Activate')).not.toBeInTheDocument()
+            await table.Do.clickActionButton(0)
+            expect(table.Has.menuItem('Activate')).toBe(false)
         })
 
         it('shows action when filter returns true', async () => {
@@ -123,9 +127,10 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
+            const table = Test.Table('test')
             // Second row — action visible (inactive)
-            await Test.Table.Act.openActionMenu(1)
-            expect(Test.Table.Get.menuItem('Activate')).toBeInTheDocument()
+            await table.Do.clickActionButton(1)
+            expect(table.Get.menuItem('Activate')).toBeInTheDocument()
         })
     })
 
@@ -143,8 +148,9 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menuItem('Delete')).toBeDisabled()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menuItem('Delete')).toBeDisabled()
         })
 
         it('does not disable the action item when isDisabled returns false', async () => {
@@ -160,8 +166,9 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menuItem('Delete')).not.toBeDisabled()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menuItem('Delete')).not.toBeDisabled()
         })
     })
 
@@ -179,7 +186,7 @@ describe('Table — Actions', () => {
                 ],
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            expect(Test.Table.Get.actionButton()).toBeDisabled()
+            expect(Test.Table('test').Get.actionButton()).toBeDisabled()
         })
 
         it('does not disable action button when isActionDisabled returns false', () => {
@@ -195,7 +202,7 @@ describe('Table — Actions', () => {
                 ],
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            expect(Test.Table.Get.actionButton()).not.toBeDisabled()
+            expect(Test.Table('test').Get.actionButton()).not.toBeDisabled()
         })
     })
 
@@ -209,8 +216,9 @@ describe('Table — Actions', () => {
                     columns: basicColumns,
                     actions: [{ id: 'a', label: 'Action', variant }],
                 })
-                await Test.Table.Act.openActionMenu()
-                const item = Test.Table.Get.menuItem('Action')
+                const table = Test.Table('test')
+                await table.Do.clickActionButton()
+                const item = table.Get.menuItem('Action')
                 expect(item).toHaveClass(variant)
             },
         )
@@ -224,8 +232,9 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menu()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menu()).toBeInTheDocument()
         })
 
         it('closes the menu on second click', async () => {
@@ -235,10 +244,10 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            const btn = Test.Table.Get.actionButton()
-            const user = await Test.Table.Click.actionButton()
-            await user.click(btn)
-            expect(Test.Table.Query.menu()).not.toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            await table.Do.clickActionButton()
+            expect(table.Has.menu()).toBe(false)
         })
 
         it('renders multiple actions in the dropdown', async () => {
@@ -252,7 +261,8 @@ describe('Table — Actions', () => {
                     { id: 'view', label: 'View' },
                 ],
             })
-            await Test.Table.Act.openActionMenu()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
             expect(screen.getAllByRole('menuitem')).toHaveLength(3)
         })
 
@@ -269,7 +279,8 @@ describe('Table — Actions', () => {
                     },
                 ],
             })
-            await Test.Table.Act.openActionMenu()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
             expect(screen.getByTestId('edit-icon')).toBeInTheDocument()
         })
 
@@ -280,10 +291,11 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menu()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menu()).toBeInTheDocument()
             fireEvent(window, new Event('resize'))
-            expect(Test.Table.Query.menu()).not.toBeInTheDocument()
+            expect(table.Has.menu()).toBe(false)
         })
 
         it('closes the menu on scroll', async () => {
@@ -293,10 +305,11 @@ describe('Table — Actions', () => {
                 columns: basicColumns,
                 actions: [{ id: 'edit', label: 'Edit' }],
             })
-            await Test.Table.Act.openActionMenu()
-            expect(Test.Table.Get.menu()).toBeInTheDocument()
+            const table = Test.Table('test')
+            await table.Do.clickActionButton()
+            expect(table.Get.menu()).toBeInTheDocument()
             fireEvent.scroll(window)
-            expect(Test.Table.Query.menu()).not.toBeInTheDocument()
+            expect(table.Has.menu()).toBe(false)
         })
     })
 })

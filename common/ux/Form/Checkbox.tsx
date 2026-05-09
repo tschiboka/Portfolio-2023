@@ -36,7 +36,11 @@ export const Checkbox = <T extends FieldValues>({
                         }}
                     />
                     <label htmlFor={name}>{label}</label>
-                    {fieldState.error && <p className="error-msg">*{fieldState.error.message}</p>}
+                    {fieldState.error && (
+                        <p className="error-msg" role="alert">
+                            *{fieldState.error.message}
+                        </p>
+                    )}
                 </div>
             )}
         />

@@ -25,7 +25,9 @@ export type RequestBuilderResult<T extends JsonBodyType> = {
     ) => RequestBuilderResult<T>
 }
 
-const BASE_URL = 'http://localhost:5000'
+export type Buildable = Pick<RequestBuilderResult<JsonBodyType>, 'build'>
+
+const BASE_URL = process.env.VITE_API_BASE_URL ?? 'http://localhost:5000'
 
 export const RequestBuilder = <T extends JsonBodyType>(
     options: RequestBuilderOptions<T>,

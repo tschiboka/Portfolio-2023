@@ -22,13 +22,14 @@ const {
 } = FormExports
 const FormElement = FormExports
 
-// ═════════════════════════════════════════════════════════════════════════════
-// Wrappers
-// ═════════════════════════════════════════════════════════════════════════════
+export const FORM_LABEL = 'Test form'
+
+const renderInForm = (ui: React.ReactElement) =>
+    render(<FormElement ariaLabel={FORM_LABEL}>{ui}</FormElement>)
 
 const InputWrapper = (props: Partial<Parameters<typeof Input<FormValues>>[0]>) => {
     const { control } = useForm<FormValues>({ defaultValues: { text: '' } })
-    return <Input name="text" control={control} type="text" {...props} />
+    return <Input name="text" control={control} type="text" ariaLabel="Text" {...props} />
 }
 
 const PasswordWrapper = ({
@@ -47,6 +48,7 @@ const PasswordWrapper = ({
             addRevealPasswordIcon
             revealPassword={revealPassword}
             setRevealPassword={setRevealPassword}
+            ariaLabel="Password"
             placeholder="Enter password"
         />
     )
@@ -54,15 +56,27 @@ const PasswordWrapper = ({
 
 const TextAreaWrapper = (props: Partial<Parameters<typeof TextArea<FormValues>>[0]>) => {
     const { control } = useForm<FormValues>({ defaultValues: { description: '' } })
-    return <TextArea name="description" control={control} {...props} />
+    return <TextArea name="description" control={control} ariaLabel="Description" {...props} />
 }
 
 const RadioButtonWrapper = ({ onChange = vi.fn() }: { onChange?: () => void }) => {
     const { control } = useForm<FormValues>({ defaultValues: { toggle: false } })
     return (
         <div>
-            <RadioButton name="toggle" control={control} value={false} onChange={onChange} />
-            <RadioButton name="toggle" control={control} value={true} onChange={onChange} />
+            <RadioButton
+                name="toggle"
+                control={control}
+                value={false}
+                onChange={onChange}
+                ariaLabel="Option A"
+            />
+            <RadioButton
+                name="toggle"
+                control={control}
+                value={true}
+                onChange={onChange}
+                ariaLabel="Option B"
+            />
         </div>
     )
 }
@@ -102,6 +116,7 @@ const SearchInputWrapper = ({
                 setValue('option', opt.label)
                 onSelect(opt)
             }}
+            ariaLabel="Option"
             placeholder="Select an option"
             {...props}
         />
@@ -110,12 +125,12 @@ const SearchInputWrapper = ({
 
 const DateInputWrapper = (props: Partial<Parameters<typeof DateInput<FormValues>>[0]>) => {
     const { control } = useForm<FormValues>({ defaultValues: { dob: '' } })
-    return <DateInput name="dob" control={control} {...props} />
+    return <DateInput name="dob" control={control} ariaLabel="DOB" {...props} />
 }
 
 const DateInputWithValueWrapper = (props: Partial<Parameters<typeof DateInput<FormValues>>[0]>) => {
     const { control } = useForm<FormValues>({ defaultValues: { dob: '1990-05-15' } })
-    return <DateInput name="dob" control={control} {...props} />
+    return <DateInput name="dob" control={control} ariaLabel="DOB" {...props} />
 }
 
 const InputWithErrorWrapper = (props: Partial<Parameters<typeof Input<FormValues>>[0]>) => {
@@ -123,17 +138,26 @@ const InputWithErrorWrapper = (props: Partial<Parameters<typeof Input<FormValues
     React.useEffect(() => {
         setError('text', { message: 'Field is required' })
     }, [setError])
-    return <Input name="text" control={control} type="text" placeholder="Enter text" {...props} />
+    return (
+        <Input
+            name="text"
+            control={control}
+            type="text"
+            ariaLabel="Text"
+            placeholder="Enter text"
+            {...props}
+        />
+    )
 }
 
 const InputDateWithValueWrapper = () => {
     const { control } = useForm<FormValues>({ defaultValues: { dob: '1990-05-15' } })
-    return <Input name="dob" control={control} type="date" />
+    return <Input name="dob" control={control} type="date" ariaLabel="Date of birth" />
 }
 
 const InputDateEmptyWrapper = () => {
     const { control } = useForm<FormValues>({ defaultValues: { dob: '' } })
-    return <Input name="dob" control={control} type="date" />
+    return <Input name="dob" control={control} type="date" ariaLabel="Date of birth" />
 }
 
 const TextAreaWithErrorWrapper = (props: Partial<Parameters<typeof TextArea<FormValues>>[0]>) => {
@@ -142,7 +166,13 @@ const TextAreaWithErrorWrapper = (props: Partial<Parameters<typeof TextArea<Form
         setError('description', { message: 'Too long' })
     }, [setError])
     return (
-        <TextArea name="description" control={control} placeholder="Enter description" {...props} />
+        <TextArea
+            name="description"
+            control={control}
+            ariaLabel="Description"
+            placeholder="Enter description"
+            {...props}
+        />
     )
 }
 
@@ -151,7 +181,7 @@ const DateInputWithErrorWrapper = (props: Partial<Parameters<typeof DateInput<Fo
     React.useEffect(() => {
         setError('dob', { message: 'Date is required' })
     }, [setError])
-    return <DateInput name="dob" control={control} {...props} />
+    return <DateInput name="dob" control={control} ariaLabel="DOB" {...props} />
 }
 
 const SearchInputWithErrorWrapper = (
@@ -167,6 +197,7 @@ const SearchInputWithErrorWrapper = (
             control={control}
             options={testOptions}
             onSelect={props.onSelectSpy ?? vi.fn()}
+            ariaLabel="Option"
             placeholder="Select an option"
             {...props}
         />
@@ -197,33 +228,34 @@ const RadioGroupWithErrorWrapper = () => {
 
 export const Set = {
     input: (props?: Partial<Parameters<typeof Input<FormValues>>[0]>) =>
-        render(<InputWrapper {...props} />),
+        renderInForm(<InputWrapper {...props} />),
     password: (props?: {
         revealPassword?: boolean
         setRevealPassword?: (reveal: boolean) => void
-    }) => render(<PasswordWrapper {...props} />),
+    }) => renderInForm(<PasswordWrapper {...props} />),
     textArea: (props?: Partial<Parameters<typeof TextArea<FormValues>>[0]>) =>
-        render(<TextAreaWrapper {...props} />),
-    radioButton: (props?: { onChange?: () => void }) => render(<RadioButtonWrapper {...props} />),
+        renderInForm(<TextAreaWrapper {...props} />),
+    radioButton: (props?: { onChange?: () => void }) =>
+        renderInForm(<RadioButtonWrapper {...props} />),
     checkbox: (
         props?: Partial<Parameters<typeof Checkbox<FormValues>>[0]> & {
             onChange?: (checked: boolean) => void
         },
-    ) => render(<CheckboxWrapper {...props} />),
+    ) => renderInForm(<CheckboxWrapper {...props} />),
     searchInput: (
         props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
             onSelectSpy?: Mock
         },
-    ) => render(<SearchInputWrapper {...props} />),
+    ) => renderInForm(<SearchInputWrapper {...props} />),
     dateInput: (props?: Partial<Parameters<typeof DateInput<FormValues>>[0]>) =>
-        render(<DateInputWrapper {...props} />),
+        renderInForm(<DateInputWrapper {...props} />),
     dateInputWithValue: (props?: Partial<Parameters<typeof DateInput<FormValues>>[0]>) =>
-        render(<DateInputWithValueWrapper {...props} />),
-    label: (...args: Parameters<typeof Label>) => render(<Label {...args[0]} />),
+        renderInForm(<DateInputWithValueWrapper {...props} />),
+    label: (...args: Parameters<typeof Label>) => renderInForm(<Label {...args[0]} />),
     button: (props?: Partial<Parameters<typeof Button>[0]>) =>
-        render(<Button {...{ children: 'Click me', ...props }} />),
+        renderInForm(<Button {...{ children: 'Click me', ...props }} />),
     buttonGroup: (props?: Partial<Parameters<typeof ButtonGroup>[0]>) =>
-        render(
+        renderInForm(
             <ButtonGroup
                 {...{
                     children: (
@@ -237,7 +269,7 @@ export const Set = {
             />,
         ),
     fieldset: (props?: Partial<Parameters<typeof Fieldset>[0]>) =>
-        render(<Fieldset {...{ children: <span>content</span>, ...props }} />),
+        renderInForm(<Fieldset {...{ children: <span>content</span>, ...props }} />),
     formElement: (
         props: Omit<Parameters<typeof FormElement>[0], 'children'> & {
             children: React.ReactNode
@@ -246,18 +278,18 @@ export const Set = {
 
     // Error state helpers
     inputWithError: (props?: Partial<Parameters<typeof Input<FormValues>>[0]>) =>
-        render(<InputWithErrorWrapper {...props} />),
-    inputDateWithValue: () => render(<InputDateWithValueWrapper />),
-    inputDateEmpty: () => render(<InputDateEmptyWrapper />),
+        renderInForm(<InputWithErrorWrapper {...props} />),
+    inputDateWithValue: () => renderInForm(<InputDateWithValueWrapper />),
+    inputDateEmpty: () => renderInForm(<InputDateEmptyWrapper />),
     textAreaWithError: (props?: Partial<Parameters<typeof TextArea<FormValues>>[0]>) =>
-        render(<TextAreaWithErrorWrapper {...props} />),
+        renderInForm(<TextAreaWithErrorWrapper {...props} />),
     dateInputWithError: (props?: Partial<Parameters<typeof DateInput<FormValues>>[0]>) =>
-        render(<DateInputWithErrorWrapper {...props} />),
+        renderInForm(<DateInputWithErrorWrapper {...props} />),
     searchInputWithError: (
         props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
             onSelectSpy?: Mock
         },
-    ) => render(<SearchInputWithErrorWrapper {...props} />),
-    checkboxWithError: () => render(<CheckboxWithErrorWrapper />),
-    radioGroupWithError: () => render(<RadioGroupWithErrorWrapper />),
+    ) => renderInForm(<SearchInputWithErrorWrapper {...props} />),
+    checkboxWithError: () => renderInForm(<CheckboxWithErrorWrapper />),
+    radioGroupWithError: () => renderInForm(<RadioGroupWithErrorWrapper />),
 }

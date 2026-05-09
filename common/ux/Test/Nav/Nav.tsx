@@ -1,6 +1,6 @@
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { Accessor } from '../Accessor/Accessor'
 import { AppContextProvider } from '../../../../src/context/AppContext/App.context'
 import { AppContextValues } from '../../../../src/context/AppContext/AppContext.types'
 import { SessionContext } from '../../../../src/context/SessionContext/Session.context'
@@ -16,49 +16,54 @@ const mockSessionValue = {
     setSession: vi.fn(),
 }
 
-export const Nav = {
-    Get: {
-        header: () => screen.getByRole('banner'),
-        linksList: () => document.querySelector('.nav_links'),
-        burger: (title: string) => screen.getByTitle(title),
-        text: (text: string | RegExp) => screen.getByText(text),
-    },
+class NavAccessor extends Accessor {
+    get Get() {
+        return {
+            ...super.Get,
+            linksList: () => this.element.querySelector('.nav_links'),
+            burger: (title: string) => this.scope.getByTitle(title),
+        }
+    }
 
-    Query: {
-        header: () => screen.queryByRole('banner'),
-        linksList: () => document.querySelector('.nav_links'),
-        text: (text: string | RegExp) => screen.queryByText(text),
-    },
-
-    Click: {
-        burger: async (title: string) => {
-            const user = userEvent.setup()
-            await user.click(Nav.Get.burger(title))
-            return user
-        },
-        text: async (text: string | RegExp) => {
-            const user = userEvent.setup()
-            await user.click(Nav.Get.text(text))
-            return user
-        },
-    },
-
-    Set: {
-        mock: (props: NavProps, appContext?: Partial<AppContextValues>) =>
-            render(
-                <AppContextProvider initialState={appContext}>
-                    <NavComponent {...props} />
-                </AppContextProvider>,
-            ),
-        mockMenu: (props: NavMenuProps, appContext?: Partial<AppContextValues>) =>
-            render(
-                <SessionContext.Provider value={mockSessionValue}>
-                    <AppContextProvider initialState={appContext}>
-                        <MemoryRouter>
-                            <NavMenuComponent {...props} />
-                        </MemoryRouter>
-                    </AppContextProvider>
-                </SessionContext.Provider>,
-            ),
-    },
+    get Do() {
+        return {
+            ...super.Do,
+            toggle: async (title: string) => {
+                await Accessor.user.click(this.Get.burger(title))
+            },
+            clickLink: async (text: string | RegExp) => {
+                await Accessor.user.click(this.Get.byText(text))
+            },
+        }
+    }
 }
+
+// Set is static (renders the component), Get/Do are instance-level (require a rendered element)
+export const Nav = Object.assign(
+    (label?: string): NavAccessor => {
+        const element = label
+            ? Accessor.screen.getByRole('banner', { name: label })
+            : Accessor.screen.getByRole('banner')
+        return new NavAccessor(element, label ? `Nav('${label}')` : 'Nav()')
+    },
+    {
+        Set: {
+            mock: (props: NavProps, appContext?: Partial<AppContextValues>) =>
+                render(
+                    <AppContextProvider initialState={appContext}>
+                        <NavComponent {...props} />
+                    </AppContextProvider>,
+                ),
+            mockMenu: (props: NavMenuProps, appContext?: Partial<AppContextValues>) =>
+                render(
+                    <SessionContext.Provider value={mockSessionValue}>
+                        <AppContextProvider initialState={appContext}>
+                            <MemoryRouter>
+                                <NavMenuComponent {...props} />
+                            </MemoryRouter>
+                        </AppContextProvider>
+                    </SessionContext.Provider>,
+                ),
+        },
+    },
+)
