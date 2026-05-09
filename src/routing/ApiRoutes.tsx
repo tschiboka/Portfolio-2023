@@ -48,7 +48,7 @@ export const ApiRoutes = {
     Index: {
         name: 'Index',
         path: '/api/index',
-        element: <Index path="/api/index" pageName="index" />,
+        element: <Index path="/api/index" />,
     },
     EmailVerification: {
         name: 'Email Verification',

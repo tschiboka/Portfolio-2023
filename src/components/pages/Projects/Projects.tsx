@@ -22,7 +22,7 @@ export interface Project {
     readMoreLink?: string
 }
 
-const Projects = ({ pageName, path }: Props) => {
+const Projects = ({ pageName }: Props) => {
     const [filteredLanguage, setFilterLanguage] = useState<string>('')
 
     let projects = getProjects()

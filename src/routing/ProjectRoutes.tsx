@@ -15,7 +15,7 @@ const LevelCreator = lazy(() =>
 export const ProjectRoutes = [
     {
         path: '/projects/xmas2025',
-        element: <Xmas2025 pageName="xmas2025" path="/projects/xmas2025" />,
+        element: <Xmas2025 />,
     },
     {
         path: '/projects/typist',

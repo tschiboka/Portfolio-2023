@@ -5,10 +5,9 @@ import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 
 interface Props {
     pageName: string
-    path: string
 }
 
-const Home = ({ pageName, path }: Props) => {
+const Home = ({ pageName }: Props) => {
     return (
         <Screen
             title="Tivadar Debnar | Home"

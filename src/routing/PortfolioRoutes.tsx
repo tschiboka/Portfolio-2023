@@ -21,7 +21,7 @@ import { Clock } from '../components/sharedComponents/Clock/Clock'
 export const PortfolioRoutes = [
     {
         path: '/',
-        element: <Home pageName="Home" path="/" />,
+        element: <Home pageName="Home" />,
     },
     {
         path: '/about',

@@ -7,7 +7,6 @@ import References from '../References/References'
 import { getReferenceList } from '../../../articles/references'
 import BlogTimeStamp from '../../sharedComponents/BlogTimeStamp/BlogTimeStamp'
 import Disclaimer from '../Disclaimer/Disclaimer'
-import Footer from '../../sharedComponents/Footer/Footer'
 
 // Other Assets
 import { blogArticles } from '../../../articles/articles'

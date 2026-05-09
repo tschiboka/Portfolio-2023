@@ -4,7 +4,7 @@ import { Editor } from './Editor/Editor'
 import { TypistContextProvider } from './Typist.context'
 import { HeadsUpDisplay } from './HeadsUpDisplay/HeadsUpDisplay'
 
-export const Typist = ({ pageName, path }: PageContainerProps) => {
+export const Typist = ({ pageName }: PageContainerProps) => {
     return (
         <TypistContextProvider>
             <Screen

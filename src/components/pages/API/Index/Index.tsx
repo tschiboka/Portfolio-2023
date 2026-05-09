@@ -5,10 +5,9 @@ import { GuestIndex } from './GuestIndex'
 
 interface IndexProps {
     path: string
-    pageName: string
 }
 
-const Index = ({ path, pageName }: IndexProps) => {
+const Index = ({ path }: IndexProps) => {
     return (
         <Screen
             title={'Tivadar Debnar | Index'}
