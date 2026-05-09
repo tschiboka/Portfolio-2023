@@ -1,4 +1,3 @@
-import Footer from '../../sharedComponents/Footer/Footer'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import './PrivacyPolicy.scss'
@@ -72,7 +71,6 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
                     using our website, you consent to the terms outlined in this Privacy Policy.
                 </p>
             </main>
-            <Footer path={path} />
         </Screen>
     )
 }

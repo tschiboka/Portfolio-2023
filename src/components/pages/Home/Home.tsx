@@ -1,6 +1,5 @@
 import Welcome from './Welcome/Welcome'
 import Intro from './Intro/Intro'
-import Footer from '../../sharedComponents/Footer/Footer'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 
@@ -22,7 +21,6 @@ const Home = ({ pageName, path }: Props) => {
             <main>
                 <Intro />
             </main>
-            <Footer pageName={pageName} path={path} />
         </Screen>
     )
 }

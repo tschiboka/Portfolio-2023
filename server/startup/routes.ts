@@ -20,7 +20,7 @@ import word_duel_arena_words from '../projects/word_duel_arena/transport/http/ro
 export default function (app: Application) {
     // Profile website routes
     app.use('/', index)
-    app.use('/message', message)
+    app.use('/api/message', message)
     app.use('/visit', visit)
     app.use('/like', like)
     app.use('/api/session', session)

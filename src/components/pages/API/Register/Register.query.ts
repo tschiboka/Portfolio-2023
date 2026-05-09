@@ -2,9 +2,15 @@ import { RegistrationFormData } from './Register.types'
 import { omit } from 'ramda'
 import { PostUserResponse } from '@common/types'
 import { Paths } from '@common/utils'
-import { RequestBuilder } from '@common/utils/Query/Query'
+import { useApi } from '@common/utils/Query/Query'
 
-export const registerUserRequest = async (data: RegistrationFormData) => {
-    const user = omit(['passwordConfirmation'])(data)
-    return new RequestBuilder(Paths.Api.RegisterUser).build().post<PostUserResponse>(user)
+export const useRegisterApi = () => {
+    const registerApi = useApi(Paths.Api.RegisterUser).build()
+
+    return {
+        registerFormRequest: (data: RegistrationFormData) => {
+            const user = omit(['passwordConfirmation'])(data)
+            return registerApi.post<PostUserResponse>(user)
+        },
+    }
 }

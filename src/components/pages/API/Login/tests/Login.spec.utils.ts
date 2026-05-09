@@ -3,7 +3,7 @@ export const LoginLabels = {
     fields: { email: 'Email', password: 'Password' },
     buttons: {
         login: /Login/,
-        register: /Register User/,
+        register: /Register/,
         togglePassword: /Toggle password visibility/,
     },
     errors: { invalidCredentials: 'Invalid email or password' },

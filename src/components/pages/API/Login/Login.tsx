@@ -115,7 +115,7 @@ const Login = ({ path, pageName }: LoginProps) => {
                                 variant="secondary"
                                 onClick={() => navigate('/api/register')}
                             >
-                                Register User
+                                Register
                             </Form.Button>
                         )}
                         <Form.Button type="submit">Login</Form.Button>

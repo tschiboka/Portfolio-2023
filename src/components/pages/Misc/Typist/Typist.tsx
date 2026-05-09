@@ -1,4 +1,3 @@
-import Footer from '../../../sharedComponents/Footer/Footer'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
 import { Editor } from './Editor/Editor'
@@ -20,7 +19,6 @@ export const Typist = ({ pageName, path }: PageContainerProps) => {
                     <HeadsUpDisplay />
                     <Editor />
                 </main>
-                <Footer pageName={pageName} path={path} />
             </Screen>
         </TypistContextProvider>
     )

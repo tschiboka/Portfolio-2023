@@ -1,6 +1,5 @@
 import ProjectCard from './ProjectCard/ProjectCard'
 import ProjectFilter from './ProjectFilter/ProjectFilter'
-import Footer from '../../sharedComponents/Footer/Footer'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { getProjects } from './getProjects'
 import './Projects.scss'
@@ -65,7 +64,6 @@ const Projects = ({ pageName, path }: Props) => {
                     ))}
                 </section>
             </main>
-            <Footer pageName={pageName} path={path} />
         </Screen>
     )
 }

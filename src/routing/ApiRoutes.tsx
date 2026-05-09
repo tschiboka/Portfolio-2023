@@ -43,7 +43,7 @@ export const ApiRoutes = {
     Register: {
         name: 'Register',
         path: '/api/register',
-        element: <Register path="/api/register" />,
+        element: <Register path="/api/register" pageName="register" />,
     },
     Index: {
         name: 'Index',

@@ -2,7 +2,6 @@ import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { AccessGuard } from '@common/utils/AccessGuard'
 import { AdminIndex } from './AdminIndex'
 import { GuestIndex } from './GuestIndex'
-import Footer from '../../../sharedComponents/Footer/Footer'
 
 interface IndexProps {
     path: string
@@ -18,6 +17,7 @@ const Index = ({ path, pageName }: IndexProps) => {
             loginRequired
             variant="api"
             pageName="Home"
+            footerProps={{ info: <p>Xmas edition - 2025</p> }}
         >
             <main>
                 <h1>Home</h1>
@@ -42,7 +42,6 @@ const Index = ({ path, pageName }: IndexProps) => {
                     <GuestIndex />
                 </AccessGuard>
             </main>
-            <Footer pageName={pageName} path={path} info={<p>Xmas edition - 2025</p>} />
         </Screen>
     )
 }

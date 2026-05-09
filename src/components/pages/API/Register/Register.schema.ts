@@ -7,19 +7,11 @@ export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.ob
         .required()
         .min(5)
         .max(20)
-        .matches(/^[a-z '-]+$/ig, { 
-            message: "Only letters, space ' and - allowed."
+        .matches(/^[a-z '-]+$/gi, {
+            message: "Only letters, space ' and - allowed.",
         }),
-    userName: yup
-        .string()
-        .required()
-        .min(5)
-        .max(20),
-    email: yup
-        .string()
-        .required()
-        .min(8)
-        .max(255),
+    userName: yup.string().required().min(5).max(20),
+    email: yup.string().required().min(8).max(255),
     password: yup
         .string()
         .required()
@@ -28,9 +20,12 @@ export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.ob
         .matches(/^(?=.*[a-z])/, 'Must contain at least one lowercase character')
         .matches(/^(?=.*[A-Z])/, 'Must contain at least one uppercase character')
         .matches(/^(?=.*[0-9])/, 'Must contain at least one number')
-        .matches(/^(?=.*[~`!@#\$%\^&\*\(\)_\-\+={\[\}\]\|\\:;"'<,>\.\?])/, 'Must contain at least one special character'),
+        .matches(
+            /^(?=.*[~`!@#$%^&*()_\-+={[}\]|\\:;"'<,>.?])/,
+            'Must contain at least one special character',
+        ),
     passwordConfirmation: yup
         .string()
         .required()
-        .oneOf([yup.ref("password")], "Passwords must match.")
+        .oneOf([yup.ref('password')], 'Passwords must match.'),
 })

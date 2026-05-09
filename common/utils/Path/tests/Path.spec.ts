@@ -46,6 +46,7 @@ describe('Paths', () => {
             ConfirmRegistration: 'ConfirmRegistration',
             RehydrateSession: 'RehydrateSession',
             Categories: 'Categories',
+            Message: 'Message',
         })
     })
 

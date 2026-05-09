@@ -3,6 +3,7 @@ import Page from '../../../../common/ux/Page/Page'
 import { FullScreenOverlay } from '../Overlay/Overlay'
 import { PageNav, PageMobileMenu, PageSubNav } from '../../Nav'
 import type { PageVariant } from '../../Nav'
+import Footer, { type FooterProps } from '../Footer/Footer'
 
 type ScreenProps = {
     children: ReactNode
@@ -14,6 +15,8 @@ type ScreenProps = {
     recordVisit?: boolean
     loginRequired?: boolean
     sideMenu?: ReactNode
+    hideFooter?: boolean
+    footerProps?: Omit<FooterProps, 'path'>
 }
 
 export const Screen = ({
@@ -26,6 +29,8 @@ export const Screen = ({
     recordVisit,
     loginRequired,
     sideMenu,
+    hideFooter,
+    footerProps,
 }: ScreenProps) => (
     <Page
         title={title}
@@ -39,6 +44,7 @@ export const Screen = ({
         <PageSubNav />
         {sideMenu}
         {children}
+        {!hideFooter && <Footer path={path} {...footerProps} />}
         <FullScreenOverlay />
     </Page>
 )

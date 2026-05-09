@@ -72,7 +72,6 @@ const Article = ({ pageName, path, title, children }: Props) => {
                 <Disclaimer />
                 <SuggestedArticles articles={article?.suggestedArticles} />
             </main>
-            <Footer pageName={pageName} path={path} visitsPreLoaded={true} visitCount={visits} />
         </Screen>
     )
 }

@@ -1,4 +1,3 @@
-import Footer from '../../../sharedComponents/Footer/Footer'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
@@ -16,9 +15,8 @@ import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
 import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
-import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
 
-const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
+const Xmas2025 = () => {
     const { user } = Session.useContext().session || {}
     const [pagePingStatus, setPagePingStatus] = useState<string>('')
 
@@ -81,6 +79,7 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
             className="Xmas"
             variant="api"
             pageName="Xmas"
+            footerProps={{ info: <p>Page ping message: {pagePingStatus}</p> }}
         >
             <main>
                 <img className="reindeer-image" src={Reindeer} alt="Reindeer Image" />
@@ -114,11 +113,6 @@ const Xmas2025 = ({ pageName, path }: PageContainerProps) => {
                 <MessageWall messages={messages?.data.data} />
                 <YourMessages messages={messages?.data.data} />
             </main>
-            <Footer
-                pageName={pageName}
-                path={path}
-                info={<p>Page ping message: {pagePingStatus}</p>}
-            />
         </Screen>
     )
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
-import Footer from '../../sharedComponents/Footer/Footer'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { blogArticles } from '../../../articles/articles'
@@ -98,7 +97,6 @@ const Blogs = ({ pageName, path }: Props) => {
                         ))}
                 </div>
             </main>
-            <Footer pageName={pageName} path={path} />
         </Screen>
     )
 }

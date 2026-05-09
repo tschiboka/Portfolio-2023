@@ -1,4 +1,3 @@
-import Footer from '../../sharedComponents/Footer/Footer'
 import AchievementList from '../../sharedComponents/AchievementList/AchievementList'
 import {
     academicAchievements,
@@ -17,7 +16,7 @@ interface Props {
     path: string
 }
 
-const About = ({ pageName, path }: Props) => {
+const About = ({ pageName }: Props) => {
     return (
         <Screen
             title="Tivadar Debnar | About"
@@ -41,37 +40,59 @@ const About = ({ pageName, path }: Props) => {
                 </p>
                 <h2>Self Study</h2>
                 <p>
-                    Curiosity and a mystical fascination with coding have been constant companions
-                    throughout my adult life, propelling me to explore browser-based programming
-                    technologies like JavaScript, CSS, and HTML. Soon, I found myself coding daily,
-                    taking online courses, such as FreeCodeCamp's front-end development course, and
-                    attending meetups of different coding-related groups. With each passing moment
-                    dedicated to my studies and projects, I came to the profound realisation that
-                    programming was my true calling, urging me to pursue a career as a professional
-                    web developer.
+                    Curiosity and a fascination with coding have been constant companions throughout
+                    my adult life, leading me to explore browser-based technologies such as
+                    JavaScript, CSS, and HTML long before entering the industry professionally. I
+                    spent years building personal projects, taking online courses, attending
+                    meetups, and coding daily in my spare time. Over time, what began as self-study
+                    evolved into a serious commitment to software engineering and ultimately
+                    motivated me to pursue it as a professional career.
                 </p>
                 <h2>College</h2>
                 <p>
                     To make my commitment official, in 2020, I enrolled in Icon College of
-                    Technology and Management to get my Higher National Diploma (HND) in Computing,
-                    where I studied some fascinating subjects, such as Algorithms and Data
-                    Structures, Databases, Web Development, Project Management and Security. The
-                    knowledge gained from my self-guided studies proved invaluable across various
-                    subjects, resulting in my graduating with distinction and setting the stage for
-                    me to pursue a bachelor's degree.
+                    Technology and Management to complete my Higher National Diploma (HND) in
+                    Computing, where I studied subjects such as Algorithms and Data Structures,
+                    Databases, Web Development, Project Management, and Security. The knowledge
+                    gained through years of self-guided study proved invaluable throughout the
+                    course and contributed towards graduating with distinction before progressing to
+                    a bachelor's degree.
                 </p>
                 <h2>Uni</h2>
                 <p>
-                    During my time at Falmouth University, I delved into the field of software
-                    engineering, focusing on Mobile Development (React Native), Artificial
-                    Intelligence, Big Data, IoT, and several other exciting disciplines.
-                    Additionally, I concentrated every spare time on my dissertation project, one of
-                    the most stimulating and complex projects I have ever embarked on: a digital
-                    guitar console that can be played on a browser-based web application. This
-                    project involved nearly 800 hours of electric wiring, manufacturing,
-                    microcontroller programming, and extensive use of JavaScript / NodeJS for its
-                    user interface and server. The final product received an exceptional 90% mark
-                    and helped me towards a first-class degree with honours.
+                    During my time at Falmouth University, I focused on software engineering
+                    disciplines including Mobile Development (React Native), Artificial
+                    Intelligence, Big Data, IoT, and several other exciting areas of computing.
+                    Alongside my studies, I dedicated a significant amount of time to my
+                    dissertation project: a browser-based digital guitar console and music studio
+                    application. The project combined hardware engineering, microcontroller
+                    programming, manufacturing, and extensive use of JavaScript and Node.js for its
+                    frontend and backend systems. After nearly 800 hours of development, the final
+                    project received a 90% mark and contributed towards my graduating with a First
+                    Class honours degree.
+                </p>
+                <h2>Continued Professional Development</h2>
+                <p>
+                    After graduating from Falmouth University, I moved into professional software
+                    engineering, where I have spent the last several years working primarily with
+                    TypeScript, React, Jest, React Testing Library, and modern frontend tooling.
+                    Working in production environments fundamentally changed how I think about
+                    software engineering. Beyond building features, I became increasingly interested
+                    in software architecture, maintainability, testing systems, developer
+                    experience, and the long-term scalability of frontend applications.
+                </p>
+                <p>
+                    Much of my recent work has focused on building robust TypeScript-heavy
+                    applications, designing reusable testing abstractions, improving consistency
+                    across large test suites, and contributing to engineering practices that reduce
+                    long-term technical entropy within projects and teams.
+                </p>
+                <p>
+                    I still approach software engineering with the same curiosity that first drew me
+                    to programming as a child. I regularly continue my self-study in areas such as
+                    system design, frontend architecture, CI/CD workflows, performance optimisation,
+                    and engineering tooling, viewing continuous learning as a core part of the
+                    profession rather than a separate activity.
                 </p>
                 <div className="image-container">
                     <figure>
@@ -101,10 +122,9 @@ const About = ({ pageName, path }: Props) => {
                 </p>
                 <h2>Academic Accomplishments</h2>
                 <AchievementList achievements={academicAchievements} />
-                <h2>Certificates</h2>
+                <h2>Additional Training</h2>
                 <AchievementList achievements={certificateAchievements} />
             </main>
-            <Footer pageName={pageName} path={path} />
         </Screen>
     )
 }

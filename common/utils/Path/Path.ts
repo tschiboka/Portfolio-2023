@@ -6,6 +6,7 @@ export const Paths = {
         ConfirmRegistration: 'ConfirmRegistration',
         RehydrateSession: 'RehydrateSession',
         Categories: 'Categories',
+        Message: 'Message',
     },
     Projects: {
         Xmas: 'Xmas',
@@ -21,6 +22,7 @@ export const apiRoutes: Record<string, string> = {
     ConfirmRegistration: 'confirm',
     RehydrateSession: 'session',
     Categories: 'categories',
+    Message: 'message',
 }
 
 export const projectRoutes: Record<string, string> = {

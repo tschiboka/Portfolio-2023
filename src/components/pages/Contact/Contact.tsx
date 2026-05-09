@@ -1,174 +1,73 @@
-/* eslint-disable react-refresh/only-export-components */
 import { Screen } from '../../sharedComponents/Screen/Screen'
-import Footer from '../../sharedComponents/Footer/Footer'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgement'
-import { MdAlternateEmail } from 'react-icons/md'
-import { LoadingIndicator } from '@common/ux'
-import { FiPhone } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
-import { ChangeEvent, useRef, useState } from 'react'
-import { PostMessageResponse } from '@common/types'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { Form, LoadingIndicator } from '@common/ux'
+import { ErrorResponse, PostMessageResponse } from '@common/types'
+import { ContactFormData } from './Contact.types'
+import { contactSchema, MAX_MESSAGE_CHARACTERS } from './Contact.schema'
+import { useContactApi } from './Contact.query'
 import './Contact.scss'
 
-interface Props {
+type ContactProps = {
     pageName: string
     path: string
 }
 
-export interface ValidationResult {
-    valid: boolean
-    error: string
-}
+const Contact = ({ pageName, path }: ContactProps) => {
+    const { sendMessageRequest } = useContactApi()
 
-export const MAX_MESSAGE_CHARACTERS = 1000
+    const [submitErrorMessage, setSubmitErrorMessage] = useState('')
+    const [showMessageAck, setShowMessageAck] = useState(false)
 
-export const validateName = (name: string): ValidationResult => {
-    const nameRegex = /^[a-z \-']+$/i
-    if (name.length === 0) return { valid: false, error: 'Cannot be Empty!' }
-    if (name.length > 50) return { valid: false, error: 'Too Long!' }
-    if (!nameRegex.test(name)) return { valid: false, error: 'No Special Characters!' }
-    return { valid: true, error: '' }
-}
+    const { control, handleSubmit } = useForm({
+        defaultValues: {
+            name: '',
+            email: '',
+            phone: '',
+            message: '',
+        },
+        resolver: yupResolver(contactSchema),
+    })
 
-export const validateEmail = (email: string): ValidationResult => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-    if (email.length === 0) return { valid: false, error: 'Cannot be Empty!' }
-    if (email.length <= 5) return { valid: false, error: 'Too Short!' }
-    if (email.length > 255) return { valid: false, error: 'Too Long!' }
-    if (!emailRegex.test(email)) return { valid: false, error: 'Invalid Email Format!' }
-    return { valid: true, error: '' }
-}
-
-export const validatePhone = (tel: string): ValidationResult => {
-    if (tel.length > 0) {
-        // Let through empty tel nums
-        if (!/^[0-9 ]+$/.test(tel))
-            return { valid: false, error: 'Only Numbers and Spaces Allowed!' }
-        if (tel.length < 10) return { valid: false, error: 'Too Short!' }
-        if (tel.length > 16) return { valid: false, error: 'Too Long!' }
-    }
-    return { valid: true, error: '' }
-}
-
-export const validateMessage = (message: string): ValidationResult => {
-    const allowedCharactersRegex = /^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"-\s]*$/
-    if (message.length === 0) return { valid: false, error: 'Cannot be Empty!' }
-    if (message.length < 10) return { valid: false, error: 'Min 10 Characters!' }
-    if (message.length > MAX_MESSAGE_CHARACTERS) return { valid: false, error: 'Too Long!' }
-    if (!allowedCharactersRegex.test(message))
-        return { valid: false, error: 'Illegal Characters in Text!' }
-    return { valid: true, error: '' }
-}
-
-const Contact = ({ pageName, path }: Props) => {
-    const nameRef = useRef<HTMLInputElement>(null)
-    const emailRef = useRef<HTMLInputElement>(null)
-    const phoneRef = useRef<HTMLInputElement>(null)
-    const messageRef = useRef<HTMLTextAreaElement>(null)
-    const charCounterRef = useRef<HTMLSpanElement>(null)
-
-    const [nameError, setNameError] = useState<string>('')
-    const [emailError, setEmailError] = useState<string>('')
-    const [telError, setTelError] = useState<string>('')
-    const [messageError, setMessageError] = useState<string>('')
-    const [charatersLeft, setCharactersLeft] = useState<number>(MAX_MESSAGE_CHARACTERS)
-    const [submitDisabled, setSubmitDisabled] = useState<boolean>(false)
-    const [userMessage, setUserMessage] = useState<string>('')
-    const [showMessageAck, setShowMessageAck] = useState<boolean>(false)
-
-    const countCharacters = () => {
-        const message = messageRef.current?.value ?? ''
-        const left = MAX_MESSAGE_CHARACTERS - message.length
-        setCharactersLeft(left)
-    }
-
-    const handleSubmit = async () => {
-        const name = nameRef.current?.value ?? ''
-        const email = emailRef.current?.value ?? ''
-        const phone = phoneRef.current?.value ?? ''
-        const message = messageRef.current?.value ?? ''
-
-        // Validate
-        const nameValidation = validateName(name)
-        const emailValidation = validateEmail(email)
-        const phoneValidation = validatePhone(phone)
-        const messageValidation = validateMessage(message)
-        setNameError(nameValidation.error)
-        setEmailError(emailValidation.error)
-        setTelError(phoneValidation.error)
-        setMessageError(messageValidation.error)
-
-        const inputValid =
-            nameValidation.valid &&
-            emailValidation.valid &&
-            phoneValidation.valid &&
-            messageValidation.valid
-
-        if (inputValid) {
-            // Disable Submit Button
-            setSubmitDisabled(true)
-            setUserMessage('Sending Message...')
-
-            // Submit Form
-            // const URLLocal = 'http://localhost:5000/message'
-            // const URL = URLLocal
-            const URLLive = 'https://portfolio-2023-nf5z.onrender.com/message'
-            const URL = URLLive
-            const options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    email: email.toLowerCase(),
-                    phone: phone.replace(/\D/g, ''),
-                    message,
-                }),
+    const sendMessage = useMutation<
+        PostMessageResponse,
+        AxiosError<ErrorResponse>,
+        ContactFormData
+    >({
+        mutationFn: async (data: ContactFormData) => {
+            const payload = {
+                name: data.name,
+                email: data.email.toLowerCase(),
+                phone: data.phone?.replace(/\D/g, '') || undefined,
+                message: data.message,
             }
+            const res = await sendMessageRequest(payload)
+            return res.data
+        },
+        onSuccess: () => {
+            setSubmitErrorMessage('')
+            setShowMessageAck(true)
+        },
+        onError: (error) => {
+            setSubmitErrorMessage(error.response?.data?.message ?? error.message)
+        },
+    })
 
-            try {
-                const response = await fetch(URL, options)
-                const responseJSON = (await response.json()) as PostMessageResponse
-                if (responseJSON.success) {
-                    setUserMessage('Message Sent!')
-                    setShowMessageAck(true)
-                } else setUserMessage('Error While Sending Message! ')
-            } catch (err) {
-                setUserMessage('Error While Sending Message!')
-            } finally {
-                setSubmitDisabled(false)
-            }
-        }
+    const submitHandler = (data: ContactFormData, event?: React.BaseSyntheticEvent) => {
+        event?.preventDefault()
+        sendMessage.mutate(data)
     }
 
-    // ChangeEvent is more specialised than FocusEvent
-    // Lowercase Email Input Value on Input Change Rather than Just Focus Change
-    const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target) {
-            const lowerCaseEmailText = event.target.value.toLowerCase()
-            event.target.value = lowerCaseEmailText
-        }
+    const isLoading = sendMessage.isPending
 
-        setEmailError(validateEmail(emailRef.current?.value || '').error)
-    }
-
-    // Phone Numbers Are Filtered for Digits
-    const handlePhoneChange = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target) {
-            const onlyDigits = event.target.value.replace(/\D/g, '')
-            event.target.value = onlyDigits
-        }
-
-        setTelError(validatePhone(phoneRef.current?.value || '').error)
-    }
-
-    const mail = 'Dev@tschiboka.com'
-    const tel = '+44 7474 999 334'
     return (
         <Screen
-            title={'Tivadar Debnar | Contact'}
+            title="Tivadar Debnar | Contact"
             path={path}
             variant="portfolio"
             pageName={pageName}
@@ -179,105 +78,55 @@ const Contact = ({ pageName, path }: Props) => {
             <main className="contact">
                 <h1>Get in Touch!</h1>
                 <section>
-                    <ul className="contacts">
-                        <li>
-                            <span>mail</span>
-                            <MdAlternateEmail className="icon" />
-                            <Link className="link" to={`mailto:${mail}`}>
-                                {mail}
-                            </Link>
-                        </li>
-                        <li>
-                            <span>phone</span>
-                            <FiPhone className="icon" />
-                            <a href={`tel:${tel}`} className="link">
-                                {tel}
-                            </a>
-                        </li>
-                    </ul>
-                    <form>
-                        <fieldset>
-                            <input
-                                id="name"
+                    <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Contact form">
+                        <Form.Fieldset>
+                            <Form.Label for="name">Full name</Form.Label>
+                            <Form.Input
+                                name="name"
+                                control={control}
                                 type="text"
-                                placeholder="Full Name *"
-                                ref={nameRef}
-                                onBlur={() =>
-                                    setNameError(validateName(nameRef.current?.value || '').error)
-                                }
+                                autoComplete="name"
                             />
-                        </fieldset>
-                        {nameError && (
-                            <span className="error-message" id="error-message--name">
-                                {nameError}
-                            </span>
-                        )}
-                        <fieldset>
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="Email Address *"
-                                ref={emailRef}
-                                onBlur={(event) => handleEmailChange(event)}
-                            />
-                        </fieldset>
-                        {emailError && (
-                            <span className="error-message" id="error-message--email">
-                                {emailError}
-                            </span>
-                        )}
-                        <fieldset>
-                            <input
-                                id="phone"
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="email">Email</Form.Label>
+                            <Form.Input
+                                name="email"
+                                control={control}
                                 type="text"
-                                placeholder="Phone"
-                                ref={phoneRef}
-                                onBlur={(event) => handlePhoneChange(event)}
+                                autoComplete="email"
                             />
-                        </fieldset>
-                        {telError && (
-                            <span className="error-message" id="error-message--tel">
-                                {telError}
-                            </span>
-                        )}
-                        <fieldset>
-                            <textarea
-                                id="name"
-                                placeholder="Your Message *"
-                                ref={messageRef}
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="phone">Phone</Form.Label>
+                            <Form.Input
+                                name="phone"
+                                control={control}
+                                type="tel"
+                                autoComplete="tel"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="message">Message</Form.Label>
+                            <Form.TextArea
+                                name="message"
+                                control={control}
                                 maxLength={MAX_MESSAGE_CHARACTERS}
-                                onChange={countCharacters}
-                                onBlur={() =>
-                                    setMessageError(
-                                        validateMessage(messageRef.current?.value || '').error,
-                                    )
-                                }
+                                rows={5}
                             />
-                        </fieldset>
-                        <span className="character-counter" ref={charCounterRef}>
-                            {charatersLeft} Characters Left
-                        </span>
-                        {messageError && (
-                            <span className="error-message" id="error-message--message">
-                                {messageError}
-                            </span>
+                        </Form.Fieldset>
+                        <LoadingIndicator show={isLoading} />
+                        {submitErrorMessage && (
+                            <p className="submit-error-message">{submitErrorMessage}</p>
                         )}
-                        <LoadingIndicator show={submitDisabled} />
-                        {userMessage && <span className="user-message">{userMessage}</span>}
-                        <button
-                            className="submit-message"
-                            type="button"
-                            name="submit"
-                            disabled={submitDisabled}
-                            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-                            onClick={handleSubmit}
-                        >
-                            Send Your Message
-                        </button>
-                    </form>
+                        <Form.ButtonGroup>
+                            <Form.Button type="submit" disabled={isLoading || showMessageAck}>
+                                Send Message
+                            </Form.Button>
+                        </Form.ButtonGroup>
+                    </Form>
                 </section>
             </main>
-            <Footer pageName={pageName} path={path} />
         </Screen>
     )
 }
