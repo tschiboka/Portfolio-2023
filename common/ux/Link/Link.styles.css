@@ -1,0 +1,14 @@
+.link {
+    color: var(--accent-dark-3);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.link:hover {
+    color: var(--accent-dark-1);
+}
+
+.link:visited {
+    color: var(--accent-dark-3);
+}

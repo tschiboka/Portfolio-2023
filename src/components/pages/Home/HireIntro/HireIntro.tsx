@@ -1,188 +1,94 @@
-import {
-    SiHtml5,
-    SiCss3,
-    SiMongodb,
-    SiAdobephotoshop,
-    SiAdobeillustrator,
-    SiJavascript,
-    SiTypescript,
-    SiCsharp,
-    SiPython,
-} from 'react-icons/si'
-import { BiMessageDots, BiLogoSass } from 'react-icons/bi'
-import { FaNodeJs } from 'react-icons/fa'
+import { BiMessageDots } from 'react-icons/bi'
 import { FiDownload } from 'react-icons/fi'
-import { TbBrandReactNative } from 'react-icons/tb'
-import { RiReactjsLine } from 'react-icons/ri'
-import ProgressBar from '../../../sharedComponents/ProgressBar/ProgressBar'
-import { getColourName } from '../../Projects/getProjects'
 import { Link } from 'react-router-dom'
+import { Button, Heading, Paragraph, Inline, Table } from '../../../../../common/ux'
+import type { TableColumns } from '../../../../../common/ux/Table/Table.types'
 import cv from '../../../../assets/files/Tivadar_Debnar_CV_2023.pdf'
 import './HireIntro.scss'
+
+type Skill = { area: string; technology: string; focus: string }
+
+const skills: Skill[] = [
+    {
+        area: 'Frontend',
+        technology: 'React',
+        focus: 'Hooks, state management, component architecture',
+    },
+    {
+        area: 'Frontend',
+        technology: 'TypeScript',
+        focus: 'Strict typing, generics, advanced patterns',
+    },
+    { area: 'Frontend', technology: 'JavaScript', focus: 'ES6+, async patterns' },
+    { area: 'Frontend', technology: 'HTML & CSS', focus: 'Semantic HTML, responsive design' },
+    { area: 'Frontend', technology: 'Sass', focus: 'Legacy / partial usage' },
+    { area: 'Backend', technology: 'Node.js', focus: 'Server-side JavaScript' },
+    { area: 'Backend', technology: 'C#', focus: 'Foundational' },
+    { area: 'Backend', technology: 'Python', focus: 'Foundational' },
+    { area: 'Testing', technology: 'Jest', focus: 'Unit & integration testing' },
+    { area: 'Testing', technology: 'React Testing Library', focus: 'Component testing' },
+    { area: 'Testing', technology: 'MSW', focus: 'API mocking' },
+    { area: 'Mobile', technology: 'React Native', focus: 'Cross-platform development' },
+    { area: 'Databases', technology: 'MongoDB', focus: 'NoSQL document store' },
+]
+
+const skillColumns: TableColumns<Skill> = [
+    { header: 'Area', accessor: 'area' },
+    { header: 'Technology', accessor: 'technology' },
+    { header: 'Focus', accessor: 'focus' },
+]
 
 const HireIntro = () => {
     return (
         <>
-            <p className="delay-0 anim-fade-from-left">
-                I appreciate your interest. Let me provide you with a brief
-                overview of myself as a developer. I am passionate about web
-                development and enjoy transforming ideas into reality. For me,
-                coding is not just a job but a creative instrument where I can
-                continually improve and challenge myself.
-            </p>
-            <h2>I'm all about Web</h2>
-            <p className="delay-2 anim-fade-from-right">
-                Although I self-studied web development for many years prior, I
-                have recently completed my formal studies, graduating from
-                Falmouth University in Computing (First Class Honours). During
-                my academic journey, I consolidated my programming concepts and
-                gained hands-on experience in various technologies and
-                languages, such as Python or C#.
-            </p>
-            <p className="delay-3 anim-fade-from-left">
-                However, my passion lies in web development. I have been
-                creating projects in JavaScript and MERN (Mongo, Express, React,
-                NodeJs) since 2017, and I continued to work on my side projects
-                even during my years in college and university.
-            </p>
-            <h2>Skills</h2>
-            <h3 className="skill-header">Frontend</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={75}
-                    title="HTML5"
-                    icon={<SiHtml5 />}
-                    color={getColourName('html')}
-                />
-                <ProgressBar
-                    percentage={78}
-                    title="CSS"
-                    icon={<SiCss3 />}
-                    color={getColourName('css')}
-                />
-                <ProgressBar
-                    percentage={85}
-                    title="JS"
-                    icon={<SiJavascript />}
-                    color={getColourName('javascript')}
-                />
-                <ProgressBar
-                    percentage={30}
-                    title="Sass"
-                    icon={<BiLogoSass />}
-                    color={getColourName('sass')}
-                />
-                <ProgressBar
-                    percentage={60}
-                    title="React"
-                    icon={<RiReactjsLine />}
-                    color={getColourName('react')}
-                />
-                <ProgressBar
-                    percentage={55}
-                    title="TS"
-                    icon={<SiTypescript />}
-                    color={getColourName('typescript')}
-                />
-            </section>
+            <Paragraph className="delay-0 anim-fade-from-left">
+                I'm a software engineer focused on building reliable, maintainable frontend systems
+                with TypeScript and React. I care less about chasing technologies and more about how
+                software holds up over time — structure, clarity, testing, and the ability for teams
+                to evolve a codebase without friction.
+            </Paragraph>
+            <Heading as="h2">I'm all about Web</Heading>
+            <Paragraph className="delay-2 anim-fade-from-right">
+                My background combines early self-directed learning with formal education in
+                computing, followed by several years of professional experience working on
+                production systems. This mix has shaped how I approach problems: I tend to think in
+                terms of systems and long-term maintainability rather than isolated features.
+            </Paragraph>
+            <Paragraph className="delay-3 anim-fade-from-left">
+                I’ve spent a large part of my recent work focusing on frontend architecture,
+                TypeScript-heavy codebases, and testing strategies (Jest, React Testing Library,
+                MSW). I’m particularly interested in reducing complexity over time through better
+                abstractions, clearer boundaries, and more predictable engineering patterns.
+            </Paragraph>
+            <Paragraph className="delay-2 anim-fade-from-right">
+                Outside of day-to-day delivery, I still actively explore system design, developer
+                tooling, and frontend architecture, but this is driven by professional depth rather
+                than early-stage learning.
+            </Paragraph>
+            <Heading as="h2">Skills</Heading>
 
-            <h3 className="skill-header">Backend</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={60}
-                    title="NodeJs"
-                    icon={<FaNodeJs />}
-                    color={getColourName('nodejs')}
-                />
-                <ProgressBar
-                    percentage={35}
-                    title="C#"
-                    icon={<SiCsharp />}
-                    color={getColourName('C#')}
-                />
-                <ProgressBar
-                    percentage={25}
-                    title="Python"
-                    icon={<SiPython />}
-                    color={getColourName('python')}
-                />
-            </section>
-            <h3 className="skill-header">Database</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={55}
-                    title="MongoDB"
-                    icon={<SiMongodb />}
-                    color={getColourName('mongodb')}
-                />
-                <ProgressBar
-                    percentage={15}
-                    title="MySQL"
-                    icon={<SiMongodb />}
-                    color={getColourName('mysql')}
-                />
-            </section>
-            <h3 className="skill-header">Mobile</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={45}
-                    title=" Native"
-                    icon={<TbBrandReactNative />}
-                    color={getColourName('react native')}
-                />
-            </section>
-            <h3 className="skill-header">Testing</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={30}
-                    title="Jest"
-                    icon={<TbBrandReactNative />}
-                    color={getColourName('jest')}
-                />
-                <ProgressBar
-                    percentage={25}
-                    title="RTL"
-                    icon={<TbBrandReactNative />}
-                    color={getColourName('RTL')}
-                />
-            </section>
-            <h3 className="skill-header">Design</h3>
-            <section className="skills">
-                <ProgressBar
-                    percentage={35}
-                    title="PhotoShop"
-                    icon={<SiAdobephotoshop />}
-                    color={getColourName('photoshop')}
-                />
-                <ProgressBar
-                    percentage={30}
-                    title="Illustrator"
-                    icon={<SiAdobeillustrator />}
-                    color={getColourName('illustrator')}
-                />
-            </section>
-            <h2>I continuously learn new things</h2>
-            <p>
-                I am taking courses to further improve my skills in React-18,
-                TypeScript and SaSS, and I also plan to continue my learning
-                journey with Redux and Test-Driven Development in Jest.
-            </p>
+            <Table data={skills} columns={skillColumns} ariaLabel="Skills and technologies" />
+
+            <Heading as="h2">Continuous development</Heading>
+            <Paragraph>
+                I continuously refine my skills through real-world engineering work and focused
+                exploration of areas such as frontend architecture, TypeScript patterns, testing
+                strategies, and system design.
+            </Paragraph>
+            <Paragraph>
+                My current focus is on building maintainable, scalable frontend systems using React
+                and TypeScript, with strong emphasis on testing, code quality, and long-term
+                maintainability.
+            </Paragraph>
             <hr />
-            <p className="delay-2 anim-fade-from-right">
-                I am excited to apply my skills and contribute to a dynamic
-                development team. If my profile aligns with your requirements
-                and you feel I would be a good fit for your team, I would be
-                thrilled to discuss further details. Please don't hesitate to
-                contact me.
-            </p>
-            <div className="button-wrapper">
-                <Link className="link" to="/contact">
+            <Inline className="button-wrapper" justify="around" wrap>
+                <Button as={Link} to="/contact">
                     Contact Tivadar <BiMessageDots />
-                </Link>
-                <a className="link" href={cv} download>
+                </Button>
+                <Button as="a" href={cv} download variant="secondary">
                     Download my CV <FiDownload />
-                </a>
-            </div>
+                </Button>
+            </Inline>
         </>
     )
 }

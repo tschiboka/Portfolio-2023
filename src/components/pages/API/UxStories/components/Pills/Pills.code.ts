@@ -12,6 +12,12 @@ export const Code = {
 <Pill label="PURPLE" color="purple" />
 <Pill label="GRAY" color="gray" />`,
     },
+    Variants: {
+        outlined: `{/* Outlined (default) */}
+<Pill label="STATUS" color="accent" variant="outlined" />`,
+        solid: `{/* Solid — full colour background */}
+<Pill label="STATUS" color="accent" variant="solid" />`,
+    },
     UseCases: {
         statusBadge: `const statusColors: Record<string, PillColor> = {
     active: 'success',

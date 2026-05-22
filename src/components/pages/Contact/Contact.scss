@@ -1,32 +1,18 @@
-@use '../../../styles/breakpoints.scss' as bp;
-@use '../../../styles/palette.scss' as palette;
-@use '../../../styles/font_sizes.scss' as font;
-
-main.contact {
-    width: 100%;
+.contact {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+    > .region__content {
         width: 100%;
     }
 
-    .submit-error-message {
-        color: deeppink;
-    }
-}
+    .region--section {
+        background-color: transparent;
 
-@keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
+        > .region__content {
+            background-color: transparent;
+        }
     }
 }

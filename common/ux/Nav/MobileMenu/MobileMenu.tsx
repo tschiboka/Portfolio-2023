@@ -1,5 +1,5 @@
 import { ReactNode, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '../../Link'
 import { BiChevronRight } from 'react-icons/bi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { append, dropLast } from 'ramda'
@@ -79,7 +79,7 @@ export const MobileMenu = ({
                             className={isHighlighted(item, pageName)}
                             onClick={() => handleItemClick(item)}
                         >
-                            <Link className="link" to={item?.path || ''}>
+                            <Link to={item?.path || ''}>
                                 {item.image && renderImage?.(item.image)}
                                 {item.label}
                                 {item.submenu && (
@@ -93,9 +93,7 @@ export const MobileMenu = ({
                 ))}
                 {menuStack.length > 1 && (
                     <li key="back" onClick={handleBackClick}>
-                        <Link className="link" to="">
-                            Back
-                        </Link>
+                        <Link to="">Back</Link>
                     </li>
                 )}
             </div>

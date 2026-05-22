@@ -32,16 +32,3 @@ p {
         font-size: font.$font_lg;
     }
 }
-
-.subtitle {
-    color: palette.$white_3;
-    font-size: font.$font_xs;
-    font-variant: normal;
-    font-style: italic;
-}
-
-.light {
-    .subtitle {
-        color: palette.$black_3;
-    }
-}

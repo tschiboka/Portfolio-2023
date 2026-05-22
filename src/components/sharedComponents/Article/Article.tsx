@@ -23,9 +23,10 @@ interface Props {
     path: string
     title: string
     children: ReactNode
+    hasContentNavigator?: boolean
 }
 
-const Article = ({ pageName, path, title, children }: Props) => {
+const Article = ({ pageName, path, title, children, hasContentNavigator = true }: Props) => {
     const article = blogArticles.find((article) => article.to === path)
     const [visitsLoaded, setVisitsLoaded] = useState(false)
     const [visits, setVisits] = useState(0)
@@ -54,10 +55,10 @@ const Article = ({ pageName, path, title, children }: Props) => {
             variant="portfolio"
             pageName={pageName}
             sideMenu={<PageSideMenu />}
+            hasContentNavigator={hasContentNavigator}
         >
             <main className="blog-component">
                 <article>{children}</article>
-
                 <LikeButton
                     path={path}
                     likes={likes}

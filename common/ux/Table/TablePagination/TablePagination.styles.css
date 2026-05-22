@@ -16,7 +16,8 @@
 
 .table-pagination__range,
 .table-pagination__total {
-    font-family: 'Roboto_Bold';
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
     color: var(--white-5);
 }
 

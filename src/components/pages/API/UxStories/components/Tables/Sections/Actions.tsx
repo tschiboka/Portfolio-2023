@@ -1,5 +1,5 @@
 import { Table } from '@common/ux/Table'
-import { Code } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import {
     type Row,
     rows,
@@ -24,17 +24,19 @@ import { Code as Snippets } from '../Tables.code'
 
 export const Actions = () => (
     <>
-        <h2 id="actions">Actions</h2>
-        <p>
+        <Heading as="h2" id="actions">
+            Actions
+        </Heading>
+        <Paragraph>
             Contextual row action menus with click handlers, links, filtering, disabled states, and
             colour variants.
-        </p>
-        <section>
-            <h3>Actions Overview</h3>
-            <p>
+        </Paragraph>
+        <Section>
+            <Heading as="h3">Actions Overview</Heading>
+            <Paragraph>
                 Rows can have a contextual action menu triggered by a vertical ellipsis button.
                 Below is a summary of all available action features:
-            </p>
+            </Paragraph>
             <Table<ActionRow>
                 title="Action Features"
                 ariaLabel="Action features overview"
@@ -44,13 +46,14 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
             />
-        </section>
-        <section>
-            <h3>isActionDisabled</h3>
-            <p>
-                Columns can define <code>isActionDisabled</code> to disable the entire action menu
-                for a row based on its data. The disabled row has the kebab button greyed out.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">isActionDisabled</Heading>
+            <Paragraph>
+                Columns can define <CodeText>isActionDisabled</CodeText> to disable the entire
+                action menu for a row based on its data. The disabled row has the kebab button
+                greyed out.
+            </Paragraph>
             <Table<ActionRow>
                 title="isActionDisabled"
                 ariaLabel="Table with disabled action menu"
@@ -66,13 +69,13 @@ export const Actions = () => (
                 actions={clickAction}
             />
             <Code language="tsx" content={Snippets.Actions.isActionDisabled} />
-        </section>
-        <section>
-            <h3>onClick</h3>
-            <p>
-                An action with an <code>onClick</code> handler. Clicking the action triggers a
-                callback that receives the row meta.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">onClick</Heading>
+            <Paragraph>
+                An action with an <CodeText>onClick</CodeText> handler. Clicking the action triggers
+                a callback that receives the row meta.
+            </Paragraph>
             <Table<ActionRow>
                 title="onClick"
                 ariaLabel="Table with onClick action"
@@ -84,13 +87,13 @@ export const Actions = () => (
                 actions={clickAction}
             />
             <Code language="tsx" content={Snippets.Actions.onClick} />
-        </section>
-        <section>
-            <h3>href</h3>
-            <p>
-                An action with an <code>href</code> function. The action navigates to a URL computed
-                from the row data.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">href</Heading>
+            <Paragraph>
+                An action with an <CodeText>href</CodeText> function. The action navigates to a URL
+                computed from the row data.
+            </Paragraph>
             <Table<ActionRow>
                 title="href"
                 ariaLabel="Table with href action"
@@ -102,14 +105,14 @@ export const Actions = () => (
                 actions={hrefAction}
             />
             <Code language="tsx" content={Snippets.Actions.href} />
-        </section>
-        <section>
-            <h3>filter</h3>
-            <p>
-                An action with a <code>filter</code> function. The action is hidden from the menu
-                for rows that don&apos;t match the condition. When all actions are filtered out the
-                menu button is disabled.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">filter</Heading>
+            <Paragraph>
+                An action with a <CodeText>filter</CodeText> function. The action is hidden from the
+                menu for rows that don&apos;t match the condition. When all actions are filtered out
+                the menu button is disabled.
+            </Paragraph>
             <Table<ActionRow>
                 title="filter"
                 ariaLabel="Table with filtered action"
@@ -121,13 +124,13 @@ export const Actions = () => (
                 actions={filterAction}
             />
             <Code language="tsx" content={Snippets.Actions.filter} />
-        </section>
-        <section>
-            <h3>isDisabled</h3>
-            <p>
-                An action with <code>isDisabled</code>. The action stays visible but is greyed out
-                and unclickable for the matching row.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">isDisabled</Heading>
+            <Paragraph>
+                An action with <CodeText>isDisabled</CodeText>. The action stays visible but is
+                greyed out and unclickable for the matching row.
+            </Paragraph>
             <Table<ActionRow>
                 title="isDisabled"
                 ariaLabel="Table with disabled action item"
@@ -139,14 +142,14 @@ export const Actions = () => (
                 actions={disabledItemAction}
             />
             <Code language="tsx" content={Snippets.Actions.isDisabled} />
-        </section>
-        <section>
-            <h3>Variants</h3>
-            <p>
-                Actions support colour variants: <code>primary</code> (accent),{' '}
-                <code>secondary</code> (dark accent), <code>danger</code> (error), and the default
-                (neutral).
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Variants</Heading>
+            <Paragraph>
+                Actions support colour variants: <CodeText>primary</CodeText> (accent),{' '}
+                <CodeText>secondary</CodeText> (dark accent), <CodeText>danger</CodeText> (error),
+                and the default (neutral).
+            </Paragraph>
             <Table<ActionRow>
                 title="Variants"
                 ariaLabel="Table with action variants"
@@ -158,13 +161,14 @@ export const Actions = () => (
                 actions={variantActions}
             />
             <Code language="tsx" content={Snippets.Actions.variants} />
-        </section>
-        <section>
-            <h3>All Actions Combined</h3>
-            <p>
-                A table combining all action features: <code>onClick</code>, <code>href</code>,{' '}
-                <code>filter</code>, <code>isDisabled</code>, and variants in a single action menu.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">All Actions Combined</Heading>
+            <Paragraph>
+                A table combining all action features: <CodeText>onClick</CodeText>,{' '}
+                <CodeText>href</CodeText>, <CodeText>filter</CodeText>,{' '}
+                <CodeText>isDisabled</CodeText>, and variants in a single action menu.
+            </Paragraph>
             <Table<Row>
                 title="All Actions Combined"
                 ariaLabel="Table with all action features"
@@ -176,6 +180,6 @@ export const Actions = () => (
                 actions={allActions}
             />
             <Code language="tsx" content={Snippets.Actions.allCombined} />
-        </section>
+        </Section>
     </>
 )

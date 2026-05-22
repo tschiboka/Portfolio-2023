@@ -30,6 +30,7 @@
         display: flex;
         justify-content: space-between;
         font-size: font.$font_md;
+        font-variant: small-caps;
         color: palette.$white_5;
         opacity: 0;
         animation: fade_in 500ms ease-out forwards;

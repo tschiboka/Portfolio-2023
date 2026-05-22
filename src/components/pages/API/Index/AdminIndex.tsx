@@ -1,5 +1,4 @@
-import { Stack } from '@common/ux'
-import { Link } from 'react-router-dom'
+import { Stack, Link } from '@common/ux'
 
 export const AdminIndex = () => (
     <Stack.Vertical gap="12">

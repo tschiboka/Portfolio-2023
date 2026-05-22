@@ -1,0 +1,68 @@
+/* Base button styles — shared by form buttons and standalone buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2rem;
+    padding: var(--space-20) var(--space-16);
+    background-color: var(--accent-dark-1);
+    border: var(--btn-border);
+    border-radius: var(--panel-radius);
+    color: var(--black-x);
+    font-size: var(--font-sm);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-variant: small-caps;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: var(--btn-shadow);
+}
+
+a.btn:visited {
+    color: var(--black-x);
+}
+
+a.btn.secondary:visited {
+    color: var(--white-1);
+}
+
+.btn:hover,
+.btn:active {
+    background-color: var(--accent-dark-4);
+    border: var(--space-2) solid var(--accent-dark-3);
+    color: var(--white-1);
+    box-shadow: var(--btn-shadow-active);
+}
+
+.btn:disabled {
+    border: var(--space-2) solid var(--black-3);
+    background-color: var(--accent-dark-3);
+    color: var(--accent-dark-5);
+    cursor: not-allowed;
+}
+
+.btn.secondary {
+    background-color: var(--black-x);
+    border: var(--space-2) solid var(--accent-dark-5);
+    color: var(--white-1);
+}
+
+.btn.secondary:hover,
+.btn.secondary:active {
+    background-color: var(--black-x);
+    border: var(--space-2) solid var(--accent-dark-3);
+    color: var(--white-1);
+    box-shadow: var(--btn-shadow-active);
+}
+
+/* Standalone overrides */
+.standalone-btn {
+    gap: var(--space-8);
+}
+
+/* Small size */
+.btn.btn--sm {
+    height: auto;
+    padding: var(--space-4) var(--space-12);
+    font-size: var(--font-xs);
+}

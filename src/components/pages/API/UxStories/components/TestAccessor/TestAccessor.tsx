@@ -1,4 +1,4 @@
-import { Code } from '@common/ux'
+import { BlockQuote, Code, CodeText, Heading, Main, Paragraph, Section, Text } from '@common/ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
@@ -7,467 +7,468 @@ import './TestAccessor.styles.css'
 
 type TestAccessorProps = { path: string }
 
-export const TestAccessor = ({ path }: TestAccessorProps) => {
-    const scrollTo = (id: string) => (e: React.MouseEvent) => {
-        e.preventDefault()
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
+export const TestAccessor = ({ path }: TestAccessorProps) => (
+    <Screen
+        title={'Tivadar Debnar | Test Accessor'}
+        path={path}
+        recordVisit={false}
+        loginRequired
+        variant="api"
+        pageName="Projects"
+        sideMenu={<PageSideMenu />}
+        hasContentNavigator
+    >
+        <Main className="TestAccessor">
+            <StoryNav />
+            <Heading as="h1">Test Accessor Framework</Heading>
+            <Paragraph>
+                Accessors <strong>locate elements</strong>, <strong>expose direct state</strong>,
+                and <strong>perform single user actions</strong>. Nothing more.
+            </Paragraph>
+            <Code language="ts" content={Snippets.Import} />
 
-    return (
-        <Screen
-            title={'Tivadar Debnar | Test Accessor'}
-            path={path}
-            recordVisit={false}
-            loginRequired
-            variant="api"
-            pageName="Projects"
-            sideMenu={<PageSideMenu />}
-        >
-            <main className="TestAccessor">
-                <StoryNav />
-                <h1>Test Accessor Framework</h1>
-                <p>
-                    Accessors <strong>locate elements</strong>, <strong>expose direct state</strong>
-                    , and <strong>perform single user actions</strong>. Nothing more.
-                </p>
-                <Code language="ts" content={Snippets.Import} />
+            <Section>
+                <Heading as="h2" id="what-it-is">
+                    What it is
+                </Heading>
+                <Paragraph>
+                    A structured test utility layer built on top of React Testing Library (RTL) and
+                    MSW. It doesn&apos;t replace RTL or change how tests run — it&apos;s an
+                    abstraction layer that enforces consistent patterns for querying components and
+                    simulating user interactions across the entire test suite.
+                </Paragraph>
+            </Section>
 
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#what-it-is" onClick={scrollTo('what-it-is')}>
-                                What it is
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#what-it-is-not" onClick={scrollTo('what-it-is-not')}>
-                                What it is not
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#core-problem" onClick={scrollTo('core-problem')}>
-                                Core Problem
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#public-api" onClick={scrollTo('public-api')}>
-                                Public API
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#usage-examples" onClick={scrollTo('usage-examples')}>
-                                Usage Examples
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#design-constraints" onClick={scrollTo('design-constraints')}>
-                                Design Constraints
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#implementation-internals"
-                                onClick={scrollTo('implementation-internals')}
-                            >
-                                Implementation Internals
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-
-                {/* What it is */}
-                <section>
-                    <h2 id="what-it-is">What it is</h2>
-                    <p>
-                        A structured test utility layer built on top of React Testing Library (RTL)
-                        and MSW. It doesn&apos;t replace RTL or change how tests run — it&apos;s an
-                        abstraction layer that enforces consistent patterns for querying components
-                        and simulating user interactions across the entire test suite.
-                    </p>
-                </section>
-
-                {/* What it is not */}
-                <section>
-                    <h2 id="what-it-is-not">What it is not</h2>
-                    <ul>
-                        <li>
+            {/* What it is not */}
+            <Section>
+                <Heading as="h2" id="what-it-is-not">
+                    What it is not
+                </Heading>
+                <ul>
+                    <li>
+                        <Text>
                             <strong>Not a replacement for RTL</strong> — It wraps RTL.{' '}
-                            <code>screen</code>, <code>render</code>, <code>waitFor</code>,{' '}
-                            <code>within</code> are still valid when an accessor doesn&apos;t cover
-                            a case.
-                        </li>
-                        <li>
+                            <CodeText>screen</CodeText>, <CodeText>render</CodeText>,{' '}
+                            <CodeText>waitFor</CodeText>, <CodeText>within</CodeText> are still
+                            valid when an accessor doesn&apos;t cover a case.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>Not a page-object pattern</strong> — Page objects bundle state +
                             assertions + navigation. Accessors are stateless element wrappers with
                             no assertions and no business logic.
-                        </li>
-                        <li>
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>Not a workflow abstraction</strong> — Accessors expose single
-                            actions (<code>Do.click</code>, <code>Do.type</code>). Multi-step
-                            sequences belong in the test body, not the accessor.
-                        </li>
-                    </ul>
-                    <blockquote>
-                        If a test is simpler with raw RTL, use raw RTL. The framework prevents drift
-                        on repeated patterns — it doesn&apos;t ban direct DOM access.
-                    </blockquote>
+                            actions (<CodeText>Do.click</CodeText>, <CodeText>Do.type</CodeText>).
+                            Multi-step sequences belong in the test body, not the accessor.
+                        </Text>
+                    </li>
+                </ul>
+                <BlockQuote>
+                    If a test is simpler with raw RTL, use raw RTL. The framework prevents drift on
+                    repeated patterns — it doesn&apos;t ban direct DOM access.
+                </BlockQuote>
 
-                    <h3>Before</h3>
-                    <Code language="ts" content={Snippets.Before} />
+                <Heading as="h3">Before</Heading>
+                <Code language="ts" content={Snippets.Before} />
 
-                    <h3>After</h3>
-                    <Code language="ts" content={Snippets.After} />
-                </section>
+                <Heading as="h3">After</Heading>
+                <Code language="ts" content={Snippets.After} />
+            </Section>
 
-                {/* Core Problem */}
-                <section>
-                    <h2 id="core-problem">Core Problem</h2>
-                    <p>
-                        Without this layer, test code drifts into inconsistent patterns. Three query
-                        strategies, three user-event lifecycle patterns — multiplied across 100+
-                        test files, this becomes unmaintainable.
-                    </p>
-                    <Code language="ts" content={Snippets.Problem} />
-                </section>
+            {/* Core Problem */}
+            <Section>
+                <Heading as="h2" id="core-problem">
+                    Core Problem
+                </Heading>
+                <Paragraph>
+                    Without this layer, test code drifts into inconsistent patterns. Three query
+                    strategies, three user-event lifecycle patterns — multiplied across 100+ test
+                    files, this becomes unmaintainable.
+                </Paragraph>
+                <Code language="ts" content={Snippets.Problem} />
+            </Section>
 
-                {/* Public API */}
-                <section>
-                    <h2 id="public-api">Public API</h2>
+            {/* Public API */}
+            <Section>
+                <Heading as="h2" id="public-api">
+                    Public API
+                </Heading>
 
-                    <h3>Namespaces</h3>
-                    <p>3 authored + 2 derived:</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Purpose</th>
-                                <th>Sync/Async</th>
-                                <th>Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <code>Get</code>
-                                </td>
-                                <td>Read DOM state</td>
-                                <td>Sync</td>
-                                <td>Authored</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <code>Do</code>
-                                </td>
-                                <td>Simulate user actions</td>
-                                <td>Async</td>
-                                <td>Authored</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <code>Set</code>
-                                </td>
-                                <td>Pre-render setup/mocking</td>
-                                <td>Sync</td>
-                                <td>Authored</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <code>Has</code>
-                                </td>
-                                <td>Check element existence</td>
-                                <td>Sync</td>
-                                <td>Derived</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <code>Wait</code>
-                                </td>
-                                <td>Wait for element</td>
-                                <td>Async</td>
-                                <td>Derived</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <Heading as="h3">Namespaces</Heading>
+                <Paragraph>3 authored + 2 derived:</Paragraph>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Purpose</th>
+                            <th>Sync/Async</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <CodeText>Get</CodeText>
+                            </td>
+                            <td>Read DOM state</td>
+                            <td>Sync</td>
+                            <td>Authored</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <CodeText>Do</CodeText>
+                            </td>
+                            <td>Simulate user actions</td>
+                            <td>Async</td>
+                            <td>Authored</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <CodeText>Set</CodeText>
+                            </td>
+                            <td>Pre-render setup/mocking</td>
+                            <td>Sync</td>
+                            <td>Authored</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <CodeText>Has</CodeText>
+                            </td>
+                            <td>Check element existence</td>
+                            <td>Sync</td>
+                            <td>Derived</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <CodeText>Wait</CodeText>
+                            </td>
+                            <td>Wait for element</td>
+                            <td>Async</td>
+                            <td>Derived</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <h3>
-                        Base <code>Get</code>
-                    </h3>
-                    <p>Inherited by all accessors:</p>
-                    <Code language="ts" content={Snippets.API.get} />
+                <Heading as="h3">
+                    Base <CodeText>Get</CodeText>
+                </Heading>
+                <Paragraph>Inherited by all accessors:</Paragraph>
+                <Code language="ts" content={Snippets.API.get} />
 
-                    <h3>
-                        Base <code>Do</code>
-                    </h3>
-                    <p>Inherited by all accessors:</p>
-                    <Code language="ts" content={Snippets.API.do} />
+                <Heading as="h3">
+                    Base <CodeText>Do</CodeText>
+                </Heading>
+                <Paragraph>Inherited by all accessors:</Paragraph>
+                <Code language="ts" content={Snippets.API.do} />
 
-                    <h3>
-                        <code>Has</code> (derived from <code>Get</code>)
-                    </h3>
-                    <p>
-                        Wraps any <code>Get</code> method — returns <code>true</code> if the getter
-                        succeeds, <code>false</code> if it throws or returns null:
-                    </p>
-                    <Code language="ts" content={Snippets.API.has} />
-                    <blockquote>
-                        <strong>Caveat:</strong> <code>Has</code> should only suppress expected
-                        lookup failures (element not found). It is not a general error silencer —
-                        runtime bugs like <code>TypeError</code> from broken accessor code should
-                        still surface. Keep accessor unit tests healthy to catch these early.
-                    </blockquote>
+                <Heading as="h3">
+                    <CodeText>Has</CodeText> (derived from <CodeText>Get</CodeText>)
+                </Heading>
+                <Paragraph>
+                    Wraps any <CodeText>Get</CodeText> method — returns <CodeText>true</CodeText> if
+                    the getter succeeds, <CodeText>false</CodeText> if it throws or returns null:
+                </Paragraph>
+                <Code language="ts" content={Snippets.API.has} />
+                <BlockQuote>
+                    <strong>Caveat:</strong> <CodeText>Has</CodeText> should only suppress expected
+                    lookup failures (element not found). It is not a general error silencer —
+                    runtime bugs like <CodeText>TypeError</CodeText> from broken accessor code
+                    should still surface. Keep accessor unit tests healthy to catch these early.
+                </BlockQuote>
 
-                    <h3>
-                        <code>Wait</code> (derived from <code>Get</code>)
-                    </h3>
-                    <p>
-                        Wraps any <code>Get</code> method in RTL&apos;s <code>waitFor</code> —
-                        retries until it succeeds. For assertions with <code>expect</code>, use{' '}
-                        <code>waitFor</code> directly since <code>Wait</code> doesn&apos;t wrap
-                        matchers.
-                    </p>
-                    <Code language="ts" content={Snippets.API.wait} />
+                <Heading as="h3">
+                    <CodeText>Wait</CodeText> (derived from <CodeText>Get</CodeText>)
+                </Heading>
+                <Paragraph>
+                    Wraps any <CodeText>Get</CodeText> method in RTL&apos;s{' '}
+                    <CodeText>waitFor</CodeText> — retries until it succeeds. For assertions with{' '}
+                    <CodeText>expect</CodeText>, use <CodeText>waitFor</CodeText> directly since{' '}
+                    <CodeText>Wait</CodeText> doesn&apos;t wrap matchers.
+                </Paragraph>
+                <Code language="ts" content={Snippets.API.wait} />
 
-                    <h3>
-                        <code>Set</code> (static, pre-render)
-                    </h3>
-                    <p>
-                        <code>Set</code> is <strong>infrastructure</strong> — it belongs to the
-                        setup/render phase, not the interaction model. It lives on the static
-                        factory, not on accessor instances. <code>Set</code> is a convention, not a
-                        contract — simple components expose <code>Set.mock(props)</code>, complex
-                        ones define domain-specific methods.
-                    </p>
-                    <Code language="ts" content={Snippets.API.set} />
-                </section>
+                <Heading as="h3">
+                    <CodeText>Set</CodeText> (static, pre-render)
+                </Heading>
+                <Paragraph>
+                    <CodeText>Set</CodeText> is <strong>infrastructure</strong> — it belongs to the
+                    setup/render phase, not the interaction model. It lives on the static factory,
+                    not on accessor instances. <CodeText>Set</CodeText> is a convention, not a
+                    contract — simple components expose <CodeText>Set.mock(props)</CodeText>,
+                    complex ones define domain-specific methods.
+                </Paragraph>
+                <Code language="ts" content={Snippets.API.set} />
+            </Section>
 
-                {/* Usage Examples */}
-                <section>
-                    <h2 id="usage-examples">Usage Examples</h2>
+            {/* Usage Examples */}
+            <Section>
+                <Heading as="h2" id="usage-examples">
+                    Usage Examples
+                </Heading>
 
-                    <h3>Basic interaction</h3>
-                    <Code language="ts" content={Snippets.Usage.basic} />
+                <Heading as="h3">Basic interaction</Heading>
+                <Code language="ts" content={Snippets.Usage.basic} />
 
-                    <h3>Conditional checks</h3>
-                    <Code language="ts" content={Snippets.Usage.conditional} />
+                <Heading as="h3">Conditional checks</Heading>
+                <Code language="ts" content={Snippets.Usage.conditional} />
 
-                    <h3>Composite accessors</h3>
-                    <Code language="ts" content={Snippets.Usage.composite} />
+                <Heading as="h3">Composite accessors</Heading>
+                <Code language="ts" content={Snippets.Usage.composite} />
 
-                    <h3>Portaled overlays</h3>
-                    <Code language="ts" content={Snippets.Usage.overlay} />
+                <Heading as="h3">Portaled overlays</Heading>
+                <Code language="ts" content={Snippets.Usage.overlay} />
 
-                    <h3>Navigation</h3>
-                    <Code language="ts" content={Snippets.Usage.navigation} />
+                <Heading as="h3">Navigation</Heading>
+                <Code language="ts" content={Snippets.Usage.navigation} />
 
-                    <h3>Server mocking</h3>
-                    <Code language="ts" content={Snippets.Usage.serverMocking} />
+                <Heading as="h3">Server mocking</Heading>
+                <Code language="ts" content={Snippets.Usage.serverMocking} />
 
-                    <h3>Page render</h3>
-                    <Code language="ts" content={Snippets.Usage.pageRender} />
-                </section>
+                <Heading as="h3">Page render</Heading>
+                <Code language="ts" content={Snippets.Usage.pageRender} />
+            </Section>
 
-                {/* Design Constraints */}
-                <section>
-                    <h2 id="design-constraints">Design Constraints</h2>
+            {/* Design Constraints */}
+            <Section>
+                <Heading as="h2" id="design-constraints">
+                    Design Constraints
+                </Heading>
 
-                    <h3>Why only three authored namespaces?</h3>
-                    <p>
-                        Previous iterations had <code>Get</code>, <code>Query</code>,{' '}
-                        <code>Click</code>, <code>Act</code> — five categories with overlapping
-                        semantics. More namespaces cause three problems:
-                    </p>
-                    <ol>
-                        <li>
+                <Heading as="h3">Why only three authored namespaces?</Heading>
+                <Paragraph>
+                    Previous iterations had <CodeText>Get</CodeText>, <CodeText>Query</CodeText>,{' '}
+                    <CodeText>Click</CodeText>, <CodeText>Act</CodeText> — five categories with
+                    overlapping semantics. More namespaces cause three problems:
+                </Paragraph>
+                <ol>
+                    <li>
+                        <Text>
                             <strong>Decision fatigue</strong> — &quot;Does this belong in{' '}
-                            <code>Act</code> or <code>Click</code>?&quot;
-                        </li>
-                        <li>
+                            <CodeText>Act</CodeText> or <CodeText>Click</CodeText>?&quot;
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>Fragmented discovery</strong> — Contributors must learn where
                             each method lives across multiple namespaces.
-                        </li>
-                        <li>
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>Maintenance drift</strong> — The same concept ends up in
                             different namespaces across different accessors.
-                        </li>
-                    </ol>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>If you&apos;re...</th>
-                                <th>Use</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Reading DOM state</td>
-                                <td>
-                                    <code>Get</code>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Simulating interaction</td>
-                                <td>
-                                    <code>Do</code>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Setting up before render</td>
-                                <td>
-                                    <code>Set</code>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        </Text>
+                    </li>
+                </ol>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>If you&apos;re...</th>
+                            <th>Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Reading DOM state</td>
+                            <td>
+                                <CodeText>Get</CodeText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Simulating interaction</td>
+                            <td>
+                                <CodeText>Do</CodeText>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Setting up before render</td>
+                            <td>
+                                <CodeText>Set</CodeText>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <h3>Enforcement</h3>
-                    <p>
-                        The base <code>Accessor</code> class only defines <code>Get</code>,{' '}
-                        <code>Do</code>, <code>Has</code>, and <code>Wait</code> as getters.
-                        Subclasses extend via spread. There is no mechanism to add a fourth authored
-                        namespace on an instance. <code>Set</code> lives on the static factory,
-                        separate from the class. Adding a new namespace requires modifying the base
-                        class — that&apos;s the enforcement point.
-                    </p>
+                <Heading as="h3">Enforcement</Heading>
+                <Paragraph>
+                    The base <CodeText>Accessor</CodeText> class only defines{' '}
+                    <CodeText>Get</CodeText>, <CodeText>Do</CodeText>, <CodeText>Has</CodeText>, and{' '}
+                    <CodeText>Wait</CodeText> as getters. Subclasses extend via spread. There is no
+                    mechanism to add a fourth authored namespace on an instance.{' '}
+                    <CodeText>Set</CodeText> lives on the static factory, separate from the class.
+                    Adding a new namespace requires modifying the base class — that&apos;s the
+                    enforcement point.
+                </Paragraph>
 
-                    <h3>Principles</h3>
+                <Heading as="h3">Principles</Heading>
 
-                    <h4>Good</h4>
-                    <Code language="ts" content={Snippets.Constraints.namespaceGood} />
+                <Heading as="h4">Good</Heading>
+                <Code language="ts" content={Snippets.Constraints.namespaceGood} />
 
-                    <h4>Bad</h4>
-                    <Code language="ts" content={Snippets.Constraints.namespaceBad} />
+                <Heading as="h4">Bad</Heading>
+                <Code language="ts" content={Snippets.Constraints.namespaceBad} />
 
-                    <ul>
-                        <li>
-                            <strong>No assertions</strong> — Use <code>expect(...)</code> in the
-                            test, never <code>accessor.Expect.*()</code>.
-                        </li>
-                        <li>
+                <ul>
+                    <li>
+                        <Text>
+                            <strong>No assertions</strong> — Use <CodeText>expect(...)</CodeText> in
+                            the test, never <CodeText>accessor.Expect.*()</CodeText>.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>No retries or polling</strong> — The caller decides when to wait
-                            via <code>Wait</code> or <code>waitFor</code>.
-                        </li>
-                        <li>
-                            <strong>No business logic</strong> — <code>Do.selectDay(14)</code> (one
-                            click) is fine. <code>Do.pickNextAvailableWeekday()</code> (logic +
-                            reads) is a test helper.
-                        </li>
-                        <li>
-                            <strong>No multi-step workflows</strong> — <code>Do.click()</code>,{' '}
-                            <code>Do.type(text)</code>, <code>Do.toggle()</code> — not{' '}
-                            <code>Do.fillFormAndSubmit()</code>.
-                        </li>
-                        <li>
-                            <strong>No hidden waits</strong> — <code>Get</code> is synchronous,{' '}
-                            <code>Do</code> is a single async interaction.
-                        </li>
-                        <li>
+                            via <CodeText>Wait</CodeText> or <CodeText>waitFor</CodeText>.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
+                            <strong>No business logic</strong> —{' '}
+                            <CodeText>Do.selectDay(14)</CodeText> (one click) is fine.{' '}
+                            <CodeText>Do.pickNextAvailableWeekday()</CodeText> (logic + reads) is a
+                            test helper.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
+                            <strong>No multi-step workflows</strong> —{' '}
+                            <CodeText>Do.click()</CodeText>, <CodeText>Do.type(text)</CodeText>,{' '}
+                            <CodeText>Do.toggle()</CodeText> — not{' '}
+                            <CodeText>Do.fillFormAndSubmit()</CodeText>.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
+                            <strong>No hidden waits</strong> — <CodeText>Get</CodeText> is
+                            synchronous, <CodeText>Do</CodeText> is a single async interaction.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>
-                                <code>Do</code> methods start with a verb
+                                <CodeText>Do</CodeText> methods start with a verb
                             </strong>{' '}
-                            — <code>Do.click()</code>, <code>Do.toggle()</code>,{' '}
-                            <code>Do.selectDay(14)</code>.
-                        </li>
-                    </ul>
+                            — <CodeText>Do.click()</CodeText>, <CodeText>Do.toggle()</CodeText>,{' '}
+                            <CodeText>Do.selectDay(14)</CodeText>.
+                        </Text>
+                    </li>
+                </ul>
 
-                    <h3>Query Strategy</h3>
-                    <blockquote>
-                        If the element has a role or label, use an accessible query. If it only has
-                        a CSS class, use <code>querySelector</code>.
-                    </blockquote>
+                <Heading as="h3">Query Strategy</Heading>
+                <BlockQuote>
+                    If the element has a role or label, use an accessible query. If it only has a
+                    CSS class, use <CodeText>querySelector</CodeText>.
+                </BlockQuote>
 
-                    <h4>Good</h4>
-                    <Code language="ts" content={Snippets.Constraints.queryGood} />
+                <Heading as="h4">Good</Heading>
+                <Code language="ts" content={Snippets.Constraints.queryGood} />
 
-                    <h4>Bad</h4>
-                    <Code language="ts" content={Snippets.Constraints.queryBad} />
+                <Heading as="h4">Bad</Heading>
+                <Code language="ts" content={Snippets.Constraints.queryBad} />
 
-                    <h3>Locator Contracts</h3>
-                    <p>
-                        When labels are repeated across test files, co-locate an{' '}
-                        <code>as const</code> object as the single source of truth:
-                    </p>
-                    <Code language="ts" content={Snippets.Constraints.locatorContract} />
-                </section>
+                <Heading as="h3">Locator Contracts</Heading>
+                <Paragraph>
+                    When labels are repeated across test files, co-locate an{' '}
+                    <CodeText>as const</CodeText> object as the single source of truth:
+                </Paragraph>
+                <Code language="ts" content={Snippets.Constraints.locatorContract} />
+            </Section>
 
-                {/* Implementation Internals */}
-                <section>
-                    <h2 id="implementation-internals">Implementation Internals</h2>
-                    <p>
-                        <em>
-                            This section covers how the framework works under the hood. Consumer
-                            code doesn&apos;t need this knowledge — it&apos;s reference for
-                            contributors modifying the base class or adding new accessors.
-                        </em>
-                    </p>
+            {/* Implementation Internals */}
+            <Section>
+                <Heading as="h2" id="implementation-internals">
+                    Implementation Internals
+                </Heading>
+                <Paragraph>
+                    <em>
+                        This section covers how the framework works under the hood. Consumer code
+                        doesn&apos;t need this knowledge — it&apos;s reference for contributors
+                        modifying the base class or adding new accessors.
+                    </em>
+                </Paragraph>
 
-                    <h3>The Accessor Base Class</h3>
-                    <Code language="ts" content={Snippets.Internals.baseClass} />
+                <Heading as="h3">The Accessor Base Class</Heading>
+                <Code language="ts" content={Snippets.Internals.baseClass} />
 
-                    <h4>Key decisions</h4>
-                    <ul>
-                        <li>
+                <Heading as="h4">Key decisions</Heading>
+                <ul>
+                    <li>
+                        <Text>
                             <strong>
-                                <code>static screen</code>
+                                <CodeText>static screen</CodeText>
                             </strong>{' '}
-                            — Centralises RTL&apos;s <code>screen</code>. Scoped vs. global is
-                            explicit: <code>this.scope</code> for children,{' '}
-                            <code>Accessor.screen</code> for portaled elements.
-                        </li>
-                        <li>
+                            — Centralises RTL&apos;s <CodeText>screen</CodeText>. Scoped vs. global
+                            is explicit: <CodeText>this.scope</CodeText> for children,{' '}
+                            <CodeText>Accessor.screen</CodeText> for portaled elements.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>
-                                <code>within()</code> scoping
+                                <CodeText>within()</CodeText> scoping
                             </strong>{' '}
                             — Every accessor is bound to a specific DOM element. Two forms on one
                             page won&apos;t interfere.
-                        </li>
-                        <li>
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>
-                                Singleton <code>user</code>
+                                Singleton <CodeText>user</CodeText>
                             </strong>{' '}
-                            — One <code>userEvent.setup()</code> instance per test. Prevents
+                            — One <CodeText>userEvent.setup()</CodeText> instance per test. Prevents
                             desynced keyboard/pointer state.
-                        </li>
-                        <li>
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>
-                                <code>context</code>
+                                <CodeText>context</CodeText>
                             </strong>{' '}
                             — Hierarchical caller chain (e.g.{' '}
-                            <code>Form(&apos;Login&apos;).Input(&apos;Email&apos;)</code>). Error
-                            messages show the full accessor chain.
-                        </li>
-                        <li>
+                            <CodeText>Form(&apos;Login&apos;).Input(&apos;Email&apos;)</CodeText>
+                            ). Error messages show the full accessor chain.
+                        </Text>
+                    </li>
+                    <li>
+                        <Text>
                             <strong>
-                                <code>require()</code>
+                                <CodeText>require()</CodeText>
                             </strong>{' '}
-                            — <code>querySelector</code> + throw. Makes must-exist vs.
+                            — <CodeText>querySelector</CodeText> + throw. Makes must-exist vs.
                             might-be-absent explicit.
-                        </li>
-                    </ul>
+                        </Text>
+                    </li>
+                </ul>
 
-                    <h3>Inheritance Model</h3>
-                    <p>
-                        Subclasses extend <code>Get</code> and <code>Do</code> via getter override
-                        with spread. <code>Has</code> and <code>Wait</code> proxies see the merged
-                        result automatically.
-                    </p>
-                    <Code language="ts" content={Snippets.Constraints.inheritance} />
+                <Heading as="h3">Inheritance Model</Heading>
+                <Paragraph>
+                    Subclasses extend <CodeText>Get</CodeText> and <CodeText>Do</CodeText> via
+                    getter override with spread. <CodeText>Has</CodeText> and{' '}
+                    <CodeText>Wait</CodeText> proxies see the merged result automatically.
+                </Paragraph>
+                <Code language="ts" content={Snippets.Constraints.inheritance} />
 
-                    <h3>TestError</h3>
-                    <Code language="ts" content={Snippets.Internals.testError} />
+                <Heading as="h3">TestError</Heading>
+                <Code language="ts" content={Snippets.Internals.testError} />
 
-                    <h3>MockBuilder</h3>
-                    <Code language="ts" content={Snippets.Internals.mockBuilder} />
+                <Heading as="h3">MockBuilder</Heading>
+                <Code language="ts" content={Snippets.Internals.mockBuilder} />
 
-                    <h3>Page.render</h3>
-                    <p>
-                        Standard test entry point. Wraps the component in all required providers
-                        (React Query, Router, Session, App Context), registers MSW handlers, and
-                        resets user state. <code>Page.render()</code> calls{' '}
-                        <code>Accessor.resetUser()</code> internally, guaranteeing a clean
-                        user-event state per test.
-                    </p>
-                </section>
-            </main>
-        </Screen>
-    )
-}
+                <Heading as="h3">Page.render</Heading>
+                <Paragraph>
+                    Standard test entry point. Wraps the component in all required providers (React
+                    Query, Router, Session, App Context), registers MSW handlers, and resets user
+                    state. <CodeText>Page.render()</CodeText> calls{' '}
+                    <CodeText>Accessor.resetUser()</CodeText> internally, guaranteeing a clean
+                    user-event state per test.
+                </Paragraph>
+            </Section>
+        </Main>
+    </Screen>
+)

@@ -1,4 +1,5 @@
 import type { AccessibleProps } from '../index.types'
+import '../Button/Button.styles.css'
 import './Form.styles.css'
 
 type ButtonProps = AccessibleProps & {
@@ -23,7 +24,8 @@ export const Button = ({
         type={type}
         aria-label={ariaLabel}
         className={
-            `${variant === 'secondary' ? 'secondary' : ''} ${className ?? ''}`.trim() || undefined
+            `btn${variant === 'secondary' ? ' secondary' : ''}${className ? ` ${className}` : ''}`.trim() ||
+            undefined
         }
         style={style}
         disabled={disabled}

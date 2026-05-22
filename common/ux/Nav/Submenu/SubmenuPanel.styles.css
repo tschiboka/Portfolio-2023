@@ -44,7 +44,8 @@
 .SubmenuBasis li:hover,
 .SubmenuBasis li.extended {
     color: white;
-    font-family: Roboto_Bold;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 .SubmenuBasis > li > .link:hover {

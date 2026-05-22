@@ -11,11 +11,12 @@ import JsDateValidation from '../articles/JsDateValidation/JsDateValidation'
 import SoundsWithHowler from '../articles/SoundsWithHowler/SoundsWithHowler'
 import JsSorting from '../articles/JsSorting/JsSorting'
 import GreenRooftop from '../articles/GreenRooftop/GreenRooftop'
-import CyclicEmailScheduling from '../articles/CyclicEmailScheduling/CyclicEmailScheduling'
+import { CyclicEmailScheduling } from '../articles/CyclicEmailScheduling/CyclicEmailScheduling'
 import ReactAnatomy from '../articles/ReactAnatomy/RactAnatomy'
 import GitCheatsheet from '../articles/GitCheatsheet/GitCheatsheet'
 import Maybe from '../articles/Maybe/Maybe'
 import HookPattern from '../articles/HookPattern/HookPattern'
+import StoppingTestEntropy from '../articles/StoppingTestEntropy/StoppingTestEntropy'
 import { Clock } from '../components/sharedComponents/Clock/Clock'
 
 export const PortfolioRoutes = [
@@ -88,6 +89,15 @@ export const PortfolioRoutes = [
     {
         path: '/blog/hook-pattern',
         element: <HookPattern pageName="hook-pattern" path="/blog/hook-pattern" />,
+    },
+    {
+        path: '/blog/stopping-test-entropy',
+        element: (
+            <StoppingTestEntropy
+                pageName="stopping-test-entropy"
+                path="/blog/stopping-test-entropy"
+            />
+        ),
     },
     {
         path: '/clock',

@@ -1,6 +1,6 @@
 import { Maybe } from 'monet'
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '../../Link'
 import { MenuItem, SubmenuState } from '../Nav.types'
 import { find } from 'ramda'
 import { Coordinates, findParentMenuCoords, isParentMenu } from './SubmenuPanel.utils'
@@ -79,7 +79,7 @@ const SubmenuBasis = ({ submenu, submenuStack, setSubmenuStack, pageName }: Subm
                         }
                         onClick={() => handleItemClick(item)}
                     >
-                        <Link className="link" to={item?.path || ''}>
+                        <Link to={item?.path || ''}>
                             <span>
                                 {item.label}
                                 {item.submenu &&

@@ -1,23 +1,22 @@
-import "./Disclaimer.scss";
-import faceImg from "../../../assets/images/headshot_placeholder.png";
-import { Link } from "react-router-dom";
+import './Disclaimer.scss'
+import faceImg from '../../../assets/images/headshot_placeholder.png'
+import { Button, Link, Paragraph, Section } from '@common/ux'
 
 const Disclaimer = () => {
     return (
-        <div className="Disclaimer">
+        <Section className="Disclaimer">
             <img src={faceImg} alt="Profile Photo" />
-            <p>
-                I welcome constructive suggestions. If you spot any errors or
-                have ideas to improve this content, I'd love to hear from you.
-                Feel free to reach out!
+            <Paragraph>
+                I welcome constructive suggestions. If you spot any errors or have ideas to improve
+                this content, I'd love to hear from you. Feel free to reach out!
                 <br />
                 Thank you, and happy coding!
-            </p>
-            <Link to="/contact" className="contact-link">
+            </Paragraph>
+            <Button as={Link} to="/contact" className="contact-link">
                 Contact Tivadar
-            </Link>
-        </div>
-    );
-};
+            </Button>
+        </Section>
+    )
+}
 
-export default Disclaimer;
+export default Disclaimer

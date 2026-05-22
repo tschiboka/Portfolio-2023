@@ -1,5 +1,4 @@
 @use '../../../styles/breakpoints.scss' as bp;
-@use '../../../styles/font_sizes.scss' as font;
 
 .Blog__title {
     @include bp.md {
@@ -7,17 +6,8 @@
     }
 }
 
-.BlogList {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-h3.BlogList__header {
-    font-size: font.$font-lg;
+.BlogList__header {
     font-variant: small-caps;
-    margin-bottom: 1.5rem;
 }
 
 hr.BlogList__hr {

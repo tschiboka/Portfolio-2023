@@ -1,10 +1,8 @@
-@use '../../../styles/breakpoints.scss' as bp;
 @use '../../../styles/palette.scss' as palette;
 @use '../../../styles/font_sizes.scss' as font;
-@use '../../../styles/animations.scss' as animations;
 
 .Figure {
-    margin: 0 auto;
+    margin: 0 auto 1.5rem;
     padding: 0;
     div {
         position: relative;
@@ -41,46 +39,12 @@
             object-fit: contain;
         }
 
-        img.bg--white {
-            background-color: white;
-        }
         &:hover {
             cursor: pointer;
             .Figure__icon {
                 background-color: palette.$black_1;
             }
         }
-    }
-    div.image--lrg {
-        max-width: 100%;
-        margin: 0 auto;
-        display: block;
-    }
-
-    div.image--med {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        display: block;
-    }
-
-    div.image--sml {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-        display: block;
-    }
-
-    div.guitar {
-        max-width: 500px;
-        background-color: palette.$white_3;
-        img {
-            max-width: 500px;
-            width: 100%;
-        }
-    }
-    div.bg--white {
-        background-color: white;
     }
 }
 

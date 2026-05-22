@@ -1,6 +1,7 @@
 table thead th {
     color: var(--accent-dark-3);
-    font-family: 'Roboto_Bold';
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
     padding: var(--space-8) var(--space-12);
 }
 

@@ -91,7 +91,8 @@
 .Header .nav_links li:hover,
 .Header .nav_links li.extended {
     color: white;
-    font-family: Roboto_Bold;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 .Header .nav_links li.active:hover {
@@ -132,5 +133,6 @@
 }
 
 .light .Header .nav_links li.active {
-    font-family: Roboto_Bold;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }

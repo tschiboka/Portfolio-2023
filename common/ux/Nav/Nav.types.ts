@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { AccessibleProps } from '../index.types'
+import { AccessibleProps, InteractiveProps } from '../index.types'
 import { Capability, Feature } from '../../types'
 
 export type MenuItem = {
@@ -20,9 +20,10 @@ export type SubmenuState = {
     extended: boolean
 }
 
-export type NavProps = AccessibleProps & {
-    visible?: boolean
-    children: ReactNode
-    logo?: ReactNode
-    burger?: ReactNode
-}
+export type NavProps = AccessibleProps &
+    InteractiveProps & {
+        visible?: boolean
+        children: ReactNode
+        logo?: ReactNode
+        burger?: ReactNode
+    }

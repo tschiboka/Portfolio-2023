@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@common/ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { Table } from '@common/ux/Table'
 import { PageSideMenu } from '../../../sharedComponents/PageSideMenu/PageSideMenu'

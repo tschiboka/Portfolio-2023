@@ -37,4 +37,41 @@ export const Code = {
     style={{ maxWidth: 600, border: '2px solid var(--accent)' }}
 />`,
     },
+    tsxExample: `import { useState } from 'react'
+    
+    interface Props {
+        initialCount?: number
+    }
+    
+    export const Counter = ({ initialCount = 0 }: Props) => {
+        const [count, setCount] = useState(initialCount)
+        return (
+            <button onClick={() => setCount((c) => c + 1)}>
+                Count: {count}
+            </button>
+        )
+    }`,
+    cssExample: `.card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-12);
+        padding: var(--space-16);
+        border-radius: 8px;
+        background: var(--bg);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }`,
+    jsonExample: `{
+        "name": "@common/ux",
+        "version": "1.0.0",
+        "main": "index.ts",
+        "dependencies": {
+            "react": "^18.2.0",
+            "react-syntax-highlighter": "^15.5.0"
+        }
+    }`,
+    bashExample: `#!/bin/bash
+    echo "Building project..."
+    npm run build
+    echo "Running tests..."
+    npm test -- --coverage`,
 }

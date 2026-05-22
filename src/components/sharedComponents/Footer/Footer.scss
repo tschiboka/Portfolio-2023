@@ -35,7 +35,8 @@
         font-size: 1.8rem;
         letter-spacing: 0;
         span {
-            font-family: 'Roboto_Bold';
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
             font-variant: small-caps;
         }
         span:last-child {
@@ -75,7 +76,8 @@
         time {
             color: palette.$gray_1;
             font-size: font.$font_xs;
-            font-family: 'Roboto_Bold';
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
         }
         .copyright__pipe {
             margin-right: 10px;

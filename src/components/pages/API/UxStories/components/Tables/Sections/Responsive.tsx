@@ -1,21 +1,23 @@
 import { Table } from '@common/ux/Table'
-import { Code } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import { type Row, rows, type BreakpointRow, breakpointData } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 
 export const Responsive = () => (
     <>
-        <h2 id="responsive">Responsive</h2>
-        <p>Responsive column visibility based on viewport breakpoints.</p>
-        <section>
-            <h3>Breakpoints</h3>
-            <p>
-                Each column can declare a <code>breakpoint</code> that sets the minimum viewport
-                width at which the column becomes visible. On narrower screens the column is hidden
-                automatically, allowing the table to remain readable on mobile without horizontal
-                scrolling. Resize your browser window to see columns appear and disappear at each
-                threshold.
-            </p>
+        <Heading as="h2" id="responsive">
+            Responsive
+        </Heading>
+        <Paragraph>Responsive column visibility based on viewport breakpoints.</Paragraph>
+        <Section>
+            <Heading as="h3">Breakpoints</Heading>
+            <Paragraph>
+                Each column can declare a <CodeText>breakpoint</CodeText> that sets the minimum
+                viewport width at which the column becomes visible. On narrower screens the column
+                is hidden automatically, allowing the table to remain readable on mobile without
+                horizontal scrolling. Resize your browser window to see columns appear and disappear
+                at each threshold.
+            </Paragraph>
             <Table<BreakpointRow>
                 title="Breakpoints"
                 ariaLabel="Breakpoints reference table"
@@ -33,15 +35,15 @@ export const Responsive = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Responsive.breakpoints} />
-        </section>
-        <section>
-            <h3>Accordion</h3>
-            <p>
-                The <code>accordion</code> breakpoint is a special value that keeps a column
+        </Section>
+        <Section>
+            <Heading as="h3">Accordion</Heading>
+            <Paragraph>
+                The <CodeText>accordion</CodeText> breakpoint is a special value that keeps a column
                 permanently hidden in the main row, regardless of viewport width. The column data is
                 always available in the expandable row instead. This is useful when certain details
                 are secondary and should only be revealed on demand via the expand chevron.
-            </p>
+            </Paragraph>
             <Table<Row>
                 title="Accordion breakpoint"
                 ariaLabel="Accordion breakpoint demo table"
@@ -54,6 +56,6 @@ export const Responsive = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Responsive.accordion} />
-        </section>
+        </Section>
     </>
 )

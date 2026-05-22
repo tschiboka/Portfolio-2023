@@ -1,5 +1,5 @@
 import { Table } from '@common/ux/Table'
-import { Code } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import { toUpper } from 'ramda'
 import { type Row, rows } from '../Tables.mocks'
 import { renderStatus, renderBadge } from '../Tables.config'
@@ -7,18 +7,21 @@ import { Code as Snippets } from '../Tables.code'
 
 export const CellRenderingDefaults = () => (
     <>
-        <h2 id="cell-rendering-defaults">Cell Rendering &amp; Defaults</h2>
-        <p>Custom cell renderers and fallback default values for missing data.</p>
-        <section>
-            <h3>Custom Cell Renderers</h3>
-            <p>
-                Each column can provide a <code>cell</code> function that receives the cell value
-                and returns a <code>ReactNode</code>. This enables rich formatting such as coloured{' '}
-                <code>Pill</code> badges for statuses, styled value badges, or simple transforms
-                like
-                <code>toUpper</code>. Because the signature is <code>(value) =&gt; ReactNode</code>,
-                point-free utility functions work out of the box.
-            </p>
+        <Heading as="h2" id="cell-rendering-defaults">
+            Cell Rendering &amp; Defaults
+        </Heading>
+        <Paragraph>Custom cell renderers and fallback default values for missing data.</Paragraph>
+        <Section>
+            <Heading as="h3">Custom Cell Renderers</Heading>
+            <Paragraph>
+                Each column can provide a <CodeText>cell</CodeText> function that receives the cell
+                value and returns a <CodeText>ReactNode</CodeText>. This enables rich formatting
+                such as coloured <CodeText>Pill</CodeText> badges for statuses, styled value badges,
+                or simple transforms like
+                <CodeText>toUpper</CodeText>. Because the signature is{' '}
+                <CodeText>(value) =&gt; ReactNode</CodeText>, point-free utility functions work out
+                of the box.
+            </Paragraph>
             <Table<Row>
                 title="Custom Cell Renderers"
                 ariaLabel="Table with custom cell renderers"
@@ -30,17 +33,18 @@ export const CellRenderingDefaults = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.CellRenderingDefaults.customRenderers} />
-        </section>
-        <section>
-            <h3>Default Values</h3>
-            <p>
-                When a cell value is <code>null</code> or <code>undefined</code>, the table applies
-                a fallback. If the column specifies a <code>defaultValue</code>, that value is
-                rendered; otherwise a generic "-" placeholder appears. Note that empty strings (
-                <code>""</code>) are <strong>not</strong> treated as missing — they render as blank
-                cells. When a column has a custom <code>cell</code> renderer, the renderer always
-                runs and the <code>defaultValue</code> is never consulted.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Default Values</Heading>
+            <Paragraph>
+                When a cell value is <CodeText>null</CodeText> or <CodeText>undefined</CodeText>,
+                the table applies a fallback. If the column specifies a{' '}
+                <CodeText>defaultValue</CodeText>, that value is rendered; otherwise a generic "-"
+                placeholder appears. Note that empty strings (<CodeText>""</CodeText>) are{' '}
+                <strong>not</strong> treated as missing — they render as blank cells. When a column
+                has a custom <CodeText>cell</CodeText> renderer, the renderer always runs and the{' '}
+                <CodeText>defaultValue</CodeText> is never consulted.
+            </Paragraph>
             <Table<{
                 label: string
                 withDefault: string | null
@@ -87,6 +91,6 @@ export const CellRenderingDefaults = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.CellRenderingDefaults.defaultValues} />
-        </section>
+        </Section>
     </>
 )

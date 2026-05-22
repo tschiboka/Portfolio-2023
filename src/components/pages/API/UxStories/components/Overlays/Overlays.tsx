@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Code, Overlay, Stack } from '@common/ux'
+import { Code, CodeText, Heading, Main, Overlay, Paragraph, Section, Stack } from '@common/ux'
 import { PopupMode, PopupSize } from '@common/ux/Overlay/Overlay.types'
 import type { ActionMenuItem } from '@common/ux/Overlay/ActionMenu'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
@@ -65,24 +65,24 @@ export const Overlays = ({ path }: OverlaysProps) => {
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}
+            hasContentNavigator
         >
-            <main>
+            <Main>
                 <StoryNav />
-                <h1>Overlays</h1>
-                <p>
+                <Heading as="h1">Overlays</Heading>
+                <Paragraph>
                     Overlay components provide modal dialogs and portaled menus for user
-                    interaction. The <code>Popup</code> variant supports modes, sizes, actions, and
-                    anchored positioning. The <code>ActionMenu</code> is a lightweight portaled
-                    dropdown for contextual actions.
-                </p>
+                    interaction. The <CodeText>Popup</CodeText> variant supports modes, sizes,
+                    actions, and anchored positioning. The <CodeText>ActionMenu</CodeText> is a
+                    lightweight portaled dropdown for contextual actions.
+                </Paragraph>
+                <Heading as="h2" id="popup">
+                    Popup
+                </Heading>
 
-                {/* ── Popup ───────────────────────────────────────── */}
-
-                <h2>Popup</h2>
-
-                <section>
-                    <h3>Modes</h3>
-                    <p>Each mode has a distinct color scheme and default icon:</p>
+                <Section>
+                    <Heading as="h3">Modes</Heading>
+                    <Paragraph>Each mode has a distinct color scheme and default icon:</Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {modes.map((mode) => (
                             <button
@@ -109,11 +109,11 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             ),
                     )}
                     <Code language="tsx" content={Snippets.Popup.modes} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Sizes</h3>
-                    <p>Popups come in three sizes — sm, md, and lg:</p>
+                <Section>
+                    <Heading as="h3">Sizes</Heading>
+                    <Paragraph>Popups come in three sizes — sm, md, and lg:</Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {sizes.map((size) => (
                             <button
@@ -139,11 +139,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             ),
                     )}
                     <Code language="tsx" content={Snippets.Popup.sizes} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Actions</h3>
-                    <p>Popups can have multiple action buttons, with conditional visibility:</p>
+                <Section>
+                    <Heading as="h3">Actions</Heading>
+                    <Paragraph>
+                        Popups can have multiple action buttons, with conditional visibility:
+                    </Paragraph>
                     <button ref={refFor('actions')} onClick={() => open('actions')}>
                         Open with actions
                     </button>
@@ -166,11 +168,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.Popup.actions} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Anchored</h3>
-                    <p>Popups anchor to the trigger button and auto-position above or below:</p>
+                <Section>
+                    <Heading as="h3">Anchored</Heading>
+                    <Paragraph>
+                        Popups anchor to the trigger button and auto-position above or below:
+                    </Paragraph>
                     <Stack.Horizontal gap="24" wrap style={{ padding: '40px 0' }}>
                         <button ref={refFor('anchored')} onClick={() => open('anchored')}>
                             Open anchored
@@ -187,11 +191,11 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.Popup.anchored} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Custom Content</h3>
-                    <p>Popups accept children for fully custom body content:</p>
+                <Section>
+                    <Heading as="h3">Custom Content</Heading>
+                    <Paragraph>Popups accept children for fully custom body content:</Paragraph>
                     <button ref={refFor('custom')} onClick={() => open('custom')}>
                         Open custom popup
                     </button>
@@ -216,20 +220,22 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         </Overlay.Popup>
                     )}
                     <Code language="tsx" content={Snippets.Popup.customContent} />
-                </section>
+                </Section>
 
                 {/* ── ActionMenu ──────────────────────────────────── */}
 
-                <h2>ActionMenu</h2>
-                <p>
+                <Heading as="h2" id="action-menu">
+                    ActionMenu
+                </Heading>
+                <Paragraph>
                     A lightweight portaled dropdown menu for contextual actions. Renders to{' '}
-                    <code>document.body</code> via <code>createPortal</code>, avoiding overflow
-                    clipping. Closes on Escape, click outside, scroll, and resize.
-                </p>
+                    <CodeText>document.body</CodeText> via <CodeText>createPortal</CodeText>,
+                    avoiding overflow clipping. Closes on Escape, click outside, scroll, and resize.
+                </Paragraph>
 
-                <section>
-                    <h3>Basic</h3>
-                    <p>A simple action menu with three items:</p>
+                <Section>
+                    <Heading as="h3">Basic</Heading>
+                    <Paragraph>A simple action menu with three items:</Paragraph>
                     <button ref={refFor('am-basic')} onClick={() => open('am-basic')}>
                         Open menu
                     </button>
@@ -241,15 +247,15 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.basic} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Alignment</h3>
-                    <p>
-                        The <code>align</code> prop controls horizontal alignment relative to the
-                        anchor: <code>start</code>, <code>center</code> (default), or{' '}
-                        <code>end</code>.
-                    </p>
+                <Section>
+                    <Heading as="h3">Alignment</Heading>
+                    <Paragraph>
+                        The <CodeText>align</CodeText> prop controls horizontal alignment relative
+                        to the anchor: <CodeText>start</CodeText>, <CodeText>center</CodeText>{' '}
+                        (default), or <CodeText>end</CodeText>.
+                    </Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {aligns.map((align) => (
                             <button
@@ -274,14 +280,14 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             ),
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.align} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Variants</h3>
-                    <p>
-                        Items support colour variants: <code>primary</code>, <code>secondary</code>,
-                        and <code>danger</code>.
-                    </p>
+                <Section>
+                    <Heading as="h3">Variants</Heading>
+                    <Paragraph>
+                        Items support colour variants: <CodeText>primary</CodeText>,{' '}
+                        <CodeText>secondary</CodeText>, and <CodeText>danger</CodeText>.
+                    </Paragraph>
                     <button ref={refFor('am-variants')} onClick={() => open('am-variants')}>
                         Open with variants
                     </button>
@@ -293,13 +299,14 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.variants} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Disabled Items</h3>
-                    <p>
-                        Items with <code>disabled: true</code> are greyed out and unclickable:
-                    </p>
+                <Section>
+                    <Heading as="h3">Disabled Items</Heading>
+                    <Paragraph>
+                        Items with <CodeText>disabled: true</CodeText> are greyed out and
+                        unclickable:
+                    </Paragraph>
                     <button ref={refFor('am-disabled')} onClick={() => open('am-disabled')}>
                         Open with disabled
                     </button>
@@ -311,11 +318,11 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.disabled} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Icons</h3>
-                    <p>Items can include an icon rendered before the label:</p>
+                <Section>
+                    <Heading as="h3">Icons</Heading>
+                    <Paragraph>Items can include an icon rendered before the label:</Paragraph>
                     <button ref={refFor('am-icons')} onClick={() => open('am-icons')}>
                         Open with icons
                     </button>
@@ -327,14 +334,14 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.icons} />
-                </section>
+                </Section>
 
-                <section>
-                    <h3>Custom aria-label</h3>
-                    <p>
-                        Override the default <code>&quot;Action menu&quot;</code> label for screen
-                        readers:
-                    </p>
+                <Section>
+                    <Heading as="h3">Custom aria-label</Heading>
+                    <Paragraph>
+                        Override the default <CodeText>&quot;Action menu&quot;</CodeText> label for
+                        screen readers:
+                    </Paragraph>
                     <button ref={refFor('am-aria')} onClick={() => open('am-aria')}>
                         Open with custom label
                     </button>
@@ -347,8 +354,8 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         />
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.ariaLabel} />
-                </section>
-            </main>
+                </Section>
+            </Main>
         </Screen>
     )
 }

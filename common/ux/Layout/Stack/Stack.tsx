@@ -12,6 +12,12 @@ const StackBase = ({
     gap,
     wrap,
     direction,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    onKeyDown,
+    onFocus,
+    onBlur,
 }: StackProps & { direction: StackDirection }) => {
     return (
         <Component
@@ -26,6 +32,12 @@ const StackBase = ({
                 flexWrap: wrap ? 'wrap' : undefined,
                 ...style,
             }}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onKeyDown={onKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
         >
             {children}
         </Component>

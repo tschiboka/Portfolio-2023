@@ -1,4 +1,3 @@
-import { ElementType } from 'react'
 import { ComponentProps } from '../../index.types'
 
 export type StackDirection = 'row' | 'column'
@@ -19,7 +18,7 @@ export type StackGap =
     | '64'
 
 export type StackProps = ComponentProps & {
-    as?: ElementType
+    as?: keyof React.JSX.IntrinsicElements
     align?: StackAlign
     justify?: StackJustify
     gap?: StackGap

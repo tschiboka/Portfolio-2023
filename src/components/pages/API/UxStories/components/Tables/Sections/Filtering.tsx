@@ -1,24 +1,27 @@
 import { Table } from '@common/ux/Table'
-import { Code } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import { type Row, rows } from '../Tables.mocks'
 import { renderStatus } from '../Tables.config'
 import { Code as Snippets } from '../Tables.code'
 
 export const Filtering = () => (
     <>
-        <h2 id="filtering">Filtering</h2>
-        <p>
-            The <code>filtering</code> prop adds a slider icon to the header. Clicking it toggles a
-            filter panel with accessible inputs. Each input has a <code>type</code> that determines
-            the control rendered. The <code>onFilter</code> callback fires when the user clicks the{' '}
+        <Heading as="h2" id="filtering">
+            Filtering
+        </Heading>
+        <Paragraph>
+            The <CodeText>filtering</CodeText> prop adds a slider icon to the header. Clicking it
+            toggles a filter panel with accessible inputs. Each input has a{' '}
+            <CodeText>type</CodeText> that determines the control rendered. The{' '}
+            <CodeText>onFilter</CodeText> callback fires when the user clicks the{' '}
             <strong>Filter</strong> button. A <strong>Reset</strong> button restores all inputs to
-            their defaults and re-fires <code>onFilter</code>.
-        </p>
-        <section>
-            <h3>Filtering — Text</h3>
-            <p>
-                A plain text input with an optional <code>placeholder</code>.
-            </p>
+            their defaults and re-fires <CodeText>onFilter</CodeText>.
+        </Paragraph>
+        <Section>
+            <Heading as="h3">Filtering — Text</Heading>
+            <Paragraph>
+                A plain text input with an optional <CodeText>placeholder</CodeText>.
+            </Paragraph>
             <Table<Row>
                 title="Text Filter"
                 ariaLabel="Table with text filter"
@@ -41,13 +44,13 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.text} />
-        </section>
-        <section>
-            <h3>Filtering — Number</h3>
-            <p>
-                A numeric input supporting optional <code>min</code> and <code>max</code>{' '}
-                constraints.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — Number</Heading>
+            <Paragraph>
+                A numeric input supporting optional <CodeText>min</CodeText> and{' '}
+                <CodeText>max</CodeText> constraints.
+            </Paragraph>
             <Table<Row>
                 title="Number Filter"
                 ariaLabel="Table with number filter"
@@ -72,13 +75,13 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.number} />
-        </section>
-        <section>
-            <h3>Filtering — Search</h3>
-            <p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — Search</Heading>
+            <Paragraph>
                 A search input with a browser-native clear button. Like all filter types, the value
                 is submitted when the user clicks <strong>Filter</strong>.
-            </p>
+            </Paragraph>
             <Table<Row>
                 title="Search Filter"
                 ariaLabel="Table with search filter"
@@ -101,13 +104,13 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.search} />
-        </section>
-        <section>
-            <h3>Filtering — Option</h3>
-            <p>
-                A native <code>&lt;select&gt;</code> dropdown with predefined choices. The first
-                option is always "All".
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — Option</Heading>
+            <Paragraph>
+                A native <CodeText>&lt;select&gt;</CodeText> dropdown with predefined choices. The
+                first option is always "All".
+            </Paragraph>
             <Table<Row>
                 title="Option Filter"
                 ariaLabel="Table with option filter"
@@ -134,13 +137,13 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.option} />
-        </section>
-        <section>
-            <h3>Filtering — Date</h3>
-            <p>
-                A native date picker with optional <code>min</code> and <code>max</code> date bounds
-                (ISO strings).
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — Date</Heading>
+            <Paragraph>
+                A native date picker with optional <CodeText>min</CodeText> and{' '}
+                <CodeText>max</CodeText> date bounds (ISO strings).
+            </Paragraph>
             <Table<Row>
                 title="Date Filter"
                 ariaLabel="Table with date filter"
@@ -159,10 +162,12 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.date} />
-        </section>
-        <section>
-            <h3>Filtering — Checkbox</h3>
-            <p>A boolean toggle. Useful for flags like "show archived" or "active only".</p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — Checkbox</Heading>
+            <Paragraph>
+                A boolean toggle. Useful for flags like "show archived" or "active only".
+            </Paragraph>
             <Table<Row>
                 title="Checkbox Filter"
                 ariaLabel="Table with checkbox filter"
@@ -178,14 +183,15 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.checkbox} />
-        </section>
-        <section>
-            <h3>Filtering — All Types Combined</h3>
-            <p>
-                Every filter input type in a single panel — <code>text</code>, <code>number</code>,{' '}
-                <code>search</code>, <code>option</code>, <code>date</code>, and{' '}
-                <code>checkbox</code>.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Filtering — All Types Combined</Heading>
+            <Paragraph>
+                Every filter input type in a single panel — <CodeText>text</CodeText>,{' '}
+                <CodeText>number</CodeText>, <CodeText>search</CodeText>,{' '}
+                <CodeText>option</CodeText>, <CodeText>date</CodeText>, and{' '}
+                <CodeText>checkbox</CodeText>.
+            </Paragraph>
             <Table<Row>
                 title="All Filter Types"
                 ariaLabel="Table with all filter types"
@@ -228,6 +234,6 @@ export const Filtering = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Filtering.allTypes} />
-        </section>
+        </Section>
     </>
 )

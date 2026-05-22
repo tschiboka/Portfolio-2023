@@ -20,7 +20,7 @@ const Welcome = () => {
             <h1>
                 <strong>Tivadar Debnar</strong>
                 <span>|</span>
-                <span>Web Developer</span>{' '}
+                <span>Web Developer</span>
             </h1>
         </div>
     )

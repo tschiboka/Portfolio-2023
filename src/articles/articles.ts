@@ -9,6 +9,7 @@ import anatomyImg from '../assets/images/blog/anatomy.png'
 import gitSignImg from '../assets/images/blog/git_sign.png'
 import monetImg from '../assets/images/blog/monet.jpg'
 import hookimg from '../assets/images/blog/hook.png'
+import testingImg from '../assets/images/testing.png'
 
 export interface BlogArticle {
     title: string
@@ -175,5 +176,18 @@ export const blogArticles: BlogArticle[] = [
         suggestedArticles: ['/blog/maybe', '/blog/brief-react-anatomy'],
         created: '15.02.2024',
         updated: '17.02.2024',
+    },
+    {
+        title: 'Stopping Test Entropy',
+        image: testingImg,
+        imageAlt: 'Testing',
+        abstract:
+            'How inconsistent testing patterns quietly destroy maintainability — and how we built a structured accessor layer on top of React Testing Library to enforce consistency, reduce cognitive overhead, and make tests feel like one system again.',
+        badges: ['React', 'TypeScript'],
+        to: '/blog/stopping-test-entropy',
+        readingTime: '12 min',
+        codeTime: '',
+        suggestedArticles: ['/blog/hook-pattern', '/blog/brief-react-anatomy'],
+        created: '17.05.2026',
     },
 ]

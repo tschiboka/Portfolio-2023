@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '../Link'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { AccessGuard } from '../../utils/AccessGuard'
 import { Nav } from './Nav'
@@ -59,7 +59,7 @@ export const NavMenu = ({
                             className={isHighlighted(item, pageName, submenu)}
                             onClick={() => onItemClick?.(item)}
                         >
-                            <Link className="link" to={item?.path || ''}>
+                            <Link to={item?.path || ''}>
                                 {item.image && renderImage?.(item.image)}
                                 <span>{item.label}</span>
                                 <Chevron item={item} submenu={submenu} />

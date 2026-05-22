@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { Form, LoadingIndicator } from '@common/ux'
+import { Form, Heading, LoadingIndicator, Main, Paragraph, Section } from '@common/ux'
 import { ErrorResponse, PostMessageResponse } from '@common/types'
 import { ContactFormData } from './Contact.types'
 import { contactSchema, MAX_MESSAGE_CHARACTERS } from './Contact.schema'
@@ -75,9 +75,9 @@ const Contact = ({ pageName, path }: ContactProps) => {
         >
             {showMessageAck && <MessageAcknowledgement />}
 
-            <main className="contact">
-                <h1>Get in Touch!</h1>
-                <section>
+            <Main className="contact">
+                <Heading as="h1">Get in Touch!</Heading>
+                <Section>
                     <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Contact form">
                         <Form.Fieldset>
                             <Form.Label for="name">Full name</Form.Label>
@@ -117,7 +117,7 @@ const Contact = ({ pageName, path }: ContactProps) => {
                         </Form.Fieldset>
                         <LoadingIndicator show={isLoading} />
                         {submitErrorMessage && (
-                            <p className="submit-error-message">{submitErrorMessage}</p>
+                            <Paragraph tone="error">{submitErrorMessage}</Paragraph>
                         )}
                         <Form.ButtonGroup>
                             <Form.Button type="submit" disabled={isLoading || showMessageAck}>
@@ -125,8 +125,8 @@ const Contact = ({ pageName, path }: ContactProps) => {
                             </Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                </section>
-            </main>
+                </Section>
+            </Main>
         </Screen>
     )
 }

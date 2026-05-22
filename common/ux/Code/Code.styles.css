@@ -29,6 +29,25 @@
     max-height: 150vh;
     overflow: auto;
     background: var(--black-x);
+    scrollbar-color: var(--accent-dark-3) var(--black-1);
+    scrollbar-width: thin;
+}
+
+.Code pre::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+.Code pre::-webkit-scrollbar-track {
+    background: var(--black-x);
+}
+
+.Code pre::-webkit-scrollbar-thumb {
+    background: var(--accent-dark-3);
+}
+
+.Code pre::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dark-1);
 }
 
 .Code__header {

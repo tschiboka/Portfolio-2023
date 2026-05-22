@@ -1,0 +1,170 @@
+@import '../index.css';
+
+/* ── Base ── */
+.region {
+    width: 100%;
+}
+
+/* ── Default (Card-like) ── */
+.region--default {
+    padding: var(--space-16);
+    background-color: var(--black-1);
+    border: 1px solid var(--black-3);
+    border-radius: var(--panel-radius);
+    box-shadow:
+        10px 10px 30px rgba(0, 0, 0, 0.7),
+        -5px -5px 5px rgba(255, 255, 255, 0.02);
+    overflow: hidden;
+}
+
+/* ── Section ── */
+.region--section {
+    margin-bottom: 1.5rem;
+}
+
+/* ── Collapsible (Section-like) ── */
+.region--collapsible {
+    margin-bottom: var(--space-16);
+    border: var(--panel-border);
+    border-radius: var(--panel-radius);
+    overflow: hidden;
+}
+
+/* ── Collapsible header (mirrors Section) ── */
+.region__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-12) var(--space-16);
+    background-color: var(--black-1);
+    border: none;
+    color: var(--white-2);
+    font-size: var(--font-sm);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-variant: small-caps;
+    cursor: pointer;
+}
+
+.region__header-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.region__icon {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-md);
+    color: var(--accent-dark-3);
+    transition: color 0.2s ease;
+}
+
+.region__header--static {
+    cursor: default;
+}
+
+.region__header:hover:not(.region__header--static) {
+    background-color: var(--black-2);
+}
+
+.region__header:hover:not(.region__header--static) .region__icon {
+    color: var(--accent-dark-1);
+}
+
+.region__chevron {
+    display: inline-block;
+    width: var(--space-8);
+    height: var(--space-8);
+    border-right: var(--space-2) solid var(--accent-dark-3);
+    border-bottom: var(--space-2) solid var(--accent-dark-3);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+}
+
+.region--open .region__chevron {
+    transform: rotate(-135deg);
+}
+
+.region__content {
+    padding: var(--space-16);
+    background-color: var(--black-1);
+}
+
+/* ── Modal ── */
+.region--modal {
+    box-sizing: border-box;
+    padding: var(--space-24);
+    border-radius: var(--space-8);
+    background: var(--black-1);
+    border: 1px solid var(--black-3);
+    color: var(--white-1);
+}
+
+/* ── Sidebar ── */
+.region--sidebar {
+    background-color: var(--black-1);
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* ── Header ── */
+.region--header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--black-1);
+    z-index: 90;
+    overflow: hidden;
+    user-select: none;
+}
+
+@media (min-width: 168px) {
+    .region--header {
+        padding: 0 1.2rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .region--header {
+        padding: 0 1.5rem;
+    }
+}
+
+/* ── Main ── */
+.region--main {
+    padding: 3rem 1rem 3rem 1rem;
+}
+
+.region--main > .region__content {
+    background-color: transparent;
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .region--main {
+        padding: 3rem 5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .region--main {
+        padding: 3rem 15%;
+    }
+}
+
+/* ── Light theme ── */
+.light .region--default {
+    background-color: var(--white-2);
+}
+
+.light .region--header {
+    background-color: white;
+}

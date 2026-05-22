@@ -30,6 +30,12 @@ export const Nav = ({
     style,
     logo,
     burger,
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+    onKeyDown,
+    onFocus,
+    onBlur,
 }: NavProps) => {
     if (!visible) return null
 
@@ -38,6 +44,12 @@ export const Nav = ({
             className={`Header${className ? ` ${className}` : ''}`}
             aria-label={ariaLabel}
             style={style}
+            onClick={onClick}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            onKeyDown={onKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
         >
             {logo ?? null}
             {burger ?? <DefaultBurger />}

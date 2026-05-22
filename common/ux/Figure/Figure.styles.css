@@ -1,0 +1,53 @@
+.figure {
+    margin: 0 auto 1.5rem;
+    padding: 0;
+}
+
+.figure__image-wrapper {
+    position: relative;
+    width: auto;
+    max-width: 100%;
+}
+
+.figure__image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    display: block;
+    object-fit: contain;
+}
+
+.figure__caption {
+    margin-top: var(--space-8);
+    text-align: center;
+}
+
+/* Sizes */
+.figure--sm .figure__image-wrapper {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.figure--md .figure__image-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.figure--lg .figure__image-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.figure--full .figure__image-wrapper {
+    max-width: 100%;
+}
+
+/* Zoomable */
+.figure--zoomable {
+    cursor: pointer;
+}
+
+.figure--zoomable .figure__image-wrapper:hover {
+    opacity: 0.85;
+}

@@ -3,6 +3,7 @@ import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { MdCopyright } from 'react-icons/md'
+import { Link } from '@common/ux'
 import logo from '../../../assets/images/icon-light.svg'
 import './Footer.scss'
 import { ReactNode } from 'react'
@@ -28,20 +29,20 @@ const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
             </span>
             <Breadcrumb path={path} visitsPreLoaded={visitsPreLoaded} visitCount={visitCount} />
             <div className="social-links">
-                <a href="https://www.facebook.com/tschiboka/">
+                <Link href="https://www.facebook.com/tschiboka/">
                     <FaFacebookF title="Facebook Link" />
-                </a>
-                <a href="https://github.com/tschiboka">
+                </Link>
+                <Link href="https://github.com/tschiboka">
                     <TbBrandGithubFilled title="Github Link" />
-                </a>
-                <a href="https://www.linkedin.com/in/tivadar-debnar/">
+                </Link>
+                <Link href="https://www.linkedin.com/in/tivadar-debnar/">
                     <TfiLinkedin title="LinkedIn Link" />
-                </a>
+                </Link>
             </div>
             <p className="copyright">
                 <MdCopyright className="copyright__icon" />
                 <time>
-                    <a href="#/clock">{year}</a>
+                    <Link href="#/clock">{year}</Link>
                 </time>
                 <span className="copyright__pipe">|</span>
                 Tivadar Debnar. All rights reserved.{' '}

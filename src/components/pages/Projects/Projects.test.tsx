@@ -60,6 +60,6 @@ describe('Get Colours', () => {
 
     it('Should Return Default Color', () => {
         const result = getColourName('A')
-        expect(result).toBe('white')
+        expect(result).toBe('gray')
     })
 })

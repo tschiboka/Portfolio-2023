@@ -1,18 +1,19 @@
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
+import { Link } from '@common/ux'
 
 export const SocialLinks = () => (
     <>
-        <a href="https://www.facebook.com/tschiboka/">
+        <Link href="https://www.facebook.com/tschiboka/">
             <FaFacebookF title="Facebook Link" />
-        </a>
-        <a href="https://github.com/tschiboka">
+        </Link>
+        <Link href="https://github.com/tschiboka">
             <TbBrandGithubFilled title="Github Link" />
-        </a>
-        <a href="https://www.linkedin.com/in/tivadar-debnar/">
+        </Link>
+        <Link href="https://www.linkedin.com/in/tivadar-debnar/">
             <TfiLinkedin title="LinkedIn Link" />
-        </a>
+        </Link>
     </>
 )
 

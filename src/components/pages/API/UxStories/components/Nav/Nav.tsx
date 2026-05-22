@@ -1,4 +1,4 @@
-import { Code, Stack } from '@common/ux'
+import { Code, CodeText, Heading, List, Main, Paragraph, Section, Stack } from '@common/ux'
 import { Nav } from '@common/ux/Nav/Nav'
 import { SubNav } from '@common/ux/Nav/SubNav/SubNav'
 import { MobileMenu } from '@common/ux/Nav/MobileMenu/MobileMenu'
@@ -90,112 +90,125 @@ const MobileMenuDemo = () => (
     </div>
 )
 
-export const NavStory = ({ path }: NavStoryProps) => {
-    return (
-        <Screen
-            title={'Tivadar Debnar | Nav'}
-            path={path}
-            recordVisit={false}
-            loginRequired
-            variant="api"
-            pageName="Projects"
-            sideMenu={<PageSideMenu />}
-        >
-            <main>
-                <StoryNav />
-                <h1>Nav</h1>
-                <p>
-                    The <code>Nav</code> system provides a responsive navigation bar with support
-                    for nested submenus, mobile menu, sub-navigation bar, and theme toggling. It is
-                    composed of several sub-components that can be used independently or together.
-                </p>
+export const NavStory = ({ path }: NavStoryProps) => (
+    <Screen
+        title={'Tivadar Debnar | Nav'}
+        path={path}
+        recordVisit={false}
+        loginRequired
+        variant="api"
+        pageName="Projects"
+        sideMenu={<PageSideMenu />}
+        hasContentNavigator
+    >
+        <Main>
+            <StoryNav />
+            <Heading as="h1">Nav</Heading>
+            <Paragraph>
+                The <CodeText>Nav</CodeText> system provides a responsive navigation bar with
+                support for nested submenus, mobile menu, sub-navigation bar, and theme toggling. It
+                is composed of several sub-components that can be used independently or together.
+            </Paragraph>
+            <Section>
+                <Heading as="h2" id="components">
+                    Components
+                </Heading>
+                <Stack.Vertical gap="8">
+                    <Paragraph>The Nav system exports the following components:</Paragraph>
+                    <List
+                        items={[
+                            <>
+                                <CodeText>Nav</CodeText> — Generic shell (header with logo, burger,
+                                and nav links)
+                            </>,
+                            <>
+                                <CodeText>NavMenu</CodeText> — Data-driven menu renderer with
+                                AccessGuard integration
+                            </>,
+                            <>
+                                <CodeText>SubNav</CodeText> — Secondary bar with theme toggle and
+                                injected content
+                            </>,
+                            <>
+                                <CodeText>MobileMenu</CodeText> — Full-screen mobile menu with
+                                stacked navigation
+                            </>,
+                        ]}
+                    />
+                </Stack.Vertical>
+            </Section>
 
-                <section>
-                    <h2>Components</h2>
-                    <Stack.Vertical gap="8">
-                        <p>The Nav system exports the following components:</p>
-                        <ul>
-                            <li>
-                                <code>Nav</code> — Generic shell (header with logo, burger, and nav
-                                links)
-                            </li>
-                            <li>
-                                <code>NavMenu</code> — Data-driven menu renderer with AccessGuard
-                                integration
-                            </li>
-                            <li>
-                                <code>SubNav</code> — Secondary bar with theme toggle and injected
-                                content
-                            </li>
-                            <li>
-                                <code>MobileMenu</code> — Full-screen mobile menu with stacked
-                                navigation
-                            </li>
-                        </ul>
-                    </Stack.Vertical>
-                </section>
+            <Section>
+                <Heading as="h2" id="menu-item-type">
+                    MenuItem Type
+                </Heading>
+                <Paragraph>
+                    All menu components accept an array of <CodeText>MenuItem</CodeText> objects
+                    that define the navigation structure.
+                </Paragraph>
+                <Code language="typescript" content={Snippets.menuItemType} />
+            </Section>
 
-                <section>
-                    <h2>MenuItem Type</h2>
-                    <p>
-                        All menu components accept an array of <code>MenuItem</code> objects that
-                        define the navigation structure.
-                    </p>
-                    <Code language="typescript" content={Snippets.menuItemType} />
-                </section>
+            <Section>
+                <Heading as="h2" id="nav-shell">
+                    Nav Shell
+                </Heading>
+                <Paragraph>
+                    The base <CodeText>Nav</CodeText> component renders a fixed header with optional
+                    logo and burger button props. Children are rendered inside the nav links list.
+                </Paragraph>
+                <NavShellDemo />
+                <Code language="tsx" content={Snippets.navShell} />
+            </Section>
 
-                <section>
-                    <h2>Nav Shell</h2>
-                    <p>
-                        The base <code>Nav</code> component renders a fixed header with optional
-                        logo and burger button props. Children are rendered inside the nav links
-                        list.
-                    </p>
-                    <NavShellDemo />
-                    <Code language="tsx" content={Snippets.navShell} />
-                </section>
+            <Section>
+                <Heading as="h2" id="sub-nav">
+                    SubNav
+                </Heading>
+                <Paragraph>
+                    The <CodeText>SubNav</CodeText> component renders a secondary bar below the main
+                    nav. It includes a theme toggle and accepts optional title and links as
+                    ReactNode props.
+                </Paragraph>
+                <SubNavDemo />
+                <Code language="tsx" content={Snippets.subNav} />
+            </Section>
 
-                <section>
-                    <h2>SubNav</h2>
-                    <p>
-                        The <code>SubNav</code> component renders a secondary bar below the main
-                        nav. It includes a theme toggle and accepts optional title and links as
-                        ReactNode props.
-                    </p>
-                    <SubNavDemo />
-                    <Code language="tsx" content={Snippets.subNav} />
-                </section>
+            <Section>
+                <Heading as="h2" id="mobile-menu">
+                    MobileMenu
+                </Heading>
+                <Paragraph>
+                    The <CodeText>MobileMenu</CodeText> component renders a full-screen overlay on
+                    mobile. It supports nested submenu navigation via a stack-based approach, theme
+                    toggling, and an extras slot for additional content like social links.
+                </Paragraph>
+                <MobileMenuDemo />
+                <Code language="tsx" content={Snippets.mobileMenu} />
+            </Section>
 
-                <section>
-                    <h2>MobileMenu</h2>
-                    <p>
-                        The <code>MobileMenu</code> component renders a full-screen overlay on
-                        mobile. It supports nested submenu navigation via a stack-based approach,
-                        theme toggling, and an extras slot for additional content like social links.
-                    </p>
-                    <MobileMenuDemo />
-                    <Code language="tsx" content={Snippets.mobileMenu} />
-                </section>
+            <Section>
+                <Heading as="h2" id="nav-menu">
+                    NavMenu
+                </Heading>
+                <Paragraph>
+                    <CodeText>NavMenu</CodeText> is a higher-level component that takes an items
+                    array and renders a full navigation bar with AccessGuard-wrapped items, submenu
+                    chevrons, and active state highlighting.
+                </Paragraph>
+                <Code language="tsx" content={Snippets.navMenu} />
+            </Section>
 
-                <section>
-                    <h2>NavMenu</h2>
-                    <p>
-                        <code>NavMenu</code> is a higher-level component that takes an items array
-                        and renders a full navigation bar with AccessGuard-wrapped items, submenu
-                        chevrons, and active state highlighting.
-                    </p>
-                    <Code language="tsx" content={Snippets.navMenu} />
-                </section>
-
-                <section>
-                    <h2>Integration Example</h2>
-                    <p>
-                        In practice, you compose these components at the app level to create a
-                        complete navigation system tailored to your page variant.
-                    </p>
-                    <Code language="tsx" content={Snippets.integration} />
-                </section>
-            </main>
-        </Screen>
-    )
-}
+            <Section>
+                <Heading as="h2" id="integration-example">
+                    Integration Example
+                </Heading>
+                <Paragraph>
+                    In practice, you compose these components at the app level to create a complete
+                    navigation system tailored to your page variant.
+                </Paragraph>
+                <Code language="tsx" content={Snippets.integration} />
+            </Section>
+        </Main>
+    </Screen>
+)

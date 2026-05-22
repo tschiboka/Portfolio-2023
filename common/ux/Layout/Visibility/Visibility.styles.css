@@ -1,0 +1,178 @@
+/* Visibility — responsive show/hide */
+
+.visibility {
+    display: contents;
+}
+
+/* Show: hidden by default, shown at breakpoint */
+.visibility--hidden {
+    display: none;
+}
+
+/* Show above */
+@media (min-width: 375px) {
+    .visibility--show-above-2xs {
+        display: contents;
+    }
+}
+@media (min-width: 420px) {
+    .visibility--show-above-xs {
+        display: contents;
+    }
+}
+@media (min-width: 576px) {
+    .visibility--show-above-sm {
+        display: contents;
+    }
+}
+@media (min-width: 670px) {
+    .visibility--show-above-mx {
+        display: contents;
+    }
+}
+@media (min-width: 768px) {
+    .visibility--show-above-md {
+        display: contents;
+    }
+}
+@media (min-width: 992px) {
+    .visibility--show-above-lg {
+        display: contents;
+    }
+}
+@media (min-width: 1200px) {
+    .visibility--show-above-xl {
+        display: contents;
+    }
+}
+@media (min-width: 1580px) {
+    .visibility--show-above-2xl {
+        display: contents;
+    }
+}
+
+/* Show below */
+@media (max-width: 374px) {
+    .visibility--show-below-2xs {
+        display: contents;
+    }
+}
+@media (max-width: 419px) {
+    .visibility--show-below-xs {
+        display: contents;
+    }
+}
+@media (max-width: 575px) {
+    .visibility--show-below-sm {
+        display: contents;
+    }
+}
+@media (max-width: 669px) {
+    .visibility--show-below-mx {
+        display: contents;
+    }
+}
+@media (max-width: 767px) {
+    .visibility--show-below-md {
+        display: contents;
+    }
+}
+@media (max-width: 991px) {
+    .visibility--show-below-lg {
+        display: contents;
+    }
+}
+@media (max-width: 1199px) {
+    .visibility--show-below-xl {
+        display: contents;
+    }
+}
+@media (max-width: 1579px) {
+    .visibility--show-below-2xl {
+        display: contents;
+    }
+}
+
+/* Hide above */
+@media (min-width: 375px) {
+    .visibility--hide-above-2xs {
+        display: none;
+    }
+}
+@media (min-width: 420px) {
+    .visibility--hide-above-xs {
+        display: none;
+    }
+}
+@media (min-width: 576px) {
+    .visibility--hide-above-sm {
+        display: none;
+    }
+}
+@media (min-width: 670px) {
+    .visibility--hide-above-mx {
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+    .visibility--hide-above-md {
+        display: none;
+    }
+}
+@media (min-width: 992px) {
+    .visibility--hide-above-lg {
+        display: none;
+    }
+}
+@media (min-width: 1200px) {
+    .visibility--hide-above-xl {
+        display: none;
+    }
+}
+@media (min-width: 1580px) {
+    .visibility--hide-above-2xl {
+        display: none;
+    }
+}
+
+/* Hide below */
+@media (max-width: 374px) {
+    .visibility--hide-below-2xs {
+        display: none;
+    }
+}
+@media (max-width: 419px) {
+    .visibility--hide-below-xs {
+        display: none;
+    }
+}
+@media (max-width: 575px) {
+    .visibility--hide-below-sm {
+        display: none;
+    }
+}
+@media (max-width: 669px) {
+    .visibility--hide-below-mx {
+        display: none;
+    }
+}
+@media (max-width: 767px) {
+    .visibility--hide-below-md {
+        display: none;
+    }
+}
+@media (max-width: 991px) {
+    .visibility--hide-below-lg {
+        display: none;
+    }
+}
+@media (max-width: 1199px) {
+    .visibility--hide-below-xl {
+        display: none;
+    }
+}
+@media (max-width: 1579px) {
+    .visibility--hide-below-2xl {
+        display: none;
+    }
+}

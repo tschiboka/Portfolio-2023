@@ -1,5 +1,6 @@
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
+import { Link } from '@common/ux'
 import './PrivacyPolicy.scss'
 
 interface Props {
@@ -66,9 +67,11 @@ const PrivacyPolicy = ({ pageName, path }: Props) => {
                     on this page, and the "Last updated" date will be revised accordingly. Contact
                     Us: If you have any questions or concerns about this Privacy Policy, please
                     contact us at{' '}
-                    <a href="mailto:tibi.aki.tivadar@gmail.com">tibi.aki.tivadar@gmail.com</a> or{' '}
-                    <a href="mailto:tibi.aki.tivadar@gmail.com">tibi.aki.tivadar@gmail.com</a>. By
-                    using our website, you consent to the terms outlined in this Privacy Policy.
+                    <Link href="mailto:tibi.aki.tivadar@gmail.com">tibi.aki.tivadar@gmail.com</Link>{' '}
+                    or{' '}
+                    <Link href="mailto:tibi.aki.tivadar@gmail.com">tibi.aki.tivadar@gmail.com</Link>
+                    . By using our website, you consent to the terms outlined in this Privacy
+                    Policy.
                 </p>
             </main>
         </Screen>

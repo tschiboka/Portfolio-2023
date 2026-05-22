@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Code, Form } from '@common/ux'
+import { Code, CodeText, Form, Heading, Main, Paragraph, Section } from '@common/ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
@@ -155,58 +155,65 @@ export const Forms = ({ path }: FormsProps) => {
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}
+            hasContentNavigator
         >
-            <main>
+            <Main>
                 <StoryNav />
-                <h1>Form</h1>
-                <p>
-                    The <code>Form</code> namespace groups all form-related primitives. Every
-                    controlled component integrates with <code>react-hook-form</code> via{' '}
-                    <code>Controller</code>, accepting a <code>control</code> object and a{' '}
-                    <code>name</code> to bind to form state. All components also accept{' '}
-                    <code>ariaLabel</code>, <code>className</code> and <code>style</code>.
-                </p>
+                <Heading as="h1">Form</Heading>
+                <Paragraph>
+                    The <CodeText>Form</CodeText> namespace groups all form-related primitives.
+                    Every controlled component integrates with <CodeText>react-hook-form</CodeText>{' '}
+                    via <CodeText>Controller</CodeText>, accepting a <CodeText>control</CodeText>{' '}
+                    object and a <CodeText>name</CodeText> to bind to form state. All components
+                    also accept <CodeText>ariaLabel</CodeText>, <CodeText>className</CodeText> and{' '}
+                    <CodeText>style</CodeText>.
+                </Paragraph>
+                <Section>
+                    <Heading as="h2" id="layout">
+                        Layout
+                    </Heading>
+                    <Paragraph>
+                        Structural components that define form layout: <CodeText>Form</CodeText>{' '}
+                        wraps the entire form, <CodeText>Form.Fieldset</CodeText> groups a label
+                        with its input, and <CodeText>Form.Label</CodeText> provides a styled label
+                        element.
+                    </Paragraph>
 
-                {/* ─── LAYOUT ─── */}
-                <section>
-                    <h2>Layout</h2>
-                    <p>
-                        Structural components that define form layout: <code>Form</code> wraps the
-                        entire form, <code>Form.Fieldset</code> groups a label with its input, and{' '}
-                        <code>Form.Label</code> provides a styled label element.
-                    </p>
-
-                    <h3>Form</h3>
-                    <p>
-                        A thin wrapper around <code>&lt;form&gt;</code> that forwards all native
-                        attributes and applies neumorphic panel styling.
-                    </p>
+                    <Heading as="h3">Form</Heading>
+                    <Paragraph>
+                        A thin wrapper around <CodeText>&lt;form&gt;</CodeText> that forwards all
+                        native attributes and applies neumorphic panel styling.
+                    </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.form} />
 
-                    <h3>Form.Fieldset</h3>
-                    <p>
+                    <Heading as="h3">Form.Fieldset</Heading>
+                    <Paragraph>
                         Groups a label and input together. The label floats above the fieldset
                         border and highlights on focus-within.
-                    </p>
+                    </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.fieldset} />
 
-                    <h3>Form.Label</h3>
-                    <p>
-                        A styled <code>&lt;label&gt;</code> with a <code>for</code> prop (mapped to{' '}
-                        <code>htmlFor</code>). Turns accent when its fieldset is focused.
-                    </p>
+                    <Heading as="h3">Form.Label</Heading>
+                    <Paragraph>
+                        A styled <CodeText>&lt;label&gt;</CodeText> with a <CodeText>for</CodeText>{' '}
+                        prop (mapped to <CodeText>htmlFor</CodeText>). Turns accent when its
+                        fieldset is focused.
+                    </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.label} />
-                </section>
+                </Section>
 
                 {/* ─── TEXT INPUTS ─── */}
-                <section>
-                    <h2>Text Inputs</h2>
-                    <p>
-                        <code>Form.Input</code> supports multiple types. <code>Form.TextArea</code>{' '}
-                        provides a multi-line variant with optional character counter.
-                    </p>
+                <Section>
+                    <Heading as="h2" id="text-inputs">
+                        Text Inputs
+                    </Heading>
+                    <Paragraph>
+                        <CodeText>Form.Input</CodeText> supports multiple types.{' '}
+                        <CodeText>Form.TextArea</CodeText> provides a multi-line variant with
+                        optional character counter.
+                    </Paragraph>
 
-                    <h3>Text</h3>
+                    <Heading as="h3">Text</Heading>
                     <Form autoComplete="off" ariaLabel="Text input demo">
                         <Form.Fieldset>
                             <Form.Label for="name">Name</Form.Label>
@@ -220,7 +227,7 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.text} />
 
-                    <h3>Email</h3>
+                    <Heading as="h3">Email</Heading>
                     <Form autoComplete="off" ariaLabel="Email input demo">
                         <Form.Fieldset>
                             <Form.Label for="email">Email</Form.Label>
@@ -234,10 +241,10 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.email} />
 
-                    <h3>Password</h3>
-                    <p>
-                        Set <code>addRevealPasswordIcon</code> to show a toggle eye icon.
-                    </p>
+                    <Heading as="h3">Password</Heading>
+                    <Paragraph>
+                        Set <CodeText>addRevealPasswordIcon</CodeText> to show a toggle eye icon.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="Password input demo">
                         <Form.Fieldset>
                             <Form.Label for="password">Password</Form.Label>
@@ -254,7 +261,7 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.password} />
 
-                    <h3>Number</h3>
+                    <Heading as="h3">Number</Heading>
                     <Form autoComplete="off" ariaLabel="Number input demo">
                         <Form.Fieldset>
                             <Form.Label for="age">Age</Form.Label>
@@ -263,11 +270,11 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.number} />
 
-                    <h3>TextArea</h3>
-                    <p>
-                        Set <code>maxLength</code> to show a live character counter.{' '}
-                        <code>rows</code> defaults to 3.
-                    </p>
+                    <Heading as="h3">TextArea</Heading>
+                    <Paragraph>
+                        Set <CodeText>maxLength</CodeText> to show a live character counter.{' '}
+                        <CodeText>rows</CodeText> defaults to 3.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="TextArea demo">
                         <Form.Fieldset>
                             <Form.Label for="bio">Bio</Form.Label>
@@ -291,18 +298,20 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.TextInputs.textarea} />
                     <Code language="tsx" content={Snippets.TextInputs.textareaMax} />
                     <Code language="tsx" content={Snippets.TextInputs.types} />
-                </section>
+                </Section>
 
                 {/* ─── DATE PICKERS ─── */}
-                <section>
-                    <h2>Date Pickers</h2>
-                    <p>
-                        Two date options: the native browser <code>type="date"</code> input (limited
-                        styling) and the custom <code>Form.DateInput</code> with a full calendar
-                        popup.
-                    </p>
+                <Section>
+                    <Heading as="h2" id="date-pickers">
+                        Date Pickers
+                    </Heading>
+                    <Paragraph>
+                        Two date options: the native browser <CodeText>type="date"</CodeText> input
+                        (limited styling) and the custom <CodeText>Form.DateInput</CodeText> with a
+                        full calendar popup.
+                    </Paragraph>
 
-                    <h3>Native Date</h3>
+                    <Heading as="h3">Native Date</Heading>
                     <Form autoComplete="off" ariaLabel="Native date demo">
                         <Form.Fieldset>
                             <Form.Label for="dob">Date of Birth</Form.Label>
@@ -311,11 +320,11 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.DatePickers.native} />
 
-                    <h3>Custom DateInput</h3>
-                    <p>
+                    <Heading as="h3">Custom DateInput</Heading>
+                    <Paragraph>
                         Full-featured calendar picker with text mask, keyboard navigation,
                         year/month quick-pick, and viewport-aware flip.
-                    </p>
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="Custom date demo">
                         <Form.Fieldset>
                             <Form.Label for="dob">Date of Birth</Form.Label>
@@ -325,21 +334,23 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.DatePickers.custom} />
                     <Code language="tsx" content={Snippets.DatePickers.customWithMinMax} />
                     <Code language="tsx" content={Snippets.DatePickers.features} />
-                </section>
+                </Section>
 
                 {/* ─── SELECTION ─── */}
-                <section>
-                    <h2>Selection</h2>
-                    <p>
+                <Section>
+                    <Heading as="h2" id="selection">
+                        Selection
+                    </Heading>
+                    <Paragraph>
                         Components for picking from predefined options: radio buttons, checkboxes,
                         and a searchable dropdown.
-                    </p>
+                    </Paragraph>
 
-                    <h3>RadioButton &amp; RadioGroup</h3>
-                    <p>
-                        Wrap radios in <code>Form.RadioGroup</code> for accessible grouping. Pass
-                        string or boolean <code>value</code> props.
-                    </p>
+                    <Heading as="h3">RadioButton &amp; RadioGroup</Heading>
+                    <Paragraph>
+                        Wrap radios in <CodeText>Form.RadioGroup</CodeText> for accessible grouping.
+                        Pass string or boolean <CodeText>value</CodeText> props.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="RadioButton demo">
                         <Form.Fieldset>
                             <Form.RadioGroup label="Role" htmlFor="role">
@@ -363,11 +374,11 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.Selection.radio} />
                     <Code language="tsx" content={Snippets.Selection.radioBoolean} />
 
-                    <h3>Checkbox</h3>
-                    <p>
-                        A styled checkbox with built-in label. The optional <code>onChange</code>{' '}
-                        callback fires with the new checked state.
-                    </p>
+                    <Heading as="h3">Checkbox</Heading>
+                    <Paragraph>
+                        A styled checkbox with built-in label. The optional{' '}
+                        <CodeText>onChange</CodeText> callback fires with the new checked state.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="Checkbox demo">
                         <Form.Checkbox
                             name="terms"
@@ -377,11 +388,12 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.Selection.checkbox} />
 
-                    <h3>SearchInput</h3>
-                    <p>
-                        A filterable dropdown with <code>highlightMatch</code> support, optional
-                        icons and colour selection. Opens on typing or clicking the toggle icon.
-                    </p>
+                    <Heading as="h3">SearchInput</Heading>
+                    <Paragraph>
+                        A filterable dropdown with <CodeText>highlightMatch</CodeText> support,
+                        optional icons and colour selection. Opens on typing or clicking the toggle
+                        icon.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="SearchInput demo">
                         <Form.Fieldset>
                             <Form.Label for="framework">Framework</Form.Label>
@@ -398,16 +410,19 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.Selection.search} />
                     <Code language="tsx" content={Snippets.Selection.searchIcons} />
-                </section>
+                </Section>
 
                 {/* ─── ACTIONS ─── */}
-                <section>
-                    <h2>Actions</h2>
-                    <p>
-                        <code>Form.Button</code> renders a styled button with <code>primary</code>{' '}
-                        (default) or <code>secondary</code> variant. <code>Form.ButtonGroup</code>{' '}
-                        arranges buttons in a row with consistent spacing.
-                    </p>
+                <Section>
+                    <Heading as="h2" id="actions">
+                        Actions
+                    </Heading>
+                    <Paragraph>
+                        <CodeText>Form.Button</CodeText> renders a styled button with{' '}
+                        <CodeText>primary</CodeText> (default) or <CodeText>secondary</CodeText>{' '}
+                        variant. <CodeText>Form.ButtonGroup</CodeText> arranges buttons in a row
+                        with consistent spacing.
+                    </Paragraph>
 
                     <Form autoComplete="off" ariaLabel="Button demo">
                         <Form.ButtonGroup>
@@ -419,11 +434,13 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.Actions.secondary} />
                     <Code language="tsx" content={Snippets.Actions.disabled} />
                     <Code language="tsx" content={Snippets.Actions.group} />
-                </section>
+                </Section>
 
                 {/* ─── ALL INPUTS: EMPTY ─── */}
-                <section>
-                    <h2>All Inputs — Empty</h2>
+                <Section>
+                    <Heading as="h2" id="all-inputs-empty">
+                        All Inputs — Empty
+                    </Heading>
                     <Form autoComplete="off" ariaLabel="All inputs empty">
                         <Form.Fieldset>
                             <Form.Label for="name">Name</Form.Label>
@@ -527,11 +544,13 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button type="submit">Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                </section>
+                </Section>
 
                 {/* ─── ALL INPUTS: WITH VALUES ─── */}
-                <section>
-                    <h2>All Inputs — With Values</h2>
+                <Section>
+                    <Heading as="h2" id="all-inputs-with-values">
+                        All Inputs — With Values
+                    </Heading>
                     <Form autoComplete="off" ariaLabel="All inputs filled">
                         <Form.Fieldset>
                             <Form.Label for="name">Name</Form.Label>
@@ -634,15 +653,17 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button type="submit">Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                </section>
+                </Section>
 
                 {/* ─── ERROR STATES: EMPTY ─── */}
-                <section>
-                    <h2>Error States — Empty</h2>
-                    <p>
+                <Section>
+                    <Heading as="h2" id="error-states-empty">
+                        Error States — Empty
+                    </Heading>
+                    <Paragraph>
                         Error messages float on the input border, replacing the character counter on
                         textareas.
-                    </p>
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="Error states empty">
                         <Form.Fieldset>
                             <Form.Label for="name">Name</Form.Label>
@@ -747,11 +768,13 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.ButtonGroup>
                     </Form>
                     <Code language="tsx" content={Snippets.ErrorStates.demo} />
-                </section>
+                </Section>
 
                 {/* ─── ERROR STATES: WITH VALUES ─── */}
-                <section>
-                    <h2>Error States — With Values</h2>
+                <Section>
+                    <Heading as="h2" id="error-states-with-values">
+                        Error States — With Values
+                    </Heading>
                     <Form autoComplete="off" ariaLabel="Error states filled">
                         <Form.Fieldset>
                             <Form.Label for="name">Name</Form.Label>
@@ -856,16 +879,18 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button type="submit">Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                </section>
+                </Section>
 
                 {/* ─── DISABLED STATES: EMPTY ─── */}
-                <section>
-                    <h2>Disabled States — Empty</h2>
-                    <p>
-                        Wrap in a native <code>&lt;fieldset disabled&gt;</code> to disable all
-                        children. Icons are not clickable and inputs show{' '}
-                        <code>cursor: not-allowed</code>.
-                    </p>
+                <Section>
+                    <Heading as="h2" id="disabled-states-empty">
+                        Disabled States — Empty
+                    </Heading>
+                    <Paragraph>
+                        Wrap in a native <CodeText>&lt;fieldset disabled&gt;</CodeText> to disable
+                        all children. Icons are not clickable and inputs show{' '}
+                        <CodeText>cursor: not-allowed</CodeText>.
+                    </Paragraph>
                     <Form autoComplete="off" ariaLabel="Disabled states empty">
                         <Form.Fieldset disabled>
                             <Form.Label for="name">Name</Form.Label>
@@ -971,11 +996,13 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.ButtonGroup>
                     </Form>
                     <Code language="tsx" content={Snippets.DisabledStates.demo} />
-                </section>
+                </Section>
 
                 {/* ─── DISABLED STATES: WITH VALUES ─── */}
-                <section>
-                    <h2>Disabled States — With Values</h2>
+                <Section>
+                    <Heading as="h2" id="disabled-states-with-values">
+                        Disabled States — With Values
+                    </Heading>
                     <Form autoComplete="off" ariaLabel="Disabled states filled">
                         <Form.Fieldset disabled>
                             <Form.Label for="name">Name</Form.Label>
@@ -1084,8 +1111,8 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button disabled>Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                </section>
-            </main>
+                </Section>
+            </Main>
         </Screen>
     )
 }

@@ -5,6 +5,7 @@ import { Screen } from '../../sharedComponents/Screen/Screen'
 import { blogArticles } from '../../../articles/articles'
 import { getLikeSummary } from '../../../serverAPI/likes'
 import { LikeSummary, VisitSummary } from '@common/types'
+import { Heading, Paragraph, Stack } from '@common/ux'
 import './Blog.scss'
 import { getVisitSummary } from '../../../serverAPI/visits'
 
@@ -53,15 +54,25 @@ const Blogs = ({ pageName, path }: Props) => {
             sideMenu={<PageSideMenu />}
         >
             <main>
-                <h1 className="Blog__title">Blog</h1>
-                <p>
-                    My blog is a way of giving back - and paying forward - all the help I have been
-                    given through my programming learning journey. Feel free to browse my articles
-                    that cover some of my findings, solutions and tutorials on exciting and relevant
-                    topics, such as programming languages, web development and project walkthroughs.
-                    Happy Coding!
-                </p>
-                <div className="BlogList">
+                <Heading as="h1" className="Blog__title">
+                    Blog
+                </Heading>
+                <Paragraph>
+                    This blog is a way of documenting things I've learned, problems I've solved, and
+                    ideas I've explored throughout my work and personal projects.
+                </Paragraph>
+
+                <Paragraph>
+                    A large part of learning software engineering comes from people openly sharing
+                    their knowledge, so I try to contribute back whenever I come across something
+                    that might help others.
+                </Paragraph>
+
+                <Paragraph>
+                    The articles mainly focus on frontend engineering, TypeScript, React, testing,
+                    architecture, and project walkthroughs.
+                </Paragraph>
+                <Stack className="BlogList" align="center">
                     {blogArticles
                         .filter((article) => !article.upcoming)
                         .map((article) => (
@@ -76,10 +87,12 @@ const Blogs = ({ pageName, path }: Props) => {
                                 newest={article.to === newArticle.to}
                             />
                         ))}
-                </div>
+                </Stack>
                 <hr className="BlogList__hr" />
-                <h3 className="BlogList__header">Coming Soon...</h3>
-                <div className="BlogList">
+                <Heading as="h3" size="lg" className="BlogList__header">
+                    Coming Soon...
+                </Heading>
+                <Stack className="BlogList" align="center">
                     {blogArticles
                         .filter((article) => article.upcoming)
                         .map((article) => (
@@ -95,7 +108,7 @@ const Blogs = ({ pageName, path }: Props) => {
                                 newest={false}
                             />
                         ))}
-                </div>
+                </Stack>
             </main>
         </Screen>
     )

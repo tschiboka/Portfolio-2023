@@ -1,16 +1,18 @@
+import { Paragraph } from '@common/ux'
+
 const GetToKnowMe = () => {
     return (
         <>
-            <p>
-                As you may have guessed, I love involving myself in technology
-                and coding-related activities. However, my personality is not
-                one-sided. I am interested in many things not concerning
-                computing, such as modern history and geopolitics, languages and
-                etymology, and I enjoy playing the guitar, callisthenics
-                training and martial arts.
-            </p>
+            <Paragraph>
+                Outside of code, I'm into modern history and geopolitics, languages and etymology,
+                and playing guitar. I also love training — especially Muay Thai.
+            </Paragraph>
+            <Paragraph>
+                If any of that overlaps with your interests, or you just want to chat about
+                something unrelated to programming for once, feel free to reach out.
+            </Paragraph>
         </>
-    );
-};
+    )
+}
 
-export default GetToKnowMe;
+export default GetToKnowMe

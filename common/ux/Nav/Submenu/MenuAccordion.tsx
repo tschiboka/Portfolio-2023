@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '../../Link'
 import { MenuItem } from '../Nav.types'
 import { isActive } from '../Nav.utils'
 
@@ -13,7 +13,7 @@ const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
             <ul className="MenuAccordion">
                 {items.map((item) => (
                     <li key={item.label}>
-                        <Link className="link" to={item?.path || ''}>
+                        <Link to={item?.path || ''}>
                             <span className={isActive(item.label, pageName)}>{item.label}</span>
                         </Link>
                     </li>

@@ -1,19 +1,24 @@
 import { Table } from '@common/ux/Table'
-import { Code, Pill } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Pill, Section } from '@common/ux'
 import { type Row, rows } from '../Tables.mocks'
 import { renderStatus } from '../Tables.config'
 import { Code as Snippets } from '../Tables.code'
 
 export const Fundamentals = () => (
     <>
-        <h2 id="fundamentals">Fundamentals</h2>
-        <p>Core table features: titles, empty states, descriptions, info buttons, and legends.</p>
-        <section>
-            <h3>No Title</h3>
-            <p>
-                The <code>title</code> prop is optional. When omitted the table renders without a
-                heading and relies solely on <code>ariaLabel</code> for accessibility.
-            </p>
+        <Heading as="h2" id="fundamentals">
+            Fundamentals
+        </Heading>
+        <Paragraph>
+            Core table features: titles, empty states, descriptions, info buttons, and legends.
+        </Paragraph>
+        <Section>
+            <Heading as="h3">No Title</Heading>
+            <Paragraph>
+                The <CodeText>title</CodeText> prop is optional. When omitted the table renders
+                without a heading and relies solely on <CodeText>ariaLabel</CodeText> for
+                accessibility.
+            </Paragraph>
             <Table<Row>
                 ariaLabel="Table without a visible title"
                 data={rows}
@@ -24,14 +29,15 @@ export const Fundamentals = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Fundamentals.noTitle} />
-        </section>
-        <section>
-            <h3>Empty State</h3>
-            <p>
-                When the <code>data</code> array is empty, the table gracefully renders a "No data"
-                placeholder instead of an empty grid. This ensures the user always sees meaningful
-                feedback, even when no records match a filter or the dataset has not loaded yet.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Empty State</Heading>
+            <Paragraph>
+                When the <CodeText>data</CodeText> array is empty, the table gracefully renders a
+                "No data" placeholder instead of an empty grid. This ensures the user always sees
+                meaningful feedback, even when no records match a filter or the dataset has not
+                loaded yet.
+            </Paragraph>
             <Table<Row>
                 title="Empty State"
                 ariaLabel="Empty table"
@@ -42,13 +48,14 @@ export const Fundamentals = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Fundamentals.emptyState} />
-        </section>
-        <section>
-            <h3>Custom Empty State</h3>
-            <p>
-                Pass an <code>emptyState</code> prop to replace the default "No data" text with any{' '}
-                <code>ReactNode</code> — a styled message, an icon, or a call to action.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Custom Empty State</Heading>
+            <Paragraph>
+                Pass an <CodeText>emptyState</CodeText> prop to replace the default "No data" text
+                with any <CodeText>ReactNode</CodeText> — a styled message, an icon, or a call to
+                action.
+            </Paragraph>
             <Table<Row>
                 title="Custom Empty State"
                 ariaLabel="Empty table with custom message"
@@ -60,15 +67,15 @@ export const Fundamentals = () => (
                 emptyState={<em>Nothing to display — try adjusting your filters.</em>}
             />
             <Code language="tsx" content={Snippets.Fundamentals.customEmptyState} />
-        </section>
-        <section>
-            <h3>Basic Usage</h3>
-            <p>
-                The simplest form of the <code>Table</code> component. Pass an array of typed row
-                objects and define <code>columns</code> by <code>header</code> label and{' '}
-                <code>accessor</code> key. Each cell displays the raw string value with no
-                transformation or formatting applied.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Basic Usage</Heading>
+            <Paragraph>
+                The simplest form of the <CodeText>Table</CodeText> component. Pass an array of
+                typed row objects and define <CodeText>columns</CodeText> by{' '}
+                <CodeText>header</CodeText> label and <CodeText>accessor</CodeText> key. Each cell
+                displays the raw string value with no transformation or formatting applied.
+            </Paragraph>
             <Table<Row>
                 title="Basic Usage"
                 ariaLabel="Basic table"
@@ -80,15 +87,16 @@ export const Fundamentals = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Fundamentals.basicUsage} />
-        </section>
-        <section>
-            <h3>Description</h3>
-            <p>
-                The optional <code>description</code> prop accepts any <code>ReactNode</code> and
-                renders it below the title as supplementary context. Use it for a short summary of
-                the data, filter hints, or inline help. It sits on the left side of the header
-                alongside the title, with the download button (if present) on the right.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Description</Heading>
+            <Paragraph>
+                The optional <CodeText>description</CodeText> prop accepts any{' '}
+                <CodeText>ReactNode</CodeText> and renders it below the title as supplementary
+                context. Use it for a short summary of the data, filter hints, or inline help. It
+                sits on the left side of the header alongside the title, with the download button
+                (if present) on the right.
+            </Paragraph>
             <Table<Row>
                 title="Description"
                 description="Overview of the first four entries sorted by name."
@@ -101,14 +109,14 @@ export const Fundamentals = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Fundamentals.description} />
-        </section>
-        <section>
-            <h3>Description with Download</h3>
-            <p>
-                When combined with <code>download</code>, the description stays on the left beneath
-                the title while the download button floats to the right. The header row uses{' '}
-                <code>flex-start</code> alignment so the button stays at the top.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Description with Download</Heading>
+            <Paragraph>
+                When combined with <CodeText>download</CodeText>, the description stays on the left
+                beneath the title while the download button floats to the right. The header row uses{' '}
+                <CodeText>flex-start</CodeText> alignment so the button stays at the top.
+            </Paragraph>
             <Table<Row>
                 title="Description with Download"
                 description={
@@ -130,14 +138,14 @@ export const Fundamentals = () => (
                 }}
             />
             <Code language="tsx" content={Snippets.Fundamentals.descriptionWithDownload} />
-        </section>
-        <section>
-            <h3>Info Button</h3>
-            <p>
-                Pass an <code>onInfo</code> callback to display a small info icon (<code>ℹ</code>)
-                next to the title. Clicking it fires the callback — useful for opening a modal,
-                tooltip, or help panel.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Info Button</Heading>
+            <Paragraph>
+                Pass an <CodeText>onInfo</CodeText> callback to display a small info icon (
+                <CodeText>ℹ</CodeText>) next to the title. Clicking it fires the callback — useful
+                for opening a modal, tooltip, or help panel.
+            </Paragraph>
             <Table<Row>
                 title="Info Button"
                 onInfo={() => alert('Info clicked — open a modal, tooltip, or help panel here.')}
@@ -150,14 +158,14 @@ export const Fundamentals = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Fundamentals.infoButton} />
-        </section>
-        <section>
-            <h3>Legend</h3>
-            <p>
-                The <code>legend</code> prop accepts any <code>ReactNode</code> and renders it below
-                the header (title, description, info, download) and above the table headers. Use it
-                for status summaries, colour keys, or any contextual metadata.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Legend</Heading>
+            <Paragraph>
+                The <CodeText>legend</CodeText> prop accepts any <CodeText>ReactNode</CodeText> and
+                renders it below the header (title, description, info, download) and above the table
+                headers. Use it for status summaries, colour keys, or any contextual metadata.
+            </Paragraph>
             <Table<Row>
                 title="Legend"
                 description="Order statuses for the current quarter."
@@ -186,6 +194,6 @@ export const Fundamentals = () => (
                 }
             />{' '}
             <Code language="tsx" content={Snippets.Fundamentals.legend} />{' '}
-        </section>
+        </Section>
     </>
 )

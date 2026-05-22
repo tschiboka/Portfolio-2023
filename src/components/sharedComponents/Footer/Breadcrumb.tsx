@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link } from '@common/ux'
 import { getVisits } from '../../../serverAPI/visits'
 import './Breadcrumb.css'
 
@@ -22,7 +22,7 @@ const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
 
     useEffect(() => {
         if (!visitsPreLoaded) {
-            getVisits(path, (visits) => {
+            void getVisits(path, (visits) => {
                 setVisits(visits)
             })
         } else setVisits(visitCount || 0)

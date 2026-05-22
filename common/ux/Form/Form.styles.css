@@ -596,29 +596,11 @@ form .wrapped-input {
     position: relative;
 }
 
-/* Buttons */
+/* Buttons — form-specific overrides (base styles in Button.styles.css .btn) */
 form button {
-    height: 2rem;
-    padding: 20px 10px;
     width: calc(100% - 2rem);
     margin: 0 1rem;
     margin-top: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--accent-dark-1);
-    border: 2px solid transparent;
-    border-radius: 10px;
-    color: black;
-    font-size: var(--font-sm);
-    font-family: 'Roboto_Bold';
-    font-variant: small-caps;
-    cursor: pointer;
-    box-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.6),
-        -2px -2px 4px rgba(255, 255, 255, 0.04),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.1),
-        inset -2px -2px 4px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 576px) {
@@ -627,41 +609,8 @@ form button {
     }
 }
 
-form button:hover,
-form button:active {
-    background-color: var(--accent-dark-4);
-    border: 2px solid var(--accent-dark-3);
-    color: white;
-    box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.4),
-        inset -2px -2px 4px rgba(255, 255, 255, 0.05);
-}
-
-form button:disabled {
-    border: 2px solid var(--black-3);
-    background-color: var(--accent-dark-3);
-    color: var(--accent-dark-5);
-    cursor: not-allowed;
-}
-
 form button[type='submit'] {
     margin-bottom: 1rem;
-}
-
-form button.secondary {
-    background-color: #000;
-    border: 2px solid var(--accent-dark-5);
-    color: white;
-}
-
-form button.secondary:hover,
-form button.secondary:active {
-    background-color: #000;
-    border: 2px solid var(--accent-dark-3);
-    color: white;
-    box-shadow:
-        inset 2px 2px 4px rgba(0, 0, 0, 0.4),
-        inset -2px -2px 4px rgba(255, 255, 255, 0.05);
 }
 
 /* Error and success messages */
@@ -782,13 +731,13 @@ form .submit-success-message {
 
 .wrapped-textarea .textarea__info {
     position: absolute;
-    bottom: -0.1rem;
+    bottom: 0;
     right: 2rem;
     padding: 0 0.4rem;
     background-color: var(--black-x);
     border-left: var(--panel-border);
     border-right: var(--panel-border);
-    font-size: var(--font-3xs);
+    font-size: var(--font-2xs);
     font-variant: small-caps;
     color: var(--black-4);
     z-index: 1;

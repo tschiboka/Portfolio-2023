@@ -2,19 +2,12 @@
 
 .codewars {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 1rem 0;
 }
 
 .codewars-img {
     max-width: 100%;
     width: 400px;
-    margin: 3rem 0 0 0;
-}
-
-.codewars-link {
-    margin-top: 1.5rem;
-    color: palette.$accent_dark_2;
-    text-align: center;
+    border-radius: 4px;
 }

@@ -2,6 +2,7 @@ import Welcome from './Welcome/Welcome'
 import Intro from './Intro/Intro'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
+import { Main } from '@common/ux'
 
 interface Props {
     pageName: string
@@ -17,9 +18,9 @@ const Home = ({ pageName }: Props) => {
             sideMenu={<PageSideMenu />}
         >
             <Welcome />
-            <main>
+            <Main>
                 <Intro />
-            </main>
+            </Main>
         </Screen>
     )
 }

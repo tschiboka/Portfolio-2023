@@ -66,7 +66,8 @@ table .expanded-row-list {
 
 table .expanded-row-item dt {
     color: var(--accent-dark-3);
-    font-family: 'Roboto_Bold';
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
 }
 
 table .expanded-row-item dt::after {

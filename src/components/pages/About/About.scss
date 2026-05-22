@@ -1,67 +1,11 @@
 @use '../../../styles/breakpoints.scss' as bp;
 @use '../../../styles/palette.scss' as palette;
 @use '../../../styles/font_sizes.scss' as font;
-@use '../../../styles/animations.scss' as animations;
-
-h1 {
-    font-family: 'Roboto_Bold';
-    font-size: font.$font_xl;
-    text-align: center;
-}
-
-h3 {
-    margin: 3rem 0;
-    color: palette.$white_2;
-    font-size: font.$font_lg;
-    font-family: 'Roboto_Bold';
-    font-variant: small-caps;
-}
-
-img.guitar-app--sm {
-    padding: 5px;
-    width: 100%;
-    object-fit: cover;
-    max-width: 500px;
-    background-color: #333;
-    @include bp.lg {
-        display: none;
-    }
-}
-
-img.guitar-app {
-    display: none;
-    @include bp.lg {
-        display: block;
-        padding: 5px;
-        width: 100%;
-        background-color: #333;
-    }
-}
-
-img.guitar {
-    padding: 5px;
-    width: 100%;
-    background-color: #aaa;
-    @include bp.lg {
-        width: 50%;
-    }
-}
-
-.image-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-img {
-    max-width: 1000px;
-}
 
 .link--inline {
     color: palette.$accent_dark_2;
     font-size: font.$font_md;
+    margin-bottom: 1.5rem;
     @include bp.md {
         font-size: font.$font_lg;
     }

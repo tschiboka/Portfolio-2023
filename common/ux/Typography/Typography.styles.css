@@ -1,0 +1,247 @@
+/* Typography — Base */
+.typo {
+    margin: 0;
+    padding: 0;
+    color: var(--white-2);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+/* Sizes (doubled specificity to override element defaults like p.typo) */
+.typo.typo--xs {
+    font-size: var(--font-xs);
+}
+.typo.typo--sm {
+    font-size: var(--font-sm);
+}
+.typo.typo--md {
+    font-size: var(--font-md);
+}
+.typo.typo--lg {
+    font-size: var(--font-lg);
+}
+.typo.typo--xl {
+    font-size: var(--font-xl);
+}
+.typo.typo--2xl {
+    font-size: var(--font-2xl);
+}
+.typo.typo--3xl {
+    font-size: var(--font-3xl);
+}
+
+/* Weight (doubled specificity to override variant defaults) */
+.typo.typo--regular {
+    font-weight: 400;
+}
+.typo.typo--medium {
+    font-weight: 500;
+}
+.typo.typo--semibold {
+    font-weight: 600;
+}
+.typo.typo--bold {
+    font-weight: 700;
+}
+
+/* Alignment */
+.typo.typo--left {
+    text-align: left;
+}
+.typo.typo--center {
+    text-align: center;
+}
+.typo.typo--right {
+    text-align: right;
+}
+.typo.typo--justify {
+    text-align: justify;
+}
+
+/* Tone */
+.typo.typo--muted {
+    color: var(--gray-2);
+}
+.typo.typo--info {
+    color: var(--accent-dark-2);
+}
+.typo.typo--success {
+    color: var(--success-dark-1);
+}
+.typo.typo--warning {
+    color: var(--yellow-dark-1);
+}
+.typo.typo--error {
+    color: var(--error-dark-1);
+}
+
+/* Truncate */
+.typo--truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Wrap */
+.typo--wrap {
+    white-space: normal;
+}
+.typo--nowrap {
+    white-space: nowrap;
+}
+.typo--balance {
+    text-wrap: balance;
+}
+
+/* Family */
+.typo.typo--sans {
+    font-family: 'Roboto', sans-serif;
+}
+.typo.typo--serif {
+    font-family: 'Georgia', serif;
+}
+.typo.typo--mono {
+    font-family: 'Roboto Mono', monospace;
+}
+
+/* Decoration */
+.typo.typo--decoration-underline {
+    text-decoration: underline;
+}
+.typo.typo--decoration-line-through {
+    text-decoration: line-through;
+}
+.typo.typo--decoration-none {
+    text-decoration: none;
+}
+
+/* Transform */
+.typo.typo--uppercase {
+    text-transform: uppercase;
+}
+.typo.typo--lowercase {
+    text-transform: lowercase;
+}
+.typo.typo--capitalize {
+    text-transform: capitalize;
+}
+
+/* Derived defaults — Heading */
+h1.typo {
+    font-size: var(--font-2xl);
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    margin: 0 0 2rem;
+}
+h2.typo {
+    font-size: var(--font-lg);
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+    margin: 0 0 1rem;
+}
+h3.typo {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    line-height: 1.3;
+    font-variant: small-caps;
+    letter-spacing: 0.02em;
+    margin: 0 0 0.75rem;
+}
+h4.typo {
+    font-size: var(--font-md);
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.5rem;
+}
+h5.typo {
+    font-size: var(--font-md);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    margin: 0 0 0.5rem;
+}
+h6.typo {
+    font-size: var(--font-sm);
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 0 0 0.5rem;
+}
+
+/* Derived defaults — Paragraph */
+p.typo {
+    font-size: var(--font-md);
+    margin: 0 0 1.5rem;
+}
+
+/* Derived defaults — Caption */
+.typo--caption {
+    font-size: var(--font-xs);
+    color: var(--gray-2);
+}
+
+/* Derived defaults — CodeText */
+code.typo {
+    font-family: 'Roboto Mono', monospace;
+    font-size: var(--font-sm);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--space-4);
+    background-color: var(--black-2);
+}
+
+/* Derived defaults — BlockQuote */
+blockquote.typo {
+    border-left: var(--space-4) solid var(--accent-dark-3);
+    padding: var(--space-8) var(--space-16);
+    color: var(--gray-2);
+    font-style: italic;
+}
+
+/* Derived defaults — Overline */
+.typo--overline {
+    font-size: var(--font-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-2);
+}
+
+/* Derived defaults — List */
+.typo-list {
+    margin: 0 0 1.5rem;
+    padding-left: 2rem;
+}
+
+.typo-list li {
+    margin-bottom: 0.25rem;
+}
+
+/* Derived defaults — InlineReference */
+.typo-inline-ref {
+    height: 100%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    transform: translateY(-2px);
+    color: var(--accent-dark-3);
+    text-decoration: none;
+    font-family: 'Roboto Mono', monospace;
+    font-size: inherit;
+}
+.typo-inline-ref:hover {
+    color: var(--accent-dark-1);
+    transform: scale(1.05) translateY(-2px);
+}
+@media (min-width: 576px) {
+    .typo-inline-ref {
+        margin: 0 0.5rem;
+        transform: translateY(-3px);
+    }
+    .typo-inline-ref:hover {
+        transform: scale(1.05) translateY(-3px);
+    }
+}

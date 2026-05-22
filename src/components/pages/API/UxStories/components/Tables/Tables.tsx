@@ -1,3 +1,4 @@
+import { CodeText, Heading, Main, Paragraph } from '@common/ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
@@ -20,113 +21,37 @@ type TablesProps = {
     path: string
 }
 
-export const Tables = ({ path }: TablesProps) => {
-    const scrollTo = (id: string) => (e: React.MouseEvent) => {
-        e.preventDefault()
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    return (
-        <Screen
-            title={'Tivadar Debnar | Tables'}
-            path={path}
-            recordVisit={false}
-            loginRequired
-            variant="api"
-            pageName="Projects"
-            sideMenu={<PageSideMenu />}
-        >
-            <main>
-                <StoryNav />
-                <h1>Tables</h1>
-                <p>
-                    The <code>Table</code> component renders data in a structured grid with support
-                    for custom cell renderers, breakpoints, default values, context passing, and
-                    accessibility props.
-                </p>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="#fundamentals" onClick={scrollTo('fundamentals')}>
-                                Fundamentals
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#filtering" onClick={scrollTo('filtering')}>
-                                Filtering
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#cell-rendering-defaults"
-                                onClick={scrollTo('cell-rendering-defaults')}
-                            >
-                                Cell Rendering & Defaults
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#responsive" onClick={scrollTo('responsive')}>
-                                Responsive
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#variants" onClick={scrollTo('variants')}>
-                                Variants
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#actions" onClick={scrollTo('actions')}>
-                                Actions
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#selection" onClick={scrollTo('selection')}>
-                                Selection
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pagination" onClick={scrollTo('pagination')}>
-                                Pagination
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#sorting" onClick={scrollTo('sorting')}>
-                                Sorting
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#download" onClick={scrollTo('download')}>
-                                Download
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#accessibility" onClick={scrollTo('accessibility')}>
-                                Accessibility
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#all-features-combined"
-                                onClick={scrollTo('all-features-combined')}
-                            >
-                                All Features Combined
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <Fundamentals />
-                <Filtering />
-                <CellRenderingDefaults />
-                <Responsive />
-                <Variants />
-                <Actions />
-                <Selection />
-                <Pagination />
-                <Sorting />
-                <Download />
-                <Accessibility />
-                <AllFeaturesCombined />
-            </main>
-        </Screen>
-    )
-}
+export const Tables = ({ path }: TablesProps) => (
+    <Screen
+        title={'Tivadar Debnar | Tables'}
+        path={path}
+        recordVisit={false}
+        loginRequired
+        variant="api"
+        pageName="Projects"
+        sideMenu={<PageSideMenu />}
+        hasContentNavigator
+    >
+        <Main>
+            <StoryNav />
+            <Heading as="h1">Tables</Heading>
+            <Paragraph>
+                The <CodeText>Table</CodeText> component renders data in a structured grid with
+                support for custom cell renderers, breakpoints, default values, context passing, and
+                accessibility props.
+            </Paragraph>
+            <Fundamentals />
+            <Filtering />
+            <CellRenderingDefaults />
+            <Responsive />
+            <Variants />
+            <Actions />
+            <Selection />
+            <Pagination />
+            <Sorting />
+            <Download />
+            <Accessibility />
+            <AllFeaturesCombined />
+        </Main>
+    </Screen>
+)

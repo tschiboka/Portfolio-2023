@@ -1,24 +1,27 @@
 import { Table } from '@common/ux/Table'
-import { Code } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import { type Row, rows, type AriaRow, ariaReferenceRows } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 
 export const Accessibility = () => (
     <>
-        <h2 id="accessibility">Accessibility</h2>
-        <p>
-            Every <code>Table</code> sub-component exposes semantic HTML attributes, ARIA labels,
-            roles, and DOM hooks so screen readers can navigate the table and tests can target
-            individual elements. The sections below demonstrate each accessibility surface and how
-            to use it.
-        </p>
-        <section>
-            <h3>ARIA Reference</h3>
-            <p>
+        <Heading as="h2" id="accessibility">
+            Accessibility
+        </Heading>
+        <Paragraph>
+            Every <CodeText>Table</CodeText> sub-component exposes semantic HTML attributes, ARIA
+            labels, roles, and DOM hooks so screen readers can navigate the table and tests can
+            target individual elements. The sections below demonstrate each accessibility surface
+            and how to use it.
+        </Paragraph>
+        <Section>
+            <Heading as="h3">ARIA Reference</Heading>
+            <Paragraph>
                 Complete list of every accessible name, role, and ARIA attribute exposed by the{' '}
-                <code>Table</code> component tree. Use these labels with <code>getByLabelText</code>
-                , <code>getByRole</code>, or assistive technology to reach any sub-component.
-            </p>
+                <CodeText>Table</CodeText> component tree. Use these labels with{' '}
+                <CodeText>getByLabelText</CodeText>, <CodeText>getByRole</CodeText>, or assistive
+                technology to reach any sub-component.
+            </Paragraph>
             <Table<AriaRow>
                 title="ARIA Reference"
                 ariaLabel="Complete ARIA attribute reference for the Table component"
@@ -30,15 +33,15 @@ export const Accessibility = () => (
                     { header: 'Value', accessor: 'value' },
                 ]}
             />
-        </section>
-        <section>
-            <h3>ariaLabel</h3>
-            <p>
-                The <code>ariaLabel</code> prop sets <code>aria-label</code> on the table&apos;s
-                wrapper <code>&lt;div role=&quot;region&quot;&gt;</code>, giving screen readers a
-                concise summary of the table&apos;s purpose. Every table should have a unique,
-                descriptive aria label.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">ariaLabel</Heading>
+            <Paragraph>
+                The <CodeText>ariaLabel</CodeText> prop sets <CodeText>aria-label</CodeText> on the
+                table&apos;s wrapper <CodeText>&lt;div role=&quot;region&quot;&gt;</CodeText>,
+                giving screen readers a concise summary of the table&apos;s purpose. Every table
+                should have a unique, descriptive aria label.
+            </Paragraph>
             <Table<Row>
                 title="ariaLabel"
                 ariaLabel="User activity summary table"
@@ -49,15 +52,15 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
-        </section>
-        <section>
-            <h3>rowAriaLabel</h3>
-            <p>
-                The <code>rowAriaLabel</code> prop sets an <code>aria-label</code> on every{' '}
-                <code>&lt;tr&gt;</code> in the body. This helps screen readers announce each
-                row&apos;s purpose when the user navigates between them. Ideally each row label
-                should be descriptive; for now the same label is broadcast to every row.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">rowAriaLabel</Heading>
+            <Paragraph>
+                The <CodeText>rowAriaLabel</CodeText> prop sets an <CodeText>aria-label</CodeText>{' '}
+                on every <CodeText>&lt;tr&gt;</CodeText> in the body. This helps screen readers
+                announce each row&apos;s purpose when the user navigates between them. Ideally each
+                row label should be descriptive; for now the same label is broadcast to every row.
+            </Paragraph>
             <Table<Row>
                 title="rowAriaLabel"
                 ariaLabel="Table with row labels"
@@ -69,15 +72,16 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.rowAriaLabel} />
-        </section>
-        <section>
-            <h3>className</h3>
-            <p>
-                The <code>className</code> prop is appended to the wrapper&apos;s class list. This
-                lets you attach custom CSS or target the table in tests via a class selector. Below
-                the wrapper gets <code>className=&quot;danger-outline&quot;</code> with a red border
-                applied via inline style to visually confirm targeting.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">className</Heading>
+            <Paragraph>
+                The <CodeText>className</CodeText> prop is appended to the wrapper&apos;s class
+                list. This lets you attach custom CSS or target the table in tests via a class
+                selector. Below the wrapper gets{' '}
+                <CodeText>className=&quot;danger-outline&quot;</CodeText> with a red border applied
+                via inline style to visually confirm targeting.
+            </Paragraph>
             <Table<Row>
                 title="className"
                 ariaLabel="Table with custom className"
@@ -90,14 +94,14 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.className} />
-        </section>
-        <section>
-            <h3>style</h3>
-            <p>
-                The <code>style</code> prop merges inline CSS onto the wrapper element. Use it for
-                one-off visual overrides such as warning highlights. Below the table has an orange
-                warning border applied via <code>style</code>.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">style</Heading>
+            <Paragraph>
+                The <CodeText>style</CodeText> prop merges inline CSS onto the wrapper element. Use
+                it for one-off visual overrides such as warning highlights. Below the table has an
+                orange warning border applied via <CodeText>style</CodeText>.
+            </Paragraph>
             <Table<Row>
                 title="style"
                 ariaLabel="Table with inline style override"
@@ -113,16 +117,16 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.style} />
-        </section>
-        <section>
-            <h3>id</h3>
-            <p>
-                The <code>id</code> prop sets a DOM identifier on the wrapper and is also used to
-                link the <code>&lt;h2&gt;</code> title to the <code>&lt;table&gt;</code> via{' '}
-                <code>aria-labelledby</code>, giving the table a programmatic name. Use it for
-                anchor links, scroll targets,
-                <code>document.getElementById</code>, or test selectors.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">id</Heading>
+            <Paragraph>
+                The <CodeText>id</CodeText> prop sets a DOM identifier on the wrapper and is also
+                used to link the <CodeText>&lt;h2&gt;</CodeText> title to the{' '}
+                <CodeText>&lt;table&gt;</CodeText> via <CodeText>aria-labelledby</CodeText>, giving
+                the table a programmatic name. Use it for anchor links, scroll targets,
+                <CodeText>document.getElementById</CodeText>, or test selectors.
+            </Paragraph>
             <Table<Row>
                 id="accessibility-id-demo"
                 title="id"
@@ -134,16 +138,16 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.id} />
-        </section>
-        <section>
-            <h3>scope=&quot;col&quot; on Headers</h3>
-            <p>
-                Every <code>&lt;th&gt;</code> rendered by <code>TableHead</code> has{' '}
-                <code>scope=&quot;col&quot;</code>, telling assistive technology that the header
-                applies to its entire column. Utility columns (expand caret and actions) also carry
-                descriptive <code>aria-label</code> attributes so screen readers don&apos;t announce
-                empty headers.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">scope=&quot;col&quot; on Headers</Heading>
+            <Paragraph>
+                Every <CodeText>&lt;th&gt;</CodeText> rendered by <CodeText>TableHead</CodeText> has{' '}
+                <CodeText>scope=&quot;col&quot;</CodeText>, telling assistive technology that the
+                header applies to its entire column. Utility columns (expand caret and actions) also
+                carry descriptive <CodeText>aria-label</CodeText> attributes so screen readers
+                don&apos;t announce empty headers.
+            </Paragraph>
             <Table<Row>
                 title="scope on Headers"
                 ariaLabel="Table demonstrating scope=col on every th"
@@ -163,17 +167,19 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.scopeCol} />
-        </section>
-        <section>
-            <h3>Action Menu ARIA</h3>
-            <p>
-                The action kebab button announces <code>aria-haspopup=&quot;true&quot;</code> and
-                toggles <code>aria-expanded</code> so screen readers know a menu exists and whether
-                it is open. The dropdown <code>&lt;ul&gt;</code> has{' '}
-                <code>role=&quot;menu&quot;</code> and each action button has{' '}
-                <code>role=&quot;menuitem&quot;</code> with an <code>aria-label</code>. Danger and
-                primary variants colour the items accordingly.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Action Menu ARIA</Heading>
+            <Paragraph>
+                The action kebab button announces{' '}
+                <CodeText>aria-haspopup=&quot;true&quot;</CodeText> and toggles{' '}
+                <CodeText>aria-expanded</CodeText> so screen readers know a menu exists and whether
+                it is open. The dropdown <CodeText>&lt;ul&gt;</CodeText> has{' '}
+                <CodeText>role=&quot;menu&quot;</CodeText> and each action button has{' '}
+                <CodeText>role=&quot;menuitem&quot;</CodeText> with an{' '}
+                <CodeText>aria-label</CodeText>. Danger and primary variants colour the items
+                accordingly.
+            </Paragraph>
             <Table<Row>
                 title="Action Menu ARIA"
                 ariaLabel="Table demonstrating accessible action menu"
@@ -198,17 +204,18 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.actionMenuAria} />
-        </section>
-        <section>
-            <h3>Expanded Row ARIA</h3>
-            <p>
+        </Section>
+        <Section>
+            <Heading as="h3">Expanded Row ARIA</Heading>
+            <Paragraph>
                 When a row is expandable, the caret button announces{' '}
-                <code>aria-label=&quot;Expand row&quot;</code> or{' '}
-                <code>&quot;Collapse row&quot;</code> depending on the current state. The expanded
-                detail <code>&lt;tr&gt;</code> carries its own <code>aria-label</code> describing
-                which row it belongs to, and the empty spacer cell is marked{' '}
-                <code>aria-hidden=&quot;true&quot;</code> so screen readers skip it.
-            </p>
+                <CodeText>aria-label=&quot;Expand row&quot;</CodeText> or{' '}
+                <CodeText>&quot;Collapse row&quot;</CodeText> depending on the current state. The
+                expanded detail <CodeText>&lt;tr&gt;</CodeText> carries its own{' '}
+                <CodeText>aria-label</CodeText> describing which row it belongs to, and the empty
+                spacer cell is marked <CodeText>aria-hidden=&quot;true&quot;</CodeText> so screen
+                readers skip it.
+            </Paragraph>
             <Table<Row>
                 title="Expanded Row ARIA"
                 ariaLabel="Table demonstrating expanded row accessibility"
@@ -225,15 +232,16 @@ export const Accessibility = () => (
                 ]}
             />
             <Code language="tsx" content={Snippets.Accessibility.expandedRowAria} />
-        </section>
-        <section>
-            <h3>Empty State role=&quot;status&quot;</h3>
-            <p>
-                When the <code>data</code> array is empty, the placeholder cell is marked with{' '}
-                <code>role=&quot;status&quot;</code> so assistive technology can announce that no
-                data is available rather than silently showing nothing. Combined with a{' '}
-                <code>variant</code> the empty state can also be visually styled as a warning.
-            </p>
+        </Section>
+        <Section>
+            <Heading as="h3">Empty State role=&quot;status&quot;</Heading>
+            <Paragraph>
+                When the <CodeText>data</CodeText> array is empty, the placeholder cell is marked
+                with <CodeText>role=&quot;status&quot;</CodeText> so assistive technology can
+                announce that no data is available rather than silently showing nothing. Combined
+                with a <CodeText>variant</CodeText> the empty state can also be visually styled as a
+                warning.
+            </Paragraph>
             <Table<Row>
                 title="Empty State role=status"
                 ariaLabel="Empty table with accessible status message"
@@ -249,6 +257,6 @@ export const Accessibility = () => (
                 }
             />{' '}
             <Code language="tsx" content={Snippets.Accessibility.emptyStateRole} />{' '}
-        </section>
+        </Section>
     </>
 )

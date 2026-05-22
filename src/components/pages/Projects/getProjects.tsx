@@ -80,15 +80,7 @@ const projects: Project[] = [
         image: wordDuelArena,
         description:
             'Word Duel Arena is an engaging multiplayer word game that challenges players to outwit their opponents by forming words from a shared set of letters. Players can join random matches or invite friends for a more personalized experience. The game features real-time turn-based gameplay, a dynamic scoring system based on word length and complexity, and a chat function for seamless communication. With its intuitive interface and competitive elements, Word Duel Arena offers endless fun and learning opportunities for word enthusiasts of all ages.',
-        badges: [
-            'React',
-            'TypeScript',
-            'NodeJs',
-            'Express',
-            'MongoDB',
-            'Jest',
-            'RTL',
-        ],
+        badges: ['React', 'TypeScript', 'NodeJs', 'Express', 'MongoDB', 'Jest', 'RTL'],
         url: '/projects/word-duel-arena',
     },
     {
@@ -101,7 +93,9 @@ const projects: Project[] = [
     },
 ]
 
-export function getColourName(str: string) {
+import type { PillColor } from '@common/ux'
+
+export function getColourName(str: string): PillColor {
     switch (str.toLowerCase()) {
         case 'html':
             return 'orange'
@@ -110,39 +104,39 @@ export function getColourName(str: string) {
         case 'javascript':
             return 'yellow'
         case 'react':
-            return 'light-blue'
+            return 'accent'
         case 'react native':
-            return 'light-blue'
+            return 'accent'
         case 'typescript':
-            return 'light-blue'
+            return 'accent'
         case 'sass':
-            return 'pink'
+            return 'error'
         case 'arduino':
-            return 'light-blue'
+            return 'accent'
         case 'nodejs':
-            return 'light-green'
+            return 'success'
         case 'express':
             return 'orange'
         case 'python':
-            return 'light-green'
+            return 'success'
         case 'c#':
             return 'purple'
         case 'mongodb':
-            return 'light-green'
+            return 'success'
         case 'photoshop':
-            return 'pink'
+            return 'error'
         case 'illustrator':
             return 'orange'
         case 'jest':
-            return 'pink'
+            return 'error'
         case 'rtl':
             return 'purple'
         case 'mysql':
             return 'orange'
         case 'git':
-            return 'pink'
+            return 'error'
         default:
-            return 'white'
+            return 'gray'
     }
 }
 

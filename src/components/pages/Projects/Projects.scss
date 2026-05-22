@@ -1,17 +1,4 @@
 @use '../../../styles/breakpoints.scss' as bp;
-@use '../../../styles/palette.scss' as palette;
-@use '../../../styles/font_sizes.scss' as font;
-
-h1 {
-    margin-bottom: 3rem;
-}
-
-main {
-    width: 100vw;
-    @include bp.lg {
-        padding: 3rem 3rem;
-    }
-}
 
 .ProjectCard-wrapper {
     width: 100%;
@@ -20,36 +7,4 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
-
-.button-wrapper--reset {
-    margin: 1.5rem;
-    display: flex;
-    justify-content: center;
-    button {
-        padding: 0.5rem 1.5rem;
-        background-color: palette.$black_1;
-        border: 2px solid palette.$black_3;
-        border-radius: 50px;
-        color: palette.$white_2;
-        font-size: font.$font_md;
-        font-weight: bold;
-        @include bp.md {
-            font-size: font.$font_lg;
-        }
-        &:hover {
-            background-color: palette.$black_2;
-            color: palette.$accent_dark_2;
-            border: 2px solid palette.$black_1;
-            cursor: pointer;
-        }
-    }
-}
-
-.light {
-    .button-wrapper--reset button {
-        background-color: palette.$white_2;
-        border: 1px solid palette.$black_5;
-        color: palette.$black_2;
-    }
 }

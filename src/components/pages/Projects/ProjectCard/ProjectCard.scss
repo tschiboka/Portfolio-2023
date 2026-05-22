@@ -22,17 +22,12 @@
     }
 
     h3 {
-        font-size: font.$font_md;
-        font-weight: bold;
         text-align: center;
-        margin-bottom: 1rem;
-        font-variant: small-caps;
-
-        @include bp.xl {
-            font-size: font.$font_lg;
-        }
     }
-    img {
+    .figure {
+        margin-bottom: 0;
+    }
+    .figure__image-wrapper img {
         width: 100%;
         height: 300px;
         object-fit: cover;
@@ -40,7 +35,6 @@
         background-color: palette.$black_2;
         border: 1px solid palette.$black_3;
         border-radius: 20px;
-        cursor: pointer;
 
         @include bp.md {
             min-height: 500px;
@@ -54,52 +48,21 @@
         border: none;
         border-bottom: 1px solid palette.$black_2;
     }
-    p {
+    .ProjectCard__description {
         display: flex;
         align-items: center;
-        font-size: font.$font_md;
         padding: 1rem 0;
         margin: 0;
         @include bp.lg {
             height: 100%;
-            font-size: font.$font_lg;
         }
     }
     .ProjectCard__badges {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-    }
-    .badge {
-        margin: 0.25rem 0.5rem;
-        padding: 0.25rem 0.5rem;
-        background-color: grey;
-        border-radius: 10px;
-        border: 1px solid #222;
-        color: palette.$black_3;
-        font-size: 1rem;
-        font-style: italic;
-        font-variant: small-caps;
-        font-family: 'Roboto_Bold';
-
-        &.yellow {
-            background-color: yellow;
-        }
-        &.orange {
-            background-color: rgb(255, 166, 0);
-        }
-        &.pink {
-            background-color: deeppink;
-        }
-        &.purple {
-            background-color: rgb(172, 0, 172);
-        }
-        &.light-green {
-            background-color: rgb(0, 226, 151);
-        }
-        &.light-blue {
-            background-color: aqua;
-        }
+        gap: 0.5rem;
+        padding: 0.5rem 0;
     }
 
     .ProjectCard__links {
@@ -164,7 +127,8 @@
         height: 100%;
         top: 0;
         left: 0;
-        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1;
+        background-color: rgba(0, 0, 0, 0.95);
         border-radius: 20px;
     }
 }
@@ -173,11 +137,6 @@
     background-color: palette.$white_2;
     hr {
         border-color: palette.$white_3;
-    }
-    .ProjectCard__badges {
-        .badge {
-            border: 1px solid palette.$black_3;
-        }
     }
     .ProjectCard__links {
         & > * {

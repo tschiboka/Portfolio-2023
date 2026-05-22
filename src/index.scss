@@ -3,23 +3,33 @@
 @use './styles/font_sizes.scss' as font;
 
 @font-face {
-    font-family: Roboto_Light;
+    font-family: Roboto;
     src: url('./assets/fonts/Roboto-Light.ttf');
+    font-weight: 300;
 }
 
 @font-face {
     font-family: Roboto;
     src: url('./assets/fonts/Roboto-Thin.ttf');
+    font-weight: 100;
 }
 
 @font-face {
-    font-family: Roboto_Medium;
+    font-family: Roboto;
+    src: url('./assets/fonts/Roboto-Regular.ttf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Roboto;
     src: url('./assets/fonts/Roboto-Medium.ttf');
+    font-weight: 500;
 }
 
 @font-face {
-    font-family: Roboto_Bold;
+    font-family: Roboto;
     src: url('./assets/fonts/Roboto-Bold.ttf');
+    font-weight: 700;
 }
 
 @font-face {
@@ -36,8 +46,8 @@ html {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Roboto_Light, Arial, Helvetica, sans-serif;
-    font-weight: lighter;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-weight: 300;
     scrollbar-color: palette.$accent_dark_3 palette.$black_1;
     scrollbar-width: thin;
 }
@@ -116,7 +126,8 @@ h2 {
     margin: 3rem 0;
     color: palette.$white_2;
     font-size: font.$font_lg;
-    font-family: 'Roboto_Bold';
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
     font-variant: small-caps;
 }
 

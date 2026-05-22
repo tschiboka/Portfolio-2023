@@ -17,14 +17,20 @@ import Categories from '../components/pages/API/Categories/Categories'
 import {
     UxStories,
     AccessGuards,
+    Buttons,
     CodeBlocks,
+    Figures,
     Forms,
+    Layouts,
+    Links,
+    LoadingIndicators,
     NavStory,
     Pills,
-    Stacks,
+    Regions,
     Tables,
     Overlays,
     TestAccessor,
+    TypographyStory,
 } from '../components/pages/API/UxStories'
 import { ReactElement } from 'react'
 
@@ -125,15 +131,40 @@ export const ApiRoutes = {
         path: '/api/ux-stories/access-guards',
         element: <AccessGuards path="/api/ux-stories/access-guards" />,
     },
+    Buttons: {
+        name: 'Buttons',
+        path: '/api/ux-stories/buttons',
+        element: <Buttons path="/api/ux-stories/buttons" />,
+    },
     CodeBlocks: {
         name: 'Code Blocks',
         path: '/api/ux-stories/code-blocks',
         element: <CodeBlocks path="/api/ux-stories/code-blocks" />,
     },
+    Figures: {
+        name: 'Figures',
+        path: '/api/ux-stories/figures',
+        element: <Figures path="/api/ux-stories/figures" />,
+    },
     Forms: {
         name: 'Forms',
         path: '/api/ux-stories/forms',
         element: <Forms path="/api/ux-stories/forms" />,
+    },
+    Layouts: {
+        name: 'Layouts',
+        path: '/api/ux-stories/layouts',
+        element: <Layouts path="/api/ux-stories/layouts" />,
+    },
+    Links: {
+        name: 'Links',
+        path: '/api/ux-stories/links',
+        element: <Links path="/api/ux-stories/links" />,
+    },
+    LoadingIndicators: {
+        name: 'Loading Indicators',
+        path: '/api/ux-stories/loading-indicators',
+        element: <LoadingIndicators path="/api/ux-stories/loading-indicators" />,
     },
     NavStory: {
         name: 'Nav Story',
@@ -150,10 +181,10 @@ export const ApiRoutes = {
         path: '/api/ux-stories/pills',
         element: <Pills path="/api/ux-stories/pills" />,
     },
-    Stacks: {
-        name: 'Stacks',
-        path: '/api/ux-stories/stacks',
-        element: <Stacks path="/api/ux-stories/stacks" />,
+    Regions: {
+        name: 'Regions',
+        path: '/api/ux-stories/regions',
+        element: <Regions path="/api/ux-stories/regions" />,
     },
     Tables: {
         name: 'Tables',
@@ -164,6 +195,11 @@ export const ApiRoutes = {
         name: 'Test Accessor',
         path: '/api/ux-stories/test-accessor',
         element: <TestAccessor path="/api/ux-stories/test-accessor" />,
+    },
+    Typography: {
+        name: 'Typography',
+        path: '/api/ux-stories/typography',
+        element: <TypographyStory path="/api/ux-stories/typography" />,
     },
 } satisfies Record<string, ApiRoute>
 

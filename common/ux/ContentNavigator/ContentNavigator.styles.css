@@ -1,0 +1,169 @@
+/* ---------- Layout ---------- */
+.ContentNavigator {
+    display: flex;
+    gap: var(--space-16);
+}
+
+.ContentNavigator__content {
+    flex: 1;
+    min-width: 0;
+}
+
+.ContentNavigator__content :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 5rem;
+}
+
+.ContentNavigator__content--no-navigator {
+    width: 100%;
+}
+
+.ContentNavigator__content--no-navigator :is(h1, h2, h3, h4, h5, h6) {
+    scroll-margin-top: 5rem;
+}
+
+/* ---------- Sticky nav ---------- */
+.ContentNavigator__nav {
+    position: sticky;
+    margin-left: var(--space-16);
+    top: 4rem;
+    align-self: flex-start;
+    flex-shrink: 0;
+    width: 200px;
+    z-index: 10000;
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .ContentNavigator__nav {
+        display: block;
+    }
+}
+
+.ContentNavigator__nav--hidden {
+    display: none !important;
+}
+
+/* ---------- Title ---------- */
+.ContentNavigator__title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    font-size: var(--font-sm);
+    color: var(--gray-2);
+    margin-bottom: var(--space-12);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ---------- Close button ---------- */
+.ContentNavigator__close-btn {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--gray-2);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: color 0.15s ease;
+}
+
+.ContentNavigator__close-btn:hover {
+    color: var(--white-1);
+}
+
+/* ---------- Open button ---------- */
+.ContentNavigator__open-btn {
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: var(--black-3);
+    border: 1px solid var(--black-4);
+    color: var(--gray-2);
+    cursor: pointer;
+    padding: var(--space-8);
+    border-radius: 6px;
+    font-size: 1.1rem;
+    margin-left: var(--space-8);
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.ContentNavigator__open-btn:hover {
+    color: var(--white-1);
+    border-color: var(--gray-2);
+}
+
+@media (min-width: 1024px) {
+    .ContentNavigator__open-btn {
+        display: flex;
+    }
+}
+
+/* ---------- Scrollable area ---------- */
+.ContentNavigator__scroll {
+    position: relative;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto;
+    scrollbar-width: none;
+    mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        white 16px,
+        white calc(100% - 16px),
+        transparent
+    );
+}
+
+.ContentNavigator__scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* ---------- Tree lines ---------- */
+.ContentNavigator__tree {
+    position: absolute;
+    top: 0;
+    right: 0;
+    pointer-events: none;
+}
+
+.ContentNavigator__tree-svg {
+    display: block;
+    color: var(--black-4);
+}
+
+/* ---------- Links ---------- */
+.ContentNavigator__links {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.ContentNavigator__link {
+    position: relative;
+    display: block;
+    line-height: 28px;
+    font-size: var(--font-sm);
+    font-variant: small-caps;
+    color: var(--gray-2);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ContentNavigator__link:hover {
+    color: var(--white-1);
+}
+
+.ContentNavigator__link[data-active='true'] {
+    color: var(--accent-dark-2);
+}

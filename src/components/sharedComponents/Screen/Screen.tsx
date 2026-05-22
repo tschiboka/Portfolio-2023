@@ -4,6 +4,7 @@ import { FullScreenOverlay } from '../Overlay/Overlay'
 import { PageNav, PageMobileMenu, PageSubNav } from '../../Nav'
 import type { PageVariant } from '../../Nav'
 import Footer, { type FooterProps } from '../Footer/Footer'
+import { ContentNavigator } from '@common/ux'
 
 type ScreenProps = {
     children: ReactNode
@@ -17,6 +18,8 @@ type ScreenProps = {
     sideMenu?: ReactNode
     hideFooter?: boolean
     footerProps?: Omit<FooterProps, 'path'>
+    hasContentNavigator?: boolean
+    contentNavigatorDepth?: number
 }
 
 export const Screen = ({
@@ -31,20 +34,24 @@ export const Screen = ({
     sideMenu,
     hideFooter,
     footerProps,
+    hasContentNavigator = false,
+    contentNavigatorDepth = 6,
 }: ScreenProps) => (
-    <Page
-        title={title}
-        path={path}
-        className={className}
-        recordVisit={recordVisit}
-        loginRequired={loginRequired}
-    >
-        {variant && pageName && <PageNav variant={variant} pageName={pageName} />}
-        {variant && pageName && <PageMobileMenu variant={variant} pageName={pageName} />}
-        <PageSubNav />
-        {sideMenu}
-        {children}
-        {!hideFooter && <Footer path={path} {...footerProps} />}
-        <FullScreenOverlay />
-    </Page>
+    <ContentNavigator showNavigator={hasContentNavigator} depth={contentNavigatorDepth}>
+        <Page
+            title={title}
+            path={path}
+            className={className}
+            recordVisit={recordVisit}
+            loginRequired={loginRequired}
+        >
+            {variant && pageName && <PageNav variant={variant} pageName={pageName} />}
+            {variant && pageName && <PageMobileMenu variant={variant} pageName={pageName} />}
+            <PageSubNav />
+            {sideMenu}
+            {children}
+            {!hideFooter && <Footer path={path} {...footerProps} />}
+            <FullScreenOverlay />
+        </Page>
+    </ContentNavigator>
 )
