@@ -95,7 +95,7 @@ export const apiMenu: MenuItem[] = [
                     },
                     {
                         label: 'Adrika Clock',
-                        path: 'https://tschiboka.com/projects/adrika-clock/index.html',
+                        path: 'https://tschiboka.com/projects/adrika_clock/index.html',
                         parent: 'Old Projects',
                     },
                     {

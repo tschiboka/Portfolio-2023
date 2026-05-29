@@ -76,7 +76,9 @@ const Contact = ({ pageName, path }: ContactProps) => {
             {showMessageAck && <MessageAcknowledgement />}
 
             <Main className="contact">
-                <Heading as="h1">Get in Touch!</Heading>
+                <Heading as="h1" align="center">
+                    Get in Touch!
+                </Heading>
                 <Section>
                     <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Contact form">
                         <Form.Fieldset>
