@@ -74,12 +74,12 @@ export const apiMenu: MenuItem[] = [
                 submenu: [
                     {
                         label: 'Chords',
-                        path: 'https://tschiboka.com/projects/adrika-clock-2/index.html',
+                        path: 'https://tschiboka.com/projects/riffmaster/src/pages/chords.html',
                         parent: 'Projects',
                     },
                     {
                         label: 'RiffMaster',
-                        path: '',
+                        path: 'https://tschiboka.com/projects/riffmaster/index.html',
                         parent: 'Projects',
                     },
                 ],
@@ -96,6 +96,11 @@ export const apiMenu: MenuItem[] = [
                     {
                         label: 'Adrika Clock',
                         path: 'https://tschiboka.com/projects/adrika_clock/index.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Crayons',
+                        path: 'https://tschiboka.com/projects/crayons/crayons.html',
                         parent: 'Old Projects',
                     },
                     {
