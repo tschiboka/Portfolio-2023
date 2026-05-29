@@ -881,6 +881,42 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                 </Section>
 
+                {/* ─── SUBMIT ERROR MESSAGE ─── */}
+                <Section>
+                    <Heading as="h2" id="submit-error-message">
+                        Submit Error Message
+                    </Heading>
+                    <Paragraph>
+                        <CodeText>Form.SubmitErrorMessage</CodeText> renders a form-level alert
+                        banner for submission feedback. Unlike field-level errors, it sits outside
+                        fieldsets and communicates the overall result of a submit action via{' '}
+                        <CodeText>role="alert"</CodeText>. Use the <CodeText>variant</CodeText> prop
+                        to convey the type of message.
+                    </Paragraph>
+
+                    <Heading as="h3">Variants</Heading>
+                    <Form autoComplete="off" ariaLabel="SubmitErrorMessage demo">
+                        <Form.SubmitErrorMessage
+                            text="Something went wrong. Please try again."
+                            variant="error"
+                        />
+                        <Form.SubmitErrorMessage
+                            text="Your changes have been saved successfully."
+                            variant="success"
+                        />
+                        <Form.SubmitErrorMessage
+                            text="Review the fields below before submitting."
+                            variant="info"
+                        />
+                        <Form.SubmitErrorMessage
+                            text="Session expires in 5 minutes."
+                            variant="warning"
+                        />
+                    </Form>
+                    <Code language="tsx" content={Snippets.SubmitErrorMessage.basic} />
+                    <Code language="tsx" content={Snippets.SubmitErrorMessage.variants} />
+                </Section>
+
                 {/* ─── DISABLED STATES: EMPTY ─── */}
                 <Section>
                     <Heading as="h2" id="disabled-states-empty">

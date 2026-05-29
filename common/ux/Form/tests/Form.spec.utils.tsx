@@ -19,6 +19,7 @@ const {
     Button,
     ButtonGroup,
     Fieldset,
+    SubmitErrorMessage,
 } = FormExports
 const FormElement = FormExports
 
@@ -222,6 +223,10 @@ const RadioGroupWithErrorWrapper = () => {
     )
 }
 
+const SubmitErrorMessageWrapper = (props: Parameters<typeof SubmitErrorMessage>[0]) => (
+    <SubmitErrorMessage {...props} />
+)
+
 // ═════════════════════════════════════════════════════════════════════════════
 // Set
 // ═════════════════════════════════════════════════════════════════════════════
@@ -292,4 +297,6 @@ export const Set = {
     ) => renderInForm(<SearchInputWithErrorWrapper {...props} />),
     checkboxWithError: () => renderInForm(<CheckboxWithErrorWrapper />),
     radioGroupWithError: () => renderInForm(<RadioGroupWithErrorWrapper />),
+    submitErrorMessage: (props: Parameters<typeof SubmitErrorMessage>[0]) =>
+        renderInForm(<SubmitErrorMessageWrapper {...props} />),
 }

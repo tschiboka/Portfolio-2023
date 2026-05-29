@@ -631,9 +631,7 @@ form .submit-error-message {
     font-size: 1.4rem;
     font-family: monospace;
     font-variant: small-caps;
-    color: deeppink;
     background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--black-3);
     border-radius: 10px;
 }
 
@@ -641,6 +639,26 @@ form .submit-error-message {
     form .submit-error-message {
         width: 500px;
     }
+}
+
+form .submit-error-message.error {
+    color: var(--error);
+    border: 1px solid var(--error-dark-3);
+}
+
+form .submit-error-message.success {
+    color: var(--success-dark-1);
+    border: 1px solid var(--success);
+}
+
+form .submit-error-message.info {
+    color: var(--accent-dark-2);
+    border: 1px solid var(--accent-dark-3);
+}
+
+form .submit-error-message.warning {
+    color: var(--yellow-dark-1);
+    border: 1px solid var(--yellow);
 }
 
 form .submit-success-message {

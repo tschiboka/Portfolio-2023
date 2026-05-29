@@ -932,6 +932,68 @@ describe('Error rendering', () => {
     })
 })
 
+describe('SubmitErrorMessage', () => {
+    it('should render the message text', () => {
+        Set.submitErrorMessage({ text: 'Something went wrong' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()!.textContent).toBe('Something went wrong')
+    })
+
+    it('should apply the error variant class by default', () => {
+        Set.submitErrorMessage({ text: 'Error occurred' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveClass('error')
+    })
+
+    it('should apply the success variant class', () => {
+        Set.submitErrorMessage({ text: 'Saved successfully', variant: 'success' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveClass('success')
+    })
+
+    it('should apply the info variant class', () => {
+        Set.submitErrorMessage({ text: 'Please review your input', variant: 'info' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveClass('info')
+    })
+
+    it('should apply the warning variant class', () => {
+        Set.submitErrorMessage({ text: 'Proceed with caution', variant: 'warning' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveClass('warning')
+    })
+
+    it('should have role="alert"', () => {
+        Set.submitErrorMessage({ text: 'Error occurred' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveAttribute('role', 'alert')
+    })
+
+    it('should set aria-label when provided', () => {
+        Set.submitErrorMessage({ text: 'Error occurred', ariaLabel: 'Submit error' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Get.submitErrorMsg()).toHaveAttribute('aria-label', 'Submit error')
+    })
+
+    it('should not be present when not rendered', () => {
+        Set.input()
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Has.submitErrorMsg()).toBe(false)
+    })
+
+    it('should not render when text is empty', () => {
+        Set.submitErrorMessage({ text: '' })
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Has.submitErrorMsg()).toBe(false)
+    })
+
+    it('should not render when text is undefined', () => {
+        Set.submitErrorMessage({})
+        const form = Test.Form(FORM_LABEL)
+        expect(form.Has.submitErrorMsg()).toBe(false)
+    })
+})
+
 describe('Input type="date"', () => {
     it('should add has-value class when date has a value', () => {
         Set.inputDateWithValue()

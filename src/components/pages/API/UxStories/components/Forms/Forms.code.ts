@@ -254,6 +254,21 @@ useEffect(() => {
     <Form.Input name="name" control={control} type="text" />
 </Form.Fieldset>`,
     },
+    SubmitErrorMessage: {
+        basic: `{/* Default variant is 'error' */}
+<Form.SubmitErrorMessage text="Submission failed. Please try again." />
+
+{/* Explicit error */}
+<Form.SubmitErrorMessage
+    text="Invalid credentials."
+    variant="error"
+    ariaLabel="Login error"
+/>`,
+        variants: `<Form.SubmitErrorMessage text="Something went wrong." variant="error" />
+<Form.SubmitErrorMessage text="Your changes have been saved." variant="success" />
+<Form.SubmitErrorMessage text="Review the fields below before submitting." variant="info" />
+<Form.SubmitErrorMessage text="Session expires in 5 minutes." variant="warning" />`,
+    },
     DisabledStates: {
         demo: `{/* Wrap in native <fieldset disabled> to disable all children */}
 <Form ariaLabel="Disabled form">

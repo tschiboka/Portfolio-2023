@@ -5,7 +5,7 @@ import SantaHat from '../../assets/images/projects/xmas/santa_hat.png'
 export const portfolioMenu: MenuItem[] = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
-    { label: 'Projects', path: '/projects' },
+    { label: 'Projects', path: '/projects', allowCapabilities: ['admin'] },
     { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
     { label: '', showSubmenuToggle: true },
@@ -59,6 +59,23 @@ export const apiMenu: MenuItem[] = [
         submenu: [
             { label: 'UX Stories', path: '/api/ux-stories', parent: 'Projects' },
             { label: 'WDA Level Creator', path: '/projects/wda-level-creator', parent: 'Projects' },
+            {
+                submenu: [
+                    {
+                        label: 'Xmas 2025',
+                        path: '/projects/xmas2025',
+                        parent: 'Old Projects',
+                        image: 'xmas_hat',
+                    },
+                    {
+                        label: 'Adrika Clock',
+                        path: 'https://tschiboka.com/projects/adrika-clock/index.html',
+                        parent: 'Old Projects',
+                    },
+                ],
+                label: 'Old Projects',
+                parent: 'Projects',
+            },
         ],
     },
     { label: 'Logout', path: '/api/logout' },

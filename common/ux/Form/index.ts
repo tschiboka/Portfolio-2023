@@ -10,6 +10,7 @@ import { Button } from './Button'
 import { ButtonGroup } from './ButtonGroup'
 import { Fieldset } from './Fieldset'
 import { DateInput } from './DateInput'
+import { SubmitErrorMessage } from './SubmitErrorMessage'
 
 export type { SearchInputOption } from './SearchInput'
 export type { FieldValues } from './Form.types'
@@ -25,5 +26,6 @@ export const Form = Object.assign(FormElement, {
     RadioButton,
     RadioGroup,
     SearchInput,
+    SubmitErrorMessage,
     TextArea,
 })

@@ -4,12 +4,11 @@ import { loginSchema } from './Login.schema'
 import { AxiosError } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Form, LoadingIndicator } from '@common/ux'
+import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@common/ux'
 import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
 import { useLoginApi } from './Login.query'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import './Login.scss'
 import { Session } from '../../../../context/SessionContext'
 import { QueryKey } from '@common/utils'
 
@@ -79,49 +78,50 @@ const Login = ({ path, pageName }: LoginProps) => {
             variant="portfolio"
             pageName={pageName}
         >
-            <main>
-                <div>
-                    <h1>Login</h1>
-                    <h2>Tschiboka Personal App</h2>
-                </div>
-                <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Login form">
-                    <Form.Fieldset>
-                        <Form.Label for="email">Email</Form.Label>
-                        <Form.Input
-                            name="email"
-                            control={control}
-                            type="text"
-                            autoComplete="email"
-                        />
-                    </Form.Fieldset>
-                    <Form.Fieldset>
-                        <Form.Label for="password">Password</Form.Label>
-                        <Form.Input
-                            name="password"
-                            control={control}
-                            type="password"
-                            addRevealPasswordIcon={true}
-                            revealPassword={revealPassword}
-                            setRevealPassword={setRevealPassword}
-                        />
-                    </Form.Fieldset>
-                    <LoadingIndicator show={isLoading} />
-                    {loginErrorMessage && (
-                        <p className="submit-error-message">{loginErrorMessage}</p>
-                    )}
-                    <Form.ButtonGroup>
-                        {enableRegistration && (
-                            <Form.Button
-                                variant="secondary"
-                                onClick={() => navigate('/api/register')}
-                            >
-                                Register
-                            </Form.Button>
-                        )}
-                        <Form.Button type="submit">Login</Form.Button>
-                    </Form.ButtonGroup>
-                </Form>
-            </main>
+            <Main>
+                <Section>
+                    <Heading as="h1" align="center">
+                        Login
+                    </Heading>
+                    <Heading align="center">Tschiboka Personal App</Heading>
+                    <Spacer size="24" />
+                    <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Login form">
+                        <Form.Fieldset>
+                            <Form.Label for="email">Email</Form.Label>
+                            <Form.Input
+                                name="email"
+                                control={control}
+                                type="text"
+                                autoComplete="email"
+                            />
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="password">Password</Form.Label>
+                            <Form.Input
+                                name="password"
+                                control={control}
+                                type="password"
+                                addRevealPasswordIcon={true}
+                                revealPassword={revealPassword}
+                                setRevealPassword={setRevealPassword}
+                            />
+                        </Form.Fieldset>
+                        <LoadingIndicator show={isLoading} />
+                        <Form.SubmitErrorMessage text={loginErrorMessage} />
+                        <Form.ButtonGroup>
+                            {enableRegistration && (
+                                <Form.Button
+                                    variant="secondary"
+                                    onClick={() => navigate('/api/register')}
+                                >
+                                    Register
+                                </Form.Button>
+                            )}
+                            <Form.Button type="submit">Login</Form.Button>
+                        </Form.ButtonGroup>
+                    </Form>
+                </Section>
+            </Main>
         </Screen>
     )
 }

@@ -1,0 +1,408 @@
+@font-face {
+    src: url("fonts/Mylodon-Light.otf");
+    font-family: "Myriad";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body { font-family: "Myriad", sans-serif; }
+
+.intro__progressbar {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro__progressbar h1 {
+    font-size: 2.5vh;
+    color: #272727;
+}
+
+.loadingprogress__frame {
+    width: 33.3vw;
+    min-width: 300px;
+    height: 1vh;
+    border: 2px solid #272727;
+    border-radius: 5px;
+}
+
+#intro__progress {
+    height: 100%;
+    width: 0;
+    background-color: #93869acc;
+    border-radius: 4px;
+}
+
+.watercolor_bg {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: 50% 50% no-repeat;
+    background-size: cover;
+    animation: bg 1.5s linear;
+    overflow: hidden;
+}
+
+.face {
+    position: relative;
+    width: auto;
+    height: 100vh;
+}
+
+.face, #photo-holder {
+    background: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+    animation: face 1.5s linear;
+    cursor: pointer;
+}
+
+#photo-holder {
+    visibility: hidden;
+    position: absolute;
+    background-color: #272727;
+    border-radius: 100%;
+    border: 1px dotted white;
+    pointer-events: none;
+}
+
+.photo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+}
+
+.arc, .line, .butterfly {
+    position: absolute;
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform-origin: 50% 50%;
+}
+
+.arc { animation: arc 1.5s ease-out; }
+
+.butterfly { animation: butterfly 5s linear infinite; }
+
+.butterfly-purple { 
+    animation-delay: -0.75s;
+    animation-duration: 4s;
+}
+
+.arc2 { animation-direction: reverse; }
+
+.lion { animation: lion ease-in-out 1.05s; }
+
+.palmtree { animation: palmtree ease-in-out 1.33s; }
+
+.watercolor-pink { animation: watercolor-pink ease-in-out 2.1s; }
+
+.nails { animation: nail ease-in-out 1.7s; }
+
+.galaxy { animation: galaxy ease-out 2.33s -1s; }
+
+.clockface { animation: clockface 1s linear infinite; }
+
+.clock-helperline, .clockface {
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.time-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    text-align: center;
+    text-shadow: 0px 4px 2.5px black, 0px -1px #2727273d;
+    color: #272727;
+}
+
+#digit1 { transform: rotate(-7.5deg) translateY(-0.1vh); }
+
+#digit2 { transform: rotate(-2.5deg) translateY(-0.4vh); }
+
+#digit3 { transform: rotate(1.5deg) translateY(-0.5vh); }
+
+#digit4 { transform: rotate(5.5deg) translateY(-0.4vh); }
+
+#digit5 { transform: rotate(9.5deg) translateY(-0.1vh); }
+
+#digit6 { transform: rotate(12.5deg) translateY(0.5vh); }
+
+#digit7 { transform: rotate(17deg) translateY(1.2vh); }
+
+#digit8 { transform: rotate(22deg) translateY(2vh); }
+
+#date {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding-right: 1vw;
+}
+
+@media only screen and (max-width: 400px) {
+    body {
+        /* background: rgba(255, 166, 0, 0.428); */
+    }
+    .face {
+        min-width: 90vw;
+    }
+    .arc1, .arc2 {
+        top: calc(50vh - 24.5vh);
+        left: calc(50vw - 24vh);
+        width: 48vh;
+        height: 48vh;       
+    }
+    .lion {
+        top: 32vh;
+        left: calc(50vw + 1vh);
+        width: 28vh;
+        height: 28vh;
+    }
+    .palmtree {
+        top: 0vh;
+        left: calc(50vw + 2vh);
+        width: 50vh;
+        height: 50vh;
+    }
+    .watercolor-pink {
+        top: 10vh;
+        left: calc(50vw + 3vh);
+        width: 30vh;
+        height: 30vh;
+    }
+    .nails {
+        top: 44vh;
+        left: calc(50vw - 19vh);
+        width: 45vh;
+        height: 45vh;
+    }
+    .galaxy {
+        top: 42.3vh;
+        left: calc(50vw - 19vh);
+        width: 27.5vh;
+        height: 27.5vh;
+    }
+    .butterfly-blue {
+        top: 23.5vh;
+        left: calc(50vw + 5.5vh);
+        width: 3.5vh;
+        height: 3.5vh;
+    }
+    .butterfly-purple {
+        top: 61vh;
+        left: calc(50vw - 22vh);
+        width: 3.5vh;
+        height: 3.5vh;
+    }
+    .clockface {
+        width: 52vh;
+        height: 52vh;
+        top: 23.5vh;
+        left: calc(50vw - 26vh);
+    }
+    .clock-helperline {
+        top: 24vh;
+        left: calc(50vw - 28vh);
+        width: 20vh;
+        height: 20vh;
+        transform: rotate(-9deg);
+    }
+    .time-box {
+        top: 17vh;
+        left: calc(50vw - 9vh);
+        height: 8vh;
+        width: 20vh;
+        transform: rotate(-6.9deg);
+        font-size: 2.3vh;
+    }
+    .clock-digit {
+        width: 16.5%;
+        height: 100%;
+    }
+    #date {
+        font-size: 2vh;
+    }
+    #photo-holder {
+        width: 40vh;
+        height: 40vh;
+        top: 30vh;
+        left: calc(50vw - 20vh);
+    }
+}
+
+@media only screen and (min-width: 401px) {
+    body {
+     /*  background: #90ee9074;*/
+    }
+    .face {
+        margin-top: -10vh;
+        height: 120vh;
+    }
+    .arc1, .arc2 {
+        top: calc(50vh - 29vh);
+        left: calc(50vw - 28vh);
+        width: 57vh;
+        height: 57vh;   
+    }
+    .lion {
+        top: 20vh;
+        left: calc(50vw + 13vh);
+        width: 34vh;
+        height: 34vh;
+    }
+    .palmtree {
+        top: 2vh;
+        left: calc(50vw + 4vh);
+        width: 50vh;
+        height: 50vh;
+    }
+    .watercolor-pink {
+        top: 6vh;
+        left: calc(50vw + 11vh);
+        width: 32vh;
+        height: 32vh;
+    }
+    .nails {
+        top: 40vh;
+        left: calc(50vw - 22vh);
+        width: 55vh;
+        height: 55vh;
+    }
+    .galaxy {
+        top: 49.5vh;
+        left: calc(50vw - 24vh);
+        width: 29vh;
+        height: 29vh;
+    }
+    .butterfly-blue {
+        top: 20vh;
+        left: calc(50vw + 10vh);
+        width: 4.5vh;
+        height: 4.5vh;
+    }
+    .butterfly-purple {
+        top: 70vh;
+        left: calc(50vw - 30vh);
+        width: 4.5vh;
+        height: 4.5vh;
+    }
+    .clockface {
+        width: 64vh;
+        height: 64vh;
+        top: 17.5vh;
+        left: calc(50vw - 32vh);
+    }
+    .clock-helperline {
+        top: 18vh;
+        left: calc(50vw - 37vh);
+        width: 26vh;
+        height: 26vh;
+        transform: rotate(-12deg);
+    }
+    .time-box {
+        top: 12vh;
+        left: calc(50vw - 10vh);
+        height: 8vh;
+        width: 20vh;
+        transform: rotate(-7deg);
+        font-size: 2.5vh;
+    }
+    .clock-digit {
+        width: 16.5%;
+        height: 100%;
+    }
+    #date {
+        font-size: 2.2vh;
+    }
+    #photo-holder {
+        width: 50vh;
+        height: 50vh;
+        top: 24vh;
+        left: calc(50vw - 25vh);
+    }
+}
+
+@keyframes bg {
+    from { transform: scale(96%) }
+    to { transform: scale(100%); }
+}
+
+@keyframes face {
+    0% { filter: grayscale(100%) blur(5px); }
+    65% { filter: grayscale(70%) blur(1px); }
+    100% { filter: grayscale(0) blur(0); }
+}
+
+@keyframes arc {
+    from { transform: rotate(1deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes lion {
+    from { transform: translate(-100vh, 100vh); }
+    to { transform: translate(0, 0); }
+}
+
+@keyframes palmtree {
+    0% { transform: translate(-100vh, 100vh); }
+    25% { transform: translate(-100vh, 100vh); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes watercolor-pink {
+    0% { transform: translate(-100vh, 100vh); }
+    45% { transform: translate(-100vh, 100vh); }
+    50% { transform: translate(-95vh, 95vh); }
+    78% { transform: translate(6vh, -6vh); }    
+    87% { transform: translate(-1.2vh, 1.2vh); }
+    95% { transform: translate(0.7vh, -0.7vh); }
+    100% { transform: translate(0, 0); }
+}
+
+@keyframes nail {
+    0% { transform: translateY(40vh); }
+    84% { transform: translateY(45vh); }
+    87% { transform: translateY(-9vh); }
+    95% { transform: translateY(6vh); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes galaxy {
+    0% { transform: translate(12vh, -12vh)}
+    95% { transform: translate(12vh, -12vh)}
+    100% { transform: translate(0, 0)}
+}
+
+@keyframes butterfly {
+    0% { transform: translate(0, 0) rotate(0.5deg) rotate3d(1, 1, 1, 15deg); }
+    20% { transform: translate(1px, -1px) rotate(-0.5deg) rotate3d(0, 0, 0, 0); }
+    40% { transform: translate(-1px, -1px) rotate(1deg) rotate3d(-1, -1, -1, 15deg); }
+    60% { transform: translate(1px, 1px) rotate(-0.5deg) rotate3d(0, 0, 0, 0); }
+    80% { transform: translate(-1px, 1px) rotate(0.5deg) rotate3d(1, 1, 1, -15deg); }
+    100% { transform: translate(0, 0) rotate(0.5deg) rotate3d(1, 1, 1, 15deg); }
+}
+
+@keyframes clockface {
+    0% { transform: rotate(0); }
+    90% { transform: rotate(0); }
+    95% { transform: rotate(-7deg); }
+    100% { transform: rotate(-6deg); }
+}

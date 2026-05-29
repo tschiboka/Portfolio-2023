@@ -45,6 +45,8 @@ class FormInstance extends Accessor {
             errorMsgs: (): HTMLElement[] => this.scope.getAllByRole('alert'),
             fieldset: (name: string | RegExp): HTMLElement =>
                 this.scope.getByRole('group', { name }),
+            submitErrorMsg: (): HTMLElement | null =>
+                this.element.querySelector('.submit-error-message'),
         }
     }
 
