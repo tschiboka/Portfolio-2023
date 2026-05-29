@@ -5,7 +5,7 @@ import SantaHat from '../../assets/images/projects/xmas/santa_hat.png'
 export const portfolioMenu: MenuItem[] = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
-    { label: 'Projects', path: '/projects', allowCapabilities: ['admin'] },
+    { label: 'Projects', path: '/projects' },
     { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
     { label: '', showSubmenuToggle: true },
@@ -13,7 +13,6 @@ export const portfolioMenu: MenuItem[] = [
 
 export const apiMenu: MenuItem[] = [
     { label: 'Home', path: '/api/index' },
-    { label: 'Xmas', path: '/projects/xmas2025', allowedFeatures: ['xmas2025'], image: 'xmas_hat' },
     {
         label: 'Dashboard',
         submenu: [
@@ -58,7 +57,34 @@ export const apiMenu: MenuItem[] = [
         label: 'Projects',
         submenu: [
             { label: 'UX Stories', path: '/api/ux-stories', parent: 'Projects' },
-            { label: 'WDA Level Creator', path: '/projects/wda-level-creator', parent: 'Projects' },
+            {
+                label: 'Word Duel Arena',
+                submenu: [
+                    {
+                        label: 'Level Creator',
+                        path: '/projects/wda-level-creator',
+                        parent: 'Projects',
+                    },
+                    { label: 'Game', path: '/projects/word-duel-arena', parent: 'Projects' },
+                ],
+                parent: 'Projects',
+            },
+            {
+                label: 'Guitar',
+                submenu: [
+                    {
+                        label: 'Chords',
+                        path: 'https://tschiboka.com/projects/adrika-clock-2/index.html',
+                        parent: 'Projects',
+                    },
+                    {
+                        label: 'RiffMaster',
+                        path: '',
+                        parent: 'Projects',
+                    },
+                ],
+                parent: 'Projects',
+            },
             {
                 submenu: [
                     {
@@ -72,11 +98,17 @@ export const apiMenu: MenuItem[] = [
                         path: 'https://tschiboka.com/projects/adrika-clock/index.html',
                         parent: 'Old Projects',
                     },
+                    {
+                        label: 'Alien Text',
+                        path: 'https://tschiboka.com/projects/alien-character-generator/index.html',
+                        parent: 'Old Projects',
+                    },
                 ],
                 label: 'Old Projects',
                 parent: 'Projects',
             },
         ],
+        allowCapabilities: ['admin'],
     },
     { label: 'Logout', path: '/api/logout' },
     { label: '', showSubmenuToggle: true },
