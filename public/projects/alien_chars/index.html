@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="utilities/useFecth.js"></script>
+    <script src="utilities/useAnalyzeText.js"></script>
+    <script src="utilities/useHeatMap.js"></script>
+    <script src="utilities/util.js"></script>
+    <script src="utilities/useTransliterate.js"></script>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/heatmap.css">
+    <link rel="stylesheet" href="./styles/character.css">
+    <title>Combinations</title>
+</head>
+<body>
+    <div id="transliterator__wrapper">
+        <div id="transliterator__result"></div>
+        <div class="transliterator__button-wrapper">
+            <button id="set-character-btn">Set Character</button>
+            <button id="transliterate-btn">Transliterate</button>
+        </div>
+        <textarea id="transliterator__input-text" autofocus></textarea>
+    </div>
+    <div id="heatmap"></div>
+    <div id="character-maker">
+        <div>
+            <button onclick="addLineToCharacterString('0, 0')"></button>
+            <button onclick="addLineToCharacterString('2.5, 0')"></button>
+            <button onclick="addLineToCharacterString('5, 0')"></button>
+        </div>
+        <div>
+            <button onclick="addLineToCharacterString('0, 2.5')"></button>
+            <button onclick="addLineToCharacterString('2.5, 2.5')"></button>
+            <button onclick="addLineToCharacterString('5, 2.5')"></button>
+        </div>
+        <div>
+            <button onclick="addLineToCharacterString('0, 5')"></button>
+            <button onclick="addLineToCharacterString('2.5, 5')"></button>
+            <button onclick="addLineToCharacterString('5, 5')"></button>
+        </div>
+        <button id="submit-character" onclick="submitCharacter()"></button>
+        <input id="character-string-result"></input>
+    </div>
+</body>
+<script>init()</script>
+</html>

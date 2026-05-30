@@ -1,0 +1,17 @@
+svg {
+    padding: 1px;
+    stroke-linecap: round;
+    stroke-width: 5px;
+    /* background-color: #1a1a1a; */
+    shape-rendering: geometricPrecision;
+}
+
+line {
+    stroke-linecap: round;
+    stroke-width: 3px;
+    shape-rendering: geometricPrecision;
+}
+
+.enter {
+    width: 100%;
+}

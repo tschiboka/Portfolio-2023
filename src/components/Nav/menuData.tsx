@@ -88,14 +88,13 @@ export const apiMenu: MenuItem[] = [
             {
                 submenu: [
                     {
-                        label: 'Xmas 2025',
-                        path: '/projects/xmas2025',
-                        parent: 'Old Projects',
-                        image: 'xmas_hat',
-                    },
-                    {
                         label: 'Adrika Clock',
                         path: 'https://tschiboka.com/projects/adrika_clock/index.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Alien Chars',
+                        path: 'https://tschiboka.com/projects/alien_chars/index.html',
                         parent: 'Old Projects',
                     },
                     {
@@ -104,8 +103,28 @@ export const apiMenu: MenuItem[] = [
                         parent: 'Old Projects',
                     },
                     {
-                        label: 'Alien Text',
-                        path: 'https://tschiboka.com/projects/alien-character-generator/index.html',
+                        label: 'Patterns',
+                        path: 'https://tschiboka.com/projects/pattern_generator/index.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Pocket Tutor',
+                        path: 'https://tschiboka.com/projects/pocket_tutor/index.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Simon',
+                        path: 'https://tschiboka.com/projects/simon/simon.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Tic Tac Toe',
+                        path: 'https://tschiboka.com/projects/tic_tac_toe/tictactoe.html',
+                        parent: 'Old Projects',
+                    },
+                    {
+                        label: 'Xmas 2025',
+                        path: '/projects/xmas2025',
                         parent: 'Old Projects',
                     },
                 ],

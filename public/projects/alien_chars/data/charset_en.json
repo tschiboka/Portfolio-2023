@@ -1,0 +1,358 @@
+{
+    "vowels": [
+        {
+            "name": "a",
+            "short_version": "a",
+            "long_version": "ea"
+        },
+        {
+            "name": "e",
+            "short_version": "e",
+            "long_version": "ee"
+        },
+        {
+            "name": "i",
+            "short_version": "i",
+            "long_version": "ai"
+        },
+        {
+            "name": "o",
+            "short_version": "o",
+            "long_version": "oo"
+        },
+        {
+            "name": "u",
+            "short_version": "u",
+            "long_version": "ou"
+        },
+        {
+            "name": "1",
+            "short_version": "oa",
+            "long_version": "oi"
+        },
+        {
+            "name": "2",
+            "short_version": "ue",
+            "long_version": "au"
+        }
+    ],
+    "consonants": [
+        {
+            "name": "b",
+            "short_version": "b",
+            "long_version": "bb"
+        },
+        {
+            "name": "c",
+            "short_version": "c",
+            "long_version": "cc"
+        },
+        {
+            "name": "d",
+            "short_version": "d",
+            "long_version": "dd"
+        },
+        {
+            "name": "f",
+            "short_version": "f",
+            "long_version": "ff"
+        },
+        {
+            "name": "g",
+            "short_version": "g",
+            "long_version": "gg"
+        },
+        {
+            "name": "h",
+            "short_version": "h",
+            "long_version": "hh"
+        },
+        {
+            "name": "j",
+            "short_version": "j",
+            "long_version": "jj"
+        },
+        {
+            "name": "k",
+            "short_version": "k",
+            "long_version": "kk"
+        },
+        {
+            "name": "l",
+            "short_version": "l",
+            "long_version": "ll"
+        },
+        {
+            "name": "m",
+            "short_version": "m",
+            "long_version": "mm"
+        },
+        {
+            "name": "n",
+            "short_version": "n",
+            "long_version": "nn"
+        },
+        {
+            "name": "p",
+            "short_version": "p",
+            "long_version": "pp"
+        },
+        {
+            "name": "q",
+            "short_version": "q",
+            "long_version": "qu"
+        },
+        {
+            "name": "r",
+            "short_version": "r",
+            "long_version": "rr"
+        },
+        {
+            "name": "s",
+            "short_version": "s",
+            "long_version": "ss"
+        },
+        {
+            "name": "t",
+            "short_version": "t",
+            "long_version": "tt"
+        },
+        {
+            "name": "v",
+            "short_version": "v",
+            "long_version": "vv"
+        },
+        {
+            "name": "w",
+            "short_version": "w",
+            "long_version": "ww"
+        },
+        {
+            "name": "x",
+            "short_version": "x",
+            "long_version": "xx"
+        },
+        {
+            "name": "y",
+            "short_version": "y",
+            "long_version": "yy"
+        },
+        {
+            "name": "z",
+            "short_version": "z",
+            "long_version": "zz"
+        },
+        {
+            "name": "1",
+            "short_version": "ch",
+            "long_version": "tch"
+        },
+        {
+            "name": "2",
+            "short_version": "sh",
+            "long_version": "sch"
+        },
+        {
+            "name": "3",
+            "short_version": "ng",
+            "long_version": "nk"
+        },
+        {
+            "name": "4",
+            "short_version": "th", 
+            "long_version": "wh"
+        },
+        {
+            "name": "5",
+            "short_version": "gh",
+            "long_version": "ck"
+        },
+        {
+            "name": "6",
+            "short_version": "st",
+            "long_version": "sr"
+        }
+    ],
+    "special_characters": [
+        {
+            "name": "1",
+            "character": "1"
+        },
+        {
+            "name": "2",
+            "character": "2"
+        },
+        {
+            "name": "3",
+            "character": "3"
+        },
+        {
+            "name": "4",
+            "character": "4"
+        },
+        {
+            "name": "5",
+            "character": "5"
+        },
+        {
+            "name": "6",
+            "character": "6"
+        },
+        {
+            "name": "7",
+            "character": "7"
+        },
+        {
+            "name": "8",
+            "character": "8"
+        },
+        {
+            "name": "9",
+            "character": "9"
+        },
+        {
+            "name": "0",
+            "character": "0"
+        },
+        {
+            "name": ".",
+            "character": "."
+        },
+        {
+            "name": ",",
+            "character": ","
+        },
+        {
+            "name": "?",
+            "character": "?"
+        },
+        {
+            "name": "!",
+            "character": "!"
+        },
+        {
+            "name": "\"",
+            "character": "\""
+        },
+        {
+            "name": "'",
+            "character": "'"
+        },
+        {
+            "name": "<",
+            "character": "<"
+        },
+        {
+            "name": ">",
+            "character": ">"
+        },
+        {
+            "name": "/",
+            "character": "/"
+        },
+        {
+            "name": "\\",
+            "character": "\\"
+        },
+        {
+            "name": "|",
+            "character": "|"
+        },
+        {
+            "name": "@",
+            "character": "@"
+        },
+        {
+            "name": ":",
+            "character": ":"
+        },
+        {
+            "name": ";",
+            "character": ";"
+        },
+        {
+            "name": "`",
+            "character": "`"
+        },
+        {
+            "name": "¬",
+            "character": "¬"
+        },
+        {
+            "name": "£",
+            "character": "£"
+        },
+        {
+            "name": "$",
+            "character": "$"
+        },
+        {
+            "name": "%",
+            "character": "%"
+        },
+        {
+            "name": "^",
+            "character": "^"
+        },
+        {
+            "name": "&",
+            "character": "&"
+        },
+        {
+            "name": "*",
+            "character": "*"
+        },
+        {
+            "name": "(",
+            "character": "("
+        },
+        {
+            "name": ")",
+            "character": ")"
+        },
+        {
+            "name": "_",
+            "character": "_"
+        },
+        {
+            "name": "-",
+            "character": "-"
+        },
+        {
+            "name": "+",
+            "character": "+"
+        },
+        {
+            "name": "=",
+            "character": "="
+        },
+        {
+            "name": "{",
+            "character": "{"
+        },
+        {
+            "name": "}",
+            "character": "}"
+        },
+        {
+            "name": "[",
+            "character": "["
+        },
+        {
+            "name": "]",
+            "character": "]"
+        },
+        {
+            "name": "#",
+            "character": "#"
+        },
+        {
+            "name": "~",
+            "character": "~"
+        },
+        {
+            "name": "\n",
+            "character": "\n"
+        }
+    ]
+}

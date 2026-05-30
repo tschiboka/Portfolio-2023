@@ -1,0 +1,1074 @@
+[
+    {
+        "characterName": "a",
+        "characterLines": [[0, 5, 2.5, 0], [2.5, 0, 5, 5]]
+    },
+    {
+        "characterName": "e",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "i",
+        "characterLines": [[2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "o",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "u",
+        "characterLines": [[0, 5, 0, 0], [0, 5, 5, 5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "oa",
+        "characterLines": [[2.5, 0, 0, 2.5], [0, 5, 0, 2.5], [5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "ue",
+        "characterLines": [[0, 2.5, 2.5, 5], [2.5, 5, 5, 2.5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "b",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "ba",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 0, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "be",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 5, 0, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "bi",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [2.5, 0, 2.5, 5], [0, 5, 2.5, 5]]
+    },
+    {
+        "characterName": "bo",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 5, 0, 5], [0, 5, 0, 3]]
+    },
+    {
+        "characterName": "bu",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 5, 0, 5], [0, 5, 0, 3], [2.5, 5, 2.5, 3]]
+    },
+    {
+        "characterName": "boa",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 2.5, 0, 2.5], [0, 5, 0, 2.5], [2.5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "bue",
+        "characterLines": [[2.5, 0, 5, 0], [5, 0, 5, 5], [5, 5, 0, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "c",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ca",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "ce",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ci",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "co",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [0, 0, 5, 0]]
+    },
+    {
+        "characterName": "cu",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "coa",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "cue",
+        "characterLines": [[0, 2.5, 5, 0], [0, 2.5, 5, 5], [0, 0, 5, 0], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "d",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "da",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 0, 0, 5]]
+    },
+    {
+        "characterName": "de",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "di",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 5, 0, 2.5]]
+    },
+    {
+        "characterName": "do",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 0, 5, 0]]
+    },
+    {
+        "characterName": "du",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "doa",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [0, 0, 0, 2.5]]
+    },
+    {
+        "characterName": "due",
+        "characterLines": [[5, 2.5, 0, 0], [5, 2.5, 0, 5], [5, 0, 0, 0], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "f",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5]]
+    },
+    {
+        "characterName": "fa",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [0, 0, 5, 5]]
+    },
+    {
+        "characterName": "fe",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "fi",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "fo",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "fu",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [0, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "foa",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "fue",
+        "characterLines": [[0, 0, 5, 0], [0, 0, 0, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "g",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ga",
+        "characterLines": [[5, 0, 0, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ge",
+        "characterLines": [[5, 0, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "gi",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "go",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0]]
+    },
+    {
+        "characterName": "gu",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "goa",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [0, 2.5, 0, 0]]
+    },
+    {
+        "characterName": "gue",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5], [0, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "h",
+        "characterLines": [[0, 0, 0, 5], [5, 0, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ha",
+        "characterLines": [[0, 0, 0, 5], [5, 2.5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "he",
+        "characterLines": [[0, 0, 0, 5], [5, 2.5, 5, 5], [0, 2.5, 5, 2.5], [0, 0, 5, 0]]
+    },
+    {
+        "characterName": "hi",
+        "characterLines": [[0, 0, 0, 5], [2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ho",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "hu",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "hoa",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 2.5, 0], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "hue",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 2.5, 5], [2.5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "j",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0]]
+    },
+    {
+        "characterName": "ja",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [5, 5, 0, 0]]
+    },
+    {
+        "characterName": "je",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ji",
+        "characterLines": [[5, 0, 5, 5], [5, 5, 0, 5], [0, 5, 0, 2.5]]
+    },
+    {
+        "characterName": "jo",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "ju",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [0, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "joa",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "jue",
+        "characterLines": [[0, 5, 5, 5], [5, 5, 5, 0], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "k",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 0], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ka",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ke",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 0], [0, 2.5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ki",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 0]]
+    },
+    {
+        "characterName": "ko",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 0], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ku",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "koa",
+        "characterLines": [[0, 2.5, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "kue",
+        "characterLines": [[0, 2.5, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 5, 5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "l",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "la",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [0, 5, 5, 0]]
+    },
+    {
+        "characterName": "le",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "li",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "lo",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [0, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "lu",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "loa",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "lue",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "m",
+        "characterLines": [[0, 0, 0, 5], [0, 0, 5, 5], [5, 5, 5, 0]]
+    },
+    {
+        "characterName": "ma",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 0], [5, 5, 0, 0]]
+    },
+    {
+        "characterName": "me",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 5, 0]]
+    },
+    {
+        "characterName": "mi",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 5]]
+    },
+    {
+        "characterName": "mo",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 5], [5, 5, 5, 0], [5, 0, 2.5, 0]]
+    },
+    {
+        "characterName": "mu",
+        "characterLines": [[2.5, 5, 0, 5], [0, 5, 0, 0], [0, 0, 5, 5], [5, 5, 5, 0]]
+    },
+    {
+        "characterName": "moa",
+        "characterLines": [[0, 0, 5, 5], [5, 5, 0, 5], [2.5, 2.5, 5, 0]]
+    },
+    {
+        "characterName": "mue",
+        "characterLines": [[0, 5, 2.5, 0], [2.5, 0, 5, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "n",
+        "characterLines": [[0, 5, 0, 0], [0, 5, 5, 0], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "na",
+        "characterLines": [[0, 5, 5, 0], [5, 0, 5, 5], [5, 5, 0, 0]]
+    },
+    {
+        "characterName": "ne",
+        "characterLines": [[0, 0, 5, 5], [5, 5, 5, 0]]
+    },
+    {
+        "characterName": "ni",
+        "characterLines": [[0, 5, 5, 0], [5, 0, 5, 5]]  
+    },
+    {
+        "characterName": "no",
+        "characterLines": [[0, 5, 0, 0], [0, 5, 5, 0], [5, 0, 5, 5], [0, 0, 2.5, 0]]
+    },
+    {
+        "characterName": "nu",
+        "characterLines": [[0, 5, 0, 0], [0, 5, 5, 0], [5, 0, 5, 5], [5, 5, 2.5, 5]]
+    },
+    {
+        "characterName": "noa",
+        "characterLines": [[0, 0, 2.5, 2.5], [5, 0, 0, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "nue",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 5, 0], [5, 0, 0, 0]]
+    },
+    {
+        "characterName": "p",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "pa",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 0, 5, 5]]
+    },
+    {
+        "characterName": "pe",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "pi",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "po",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "pu",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [0, 0, 0, 2.5]]
+    },
+    {
+        "characterName": "poa",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "pue",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 0, 0, 5]]
+    },
+    {
+        "characterName": "q",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "qa",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 0, 0, 5]]
+    },
+    {
+        "characterName": "qe",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "qi",
+        "characterLines": [[0, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "qo",
+        "characterLines": [[2.5, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "qu",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "qoa",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "que",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "r",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ra",
+        "characterLines": [[0, 5, 5, 5], [2.5, 5, 2.5, 0], [2.5, 5, 5, 0]]
+    },
+    {
+        "characterName": "re",
+        "characterLines": [[0, 5, 5, 5], [2.5, 5, 2.5, 0], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "ri",
+        "characterLines": [[0, 5, 5, 5], [2.5, 5, 2.5, 0], [5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "ro",
+        "characterLines": [[0, 5, 5, 5], [2.5, 5, 2.5, 0], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "ru",
+        "characterLines": [[5, 5, 0, 5], [2.5, 5, 2.5, 0], [0, 5, 0, 2.5]]
+    },
+    {
+        "characterName": "roa",
+        "characterLines": [[0, 5, 5, 5], [0, 2.5, 5, 2.5], [2.5, 5, 2.5, 0]]
+    },
+    {
+        "characterName": "rue",
+        "characterLines": [[0, 5, 5, 5], [2.5, 5, 2.5, 0], [2.5, 5, 0, 0]]
+    },
+    {
+        "characterName": "s",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "sa",
+        "characterLines": [[5, 2.5, 5, 0], [5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "se",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 5, 5]]
+    },
+    {
+        "characterName": "si",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 5], [5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "so",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "su",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "soa",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "sue",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 5], [5, 5, 5, 2.5], [5, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "t",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ta",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": "te",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [0, 0, 0, 5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": "ti",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": "to",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 0, 2.5]]
+    },
+    {
+        "characterName": "tu",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "toa",
+        "characterLines":[[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 0, 2.5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "tue",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 5, 2.5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "v",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 5, 0]]
+    },
+    {
+        "characterName": "va",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "ve",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 5, 0], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "vi",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 5, 0], [2.5, 5, 2.5, 0]]
+    },
+    {
+        "characterName": "vo",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 5, 0, 5]]
+    },
+    {
+        "characterName": "vu",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": "voa",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "vue",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 5, 2.5]]  
+    },
+    {
+        "characterName": "w",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "wa",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [2.5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "we",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "wi",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "wo",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 2.5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "wu",
+        "characterLines": [[0, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "woa",
+        "characterLines": [[0, 5, 0, 0], [0, 0, 5, 0], [2.5, 0, 2.5, 2.5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "wue",
+        "characterLines": [[0, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 5], [2.5, 0, 2.5, 2.5]] 
+    },
+    {
+        "characterName": "x",
+        "characterLines": [[0, 0, 5, 5], [5, 0, 0, 5]]
+    },
+    {
+        "characterName": "xa",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "xe",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "xi",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "xo",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "xu",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 2.5, 0], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "xoa",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 0, 2.5]]  
+    },
+    {
+        "characterName": "xue",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5], [5, 0, 0, 5], [0, 0, 5, 5]]
+    },
+    {
+        "characterName": "y",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "ya",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "ye",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "yi",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "yo",
+        "characterLines": [[0, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 2.5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "yu",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "yoa",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "yue",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "z",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 5]]    
+    },
+    {
+        "characterName": "za",
+        "characterLines": [[0, 2.5, 0, 0], [0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "ze",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 0, 5]]
+    },
+    {
+        "characterName": "zi",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 5], [0, 5, 0, 2.5]]
+    },
+    {
+        "characterName": "zo",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 2.5], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "zu",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 2.5], [5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "zoa",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "zue",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 0, 5], [0, 5, 0, 2.5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "ch",
+        "characterLines": [[0, 0, 0, 5], [0, 5, 2.5, 2.5], [2.5, 2.5, 5, 5], [5, 5, 5, 0]]   
+    },
+    {
+        "characterName": "cha",
+        "characterLines": [[0, 5, 2.5, 2.5], [2.5, 2.5, 5, 5], [2.5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "che",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 0, 5], [2.5, 0, 5, 5]]
+    },
+    {
+        "characterName": "chi",
+        "characterLines": [[0, 5, 2.5, 0], [2.5, 0, 5, 5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "cho",
+        "characterLines": [[0, 0, 2.5, 0], [2.5, 0, 2.5, 2.5], [2.5, 2.5, 0, 5], [5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "chu",
+        "characterLines": [[2.5, 0, 2.5, 2.5], [0, 5, 2.5, 2.5], [5, 5, 2.5, 2.5], [5, 0, 2.5, 0]]
+    },
+    {
+        "characterName": "choa",
+        "characterLines": [[0, 5, 2.5, 2.5], [2.5, 0, 2.5, 2.5], [5, 5, 2.5, 2.5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "chue",
+        "characterLines": [[0, 5, 2.5, 2.5], [2.5, 0, 2.5, 2.5], [5, 5, 2.5, 2.5], [2.5, 2.5, 5, 2.5]]  
+    },
+    {
+        "characterName": "sh",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 0, 5, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "sha",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 0, 5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "she",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "shi",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "sho",
+        "characterLines": [[0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [0, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "shu",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 0, 5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "shoa",
+        "characterLines": [[2.5, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "shue",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 2.5, 0, 5], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ng",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "nga",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 2.5], [2.5, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "nge",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 2.5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ngi",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "ngo",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [0, 2.5, 5, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "ngu",
+        "characterLines": [[0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 0], [2.5, 0, 2.5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ngoa",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 2.5, 0, 5], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ngue",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 0, 5], [2.5, 0, 2.5, 5], [2.5, 0, 5, 5]]
+    },
+    {
+        "characterName": "th",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "tha",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 5, 5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "the",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [0, 5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "thi",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [2.5, 0, 2.5, 5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": "tho",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [0, 5, 5, 5], [5, 5, 5, 2.5]]
+    },
+    {
+        "characterName": "thu",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [0, 5, 5, 5], [5, 5, 5, 2.5], [2.5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "thoa",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "thue",
+        "characterLines": [[2.5, 0, 5, 0], [0, 2.5, 5, 2.5], [0, 5, 5, 5], [5, 5, 5, 0]]    
+    },
+    {
+        "characterName": "gh",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 5], [5, 2.5, 0, 2.5], [0, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "gha",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 5, 0], [0, 5, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ghe",
+        "characterLines": [[0, 0, 5, 0], [0, 5, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ghi",
+        "characterLines": [[0, 5, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5], [2.5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": "gho",
+        "characterLines": [[0, 0, 0, 5], [5, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "ghu",
+        "characterLines": [[5, 0, 5, 5], [5, 2.5, 0, 2.5], [0, 2.5, 0, 5], [0, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "ghoa",
+        "characterLines": [[2.5, 5, 0, 2.5], [0, 2.5, 5, 2.5], [5, 0, 5, 5]]
+    },
+    {
+        "characterName": "ghue",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 5, 0], [2.5, 0, 2.5, 5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "st",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 5, 5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "sta",
+        "characterLines": [[0, 0, 2.5, 2.5], [2.5, 2.5, 2.5, 5], [0, 2.5, 5, 2.5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "ste",
+        "characterLines": [[5, 0, 2.5, 2.5], [2.5, 2.5, 2.5, 5], [0, 2.5, 5, 2.5], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "sti",
+        "characterLines": [[5, 0, 5, 5], [2.5, 0, 2.5, 5], [5, 2.5, 0, 2.5], [0, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "sto",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 0, 2.5], [0, 2.5, 0, 5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "stu",
+        "characterLines": [[0, 0, 5, 0], [2.5, 0, 2.5, 5], [0, 5, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "stoa",
+        "characterLines": [[0, 0, 5, 0], [0, 2.5, 5, 2.5], [2.5, 2.5, 0, 5], [2.5, 2.5, 2.5, 5], [2.5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "stue",
+        "characterLines": [[0, 0, 2.5, 5], [2.5, 5, 2.5, 0], [2.5, 5, 5, 0], [0, 5, 5, 5]]
+    },
+    {
+        "characterName": "1",
+        "characterLines": [[0, 5, 5, 5], [2.5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "2",
+        "characterLines": [[0, 5, 5, 5], [0, 0, 0, 2.5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "3",
+        "characterLines": [[0, 5, 5, 5], [0, 0, 0, 2.5], [2.5, 0, 2.5, 2.5], [5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "4",
+        "characterLines": [[0, 5, 5, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "5",
+        "characterLines": [[0, 5, 5, 5], [0, 2.5, 2.5, 2.5], [0, 0, 2.5, 0]]
+    },
+    {
+        "characterName": "6",
+        "characterLines": [[0, 5, 5, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "7",
+        "characterLines": [[0, 5, 5, 5], [2.5, 2.5, 5, 2.5], [2.5, 0, 5, 0]]
+    },
+    {
+        "characterName": "8",
+        "characterLines": [[0, 5, 5, 5], [0, 2.5, 5, 2.5], [0, 0, 2.5, 0]]
+    },
+    {
+        "characterName": "9",
+        "characterLines": [[5, 5, 0, 5], [5, 2.5, 0, 2.5], [2.5, 0, 5, 0]]
+    },
+    {
+        "characterName": "0",
+        "characterLines": [[2.5, 0, 0, 2.5], [0, 2.5, 2.5, 5], [2.5, 5, 5, 2.5], [5, 2.5, 2.5, 0]]
+    },
+    {
+        "characterName": ".",
+        "characterLines": [[0, 5, 2.5, 5]]
+    },
+    {
+        "characterName": ",",
+        "characterLines": [[0, 2.5, 0, 5]]
+    },
+    {
+        "characterName": "?",
+        "characterLines": [[0, 0, 5, 0], [5, 0, 5, 2.5], [5, 2.5, 2.5, 2.5], [2.5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "!",
+        "characterLines": [[0, 2.5, 0, 5], [2.5, 0, 2.5, 5], [5, 2.5, 5, 5]]
+    },
+    {
+        "characterName": "\"",
+        "characterLines": [[0, 0, 0, 2.5], [2.5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "'",
+        "characterLines": [[0, 0, 0, 2.5]]
+    },
+    {
+        "characterName": "<",
+        "characterLines": [[2.5, 0, 0, 2.5], [0, 2.5, 2.5, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": ">",
+        "characterLines": [[2.5, 0, 5, 2.5], [5, 2.5, 2.5, 5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "/",
+        "characterLines": [[5, 0, 0, 5]]
+    },
+    {
+        "characterName": "\\",
+        "characterLines": [[0, 0, 5, 5]]
+    },
+    {
+        "characterName": "|",
+        "characterLines": [[0, 0, 0, 5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "@",
+        "characterLines": [[5, 2.5, 2.5, 2.5], [2.5, 2.5, 2.5, 5], [2.5, 5, 5, 5], [5, 5, 5, 0], [5, 0, 0, 0], [0, 0, 0, 5]]
+    },
+    {
+        "characterName": ":",
+        "characterLines": [[0, 0, 5, 0], [2.5, 2.5, 5, 2.5], [2.5, 5, 5, 5]]
+    },
+    {
+        "characterName": ";",
+        "characterLines": [[0, 0, 5, 0], [2.5, 2.5, 5, 2.5], [5, 5, 0, 5]]
+    },
+    {
+        "characterName": "`",
+        "characterLines": [[2.5, 0, 0, 2.5]]
+    },
+    {
+        "characterName": "¬",
+        "characterLines": [[0, 0, 2.5, 0], [2.5, 0, 2.5, 2.5]]
+    },
+    {
+        "characterName": "£",
+        "characterLines": [[5, 0, 2.5, 0], [2.5, 0, 0, 5], [0, 5, 5, 5], [0, 2.5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "$",
+        "characterLines": [[5, 0, 0, 0], [0, 0, 0, 2.5], [0, 2.5, 5, 2.5], [5, 2.5, 5, 5], [5, 5, 0, 5], [2.5, 5, 2.5, 0]]
+    },
+    {
+        "characterName": "%",
+        "characterLines": [[5, 0, 0, 5], [2.5, 0, 0, 2.5], [5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "^",
+        "characterLines": [[0, 2.5, 2.5, 0], [2.5, 0, 5, 2.5]]
+    },
+    {
+        "characterName": "&",
+        "characterLines": [[0, 0, 2.5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 0, 5], [0, 5, 0, 0], [5, 2.5, 2.5, 5], [5, 5, 2.5, 2.5]]
+    },
+    {
+        "characterName": "*",
+        "characterLines": [[0, 0, 5, 5], [0, 5, 5, 0], [0, 2.5, 5, 2.5], [2.5, 0, 2.5, 5]]
+    },
+    {
+        "characterName": "(",
+        "characterLines": [[2.5, 0, 0, 2.5], [0, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": ")",
+        "characterLines": [[2.5, 0, 5, 2.5], [5, 2.5, 2.5, 5]]
+    },
+    {
+        "characterName": "_",
+        "characterLines": [[0, 5, 5, 5]]
+    },
+    {
+        "characterName": "-",
+        "characterLines": [[0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "+",
+        "characterLines": [[2.5, 0, 2.5, 5], [0, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "=",
+        "characterLines": [[0, 1.5, 5, 1.5], [0, 3, 5, 3]]
+    },
+    {
+        "characterName": "{",
+        "characterLines": [[5, 0, 2.5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 5, 5], [2.5, 2.5, 0, 2.5]]
+    },
+    {
+        "characterName": "}",
+        "characterLines": [[0, 0, 2.5, 0], [2.5, 0, 2.5, 5], [2.5, 5, 0, 5], [2.5, 2.5, 5, 2.5]]
+    },
+    {
+        "characterName": "[",
+        "characterLines": [[2.5, 0, 0, 0], [0, 0, 0, 5], [0, 5, 2.5, 5]]
+    },
+    {
+        "characterName": "]",
+        "characterLines": [[2.5, 0, 5, 0], [5, 0, 5, 5], [5, 5, 2.5, 5]]
+    },
+    {
+        "characterName": "~",
+        "characterLines": [[0, 2.5, 2.5, 0], [2.5, 0, 2.5, 2.5], [2.5, 2.5, 5, 0]]
+    },
+    {
+        "characterName": "#",
+        "characterLines": [[1.5, 0, 1.5, 5], [4, 0, 4, 5], [0, 1.5, 5, 1.5], [0, 3.5, 5, 3.5]]
+    },
+    {
+        "characterName": "\n",
+        "characterLines": []
+    }
+]

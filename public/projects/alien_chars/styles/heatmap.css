@@ -1,0 +1,33 @@
+.heatmap {
+    width: 700px;
+    height: 900px;
+    border: 2px solid #333;
+    background-color: #222;
+    color: white;
+    border-collapse: collapse;
+}
+
+td {
+    text-align: center;
+    border: 1px solid #151515;    
+}
+
+td.deeppink {
+    background-color: rgba(255, 20, 145, 0.3);
+}
+
+td.orange {
+    background-color: rgba(255, 166, 0, 0.3);
+}
+
+td.yellow {
+    background-color: rgba(255, 255, 0, 0.3);
+}
+
+td.green {
+    background-color: rgba(127, 255, 212, 0.3);
+}
+
+td.blue {
+    background-color: rgba(0, 255, 255, 0.3);
+}
