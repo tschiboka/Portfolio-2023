@@ -11,36 +11,34 @@ export const SolutionBoard = () => {
     const words = level ? level.targetWords : []
     const boardRef = useRef<HTMLDivElement>(null)
     const [containerWidth, setContainerWidth] = useState(0)
+    const [containerHeight, setContainerHeight] = useState(0)
 
     useEffect(() => {
         if (!boardRef.current) return
 
-        const updateWidth = () => {
+        const updateSize = () => {
             if (boardRef.current) {
                 setContainerWidth(boardRef.current.offsetWidth)
+                setContainerHeight(boardRef.current.offsetHeight)
             }
         }
 
-        updateWidth()
-        window.addEventListener('resize', updateWidth)
-        return () => window.removeEventListener('resize', updateWidth)
+        updateSize()
+        window.addEventListener('resize', updateSize)
+        return () => window.removeEventListener('resize', updateSize)
     }, [boardRef.current])
 
     const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
 
     const columns = useMemo(() => {
-        const column1 =
-            words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) ||
-            []
-        const column2 =
-            words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) ||
-            []
+        const column1 = words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) || []
+        const column2 = words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) || []
         return { column1, column2 }
     }, [words, MAX_WORDS_PER_COLUMN])
 
     const columnConfig = useMemo(
-        () => getColumnConfig({ columns, containerWidth }),
-        [columns, containerWidth],
+        () => getColumnConfig({ columns, containerWidth, containerHeight }),
+        [columns, containerWidth, containerHeight],
     )
 
     if (words.length === 0) return <div className="solution-board empty"></div>

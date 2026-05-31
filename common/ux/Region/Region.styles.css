@@ -79,11 +79,15 @@
     height: var(--space-8);
     border-right: var(--space-2) solid var(--accent-dark-3);
     border-bottom: var(--space-2) solid var(--accent-dark-3);
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
     transition: transform 0.2s ease;
 }
 
-.region--open .region__chevron {
+.region--collapsible > button > .region__chevron {
+    transform: rotate(45deg);
+}
+
+.region--collapsible.region--open > button > .region__chevron {
     transform: rotate(-135deg);
 }
 
@@ -129,6 +133,7 @@
 @media (min-width: 168px) {
     .region--header {
         padding: 0 1.2rem;
+        outline: var(--space-2) solid transparent;
     }
 }
 

@@ -119,7 +119,7 @@ export const apiMenu: MenuItem[] = [
                     },
                     {
                         label: 'Tic Tac Toe',
-                        path: 'https://tschiboka.com/projects/tic_tac_toe/tictactoe.html',
+                        path: 'https://tschiboka.com/projects/tictactoe/tictactoe.html',
                         parent: 'Old Projects',
                     },
                     {

@@ -6,7 +6,7 @@ import {
 import guitarImage from '../../../assets/images/about/RiffMaster.png'
 import guitarAppImage from '../../../assets/images/about/RiffMaster_App.png'
 import guitarAppImageSm from '../../../assets/images/about/RiffMaster_App_Mobile.png'
-import { Heading, Paragraph, Link, Main, Figure, Stack } from '@common/ux'
+import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common/ux'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import './About.scss'
@@ -111,9 +111,10 @@ const About = ({ pageName }: Props) => {
                         size="md"
                     />
                 </Stack>
-                <Link className="link--inline" to="/blog/riffmaster">
+                <Link to="/blog/riffmaster">
                     You can check out this guitar project in detail here.
                 </Link>
+                <Spacer size="32" />
                 <Heading as="h2">Continued Self Development</Heading>
                 <Paragraph>
                     I consider the completion of my bachelor's degree the beginning of my

@@ -36,7 +36,6 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = (): void => {}
 
-
 describe('isDefined', () => {
     it('returns true for non-null, non-undefined values', () => {
         expect(isDefined(0)).toBe(true)
@@ -93,7 +92,6 @@ describe('isNull', () => {
     })
 })
 
-
 describe('isTruthy', () => {
     it('returns true for truthy values', () => {
         expect(isTruthy(1)).toBe(true)
@@ -135,7 +133,6 @@ describe('isFalsy', () => {
         expect(isFalsy({})).toBe(false)
     })
 })
-
 
 describe('isBoolean', () => {
     it('returns true for booleans', () => {
@@ -244,7 +241,6 @@ describe('isFiniteNumber', () => {
     })
 })
 
-
 describe('isArray', () => {
     it('returns true for arrays', () => {
         expect(isArray([])).toBe(true)
@@ -309,7 +305,6 @@ describe('isPlainObject', () => {
     })
 })
 
-
 describe('hasLength', () => {
     it('returns true for non-empty arrays', () => {
         expect(hasLength([1, 2, 3])).toBe(true)
@@ -368,6 +363,18 @@ describe('isEmpty', () => {
     it('returns true for undefined', () => {
         expect(isEmpty(undefined)).toBe(true)
     })
+
+    it('returns true for empty Sets and Maps', () => {
+        expect(isEmpty(new Set())).toBe(true)
+        expect(isEmpty(new Map())).toBe(true)
+    })
+
+    it('returns false for non-empty Sets and Maps', () => {
+        const set = new Set([1])
+        const map = new Map([['key', 'value']])
+        expect(isEmpty(set)).toBe(false)
+        expect(isEmpty(map)).toBe(false)
+    })
 })
 
 describe('isNonEmpty', () => {
@@ -425,7 +432,6 @@ describe('isNested', () => {
         expect(isNested({})).toBe(false)
     })
 })
-
 
 describe('hasProperty', () => {
     it('returns true when object has the property', () => {
@@ -486,7 +492,6 @@ describe('hasValue', () => {
     })
 })
 
-
 describe('isOneOf', () => {
     const statuses = ['active', 'inactive'] as const
 
@@ -504,7 +509,6 @@ describe('isOneOf', () => {
         expect(isOneOf(4, [1, 2, 3])).toBe(false)
     })
 })
-
 
 describe('isShallowEqual', () => {
     it('returns true for identical primitives', () => {
@@ -612,7 +616,6 @@ describe('isUnique', () => {
     })
 })
 
-
 describe('isInstanceOf', () => {
     it('returns true for matching instances', () => {
         expect(isInstanceOf(new Date(), Date)).toBe(true)
@@ -629,7 +632,6 @@ describe('isInstanceOf', () => {
         expect(isInstanceOf({}, Date as never)).toBe(false)
     })
 })
-
 
 describe('isDate', () => {
     it('returns true for valid dates', () => {
@@ -720,7 +722,6 @@ describe('isThenable', () => {
         expect(isThenable(null)).toBe(false)
     })
 })
-
 
 describe('isAll', () => {
     const allStrings = isAll(isString)

@@ -11,7 +11,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
         title={'Tivadar Debnar | Code Blocks'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

@@ -13,7 +13,6 @@ export const Pills = ({ path }: PillsProps) => (
         title={'Tivadar Debnar | Pills'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

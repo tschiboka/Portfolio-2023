@@ -17,7 +17,13 @@ export const SolvedSolutionWord = ({ playableWord, letterSize }: SolvedSolutionW
                 <div
                     className={`letter ${solvedByClass}`}
                     key={index}
-                    style={{ width: letterSize, height: letterSize }}
+                    style={
+                        {
+                            width: letterSize,
+                            height: letterSize,
+                            '--letter-size': `${letterSize}px`,
+                        } as React.CSSProperties
+                    }
                 >
                     {char}
                 </div>
@@ -40,7 +46,13 @@ export const UnsolvedSolutionWord = ({ playableWord, letterSize }: UnsolvedSolut
                 <div
                     className={`letter ${hintedIndices.includes(index) ? 'hinted' : ''}`}
                     key={index}
-                    style={{ width: letterSize, height: letterSize }}
+                    style={
+                        {
+                            width: letterSize,
+                            height: letterSize,
+                            '--letter-size': `${letterSize}px`,
+                        } as React.CSSProperties
+                    }
                 >
                     {char}
                 </div>

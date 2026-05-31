@@ -231,24 +231,33 @@ export const hasLength = (value: { length: number } | Nil): boolean =>
  * - Objects: no own enumerable keys
  *
  * @example
- * isEmpty(null)      // true
- * isEmpty(undefined) // true
- * isEmpty([])        // true
- * isEmpty([1])       // false
- * isEmpty('')        // true
- * isEmpty('hello')   // false
- * isEmpty({})        // true
- * isEmpty({ a: 1 }) // false
+ * isEmpty(null)                // true
+ * isEmpty(undefined)           // true
+ * isEmpty([])                  // true
+ * isEmpty([1])                 // false
+ * isEmpty('')                  // true
+ * isEmpty('hello')             // false
+ * isEmpty({})                  // true
+ * isEmpty({ a: 1 })            // false
+ * isEmpty(new Set())           // true
+ * isEmpty(new Map())           // true
+ * isEmpty(new Set([1]))        // false
+ * isEmpty(new Map([['a', 1]])) // false
  *
  * @param value - The value to check.
  * @returns `true` if the value is empty.
  */
-export const isEmpty = (value: Emptiable): boolean => {
+export const isEmpty = (value: unknown): boolean => {
     if (value == null) return true
-    if (Array.isArray(value) || typeof value === 'string') return value.length === 0
-    return Object.keys(value).length === 0
-}
 
+    if (Array.isArray(value) || typeof value === 'string') return value.length === 0
+
+    if (value instanceof Set || value instanceof Map) return value.size === 0
+
+    if (typeof value === 'object') return Object.keys(value as Record<string, unknown>).length === 0
+
+    return false
+}
 /**
  * Checks whether a value is non-empty.
  *
@@ -327,7 +336,6 @@ export const hasValue = (
     return Object.values(collection).includes(value)
 }
 
-
 /**
  * Type guard that checks whether a value is one of the given options.
  *
@@ -342,7 +350,6 @@ export const hasValue = (
  */
 export const isOneOf = <T>(value: unknown, options: readonly T[]): value is T =>
     options.includes(value as T)
-
 
 /**
  * Shallow equality check for two values.
@@ -427,7 +434,6 @@ export const isEqual = (a: unknown, b: unknown): boolean => {
  */
 export const isUnique = (value: unknown[]): boolean => new Set(value).size === value.length
 
-
 /**
  * Type guard that checks whether a value is an instance of a given constructor.
  *
@@ -444,7 +450,6 @@ export const isInstanceOf = <T>(
     value: unknown,
     constructor: new (...args: never[]) => T,
 ): value is T => value instanceof constructor
-
 
 /**
  * Type guard that checks whether a value is a `Date` instance and is valid.
@@ -517,7 +522,6 @@ export const isThenable = (value: unknown): value is PromiseLike<unknown> =>
     typeof value === 'object' &&
     value !== null &&
     typeof (value as Record<string, unknown>).then === 'function'
-
 
 /**
  * Creates a predicate that checks if **all** elements in an array satisfy a type guard.

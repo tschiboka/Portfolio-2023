@@ -28,7 +28,6 @@ const Intro = () => {
             </Paragraph>
             <hr />
             <Heading as="h2">How can I help you?</Heading>
-
             <Section title="How I work" icon={<FaGlasses />} expandable defaultOpen={false}>
                 <HireIntro />
             </Section>

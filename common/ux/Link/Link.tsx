@@ -9,6 +9,8 @@ export const Link = (props: LinkProps) => {
     const cls = `link${className ? ` ${className}` : ''}`
 
     if ('to' in props && props.to !== undefined) {
+        const target = props.target ?? (isExternal(props.to) ? '_blank' : undefined)
+        const rel = props.rel ?? (isExternal(props.to) ? 'noopener noreferrer' : undefined)
         return (
             <RouterLink
                 className={cls}
@@ -17,6 +19,8 @@ export const Link = (props: LinkProps) => {
                 title={title}
                 onClick={onClick}
                 to={props.to}
+                target={target}
+                rel={rel}
             >
                 {children}
             </RouterLink>

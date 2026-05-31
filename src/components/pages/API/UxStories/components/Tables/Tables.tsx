@@ -26,7 +26,6 @@ export const Tables = ({ path }: TablesProps) => (
         title={'Tivadar Debnar | Tables'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

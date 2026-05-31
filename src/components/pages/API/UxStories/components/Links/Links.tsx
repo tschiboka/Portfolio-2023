@@ -11,7 +11,6 @@ export const Links = ({ path }: LinksProps) => (
         title={'Tivadar Debnar | Links'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

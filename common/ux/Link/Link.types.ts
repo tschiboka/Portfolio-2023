@@ -10,6 +10,8 @@ export type LinkAsRoute = SharedProps & {
     to: string
     href?: never
     download?: never
+    target?: string
+    rel?: string
 }
 
 export type LinkAsAnchor = SharedProps & {

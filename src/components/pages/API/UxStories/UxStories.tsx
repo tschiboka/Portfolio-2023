@@ -24,9 +24,8 @@ export const UxStories = ({ path }: UxStoriesProps) => {
             title={'Tivadar Debnar | Ux Stories'}
             path={path}
             recordVisit={false}
-            loginRequired
             variant="api"
-            pageName="Projects"
+            pageName="UX Stories"
             sideMenu={<PageSideMenu />}
         >
             <main>

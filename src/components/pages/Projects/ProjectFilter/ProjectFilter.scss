@@ -1,34 +1,20 @@
-@use '../../../../styles/breakpoints.scss' as bp;
-@use '../../../../styles/palette.scss' as palette;
-
 .ProjectFilter {
-    margin: 1.5rem 0;
-    padding: 1rem 1.5rem;
-    background-color: palette.$black_2;
-    border: 1px solid palette.$black_5;
-    border-radius: 12px;
-}
-
-.ProjectFilter__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-}
-
-.ProjectFilter__pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    .Pill {
-        cursor: pointer;
-        transition: opacity 0.2s ease;
-    }
     .ProjectFilter__pill--dimmed {
         opacity: 0.3;
     }
-}
 
-.light .ProjectFilter {
-    background-color: palette.$white_2;
+    .ProjectFilter__groups {
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .ProjectFilter__group-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .Pill {
+        font-variant: small-caps;
+    }
 }

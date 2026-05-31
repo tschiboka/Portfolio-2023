@@ -151,7 +151,6 @@ export const Forms = ({ path }: FormsProps) => {
             title={'Tivadar Debnar | Forms'}
             path={path}
             recordVisit={false}
-            loginRequired
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}

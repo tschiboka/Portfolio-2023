@@ -45,13 +45,7 @@ function requestVisitorsInfo() {
         },
     }
 
-    const postVisit = async (url, meta) => {
-        try {
-            await fetch(url, meta)
-        } catch (err) {
-            console.log(`Error ${err}`)
-        }
-    }
+    const postVisit = async (url, meta) => {}
 
     postVisit(url, meta)
 
@@ -62,7 +56,6 @@ function requestVisitorsInfo() {
 
             app.visits = visits
 
-            console.log('VISITORS: ', JSON.stringify(app.visits))
             $('#visitors--total').html(visits.total)
             $('#visitors--unique').html(visits.unique)
         } catch (err) {

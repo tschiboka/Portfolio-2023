@@ -20,7 +20,6 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
         title={'Tivadar Debnar | Loading Indicators'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

@@ -25,7 +25,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
         title={'Tivadar Debnar | Typography'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
@@ -51,12 +50,24 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
 
                 <Heading as="h3">Levels</Heading>
                 <Stack gap="8">
-                    <Heading as="h1" includeInTableOfContents={false}>Heading 1</Heading>
-                    <Heading as="h2" includeInTableOfContents={false}>Heading 2</Heading>
-                    <Heading as="h3" includeInTableOfContents={false}>Heading 3</Heading>
-                    <Heading as="h4" includeInTableOfContents={false}>Heading 4</Heading>
-                    <Heading as="h5" includeInTableOfContents={false}>Heading 5</Heading>
-                    <Heading as="h6" includeInTableOfContents={false}>Heading 6</Heading>
+                    <Heading as="h1" includeInTableOfContents={false}>
+                        Heading 1
+                    </Heading>
+                    <Heading as="h2" includeInTableOfContents={false}>
+                        Heading 2
+                    </Heading>
+                    <Heading as="h3" includeInTableOfContents={false}>
+                        Heading 3
+                    </Heading>
+                    <Heading as="h4" includeInTableOfContents={false}>
+                        Heading 4
+                    </Heading>
+                    <Heading as="h5" includeInTableOfContents={false}>
+                        Heading 5
+                    </Heading>
+                    <Heading as="h6" includeInTableOfContents={false}>
+                        Heading 6
+                    </Heading>
                 </Stack>
                 <Code language="tsx" content={Snippets.Heading.levels} />
 

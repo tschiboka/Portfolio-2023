@@ -61,7 +61,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
             title={'Tivadar Debnar | Overlays'}
             path={path}
             recordVisit={false}
-            loginRequired
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}

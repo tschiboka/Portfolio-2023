@@ -1,38 +1,58 @@
-import ProjectCard from './ProjectCard/ProjectCard'
-import ProjectFilter from './ProjectFilter/ProjectFilter'
+import { ProjectCard } from './ProjectCard/ProjectCard'
+import { ProjectFilter } from './ProjectFilter/ProjectFilter'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
-import { getProjects } from './getProjects'
-import './Projects.scss'
-import { useState } from 'react'
+import { getProjects } from './Projects.selectors'
+import { ReactNode, useState } from 'react'
 import { Screen } from '../../sharedComponents/Screen/Screen'
-import { Heading, Paragraph, Main } from '@common/ux'
+import { Heading, Paragraph, Main, Section } from '@common/ux'
+import { isEmpty } from '@common/utils/Predicate/Predicate'
+import { BsSliders2 } from 'react-icons/bs'
 
 interface Props {
     pageName: string
     path: string
 }
 
+/**
+ * Featured: Projects that are complete and represent my best work, showcasing a range of skills and technologies.
+ * In Progress: Projects that are currently being developed or refined, demonstrating my ongoing learning and experimentation.
+ * Archived: Older projects that may not reflect my current skill level but are included for historical context and to show my growth over time.
+ */
+export type ProjectType = 'featured' | 'complete' | 'inProgress' | 'archived'
+
 export interface Project {
     title: string
+    year: number
+    type?: ProjectType
     image: string
     gallery?: [string]
-    description: string
+    description: ReactNode
     badges: string[]
     url?: string
     github?: string
-    readMoreLink?: string
+    blog?: string
+    openInNewTab?: boolean
+}
+
+const filterProjects = (by: string, projects: Project[] = getProjects()) => {
+    if (by === 'featured') return projects.filter((project) => project.type === 'featured')
+    if (by === 'inProgress') return projects.filter((project) => project.type === 'inProgress')
+    if (by === 'archived') return projects.filter((project) => project.type === 'archived')
+    return projects
 }
 
 const Projects = ({ pageName }: Props) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
+    const [selectedFilter, setSelectedFilter] = useState<string>('all')
 
     const allProjects = getProjects()
-    const filteredProjects =
-        selectedLanguages.size === 0
-            ? allProjects
-            : allProjects.filter((project) =>
-                  project.badges.some((badge) => selectedLanguages.has(badge)),
-              )
+    const filteredProjectsByLanguage = isEmpty(selectedLanguages)
+        ? allProjects
+        : allProjects.filter((project) =>
+              project.badges.some((badge) => selectedLanguages.has(badge)),
+          )
+
+    const filteredProjects = filterProjects(selectedFilter, filteredProjectsByLanguage)
 
     const handleToggle = (language: string) => {
         setSelectedLanguages((prev) => {
@@ -41,6 +61,15 @@ const Projects = ({ pageName }: Props) => {
             else next.add(language)
             return next
         })
+    }
+
+    const handleFilter = (by: string) => {
+        setSelectedFilter(by)
+    }
+
+    const handleClearFilters = () => {
+        setSelectedLanguages(new Set())
+        setSelectedFilter('featured')
     }
 
     return (
@@ -54,34 +83,31 @@ const Projects = ({ pageName }: Props) => {
             <Main>
                 <Heading as="h1">Projects</Heading>
                 <Paragraph>
-                    This page contains a selection of personal and academic projects covering
-                    frontend development, full-stack applications, UI experimentation, and
-                    browser-based systems.
+                    This page is a mix of personal and academic projects — really just a space where
+                    I build, experiment, and share what I’ve learned along the way. Some projects
+                    are polished, others are messy, and a few I still use today. They range from
+                    frontend and full-stack apps to UI experiments and browser-based systems, mostly
+                    built with TypeScript, React, Node.js, and modern frontend tooling.
                 </Paragraph>
-
-                <Paragraph>
-                    Many of these projects were opportunities to explore architectural ideas, solve
-                    implementation challenges, and deepen my understanding of how modern web
-                    applications are designed and maintained.
-                </Paragraph>
-
-                <Paragraph>
-                    The technologies vary across projects, but most are centred around TypeScript,
-                    React, Node.js, and modern frontend tooling.
-                </Paragraph>
-                <ProjectFilter
-                    selectedLanguages={selectedLanguages}
-                    onToggle={handleToggle}
-                    onClear={() => setSelectedLanguages(new Set())}
-                    totalCount={allProjects.length}
-                    filteredCount={filteredProjects.length}
-                />
-                <hr />
-                <section className="ProjectCard-wrapper">
-                    {filteredProjects.map((project) => (
-                        <ProjectCard key={project.title} project={project} />
-                    ))}
-                </section>
+                <Section
+                    title="Filter Projects"
+                    expandable
+                    defaultOpen={false}
+                    icon={<BsSliders2 />}
+                >
+                    <ProjectFilter
+                        selectedLanguages={selectedLanguages}
+                        onToggle={handleToggle}
+                        onFilter={handleFilter}
+                        onClear={handleClearFilters}
+                        totalCount={allProjects.length}
+                        filteredCount={filteredProjects.length}
+                        selectedFilter={selectedFilter}
+                    />
+                </Section>
+                {filteredProjects.map((project) => (
+                    <ProjectCard key={project.title} project={project} />
+                ))}
             </Main>
         </Screen>
     )

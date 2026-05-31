@@ -12,7 +12,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
         title={'Tivadar Debnar | Test Accessor'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

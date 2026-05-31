@@ -14,7 +14,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
         title={'Tivadar Debnar | Buttons'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

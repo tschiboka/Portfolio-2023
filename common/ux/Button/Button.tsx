@@ -5,12 +5,7 @@ const commonKeys = new Set(['as', 'variant', 'size', 'className', 'ariaLabel', '
 
 export const Button = (props: ButtonProps) => {
     const { children, variant = 'primary', size = 'md', className, ariaLabel, style } = props
-    const cls = [
-        'btn',
-        size === 'sm' ? 'btn--sm' : 'standalone-btn',
-        variant === 'secondary' ? 'secondary' : '',
-        className ?? '',
-    ]
+    const cls = ['btn', size === 'sm' ? 'btn--sm' : 'standalone-btn', variant, className ?? '']
         .filter(Boolean)
         .join(' ')
 

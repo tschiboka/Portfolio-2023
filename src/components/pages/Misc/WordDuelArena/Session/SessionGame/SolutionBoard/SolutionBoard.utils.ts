@@ -6,11 +6,13 @@ type GetColumnConfigProps = {
         column2: PlayableLevelWord[]
     }
     containerWidth: number
+    containerHeight: number
 }
 
 export const getColumnConfig = ({
     columns,
     containerWidth,
+    containerHeight,
 }: GetColumnConfigProps) => {
     const { column1, column2 } = columns
     if (containerWidth === 0)
@@ -41,20 +43,23 @@ export const getColumnConfig = ({
     const col1PixelWidth = (availableWidth * col1WidthPercent) / 100 - columnPadding
     const col2PixelWidth = (availableWidth * col2WidthPercent) / 100 - columnPadding
 
-    const letterMargin = 1
+    const letterMargin = 2 // margin: 0 1px = 1px each side = 2px total per letter
     const col1LetterSize =
-        maxCol1 > 0
-            ? Math.floor((col1PixelWidth - letterMargin * maxCol1) / maxCol1)
-            : 20
+        maxCol1 > 0 ? Math.floor((col1PixelWidth - letterMargin * maxCol1) / maxCol1) : 20
     const col2LetterSize =
-        maxCol2 > 0
-            ? Math.floor((col2PixelWidth - letterMargin * maxCol2) / maxCol2)
-            : 20
+        maxCol2 > 0 ? Math.floor((col2PixelWidth - letterMargin * maxCol2) / maxCol2) : 20
+    const horizontalLetterSize = Math.min(col1LetterSize, col2LetterSize)
 
-    const uniformLetterSize = Math.max(
-        16,
-        Math.min(col1LetterSize, col2LetterSize),
-    )
+    // Also constrain by vertical space: each row is (letterSize + 6px) from padding/margin
+    const numRows = Math.max(column1.length, column2.length)
+    const boardVerticalPadding = 10
+    const rowOverhead = 6 // padding: 2px 0 + margin: 1px 0 = 4px + 2px
+    const verticalLetterSize =
+        numRows > 0
+            ? Math.floor((containerHeight - boardVerticalPadding) / numRows - rowOverhead)
+            : horizontalLetterSize
+
+    const uniformLetterSize = Math.min(horizontalLetterSize, verticalLetterSize)
 
     return {
         col1: { width: col1WidthPercent, letterSize: uniformLetterSize },

@@ -51,7 +51,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
         title={'Tivadar Debnar | Layouts'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

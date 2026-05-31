@@ -95,7 +95,6 @@ export const NavStory = ({ path }: NavStoryProps) => (
         title={'Tivadar Debnar | Nav'}
         path={path}
         recordVisit={false}
-        loginRequired
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

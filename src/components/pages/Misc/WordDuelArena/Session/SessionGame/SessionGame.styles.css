@@ -14,15 +14,22 @@
     justify-content: space-between;
     align-items: flex-end;
     gap: var(--sp-md);
+    padding: 0 var(--sp-md);
 }
 
 .game-controls button {
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--sp-sm);
     position: relative;
     background-color: var(--color-bg-medium);
     border: var(--border-normal);
     border-radius: 100%;
     color: var(--color-font-light);
-    font-size: 30px;
+    font-size: var(--font-md);
     margin-bottom: var(--sp-md);
     cursor: pointer;
 }

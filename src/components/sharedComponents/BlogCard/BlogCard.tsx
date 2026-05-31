@@ -1,5 +1,5 @@
 import { BlogArticle } from '../../../articles/articles'
-import { getColourName } from '../../pages/Projects/getProjects'
+import { getColourName } from '../../pages/Projects/Projects.selectors'
 import { useNavigate } from 'react-router-dom'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'
 import { BiSolidTimeFive } from 'react-icons/bi'
