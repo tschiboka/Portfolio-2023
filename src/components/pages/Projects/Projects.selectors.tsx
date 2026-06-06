@@ -522,6 +522,8 @@ export function getColourName(str: string): PillColor {
             return 'orange'
         case 'git':
             return 'error'
+        case 'design':
+            return 'error'
         case 'featured':
             return 'accent'
         case 'complete':

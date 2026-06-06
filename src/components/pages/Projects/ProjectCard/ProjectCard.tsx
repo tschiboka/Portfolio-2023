@@ -38,12 +38,21 @@ export const ProjectCard = ({
                             </div>
                             {type && (
                                 <Pill
+                                    className="ProjectCard__type--desktop"
                                     label={type.toLocaleLowerCase()}
                                     color={getColourName(type)}
                                     variant="outlined"
                                 />
                             )}
                         </Stack.Horizontal>
+                        {type && (
+                            <Pill
+                                className="ProjectCard__type--mobile"
+                                label={type.toLocaleLowerCase()}
+                                color={getColourName(type)}
+                                variant="outlined"
+                            />
+                        )}
                     </Heading>
                     <Paragraph className="ProjectCard__description">{description}</Paragraph>
                     <Stack.Vertical gap="8" wrap className="ProjectCard__links">

@@ -31,6 +31,27 @@
         }
     }
 
+    .ProjectCard__content {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .ProjectCard__type--mobile {
+        display: inline-block;
+
+        @include bp.xl {
+            display: none;
+        }
+    }
+
+    .ProjectCard__type--desktop {
+        display: none;
+
+        @include bp.xl {
+            display: inline-block;
+        }
+    }
+
     h3 {
         margin: 0;
     }
@@ -45,6 +66,7 @@
     }
 
     .ProjectCard__links {
+        width: 100%;
         color: palette.$accent_dark_3;
         font-size: font.$font_sm !important;
         padding: 0.25rem;
@@ -56,10 +78,19 @@
             color: palette.$accent_dark_3;
         }
 
+        > * {
+            max-width: 100%;
+        }
+
         a {
             font-size: font.$font_sm !important;
             color: palette.$accent_dark_3;
             font-family: monospace;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-width: 0;
+            flex: 1;
 
             &:hover {
                 color: palette.$accent_dark_2;
