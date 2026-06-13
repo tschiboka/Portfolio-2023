@@ -2,13 +2,13 @@ import express from 'express'
 import auth from '../middlewares/auth'
 import { User } from '../models/user'
 import { Settings } from '../models/setting'
-import { ErrorResponse, GetSessionResponse, TypedRequest, TypedResponse } from '@common/types'
+import { GetSessionResponse, TypedRequest, TypedResponse } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 const router = express.Router()
 
 type GetSessionReq = TypedRequest
-type GetSessionRes = TypedResponse<GetSessionResponse | ErrorResponse>
+type GetSessionRes = TypedResponse<GetSessionResponse>
 
 router.get('/', [auth], async (req: GetSessionReq, res: GetSessionRes) => {
     const userId = (req as any).user.id

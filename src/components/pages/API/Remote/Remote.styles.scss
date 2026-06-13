@@ -1,0 +1,9 @@
+@use '../../../../styles/palette.scss' as palette;
+@use '../../../../styles/breakpoints.scss' as bp;
+
+.Remote__buttons {
+    border: 1px solid palette.$black_4;
+    background-color: palette.$black_x;
+    margin-top: 1rem;
+    padding: 2rem;
+}

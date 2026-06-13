@@ -1,7 +1,7 @@
-import { useApi } from './Query'
+import { RequestBuilder } from './Query'
 
 export { QueryKey } from './Key'
 
 export const Query = {
-    useApi,
+    RequestBuilder,
 }

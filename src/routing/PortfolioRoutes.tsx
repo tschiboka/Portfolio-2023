@@ -1,7 +1,7 @@
 // Website Pages
 import Home from '../components/pages/Home/Home'
 import About from '../components/pages/About/About'
-import Projects from '../components/pages/Projects/Projects'
+import { Projects } from '../components/pages/Projects/Projects'
 import Blog from '../components/pages/Blog/Blog'
 import Contact from '../components/pages/Contact/Contact'
 import PrivacyPolicy from '../components/pages/PrivacyPolicy/PrivacyPolicy'

@@ -14,7 +14,7 @@ import ticTacToeImg from '../../../assets/images/projects/TicTacToe.png'
 import crayonsImg from '../../../assets/images/projects/Crayons.png'
 import tschibokaDarkImg from '../../../assets/images/projects/TschibokaDark.png'
 import adrikaClockImg from '../../../assets/images/projects/AdrikaClock.png'
-import { Project } from './Projects'
+import { Project } from '.'
 
 const projects: Project[] = [
     {
@@ -538,3 +538,10 @@ export function getColourName(str: string): PillColor {
 }
 
 export const getProjects = () => projects
+
+export const filterProjects = (by: string, projects: Project[] = getProjects()) => {
+    if (by === 'featured') return projects.filter((project) => project.type === 'featured')
+    if (by === 'inProgress') return projects.filter((project) => project.type === 'inProgress')
+    if (by === 'archived') return projects.filter((project) => project.type === 'archived')
+    return projects
+}

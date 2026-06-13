@@ -1,7 +1,7 @@
 import { BiMessageDots } from 'react-icons/bi'
 import { FiDownload } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
-import { Button, Heading, Paragraph, Inline, Table } from '../../../../../common/ux'
+import { Button, Heading, Paragraph, Table, Stack } from '../../../../../common/ux'
 import type { TableColumns } from '../../../../../common/ux/Table/Table.types'
 import cv from '../../../../assets/files/Tivadar_Debnar_CV_2023.pdf'
 import './HireIntro.scss'
@@ -66,9 +66,7 @@ const HireIntro = () => {
                 than early-stage learning.
             </Paragraph>
             <Heading as="h2">Skills</Heading>
-
             <Table data={skills} columns={skillColumns} ariaLabel="Skills and technologies" />
-
             <Heading as="h2">Continuous development</Heading>
             <Paragraph>
                 I continuously refine my skills through real-world engineering work and focused
@@ -81,14 +79,14 @@ const HireIntro = () => {
                 maintainability.
             </Paragraph>
             <hr />
-            <Inline className="button-wrapper" justify="around" wrap>
+            <Stack.Vertical gap="16" className="button-wrapper" justify="center" align="center">
                 <Button as={Link} to="/contact">
                     Contact Tivadar <BiMessageDots />
                 </Button>
                 <Button as="a" href={cv} download variant="secondary">
                     Download my CV <FiDownload />
                 </Button>
-            </Inline>
+            </Stack.Vertical>
         </>
     )
 }

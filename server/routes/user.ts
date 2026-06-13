@@ -7,7 +7,6 @@ import { User, validateUser, generateToken } from '../models/user'
 import { Settings, HALF_AN_HOUR_IN_MS } from '../models/setting'
 import { Token } from '../models/token'
 import {
-    ErrorResponse,
     GetUserResponse,
     GetUsersResponse,
     PostUserError,
@@ -21,7 +20,7 @@ import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 const router = express.Router()
 
 type GetUsersReq = TypedRequest
-type GetUsersRes = TypedResponse<GetUsersResponse | ErrorResponse>
+type GetUsersRes = TypedResponse<GetUsersResponse>
 
 router.get('/', async (req: GetUsersReq, res: GetUsersRes) => {
     const users = await User.find()
@@ -33,7 +32,7 @@ router.get('/', async (req: GetUsersReq, res: GetUsersRes) => {
 })
 
 type GetUserReq = TypedRequest<{ params: { id: string } }>
-type GetUserRes = TypedResponse<GetUserResponse | ErrorResponse>
+type GetUserRes = TypedResponse<GetUserResponse>
 
 router.get('/:id', async (req: GetUserReq, res: GetUserRes) => {
     const valid = mongoose.Types.ObjectId.isValid(req.params.id)
@@ -52,7 +51,7 @@ router.get('/:id', async (req: GetUserReq, res: GetUserRes) => {
 })
 
 type PostUserReq = TypedRequest<{ body: PostUserRequest }>
-type PostUserRes = TypedResponse<PostUserResponse | PostUserError | ErrorResponse>
+type PostUserRes = TypedResponse<PostUserResponse | PostUserError>
 
 router.post('/', async (req: PostUserReq, res: PostUserRes) => {
     const { error } = validateUser(req.body)

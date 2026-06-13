@@ -42,7 +42,8 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
         )
     }
 
-    const { isAuthLoading } = isApi ? Session.useContext() : { isAuthLoading: false }
+    const sessionContext = Session.useContext()
+    const isAuthLoading = isApi ? sessionContext.isAuthLoading : false
 
     return (
         <>

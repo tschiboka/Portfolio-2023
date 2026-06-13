@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useState } from 'react'
 
 // Components
 import { Screen } from '../Screen/Screen'
@@ -13,8 +13,7 @@ import { blogArticles } from '../../../articles/articles'
 
 // Styles
 import './Articles.scss'
-import { getLikes } from '../../../serverAPI/likes'
-import { getVisits } from '../../../serverAPI/visits'
+import { useGetLikes } from '@common/queries'
 import SuggestedArticles from '../SuggestedArticles/SuggestedArticles'
 import { PageSideMenu } from '../PageSideMenu/PageSideMenu'
 
@@ -28,25 +27,11 @@ interface Props {
 
 const Article = ({ pageName, path, title, children, hasContentNavigator = true }: Props) => {
     const article = blogArticles.find((article) => article.to === path)
-    const [visitsLoaded, setVisitsLoaded] = useState(false)
-    const [visits, setVisits] = useState(0)
-    const [likesLoaded, setLikesLoaded] = useState(false)
-    const [likes, setLikes] = useState(0)
     const [articleLiked, setArticleLiked] = useState(false)
     const references = getReferenceList(path)
-    useEffect(() => {
-        if (!visitsLoaded) {
-            void getVisits(path, (visits: number) => {
-                setVisitsLoaded(true)
-                setVisits(visits)
-            })
-        }
-        if (!likesLoaded)
-            void getLikes(path, (likes: number) => {
-                setLikesLoaded(true)
-                setLikes(likes)
-            })
-    }, [likes, visits, likesLoaded, visitsLoaded, path])
+
+    const { data: likesData } = useGetLikes(path)
+    const likes = likesData?.likes ?? 0
 
     return (
         <Screen

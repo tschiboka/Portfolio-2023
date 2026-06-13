@@ -36,7 +36,7 @@ export const ProjectFilter = ({
 
     return (
         <div className="ProjectFilter">
-            <Stack.Horizontal gap="32">
+            <Stack.Horizontal gap="32" className="ProjectFilter__languages" wrap>
                 {Object.keys(languageGroups).map((groupName) => (
                     <Stack.Vertical key={groupName} className="ProjectFilter__groups">
                         <Overline>{groupName}</Overline>

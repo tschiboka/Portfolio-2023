@@ -1,1 +1,1 @@
-export { HttpStatus } from '../../../common/utils/HttpStatus'
+export { HttpStatus } from '@common/utils/Server'

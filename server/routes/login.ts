@@ -5,7 +5,6 @@ import { validateLogin } from '../models/login'
 import { User } from '../models/user'
 import { Settings } from '../models/setting'
 import {
-    ErrorResponse,
     PostLoginError,
     PostLoginRequest,
     PostLoginResponse,
@@ -17,7 +16,7 @@ import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 const router = express.Router()
 
 type PostLoginReq = TypedRequest<{ body: PostLoginRequest }>
-type PostLoginRes = TypedResponse<PostLoginResponse | PostLoginError | ErrorResponse>
+type PostLoginRes = TypedResponse<PostLoginResponse | PostLoginError>
 
 router.post('/', async (req: PostLoginReq, res: PostLoginRes) => {
     const { error } = validateLogin(req.body)

@@ -1,9 +1,8 @@
 import { PostMessageResponse } from '@common/types'
-import { Paths } from '@common/utils'
-import { useApi } from '@common/utils/Query/Query'
+import { Paths, Query } from '@common/utils'
 
 export const useContactApi = () => {
-    const messageApi = useApi(Paths.Api.Message).build()
+    const messageRequest = new Query.RequestBuilder(Paths.Api.Message).build()
 
     return {
         sendMessageRequest: (data: {
@@ -11,6 +10,6 @@ export const useContactApi = () => {
             email: string
             phone?: string
             message: string
-        }) => messageApi.post<PostMessageResponse>(data),
+        }) => messageRequest.post<PostMessageResponse>(data),
     }
 }

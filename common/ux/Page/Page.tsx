@@ -1,9 +1,9 @@
 import { ReactNode, useEffect } from 'react'
-import { postVisit } from '../../../src/serverAPI/visits'
 import { detectIncognito } from 'detectincognitojs'
 import { useNavigate } from 'react-router-dom'
 import { Session } from '../../../src/context/SessionContext'
 import { useAppContext } from '../../../src/context/AppContext/App.context'
+import { postVisit } from '@common/queries'
 import './Page.css'
 
 export type PageProps = {

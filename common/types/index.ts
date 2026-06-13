@@ -28,6 +28,7 @@ export * from './app'
 export * from './projects/typist'
 export * from './projects/wda'
 export * from './projects/xmas'
+export * from './projects/gym'
 
 import type { Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
@@ -46,7 +47,7 @@ export type TypedRequest<
     T extends { query: infer Q } ? Q : ParsedQs
 >
 
-export type TypedResponse<T = unknown> = Response<T>
+export type TypedResponse<T = unknown> = Response<T | ErrorResponse>
 
 // Generic error response for all API endpoints
 export type ErrorResponse = {

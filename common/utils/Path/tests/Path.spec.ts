@@ -47,6 +47,8 @@ describe('Paths', () => {
             RehydrateSession: 'RehydrateSession',
             Categories: 'Categories',
             Message: 'Message',
+            Like: 'Like',
+            Visit: 'Visit',
         })
     })
 
@@ -55,6 +57,7 @@ describe('Paths', () => {
             Xmas: 'Xmas',
             Typist: 'Typist',
             WordDuelArena: 'WordDuelArena',
+            Gym: 'Gym',
         })
     })
 })
@@ -67,12 +70,15 @@ describe('apiRoutes', () => {
     })
 
     it.each([
-        ['Login', 'login'],
-        ['Settings', 'settings'],
-        ['RegisterUser', 'user'],
-        ['ConfirmRegistration', 'confirm'],
-        ['RehydrateSession', 'session'],
-        ['Categories', 'categories'],
+        ['Login', 'api/login'],
+        ['Settings', 'api/settings'],
+        ['RegisterUser', 'api/user'],
+        ['ConfirmRegistration', 'api/confirm'],
+        ['RehydrateSession', 'api/session'],
+        ['Categories', 'api/categories'],
+        ['Message', 'api/message'],
+        ['Like', 'api/like'],
+        ['Visit', 'api/visit'],
     ])('should map %s to %s', (key, route) => {
         expect(apiRoutes[key]).toBe(route)
     })

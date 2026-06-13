@@ -1,10 +1,12 @@
+import { Button, Heading, Main, Section, Stack } from '@common/ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
+import './Remote.styles.scss'
 
 interface RemoteProps {
     path: string
 }
 
-const Remote = ({ path }: RemoteProps) => {
+export const Remote = ({ path }: RemoteProps) => {
     return (
         <Screen
             title={'Tivadar Debnar | Remote'}
@@ -14,9 +16,16 @@ const Remote = ({ path }: RemoteProps) => {
             variant="api"
             pageName="Remote"
         >
-            <h1>Remote</h1>
+            <Main>
+                <Section>
+                    <Heading as="h1">Remote</Heading>
+                    <Stack.Horizontal className="Remote__buttons" gap="16" align="start" wrap>
+                        <Button as="a" href="#/projects/gym">
+                            Gym
+                        </Button>
+                    </Stack.Horizontal>
+                </Section>
+            </Main>
         </Screen>
     )
 }
-
-export default Remote

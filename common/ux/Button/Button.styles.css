@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 2rem;
-    padding: var(--space-20) var(--space-16);
+    padding: var(--space-16) var(--space-20);
     background-color: var(--accent-dark-1);
     border: var(--btn-border);
     border-radius: var(--panel-radius);

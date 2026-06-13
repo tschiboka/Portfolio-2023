@@ -5,7 +5,6 @@ import { getUserToken } from '../models/user'
 import { Category, validateCategory } from '../models/category'
 import {
     GetCategoryResponse,
-    ErrorResponse,
     TypedRequest,
     TypedResponse,
     PostCategoryRequest,
@@ -15,7 +14,7 @@ import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 const router = express.Router()
 
 type GetCategoriesReq = TypedRequest<{ query: { isParent?: string } }>
-type GetCategoriesRes = TypedResponse<{ data: GetCategoryResponse[] } | ErrorResponse>
+type GetCategoriesRes = TypedResponse<{ data: GetCategoryResponse[] }>
 router.get('/', [auth], async (req: GetCategoriesReq, res: GetCategoriesRes) => {
     const user = await getUserToken(req)
     if (!user)
@@ -38,7 +37,7 @@ router.get('/', [auth], async (req: GetCategoriesReq, res: GetCategoriesRes) => 
 })
 
 type PostCategoryReq = TypedRequest<{ body: PostCategoryRequest }>
-type PostCategoryRes = TypedResponse<ErrorResponse>
+type PostCategoryRes = TypedResponse
 router.post('/', [auth], async (req: PostCategoryReq, res: PostCategoryRes) => {
     const user = await getUserToken(req)
     if (!user)

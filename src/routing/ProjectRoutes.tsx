@@ -4,6 +4,7 @@ import { WordDuelArena } from '../components/pages/Misc/WordDuelArena/WordDuelAr
 import { Session } from '../components/pages/Misc/WordDuelArena/Session/Session'
 import { lazy } from 'react'
 import { Typist } from '../components/pages/Misc/Typist/Typist'
+import { Gym } from '../components/pages/Misc/Gym/Gym'
 import { Suspense } from 'react'
 
 const LevelCreator = lazy(() =>
@@ -36,5 +37,9 @@ export const ProjectRoutes = [
                 <LevelCreator />
             </Suspense>
         ),
+    },
+    {
+        path: '/projects/gym',
+        element: <Gym path="/projects/gym" />,
     },
 ]

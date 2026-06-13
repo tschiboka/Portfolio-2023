@@ -5,7 +5,6 @@ import { isEmpty } from '@common/utils/Predicate'
 import { Log } from '../models/log'
 import {
     DeleteLogResponse,
-    ErrorResponse,
     GetLogQuery,
     GetLogResponse,
     GetLogTableResponse,
@@ -41,7 +40,7 @@ router.get('/', [auth, admin], async (req: GetLogReq, res: GetLogRes) => {
 })
 
 type DeleteLogReq = TypedRequest<{ params: { ids: string } }>
-type DeleteLogRes = TypedResponse<DeleteLogResponse | ErrorResponse>
+type DeleteLogRes = TypedResponse<DeleteLogResponse>
 
 router.delete('/:ids', [auth, admin], async (req: DeleteLogReq, res: DeleteLogRes) => {
     const ids = req.params.ids.split(',')

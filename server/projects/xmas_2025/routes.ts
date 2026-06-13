@@ -5,7 +5,6 @@ import { User } from '../../models/user'
 import { last } from 'ramda'
 import { TypedRequest, TypedResponse } from '@common/types'
 import type {
-    ErrorResponse,
     XmasMessage as XmasMessageEntity,
     XmasCandles,
     GetXmasCandlesResponse,
@@ -47,7 +46,7 @@ router.post('/message', auth, async (req: PostMessageReq, res: PostMessageRes) =
 })
 
 type GetMessagesReq = TypedRequest<{ query: GetXmasMessagesQuery }>
-type GetMessagesRes = TypedResponse<GetXmasMessagesResponse | ErrorResponse>
+type GetMessagesRes = TypedResponse<GetXmasMessagesResponse>
 router.get('/message', auth, async (req: GetMessagesReq, res: GetMessagesRes) => {
     const { userId } = req.query
     if (!userId)
@@ -115,7 +114,7 @@ router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
 })
 
 type PutCandlesReq = TypedRequest<{ body: PutXmasCandlesRequest }>
-type PutCandlesRes = TypedResponse<PutXmasCandlesResponse | ErrorResponse>
+type PutCandlesRes = TypedResponse<PutXmasCandlesResponse>
 router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
     const { error } = validateCandle(req.body)
     if (error)

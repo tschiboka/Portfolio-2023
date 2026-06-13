@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
 import { Link } from '@common/ux'
-import { getVisits } from '../../../serverAPI/visits'
+import { useGetVisits } from '@common/queries'
 import './Breadcrumb.css'
 
 interface Props {
@@ -16,17 +15,10 @@ const getBreadCrumbPath = (breadcrumbs: string[], index: number) => {
 }
 
 const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
-    const [visits, setVisits] = useState(visitCount || 0)
+    const { data: visitsData } = useGetVisits(path)
+    const visits = visitsPreLoaded ? (visitCount ?? 0) : (visitsData?.visits ?? 0)
     const noLeadingSlash = path.replace('/', '')
     const breadcrumbPaths = noLeadingSlash.split('/')
-
-    useEffect(() => {
-        if (!visitsPreLoaded) {
-            void getVisits(path, (visits) => {
-                setVisits(visits)
-            })
-        } else setVisits(visitCount || 0)
-    }, [visits, visitCount, visitsPreLoaded, path])
 
     return (
         <div className="Breadcrumb">

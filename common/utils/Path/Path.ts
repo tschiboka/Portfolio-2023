@@ -1,32 +1,38 @@
 export const Paths = {
     Api: {
+        Like: 'Like',
+        Visit: 'Visit',
+        Message: 'Message',
         Login: 'Login',
         Settings: 'Settings',
         RegisterUser: 'RegisterUser',
         ConfirmRegistration: 'ConfirmRegistration',
         RehydrateSession: 'RehydrateSession',
         Categories: 'Categories',
-        Message: 'Message',
     },
     Projects: {
         Xmas: 'Xmas',
         Typist: 'Typist',
         WordDuelArena: 'WordDuelArena',
+        Gym: 'Gym',
     },
 } as const
 
 export const apiRoutes: Record<string, string> = {
-    Login: 'login',
-    Settings: 'settings',
-    RegisterUser: 'user',
-    ConfirmRegistration: 'confirm',
-    RehydrateSession: 'session',
-    Categories: 'categories',
-    Message: 'message',
+    Like: 'api/like',
+    Visit: 'api/visit',
+    Message: 'api/message',
+    Login: 'api/login',
+    Settings: 'api/settings',
+    RegisterUser: 'api/user',
+    ConfirmRegistration: 'api/confirm',
+    RehydrateSession: 'api/session',
+    Categories: 'api/categories',
 }
 
 export const projectRoutes: Record<string, string> = {
     Xmas: 'projects/xmas_2025',
     Typist: 'projects/typist',
     WordDuelArena: 'projects/word_duel_arena',
+    Gym: 'projects/gym',
 }

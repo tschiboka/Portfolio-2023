@@ -6,7 +6,7 @@ import { BiSolidTimeFive } from 'react-icons/bi'
 import { FaEye, FaCode } from 'react-icons/fa'
 import { BsFillCalendar2DateFill } from 'react-icons/bs'
 import { useState } from 'react'
-import { postLike } from '../../../serverAPI/likes'
+import { usePostLike } from '@common/queries'
 import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@common/ux'
 import './BlogCard.scss'
 
@@ -39,6 +39,7 @@ const toPillColor = (badge: string) => pillColorMap[getColourName(badge)] ?? 'gr
 const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, newest }: Props) => {
     const navigate = useNavigate()
     const [articleLiked, setArticleLiked] = useState(false)
+    const { mutate: doPostLike } = usePostLike()
 
     return (
         <Card
@@ -108,7 +109,10 @@ const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, new
                                         event.preventDefault()
                                         event.stopPropagation()
                                         if (!articleLiked)
-                                            void postLike(path, () => setArticleLiked(true))
+                                            doPostLike(
+                                                { path },
+                                                { onSuccess: () => setArticleLiked(true) },
+                                            )
                                         return false
                                     }}
                                 >

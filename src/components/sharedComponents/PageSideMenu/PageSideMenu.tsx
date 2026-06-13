@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 import { BiSolidUpArrowSquare } from 'react-icons/bi'
 import { HiShare } from 'react-icons/hi'
 import { FaEye } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
 import { SideMenu } from '@common/ux/SideMenu'
 import type { SideMenuItem } from '@common/ux/SideMenu'
-import { getLikes, postLike } from '../../../serverAPI/likes'
-import { getVisits } from '../../../serverAPI/visits'
+import { useGetLikes, usePostLike } from '@common/queries/Likes.queries'
+import { useGetVisits } from '@common/queries'
+import { QueryKey } from '@common/utils'
 import ShareMenu from '../ShareMenu/ShareMenu'
 import './PageSideMenu.css'
 
@@ -18,16 +20,16 @@ const scrollToTop = () => {
 export const PageSideMenu = () => {
     const [visible, setVisible] = useState(true)
     const [shareMenuVisible, setShareMenuVisible] = useState(false)
-    const [visits, setVisits] = useState(0)
-    const [likes, setLikes] = useState(0)
     const [liked, setLiked] = useState(false)
 
     const { pathname } = useLocation()
+    const queryClient = useQueryClient()
+    const { data: likesData } = useGetLikes(pathname)
+    const { data: visitsData } = useGetVisits(pathname)
+    const { mutate: doPostLike } = usePostLike()
 
-    useEffect(() => {
-        void getVisits(pathname, setVisits)
-        void getLikes(pathname, setLikes)
-    }, [pathname])
+    const visits = visitsData?.visits ?? 0
+    const likes = likesData?.likes ?? 0
 
     const items: SideMenuItem[] = [
         {
@@ -48,10 +50,17 @@ export const PageSideMenu = () => {
             badge: likes > 0 ? <span>{likes}</span> : undefined,
             onClick: () => {
                 if (!liked) {
-                    void postLike(pathname, () => {
-                        setLikes((prev) => prev + 1)
-                        setLiked(true)
-                    })
+                    doPostLike(
+                        { path: pathname },
+                        {
+                            onSuccess: () => {
+                                setLiked(true)
+                                void queryClient.invalidateQueries({
+                                    queryKey: QueryKey.Likes.byFilters({ path: pathname }).build(),
+                                })
+                            },
+                        },
+                    )
                 }
             },
         },

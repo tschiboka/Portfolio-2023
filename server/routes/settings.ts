@@ -1,7 +1,6 @@
 import express from 'express'
 import { validateSettings, Settings } from '../models/setting'
 import {
-    ErrorResponse,
     GetSettingsResponse,
     PostSettingsRequest,
     PostSettingsResponse,
@@ -13,7 +12,7 @@ import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 const route = express.Router()
 
 type GetSettingsReq = TypedRequest
-type GetSettingsRes = TypedResponse<GetSettingsResponse | ErrorResponse>
+type GetSettingsRes = TypedResponse<GetSettingsResponse>
 
 route.get('/', async (req: GetSettingsReq, res: GetSettingsRes) => {
     const settings = await Settings.find()
@@ -25,7 +24,7 @@ route.get('/', async (req: GetSettingsReq, res: GetSettingsRes) => {
 })
 
 type PostSettingsReq = TypedRequest<{ body: PostSettingsRequest }>
-type PostSettingsRes = TypedResponse<PostSettingsResponse | ErrorResponse>
+type PostSettingsRes = TypedResponse<PostSettingsResponse>
 
 route.post('/', async (req: PostSettingsReq, res: PostSettingsRes) => {
     const body = req.body

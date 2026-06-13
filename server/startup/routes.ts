@@ -14,6 +14,7 @@ import category from '../routes/category'
 import session from '../routes/session'
 import xmas2025 from '../projects/xmas_2025/routes'
 import typist from '../projects/typist/routes'
+import gym from '../projects/gym/routes'
 import word_duel_arena_level from '../projects/word_duel_arena/transport/http/routes/level'
 import word_duel_arena_words from '../projects/word_duel_arena/transport/http/routes/word'
 
@@ -21,12 +22,12 @@ export default function (app: Application) {
     // Profile website routes
     app.use('/', index)
     app.use('/api/message', message)
-    app.use('/visit', visit)
-    app.use('/like', like)
+    app.use('/api/visit', visit)
+    app.use('/api/like', like)
     app.use('/api/session', session)
-    app.use('/schedule', schedule)
+    app.use('/api/schedule', schedule)
 
-    // API routes
+    // App routes
     app.use('/api/settings', settings)
     app.use('/api/user', user)
     app.use('/api/login', login)
@@ -37,6 +38,7 @@ export default function (app: Application) {
     // Project routes
     app.use('/projects/xmas_2025', xmas2025)
     app.use('/projects/typist', typist)
+    app.use('/projects/gym', gym)
     app.use('/projects/word_duel_arena/level', word_duel_arena_level)
     app.use('/projects/word_duel_arena/word', word_duel_arena_words)
 }

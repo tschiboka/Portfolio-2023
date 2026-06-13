@@ -8,5 +8,5 @@ export const apiPathBuilder = (pathName: string): string => {
         return `${url}/${projectRoutes[pathName]}`
     }
 
-    return `${url}/api/${apiRoutes[pathName]}`
+    return `${url}/${apiRoutes[pathName]}`
 }

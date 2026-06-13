@@ -228,4 +228,22 @@ describe('Browser', () => {
             expect(slugify('Hello---World!')).toBe('hello-world')
         })
     })
+
+    describe('isLocalhost', () => {
+        it('should return true when hostname is localhost', () => {
+            expect(Browser.isLocalhost('localhost')).toBe(true)
+        })
+
+        it('should return true when hostname is 127.0.0.1', () => {
+            expect(Browser.isLocalhost('127.0.0.1')).toBe(true)
+        })
+
+        it('should return false for other hostnames', () => {
+            expect(Browser.isLocalhost('example.com')).toBe(false)
+        })
+
+        it('should return false for production domain', () => {
+            expect(Browser.isLocalhost('tschiboka.com')).toBe(false)
+        })
+    })
 })

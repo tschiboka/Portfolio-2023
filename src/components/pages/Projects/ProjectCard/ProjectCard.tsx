@@ -1,4 +1,3 @@
-import type { Project } from '../Projects'
 import { getColourName } from '../Projects.selectors'
 import {
     Link,
@@ -15,6 +14,7 @@ import { FaGithub } from 'react-icons/fa'
 import { TbWorldWww } from 'react-icons/tb'
 import { PiReadCvLogoFill } from 'react-icons/pi'
 import './ProjectCard.scss'
+import { Project, ProjectTypeDisplayNames } from '..'
 
 interface Props {
     project: Project
@@ -39,7 +39,7 @@ export const ProjectCard = ({
                             {type && (
                                 <Pill
                                     className="ProjectCard__type--desktop"
-                                    label={type.toLocaleLowerCase()}
+                                    label={ProjectTypeDisplayNames[type]}
                                     color={getColourName(type)}
                                     variant="outlined"
                                 />
@@ -48,7 +48,7 @@ export const ProjectCard = ({
                         {type && (
                             <Pill
                                 className="ProjectCard__type--mobile"
-                                label={type.toLocaleLowerCase()}
+                                label={ProjectTypeDisplayNames[type]}
                                 color={getColourName(type)}
                                 variant="outlined"
                             />

@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react'
 import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { blogArticles } from '../../../articles/articles'
-import { getLikeSummary } from '../../../serverAPI/likes'
-import { LikeSummary, VisitSummary } from '@common/types'
 import { Heading, Paragraph, Stack } from '@common/ux'
+import { useGetLikeSummary, useGetVisitSummary } from '@common/queries'
+
 import './Blog.scss'
-import { getVisitSummary } from '../../../serverAPI/visits'
 
 interface Props {
     pageName: string
@@ -15,10 +13,10 @@ interface Props {
 }
 
 const Blogs = ({ pageName, path }: Props) => {
-    const [visits, setVisits] = useState<VisitSummary | null>(null)
-    const [visitsLoaded, setVisitsLoaded] = useState(false)
-    const [likes, setLikes] = useState<LikeSummary | null>(null)
-    const [likesLoaded, setLikesLoaded] = useState(false)
+    const { data: visitsData } = useGetVisitSummary()
+    const { data: likesData } = useGetLikeSummary()
+    const visits = visitsData?.visits ?? null
+    const likes = likesData?.likes ?? null
 
     // Get Newest Article
     const publishedArticles = blogArticles.filter((article) => !!article.created)
@@ -29,21 +27,6 @@ const Blogs = ({ pageName, path }: Props) => {
     })
 
     const newArticle = sortedArticles[sortedArticles.length - 1]
-
-    useEffect(() => {
-        if (!visitsLoaded)
-            void getVisitSummary((visits: VisitSummary | null) => {
-                setVisitsLoaded(true)
-                setVisits(visits)
-            })
-        if (!likesLoaded) {
-            void getLikeSummary((likes: LikeSummary | null) => {
-                setLikesLoaded(true)
-                setLikes(likes)
-            })
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visits, likes])
 
     return (
         <Screen

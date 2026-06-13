@@ -1,11 +1,12 @@
 import '@testing-library/jest-dom'
 import { act } from '@testing-library/react'
 import { Test, Accessor } from '../../Test'
-import { postVisit } from '../../../../src/serverAPI/visits'
+import * as visitsQueries from '@common/queries'
 import Page from '../Page'
 
 beforeEach(() => {
     vi.clearAllMocks()
+    vi.spyOn(visitsQueries, 'postVisit').mockResolvedValue(undefined)
 })
 
 describe('Page', () => {
@@ -96,7 +97,7 @@ describe('Page', () => {
                 await Promise.resolve()
             })
 
-            expect(vi.mocked(postVisit)).toHaveBeenCalledWith('/home')
+            expect(visitsQueries.postVisit).toHaveBeenCalledWith('/home')
         })
 
         it('skips visit recording when recordVisit is false', async () => {
@@ -113,7 +114,7 @@ describe('Page', () => {
                 await Promise.resolve()
             })
 
-            expect(vi.mocked(postVisit)).not.toHaveBeenCalled()
+            expect(visitsQueries.postVisit).not.toHaveBeenCalled()
         })
     })
 

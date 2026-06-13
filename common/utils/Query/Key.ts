@@ -42,6 +42,12 @@ export class CacheKeyBuilder {
 }
 
 export const QueryKey = {
+    get Likes() {
+        return new CacheKeyBuilder('likes')
+    },
+    get Visits() {
+        return new CacheKeyBuilder('visits')
+    },
     get AppSettings() {
         return new CacheKeyBuilder('app-settings')
     },
@@ -77,5 +83,11 @@ export const QueryKey = {
     },
     get WordFrequencies() {
         return new CacheKeyBuilder('word-frequencies')
+    },
+    get GymRoutines() {
+        return new CacheKeyBuilder('gym-routines')
+    },
+    get GymExercises() {
+        return new CacheKeyBuilder('gym-exercises')
     },
 }

@@ -1,35 +1,17 @@
 import BlogCard from '../BlogCard/BlogCard'
 import { blogArticles } from '../../../articles/articles'
 import './SuggestedArticle.scss'
-import { useEffect, useState } from 'react'
-import { getVisitSummary } from '../../../serverAPI/visits'
-import { getLikeSummary } from '../../../serverAPI/likes'
-import { LikeSummary, VisitSummary } from '@common/types'
+import { useGetLikeSummary, useGetVisitSummary } from '@common/queries'
 
 interface Props {
     articles?: string[]
 }
 
 const SuggestedArticles = ({ articles }: Props) => {
-    const [visits, setVisits] = useState<VisitSummary | null>(null)
-    const [visitsLoaded, setVisitsLoaded] = useState(false)
-    const [likes, setLikes] = useState<LikeSummary | null>(null)
-    const [likesLoaded, setLikesLoaded] = useState(false)
-
-    useEffect(() => {
-        if (!visitsLoaded)
-            void getVisitSummary((visits: VisitSummary | null) => {
-                setVisitsLoaded(true)
-                setVisits(visits)
-            })
-        if (!likesLoaded) {
-            void getLikeSummary((likes: LikeSummary | null) => {
-                setLikesLoaded(true)
-                setLikes(likes)
-            })
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visits, likes])
+    const { data: visitsData } = useGetVisitSummary()
+    const { data: likesData } = useGetLikeSummary()
+    const visits = visitsData?.visits ?? null
+    const likes = likesData?.likes ?? null
 
     const getBlogArticle = (path: string) => {
         const article = blogArticles.find((article) => article.to === path)

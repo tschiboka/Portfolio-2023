@@ -4,19 +4,13 @@ import { omit, assoc } from 'ramda'
 import { isFalsy } from '@common/utils/Predicate'
 import { Token } from '../models/token'
 import { User } from '../models/user'
-import {
-    PostConfirmRequest,
-    PostConfirmResponse,
-    ErrorResponse,
-    TypedRequest,
-    TypedResponse,
-} from '@common/types'
+import { PostConfirmRequest, PostConfirmResponse, TypedRequest, TypedResponse } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
 const router = express.Router()
 
 type PostConfirmReq = TypedRequest<{ body: PostConfirmRequest }>
-type PostConfirmRes = TypedResponse<PostConfirmResponse | ErrorResponse>
+type PostConfirmRes = TypedResponse<PostConfirmResponse>
 router.post('/', async (req: PostConfirmReq, res: PostConfirmRes) => {
     // Find verification token
     const { token: verificationToken } = req.body

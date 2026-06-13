@@ -1,49 +1,21 @@
 import { ProjectCard } from './ProjectCard/ProjectCard'
 import { ProjectFilter } from './ProjectFilter/ProjectFilter'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
-import { getProjects } from './Projects.selectors'
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { Heading, Paragraph, Main, Section } from '@common/ux'
 import { isEmpty } from '@common/utils/Predicate/Predicate'
 import { BsSliders2 } from 'react-icons/bs'
+import { DEFAULT_PROJECT_FILTER, filterProjects, getProjects } from '.'
 
 interface Props {
     pageName: string
     path: string
 }
 
-/**
- * Featured: Projects that are complete and represent my best work, showcasing a range of skills and technologies.
- * In Progress: Projects that are currently being developed or refined, demonstrating my ongoing learning and experimentation.
- * Archived: Older projects that may not reflect my current skill level but are included for historical context and to show my growth over time.
- */
-export type ProjectType = 'featured' | 'complete' | 'inProgress' | 'archived'
-
-export interface Project {
-    title: string
-    year: number
-    type?: ProjectType
-    image: string
-    gallery?: [string]
-    description: ReactNode
-    badges: string[]
-    url?: string
-    github?: string
-    blog?: string
-    openInNewTab?: boolean
-}
-
-const filterProjects = (by: string, projects: Project[] = getProjects()) => {
-    if (by === 'featured') return projects.filter((project) => project.type === 'featured')
-    if (by === 'inProgress') return projects.filter((project) => project.type === 'inProgress')
-    if (by === 'archived') return projects.filter((project) => project.type === 'archived')
-    return projects
-}
-
-const Projects = ({ pageName }: Props) => {
+export const Projects = ({ pageName }: Props) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
-    const [selectedFilter, setSelectedFilter] = useState<string>('all')
+    const [selectedFilter, setSelectedFilter] = useState<string>(DEFAULT_PROJECT_FILTER)
 
     const allProjects = getProjects()
     const filteredProjectsByLanguage = isEmpty(selectedLanguages)
@@ -69,7 +41,7 @@ const Projects = ({ pageName }: Props) => {
 
     const handleClearFilters = () => {
         setSelectedLanguages(new Set())
-        setSelectedFilter('featured')
+        setSelectedFilter(DEFAULT_PROJECT_FILTER)
     }
 
     return (
@@ -112,5 +84,3 @@ const Projects = ({ pageName }: Props) => {
         </Screen>
     )
 }
-
-export default Projects
