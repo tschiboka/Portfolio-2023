@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 import { Like } from '../models/like'
 import { Visit } from '../models/visit'
 
@@ -149,31 +149,20 @@ const createMessage = (breakdown: Breakdown) => {
 }
 
 const sendEmail = async (message: string) => {
-    const fromEmailAddress = 'tibi.aki.tivadar@gmail.com'
-    const toEmailAddress = 'tibi.aki.tivadar@gmail.com'
-    const emailPassword = process.env.EMAIL_PASSWORD
+    const resendApiKey = process.env.RESEND_API_KEY
+    if (!resendApiKey) throw new Error('RESEND_API_KEY environment variable is not set')
 
-    if (!emailPassword) throw new Error('EMAIL_PASSWORD environment variable is not set')
+    const resend = new Resend(resendApiKey)
 
-    const mailOptions = {
-        from: fromEmailAddress,
-        to: [fromEmailAddress, toEmailAddress],
+    const { data, error } = await resend.emails.send({
+        from: 'Tschiboka <onboarding@resend.dev>',
+        to: ['tibi.aki.tivadar@gmail.com'],
         subject: 'Breakdown Report | tschiboka.com',
         html: message,
-    }
-
-    const transporter = nodemailer.createTransport({
-        auth: {
-            user: fromEmailAddress,
-            pass: emailPassword,
-        },
-        secure: true,
-        port: 465,
-        tls: { rejectUnauthorized: false },
-        host: 'smtp.gmail.com',
     })
-    const info = await transporter.sendMail(mailOptions)
-    return info
+
+    if (error) throw error
+    return data
 }
 
 export default dailyEmail
