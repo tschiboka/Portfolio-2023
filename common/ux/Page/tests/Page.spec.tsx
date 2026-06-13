@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { act } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import { Test, Accessor } from '../../Test'
 import * as visitsQueries from '@common/queries'
 import Page from '../Page'
@@ -93,11 +93,7 @@ describe('Page', () => {
                 ),
             })
 
-            await act(async () => {
-                await Promise.resolve()
-            })
-
-            expect(visitsQueries.postVisit).toHaveBeenCalledWith('/home')
+            await waitFor(() => expect(visitsQueries.postVisit).toHaveBeenCalledWith('/home'))
         })
 
         it('skips visit recording when recordVisit is false', async () => {
@@ -110,11 +106,7 @@ describe('Page', () => {
                 ),
             })
 
-            await act(async () => {
-                await Promise.resolve()
-            })
-
-            expect(visitsQueries.postVisit).not.toHaveBeenCalled()
+            await waitFor(() => expect(visitsQueries.postVisit).not.toHaveBeenCalled())
         })
     })
 

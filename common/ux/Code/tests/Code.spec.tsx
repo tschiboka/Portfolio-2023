@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react'
+import { waitFor } from '@testing-library/react'
 import { Browser } from '@common/utils/Browser'
 import { Accessor, Test } from '@common/ux/Test'
 
@@ -128,11 +128,9 @@ describe('Code', () => {
             await clickCopyIcon()
             expect(codeBlock().Get.byText('Copied')).toBeInTheDocument()
 
-            act(() => {
-                vi.advanceTimersByTime(2000)
-            })
+            vi.advanceTimersByTime(2000)
 
-            expect(codeBlock().Has.copyMessage()).toBe(false)
+            await waitFor(() => expect(codeBlock().Has.copyMessage()).toBe(false))
         })
 
         it('should still show "Copied" message before 2 seconds elapse', async () => {
@@ -140,9 +138,7 @@ describe('Code', () => {
 
             await clickCopyIcon()
 
-            act(() => {
-                vi.advanceTimersByTime(1900)
-            })
+            vi.advanceTimersByTime(1900)
 
             expect(codeBlock().Get.byText('Copied')).toBeInTheDocument()
         })
@@ -153,9 +149,7 @@ describe('Code', () => {
             await clickCopyIcon()
             expect(codeBlock().Get.byText('Copied')).toBeInTheDocument()
 
-            act(() => {
-                vi.advanceTimersByTime(1000)
-            })
+            vi.advanceTimersByTime(1000)
 
             await clickCopyIcon()
             expect(codeBlock().Get.byText('Copied')).toBeInTheDocument()

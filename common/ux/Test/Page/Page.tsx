@@ -31,7 +31,12 @@ const withPageProviders = (options: PageSetupOptions) => {
         <QueryClientProvider client={queryClient}>
             <SessionContext.Provider value={sessionValue}>
                 <AppContextProvider initialState={appContext}>
-                    <MemoryRouter initialEntries={route}>{children}</MemoryRouter>
+                    <MemoryRouter
+                        initialEntries={route}
+                        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+                    >
+                        {children}
+                    </MemoryRouter>
                 </AppContextProvider>
             </SessionContext.Provider>
         </QueryClientProvider>

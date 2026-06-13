@@ -146,7 +146,7 @@ describe('Close menu', () => {
         const menu = getSideMenu()
         await menu.Do.close()
 
-        expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+        await waitFor(() => expect(screen.queryByRole('complementary')).not.toBeInTheDocument())
     })
 })
 

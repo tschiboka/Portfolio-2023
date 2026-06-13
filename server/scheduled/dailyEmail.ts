@@ -60,12 +60,8 @@ async function dailyEmail() {
     }
 
     const message = createMessage(breakdown)
-    try {
-        await sendEmail(message)
-        return { success: true }
-    } catch (err) {
-        return { success: false, error: err }
-    }
+    await sendEmail(message)
+    return { success: true }
 }
 
 const getDateString = () => {
@@ -157,6 +153,8 @@ const sendEmail = async (message: string) => {
     const toEmailAddress = 'tibi.aki.tivadar@gmail.com'
     const emailPassword = process.env.EMAIL_PASSWORD
 
+    if (!emailPassword) throw new Error('EMAIL_PASSWORD environment variable is not set')
+
     const mailOptions = {
         from: fromEmailAddress,
         to: [fromEmailAddress, toEmailAddress],
@@ -174,12 +172,8 @@ const sendEmail = async (message: string) => {
         tls: { rejectUnauthorized: false },
         host: 'smtp.gmail.com',
     })
-    try {
-        const info = await transporter.sendMail(mailOptions)
-        return info
-    } catch (err) {
-        return err
-    }
+    const info = await transporter.sendMail(mailOptions)
+    return info
 }
 
 export default dailyEmail

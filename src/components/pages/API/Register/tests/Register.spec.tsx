@@ -7,11 +7,13 @@ import { RegisterLabels } from './Register.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = RegisterLabels
 
-const setupRegister = () => {
+const setupRegister = async () => {
     Test.Page.Do.render({
         path: ApiRoutes.Register,
         handlers: defaultHandlers,
     })
+
+    await waitFor(() => expect(Test.LoadingIndicator.Has.isLoading()).toBe(false))
 
     return { form: Test.Form(FORM) }
 }
@@ -22,56 +24,56 @@ describe('Register', () => {
     })
 
     describe('Layout', () => {
-        it('should render heading and subheading', () => {
-            setupRegister()
+        it('should render heading and subheading', async () => {
+            await setupRegister()
             expect(screen.getByRole('heading', { name: 'Register' })).toBeInTheDocument()
             expect(screen.getByText('Tschiboka Personal App')).toBeInTheDocument()
         })
 
-        it('should render the full name input with label', () => {
-            const { form } = setupRegister()
+        it('should render the full name input with label', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.fullName).Get.value()).toBeDefined()
         })
 
-        it('should render the user name input with label', () => {
-            const { form } = setupRegister()
+        it('should render the user name input with label', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.userName).Get.value()).toBeDefined()
         })
 
-        it('should render the email input with label', () => {
-            const { form } = setupRegister()
+        it('should render the email input with label', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.email).Get.value()).toBeDefined()
         })
 
-        it('should render the password input with label', () => {
-            const { form } = setupRegister()
+        it('should render the password input with label', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.password).Get.value()).toBeDefined()
         })
 
-        it('should render the confirm password input with label', () => {
-            const { form } = setupRegister()
+        it('should render the confirm password input with label', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.confirm).Get.value()).toBeDefined()
         })
 
-        it('should render the register button', () => {
-            const { form } = setupRegister()
+        it('should render the register button', async () => {
+            const { form } = await setupRegister()
             expect(form.Button(buttons.register).Get.textContent()).toMatch(buttons.register)
         })
 
-        it('should render the login button', () => {
-            const { form } = setupRegister()
+        it('should render the login button', async () => {
+            const { form } = await setupRegister()
             expect(form.Button(buttons.login).Get.textContent()).toMatch(buttons.login)
         })
 
-        it('should render the form with accessible label', () => {
-            const { form } = setupRegister()
+        it('should render the form with accessible label', async () => {
+            const { form } = await setupRegister()
             expect(form).toBeDefined()
         })
     })
 
     describe('Login button', () => {
         it('should navigate to /api/login when login button is clicked', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Button(buttons.login).Do.click()
             expect(Test.Page.Get.navigatedTo()).toBe('/api/login')
         })
@@ -79,20 +81,20 @@ describe('Register', () => {
 
     describe('Form validation', () => {
         it('should show validation error when full name is empty on submit', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when full name is too short', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Input(fields.fullName).Do.type('Ab')
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when email is empty on submit', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Do.submit()
@@ -100,7 +102,7 @@ describe('Register', () => {
         })
 
         it('should show validation error when password is too short', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('valid@email.com')
@@ -110,7 +112,7 @@ describe('Register', () => {
         })
 
         it('should show validation error when passwords do not match', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('valid@email.com')
@@ -121,7 +123,7 @@ describe('Register', () => {
         })
 
         it('should not call register API when form is invalid', async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
             expect(Test.Page.Has.navigated()).toBe(false)
@@ -130,13 +132,16 @@ describe('Register', () => {
 
     describe('Successful registration', () => {
         const fillAndSubmitForm = async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.password).Do.type('ValidPass1!')
             await form.Input(fields.confirm).Do.type('ValidPass1!')
             await form.Do.submit()
+            await waitFor(() => {
+                expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
+            })
             return form
         }
 
@@ -155,7 +160,7 @@ describe('Register', () => {
 
     describe('Failed registration', () => {
         const fillAndSubmitInvalid = async () => {
-            const { form } = setupRegister()
+            const { form } = await setupRegister()
             Test.Page.Set.handlers(handlePostRegisterError(errors.registrationFailed))
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
@@ -163,6 +168,9 @@ describe('Register', () => {
             await form.Input(fields.password).Do.type('ValidPass1!')
             await form.Input(fields.confirm).Do.type('ValidPass1!')
             await form.Do.submit()
+            await waitFor(() => {
+                expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
+            })
             return form
         }
 
@@ -174,26 +182,28 @@ describe('Register', () => {
         it('should not disable submit button on registration failure', async () => {
             const form = await fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.registrationFailed)).toBeInTheDocument()
-            expect(form.Button(buttons.register).Get.isDisabled()).toBe(false)
+            await waitFor(() => {
+                expect(form.Button(buttons.register).Get.isDisabled()).toBe(false)
+            })
         })
     })
 
     describe('Password reveal', () => {
-        it('should render password field as type password by default', () => {
-            const { form } = setupRegister()
+        it('should render password field as type password by default', async () => {
+            const { form } = await setupRegister()
             expect(form.Input(fields.password).Get.type()).toBe('password')
         })
 
-        it('should render toggle password buttons for both password fields', () => {
-            setupRegister()
+        it('should render toggle password buttons for both password fields', async () => {
+            await setupRegister()
             const toggleButtons = screen.getAllByRole('button', { name: buttons.togglePassword })
             expect(toggleButtons).toHaveLength(2)
         })
     })
 
     describe('Loading state', () => {
-        it('should not show loading indicator initially', () => {
-            setupRegister()
+        it('should not show loading indicator initially', async () => {
+            await setupRegister()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
         })
     })

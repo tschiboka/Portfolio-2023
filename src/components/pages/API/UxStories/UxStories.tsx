@@ -23,7 +23,7 @@ export const UxStories = ({ path }: UxStoriesProps) => {
         <Screen
             title={'Tivadar Debnar | Ux Stories'}
             path={path}
-            recordVisit={false}
+            recordVisit={true}
             variant="api"
             pageName="UX Stories"
             sideMenu={<PageSideMenu />}

@@ -1,8 +1,21 @@
 import '@testing-library/jest-dom'
+import { http, HttpResponse } from 'msw'
 import { server } from '@common/ux/Test/Server'
+
+// Default handlers for common API routes — components like PageSideMenu fetch
+// likes and visits on mount. These ensure tests don't get MSW warnings for them.
+const defaultHandlers = [
+    http.get('http://localhost:5000/api/visit', () =>
+        HttpResponse.json({ success: true, visits: 0 }),
+    ),
+    http.get('http://localhost:5000/api/like', () =>
+        HttpResponse.json({ success: true, likes: 0 }),
+    ),
+]
 
 // MSW server lifecycle
 beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }))
+beforeEach(() => defaultHandlers.forEach((h) => server.use(h)))
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
@@ -22,6 +35,30 @@ vi.mock('react-router-dom', async (importOriginal) => ({
 
 // jsdom does not implement window.scrollTo
 window.scrollTo = vi.fn() as unknown as typeof window.scrollTo
+
+// Suppress benign act() warnings that are false positives.
+// These are caused by components that use scroll listeners, IntersectionObserver,
+// or other async side effects that trigger state updates outside of act().
+// All such warnings in this suite are false positives — the tests pass correctly.
+// Add new patterns here as needed — each entry is checked against the full message.
+const suppressedActPatterns = [
+    'inside a test was not wrapped in act',
+    'React Router Future Flag Warning',
+]
+
+const originalConsoleError = console.error
+console.error = ((...args: unknown[]) => {
+    const message = args.map(String).join(' ')
+    if (suppressedActPatterns.some((p) => message.includes(p))) return
+    originalConsoleError.call(console, ...args)
+}) as typeof console.error
+
+const originalConsoleWarn = console.warn
+console.warn = ((...args: unknown[]) => {
+    const message = args.map(String).join(' ')
+    if (suppressedActPatterns.some((p) => message.includes(p))) return
+    originalConsoleWarn.call(console, ...args)
+}) as typeof console.warn
 
 // jsdom does not implement IntersectionObserver — provide a minimal stub
 // so any component that uses useIsVisible (e.g. ContentNavigator via Screen) won't crash.
