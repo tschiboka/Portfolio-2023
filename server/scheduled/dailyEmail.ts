@@ -155,7 +155,7 @@ const sendEmail = async (message: string) => {
     const resend = new Resend(resendApiKey)
 
     const { data, error } = await resend.emails.send({
-        from: 'Tschiboka <onboarding@resend.dev>',
+        from: 'Tschiboka <reports@tschiboka.com>',
         to: ['tibi.aki.tivadar@gmail.com'],
         subject: 'Breakdown Report | tschiboka.com',
         html: message,
