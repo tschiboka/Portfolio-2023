@@ -9,7 +9,6 @@ const User = ({ path }: UserProps) => {
         <Screen
             title={'Tivadar Debnar | User'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="User"

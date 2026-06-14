@@ -75,7 +75,6 @@ const Xmas2025 = () => {
             title="Tivadar Debnar | Xmas 2025"
             path="/xmas2025"
             loginRequired
-            recordVisit={true}
             className="Xmas"
             variant="api"
             pageName="Xmas"

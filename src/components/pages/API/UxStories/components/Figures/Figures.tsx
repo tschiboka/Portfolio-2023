@@ -12,7 +12,6 @@ export const Figures = ({ path }: FiguresProps) => (
     <Screen
         title={'Tivadar Debnar | Figures'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

@@ -55,7 +55,6 @@ const Categories = ({ path }: CategoriesProps) => {
         <Screen
             title={'Tivadar Debnar | Categories'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Categories"

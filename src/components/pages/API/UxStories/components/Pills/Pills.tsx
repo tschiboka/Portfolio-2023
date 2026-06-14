@@ -12,7 +12,6 @@ export const Pills = ({ path }: PillsProps) => (
     <Screen
         title={'Tivadar Debnar | Pills'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

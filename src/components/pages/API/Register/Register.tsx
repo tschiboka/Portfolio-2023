@@ -66,7 +66,6 @@ const Register = ({ path, pageName }: RegisterProps) => {
             className="Register"
             title="Tivadar Debnar | Register"
             path={path}
-            recordVisit={false}
             variant="portfolio"
             pageName={pageName}
         >

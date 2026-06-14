@@ -9,7 +9,6 @@ const Activities = ({ path }: ActivitiesProps) => {
         <Screen
             title={'Tivadar Debnar | Activities'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Activities"

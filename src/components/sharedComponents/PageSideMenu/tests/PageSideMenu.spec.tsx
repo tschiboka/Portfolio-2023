@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@common/ux/Test'
+import { Accessor } from '@common/ux/Test/Accessor/Accessor'
 import { PageSideMenu } from '../PageSideMenu'
 import {
     pageSideMenuHandlers,
@@ -147,6 +148,48 @@ describe('Close menu', () => {
         await menu.Do.close()
 
         await waitFor(() => expect(screen.queryByRole('complementary')).not.toBeInTheDocument())
+    })
+
+    it('should show reopen button when side menu is closed', async () => {
+        setupPageSideMenu()
+        const menu = getSideMenu()
+        await menu.Do.close()
+
+        await waitFor(() => {
+            expect(screen.getByTitle('Open Menu')).toBeInTheDocument()
+        })
+    })
+
+    it('should reopen the side menu when reopen button is clicked', async () => {
+        setupPageSideMenu()
+        const menu = getSideMenu()
+        await menu.Do.close()
+
+        await waitFor(() => {
+            expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
+        })
+
+        await Accessor.user.click(screen.getByTitle('Open Menu'))
+
+        await waitFor(() => {
+            expect(screen.getByRole('complementary')).toBeInTheDocument()
+        })
+    })
+
+    it('should hide reopen button when side menu is reopened', async () => {
+        setupPageSideMenu()
+        const menu = getSideMenu()
+        await menu.Do.close()
+
+        await waitFor(() => {
+            expect(screen.getByTitle('Open Menu')).toBeInTheDocument()
+        })
+
+        await Accessor.user.click(screen.getByTitle('Open Menu'))
+
+        await waitFor(() => {
+            expect(screen.queryByTitle('Open Menu')).not.toBeInTheDocument()
+        })
     })
 })
 

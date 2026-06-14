@@ -35,7 +35,6 @@ const Admin = ({ path }: AdminProps) => {
         <Screen
             title={'Tivadar Debnar | Admin'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Admin"

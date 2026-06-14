@@ -11,7 +11,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
     <Screen
         title={'Tivadar Debnar | Test Accessor'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

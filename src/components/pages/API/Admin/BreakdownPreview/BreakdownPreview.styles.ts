@@ -156,11 +156,12 @@ export const footerStyle: CSSProperties = {
 
 export const responsiveOverrides = `
     <style id="breakdown-preview-responsive">
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             .bp-shell { padding: 12px 6px !important; }
             .bp-header { padding: 16px !important; }
             .bp-body { padding: 16px !important; }
             .bp-stat-value { font-size: 1.53rem !important; }
+            .bp-signature-row { flex-direction: column !important; align-items: flex-start !important; }
             .bp-signature-links { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
         }
     </style>

@@ -1,0 +1,18 @@
+.CounterBadge {
+    position: absolute;
+    top: -14px;
+    right: -10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 16px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-sm);
+    background: var(--accent-dark-3);
+    color: var(--black-1);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: var(--font-2xs);
+    font-weight: 700;
+    line-height: 1;
+}

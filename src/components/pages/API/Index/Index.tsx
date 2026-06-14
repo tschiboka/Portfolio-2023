@@ -12,7 +12,6 @@ const Index = ({ path }: IndexProps) => {
         <Screen
             title={'Tivadar Debnar | Index'}
             path={path}
-            recordVisit={true}
             loginRequired
             variant="api"
             pageName="Home"

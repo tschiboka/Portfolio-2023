@@ -22,7 +22,6 @@ const Tasks = ({ path }: TaskProps) => {
         <Screen
             title={'Tivadar Debnar | Tasks'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Tasks"

@@ -60,7 +60,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
         <Screen
             title={'Tivadar Debnar | Overlays'}
             path={path}
-            recordVisit={false}
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}

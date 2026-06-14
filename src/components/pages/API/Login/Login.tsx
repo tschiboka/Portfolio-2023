@@ -74,7 +74,6 @@ const Login = ({ path, pageName }: LoginProps) => {
             className="Login"
             title="Tivadar Debnar | Login"
             path={path}
-            recordVisit={false}
             variant="portfolio"
             pageName={pageName}
         >

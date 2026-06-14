@@ -10,7 +10,6 @@ export const Typist = ({ pageName }: PageContainerProps) => {
             <Screen
                 title="Tivadar Debnar | Typist"
                 path="/projects/typist"
-                recordVisit={true}
                 className="Typist"
                 variant="portfolio"
                 pageName={pageName}

@@ -6,7 +6,7 @@ interface IndexProps {
 
 const Index = ({ path }: IndexProps) => {
     return (
-        <Screen title={'Tivadar Debnar | Index'} path={path} recordVisit={false}>
+        <Screen title={'Tivadar Debnar | Index'} path={path}>
             <button>Admin</button>
             <button>Remote</button>
             <button>Stats</button>

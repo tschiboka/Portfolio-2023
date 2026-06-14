@@ -50,7 +50,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
     <Screen
         title={'Tivadar Debnar | Layouts'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

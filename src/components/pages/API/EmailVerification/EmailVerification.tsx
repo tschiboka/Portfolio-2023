@@ -2,8 +2,9 @@ import { useMutation } from '@tanstack/react-query'
 import { LoadingIndicator } from '@common/ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './EmailVerification.scss'
-import { useVerifyEmailRequest } from './EmailVerification.query'
-import { AxiosError, AxiosResponse } from 'axios'
+import { verifyEmailRequest } from './EmailVerification.query'
+import { QueryKey } from '@common/utils'
+import type { AxiosError, AxiosResponse } from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
@@ -16,15 +17,12 @@ const EmailVerification = ({ path }: IndexProps) => {
     const { verificationToken = '' } = useParams()
     const navigate = useNavigate()
 
-    const { mutate: verifyEmail, isPending } = useMutation<
-        AxiosResponse<{ token: string }, any>,
-        AxiosError<any>,
-        { token: string }
-    >({
-        mutationKey: ['adsfadsf'],
-        mutationFn: (token) => useVerifyEmailRequest(token),
-        onError: (error: AxiosError<any>) => {
-            setMessage(error.response?.data?.message)
+    const { mutate: verifyEmail, isPending } = useMutation({
+        mutationKey: QueryKey.ConfirmRegistration.build(),
+        mutationFn: (token: { token: string }): Promise<AxiosResponse<{ token: string }>> =>
+            verifyEmailRequest(token),
+        onError: (error: AxiosError<{ message?: string }>) => {
+            setMessage(error.response?.data?.message ?? 'Verification failed')
         },
         onSuccess: () => {
             setMessage('Email verified')
@@ -34,6 +32,7 @@ const EmailVerification = ({ path }: IndexProps) => {
 
     useEffect(() => {
         verifyEmail({ token: verificationToken })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -41,7 +40,6 @@ const EmailVerification = ({ path }: IndexProps) => {
             className="EmailVerification"
             title={'Tivadar Debnar | Email Verification'}
             path={path}
-            recordVisit={false}
         >
             <h1>Verifing your email address</h1>
             <LoadingIndicator show={isPending} />

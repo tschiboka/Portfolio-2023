@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { Test, Accessor } from '../../Test'
+import { CounterBadge } from '../../CounterBadge/CounterBadge'
 import type { SideMenuItem, SideMenuProps } from '../SideMenu.types'
 
 const mockItems: SideMenuItem[] = [
@@ -89,6 +90,17 @@ describe('SideMenu', () => {
             Test.SideMenu.Set.mock({ items: noBadgeItems })
 
             expect(Test.SideMenu().Has.badge()).toBe(false)
+        })
+
+        it('renders CounterBadge when CounterBadge is used as badge', () => {
+            const items: SideMenuItem[] = [
+                { icon: <span />, label: 'Views', badge: <CounterBadge count={42} /> },
+            ]
+            Test.SideMenu.Set.mock({ items })
+
+            const badge = Test.CounterBadge()
+            expect(badge).not.toBeNull()
+            expect(badge!.Get.text()).toBe('42')
         })
     })
 

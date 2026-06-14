@@ -10,7 +10,6 @@ const AddRecords = ({ path }: AddRecordProps) => {
         <Screen
             title={'Tivadar Debnar | Add Records'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Add Records"

@@ -11,7 +11,6 @@ export const Remote = ({ path }: RemoteProps) => {
         <Screen
             title={'Tivadar Debnar | Remote'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Remote"

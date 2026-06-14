@@ -9,7 +9,6 @@ const ViewRecords = ({ path }: ViewRecordsProps) => {
         <Screen
             title={'Tivadar Debnar | View Records'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="View Records"

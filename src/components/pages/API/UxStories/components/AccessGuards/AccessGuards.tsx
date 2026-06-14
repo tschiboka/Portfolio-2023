@@ -38,7 +38,6 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
         <Screen
             title={'Tivadar Debnar | Access Guards'}
             path={path}
-            recordVisit={false}
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}

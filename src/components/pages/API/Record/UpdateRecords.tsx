@@ -9,7 +9,6 @@ const UpdateRecords = ({ path }: UpdateRecordsProps) => {
         <Screen
             title={'Tivadar Debnar | Update Records'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Update Records"

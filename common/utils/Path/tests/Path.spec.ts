@@ -49,6 +49,7 @@ describe('Paths', () => {
             Message: 'Message',
             Like: 'Like',
             Visit: 'Visit',
+            Schedule: 'Schedule',
         })
     })
 

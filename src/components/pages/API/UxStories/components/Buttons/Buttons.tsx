@@ -13,7 +13,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
     <Screen
         title={'Tivadar Debnar | Buttons'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

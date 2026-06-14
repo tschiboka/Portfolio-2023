@@ -51,6 +51,9 @@ export const QueryKey = {
     get AppSettings() {
         return new CacheKeyBuilder('app-settings')
     },
+    get ConfirmRegistration() {
+        return new CacheKeyBuilder('confirm-registration')
+    },
     get Categories() {
         return new CacheKeyBuilder('categories')
     },

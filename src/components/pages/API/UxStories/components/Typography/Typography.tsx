@@ -24,7 +24,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
     <Screen
         title={'Tivadar Debnar | Typography'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

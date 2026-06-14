@@ -24,7 +24,6 @@ export const Regions = ({ path }: RegionsProps) => (
     <Screen
         title={'Tivadar Debnar | Regions'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

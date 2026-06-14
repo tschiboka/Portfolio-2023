@@ -15,7 +15,6 @@ export const Gym = ({ path }: GymProps) => {
         <Screen
             title={'Tivadar Debnar | Gym'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Gym"

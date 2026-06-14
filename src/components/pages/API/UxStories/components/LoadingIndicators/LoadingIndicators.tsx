@@ -19,7 +19,6 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
     <Screen
         title={'Tivadar Debnar | Loading Indicators'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

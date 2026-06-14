@@ -5,7 +5,9 @@ import { BiSolidUpArrowSquare } from 'react-icons/bi'
 import { HiShare } from 'react-icons/hi'
 import { FaEye } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
+import { IoMdClose } from 'react-icons/io'
 import { SideMenu } from '@common/ux/SideMenu'
+import { CounterBadge } from '@common/ux/CounterBadge'
 import type { SideMenuItem } from '@common/ux/SideMenu'
 import { useGetLikes, usePostLike } from '@common/queries/Likes.queries'
 import { useGetVisits } from '@common/queries'
@@ -41,13 +43,13 @@ export const PageSideMenu = () => {
         {
             icon: <FaEye />,
             label: 'Views',
-            badge: visits > 0 ? <span>{visits}</span> : undefined,
+            badge: visits > 0 ? <CounterBadge count={visits} /> : undefined,
         },
         {
             icon: <AiFillHeart />,
             label: 'Like',
             highlighted: liked,
-            badge: likes > 0 ? <span>{likes}</span> : undefined,
+            badge: likes > 0 ? <CounterBadge count={likes} /> : undefined,
             onClick: () => {
                 if (!liked) {
                     doPostLike(
@@ -75,6 +77,15 @@ export const PageSideMenu = () => {
         <div className="PageSideMenu">
             {shareMenuVisible && <ShareMenu path={pathname} />}
             <SideMenu items={items} visible={visible} onClose={() => setVisible(false)} />
+            {!visible && (
+                <button
+                    className="PageSideMenu__reopen"
+                    title="Open Menu"
+                    onClick={() => setVisible(true)}
+                >
+                    <IoMdClose style={{ transform: 'rotate(45deg)' }} />
+                </button>
+            )}
         </div>
     )
 }

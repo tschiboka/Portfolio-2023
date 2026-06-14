@@ -9,7 +9,6 @@ const Events = ({ path }: EventsProp) => {
         <Screen
             title={'Tivadar Debnar | Events'}
             path={path}
-            recordVisit={false}
             loginRequired
             variant="api"
             pageName="Events"

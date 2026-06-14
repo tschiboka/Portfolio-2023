@@ -150,7 +150,6 @@ export const Forms = ({ path }: FormsProps) => {
         <Screen
             title={'Tivadar Debnar | Forms'}
             path={path}
-            recordVisit={false}
             variant="api"
             pageName="Projects"
             sideMenu={<PageSideMenu />}

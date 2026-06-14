@@ -10,7 +10,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
     <Screen
         title={'Tivadar Debnar | Code Blocks'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

@@ -10,7 +10,6 @@ export const Links = ({ path }: LinksProps) => (
     <Screen
         title={'Tivadar Debnar | Links'}
         path={path}
-        recordVisit={false}
         variant="api"
         pageName="Projects"
         sideMenu={<PageSideMenu />}

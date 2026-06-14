@@ -15,17 +15,6 @@ import { FiGlobe, FiPhone } from 'react-icons/fi'
 import { MdEmail } from 'react-icons/md'
 import faceImg from '../../../../../assets/images/headshot_placeholder_grayscale.png'
 
-const iconLinkStyle: React.CSSProperties = {
-    color: '#007676',
-    textDecoration: 'none',
-    verticalAlign: 'middle',
-}
-
-const iconStyle: React.CSSProperties = {
-    verticalAlign: 'middle',
-    display: 'inline-block',
-}
-
 const smallStyle: React.CSSProperties = {
     fontSize: '0.58rem',
     color: '#888',
@@ -40,8 +29,17 @@ const Signature = () => (
             paddingTop: '16px',
         }}
     >
+        <style>{`
+            @media (max-width: 600px) {
+                .bp-signature-row { flex-direction: column !important; align-items: flex-start !important; }
+                .bp-signature-links { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
+            }
+        `}</style>
         {/* Top row: avatar column + info column */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'stretch' }}>
+        <div
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'stretch' }}
+            className="bp-signature-row"
+        >
             {/* Avatar + socials column */}
             <div
                 style={{
@@ -67,40 +65,7 @@ const Signature = () => (
                             '2px 2px 4px rgba(0,0,0,0.6), -2px -2px 4px rgba(255,255,255,0.04), inset 2px 2px 4px rgba(255,255,255,0.1), inset -2px -2px 4px rgba(0,0,0,0.4)',
                     }}
                 />
-                <div
-                    style={{
-                        display: 'flex',
-                        gap: '8px',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                    }}
-                >
-                    <a
-                        href="https://www.linkedin.com/in/tivadar-debnar/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={iconLinkStyle}
-                    >
-                        <TfiLinkedin size={14} style={iconStyle} title="LinkedIn" />
-                    </a>
-                    <a
-                        href="https://github.com/tschiboka"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={iconLinkStyle}
-                    >
-                        <TbBrandGithubFilled size={14} style={iconStyle} title="GitHub" />
-                    </a>
-                    <a
-                        href="https://www.facebook.com/tschiboka/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={iconLinkStyle}
-                    >
-                        <FaFacebookF size={14} style={iconStyle} title="Facebook" />
-                    </a>
-                </div>
+                <div style={{ height: '8px' }} />
             </div>
 
             {/* Info column */}
@@ -225,6 +190,40 @@ const Signature = () => (
                                 tibi.aki.tivadar@gmail.com
                             </a>
                         </span>
+                        <div style={{ width: '100%', height: '6px' }} />
+                        <div
+                            style={{
+                                display: 'flex',
+                                gap: '4px',
+                                alignItems: 'center',
+                                flexWrap: 'wrap',
+                            }}
+                        >
+                            <a
+                                href="https://github.com/tschiboka"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#888', textDecoration: 'none' }}
+                            >
+                                <TbBrandGithubFilled size={12} style={{ display: 'block' }} />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/tivadar-debnar/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#888', textDecoration: 'none' }}
+                            >
+                                <TfiLinkedin size={12} style={{ display: 'block' }} />
+                            </a>
+                            <a
+                                href="https://www.facebook.com/tschiboka/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{ color: '#888', textDecoration: 'none' }}
+                            >
+                                <FaFacebookF size={12} style={{ display: 'block' }} />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

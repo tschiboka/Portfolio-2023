@@ -5,6 +5,7 @@ import { Button } from './Button/Button'
 import { Checkbox } from './Checkbox/Checkbox'
 import { Code } from './Code/Code'
 import { ContentNavigator } from './ContentNavigator/ContentNavigator'
+import { CounterBadge } from './CounterBadge/CounterBadge'
 import { DateInput } from './DateInput/DateInput'
 import { Figure } from './Figure/Figure'
 import { Form } from './Form/Form'
@@ -32,6 +33,7 @@ export const Test = {
     Checkbox,
     Code,
     ContentNavigator,
+    CounterBadge,
     DateInput,
     Figure,
     Form,
