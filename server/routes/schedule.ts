@@ -9,7 +9,7 @@
  */
 
 import express from 'express'
-import dailyEmail from '../scheduled/dailyEmail'
+import { sendDailyBreakdown } from '../cron/emails/breakdown/breakdown'
 import { PostDailyBreakdownResponse, TypedRequest, TypedResponse } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 
@@ -19,7 +19,7 @@ type PostDailyBreakdownReq = TypedRequest
 type PostDailyBreakdownRes = TypedResponse<PostDailyBreakdownResponse>
 
 route.post('/daily-breakdown', async (req: PostDailyBreakdownReq, res: PostDailyBreakdownRes) => {
-    const result = await dailyEmail()
+    const result = await sendDailyBreakdown()
     res.status(HttpStatus.CREATED).json(result)
 })
 

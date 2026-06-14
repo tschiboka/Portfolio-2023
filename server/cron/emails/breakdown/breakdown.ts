@@ -1,28 +1,11 @@
 import { Resend } from 'resend'
-import { Like } from '../models/like'
-import { Visit } from '../models/visit'
+import { Like } from '../../../models/like'
+import { Visit } from '../../../models/visit'
+import { renderHeader, renderSection } from './breakdown.utils'
+import { renderSignature } from '../signature'
+import { Breakdown, PathBreakdownItem } from './breakdown.type'
 
-interface PathBreakdownItem {
-    path: string
-    count: number
-}
-
-interface Breakdown {
-    visits: {
-        today: PathBreakdownItem[]
-        total: PathBreakdownItem[]
-        totalCount: number
-        todayCount: number
-    }
-    likes: {
-        today: PathBreakdownItem[]
-        total: PathBreakdownItem[]
-        totalCount: number
-        todayCount: number
-    }
-}
-
-async function dailyEmail() {
+export async function sendDailyBreakdown() {
     const todaysDate = new Date(getDateString())
 
     // Get Visit Statistics
@@ -43,19 +26,19 @@ async function dailyEmail() {
         },
     })
 
-    // Breakdown
+    // Build breakdown
     const breakdown: Breakdown = {
         visits: {
             today: getPathBreakdown(todayVisits),
             total: getPathBreakdown(totalVisits),
-            totalCount: totalVisits.length,
             todayCount: todayVisits.length,
+            totalCount: totalVisits.length,
         },
         likes: {
             today: getPathBreakdown(todayLikes),
             total: getPathBreakdown(totalLikes),
-            totalCount: totalLikes.length,
             todayCount: todayLikes.length,
+            totalCount: totalLikes.length,
         },
     }
 
@@ -95,58 +78,21 @@ const getPathBreakdown = (records: any[]): PathBreakdownItem[] => {
     return breakdown.sort((a: PathBreakdownItem, b: PathBreakdownItem) => b.count - a.count)
 }
 
-const createMessage = (breakdown: Breakdown) => {
-    const visitBreakdown = !breakdown.visits.today.length
-        ? ''
-        : `${breakdown.visits.today
-              .map(
-                  (visit: PathBreakdownItem) =>
-                      visit.path +
-                      ' ' +
-                      visit.count +
-                      ' of ' +
-                      (
-                          breakdown.visits.total.find(
-                              (visitTot: PathBreakdownItem) => visitTot.path === visit.path,
-                          ) || { count: 0 }
-                      ).count,
-              )
-              .join('<br />')}`
+const createMessage = (breakdown: Breakdown) => `
+    <div style="font-family:Roboto, Arial, Helvetica, sans-serif; font-weight:300; background:#111; padding:24px 12px; color:#eee;">
+        <div style="max-width:600px; margin:0 auto; background:#0a0a0a; border-radius:10px; overflow:hidden; border:2px solid #222; box-shadow:10px 10px 30px rgba(0,0,0,0.7), -5px -5px 5px rgba(255,255,255,0.02), inset 10px 10px 20px black;">
 
-    const likeBreakdown = !breakdown.likes.today.length
-        ? ''
-        : `${breakdown.likes.today
-              .map(
-                  (like: PathBreakdownItem) =>
-                      like.path +
-                      ' ' +
-                      like.count +
-                      ' of ' +
-                      (
-                          breakdown.likes.total.find(
-                              (likeTot: PathBreakdownItem) => likeTot.path === like.path,
-                          ) || { count: 0 }
-                      ).count,
-              )
-              .join('<br />')}`
+            ${renderHeader()}
 
-    const message = `
-        <h2>VISITS</h2>
-        <p>
-            Today Visit Count: ${breakdown.visits?.todayCount}
-            Total Visit Count: ${breakdown.visits?.totalCount}
-        </p>
-        <span>${visitBreakdown}</span>
-                        
-        <h2>LIKES</h2>
-        <p>
-            Today Like Count: ${breakdown.likes?.todayCount}
-            Total Like Count: ${breakdown.likes?.totalCount}
-        </p>
-        <span>${likeBreakdown}</span>
-    `
-    return message
-}
+            <div style="padding:20px; background:#0a0a0a; color:#d8d8d8;">
+                ${renderSection('Visits', breakdown.visits)}
+                <hr style="margin:24px 0; border:none; border-top:1px solid #333;" />
+                ${renderSection('Likes', breakdown.likes)}
+                ${renderSignature()}
+            </div>
+        </div>
+    </div>
+`
 
 const sendEmail = async (message: string) => {
     const resendApiKey = process.env.RESEND_API_KEY
@@ -155,7 +101,7 @@ const sendEmail = async (message: string) => {
     const resend = new Resend(resendApiKey)
 
     const { data, error } = await resend.emails.send({
-        from: 'Tschiboka <reports@tschiboka.com>',
+        from: 'Tschiboka <no-reply@tschiboka.com>',
         to: ['tibi.aki.tivadar@gmail.com'],
         subject: 'Breakdown Report | tschiboka.com',
         html: message,
@@ -164,5 +110,3 @@ const sendEmail = async (message: string) => {
     if (error) throw error
     return data
 }
-
-export default dailyEmail
