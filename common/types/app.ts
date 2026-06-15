@@ -178,6 +178,31 @@ export type PostLikeError = {
     error: string
 }
 
+// BREAKDOWN TYPES
+// GET /api/breakdowns response
+
+export type BreakdownPathItem = {
+    path: string
+    visits: number
+    likes: number
+}
+
+export type GetBreakdownsResponse = {
+    success: boolean
+    data: {
+        today: BreakdownPathItem[]
+        todayCounts: { visits: number; likes: number }
+        total: BreakdownPathItem[]
+        totalCounts: { visits: number; likes: number }
+    }
+}
+
+// POST /api/breakdowns/backfill response
+export type PostBackfillResponse = {
+    success: boolean
+    upserted: number
+}
+
 // SETTINGS TYPES
 export type Settings = {
     maxUsers: number

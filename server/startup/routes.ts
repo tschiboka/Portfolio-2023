@@ -12,6 +12,7 @@ import confirm from '../routes/confirm'
 import log from '../routes/log'
 import category from '../routes/category'
 import session from '../routes/session'
+import breakdowns from '../routes/breakdowns'
 import xmas2025 from '../projects/xmas_2025/routes'
 import typist from '../projects/typist/routes'
 import gym from '../projects/gym/routes'
@@ -26,6 +27,7 @@ export default function (app: Application) {
     app.use('/api/like', like)
     app.use('/api/session', session)
     app.use('/api/schedule', schedule)
+    app.use('/api/breakdowns', breakdowns)
 
     // App routes
     app.use('/api/settings', settings)

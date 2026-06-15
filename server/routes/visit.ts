@@ -1,5 +1,6 @@
 import express from 'express'
 import { Visit, validateVisit } from '../models/visit'
+import { DailyBreakdown } from '../models/dailyBreakdown'
 import {
     GetVisitQuery,
     GetVisitResponse,
@@ -50,6 +51,15 @@ router.post('/', async (req: PostVisitReq, res: PostVisitRes) => {
     const visit = new Visit(req.body)
 
     await visit.save()
+
+    // Upsert daily aggregate (enables fast breakdown queries without pulling raw records)
+    const today = new Date().toISOString().slice(0, 10)
+    await DailyBreakdown.updateOne(
+        { date: today, path: req.body.path },
+        { $inc: { visits: 1 } },
+        { upsert: true },
+    )
+
     res.status(HttpStatus.OK).json({ success: true, visit })
 })
 

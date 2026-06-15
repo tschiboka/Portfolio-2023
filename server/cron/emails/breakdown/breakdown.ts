@@ -1,44 +1,41 @@
 import { Resend } from 'resend'
-import { Like } from '../../../models/like'
-import { Visit } from '../../../models/visit'
+import { DailyBreakdown } from '../../../models/dailyBreakdown'
 import { renderHeader, renderSection } from './breakdown.utils'
 import { renderSignature } from '../signature'
-import { Breakdown, PathBreakdownItem } from './breakdown.type'
+import { Breakdown } from './breakdown.type'
 
 export async function sendDailyBreakdown() {
-    const todaysDate = new Date(getDateString())
+    const today = getDateString()
 
-    // Get Visit Statistics
-    const totalVisits = await Visit.find()
-    const todayVisits = await Visit.find({
-        visitDate: {
-            $gte: new Date(todaysDate.setHours(0, 0, 0, 0)),
-            $lt: new Date(todaysDate.setHours(23, 59, 59, 999)),
+    const todayBreakdowns = await DailyBreakdown.find({ date: today })
+    const totalAggregated = await DailyBreakdown.aggregate([
+        {
+            $group: {
+                _id: '$path',
+                visits: { $sum: '$visits' },
+                likes: { $sum: '$likes' },
+            },
         },
-    })
+    ])
 
-    // Get Like Statistics
-    const totalLikes = await Like.find()
-    const todayLikes = await Like.find({
-        likeDate: {
-            $gte: new Date(todaysDate.setHours(0, 0, 0, 0)),
-            $lt: new Date(todaysDate.setHours(23, 59, 59, 999)),
-        },
-    })
-
-    // Build breakdown
     const breakdown: Breakdown = {
         visits: {
-            today: getPathBreakdown(todayVisits),
-            total: getPathBreakdown(totalVisits),
-            todayCount: todayVisits.length,
-            totalCount: totalVisits.length,
+            today: todayBreakdowns.map((b) => ({ path: b.path, count: b.visits })),
+            total: totalAggregated.map((b) => ({ path: b._id, count: b.visits })),
+            todayCount: todayBreakdowns.reduce((sum, b) => sum + b.visits, 0),
+            totalCount: totalAggregated.reduce(
+                (sum: number, b: { visits: number }) => sum + b.visits,
+                0,
+            ),
         },
         likes: {
-            today: getPathBreakdown(todayLikes),
-            total: getPathBreakdown(totalLikes),
-            todayCount: todayLikes.length,
-            totalCount: totalLikes.length,
+            today: todayBreakdowns.map((b) => ({ path: b.path, count: b.likes })),
+            total: totalAggregated.map((b) => ({ path: b._id, count: b.likes })),
+            todayCount: todayBreakdowns.reduce((sum, b) => sum + b.likes, 0),
+            totalCount: totalAggregated.reduce(
+                (sum: number, b: { likes: number }) => sum + b.likes,
+                0,
+            ),
         },
     }
 
@@ -54,28 +51,6 @@ const getDateString = () => {
     const day = date.getDate()
     const zeroPad = (num: number) => (num < 10 ? '0' + num : num)
     return `${year}-${zeroPad(month)}-${zeroPad(day)}`
-}
-
-const getPathBreakdown = (records: any[]): PathBreakdownItem[] => {
-    if (!records) throw Error('Parameter missing')
-
-    const breakdown: PathBreakdownItem[] = []
-    const paths: string[] = []
-    records.forEach((record: any) => {
-        if (!record.path) return
-        const path = record.path
-        if (paths.indexOf(path) === -1) {
-            paths.push(path)
-            breakdown.push({ path, count: 0 })
-        }
-    })
-
-    records.forEach((record: any) => {
-        breakdown.forEach((breakdownItem: PathBreakdownItem) => {
-            if (breakdownItem.path === record.path) breakdownItem.count++
-        })
-    })
-    return breakdown.sort((a: PathBreakdownItem, b: PathBreakdownItem) => b.count - a.count)
 }
 
 const createMessage = (breakdown: Breakdown) => `

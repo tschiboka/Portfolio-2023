@@ -1,5 +1,6 @@
 import express from 'express'
 import { Like, validateLike } from '../models/like'
+import { DailyBreakdown } from '../models/dailyBreakdown'
 import {
     GetLikeQuery,
     GetLikeSummaryResponse,
@@ -47,6 +48,15 @@ router.post('/', async (req: PostLikeReq, res: PostLikeRes) => {
     const like = new Like(req.body)
 
     await like.save()
+
+    // Upsert daily aggregate (enables fast breakdown queries without pulling raw records)
+    const today = new Date().toISOString().slice(0, 10)
+    await DailyBreakdown.updateOne(
+        { date: today, path: req.body.path },
+        { $inc: { likes: 1 } },
+        { upsert: true },
+    )
+
     res.status(HttpStatus.CREATED).json({ success: true, like })
 })
 

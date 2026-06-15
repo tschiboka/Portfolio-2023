@@ -10,6 +10,7 @@ export const Paths = {
         RehydrateSession: 'RehydrateSession',
         Categories: 'Categories',
         Schedule: 'Schedule',
+        Breakdowns: 'Breakdowns',
     },
     Projects: {
         Xmas: 'Xmas',
@@ -30,6 +31,7 @@ export const apiRoutes: Record<string, string> = {
     RehydrateSession: 'api/session',
     Categories: 'api/categories',
     Schedule: 'api/schedule',
+    Breakdowns: 'api/breakdowns',
 }
 
 export const projectRoutes: Record<string, string> = {
