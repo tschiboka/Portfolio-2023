@@ -1,11 +1,9 @@
 import { createContext, ReactNode, useContext, useRef, useState } from 'react'
-import {
-    SessionContextType,
-    SessionStatuses,
-    WebSocketSessionState,
-} from './Session.types'
+import { SessionContextType, SessionStatuses, WebSocketSessionState } from './Session.types'
 import { useParams } from 'react-router'
-import { LocalStorage } from '../common/utils'
+import { Storage } from '@common/utils'
+
+const WDA_KEY = 'word-duel-arena'
 
 const defaultState: WebSocketSessionState = {
     id: '',
@@ -20,20 +18,21 @@ const defaultState: WebSocketSessionState = {
     previousMatches: [],
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(
-    undefined,
-)
+export const SessionContext = createContext<SessionContextType | undefined>(undefined)
 type SessionProviderProps = {
     children: ReactNode
 }
 
+type DeviceIdStorage = {
+    deviceId: string
+}
+
 export const SessionProvider = ({ children }: SessionProviderProps) => {
-    const [sessionState, setSessionState] =
-        useState<WebSocketSessionState>(defaultState)
+    const [sessionState, setSessionState] = useState<WebSocketSessionState>(defaultState)
 
     console.log('SessionState:', sessionState)
 
-    const deviceId = useRef(LocalStorage.getLocalStorage().deviceId).current
+    const deviceId = useRef(Storage.get<DeviceIdStorage>(WDA_KEY)?.deviceId ?? '').current
     const { sessionId } = useParams()
 
     if (!sessionId) throw new Error('sessionId param is missing')

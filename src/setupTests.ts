@@ -24,6 +24,12 @@ vi.mock('detectincognitojs', () => ({
     detectIncognito: () => Promise.resolve({ isPrivate: false }),
 }))
 
+// jsdom does not implement the Fullscreen API — stub fullscreenElement to null
+Object.defineProperty(document, 'fullscreenElement', {
+    configurable: true,
+    get: () => null,
+})
+
 // useNavigate calls navigate() which has no effect in happy-dom — provide a trackable mock
 const mockNavigate = vi.hoisted(() => vi.fn())
 vi.mock('react-router-dom', async (importOriginal) => ({
@@ -68,6 +74,10 @@ vi.stubGlobal(
         return { observe: vi.fn(), unobserve: vi.fn(), disconnect: vi.fn() }
     }),
 )
+
+// jsdom does not implement HTMLCanvasElement.getContext — provide a minimal stub
+// so any component that uses <canvas> (e.g. XmasFormCanvas) won't crash.
+Object.assign(HTMLCanvasElement.prototype, { getContext: vi.fn() })
 
 // jsdom does not implement window.matchMedia — provide a minimal stub
 // so any component that uses matchMedia (e.g. responsive hooks) won't crash.

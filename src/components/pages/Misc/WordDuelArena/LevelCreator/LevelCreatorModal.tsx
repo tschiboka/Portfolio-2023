@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
-import { Level, LevelWord, mergeApiStatuses } from '../common/utils'
+import { Level, LevelWord } from '../common/utils'
+import { Query } from '@common/utils'
 import { transformAnagramMap } from '../common/utils/Word/getPossibleWords'
 import {
     useGetAnagramMap,
@@ -36,7 +37,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
         },
     })
 
-    const { isLoading, isPending, error } = mergeApiStatuses([
+    const { isLoading, isPending, error } = Query.mergeApiStatuses([
         levelDataResponse,
         anagramMapResponse,
         wordFrequenciesResponse,

@@ -1,10 +1,22 @@
 import type { MockInstance } from 'vitest'
 import { Browser } from '../index'
 import { renderHook, act } from '@testing-library/react'
-import { useIsVisible } from '../useIsVisible'
-import { slugify } from '../slugify'
 
-const { copyToClipboard } = Browser
+const { copyToClipboard, useFullScreen } = Browser
+
+// Vendor-prefixed Fullscreen API types — mirrors the hook's interfaces
+interface FullScreenElement {
+    requestFullscreen?: () => Promise<void>
+    webkitRequestFullscreen?: () => Promise<void>
+    msRequestFullscreen?: () => Promise<void>
+}
+
+interface FullScreenDocument {
+    exitFullscreen?: () => Promise<void>
+    webkitExitFullscreen?: () => Promise<void>
+    msExitFullscreen?: () => Promise<void>
+    fullscreenElement?: Element | null
+}
 
 const observeMock = vi.fn()
 const unobserveMock = vi.fn()
@@ -141,7 +153,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            renderHook(() => useIsVisible([el1, el2]))
+            renderHook(() => Browser.useIsVisible([el1, el2]))
 
             const observer = instances[0]
             expect(observer.observe).toHaveBeenCalledTimes(2)
@@ -151,7 +163,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            const { result } = renderHook(() => useIsVisible([el1, el2]))
+            const { result } = renderHook(() => Browser.useIsVisible([el1, el2]))
 
             const observer = instances[0]
 
@@ -171,7 +183,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            const { result } = renderHook(() => useIsVisible([el1, el2]))
+            const { result } = renderHook(() => Browser.useIsVisible([el1, el2]))
 
             const observer = instances[0]
 
@@ -197,7 +209,7 @@ describe('Browser', () => {
         it('disconnects on unmount', () => {
             const el1 = createElement()
 
-            const { unmount } = renderHook(() => useIsVisible([el1]))
+            const { unmount } = renderHook(() => Browser.useIsVisible([el1]))
 
             const observer = instances[0]
 
@@ -208,24 +220,24 @@ describe('Browser', () => {
     })
     describe('slugify', () => {
         it('should return an empty string for an empty input', () => {
-            expect(slugify('')).toBe('')
+            expect(Browser.slugify('')).toBe('')
         })
 
         it('should replace non-word characters with empty string', () => {
-            expect(slugify('Hello World!')).toBe('hello-world')
+            expect(Browser.slugify('Hello World!')).toBe('hello-world')
         })
 
         it('should replace spaces with dashes', () => {
-            expect(slugify('Hello World!')).toBe('hello-world')
-            expect(slugify('Hello-World!')).toBe('hello-world')
+            expect(Browser.slugify('Hello World!')).toBe('hello-world')
+            expect(Browser.slugify('Hello-World!')).toBe('hello-world')
         })
 
         it('should replace underscores with dashes', () => {
-            expect(slugify('Hello_World!')).toBe('hello-world')
+            expect(Browser.slugify('Hello_World!')).toBe('hello-world')
         })
 
         it('should replace multiple dashes with a single dash', () => {
-            expect(slugify('Hello---World!')).toBe('hello-world')
+            expect(Browser.slugify('Hello---World!')).toBe('hello-world')
         })
     })
 
@@ -244,6 +256,259 @@ describe('Browser', () => {
 
         it('should return false for production domain', () => {
             expect(Browser.isLocalhost('tschiboka.com')).toBe(false)
+        })
+    })
+
+    // --------------------
+    // useFullScreen tests
+    // --------------------
+    describe('useFullScreen', () => {
+        afterEach(() => {
+            vi.restoreAllMocks()
+        })
+
+        it('should start with isFullscreen set to false', () => {
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+            expect(result.current.isFullscreen).toBe(false)
+        })
+
+        it('should return a ref, enterFullScreen, exitFullScreen and isFullscreen', () => {
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+            expect(result.current).toHaveProperty('ref')
+            expect(result.current).toHaveProperty('enterFullScreen')
+            expect(result.current).toHaveProperty('exitFullScreen')
+            expect(result.current).toHaveProperty('isFullscreen')
+        })
+
+        it('should call requestFullscreen on the element when enterFullScreen is called', () => {
+            const requestFullscreen = vi.fn().mockResolvedValue(undefined)
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            // Attach a mock element to the ref
+            const el = document.createElement('div')
+            el.requestFullscreen = requestFullscreen
+            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current = el
+
+            act(() => {
+                result.current.enterFullScreen()
+            })
+
+            expect(requestFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call webkitRequestFullscreen when requestFullscreen is not available', () => {
+            const webkitRequestFullscreen = vi.fn().mockResolvedValue(undefined)
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            const el = document.createElement('div') as unknown as FullScreenElement
+            el.webkitRequestFullscreen = webkitRequestFullscreen
+            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current =
+                el as HTMLDivElement
+
+            act(() => {
+                result.current.enterFullScreen()
+            })
+
+            expect(webkitRequestFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call msRequestFullscreen when standard and webkit are not available', () => {
+            const msRequestFullscreen = vi.fn().mockResolvedValue(undefined)
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            const el = document.createElement('div') as unknown as FullScreenElement
+            el.msRequestFullscreen = msRequestFullscreen
+            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current =
+                el as HTMLDivElement
+
+            act(() => {
+                result.current.enterFullScreen()
+            })
+
+            expect(msRequestFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should not throw when ref has no current element', () => {
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            expect(() => {
+                act(() => {
+                    result.current.enterFullScreen()
+                })
+            }).not.toThrow()
+        })
+
+        it('should call exitFullscreen on the document when exitFullScreen is called', () => {
+            const exitFullscreen = vi.fn().mockResolvedValue(undefined)
+            document.exitFullscreen = exitFullscreen
+
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            act(() => {
+                result.current.exitFullScreen()
+            })
+
+            expect(exitFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call webkitExitFullscreen when exitFullscreen is not available', () => {
+            const webkitExitFullscreen = vi.fn().mockResolvedValue(undefined)
+            const fullDoc = document as unknown as FullScreenDocument
+            fullDoc.webkitExitFullscreen = webkitExitFullscreen
+            delete fullDoc.exitFullscreen
+
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            act(() => {
+                result.current.exitFullScreen()
+            })
+
+            expect(webkitExitFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should call msExitFullscreen when standard and webkit are not available', () => {
+            const msExitFullscreen = vi.fn().mockResolvedValue(undefined)
+            const fullDoc = document as unknown as FullScreenDocument
+            fullDoc.msExitFullscreen = msExitFullscreen
+            delete fullDoc.exitFullscreen
+            delete fullDoc.webkitExitFullscreen
+
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            act(() => {
+                result.current.exitFullScreen()
+            })
+
+            expect(msExitFullscreen).toHaveBeenCalledTimes(1)
+        })
+
+        it('should update isFullscreen when fullscreenchange event fires', () => {
+            const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
+            expect(result.current.isFullscreen).toBe(false)
+
+            Object.defineProperty(document, 'fullscreenElement', {
+                configurable: true,
+                get: () => document.createElement('div'),
+            })
+
+            act(() => {
+                document.dispatchEvent(new Event('fullscreenchange'))
+            })
+
+            expect(result.current.isFullscreen).toBe(true)
+
+            // Now set it back to null
+            Object.defineProperty(document, 'fullscreenElement', {
+                configurable: true,
+                get: () => null,
+            })
+
+            act(() => {
+                document.dispatchEvent(new Event('fullscreenchange'))
+            })
+
+            expect(result.current.isFullscreen).toBe(false)
+        })
+
+        it('should clean up the fullscreenchange listener on unmount', () => {
+            const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener')
+            const { unmount } = renderHook(() => useFullScreen<HTMLDivElement>())
+
+            unmount()
+
+            expect(removeEventListenerSpy).toHaveBeenCalledWith(
+                'fullscreenchange',
+                expect.any(Function),
+            )
+        })
+    })
+
+    // --------------------
+    // useOrientation tests
+    // --------------------
+    describe('useOrientation', () => {
+        const PORTRAIT = { innerWidth: 400, innerHeight: 800 }
+        const LANDSCAPE = { innerWidth: 1200, innerHeight: 800 }
+        const MOBILE = { innerWidth: 600, innerHeight: 900 }
+        const DESKTOP = { innerWidth: 1440, innerHeight: 900 }
+
+        afterEach(() => {
+            vi.restoreAllMocks()
+        })
+
+        it('should detect portrait orientation', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(PORTRAIT.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(PORTRAIT.innerHeight)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.orientation).toBe('portrait')
+        })
+
+        it('should detect landscape orientation', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.orientation).toBe('landscape')
+        })
+
+        it('should detect mobile width', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(MOBILE.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(MOBILE.innerHeight)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.isMobile).toBe(true)
+        })
+
+        it('should detect desktop width', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(DESKTOP.innerHeight)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.isMobile).toBe(false)
+        })
+
+        it('should update on resize event', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.orientation).toBe('landscape')
+
+            // Change to portrait
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(PORTRAIT.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(PORTRAIT.innerHeight)
+
+            act(() => {
+                window.dispatchEvent(new Event('resize'))
+            })
+
+            expect(result.current.orientation).toBe('portrait')
+        })
+
+        it('should update isMobile on resize', () => {
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
+
+            const { result } = renderHook(() => Browser.useOrientation())
+            expect(result.current.isMobile).toBe(false)
+
+            // Resize to mobile width
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(MOBILE.innerWidth)
+
+            act(() => {
+                window.dispatchEvent(new Event('resize'))
+            })
+
+            expect(result.current.isMobile).toBe(true)
+        })
+
+        it('should clean up the resize listener on unmount', () => {
+            const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
+            const { unmount } = renderHook(() => Browser.useOrientation())
+
+            unmount()
+
+            expect(removeEventListenerSpy).toHaveBeenCalledWith('resize', expect.any(Function))
         })
     })
 })

@@ -1,6 +1,6 @@
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { InteractionOverlay } from '../SessionOverlay/SessionOverlay'
-import { shuffleArray } from '../../common/utils'
+import { Arrays } from '@common/utils/Arrays'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
 import { useSession } from '../Session.context'
 import { useEffect, useState } from 'react'
@@ -13,10 +13,7 @@ type SessionGameProps = {
     isFullscreen: boolean
 }
 
-export const SessionGame = ({
-    enterFullScreen,
-    isFullscreen,
-}: SessionGameProps) => {
+export const SessionGame = ({ enterFullScreen, isFullscreen }: SessionGameProps) => {
     const { level } = useSession().sessionState || {}
     const levelName = level?.name || ''
     const [inputLetters, setInputLetters] = useState<string>('')
@@ -24,17 +21,14 @@ export const SessionGame = ({
 
     useEffect(() => {
         if (level) {
-            const shuffledLetters = shuffleArray(level.name.split('')).join('')
+            const shuffledLetters = Arrays.shuffleArray(level.name.split('')).join('')
             setInputLetters(shuffledLetters)
         }
     }, [levelName])
 
     return (
         <div className="session-game">
-            <InteractionOverlay
-                enterFullScreen={enterFullScreen}
-                isFullscreen={isFullscreen}
-            />
+            <InteractionOverlay enterFullScreen={enterFullScreen} isFullscreen={isFullscreen} />
             <>
                 <SessionHeader />
                 <SolutionBoard />
@@ -44,10 +38,7 @@ export const SessionGame = ({
                     setExtraWordsOpen={setExtraWordsOpen}
                 />
             </>
-            <ExtraWords
-                isOpen={extraWordsOpen}
-                setExtraWordsOpen={setExtraWordsOpen}
-            />
+            <ExtraWords isOpen={extraWordsOpen} setExtraWordsOpen={setExtraWordsOpen} />
         </div>
     )
 }

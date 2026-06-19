@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { Storage } from '@common/utils'
 import { AppContextValues, LocalStorage } from './AppContext.types'
+
+const APP_KEY = 'tschiboka'
 
 const AppContext = createContext<AppContextValues | undefined>(undefined)
 
@@ -17,16 +20,18 @@ type AppContextProviderProps = {
     initialState?: Partial<AppContextValues>
 }
 
+const readTheme = (): string => {
+    const stored = Storage.get<LocalStorage>(APP_KEY)
+    const theme = stored?.theme
+    if (theme === 'dark' || theme === 'light') return theme
+    return 'dark'
+}
+
 export const AppContextProvider: React.FC<AppContextProviderProps> = ({
     children,
     initialState,
 }) => {
-    let storage = localStorage.getItem('tschiboka') || '{"theme": "dark"}'
-    const check = JSON.parse(storage) as Partial<LocalStorage>
-    if (check.theme !== 'dark' && check.theme !== 'light') storage = '{"theme": "dark"}'
-    const storageJSON = JSON.parse(storage) as LocalStorage
-
-    const [themeMode, setThemeMode] = useState(initialState?.themeMode ?? storageJSON.theme)
+    const [themeMode, setThemeMode] = useState(initialState?.themeMode ?? readTheme())
     const [mainMenuVisible, setMainMenuVisible] = useState(initialState?.mainMenuVisible ?? true)
     const [mobileMenuVisible, setMobileMenuVisible] = useState(
         initialState?.mobileMenuVisible ?? false,
@@ -54,11 +59,10 @@ export const AppContextProvider: React.FC<AppContextProviderProps> = ({
 
     useEffect(() => {
         const body = document.getElementsByTagName('body')[0]
-        const storage = localStorage.getItem('tschiboka') || '{}'
-        const storageJSON = JSON.parse(storage) as unknown as Partial<LocalStorage>
-        const updatedStorage: LocalStorage = { ...storageJSON, theme: themeMode }
-
-        localStorage.setItem('tschiboka', JSON.stringify(updatedStorage))
+        Storage.update<LocalStorage>(
+            APP_KEY,
+            (prev) => ({ ...prev, theme: themeMode }) as LocalStorage,
+        )
         body.className = themeMode
     }, [themeMode])
 

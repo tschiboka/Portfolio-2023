@@ -2,7 +2,7 @@ import { useSession } from '../Session.context'
 import { InteractionModes } from './SessionOverlay.types'
 import { useGetInteractionOverlayState } from './SessionOverlay.hooks'
 import './SessionOverlay.styles.css'
-import { useOrientation } from '../../common/utils'
+import { Browser } from '@common/utils/Browser'
 import { useSessionWS } from '../SessionWebSocket'
 
 export const InteractionOverlay = ({
@@ -12,7 +12,7 @@ export const InteractionOverlay = ({
     enterFullScreen: () => void
     isFullscreen: boolean
 }) => {
-    const { orientation, isMobile } = useOrientation()
+    const { orientation, isMobile } = Browser.useOrientation()
     const { sessionState } = useSession()
     const { errorMessage } = useSessionWS()
     let message = errorMessage
@@ -26,30 +26,22 @@ export const InteractionOverlay = ({
         const player = sessionState.players[sessionState.role]
         const meConnected = player?.connected
         const opponentConnected =
-            sessionState.players[
-                sessionState.role === 'player1' ? 'player2' : 'player1'
-            ]?.connected
+            sessionState.players[sessionState.role === 'player1' ? 'player2' : 'player1']?.connected
         const isInLobby = sessionState.status === 'LOBBY'
         const isEnded = sessionState.currentMatch?.status === 'FINISHED'
-        const isWaitingForOpponent =
-            isInLobby && !opponentConnected && meConnected
+        const isWaitingForOpponent = isInLobby && !opponentConnected && meConnected
 
         if (isMobile && orientation === 'landscape') mode = 'landscape'
         else if (!sessionState.players[sessionState.role]) mode = 'connect'
-        else if (
-            sessionState.players[sessionState.role] &&
-            isMobile &&
-            !isFullscreen
-        )
+        else if (sessionState.players[sessionState.role] && isMobile && !isFullscreen)
             mode = 'no-fullscreen'
         else if (isWaitingForOpponent) mode = 'wait-opponent'
         if (isEnded) {
             const playersPoints = sessionState?.currentMatch?.perPlayerStatus
             const player = playersPoints?.[sessionState.role]?.points || 0
             const opponent =
-                playersPoints?.[
-                    sessionState.role === 'player1' ? 'player2' : 'player1'
-                ]?.points || 0
+                playersPoints?.[sessionState.role === 'player1' ? 'player2' : 'player1']?.points ||
+                0
 
             if (player === opponent) message = "It's a draw!"
             else if (player > opponent) message = 'You won! Congratulations!'
@@ -62,8 +54,7 @@ export const InteractionOverlay = ({
 
     if (errorMessage) mode = 'error'
     const overlayProps = { mode, message, enterFullScreen }
-    const { title, type, description, actions } =
-        useGetInteractionOverlayState(overlayProps)
+    const { title, type, description, actions } = useGetInteractionOverlayState(overlayProps)
 
     return (
         mode !== 'none' && (

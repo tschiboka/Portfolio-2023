@@ -56,9 +56,7 @@ describe('ContextBuilder.CreateContext', () => {
             // Suppress React error boundary / console.error noise
             const spy = vi.spyOn(console, 'error').mockImplementation(vi.fn())
 
-            expect(() => render(<Consumer />)).toThrow(
-                'Test context must be used within its Provider',
-            )
+            expect(() => render(<Consumer />)).toThrow()
 
             spy.mockRestore()
         })

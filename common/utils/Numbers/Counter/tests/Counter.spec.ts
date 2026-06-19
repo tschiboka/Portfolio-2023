@@ -44,7 +44,7 @@ describe('Numbers.Counter.format', () => {
 
         // decimal input — floors first
         [1999.9, '1.9K'],
-    ])('format(%p) should return %p', (input, expected) => {
+    ])('format(%i) should return %s', (input, expected) => {
         expect(Numbers.Counter.format(input)).toBe(expected)
     })
 })

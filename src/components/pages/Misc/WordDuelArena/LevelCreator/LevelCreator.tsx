@@ -6,10 +6,10 @@ import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../common/utils/Word/constants
 import { useGetLevelNames } from './LevelCreator.queries'
 import { LevelList } from './LevelList'
 import { LoadingIndicator } from '@common/ux'
-import { useFullScreen } from '../common/utils/FullScreen/useFullScreen'
+import { Browser } from '@common/utils'
 
 export const LevelCreator = () => {
-    const { ref, enterFullScreen } = useFullScreen<HTMLDivElement>()
+    const { ref, enterFullScreen } = Browser.useFullScreen<HTMLDivElement>()
 
     const { data, isLoading, error } = useGetLevelNames()
     const levels = data?.levels

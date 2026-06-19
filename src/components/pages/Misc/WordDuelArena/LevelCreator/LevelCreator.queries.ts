@@ -2,9 +2,9 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
 import { Paths, Query, QueryKey } from '@common/utils'
-import { LevelNameResponse } from '../common/utils/Types/Level'
-import { ErrorResponse } from '../common/utils/Queries/Queries.types'
-import { FrequencyType } from '../common/utils/Types/Words'
+import type { ErrorResponse } from '@common/utils/Query'
+import type { LevelNameResponse } from '../common/utils/Types/Level'
+import type { FrequencyType } from '../common/utils/Types/Words'
 
 export const useGetLevelNames = () => {
     const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)

@@ -50,6 +50,7 @@ describe('Paths', () => {
             Like: 'Like',
             Visit: 'Visit',
             Schedule: 'Schedule',
+            Breakdowns: 'Breakdowns',
         })
     })
 
