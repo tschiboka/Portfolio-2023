@@ -50,6 +50,7 @@
                 }
                 @include bp.lg {
                     border-right: 2px solid palette.$black_2;
+                    min-width: 30vw;
                 }
             }
         }

@@ -1,12 +1,15 @@
 import { DateTime } from '../index'
 
-const { Formats, Units } = DateTime
+const { Formats, Units, Format } = DateTime
 
 describe('DateTime', () => {
     describe('Formats', () => {
         it.each([
             ['DisplayDate', 'DD/MM/YYYY'],
             ['DisplayDateTime', 'DD/MM/YYYY HH:mm'],
+            ['DisplayLongDate', 'ddd, DD. MMM. YYYY'],
+            ['ApiDate', 'YYYY-MM-DD'],
+            ['ApiDateTime', 'YYYY-MM-DDTHH:mm:ssZ'],
         ] as const)('should have %s = "%s"', (key, expected) => {
             expect(Formats[key]).toBe(expected)
         })
@@ -84,6 +87,131 @@ describe('DateTime', () => {
             ])('%s', (_, actual, expected) => {
                 expect(actual).toBe(expected)
             })
+        })
+    })
+
+    describe('Format.to', () => {
+        describe('valid inputs', () => {
+            it('should format a Date object with DisplayDate', () => {
+                const date = new Date(2023, 7, 6)
+                expect(Format.to('DisplayDate', date)).toBe('06/08/2023')
+            })
+
+            it('should format a Date object with DisplayDateTime', () => {
+                const date = new Date(2023, 7, 6, 14, 30)
+                expect(Format.to('DisplayDateTime', date)).toBe('06/08/2023 14:30')
+            })
+
+            it('should format a Date object with DisplayLongDate', () => {
+                const date = new Date(2026, 5, 12)
+                expect(Format.to('DisplayLongDate', date)).toBe('Fri, 12. Jun. 2026')
+            })
+
+            it('should format a timestamp number', () => {
+                const date = new Date(2023, 7, 6)
+                expect(Format.to('DisplayDate', date.getTime())).toBe('06/08/2023')
+            })
+
+            it('should format an ISO date string', () => {
+                expect(Format.to('DisplayDate', '2023-08-06')).toBe('06/08/2023')
+            })
+
+            it('should format a DD/MM/YYYY date string', () => {
+                expect(Format.to('DisplayDate', '06/08/2023')).toBe('06/08/2023')
+            })
+        })
+
+        describe('edge cases', () => {
+            it('should return undefined for undefined', () => {
+                expect(Format.to('DisplayDate', undefined)).toBeUndefined()
+            })
+
+            it('should return undefined for null', () => {
+                expect(Format.to('DisplayDate', null)).toBeUndefined()
+            })
+
+            it('should return undefined for empty string', () => {
+                expect(Format.to('DisplayDate', '')).toBeUndefined()
+            })
+
+            it('should return undefined for an unparseable string', () => {
+                expect(Format.to('DisplayDate', 'not-a-date')).toBeUndefined()
+            })
+        })
+    })
+
+    describe('Format.parse', () => {
+        it('should parse a DD/MM/YYYY string', () => {
+            const result = Format.parse('06/08/2023')
+            expect(result).toBeInstanceOf(Date)
+            expect(result!.getFullYear()).toBe(2023)
+            expect(result!.getMonth()).toBe(7)
+            expect(result!.getDate()).toBe(6)
+        })
+
+        it('should parse an ISO date string', () => {
+            const result = Format.parse('2023-08-06')
+            expect(result).toBeInstanceOf(Date)
+            expect(result!.getFullYear()).toBe(2023)
+            expect(result!.getMonth()).toBe(7)
+            expect(result!.getDate()).toBe(6)
+        })
+
+        it('should parse a Date object', () => {
+            const input = new Date(2023, 7, 6)
+            const result = Format.parse(input)
+            expect(result).toStrictEqual(input)
+        })
+
+        it('should parse a timestamp number', () => {
+            const timestamp = new Date(2023, 7, 6).getTime()
+            const result = Format.parse(timestamp)
+            expect(result!.getFullYear()).toBe(2023)
+            expect(result!.getMonth()).toBe(7)
+        })
+
+        it('should return undefined for undefined', () => {
+            expect(Format.parse(undefined)).toBeUndefined()
+        })
+
+        it('should return undefined for null', () => {
+            expect(Format.parse(null)).toBeUndefined()
+        })
+
+        it('should return undefined for empty string', () => {
+            expect(Format.parse('')).toBeUndefined()
+        })
+
+        it('should return undefined for an unparseable string', () => {
+            expect(Format.parse('not-a-date')).toBeUndefined()
+        })
+    })
+
+    describe('Format.ms', () => {
+        it('should return timestamp for a DD/MM/YYYY string', () => {
+            const result = Format.ms('06/08/2023')
+            expect(result).toBe(new Date(2023, 7, 6).getTime())
+        })
+
+        it('should return timestamp for an ISO string', () => {
+            const result = Format.ms('2023-08-06')
+            expect(result).toBe(new Date(2023, 7, 6).getTime())
+        })
+
+        it('should return 0 for undefined', () => {
+            expect(Format.ms(undefined)).toBe(0)
+        })
+
+        it('should return 0 for null', () => {
+            expect(Format.ms(null)).toBe(0)
+        })
+
+        it('should return 0 for empty string', () => {
+            expect(Format.ms('')).toBe(0)
+        })
+
+        it('should return 0 for an unparseable string', () => {
+            expect(Format.ms('not-a-date')).toBe(0)
         })
     })
 })

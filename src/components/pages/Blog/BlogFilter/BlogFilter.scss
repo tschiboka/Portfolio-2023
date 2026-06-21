@@ -1,0 +1,14 @@
+.BlogFilter {
+    .BlogFilter__pill--dimmed {
+        opacity: 0.3;
+    }
+
+    .BlogFilter__groups {
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .Pill {
+        font-variant: small-caps;
+    }
+}

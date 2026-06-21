@@ -62,7 +62,7 @@ export const Projects = ({ pageName }: Props) => {
                     built with TypeScript, React, Node.js, and modern frontend tooling.
                 </Paragraph>
                 <Section
-                    title="Filter Projects"
+                    title={`Filter Projects | ${filteredProjects.length} of ${allProjects.length}`}
                     expandable
                     defaultOpen={false}
                     icon={<BsSliders2 />}

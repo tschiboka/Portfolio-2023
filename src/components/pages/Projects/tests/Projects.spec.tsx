@@ -34,7 +34,7 @@ describe('Projects', () => {
 
         it('should render the filter section', async () => {
             await setupProjects()
-            expect(screen.getByRole('region', { name: 'Filter Projects' })).toBeInTheDocument()
+            expect(screen.getByRole('region', { name: /Filter Projects/ })).toBeInTheDocument()
         })
     })
 
@@ -77,20 +77,20 @@ describe('Projects', () => {
     describe('Filter section expand/collapse', () => {
         it('should be collapsed by default', async () => {
             await setupProjects()
-            const section = Test.Section('Filter Projects')
+            const section = Test.Section.byTitle(/Filter Projects/)
             expect(section.Get.isOpen()).toBe(false)
         })
 
         it('should expand when the section header is clicked', async () => {
             await setupProjects()
-            const section = Test.Section('Filter Projects')
+            const section = Test.Section.byTitle(/Filter Projects/)
             await section.Do.toggle()
             expect(section.Get.isOpen()).toBe(true)
         })
 
         it('should show language pills when expanded', async () => {
             await setupProjects()
-            const section = Test.Section('Filter Projects')
+            const section = Test.Section.byTitle(/Filter Projects/)
             await section.Do.toggle()
             expect(screen.getByText('Frontend')).toBeInTheDocument()
             expect(screen.getByText('Backend')).toBeInTheDocument()
@@ -98,7 +98,7 @@ describe('Projects', () => {
 
         it('should collapse when the section header is clicked again', async () => {
             await setupProjects()
-            const section = Test.Section('Filter Projects')
+            const section = Test.Section.byTitle(/Filter Projects/)
             await section.Do.toggle()
             expect(section.Get.isOpen()).toBe(true)
             await section.Do.toggle()
@@ -109,7 +109,7 @@ describe('Projects', () => {
     describe('Language filter', () => {
         const expandFilterSection = async () => {
             await setupProjects()
-            const section = Test.Section('Filter Projects')
+            const section = Test.Section.byTitle(/Filter Projects/)
             await section.Do.toggle()
             return section
         }
@@ -148,7 +148,7 @@ describe('Projects', () => {
     describe('Type filter', () => {
         const expandTypeSection = async () => {
             await setupProjects()
-            const filterSection = Test.Section('Filter Projects')
+            const filterSection = Test.Section.byTitle(/Filter Projects/)
             await filterSection.Do.toggle()
             const typeSection = Test.Section('More filters')
             await typeSection.Do.toggle()
@@ -189,7 +189,7 @@ describe('Projects', () => {
     describe('Clear filters', () => {
         it('should reset all filters and show all projects when clear is clicked', async () => {
             await setupProjects()
-            const filterSection = Test.Section('Filter Projects')
+            const filterSection = Test.Section.byTitle(/Filter Projects/)
             await filterSection.Do.toggle()
 
             // Apply language filter
