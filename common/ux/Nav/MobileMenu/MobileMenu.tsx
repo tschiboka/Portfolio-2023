@@ -8,6 +8,7 @@ import { AccessGuard } from '../../../utils/AccessGuard'
 import Toggle from '../../../../src/components/sharedComponents/Toggle/Toggle'
 import { MenuItem } from '../Nav.types'
 import { isHighlighted } from '../Nav.utils'
+import { Const } from '@common/ux'
 import './MobileMenu.styles.css'
 
 export type MobileMenuProps = {
@@ -59,7 +60,7 @@ export const MobileMenu = ({
     }
 
     return (
-        <menu className={`MobileMenu${className ? ` ${className}` : ''}`}>
+        <menu className={`MobileMenu${className ? ` ${className}` : ''}`} style={{ zIndex: Const.ZIndex.dropdown }}>
             <div className="MobileMenu__items">
                 {menuStack[menuStack.length - 1].map((item) => (
                     <AccessGuard

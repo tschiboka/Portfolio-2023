@@ -106,3 +106,48 @@ export const Font = {
     xl: '2.2em',
     '2xl': '3em',
 } as const
+
+/**
+ * Z-Index Layer System
+ *
+ * Replaces arbitrary z-index usage with named semantic layers.
+ * Each layer represents a UI responsibility, not a numeric value.
+ *
+ * Rules:
+ * - Never use raw z-index values in components
+ * - Always use these named layers
+ * - Base is the default; everything else is explicit elevation
+ *
+ * Layers:
+ *
+ * Base     - Default page content (layouts, cards, forms)
+ * Sticky   - Persistent in-page UI (headers, sticky nav)
+ * Dropdown - Anchored transient UI (menus, selects, popovers)
+ *
+ * Panel    - Full-screen UI domain (modals, drawers, dialogs)
+ * Backdrop - Blocking/dimming layer behind panel content
+ * Close    - Panel controls that must sit above content
+ *
+ * Top      - Highest-priority global UI (toasts, system alerts)
+ *
+ * Mental model:
+ * Base → Sticky → Dropdown → Panel → Top
+ *
+ * Panel internals:
+ * Backdrop < Panel < Close
+ *
+ * Note:
+ * If a z-index value is needed outside these layers, it is likely a
+ * design issue, not a missing value.
+ */
+export const ZIndex = {
+    base: 10,
+    sticky: 20,
+    dropdown: 30,
+
+    backdrop: 39,
+    panel: 40,
+    close: 41,
+
+    top: 50,
+} as const

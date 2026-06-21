@@ -1,5 +1,6 @@
 import { IoMdClose } from 'react-icons/io'
 import { SideMenuProps } from './SideMenu.types'
+import { Const } from '@common/ux'
 import './SideMenu.styles.css'
 
 export const SideMenu = ({
@@ -16,7 +17,7 @@ export const SideMenu = ({
         <aside
             className={`SideMenu${className ? ` ${className}` : ''}`}
             aria-label={ariaLabel ?? 'Side menu'}
-            style={style}
+            style={{ zIndex: Const.ZIndex.sticky, ...style }}
         >
             <div className="SideMenu__line" />
             {items.map((item) => (

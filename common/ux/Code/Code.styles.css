@@ -3,51 +3,12 @@
     max-width: 1200px;
     background-color: var(--black-1);
     font-family: 'Fira', monospace;
-    padding: var(--space-24);
+    font-size: var(--font-xs);
+    padding: var(--space-12);
     background: var(--black-x);
     border-radius: var(--panel-radius);
     border: var(--panel-border);
     box-shadow: var(--panel-shadow);
-}
-
-/* Fix Up SyntaxHighlighter Library Errors when it Skips Styling */
-.Code span,
-.Code pre code {
-    font-family: 'Fira', monospace;
-    font-size: var(--font-sm);
-    background: var(--black-x);
-}
-
-@media (min-width: 992px) {
-    .Code span,
-    .Code pre code {
-        font-size: 1.2rem;
-    }
-}
-
-.Code pre {
-    max-height: 150vh;
-    overflow: auto;
-    background: var(--black-x);
-    scrollbar-color: var(--accent-dark-3) var(--black-1);
-    scrollbar-width: thin;
-}
-
-.Code pre::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
-}
-
-.Code pre::-webkit-scrollbar-track {
-    background: var(--black-x);
-}
-
-.Code pre::-webkit-scrollbar-thumb {
-    background: var(--accent-dark-3);
-}
-
-.Code pre::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-dark-1);
 }
 
 .Code__header {
@@ -88,6 +49,46 @@
     color: var(--accent);
     background-color: #191b21;
     animation: fade_out 2s linear;
+}
+
+/* Fix Up SyntaxHighlighter Library Errors when it Skips Styling */
+.Code span,
+.Code pre code {
+    font-family: 'Fira', monospace;
+    font-size: var(--font-xs);
+    background: var(--black-x);
+}
+
+@media (min-width: 992px) {
+    .Code span,
+    .Code pre code {
+        font-size: var(--font-sm);
+    }
+}
+
+.Code pre {
+    max-height: 150vh;
+    overflow: auto;
+    background: var(--black-x);
+    scrollbar-color: var(--accent-dark-3) var(--black-1);
+    scrollbar-width: thin;
+}
+
+.Code pre::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+
+.Code pre::-webkit-scrollbar-track {
+    background: var(--black-x);
+}
+
+.Code pre::-webkit-scrollbar-thumb {
+    background: var(--accent-dark-3);
+}
+
+.Code pre::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-dark-1);
 }
 
 @keyframes fade_out {

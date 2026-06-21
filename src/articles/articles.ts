@@ -1,7 +1,6 @@
 import riffmasterHardwareImg from '../assets/images/blog/riffmasterHardware.png'
 import riffMasterJamImg from '../assets/images/blog/riffmasterJam.png'
 import calendarImg from '../assets/images/blog/calendar.png'
-import mcdonaldsImg from '../assets/images/blog/mcdonaldsNeon.png'
 import jsSortingImg from '../assets/images/blog/jsSorting.png'
 import greenRooftopImg from '../assets/images/blog/grass.png'
 import emailImg from '../assets/images/blog/email.png'
@@ -10,6 +9,8 @@ import gitSignImg from '../assets/images/blog/git_sign.png'
 import monetImg from '../assets/images/blog/monet.jpg'
 import hookimg from '../assets/images/blog/hook.png'
 import testingImg from '../assets/images/testing.png'
+import emailImg2 from '../assets/images/blog/resend_email_scheduling.png'
+import zIndexImg from '../assets/images/blog/z_index.png'
 
 export interface BlogArticle {
     title: string
@@ -97,22 +98,9 @@ export const blogArticles: BlogArticle[] = [
         created: '05.09.2023',
     },
     {
-        title: "Recreating McDonald's Ordering Kiosk UI",
-        image: mcdonaldsImg,
-        imageAlt: 'McDonalds',
-        abstract:
-            "Discover the secrets of user-friendly UI design as we recreate McDonald's ordering kiosk interface. Learn the techniques behind its user-friendly layout while learning the fundamentals of Flexbox.",
-        badges: ['HTML', 'CSS'],
-        to: '',
-        readingTime: '',
-        codeTime: '',
-        upcoming: true,
-        upcomingDate: '10.04.2024',
-    },
-    {
         title: 'Scheduling Emails with Cyclic',
         image: emailImg,
-        imageAlt: 'Email',
+        imageAlt: 'Cyclic Email',
         abstract:
             'Discover a solution for scheduling emails with Node.js in unconventional hosting environments like Cyclic. Learn why traditional Node schedulers may not work and explore my workaround involving a separate post path for scheduling within your application and the Cron scheduler.',
         badges: ['NodeJs', 'Express'],
@@ -189,5 +177,31 @@ export const blogArticles: BlogArticle[] = [
         codeTime: '',
         suggestedArticles: ['/blog/hook-pattern', '/blog/brief-react-anatomy'],
         created: '17.05.2026',
+    },
+    {
+        title: 'Building a Scheduled Analytics Pipeline',
+        image: emailImg2,
+        imageAlt: 'Analytics Email',
+        abstract:
+            'How I built a daily analytics email system for my portfolio using Express, MongoDB, and Resend — and the production pitfalls I discovered along the way, including SMTP blocks, cold starts, silent failures, and domain verification.',
+        badges: ['NodeJs', 'Express', 'TypeScript'],
+        to: '/blog/daily-analytics-email',
+        readingTime: '8 min',
+        codeTime: '',
+        suggestedArticles: ['/blog/cyclic-email-scheduling', '/blog/stopping-test-entropy'],
+        created: '12.06.2026',
+    },
+    {
+        title: 'De-scrambling z-index hell with Layer-Based Design',
+        image: zIndexImg,
+        imageAlt: 'Z-index layer system diagram',
+        abstract:
+            'A practical approach to managing z-index values using semantic layers, making your CSS more maintainable and understandable.',
+        badges: ['CSS'],
+        to: '/blog/z-index-layers',
+        readingTime: '3 min',
+        codeTime: '',
+        suggestedArticles: ['/blog/stopping-test-entropy', '/blog/brief-react-anatomy'],
+        created: '13.06.2026',
     },
 ]

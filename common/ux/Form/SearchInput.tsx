@@ -5,6 +5,7 @@ import { hasLength } from '@common/utils/Predicate'
 import { colors } from '../../../src/components/pages/API/Categories/colors'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
+import { Const } from '@common/ux'
 import './Form.styles.css'
 
 export type SearchInputOption = {
@@ -175,7 +176,7 @@ export const SearchInput = <TFieldValues extends FieldValues>({
                             </div>
                         </div>
                         {open && (
-                            <div className="option-dropdown">
+                            <div className="option-dropdown" style={{ zIndex: Const.ZIndex.dropdown }}>
                                 {filteredOptions(value) && hasLength(filteredOptions(value)) ? (
                                     getOptions(filteredOptions(value), value)
                                 ) : (

@@ -32,6 +32,9 @@ const pillColorMap: Record<
     'light-green': 'success',
     'light-blue': 'accent',
     white: 'gray',
+    accent: 'accent',
+    success: 'success',
+    error: 'error',
 }
 
 const toPillColor = (badge: string) => pillColorMap[getColourName(badge)] ?? 'gray'

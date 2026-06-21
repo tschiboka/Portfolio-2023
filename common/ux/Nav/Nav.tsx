@@ -2,6 +2,7 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
 import { useAppContext } from '../../../src/context/AppContext/App.context'
 import { NavProps } from './Nav.types'
+import { Const } from '@common/ux'
 import './Nav.styles.css'
 
 const DefaultBurger = () => {
@@ -43,7 +44,7 @@ export const Nav = ({
         <header
             className={`Header${className ? ` ${className}` : ''}`}
             aria-label={ariaLabel}
-            style={style}
+            style={{ zIndex: Const.ZIndex.sticky, ...style }}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}

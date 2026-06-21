@@ -5,6 +5,7 @@ import { MenuItem, SubmenuState } from '../Nav.types'
 import { find } from 'ramda'
 import { Coordinates, findParentMenuCoords, isParentMenu } from './SubmenuPanel.utils'
 import { isActive } from '../Nav.utils'
+import { Const } from '@common/ux'
 import './SubmenuPanel.styles.css'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import { AccessGuard } from '../../../utils/AccessGuard'
@@ -55,7 +56,7 @@ const SubmenuBasis = ({ submenu, submenuStack, setSubmenuStack, pageName }: Subm
         submenuStack[1]?.extended && submenuStack[1].parentLabel === label
 
     return (
-        <div className="SubmenuBasis" style={{ left: coords.x }}>
+        <div className="SubmenuBasis" style={{ left: coords.x, zIndex: Const.ZIndex.dropdown }}>
             {submenu?.options.map((item) => (
                 <AccessGuard
                     guards={[

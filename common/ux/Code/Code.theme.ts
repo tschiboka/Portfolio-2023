@@ -42,12 +42,16 @@ export const tschibokaDark: HljsStyle = {
         color: '#d8d8d8',
     },
 
+    comment: {
+        color: '#666',
+        fontStyle: 'italic',
+    },
     'hljs-comment': {
-        color: '#005151',
+        color: '#666',
         fontStyle: 'italic',
     },
     'hljs-quote': {
-        color: '#005151',
+        color: '#666',
         fontStyle: 'italic',
     },
 

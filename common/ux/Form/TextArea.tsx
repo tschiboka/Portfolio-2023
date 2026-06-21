@@ -1,6 +1,7 @@
 import { Control, Controller, Path } from 'react-hook-form'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
+import { Const } from '@common/ux'
 import './Form.styles.css'
 
 export const DEFAULT_TEXTAREA_ROWS = 3
@@ -47,7 +48,7 @@ export const TextArea = <T extends FieldValues>({
                     </p>
                 ) : (
                     maxLength && (
-                        <span className="textarea__info">
+                        <span className="textarea__info" style={{ zIndex: Const.ZIndex.base }}>
                             <span className="highlight">{field.value.length} </span>
                             of {maxLength} chars
                         </span>

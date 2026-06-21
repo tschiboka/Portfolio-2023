@@ -1,3 +1,4 @@
+import { Const } from '@common/ux'
 import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -80,8 +81,13 @@ export const ActionMenu = ({
             aria-label={ariaLabel ?? 'Action menu'}
             style={
                 anchorResult
-                    ? { ...anchorResult.style, ...anchorResult.cornerStyle, ...styleProp }
-                    : measureStyle
+                    ? {
+                          zIndex: Const.ZIndex.panel,
+                          ...anchorResult.style,
+                          ...anchorResult.cornerStyle,
+                          ...styleProp,
+                      }
+                    : { zIndex: Const.ZIndex.panel, ...measureStyle }
             }
         >
             {anchorResult && (

@@ -46,7 +46,7 @@ import { getReferenceList } from '../references'
 import './SoundsWithHowler.scss'
 import Article from '../../components/sharedComponents/Article/Article'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
-import { Button, Code, Grid, Heading, Link, Paragraph, Section } from '@common/ux'
+import { Button, Code, CodeText, Grid, Heading, Link, Paragraph, Section } from '@common/ux'
 
 interface Props {
     pageName: string
@@ -382,10 +382,11 @@ const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Paragraph>
                     Alternatively, we can store individual string information as arrays of numbers
                     and pop or push them on interaction. In this case, the default value of the
-                    string array would be [[0], [0], [0], [0], [0], [0]], where 0 means a guitar
-                    string without any notes registered. Similarly, reading the uppermost value can
-                    be done by either iterating through the individual strings and finding the
-                    highest number or saving a sorted array and referring to its last item.
+                    string array would be <CodeText>[[0], [0], [0], [0], [0], [0]]</CodeText>, where
+                    0 means a guitar string without any notes registered. Similarly, reading the
+                    uppermost value can be done by either iterating through the individual strings
+                    and finding the highest number or saving a sorted array and referring to its
+                    last item.
                 </Paragraph>
                 <Paragraph>
                     Lastly, we can initialise a display action on board function that takes the

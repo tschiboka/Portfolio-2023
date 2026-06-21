@@ -6,6 +6,7 @@ import { Heading, Paragraph, Stack } from '@common/ux'
 import { useGetLikeSummary, useGetVisitSummary } from '@common/queries'
 
 import './Blog.scss'
+import { hasLength } from '@common/utils/Predicate/Predicate'
 
 interface Props {
     pageName: string
@@ -27,6 +28,22 @@ const Blogs = ({ pageName, path }: Props) => {
     })
 
     const newArticle = sortedArticles[sortedArticles.length - 1]
+
+    const comingSoonArticles = blogArticles
+        .filter((article) => article.upcoming)
+        .map((article) => (
+            <BlogCard
+                key={article.title}
+                blogArticle={article}
+                visits={visits ? visits[article.to] : 0}
+                readingTime={article?.readingTime}
+                codeTime={article?.codeTime}
+                likes={likes ? likes[article.to] : 0}
+                path={article.to}
+                upcoming={article.upcoming}
+                newest={false}
+            />
+        ))
 
     return (
         <Screen
@@ -71,27 +88,17 @@ const Blogs = ({ pageName, path }: Props) => {
                             />
                         ))}
                 </Stack>
-                <hr className="BlogList__hr" />
-                <Heading as="h3" size="lg" className="BlogList__header">
-                    Coming Soon...
-                </Heading>
-                <Stack className="BlogList" align="center">
-                    {blogArticles
-                        .filter((article) => article.upcoming)
-                        .map((article) => (
-                            <BlogCard
-                                key={article.title}
-                                blogArticle={article}
-                                visits={visits ? visits[article.to] : 0}
-                                readingTime={article?.readingTime}
-                                codeTime={article?.codeTime}
-                                likes={likes ? likes[article.to] : 0}
-                                path={article.to}
-                                upcoming={article.upcoming}
-                                newest={false}
-                            />
-                        ))}
-                </Stack>
+                {hasLength(comingSoonArticles) && (
+                    <>
+                        <hr className="BlogList__hr" />
+                        <Heading as="h3" size="lg" className="BlogList__header">
+                            Coming Soon...
+                        </Heading>
+                        <Stack className="BlogList" align="center">
+                            {comingSoonArticles}
+                        </Stack>
+                    </>
+                )}
             </main>
         </Screen>
     )

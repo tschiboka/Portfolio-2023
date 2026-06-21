@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
+import { Const } from '@common/ux'
 import './Form.styles.css'
 
 type RadioGroupProps = AccessibleProps & {
@@ -24,7 +25,9 @@ export const RadioGroup = ({
         role="radiogroup"
         style={style}
     >
-        <label htmlFor={htmlFor}>{label}</label>
+        <label htmlFor={htmlFor} style={{ zIndex: Const.ZIndex.base }}>
+            {label}
+        </label>
         {children}
         {error && (
             <p className="error-msg" role="alert">

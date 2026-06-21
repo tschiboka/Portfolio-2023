@@ -1,3 +1,4 @@
+import { Const } from '@common/ux'
 import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
@@ -63,7 +64,11 @@ export const Popup = ({
     }
 
     return createPortal(
-        <div className="Overlay--popup__backdrop" onClick={onClose}>
+        <div
+            className="Overlay--popup__backdrop"
+            style={{ zIndex: Const.ZIndex.backdrop }}
+            onClick={onClose}
+        >
             <div
                 ref={popupRef}
                 role="dialog"
@@ -71,6 +76,7 @@ export const Popup = ({
                 aria-label={ariaLabel ?? title}
                 className={className ?? `Overlay--popup ${ModeClass[mode]}`}
                 style={{
+                    zIndex: Const.ZIndex.panel,
                     ...SizeStyle[size],
                     ...(anchorResult
                         ? { ...anchorResult.style, ...anchorResult.cornerStyle }

@@ -29,7 +29,6 @@
     align-self: flex-start;
     flex-shrink: 0;
     width: 200px;
-    z-index: 10000;
     display: none;
 }
 

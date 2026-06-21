@@ -43,8 +43,8 @@
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
-                    width: 35vw;
-                    min-width: 35vw;
+                    width: 50%;
+                    min-width: 50%;
                     padding: 1rem;
                     display: inline;
                 }
@@ -98,9 +98,15 @@
             font-size: font.$font_xs;
             font-weight: lighter;
             padding-top: 1rem;
+            color: palette.$accent_dark_3;
+
             @include bp.md {
                 padding-left: 2rem;
             }
+            &:visited {
+                color: palette.$accent_dark_4;
+            }
+
             &:hover {
                 color: palette.$accent_dark_2;
                 transform: scale(1.05);
@@ -135,6 +141,9 @@
                 color: palette.$black_5;
                 &:hover {
                     color: palette.$accent_dark_3;
+                }
+                &:visited {
+                    color: palette.$black_5;
                 }
             }
         }

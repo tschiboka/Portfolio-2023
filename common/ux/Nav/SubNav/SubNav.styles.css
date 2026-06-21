@@ -10,7 +10,6 @@
     align-items: center;
     background-color: var(--black-1);
     font-size: 1.1em;
-    z-index: 80;
 }
 
 @media (min-width: 768px) {

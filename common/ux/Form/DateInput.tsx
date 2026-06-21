@@ -3,6 +3,7 @@ import { Control, Controller, Path } from 'react-hook-form'
 import { BsCalendar3, BsChevronLeft, BsChevronRight, BsX } from 'react-icons/bs'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
+import { Const } from '@common/ux'
 import {
     getDaysInMonth,
     getFirstDayOfMonth,
@@ -253,6 +254,7 @@ export const DateInput = <T extends FieldValues>({
                             <div
                                 ref={calendarRef}
                                 className={`date-input__calendar${flipUp ? ' flip-up' : ''}`}
+                                style={{ zIndex: Const.ZIndex.dropdown }}
                                 onKeyDown={(e) => handleKeyDown(e, daysInMonth, field.onChange)}
                             >
                                 <div className="date-input__header">

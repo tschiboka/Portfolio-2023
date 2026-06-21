@@ -1,6 +1,6 @@
 import { ReactNode, useState, useCallback, useRef } from 'react'
 import { GuardAction } from '../AccessGuard.types'
-import { Overlay } from '@common/ux'
+import { Const, Overlay } from '@common/ux'
 import { PopupMode, PopupSize } from '@common/ux/Overlay/Overlay.types'
 import './Renderers.styles.css'
 
@@ -50,7 +50,7 @@ export const SoftDisabledRenderer = ({
     }))
 
     return (
-        <div className="access-guard-soft-disabled">
+        <div className="access-guard-soft-disabled" style={{ zIndex: Const.ZIndex.dropdown }}>
             <div
                 ref={triggerRef}
                 onClick={handleInteraction}

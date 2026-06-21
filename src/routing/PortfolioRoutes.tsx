@@ -17,6 +17,8 @@ import GitCheatsheet from '../articles/GitCheatsheet/GitCheatsheet'
 import Maybe from '../articles/Maybe/Maybe'
 import HookPattern from '../articles/HookPattern/HookPattern'
 import StoppingTestEntropy from '../articles/StoppingTestEntropy/StoppingTestEntropy'
+import DailyAnalyticsEmail from '../articles/DailyAnalyticsEmail/DailyAnalyticsEmail'
+import ZIndexLayers from '../articles/ZIndexLayers/ZIndexLayers'
 import { Clock } from '../components/sharedComponents/Clock/Clock'
 
 export const PortfolioRoutes = [
@@ -98,6 +100,19 @@ export const PortfolioRoutes = [
                 path="/blog/stopping-test-entropy"
             />
         ),
+    },
+    {
+        path: '/blog/daily-analytics-email',
+        element: (
+            <DailyAnalyticsEmail
+                pageName="daily-analytics-email"
+                path="/blog/daily-analytics-email"
+            />
+        ),
+    },
+    {
+        path: '/blog/z-index-layers',
+        element: <ZIndexLayers pageName="z-index-layers" path="/blog/z-index-layers" />,
     },
     {
         path: '/clock',

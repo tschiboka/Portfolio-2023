@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import Toggle from '../../../../src/components/sharedComponents/Toggle/Toggle'
 import { useAppContext } from '../../../../src/context/AppContext/App.context'
+import { Const } from '@common/ux'
 import './SubNav.styles.css'
 
 export type SubNavProps = {
@@ -14,7 +15,7 @@ export const SubNav = ({ title, links }: SubNavProps) => {
 
     if (!subMenuVisible) return null
     return (
-        <div className="SubNav">
+        <div className="SubNav" style={{ zIndex: Const.ZIndex.sticky }}>
             <div className="sublogo">{title && <span className="sublogo-text">{title}</span>}</div>
             <div className="social-links">
                 <div className="theme-toggle" title="Toggle Colour Theme">

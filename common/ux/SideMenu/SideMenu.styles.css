@@ -8,7 +8,6 @@
     width: 100%;
     height: 4rem;
     background-color: var(--black-1);
-    z-index: 60;
     user-select: none;
 }
 
@@ -24,7 +23,6 @@
         top: 50%;
         transform: translateY(-50%);
         background-color: transparent;
-        z-index: 40;
     }
 }
 

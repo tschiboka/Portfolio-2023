@@ -1,4 +1,5 @@
 import type { AccessibleProps } from '../index.types'
+import { Const } from '@common/ux'
 import './Form.styles.css'
 
 type LabelProps = AccessibleProps & {
@@ -12,7 +13,7 @@ export const Label = ({ for: htmlFor, children, ariaLabel, className, style }: L
             htmlFor={htmlFor}
             aria-label={ariaLabel}
             className={`form-label ${className || ''}`}
-            style={style}
+            style={{ zIndex: Const.ZIndex.base, ...style }}
         >
             {children}
         </label>

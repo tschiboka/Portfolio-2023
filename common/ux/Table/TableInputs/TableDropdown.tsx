@@ -1,4 +1,5 @@
 import { type ReactNode, useEffect, useId, useRef, useState } from 'react'
+import { Const } from '@common/ux'
 import './TableDropdown.styles.css'
 
 export type DropdownOption = {
@@ -78,6 +79,7 @@ export const TableDropdown = ({
                 <ul
                     id={listboxId}
                     className="table-dropdown__menu"
+                    style={{ zIndex: Const.ZIndex.dropdown }}
                     role="listbox"
                     aria-label={ariaLabel}
                 >

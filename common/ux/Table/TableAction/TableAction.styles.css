@@ -35,7 +35,6 @@ table .action-dropdown {
     position: absolute;
     top: 100%;
     right: 0;
-    z-index: 10;
     list-style: none;
     margin: 0;
     padding: var(--space-4) var(--space-8);

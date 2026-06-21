@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { RegionProps } from './Region.types'
+import { Const } from '@common/ux'
 import './Region.styles.css'
 
 const VariantTag = {
@@ -44,7 +45,7 @@ export const Region = ({
         <Tag
             className={cls}
             aria-label={ariaLabel ?? title}
-            style={style}
+            style={variant === 'header' ? { zIndex: Const.ZIndex.sticky, ...style } : style}
             role={variant === 'modal' ? 'dialog' : undefined}
             onClick={onClick}
             onMouseEnter={onMouseEnter}

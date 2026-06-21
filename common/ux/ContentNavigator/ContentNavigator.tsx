@@ -3,6 +3,7 @@ import { AccessibleProps } from '../index.types'
 import { Browser } from '@common/utils/Browser'
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
+import { Const } from '@common/ux'
 import './ContentNavigator.styles.css'
 import {
     getActiveHeaders,
@@ -235,7 +236,7 @@ export const ContentNavigator = ({
     }
 
     return (
-        <div className="ContentNavigator">
+        <div className="ContentNavigator" style={{ position: 'relative' }}>
             {!isOpen && headings.length > 0 && (
                 <button
                     className="ContentNavigator__open-btn"
@@ -248,7 +249,7 @@ export const ContentNavigator = ({
             <nav
                 aria-label={ariaLabel}
                 className={`ContentNavigator__nav${isOpen ? '' : ' ContentNavigator__nav--hidden'}${className ? ` ${className}` : ''}`}
-                style={style}
+                style={{ zIndex: Const.ZIndex.sticky, ...style }}
             >
                 <span className="ContentNavigator__title">
                     <TbListTree />

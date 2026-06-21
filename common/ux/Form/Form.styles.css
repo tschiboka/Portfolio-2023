@@ -40,10 +40,11 @@ form fieldset {
     }
 }
 
-form label {
+form label,
+.form-label {
     position: absolute;
     top: -0.4rem;
-    left: 2rem;
+    left: 3rem;
     padding: 0 0.4rem;
     background-color: var(--black-x);
     border-left: var(--panel-border);
@@ -51,7 +52,6 @@ form label {
     font-size: var(--font-xs);
     font-variant: small-caps;
     color: var(--white-3);
-    z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -153,7 +153,6 @@ form input[type='date']::-webkit-calendar-picker-indicator {
     border: var(--panel-border);
     border-radius: var(--panel-radius);
     box-shadow: var(--panel-shadow);
-    z-index: 20;
     animation: dateInputFadeIn 0.2s ease-out;
 }
 
@@ -537,7 +536,6 @@ form input[type='checkbox']:checked {
     font-size: var(--font-xs);
     font-variant: small-caps;
     color: var(--white-3);
-    z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -758,7 +756,6 @@ form .submit-success-message {
     font-size: var(--font-2xs);
     font-variant: small-caps;
     color: var(--black-4);
-    z-index: 1;
 }
 
 .wrapped-textarea .textarea__info .highlight {
@@ -779,7 +776,6 @@ form .submit-success-message {
     font-style: italic;
     font-variant: small-caps;
     color: var(--error-dark-1);
-    z-index: 1;
 }
 
 .wrapped-textarea .error-msg {
@@ -870,7 +866,6 @@ form .submit-success-message {
     width: calc(100% + 4px);
     padding: 1rem;
     background-color: #0c0c0c;
-    z-index: 10;
     border: 2px solid var(--black-2);
     border-radius: 0 0 10px 10px;
     box-shadow: var(--input-shadow);

@@ -346,6 +346,50 @@ const references: Record<string, Reference[]> = {
             source: 'https://overreacted.io/why-do-hooks-rely-on-call-order/',
         },
     ],
+    '/blog/daily-analytics-email': [
+        {
+            title: 'Resend Documentation',
+            author: 'Resend',
+            source: 'https://resend.com/docs',
+        },
+        {
+            title: 'Render Free Instance Spin-Down',
+            author: 'Render',
+            source: 'https://render.com/docs/free#spin-down',
+        },
+        {
+            title: 'MongoDB Aggregation Pipeline',
+            author: 'MongoDB',
+            source: 'https://www.mongodb.com/docs/manual/aggregation/',
+        },
+        {
+            title: 'Cron Job Timeout Limits',
+            author: 'cron-job.org',
+            source: 'https://cron-job.org/en/',
+        },
+        {
+            title: 'SPF and DKIM for Email Deliverability',
+            author: 'Resend',
+            source: 'https://resend.com/docs/dashboard/domains/introduction-to-spf-and-dkim',
+        },
+    ],
+    '/blog/z-index-layers': [
+        {
+            title: 'The Stacking Context',
+            author: 'MDN',
+            source: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_positioned_layout/Stacking_context',
+        },
+        {
+            title: 'What the Heck, z-index??',
+            author: 'Kitty Giraudel',
+            source: 'https://www.smashingmagazine.com/2021/02/css-z-index-stacking-context/',
+        },
+        {
+            title: 'The Surprising Truth About Pixels and Accessibility',
+            author: 'Josh W. Comeau',
+            source: 'https://www.joshwcomeau.com/css/stacking-contexts/',
+        },
+    ],
 }
 
 export const getReferenceList = (path: string) => references[path]
