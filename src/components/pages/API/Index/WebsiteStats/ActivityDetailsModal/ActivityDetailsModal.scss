@@ -1,0 +1,60 @@
+.ActivityDetailsModal {
+    padding: 8px 0;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.ActivityDetailsModal__table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+        padding: 6px 8px;
+        vertical-align: top;
+    }
+
+    tr + tr td {
+        border-top: 1px solid var(--black-2);
+    }
+}
+
+.ActivityDetailsModal__label {
+    font-weight: 600;
+    color: var(--accent-dark-3);
+    white-space: nowrap;
+    width: 80px;
+    padding-right: 16px;
+}
+
+.ActivityDetailsModal__error {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ActivityDetailsModal__field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.ActivityDetailsModal__stack {
+    background: var(--black-1);
+    border: 1px solid var(--black-2);
+    border-radius: 4px;
+    padding: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    max-height: 300px;
+    overflow-y: auto;
+    margin: 0;
+}
+
+.ActivityDetailsModal__empty {
+    color: var(--gray-4);
+    font-style: italic;
+    text-align: center;
+    padding: 24px;
+}

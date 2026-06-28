@@ -131,20 +131,20 @@ describe('Region', () => {
         })
     })
 
-    describe('modal variant', () => {
+    describe('dialog variant', () => {
         it('should render with role dialog', () => {
-            const region = Set.region({ ariaLabel: 'Dialog', variant: 'modal' })
+            const region = Set.region({ ariaLabel: 'Dialog', variant: 'dialog' })
             expect(region.Get.attribute('role')).toBe('dialog')
         })
 
-        it('should render as a div', () => {
-            const region = Set.region({ ariaLabel: 'ModalTag', variant: 'modal' })
-            expect(region.Get.tagName()).toBe('DIV')
+        it('should render with aria-label', () => {
+            const region = Set.region({ ariaLabel: 'DialogTag', variant: 'dialog' })
+            expect(region.Get.attribute('aria-label')).toBe('DialogTag')
         })
 
-        it('should include modal variant class', () => {
-            const region = Set.region({ ariaLabel: 'ModalCls', variant: 'modal' })
-            expect(region.Get.className()).toContain('region--modal')
+        it('should include dialog variant class', () => {
+            const region = Set.region({ ariaLabel: 'DialogCls', variant: 'dialog' })
+            expect(region.Get.className()).toContain('region--dialog')
         })
     })
 

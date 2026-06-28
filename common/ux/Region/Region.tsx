@@ -6,7 +6,7 @@ import './Region.styles.css'
 const VariantTag = {
     default: 'div',
     section: 'section',
-    modal: 'div',
+    dialog: 'div',
     sidebar: 'aside',
     header: 'header',
     main: 'main',
@@ -46,7 +46,7 @@ export const Region = ({
             className={cls}
             aria-label={ariaLabel ?? title}
             style={variant === 'header' ? { zIndex: Const.ZIndex.sticky, ...style } : style}
-            role={variant === 'modal' ? 'dialog' : undefined}
+            role={variant === 'dialog' ? 'dialog' : undefined}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}

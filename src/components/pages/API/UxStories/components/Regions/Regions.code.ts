@@ -18,10 +18,10 @@ export const Code = {
     <p>Starts collapsed — click the header to expand.</p>
 </Section>`,
     },
-    Modal: {
-        basic: `<Modal ariaLabel="Confirm action">
+    Dialog: {
+        basic: `<Dialog ariaLabel="Confirm action">
     <p>Are you sure you want to proceed?</p>
-</Modal>`,
+</Dialog>`,
     },
     Sidebar: {
         basic: `<Sidebar ariaLabel="App navigation">
@@ -47,7 +47,7 @@ export const Code = {
         direct: `{/* All wrappers delegate to Region */}
 <Region variant="default">…</Region>
 <Region variant="section" collapsible>…</Region>
-<Region variant="modal">…</Region>
+<Region variant="dialog">…</Region>
 <Region variant="sidebar">…</Region>
 <Region variant="header">…</Region>
 <Region variant="main">…</Region>`,

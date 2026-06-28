@@ -54,3 +54,19 @@ export type ErrorResponse = {
     success: boolean
     message: string
 }
+
+// Generic pagination metadata for paginated API responses
+export type PageMeta = {
+    totalItems: number
+    totalPages: number
+    pageNumber: number
+}
+
+// Generic paginated response wrapper.
+// TData — the row type, TContext — endpoint-specific extra metadata (e.g. summary counts).
+export type PaginatedResponse<TData, TContext = undefined> = {
+    success: boolean
+    data: TData[]
+    meta: PageMeta
+    context?: TContext
+}

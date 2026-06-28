@@ -6,7 +6,7 @@ import {
     Heading,
     Paragraph,
     Section,
-    Modal,
+    Dialog,
     Sidebar,
     Header,
     Main,
@@ -36,7 +36,7 @@ export const Regions = ({ path }: RegionsProps) => (
                 <CodeText>Region</CodeText> is a unified structural primitive for all major UI
                 containers. It provides a single consistent API with named wrappers for each use
                 case: <CodeText>Card</CodeText>, <CodeText>Section</CodeText>,{' '}
-                <CodeText>Modal</CodeText>, <CodeText>Sidebar</CodeText>,{' '}
+                <CodeText>Dialog</CodeText>, <CodeText>Sidebar</CodeText>,{' '}
                 <CodeText>Header</CodeText>, and <CodeText>Main</CodeText>.
             </Paragraph>
             <Box as="section">
@@ -84,17 +84,19 @@ export const Regions = ({ path }: RegionsProps) => (
             </Box>
 
             <Box as="section">
-                <Heading as="h2" id="modal">
-                    Modal
+                <Heading as="h2" id="dialog">
+                    Dialog
                 </Heading>
                 <Paragraph>
-                    A <CodeText>role=&quot;dialog&quot;</CodeText> container styled for overlay use
-                    cases. Pair with <CodeText>Overlay</CodeText> for backdrop and focus trapping.
+                    A <CodeText>role=&quot;dialog&quot;</CodeText> container styled for overlay use.
+                    Renders as a <CodeText>&lt;div&gt;</CodeText> via the{' '}
+                    <CodeText>dialog</CodeText> variant. cases. Pair with{' '}
+                    <CodeText>Overlay</CodeText> for backdrop and focus trapping.
                 </Paragraph>
-                <Modal ariaLabel="Confirm action">
+                <Dialog ariaLabel="Confirm action">
                     <p>Are you sure you want to proceed?</p>
-                </Modal>
-                <Code language="tsx" content={Snippets.Modal.basic} />
+                </Dialog>
+                <Code language="tsx" content={Snippets.Dialog.basic} />
             </Box>
 
             <Box as="section">

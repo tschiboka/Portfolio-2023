@@ -13,6 +13,7 @@ import log from '../routes/log'
 import category from '../routes/category'
 import session from '../routes/session'
 import breakdowns from '../routes/breakdowns'
+import activity from '../routes/activity'
 import xmas2025 from '../projects/xmas_2025/routes'
 import typist from '../projects/typist/routes'
 import gym from '../projects/gym/routes'
@@ -28,6 +29,7 @@ export default function (app: Application) {
     app.use('/api/session', session)
     app.use('/api/schedule', schedule)
     app.use('/api/breakdowns', breakdowns)
+    app.use('/api/activity', activity)
 
     // App routes
     app.use('/api/settings', settings)

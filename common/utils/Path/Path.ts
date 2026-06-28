@@ -11,6 +11,7 @@ export const Paths = {
         Categories: 'Categories',
         Schedule: 'Schedule',
         Breakdowns: 'Breakdowns',
+        Activity: 'Activity',
     },
     Projects: {
         Xmas: 'Xmas',
@@ -32,6 +33,7 @@ export const apiRoutes: Record<string, string> = {
     Categories: 'api/categories',
     Schedule: 'api/schedule',
     Breakdowns: 'api/breakdowns',
+    Activity: 'api/activity',
 }
 
 export const projectRoutes: Record<string, string> = {

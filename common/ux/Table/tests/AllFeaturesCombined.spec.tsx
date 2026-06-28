@@ -63,10 +63,6 @@ describe('Table — Combined Features', () => {
     it('renders table with title, description, legend, data, actions, selection, sorting, filtering, download, and pagination', () => {
         Test.Table.Set.mock<FullRow>({
             id: 'full-table',
-            title: 'Combined Table',
-            description: 'All features at once',
-            onInfo: vi.fn(),
-            legend: <span>Legend</span>,
             ariaLabel: 'Full feature table',
             rowAriaLabel: 'User row',
             data: fullData,
@@ -131,12 +127,8 @@ describe('Table — Combined Features', () => {
             },
         })
         // Region & title
-        const table = Test.Table('Combined Table')
+        const table = Test.Table('Full feature table')
         expect(table.Get.tagName()).toBeDefined()
-        expect(table.Get.heading('Combined Table')).toBeInTheDocument()
-        expect(screen.getByText('All features at once')).toBeInTheDocument()
-        expect(screen.getByText('Legend')).toBeInTheDocument()
-        expect(table.Get.infoButton()).toBeInTheDocument()
         // Table data
         expect(screen.getByText('Alice')).toBeInTheDocument()
         expect(screen.getByText('Bob')).toBeInTheDocument()
@@ -406,7 +398,7 @@ describe('Table — Combined Features', () => {
 
     it('empty data with all features shows empty state and still renders header/pagination', () => {
         Test.Table.Set.mock<FullRow>({
-            title: 'Empty Combined',
+            id: 'empty-table',
             ariaLabel: 'test',
             data: [],
             columns: fullColumns,
@@ -432,6 +424,7 @@ describe('Table — Combined Features', () => {
                 onPageChange: vi.fn(),
                 onPageSizeChange: vi.fn(),
             },
+            title: 'Empty Combined',
         })
         const table = Test.Table('Empty Combined')
         expect(screen.getByText('No data')).toBeInTheDocument()

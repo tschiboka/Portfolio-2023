@@ -24,7 +24,6 @@ export const Variants = () => (
                 text colour.
             </Paragraph>
             <Table<VariantRow>
-                title="Column Variants — Static"
                 ariaLabel="Table demonstrating static column colour variants"
                 data={variantRows}
                 columns={[
@@ -34,6 +33,7 @@ export const Variants = () => (
                     { header: 'Danger', accessor: 'label', variant: 'danger' },
                     { header: 'Disabled', accessor: 'label', variant: 'disabled' },
                 ]}
+                title="Column Variants — Static"
             />
             <Code language="tsx" content={Snippets.Variants.columnStatic} />
         </Section>
@@ -49,7 +49,6 @@ export const Variants = () => (
                 <CodeText>inactive</CodeText> → <CodeText>disabled</CodeText>.
             </Paragraph>
             <Table<VariantRow>
-                title="Row Variants"
                 ariaLabel="Table demonstrating row-level variants"
                 data={variantRows}
                 rowVariant={rowVariantFn}
@@ -58,6 +57,7 @@ export const Variants = () => (
                     { header: 'Status', accessor: 'status' },
                     { header: 'Description', accessor: 'description' },
                 ]}
+                title="Row Variants"
             />
             <Code language="tsx" content={Snippets.Variants.rowVariants} />
         </Section>
@@ -70,7 +70,6 @@ export const Variants = () => (
                 <CodeText>status</CodeText> field while the Label column stays default.
             </Paragraph>
             <Table<VariantRow>
-                title="Cell Variants — Dynamic"
                 ariaLabel="Table demonstrating per-cell dynamic variants"
                 data={variantRows}
                 columns={[
@@ -82,6 +81,7 @@ export const Variants = () => (
                         variant: cellVariantFn,
                     },
                 ]}
+                title="Cell Variants — Dynamic"
             />
             <Code language="tsx" content={Snippets.Variants.cellDynamic} />
         </Section>
@@ -96,7 +96,6 @@ export const Variants = () => (
                 stays <CodeText>secondary</CodeText> and Description uses its cell function.
             </Paragraph>
             <Table<VariantRow>
-                title="Variant Priority"
                 ariaLabel="Table demonstrating variant priority resolution"
                 data={variantRows}
                 rowVariant={rowVariantFn}
@@ -109,6 +108,7 @@ export const Variants = () => (
                         variant: cellVariantFn,
                     },
                 ]}
+                title="Variant Priority"
             />
             <Code language="tsx" content={Snippets.Variants.priority} />
         </Section>

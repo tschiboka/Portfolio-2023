@@ -10,7 +10,8 @@ export const Fundamentals = () => (
             Fundamentals
         </Heading>
         <Paragraph>
-            Core table features: titles, empty states, descriptions, info buttons, and legends.
+            Core table features: titles (via the <CodeText>title</CodeText> prop), empty states,
+            descriptions, info buttons, and legends.
         </Paragraph>
         <Section>
             <Heading as="h3">No Title</Heading>
@@ -39,13 +40,13 @@ export const Fundamentals = () => (
                 loaded yet.
             </Paragraph>
             <Table<Row>
-                title="Empty State"
                 ariaLabel="Empty table"
                 data={[]}
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Value', accessor: 'value' },
                 ]}
+                title="Empty State"
             />
             <Code language="tsx" content={Snippets.Fundamentals.emptyState} />
         </Section>
@@ -57,13 +58,13 @@ export const Fundamentals = () => (
                 action.
             </Paragraph>
             <Table<Row>
-                title="Custom Empty State"
                 ariaLabel="Empty table with custom message"
                 data={[]}
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Value', accessor: 'value' },
                 ]}
+                title="Custom Empty State"
                 emptyState={<em>Nothing to display — try adjusting your filters.</em>}
             />
             <Code language="tsx" content={Snippets.Fundamentals.customEmptyState} />
@@ -77,7 +78,6 @@ export const Fundamentals = () => (
                 displays the raw string value with no transformation or formatting applied.
             </Paragraph>
             <Table<Row>
-                title="Basic Usage"
                 ariaLabel="Basic table"
                 data={rows}
                 columns={[
@@ -85,21 +85,20 @@ export const Fundamentals = () => (
                     { header: 'Value', accessor: 'value' },
                     { header: 'Status', accessor: 'status' },
                 ]}
+                title="Basic Usage"
             />
             <Code language="tsx" content={Snippets.Fundamentals.basicUsage} />
         </Section>
         <Section>
             <Heading as="h3">Description</Heading>
             <Paragraph>
-                The optional <CodeText>description</CodeText> prop accepts any{' '}
+                The optional <CodeText>&lt;Table.Header&gt;</CodeText> slot accepts any{' '}
                 <CodeText>ReactNode</CodeText> and renders it below the title as supplementary
                 context. Use it for a short summary of the data, filter hints, or inline help. It
                 sits on the left side of the header alongside the title, with the download button
                 (if present) on the right.
             </Paragraph>
             <Table<Row>
-                title="Description"
-                description="Overview of the first four entries sorted by name."
                 ariaLabel="Table with a description"
                 data={rows}
                 columns={[
@@ -107,24 +106,20 @@ export const Fundamentals = () => (
                     { header: 'Value', accessor: 'value' },
                     { header: 'Status', accessor: 'status' },
                 ]}
-            />
+                title="Description"
+            >
+                <Table.Header>Overview of the first four entries sorted by name.</Table.Header>
+            </Table>
             <Code language="tsx" content={Snippets.Fundamentals.description} />
         </Section>
         <Section>
             <Heading as="h3">Description with Download</Heading>
             <Paragraph>
-                When combined with <CodeText>download</CodeText>, the description stays on the left
-                beneath the title while the download button floats to the right. The header row uses{' '}
-                <CodeText>flex-start</CodeText> alignment so the button stays at the top.
+                When combined with <CodeText>download</CodeText>, the header content stays on the
+                left beneath the title while the download button floats to the right. The header row
+                uses <CodeText>flex-start</CodeText> alignment so the button stays at the top.
             </Paragraph>
             <Table<Row>
-                title="Description with Download"
-                description={
-                    <>
-                        Showing <strong>{rows.length}</strong> rows — click the download icon to
-                        export.
-                    </>
-                }
                 ariaLabel="Table with description and download"
                 data={rows}
                 columns={[
@@ -136,19 +131,22 @@ export const Fundamentals = () => (
                     label: 'Export CSV',
                     onDownload: (data: Row[]) => alert(`Exporting ${data.length} rows`),
                 }}
-            />
+                title="Description with Download"
+            >
+                <Table.Header>
+                    Showing <strong>{rows.length}</strong> rows — click the download icon to export.
+                </Table.Header>
+            </Table>
             <Code language="tsx" content={Snippets.Fundamentals.descriptionWithDownload} />
         </Section>
         <Section>
             <Heading as="h3">Info Button</Heading>
             <Paragraph>
-                Pass an <CodeText>onInfo</CodeText> callback to display a small info icon (
-                <CodeText>ℹ</CodeText>) next to the title. Clicking it fires the callback — useful
-                for opening a modal, tooltip, or help panel.
+                Add a <CodeText>&lt;Table.Info text="..." /&gt;</CodeText> slot to display a small
+                info icon (<CodeText>ℹ</CodeText>) next to the title. Clicking it opens a modal with
+                the provided text — useful for contextual help without cluttering the UI.
             </Paragraph>
             <Table<Row>
-                title="Info Button"
-                onInfo={() => alert('Info clicked — open a modal, tooltip, or help panel here.')}
                 ariaLabel="Table with info button"
                 data={rows}
                 columns={[
@@ -156,19 +154,21 @@ export const Fundamentals = () => (
                     { header: 'Value', accessor: 'value' },
                     { header: 'Status', accessor: 'status' },
                 ]}
-            />
+                title="Info Button"
+            >
+                <Table.Info text="Info clicked — open a modal, tooltip, or help panel here." />
+            </Table>
             <Code language="tsx" content={Snippets.Fundamentals.infoButton} />
         </Section>
         <Section>
             <Heading as="h3">Legend</Heading>
             <Paragraph>
-                The <CodeText>legend</CodeText> prop accepts any <CodeText>ReactNode</CodeText> and
-                renders it below the header (title, description, info, download) and above the table
-                headers. Use it for status summaries, colour keys, or any contextual metadata.
+                The <CodeText>&lt;Table.Legend&gt;</CodeText> slot accepts any{' '}
+                <CodeText>ReactNode</CodeText> and renders it below the header (title, description,
+                info, download) and above the table headers. Use it for status summaries, colour
+                keys, or any contextual metadata.
             </Paragraph>
             <Table<Row>
-                title="Legend"
-                description="Order statuses for the current quarter."
                 ariaLabel="Table with legend"
                 data={rows}
                 columns={[
@@ -176,7 +176,10 @@ export const Fundamentals = () => (
                     { header: 'Value', accessor: 'value' },
                     { header: 'Status', accessor: 'status', cell: renderStatus },
                 ]}
-                legend={
+                title="Legend"
+            >
+                <Table.Header>Order statuses for the current quarter.</Table.Header>
+                <Table.Legend>
                     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                             <Pill label="ACTIVE" color="success" /> = 21
@@ -191,8 +194,8 @@ export const Fundamentals = () => (
                             <Pill label="ERROR" color="error" /> = 1
                         </span>
                     </div>
-                }
-            />{' '}
+                </Table.Legend>
+            </Table>{' '}
             <Code language="tsx" content={Snippets.Fundamentals.legend} />{' '}
         </Section>
     </>

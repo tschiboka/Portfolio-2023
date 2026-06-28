@@ -3,6 +3,14 @@ table thead th {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     padding: var(--space-8) var(--space-12);
+    transition: color 0.15s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+table thead th:hover {
+    color: var(--accent);
 }
 
 table thead tr:first-child th {
@@ -83,6 +91,118 @@ table thead th.sorted-desc .sort-icon::after {
 
 table thead th.sorted-desc .sort-icon::before {
     opacity: 0.3;
+}
+
+/* Column resize handles */
+.th-resize-handle {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    cursor: col-resize;
+    user-select: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.th-resize-handle--left {
+    left: 0;
+}
+
+.th-resize-handle--right {
+    right: 0;
+}
+
+th:where(:hover) .th-resize-line {
+    background: var(--gray-2);
+}
+
+.th-resize-handle:hover .th-resize-line,
+.th-resize-handle:active .th-resize-line {
+    background: var(--accent);
+}
+
+.th-resize-line {
+    width: 2px;
+    height: 60%;
+    background: transparent;
+    border-radius: 1px;
+}
+
+/* Column reorder buttons — between resize handles and label */
+.th-reorder {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 3;
+}
+
+th.has-reorder:hover .th-reorder {
+    opacity: 1;
+}
+
+.th-reorder {
+    left: 14px;
+}
+
+.th-reorder--right {
+    left: auto;
+    right: 14px;
+}
+
+.th-reorder-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 18px;
+    padding: 0;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+    color: var(--gray-4);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    transition:
+        color 0.15s,
+        border-color 0.15s;
+}
+
+.th-reorder-btn:hover:not(:disabled) {
+    color: var(--accent);
+}
+
+.th-reorder-btn:disabled {
+    opacity: 0.15;
+    cursor: default;
+}
+
+/* Header content layout */
+.th-content {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.th-label {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.has-reorder .th-label {
+    padding: 0 var(--space-16);
+}
+
+table thead th {
+    position: relative;
 }
 
 table th.\32xs {

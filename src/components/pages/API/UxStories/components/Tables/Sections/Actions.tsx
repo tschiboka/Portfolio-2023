@@ -38,13 +38,13 @@ export const Actions = () => (
                 Below is a summary of all available action features:
             </Paragraph>
             <Table<ActionRow>
-                title="Action Features"
                 ariaLabel="Action features overview"
                 data={actionRows}
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Function', accessor: 'function' },
                 ]}
+                title="Action Features"
             />
         </Section>
         <Section>
@@ -55,7 +55,6 @@ export const Actions = () => (
                 greyed out.
             </Paragraph>
             <Table<ActionRow>
-                title="isActionDisabled"
                 ariaLabel="Table with disabled action menu"
                 data={isActionDisabledData}
                 columns={[
@@ -67,6 +66,7 @@ export const Actions = () => (
                     },
                 ]}
                 actions={clickAction}
+                title="isActionDisabled"
             />
             <Code language="tsx" content={Snippets.Actions.isActionDisabled} />
         </Section>
@@ -77,7 +77,6 @@ export const Actions = () => (
                 a callback that receives the row meta.
             </Paragraph>
             <Table<ActionRow>
-                title="onClick"
                 ariaLabel="Table with onClick action"
                 data={onClickData}
                 columns={[
@@ -85,6 +84,7 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
                 actions={clickAction}
+                title="onClick"
             />
             <Code language="tsx" content={Snippets.Actions.onClick} />
         </Section>
@@ -95,7 +95,6 @@ export const Actions = () => (
                 computed from the row data.
             </Paragraph>
             <Table<ActionRow>
-                title="href"
                 ariaLabel="Table with href action"
                 data={hrefData}
                 columns={[
@@ -103,6 +102,7 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
                 actions={hrefAction}
+                title="href"
             />
             <Code language="tsx" content={Snippets.Actions.href} />
         </Section>
@@ -114,7 +114,6 @@ export const Actions = () => (
                 the menu button is disabled.
             </Paragraph>
             <Table<ActionRow>
-                title="filter"
                 ariaLabel="Table with filtered action"
                 data={filterData}
                 columns={[
@@ -122,6 +121,7 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
                 actions={filterAction}
+                title="filter"
             />
             <Code language="tsx" content={Snippets.Actions.filter} />
         </Section>
@@ -132,7 +132,6 @@ export const Actions = () => (
                 greyed out and unclickable for the matching row.
             </Paragraph>
             <Table<ActionRow>
-                title="isDisabled"
                 ariaLabel="Table with disabled action item"
                 data={isDisabledData}
                 columns={[
@@ -140,6 +139,7 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
                 actions={disabledItemAction}
+                title="isDisabled"
             />
             <Code language="tsx" content={Snippets.Actions.isDisabled} />
         </Section>
@@ -151,7 +151,6 @@ export const Actions = () => (
                 and the default (neutral).
             </Paragraph>
             <Table<ActionRow>
-                title="Variants"
                 ariaLabel="Table with action variants"
                 data={variantData}
                 columns={[
@@ -159,6 +158,7 @@ export const Actions = () => (
                     { header: 'Function', accessor: 'function' },
                 ]}
                 actions={variantActions}
+                title="Variants"
             />
             <Code language="tsx" content={Snippets.Actions.variants} />
         </Section>
@@ -170,7 +170,6 @@ export const Actions = () => (
                 <CodeText>isDisabled</CodeText>, and variants in a single action menu.
             </Paragraph>
             <Table<Row>
-                title="All Actions Combined"
                 ariaLabel="Table with all action features"
                 data={rows}
                 columns={[
@@ -178,6 +177,7 @@ export const Actions = () => (
                     { header: 'Status', accessor: 'status' },
                 ]}
                 actions={allActions}
+                title="All Actions Combined"
             />
             <Code language="tsx" content={Snippets.Actions.allCombined} />
         </Section>

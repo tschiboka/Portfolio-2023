@@ -23,7 +23,6 @@ export const Accessibility = () => (
                 technology to reach any sub-component.
             </Paragraph>
             <Table<AriaRow>
-                title="ARIA Reference"
                 ariaLabel="Complete ARIA attribute reference for the Table component"
                 data={ariaReferenceRows}
                 columns={[
@@ -32,6 +31,7 @@ export const Accessibility = () => (
                     { header: 'Attribute', accessor: 'attribute', variant: 'secondary' },
                     { header: 'Value', accessor: 'value' },
                 ]}
+                title="ARIA Reference"
             />
         </Section>
         <Section>
@@ -43,13 +43,13 @@ export const Accessibility = () => (
                 should have a unique, descriptive aria label.
             </Paragraph>
             <Table<Row>
-                title="ariaLabel"
                 ariaLabel="User activity summary table"
                 data={rows.slice(0, 2)}
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Status', accessor: 'status', variant: 'danger' },
                 ]}
+                title="ariaLabel"
             />
             <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
         </Section>
@@ -62,7 +62,6 @@ export const Accessibility = () => (
                 row label should be descriptive; for now the same label is broadcast to every row.
             </Paragraph>
             <Table<Row>
-                title="rowAriaLabel"
                 ariaLabel="Table with row labels"
                 rowAriaLabel="User activity row"
                 data={rows.slice(0, 2)}
@@ -70,6 +69,7 @@ export const Accessibility = () => (
                     { header: 'Name', accessor: 'name', variant: 'primary' },
                     { header: 'Status', accessor: 'status', variant: 'secondary' },
                 ]}
+                title="rowAriaLabel"
             />
             <Code language="tsx" content={Snippets.Accessibility.rowAriaLabel} />
         </Section>
@@ -83,7 +83,6 @@ export const Accessibility = () => (
                 via inline style to visually confirm targeting.
             </Paragraph>
             <Table<Row>
-                title="className"
                 ariaLabel="Table with custom className"
                 className="danger-outline"
                 style={{ border: '2px solid var(--error)', borderRadius: '8px' }}
@@ -92,6 +91,7 @@ export const Accessibility = () => (
                     { header: 'Name', accessor: 'name', variant: 'danger' },
                     { header: 'Value', accessor: 'value', variant: 'danger' },
                 ]}
+                title="className"
             />
             <Code language="tsx" content={Snippets.Accessibility.className} />
         </Section>
@@ -103,7 +103,6 @@ export const Accessibility = () => (
                 orange warning border applied via <CodeText>style</CodeText>.
             </Paragraph>
             <Table<Row>
-                title="style"
                 ariaLabel="Table with inline style override"
                 style={{
                     border: '2px solid var(--orange)',
@@ -115,6 +114,7 @@ export const Accessibility = () => (
                     { header: 'Name', accessor: 'name' },
                     { header: 'Status', accessor: 'status', variant: 'danger' },
                 ]}
+                title="style"
             />
             <Code language="tsx" content={Snippets.Accessibility.style} />
         </Section>
@@ -129,13 +129,13 @@ export const Accessibility = () => (
             </Paragraph>
             <Table<Row>
                 id="accessibility-id-demo"
-                title="id"
                 ariaLabel="Table with id for anchor and aria-labelledby"
                 data={rows.slice(0, 2)}
                 columns={[
                     { header: 'Name', accessor: 'name', variant: 'primary' },
                     { header: 'Value', accessor: 'value', variant: 'secondary' },
                 ]}
+                title="id"
             />
             <Code language="tsx" content={Snippets.Accessibility.id} />
         </Section>
@@ -149,7 +149,6 @@ export const Accessibility = () => (
                 don&apos;t announce empty headers.
             </Paragraph>
             <Table<Row>
-                title="scope on Headers"
                 ariaLabel="Table demonstrating scope=col on every th"
                 data={rows.slice(0, 2)}
                 columns={[
@@ -165,6 +164,7 @@ export const Accessibility = () => (
                         onClick: ({ row }) => alert(`Viewing ${row.name}`),
                     },
                 ]}
+                title="scope on Headers"
             />
             <Code language="tsx" content={Snippets.Accessibility.scopeCol} />
         </Section>

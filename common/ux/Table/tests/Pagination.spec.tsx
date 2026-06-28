@@ -239,14 +239,14 @@ describe('Table — Pagination', () => {
                 columns: basicColumns,
                 pagination: {
                     page: 1,
-                    totalPages: 3,
+                    totalPages: 9,
                     pageSize: 10,
-                    totalItems: 25,
+                    totalItems: 87,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
                 },
             })
-            expect(screen.getByText('25')).toBeInTheDocument()
+            expect(screen.getByText('87')).toBeInTheDocument()
         })
 
         it('does not show item info when totalItems is not provided', () => {
@@ -271,16 +271,16 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 3,
-                    totalPages: 3,
+                    page: 9,
+                    totalPages: 9,
                     pageSize: 10,
-                    totalItems: 25,
+                    totalItems: 87,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
                 },
             })
-            // Page 3 of 25 items at size 10 = items 21–25
-            expect(screen.getByLabelText('Items 21 to 25')).toBeInTheDocument()
+            // Page 9 of 87 items at size 10 = items 81–87
+            expect(screen.getByLabelText('Items 81 to 87')).toBeInTheDocument()
         })
     })
 
@@ -289,8 +289,8 @@ describe('Table — Pagination', () => {
             expect(DEFAULT_PAGE_SIZE).toBe(10)
         })
 
-        it('DEFAULT_PAGE_SIZE_OPTIONS is [10, 25, 50, 100]', () => {
-            expect(DEFAULT_PAGE_SIZE_OPTIONS).toEqual([10, 25, 50, 100])
+        it('DEFAULT_PAGE_SIZE_OPTIONS is [5, 10, 25, 50, 100]', () => {
+            expect(DEFAULT_PAGE_SIZE_OPTIONS).toEqual([5, 10, 25, 50, 100])
         })
 
         describe('getPageWindow', () => {

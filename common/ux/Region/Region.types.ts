@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { AccessibleProps, InteractiveProps } from '../index.types'
 
-export type RegionVariant = 'default' | 'section' | 'modal' | 'sidebar' | 'header' | 'main'
+export type RegionVariant = 'default' | 'section' | 'dialog' | 'sidebar' | 'header' | 'main'
 
 export type RegionProps = AccessibleProps &
     InteractiveProps & {
@@ -20,7 +20,7 @@ export type CardProps = AccessibleProps &
         icon?: ReactNode
     }
 
-export type ModalProps = AccessibleProps &
+export type DialogProps = AccessibleProps &
     InteractiveProps & {
         children: ReactNode
         title?: string

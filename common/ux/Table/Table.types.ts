@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
+import type { TableControl } from './useTableController'
 
 import type { DropdownOption } from './TableInputs/TableDropdown'
+import { PageMeta } from '@common/types'
 
 export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'
 
@@ -27,6 +29,7 @@ export type TableColumn<TData extends Record<string, ReactNode>, TContext = unkn
     defaultValue?: ReactNode
     isActionDisabled?: (meta: CellMeta<TData, TContext>) => boolean
     isSortable?: boolean
+    width?: string
     variant?:
         | CellVariant
         | ((cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => CellVariant | undefined)
@@ -142,20 +145,26 @@ export interface Table<
     TContext = unknown,
 > extends AccessibleProps {
     id?: string
-    data: Array<TData>
+    data?: Array<TData>
     columns: TableColumns<TData, TContext>
-    title?: string
-    description?: ReactNode
-    onInfo?: () => void
-    legend?: ReactNode
+    children?: ReactNode
     context?: TContext
     rowAriaLabel?: string
-    actions?: TableAction<TData, TContext>[]
     emptyState?: ReactNode
-    rowVariant?: (meta: CellMeta<TData, TContext>) => CellVariant | undefined
+    isLoading?: boolean
+    title?: string
     selection?: TableSelection<TData, TContext>
+    download?: TableDownload<TData>
+    rowVariant?: (meta: CellMeta<TData, TContext>) => CellVariant | undefined
+    onRefresh?: () => void
+    enableColumnResize?: boolean
+    enableColumnReorder?: boolean
+    onColumnResize?: (columnIndex: number, width: number) => void
+    onColumnReorder?: (columnIndex: number, toIndex: number) => void
+    controller?: TableControl<any, any>
+    meta?: PageMeta
     sorting?: TableSorting<TData>
     filtering?: TableFiltering
-    download?: TableDownload<TData>
     pagination?: TablePagination
+    actions?: TableAction<TData, TContext>[]
 }

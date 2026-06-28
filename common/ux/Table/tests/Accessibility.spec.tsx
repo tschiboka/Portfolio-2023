@@ -2,6 +2,7 @@ import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 import { Test, Accessor } from '@common/ux/Test'
+import { Table } from '..'
 
 describe('Table — Accessibility', () => {
     describe('Region wrapper', () => {
@@ -21,10 +22,10 @@ describe('Table — Accessibility', () => {
 
         it('sets aria-labelledby pointing to the title when title is provided', () => {
             Test.Table.Set.mock<Row>({
-                title: 'My Table',
-                ariaLabel: 'Test',
+                ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'My Table',
             })
             const table = Test.Table('My Table')
             const heading = table.Get.heading('My Table')
@@ -51,10 +52,10 @@ describe('Table — Accessibility', () => {
         it('links title id to the table via aria-labelledby when id is provided', () => {
             Test.Table.Set.mock<Row>({
                 id: 'custom-id',
-                title: 'Titled',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'Titled',
             })
             const table = Test.Table('Titled')
             const heading = table.Get.heading('Titled')
@@ -63,10 +64,10 @@ describe('Table — Accessibility', () => {
 
         it('generates an auto-id for aria-labelledby when no id prop is given but title exists', () => {
             Test.Table.Set.mock<Row>({
-                title: 'Auto ID',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'Auto ID',
             })
             const table = Test.Table('Auto ID')
             const heading = table.Get.heading('Auto ID')
@@ -124,10 +125,10 @@ describe('Table — Accessibility', () => {
 
         it('links table via aria-labelledby to the title heading', () => {
             Test.Table.Set.mock<Row>({
-                title: 'Linked',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'Linked',
             })
             const table = Test.Table('Linked')
             const heading = table.Get.heading('Linked')
@@ -879,21 +880,22 @@ describe('Table — Accessibility', () => {
     describe('Info button ARIA', () => {
         it('renders info button with aria-label "More information"', () => {
             Test.Table.Set.mock<Row>({
-                title: 'Info',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                onInfo: vi.fn(),
+                title: 'Info',
+                children: <Table.Info text="Some info" />,
             })
-            expect(Test.Table('Info').Get.infoButton()).toBeInTheDocument()
+            const table = Test.Table('Info')
+            expect(table.Get.infoButton()).toBeInTheDocument()
         })
 
-        it('does not render info button when onInfo is not provided', () => {
+        it('does not render info button when infoText is not provided', () => {
             Test.Table.Set.mock<Row>({
-                title: 'No Info',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'No Info',
             })
             expect(
                 Accessor.screen.queryByRole('button', { name: 'More information' }),
@@ -916,30 +918,24 @@ describe('Table — Accessibility', () => {
 
         it('table element does not have aria-label when title provides aria-labelledby', () => {
             Test.Table.Set.mock<Row>({
-                title: 'Titled',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'Titled',
             })
             expect(Test.Table('Titled').Get.table()).not.toHaveAttribute('aria-label')
         })
     })
 
     describe('Description ARIA', () => {
-        it('table has aria-describedby pointing to the description element', () => {
+        it('renders description text in the header slot', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
-                description: 'A helpful description',
                 data: rows,
                 columns: basicColumns,
+                children: <Table.Header>A helpful description</Table.Header>,
             })
-            const table = Test.Table('test')
-            const tableEl = table.Get.table()
-            const descId = tableEl.getAttribute('aria-describedby')
-            expect(descId).toBeTruthy()
-            const descEl = document.getElementById(descId!)
-            expect(descEl).toBeInTheDocument()
-            expect(descEl).toHaveTextContent('A helpful description')
+            expect(Test.Table('test').Get.byText('A helpful description')).toBeInTheDocument()
         })
 
         it('table does not have aria-describedby when no description', () => {

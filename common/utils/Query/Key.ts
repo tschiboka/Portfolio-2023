@@ -93,4 +93,7 @@ export const QueryKey = {
     get GymExercises() {
         return new CacheKeyBuilder('gym-exercises')
     },
+    get ActivityFeed() {
+        return new CacheKeyBuilder('activity-feed')
+    },
 }

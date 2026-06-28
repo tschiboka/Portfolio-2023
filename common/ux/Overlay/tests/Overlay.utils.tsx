@@ -62,6 +62,20 @@ export const Set = {
         const popup = Test.Overlay(label)
         return { ...result, onClose, anchorRef: ref, popup }
     },
+    modal: (props: Partial<React.ComponentProps<typeof Overlay.Modal>> = {}) => {
+        const onClose = vi.fn()
+        const label = props.ariaLabel ?? props.title ?? 'Test Modal'
+        const result = render(
+            <Overlay.Modal
+                onClose={onClose}
+                title="Test Modal"
+                message="Test message"
+                {...props}
+            />,
+        )
+        const modal = Test.Overlay(label)
+        return { ...result, onClose, modal }
+    },
 }
 
 export { mockAnchorRef }

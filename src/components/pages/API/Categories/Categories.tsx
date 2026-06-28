@@ -179,8 +179,8 @@ const Categories = ({ path }: CategoriesProps) => {
                     </form>
                 </div>
                 <Table<GetCategoryResponse, unknown>
-                    id="categories-table"
                     title="See the list of categories"
+                    id="categories-table"
                     ariaLabel="Categories table"
                     data={categories?.data || []}
                     columns={columns}

@@ -51,6 +51,7 @@ describe('Paths', () => {
             Visit: 'Visit',
             Schedule: 'Schedule',
             Breakdowns: 'Breakdowns',
+            Activity: 'Activity',
         })
     })
 

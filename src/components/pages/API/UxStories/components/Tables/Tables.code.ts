@@ -1,4 +1,37 @@
 export const Code = {
+    Controller: {
+        basic: `const controller = useTableController({
+    sorting: { default: { column: 'datetime', direction: 'desc' } },
+    pagination: { pageSize: 10 },
+    filters: {
+        path: text({ label: 'Path', placeholder: 'Filter by path...' }),
+        type: select({
+            label: 'Type',
+            options: [
+                { label: 'Visit', value: 'visit' },
+                { label: 'Like', value: 'like' },
+            ],
+        }),
+    },
+    toParams: (state) => ({
+        sortBy: state.sorting.column,
+        asc: state.sorting.direction === 'asc' ? 'true' : undefined,
+        page: String(state.pagination.page),
+        pageSize: String(state.pagination.pageSize),
+        ...state.filters,
+    }),
+})
+
+// Use params for the API query
+const { data } = useQuery(controller.params)
+
+// Pass controller to the Table
+<Table
+    data={data}
+    controller={controller}
+    columns={[...]}
+/>`,
+    },
     Fundamentals: {
         noTitle: `<Table<Row>
     ariaLabel="Table without a visible title"
@@ -10,15 +43,14 @@ export const Code = {
     ]}
 />`,
         emptyState: `<Table<Row>
-    title="Empty State"
     data={[]}
     columns={[...]}
+    title="Empty State"
 />`,
         customEmptyState: `emptyState={
     <em>Nothing to display — try adjusting your filters.</em>
 }`,
         basicUsage: `<Table<Row>
-    title="Basic Usage"
     ariaLabel="Basic table"
     data={rows}
     columns={[
@@ -26,20 +58,19 @@ export const Code = {
         { header: 'Value', accessor: 'value' },
         { header: 'Status', accessor: 'status' },
     ]}
+    title="Basic Usage"
 />`,
-        description: `description="Overview of the first four entries sorted by name."`,
-        descriptionWithDownload: `description={
-    <>
-        Showing <strong>{rows.length}</strong> rows
-        — click the download icon to export.
-    </>
-}
+        description: `<Table.Header>Overview of the first four entries sorted by name.</Table.Header>`,
+        descriptionWithDownload: `<Table.Header>
+    Showing <strong>{rows.length}</strong> rows
+    — click the download icon to export.
+</Table.Header>
 download={{
     label: 'Export CSV',
     onDownload: (data) => { /* handle export */ },
 }}`,
-        infoButton: `onInfo={() => alert('Info clicked')}`,
-        legend: `legend={
+        infoButton: `<Table.Info text="Click for more information about this table." />`,
+        legend: `<Table.Legend>
     <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <Pill label="ACTIVE" color="success" /> = 21
@@ -49,7 +80,7 @@ download={{
         </span>
         ...
     </div>
-}`,
+</Table.Legend>`,
     },
     Filtering: {
         text: `filtering={{
@@ -328,6 +359,57 @@ pagination={{
     ...
 }}`,
     },
+    ColumnCustomization: {
+        resizeReorder: `<Table<Row>
+    ariaLabel="Table with column resize and reorder"
+    data={rows}
+    columns={cols}
+    enableColumnResize
+    enableColumnReorder
+    onColumnResize={(index, width) => {
+        setColWidths((prev) => ({ ...prev, [index]: width }))
+    }}
+    onColumnReorder={(from, to) => {
+        setCols((prev) => {
+            const next = [...prev]
+            const [moved] = next.splice(from, 1)
+            next.splice(to, 0, moved)
+            return next
+        })
+    }}
+    title="Column Customization"
+/>`,
+        usage: `// Optional — only render when needed
+onColumnResize?: (columnIndex: number, width: number) => void
+onColumnReorder?: (fromIndex: number, toIndex: number) => void`,
+    },
+    RefreshLoading: {
+        refresh: `<Table<Row>
+    ariaLabel="Table with refresh and skeleton"
+    data={isLoading ? [] : rows}
+    columns={[
+        { header: 'Name', accessor: 'name' },
+        { header: 'Value', accessor: 'value' },
+        { header: 'Status', accessor: 'status' },
+    ]}
+    isLoading={isLoading}
+    onRefresh={handleRefresh}
+    pagination={{
+        page: 1,
+        totalPages: 1,
+        pageSize: 5,
+        onPageChange: () => {},
+        onPageSizeChange: () => {},
+    }}
+    title="Refresh & Skeleton"
+/>`,
+        isLoading: `// Skeleton shown while loading, emptyState shown after
+<Table
+    isLoading={isLoading}
+    emptyState={<em>No data available.</em>}
+    ...
+/>`,
+    },
     Download: {
         single: `download={{
     onDownload: (data) => { /* handle download */ },
@@ -366,8 +448,8 @@ style={{ border: '2px solid var(--error)', borderRadius: '8px' }}`,
     boxShadow: '0 0 8px var(--orange-dark-3)',
 }}`,
         id: `id="accessibility-id-demo"
-title="id"
-ariaLabel="Table with id for anchor and aria-labelledby"`,
+ariaLabel="Table with id for anchor and aria-labelledby"
+title="id"`,
         scopeCol: `// Every <th> has scope="col" automatically
 // Utility columns (expand, actions) have descriptive aria-labels
 actions={[
@@ -398,20 +480,21 @@ columns={[
     AllFeaturesCombined: {
         demo: `<Table<AllFeaturesRow>
     id="full-demo-table"
-    title="All Features Combined"
-    description="A kitchen-sink demo combining every Table feature."
-    onInfo={() => alert('Info')}
-    legend={<div>...</div>}
     ariaLabel="Full feature table"
     rowAriaLabel="User row"
     data={pageData}
-    columns={[
-        { header: 'Name', accessor: 'name', cell: toUpper, isSortable: true },
-        { header: 'Email', accessor: 'email', variant: 'secondary', breakpoint: 'lg' },
-        { header: 'Status', accessor: 'status', cell: statusPill, variant: statusVariant, isSortable: true },
-        { header: 'Note', accessor: 'note', defaultValue: 'N/A', breakpoint: 'lg' },
-        ...
-    ]}
+    columns={cols}
+    isLoading={isLoading}
+    onRefresh={handleRefresh}
+    onColumnResize={(index, width) => setColWidths((prev) => ({ ...prev, [index]: width }))}
+    onColumnReorder={(from, to) => {
+        setCols((prev) => {
+            const next = [...prev]
+            const [moved] = next.splice(from, 1)
+            next.splice(to, 0, moved)
+            return next
+        })
+    }}
     rowVariant={rowVariantFn}
     selection={{ getRowId, selectedRowIds, onChange, isRowSelectable }}
     actions={[...]}
@@ -419,6 +502,12 @@ columns={[
     filtering={{ inputs: [...], onFilter }}
     download={{ options: [...], onDownload }}
     pagination={{ page, totalPages, pageSize, totalItems, onPageChange, onPageSizeChange }}
-/>`,
+    title="All Features Combined"
+>
+    <Table.Header>A kitchen-sink demo combining every Table feature.</Table.Header>
+    <Table.Legend>
+        <div>...</div>
+    </Table.Legend>
+</Table>`,
     },
 }

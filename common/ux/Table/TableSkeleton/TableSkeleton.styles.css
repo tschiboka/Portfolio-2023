@@ -1,0 +1,26 @@
+table .table-skeleton-row td {
+    padding: var(--space-8) var(--space-12);
+}
+
+table .table-skeleton-row {
+    height: 40px;
+}
+
+table .table-skeleton-bar {
+    height: 100%;
+    min-height: 16px;
+    background: var(--black-3);
+    border-radius: 2px;
+    animation: table-skeleton-pulse 1.5s ease-in-out infinite;
+    width: 100%;
+}
+
+@keyframes table-skeleton-pulse {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}

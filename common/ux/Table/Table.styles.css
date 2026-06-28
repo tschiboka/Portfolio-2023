@@ -125,9 +125,40 @@
     -webkit-overflow-scrolling: touch;
 }
 
+/* Skeleton loading animation */
+@keyframes table-skeleton-pulse {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.table-skeleton-row {
+    display: table-row;
+}
+
+.table-skeleton-cell {
+    display: table-cell;
+    padding: 8px 12px;
+    animation: table-skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+.table-skeleton-bar {
+    height: 14px;
+    border-radius: 4px;
+    background: currentColor;
+    opacity: 0.15;
+}
+
 table {
     width: 100%;
     max-width: 100vw;
+    table-layout: fixed;
     font-size: var(--font-sm);
     font-variant: small-caps;
     border-collapse: collapse;

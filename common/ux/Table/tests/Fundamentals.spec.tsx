@@ -1,7 +1,9 @@
 import { Test } from '@common/ux/Test'
+import { Accessor } from '@common/ux/Test/Accessor/Accessor'
 import { screen } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
+import { Table } from '..'
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  FUNDAMENTALS
@@ -11,10 +13,10 @@ describe('Table — Fundamentals', () => {
     describe('Title', () => {
         it('renders a heading when title is provided', () => {
             Test.Table.Set.mock<Row>({
-                title: 'Users',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'Users',
             })
             expect(Test.Table('Users').Get.heading('Users')).toBeInTheDocument()
         })
@@ -24,7 +26,7 @@ describe('Table — Fundamentals', () => {
             expect(screen.queryByRole('heading')).not.toBeInTheDocument()
         })
 
-        it('does not render header section when no title, description, onInfo, filtering, or download', () => {
+        it('does not render header section when no title, description, infoText, filtering, or download', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -37,71 +39,106 @@ describe('Table — Fundamentals', () => {
     describe('Description', () => {
         it('renders description text', () => {
             Test.Table.Set.mock<Row>({
-                title: 'T',
-                description: 'Detailed info',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'T',
+                children: <Table.Header>Detailed info</Table.Header>,
             })
             expect(screen.getByText('Detailed info')).toBeInTheDocument()
         })
 
         it('renders description as ReactNode', () => {
             Test.Table.Set.mock<Row>({
-                title: 'T',
-                description: <strong>Bold description</strong>,
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'T',
+                children: (
+                    <Table.Header>
+                        <strong>Bold description</strong>
+                    </Table.Header>
+                ),
             })
             expect(screen.getByText('Bold description').tagName).toBe('STRONG')
         })
 
         it('does not render description when omitted', () => {
             const { container } = Test.Table.Set.mock<Row>({
-                title: 'T',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'T',
             })
             expect(container.querySelector('.table-description')).not.toBeInTheDocument()
         })
     })
 
     describe('Info button', () => {
-        it('renders info button when onInfo is provided', () => {
+        it('renders info button when infoText is provided', () => {
             Test.Table.Set.mock<Row>({
-                title: 'T',
-                onInfo: vi.fn(),
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'T',
+                children: <Table.Info text="Some info" />,
             })
             expect(Test.Table('T').Get.infoButton()).toBeInTheDocument()
         })
 
-        it('calls onInfo when clicked', async () => {
-            const onInfo = vi.fn()
+        it('opens a modal with info text when clicked', async () => {
             Test.Table.Set.mock<Row>({
-                title: 'T',
-                onInfo: onInfo,
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
+                title: 'T',
+                children: <Table.Info text="Detailed information about this table" />,
             })
             await Test.Table('T').Do.clickInfoButton()
-            expect(onInfo).toHaveBeenCalledTimes(1)
+            expect(screen.getByText('Detailed information about this table')).toBeInTheDocument()
+        })
+
+        it('modal closes when close button is clicked', async () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                title: 'T',
+                children: <Table.Info text="Dismiss me" />,
+            })
+            await Test.Table('T').Do.clickInfoButton()
+            expect(screen.getByText('Dismiss me')).toBeInTheDocument()
+            await Accessor.user.click(screen.getByRole('button', { name: 'Close' }))
+            expect(screen.queryByText('Dismiss me')).not.toBeInTheDocument()
+        })
+
+        it('does not render info button when infoText is omitted', () => {
+            Test.Table.Set.mock<Row>({
+                ariaLabel: 'test',
+                data: rows,
+                columns: basicColumns,
+                title: 'T',
+            })
+            expect(
+                Accessor.screen.queryByRole('button', { name: 'More information' }),
+            ).not.toBeInTheDocument()
         })
     })
 
     describe('Legend', () => {
         it('renders legend content below the header', () => {
             Test.Table.Set.mock<Row>({
-                title: 'T',
                 ariaLabel: 'test',
                 data: rows,
                 columns: basicColumns,
-                legend: <span data-testid="legend">Legend here</span>,
+                children: (
+                    <>
+                        <Table.Legend>
+                            <span data-testid="legend">Legend here</span>
+                        </Table.Legend>
+                    </>
+                ),
+                title: 'T',
             })
             expect(screen.getByTestId('legend')).toBeInTheDocument()
         })

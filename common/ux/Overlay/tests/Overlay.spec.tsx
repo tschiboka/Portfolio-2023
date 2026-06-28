@@ -768,3 +768,246 @@ describe('SizeStyle', () => {
         expect(SizeStyle.lg).toEqual({ minWidth: 480, maxWidth: 640 })
     })
 })
+
+describe('Overlay.Modal', () => {
+    describe('rendering', () => {
+        it('should render as a portal to document.body', () => {
+            expect(Set.modal().modal.Get.dialog().closest('body')).toBe(document.body)
+        })
+
+        it('should render with role="dialog" and aria-modal="true"', () => {
+            expect(Set.modal().modal.Get.attribute('aria-modal')).toBe('true')
+        })
+
+        it('should use title as aria-label by default', () => {
+            expect(Set.modal({ title: 'My Title' }).modal.Get.attribute('aria-label')).toBe(
+                'My Title',
+            )
+        })
+
+        it('should prefer ariaLabel over title for aria-label', () => {
+            expect(
+                Set.modal({ title: 'My Title', ariaLabel: 'Custom Label' }).modal.Get.attribute(
+                    'aria-label',
+                ),
+            ).toBe('Custom Label')
+        })
+
+        it('should have position relative for centered layout', () => {
+            expect(Set.modal().modal.Get.style().position).toBe('relative')
+        })
+    })
+
+    describe('title', () => {
+        it('should render the title', () => {
+            expect(Set.modal({ title: 'Hello' }).modal.Get.byText('Hello')).toBeInTheDocument()
+        })
+
+        it('should render the title in an h3', () => {
+            expect(Set.modal({ title: 'Hello' }).modal.Get.heading().tagName).toBe('H3')
+        })
+
+        it('should not render a title when not provided', () => {
+            render(<Overlay.Modal onClose={vi.fn()} message="Test message" />)
+            expect(screen.queryByRole('heading')).not.toBeInTheDocument()
+        })
+    })
+
+    describe('message', () => {
+        it('should render the message text', () => {
+            expect(
+                Set.modal({ message: 'A message' }).modal.Get.byText('A message'),
+            ).toBeInTheDocument()
+        })
+
+        it('should render ReactNode as message', () => {
+            expect(
+                Set.modal({
+                    message: <span data-testid="custom-msg">Rich</span>,
+                }).modal.Get.byTestId('custom-msg'),
+            ).toBeInTheDocument()
+        })
+
+        it('should not render message area when not provided', () => {
+            Set.modal({ message: undefined })
+            expect(screen.queryByText('Test message')).not.toBeInTheDocument()
+        })
+    })
+
+    describe('children', () => {
+        it('should render custom children', () => {
+            expect(
+                Set.modal({ children: <div data-testid="child">Custom</div> }).modal.Get.byTestId(
+                    'child',
+                ),
+            ).toBeInTheDocument()
+        })
+    })
+
+    describe('icon', () => {
+        it('should render default icon per mode', () => {
+            expect(
+                Set.modal({ mode: 'primary' })
+                    .modal.Get.dialog()
+                    .querySelector('.Overlay--popup__icon'),
+            ).toBeInTheDocument()
+        })
+
+        it('should render custom icon when provided', () => {
+            expect(
+                Set.modal({ icon: <span data-testid="custom-icon">★</span> }).modal.Get.byTestId(
+                    'custom-icon',
+                ),
+            ).toBeInTheDocument()
+        })
+    })
+
+    describe('modes', () => {
+        const modes = ['primary', 'warning', 'danger', 'info'] as const
+
+        modes.forEach((mode) => {
+            it(`should apply ${mode} mode class`, () => {
+                expect(Set.modal({ mode }).modal.Get.className()).toContain(ModeClass[mode])
+            })
+        })
+
+        it('should default to primary mode', () => {
+            expect(Set.modal().modal.Get.className()).toContain(ModeClass.primary)
+        })
+    })
+
+    describe('sizes', () => {
+        const sizes = ['sm', 'md', 'lg', 'xl'] as const
+
+        sizes.forEach((size) => {
+            it(`should apply ${size} size styles`, () => {
+                const { modal } = Set.modal({ size })
+                expect(modal.Get.style().minWidth).toBeDefined()
+                expect(modal.Get.style().maxWidth).toBeDefined()
+            })
+        })
+
+        it('should default to md size', () => {
+            expect(Set.modal().modal.Get.dialog()).toBeInTheDocument()
+        })
+    })
+
+    describe('close button (showClose)', () => {
+        it('should render close button by default', () => {
+            expect(Set.modal().modal.Has.closeButton()).toBe(true)
+        })
+
+        it('should call onClose when close button is clicked', async () => {
+            const { onClose, modal } = Set.modal()
+            await modal.Do.close()
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should hide close button when showClose is false', () => {
+            expect(Set.modal({ showClose: false }).modal.Has.closeButton()).toBe(false)
+        })
+
+        it('should append a Close action button when showClose is true', () => {
+            expect(
+                Set.modal({ showClose: true, actions: [] }).modal.Get.byText('Close'),
+            ).toBeInTheDocument()
+        })
+
+        it('should not append Close action when showClose is false', () => {
+            Set.modal({ showClose: false, actions: [] })
+            expect(screen.queryByText('Close')).not.toBeInTheDocument()
+        })
+    })
+
+    describe('actions', () => {
+        it('should render action buttons', () => {
+            expect(
+                Set.modal({ actions: [{ label: 'Confirm', onClick: vi.fn() }] }).modal.Get.byText(
+                    'Confirm',
+                ),
+            ).toBeInTheDocument()
+        })
+
+        it('should call action onClick when clicked', async () => {
+            const onClick = vi.fn()
+            const { modal } = Set.modal({
+                actions: [{ label: 'Confirm', onClick }],
+            })
+            await modal.Do.clickActionButton('Confirm')
+            expect(onClick).toHaveBeenCalledTimes(1)
+        })
+
+        it('should hide actions with when: false', () => {
+            Set.modal({
+                actions: [{ label: 'Hidden', when: false, onClick: vi.fn() }],
+            })
+            expect(screen.queryByText('Hidden')).not.toBeInTheDocument()
+        })
+
+        it('should show actions with when: true', () => {
+            expect(
+                Set.modal({
+                    actions: [{ label: 'Visible', when: true, onClick: vi.fn() }],
+                }).modal.Get.byText('Visible'),
+            ).toBeInTheDocument()
+        })
+    })
+
+    describe('backdrop', () => {
+        it('should call onClose when backdrop is clicked', async () => {
+            const { onClose, modal } = Set.modal()
+            await modal.Do.clickBackdrop()
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should not call onClose when dialog body is clicked', async () => {
+            const user = userEvent.setup()
+            const { onClose, modal } = Set.modal()
+            await user.click(modal.Get.dialog())
+            expect(onClose).not.toHaveBeenCalled()
+        })
+    })
+
+    describe('Escape key', () => {
+        it('should call onClose when Escape is pressed', async () => {
+            const { onClose, modal } = Set.modal()
+            await modal.Do.dismiss()
+            expect(onClose).toHaveBeenCalledTimes(1)
+        })
+
+        it('should not call onClose for other keys', async () => {
+            const { onClose, modal } = Set.modal()
+            await modal.Do.keyboard('{Enter}')
+            expect(onClose).not.toHaveBeenCalled()
+        })
+    })
+
+    describe('scroll lock', () => {
+        it('should set overflow hidden on body and html when mounted', () => {
+            Set.modal()
+            expect(document.body.style.overflow).toBe('hidden')
+            expect(document.documentElement.style.overflow).toBe('hidden')
+        })
+
+        it('should restore overflow on unmount', () => {
+            document.body.style.overflow = 'auto'
+            document.documentElement.style.overflow = 'auto'
+            const { unmount } = Set.modal()
+            unmount()
+            expect(document.body.style.overflow).toBe('auto')
+            expect(document.documentElement.style.overflow).toBe('auto')
+        })
+    })
+
+    describe('custom className and style', () => {
+        it('should apply custom className', () => {
+            expect(Set.modal({ className: 'my-modal' }).modal.Get.className()).toContain('my-modal')
+        })
+
+        it('should apply custom style', () => {
+            expect(Set.modal({ style: { border: '2px solid red' } }).modal.Get.style().border).toBe(
+                '2px solid red',
+            )
+        })
+    })
+})

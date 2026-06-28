@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Table } from '@common/ux/Table'
-import type { SortDirection } from '@common/ux/Table/Table.types'
+import type { SortDirection, TableColumns } from '@common/ux/Table/Table.types'
 import { Pill } from '@common/ux'
 import { toUpper } from 'ramda'
 import {
@@ -28,7 +28,6 @@ export const MultipleSelectionDemo = () => {
     const [selected, setSelected] = useState<string[]>([])
     return (
         <Table<SelectionRow>
-            title="Multiple Selection"
             ariaLabel="Table with multiple row selection"
             data={selectionRows}
             columns={[
@@ -41,6 +40,7 @@ export const MultipleSelectionDemo = () => {
                 selectedRowIds: selected,
                 onChange: setSelected,
             }}
+            title="Multiple Selection"
         />
     )
 }
@@ -49,7 +49,6 @@ export const SingleSelectionDemo = () => {
     const [selected, setSelected] = useState<string[]>([])
     return (
         <Table<SelectionRow>
-            title="Single Selection"
             ariaLabel="Table with single row selection"
             data={selectionRows}
             columns={[
@@ -63,6 +62,7 @@ export const SingleSelectionDemo = () => {
                 selectedRowIds: selected,
                 onChange: setSelected,
             }}
+            title="Single Selection"
         />
     )
 }
@@ -71,7 +71,6 @@ export const SelectableDemo = () => {
     const [selected, setSelected] = useState<string[]>([])
     return (
         <Table<SelectionRow>
-            title="isRowSelectable"
             ariaLabel="Table with conditionally selectable rows"
             data={selectionRows}
             columns={[
@@ -89,6 +88,7 @@ export const SelectableDemo = () => {
                 onChange: setSelected,
                 isRowSelectable: ({ row }) => row.status !== 'inactive',
             }}
+            title="isRowSelectable"
         />
     )
 }
@@ -97,8 +97,7 @@ export const SelectionWithActionsDemo = () => {
     const [selected, setSelected] = useState<string[]>([])
     return (
         <Table<SelectionRow>
-            title="Selection with Actions"
-            ariaLabel="Table with selection and action menu"
+            ariaLabel="Table with selection and actions"
             data={selectionRows}
             columns={[
                 { header: 'Name', accessor: 'name' },
@@ -111,6 +110,7 @@ export const SelectionWithActionsDemo = () => {
                 onChange: setSelected,
             }}
             actions={selectionActions}
+            title="Selection with Actions"
         />
     )
 }
@@ -132,7 +132,6 @@ export const PaginationDemo = () => {
     const p = usePagination(allPaginationRows)
     return (
         <Table<PaginationRow>
-            title="Pagination"
             ariaLabel="Paginated table"
             data={p.pageData}
             columns={paginationColumns}
@@ -144,6 +143,7 @@ export const PaginationDemo = () => {
                 onPageChange: p.setPage,
                 onPageSizeChange: p.onPageSizeChange,
             }}
+            title="Pagination"
         />
     )
 }
@@ -152,7 +152,6 @@ export const CustomPageSizeDemo = () => {
     const p = usePagination(allPaginationRows, 5)
     return (
         <Table<PaginationRow>
-            title="Custom Page Sizes"
             ariaLabel="Table with custom page size options"
             data={p.pageData}
             columns={paginationColumns}
@@ -165,6 +164,7 @@ export const CustomPageSizeDemo = () => {
                 onPageChange: p.setPage,
                 onPageSizeChange: p.onPageSizeChange,
             }}
+            title="Custom Page Sizes"
         />
     )
 }
@@ -174,7 +174,6 @@ export const SmallDatasetPaginationDemo = () => {
     const p = usePagination(rows)
     return (
         <Table<PaginationRow>
-            title="Small Dataset"
             ariaLabel="Paginated table with few items"
             data={p.pageData}
             columns={paginationColumns}
@@ -186,6 +185,7 @@ export const SmallDatasetPaginationDemo = () => {
                 onPageChange: p.setPage,
                 onPageSizeChange: p.onPageSizeChange,
             }}
+            title="Small Dataset"
         />
     )
 }
@@ -194,7 +194,6 @@ export const NoTotalItemsDemo = () => {
     const p = usePagination(allPaginationRows)
     return (
         <Table<PaginationRow>
-            title="No Total Items"
             ariaLabel="Paginated table without total item count"
             data={p.pageData}
             columns={paginationColumns}
@@ -205,6 +204,7 @@ export const NoTotalItemsDemo = () => {
                 onPageChange: p.setPage,
                 onPageSizeChange: p.onPageSizeChange,
             }}
+            title="No Total Items"
         />
     )
 }
@@ -215,6 +215,31 @@ export const AllFeaturesCombinedDemo = () => {
     const [pageSize, setPageSize] = useState(10)
     const [sortColumn, setSortColumn] = useState<keyof AllFeaturesRow>('name')
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
+    const [isLoading, setIsLoading] = useState(false)
+    const [cols, setCols] = useState<TableColumns<AllFeaturesRow>>([
+        { header: 'Name', accessor: 'name', cell: toUpper, isSortable: true },
+        { header: 'Email', accessor: 'email', variant: 'secondary', breakpoint: 'mx' },
+        { header: 'Role', accessor: 'role', breakpoint: 'sm', isSortable: true },
+        {
+            header: 'Status',
+            accessor: 'status',
+            cell: allFeaturesStatusPill,
+            variant: allFeaturesStatusVariant,
+            isSortable: true,
+        },
+        { header: 'Department', accessor: 'department', defaultValue: 'N/A', breakpoint: 'lg' },
+        { header: 'Joined', accessor: 'joined', defaultValue: 'N/A', breakpoint: 'mx' },
+        { header: 'Phone', accessor: 'phone', defaultValue: 'N/A', breakpoint: 'lg' },
+        { header: 'Location', accessor: 'location', defaultValue: 'N/A', breakpoint: 'xl' },
+        {
+            header: 'Note',
+            accessor: 'note',
+            defaultValue: 'N/A',
+            breakpoint: 'md',
+            isActionDisabled: ({ row }) => row.status === 'inactive',
+        },
+    ])
+    const [, setColWidths] = useState<Record<number, number>>({})
 
     const sorted = useMemo(
         () => sortRows(allFeaturesData, sortColumn, sortDirection),
@@ -224,81 +249,32 @@ export const AllFeaturesCombinedDemo = () => {
     const totalPages = Math.ceil(totalItems / pageSize)
     const pageData = sorted.slice((page - 1) * pageSize, page * pageSize)
 
+    const handleRefresh = () => {
+        setIsLoading(true)
+        setTimeout(() => setIsLoading(false), 1500)
+    }
+
     return (
         <Table<AllFeaturesRow>
-            id="full-demo-table"
             title="All Features Combined"
-            description="A kitchen-sink demo combining every Table feature in one place."
-            onInfo={() => alert('All Features Combined — info panel placeholder.')}
-            legend={
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <Pill label="ACTIVE" color="success" /> = 9
-                    </span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <Pill label="PENDING" color="orange" /> = 2
-                    </span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-                        <Pill label="INACTIVE" color="error" /> = 3
-                    </span>
-                </div>
-            }
+            id="full-demo-table"
             ariaLabel="Full feature table"
             rowAriaLabel="User row"
             data={pageData}
-            columns={[
-                { header: 'Name', accessor: 'name', cell: toUpper, isSortable: true },
-                {
-                    header: 'Email',
-                    accessor: 'email',
-                    variant: 'secondary',
-                    breakpoint: 'lg',
-                },
-                {
-                    header: 'Role',
-                    accessor: 'role',
-                    breakpoint: 'md',
-                    isSortable: true,
-                },
-                {
-                    header: 'Status',
-                    accessor: 'status',
-                    cell: allFeaturesStatusPill,
-                    variant: allFeaturesStatusVariant,
-                    isSortable: true,
-                },
-                {
-                    header: 'Department',
-                    accessor: 'department',
-                    defaultValue: 'N/A',
-                    breakpoint: 'xl',
-                },
-                {
-                    header: 'Joined',
-                    accessor: 'joined',
-                    defaultValue: 'N/A',
-                    breakpoint: '2xl',
-                },
-                {
-                    header: 'Phone',
-                    accessor: 'phone',
-                    defaultValue: 'N/A',
-                    breakpoint: '2xl',
-                },
-                {
-                    header: 'Location',
-                    accessor: 'location',
-                    defaultValue: 'N/A',
-                    breakpoint: '2xl',
-                },
-                {
-                    header: 'Note',
-                    accessor: 'note',
-                    defaultValue: 'N/A',
-                    breakpoint: 'lg',
-                    isActionDisabled: ({ row }) => row.status === 'inactive',
-                },
-            ]}
+            columns={cols}
+            isLoading={isLoading}
+            onRefresh={handleRefresh}
+            onColumnResize={(index, width) => {
+                setColWidths((prev) => ({ ...prev, [index]: width }))
+            }}
+            onColumnReorder={(from, to) => {
+                setCols((prev) => {
+                    const next = [...prev]
+                    const [moved] = next.splice(from, 1)
+                    next.splice(to, 0, moved)
+                    return next
+                })
+            }}
             rowVariant={allFeaturesRowVariant}
             selection={{
                 getRowId: (row) => row.id,
@@ -365,7 +341,24 @@ export const AllFeaturesCombinedDemo = () => {
                     setPage(1)
                 },
             }}
-        />
+        >
+            <Table.Header>
+                A kitchen-sink demo combining every Table feature in one place.
+            </Table.Header>
+            <Table.Legend>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <Pill label="ACTIVE" color="success" /> = 9
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <Pill label="PENDING" color="orange" /> = 2
+                    </span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                        <Pill label="INACTIVE" color="error" /> = 3
+                    </span>
+                </div>
+            </Table.Legend>
+        </Table>
     )
 }
 
@@ -376,7 +369,6 @@ export const BasicSortingDemo = () => {
 
     return (
         <Table<SortingRow>
-            title="Basic Sorting"
             ariaLabel="Table with basic column sorting"
             data={sorted}
             columns={[
@@ -393,6 +385,7 @@ export const BasicSortingDemo = () => {
                     setDirection(dir)
                 },
             }}
+            title="Basic Sorting"
         />
     )
 }
@@ -404,7 +397,6 @@ export const MixedSortableDemo = () => {
 
     return (
         <Table<SortingRow>
-            title="Mixed Sortable Columns"
             ariaLabel="Table with some sortable and some non-sortable columns"
             data={sorted}
             columns={[
@@ -421,6 +413,7 @@ export const MixedSortableDemo = () => {
                     setDirection(dir)
                 },
             }}
+            title="Mixed Sortable Columns"
         />
     )
 }
@@ -433,7 +426,6 @@ export const SortingWithSelectionDemo = () => {
 
     return (
         <Table<SortingRow>
-            title="Sorting with Selection"
             ariaLabel="Table with sorting and row selection"
             data={sorted}
             columns={[
@@ -455,6 +447,7 @@ export const SortingWithSelectionDemo = () => {
                 selectedRowIds: selected,
                 onChange: setSelected,
             }}
+            title="Sorting with Selection"
         />
     )
 }
@@ -470,7 +463,6 @@ export const SortingWithPaginationDemo = () => {
 
     return (
         <Table<SortingRow>
-            title="Sorting with Pagination"
             ariaLabel="Table with sorting and pagination"
             data={pageData}
             columns={[
@@ -500,6 +492,7 @@ export const SortingWithPaginationDemo = () => {
                     setPage(1)
                 },
             }}
+            title="Sorting with Pagination"
         />
     )
 }

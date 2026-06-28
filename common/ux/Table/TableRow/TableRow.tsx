@@ -78,7 +78,11 @@ export const TableRow = <TData extends Record<string, ReactNode>, TContext>({
                     .filter(Boolean)
                     .join(' ')
                 return (
-                    <td key={`table-row-${index}-${colIndex}`} className={classes}>
+                    <td
+                        key={`table-row-${index}-${colIndex}`}
+                        className={classes}
+                        style={col.width ? { width: col.width } : undefined}
+                    >
                         {getCellContent({ col, row, index, data, context })}
                     </td>
                 )

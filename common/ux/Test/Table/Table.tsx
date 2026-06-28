@@ -15,6 +15,24 @@ class TableAccessor extends Accessor {
             emptyState: () => this.scope.getByRole('status'),
             infoButton: () => this.scope.getByRole('button', { name: 'More information' }),
 
+            // Refresh
+            refreshButton: () => this.scope.getByRole('button', { name: 'Refresh data' }),
+
+            // Skeleton — rows are aria-hidden, detect by class
+            skeleton: () => this.element.querySelector('.table-skeleton-row') as HTMLElement | null,
+
+            // Column resize
+            resizeHandle: (colIndex: number) =>
+                this.scope
+                    .getAllByRole('columnheader')
+                    [colIndex]?.querySelector('.th-resize-handle') as HTMLElement | null,
+
+            // Column reorder
+            reorderLeftButton: (header: string) =>
+                this.scope.getByRole('button', { name: `Move ${header} left` }),
+            reorderRightButton: (header: string) =>
+                this.scope.getByRole('button', { name: `Move ${header} right` }),
+
             // Selection
             selectAll: () => this.scope.getByRole('checkbox', { name: 'Select all rows' }),
             selectRow: (n: number) => this.scope.getByRole('checkbox', { name: `Select row ${n}` }),
@@ -108,6 +126,15 @@ class TableAccessor extends Accessor {
             clickInfoButton: async () => {
                 await Accessor.user.click(this.Get.infoButton())
             },
+            refresh: async () => {
+                await Accessor.user.click(this.Get.refreshButton())
+            },
+            reorderLeft: async (header: string) => {
+                await Accessor.user.click(this.Get.reorderLeftButton(header))
+            },
+            reorderRight: async (header: string) => {
+                await Accessor.user.click(this.Get.reorderRightButton(header))
+            },
             download: async (label?: string) => {
                 await Accessor.user.click(this.Get.downloadButton(label))
             },
@@ -124,8 +151,11 @@ export const Table = Object.assign(
     {
         Set: {
             mock: <TData extends Record<string, ReactNode>, TContext = unknown>(
-                props: TableProps<TData, TContext>,
-            ) => render(<TableComponent<TData, TContext> {...props} />),
+                props: Partial<TableProps<TData, TContext>> & Record<string, unknown>,
+            ) =>
+                render(
+                    <TableComponent<TData, TContext> {...(props as TableProps<TData, TContext>)} />,
+                ),
         },
     },
 )

@@ -27,6 +27,8 @@
 // If two endpoints genuinely share the same shape, create a core entity type
 // and compose endpoint-specific types from it (e.g. via intersection or Pick/Omit).
 
+import type { PaginatedResponse } from './index'
+
 export type Capability = 'admin'
 export type Feature = 'xmas2025'
 
@@ -196,6 +198,53 @@ export type GetBreakdownsResponse = {
         totalCounts: { visits: number; likes: number }
     }
 }
+
+// ACTIVITY FEED TYPES
+export type ActivityType = 'visit' | 'like' | 'message' | 'error'
+
+export type ActivityMessageDetails = {
+    name: string
+    email: string
+    phone: string | null
+    message: string
+    isRead: boolean
+}
+
+export type ActivityErrorDetails = {
+    name: string
+    message: string
+    stack: string
+}
+
+export type ActivityEvent = {
+    id: string
+    datetime: string
+    path: string
+    type: ActivityType
+    details?: string
+}
+
+export type ActivityFeedSortBy = 'datetime' | 'path' | 'type'
+// GET /api/activity/admin query params
+export type GetActivityFeedQuery = {
+    path?: string
+    type?: ActivityType
+    dateFrom?: string
+    dateTo?: string
+    sortBy?: ActivityFeedSortBy
+    asc?: string
+    page?: string
+    pageSize?: string
+}
+
+export type ActivityFeedContext = {
+    visits: number
+    likes: number
+    messages: number
+    errors: number
+}
+
+export type GetActivityFeedResponse = PaginatedResponse<ActivityEvent, ActivityFeedContext>
 
 // POST /api/breakdowns/backfill response
 export type PostBackfillResponse = {

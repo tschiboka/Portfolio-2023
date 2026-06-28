@@ -44,6 +44,7 @@ export const UxStories = ({ path }: UxStoriesProps) => {
                                 {
                                     header: 'Component',
                                     accessor: 'name',
+                                    width: '200px',
                                     cell: (_val, { row }) => <Link to={row.path}>{row.name}</Link>,
                                 },
                                 { header: 'Description', accessor: 'description' },

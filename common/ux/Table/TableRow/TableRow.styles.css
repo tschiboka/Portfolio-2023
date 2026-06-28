@@ -5,6 +5,9 @@ table tbody tr:first-child td {
 
 table tbody tr td {
     padding: var(--space-8) var(--space-12);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Variants */

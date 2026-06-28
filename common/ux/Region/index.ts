@@ -1,6 +1,6 @@
 export { Region } from './Region'
 export { Card } from './Card'
-export { Modal } from './Modal'
+export { Dialog } from './Dialog'
 export { Sidebar } from './Sidebar'
 export { Header } from './Header'
 export { Main } from './Main'
@@ -9,7 +9,7 @@ export type {
     RegionProps,
     RegionVariant,
     CardProps,
-    ModalProps,
+    DialogProps,
     SidebarProps,
     HeaderProps,
     MainProps,

@@ -55,8 +55,8 @@ export const Download = () => (
                     { header: 'Status', accessor: 'status' },
                 ]}
                 download={{
-                    label: 'Download CSV',
-                    onDownload: (data: Row[]) => alert(`CSV export: ${data.length} rows`),
+                    label: 'Export CSV',
+                    onDownload: (data: Row[]) => alert(`Exporting ${data.length} rows`),
                 }}
             />
             <Code language="tsx" content={Snippets.Download.singleWithLabel} />

@@ -38,3 +38,17 @@ export type PopupProps = AccessibleProps & {
     showClose?: boolean
     onClose: () => void
 }
+
+export type ModalSize = 'sm' | 'md' | 'lg' | 'xl'
+
+export type ModalProps = AccessibleProps & {
+    children?: ReactNode
+    title?: string
+    message?: ReactNode
+    icon?: ReactNode
+    size?: ModalSize
+    mode?: PopupMode
+    actions?: PopupAction[]
+    showClose?: boolean
+    onClose: () => void
+}

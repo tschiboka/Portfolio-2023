@@ -3,6 +3,8 @@ import InlineReference from '../../components/sharedComponents/InlineReference/I
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@common/ux'
 import codeSnippets from './codeSnippets'
 import { getReferenceList } from '../references'
+import CronJobsImg from '../../assets/images/blog/resend_email_scheduling/cron_jobs.png'
+import Figure from '../../components/sharedComponents/Figure/Figure'
 
 interface Props {
     pageName: string
@@ -172,6 +174,13 @@ const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                     The first request wakes the service. The second performs the work. This
                     completely eliminated timeout failures without upgrading the hosting plan.
                 </Paragraph>
+                <Figure
+                    caption="Render free tier cold start times"
+                    image={CronJobsImg}
+                    alt="Render cold start times"
+                    size="full"
+                    zoomAllowed
+                />
             </Section>
             <Section>
                 <Heading as="h2">Step 7: Avoid Duplicate Sends</Heading>

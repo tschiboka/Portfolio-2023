@@ -4,6 +4,7 @@ import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageS
 import { StoryNav } from '../StoryNav/StoryNav'
 import {
     Fundamentals,
+    Controller,
     Filtering,
     CellRenderingDefaults,
     Responsive,
@@ -13,6 +14,8 @@ import {
     Pagination,
     Sorting,
     Download,
+    RefreshLoading,
+    ColumnCustomization,
     Accessibility,
     AllFeaturesCombined,
 } from './Sections'
@@ -39,6 +42,7 @@ export const Tables = ({ path }: TablesProps) => (
                 accessibility props.
             </Paragraph>
             <Fundamentals />
+            <Controller />
             <Filtering />
             <CellRenderingDefaults />
             <Responsive />
@@ -48,6 +52,8 @@ export const Tables = ({ path }: TablesProps) => (
             <Pagination />
             <Sorting />
             <Download />
+            <RefreshLoading />
+            <ColumnCustomization />
             <Accessibility />
             <AllFeaturesCombined />
         </Main>
