@@ -8,7 +8,7 @@ type LinksProps = { path: string }
 
 export const Links = ({ path }: LinksProps) => (
     <Screen
-        title={'Tivadar Debnar | Links'}
+        title={'tschiboka | Links'}
         path={path}
         variant="api"
         pageName="Projects"

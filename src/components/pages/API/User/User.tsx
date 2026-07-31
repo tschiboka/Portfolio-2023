@@ -6,13 +6,7 @@ interface UserProps {
 
 const User = ({ path }: UserProps) => {
     return (
-        <Screen
-            title={'Tivadar Debnar | User'}
-            path={path}
-            loginRequired
-            variant="api"
-            pageName="User"
-        >
+        <Screen title={'tschiboka | User'} path={path} loginRequired variant="api" pageName="User">
             <h1>User</h1>
         </Screen>
     )

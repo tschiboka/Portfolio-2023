@@ -58,7 +58,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Overlays'}
+            title={'tschiboka | Overlays'}
             path={path}
             variant="api"
             pageName="Projects"

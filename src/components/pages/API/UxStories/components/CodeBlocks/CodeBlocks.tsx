@@ -8,7 +8,7 @@ type CodeBlocksProps = { path: string }
 
 export const CodeBlocks = ({ path }: CodeBlocksProps) => (
     <Screen
-        title={'Tivadar Debnar | Code Blocks'}
+        title={'tschiboka | Code Blocks'}
         path={path}
         variant="api"
         pageName="Projects"

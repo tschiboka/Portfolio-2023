@@ -10,7 +10,7 @@ const colors = ['accent', 'error', 'success', 'yellow', 'orange', 'purple', 'gra
 
 export const Pills = ({ path }: PillsProps) => (
     <Screen
-        title={'Tivadar Debnar | Pills'}
+        title={'tschiboka | Pills'}
         path={path}
         variant="api"
         pageName="Projects"

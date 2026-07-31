@@ -9,7 +9,7 @@ interface RemoteProps {
 export const Remote = ({ path }: RemoteProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Remote'}
+            title={'tschiboka | Remote'}
             path={path}
             loginRequired
             variant="api"

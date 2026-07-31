@@ -20,7 +20,7 @@ const Tasks = ({ path }: TaskProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Tasks'}
+            title={'tschiboka | Tasks'}
             path={path}
             loginRequired
             variant="api"

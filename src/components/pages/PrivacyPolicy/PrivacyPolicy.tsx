@@ -11,7 +11,7 @@ interface Props {
 const PrivacyPolicy = ({ pageName, path }: Props) => {
     return (
         <Screen
-            title="Tivadar Debnar | Privacy Policy"
+            title="tschiboka | Privacy Policy"
             path={path}
             variant="portfolio"
             pageName={pageName}

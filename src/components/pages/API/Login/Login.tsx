@@ -72,7 +72,7 @@ const Login = ({ path, pageName }: LoginProps) => {
     return (
         <Screen
             className="Login"
-            title="Tivadar Debnar | Login"
+            title="tschiboka | Login"
             path={path}
             variant="portfolio"
             pageName={pageName}

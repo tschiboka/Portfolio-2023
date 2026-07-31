@@ -22,7 +22,7 @@ type TypographyStoryProps = { path: string }
 
 export const TypographyStory = ({ path }: TypographyStoryProps) => (
     <Screen
-        title={'Tivadar Debnar | Typography'}
+        title={'tschiboka | Typography'}
         path={path}
         variant="api"
         pageName="Projects"

@@ -103,7 +103,7 @@ const CheckboxWrapper = ({
 const SearchInputWrapper = ({
     onSelectSpy,
     ...props
-}: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
+}: Partial<Parameters<typeof SearchInput<string, FormValues>>[0]> & {
     onSelectSpy?: Mock
 }) => {
     const { control, setValue } = useForm<FormValues>({ defaultValues: { option: '' } })
@@ -186,7 +186,7 @@ const DateInputWithErrorWrapper = (props: Partial<Parameters<typeof DateInput<Fo
 }
 
 const SearchInputWithErrorWrapper = (
-    props: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & { onSelectSpy?: Mock },
+    props: Partial<Parameters<typeof SearchInput<string, FormValues>>[0]> & { onSelectSpy?: Mock },
 ) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { option: '' } })
     React.useEffect(() => {
@@ -248,7 +248,7 @@ export const Set = {
         },
     ) => renderInForm(<CheckboxWrapper {...props} />),
     searchInput: (
-        props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
+        props?: Partial<Parameters<typeof SearchInput<string, FormValues>>[0]> & {
             onSelectSpy?: Mock
         },
     ) => renderInForm(<SearchInputWrapper {...props} />),
@@ -291,7 +291,7 @@ export const Set = {
     dateInputWithError: (props?: Partial<Parameters<typeof DateInput<FormValues>>[0]>) =>
         renderInForm(<DateInputWithErrorWrapper {...props} />),
     searchInputWithError: (
-        props?: Partial<Parameters<typeof SearchInput<FormValues>>[0]> & {
+        props?: Partial<Parameters<typeof SearchInput<string, FormValues>>[0]> & {
             onSelectSpy?: Mock
         },
     ) => renderInForm(<SearchInputWithErrorWrapper {...props} />),

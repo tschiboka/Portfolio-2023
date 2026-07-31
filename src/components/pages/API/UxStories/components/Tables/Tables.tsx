@@ -26,7 +26,7 @@ type TablesProps = {
 
 export const Tables = ({ path }: TablesProps) => (
     <Screen
-        title={'Tivadar Debnar | Tables'}
+        title={'tschiboka | Tables'}
         path={path}
         variant="api"
         pageName="Projects"

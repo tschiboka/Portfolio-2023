@@ -11,7 +11,7 @@ interface IndexProps {
 const Index = ({ path }: IndexProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Index'}
+            title={'tschiboka | Index'}
             path={path}
             loginRequired
             variant="api"

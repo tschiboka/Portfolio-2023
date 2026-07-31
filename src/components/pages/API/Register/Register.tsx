@@ -64,7 +64,7 @@ const Register = ({ path, pageName }: RegisterProps) => {
     return (
         <Screen
             className="Register"
-            title="Tivadar Debnar | Register"
+            title="tschiboka | Register"
             path={path}
             variant="portfolio"
             pageName={pageName}

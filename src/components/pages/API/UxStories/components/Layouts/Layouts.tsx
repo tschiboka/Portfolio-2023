@@ -48,7 +48,7 @@ const wrapItems = [
 
 export const Layouts = ({ path }: LayoutsProps) => (
     <Screen
-        title={'Tivadar Debnar | Layouts'}
+        title={'tschiboka | Layouts'}
         path={path}
         variant="api"
         pageName="Projects"

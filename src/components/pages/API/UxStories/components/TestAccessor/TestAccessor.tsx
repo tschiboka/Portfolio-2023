@@ -9,7 +9,7 @@ type TestAccessorProps = { path: string }
 
 export const TestAccessor = ({ path }: TestAccessorProps) => (
     <Screen
-        title={'Tivadar Debnar | Test Accessor'}
+        title={'tschiboka | Test Accessor'}
         path={path}
         variant="api"
         pageName="Projects"

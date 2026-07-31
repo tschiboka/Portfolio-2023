@@ -1,18 +1,18 @@
-import { GymExerciseResponse, GymUserRoutineResponse } from '@common/types'
+import { GymExerciseResource, GymUserRoutineResponse } from '@common/types'
 import Joi from 'joi'
 import mongoose from 'mongoose'
 
-const gymExerciseSchema = new mongoose.Schema<GymExerciseResponse>({
+const gymExerciseSchema = new mongoose.Schema<GymExerciseResource>({
     name: { type: String, required: true },
 })
 const gymRoutineSchema = new mongoose.Schema<GymUserRoutineResponse>({
     name: { type: String, required: true },
 })
 
-const GymExercise = mongoose.model<GymExerciseResponse>('GymExercise', gymExerciseSchema)
+const GymExercise = mongoose.model<GymExerciseResource>('GymExercise', gymExerciseSchema)
 const GymRoutine = mongoose.model<GymUserRoutineResponse>('GymRoutine', gymRoutineSchema)
 
-const validateGymExercise = (exercise: GymExerciseResponse) => {
+const validateGymExercise = (exercise: GymExerciseResource) => {
     const schema = Joi.object({
         name: Joi.string().required(),
     })
@@ -27,4 +27,4 @@ const validateGymRoutine = (routine: GymUserRoutineResponse) => {
 }
 
 export { GymExercise, GymRoutine, validateGymExercise, validateGymRoutine }
-export type { GymExerciseResponse, GymUserRoutineResponse }
+export type { GymExerciseResource, GymUserRoutineResponse }

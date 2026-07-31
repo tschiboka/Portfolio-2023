@@ -19,7 +19,7 @@ interface Props {
 const About = ({ pageName }: Props) => {
     return (
         <Screen
-            title="Tivadar Debnar | About"
+            title="tschiboka | About"
             path="/about"
             variant="portfolio"
             pageName={pageName}

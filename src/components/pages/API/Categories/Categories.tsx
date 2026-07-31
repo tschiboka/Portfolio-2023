@@ -53,7 +53,7 @@ const Categories = ({ path }: CategoriesProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Categories'}
+            title={'tschiboka | Categories'}
             path={path}
             loginRequired
             variant="api"

@@ -7,7 +7,7 @@ interface StatProps {
 const Stats = ({ path }: StatProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Stats'}
+            title={'tschiboka | Stats'}
             path={path}
             loginRequired
             variant="api"

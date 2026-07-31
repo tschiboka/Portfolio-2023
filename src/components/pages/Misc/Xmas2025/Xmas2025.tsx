@@ -72,7 +72,7 @@ const Xmas2025 = () => {
 
     return (
         <Screen
-            title="Tivadar Debnar | Xmas 2025"
+            title="tschiboka | Xmas 2025"
             path="/xmas2025"
             loginRequired
             className="Xmas"

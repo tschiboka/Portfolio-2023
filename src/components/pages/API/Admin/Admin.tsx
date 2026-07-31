@@ -45,7 +45,7 @@ const Admin = ({ path }: AdminProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Admin'}
+            title={'tschiboka | Admin'}
             path={path}
             loginRequired
             variant="api"

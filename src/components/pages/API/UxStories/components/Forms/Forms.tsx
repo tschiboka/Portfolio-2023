@@ -148,7 +148,7 @@ export const Forms = ({ path }: FormsProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Forms'}
+            title={'tschiboka | Forms'}
             path={path}
             variant="api"
             pageName="Projects"

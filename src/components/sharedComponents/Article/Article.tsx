@@ -35,7 +35,7 @@ const Article = ({ pageName, path, title, children, hasContentNavigator = true }
 
     return (
         <Screen
-            title={'Tivadar Debnar | ' + title}
+            title={'tschiboka | ' + title}
             path={path}
             variant="portfolio"
             pageName={pageName}

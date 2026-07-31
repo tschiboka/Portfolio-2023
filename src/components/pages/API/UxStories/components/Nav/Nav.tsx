@@ -92,7 +92,7 @@ const MobileMenuDemo = () => (
 
 export const NavStory = ({ path }: NavStoryProps) => (
     <Screen
-        title={'Tivadar Debnar | Nav'}
+        title={'tschiboka | Nav'}
         path={path}
         variant="api"
         pageName="Projects"

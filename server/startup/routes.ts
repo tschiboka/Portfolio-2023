@@ -16,7 +16,7 @@ import breakdowns from '../routes/breakdowns'
 import activity from '../routes/activity'
 import xmas2025 from '../projects/xmas_2025/routes'
 import typist from '../projects/typist/routes'
-import gym from '../projects/gym/routes'
+import gym from '../projects/gym/routes/routes'
 import word_duel_arena_level from '../projects/word_duel_arena/transport/http/routes/level'
 import word_duel_arena_words from '../projects/word_duel_arena/transport/http/routes/word'
 

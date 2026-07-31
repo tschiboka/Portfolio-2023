@@ -36,11 +36,7 @@ const EmailVerification = ({ path }: IndexProps) => {
     }, [])
 
     return (
-        <Screen
-            className="EmailVerification"
-            title={'Tivadar Debnar | Email Verification'}
-            path={path}
-        >
+        <Screen className="EmailVerification" title={'tschiboka | Email Verification'} path={path}>
             <h1>Verifing your email address</h1>
             <LoadingIndicator show={isPending} />
             {message && <h2>{message}</h2>}

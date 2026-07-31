@@ -22,7 +22,7 @@ type RegionsProps = { path: string }
 
 export const Regions = ({ path }: RegionsProps) => (
     <Screen
-        title={'Tivadar Debnar | Regions'}
+        title={'tschiboka | Regions'}
         path={path}
         variant="api"
         pageName="Projects"

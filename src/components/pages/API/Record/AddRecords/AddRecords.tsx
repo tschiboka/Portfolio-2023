@@ -8,7 +8,7 @@ interface AddRecordProps {
 const AddRecords = ({ path }: AddRecordProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Add Records'}
+            title={'tschiboka | Add Records'}
             path={path}
             loginRequired
             variant="api"

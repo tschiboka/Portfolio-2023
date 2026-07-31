@@ -7,7 +7,7 @@ interface UpdateRecordsProps {
 const UpdateRecords = ({ path }: UpdateRecordsProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Update Records'}
+            title={'tschiboka | Update Records'}
             path={path}
             loginRequired
             variant="api"

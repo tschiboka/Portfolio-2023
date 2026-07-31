@@ -46,7 +46,7 @@ export const Projects = ({ pageName }: Props) => {
 
     return (
         <Screen
-            title="Tivadar Debnar | Projects"
+            title="tschiboka | Projects"
             path="/projects"
             variant="portfolio"
             pageName={pageName}

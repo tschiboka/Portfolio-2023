@@ -17,7 +17,7 @@ type LoadingIndicatorsProps = { path: string }
 
 export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
     <Screen
-        title={'Tivadar Debnar | Loading Indicators'}
+        title={'tschiboka | Loading Indicators'}
         path={path}
         variant="api"
         pageName="Projects"

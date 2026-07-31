@@ -7,7 +7,7 @@ interface ActivitiesProps {
 const Activities = ({ path }: ActivitiesProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Activities'}
+            title={'tschiboka | Activities'}
             path={path}
             loginRequired
             variant="api"

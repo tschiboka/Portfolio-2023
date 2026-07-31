@@ -8,7 +8,7 @@ export const Typist = ({ pageName }: PageContainerProps) => {
     return (
         <TypistContextProvider>
             <Screen
-                title="Tivadar Debnar | Typist"
+                title="tschiboka | Typist"
                 path="/projects/typist"
                 className="Typist"
                 variant="portfolio"

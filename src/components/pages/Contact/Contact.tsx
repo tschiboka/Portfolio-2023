@@ -67,7 +67,7 @@ const Contact = ({ pageName, path }: ContactProps) => {
 
     return (
         <Screen
-            title="Tivadar Debnar | Contact"
+            title="tschiboka | Contact"
             path={path}
             variant="portfolio"
             pageName={pageName}

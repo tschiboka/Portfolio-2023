@@ -7,7 +7,7 @@ interface EventsProp {
 const Events = ({ path }: EventsProp) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Events'}
+            title={'tschiboka | Events'}
             path={path}
             loginRequired
             variant="api"

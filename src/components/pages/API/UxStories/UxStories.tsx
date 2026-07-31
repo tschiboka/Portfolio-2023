@@ -21,7 +21,7 @@ interface UxStoriesProps {
 export const UxStories = ({ path }: UxStoriesProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | Ux Stories'}
+            title={'tschiboka | Ux Stories'}
             path={path}
             variant="api"
             pageName="UX Stories"

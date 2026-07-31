@@ -69,7 +69,7 @@ const Blogs = ({ pageName, path }: Props) => {
 
     return (
         <Screen
-            title="Tivadar Debnar | Blog"
+            title="tschiboka | Blog"
             path={path}
             variant="portfolio"
             pageName={pageName}

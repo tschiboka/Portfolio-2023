@@ -1,3 +1,5 @@
+import type { SearchInputOption } from '@common/ux'
+
 // Shared types for the Gym project.
 
 export type GymUserRoutineResponse = {
@@ -109,9 +111,13 @@ export type EquipmentResource =
     | 'plyo_box'
     | 'sled'
     | 'jump_rope'
+    | 'stability_ball'
 
     // Mobility
     | 'foam_roller'
+
+    // Steps / platforms
+    | 'step'
 
 export type GymExerciseResource = {
     name: string
@@ -131,3 +137,7 @@ export type GymExerciseResource = {
 
 export type GetGymUserRoutinesResponse = { routines: GymUserRoutineResponse[] }
 export type GetGymExercisesResponse = { exercises: GymExerciseResource[] }
+
+export type GetGymDifficultyOptionsResponse = SearchInputOption<DifficultyLevel>[]
+export type GetGymEquipmentOptionsResponse = SearchInputOption<EquipmentResource>[]
+export type GetGymMuscleGroupOptionsResponse = SearchInputOption<MuscleGroupResource>[]

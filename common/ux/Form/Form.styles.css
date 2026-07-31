@@ -44,7 +44,7 @@ form label,
 .form-label {
     position: absolute;
     top: -0.4rem;
-    left: 3rem;
+    left: 2.5rem;
     padding: 0 0.4rem;
     background-color: var(--black-x);
     border-left: var(--panel-border);

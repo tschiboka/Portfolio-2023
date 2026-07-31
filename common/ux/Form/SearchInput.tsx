@@ -8,18 +8,18 @@ import type { AccessibleProps } from '../index.types'
 import { Const } from '@common/ux'
 import './Form.styles.css'
 
-export type SearchInputOption = {
+export type SearchInputOption<T extends string = string> = {
     label: string
-    value: string
+    value: T
     icon?: ReactNode
     iconColor?: string
 }
 
 type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'
 
-type SearchInputProps<TFieldValues extends FieldValues> = AccessibleProps & {
+type SearchInputProps<TValue extends string, TFieldValues extends FieldValues> = AccessibleProps & {
     name: Path<TFieldValues>
-    options: SearchInputOption[]
+    options: SearchInputOption<TValue>[]
     buttonIcon?: SearchInputOptionButtonIcons
     icon?: ReactNode
     showIconWithInput?: boolean
@@ -27,10 +27,13 @@ type SearchInputProps<TFieldValues extends FieldValues> = AccessibleProps & {
     control: Control<TFieldValues>
     placeholder?: string
     highlightMatch?: boolean
-    onSelect: (option: SearchInputOption) => void
+    onSelect: (option: SearchInputOption<TValue>) => void
 }
 
-export const SearchInput = <TFieldValues extends FieldValues>({
+export const SearchInput = <
+    TValue extends string = string,
+    TFieldValues extends FieldValues = FieldValues,
+>({
     name,
     options,
     buttonIcon = 'magnifyingglass',
@@ -43,7 +46,7 @@ export const SearchInput = <TFieldValues extends FieldValues>({
     className,
     style,
     ...rest
-}: SearchInputProps<TFieldValues>) => {
+}: SearchInputProps<TValue, TFieldValues>) => {
     const [open, setOpen] = useState(false)
     const openClassStr = open ? 'open' : 'closed'
     const containerRef = useRef<HTMLDivElement>(null)
@@ -75,7 +78,7 @@ export const SearchInput = <TFieldValues extends FieldValues>({
                 .includes(text.replace(/\s/g, '').toUpperCase()),
         )
 
-    const getOptions = (options: SearchInputOption[], input: string) =>
+    const getOptions = (options: SearchInputOption<TValue>[], input: string) =>
         options.map((option) => (
             <div
                 className="option"
@@ -176,7 +179,10 @@ export const SearchInput = <TFieldValues extends FieldValues>({
                             </div>
                         </div>
                         {open && (
-                            <div className="option-dropdown" style={{ zIndex: Const.ZIndex.dropdown }}>
+                            <div
+                                className="option-dropdown"
+                                style={{ zIndex: Const.ZIndex.dropdown }}
+                            >
                                 {filteredOptions(value) && hasLength(filteredOptions(value)) ? (
                                     getOptions(filteredOptions(value), value)
                                 ) : (

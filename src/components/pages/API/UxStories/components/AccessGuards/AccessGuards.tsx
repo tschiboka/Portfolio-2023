@@ -36,7 +36,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
 
     return (
         <Screen
-            title={'Tivadar Debnar | Access Guards'}
+            title={'tschiboka | Access Guards'}
             path={path}
             variant="api"
             pageName="Projects"

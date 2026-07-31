@@ -10,7 +10,7 @@ type FiguresProps = { path: string }
 
 export const Figures = ({ path }: FiguresProps) => (
     <Screen
-        title={'Tivadar Debnar | Figures'}
+        title={'tschiboka | Figures'}
         path={path}
         variant="api"
         pageName="Projects"

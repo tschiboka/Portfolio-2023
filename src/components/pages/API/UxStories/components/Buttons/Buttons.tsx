@@ -11,7 +11,7 @@ const noop = () => {}
 
 export const Buttons = ({ path }: ButtonsProps) => (
     <Screen
-        title={'Tivadar Debnar | Buttons'}
+        title={'tschiboka | Buttons'}
         path={path}
         variant="api"
         pageName="Projects"

@@ -12,13 +12,7 @@ export const Gym = ({ path }: GymProps) => {
     const { data: exercises } = useGetGymExercises()
 
     return (
-        <Screen
-            title={'Tivadar Debnar | Gym'}
-            path={path}
-            loginRequired
-            variant="api"
-            pageName="Gym"
-        >
+        <Screen title={'tschiboka | Gym'} path={path} loginRequired variant="api" pageName="Gym">
             <Main>
                 <ExercisesSection exercises={exercises?.exercises || []} />
                 <Section title="Routines" expandable defaultOpen={false}>

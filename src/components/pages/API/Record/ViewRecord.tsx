@@ -7,7 +7,7 @@ interface ViewRecordsProps {
 const ViewRecords = ({ path }: ViewRecordsProps) => {
     return (
         <Screen
-            title={'Tivadar Debnar | View Records'}
+            title={'tschiboka | View Records'}
             path={path}
             loginRequired
             variant="api"
