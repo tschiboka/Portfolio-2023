@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react'
 import type { TableFilteringInput, TableFiltering } from '../Table.types'
 import { FilterInput } from './FilterInput'
 import './TableFilterPanel.styles.css'
@@ -19,6 +19,12 @@ const getDefaultValue = (input: TableFilteringInput): unknown => {
 const buildDefaults = (inputs: TableFilteringInput[]): FilterValues =>
     Object.fromEntries(inputs.map((i) => [i.key, getDefaultValue(i)]))
 
+// Fill any unset/undefined filter value with its input's default so inputs render controlled.
+const normalizeValues = (inputs: TableFilteringInput[], values: FilterValues): FilterValues =>
+    Object.fromEntries(
+        inputs.map((input) => [input.key, values[input.key] ?? getDefaultValue(input)]),
+    )
+
 export type TableFilterPanelHandle = {
     submit: () => void
     reset: () => void
@@ -31,19 +37,28 @@ type TableFilterPanelProps = {
 
 export const TableFilterPanel = forwardRef<TableFilterPanelHandle, TableFilterPanelProps>(
     ({ id, filtering }, ref) => {
-        const [values, setValues] = useState<FilterValues>(() => buildDefaults(filtering.inputs))
+        const [values, setValues] = useState<FilterValues>(() =>
+            normalizeValues(filtering.inputs, filtering.values ?? {}),
+        )
+
+        // Keep the form in sync when the applied filters change externally (URL hydration,
+        // back/forward), without clobbering the user's in-progress draft (only committed
+        // `filtering.values` changes trigger this).
+        useEffect(() => {
+            setValues(normalizeValues(filtering.inputs, filtering.values ?? {}))
+        }, [filtering.inputs, filtering.values])
 
         const handleChange = (key: string, value: unknown) => {
             setValues((prev) => ({ ...prev, [key]: value }))
         }
 
-        const handleSubmit = () => filtering.onFilter(values)
-
-        const handleReset = () => {
+        const handleReset = useCallback(() => {
             const defaults = buildDefaults(filtering.inputs)
             setValues(defaults)
             filtering.onFilter(defaults)
-        }
+        }, [filtering])
+
+        const handleSubmit = useCallback(() => filtering.onFilter(values), [filtering, values])
 
         useImperativeHandle(ref, () => ({ submit: handleSubmit, reset: handleReset }))
 

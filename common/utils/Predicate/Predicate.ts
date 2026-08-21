@@ -1,9 +1,4 @@
-type Nil = null | undefined
-type Defined<T> = Exclude<T, Nil>
-type Falsy = false | 0 | '' | Nil
-type Truthy<T> = Exclude<T, Falsy>
-type Emptiable = unknown[] | string | Record<string, unknown> | Nil
-type Primitive = string | number | boolean | Nil
+import type { Defined, Emptiable, Falsy, Nil, Nullish, Primitive, Truthy } from '../Generics'
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.
@@ -119,7 +114,7 @@ export const isString = (value: unknown): value is string => typeof value === 's
  * @param value - The value to check.
  * @returns `true` if the value is a primitive.
  */
-export const isPrimitive = (value: unknown): value is Primitive =>
+export const isPrimitive = (value: unknown): value is Nullish<Primitive> =>
     value === null ||
     value === undefined ||
     (typeof value !== 'object' && typeof value !== 'function')

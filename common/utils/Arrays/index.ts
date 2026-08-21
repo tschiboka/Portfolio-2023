@@ -1,1 +1,1 @@
-export { Arrays, shuffleArray } from './Arrays'
+export { Arrays, shuffleArray, times } from './Arrays'

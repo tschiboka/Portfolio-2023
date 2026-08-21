@@ -127,16 +127,17 @@ export type TableFilteringInput =
 
 export type TableFiltering = {
     inputs: TableFilteringInput[]
+    values?: Record<string, unknown>
     onFilter: (values: Record<string, unknown>) => void
 }
 
 export type TablePagination = {
-    page: number
+    pageNumber: number
     totalPages: number
     pageSize?: number
     pageSizeOptions?: number[]
     totalItems?: number
-    onPageChange: (page: number) => void
+    onPageChange: (pageNumber: number) => void
     onPageSizeChange: (size: number) => void
 }
 

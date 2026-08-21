@@ -5,7 +5,7 @@ import { MIN_WORD_LENGTH } from '../../../common/utils'
 
 type CalculateLetterPositionsProps = {
     letters: string[]
-    containerRef: RefObject<HTMLElement>
+    containerRef: RefObject<HTMLElement | null>
 }
 
 export const calculateLetterPositions = ({
@@ -17,7 +17,7 @@ export const calculateLetterPositions = ({
     // Get the wheel element (child of container) for accurate positioning
     const wheelEl = containerRef.current.querySelector('.letter-wheel')
     if (!wheelEl) return []
-    
+
     const wheelRect = wheelEl.getBoundingClientRect()
     const size = wheelRect.width // width === height for circular wheel
     const centerX = size / 2
@@ -30,8 +30,8 @@ export const calculateLetterPositions = ({
         const rad = (angle * Math.PI) / 180
 
         // Calculate position relative to wheel center
-        let cx = centerX - radius * Math.cos(rad)
-        let cy = centerY - radius * Math.sin(rad)
+        const cx = centerX - radius * Math.cos(rad)
+        const cy = centerY - radius * Math.sin(rad)
 
         const transform = `
             rotate(${angle}deg)
@@ -59,12 +59,9 @@ export const recalculatePositions = ({
     setPositions(newPositions)
 }
 
-export const getLetterComponent = (
-    target: Element | null,
-): HTMLElement | null => {
-    const isLetter =
-        target instanceof HTMLElement && target.dataset.letterId !== undefined
-    return isLetter ? (target as HTMLElement) : null
+export const getLetterComponent = (target: Element | null): HTMLElement | null => {
+    const isLetter = target instanceof HTMLElement && target.dataset.letterId !== undefined
+    return isLetter ? target : null
 }
 
 type SubmitMoveParams = {
@@ -83,28 +80,27 @@ export const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) =
     setTouchState({ touchedIds: [], touchedLetters: '' })
 }
 
-export const isSubmitKeyStroke = (key: string) =>
-    key === 'Enter' || key === 'Return' || key === ' '
+export const isSubmitKeyStroke = (key: string) => key === 'Enter' || key === 'Return' || key === ' '
 
 export const getTouchState = (
     prevIds: number[],
     prevLetters: string,
     letter: string,
-    id: number
+    id: number,
 ): TouchState => {
     const indexInStack = prevIds.indexOf(id)
-    
+
     if (indexInStack === -1) {
         return {
             touchedIds: [...prevIds, id],
-            touchedLetters: prevLetters + letter
+            touchedLetters: prevLetters + letter,
         }
     } else if (indexInStack === prevIds.length - 2) {
         return {
             touchedIds: prevIds.slice(0, -1),
-            touchedLetters: prevLetters.slice(0, -1)
+            touchedLetters: prevLetters.slice(0, -1),
         }
     }
-    
+
     return { touchedIds: prevIds, touchedLetters: prevLetters }
 }

@@ -5,13 +5,13 @@ import {
     createHandleTouchMove,
     createHandleTouchEnd,
 } from './LetterWheel.handlers'
-import {  recalculatePositions } from './LetterWheel.utils'
+import { recalculatePositions } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 
 type UseLetterWheelListenersProps = {
-    containerRef: RefObject<HTMLDivElement>
-    wheelRef: RefObject<HTMLDivElement>
+    containerRef: RefObject<HTMLDivElement | null>
+    wheelRef: RefObject<HTMLDivElement | null>
     inputLetters: string
     allowKeyboardInput: boolean
     touchState: TouchState
@@ -29,8 +29,7 @@ export const useLetterWheelListeners = ({
     setPositions,
     setTouchState,
     send,
-}: UseLetterWheelListenersProps
-) => {
+}: UseLetterWheelListenersProps) => {
     // Keyboard
     useEffect(() => {
         if (!allowKeyboardInput) return
@@ -42,11 +41,12 @@ export const useLetterWheelListeners = ({
 
     // Resize
     useEffect(() => {
-        const updatePositions = () => recalculatePositions({
-            letters: inputLetters.split(''),
-            containerRef,
-            setPositions,
-        })
+        const updatePositions = () =>
+            recalculatePositions({
+                letters: inputLetters.split(''),
+                containerRef,
+                setPositions,
+            })
         updatePositions()
         window.addEventListener('resize', updatePositions)
 
@@ -65,12 +65,12 @@ export const useLetterWheelListeners = ({
         }
 
         Object.entries(handlers).forEach(([event, handler]) =>
-            wheel.addEventListener(event, handler)
+            wheel.addEventListener(event, handler),
         )
 
         return () =>
             Object.entries(handlers).forEach(([event, handler]) =>
-                wheel.removeEventListener(event, handler)
+                wheel.removeEventListener(event, handler),
             )
     }, [touchState, setTouchState, send, wheelRef])
 }

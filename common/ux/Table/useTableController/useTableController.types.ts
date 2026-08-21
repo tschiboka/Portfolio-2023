@@ -1,22 +1,24 @@
+import { Paging, SortDirection, TableSortState } from '.'
 import type { TableFilteringInput } from '../Table.types'
-import type { FilterConfig } from './filters'
+import type { FilterDefinitions } from '../TableFilterConfig'
+import type { Dictionary } from '@common/utils/Generics'
+export type { SortDirection, TableSortState, Paging } from '@common/types'
 
-export type SortDirection = 'asc' | 'desc'
-
-export type TableSortState = {
-    column: string
-    direction: SortDirection
+export type TableState<TFilters extends Dictionary> = {
+    filters: TFilters
+    sorting: TableSortState
+    pagination: Paging
 }
 
-export type TablePaginationState = {
-    page: number
-    pageSize: number
+export type UrlPersistenceConfig = {
+    // default true
+    enabled?: boolean
+    // only set namespace when multiple persistent tables share a page
+    namespace?: string
 }
 
-export type UseTableConfig<TFilters extends Record<string, unknown>, TParams> = {
-    filters?: {
-        [K in keyof TFilters]: FilterConfig
-    }
+export type UseTableConfig<TFilters extends Dictionary, TParams> = {
+    filters?: FilterDefinitions<TFilters>
     sorting?: {
         default?: TableSortState
     }
@@ -24,24 +26,16 @@ export type UseTableConfig<TFilters extends Record<string, unknown>, TParams> = 
         pageSize?: number
         pageSizeOptions?: number[]
     }
+    urlPersistence?: UrlPersistenceConfig
     toParams: ToParamsFn<TFilters, TParams>
 }
 
-export type ToParamsFn<TFilters extends Record<string, unknown>, TParams> = (state: {
-    filters: TFilters
-    sorting: TableSortState
-    pagination: TablePaginationState
-}) => TParams
+export type ToParamsFn<TFilters extends Dictionary, TParams> = (
+    state: TableState<TFilters>,
+) => TParams
 
-export type TableControl<
-    TFilters extends Record<string, unknown> = Record<string, unknown>,
-    TParams = unknown,
-> = {
-    state: {
-        filters: TFilters
-        sorting: TableSortState
-        pagination: TablePaginationState
-    }
+export type TableControl<TFilters extends Dictionary = Dictionary, TParams = unknown> = {
+    state: TableState<TFilters>
     params: TParams
     sorting: {
         column: string
@@ -49,16 +43,17 @@ export type TableControl<
         onSortChange: (column: string, direction: SortDirection) => void
     }
     pagination: {
-        page: number
+        pageNumber: number
         pageSize: number
         pageSizeOptions?: number[]
         totalPages?: number
         totalItems?: number
-        onPageChange: (page: number) => void
+        onPageChange: (pageNumber: number) => void
         onPageSizeChange: (size: number) => void
     }
     filtering: {
         inputs: TableFilteringInput[]
-        onFilter: (values: Record<string, unknown>) => void
+        values: Dictionary
+        onFilter: (values: Dictionary) => void
     }
 }

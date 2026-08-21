@@ -3,11 +3,9 @@ import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Buttons.code'
+import { Functions } from '@common/utils/Functions/Functions'
 
 type ButtonsProps = { path: string }
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-const noop = () => {}
 
 export const Buttons = ({ path }: ButtonsProps) => (
     <Screen
@@ -37,8 +35,8 @@ export const Buttons = ({ path }: ButtonsProps) => (
                     <CodeText>md</CodeText>.
                 </Paragraph>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <Button onClick={noop}>Submit</Button>
-                    <Button variant="secondary" onClick={noop}>
+                    <Button onClick={Functions.noop}>Submit</Button>
+                    <Button variant="secondary" onClick={Functions.noop}>
                         Cancel
                     </Button>
                 </Stack.Horizontal>
@@ -55,8 +53,8 @@ export const Buttons = ({ path }: ButtonsProps) => (
                     <CodeText>secondary</CodeText> (dark background with accent border).
                 </Paragraph>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <Button onClick={noop}>Primary</Button>
-                    <Button variant="secondary" onClick={noop}>
+                    <Button onClick={Functions.noop}>Primary</Button>
+                    <Button variant="secondary" onClick={Functions.noop}>
                         Secondary
                     </Button>
                 </Stack.Horizontal>
@@ -72,16 +70,16 @@ export const Buttons = ({ path }: ButtonsProps) => (
                     <CodeText>sm</CodeText> (compact, suitable for inline actions and toolbars).
                 </Paragraph>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <Button onClick={noop}>Standard</Button>
-                    <Button size="sm" onClick={noop}>
+                    <Button onClick={Functions.noop}>Standard</Button>
+                    <Button size="sm" onClick={Functions.noop}>
                         Compact
                     </Button>
                 </Stack.Horizontal>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
-                    <Button variant="secondary" onClick={noop}>
+                    <Button variant="secondary" onClick={Functions.noop}>
                         Standard
                     </Button>
-                    <Button variant="secondary" size="sm" onClick={noop}>
+                    <Button variant="secondary" size="sm" onClick={Functions.noop}>
                         Compact
                     </Button>
                 </Stack.Horizontal>
@@ -139,7 +137,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
                     Use <CodeText>ariaLabel</CodeText> when the visible label alone doesn
                     {"'"}t convey enough context for screen readers.
                 </Paragraph>
-                <Button ariaLabel="Save current document" onClick={noop}>
+                <Button ariaLabel="Save current document" onClick={Functions.noop}>
                     Save
                 </Button>
                 <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />

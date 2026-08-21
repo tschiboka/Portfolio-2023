@@ -1,11 +1,5 @@
 export { Table } from './Table'
-export {
-    useTableController,
-    text,
-    select,
-    date,
-    number,
-    search,
-    checkbox,
-} from './useTableController'
+export { useTableController } from './useTableController'
 export type { TableControl } from './useTableController'
+export { text, select, date, number, search, checkbox } from './TableFilterConfig'
+export { useTableUrlPersistence, buildCodec } from './TableUrlPersistence'

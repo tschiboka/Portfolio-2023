@@ -1,6 +1,6 @@
 import { text, select, date } from '@common/ux'
 import type { ActivityType } from '@common/types'
-import type { FilterConfig } from '@common/ux/Table/useTableController/filters'
+import type { FilterConfig } from '@common/ux/Table/TableFilterConfig'
 
 export type ActivityFiltersData = {
     path?: string

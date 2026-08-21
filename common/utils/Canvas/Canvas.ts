@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
 import { Canvas, Circle, Line, Point } from './Canvas.types'
 
-export const useCanvas = (ref: RefObject<HTMLCanvasElement>): Canvas => {
+export const useCanvas = (ref: RefObject<HTMLCanvasElement | null>): Canvas => {
     const createCanvas = () => {
         const canvas = ref.current
         if (!canvas) return

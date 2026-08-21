@@ -9,6 +9,14 @@ export const shuffleArray = <T>(array: T[]): T[] => {
     return shuffled
 }
 
+/** Build a `count`-length array by calling `build` once per index, 0-based.
+ * @example
+ * times(3, (i) => i + 1) // [1, 2, 3]
+ */
+export const times = <T>(count: number, build: (index: number) => T): T[] =>
+    Array.from({ length: count }, (_, index) => build(index))
+
 export const Arrays = {
     shuffleArray,
+    times,
 }

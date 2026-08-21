@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef } from 'react'
 import { RoundResponse, TypistContextValues, TypistEditorState } from './Typist.types'
-import { ContextBuilder } from '@common/utils'
+import { ContextBuilder, Functions } from '@common/utils'
 import { textToWords } from './Typist.utils'
 import { usePostRound } from './Typist.queries'
 import { editorReducer } from './Editor/Editor.reducer'
@@ -23,8 +23,7 @@ const initialState: TypistEditorState = {
 
 const initialValues: TypistContextValues = {
     editorState: initialState,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    dispatch: () => {},
+    dispatch: Functions.noop,
     isLoading: false,
 }
 

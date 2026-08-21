@@ -21,7 +21,7 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
 }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
-    const animationRef = useRef<number>()
+    const animationRef = useRef<number>(0)
     const lightsRef = useRef<Light[]>([])
 
     const getPositionOnBorder = (

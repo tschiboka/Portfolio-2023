@@ -20,11 +20,11 @@ type GetActivityReq = TypedRequest<{ query: GetActivityFeedQuery }>
 type GetActivityRes = TypedResponse<GetActivityFeedResponse>
 
 router.get('/admin', [auth, admin], async (req: GetActivityReq, res: GetActivityRes) => {
-    const { path, type, dateFrom, dateTo, sortBy, asc, page, pageSize } = req.query
+    const { path, type, dateFrom, dateTo, sortBy, asc, pageNumber, pageSize } = req.query
 
-    const pageNumber = Math.max(parseInt(page ?? '1', 10), 1)
+    const currentPage = Math.max(parseInt(pageNumber ?? '1', 10), 1)
     const limit = Math.min(Math.max(parseInt(pageSize ?? '10', 10), 1), 100)
-    const skip = (pageNumber - 1) * limit
+    const skip = (currentPage - 1) * limit
     const dir = asc === 'true' ? 1 : -1
 
     // Build parallel queries from each collection
@@ -173,7 +173,7 @@ router.get('/admin', [auth, admin], async (req: GetActivityReq, res: GetActivity
         meta: {
             totalItems,
             totalPages: Math.ceil(totalItems / limit),
-            pageNumber,
+            pageNumber: currentPage,
         },
         context: summary,
     })

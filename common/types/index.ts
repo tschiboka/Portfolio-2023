@@ -29,6 +29,7 @@ export * from './projects/typist'
 export * from './projects/wda'
 export * from './projects/xmas'
 export * from './projects/gym'
+export * from './table'
 
 import type { Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'

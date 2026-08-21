@@ -21,8 +21,10 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
     if (Array.isArray(node)) {
         return node.flatMap(flattenChildren)
     }
-    if (isValidElement(node) && (node.type as any) === FRAGMENT_TYPE) {
-        return flattenChildren((node as React.ReactElement).props.children)
+    if (isValidElement(node) && (node.type as unknown) === FRAGMENT_TYPE) {
+        return flattenChildren(
+            ((node as React.ReactElement).props as { children?: ReactNode }).children,
+        )
     }
     return [node]
 }
@@ -39,7 +41,8 @@ export const extractSlot = (
     for (const child of flat) {
         if (isValidElement(child)) {
             const el = child as React.ReactElement
-            if (el.type && (el.type as any).displayName === slotName) {
+            const type = el.type as { displayName?: string }
+            if (type.displayName === slotName) {
                 slots.push(child)
             } else {
                 rest.push(child)

@@ -1,22 +1,15 @@
 import type { ActivityFeedSortBy, GetActivityFeedQuery } from '@common/types'
-import type {
-    TableSortState,
-    TablePaginationState,
-} from '@common/ux/Table/useTableController/useTableController.types'
+import type { TableState } from '@common/ux/Table/useTableController/useTableController.types'
 import type { ActivityFiltersData } from './BreakdownTable.filters'
 import { BaseTransformer } from '@common/utils/Transformer'
 
-type BreakdownParamsInput = {
-    filters: ActivityFiltersData
-    sorting: TableSortState
-    pagination: TablePaginationState
-}
+type BreakdownParamsInput = TableState<ActivityFiltersData>
 
 class BreakdownParamsTransformer extends BaseTransformer<
     BreakdownParamsInput,
     GetActivityFeedQuery
 > {
-    override Get(state: BreakdownParamsInput): GetActivityFeedQuery {
+    override Get(this: void, state: BreakdownParamsInput): GetActivityFeedQuery {
         return {
             path: state.filters.path,
             type: state.filters.type,
@@ -24,7 +17,7 @@ class BreakdownParamsTransformer extends BaseTransformer<
             dateTo: state.filters.dateTo,
             sortBy: state.sorting.column as ActivityFeedSortBy,
             asc: state.sorting.direction === 'asc' ? 'true' : undefined,
-            page: String(state.pagination.page),
+            pageNumber: String(state.pagination.pageNumber),
             pageSize: String(state.pagination.pageSize),
         }
     }

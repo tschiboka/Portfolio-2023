@@ -113,7 +113,7 @@ const StatCard = ({ label, value }: { label: string; value: number }) => (
 type DataSectionProps = {
     title: string
     data: SectionData
-    icon: JSX.Element
+    icon: React.JSX.Element
 }
 
 const DataSection = ({ title, data, icon }: DataSectionProps) => (

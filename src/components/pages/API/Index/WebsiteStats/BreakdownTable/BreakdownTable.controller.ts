@@ -7,5 +7,6 @@ export const useBreakdownTableController = () =>
     useTableController<ActivityFiltersData, GetActivityFeedQuery>({
         filters,
         sorting: { default: { column: 'datetime', direction: 'desc' } },
+        urlPersistence: { namespace: 'breakdown' },
         toParams: breakdownParamsTransformer.Get,
     })

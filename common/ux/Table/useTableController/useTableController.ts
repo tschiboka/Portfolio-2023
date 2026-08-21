@@ -1,55 +1,125 @@
-import { useCallback, useMemo, useState } from 'react'
-import type { FilterConfig } from './filters'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import type { FilterDefinitions } from '../TableFilterConfig'
 import type {
     UseTableConfig,
     TableControl,
-    TableSortState,
     SortDirection,
+    TableState,
 } from './useTableController.types'
 import { TableFilteringInput } from '../Table.types'
+import { useTableUrlPersistence, statesEqual } from '../TableUrlPersistence'
+import { Table } from '@common/utils'
+import { isDefined, Objects } from '@common/utils'
+import type { Dictionary } from '@common/utils/Generics'
 
-// ─── Hook ────────────────────────────────────────────────────────────────────
-
-const getDefaultFilters = <TFilters extends Record<string, unknown>>(filterDefs?: {
-    [K in keyof TFilters]: FilterConfig
-}): TFilters => {
-    if (!filterDefs) return {} as TFilters
-    return Object.fromEntries(
+const getDefaultFilters = <TFilters extends Dictionary>(
+    filterDefs?: FilterDefinitions<TFilters>,
+): TFilters => {
+    if (!isDefined(filterDefs)) return Objects.fromEntries<TFilters>([])
+    return Objects.fromEntries<TFilters>(
         Object.entries(filterDefs).map(([key]) => [key, undefined]),
-    ) as TFilters
+    )
 }
 
-export const useTableController = <TFilters extends Record<string, unknown>, TParams = unknown>({
+export const useTableController = <TFilters extends Dictionary, TParams = unknown>({
     filters: filterDefs,
     sorting: sortingConfig,
     pagination: paginationConfig,
+    urlPersistence: urlPersistenceConfig,
     toParams,
 }: UseTableConfig<TFilters, TParams>): TableControl<TFilters, TParams> => {
-    const [filters, setFilters] = useState<TFilters>(getDefaultFilters(filterDefs))
-    const [sort, setSort] = useState<TableSortState>(
-        sortingConfig?.default ?? { column: '', direction: 'asc' },
+    const urlPersistence = useTableUrlPersistence<TFilters>({
+        filters: filterDefs,
+        defaultSort: sortingConfig?.default ?? Table.Sorting.defaults,
+        defaultPaging: {
+            pageNumber: Table.Paging.defaults.pageNumber,
+            pageSize: paginationConfig?.pageSize ?? Table.Paging.defaults.pageSize,
+        },
+        config: urlPersistenceConfig,
+    })
+    const urlState = urlPersistence.enabled ? urlPersistence.state : null
+
+    const [state, setState] = useState<TableState<TFilters>>(() => ({
+        filters: urlState?.filters ?? getDefaultFilters(filterDefs),
+        sorting: urlState?.sorting ?? sortingConfig?.default ?? Table.Sorting.defaults,
+        pagination: {
+            pageNumber: urlState?.pagination.pageNumber ?? Table.Paging.defaults.pageNumber,
+            pageSize:
+                urlState?.pagination.pageSize ??
+                paginationConfig?.pageSize ??
+                Table.Paging.defaults.pageSize,
+        },
+    }))
+
+    // Single commit point: apply a state transition and persist it (once) when enabled.
+    // `replace` mirrors the URL history mode: filter apply/reset pushes (Back restores the
+    // filtered state); sort/page replace (no granular history).
+    const commit = useCallback(
+        (transition: (prev: TableState<TFilters>) => TableState<TFilters>, replace = true) => {
+            setState((prev) => {
+                const next = transition(prev)
+                if (urlPersistence.enabled) urlPersistence.persist(next, replace)
+                return next
+            })
+        },
+        [urlPersistence],
     )
-    const [page, setPage] = useState(1)
-    const [pageSize, setPageSize] = useState(paginationConfig?.pageSize ?? 10)
 
-    const handleFilter = useCallback((values: Record<string, unknown>) => {
-        setFilters((prev) => ({ ...prev, ...values }) as TFilters)
-        setPage(1)
-    }, [])
+    // Two-way sync: when the URL changes externally (back/forward, nav, manual URL edits)
+    // without a `commit`, mirror the URL-derived state back in. Our own persist echo already
+    // matches `state`, so `statesEqual` makes this a no-op for it. `prev` is read functionally
+    // so `state` is not a dependency.
+    useEffect(() => {
+        if (!urlPersistence.enabled || !urlState) return
+        setState((prev) => (statesEqual(prev, urlState) ? prev : urlState))
+    }, [urlState, urlPersistence.enabled, urlPersistence])
 
-    const handleSortChange = useCallback((column: string, direction: SortDirection) => {
-        setSort({ column, direction })
-        setPage(1)
-    }, [])
+    const { sorting: sort, pagination } = state
+    const { pageNumber, pageSize } = pagination
 
-    const handlePageChange = useCallback((p: number) => {
-        setPage(p)
-    }, [])
+    const handleFilter = useCallback(
+        (values: Dictionary) =>
+            commit(
+                (prev) => ({
+                    ...prev,
+                    filters: { ...prev.filters, ...values } as TFilters,
+                    pagination: {
+                        ...prev.pagination,
+                        pageNumber: Table.Paging.defaults.pageNumber,
+                    },
+                }),
+                false,
+            ),
+        [commit],
+    )
 
-    const handlePageSizeChange = useCallback((size: number) => {
-        setPageSize(size)
-        setPage(1)
-    }, [])
+    const handleSortChange = useCallback(
+        (column: string, direction: SortDirection) =>
+            commit((prev) => ({
+                ...prev,
+                sorting: { column, direction },
+                pagination: { ...prev.pagination, pageNumber: Table.Paging.defaults.pageNumber },
+            })),
+        [commit],
+    )
+
+    const handlePageChange = useCallback(
+        (p: number) =>
+            commit((prev) => ({
+                ...prev,
+                pagination: { ...prev.pagination, pageNumber: p },
+            })),
+        [commit],
+    )
+
+    const handlePageSizeChange = useCallback(
+        (size: number) =>
+            commit((prev) => ({
+                ...prev,
+                pagination: { pageNumber: Table.Paging.defaults.pageNumber, pageSize: size },
+            })),
+        [commit],
+    )
 
     const pageSizeOptions = paginationConfig?.pageSizeOptions
 
@@ -59,25 +129,11 @@ export const useTableController = <TFilters extends Record<string, unknown>, TPa
             key,
             label: config.label,
             type: config.type,
-            ...('placeholder' in config ? { placeholder: config.placeholder } : {}),
-            ...('options' in config ? { options: config.options } : {}),
-            ...('min' in config ? { min: config.min } : {}),
-            ...('max' in config ? { max: config.max } : {}),
-            ...('required' in config ? { required: config.required } : {}),
-            ...('span' in config ? { span: config.span } : {}),
+            ...Objects.pick(config, ['placeholder', 'options', 'min', 'max', 'required', 'span']),
         })) as TableFilteringInput[]
     }, [filterDefs])
 
-    const state = useMemo(
-        () => ({ filters, sorting: sort, pagination: { page, pageSize } }),
-        [filters, sort, page, pageSize],
-    )
-
-    const params = useMemo(
-        () => toParams(state),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [filters, sort.column, sort.direction, page, pageSize],
-    )
+    const params = useMemo(() => toParams(state), [state, toParams])
 
     return {
         state,
@@ -88,7 +144,7 @@ export const useTableController = <TFilters extends Record<string, unknown>, TPa
             onSortChange: handleSortChange,
         },
         pagination: {
-            page,
+            pageNumber,
             pageSize,
             pageSizeOptions,
             onPageChange: handlePageChange,
@@ -96,6 +152,7 @@ export const useTableController = <TFilters extends Record<string, unknown>, TPa
         },
         filtering: {
             inputs: filterInputs,
+            values: state.filters,
             onFilter: handleFilter,
         },
     }

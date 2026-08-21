@@ -1,5 +1,5 @@
 import { CacheKeyBuilder, QueryKey } from '../Key'
-
+import type { Key } from '@common/utils/Generics'
 
 describe('CacheKeyBuilder', () => {
     describe('build (base key only)', () => {
@@ -174,7 +174,6 @@ describe('CacheKeyBuilder', () => {
     })
 })
 
-
 describe('QueryKey', () => {
     const expectedKeys: Record<string, string> = {
         AppSettings: 'app-settings',
@@ -193,7 +192,7 @@ describe('QueryKey', () => {
 
     describe('each key should return a CacheKeyBuilder with the correct base key', () => {
         it.each(Object.entries(expectedKeys))('%s → ["%s"]', (property, baseKey) => {
-            const builder = QueryKey[property as keyof typeof QueryKey]
+            const builder = QueryKey[property as Key<typeof QueryKey>]
             expect(builder).toBeInstanceOf(CacheKeyBuilder)
             expect(builder.build()).toEqual([baseKey])
         })

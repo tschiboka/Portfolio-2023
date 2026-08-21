@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express'
-import { HttpStatus } from '../../common/utils/Server/HttpStatus'
 import auth from './auth'
 import admin from './admin'
 

@@ -57,7 +57,7 @@ describe('Table — Refresh & Loading', () => {
                 data: [],
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 1,
                     pageSize: 5,
                     onPageChange: vi.fn(),
@@ -75,7 +75,7 @@ describe('Table — Refresh & Loading', () => {
                 data: [],
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 1,
                     pageSize: 3,
                     onPageChange: vi.fn(),
@@ -99,7 +99,7 @@ describe('Table — Refresh & Loading', () => {
                     { header: 'D', accessor: 'note' },
                 ],
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 1,
                     pageSize: 1,
                     onPageChange: vi.fn(),

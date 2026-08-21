@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { isNumber } from '@common/utils/Predicate'
+import type { Key } from '@common/utils/Generics'
 import { HttpStatus } from '../HttpStatus'
 
 describe('HttpStatus', () => {
@@ -10,7 +11,7 @@ describe('HttpStatus', () => {
             ['PROCESSING', 102],
             ['EARLY_HINTS', 103],
         ])('%s should be %i', (key: string, value: number) => {
-            expect(HttpStatus[key as keyof typeof HttpStatus]).toBe(value)
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
 
@@ -27,7 +28,7 @@ describe('HttpStatus', () => {
             ['ALREADY_REPORTED', 208],
             ['IM_USED', 226],
         ])('%s should be %i', (key: string, value: number) => {
-            expect(HttpStatus[key as keyof typeof HttpStatus]).toBe(value)
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
 
@@ -41,7 +42,7 @@ describe('HttpStatus', () => {
             ['TEMPORARY_REDIRECT', 307],
             ['PERMANENT_REDIRECT', 308],
         ])('%s should be %i', (key: string, value: number) => {
-            expect(HttpStatus[key as keyof typeof HttpStatus]).toBe(value)
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
 
@@ -77,7 +78,7 @@ describe('HttpStatus', () => {
             ['REQUEST_HEADER_FIELDS_TOO_LARGE', 431],
             ['UNAVAILABLE_FOR_LEGAL_REASONS', 451],
         ])('%s should be %i', (key: string, value: number) => {
-            expect(HttpStatus[key as keyof typeof HttpStatus]).toBe(value)
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
 
@@ -95,7 +96,7 @@ describe('HttpStatus', () => {
             ['NOT_EXTENDED', 510],
             ['NETWORK_AUTHENTICATION_REQUIRED', 511],
         ])('%s should be %i', (key: string, value: number) => {
-            expect(HttpStatus[key as keyof typeof HttpStatus]).toBe(value)
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
 

@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import { LocalSession } from '../../../src/context/SessionContext'
 import { apiPathBuilder } from '../Path/apiPathBuilder'
+import { Objects } from '../Objects'
 import { hasLength } from '../Predicate'
 import { PathKey } from '../Path/Path.types'
 
@@ -235,6 +236,6 @@ export class RequestBuilder {
      * Returns a copy of the object with all `null` / `undefined` entries removed.
      */
     private clean<T extends Record<string, unknown>>(params: T): T {
-        return Object.fromEntries(Object.entries(params).filter(([, v]) => v != null)) as T
+        return Objects.fromEntries<T>(Object.entries(params).filter(([, v]) => v != null))
     }
 }

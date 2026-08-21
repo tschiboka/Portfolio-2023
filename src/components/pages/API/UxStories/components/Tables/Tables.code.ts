@@ -16,7 +16,7 @@ export const Code = {
     toParams: (state) => ({
         sortBy: state.sorting.column,
         asc: state.sorting.direction === 'asc' ? 'true' : undefined,
-        page: String(state.pagination.page),
+        pageNumber: String(state.pagination.pageNumber),
         pageSize: String(state.pagination.pageSize),
         ...state.filters,
     }),

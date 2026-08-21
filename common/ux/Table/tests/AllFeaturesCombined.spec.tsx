@@ -117,7 +117,7 @@ describe('Table — Combined Features', () => {
                 onDownload: vi.fn(),
             },
             pagination: {
-                page: 1,
+                pageNumber: 1,
                 totalPages: 2,
                 pageSize: 3,
                 pageSizeOptions: [3, 5, 10],
@@ -320,7 +320,7 @@ describe('Table — Combined Features', () => {
             ],
             download: { onDownload, label: 'Export' },
             pagination: {
-                page: 1,
+                pageNumber: 1,
                 totalPages: 2,
                 pageSize: 3,
                 totalItems: 5,
@@ -380,7 +380,7 @@ describe('Table — Combined Features', () => {
                 onFilter: vi.fn(),
             },
             pagination: {
-                page: 1,
+                pageNumber: 1,
                 totalPages: 2,
                 onPageChange: vi.fn(),
                 onPageSizeChange: vi.fn(),
@@ -419,7 +419,7 @@ describe('Table — Combined Features', () => {
             },
             download: { onDownload: vi.fn() },
             pagination: {
-                page: 1,
+                pageNumber: 1,
                 totalPages: 0,
                 onPageChange: vi.fn(),
                 onPageSizeChange: vi.fn(),

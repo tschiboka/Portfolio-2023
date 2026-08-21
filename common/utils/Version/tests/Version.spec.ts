@@ -1,6 +1,7 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { useVersionCheck } from '../Version'
 import { GetVersionResponse } from '../../../types'
+import { Functions } from '@common/utils'
 
 const VALID_SHA = 'a'.repeat(40)
 const OTHER_SHA = 'b'.repeat(40)
@@ -22,10 +23,10 @@ const mockFetch = (body: GetVersionResponse, ok = true) => {
 describe('useVersionCheck', () => {
     beforeEach(() => {
         vi.useFakeTimers({ shouldAdvanceTime: true })
-        vi.spyOn(console, 'log').mockImplementation(() => {})
-        vi.spyOn(console, 'warn').mockImplementation(() => {})
-        vi.spyOn(console, 'info').mockImplementation(() => {})
-        vi.spyOn(console, 'error').mockImplementation(() => {})
+        vi.spyOn(console, 'log').mockImplementation(Functions.noop)
+        vi.spyOn(console, 'warn').mockImplementation(Functions.noop)
+        vi.spyOn(console, 'info').mockImplementation(Functions.noop)
+        vi.spyOn(console, 'error').mockImplementation(Functions.noop)
     })
 
     afterEach(() => {

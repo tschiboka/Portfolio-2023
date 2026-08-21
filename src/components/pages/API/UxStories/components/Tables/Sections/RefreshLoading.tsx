@@ -4,6 +4,7 @@ import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
 import { type Row, rows } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 import { renderStatus } from '../Tables.config'
+import { Functions } from '@common/utils/Functions/Functions'
 
 export const RefreshLoading = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -53,11 +54,11 @@ export const RefreshLoading = () => {
                     onRefresh={handleRefresh}
                     emptyState={undefined}
                     pagination={{
-                        page: 1,
+                        pageNumber: 1,
                         totalPages: 1,
                         pageSize: 5,
-                        onPageChange: () => {},
-                        onPageSizeChange: () => {},
+                        onPageChange: Functions.noop,
+                        onPageSizeChange: Functions.noop,
                     }}
                 />
                 <Code language="tsx" content={Snippets.RefreshLoading.refresh} />

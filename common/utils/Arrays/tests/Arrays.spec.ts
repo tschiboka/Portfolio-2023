@@ -89,3 +89,37 @@ describe('Arrays.shuffleArray', () => {
         expect(result.sort()).toEqual(input.sort())
     })
 })
+
+describe('Arrays.times', () => {
+    it('builds an array of the given length', () => {
+        expect(Arrays.times(3, (index) => index)).toEqual([0, 1, 2])
+    })
+
+    it('passes the 0-based index to the builder', () => {
+        expect(Arrays.times(4, (index) => `h${index + 1}`)).toEqual(['h1', 'h2', 'h3', 'h4'])
+    })
+
+    it('returns an empty array for a count of 0', () => {
+        expect(Arrays.times(0, (index) => index)).toEqual([])
+    })
+
+    it('builds heterogeneous values returned by the builder', () => {
+        expect(Arrays.times(2, (index) => ({ key: index }))).toEqual([{ key: 0 }, { key: 1 }])
+    })
+
+    it('calls the builder exactly once per index', () => {
+        const build = vi.fn((index: number) => index)
+        Arrays.times(5, build)
+        expect(build).toHaveBeenCalledTimes(5)
+        expect(build).toHaveBeenNthCalledWith(1, 0)
+        expect(build).toHaveBeenNthCalledWith(5, 4)
+    })
+
+    it('truncates a non-integer count down (ToLength)', () => {
+        expect(Arrays.times(2.9, (index) => index)).toEqual([0, 1])
+    })
+
+    it('returns an empty array for a negative count (matches Array.from)', () => {
+        expect(Arrays.times(-1, (index) => index)).toEqual([])
+    })
+})

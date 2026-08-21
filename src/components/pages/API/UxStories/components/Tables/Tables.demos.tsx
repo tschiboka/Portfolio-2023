@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
-import { Table } from '@common/ux/Table'
+import { Table, useTableController, text, select } from '@common/ux/Table'
 import type { SortDirection, TableColumns } from '@common/ux/Table/Table.types'
+import type { UrlPersistenceConfig } from '@common/ux/Table/useTableController/useTableController.types'
 import { Pill } from '@common/ux'
 import { toUpper } from 'ramda'
 import {
@@ -136,7 +137,7 @@ export const PaginationDemo = () => {
             data={p.pageData}
             columns={paginationColumns}
             pagination={{
-                page: p.page,
+                pageNumber: p.page,
                 totalPages: p.totalPages,
                 pageSize: p.pageSize,
                 totalItems: p.totalItems,
@@ -156,7 +157,7 @@ export const CustomPageSizeDemo = () => {
             data={p.pageData}
             columns={paginationColumns}
             pagination={{
-                page: p.page,
+                pageNumber: p.page,
                 totalPages: p.totalPages,
                 pageSize: p.pageSize,
                 pageSizeOptions: [5, 15, 30],
@@ -178,7 +179,7 @@ export const SmallDatasetPaginationDemo = () => {
             data={p.pageData}
             columns={paginationColumns}
             pagination={{
-                page: p.page,
+                pageNumber: p.page,
                 totalPages: p.totalPages,
                 pageSize: p.pageSize,
                 totalItems: p.totalItems,
@@ -198,7 +199,7 @@ export const NoTotalItemsDemo = () => {
             data={p.pageData}
             columns={paginationColumns}
             pagination={{
-                page: p.page,
+                pageNumber: p.page,
                 totalPages: p.totalPages,
                 pageSize: p.pageSize,
                 onPageChange: p.setPage,
@@ -330,7 +331,7 @@ export const AllFeaturesCombinedDemo = () => {
                 onDownload: (value, data) => alert(`${value}: ${data.length} rows`),
             }}
             pagination={{
-                page,
+                pageNumber: page,
                 totalPages,
                 pageSize,
                 pageSizeOptions: [5, 10, 15],
@@ -481,7 +482,7 @@ export const SortingWithPaginationDemo = () => {
                 },
             }}
             pagination={{
-                page,
+                pageNumber: page,
                 totalPages,
                 pageSize,
                 pageSizeOptions: [3, 5],
@@ -496,3 +497,97 @@ export const SortingWithPaginationDemo = () => {
         />
     )
 }
+
+// ─── Controller + URL persistence demos ─────────────────────────────────────
+// A controller-driven table that reads/writes its state to the URL. `urlPersistence` is
+// opt-in: omitted → local state only; `{}` → root params; `{ namespace }` → namespaced params.
+
+type ControllerDemoFilters = { name?: string; role?: string; status?: string }
+
+const CONTROLLER_DEMO_COLUMNS: TableColumns<AllFeaturesRow> = [
+    { header: 'Name', accessor: 'name', cell: toUpper, isSortable: true },
+    { header: 'Role', accessor: 'role', breakpoint: 'sm', isSortable: true },
+    {
+        header: 'Status',
+        accessor: 'status',
+        cell: allFeaturesStatusPill,
+        variant: allFeaturesStatusVariant,
+        isSortable: true,
+    },
+    { header: 'Department', accessor: 'department', defaultValue: 'N/A', breakpoint: 'lg' },
+]
+
+const CONTROLLER_DEMO_FILTERS = {
+    name: text({ label: 'Name', placeholder: 'Search name…' }),
+    role: select({
+        label: 'Role',
+        options: [
+            { label: 'Admin', value: 'admin' },
+            { label: 'Editor', value: 'editor' },
+            { label: 'Viewer', value: 'viewer' },
+        ],
+    }),
+    status: select({
+        label: 'Status',
+        options: [
+            { label: 'Active', value: 'active' },
+            { label: 'Inactive', value: 'inactive' },
+            { label: 'Pending', value: 'pending' },
+        ],
+    }),
+}
+
+const ControllerPersistenceDemo = ({
+    urlPersistence,
+}: {
+    urlPersistence?: UrlPersistenceConfig
+}) => {
+    const controller = useTableController<ControllerDemoFilters>({
+        filters: CONTROLLER_DEMO_FILTERS,
+        sorting: { default: { column: 'name', direction: 'asc' } },
+        pagination: { pageSize: 5, pageSizeOptions: [5, 10, 25] },
+        urlPersistence,
+        toParams: (state) => state,
+    })
+
+    const { filters, sorting, pagination } = controller.state
+    const pageData = useMemo(() => {
+        const filtered = allFeaturesData.filter((row) => {
+            if (filters.name && !row.name.toLowerCase().includes(filters.name.toLowerCase()))
+                return false
+            if (filters.role && row.role !== filters.role) return false
+            if (filters.status && row.status !== filters.status) return false
+            return true
+        })
+        const sorted = sortRows(filtered, sorting.column as keyof AllFeaturesRow, sorting.direction)
+        const start = (pagination.pageNumber - 1) * pagination.pageSize
+        return {
+            rows: sorted.slice(start, start + pagination.pageSize),
+            totalItems: filtered.length,
+            totalPages: Math.ceil(filtered.length / pagination.pageSize),
+        }
+    }, [filters, sorting, pagination])
+
+    return (
+        <Table<AllFeaturesRow>
+            ariaLabel="Controller-driven table with URL persistence"
+            data={pageData.rows}
+            columns={CONTROLLER_DEMO_COLUMNS}
+            controller={controller}
+            meta={{
+                totalItems: pageData.totalItems,
+                totalPages: pageData.totalPages,
+                pageNumber: pagination.pageNumber,
+            }}
+            title="Controller + URL persistence"
+        />
+    )
+}
+
+export const ControllerSingleDemo = () => <ControllerPersistenceDemo urlPersistence={{}} />
+
+export const ControllerNamedDemo = () => (
+    <ControllerPersistenceDemo urlPersistence={{ namespace: 'demo' }} />
+)
+
+export const ControllerOffDemo = () => <ControllerPersistenceDemo />

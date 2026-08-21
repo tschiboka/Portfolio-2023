@@ -233,7 +233,7 @@ export type GetActivityFeedQuery = {
     dateTo?: string
     sortBy?: ActivityFeedSortBy
     asc?: string
-    page?: string
+    pageNumber?: string
     pageSize?: string
 }
 

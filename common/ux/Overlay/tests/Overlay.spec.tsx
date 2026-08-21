@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Overlay } from '../index'
 import type { ActionMenuItem } from '../ActionMenu'
+import type { Key } from '@common/utils/Generics'
 import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
 import { mocks } from './Overlay.mocks'
 import { Set, mockAnchorRef } from './Overlay.utils'
@@ -750,7 +751,7 @@ describe('ModeClass', () => {
 
     Object.entries(expected).forEach(([mode, cls]) => {
         it(`should map "${mode}" to "${cls}"`, () => {
-            expect(ModeClass[mode as keyof typeof ModeClass]).toBe(cls)
+            expect(ModeClass[mode as Key<typeof ModeClass>]).toBe(cls)
         })
     })
 })

@@ -691,7 +691,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -706,7 +706,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -724,7 +724,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 2,
+                    pageNumber: 2,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -739,7 +739,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 2,
+                    pageNumber: 2,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -754,7 +754,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 2,
+                    pageNumber: 2,
                     totalPages: 5,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -773,7 +773,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 5,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -790,7 +790,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 5,
+                    pageNumber: 5,
                     totalPages: 5,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -807,7 +807,7 @@ describe('Table — Accessibility', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     pageSize: 10,
                     totalItems: 25,

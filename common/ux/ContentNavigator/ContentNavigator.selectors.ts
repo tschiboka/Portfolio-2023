@@ -12,7 +12,7 @@ export const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
         .filter(({ text }) => hasLength(text.trim()))
 
 export const getHeadingNodes = (
-    contentRef: React.RefObject<HTMLDivElement>,
+    contentRef: React.RefObject<HTMLDivElement | null>,
     depth: number,
 ): Element[] => {
     if (!contentRef.current) return []
@@ -54,4 +54,3 @@ export const getActiveHeaders = (elems: Element[]) => {
 
     return active
 }
-

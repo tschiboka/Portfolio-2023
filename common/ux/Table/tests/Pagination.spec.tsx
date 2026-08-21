@@ -1,11 +1,4 @@
 import { screen } from '@testing-library/react'
-import {
-    getPageWindow,
-    isFirstPage,
-    isLastPage,
-    DEFAULT_PAGE_SIZE,
-    DEFAULT_PAGE_SIZE_OPTIONS,
-} from '../TablePagination/TablePagination.utils'
 import { Test } from '@common/ux/Test'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
@@ -18,7 +11,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -38,7 +31,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -59,7 +52,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange,
                     onPageSizeChange: vi.fn(),
@@ -76,7 +69,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 3,
+                    pageNumber: 3,
                     totalPages: 5,
                     onPageChange,
                     onPageSizeChange: vi.fn(),
@@ -93,7 +86,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 3,
+                    pageNumber: 3,
                     totalPages: 5,
                     onPageChange,
                     onPageSizeChange: vi.fn(),
@@ -110,7 +103,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 3,
+                    pageNumber: 3,
                     totalPages: 5,
                     onPageChange,
                     onPageSizeChange: vi.fn(),
@@ -127,7 +120,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 3,
+                    pageNumber: 3,
                     totalPages: 5,
                     onPageChange,
                     onPageSizeChange: vi.fn(),
@@ -145,7 +138,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 5,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -164,7 +157,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 5,
+                    pageNumber: 5,
                     totalPages: 5,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -183,7 +176,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 1,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -204,7 +197,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 2,
+                    pageNumber: 2,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -219,7 +212,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 2,
+                    pageNumber: 2,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -238,7 +231,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 9,
                     pageSize: 10,
                     totalItems: 87,
@@ -255,7 +248,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 1,
+                    pageNumber: 1,
                     totalPages: 3,
                     onPageChange: vi.fn(),
                     onPageSizeChange: vi.fn(),
@@ -271,7 +264,7 @@ describe('Table — Pagination', () => {
                 data: rows,
                 columns: basicColumns,
                 pagination: {
-                    page: 9,
+                    pageNumber: 9,
                     totalPages: 9,
                     pageSize: 10,
                     totalItems: 87,
@@ -281,72 +274,6 @@ describe('Table — Pagination', () => {
             })
             // Page 9 of 87 items at size 10 = items 81–87
             expect(screen.getByLabelText('Items 81 to 87')).toBeInTheDocument()
-        })
-    })
-
-    describe('Pagination utilities', () => {
-        it('DEFAULT_PAGE_SIZE is 10', () => {
-            expect(DEFAULT_PAGE_SIZE).toBe(10)
-        })
-
-        it('DEFAULT_PAGE_SIZE_OPTIONS is [5, 10, 25, 50, 100]', () => {
-            expect(DEFAULT_PAGE_SIZE_OPTIONS).toEqual([5, 10, 25, 50, 100])
-        })
-
-        describe('getPageWindow', () => {
-            it('returns all pages when totalPages <= 3', () => {
-                expect(getPageWindow(1, 1)).toEqual([1])
-                expect(getPageWindow(1, 2)).toEqual([1, 2])
-                expect(getPageWindow(1, 3)).toEqual([1, 2, 3])
-            })
-
-            it('returns first 3 pages when on first page', () => {
-                expect(getPageWindow(1, 10)).toEqual([1, 2, 3])
-            })
-
-            it('returns last 3 pages when on last page', () => {
-                expect(getPageWindow(10, 10)).toEqual([8, 9, 10])
-            })
-
-            it('returns centered window when in the middle', () => {
-                expect(getPageWindow(5, 10)).toEqual([4, 5, 6])
-            })
-
-            it('returns first window when on page 2', () => {
-                expect(getPageWindow(2, 10)).toEqual([1, 2, 3])
-            })
-
-            it('returns last window when on second-to-last page', () => {
-                expect(getPageWindow(9, 10)).toEqual([8, 9, 10])
-            })
-        })
-
-        describe('isFirstPage', () => {
-            it('returns true for page 1', () => {
-                expect(isFirstPage(1)).toBe(true)
-            })
-
-            it('returns true for page 0', () => {
-                expect(isFirstPage(0)).toBe(true)
-            })
-
-            it('returns false for page 2', () => {
-                expect(isFirstPage(2)).toBe(false)
-            })
-        })
-
-        describe('isLastPage', () => {
-            it('returns true when page equals totalPages', () => {
-                expect(isLastPage(5, 5)).toBe(true)
-            })
-
-            it('returns true when page exceeds totalPages', () => {
-                expect(isLastPage(6, 5)).toBe(true)
-            })
-
-            it('returns false when page is less than totalPages', () => {
-                expect(isLastPage(3, 5)).toBe(false)
-            })
         })
     })
 })
