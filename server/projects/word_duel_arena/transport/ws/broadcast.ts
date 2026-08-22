@@ -7,6 +7,7 @@ import type {
     WdaWsResponse,
 } from '@common/types/projects/wda'
 import { WdaWsResponseTypes } from '@common/types/projects/wda'
+import type { Nullable } from '@common/utils'
 import WebSocket from 'ws'
 
 import { validateSession } from './validation/session/session'
@@ -58,7 +59,7 @@ function commitSessionState(session: Session, nextState: SessionState, deviceId?
     broadcastSessionState(session)
 }
 
-function toPublicPlayer(player: Player | null): WdaPublicPlayer | null {
+function toPublicPlayer(player: Nullable<Player>): Nullable<WdaPublicPlayer> {
     return player ? { connected: player.connected, lastActive: player.lastActive } : null
 }
 
@@ -82,7 +83,7 @@ function transformSessionForClient(
     state: SessionState,
     requestingDeviceId: string,
 ): WdaClientSessionState {
-    const role = (Object.entries(state.players) as [PlayerRole, Player | null][]).find(
+    const role = (Object.entries(state.players) as [PlayerRole, Nullable<Player>][]).find(
         ([_, player]) => player && player.deviceId === requestingDeviceId,
     )?.[0]
 

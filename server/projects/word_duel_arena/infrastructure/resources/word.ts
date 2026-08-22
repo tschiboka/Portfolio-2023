@@ -1,13 +1,15 @@
 import fs from 'fs/promises'
 import path from 'path'
+import type { Nullable } from '@common/utils'
+import type { Dictionary } from '@common/utils'
 
 type WordResources = {
     wordList: string[]
-    anagramMap: Record<string, string[]>
-    frequency: Record<string, number>
+    anagramMap: Dictionary<string[]>
+    frequency: Dictionary<number>
 }
 
-let resources: WordResources | null = null
+let resources: Nullable<WordResources> = null
 
 const loadWordResources = async () => {
     if (resources) return resources

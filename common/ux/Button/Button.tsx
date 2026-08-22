@@ -1,4 +1,5 @@
 import type { ButtonProps } from './Button.types'
+import type { Dictionary } from '@common/utils'
 import './Button.styles.css'
 
 const commonKeys = new Set(['as', 'variant', 'size', 'className', 'ariaLabel', 'style', 'children'])
@@ -27,9 +28,9 @@ export const Button = (props: ButtonProps) => {
 
     if (typeof props.as === 'function' || typeof props.as === 'object') {
         const Component = props.as
-        const rest: Record<string, unknown> = {}
+        const rest: Dictionary = {}
         for (const key of Object.keys(props)) {
-            if (!commonKeys.has(key)) rest[key] = (props as Record<string, unknown>)[key]
+            if (!commonKeys.has(key)) rest[key] = (props as Dictionary)[key]
         }
         return (
             <Component className={cls} aria-label={ariaLabel} style={style} {...rest}>

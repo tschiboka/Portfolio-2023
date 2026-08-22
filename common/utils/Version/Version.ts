@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { DateTime } from '@common/utils'
+import type { Nullable } from '@common/utils'
 import { GetVersionResponse } from '../../types'
 
 export const useVersionCheck = () => {
     const [isStale, setIsStale] = useState(false)
-    const initialVersion = useRef<string | null>(null)
+    const initialVersion = useRef<Nullable<string>>(null)
 
     useEffect(() => {
         const checkVersion = async () => {

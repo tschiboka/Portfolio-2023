@@ -1,3 +1,5 @@
+import { Arrays } from '@common/utils'
+
 export type Row = {
     name: string
     value: string
@@ -492,7 +494,7 @@ export const allFeaturesData: AllFeaturesRow[] = [
 
 export type PaginationRow = { id: string; name: string; value: string }
 
-export const allPaginationRows: PaginationRow[] = Array.from({ length: 87 }, (_, i) => ({
+export const allPaginationRows: PaginationRow[] = Arrays.times(87, (i) => ({
     id: String(i + 1),
     name: `Item ${i + 1}`,
     value: `${(i + 1) * 10}`,

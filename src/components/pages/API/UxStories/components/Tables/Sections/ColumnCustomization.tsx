@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Table } from '@common/ux/Table'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
+import { isNonEmpty } from '@common/utils'
 import { type Row, rows } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 import { renderStatus } from '../Tables.config'
@@ -57,7 +58,7 @@ export const ColumnCustomization = () => {
                         })
                     }}
                 />
-                {Object.keys(colWidths).length > 0 && (
+                {isNonEmpty(colWidths) && (
                     <Paragraph>
                         Current widths:{' '}
                         {Object.entries(colWidths)

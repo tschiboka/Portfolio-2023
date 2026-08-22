@@ -1,4 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
+import type { Nullable } from '@common/utils'
 
 export class CounterBadgeAccessor extends Accessor {
     get Get() {
@@ -15,7 +16,7 @@ export class CounterBadgeAccessor extends Accessor {
     }
 }
 
-export const CounterBadge = (): CounterBadgeAccessor | null => {
+export const CounterBadge = (): Nullable<CounterBadgeAccessor> => {
     const element = document.querySelector<HTMLElement>('.CounterBadge')
     if (!element) return null
     return new CounterBadgeAccessor(element, 'CounterBadge()')

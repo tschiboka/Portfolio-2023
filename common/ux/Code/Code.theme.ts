@@ -30,8 +30,9 @@
  */
 
 import type { CSSProperties } from 'react'
+import type { Dictionary } from '@common/utils'
 
-type HljsStyle = Record<string, CSSProperties>
+type HljsStyle = Dictionary<CSSProperties>
 
 export const tschibokaDark: HljsStyle = {
     hljs: {

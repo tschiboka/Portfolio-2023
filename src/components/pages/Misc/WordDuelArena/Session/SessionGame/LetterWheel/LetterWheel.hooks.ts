@@ -8,6 +8,7 @@ import {
 import { recalculatePositions } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
+import type { Dictionary } from '@common/utils'
 
 type UseLetterWheelListenersProps = {
     containerRef: RefObject<HTMLDivElement | null>
@@ -58,7 +59,7 @@ export const useLetterWheelListeners = ({
         const wheel = wheelRef.current
         if (!wheel) return
 
-        const handlers: Record<string, EventListener> = {
+        const handlers: Dictionary<EventListener> = {
             touchstart: createHandleTouchStart({ setTouchState }),
             touchmove: createHandleTouchMove({ setTouchState }),
             touchend: createHandleTouchEnd({ touchState, setTouchState, send }),

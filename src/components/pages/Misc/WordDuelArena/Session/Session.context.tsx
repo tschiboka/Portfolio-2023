@@ -2,6 +2,7 @@ import { createContext, ReactNode, useContext, useRef, useState } from 'react'
 import { SessionContextType, SessionStatuses, WebSocketSessionState } from './Session.types'
 import { useParams } from 'react-router'
 import { Storage } from '@common/utils'
+import type { Optional } from '@common/utils'
 
 const WDA_KEY = 'word-duel-arena'
 
@@ -18,7 +19,7 @@ const defaultState: WebSocketSessionState = {
     previousMatches: [],
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(undefined)
+export const SessionContext = createContext<Optional<SessionContextType>>(undefined)
 type SessionProviderProps = {
     children: ReactNode
 }

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
 import { Overlay, Code, Stack, Text, CodeText, Box } from '@common/ux'
+import type { Optional } from '@common/utils'
 import type {
     BreakdownRow,
     ActivityMessageDetails,
@@ -79,9 +80,9 @@ export const ActivityDetailsModal = ({ row, onClose }: ActivityDetailsModalProps
     const isMessage = row.type === 'message'
     const isError = row.type === 'error'
 
-    const msgDetails: ActivityMessageDetails | undefined =
+    const msgDetails: Optional<ActivityMessageDetails> =
         isMessage && row.details ? (JSON.parse(row.details) as ActivityMessageDetails) : undefined
-    const errDetails: ActivityErrorDetails | undefined =
+    const errDetails: Optional<ActivityErrorDetails> =
         isError && row.details ? (JSON.parse(row.details) as ActivityErrorDetails) : undefined
 
     return (

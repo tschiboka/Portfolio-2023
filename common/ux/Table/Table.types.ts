@@ -4,6 +4,7 @@ import type { TableControl } from './useTableController'
 
 import type { DropdownOption } from './TableInputs/TableDropdown'
 import { PageMeta } from '@common/types'
+import type { Optional, Predicate } from '@common/utils'
 
 export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'
 
@@ -24,15 +25,15 @@ export type TableColumn<TData extends Record<string, ReactNode>, TContext = unkn
     header: string
     accessor: keyof TData
     cell?: (cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => ReactNode
-    filter?: (value: unknown) => boolean
+    filter?: Predicate<unknown>
     breakpoint?: TableBreakpoint
     defaultValue?: ReactNode
-    isActionDisabled?: (meta: CellMeta<TData, TContext>) => boolean
+    isActionDisabled?: Predicate<CellMeta<TData, TContext>>
     isSortable?: boolean
     width?: string
     variant?:
         | CellVariant
-        | ((cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => CellVariant | undefined)
+        | ((cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => Optional<CellVariant>)
 }
 export type TableColumns<TData extends Record<string, ReactNode>, TContext = unknown> = TableColumn<
     TData,
@@ -47,8 +48,8 @@ export type TableAction<TData extends Record<string, ReactNode>, TContext = unkn
     variant?: TableActionVariant
     onClick?: (meta: CellMeta<TData, TContext>) => void
     href?: (meta: CellMeta<TData, TContext>) => string
-    filter?: (meta: CellMeta<TData, TContext>) => boolean
-    isDisabled?: (meta: CellMeta<TData, TContext>) => boolean
+    filter?: Predicate<CellMeta<TData, TContext>>
+    isDisabled?: Predicate<CellMeta<TData, TContext>>
 }
 
 export type TableSelectionMode = 'single' | 'multiple'
@@ -58,7 +59,7 @@ export type TableSelection<TData extends Record<string, ReactNode>, TContext = u
     getRowId: (row: TData) => string
     selectedRowIds: string[]
     onChange: (selected: string[]) => void
-    isRowSelectable?: (meta: CellMeta<TData, TContext>) => boolean
+    isRowSelectable?: Predicate<CellMeta<TData, TContext>>
 }
 
 export type SortDirection = 'asc' | 'desc'
@@ -156,7 +157,7 @@ export interface Table<
     title?: string
     selection?: TableSelection<TData, TContext>
     download?: TableDownload<TData>
-    rowVariant?: (meta: CellMeta<TData, TContext>) => CellVariant | undefined
+    rowVariant?: (meta: CellMeta<TData, TContext>) => Optional<CellVariant>
     onRefresh?: () => void
     enableColumnResize?: boolean
     enableColumnReorder?: boolean

@@ -1,5 +1,6 @@
 import Article from '../../components/sharedComponents/Article/Article'
 import { Code, CodeText, Heading, Paragraph, Pill, PillColor, Section, Table } from '@common/ux'
+import type { Dictionary } from '@common/utils'
 import Figure from '../../components/sharedComponents/Figure/Figure'
 import { codeSnippets } from './codeSnippets'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
@@ -167,7 +168,7 @@ const ZIndexLayers = ({ pageName, path }: Props) => {
                             header: 'Value',
                             accessor: 'value',
                             cell: (cell) => {
-                                const colorMap: Record<string, PillColor> = {
+                                const colorMap: Dictionary<PillColor> = {
                                     '10': 'gray',
                                     '20': 'yellow',
                                     '30': 'orange',

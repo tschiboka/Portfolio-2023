@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import type { AnchorResult, PopupProps } from './Overlay.types'
+import type { Optional } from '@common/utils'
 import {
     ArrowClass,
     DefaultIcon,
@@ -35,7 +36,7 @@ export const Popup = ({
         ? [...actions, { label: 'Close', variant: 'secondary' as const, onClick: onClose }]
         : actions
     const popupRef = useRef<HTMLDivElement>(null)
-    const [anchorResult, setAnchorResult] = useState<AnchorResult | undefined>(undefined)
+    const [anchorResult, setAnchorResult] = useState<Optional<AnchorResult>>(undefined)
 
     // Lock scroll FIRST so viewport is stable when we measure
     useScrollLock()

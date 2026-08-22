@@ -3,6 +3,8 @@ import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
 import { Level, LevelWord } from '../common/utils'
 import { Query } from '@common/utils'
+import type { Nullable } from '@common/utils'
+import { isEmpty } from '@common/utils'
 import { transformAnagramMap } from '../common/utils/Word/getPossibleWords'
 import {
     useGetAnagramMap,
@@ -54,14 +56,12 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
         if (wordFrequencies && !frequencies) {
             setFrequencies(wordFrequencies)
         }
-        if (frequencies && possibleWords.length === 0 && anagramMap) {
-            void transformAnagramMap(levelName, anagramMap).then((possibleWords) => {
-                const newWordSet = possibleWords.map((word) => ({
-                    word,
-                    frequency: frequencies[word.toUpperCase()] || 0,
-                }))
-                setPossibleWords(newWordSet)
-            })
+        if (frequencies && isEmpty(possibleWords) && anagramMap) {
+            const newWordSet = transformAnagramMap(levelName, anagramMap).map((word) => ({
+                word,
+                frequency: frequencies[word.toUpperCase()] || 0,
+            }))
+            setPossibleWords(newWordSet)
         }
         if (levelData && frequencies) {
             const selectedWordSet = levelData.targetWords.map((word) => ({
@@ -81,7 +81,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     }, [error])
 
     const averageFrequency = () => {
-        if (selectedWords.length === 0) return 0
+        if (isEmpty(selectedWords)) return 0
         const total = selectedWords.reduce((sum, word) => sum + word.frequency, 0)
         return total / selectedWords.length
     }
@@ -93,7 +93,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     }
 
     const onSave = async () => {
-        const validation: string | null = await levelSchema
+        const validation: Nullable<string> = await levelSchema
             .validate({ selectedWords })
             .then(() => null)
             .catch((error: Error) => error.message)

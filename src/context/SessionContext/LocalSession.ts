@@ -1,14 +1,15 @@
 import { Storage } from '@common/utils'
+import type { Nullable } from '@common/utils'
 import { Session } from './SessionContext.types'
 
 const APP_KEY = 'tschiboka'
 
-const readSession = (): Session | null => {
+const readSession = (): Nullable<Session> => {
     const storage = Storage.get<{ session?: Session }>(APP_KEY)
     return storage?.session ?? null
 }
 
-const writeSession = (session: Session | null): void => {
+const writeSession = (session: Nullable<Session>): void => {
     Storage.update<{ session?: Session }>(APP_KEY, (prev) => ({
         ...prev,
         ...(session ? { session } : {}),
@@ -25,8 +26,8 @@ const removeSession = (): void => {
 }
 
 export class LocalSession {
-    private static instance: LocalSession | null
-    private localSession: Session | null
+    private static instance: Nullable<LocalSession>
+    private localSession: Nullable<Session>
 
     private constructor() {
         this.localSession = readSession()
@@ -39,7 +40,7 @@ export class LocalSession {
         return LocalSession.instance
     }
 
-    get(): Session | null {
+    get(): Nullable<Session> {
         return this.localSession
     }
 

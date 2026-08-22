@@ -1,7 +1,20 @@
-import type { Optional } from '@common/utils/Generics'
+import type { Optional, Dictionary } from '@common/utils/Generics'
 
 const build = (namespace: Optional<string>, key: string): string =>
     namespace ? `${namespace}.${key}` : key
+
+/** Serialises an object of query params to a `?key=value&...` string, or `''` when empty/undefined.
+ * Pure — builds a fresh `URLSearchParams`; does not mutate input.
+ * @example
+ * toQueryString({ a: '1', b: 'x y' }) // '?a=1&b=x+y'
+ * toQueryString({})                    // ''
+ * toQueryString(undefined)             // ''
+ */
+const toQueryString = (query: Optional<Dictionary<string>>): string => {
+    if (!query) return ''
+    const s = new URLSearchParams(query).toString()
+    return s === '' ? '' : `?${s}`
+}
 
 /** Return a copy of `params` with `key` set to `value` when it differs from `fallback`;
  * otherwise with `key` removed. Pure — does not mutate the input. Used to keep URLs
@@ -27,4 +40,5 @@ const setIfDifferent = (
 export const Params = {
     build,
     setIfDifferent,
+    toQueryString,
 }

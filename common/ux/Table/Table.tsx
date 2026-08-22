@@ -16,7 +16,7 @@ import { TableFilterPanel, type TableFilterPanelHandle } from './TableFilter/Tab
 import { TablePagination } from './TablePagination/TablePagination'
 import { TableDownloadButton } from './TableDownload/TableDownload'
 import { Overlay } from '../Overlay'
-import { hasLength, isNonEmpty } from '@common/utils'
+import { hasLength, isNonEmpty, type Optional } from '@common/utils'
 import { TableSkeleton } from './TableSkeleton/TableSkeleton'
 import { extractSlot } from './TableSlots/TableSlots.utils'
 import { Header, Info, Legend, Filters, Download, Empty } from './TableSlots'
@@ -61,7 +61,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
 
     const [columns, setColumns] = useState<TableColumns<TData, TContext>>(columnsProp)
     const [infoOpen, setInfoOpen] = useState(false)
-    const [rowHeight, setRowHeight] = useState<number | undefined>(undefined)
+    const [rowHeight, setRowHeight] = useState<Optional<number>>(undefined)
     const [filtersOpen, setFiltersOpen] = useState(false)
     const columnsPropRef = useRef(columnsProp)
     const tableRef = useRef<HTMLTableElement>(null)

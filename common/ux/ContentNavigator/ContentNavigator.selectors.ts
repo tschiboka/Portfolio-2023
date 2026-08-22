@@ -1,4 +1,4 @@
-import { Browser, hasLength } from '@common/utils'
+import { Arrays, Browser, hasLength } from '@common/utils'
 import { VisibilityEntry } from '@common/utils/Browser/useIsVisible'
 
 export const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
@@ -17,7 +17,7 @@ export const getHeadingNodes = (
 ): Element[] => {
     if (!contentRef.current) return []
 
-    const selectors = Array.from({ length: depth }, (_, i) => `h${i + 1}[data-toc]`).join(', ')
+    const selectors = Arrays.times(depth, (i) => `h${i + 1}[data-toc]`).join(', ')
 
     const nodes = Array.from(contentRef.current.querySelectorAll(selectors))
     const usedSlugs = new Map<string, number>()

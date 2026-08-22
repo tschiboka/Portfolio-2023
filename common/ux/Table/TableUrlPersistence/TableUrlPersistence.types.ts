@@ -1,4 +1,4 @@
-import type { Dictionary } from '@common/utils/Generics'
+import type { Dictionary, Nullable } from '@common/utils/Generics'
 import type {
     Paging,
     TableSortState,
@@ -20,7 +20,7 @@ export type TableUrlPersistence<TFilters extends Dictionary> = {
     /** Whether URL persistence is active. */
     enabled: boolean
     /** The current state derived from the URL (null when offline). */
-    state: TableState<TFilters> | null
+    state: Nullable<TableState<TFilters>>
     /**
      * Persist the given state to the URL.
      * `replace` defaults to true (internal nav like sort/page);

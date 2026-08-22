@@ -35,3 +35,30 @@ describe('Params.setIfDifferent', () => {
         expect(result.get('dir')).toBe('desc')
     })
 })
+
+describe('Params.toQueryString', () => {
+    it('serialises an object of params to a ?key=value string', () => {
+        expect(Params.toQueryString({ a: '1', b: '2' })).toBe('?a=1&b=2')
+    })
+
+    it('URL-encodes values', () => {
+        expect(Params.toQueryString({ q: 'x y' })).toBe('?q=x+y')
+        expect(Params.toQueryString({ q: 'a&b' })).toBe('?q=a%26b')
+    })
+
+    it('returns an empty string for an empty object', () => {
+        expect(Params.toQueryString({})).toBe('')
+    })
+
+    it('returns an empty string for undefined', () => {
+        expect(Params.toQueryString(undefined)).toBe('')
+    })
+
+    it('preserves an empty-string value as a present-but-empty param', () => {
+        expect(Params.toQueryString({ a: '' })).toBe('?a=')
+    })
+
+    it('preserves a zero (falsy) value', () => {
+        expect(Params.toQueryString({ a: '0' })).toBe('?a=0')
+    })
+})

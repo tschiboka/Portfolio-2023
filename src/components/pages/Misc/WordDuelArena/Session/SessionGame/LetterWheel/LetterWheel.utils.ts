@@ -2,6 +2,8 @@ import { RefObject } from 'react'
 import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 import { MIN_WORD_LENGTH } from '../../../common/utils'
+import type { Nullable } from '@common/utils'
+import { isEmpty } from '@common/utils'
 
 type CalculateLetterPositionsProps = {
     letters: string[]
@@ -12,7 +14,7 @@ export const calculateLetterPositions = ({
     letters,
     containerRef,
 }: CalculateLetterPositionsProps): LetterPosition[] => {
-    if (!containerRef.current || letters.length === 0) return []
+    if (!containerRef.current || isEmpty(letters)) return []
 
     // Get the wheel element (child of container) for accurate positioning
     const wheelEl = containerRef.current.querySelector('.letter-wheel')
@@ -59,7 +61,7 @@ export const recalculatePositions = ({
     setPositions(newPositions)
 }
 
-export const getLetterComponent = (target: Element | null): HTMLElement | null => {
+export const getLetterComponent = (target: Element | null): Nullable<HTMLElement> => {
     const isLetter = target instanceof HTMLElement && target.dataset.letterId !== undefined
     return isLetter ? target : null
 }

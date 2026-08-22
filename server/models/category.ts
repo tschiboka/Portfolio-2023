@@ -1,6 +1,7 @@
 import mongoose, { Document } from 'mongoose'
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
+import type { Nullable } from '@common/utils/Generics/Generics.types'
 ;(Joi as any).objectId = joiObjectId(Joi)
 
 interface ICategory extends Document {
@@ -12,7 +13,7 @@ interface ICategory extends Document {
     status: string
     created_at: Date
     isParent: boolean
-    parentId: mongoose.Types.ObjectId | null
+    parentId: Nullable<mongoose.Types.ObjectId>
 }
 
 const Category = mongoose.model<ICategory>(

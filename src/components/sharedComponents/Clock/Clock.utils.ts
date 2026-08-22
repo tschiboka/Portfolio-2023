@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { ClockData } from '.'
 import { CanvasType, Centre, DateTime, Line } from '@common/utils'
+import type { Nullable } from '@common/utils'
 
 export const getDateTime = (): ClockData => {
     const dateTime = Date.now()
@@ -16,7 +17,7 @@ export const getDateTime = (): ClockData => {
     }
 }
 
-type StartLoopProps = { setClock: (clock: ClockData | null) => void }
+type StartLoopProps = { setClock: (clock: Nullable<ClockData>) => void }
 export const startLoop = ({ setClock }: StartLoopProps) =>
     setInterval(() => {
         const updatedDateTime = getDateTime()

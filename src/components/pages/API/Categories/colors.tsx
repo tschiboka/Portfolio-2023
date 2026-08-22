@@ -1,8 +1,11 @@
+import { ReactNode } from 'react'
+import type { Dictionary } from '@common/utils'
+
 const createColorSign = (color: string) => (
     <div className="color" style={{ backgroundColor: color }}></div>
 )
 
-export const colors: Record<string, React.ReactNode> = {
+export const colors: Dictionary<ReactNode> = {
     aliceblue: createColorSign('aliceblue'),
     antiquewhite: createColorSign('antiquewhite'),
     aqua: createColorSign('aqua'),

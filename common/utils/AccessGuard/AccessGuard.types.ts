@@ -1,9 +1,10 @@
 import { ReactNode } from 'react'
 import { Capability } from '../../types'
+import type { Dictionary, Predicate } from '../Generics'
 
 export type AccessMap = {
     capabilities: Capability[]
-    features: Record<string, boolean>
+    features: Dictionary<boolean>
 }
 
 export type AccessDeniedMode = 'hidden' | 'visible' | 'disabled' | 'soft-disabled' | 'tooltip'
@@ -33,7 +34,7 @@ export type ModeConfig =
 export type GuardCondition =
     | { type: 'capability'; capabilities?: Capability[] }
     | { type: 'feature'; features?: string[] }
-    | { type: 'custom'; predicate: (access: AccessMap) => boolean }
+    | { type: 'custom'; predicate: Predicate<AccessMap> }
 
 export type Guard =
     | { when: GuardCondition; unless?: never; then: ModeConfig }

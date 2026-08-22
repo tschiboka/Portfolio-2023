@@ -1,5 +1,5 @@
-export type AnagramMapType = {
-  [key: string]: string[]
-}
+import type { Dictionary } from '@common/utils'
 
-export type FrequencyType = Record<string, number>;
+export type AnagramMapType = Dictionary<string[]>
+
+export type FrequencyType = Dictionary<number>

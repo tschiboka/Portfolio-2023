@@ -33,6 +33,7 @@ import {
     TypographyStory,
 } from '../components/pages/API/UxStories'
 import { ReactElement } from 'react'
+import type { Dictionary } from '@common/utils'
 
 export type ApiRoute = {
     name?: string
@@ -201,6 +202,6 @@ export const ApiRoutes = {
         path: '/api/ux-stories/typography',
         element: <TypographyStory path="/api/ux-stories/typography" />,
     },
-} satisfies Record<string, ApiRoute>
+} satisfies Dictionary<ApiRoute>
 
 export const ApiRoutesList: ApiRoute[] = Object.values(ApiRoutes)

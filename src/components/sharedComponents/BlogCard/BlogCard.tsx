@@ -13,8 +13,8 @@ import './BlogCard.scss'
 interface Props {
     blogArticle: BlogArticle
     visits: number
-    readingTime?: string | undefined
-    codeTime?: string | undefined
+    readingTime?: string
+    codeTime?: string
     likes: number
     path: string
     upcoming?: boolean

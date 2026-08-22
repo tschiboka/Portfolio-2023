@@ -7,7 +7,7 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength, isDefined } from '@common/utils'
+import { hasLength, isDefined, type Optional } from '@common/utils'
 import { ExpandedRow } from './ExpandedRow'
 import { TableActions } from '../TableAction/TableAction'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckbox'
@@ -29,7 +29,7 @@ type TableRowProps<TData extends Record<string, ReactNode>, TContext> = {
     actions?: TableAction<TData, TContext>[]
     meta: CellMeta<TData, TContext>
     isActionDisabled: boolean
-    rowVariant?: (meta: CellMeta<TData, TContext>) => CellVariant | undefined
+    rowVariant?: (meta: CellMeta<TData, TContext>) => Optional<CellVariant>
     selection?: TableSelection<TData, TContext>
 }
 

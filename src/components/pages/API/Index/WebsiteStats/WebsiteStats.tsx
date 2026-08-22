@@ -2,6 +2,7 @@ import { Stack, Section } from '@common/ux'
 import { useGetActivityFeed } from './WebsiteStats.queries'
 import { AxiosError } from 'axios'
 import { BreakdownTable, useBreakdownTableController } from './BreakdownTable'
+import type { Dictionary } from '@common/utils'
 
 export const WebsiteStats = () => {
     const controller = useBreakdownTableController()
@@ -11,7 +12,7 @@ export const WebsiteStats = () => {
     const errorMessage =
         activityFeedResponse.error instanceof AxiosError
             ? String(
-                  (activityFeedResponse.error.response?.data as Record<string, unknown>)?.message ??
+                  (activityFeedResponse.error.response?.data as Dictionary)?.message ??
                       activityFeedResponse.error.message ??
                       'Unknown error',
               )

@@ -10,6 +10,7 @@ import type {
 import { validateLevel } from '../validation/level'
 import { levelPersistance } from '../../../infrastructure/persistence/db/level'
 import { HttpStatus } from '../../../../../../common/utils/Server/HttpStatus'
+import { isEmpty } from '@common/utils/Predicate'
 
 type GetLevelsRes = TypedResponse<GetWdaLevelsResponse | WdaErrorResponse>
 async function handleListLevels(_req: TypedRequest, res: GetLevelsRes) {
@@ -27,7 +28,7 @@ async function handleListLevels(_req: TypedRequest, res: GetLevelsRes) {
         }),
     )
 
-    if (result.length === 0)
+    if (isEmpty(result))
         return res.status(HttpStatus.NOT_FOUND).json({ message: 'No levels found in DB' })
     res.status(HttpStatus.OK).json({ levels: result })
 }

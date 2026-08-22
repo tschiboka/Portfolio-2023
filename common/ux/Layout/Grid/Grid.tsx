@@ -1,5 +1,6 @@
 import { selectAlign, selectJustify } from '../Stack/Stack.selectors'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
+import { isDefined } from '@common/utils'
 import './Grid.styles.css'
 
 const isResponsive = (columns: GridProps['columns']): columns is ResponsiveColumns =>
@@ -29,21 +30,22 @@ export const Grid = ({
     onFocus,
     onBlur,
 }: GridProps) => {
-    const responsive = columns != null && isResponsive(columns)
+    const responsive = isDefined(columns) && isResponsive(columns)
     const cls = ['grid', responsive ? buildResponsiveClasses(columns) : '', className ?? '']
         .filter(Boolean)
         .join(' ')
 
     const inlineStyle: React.CSSProperties = {
         display: 'grid',
-        gridTemplateColumns: columns != null && !responsive ? `repeat(${columns}, 1fr)` : undefined,
+        gridTemplateColumns:
+            isDefined(columns) && !responsive ? `repeat(${columns}, 1fr)` : undefined,
         alignItems: selectAlign(align),
         justifyItems: selectJustify(justify),
         ...style,
     }
-    if (gap != null) inlineStyle.gap = `${gap}px`
-    if (rowGap != null) inlineStyle.rowGap = `${rowGap}px`
-    if (columnGap != null) inlineStyle.columnGap = `${columnGap}px`
+    if (isDefined(gap)) inlineStyle.gap = `${gap}px`
+    if (isDefined(rowGap)) inlineStyle.rowGap = `${rowGap}px`
+    if (isDefined(columnGap)) inlineStyle.columnGap = `${columnGap}px`
 
     return (
         <Component

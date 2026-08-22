@@ -9,6 +9,9 @@ import {
 } from '@common/types'
 import { HttpStatus } from '../../../common/utils/Server/HttpStatus'
 import { isTruthy, isNonEmpty } from '@common/utils/Predicate'
+import { Arrays } from '@common/utils/Arrays'
+import { Strings } from '@common/utils/Strings/Strings'
+
 const router = express.Router()
 
 // WARNING: Temporarily use a hard-coded user settings
@@ -73,7 +76,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
               //       : true
               const meetsCombinationCriteria = isNonEmpty(uniqueErrorCombinations)
                   ? uniqueErrorCombinations.some((combination: string) =>
-                        word.toLowerCase().includes(combination.toLowerCase()),
+                        Strings.includesIgnoreCase(word, combination),
                     )
                   : true
               return meetsCombinationCriteria
@@ -81,13 +84,10 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
         : filteredByDifficulty
 
     // Fall back to difficulty-filtered words if combination filter yields nothing
-    const wordPool = filteredWords.length > 0 ? filteredWords : filteredByDifficulty
+    const wordPool = isNonEmpty(filteredWords) ? filteredWords : filteredByDifficulty
 
     // Get random words from the filtered list until we reach the target text length
-    let responseWords = Array.from({ length: userSettings.textLength }, () => {
-        const randomIndex = Math.floor(Math.random() * wordPool.length)
-        return wordPool[randomIndex]
-    })
+    let responseWords = Arrays.times(userSettings.textLength, () => Arrays.random(wordPool) ?? '')
 
     // Capitalisation
     if (!userSettings.allowCapitalLetters) {

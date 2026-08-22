@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
+import type { Nullable } from '@common/utils'
 import { ClockData, ClockFaceCanvas, startLoop } from '.'
 import './Clock.scss'
 
 export const Clock = () => {
-    const [clock, setClock] = useState<ClockData | null>(null)
+    const [clock, setClock] = useState<Nullable<ClockData>>(null)
 
     useEffect(() => {
         startLoop({ setClock })
@@ -13,9 +14,7 @@ export const Clock = () => {
         <div className="ClockWidget">
             <header></header>
             <div className="ClockContainer">
-                <div className="ClockFace">
-                    {clock && <ClockFaceCanvas clock={clock} />}
-                </div>
+                <div className="ClockFace">{clock && <ClockFaceCanvas clock={clock} />}</div>
             </div>
             <footer></footer>
         </div>

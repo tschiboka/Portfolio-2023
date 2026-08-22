@@ -1,5 +1,8 @@
 import { MovePayload } from '@common/types'
 import { SessionState } from '../../types'
+import type { Optional } from '@common/utils'
+import { isDefined, isEmpty } from '@common/utils/Predicate'
+import { Arrays } from '@common/utils/Arrays'
 import { GIVE_HINTS_AFTER_FAILED_ATTEMPTS } from '../../config/constants/game'
 
 export const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
@@ -32,12 +35,12 @@ export const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
     )
 }
 
-export const getRandomUnsolvedWordIndex = (draft: SessionState): number | undefined => {
+export const getRandomUnsolvedWordIndex = (draft: SessionState): Optional<number> => {
     if (!draft.level) return undefined
     const unsolvedIndices = draft.level.targetWords
         .map((word, index) => (word.status === 'UNSOLVED' ? index : null))
-        .filter((index): index is number => index !== null)
-    if (unsolvedIndices.length === 0) return undefined
+        .filter(isDefined)
+    if (isEmpty(unsolvedIndices)) return undefined
 
-    return unsolvedIndices[Math.floor(Math.random() * unsolvedIndices.length)]
+    return Arrays.random(unsolvedIndices)
 }

@@ -1,12 +1,10 @@
+import type { Nullable } from '@common/utils'
 import { useSessionWS } from '../SessionWebSocket'
-import {
-    InteractionModes,
-    InteractionOverlayConfig,
-} from './SessionOverlay.types'
+import { InteractionModes, InteractionOverlayConfig } from './SessionOverlay.types'
 
 type UseGetInteractionOverlayStateProps = {
     mode: InteractionModes
-    message: string | null
+    message: Nullable<string>
     enterFullScreen: () => void
 }
 
@@ -35,8 +33,7 @@ export const useGetInteractionOverlayState = ({
             case 'no-fullscreen':
                 return {
                     title: 'Fullscreen Mode Recommended',
-                    description:
-                        'Please enter fullscreen mode for the best experience.',
+                    description: 'Please enter fullscreen mode for the best experience.',
                     type: 'info',
                     actions: [
                         {
@@ -69,8 +66,7 @@ export const useGetInteractionOverlayState = ({
             case 'wait-opponent':
                 return {
                     title: 'Waiting for Opponent',
-                    description:
-                        'Waiting for your opponent to connect to the session.',
+                    description: 'Waiting for your opponent to connect to the session.',
                     type: 'info',
                 }
             case 'ended':

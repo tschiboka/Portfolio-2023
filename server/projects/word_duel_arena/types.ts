@@ -12,6 +12,7 @@ import type {
     WdaMatchPlayerStatus,
     WdaMatchEndReason,
 } from '@common/types/projects/wda'
+import type { Nullable, Dictionary } from '@common/utils'
 
 export type { PlayerRole, OptionalPlayerRole, LastWordAttempt }
 
@@ -23,7 +24,7 @@ export type Session = {
     connections: Set<WebSocket>
 }
 
-export type Sessions = Record<string, Session>
+export type Sessions = Dictionary<Session>
 
 // --- Statuses (aliased from shared types) ---
 
@@ -88,10 +89,10 @@ export type SessionState = {
     id: string
     status: SessionStatus
     players: {
-        player1: Player | null
-        player2: Player | null
+        player1: Nullable<Player>
+        player2: Nullable<Player>
     }
-    level: Level | null
-    currentMatch: Match | null
+    level: Nullable<Level>
+    currentMatch: Nullable<Match>
     previousMatches: Match[]
 }

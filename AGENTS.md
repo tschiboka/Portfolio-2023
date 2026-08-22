@@ -244,6 +244,21 @@ stay short (`trim`, `toUndefined`) while `Strings.Optional.trim` reads perfectly
   isn't feature-specific goes in `common/ux`, not inside a feature folder. Never build a
   one-off component inside feature code that's actually generic — extract it to `common/ux`.
 
+### 3.3.0 Imports — combine, and watch for circular deps
+
+- **Always review every import when editing or adding to a file.** When you add an import from a
+  module that's already imported in the same file, **combine into the existing import statement**
+  rather than adding a second line for the same package/path. Split only when paths genuinely
+  differ (e.g. two different `@common/utils/<Folder>` subpaths — those are separate modules and
+  stay separate).
+- **Never introduce a circular dependency.** A circular import is when module A imports from B and
+  B imports (directly or transitively) back from A — the modules can't initialise in a stable
+  order. **`common/types/*` must never import from `common/utils/*`** at runtime: `common/utils`
+  already imports `@common/types`, so importing back creates a cycle. Keep the layers one-way:
+  feature → `common/utils` → `common/types`. (Type-only `import type` from the barrel is safe —
+  erased at runtime — but keep value imports on subpaths, especially in server code, where the
+  `@common/utils` barrel drags in FE-only React+CSS.)
+
 ### 3.3.1 Functional iteration
 
 - **Prefer functional iteration over explicit `for` / `while` loops.** Use `map`, `filter`,

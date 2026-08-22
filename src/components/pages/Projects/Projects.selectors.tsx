@@ -15,6 +15,7 @@ import crayonsImg from '../../../assets/images/projects/Crayons.png'
 import tschibokaDarkImg from '../../../assets/images/projects/TschibokaDark.png'
 import adrikaClockImg from '../../../assets/images/projects/AdrikaClock.png'
 import { Project } from '.'
+import { Strings } from '@common/utils/Strings'
 
 const projects: Project[] = [
     {
@@ -479,7 +480,7 @@ export const technologies: Technology[] = [
 import type { PillColor } from '@common/ux'
 
 export const getTechnologies = (technology: string) => {
-    return technologies.find((tech) => tech.name.toLowerCase() === technology.toLowerCase())
+    return technologies.find((tech) => Strings.equalIgnoreCase(tech.name, technology))
 }
 
 export function getColourName(str: string): PillColor {

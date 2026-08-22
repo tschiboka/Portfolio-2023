@@ -1,4 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
+import { isDefined } from '@common/utils'
 
 export class LoadingIndicatorAccessor extends Accessor {
     get Get() {
@@ -14,7 +15,7 @@ export const LoadingIndicator = Object.assign(
     {
         Has: {
             isLoading: (label = 'Loading') =>
-                Accessor.screen.queryByRole('progressbar', { name: label }) !== null,
+                isDefined(Accessor.screen.queryByRole('progressbar', { name: label })),
         },
     },
 )

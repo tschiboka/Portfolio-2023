@@ -1,5 +1,7 @@
 import type { SessionState } from '../../../types'
 import { Level } from '../../../model/level'
+import { Arrays } from '@common/utils/Arrays/Arrays'
+import { isEmpty } from '@common/utils/Predicate'
 
 type DbLevel = {
     name: string
@@ -19,10 +21,8 @@ const levelPersistance = {
     findLevelForSession: async (_sessionState: SessionState) => {
         // TODO: Implement a better level selection logic based on player history
         const levels = await Level.find().lean()
-        if (levels.length === 0) return null
-
-        const randomIndex = Math.floor(Math.random() * levels.length)
-        return levels[randomIndex]
+        if (isEmpty(levels)) return null
+        return Arrays.random(levels) ?? null
     },
 }
 

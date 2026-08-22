@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Storage } from '@common/utils'
+import type { Optional } from '@common/utils'
 import { AppContextValues, LocalStorage } from './AppContext.types'
 
 const APP_KEY = 'tschiboka'
 
-const AppContext = createContext<AppContextValues | undefined>(undefined)
+const AppContext = createContext<Optional<AppContextValues>>(undefined)
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useAppContext = () => {

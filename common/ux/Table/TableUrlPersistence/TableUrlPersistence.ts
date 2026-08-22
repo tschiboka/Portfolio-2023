@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react'
 import { useInRouterContext, useSearchParams } from 'react-router-dom'
-import type { Dictionary, Optional } from '@common/utils/Generics'
+import type { Dictionary, Optional, Nullable } from '@common/utils/Generics'
 import type { TableSortState, TableState } from '../useTableController/useTableController.types'
 import type { FilterConfig, FilterDefinitions } from '../TableFilterConfig'
 import type { TableUrlPersistence, UseTableUrlPersistenceArgs } from './TableUrlPersistence.types'
 import { buildCodec } from './TableUrlPersistence.config'
-import { isDefined, Objects, Url } from '@common/utils'
+import { isDefined, Objects, Url, Numbers } from '@common/utils'
 
 const readFilterValues = <TFilters extends Dictionary>(
     params: URLSearchParams,
@@ -61,16 +61,17 @@ export const useTableUrlPersistence = <TFilters extends Dictionary>({
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [searchParams, setSearchParams] = inRouter ? useSearchParams() : [null, null]
 
-    const state = useMemo<TableState<TFilters> | null>(() => {
+    const state = useMemo<Nullable<TableState<TFilters>>>(() => {
         if (!enabled || !searchParams) return null
         const sortBy = searchParams.get(Url.Params.build(namespace, 'sortBy'))
         const dir = searchParams.get(Url.Params.build(namespace, 'dir'))
-        const page = Number(
-            searchParams.get(Url.Params.build(namespace, 'pageNumber')) ?? defaultPaging.pageNumber,
-        )
-        const pageSize = Number(
-            searchParams.get(Url.Params.build(namespace, 'pageSize')) ?? defaultPaging.pageSize,
-        )
+        const page =
+            Numbers.Optional.toNumber(
+                searchParams.get(Url.Params.build(namespace, 'pageNumber')),
+            ) ?? defaultPaging.pageNumber
+        const pageSize =
+            Numbers.Optional.toNumber(searchParams.get(Url.Params.build(namespace, 'pageSize'))) ??
+            defaultPaging.pageSize
         return {
             filters: readFilterValues(searchParams, filterDefs, namespace),
             sorting: {
@@ -78,8 +79,8 @@ export const useTableUrlPersistence = <TFilters extends Dictionary>({
                 direction: (dir as TableSortState['direction']) ?? defaultSort.direction,
             },
             pagination: {
-                pageNumber: Number.isNaN(page) ? defaultPaging.pageNumber : page,
-                pageSize: Number.isNaN(pageSize) ? defaultPaging.pageSize : pageSize,
+                pageNumber: page,
+                pageSize,
             },
         }
     }, [enabled, searchParams, filterDefs, namespace, defaultSort, defaultPaging])

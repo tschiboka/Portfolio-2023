@@ -7,8 +7,9 @@ import type { ModalProps } from './Overlay.types'
 import { DefaultIcon, ModeClass, useScrollLock } from './Popup.utils'
 import { isNonEmpty } from '@common/utils'
 import { Stack } from '../Layout'
+import type { Dictionary } from '@common/utils'
 
-const ModalSizeStyle: Record<string, CSSProperties> = {
+const ModalSizeStyle: Dictionary<CSSProperties> = {
     sm: { minWidth: 360, maxWidth: 480 },
     md: { minWidth: 480, maxWidth: 600 },
     lg: { minWidth: 600, maxWidth: 720 },

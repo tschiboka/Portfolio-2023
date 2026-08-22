@@ -1,6 +1,7 @@
 import type { SessionState, Level, LevelWord } from '../../types'
 
 import { isDefined } from '@common/utils/Predicate'
+import { Arrays } from '@common/utils/Arrays/Arrays'
 import { produce } from 'immer'
 import { levelPersistance } from '../../infrastructure/persistence/db/level'
 import { LevelWordStatuses } from '../../config/constants/game'
@@ -64,7 +65,7 @@ const getExtraWords = (levelName: string, targetWords: string[]): string[] => {
 
     const anagrams = getPossibleAnagrams(levelName)
     const allPossibleWords = anagrams.flatMap((a: string) => anagramMap[a] ?? [])
-    const uniqueWords = Array.from(new Set<string>(allPossibleWords))
+    const uniqueWords = Arrays.unique(allPossibleWords)
 
     const targetWordSet = new Set(targetWords)
     return uniqueWords.filter((word: string) => !targetWordSet.has(word))

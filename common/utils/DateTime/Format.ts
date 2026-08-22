@@ -1,19 +1,21 @@
 import moment from 'moment'
 import { Formats } from './Formats'
+import type { Optional, Nullish } from '../Generics'
+import { isString, isNullish } from '../Predicate'
 
 export type FormatKey = keyof typeof Formats
 
-type InputValue = string | number | Date | undefined | null
+type InputValue = Nullish<string | number | Date>
 
 /** Ordered list of format strings to try when parsing date strings. */
 const PARSE_FORMATS = Object.values(Formats)
 
-function toMoment(value: InputValue): moment.Moment | undefined {
-    if (value === undefined || value === null || value === '') return undefined
+function toMoment(value: InputValue): Optional<moment.Moment> {
+    if (isNullish(value) || value === '') return undefined
 
     // For strings, try our known formats first (e.g. DD/MM/YYYY) before falling
     // back to moment's auto-detection (which assumes US date format).
-    if (typeof value === 'string') {
+    if (isString(value)) {
         const parsed = moment(value, PARSE_FORMATS, true)
         if (parsed.isValid()) return parsed
     }
@@ -39,7 +41,7 @@ export const Format = {
      *   DateTime.Format.to('DisplayDate', new Date(2023, 7, 6)) // "06/08/2023"
      *   DateTime.Format.to('DisplayDate', undefined)            // undefined
      */
-    to(to: FormatKey, value: InputValue): string | undefined {
+    to(to: FormatKey, value: InputValue): Optional<string> {
         const m = toMoment(value)
         if (!m) return undefined
 
@@ -60,7 +62,7 @@ export const Format = {
      *   DateTime.Format.parse(new Date(2023, 7, 6)) // Date(2023, 7, 6)
      *   DateTime.Format.parse(undefined)            // undefined
      */
-    parse(value: InputValue): Date | undefined {
+    parse(value: InputValue): Optional<Date> {
         const m = toMoment(value)
         return m?.toDate()
     },

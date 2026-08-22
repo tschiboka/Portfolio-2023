@@ -10,10 +10,12 @@ import { mockDefaultQueryOptions, mockDefaultSessionContext, mockNavigate } from
 import { ApiRoute } from '../../../../src/routing/ApiRoutes'
 import { server } from '../Server'
 import { TestError } from '../Accessor/Accessor'
+import { isString, isNonEmpty } from '@common/utils'
+import type { Optional } from '@common/utils'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: mockDefaultQueryOptions })
 
-const resolvePath = (path: string | ApiRoute) => (typeof path === 'string' ? path : path.path)
+const resolvePath = (path: string | ApiRoute) => (isString(path) ? path : path.path)
 
 const resolveElement = (options: PageSetupOptions) => {
     if (options.children) return options.children
@@ -47,16 +49,16 @@ const withPageProviders = (options: PageSetupOptions) => {
 
 export const Page = {
     Get: {
-        navigatedTo: () => mockNavigate.mock.lastCall?.[0] as string | undefined,
+        navigatedTo: () => mockNavigate.mock.lastCall?.[0] as Optional<string>,
     },
     Has: {
-        navigated: () => mockNavigate.mock.calls.length > 0,
+        navigated: () => isNonEmpty(mockNavigate.mock.calls),
     },
     Wait: {
         navigatedTo: async (path: string) => {
             await waitFor(() => {
                 if (!mockNavigate.mock.calls.some(([p]: unknown[]) => p === path)) {
-                    const actual = mockNavigate.mock.lastCall?.[0] as string | undefined
+                    const actual = mockNavigate.mock.lastCall?.[0] as Optional<string>
                     throw TestError.navigation(path, actual)
                 }
             })

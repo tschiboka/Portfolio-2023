@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties, ReactNode, RefObject } from 'react'
 import type { AccessibleProps } from '../index.types'
 import type { AnchorResult } from './Overlay.types'
+import type { Optional } from '@common/utils'
 import { ArrowClass, getAnchorPosition } from './Popup.utils'
 
 export type ActionMenuItem = {
@@ -33,7 +34,7 @@ export const ActionMenu = ({
     onClose,
 }: ActionMenuProps) => {
     const menuRef = useRef<HTMLDivElement>(null)
-    const [anchorResult, setAnchorResult] = useState<AnchorResult | undefined>(undefined)
+    const [anchorResult, setAnchorResult] = useState<Optional<AnchorResult>>(undefined)
 
     useLayoutEffect(() => {
         const anchorEl = anchorRef?.current

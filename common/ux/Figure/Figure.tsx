@@ -1,9 +1,10 @@
 import type { CSSProperties } from 'react'
 import type { FigureProps, FigureSource } from './Figure.types'
+import type { Optional } from '@common/utils'
 import { Caption } from '../Typography'
 import './Figure.styles.css'
 
-const buildMedia = (source: FigureSource): string | undefined => {
+const buildMedia = (source: FigureSource): Optional<string> => {
     const { minWidth, maxWidth } = source
     const conditions: string[] = []
     if (minWidth) conditions.push(`(min-width: ${minWidth})`)
@@ -41,9 +42,7 @@ export const Figure = ({
         <img src={src} alt={alt} />
     )
 
-    const wrapperStyle: CSSProperties | undefined = bgColor
-        ? { backgroundColor: bgColor }
-        : undefined
+    const wrapperStyle: Optional<CSSProperties> = bgColor ? { backgroundColor: bgColor } : undefined
 
     return (
         <figure className={cls} aria-label={ariaLabel} style={style} onClick={onZoom}>

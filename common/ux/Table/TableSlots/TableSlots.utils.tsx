@@ -1,4 +1,5 @@
 import { type ReactNode, isValidElement } from 'react'
+import { isNonEmpty } from '@common/utils'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
 
@@ -52,5 +53,5 @@ export const extractSlot = (
         }
     }
 
-    return { slot: slots.length > 0 ? slots[0] : undefined, rest }
+    return { slot: isNonEmpty(slots) ? slots[0] : undefined, rest }
 }

@@ -1,5 +1,6 @@
 export {
     isDefined,
+    isNullish,
     isEmpty,
     isNonEmpty,
     hasLength,
@@ -10,4 +11,7 @@ export {
     isArray,
     isString,
     hasProperty,
+    isOneOf,
+    hasValue,
+    includesAll,
 } from './Predicate'

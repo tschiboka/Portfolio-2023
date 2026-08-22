@@ -1,6 +1,7 @@
 import { isDefined } from '../Predicate'
+import type { Dictionary } from '../Generics'
 
-export type CacheKey = Array<string | number | Record<string, unknown>>
+export type CacheKey = Array<string | number | Dictionary>
 
 type CacheKeyState = {
     key: string

@@ -8,6 +8,7 @@ import {
     TableSelection,
 } from '../Table.types'
 import { hasLength } from '@common/utils'
+import type { Optional } from '@common/utils'
 import { TableRow } from '../TableRow/TableRow'
 import { getTotalCols } from '../Table.utils'
 import './TableBody.styles.css'
@@ -21,7 +22,7 @@ type TableBodyProps<TData extends Record<string, ReactNode>, TContext> = {
     hiddenColumns: TableColumn<TData, TContext>[]
     actions?: TableAction<TData, TContext>[]
     emptyState?: ReactNode
-    rowVariant?: (meta: CellMeta<TData, TContext>) => CellVariant | undefined
+    rowVariant?: (meta: CellMeta<TData, TContext>) => Optional<CellVariant>
     selection?: TableSelection<TData, TContext>
 }
 

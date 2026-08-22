@@ -7,16 +7,15 @@ import type {
     SortDirection,
 } from '@common/ux/Table/Table.types'
 import { Pill } from '@common/ux'
+import type { Optional, Dictionary } from '@common/utils'
 import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.mocks'
 
-
-export const statusPillColors: Record<string, 'success' | 'error' | 'orange'> = {
+export const statusPillColors: Dictionary<'success' | 'error' | 'orange'> = {
     active: 'success',
     inactive: 'error',
     pending: 'orange',
     error: 'error',
 }
-
 
 export const renderStatus = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
@@ -26,8 +25,7 @@ export const renderBadge = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell)} color="purple" />
 )
 
-
-export const statusToVariant: Record<string, CellVariant> = {
+export const statusToVariant: Dictionary<CellVariant> = {
     active: 'primary',
     pending: 'secondary',
     inactive: 'disabled',
@@ -37,11 +35,10 @@ export const statusToVariant: Record<string, CellVariant> = {
 export const cellVariantFn = (
     _cell: CellValue<VariantRow>,
     meta: CellMeta<VariantRow>,
-): CellVariant | undefined => statusToVariant[meta.row.status]
+): Optional<CellVariant> => statusToVariant[meta.row.status]
 
-export const rowVariantFn = (meta: CellMeta<VariantRow>): CellVariant | undefined =>
+export const rowVariantFn = (meta: CellMeta<VariantRow>): Optional<CellVariant> =>
     statusToVariant[meta.row.status]
-
 
 export const clickAction: TableAction<ActionRow>[] = [
     {
@@ -109,7 +106,6 @@ export const allActions: TableAction<Row>[] = [
     },
 ]
 
-
 export const getSelectionRowId = (row: SelectionRow) => row.id
 
 export const selectionActions: TableAction<SelectionRow>[] = [
@@ -127,7 +123,6 @@ export const selectionActions: TableAction<SelectionRow>[] = [
     },
 ]
 
-
 export const allFeaturesStatusPill = (cell: CellValue<AllFeaturesRow>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
 )
@@ -135,14 +130,14 @@ export const allFeaturesStatusPill = (cell: CellValue<AllFeaturesRow>): ReactNod
 export const allFeaturesStatusVariant = (
     _cell: CellValue<AllFeaturesRow>,
     meta: CellMeta<AllFeaturesRow>,
-): CellVariant | undefined => {
+): Optional<CellVariant> => {
     if (meta.row.status === 'inactive') return 'disabled'
     if (meta.row.status === 'pending') return 'secondary'
     if (meta.row.status === 'error') return 'danger'
     return undefined
 }
 
-export const allFeaturesRowVariant = (meta: CellMeta<AllFeaturesRow>): CellVariant | undefined => {
+export const allFeaturesRowVariant = (meta: CellMeta<AllFeaturesRow>): Optional<CellVariant> => {
     if (meta.row.status === 'inactive') return 'disabled'
     if (meta.row.status === 'error') return 'danger'
     return undefined
@@ -173,7 +168,6 @@ export const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
         isDisabled: ({ row }) => row.status === 'active',
     },
 ]
-
 
 export const sortRows = <T extends Record<string, ReactNode>>(
     data: T[],

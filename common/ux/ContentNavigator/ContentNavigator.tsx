@@ -4,6 +4,7 @@ import { Browser } from '@common/utils/Browser'
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
 import { Const } from '@common/ux'
+import { isEmpty, isNonEmpty } from '@common/utils'
 import './ContentNavigator.styles.css'
 import {
     getActiveHeaders,
@@ -101,7 +102,7 @@ export const ContentNavigator = ({
 
     // Compute active headings on mount / when elements change
     useEffect(() => {
-        if (elements.length === 0) return
+        if (isEmpty(elements)) return
         // Small delay to let layout settle
         const id = requestAnimationFrame(() => setActiveIndices(computeActive()))
         return () => cancelAnimationFrame(id)
@@ -119,7 +120,7 @@ export const ContentNavigator = ({
 
             const container = scrollRef.current
             const els = elementsRef.current
-            if (!container || els.length === 0) return
+            if (!container || isEmpty(els)) return
 
             const active = computeActive()
             setActiveIndices(active)
@@ -180,11 +181,11 @@ export const ContentNavigator = ({
         [headings],
     )
 
-    const svgHeight = headings.length > 0 ? yPositions[yPositions.length - 1] + ROW : 0
+    const svgHeight = isNonEmpty(headings) ? yPositions[yPositions.length - 1] + ROW : 0
 
     // Build tree path and active path (highlights ALL visible segments + connectors)
     const { treePath, activePath } = useMemo(() => {
-        if (headings.length === 0) return { treePath: '', activePath: '' }
+        if (isEmpty(headings)) return { treePath: '', activePath: '' }
 
         const segments: string[] = []
 
@@ -237,7 +238,7 @@ export const ContentNavigator = ({
 
     return (
         <div className="ContentNavigator" style={{ position: 'relative' }}>
-            {!isOpen && headings.length > 0 && (
+            {!isOpen && isNonEmpty(headings) && (
                 <button
                     className="ContentNavigator__open-btn"
                     onClick={() => setIsOpen(true)}
@@ -288,7 +289,7 @@ export const ContentNavigator = ({
                             </a>
                         ))}
                     </div>
-                    {headings.length > 0 && (
+                    {isNonEmpty(headings) && (
                         <div className="ContentNavigator__tree">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

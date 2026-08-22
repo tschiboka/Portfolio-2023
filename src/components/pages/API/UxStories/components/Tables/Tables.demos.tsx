@@ -3,6 +3,7 @@ import { Table, useTableController, text, select } from '@common/ux/Table'
 import type { SortDirection, TableColumns } from '@common/ux/Table/Table.types'
 import type { UrlPersistenceConfig } from '@common/ux/Table/useTableController/useTableController.types'
 import { Pill } from '@common/ux'
+import { Strings } from '@common/utils/Strings'
 import { toUpper } from 'ramda'
 import {
     type SelectionRow,
@@ -553,8 +554,7 @@ const ControllerPersistenceDemo = ({
     const { filters, sorting, pagination } = controller.state
     const pageData = useMemo(() => {
         const filtered = allFeaturesData.filter((row) => {
-            if (filters.name && !row.name.toLowerCase().includes(filters.name.toLowerCase()))
-                return false
+            if (filters.name && !Strings.includesIgnoreCase(row.name, filters.name)) return false
             if (filters.role && row.role !== filters.role) return false
             if (filters.status && row.status !== filters.status) return false
             return true

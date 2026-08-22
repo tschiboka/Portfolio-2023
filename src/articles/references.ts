@@ -1,6 +1,7 @@
 import { Reference } from '../components/sharedComponents/References/References'
+import type { Dictionary } from '@common/utils'
 
-const references: Record<string, Reference[]> = {
+const references: Dictionary<Reference[]> = {
     '/blog/riffmaster': [
         {
             title: 'Keyboard Matrix, 2000',

@@ -1,7 +1,9 @@
+import type { Nullish } from '../../Generics'
 import {
     isDefined,
     isUndefined,
     isNull,
+    isNullish,
     isTruthy,
     isFalsy,
     isBoolean,
@@ -20,6 +22,7 @@ import {
     hasProperty,
     hasValue,
     isOneOf,
+    includesAll,
     isShallowEqual,
     isEqual,
     isUnique,
@@ -54,7 +57,7 @@ describe('isDefined', () => {
     })
 
     it('works as a filter callback', () => {
-        const items: (string | null | undefined)[] = ['a', null, 'b', undefined]
+        const items: Nullish<string>[] = ['a', null, 'b', undefined]
         const result = items.filter(isDefined)
         expect(result).toEqual(['a', 'b'])
     })
@@ -89,6 +92,27 @@ describe('isNull', () => {
         expect(isNull(0)).toBe(false)
         expect(isNull('')).toBe(false)
         expect(isNull(false)).toBe(false)
+    })
+})
+
+describe('isNullish', () => {
+    it('returns true for null', () => {
+        expect(isNullish(null)).toBe(true)
+    })
+
+    it('returns true for undefined', () => {
+        expect(isNullish(undefined)).toBe(true)
+    })
+
+    it('returns false for other values', () => {
+        expect(isNullish(0)).toBe(false)
+        expect(isNullish('')).toBe(false)
+        expect(isNullish(false)).toBe(false)
+        expect(isNullish('null')).toBe(false)
+        expect(isNullish('undefined')).toBe(false)
+        expect(isNullish(NaN)).toBe(false)
+        expect(isNullish({})).toBe(false)
+        expect(isNullish([])).toBe(false)
     })
 })
 
@@ -752,5 +776,44 @@ describe('isAny', () => {
 
     it('returns false for empty arrays', () => {
         expect(anyNumber([])).toBe(false)
+    })
+})
+
+describe('includesAll', () => {
+    it('returns true when every required element is present', () => {
+        expect(includesAll(['a', 'b'], ['a', 'b', 'c'])).toBe(true)
+    })
+
+    it('returns false when a required element is missing', () => {
+        expect(includesAll(['a', 'd'], ['a', 'b', 'c'])).toBe(false)
+    })
+
+    it('returns true for an empty required list (empty is a subset of everything)', () => {
+        expect(includesAll([], ['a', 'b'])).toBe(true)
+        expect(includesAll([], [])).toBe(true)
+    })
+
+    it('returns true when both lists are empty', () => {
+        expect(includesAll([], [])).toBe(true)
+    })
+
+    it('returns false when available is empty but required is not', () => {
+        expect(includesAll(['a'], [])).toBe(false)
+    })
+
+    it('handles duplicate required values against a single available value', () => {
+        expect(includesAll(['a', 'a'], ['a', 'b'])).toBe(true)
+    })
+
+    it('handles numbers', () => {
+        expect(includesAll([1, 2], [1, 2, 3])).toBe(true)
+        expect(includesAll([1, 4], [1, 2, 3])).toBe(false)
+    })
+
+    it('handles objects by reference identity', () => {
+        const shared = { id: 1 }
+        const other = { id: 2 }
+        expect(includesAll([shared], [shared, other])).toBe(true)
+        expect(includesAll([{ id: 1 }], [shared, other])).toBe(false)
     })
 })

@@ -1,8 +1,9 @@
 import type { TableAction } from '@common/ux/Table/Table.types'
+import type { Nullable } from '@common/utils'
 import type { BreakdownRow } from './BreakdownTable.types'
 
 export const breakdownActions = (
-    setDetailRow: (row: BreakdownRow | null) => void,
+    setDetailRow: (row: Nullable<BreakdownRow>) => void,
 ): TableAction<BreakdownRow>[] => [
     {
         id: 'details',

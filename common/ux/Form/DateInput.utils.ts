@@ -1,3 +1,5 @@
+import type { Nullable } from '@common/utils'
+
 export function getDaysInMonth(year: number, month: number): number {
     return new Date(year, month + 1, 0).getDate()
 }
@@ -13,7 +15,7 @@ export function formatDate(iso: string): string {
     return `${d}/${m}/${y}`
 }
 
-export function parseDate(text: string): string | null {
+export function parseDate(text: string): Nullable<string> {
     const cleaned = text.replace(/\//g, '')
     if (cleaned.length !== 8) return null
     const d = parseInt(cleaned.slice(0, 2), 10)

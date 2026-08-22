@@ -1,7 +1,8 @@
-import { ApiPaths } from "./ApiPaths"
+import { ApiPaths } from './ApiPaths'
+import type { Dictionary } from '@common/utils'
 
 export type ApiPathParams = {
     path: keyof typeof ApiPaths.Paths
-    params?: Record<string, string | number>
-    query?: Record<string, string>
+    params?: Dictionary<string | number>
+    query?: Dictionary<string>
 }

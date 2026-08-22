@@ -14,6 +14,14 @@ import type { Defined, Emptiable, Falsy, Nil, Nullish, Primitive, Truthy } from 
  */
 export const isDefined = <T>(value: T): value is Defined<T> => value !== null && value !== undefined
 
+/** Checks whether a value is `null` or `undefined`.
+ * @example
+ * isNullish(null)       // true
+ * isNullish(undefined)  // true
+ * isNullish(0)          // false
+ */
+export const isNullish = (value: unknown): value is Nil => value === null || value === undefined
+
 /**
  * Type guard that checks whether a value is `undefined`.
  *
@@ -345,6 +353,21 @@ export const hasValue = (
  */
 export const isOneOf = <T>(value: unknown, options: readonly T[]): value is T =>
     options.includes(value as T)
+
+/**
+ * Returns `true` when every element of `required` is present in `available` (subset check).
+ *
+ * @example
+ * includesAll(['a', 'b'], ['a', 'b', 'c']) // true
+ * includesAll(['a', 'd'], ['a', 'b', 'c']) // false
+ * includesAll([], ['a', 'b'])              // true (empty is a subset of everything)
+ *
+ * @param required - The elements that must all be present.
+ * @param available - The collection being tested for containing `required`.
+ * @returns `true` if every element of `required` is in `available`.
+ */
+export const includesAll = <T>(required: readonly T[], available: readonly T[]): boolean =>
+    required.every((item) => available.includes(item))
 
 /**
  * Shallow equality check for two values.

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import type { Dictionary } from '@common/utils'
 
 export type ParentOption = {
     name: string
@@ -13,4 +14,4 @@ export type CategoryFormData = {
     icon: string
     color: string
 }
-export type Icon = Record<string, ReactNode>
+export type Icon = Dictionary<ReactNode>

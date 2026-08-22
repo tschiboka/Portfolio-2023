@@ -1,14 +1,11 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 import useWebSocket from 'react-use-websocket'
 import { useSession } from './Session.context'
-import {
-    WebSocketContextType,
-    WebSocketRequest,
-    WebSocketResponse,
-} from './Session.types'
+import { WebSocketContextType, WebSocketRequest, WebSocketResponse } from './Session.types'
 import { ApiPaths } from '../common/utils'
+import type { Optional, Nullable } from '@common/utils'
 
-const WSContext = createContext<WebSocketContextType | undefined>(undefined)
+const WSContext = createContext<Optional<WebSocketContextType>>(undefined)
 
 export const useSessionWS = () => {
     const ctx = useContext(WSContext)
@@ -22,8 +19,8 @@ type Props = { children: ReactNode }
 
 export const SessionWebSocketProvider = ({ children }: Props) => {
     const { sessionId, deviceId, setSessionState } = useSession()
-    const [wsUrl, setWsUrl] = useState<string | null>(null)
-    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [wsUrl, setWsUrl] = useState<Nullable<string>>(null)
+    const [errorMessage, setErrorMessage] = useState<Nullable<string>>(null)
 
     const targetUrl =
         sessionId && deviceId
@@ -40,8 +37,9 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
         }
     }
 
-    const { sendJsonMessage, lastJsonMessage, readyState } =
-        useWebSocket<WebSocketResponse>(wsUrl, {
+    const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket<WebSocketResponse>(
+        wsUrl,
+        {
             shouldReconnect: () => false,
             share: false,
             onMessage: (event) => {
@@ -53,7 +51,8 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
                     setErrorMessage(null)
                 }
             },
-        })
+        },
+    )
 
     const send = (msg: WebSocketRequest) => {
         sendJsonMessage(msg)

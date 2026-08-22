@@ -1,7 +1,8 @@
-import { Navigation } from "."
+import { Navigation } from '.'
+import type { Dictionary } from '@common/utils'
 
 export type NavigationProps = {
     path: keyof typeof Navigation.NavigationPaths
-    params?: Record<string, string | number>
-    query?: Record<string, string>
+    params?: Dictionary<string | number>
+    query?: Dictionary<string>
 }

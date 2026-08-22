@@ -1,4 +1,6 @@
 import { AccessMap, Guard, GuardCondition, ModeConfig } from './AccessGuard.types'
+import type { Nullable } from '../Generics'
+import { includesAll } from '../Predicate'
 
 /**
  * Evaluates a single condition against the current access map.
@@ -8,7 +10,7 @@ export const isConditionDenied = (condition: GuardCondition, access: AccessMap):
     switch (condition.type) {
         case 'capability': {
             const { capabilities = [] } = condition
-            return !capabilities.every((c) => access.capabilities.includes(c))
+            return !includesAll(capabilities, access.capabilities)
         }
         case 'feature': {
             const { features = [] } = condition
@@ -33,7 +35,7 @@ export const isGuardActive = (guard: Guard, access: AccessMap): boolean => {
  * Walk through guards in priority order.
  * Returns the first matching ModeConfig, or null if all guards pass (access granted).
  */
-export const resolveGuards = (guards: Guard[], access: AccessMap): ModeConfig | null => {
+export const resolveGuards = (guards: Guard[], access: AccessMap): Nullable<ModeConfig> => {
     for (const guard of guards) {
         if (isGuardActive(guard, access)) {
             return guard.then

@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
+import type { Nullable } from '@common/utils'
 import { Modal } from './Modal'
 import { InvitationModal } from '../../../Home/InvitationModal/InvitationModal'
 
@@ -15,7 +16,7 @@ type ModalContextType = {
     setClose: () => void
 }
 
-const ModalContext = createContext<ModalContextType | null>(null)
+const ModalContext = createContext<Nullable<ModalContextType>>(null)
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const [modal, setModal] = useState<ModalState>({ name: null })
@@ -23,9 +24,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     const setClose = () => setModal({ name: null })
 
     return (
-        <ModalContext.Provider
-            value={{ isOpen: !!modal.name, setOpen, setClose }}
-        >
+        <ModalContext.Provider value={{ isOpen: !!modal.name, setOpen, setClose }}>
             {children}
             <Modal modal={modal} onClose={setClose} />
         </ModalContext.Provider>

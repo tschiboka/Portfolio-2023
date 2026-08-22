@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { CellMeta, TableSelection } from '../Table.types'
-import { hasLength } from '@common/utils'
+import { hasLength, includesAll } from '@common/utils/Predicate'
 
 type SelectionContext<TData extends Record<string, ReactNode>, TContext> = {
     data: TData[]
@@ -36,5 +36,5 @@ export const getAllSelected = <TData extends Record<string, ReactNode>, TContext
     ctx: SelectionContext<TData, TContext>,
 ): boolean => {
     const ids = getSelectableIds(ctx)
-    return hasLength(ids) && ids.every((id) => ctx.selection.selectedRowIds.includes(id))
+    return hasLength(ids) && includesAll(ids, ctx.selection.selectedRowIds)
 }

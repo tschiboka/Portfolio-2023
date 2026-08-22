@@ -12,6 +12,8 @@ import {
     toISODate,
 } from './DateInput.utils'
 import './Form.styles.css'
+import { Arrays } from '@common/utils/Arrays/Arrays'
+import type { Nullable } from '@common/utils'
 
 type DateInputProps<TFieldValues extends FieldValues = FieldValues> = AccessibleProps & {
     name: Path<TFieldValues>
@@ -40,7 +42,7 @@ export const DateInput = <T extends FieldValues>({
     const [textValue, setTextValue] = useState('')
     const [viewYear, setViewYear] = useState(new Date().getFullYear())
     const [viewMonth, setViewMonth] = useState(new Date().getMonth())
-    const [focusedDay, setFocusedDay] = useState<number | null>(null)
+    const [focusedDay, setFocusedDay] = useState<Nullable<number>>(null)
     const [yearPickerOpen, setYearPickerOpen] = useState(false)
 
     const containerRef = useRef<HTMLDivElement>(null)
@@ -276,18 +278,16 @@ export const DateInput = <T extends FieldValues>({
                                 {yearPickerOpen ? (
                                     <div className="date-input__year-picker">
                                         <div className="date-input__year-list" ref={yearListRef}>
-                                            {Array.from({ length: 201 }, (_, i) => 1900 + i).map(
-                                                (y) => (
-                                                    <button
-                                                        key={y}
-                                                        type="button"
-                                                        className={`date-input__year-option${y === viewYear ? ' selected' : ''}`}
-                                                        onClick={() => setViewYear(y)}
-                                                    >
-                                                        {y}
-                                                    </button>
-                                                ),
-                                            )}
+                                            {Arrays.times(201, (i) => 1900 + i).map((y) => (
+                                                <button
+                                                    key={y}
+                                                    type="button"
+                                                    className={`date-input__year-option${y === viewYear ? ' selected' : ''}`}
+                                                    onClick={() => setViewYear(y)}
+                                                >
+                                                    {y}
+                                                </button>
+                                            ))}
                                         </div>
                                         <div className="date-input__month-list">
                                             {MONTHS.map((m, i) => (
@@ -313,13 +313,13 @@ export const DateInput = <T extends FieldValues>({
                                             ))}
                                         </div>
                                         <div className="date-input__grid" role="grid" tabIndex={0}>
-                                            {Array.from({ length: firstDay }).map((_, i) => (
+                                            {Arrays.times(firstDay, (i) => (
                                                 <span
                                                     key={`empty-${i}`}
                                                     className="date-input__empty"
                                                 />
                                             ))}
-                                            {Array.from({ length: daysInMonth }, (_, i) => {
+                                            {Arrays.times(daysInMonth, (i) => {
                                                 const day = i + 1
                                                 const iso = toISODate(viewYear, viewMonth, day)
                                                 const isSelected = iso === selectedISO

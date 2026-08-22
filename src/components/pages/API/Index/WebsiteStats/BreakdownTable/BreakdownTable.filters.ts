@@ -1,6 +1,7 @@
 import { text, select, date } from '@common/ux'
 import type { ActivityType } from '@common/types'
 import type { FilterConfig } from '@common/ux/Table/TableFilterConfig'
+import type { Dictionary } from '@common/utils'
 
 export type ActivityFiltersData = {
     path?: string
@@ -9,7 +10,7 @@ export type ActivityFiltersData = {
     dateTo?: string
 }
 
-export const filters: Record<string, FilterConfig> = {
+export const filters: Dictionary<FilterConfig> = {
     path: text({ label: 'Path', placeholder: 'Filter by path...' }),
     type: select({
         label: 'Type',

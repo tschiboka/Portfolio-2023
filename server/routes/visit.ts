@@ -12,6 +12,7 @@ import {
     TypedResponse,
 } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
+import type { Dictionary } from '@common/utils'
 
 const router = express.Router()
 
@@ -23,7 +24,7 @@ router.get('/', async (req: GetVisitReq, res: GetVisitRes) => {
 
     if (!path) {
         const visits = await Visit.find()
-        const groupedVisits: Record<string, number> = {}
+        const groupedVisits: Dictionary<number> = {}
         visits.forEach((visit) => {
             if (!visit.path) return
             if (!groupedVisits[visit.path]) groupedVisits[visit.path] = 1

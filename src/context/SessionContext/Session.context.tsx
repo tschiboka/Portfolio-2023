@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import type { Optional } from '@common/utils'
 import { Session, SessionContextValues } from './SessionContext.types'
 import { LocalSession } from './LocalSession'
 import { useRehydrateSessionResources } from '../../components/pages/API/Login/Login.query'
@@ -7,7 +8,7 @@ type SessionContextProviderProps = {
     children: React.ReactNode
 }
 
-export const SessionContext = createContext<SessionContextValues | undefined>(undefined)
+export const SessionContext = createContext<Optional<SessionContextValues>>(undefined)
 
 export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ children }) => {
     const [session, setSession] = useState<Session>()

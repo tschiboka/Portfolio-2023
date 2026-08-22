@@ -1,5 +1,7 @@
 import { screen, within, waitFor, type BoundFunctions, type queries } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
+import type { Dictionary, Nullish } from '@common/utils/Generics'
+import { isDefined } from '@common/utils'
 
 type Scope = BoundFunctions<typeof queries>
 
@@ -29,7 +31,7 @@ export class Accessor {
         Accessor._user = userEvent.setup()
     }
 
-    constructor(element: HTMLElement | null | undefined, context = 'Accessor') {
+    constructor(element: Nullish<HTMLElement>, context = 'Accessor') {
         if (!element) throw TestError.notFound(context)
         this.element = element
         this.scope = within(element)
@@ -79,9 +81,9 @@ export class Accessor {
 
     // Auto-generated via Proxy over Get — wraps each Get method in try-catch, returns boolean.
     // Usage: dateInput.Has.calendar() → true/false. Never throws.
-    get Has(): Record<string, (...args: unknown[]) => boolean> {
+    get Has(): Dictionary<(...args: unknown[]) => boolean> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-        const get = (this as any).Get as Record<string, (...args: unknown[]) => unknown>
+        const get = (this as any).Get as Dictionary<(...args: unknown[]) => unknown>
         return new Proxy(
             {},
             {
@@ -89,7 +91,7 @@ export class Accessor {
                     if (typeof get[prop] !== 'function') return undefined
                     return (...args: unknown[]) => {
                         try {
-                            return get[prop](...args) != null
+                            return isDefined(get[prop](...args))
                         } catch {
                             return false
                         }
@@ -102,9 +104,9 @@ export class Accessor {
     // Auto-generated via Proxy over Get — wraps each Get method in waitFor().
     // Usage: await table.Wait.heading('Users'). Retries until Get succeeds.
     // Delegates 100% to RTL's waitFor — no custom retry logic or timeouts.
-    get Wait(): Record<string, (...args: unknown[]) => Promise<unknown>> {
+    get Wait(): Dictionary<(...args: unknown[]) => Promise<unknown>> {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-        const get = (this as any).Get as Record<string, (...args: unknown[]) => unknown>
+        const get = (this as any).Get as Dictionary<(...args: unknown[]) => unknown>
         return new Proxy(
             {},
             {

@@ -2,6 +2,7 @@ import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@c
 import { getColourName, technologies, Technology } from '../../Projects/Projects.selectors'
 import './BlogFilter.scss'
 import { BlogSortBy } from '../Blog.type'
+import type { Dictionary } from '@common/utils'
 
 interface Props {
     selectedLanguages: Set<string>
@@ -31,7 +32,7 @@ export const BlogFilter = ({
             groups[tech.groupName].push(tech)
             return groups
         },
-        {} as Record<string, Technology[]>,
+        {} as Dictionary<Technology[]>,
     )
 
     return (

@@ -2,16 +2,17 @@ import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import { LocalSession } from '../../../src/context/SessionContext'
 import { apiPathBuilder } from '../Path/apiPathBuilder'
 import { Objects } from '../Objects'
-import { hasLength } from '../Predicate'
+import { hasLength, isDefined } from '../Predicate'
 import { PathKey } from '../Path/Path.types'
+import type { Dictionary } from '../Generics'
 
 export class RequestBuilder {
     private baseUrl: string
     private subpath = ''
 
-    private headers: Record<string, string> = {}
-    private queryParams: Record<string, unknown> = {}
-    private pathParams: Record<string, string | number> = {}
+    private headers: Dictionary<string> = {}
+    private queryParams: Dictionary = {}
+    private pathParams: Dictionary<string | number> = {}
 
     /**
      * Creates a new request builder for the given API path.
@@ -48,7 +49,7 @@ export class RequestBuilder {
      * Replaces all path parameters with the given key-value pairs.
      * `null` / `undefined` values are stripped out.
      */
-    setParams(params: Record<string, string | number>): this {
+    setParams(params: Dictionary<string | number>): this {
         this.pathParams = this.clean(params)
         return this
     }
@@ -57,7 +58,7 @@ export class RequestBuilder {
      * Merges the given parameters into the existing path parameters.
      * `null` / `undefined` values are stripped out.
      */
-    appendParams(params: Record<string, string | number>): this {
+    appendParams(params: Dictionary<string | number>): this {
         this.pathParams = {
             ...this.pathParams,
             ...this.clean(params),
@@ -236,6 +237,6 @@ export class RequestBuilder {
      * Returns a copy of the object with all `null` / `undefined` entries removed.
      */
     private clean<T extends Record<string, unknown>>(params: T): T {
-        return Objects.fromEntries<T>(Object.entries(params).filter(([, v]) => v != null))
+        return Objects.fromEntries<T>(Object.entries(params).filter(([, v]) => isDefined(v)))
     }
 }

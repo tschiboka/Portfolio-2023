@@ -1,4 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
+import { isDefined } from '@common/utils'
 
 export class RegionAccessor extends Accessor {
     get Get() {
@@ -8,7 +9,7 @@ export class RegionAccessor extends Accessor {
                 const header = this.element.querySelector('.region__header')
                 return header?.getAttribute('aria-expanded') === 'true'
             },
-            isCollapsible: () => this.element.querySelector('[aria-expanded]') !== null,
+            isCollapsible: () => isDefined(this.element.querySelector('[aria-expanded]')),
             title: () => this.element.querySelector('.region__title')?.textContent ?? null,
             icon: () => this.element.querySelector('.region__icon'),
             content: () => this.element.querySelector('.region__content'),

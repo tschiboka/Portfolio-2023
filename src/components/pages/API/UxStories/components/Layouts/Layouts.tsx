@@ -15,6 +15,7 @@
     Split,
     Stack,
 } from '@common/ux'
+import { Arrays } from '@common/utils'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
@@ -335,7 +336,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                             <CodeText>columns={`{${cols}}`}</CodeText>
                         </Paragraph>
                         <Grid columns={cols} gap="8">
-                            {Array.from({ length: 6 }, (_, i) => (
+                            {Arrays.times(6, (i) => (
                                 <span key={i} style={cell()}>
                                     {i + 1}
                                 </span>
@@ -347,7 +348,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
 
                 <Heading as="h3">Row &amp; Column Gap</Heading>
                 <Grid columns={3} rowGap="16" columnGap="4">
-                    {Array.from({ length: 6 }, (_, i) => (
+                    {Arrays.times(6, (i) => (
                         <span key={i} style={cell()}>
                             {i + 1}
                         </span>
@@ -364,7 +365,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     override at their min-width.
                 </Paragraph>
                 <Grid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap="8">
-                    {Array.from({ length: 8 }, (_, i) => (
+                    {Arrays.times(8, (i) => (
                         <span key={i} style={cell()}>
                             {i + 1}
                         </span>

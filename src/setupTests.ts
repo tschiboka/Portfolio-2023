@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { http, HttpResponse } from 'msw'
 import { server } from '@common/ux/Test/Server'
+import type { Dictionary } from '@common/utils'
 
 // Default handlers for common API routes — components like PageSideMenu fetch
 // likes and visits on mount. These ensure tests don't get MSW warnings for them.
@@ -37,7 +38,7 @@ vi.mock('react-router-dom', async (importOriginal) => ({
     useNavigate: () => mockNavigate,
 }))
 // Expose on globalThis so tests can assert on it
-;(globalThis as Record<string, unknown>).mockNavigate = mockNavigate
+;(globalThis as Dictionary).mockNavigate = mockNavigate
 
 // jsdom does not implement window.scrollTo
 window.scrollTo = vi.fn() as unknown as typeof window.scrollTo

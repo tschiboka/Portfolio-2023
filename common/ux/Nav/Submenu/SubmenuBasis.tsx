@@ -6,6 +6,7 @@ import { find } from 'ramda'
 import { Coordinates, findParentMenuCoords, isParentMenu } from './SubmenuPanel.utils'
 import { isActive } from '../Nav.utils'
 import { Const } from '@common/ux'
+import { isNonEmpty } from '@common/utils'
 import './SubmenuPanel.styles.css'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import { AccessGuard } from '../../../utils/AccessGuard'
@@ -24,7 +25,7 @@ const SubmenuBasis = ({ submenu, submenuStack, setSubmenuStack, pageName }: Subm
             () => setSubmenuStack([]),
             (sub) => {
                 if (submenuStack[0]?.parentLabel === item.label) setSubmenuStack([])
-                else if (submenuStack.length >= 1) {
+                else if (isNonEmpty(submenuStack)) {
                     const newSubmenuItem = {
                         parentLabel: item.label,
                         options: sub,

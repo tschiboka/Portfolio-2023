@@ -1,10 +1,11 @@
+import type { Nullable } from '../Generics'
 /**
  * Safe wrapper around localStorage with JSON serialisation.
  * All methods are guarded against inaccessible localStorage
  * and malformed JSON — they degrade gracefully instead of throwing.
  */
 
-const get = <T = unknown>(key: string): T | null => {
+const get = <T = unknown>(key: string): Nullable<T> => {
     try {
         const raw = localStorage.getItem(key)
         if (raw === null) return null
@@ -31,7 +32,7 @@ const remove = (key: string): void => {
     }
 }
 
-const update = <T>(key: string, updater: (prev: T | null) => T): T => {
+const update = <T>(key: string, updater: (prev: Nullable<T>) => T): T => {
     const prev = get<T>(key)
     const next = updater(prev)
     set(key, next)

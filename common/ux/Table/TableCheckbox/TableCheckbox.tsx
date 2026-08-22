@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { CellMeta, TableSelection } from '../Table.types'
 import { getAllSelected, getSelectableIds } from './TableCheckbox.selectors'
+import { isEmpty } from '@common/utils'
 import './TableCheckbox.styles.css'
 
 type TableCheckboxHeaderProps<TData extends Record<string, ReactNode>, TContext> = {
@@ -37,7 +38,7 @@ export const TableCheckboxHeader = <TData extends Record<string, ReactNode>, TCo
                 className="select-checkbox"
                 checked={allSelected}
                 aria-label="Select all rows"
-                disabled={selectableIds.length === 0}
+                disabled={isEmpty(selectableIds)}
                 onChange={handleToggleAll}
             />
         </th>

@@ -5,6 +5,7 @@ import type { ActionMenuItem } from '@common/ux/Overlay/ActionMenu'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
+import type { Nullable } from '@common/utils'
 import { Code as Snippets } from './Overlays.code'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']
@@ -15,7 +16,7 @@ type OverlaysProps = {
     path: string
 }
 export const Overlays = ({ path }: OverlaysProps) => {
-    const [activePopup, setActivePopup] = useState<string | null>(null)
+    const [activePopup, setActivePopup] = useState<Nullable<string>>(null)
     const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})
 
     const open = (id: string) => setActivePopup(id)

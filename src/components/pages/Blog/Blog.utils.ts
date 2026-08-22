@@ -1,6 +1,7 @@
 import { DateTime } from '@common/utils/DateTime'
 import { blogArticles, BlogArticle } from '../../../articles/articles'
 import { isEmpty } from '@common/utils/Predicate/Predicate'
+import type { Nullable, Dictionary } from '@common/utils'
 import { BlogSortBy } from './Blog.type'
 
 export const getPublishedArticles = () => blogArticles.filter((article) => !!article.created)
@@ -26,8 +27,8 @@ export const getFilteredArticles = (selectedLanguages: Set<string>) => {
 }
 
 export const getComingSoonArticles = (
-    visits: Record<string, number> | null,
-    likes: Record<string, number> | null,
+    visits: Nullable<Dictionary<number>>,
+    likes: Nullable<Dictionary<number>>,
 ) =>
     blogArticles
         .filter((article) => article.upcoming)
@@ -40,8 +41,8 @@ export const getComingSoonArticles = (
 export const getSortedArticlesBy = (
     articles: BlogArticle[],
     sortedBy: BlogSortBy,
-    likes: Record<string, number> | null,
-    visits: Record<string, number> | null,
+    likes: Nullable<Dictionary<number>>,
+    visits: Nullable<Dictionary<number>>,
 ) =>
     [...articles].sort((a, b) => {
         switch (sortedBy) {

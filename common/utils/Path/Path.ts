@@ -1,3 +1,5 @@
+import type { Dictionary } from '../Generics'
+
 export const Paths = {
     Api: {
         Like: 'Like',
@@ -21,7 +23,7 @@ export const Paths = {
     },
 } as const
 
-export const apiRoutes: Record<string, string> = {
+export const apiRoutes: Dictionary<string> = {
     Like: 'api/like',
     Visit: 'api/visit',
     Message: 'api/message',

@@ -8,6 +8,7 @@ import type { BreakdownRow } from './BreakdownTable.types'
 import { breakdownActions } from './BreakdownTable.actions'
 import { useState } from 'react'
 import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
+import type { Nullable } from '@common/utils'
 
 type BreakdownTableProps = {
     controller: TableControl
@@ -26,7 +27,7 @@ export const BreakdownTable = ({
     isLoading,
     onRefresh,
 }: BreakdownTableProps) => {
-    const [showDetails, setShowDetails] = useState<BreakdownRow | null>(null)
+    const [showDetails, setShowDetails] = useState<Nullable<BreakdownRow>>(null)
 
     return (
         <>

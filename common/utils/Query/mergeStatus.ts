@@ -1,4 +1,5 @@
 import type { UseQueryResult, UseMutationResult } from '@tanstack/react-query'
+import type { Nullable } from '../Generics'
 
 export type ErrorResponse = { message?: string }
 
@@ -14,7 +15,7 @@ export type MergedApiStatus<TError = unknown> = {
     isError: boolean
     isPending: boolean
     isSuccess: boolean
-    error: TError | null
+    error: Nullable<TError>
 }
 
 export const mergeApiStatuses = <TError = ErrorResponse>(

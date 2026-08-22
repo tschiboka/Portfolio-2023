@@ -1,4 +1,5 @@
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils'
+import { isEmpty } from '@common/utils'
 import { useSession } from '../../Session.context'
 import { PlayableLevelWord } from '../../Session.types'
 import { SolvedSolutionWord, UnsolvedSolutionWord } from './SolutionWord'
@@ -41,7 +42,7 @@ export const SolutionBoard = () => {
         [columns, containerWidth, containerHeight],
     )
 
-    if (words.length === 0) return <div className="solution-board empty"></div>
+    if (isEmpty(words)) return <div className="solution-board empty"></div>
 
     return (
         <div className="solution-board" ref={boardRef}>

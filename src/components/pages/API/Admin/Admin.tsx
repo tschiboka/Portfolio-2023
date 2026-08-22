@@ -4,6 +4,7 @@ import { AxiosError } from 'axios'
 import { Button, Code, Heading, Main, Paragraph, Section, Spacer } from '@common/ux'
 import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@common/types'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
+import type { Nullable } from '@common/utils'
 import { useAdminApi } from './Admin.query'
 import { BreakdownPreview, MOCK_BREAKDOWN } from './BreakdownPreview'
 
@@ -13,8 +14,8 @@ interface AdminProps {
 
 const Admin = ({ path }: AdminProps) => {
     const { triggerDailyBreakdown, triggerBackfill } = useAdminApi()
-    const [response, setResponse] = useState<PostDailyBreakdownResponse | null>(null)
-    const [backfillResult, setBackfillResult] = useState<PostBackfillResponse | null>(null)
+    const [response, setResponse] = useState<Nullable<PostDailyBreakdownResponse>>(null)
+    const [backfillResult, setBackfillResult] = useState<Nullable<PostBackfillResponse>>(null)
 
     const { mutate: sendDailyBreakdown, isPending } = useMutation<
         PostDailyBreakdownResponse,

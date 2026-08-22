@@ -11,6 +11,7 @@ import {
     ActivityEvent,
 } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
+import type { Dictionary } from '@common/utils'
 import auth from '../middlewares/auth'
 import admin from '../middlewares/admin'
 
@@ -31,7 +32,7 @@ router.get('/admin', [auth, admin], async (req: GetActivityReq, res: GetActivity
     const queries: Promise<{ rows: ActivityEvent[]; total: number }>[] = []
 
     if (!type || type === 'visit') {
-        const visitFilter: Record<string, unknown> = {}
+        const visitFilter: Dictionary = {}
         if (path) visitFilter.path = { $regex: path, $options: 'i' }
 
         queries.push(
@@ -50,7 +51,7 @@ router.get('/admin', [auth, admin], async (req: GetActivityReq, res: GetActivity
     }
 
     if (!type || type === 'like') {
-        const likeFilter: Record<string, unknown> = {}
+        const likeFilter: Dictionary = {}
         if (path) likeFilter.path = { $regex: path, $options: 'i' }
 
         queries.push(

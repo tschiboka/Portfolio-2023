@@ -1,4 +1,5 @@
 import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@common/types/projects/wda'
+import type { Nullable } from '@common/utils'
 
 // Re-export shared types with local names
 export type {
@@ -40,7 +41,7 @@ export type SessionContextType = {
 export type WebSocketContextType = {
     lastState?: WdaWsResponse
     readyState: number
-    errorMessage: string | null
+    errorMessage: Nullable<string>
     connect: () => void
     send: (msg: WdaWsRequest) => void
 }

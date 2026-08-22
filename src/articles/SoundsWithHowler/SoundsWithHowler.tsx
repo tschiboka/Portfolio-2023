@@ -1,5 +1,6 @@
 // Components
 import { useEffect, useState } from 'react'
+import type { Nullable } from '@common/utils'
 import Figure from '../../components/sharedComponents/Figure/Figure'
 import { Howl } from 'howler'
 
@@ -80,7 +81,7 @@ const audioObject = () => {
 }
 
 const SoundsWithHowler = ({ pageName, path }: Props) => {
-    const [audio, setAudio] = useState<Record<string, Howl> | null>(null)
+    const [audio, setAudio] = useState<Nullable<Record<string, Howl>>>(null)
     const [firstAudio, setFirstAudio] = useState('') // First Audio will Play After useEffect[audio]
     const references = getReferenceList(path)
     const playAudio = (audioName: string) => {

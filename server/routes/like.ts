@@ -12,6 +12,7 @@ import {
     TypedResponse,
 } from '@common/types'
 import { HttpStatus } from '../../common/utils/Server/HttpStatus'
+import type { Dictionary } from '@common/utils'
 
 const router = express.Router()
 
@@ -22,7 +23,7 @@ router.get('/', async (req: GetLikeReq, res: GetLikeRes) => {
 
     if (!path) {
         const likes = await Like.find()
-        const groupedLikes: Record<string, number> = {}
+        const groupedLikes: Dictionary<number> = {}
         likes.forEach((like: any) => {
             if (!groupedLikes[like.path]) groupedLikes[like.path] = 1
             else groupedLikes[like.path] = groupedLikes[like.path] + 1

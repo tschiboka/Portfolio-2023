@@ -12,7 +12,7 @@ type InputProps<TFieldValues extends FieldValues = FieldValues> = AccessibleProp
     placeholder?: string
     addRevealPasswordIcon?: boolean
     revealPassword?: boolean
-    setRevealPassword?: ((reveal: boolean) => void) | undefined
+    setRevealPassword?: (reveal: boolean) => void
 }
 
 export const Input = <T extends FieldValues>({

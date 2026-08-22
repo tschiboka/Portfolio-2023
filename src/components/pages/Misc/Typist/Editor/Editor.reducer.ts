@@ -1,6 +1,7 @@
 import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import { EditorWord, CharStatus } from './Character/Character.types'
 import { textToWords } from '../Typist.utils'
+import type { Optional } from '@common/utils'
 
 const updateCharStatus = (
     words: EditorWord[],
@@ -19,17 +20,10 @@ const updateCharStatus = (
         }),
     }))
 
-const getCurrentCharStatus = (
-    state: TypistEditorState,
-): CharStatus | undefined =>
-    state.words
-        .flatMap((w) => w.chars)
-        .find((ch) => ch.index === state.cursorPosition)?.status
+const getCurrentCharStatus = (state: TypistEditorState): Optional<CharStatus> =>
+    state.words.flatMap((w) => w.chars).find((ch) => ch.index === state.cursorPosition)?.status
 
-const handleKeystroke = (
-    state: TypistEditorState,
-    key: string,
-): TypistEditorState => {
+const handleKeystroke = (state: TypistEditorState, key: string): TypistEditorState => {
     const expected = state.text[state.cursorPosition]
     const correct = key === expected
     const isLastChar = state.cursorPosition === state.text.length - 1
@@ -49,11 +43,7 @@ const handleKeystroke = (
         return {
             ...state,
             status: isLastChar ? 'idle' : 'playing',
-            lastEvent: isLastChar
-                ? 'ended'
-                : isStarting
-                  ? 'started'
-                  : 'resumed',
+            lastEvent: isLastChar ? 'ended' : isStarting ? 'started' : 'resumed',
             cursorPosition: newPos,
             words: updateCharStatus(
                 state.words,

@@ -12,6 +12,7 @@
  */
 
 import type { BreakdownPreviewProps, SectionData } from './BreakdownPreview.types'
+import { isEmpty } from '@common/utils'
 import {
     shellStyle,
     cardStyle,
@@ -149,7 +150,7 @@ const DataSection = ({ title, data, icon }: DataSectionProps) => (
                 </tr>
             </thead>
             <tbody>
-                {data.today.length === 0 ? (
+                {isEmpty(data.today) ? (
                     <tr>
                         <td className="bp-empty" style={emptyStyle} colSpan={3}>
                             No data today
