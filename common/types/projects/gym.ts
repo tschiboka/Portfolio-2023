@@ -2,9 +2,34 @@ import type { SearchInputOption } from '@common/ux'
 
 // Shared types for the Gym project.
 
-export type GymUserRoutineResponse = {
-    name: string
+export type GymRoutineEntry = {
+    exerciseId: string
+    order: number
+    // TODO: [0003] - sets / reps / rest to be added here when routine composition lands
 }
+
+export const ROUTINE_SOURCES = ['user', 'system'] as const
+export type GymRoutineSource = (typeof ROUTINE_SOURCES)[number]
+
+export type GymRoutineBase = {
+    _id: string
+    name: string
+    entries: GymRoutineEntry[]
+}
+
+/** User-owned routine referencing canonical exercises. */
+export type GymUserRoutine = GymRoutineBase & { source: 'user'; ownerId: string }
+
+/** Future system/default routine (app-generated or admin-defined) with no owner. */
+export type GymSystemRoutine = GymRoutineBase & { source: 'system' }
+
+export type GymRoutineResource = GymUserRoutine | GymSystemRoutine
+
+/** User routine creation body (source forced to 'user' server-side). */
+export type PostGymRoutineRequest = Omit<GymRoutineBase, '_id'>
+
+/** User routine update body — all fields optional. */
+export type PatchGymRoutineRequest = Partial<Omit<GymRoutineBase, '_id'>>
 
 export type MuscleGroupResource =
     // Chest
@@ -61,65 +86,73 @@ export type MuscleRegion =
     | 'legs'
     | 'neck'
 
-export type ExerciseType = 'strength' | 'cardio' | 'flexibility' | 'balance' | 'mobility'
+export const EXERCISE_TYPES = ['strength', 'cardio', 'flexibility', 'balance', 'mobility'] as const
+export type ExerciseType = (typeof EXERCISE_TYPES)[number]
 
-export type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced'
+export const DIFFICULTY_LEVELS = ['beginner', 'intermediate', 'advanced'] as const
+export type DifficultyLevel = (typeof DIFFICULTY_LEVELS)[number]
 
-export type EquipmentResource =
-    | 'bodyweight'
+export const EQUIPMENT_OPTIONS = [
+    { value: 'bodyweight', label: 'Bodyweight' },
 
     // Free weights
-    | 'barbell'
-    | 'ez_bar'
-    | 'trap_bar'
-    | 'dumbbell'
-    | 'kettlebell'
-    | 'weight_plate'
+    { value: 'barbell', label: 'Barbell' },
+    { value: 'ez_bar', label: 'EZ Bar' },
+    { value: 'trap_bar', label: 'Trap Bar' },
+    { value: 'dumbbell', label: 'Dumbbell' },
+    { value: 'kettlebell', label: 'Kettlebell' },
+    { value: 'weight_plate', label: 'Weight Plate' },
 
     // Machines & cables
-    | 'cable'
-    | 'smith_machine'
-    | 'machine'
+    { value: 'cable', label: 'Cable' },
+    { value: 'smith_machine', label: 'Smith Machine' },
+    { value: 'machine', label: 'Machine' },
 
     // Benches & racks
-    | 'bench'
-    | 'power_rack'
-    | 'squat_rack'
+    { value: 'bench', label: 'Bench' },
+    { value: 'power_rack', label: 'Power Rack' },
+    { value: 'squat_rack', label: 'Squat Rack' },
 
     // Bands & suspension
-    | 'resistance_band'
-    | 'mini_band'
-    | 'trx'
+    { value: 'resistance_band', label: 'Resistance Band' },
+    { value: 'mini_band', label: 'Mini Band' },
+    { value: 'trx', label: 'TRX' },
 
     // Pull-up equipment
-    | 'pull_up_bar'
-    | 'dip_station'
+    { value: 'pull_up_bar', label: 'Pull-Up Bar' },
+    { value: 'dip_station', label: 'Dip Station' },
 
     // Cardio
-    | 'treadmill'
-    | 'exercise_bike'
-    | 'rowing_machine'
-    | 'elliptical'
-    | 'stair_climber'
-    | 'ski_erg'
+    { value: 'treadmill', label: 'Treadmill' },
+    { value: 'exercise_bike', label: 'Exercise Bike' },
+    { value: 'rowing_machine', label: 'Rowing Machine' },
+    { value: 'elliptical', label: 'Elliptical' },
+    { value: 'stair_climber', label: 'Stair Climber' },
+    { value: 'ski_erg', label: 'Ski Erg' },
 
     // Functional fitness
-    | 'battle_rope'
-    | 'medicine_ball'
-    | 'slam_ball'
-    | 'sandbag'
-    | 'plyo_box'
-    | 'sled'
-    | 'jump_rope'
-    | 'stability_ball'
+    { value: 'battle_rope', label: 'Battle Rope' },
+    { value: 'medicine_ball', label: 'Medicine Ball' },
+    { value: 'slam_ball', label: 'Slam Ball' },
+    { value: 'sandbag', label: 'Sandbag' },
+    { value: 'plyo_box', label: 'Plyo Box' },
+    { value: 'sled', label: 'Sled' },
+    { value: 'jump_rope', label: 'Jump Rope' },
+    { value: 'stability_ball', label: 'Stability Ball' },
 
     // Mobility
-    | 'foam_roller'
+    { value: 'foam_roller', label: 'Foam Roller' },
 
     // Steps / platforms
-    | 'step'
+    { value: 'step', label: 'Step' },
+] as const satisfies readonly SearchInputOption[]
+export type EquipmentResource = (typeof EQUIPMENT_OPTIONS)[number]['value']
 
-export type GymExerciseResource = {
+export const EXERCISE_SOURCES = ['canonical', 'user'] as const
+export type GymExerciseSource = (typeof EXERCISE_SOURCES)[number]
+
+export type GymExerciseBase = {
+    _id: string
     name: string
     type: ExerciseType
     difficulty?: DifficultyLevel
@@ -127,7 +160,7 @@ export type GymExerciseResource = {
     primaryMuscleGroups: MuscleGroupResource[]
     secondaryMuscleGroups?: MuscleGroupResource[]
     unilateral?: boolean
-    equipment?: string[] // make this an enum
+    equipment?: EquipmentResource[]
     instructions?: string
     notes?: string
     image?: string
@@ -135,9 +168,23 @@ export type GymExerciseResource = {
     url?: string
 }
 
-export type GetGymUserRoutinesResponse = { routines: GymUserRoutineResponse[] }
+/** Admin-curated, project-wide exercise with no individual owner. */
+export type GymCanonicalExercise = GymExerciseBase & { source: 'canonical' }
+
+/** User-owned, private exercise scoped to its owner. */
+export type GymUserExercise = GymExerciseBase & { source: 'user'; ownerId: string }
+
+export type GymExerciseResource = GymCanonicalExercise | GymUserExercise
+
+export type GetGymUserRoutinesResponse = { routines: GymRoutineResource[] }
 export type GetGymExercisesResponse = { exercises: GymExerciseResource[] }
 
 export type GetGymDifficultyOptionsResponse = SearchInputOption<DifficultyLevel>[]
 export type GetGymEquipmentOptionsResponse = SearchInputOption<EquipmentResource>[]
 export type GetGymMuscleGroupOptionsResponse = SearchInputOption<MuscleGroupResource>[]
+
+/** Canonical exercise creation body (source is forced to 'canonical' server-side). */
+export type PostGymExerciseRequest = Omit<GymExerciseBase, '_id'>
+
+/** Canonical exercise update body — all fields optional. */
+export type PatchGymExerciseRequest = Partial<Omit<GymExerciseBase, '_id'>>

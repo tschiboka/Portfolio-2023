@@ -291,6 +291,15 @@ stay short (`trim`, `toUndefined`) while `Strings.Optional.trim` reads perfectly
 - **Tiny inline-only helpers do not require comments.** No need to document something that's
   self-evident in one line.
 
+### 3.4.1 TODOs always reference a ticket
+
+- **Every `TODO` (and `FIXME` / `HACK` / `XXX`) comment must reference the ticket that owns it** so
+  the intent is traceable and blameable. Use the `NNNN` docs-ID prefix or a ticket ID.
+- Format: `TODO: [0003] - <what and why>`.
+- Example: `// TODO: [0003] - sets / reps / rest to be added here when routine composition lands`.
+- If there is no ticket yet for the work, open one (or a docs `NNNN-` entry) rather than leaving an
+  unattributed TODO.
+
 ### 3.5 Testing
 
 - **Every exported function needs a spec file or test suite.** No export ships untested.

@@ -7,6 +7,8 @@ Index of all numbered feature documents. Each row links to its feature doc.
 | 0000 | [`0000-doc-template.md`](./0000-doc-template.md)                         | Feature doc template                                  | —           | —          | —            |
 | 0001 | [`0001-table-filter-persistence.md`](./0001-table-filter-persistence.md) | URL persistence for table filtering, paging & sorting | In progress | 2026-07-31 | 2026-08-21   |
 | 0002 | [`0002-util-reuse-sweep.md`](./0002-util-reuse-sweep.md)                 | Util reuse & generic-types consolidation sweep        | In progress | 2026-08-21 | 2026-08-22   |
+| 0003 | [`0003-gym-exercises-routines.md`](./0003-gym-exercises-routines.md)     | Finalise gym exercises & routines features            | Planned     | 2026-08-22 | 2026-08-22   |
+| 0004 | [`0004-api-responder.md`](./0004-api-responder.md)                       | Centralised API response handling (ApiResponder)      | Planned     | 2026-08-22 | 2026-08-22   |
 
 ---
 
