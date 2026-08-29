@@ -1,5 +1,5 @@
 import type { Optional } from '../Generics'
-import { isEmpty } from '../Predicate'
+import { isEmpty, isPositiveInteger } from '../Predicate'
 
 export const shuffleArray = <T>(array: T[]): T[] => {
     const shuffled = [...array]
@@ -36,9 +36,27 @@ export const random = <T>(array: readonly T[]): Optional<T> => {
  */
 export const unique = <T>(array: readonly T[]): T[] => Array.from(new Set(array))
 
+/** Splits an array into consecutive `size`-length sub-arrays; the final chunk may be shorter.
+ * Guarded to a positive-integer `size` — invalid sizes throw rather than behaving incidentally.
+ * @example
+ * chunk([1, 2, 3, 4, 5], 2) // [[1, 2], [3, 4], [5]]
+ * chunk([], 3)              // []
+ * @throws {RangeError} when `size` is not a positive integer (0, negative, fractional, NaN, or infinite).
+ */
+export const chunk = <T>(items: readonly T[], size: number): T[][] => {
+    const rawSize = size
+    if (!isPositiveInteger(size)) {
+        throw new RangeError(`chunk: size must be a positive integer, got ${rawSize}`)
+    }
+    return Array.from({ length: Math.ceil(items.length / size) }, (_, i) =>
+        items.slice(i * size, i * size + size),
+    )
+}
+
 export const Arrays = {
     shuffleArray,
     times,
     random,
     unique,
+    chunk,
 }

@@ -1,42 +1,12 @@
-import 'express-async-errors'
 import http from 'http'
-import express from 'express'
-import cors from 'cors'
-import error from './middlewares/error'
-import setupRoutes from './startup/routes'
-import setupDb from './startup/db'
-import setupValidation from './startup/validation'
-import setupProd from './startup/prod'
-import setupWs from './projects/word_duel_arena/transport/ws'
+import { App, AppConstants } from './App'
+import { ApiMessage } from '../common/utils/Server'
+import setupWs from './projects/WordDuelArena/transport/ws'
+;(async () => {
+    const app = await App.start()
+    const server = http.createServer(app)
+    setupWs(server)
 
-const app = express()
-
-app.use(express.json())
-app.use(
-    express.json({
-        type: ['application/json', 'text/plain'],
-    }),
-)
-
-// Cross-Origin Shared Resources
-const allowAllOrigin = true
-app.use(
-    cors({
-        methods: 'GET, POST, PUT, DELETE',
-        origin: allowAllOrigin ? '*' : ['https://tschiboka.com'],
-    }),
-)
-
-setupRoutes(app)
-setupDb()
-setupValidation()
-setupProd(app)
-
-app.use(error)
-
-const server = http.createServer(app)
-setupWs(server)
-
-const PORT = process.env.PORT || 5000
-
-server.listen(PORT, () => console.log(`Listening on ${PORT}`))
+    const PORT = process.env.PORT || AppConstants.defaultPort
+    server.listen(PORT, () => console.log(ApiMessage.listening(PORT)))
+})()

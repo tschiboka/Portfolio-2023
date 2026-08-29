@@ -8,12 +8,16 @@ import {
     isFalsy,
     isBoolean,
     isNumber,
+    isPositiveInteger,
     isString,
+    isDigits,
     isPrimitive,
     isFunction,
     isFiniteNumber,
     isArray,
     isObject,
+    isObjectId,
+    isValidObjectId,
     isPlainObject,
     hasLength,
     isEmpty,
@@ -191,6 +195,56 @@ describe('isNumber', () => {
     })
 })
 
+describe('isPositiveInteger', () => {
+    it('returns true for positive integers', () => {
+        expect(isPositiveInteger(1)).toBe(true)
+        expect(isPositiveInteger(42)).toBe(true)
+        expect(isPositiveInteger(Number.MAX_SAFE_INTEGER)).toBe(true)
+    })
+
+    it('returns false for zero and negative integers', () => {
+        expect(isPositiveInteger(0)).toBe(false)
+        expect(isPositiveInteger(-1)).toBe(false)
+        expect(isPositiveInteger(-42)).toBe(false)
+        expect(isPositiveInteger(Number.MIN_SAFE_INTEGER)).toBe(false)
+    })
+
+    it('returns false for fractional numbers', () => {
+        expect(isPositiveInteger(2.5)).toBe(false)
+        expect(isPositiveInteger(-2.5)).toBe(false)
+        expect(isPositiveInteger(0.5)).toBe(false)
+        expect(isPositiveInteger(Math.PI)).toBe(false)
+    })
+
+    it('returns false for non-finite numbers', () => {
+        expect(isPositiveInteger(NaN)).toBe(false)
+        expect(isPositiveInteger(Infinity)).toBe(false)
+        expect(isPositiveInteger(-Infinity)).toBe(false)
+    })
+
+    it('returns false for non-number values', () => {
+        expect(isPositiveInteger('3')).toBe(false)
+        expect(isPositiveInteger('')).toBe(false)
+        expect(isPositiveInteger(null)).toBe(false)
+        expect(isPositiveInteger(undefined)).toBe(false)
+        expect(isPositiveInteger(true)).toBe(false)
+        expect(isPositiveInteger(false)).toBe(false)
+        expect(isPositiveInteger([])).toBe(false)
+        expect(isPositiveInteger({})).toBe(false)
+        expect(isPositiveInteger(Symbol('3'))).toBe(false)
+    })
+
+    it('narrows the type to a positive integer when asserted', () => {
+        const value: unknown = 5
+        if (isPositiveInteger(value)) {
+            // value is narrowed to number here
+            expect(value > 0).toBe(true)
+        } else {
+            throw new Error('expected 5 to be a positive integer')
+        }
+    })
+})
+
 describe('isString', () => {
     it('returns true for strings', () => {
         expect(isString('')).toBe(true)
@@ -204,6 +258,32 @@ describe('isString', () => {
         expect(isString(undefined)).toBe(false)
         expect(isString(true)).toBe(false)
         expect(isString([])).toBe(false)
+    })
+})
+
+describe('isDigits', () => {
+    it.each(['0', '12345', '999000111222', '007'])(
+        'returns true for digit-only strings: %s',
+        (value) => {
+            expect(isDigits(value)).toBe(true)
+        },
+    )
+
+    it('returns false for the empty string', () => {
+        expect(isDigits('')).toBe(false)
+    })
+
+    it.each(['12a45', '12 45', '12.5', '1-2', '1_2', '+12', '-12'])(
+        'returns false for strings with non-digits: %s',
+        (value) => {
+            expect(isDigits(value)).toBe(false)
+        },
+    )
+
+    it('returns false for non-strings', () => {
+        expect(isDigits(12345)).toBe(false)
+        expect(isDigits(null)).toBe(false)
+        expect(isDigits(undefined)).toBe(false)
     })
 })
 
@@ -302,6 +382,247 @@ describe('isObject', () => {
     it('returns false for primitives', () => {
         expect(isObject('string')).toBe(false)
         expect(isObject(42)).toBe(false)
+    })
+})
+
+describe('isObjectId', () => {
+    /** Valid 24-char lowercase hex ObjectId string. */
+    const HEX = '64b000000000000000000000'
+    /** Duck-typed Mongo ObjectId: an object whose String() form is the given value. */
+    const objectId = (asString: string) => ({ toString: () => asString })
+
+    it('returns true for an object whose String() form is 24-char lowercase hex', () => {
+        expect(isObjectId(objectId(HEX))).toBe(true)
+    })
+
+    it('returns false for a primitive 24-char hex string (it is the representation, not the object)', () => {
+        expect(isObjectId(HEX)).toBe(false)
+    })
+
+    describe('primitive values', () => {
+        it.each([
+            [HEX],
+            [''],
+            ['not-an-id'],
+            [0],
+            [42],
+            [-1],
+            [1.5],
+            [NaN],
+            [Infinity],
+            [-Infinity],
+            [true],
+            [false],
+            [null],
+            [undefined],
+        ])('returns false for primitive %p', (primitive) => {
+            expect(isObjectId(primitive)).toBe(false)
+        })
+
+        it('returns false for BigInt and Symbol primitives', () => {
+            expect(isObjectId(10n)).toBe(false)
+            expect(isObjectId(Symbol('id'))).toBe(false)
+        })
+    })
+
+    it('returns false for arrays and functions', () => {
+        expect(isObjectId([])).toBe(false)
+        expect(isObjectId(['64b000000000000000000000'])).toBe(false)
+        expect(isObjectId(noop)).toBe(false)
+    })
+
+    describe('hex-format boundaries', () => {
+        it('returns true for exactly 24 chars', () => {
+            expect(isObjectId(objectId(HEX))).toBe(true)
+        })
+
+        it.each([
+            ['shorter than 24', objectId('64b00000000000000000')],
+            ['longer than 24', objectId(`${HEX}0`)],
+            ['empty', objectId('')],
+            ['non-hex char', objectId('64b00000000000000000000g')],
+            ['space', objectId('64b0000000000000000 00000')],
+            ['tab', objectId('64b0000000000000000\t00000')],
+            ['newline', objectId('64b0000000000000000\n00000')],
+            ['leading whitespace', objectId(` ${HEX}`)],
+            ['trailing whitespace', objectId(`${HEX} `)],
+            ['leading/trailing whitespace', objectId(` ${HEX} `)],
+            ['leading 0x prefix', objectId(`0x${HEX}`)],
+            ['hyphenated', objectId('64b00000-0000-0000-0000-000000000000')],
+            ['uuid-shaped', objectId('64b00000-0000-4000-8000-000000000000')],
+        ])('returns false when %s', (_label, value) => {
+            expect(isObjectId(value)).toBe(false)
+        })
+    })
+
+    describe('hexadecimal alphabet (case-sensitive, lowercase-only)', () => {
+        it('returns true for 0-9 and a-f', () => {
+            expect(isObjectId(objectId('000000000000000000000000'))).toBe(true)
+            expect(isObjectId(objectId('ffffffffffffffffffffffff'))).toBe(true)
+            expect(isObjectId(objectId('64b000000000000000000000'))).toBe(true)
+        })
+
+        it('rejects uppercase A-F', () => {
+            expect(isObjectId(objectId('64B000000000000000000000'))).toBe(false)
+            expect(isObjectId(objectId('64b0000000000000000000FF'))).toBe(false)
+            expect(isObjectId(objectId('64b0000000000000000000A0'))).toBe(false)
+        })
+
+        it('rejects invalid alphabetic characters and punctuation', () => {
+            expect(isObjectId(objectId('64b00000000000000000000g'))).toBe(false)
+            expect(isObjectId(objectId('64b00000000000000000000Z'))).toBe(false)
+            expect(isObjectId(objectId('64b00000000000000000000_'))).toBe(false)
+            expect(isObjectId(objectId('64b00000000000000000000-'))).toBe(false)
+            expect(isObjectId(objectId('64b00000000000000000000/'))).toBe(false)
+            expect(isObjectId(objectId('64b00000000000000000000\\'))).toBe(false)
+        })
+    })
+
+    describe('standard object families (default toString is never 24-hex)', () => {
+        it.each([
+            ['empty object', {}],
+            ['Date', new Date()],
+            ['invalid Date', new Date('invalid')],
+            ['RegExp', /abc/],
+            ['Error', new Error('boom')],
+            ['Map', new Map()],
+            ['Set', new Set()],
+        ])('returns false for a %s', (_label, value) => {
+            expect(isObjectId(value)).toBe(false)
+        })
+
+        it('returns true for a String wrapper object whose value is a valid ObjectId', () => {
+            expect(isObjectId(new String(HEX))).toBe(true)
+        })
+
+        it('returns false for Number and Boolean wrapper objects', () => {
+            expect(isObjectId(new Number(42))).toBe(false)
+            expect(isObjectId(new Number(NaN))).toBe(false)
+            expect(isObjectId(new Boolean(true))).toBe(false)
+        })
+
+        it('returns false for an invalid String wrapper object', () => {
+            expect(isObjectId(new String('not-an-id'))).toBe(false)
+            expect(isObjectId(new String(''))).toBe(false)
+        })
+    })
+
+    describe('custom toString() / coercion', () => {
+        it('returns true for an object with an own custom toString() returning a valid ObjectId', () => {
+            expect(isObjectId(objectId(HEX))).toBe(true)
+        })
+
+        it('returns true for an object inheriting a custom toString() returning a valid ObjectId', () => {
+            const proto = Object.create({ toString: () => HEX }) as { toString(): string }
+            expect(isObjectId(proto)).toBe(true)
+        })
+
+        it('returns false for an object whose custom toString() is invalid', () => {
+            expect(isObjectId({ toString: () => 'not-an-id' })).toBe(false)
+        })
+
+        it('coerces toString() returning a non-string via String()', () => {
+            expect(isObjectId({ toString: () => 42 })).toBe(false)
+        })
+
+        it('coerces a null-prototype object via String()', () => {
+            const nullProto = Object.create(null) as { toString(): string }
+            nullProto.toString = () => HEX
+            expect(isObjectId(nullProto)).toBe(true)
+        })
+    })
+
+    describe('Symbol.toPrimitive precedence', () => {
+        it('honours Symbol.toPrimitive over toString()', () => {
+            const withToPrimitive = {
+                toString: () => 'not-an-id',
+                [Symbol.toPrimitive]: () => HEX,
+            }
+            expect(isObjectId(withToPrimitive)).toBe(true)
+        })
+
+        it('rejects when Symbol.toPrimitive returns an invalid string', () => {
+            const withToPrimitive = {
+                toString: () => HEX,
+                [Symbol.toPrimitive]: () => 'bad',
+            }
+            expect(isObjectId(withToPrimitive)).toBe(false)
+        })
+    })
+
+    describe('exceptions', () => {
+        it('propagates a throwing toString()', () => {
+            const throwing = {
+                toString: () => {
+                    throw new Error('boom')
+                },
+            }
+            expect(() => isObjectId(throwing)).toThrow('boom')
+        })
+
+        it('propagates a throwing Symbol.toPrimitive', () => {
+            const throwing = {
+                [Symbol.toPrimitive]: () => {
+                    throw new Error('boom')
+                },
+            }
+            expect(() => isObjectId(throwing)).toThrow('boom')
+        })
+    })
+
+    describe('core value use: the real mongoose ObjectId shape', () => {
+        it('returns true for an object mirroring mongoose ObjectId.toString()', () => {
+            const fakeMongooseId = { toString: () => '64b000000000000000000000' }
+            expect(isObjectId(fakeMongooseId)).toBe(true)
+        })
+    })
+})
+
+describe('isValidObjectId', () => {
+    /** Valid 24-char lowercase hex ObjectId string. */
+    const HEX = '64b000000000000000000000'
+
+    it('returns true for exactly 24 lowercase hex characters', () => {
+        expect(isValidObjectId(HEX)).toBe(true)
+        expect(isValidObjectId('000000000000000000000000')).toBe(true)
+        expect(isValidObjectId('ffffffffffffffffffffffff')).toBe(true)
+    })
+
+    it('rejects exactly 24 uppercase hex characters (lowercase-only)', () => {
+        expect(isValidObjectId('64B000000000000000000000')).toBe(false)
+        expect(isValidObjectId('FFFFFFFFFFFFFFFFFFFFFFFF')).toBe(false)
+        expect(isValidObjectId('64b0000000000000000000A0')).toBe(false)
+    })
+
+    describe('non-string values', () => {
+        it.each([
+            ['undefined', undefined],
+            ['null', null],
+            ['number', 42],
+            ['boolean', true],
+            ['object', {}],
+            ['array', [HEX]],
+            ['ObjectId-like object', { toString: () => HEX }],
+            ['String wrapper', new String(HEX)],
+        ])('returns false for a %s', (_label, value) => {
+            expect(isValidObjectId(value)).toBe(false)
+        })
+    })
+
+    describe('invalid string representations', () => {
+        it.each([
+            ['empty', ''],
+            ['shorter than 24', '64b00000000000000000000'],
+            ['longer than 24', `${HEX}0`],
+            ['non-hex char', '64b00000000000000000000g'],
+            ['leading whitespace', ` ${HEX}`],
+            ['trailing whitespace', `${HEX} `],
+            ['embedded whitespace', '64b0000000000000000 00000'],
+            ['0x prefix', `0x${HEX}`],
+            ['uuid-shaped', '64b00000-0000-4000-8000-000000000000'],
+        ])('returns false when %s', (_label, value) => {
+            expect(isValidObjectId(value)).toBe(false)
+        })
     })
 })
 

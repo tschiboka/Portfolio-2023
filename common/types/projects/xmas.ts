@@ -33,7 +33,6 @@ export type PostXmasMessageRequest = {
 
 // POST /message response
 export type PostXmasMessageResponse = {
-    success: boolean
     message: string
 }
 
@@ -44,13 +43,11 @@ export type GetXmasMessagesQuery = {
 
 // GET /message response
 export type GetXmasMessagesResponse = {
-    success: boolean
     data: XmasMessage[]
 }
 
 // GET /candles response
 export type GetXmasCandlesResponse = {
-    success: boolean
     data: { candles: XmasCandles }
 }
 
@@ -64,6 +61,5 @@ export type PutXmasCandlesRequest = {
 
 // PUT /candles response
 export type PutXmasCandlesResponse = {
-    success: boolean
     data: { candles: XmasCandles }
 }

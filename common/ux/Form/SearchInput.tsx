@@ -5,15 +5,10 @@ import { hasLength } from '@common/utils/Predicate'
 import { colors } from '../../../src/components/pages/API/Categories/colors'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
-import { Const } from '@common/ux'
+import { Const, SearchInputOption } from '@common/ux'
 import './Form.styles.css'
 
-export type SearchInputOption<T extends string = string> = {
-    label: string
-    value: T
-    icon?: ReactNode
-    iconColor?: string
-}
+export type { SearchInputOption } from './SearchInput.types'
 
 type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'
 

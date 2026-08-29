@@ -4,6 +4,10 @@
     "private": true,
     "authour": "Tivadar Debnar",
     "type": "module",
+    "workspaces": [
+        "common",
+        "server"
+    ],
     "description": "Tivadar Debnar - Frontend Developer: Portfolio Website with Blog and Articles.",
     "keywords": [
         "portfolio",
@@ -18,6 +22,7 @@
         "url": "https://github.com/tschiboka/Portfolio-2023/issues"
     },
     "scripts": {
+        "start": "npm run start --workspace server",
         "dev": "node scripts/generate-version-dev.js && vite",
         "tsc": "tsc",
         "build": "tsc && vite build && node scripts/generate-version.js",
@@ -39,7 +44,6 @@
         "immer": "^11.1.0",
         "joi-objectid": "^4.0.2",
         "jsonwebtoken": "^9.0.2",
-        "moment": "^2.30.1",
         "monet": "^0.9.3",
         "nanoid": "^5.1.6",
         "nodemon": "^3.0.2",

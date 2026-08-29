@@ -2,11 +2,25 @@ import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
 import { Test, Accessor } from '../../Test'
 import * as visitsQueries from '@common/queries'
+import { Browser } from '@common/utils'
+import type { PostVisitResponse } from '@common/types'
 import Page from '../Page'
+
+// detectincognitojs is async and browser-detection dependent; stub it as "not private" so
+// visit recording is deterministic in tests.
+vi.mock('detectincognitojs', () => ({
+    detectIncognito: vi.fn().mockResolvedValue({ isPrivate: false }),
+}))
+
+const visitResponse: PostVisitResponse = {
+    visit: { path: '/home', visitDate: new Date() },
+}
 
 beforeEach(() => {
     vi.clearAllMocks()
-    vi.spyOn(visitsQueries, 'postVisit').mockResolvedValue(undefined)
+    vi.spyOn(visitsQueries, 'postVisit').mockResolvedValue(visitResponse)
+    // Page skips visit recording on localhost; force a non-localhost environment.
+    vi.spyOn(Browser, 'isLocalhost').mockReturnValue(false)
 })
 
 describe('Page', () => {

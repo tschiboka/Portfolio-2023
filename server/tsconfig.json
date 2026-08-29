@@ -17,6 +17,6 @@
             "@common/*": ["../common/*"]
         }
     },
-    "include": ["./**/*.ts", "../common/**/*.ts"],
+    "include": ["./**/*.ts"],
     "exclude": ["node_modules", "dist", "**/*.js"]
 }

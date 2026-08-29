@@ -52,8 +52,13 @@ export type TypedResponse<T = unknown> = Response<T | ErrorResponse>
 
 // Generic error response for all API endpoints
 export type ErrorResponse = {
-    success: boolean
     message: string
+}
+
+// The minimal subset of a user that permission checks rely on (duck-typed: a User doc or token).
+export type CurrentUser = {
+    _id: string
+    isAdmin: boolean
 }
 
 // Generic pagination metadata for paginated API responses
@@ -66,7 +71,6 @@ export type PageMeta = {
 // Generic paginated response wrapper.
 // TData — the row type, TContext — endpoint-specific extra metadata (e.g. summary counts).
 export type PaginatedResponse<TData, TContext = undefined> = {
-    success: boolean
     data: TData[]
     meta: PageMeta
     context?: TContext

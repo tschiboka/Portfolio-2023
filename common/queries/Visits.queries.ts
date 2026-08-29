@@ -1,21 +1,17 @@
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common/types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey, Browser } from '@common/utils'
+import { Paths, Query, QueryKey } from '@common/utils'
 
-export const postVisit = async (path: string) => {
-    if (Browser.isLocalhost()) return
-
+export const postVisit = async (path: string): Promise<PostVisitResponse> => {
     const request = new Query.RequestBuilder(Paths.Api.Visit).build()
-    await request.post<PostVisitResponse>({ path })
+    const res = await request.post<PostVisitResponse>({ path })
+    return res.data
 }
 
 export const usePostVisit = () =>
     useMutation<PostVisitResponse, AxiosError, { path: string }>({
-        mutationFn: async ({ path }) => {
-            await postVisit(path)
-            return { success: true } as PostVisitResponse
-        },
+        mutationFn: ({ path }) => postVisit(path),
     })
 
 export const useGetVisits = (path: string) => {

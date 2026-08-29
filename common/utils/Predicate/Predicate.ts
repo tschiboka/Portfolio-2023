@@ -1,4 +1,5 @@
 import type { Defined, Emptiable, Falsy, Nil, Nullish, Primitive, Truthy } from '../Generics'
+import { Regexp } from '../Regexp'
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.
@@ -98,6 +99,23 @@ export const isBoolean = (value: unknown): value is boolean => typeof value === 
 export const isNumber = (value: unknown): value is number => typeof value === 'number'
 
 /**
+ * Type guard that checks whether a value is a positive integer (`1, 2, 3, …`).
+ *
+ * @example
+ * isPositiveInteger(3)    // true
+ * isPositiveInteger(0)    // false
+ * isPositiveInteger(-2)   // false
+ * isPositiveInteger(2.5)  // false
+ * isPositiveInteger(NaN)  // false
+ * isPositiveInteger('3')  // false
+ *
+ * @param value - The value to check.
+ * @returns `true` if the value is a positive integer.
+ */
+export const isPositiveInteger = (value: unknown): value is number =>
+    typeof value === 'number' && Number.isInteger(value) && value > 0
+
+/**
  * Type guard that checks whether a value is a `string`.
  *
  * @example
@@ -108,6 +126,54 @@ export const isNumber = (value: unknown): value is number => typeof value === 'n
  * @returns `true` if the value is a `string`.
  */
 export const isString = (value: unknown): value is string => typeof value === 'string'
+
+/**
+ * Type guard that checks whether a string consists only of digits (`0-9`) and is non-empty.
+ * Equivalent to `/^\d+$/` — an empty string returns `false`.
+ *
+ * @example
+ * isDigits('12345')   // true
+ * isDigits('12a45')   // false
+ * isDigits('')        // false
+ * isDigits(12345)     // false (not a string)
+ */
+export const isDigits = (value: unknown): value is string =>
+    typeof value === 'string' && /^\d+$/.test(value)
+
+/**
+ * Type guard that checks whether a value is an object whose `String(value)` form is a valid
+ * Mongo `ObjectId` (24-char lowercase hex). Duck-types on the string form so callers don't need
+ * a runtime mongoose dependency.
+ *
+ * Primitives are excluded — a raw 24-hex string is the representation, not the object itself.
+ * Matching is case-sensitive (lowercase `a-f` only, as mongoose always emits).
+ *
+ * @example
+ * isObjectId(new mongoose.Types.ObjectId()) // true (its String() form is 24 hex chars)
+ * isObjectId('64b000000000000000000000')    // false (primitive string, not an object)
+ * isObjectId('not-an-id')                   // false
+ * isObjectId(42)                            // false
+ */
+export const isObjectId = (value: unknown): value is { toString(): string } => {
+    if (isPrimitive(value) || !isObject(value)) return false
+    return Regexp.ObjectId.test(String(value))
+}
+
+/**
+ * Type guard that checks whether a value is a valid Mongo `ObjectId` **string** — a primitive
+ * string of exactly 24 lowercase hex characters.
+ *
+ * Validates the string *representation* only, NOT whether the value is a Mongoose `ObjectId`
+ * instance (an object, rejected here). Intended for route params already in string form.
+ *
+ * @example
+ * isValidObjectId('64b000000000000000000000') // true
+ * isValidObjectId('64B000000000000000000000') // false (uppercase not permitted)
+ * isValidObjectId(new mongoose.Types.ObjectId()) // false (object, not a string)
+ * isValidObjectId('not-an-id')                 // false
+ */
+export const isValidObjectId = (value: unknown): value is string =>
+    isString(value) && Regexp.ObjectId.test(value)
 
 /**
  * Type guard that checks whether a value is a primitive type.

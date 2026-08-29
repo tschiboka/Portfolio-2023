@@ -216,4 +216,37 @@ describe('DateTime', () => {
             expect(Format.ms('not-a-date')).toBe(0)
         })
     })
+
+    describe('Format.toIso', () => {
+        it('should return an ISO string for a Date object', () => {
+            const date = new Date(2023, 7, 6)
+            expect(Format.toIso(date)).toBe(new Date(2023, 7, 6).toISOString())
+        })
+
+        it('should return an ISO string for a timestamp number', () => {
+            const date = new Date(2023, 7, 6)
+            expect(Format.toIso(date.getTime())).toBe(date.toISOString())
+        })
+
+        it('should return an ISO string for an ISO date string', () => {
+            const result = Format.toIso('2023-08-06')
+            expect(result).toBe(new Date(2023, 7, 6).toISOString())
+        })
+
+        it('should fall back to an ISO of the default (now) for undefined', () => {
+            const before = Date.now()
+            const result = Format.toIso(undefined)
+            expect(Date.parse(result)).toBeGreaterThanOrEqual(before)
+        })
+
+        it('should fall back for an unparseable string', () => {
+            const fallback = new Date(2020, 0, 1)
+            expect(Format.toIso('not-a-date', fallback)).toBe(fallback.toISOString())
+        })
+
+        it('should fall back for an empty string', () => {
+            const fallback = new Date(2020, 0, 1)
+            expect(Format.toIso('', fallback)).toBe(fallback.toISOString())
+        })
+    })
 })

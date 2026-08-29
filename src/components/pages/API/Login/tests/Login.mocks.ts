@@ -22,7 +22,6 @@ export const mockUser = {
 }
 
 export const mockLoginSuccess = {
-    success: true,
     token: 'mock-jwt-token',
     user: mockUser,
     settings: [defaultSettings],

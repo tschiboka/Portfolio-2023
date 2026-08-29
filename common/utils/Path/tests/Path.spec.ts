@@ -73,11 +73,11 @@ describe('apiRoutes', () => {
     })
 
     it.each([
-        ['Login', 'api/login'],
+        ['Login', 'api/user/login'],
         ['Settings', 'api/settings'],
-        ['RegisterUser', 'api/user'],
-        ['ConfirmRegistration', 'api/confirm'],
-        ['RehydrateSession', 'api/session'],
+        ['RegisterUser', 'api/user/register'],
+        ['ConfirmRegistration', 'api/user/confirm'],
+        ['RehydrateSession', 'api/user/session'],
         ['Categories', 'api/categories'],
         ['Message', 'api/message'],
         ['Like', 'api/like'],
@@ -105,11 +105,11 @@ describe('projectRoutes', () => {
 
 describe('apiPathBuilder', () => {
     it.each([
-        [Paths.Api.Login, '/api/login'],
+        [Paths.Api.Login, '/api/user/login'],
         [Paths.Api.Settings, '/api/settings'],
-        [Paths.Api.RegisterUser, '/api/user'],
-        [Paths.Api.ConfirmRegistration, '/api/confirm'],
-        [Paths.Api.RehydrateSession, '/api/session'],
+        [Paths.Api.RegisterUser, '/api/user/register'],
+        [Paths.Api.ConfirmRegistration, '/api/user/confirm'],
+        [Paths.Api.RehydrateSession, '/api/user/session'],
         [Paths.Api.Categories, '/api/categories'],
     ])('should build API path for %s → %s', (pathKey, expected) => {
         const result = apiPathBuilder(pathKey)

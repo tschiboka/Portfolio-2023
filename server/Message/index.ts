@@ -1,0 +1,7 @@
+export { MessageRouter } from './Message.routes'
+export { MessageService } from './Message.service'
+export { MessageRepository } from './Message.repository'
+export { MessageSchema } from './Message.schema'
+export { MessageFieldLimits } from './Message.constants'
+export { MessageModel } from './Message.model'
+export type { IMessage, MessageInput } from './Message.types'

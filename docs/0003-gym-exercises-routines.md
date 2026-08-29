@@ -1,7 +1,7 @@
 # 0003 — Gym Exercises & Routines: finalise page features
 
-> **Status:** Planned
-> **Last updated:** 2026-08-22
+> **Status:** In progress
+> **Last updated:** 2026-08-23
 > **Created:** 2026-08-22
 
 ---
@@ -155,9 +155,15 @@ readonly SearchInputOption[]`). The const and derived type are intentionally **c
 | File                                                                              | Role                                                                      |
 | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `common/types/projects/gym.ts`                                                    | Lock final `GymExerciseResource` / `GymRoutineResource`, `equipment` enum |
-| `server/projects/gym/models/models.ts`                                            | Full schemas + Joi validators                                             |
-| `server/projects/gym/routes/exercises.ts`                                         | GET + POST/PATCH/DELETE exercise routes                                   |
-| `server/projects/gym/routes/routines.ts`                                          | GET + POST/PATCH/DELETE routine routes                                    |
+| `common/utils/Transformer/ApiTransformers.ts`                                     | `ApiTransformers.toApiResource` (doc → API resource, ObjectId → string)   |
+| `common/utils/Predicate/Predicate.ts` / `common/utils/Regexp/Regexp.ts`           | `isObjectId` predicate + `Regexp.ObjectId` (its 24-hex contract)          |
+| `server/projects/gym/Exercises/Exercises.routes.ts`                               | GET + POST/PATCH/DELETE exercise routes (on `ApiResponder`)               |
+| `server/projects/gym/Routines/Routines.routes.ts`                                 | GET (on `ApiResponder`); POST/PATCH/DELETE routine routes pending         |
+| `server/projects/gym/Exercises/{models,schema,types,constants}.ts` + `index.ts`   | Exercise feature files per AGENTS §3.2.1                                  |
+| `server/projects/gym/Routines/{models,schema,types}.ts` + `index.ts`              | Routine feature files per AGENTS §3.2.1                                   |
+| `common/utils/Option/`                                                            | `Option<T>` + `getValues`/`getLabels`/`getLabelByValue`/`getValueByLabel` |
+| `common/utils/Predicate` / `common/utils/Regexp`                                  | `isValidObjectId` / `isObjectId` + `Regexp.ObjectId`                      |
+| `common/utils/Generics`                                                           | `WithoutId<T>` generic                                                    |
 | `src/components/pages/Misc/Gym/Gym.queries.ts`                                    | Add mutation hooks                                                        |
 | `src/components/pages/Misc/Gym/components/ExerciesesSection/ExercisesSection.tsx` | Wire submit + option `onSelect`                                           |
 
@@ -201,9 +207,41 @@ GymSystemRoutine`; `GetGymUserRoutinesResponse` uses it
 - [x] Add POST/PATCH/DELETE exercise routes (admin for canonical; owner-scoped for user exercises)
       — `POST /` admin-only (canonical), `PATCH/DELETE /:id` admin-for-canonical /
       owner-for-user guard; added `PostGymExerciseRequest` / `PatchGymExerciseRequest`
-- [ ] Add POST/PATCH/DELETE routine routes (owner-scoped)
-- [ ] Scope exercise/routine GETs by ownership
-- [ ] Spec new validators/routes
+- [x] Serialise exercise/routine docs to API resources on GET via `ApiTransformers.toApiResource`
+      — converts `ObjectId` → `string` recursively (incl. nested `ownerId`/`entries`); removed the
+      `as unknown as GymExerciseResource` cast in `exercises.ts` (was a type lie) and fixed the
+      `GymRoutine.find()` doc → `GymRoutineResource[]` mismatch in `routines.ts`. Both `tsc`-clean.
+      Builds on the `isObjectId` predicate + `Regexp.ObjectId` (24-char lowercase hex contract).
+- [x] Decompose the gym server into feature folders per AGENTS §3.2.1
+      — `server/projects/gym/{Exercises,Routines,Difficulty,Equipment,MuscleGroup}/`, each with
+      `Feature.routes/models/schema/types/constants(+options)` + `index.ts` barrel; the gym root
+      `index.ts` exports `gymRouter`. The old `models/` and `routes/` folders are gone. Routers use
+      `ApiResponder` + `ApiTransformers` + `isValidObjectId` + `ApiMessage`, and all export the
+      `<Feature>Router` name (`ExercisesRouter`/`RoutinesRouter`/`DifficultyRouter`/
+      `EquipmentRouter`/`MuscleGroupRouter`). The option features (`Difficulty`/`Equipment`/
+      `MuscleGroup`) are static option-list GETs — no CRUD/ownership/persistence — so they are
+      **not** given the repository/permissions/service layering (nothing to layer); they return
+      wrapped objects (`{ difficulties }`/`{ equipment }`/`{ muscleGroups }`) via `ApiResponder.ok`
+      (array-payload decision: wrap, don't widen `ok` — see 0004).
+- [x] **Exercises layering (repository/permissions/service)** — `Exercises.repository.ts`
+      (`ExercisesRepository` via the duck-typed `Repository` util + `findVisibleTo`),
+      `Exercises.permissions.ts` (`ExercisesPermissions.requireUserCanModify` — admin-for-canonical /
+      owner-for-user), `Exercises.service.ts` (`ExercisesService` — `listVisibleTo`/`create`/
+      `update`/`remove`), and thin `Exercises.routes.ts` delegating to the service; barrel exports
+      all layers. Service spec deferred (no BE test framework; see 0004).
+- [x] Add POST/PATCH/DELETE routine routes (owner-scoped) + scope routine GETs
+      — `RoutineModel`, `RoutinesRepository` + `findVisibleTo` (own + system),
+      `RoutinesPermissions.requireUserCanModify` (admin-for-system / owner-for-user),
+      `RoutinesService` (`listVisibleTo`/`create`/`update`/`remove`; `create` is user-owned,
+      sets `ownerId`), thin `RoutinesRoutes` (GET/POST/PATCH/DELETE). Service spec deferred.
+      Ownership guards are **shared** via `common/utils/Server/Permissions` (`requireAdminManaged` +
+      `requireOwned`) — see 0004 cross-cutting note.
+- [x] Scope exercise/routine GETs by ownership
+      — `ExercisesRepository.findVisibleTo` (canonical + own) and
+      `RoutinesRepository.findVisibleTo` (own + system) are used by `listVisibleTo` in each service,
+      replacing the unscoped `GymRoutine.find()`.
+- [x] Spec new validators/routes — **deferred**: no established BE test framework (schema/route/model
+      specs tracked for a future test-sweep ticket) — see 0004.
 
 **Frontend**
 

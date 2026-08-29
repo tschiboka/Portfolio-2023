@@ -1,7 +1,7 @@
 # 0001 — Table State URL Persistence (Filters + Paging + Sorting)
 
-**Status:** In progress
-**Last updated:** 2026-08-21
+**Status:** Done
+**Last updated:** 2026-08-29
 **Created:** 2026-07-31
 **Pilot consumer:** `WebsiteStats` → `BreakdownTable` (activity feed)
 

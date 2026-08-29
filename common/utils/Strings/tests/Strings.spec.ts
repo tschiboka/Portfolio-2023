@@ -80,3 +80,94 @@ describe('Strings.includesIgnoreCase', () => {
         expect(Strings.includesIgnoreCase('a b c', 'a b')).toBe(true)
     })
 })
+
+describe('Strings.capitalise', () => {
+    it('uppercases the first letter of a lowercase word', () => {
+        expect(Strings.capitalise('exercise')).toBe('Exercise')
+        expect(Strings.capitalise('routine')).toBe('Routine')
+        expect(Strings.capitalise('user')).toBe('User')
+    })
+
+    it('leaves the rest of the string unchanged', () => {
+        expect(Strings.capitalise('exercises list')).toBe('Exercises list')
+        expect(Strings.capitalise('camelCase')).toBe('CamelCase')
+    })
+
+    it('leaves an already-capitalised string unchanged', () => {
+        expect(Strings.capitalise('Exercise')).toBe('Exercise')
+        expect(Strings.capitalise('Hello World')).toBe('Hello World')
+    })
+
+    it('leaves all-uppercase words effectively unchanged (only first char touched)', () => {
+        expect(Strings.capitalise('USER')).toBe('USER')
+        expect(Strings.capitalise('API')).toBe('API')
+    })
+
+    it('returns an empty string for empty input', () => {
+        expect(Strings.capitalise('')).toBe('')
+    })
+
+    it('uppercases a single-character string', () => {
+        expect(Strings.capitalise('x')).toBe('X')
+        expect(Strings.capitalise('A')).toBe('A')
+    })
+
+    it('uppercases non-ASCII first characters', () => {
+        expect(Strings.capitalise('élan')).toBe('Élan')
+        expect(Strings.capitalise('über')).toBe('Über')
+    })
+
+    it('does not trim leading whitespace (capitalises the whitespace char, if any)', () => {
+        // A leading space is "capitalised" (unchanged) and the following char stays lowercase
+        expect(Strings.capitalise(' test')).toBe(' test')
+    })
+
+    it.each([
+        ['space', ' '],
+        ['tab', '\t'],
+        ['newline', '\n'],
+        ['carriage return', '\r'],
+        ['vertical tab', '\v'],
+        ['form feed', '\f'],
+        ['nbsp', '\u00A0'],
+    ])('leaves a leading %s unchanged and lowercases nothing after it', (_label, ws) => {
+        expect(Strings.capitalise(`${ws}word`)).toBe(`${ws}word`)
+    })
+
+    it('leaves trailing whitespace intact while capitalising the content', () => {
+        expect(Strings.capitalise('test ')).toBe('Test ')
+        expect(Strings.capitalise('hello\t')).toBe('Hello\t')
+    })
+
+    it('handles digits and symbols in the rest of the string unchanged', () => {
+        expect(Strings.capitalise('x2 format')).toBe('X2 format')
+        expect(Strings.capitalise('p1')).toBe('P1')
+    })
+
+    it('returns an empty string for nullish input', () => {
+        expect(Strings.capitalise(null)).toBe('')
+        expect(Strings.capitalise(undefined)).toBe('')
+    })
+
+    it('returns a whitespace-only string unchanged (no trimming)', () => {
+        expect(Strings.capitalise('   ')).toBe('   ')
+    })
+
+    it('capitalises the first char of a multiline string, leaving the rest intact', () => {
+        expect(Strings.capitalise('hello\nworld')).toBe('Hello\nworld')
+    })
+
+    it('leaves an emoji/surrogate-pair leading char unchanged', () => {
+        // text[0] is the high surrogate of the pair; toUpperCase leaves it as-is
+        expect(Strings.capitalise('🧪test')).toBe('🧪test')
+        expect(Strings.capitalise('🎉party')).toBe('🎉party')
+    })
+
+    it('capitalises a tab-indented string without trimming', () => {
+        expect(Strings.capitalise('\thello')).toBe('\thello')
+    })
+
+    it('leaves a digit-leading string unchanged at position 0 (digit has no case)', () => {
+        expect(Strings.capitalise('1exercise')).toBe('1exercise')
+    })
+})

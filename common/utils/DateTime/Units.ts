@@ -5,5 +5,6 @@ export const Units = {
         fromHour: (hour = 1) => Units.Ms.fromMin(hour * 60),
         fromDay: (day = 1) => Units.Ms.fromHour(day * 24),
         fromWeek: (week = 1) => Units.Ms.fromDay(week * 7),
+        toSec: (ms: number) => ms / 1000,
     },
 }

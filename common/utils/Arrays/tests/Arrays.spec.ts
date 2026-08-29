@@ -230,3 +230,139 @@ describe('Arrays.unique', () => {
         ])
     })
 })
+
+describe('Arrays.chunk', () => {
+    it.each([
+        [2, 2],
+        [4, 2],
+        [6, 2],
+        [6, 3],
+        [10, 5],
+    ])('splits %i items evenly into size-%i chunks', (length, size) => {
+        const input = Arrays.times(length, (index) => index + 1)
+        expect(Arrays.chunk(input, size)).toEqual(
+            Arrays.times(length / size, (index) => input.slice(index * size, index * size + size)),
+        )
+    })
+
+    it.each([
+        [5, 2, [5]],
+        [5, 3, [4, 5]],
+        [7, 3, [7]],
+        [10, 3, [10]],
+    ])('keeps a %i-length final chunk for %i items of size %i', (length, size, lastChunk) => {
+        const input = Arrays.times(length, (index) => index + 1)
+        const result = Arrays.chunk(input, size)
+        expect(result[result.length - 1]).toEqual(lastChunk)
+    })
+
+    it('reconstructs the input when all chunks are concatenated (flat invariant)', () => {
+        const input = [1, 2, 3, 4, 5, 6, 7]
+        expect(Arrays.chunk(input, 3).flat()).toEqual(input)
+    })
+
+    it('returns an empty array for an empty input', () => {
+        expect(Arrays.chunk([], 3)).toEqual([])
+        expect(Arrays.chunk([], 1)).toEqual([])
+    })
+
+    it('returns a single chunk when the size equals the array length', () => {
+        expect(Arrays.chunk([1, 2, 3], 3)).toEqual([[1, 2, 3]])
+    })
+
+    it('returns a single chunk when the size exceeds the array length', () => {
+        expect(Arrays.chunk([1, 2, 3], 5)).toEqual([[1, 2, 3]])
+        expect(Arrays.chunk([1, 2, 3], Number.MAX_SAFE_INTEGER)).toEqual([[1, 2, 3]])
+    })
+
+    it('returns one element per chunk for a size of 1', () => {
+        expect(Arrays.chunk(['a', 'b', 'c'], 1)).toEqual([['a'], ['b'], ['c']])
+    })
+
+    it('handles a single-element array', () => {
+        expect(Arrays.chunk([42], 2)).toEqual([[42]])
+        expect(Arrays.chunk([42], 1)).toEqual([[42]])
+    })
+
+    it('handles empty input for any valid size', () => {
+        // Empty input with a positive integer size — always [].
+        expect(Arrays.chunk([], 5)).toEqual([])
+        expect(Arrays.chunk([], Number.MAX_SAFE_INTEGER)).toEqual([])
+    })
+
+    it('preserves duplicate primitive values and order', () => {
+        expect(Arrays.chunk([1, 1, 2, 2, 3], 2)).toEqual([[1, 1], [2, 2], [3]])
+    })
+
+    it('preserves falsy and special values', () => {
+        // NaN, null, undefined, false, 0, '', Infinity all preserved exactly.
+        const input = [NaN, null, undefined, false, 0, '', Infinity, -Infinity]
+        expect(Arrays.chunk(input, 3).flat()).toEqual(input)
+    })
+
+    it('handles arrays of objects by reference (shallow, not cloned)', () => {
+        const a = { id: 1 }
+        const b = { id: 2 }
+        const result = Arrays.chunk([a, b, a], 2)
+        expect(result).toEqual([[a, b], [a]])
+        expect(result[0][0]).toBe(a)
+    })
+
+    it('does not mutate the input array', () => {
+        const input = [1, 2, 3, 4, 5]
+        const original = [...input]
+        Arrays.chunk(input, 2)
+        expect(input).toEqual(original)
+    })
+
+    it('returns new outer and inner array references', () => {
+        const input = [1, 2, 3, 4]
+        const result = Arrays.chunk(input, 2)
+        expect(result).not.toBe([input])
+        expect(result).not.toBe(input)
+        expect(result[0]).not.toBe(input)
+        expect(result[1]).not.toBe(input)
+    })
+
+    it('mutating a returned chunk does not mutate the input structure', () => {
+        const input = [1, 2, 3, 4]
+        const result = Arrays.chunk(input, 2)
+        result[0][0] = 99
+        expect(input).toEqual([1, 2, 3, 4])
+    })
+
+    it('is pure — repeated calls produce fresh, equivalent outputs', () => {
+        const input = [1, 2, 3, 4, 5]
+        const first = Arrays.chunk(input, 2)
+        const second = Arrays.chunk(input, 2)
+        expect(second).toEqual(first)
+        expect(second).not.toBe(first)
+        expect(second[0]).not.toBe(first[0])
+    })
+
+    it('preserves the element type through generic invocation', () => {
+        const strings = Arrays.chunk(['a', 'b', 'c'], 2)
+        expect(strings).toEqual([['a', 'b'], ['c']])
+        const booleans = Arrays.chunk([true, false, true], 2)
+        expect(booleans).toEqual([[true, false], [true]])
+    })
+
+    it.each([
+        [0, '0'],
+        [-1, '-1'],
+        [-5, '-5'],
+        [-2.5, '-2.5'],
+        [0.5, '0.5'],
+        [1.5, '1.5'],
+        [3.9, '3.9'],
+        [NaN, 'NaN'],
+        [Infinity, 'Infinity'],
+        [-Infinity, '-Infinity'],
+    ])('throws a RangeError for invalid size %s', (size) => {
+        expect(() => Arrays.chunk([1, 2, 3], size)).toThrow(RangeError)
+    })
+
+    it('throws a RangeError mentioning the offending size', () => {
+        expect(() => Arrays.chunk([1, 2, 3], 0)).toThrow('size must be a positive integer, got 0')
+    })
+})

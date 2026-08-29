@@ -1,7 +1,6 @@
 import type { GetLikeSummaryResponse, GetVisitSummaryResponse } from '@common/types'
 
 export const mockBlogVisits: GetVisitSummaryResponse = {
-    success: true,
     visits: {
         '/blog/riffmaster': 120,
         '/blog/sounds-with-howler': 85,
@@ -18,7 +17,6 @@ export const mockBlogVisits: GetVisitSummaryResponse = {
 }
 
 export const mockBlogLikes: GetLikeSummaryResponse = {
-    success: true,
     likes: {
         '/blog/riffmaster': 12,
         '/blog/sounds-with-howler': 8,

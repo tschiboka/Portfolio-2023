@@ -1,0 +1,33 @@
+import type { MuscleGroupResource } from '@common/types'
+import type { SearchInputOption } from '@common/ux/Form/SearchInput.types'
+
+export const muscleGroupOptions: SearchInputOption<MuscleGroupResource>[] = [
+    { value: 'upper_chest', label: 'Upper Chest' },
+    { value: 'middle_chest', label: 'Middle Chest' },
+    { value: 'lower_chest', label: 'Lower Chest' },
+    { value: 'lats', label: 'Lats' },
+    { value: 'traps', label: 'Traps' },
+    { value: 'rhomboids', label: 'Rhomboids' },
+    { value: 'teres_major', label: 'Teres Major' },
+    { value: 'erector_spinae', label: 'Erector Spinae' },
+    { value: 'front_delts', label: 'Front Delts' },
+    { value: 'side_delts', label: 'Side Delts' },
+    { value: 'rear_delts', label: 'Rear Delts' },
+    { value: 'biceps', label: 'Biceps' },
+    { value: 'triceps', label: 'Triceps' },
+    { value: 'brachialis', label: 'Brachialis' },
+    { value: 'brachioradialis', label: 'Brachioradialis' },
+    { value: 'forearms', label: 'Forearms' },
+    { value: 'abs', label: 'Abs' },
+    { value: 'obliques', label: 'Obliques' },
+    { value: 'transverse_abdominis', label: 'Transverse Abdominis' },
+    { value: 'glutes', label: 'Glutes' },
+    { value: 'hip_flexors', label: 'Hip Flexors' },
+    { value: 'adductors', label: 'Adductors' },
+    { value: 'abductors', label: 'Abductors' },
+    { value: 'quadriceps', label: 'Quadriceps' },
+    { value: 'hamstrings', label: 'Hamstrings' },
+    { value: 'calves', label: 'Calves' },
+    { value: 'tibialis_anterior', label: 'Tibialis Anterior' },
+    { value: 'neck', label: 'Neck' },
+]

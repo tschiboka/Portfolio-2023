@@ -12,9 +12,12 @@ type ExercisesSectionProps = {
     exercises: GymExerciseResource[]
 }
 export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
-    const { data: difficultyData = [], ...difficultyResponse } = useGetGymDifficultyOptions()
-    const { data: equipmentData = [], ...equipmentResponse } = useGetGymEquipmentOptions()
-    const { data: muscleGroupData = [], ...muscleGroupResponse } = useGetGymMuscleGroupOptions()
+    const { data: difficultyData, ...difficultyResponse } = useGetGymDifficultyOptions()
+    const { data: equipmentData, ...equipmentResponse } = useGetGymEquipmentOptions()
+    const { data: muscleGroupData, ...muscleGroupResponse } = useGetGymMuscleGroupOptions()
+    const difficulties = Query.extractEntities(difficultyData, 'difficulties')
+    const equipment = Query.extractEntities(equipmentData, 'equipment')
+    const muscleGroups = Query.extractEntities(muscleGroupData, 'muscleGroups')
     const { isLoading } = Query.mergeApiStatuses([
         difficultyResponse,
         equipmentResponse,
@@ -57,7 +60,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="difficulty"
                             control={control}
-                            options={difficultyData}
+                            options={difficulties}
                             onSelect={() => {
                                 console.log('selected')
                             }}
@@ -72,7 +75,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="primaryMuscleGroup1"
                             control={control}
-                            options={muscleGroupData}
+                            options={muscleGroups}
                             onSelect={() => {
                                 console.log('selected')
                             }}
@@ -83,7 +86,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="primaryMuscleGroup2"
                             control={control}
-                            options={muscleGroupData}
+                            options={muscleGroups}
                             onSelect={() => {
                                 console.log('selected')
                             }}
@@ -96,7 +99,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="secondaryMuscleGroup1"
                             control={control}
-                            options={muscleGroupData}
+                            options={muscleGroups}
                             onSelect={() => {
                                 console.log('selected')
                             }}
@@ -109,7 +112,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="secondaryMuscleGroup2"
                             control={control}
-                            options={muscleGroupData}
+                            options={muscleGroups}
                             onSelect={() => {
                                 console.log('selected')
                             }}
@@ -123,7 +126,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                         <Form.SearchInput
                             name="equipment"
                             control={control}
-                            options={equipmentData}
+                            options={equipment}
                             onSelect={() => {
                                 console.log('selected')
                             }}

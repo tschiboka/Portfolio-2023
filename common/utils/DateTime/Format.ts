@@ -84,4 +84,22 @@ export const Format = {
         const m = toMoment(value)
         return m?.valueOf() ?? 0
     },
+
+    /**
+     * Converts a date value to an ISO `String` (e.g. `2023-08-06T14:30:00.000Z`), or the ISO form
+     * of a fallback date when the value is empty or unparseable.
+     *
+     * @param value - The date value to convert
+     * @param fallback - The date to use when `value` is empty/invalid (defaults to now)
+     * @returns An ISO date string
+     *
+     * @example
+     *   DateTime.Format.toIso('2023-08-06')          // "2023-08-05T22:00:00.000Z"
+     *   DateTime.Format.toIso(undefined)             // <now in ISO>
+     *   DateTime.Format.toIso('not-a-date', new Date(2020, 0, 1)) // "2019-12-31T23:00:00.000Z"
+     */
+    toIso(value: InputValue, fallback: Date = new Date()): string {
+        const m = toMoment(value)
+        return (m ?? toMoment(fallback))?.toISOString() ?? ''
+    },
 }

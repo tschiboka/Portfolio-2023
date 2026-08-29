@@ -7,19 +7,19 @@ export const loginHandlers = {
         RequestBuilder({
             path: '/api/settings',
             method: HttpMethods.GET,
-            response: MockBuilder({ data }),
+            response: MockBuilder({ settings: data }),
         }).build(),
 
     success: (data = mockLoginSuccess) =>
         RequestBuilder({
-            path: '/api/login',
+            path: '/api/user/login',
             method: HttpMethods.POST,
             response: MockBuilder({ data }),
         }).build(),
 
     error: (message: string, status = 400) =>
         RequestBuilder({
-            path: '/api/login',
+            path: '/api/user/login',
             method: HttpMethods.POST,
             response: MockBuilder({ message }),
             status,

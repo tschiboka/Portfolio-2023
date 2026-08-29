@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Session } from '../../../src/context/SessionContext'
 import { useAppContext } from '../../../src/context/AppContext/App.context'
 import { postVisit } from '@common/queries'
+import { Browser } from '@common/utils'
 import './Page.css'
 
 export type PageProps = {
@@ -28,6 +29,8 @@ const Page = ({
     useEffect(() => {
         document.title = title
         window.scrollTo(0, 0)
+
+        if (Browser.isLocalhost()) return
 
         void detectIncognito().then((result) => {
             if (!result.isPrivate && recordVisit) void postVisit(path)

@@ -38,7 +38,7 @@ export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ 
     }, [session])
 
     useEffect(() => {
-        const response = sessionRehydrateData?.data?.data
+        const response = sessionRehydrateData?.data
 
         if (token && sessionRehydrateResponse.isSuccess && response?.user) {
             const { user, settings } = response

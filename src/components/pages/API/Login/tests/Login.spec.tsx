@@ -61,7 +61,10 @@ describe('Login', () => {
             const { form } = setupLogin()
             Test.Page.Set.handlers(
                 handleGetSettings.updateResponse((builder) =>
-                    builder.setValue('data', { ...defaultSettings, enableUserRegistration: false }),
+                    builder.setValue('settings', {
+                        ...defaultSettings,
+                        enableUserRegistration: false,
+                    }),
                 ),
             )
             await waitFor(() => {

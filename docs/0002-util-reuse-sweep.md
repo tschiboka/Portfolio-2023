@@ -1,6 +1,6 @@
 # 0002 — Util Reuse Sweep
 
-> **Status:** Complete — type/generic inventory audit + all migrations applied; util-folders sweep + Predicate sub-sweep done. **Remaining:** final `npm test` (run by user) then tick Verify.
+> **Status:** Done — type/generic inventory audit + all migrations applied; util-folders sweep + Predicate sub-sweep done; final `npm test` passed (Verify ticked).
 > **Last updated:** 2026-08-22
 > **Created:** 2026-08-21
 

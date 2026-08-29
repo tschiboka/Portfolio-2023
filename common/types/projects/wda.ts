@@ -177,7 +177,9 @@ export type PostWdaLevelResponse = {
 // --- Word HTTP Types ---
 
 // GET /word/list
-export type GetWdaWordListResponse = string[]
+export type GetWdaWordListResponse = {
+    wordList: string[]
+}
 
 // GET /word/anagrams
 export type GetWdaAnagramMapResponse = Record<string, string[]>

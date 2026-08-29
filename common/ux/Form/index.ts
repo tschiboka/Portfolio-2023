@@ -12,7 +12,7 @@ import { Fieldset } from './Fieldset'
 import { DateInput } from './DateInput'
 import { SubmitErrorMessage } from './SubmitErrorMessage'
 
-export type { SearchInputOption } from './SearchInput'
+export type { SearchInputOption } from './SearchInput.types'
 export type { FieldValues } from './Form.types'
 
 export const Form = Object.assign(FormElement, {

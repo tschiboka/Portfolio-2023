@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
 import type { TableControl } from './useTableController'
-
 import type { DropdownOption } from './TableInputs/TableDropdown'
 import { PageMeta } from '@common/types'
 import type { Optional, Predicate } from '@common/utils'

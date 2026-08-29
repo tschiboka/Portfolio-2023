@@ -1,4 +1,4 @@
-import type { SearchInputOption } from '@common/ux'
+import type { SearchInputOption } from '@common/ux/Form/SearchInput.types'
 
 // Shared types for the Gym project.
 
@@ -11,25 +11,22 @@ export type GymRoutineEntry = {
 export const ROUTINE_SOURCES = ['user', 'system'] as const
 export type GymRoutineSource = (typeof ROUTINE_SOURCES)[number]
 
-export type GymRoutineBase = {
+export type GymRoutineResource = {
     _id: string
     name: string
     entries: GymRoutineEntry[]
+    source: GymRoutineSource
+    ownerId?: string
 }
 
-/** User-owned routine referencing canonical exercises. */
-export type GymUserRoutine = GymRoutineBase & { source: 'user'; ownerId: string }
-
-/** Future system/default routine (app-generated or admin-defined) with no owner. */
-export type GymSystemRoutine = GymRoutineBase & { source: 'system' }
-
-export type GymRoutineResource = GymUserRoutine | GymSystemRoutine
+/** Routine fields a client may submit (ids/source/owner are server-managed). */
+type GymRoutineInput = Omit<GymRoutineResource, '_id' | 'source' | 'ownerId'>
 
 /** User routine creation body (source forced to 'user' server-side). */
-export type PostGymRoutineRequest = Omit<GymRoutineBase, '_id'>
+export type PostGymRoutineRequest = GymRoutineInput
 
 /** User routine update body — all fields optional. */
-export type PatchGymRoutineRequest = Partial<Omit<GymRoutineBase, '_id'>>
+export type PatchGymRoutineRequest = Partial<GymRoutineInput>
 
 export type MuscleGroupResource =
     // Chest
@@ -179,9 +176,15 @@ export type GymExerciseResource = GymCanonicalExercise | GymUserExercise
 export type GetGymUserRoutinesResponse = { routines: GymRoutineResource[] }
 export type GetGymExercisesResponse = { exercises: GymExerciseResource[] }
 
-export type GetGymDifficultyOptionsResponse = SearchInputOption<DifficultyLevel>[]
-export type GetGymEquipmentOptionsResponse = SearchInputOption<EquipmentResource>[]
-export type GetGymMuscleGroupOptionsResponse = SearchInputOption<MuscleGroupResource>[]
+export type GetGymDifficultyOptionsResponse = {
+    difficulties: SearchInputOption<DifficultyLevel>[]
+}
+export type GetGymEquipmentOptionsResponse = {
+    equipment: SearchInputOption<EquipmentResource>[]
+}
+export type GetGymMuscleGroupOptionsResponse = {
+    muscleGroups: SearchInputOption<MuscleGroupResource>[]
+}
 
 /** Canonical exercise creation body (source is forced to 'canonical' server-side). */
 export type PostGymExerciseRequest = Omit<GymExerciseBase, '_id'>

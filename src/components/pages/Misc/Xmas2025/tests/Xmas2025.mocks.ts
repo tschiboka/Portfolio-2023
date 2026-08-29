@@ -38,17 +38,14 @@ export const mockXmasMessages: XmasMessage[] = [
 ]
 
 export const mockXmasMessagesResponse: GetXmasMessagesResponse = {
-    success: true,
     data: mockXmasMessages,
 }
 
 export const mockPostMessageSuccess: PostXmasMessageResponse = {
-    success: true,
     message: 'Message sent successfully',
 }
 
 export const mockXmasCandles: GetXmasCandlesResponse = {
-    success: true,
     data: {
         candles: {
             _id: 'candles-1',
@@ -61,7 +58,6 @@ export const mockXmasCandles: GetXmasCandlesResponse = {
 }
 
 export const mockPutCandlesSuccess: PutXmasCandlesResponse = {
-    success: true,
     data: {
         candles: {
             _id: 'candles-1',

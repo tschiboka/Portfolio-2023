@@ -54,9 +54,8 @@ export type PostConfirmRequest = {
     token: string
 }
 
-// POST /api/confirm response
+// POST /api/user/confirm response
 export type PostConfirmResponse = {
-    success: boolean
     token: { token: string; created: Date }
 }
 
@@ -74,13 +73,10 @@ export type PostDailyBreakdownResponse = {
 }
 
 // SESSION TYPES
-// GET /api/session response
+// GET /api/user/session response
 export type GetSessionResponse = {
-    success: boolean
-    data: {
-        user: User
-        settings: Settings
-    }
+    user: User
+    settings: Settings
 }
 
 // MESSAGE TYPES
@@ -94,7 +90,6 @@ export type PostMessageRequest = {
 
 // POST /api/message response
 export type PostMessageResponse = {
-    success: boolean
     message: string
 }
 
@@ -124,7 +119,6 @@ export type GetLogQuery = {
 
 // GET /api/log response (no query — full table)
 export type GetLogTableResponse = {
-    success: boolean
     table: Log[]
 }
 
@@ -153,13 +147,11 @@ export type GetLikeByPathQuery = Required<GetLikeQuery>
 
 // GET /api/like response (all likes grouped by path)
 export type GetLikeSummaryResponse = {
-    success: boolean
     likes: LikeSummary
 }
 
 // GET /api/like?path= response (single path count)
 export type GetLikeResponse = {
-    success: boolean
     likes: number
 }
 
@@ -170,7 +162,6 @@ export type PostLikeRequest = {
 
 // POST /api/like response
 export type PostLikeResponse = {
-    success: boolean
     like: { path: string; likeDate: Date }
 }
 
@@ -248,7 +239,6 @@ export type GetActivityFeedResponse = PaginatedResponse<ActivityEvent, ActivityF
 
 // POST /api/breakdowns/backfill response
 export type PostBackfillResponse = {
-    success: boolean
     upserted: number
 }
 
@@ -265,8 +255,7 @@ export type Settings = {
 
 // GET /api/settings response
 export type GetSettingsResponse = {
-    success: boolean
-    data: Settings
+    settings: Settings
 }
 
 // POST /api/settings request
@@ -274,8 +263,7 @@ export type PostSettingsRequest = Settings
 
 // POST /api/settings response
 export type PostSettingsResponse = {
-    success: boolean
-    data: Settings
+    settings: Settings
 }
 
 // VERSION TYPES
@@ -299,13 +287,11 @@ export type GetVisitByPathQuery = Required<GetVisitQuery>
 
 // GET /api/visit response (all visits grouped by path)
 export type GetVisitSummaryResponse = {
-    success: boolean
     visits: VisitSummary
 }
 
 // GET /api/visit?path= response (single path count)
 export type GetVisitResponse = {
-    success: boolean
     visits: number
 }
 
@@ -316,7 +302,6 @@ export type PostVisitRequest = {
 
 // POST /api/visit response
 export type PostVisitResponse = {
-    success: boolean
     visit: { path: string; visitDate: Date }
 }
 
@@ -342,22 +327,17 @@ export type User = {
 
 // GET /api/user response (all users)
 export type GetUsersResponse = {
-    success: boolean
-    data: User[]
+    users: User[]
 }
 
 // GET /api/user/:id response (single user)
-export type GetUserResponse = {
-    success: boolean
-    data: User
-}
+export type GetUserResponse = User
 
 // POST /api/user request (registration)
 export type PostUserRequest = Pick<User, 'fullName' | 'userName' | 'email' | 'password'>
 
-// POST /api/user response
+// POST /api/user/register response
 export type PostUserResponse = {
-    success: boolean
     message: string
 }
 
@@ -369,15 +349,14 @@ export type PostUserError = {
 }
 
 // LOGIN TYPES
-// POST /api/login request
+// POST /api/user/login request
 export type PostLoginRequest = {
     email: string
     password: string
 }
 
-// POST /api/login response
+// POST /api/user/login response
 export type PostLoginResponse = {
-    success: boolean
     token: string
     user: User
     settings: Settings[]

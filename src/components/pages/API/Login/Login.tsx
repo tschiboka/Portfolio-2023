@@ -66,7 +66,7 @@ const Login = ({ path, pageName }: LoginProps) => {
         loginRequest.mutate(data)
     }
 
-    const enableRegistration = settingsData?.data?.enableUserRegistration
+    const enableRegistration = settingsData?.settings?.enableUserRegistration
     const isLoading = settingIsLoading || loginRequest.isPending
 
     return (

@@ -55,6 +55,9 @@ export type EmptyObject = Record<never, never>
 /** A container that can be empty: array, string, object, or nil */
 export type Emptiable = unknown[] | string | Dictionary | Nil
 
+/** Entity/resource without its database-generated `_id` field (server-managed). */
+export type WithoutId<T extends { _id: unknown }> = Omit<T, '_id'>
+
 /**
  * ============================================================================
  * Arrays
