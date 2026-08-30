@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import { Modal } from './Modal'
 import { InvitationModal } from '../../../Home/InvitationModal/InvitationModal'
 

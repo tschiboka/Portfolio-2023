@@ -1,7 +1,7 @@
 // Components
 import Article from '../../components/sharedComponents/Article/Article'
 import Figure from '../../components/sharedComponents/Figure/Figure'
-import { Code, Heading, List, Paragraph, Section } from '@common/ux'
+import { Code, Heading, List, Paragraph, Section } from '@ux'
 
 // Images
 import matryoshkaImg from '../../assets/images/blog/js_sorting/Matryoshka.png'

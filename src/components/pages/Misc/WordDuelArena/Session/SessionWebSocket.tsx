@@ -3,7 +3,7 @@ import useWebSocket from 'react-use-websocket'
 import { useSession } from './Session.context'
 import { WebSocketContextType, WebSocketRequest, WebSocketResponse } from './Session.types'
 import { ApiPaths } from '../common/utils'
-import type { Optional, Nullable } from '@common/utils'
+import type { Optional, Nullable } from '@utils'
 
 const WSContext = createContext<Optional<WebSocketContextType>>(undefined)
 

@@ -1,6 +1,6 @@
 import Article from '../../components/sharedComponents/Article/Article'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
-import { Code, CodeText, Heading, List, Paragraph, Section } from '@common/ux'
+import { Code, CodeText, Heading, List, Paragraph, Section } from '@ux'
 import codeSnippets from './codeSnippets'
 import { getReferenceList } from '../references'
 import CronJobsImg from '../../assets/images/blog/resend_email_scheduling/cron_jobs.png'

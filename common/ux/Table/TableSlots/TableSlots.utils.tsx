@@ -1,5 +1,5 @@
 import { type ReactNode, isValidElement } from 'react'
-import { isNonEmpty } from '@common/utils'
+import { isNonEmpty } from '@utils'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
 

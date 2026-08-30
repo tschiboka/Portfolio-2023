@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { GetCategoryResponse, PostCategoryRequest } from '@common/types'
+import { GetCategoryResponse, PostCategoryRequest } from '@types'
 import { AxiosError } from 'axios'
 import { RequestError } from '../common/error'
-import { Paths, Query, QueryKey } from '@common/utils'
+import { Paths, Query, QueryKey } from '@utils'
 
 type UsePostCategory = {
     onSuccess: () => void

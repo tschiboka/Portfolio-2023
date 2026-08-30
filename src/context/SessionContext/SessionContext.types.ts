@@ -1,4 +1,4 @@
-import { Settings, User } from '@common/types/app'
+import { Settings, User } from '@types'
 
 export type Session = {
     user?: User

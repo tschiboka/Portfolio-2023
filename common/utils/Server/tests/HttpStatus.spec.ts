@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { isNumber } from '@common/utils/Predicate'
-import type { Key } from '@common/utils/Generics'
+import { isNumber } from '@utils'
+import type { Key } from '@utils'
 import { HttpStatus } from '../HttpStatus'
 
 describe('HttpStatus', () => {

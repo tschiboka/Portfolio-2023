@@ -2,7 +2,7 @@ import Welcome from './Welcome/Welcome'
 import Intro from './Intro/Intro'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
-import { Main } from '@common/ux'
+import { Main } from '@ux'
 
 interface Props {
     pageName: string

@@ -6,7 +6,7 @@ import {
 import guitarImage from '../../../assets/images/about/RiffMaster.png'
 import guitarAppImage from '../../../assets/images/about/RiffMaster_App.png'
 import guitarAppImageSm from '../../../assets/images/about/RiffMaster_App_Mobile.png'
-import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common/ux'
+import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@ux'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import './About.scss'

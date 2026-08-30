@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './Form.styles.css'
 
 type RadioGroupProps = AccessibleProps & {

@@ -1,9 +1,9 @@
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
-import { Table } from '@common/ux/Table'
+import { Table } from '@ux'
 import { PageSideMenu } from '../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { stories } from './stories'
-import { Stack } from '@common/ux'
+import { Stack } from '@ux'
 import './UxStories.styles.css'
 
 type StoryRow = { name: string; description: string; path: string }

@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { WordOptionList } from './WordOptionList/WordOptionList'
 import { LevelPreview } from './LevelPreview/LevelPreview'
 import { Level, LevelWord } from '../common/utils'
-import { Query } from '@common/utils'
-import type { Nullable } from '@common/utils'
-import { isEmpty } from '@common/utils'
+import { Query } from '@utils'
+import type { Nullable } from '@utils'
+import { isEmpty } from '@utils'
 import { transformAnagramMap } from '../common/utils/Word/getPossibleWords'
 import {
     useGetAnagramMap,
@@ -12,9 +12,9 @@ import {
     useGetWordFrequencies,
     usePostLevel,
 } from './LevelCreator.queries'
-import { LoadingIndicator } from '@common/ux'
+import { LoadingIndicator } from '@ux'
 import { useQueryClient } from '@tanstack/react-query'
-import { QueryKey } from '@common/utils'
+import { QueryKey } from '@utils'
 import { FrequencyType } from '../common/utils/Types/Words'
 import { levelSchema } from './LevelCreator.schema'
 
@@ -63,7 +63,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
             }))
             setPossibleWords(newWordSet)
         }
-        if (levelData && frequencies) {
+        if (levelData && frequencies && levelData.targetWords) {
             const selectedWordSet = levelData.targetWords.map((word) => ({
                 word,
                 frequency: frequencies[word.toUpperCase()] || 0,

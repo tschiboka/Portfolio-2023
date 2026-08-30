@@ -1,7 +1,7 @@
+import { useGetVisits } from '../../../../common/queries'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
-import { Link } from '@common/ux'
-import { useGetVisits } from '@common/queries'
+import { Link } from '@ux'
 import './Breadcrumb.css'
 
 interface Props {

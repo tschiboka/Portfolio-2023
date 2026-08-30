@@ -3,8 +3,8 @@ import { detectIncognito } from 'detectincognitojs'
 import { useNavigate } from 'react-router-dom'
 import { Session } from '../../../src/context/SessionContext'
 import { useAppContext } from '../../../src/context/AppContext/App.context'
-import { postVisit } from '@common/queries'
-import { Browser } from '@common/utils'
+import { postVisit } from '../../queries'
+import { Browser } from '@utils'
 import './Page.css'
 
 export type PageProps = {

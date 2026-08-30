@@ -1,4 +1,4 @@
-import { Code, CodeText, Heading, Paragraph } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph } from '@ux'
 import { Code as Snippets } from '../Tables.code'
 import { AllFeaturesCombinedDemo } from '../Tables.demos'
 

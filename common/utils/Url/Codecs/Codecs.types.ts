@@ -1,4 +1,4 @@
-import type { Nullish, Optional } from '@common/utils/Generics'
+import type { Nullish, Optional } from '@utils'
 
 export type UrlKey = string
 // A raw URL query value as read from search params — absent params are null/undefined.

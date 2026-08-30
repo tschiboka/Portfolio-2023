@@ -1,6 +1,6 @@
 import { UseQueryResult, UseMutationResult } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 
 type ErrorResponse = { message?: string }
 

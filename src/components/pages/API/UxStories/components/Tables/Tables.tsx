@@ -1,4 +1,4 @@
-import { CodeText, Heading, Main, Paragraph } from '@common/ux'
+import { CodeText, Heading, Main, Paragraph } from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'

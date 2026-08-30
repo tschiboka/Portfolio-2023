@@ -4,13 +4,13 @@ import { loginSchema } from './Login.schema'
 import { AxiosError } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@common/ux'
-import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common/types'
+import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@ux'
+import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@types'
 import { useLoginApi } from './Login.query'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Session } from '../../../../context/SessionContext'
-import { QueryKey } from '@common/utils'
+import { QueryKey } from '@utils'
 
 type LoginProps = {
     path: string

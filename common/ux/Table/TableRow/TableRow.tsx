@@ -7,7 +7,7 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength, isDefined, type Optional } from '@common/utils'
+import { hasLength, isDefined, type Optional } from '@utils'
 import { ExpandedRow } from './ExpandedRow'
 import { TableActions } from '../TableAction/TableAction'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckbox'

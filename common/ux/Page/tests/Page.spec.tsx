@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
 import { Test, Accessor } from '../../Test'
-import * as visitsQueries from '@common/queries'
-import { Browser } from '@common/utils'
-import type { PostVisitResponse } from '@common/types'
+import * as visitsQueries from '../../../queries'
+import { Browser } from '@utils'
+import type { PostVisitResponse } from '@types'
 import Page from '../Page'
 
 // detectincognitojs is async and browser-detection dependent; stub it as "not private" so

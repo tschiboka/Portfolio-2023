@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BlogArticle } from '../../../articles/articles'
 import { getColourName } from '../../pages/Projects/Projects.selectors'
 import { useNavigate } from 'react-router-dom'
@@ -5,9 +6,8 @@ import { AiFillHeart, AiFillStar } from 'react-icons/ai'
 import { BiSolidTimeFive } from 'react-icons/bi'
 import { FaEye, FaCode } from 'react-icons/fa'
 import { BsFillCalendar2DateFill } from 'react-icons/bs'
-import { useState } from 'react'
-import { usePostLike } from '@common/queries'
-import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@common/ux'
+import { usePostLike } from '../../../../common/queries'
+import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@ux'
 import './BlogCard.scss'
 
 interface Props {

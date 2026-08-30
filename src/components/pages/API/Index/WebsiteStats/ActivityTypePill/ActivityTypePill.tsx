@@ -1,6 +1,6 @@
-import { Pill, Inline } from '@common/ux'
-import type { PillColor } from '@common/ux/Pill/Pill'
-import type { ActivityType, ActivityFeedContext } from '@common/types'
+import { Pill, Inline } from '@ux'
+import type { PillColor } from '@ux'
+import type { ActivityType, ActivityFeedContext } from '@types'
 import './ActivityTypePill.scss'
 
 const TYPE_COLORS: Record<ActivityType, PillColor> = {

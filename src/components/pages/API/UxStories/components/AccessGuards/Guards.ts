@@ -1,4 +1,4 @@
-import { type Guard } from '@common/utils/AccessGuard/AccessGuard.types'
+import { Guard } from '@ux'
 
 const alwaysDenied: Guard = {
     when: { type: 'custom', predicate: () => false },

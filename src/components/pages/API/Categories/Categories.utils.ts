@@ -1,10 +1,10 @@
-import { SearchInputOption } from '@common/ux'
-import type { CellMeta, CellValue } from '@common/ux/Table/Table.types'
-import { GetCategoryResponse } from '@common/types'
+import { SearchInputOption } from '@ux'
+import { GetCategoryResponse } from '@types'
 import { colors } from './colors'
 import { icons } from './icons'
-import { isDefined } from '@common/utils'
+import { isDefined } from '@utils'
 import { ReactNode } from 'react'
+import { CellMeta, CellValue } from '@ux'
 
 export const iconOptions: SearchInputOption[] = Object.keys(icons)
     .map((icon) => ({

@@ -10,8 +10,8 @@ import { mockDefaultQueryOptions, mockDefaultSessionContext, mockNavigate } from
 import { ApiRoute } from '../../../../src/routing/ApiRoutes'
 import { server } from '../Server'
 import { TestError } from '../Accessor/Accessor'
-import { isString, isNonEmpty } from '@common/utils'
-import type { Optional } from '@common/utils'
+import { isString, isNonEmpty } from '@utils'
+import type { Optional } from '@utils'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: mockDefaultQueryOptions })
 

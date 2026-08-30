@@ -1,4 +1,4 @@
-import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@ux'
 import { Code as Snippets } from '../Tables.code'
 import {
     BasicSortingDemo,

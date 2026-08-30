@@ -1,3 +1,4 @@
+export * from './AccessGuard'
 export * from './Button'
 export * from './Code'
 export * from './Const'

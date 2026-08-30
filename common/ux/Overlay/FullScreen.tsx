@@ -1,4 +1,4 @@
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './Overlay.styles.css'
 import { OverlayProps } from './Overlay.types'
 

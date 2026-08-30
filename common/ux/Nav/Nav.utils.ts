@@ -1,6 +1,6 @@
 import { MenuItem, SubmenuState } from './Nav.types'
-import type { Optional } from '@common/utils'
-import { Strings } from '@common/utils/Strings'
+import type { Optional } from '@utils'
+import { Strings } from '@utils'
 
 export const isArticle = (path: Optional<string>): boolean => /^\/blog\//.test(path || '')
 

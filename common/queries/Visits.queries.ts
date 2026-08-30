@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query'
-import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common/types'
+import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common/utils'
+import { Paths, Query, QueryKey } from '@utils'
 
 export const postVisit = async (path: string): Promise<PostVisitResponse> => {
     const request = new Query.RequestBuilder(Paths.Api.Visit).build()

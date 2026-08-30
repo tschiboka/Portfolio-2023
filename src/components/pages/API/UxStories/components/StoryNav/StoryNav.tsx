@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 import { BiChevronLeft, BiChevronRight, BiChevronsLeft } from 'react-icons/bi'
 import { stories, STORIES_INDEX_PATH } from '../../stories'
 import './StoryNav.styles.css'

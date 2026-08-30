@@ -1,4 +1,4 @@
-import { Arrays } from '@common/utils'
+import { Arrays } from '@utils'
 
 export type Row = {
     name: string

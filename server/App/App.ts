@@ -1,14 +1,14 @@
-import express, { Application } from 'express'
+﻿import express, { Application } from 'express'
 import mongoose from 'mongoose'
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import cors from 'cors'
-import { ApiMessage } from '../../common/utils/Server'
+import { ApiMessage } from '@utils'
 import { AppRoutes } from './App.routes'
 import { AppMiddleware } from './App.middlewares'
 import { AppConstants } from './App.constants'
 
-/** Application composition root — builds the Express app and (optionally) boots it. */
+/** Application composition root â€” builds the Express app and (optionally) boots it. */
 export const App = {
     /** Boot-time setup steps, grouped under `App.Boot`. */
     Boot: {
@@ -41,7 +41,6 @@ export const App = {
 
         App.Boot.setupValidation()
         AppMiddleware.prod(app)
-        AppRoutes.register(app)
 
         app.use(AppMiddleware.error)
 

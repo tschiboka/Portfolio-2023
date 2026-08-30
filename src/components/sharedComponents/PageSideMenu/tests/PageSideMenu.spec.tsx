@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
-import { Accessor } from '@common/ux/Test/Accessor/Accessor'
+import { Accessor, Test } from '@ux/Test'
 import { PageSideMenu } from '../PageSideMenu'
 import {
     pageSideMenuHandlers,

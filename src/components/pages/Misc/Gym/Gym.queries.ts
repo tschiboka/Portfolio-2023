@@ -4,9 +4,9 @@ import {
     GetGymExercisesResponse,
     GetGymMuscleGroupOptionsResponse,
     GetGymUserRoutinesResponse,
-} from '@common/types/projects/gym'
+} from '@types'
 import { useQuery } from '@tanstack/react-query'
-import { ErrorResponse, Paths, Query, QueryKey } from '@common/utils'
+import { ErrorResponse, Paths, Query, QueryKey } from '@utils'
 import { AxiosError } from 'axios'
 
 export const useGetGymUserRoutines = () => {

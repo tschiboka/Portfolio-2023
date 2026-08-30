@@ -1,5 +1,5 @@
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils'
-import { isEmpty } from '@common/utils'
+import { isEmpty } from '@utils'
 import { useSession } from '../../Session.context'
 import { PlayableLevelWord } from '../../Session.types'
 import { SolvedSolutionWord, UnsolvedSolutionWord } from './SolutionWord'

@@ -1,4 +1,4 @@
-import { Numbers } from '@common/utils'
+import { Numbers } from '@utils'
 import type { AccessibleProps } from '../index.types'
 import './CounterBadge.css'
 

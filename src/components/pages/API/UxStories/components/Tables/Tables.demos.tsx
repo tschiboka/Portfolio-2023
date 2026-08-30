@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react'
-import { Table, useTableController, text, select } from '@common/ux/Table'
-import type { SortDirection, TableColumns } from '@common/ux/Table/Table.types'
-import type { UrlPersistenceConfig } from '@common/ux/Table/useTableController/useTableController.types'
-import { Pill } from '@common/ux'
-import { Strings } from '@common/utils/Strings'
+import { Table, useTableController, text, select } from '@ux'
+import type { SortDirection, TableColumns } from '@ux'
+import { Pill } from '@ux'
+import { Strings } from '@utils'
 import { toUpper } from 'ramda'
 import {
     type SelectionRow,
@@ -25,6 +24,7 @@ import {
     allFeaturesActions,
     sortRows,
 } from './Tables.config'
+import { UrlPersistenceConfig } from '@ux/Table/useTableController/useTableController.types'
 
 export const MultipleSelectionDemo = () => {
     const [selected, setSelected] = useState<string[]>([])

@@ -4,7 +4,7 @@ import { TbZoomOutFilled } from 'react-icons/tb'
 import { Reference } from '../References/References'
 import './Figure.scss'
 import InlineReference from '../InlineReference/InlineReference'
-import { Figure as UxFigure } from '@common/ux'
+import { Figure as UxFigure } from '@ux'
 import type { FigureSize } from '../../../../common/ux/Figure/Figure.types'
 
 interface Props {

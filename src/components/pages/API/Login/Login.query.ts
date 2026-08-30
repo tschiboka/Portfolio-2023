@@ -3,9 +3,9 @@ import {
     PostLoginResponse,
     GetSettingsResponse,
     GetSessionResponse,
-} from '@common/types/app'
+} from '@types'
 import { useQuery } from '@tanstack/react-query'
-import { isDefined, Paths, Query, QueryKey } from '@common/utils'
+import { isDefined, Paths, Query, QueryKey } from '@utils'
 
 export const useLoginApi = () => {
     const loginRequest = new Query.RequestBuilder(Paths.Api.Login).build()

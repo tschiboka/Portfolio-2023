@@ -1,4 +1,4 @@
-import type { SearchInputOption } from '@common/ux/Form/SearchInput.types'
+import type { SearchInputOption } from '@ux'
 
 // Shared types for the Gym project.
 

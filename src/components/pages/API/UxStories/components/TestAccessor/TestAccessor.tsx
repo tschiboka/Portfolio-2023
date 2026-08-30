@@ -1,4 +1,4 @@
-import { BlockQuote, Code, CodeText, Heading, Main, Paragraph, Section, Text } from '@common/ux'
+import { BlockQuote, Code, CodeText, Heading, Main, Paragraph, Section, Text } from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'

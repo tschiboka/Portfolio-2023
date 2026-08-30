@@ -1,5 +1,4 @@
-import { RequestBuilder, MockBuilder } from '@common/ux/Test/Server'
-import { HttpMethods } from '@common/ux/Test/Server/RequestBuilder'
+import { RequestBuilder, MockBuilder, HttpMethods } from '@ux/Test'
 import { defaultSettings, mockLoginSuccess } from './Login.mocks'
 
 export const loginHandlers = {

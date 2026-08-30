@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import type { CellMeta } from '../Table.types'
 import { getCellContent } from '../Table.utils'
 import { Row } from './Table.spec.types'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 
 describe('Table — Cell Rendering & Defaults', () => {
     describe('Default cell rendering', () => {

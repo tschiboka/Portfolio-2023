@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { Storage } from '@common/utils'
-import type { Optional } from '@common/utils'
+import { Storage } from '@utils'
+import type { Optional } from '@utils'
 import { AppContextValues, LocalStorage } from './AppContext.types'
 
 const APP_KEY = 'tschiboka'

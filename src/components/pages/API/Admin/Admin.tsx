@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { Button, Code, Heading, Main, Paragraph, Section, Spacer } from '@common/ux'
-import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@common/types'
+import { Button, Code, Heading, Main, Paragraph, Section, Spacer } from '@ux'
+import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@types'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import { useAdminApi } from './Admin.query'
 import { BreakdownPreview, MOCK_BREAKDOWN } from './BreakdownPreview'
 

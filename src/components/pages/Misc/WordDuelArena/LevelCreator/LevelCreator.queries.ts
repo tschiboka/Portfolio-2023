@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
-import { Paths, Query, QueryKey } from '@common/utils'
-import type { ErrorResponse } from '@common/utils/Query'
+import { Paths, Query, QueryKey } from '@utils'
+import type { ErrorResponse } from '@utils'
 import type { LevelNameResponse } from '../common/utils/Types/Level'
 import type { FrequencyType } from '../common/utils/Types/Words'
 

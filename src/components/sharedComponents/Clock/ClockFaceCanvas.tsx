@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 import { ClockData, drawGrooves, drawHands } from '.'
-import { Canvas } from '@common/utils'
+import { Canvas } from '@utils'
 
 type ClockFaceCanvasProps = { clock: ClockData }
 

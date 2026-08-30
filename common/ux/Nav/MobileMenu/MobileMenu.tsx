@@ -4,11 +4,11 @@ import { BiChevronRight } from 'react-icons/bi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { append, dropLast } from 'ramda'
 import { useAppContext } from '../../../../src/context/AppContext/App.context'
-import { AccessGuard } from '../../../utils/AccessGuard'
+import { AccessGuard } from '@ux'
 import Toggle from '../../../../src/components/sharedComponents/Toggle/Toggle'
 import { MenuItem } from '../Nav.types'
 import { isHighlighted } from '../Nav.utils'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './MobileMenu.styles.css'
 
 export type MobileMenuProps = {
@@ -60,7 +60,10 @@ export const MobileMenu = ({
     }
 
     return (
-        <menu className={`MobileMenu${className ? ` ${className}` : ''}`} style={{ zIndex: Const.ZIndex.dropdown }}>
+        <menu
+            className={`MobileMenu${className ? ` ${className}` : ''}`}
+            style={{ zIndex: Const.ZIndex.dropdown }}
+        >
             <div className="MobileMenu__items">
                 {menuStack[menuStack.length - 1].map((item) => (
                     <AccessGuard

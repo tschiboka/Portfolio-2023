@@ -5,7 +5,6 @@ import { useFullScreen } from './useFullScreen'
 import { useIsVisible } from './useIsVisible'
 import { useOrientation } from './useOrientation'
 
-export { useFullScreen, useOrientation }
 export const Browser = {
     copyToClipboard,
     isLocalhost,

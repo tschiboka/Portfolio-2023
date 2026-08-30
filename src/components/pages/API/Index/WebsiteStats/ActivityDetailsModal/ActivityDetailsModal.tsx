@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-return */
-import { Overlay, Code, Stack, Text, CodeText, Box } from '@common/ux'
-import type { Optional } from '@common/utils'
+import { Overlay, Code, Stack, Text, CodeText, Box } from '@ux'
+import type { Optional } from '@utils'
 import type {
     BreakdownRow,
     ActivityMessageDetails,

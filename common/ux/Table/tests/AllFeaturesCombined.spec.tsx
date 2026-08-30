@@ -1,4 +1,4 @@
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import { screen, within } from '@testing-library/react'
 
 describe('Table — Combined Features', () => {

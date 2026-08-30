@@ -11,4 +11,4 @@ export const Overlay = {
 }
 
 export type { ActionMenuItem, ActionMenuProps } from './ActionMenu'
-export type { OverlayProps, ModalProps, ModalSize } from './Overlay.types'
+export type { OverlayProps, ModalProps, ModalSize, PopupMode, PopupSize } from './Overlay.types'

@@ -348,7 +348,7 @@ export const Set = {
 })`,
 
     // ── MSW Integration ──────────────────────────────────────────────────────
-    mswIntegration: `import { server, MockBuilder, RequestBuilder } from '@common/ux/Test'
+    mswIntegration: `import { server, MockBuilder, RequestBuilder } from '@ux'
 
 // Define a mock API handler
 const handleGetUsers = RequestBuilder({
@@ -403,7 +403,7 @@ export const TestError = {
 }`,
 
     // ── Full Component List ──────────────────────────────────────────────────
-    testNamespace: `import { Test } from '@common/ux/Test'
+    testNamespace: `import { Test } from '@ux'
 
 // Every component accessor is available under Test.*
 Test.Button('Save')             // ButtonAccessor

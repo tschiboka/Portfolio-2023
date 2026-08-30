@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
-import { Accessor } from '@common/ux/Test/Accessor/Accessor'
+import { Accessor, Test } from '@ux/Test'
 import Xmas2025 from '../Xmas2025'
 import { handlers } from './Xmas2025.mockHandles'
 import { mockUser } from './Xmas2025.mocks'

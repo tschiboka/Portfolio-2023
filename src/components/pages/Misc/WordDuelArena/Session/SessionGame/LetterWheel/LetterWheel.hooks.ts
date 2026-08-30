@@ -8,7 +8,7 @@ import {
 import { recalculatePositions } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 type UseLetterWheelListenersProps = {
     containerRef: RefObject<HTMLDivElement | null>

@@ -6,7 +6,7 @@ import type {
     PutXmasCandlesResponse,
     XmasMessage,
     User,
-} from '@common/types'
+} from '@types'
 
 export const mockUser: User = {
     id: 'test-user-id',

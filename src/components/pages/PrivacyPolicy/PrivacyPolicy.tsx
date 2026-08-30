@@ -1,6 +1,6 @@
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 import './PrivacyPolicy.scss'
 
 interface Props {

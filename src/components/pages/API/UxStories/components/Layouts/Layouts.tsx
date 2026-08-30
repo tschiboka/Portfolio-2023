@@ -14,8 +14,8 @@
     Spacer,
     Split,
     Stack,
-} from '@common/ux'
-import { Arrays } from '@common/utils'
+} from '@ux'
+import { Arrays } from '@utils'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'

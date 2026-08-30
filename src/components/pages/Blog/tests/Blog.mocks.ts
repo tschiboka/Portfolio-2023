@@ -1,4 +1,4 @@
-import type { GetLikeSummaryResponse, GetVisitSummaryResponse } from '@common/types'
+import type { GetLikeSummaryResponse, GetVisitSummaryResponse } from '@types'
 
 export const mockBlogVisits: GetVisitSummaryResponse = {
     visits: {

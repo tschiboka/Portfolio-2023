@@ -1,5 +1,5 @@
-import { Table } from '@common/ux/Table'
-import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
+import { Table } from '@ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@ux'
 import { type VariantRow, variantRows } from '../Tables.mocks'
 import { cellVariantFn, rowVariantFn } from '../Tables.config'
 import { Code as Snippets } from '../Tables.code'

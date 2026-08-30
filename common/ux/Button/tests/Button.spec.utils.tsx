@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import { Button } from '../Button'
 import type { AsButton, AsAnchor } from '../Button.types'
 

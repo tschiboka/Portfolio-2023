@@ -1,5 +1,5 @@
 import { Navigation } from '.'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 export type NavigationProps = {
     path: keyof typeof Navigation.NavigationPaths

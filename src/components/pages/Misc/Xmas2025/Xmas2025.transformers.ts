@@ -1,4 +1,4 @@
-import { PostXmasMessageRequest, User } from '@common/types'
+import { PostXmasMessageRequest, User } from '@types'
 import { XmasFormData } from './Xmas2025.types'
 
 export const xmasTransformer = {

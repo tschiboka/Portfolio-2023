@@ -1,6 +1,6 @@
 import type { TableState } from '../useTableController/useTableController.types'
-import type { Dictionary } from '@common/utils/Generics'
-import { Objects } from '@common/utils'
+import type { Dictionary } from '@utils'
+import { Objects } from '@utils'
 
 /** Structural equality for a `TableState`. Filter values are primitives, so a shallow compare
  * plus the sorting/paging fields is sufficient. Used to tell a URL-derived state from the state

@@ -1,4 +1,4 @@
-import { Paragraph } from '@common/ux'
+import { Paragraph } from '@ux'
 
 const GetToKnowMe = () => {
     return (

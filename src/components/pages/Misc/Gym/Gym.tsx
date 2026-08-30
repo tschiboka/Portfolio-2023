@@ -1,4 +1,4 @@
-import { Button, Code, Main, Section } from '@common/ux'
+import { Button, Code, Main, Section } from '@ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useGetGymExercises, useGetGymUserRoutines } from './Gym.queries'
 import { ExercisesSection } from './components/ExerciesesSection/ExercisesSection'

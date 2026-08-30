@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import { ApiRoutes } from '../../../../../routing/ApiRoutes'
 import { mockSetSession, mockUser, defaultSettings } from './Login.mocks'
 import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandles'

@@ -1,5 +1,5 @@
-import { useTableController } from '@common/ux'
-import type { GetActivityFeedQuery } from '@common/types'
+import { useTableController } from '@ux'
+import type { GetActivityFeedQuery } from '@types'
 import { filters, type ActivityFiltersData } from './BreakdownTable.filters'
 import { breakdownParamsTransformer } from './BreakdownTable.transformers'
 

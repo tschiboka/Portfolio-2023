@@ -7,8 +7,8 @@ import {
     PostXmasMessageResponse,
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
-} from '@common/types'
-import { Paths, QueryKey, Query } from '@common/utils'
+} from '@types'
+import { Paths, QueryKey, Query } from '@utils'
 
 export const useGetPagePingData = () => {
     const request = new Query.RequestBuilder(Paths.Projects.Xmas).build()

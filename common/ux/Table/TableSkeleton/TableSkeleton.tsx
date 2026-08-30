@@ -1,4 +1,4 @@
-import { Arrays } from '@common/utils/Arrays/Arrays'
+import { Arrays } from '@utils'
 import './TableSkeleton.styles.css'
 
 type TableSkeletonProps = {

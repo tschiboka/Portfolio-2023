@@ -1,5 +1,5 @@
-import { Table, Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
-import { Functions } from '@common/utils'
+import { Table, Code, CodeText, Heading, Paragraph, Section } from '@ux'
+import { Functions } from '@utils'
 import { Code as Snippets } from '../Tables.code'
 import { type Row, rows } from '../Tables.mocks'
 import { ControllerSingleDemo, ControllerNamedDemo, ControllerOffDemo } from '../Tables.demos'

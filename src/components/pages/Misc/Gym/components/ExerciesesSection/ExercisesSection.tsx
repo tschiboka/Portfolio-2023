@@ -1,6 +1,6 @@
-import { GymExerciseResource } from '@common/types'
-import { Code, Form, LoadingIndicator, Section } from '@common/ux'
-import { Query } from '@common/utils'
+import { GymExerciseResource } from '@types'
+import { Code, Form, LoadingIndicator, Section } from '@ux'
+import { Query } from '@utils'
 import { useForm } from 'react-hook-form'
 import {
     useGetGymDifficultyOptions,

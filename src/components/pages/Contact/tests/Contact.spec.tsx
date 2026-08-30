@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import Contact from '../Contact'
 import { defaultHandlers, handlePostMessageError } from './Contact.mockHandles'
 import { ContactLabels } from './Contact.spec.utils'

@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useRef, useState } from 'react'
 import { SessionContextType, SessionStatuses, WebSocketSessionState } from './Session.types'
 import { useParams } from 'react-router'
-import { Storage } from '@common/utils'
-import type { Optional } from '@common/utils'
+import { Storage } from '@utils'
+import type { Optional } from '@utils'
 
 const WDA_KEY = 'word-duel-arena'
 

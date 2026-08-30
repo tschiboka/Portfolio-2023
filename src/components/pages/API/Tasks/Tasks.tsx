@@ -1,7 +1,7 @@
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './Tasks.scss'
 import { useForm } from 'react-hook-form'
-import { Form } from '@common/ux'
+import { Form } from '@ux'
 
 interface TaskProps {
     path: string

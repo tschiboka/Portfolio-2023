@@ -54,7 +54,7 @@ import { getReferenceList } from '../references'
 // Styles
 import './RiffMaster.scss'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
-import { Button, Code, Heading, Link, Paragraph, Section } from '@common/ux'
+import { Button, Code, Heading, Link, Paragraph, Section } from '@ux'
 
 interface Props {
     pageName: string

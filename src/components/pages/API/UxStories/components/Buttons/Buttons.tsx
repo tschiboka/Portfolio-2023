@@ -1,9 +1,9 @@
-import { Button, Code, CodeText, Heading, Main, Paragraph, Section, Stack } from '@common/ux'
+import { Button, Code, CodeText, Heading, Main, Paragraph, Section, Stack } from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Buttons.code'
-import { Functions } from '@common/utils/Functions/Functions'
+import { Functions } from '@utils'
 
 type ButtonsProps = { path: string }
 

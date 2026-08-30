@@ -1,5 +1,5 @@
 import './Overlay.scss'
-import { Overlay } from '@common/ux'
+import { Overlay } from '@ux'
 import { useAppContext } from '../../../context/AppContext/App.context'
 
 export const FullScreenOverlay = () => {

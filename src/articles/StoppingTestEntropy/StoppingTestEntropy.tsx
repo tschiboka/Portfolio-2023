@@ -1,5 +1,5 @@
 import Article from '../../components/sharedComponents/Article/Article'
-import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@common/ux'
+import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@ux'
 import codeSnippets from './codeSnippets'
 
 interface Props {

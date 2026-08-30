@@ -16,7 +16,7 @@ import { TableFilterPanel, type TableFilterPanelHandle } from './TableFilter/Tab
 import { TablePagination } from './TablePagination/TablePagination'
 import { TableDownloadButton } from './TableDownload/TableDownload'
 import { Overlay } from '../Overlay'
-import { hasLength, isNonEmpty, type Optional } from '@common/utils'
+import { hasLength, isNonEmpty, type Optional } from '@utils'
 import { TableSkeleton } from './TableSkeleton/TableSkeleton'
 import { extractSlot } from './TableSlots/TableSlots.utils'
 import { Header, Info, Legend, Filters, Download, Empty } from './TableSlots'

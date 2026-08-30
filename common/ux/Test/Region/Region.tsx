@@ -1,5 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
-import { isDefined } from '@common/utils'
+import { isDefined } from '@utils'
 
 export class RegionAccessor extends Accessor {
     get Get() {

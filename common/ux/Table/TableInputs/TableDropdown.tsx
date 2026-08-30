@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useId, useRef, useState } from 'react'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './TableDropdown.styles.css'
 
 export type DropdownOption = {

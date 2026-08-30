@@ -1,5 +1,5 @@
-import { Link, Paragraph } from '@common/ux'
-import { Box } from '@common/ux'
+import { Link, Paragraph } from '@ux'
+import { Box } from '@ux'
 import './ProgrammingBuddy.scss'
 
 const ProgrammingBuddy = () => {

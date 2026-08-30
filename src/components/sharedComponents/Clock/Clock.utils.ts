@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { ClockData } from '.'
-import { CanvasType, Centre, DateTime, Line } from '@common/utils'
-import type { Nullable } from '@common/utils'
+import { CanvasType, Centre, DateTime, Line } from '@utils'
+import type { Nullable } from '@utils'
 
 export const getDateTime = (): ClockData => {
     const dateTime = Date.now()

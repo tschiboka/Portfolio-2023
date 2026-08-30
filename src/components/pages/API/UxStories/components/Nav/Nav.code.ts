@@ -11,14 +11,14 @@ export const Code = {
     showSubmenuToggle?: boolean
 }`,
 
-    navShell: `import { Nav } from '@common/ux/Nav'
+    navShell: `import { Nav } from '@ux'
 
 <Nav logo={<MyLogo />} burger={<MyBurger />}>
     <li>Home</li>
     <li>About</li>
 </Nav>`,
 
-    navMenu: `import { NavMenu } from '@common/ux/Nav'
+    navMenu: `import { NavMenu } from '@ux'
 
 const menu: MenuItem[] = [
     { label: 'Home', path: '/' },
@@ -36,14 +36,14 @@ const menu: MenuItem[] = [
     onSubmenuToggle={(item, stack) => setSubmenuStack(stack)}
 />`,
 
-    subNav: `import { SubNav } from '@common/ux/Nav'
+    subNav: `import { SubNav } from '@ux'
 
 <SubNav
     title={<><span>Tivadar&nbsp;</span><span>Debnar</span></>}
     links={<SocialLinks />}
 />`,
 
-    mobileMenu: `import { MobileMenu } from '@common/ux/Nav'
+    mobileMenu: `import { MobileMenu } from '@ux'
 
 <MobileMenu
     items={menu}
@@ -54,7 +54,7 @@ const menu: MenuItem[] = [
 />`,
 
     integration: `// PageNav.tsx — app-level orchestrator
-import { NavMenu, MobileMenu, SubNav } from '@common/ux/Nav'
+import { NavMenu, MobileMenu, SubNav } from '@ux'
 import { Logo } from './Logo'
 import { SocialLinks, SubNavTitle } from './PersonalContent'
 import { menu, getMenuItemImage } from './menuData'

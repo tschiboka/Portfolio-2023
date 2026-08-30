@@ -1,15 +1,5 @@
 import { getColourName } from '../Projects.selectors'
-import {
-    Link,
-    Heading,
-    Paragraph,
-    Pill,
-    Figure,
-    Stack,
-    Card,
-    Typography,
-    Overline,
-} from '@common/ux'
+import { Link, Heading, Paragraph, Pill, Figure, Stack, Card, Typography, Overline } from '@ux'
 import { FaGithub } from 'react-icons/fa'
 import { TbWorldWww } from 'react-icons/tb'
 import { PiReadCvLogoFill } from 'react-icons/pi'

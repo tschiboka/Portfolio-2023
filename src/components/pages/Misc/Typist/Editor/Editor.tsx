@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { TypistContext } from '../Typist.context'
 import { Character } from './Character/Character'
 import { createEditorHandler } from './Editor.handlers'
-import { isTruthy } from '@common/utils/Predicate'
+import { isTruthy } from '@utils'
 import './Editor.styles.scss'
-import { LoadingIndicator } from '@common/ux'
+import { LoadingIndicator } from '@ux'
 
 export const Editor = () => {
     const { editorState, dispatch, isLoading } = TypistContext.Use()

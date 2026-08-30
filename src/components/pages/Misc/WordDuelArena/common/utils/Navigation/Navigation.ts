@@ -1,6 +1,6 @@
 import { NavigationProps } from './Navigation.types'
-import { Url } from '@common/utils/Url'
-import { Browser } from '@common/utils/Browser'
+import { Url } from '@utils'
+import { Browser } from '@utils'
 
 export class Navigation {
     static readonly NavigationPaths = {

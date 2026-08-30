@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-argument */
-import { Table } from '@common/ux'
+import { Table } from '@ux'
 import { activityColumns as defaultColumns } from './BreakdownTable.columns'
 import { ActivityTypeLegend } from '../ActivityTypePill/ActivityTypePill'
-import type { TableControl } from '@common/ux/Table'
-import type { ActivityFeedContext, PageMeta } from '@common/types'
+import type { TableControl } from '@ux'
+import type { ActivityFeedContext, PageMeta } from '@types'
 import type { BreakdownRow } from './BreakdownTable.types'
 import { breakdownActions } from './BreakdownTable.actions'
 import { useState } from 'react'
 import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 
 type BreakdownTableProps = {
     controller: TableControl

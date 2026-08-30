@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { TableColumn } from './Table.types'
-import { isDefined } from '@common/utils'
+import { isDefined } from '@utils'
 
 type RenderCellArgs<TData extends Record<string, ReactNode>, TContext> = {
     col: TableColumn<TData, TContext>

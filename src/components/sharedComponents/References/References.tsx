@@ -1,4 +1,4 @@
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 import './References.scss'
 
 export interface Reference {

@@ -1,5 +1,5 @@
-import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@common/types/projects/wda'
-import type { Nullable } from '@common/utils'
+import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@types'
+import type { Nullable } from '@utils'
 
 // Re-export shared types with local names
 export type {
@@ -17,7 +17,7 @@ export type {
     WdaClientSessionState as WebSocketSessionState,
     WdaWsRequest as WebSocketRequest,
     WdaWsResponse as WebSocketResponse,
-} from '@common/types/projects/wda'
+} from '@types'
 
 // Re-export shared constants with local names
 export {
@@ -26,7 +26,7 @@ export {
     WdaPlayerDerivedStatuses as PlayerDerivedStatus,
     WdaWsRequestTypes as WebSocketRequestType,
     WdaWsResponseTypes as WebSocketResponseType,
-} from '@common/types/projects/wda'
+} from '@types'
 
 // --- FE-only types ---
 

@@ -1,7 +1,7 @@
-import { DateTime } from '@common/utils/DateTime'
+import { DateTime } from '@utils'
 import { blogArticles, BlogArticle } from '../../../articles/articles'
-import { isEmpty } from '@common/utils/Predicate/Predicate'
-import type { Nullable, Dictionary } from '@common/utils'
+import { isEmpty } from '@utils'
+import type { Nullable, Dictionary } from '@utils'
 import { BlogSortBy } from './Blog.type'
 
 export const getPublishedArticles = () => blogArticles.filter((article) => !!article.created)

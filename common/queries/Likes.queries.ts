@@ -1,12 +1,7 @@
 import { useQuery, useMutation } from '@tanstack/react-query'
-import {
-    GetLikeResponse,
-    GetLikeSummaryResponse,
-    PostLikeRequest,
-    PostLikeResponse,
-} from '@common/types'
+import { GetLikeResponse, GetLikeSummaryResponse, PostLikeRequest, PostLikeResponse } from '@types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common/utils'
+import { Paths, Query, QueryKey } from '@utils'
 
 export const useGetLikes = (path: string) => {
     const request = new Query.RequestBuilder(Paths.Api.Like).setQuery({ path }).build()

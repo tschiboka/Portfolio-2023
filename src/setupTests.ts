@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { http, HttpResponse } from 'msw'
-import { server } from '@common/ux/Test/Server'
-import type { Dictionary } from '@common/utils'
+import { server } from '@ux/Test/Server'
+import type { Dictionary } from '@utils'
 
 // Default handlers for common API routes — components like PageSideMenu fetch
 // likes and visits on mount. These ensure tests don't get MSW warnings for them.

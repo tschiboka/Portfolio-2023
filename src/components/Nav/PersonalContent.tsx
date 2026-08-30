@@ -1,7 +1,7 @@
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 
 export const SocialLinks = () => (
     <>

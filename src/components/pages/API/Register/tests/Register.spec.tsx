@@ -1,5 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import { ApiRoutes } from '../../../../../routing/ApiRoutes'
 import { mockRegisterSuccess } from './Register.mocks'
 import { defaultHandlers, handlePostRegisterError } from './Register.mockHandles'

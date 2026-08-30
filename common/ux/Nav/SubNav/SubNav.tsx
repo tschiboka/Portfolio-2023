@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import Toggle from '../../../../src/components/sharedComponents/Toggle/Toggle'
 import { useAppContext } from '../../../../src/context/AppContext/App.context'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './SubNav.styles.css'
 
 export type SubNavProps = {

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 // Components
 import Article from '../../components/sharedComponents/Article/Article'
 import Figure from '../../components/sharedComponents/Figure/Figure'
-import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography } from '@common/ux'
+import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images

@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
-import { Table } from '@common/ux/Table'
-import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
+import { Table } from '@ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@ux'
 import { type Row, rows } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 import { renderStatus } from '../Tables.config'
-import { Functions } from '@common/utils/Functions/Functions'
+import { Functions } from '@utils'
 
 export const RefreshLoading = () => {
     const [isLoading, setIsLoading] = useState(false)

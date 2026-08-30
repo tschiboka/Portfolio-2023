@@ -33,7 +33,7 @@ import {
     TypographyStory,
 } from '../components/pages/API/UxStories'
 import { ReactElement } from 'react'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 export type ApiRoute = {
     name?: string

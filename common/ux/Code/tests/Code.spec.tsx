@@ -1,6 +1,6 @@
 import { waitFor } from '@testing-library/react'
-import { Browser } from '@common/utils/Browser'
-import { Accessor, Test } from '@common/ux/Test'
+import { Browser } from '@utils'
+import { Accessor, Test } from '@ux/Test'
 
 const LABEL = 'test-code'
 const codeBlock = () => Test.Code('test-code')

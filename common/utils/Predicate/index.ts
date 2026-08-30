@@ -9,6 +9,7 @@ export {
     isFalsy,
     isNumber,
     isPositiveInteger,
+    isFiniteNumber,
     isArray,
     isString,
     isDigits,

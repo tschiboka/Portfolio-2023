@@ -1,7 +1,7 @@
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
-import { Form, LoadingIndicator } from '@common/ux'
+import { Form, LoadingIndicator } from '@ux'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { xmasSchema } from './Xmas2025.schema'

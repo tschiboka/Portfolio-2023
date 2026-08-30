@@ -1,7 +1,7 @@
 import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
-import { Test, Accessor } from '@common/ux/Test'
+import { Test, Accessor } from '@ux/Test'
 import { Table } from '..'
 
 describe('Table — Accessibility', () => {

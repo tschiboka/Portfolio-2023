@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import { ClockData, ClockFaceCanvas, startLoop } from '.'
 import './Clock.scss'
 

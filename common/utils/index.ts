@@ -1,4 +1,3 @@
-export * from './AccessGuard'
 export * from './Arrays'
 export * from './Booleans'
 export * from './Browser'

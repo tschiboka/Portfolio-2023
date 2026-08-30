@@ -1,7 +1,7 @@
 import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import { EditorWord, CharStatus } from './Character/Character.types'
 import { textToWords } from '../Typist.utils'
-import type { Optional } from '@common/utils'
+import type { Optional } from '@utils'
 
 const updateCharStatus = (
     words: EditorWord[],

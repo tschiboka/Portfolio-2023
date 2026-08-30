@@ -1,6 +1,6 @@
 import { selectAlign, selectJustify } from '../Stack/Stack.selectors'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
-import { isDefined } from '@common/utils'
+import { isDefined } from '@utils'
 import './Grid.styles.css'
 
 const isResponsive = (columns: GridProps['columns']): columns is ResponsiveColumns =>

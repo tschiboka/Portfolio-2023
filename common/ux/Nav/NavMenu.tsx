@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link } from '../Link'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { AccessGuard } from '../../utils/AccessGuard'
+import { AccessGuard } from '@ux'
 import { Nav } from './Nav'
 import { MenuItem, NavProps, SubmenuState } from './Nav.types'
 import { isHighlighted } from './Nav.utils'

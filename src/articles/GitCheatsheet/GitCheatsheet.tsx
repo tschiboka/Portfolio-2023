@@ -1,7 +1,7 @@
 // Components
 import Article from '../../components/sharedComponents/Article/Article'
 import Figure from '../../components/sharedComponents/Figure/Figure'
-import { Code, Heading, Paragraph, Section, Typography } from '@common/ux'
+import { Code, Heading, Paragraph, Section, Typography } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images

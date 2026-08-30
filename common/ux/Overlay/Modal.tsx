@@ -1,13 +1,13 @@
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
 import type { CSSProperties } from 'react'
 import type { ModalProps } from './Overlay.types'
 import { DefaultIcon, ModeClass, useScrollLock } from './Popup.utils'
-import { isNonEmpty } from '@common/utils'
+import { isNonEmpty } from '@utils'
 import { Stack } from '../Layout'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 const ModalSizeStyle: Dictionary<CSSProperties> = {
     sm: { minWidth: 360, maxWidth: 480 },

@@ -1,4 +1,4 @@
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import { useSessionWS } from '../SessionWebSocket'
 import { InteractionModes, InteractionOverlayConfig } from './SessionOverlay.types'
 

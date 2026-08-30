@@ -2,7 +2,7 @@ import { useSession } from '../Session.context'
 import { InteractionModes } from './SessionOverlay.types'
 import { useGetInteractionOverlayState } from './SessionOverlay.hooks'
 import './SessionOverlay.styles.css'
-import { Browser } from '@common/utils/Browser'
+import { Browser } from '@utils'
 import { useSessionWS } from '../SessionWebSocket'
 
 export const InteractionOverlay = ({

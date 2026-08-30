@@ -25,7 +25,8 @@ import { SideMenu } from './SideMenu/SideMenu'
 import { Table } from './Table/Table'
 import { Typography } from './Typography/Typography'
 export { Accessor, TestError } from './Accessor/Accessor'
-export { server, MockBuilder, RequestBuilder } from './Server'
+export { server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
+import { server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 
 export const Test = {
     Box,
@@ -52,4 +53,8 @@ export const Test = {
     SideMenu,
     Table,
     Typography,
+    server,
+    MockBuilder,
+    RequestBuilder,
+    HttpMethods,
 }

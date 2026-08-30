@@ -3,7 +3,7 @@ import type { CellMeta, TableAction } from '../Table.types'
 import { Overlay } from '../../Overlay'
 import type { ActionMenuItem } from '../../Overlay'
 import './TableAction.styles.css'
-import { hasLength } from '@common/utils'
+import { hasLength } from '@utils'
 
 type TableActionsProps<TData extends Record<string, ReactNode>, TContext> = {
     actions: TableAction<TData, TContext>[]

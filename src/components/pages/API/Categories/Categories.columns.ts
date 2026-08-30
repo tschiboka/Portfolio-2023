@@ -1,6 +1,6 @@
 import { getParentCategory } from './Categories.utils'
-import type { TableColumns } from '@common/ux/Table/Table.types'
-import type { GetCategoryResponse } from '@common/types'
+import { TableColumns } from '@ux'
+import type { GetCategoryResponse } from '@types'
 
 export const columns: TableColumns<GetCategoryResponse> = [
     { header: 'Name', accessor: 'name' },

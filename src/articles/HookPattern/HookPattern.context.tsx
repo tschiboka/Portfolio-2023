@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import type { Optional } from '@common/utils'
+import type { Optional } from '@utils'
 
 interface ThemeContextType {
     theme: string

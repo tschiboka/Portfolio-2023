@@ -1,8 +1,8 @@
 import { Screen } from '../../../sharedComponents/Screen/Screen'
-import { AccessGuard } from '@common/utils/AccessGuard'
+import { AccessGuard } from '@ux'
 import { AdminIndex } from './AdminIndex'
 import { GuestIndex } from './GuestIndex'
-import { Heading, Main } from '@common/ux'
+import { Heading, Main } from '@ux'
 
 interface IndexProps {
     path: string

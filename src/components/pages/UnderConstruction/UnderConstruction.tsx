@@ -2,7 +2,7 @@ import logo from '../../assets/images/icon-light.svg'
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
-import { Link } from '@common/ux'
+import { Link } from '@ux'
 import './UnderConstruction.scss'
 
 const UnderConstruction = () => {

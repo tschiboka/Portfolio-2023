@@ -1,4 +1,4 @@
-import type { CurrentUser } from '@common/types'
+import type { CurrentUser } from '@types'
 import { ApiResponder } from '../ApiResponder'
 
 /** The subset of an admin-or-user-owned resource a permission check relies on. */

@@ -1,6 +1,5 @@
-import { RequestBuilder, MockBuilder } from '@common/ux/Test/Server'
-import { HttpMethods } from '@common/ux/Test/Server/RequestBuilder'
-import { HttpStatus } from '@common/utils'
+import { RequestBuilder, MockBuilder, HttpMethods } from '@ux/Test'
+import { HttpStatus } from '@utils'
 import { mockMessageSuccess } from './Contact.mocks'
 
 export const handlePostMessage = RequestBuilder({

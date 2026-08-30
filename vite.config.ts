@@ -5,9 +5,18 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react()],
+    optimizeDeps: {
+        exclude: ['msw', '@mswjs/interceptors'],
+    },
     resolve: {
         alias: {
-            '@common': path.resolve(__dirname, 'common'),
+            '@types': path.resolve(__dirname, 'common/types'),
+            '@ux': path.resolve(__dirname, 'common/ux'),
+            '@utils': path.resolve(__dirname, 'common/utils'),
+            '@app': path.resolve(__dirname, 'src/app'),
+            '@portfolio': path.resolve(__dirname, 'src/portfolio'),
+            '@projects': path.resolve(__dirname, 'src/projects'),
+            '@public': path.resolve(__dirname, 'public'),
         },
     },
     test: {

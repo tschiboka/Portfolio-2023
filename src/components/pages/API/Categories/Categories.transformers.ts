@@ -1,6 +1,6 @@
-import { GetCategoryResponse } from '@common/types'
+import { GetCategoryResponse } from '@types'
 import { icons } from './icons'
-import { SearchInputOption } from '@common/ux'
+import { SearchInputOption } from '@ux'
 
 export const getParents = {
     fromApi: (categories: GetCategoryResponse[]): SearchInputOption[] =>

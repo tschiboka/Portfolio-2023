@@ -12,7 +12,7 @@
  */
 
 import type { BreakdownPreviewProps, SectionData } from './BreakdownPreview.types'
-import { isEmpty } from '@common/utils'
+import { isEmpty } from '@utils'
 import {
     shellStyle,
     cardStyle,

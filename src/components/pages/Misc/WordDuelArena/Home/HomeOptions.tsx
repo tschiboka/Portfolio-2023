@@ -1,5 +1,5 @@
 import { OptionPanel, useModal } from '../common/components'
-import { Functions } from '@common/utils'
+import { Functions } from '@utils'
 
 export const HomeOptions = () => {
     const { setOpen } = useModal()

@@ -1,4 +1,4 @@
-import { GetLikeResponse, GetVisitResponse, PostLikeResponse } from '@common/types'
+import { GetLikeResponse, GetVisitResponse, PostLikeResponse } from '@types'
 
 export const mockLikes: GetLikeResponse = { likes: 0 }
 export const mockLikesWithCount: GetLikeResponse = { likes: 5 }

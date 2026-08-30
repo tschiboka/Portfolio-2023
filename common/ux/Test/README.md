@@ -5,7 +5,7 @@
 Accessors **locate elements**, **expose direct state**, and **perform single user actions**. Nothing more.
 
 ```ts
-import { Test } from '@common/ux'
+import { Test } from '@ux'
 ```
 
 ---

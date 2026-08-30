@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { Test } from '@common/ux/Test'
+import { Test } from '@ux/Test'
 import { Typography } from '../Typography'
 import { Heading } from '../Heading'
 import { Paragraph } from '../Paragraph'

@@ -1,4 +1,4 @@
-import { DateTime } from '@common/utils/DateTime'
+import { DateTime } from '@utils'
 import './BlogTimeStamp.scss'
 
 interface Props {

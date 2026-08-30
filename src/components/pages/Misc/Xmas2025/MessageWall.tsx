@@ -1,7 +1,7 @@
 import moment from 'moment'
-import { AccessGuard } from '@common/utils/AccessGuard'
-import { XmasMessage } from '@common/types'
-import { DateTime } from '@common/utils'
+import { AccessGuard } from '@ux'
+import { XmasMessage } from '@types'
+import { DateTime } from '@utils'
 
 export type MessageWallProps = {
     messages?: XmasMessage[]

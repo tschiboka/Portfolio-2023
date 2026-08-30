@@ -3,9 +3,8 @@ import BlogCard from '../../sharedComponents/BlogCard/BlogCard'
 import { BlogFilter } from './BlogFilter/BlogFilter'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'
 import { Screen } from '../../sharedComponents/Screen/Screen'
-import { Heading, Paragraph, Stack, Section } from '@common/ux'
-import { useGetLikeSummary, useGetVisitSummary } from '@common/queries'
-import { hasLength } from '@common/utils/Predicate/Predicate'
+import { Heading, Paragraph, Stack, Section } from '@ux'
+import { hasLength } from '@utils'
 import { BsSliders2 } from 'react-icons/bs'
 import {
     getNewestArticle,
@@ -17,6 +16,7 @@ import {
 
 import './Blog.scss'
 import { BlogSortBy } from './Blog.type'
+import { useGetLikeSummary, useGetVisitSummary } from '../../../../common/queries'
 
 interface Props {
     pageName: string

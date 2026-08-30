@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react'
-import { Code, CodeText, Heading, Main, Overlay, Paragraph, Section, Stack } from '@common/ux'
-import { PopupMode, PopupSize } from '@common/ux/Overlay/Overlay.types'
-import type { ActionMenuItem } from '@common/ux/Overlay/ActionMenu'
+import { Code, CodeText, Heading, Main, Overlay, Paragraph, Section, Stack } from '@ux'
+import type { ActionMenuItem } from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import { Code as Snippets } from './Overlays.code'
+import { PopupMode, PopupSize } from '@ux/Overlay/Overlay.types'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']
 const sizes: PopupSize[] = ['sm', 'md', 'lg']

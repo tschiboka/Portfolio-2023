@@ -1,5 +1,4 @@
-import { Test } from '@common/ux/Test'
-import { Accessor } from '@common/ux/Test/Accessor/Accessor'
+import { Accessor, Test } from '@ux/Test'
 import { screen } from '@testing-library/react'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'

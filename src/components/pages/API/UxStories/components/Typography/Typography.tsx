@@ -12,7 +12,7 @@
     Section,
     Stack,
     Text,
-} from '@common/ux'
+} from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'

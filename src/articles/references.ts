@@ -1,5 +1,5 @@
 import { Reference } from '../components/sharedComponents/References/References'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 const references: Dictionary<Reference[]> = {
     '/blog/riffmaster': [

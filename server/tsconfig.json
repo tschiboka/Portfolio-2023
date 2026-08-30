@@ -14,7 +14,12 @@
         "resolveJsonModule": true,
         "sourceMap": true,
         "paths": {
-            "@common/*": ["../common/*"]
+            "@types": ["../common/types"],
+            "@types/*": ["../common/types/*"],
+            "@ux": ["../common/ux"],
+            "@ux/*": ["../common/ux/*"],
+            "@utils": ["../common/utils"],
+            "@utils/*": ["../common/utils/*"]
         }
     },
     "include": ["./**/*.ts"],

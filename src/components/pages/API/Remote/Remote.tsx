@@ -1,4 +1,4 @@
-import { Button, Heading, Main, Section, Stack } from '@common/ux'
+import { Button, Heading, Main, Section, Stack } from '@ux'
 import { Screen } from '../../../sharedComponents/Screen/Screen'
 import './Remote.styles.scss'
 

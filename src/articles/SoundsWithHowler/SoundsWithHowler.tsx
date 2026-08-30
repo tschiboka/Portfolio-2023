@@ -1,6 +1,6 @@
 // Components
 import { useEffect, useState } from 'react'
-import type { Nullable } from '@common/utils'
+import type { Nullable } from '@utils'
 import Figure from '../../components/sharedComponents/Figure/Figure'
 import { Howl } from 'howler'
 
@@ -47,7 +47,7 @@ import { getReferenceList } from '../references'
 import './SoundsWithHowler.scss'
 import Article from '../../components/sharedComponents/Article/Article'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
-import { Button, Code, CodeText, Grid, Heading, Link, Paragraph, Section } from '@common/ux'
+import { Button, Code, CodeText, Grid, Heading, Link, Paragraph, Section } from '@ux'
 
 interface Props {
     pageName: string

@@ -1,13 +1,7 @@
 import type { ReactNode } from 'react'
-import type {
-    CellValue,
-    CellVariant,
-    CellMeta,
-    TableAction,
-    SortDirection,
-} from '@common/ux/Table/Table.types'
-import { Pill } from '@common/ux'
-import type { Optional, Dictionary } from '@common/utils'
+import type { CellValue, CellVariant, CellMeta, TableAction, SortDirection } from '@ux'
+import { Pill } from '@ux'
+import type { Optional, Dictionary } from '@utils'
 import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.mocks'
 
 export const statusPillColors: Dictionary<'success' | 'error' | 'orange'> = {

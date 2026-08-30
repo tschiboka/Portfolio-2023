@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 const createColorSign = (color: string) => (
     <div className="color" style={{ backgroundColor: color }}></div>

@@ -1,7 +1,7 @@
-import { text, select, date } from '@common/ux'
-import type { ActivityType } from '@common/types'
-import type { FilterConfig } from '@common/ux/Table/TableFilterConfig'
-import type { Dictionary } from '@common/utils'
+import { text, select, date } from '@ux'
+import type { ActivityType } from '@types'
+import type { Dictionary } from '@utils'
+import { FilterConfig } from '@ux/Table/TableFilterConfig'
 
 export type ActivityFiltersData = {
     path?: string

@@ -1,4 +1,4 @@
-import { Arrays } from '@common/utils/Arrays/Arrays'
+import { Arrays } from '@utils'
 import { AnagramMapType } from '../Types'
 
 export const transformAnagramMap = (input: string, anagramMap: AnagramMapType): string[] => {

@@ -1,4 +1,4 @@
-import type { PageMeta } from '@common/types'
+import type { PageMeta } from '@types'
 import { TablePagingDefaults } from '../Table/Table.constants'
 import { isDefined, isDigits } from '../Predicate'
 

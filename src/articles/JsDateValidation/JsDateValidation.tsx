@@ -11,7 +11,7 @@ import { getReferenceList } from '../references'
 
 // Styles
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
-import { Code, Heading, Paragraph, Section } from '@common/ux'
+import { Code, Heading, Paragraph, Section } from '@ux'
 
 interface Props {
     pageName: string

@@ -1,4 +1,4 @@
-import { Heading, Paragraph, Section } from '@common/ux'
+import { Heading, Paragraph, Section } from '@ux'
 import HireIntro from '../HireIntro/HireIntro'
 import ProgrammingBuddy from '../ProgrammingBuddy/ProgrammingBuddy'
 import GetToKnowMe from '../GetToKnowMe/GetToKnowMe'

@@ -1,11 +1,11 @@
 import { Control, Controller, Path } from 'react-hook-form'
 import { BsChevronBarDown, BsChevronBarUp, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
-import { hasLength } from '@common/utils/Predicate'
+import { hasLength } from '@utils'
 import { colors } from '../../../src/components/pages/API/Categories/colors'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
-import { Const, SearchInputOption } from '@common/ux'
+import { Const, SearchInputOption } from '@ux'
 import './Form.styles.css'
 
 export type { SearchInputOption } from './SearchInput.types'

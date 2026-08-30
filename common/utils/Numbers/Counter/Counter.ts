@@ -1,4 +1,4 @@
-import { isFiniteNumber } from '@common/utils/Predicate/Predicate'
+import { isFiniteNumber } from '@utils'
 import { truncateTo } from '../truncateTo'
 
 type Unit = { value: number; suffix: string }

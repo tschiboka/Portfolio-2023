@@ -1,8 +1,8 @@
-import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common/ux'
+import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@ux'
 import { getColourName, technologies, Technology } from '../../Projects/Projects.selectors'
 import './BlogFilter.scss'
 import { BlogSortBy } from '../Blog.type'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 interface Props {
     selectedLanguages: Set<string>

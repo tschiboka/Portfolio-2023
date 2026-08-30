@@ -1,5 +1,5 @@
-import { PostBackfillResponse, PostDailyBreakdownResponse } from '@common/types'
-import { Paths, Query } from '@common/utils'
+import { PostBackfillResponse, PostDailyBreakdownResponse } from '@types'
+import { Paths, Query } from '@utils'
 
 export const useAdminApi = () => {
     const scheduleRequest = new Query.RequestBuilder(Paths.Api.Schedule)

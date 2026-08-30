@@ -1,18 +1,7 @@
-import { AccessGuard } from '@common/utils'
+import { AccessGuard } from '@ux'
 import { useForm } from 'react-hook-form'
 import { Guards } from './Guards'
-import {
-    Button,
-    Code,
-    CodeText,
-    Form,
-    Heading,
-    Main,
-    Paragraph,
-    Section,
-    Stack,
-    Text,
-} from '@common/ux'
+import { Button, Code, CodeText, Form, Heading, Main, Paragraph, Section, Stack, Text } from '@ux'
 import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'

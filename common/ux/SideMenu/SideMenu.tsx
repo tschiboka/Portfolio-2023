@@ -1,6 +1,6 @@
 import { IoMdClose } from 'react-icons/io'
 import { SideMenuProps } from './SideMenu.types'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './SideMenu.styles.css'
 
 export const SideMenu = ({

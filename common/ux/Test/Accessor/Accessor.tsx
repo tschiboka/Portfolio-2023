@@ -1,7 +1,7 @@
 import { screen, within, waitFor, type BoundFunctions, type queries } from '@testing-library/react'
 import userEvent, { type UserEvent } from '@testing-library/user-event'
-import type { Dictionary, Nullish } from '@common/utils/Generics'
-import { isDefined } from '@common/utils'
+import type { Dictionary, Nullish } from '@utils'
+import { isDefined } from '@utils'
 
 type Scope = BoundFunctions<typeof queries>
 

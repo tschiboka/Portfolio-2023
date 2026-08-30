@@ -1,4 +1,4 @@
-import { Stack } from '@common/ux'
+import { Stack } from '@ux'
 import { WebsiteStats } from './WebsiteStats'
 
 export const AdminIndex = () => {

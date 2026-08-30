@@ -1,5 +1,5 @@
 import { CacheKeyBuilder, QueryKey } from '../Key'
-import type { Key } from '@common/utils/Generics'
+import type { Key } from '@utils'
 
 describe('CacheKeyBuilder', () => {
     describe('build (base key only)', () => {

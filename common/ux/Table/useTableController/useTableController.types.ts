@@ -1,8 +1,8 @@
 import { Paging, SortDirection, TableSortState } from '.'
 import type { TableFilteringInput } from '../Table.types'
 import type { FilterDefinitions } from '../TableFilterConfig'
-import type { Dictionary } from '@common/utils/Generics'
-export type { SortDirection, TableSortState, Paging } from '@common/types'
+import type { Dictionary } from '@utils'
+export type { SortDirection, TableSortState, Paging } from '@types'
 
 export type TableState<TFilters extends Dictionary> = {
     filters: TFilters

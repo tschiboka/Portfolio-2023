@@ -1,6 +1,6 @@
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { InteractionOverlay } from '../SessionOverlay/SessionOverlay'
-import { Arrays } from '@common/utils/Arrays'
+import { Arrays } from '@utils'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
 import { useSession } from '../Session.context'
 import { useEffect, useState } from 'react'

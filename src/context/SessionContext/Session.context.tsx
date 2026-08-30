@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
-import type { Optional } from '@common/utils'
+import type { Optional } from '@utils'
 import { Session, SessionContextValues } from './SessionContext.types'
 import { LocalSession } from './LocalSession'
 import { useRehydrateSessionResources } from '../../components/pages/API/Login/Login.query'

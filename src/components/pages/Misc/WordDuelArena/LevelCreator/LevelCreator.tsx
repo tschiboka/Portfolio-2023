@@ -1,12 +1,13 @@
 import { ChangeEvent, useState } from 'react'
 import './LevelCreator.styles.css'
+import '../WordDuelArena.styles.css'
 import { LevelCreatorModal } from './LevelCreatorModal'
 import { getAnagramKey } from '../common/utils/Word/getAnagramKey'
 import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../common/utils/Word/constants'
 import { useGetLevelNames } from './LevelCreator.queries'
 import { LevelList } from './LevelList'
-import { LoadingIndicator } from '@common/ux'
-import { Browser } from '@common/utils'
+import { LoadingIndicator } from '@ux'
+import { Browser } from '@utils'
 
 export const LevelCreator = () => {
     const { ref, enterFullScreen } = Browser.useFullScreen<HTMLDivElement>()
@@ -25,7 +26,7 @@ export const LevelCreator = () => {
         setLevelName(e.target.value.toUpperCase())
 
     return (
-        <div className="level-creator" ref={ref}>
+        <div className="level-creator word-duel-arena" ref={ref}>
             <div className="app">
                 <h1>Level Creator</h1>
                 <div className="level-form">

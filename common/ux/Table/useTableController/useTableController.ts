@@ -8,9 +8,9 @@ import type {
 } from './useTableController.types'
 import { TableFilteringInput } from '../Table.types'
 import { useTableUrlPersistence, statesEqual } from '../TableUrlPersistence'
-import { Table } from '@common/utils'
-import { isDefined, Objects } from '@common/utils'
-import type { Dictionary } from '@common/utils/Generics'
+import { Table } from '@utils'
+import { isDefined, Objects } from '@utils'
+import type { Dictionary } from '@utils'
 
 const getDefaultFilters = <TFilters extends Dictionary>(
     filterDefs?: FilterDefinitions<TFilters>,

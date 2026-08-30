@@ -1,8 +1,8 @@
-import { Stack, Section } from '@common/ux'
+import { Stack, Section } from '@ux'
 import { useGetActivityFeed } from './WebsiteStats.queries'
 import { AxiosError } from 'axios'
 import { BreakdownTable, useBreakdownTableController } from './BreakdownTable'
-import type { Dictionary } from '@common/utils'
+import type { Dictionary } from '@utils'
 
 export const WebsiteStats = () => {
     const controller = useBreakdownTableController()

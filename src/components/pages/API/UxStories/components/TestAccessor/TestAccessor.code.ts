@@ -1,5 +1,5 @@
 export const Code = {
-    Import: `import { Test } from '@common/ux'`,
+    Import: `import { Test } from '@ux'`,
     Before: `// Without accessor — scattered patterns, fragile selectors, repeated setup
 const user = userEvent.setup()
 const dialog = screen.getByRole('dialog', { name: 'Confirm delete' })

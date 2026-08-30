@@ -10,7 +10,12 @@ type SubmenuPanelProps = {
     pageName: string
 }
 
-const SubmenuPanel = ({ submenu, submenuStack, setSubmenuStack, pageName }: SubmenuPanelProps) => {
+export const SubmenuPanel = ({
+    submenu,
+    submenuStack,
+    setSubmenuStack,
+    pageName,
+}: SubmenuPanelProps) => {
     const [_, setCoords] = useState<Coordinates>(() => findParentMenuCoords(submenu?.parentLabel))
 
     useEffect(() => {
@@ -28,5 +33,3 @@ const SubmenuPanel = ({ submenu, submenuStack, setSubmenuStack, pageName }: Subm
         />
     )
 }
-
-export default SubmenuPanel

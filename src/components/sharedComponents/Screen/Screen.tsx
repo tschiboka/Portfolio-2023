@@ -4,7 +4,7 @@ import { FullScreenOverlay } from '../Overlay/Overlay'
 import { PageNav, PageMobileMenu, PageSubNav } from '../../Nav'
 import type { PageVariant } from '../../Nav'
 import Footer, { type FooterProps } from '../Footer/Footer'
-import { ContentNavigator } from '@common/ux'
+import { ContentNavigator } from '@ux'
 
 type ScreenProps = {
     children: ReactNode

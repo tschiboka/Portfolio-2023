@@ -1,1 +1,1 @@
-export type { PostLoginRequest as LoginFormData } from '@common/types/app'
+export type { PostLoginRequest as LoginFormData } from '@types'

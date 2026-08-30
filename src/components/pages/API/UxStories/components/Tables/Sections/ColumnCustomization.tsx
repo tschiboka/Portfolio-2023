@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Table } from '@common/ux/Table'
-import { Code, CodeText, Heading, Paragraph, Section } from '@common/ux'
-import { isNonEmpty } from '@common/utils'
+import { Table } from '@ux'
+import { Code, CodeText, Heading, Paragraph, Section } from '@ux'
+import { isNonEmpty } from '@utils'
 import { type Row, rows } from '../Tables.mocks'
 import { Code as Snippets } from '../Tables.code'
 import { renderStatus } from '../Tables.config'
-import type { TableColumns } from '@common/ux/Table/Table.types'
+import type { TableColumns } from '@ux'
 
 export const ColumnCustomization = () => {
     const [cols, setCols] = useState<TableColumns<Row>>([

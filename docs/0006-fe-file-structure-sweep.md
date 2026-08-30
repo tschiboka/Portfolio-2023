@@ -1,7 +1,7 @@
 # 0006 — FE file structure sweep
 
-> **Status:** Planned
-> **Last updated:** 2026-08-29
+> **Status:** In progress — alias migration applied (2026-08-30); structure/role sweep pending
+> **Last updated:** 2026-08-30
 > **Created:** 2026-08-29
 
 ---
@@ -326,7 +326,7 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 - [ ] Move blog article content `src/articles/` → `features/portfolio/blogs/`
 - [ ] Map `Misc/*` → `features/projects/`; `pages/API/*` → `features/api/`
 - [ ] Add area-group convention to `ARCHITECTURE.md` (§1.1)
-- [ ] Relocate generic components to `common/ux/` (§3.2)
+- [x] Relocate generic components to `common/ux/` (§3.2)
 - [ ] Delete empty `src/sharedComponents/Article/`
 - [ ] Add FE `App.tsx` composition root; slim `main.tsx` (§3.1)
 - [ ] Rename/fold `context/AppContext/App.context.tsx` naming trap
@@ -351,11 +351,57 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 
 - [ ] Add `index.ts` to every feature folder
 - [ ] `tsc` + lint + FE tests green per batch
-- [ ] Grep for stale default-export/old-path imports
+- [x] Grep for stale default-export/old-path imports
 - [ ] Update `ARCHITECTURE.md` (§3.6)
 - [ ] Update repo memory with final conventions
 
-## 10. Related docs / links
+## 10. Session work log — alias migration + server restructure (2026-08-30)
+
+### 10.1 Server restructure
+
+- Extracted project routes out of `server/App/`; created `server/Projects/Projects.routes.ts` + `server/Projects/index.ts` barrel.
+- `server/index.ts` now registers `AppRoutes` + `ProjectsRoutes` at the top level; `/session` route moved before `/api/user/:id` (Express ordering bug — fixed refresh token loss).
+- Renamed `server/projects/` → `server/Projects/`; normalized git index casing.
+
+### 10.2 Import alias infrastructure (applied)
+
+Domain aliases added across root `tsconfig.json`, `server/tsconfig.json`, `vite.config.ts`, `jest.config.cjs`:
+
+```
+@types/*     → common/types/*
+@ux/*        → common/ux/*
+@utils/*     → common/utils/*
+@app/*       → src/app/*
+@portfolio/* → src/portfolio/*
+@projects/*  → src/projects/*
+@public/*    → public/*
+```
+
+- Server subset: `@types`, `@ux`, `@utils` (no FE domain aliases).
+- Each tool requires bare + wildcard patterns (tsconfig `paths`, jest `moduleNameMapper` regex).
+- `@common/*` dropped from tsconfig/vite/server (kept only in jest until `common/queries` leaves `common/`).
+- Bulk-migrated `@common/ux|utils|types` → domain aliases across FE + server.
+
+### 10.3 Component/relocation + export fixes
+
+- **AccessGuard**: moved `common/utils/AccessGuard` → `common/ux/AccessGuard` (it is a React/JSX component, not a util — server `tsx` can't load its CSS). Removed from `@utils` barrel, added to `@ux` barrel; updated FE imports `@utils`→`@ux`.
+- **Barrel exports fixed**: `@ux/Test` re-exports `HttpMethods` (+ `Test` object gains `server`/`MockBuilder`/`RequestBuilder`/`HttpMethods`); `@ux/Table` re-exports `TableFilterConfig` + `useTableController` types (explicit list to avoid `SortDirection` collision); `@ux/Overlay` re-exports `PopupMode`/`PopupSize`; `common/utils/Url` re-exports `./Codecs` (types like `UrlDecode`/`UrlEncode`).
+
+### 10.4 Bug fixes
+
+- `Units` is not a named export of `@utils` (only `DateTime.Units`); server consumers switched to `DateTime.Units.Ms`.
+- `LevelCreator` black-bg/see-through text — CSS vars scoped to `.word-duel-arena`, not `.level-creator`; wrapped LevelCreator root with `word-duel-arena` class + imported `WordDuelArena.styles.css`.
+- `EmailVerification.query.ts` misused the MSW `RequestBuilder`; replaced with `Query.RequestBuilder` HTTP client.
+- `Page.spec.tsx` imported `visitsQueries` from `@types`; fixed to relative `../../../queries`.
+- Test `mockNavigate` undefined — `setupTests.ts` must import `server` from narrow `@ux/Test/Server`, not the `@ux/Test` barrel (barrel pulls `Page.mocks.ts` which reads `globalThis.mockNavigate` at eval time).
+- Vite dep-pre-bundle msw error: added `optimizeDeps.exclude: ['msw', '@mswjs/interceptors']` to `vite.config.ts`.
+
+### 10.5 Open / next
+
+- `@common/queries` still referenced (queries remain in `common/`; planned to move + re-alias in a future PR).
+- Remaining 0006 work (structure/role/return-naming sweep) still pending — see checklist §9.
+
+## 11. Related docs / links
 
 - [`ARCHITECTURE.md`](../ARCHITECTURE.md) — §1 FE structure, §1.2 roles,
   §1.4 allowed suffixes, §4.4 generic components, §2.6 server `FeatureSchema`.

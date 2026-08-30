@@ -2,7 +2,7 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
 import { useAppContext } from '../../../src/context/AppContext/App.context'
 import { NavProps } from './Nav.types'
-import { Const } from '@common/ux'
+import { Const } from '@ux'
 import './Nav.styles.css'
 
 const DefaultBurger = () => {

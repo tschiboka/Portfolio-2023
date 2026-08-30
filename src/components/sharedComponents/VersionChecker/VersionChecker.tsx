@@ -1,4 +1,4 @@
-import { Version } from '@common/utils'
+import { Version } from '@utils'
 
 export const VersionChecker = () => {
     Version.useVersionCheck()

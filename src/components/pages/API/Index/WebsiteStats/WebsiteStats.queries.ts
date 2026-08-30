@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 import { useQuery } from '@tanstack/react-query'
-import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common/types'
+import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common/utils'
+import { Paths, Query, QueryKey } from '@utils'
 
 type UseGetActivityFeedProps = {
     params: GetActivityFeedQuery
