@@ -3,7 +3,7 @@ import { FiDownload } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { Button, Heading, Paragraph, Table, Stack } from '../../../../../common/ux'
 import type { TableColumns } from '../../../../../common/ux/Table/Table.types'
-import cv from '../../../../assets/files/Tivadar_Debnar_CV_2023.pdf'
+import cv from '@portfolio/assets/files/Tivadar_Debnar_CV_2023.pdf'
 import './HireIntro.scss'
 
 type Skill = { area: string; technology: string; focus: string }

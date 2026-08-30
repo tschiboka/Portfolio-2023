@@ -1,5 +1,5 @@
 import './MessageAcknowledgement.scss'
-import thumbsupImg from '../../../../assets/images/thumbs_up.png'
+import thumbsupImg from '@portfolio/assets/thumbs_up.png'
 import { Link } from '@ux'
 
 const MessageAcknowledgement = () => {

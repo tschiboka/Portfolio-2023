@@ -1,15 +1,11 @@
-import CandleLit from '../../../../assets/images/projects/xmas/candle_lit.png'
-import CandleBlown from '../../../../assets/images/projects/xmas/candle_blown.png'
+import CandleLit from '@projects/assets/xmas/candle_lit.png'
+import CandleBlown from '@projects/assets/xmas/candle_blown.png'
 import { useEffect, useState } from 'react'
 import { useGetCandles, usePutCandles } from './Xmas2025.queries'
 
 export const CandlePanel = () => {
     const { data: candlesData, ...getCandlesResponse } = useGetCandles()
-    const {
-        mutate: setCandleData,
-        data: putCandlesData,
-        ...putCandlesResponse
-    } = usePutCandles()
+    const { mutate: setCandleData, ...putCandlesResponse } = usePutCandles()
     const [candles, setCandles] = useState([false, false, false, false])
 
     useEffect(() => {

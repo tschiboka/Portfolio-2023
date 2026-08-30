@@ -5,12 +5,12 @@ import { Code, Heading, Paragraph, Section } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images
-import ReactTitleImg from '../../assets/images/blog/react_anatomy/react.jpg'
-import DOMImg from '../../assets/images/blog/react_anatomy/DOM.png'
-import VDOMImg from '../../assets/images/blog/react_anatomy/virtual-dom.png'
-import StackReconciliationImg from '../../assets/images/blog/react_anatomy/stack-reconciliation.jpg'
-import FiberImg from '../../assets/images/blog/react_anatomy/fiber.png'
-import LifeCycleMethodsImg from '../../assets/images/blog/react_anatomy/component-lifecycle-methods.webp'
+import ReactTitleImg from '@portfolio/assets/blog/react_anatomy/react.jpg'
+import DOMImg from '@portfolio/assets/blog/react_anatomy/DOM.png'
+import VDOMImg from '@portfolio/assets/blog/react_anatomy/virtual-dom.png'
+import StackReconciliationImg from '@portfolio/assets/blog/react_anatomy/stack-reconciliation.jpg'
+import FiberImg from '@portfolio/assets/blog/react_anatomy/fiber.png'
+import LifeCycleMethodsImg from '@portfolio/assets/blog/react_anatomy/component-lifecycle-methods.webp'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

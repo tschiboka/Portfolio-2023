@@ -1,7 +1,7 @@
-import headshot from '../../../../assets/images/headshot_placeholder.png'
+import headshot from '@portfolio/assets/headshot_placeholder.png'
 import { useAppContext } from '../../../../context/AppContext/App.context'
-import './Welcome.scss'
 import { useNavigate } from 'react-router-dom'
+import './Welcome.scss'
 
 const Welcome = () => {
     const navigate = useNavigate()

@@ -1,6 +1,5 @@
-import { MenuItem } from '@ux'
-import { collectMenuGroups } from '@ux'
-import SantaHat from '../../assets/images/projects/xmas/santa_hat.png'
+import { collectMenuGroups, MenuItem } from '@ux'
+import SantaHat from '@projects/assets/xmas/santa_hat.png'
 
 export const portfolioMenu: MenuItem[] = [
     { label: 'Home', path: '/' },

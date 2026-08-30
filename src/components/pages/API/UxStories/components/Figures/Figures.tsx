@@ -4,7 +4,7 @@ import { Screen } from '../../../../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../../../../sharedComponents/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Figures.code'
-import placeholder_image from '../../../../../../assets/images/projects/GradientGenerator.png'
+import placeholder_image from '@portfolio/assets/projects/GradientGenerator.png'
 
 type FiguresProps = { path: string }
 

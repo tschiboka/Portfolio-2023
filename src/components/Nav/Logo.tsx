@@ -1,6 +1,6 @@
 import { useAppContext } from '../../context/AppContext/App.context'
-import iconDark from '../../assets/images/icon.svg'
-import iconLight from '../../assets/images/icon-light.svg'
+import iconDark from '@app/assets/icon.svg'
+import iconLight from '@app/assets/icon-light.svg'
 
 export const Logo = () => {
     const { themeMode } = useAppContext()

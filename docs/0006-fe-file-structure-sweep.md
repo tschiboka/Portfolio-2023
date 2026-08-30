@@ -401,7 +401,83 @@ Domain aliases added across root `tsconfig.json`, `server/tsconfig.json`, `vite.
 - `@common/queries` still referenced (queries remain in `common/`; planned to move + re-alias in a future PR).
 - Remaining 0006 work (structure/role/return-naming sweep) still pending — see checklist §9.
 
-## 11. Related docs / links
+## 11. Asset distribution (2026-08-30)
+
+Distribute static assets by domain ownership so each area owns the files it uses, eliminating the `src/assets/` central dump and mirroring the `@ux`/`@app`/`@portfolio`/`@projects`/`@public` aliases.
+
+### 11.1 Ownership map
+
+**Two project kinds (distinct asset homes):**
+
+- **In-repo app projects** (built inside this React app: `Misc/*` → WordDuelArena, Typist, Gym, Xmas2025) → `@projects/assets/`.
+- **Portfolio card projects** (external/standalone projects showcased as cards on the Projects page, e.g. the 9 legacy games, riffmaster) → `@portfolio/assets/projects/`.
+
+| Domain           | Asset home              | Contents                                                                                                                                     |
+| ---------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| **UX** (generic) | `common/ux/assets/`     | shared svg/placeholders used across components (dev_tools not pursued — dead, deleted)                                                       |
+| **App** (chrome) | `src/app/assets/`       | logo/icon, fonts, app backgrounds & dev/test images (form-bg-pattern dead, deleted)                                                          |
+| **Portfolio**    | `src/portfolio/assets/` | blog (`blog/` images + `blog/files/` txt/pdf/mp3), certificates, about images, CV `files/`, **portfolio card project art under `projects/`** |
+| **Projects**     | `src/projects/assets/`  | in-repo app projects: wordduelarena, xmas (typist/gym have no project-local assets)                                                          |
+| **Public**       | `public/assets/`        | server-served statics only: icons, headshot placeholders, empty `fonts/` stub, `projects/` static apps — not FE-imported                     |
+
+**App chrome** = the non-content framing UI every page shares: logo, favicon, layout/form background patterns, dev/test placeholder images — not page/article content. Fonts (FE-`@font-face`-imported) live in `@app/assets/fonts`.
+
+### 11.2 Source inventory (to distribute)
+
+- **`src/assets/`** — the movable central dump (FE-bundled, safe to distribute):
+    - loose: `form-bg-pattern.png`, `headshot_placeholder*.png`, `icon.svg`, `icon-light.svg`, `placeholder_image.jpg`, `testing.png`, `thumbs_up.png`, `react.svg`
+    - subfolders: `about/`, `blog/`, `certificates/`, `projects/`, `dev_tools/`
+    - `files/`, `fonts/`
+- **`public/`** — NOT moved (safe-to-keep): `icon.svg` (favicon), `version.json` (build meta), `projects/` (9 static apps), `assets/{fonts, icons/*, headshot_placeholders}` — all served to server email templates / static URLs (e.g. `Schedule.utils.ts` absolute URLs) or public-served. **Recanted the earlier plan to move these.**
+
+### 11.3 Steps (per AGENTS.md — one batch at a time, approve each)
+
+- [x]   1. ~~Move legacy `public/projects/*` → `src/portfolio/assets/projects/`~~ → **RECANTED**: the 9 are pre-built static apps served from `public/`; they stay. (Attempted + reverted.)
+- [x]   2. Create `common/ux/assets/` and `src/app/assets/` (new)
+- [ ]   3. Move generic UX assets from `src/assets/` (dev_tools, thumbs_up, shared placeholders/svg) → `common/ux/assets/`
+- [x]   4. Move app chrome from `src/assets/` (icon, icon-light, form-bg, testing, react, favicon) → `src/app/assets/`
+- [x]   5. Finish portfolio moves from `src/assets/images/` (about/blog/certificates) → `src/portfolio/assets/`
+- [x]   6. Finish in-repo project moves (projects images) → `src/projects/assets/`
+- [x]   7. `public/assets/` stays as-is (server-served statics — no move)
+- [x]   8. `src/assets/{files,fonts}` → decide public vs `@app` (low priority)
+- [x]   9. Update all imports + CSS `url()` refs to the new `@ux`/`@app`/`@portfolio`/`@projects` asset paths
+- [x]   10. Delete the emptied `src/assets/` central dump (if fully emptied)
+- [x]   11. Verify (tsc, build, grep for stale asset paths)
+
+### 11.4 Execution progress (2026-08-30)
+
+**Done:**
+
+- Created `src/app/assets/`, `common/ux/assets/`, `src/portfolio/assets/projects/`.
+- App chrome → `@app/assets` (`icon.svg`, `icon-light.svg`); updated `Logo.tsx`, `Footer.tsx`, `UnderConstruction.tsx`, `index.html`. Deleted dead `form-bg-pattern.png`.
+- Portfolio loose → `@portfolio/assets` (`headshot_placeholder*`, `testing.png`, `thumbs_up.png`); updated `Welcome.tsx`, `Disclaimer.tsx`, `Signature.tsx`, `articles.ts`, `MessageAcknowledgement.tsx`. Deleted dead `placeholder_image.jpg`.
+- `about/` → `@portfolio/assets/about` (updated `About.tsx`, `RiffMaster.tsx`).
+- `certificates/` → `@portfolio/assets/certificates` (updated `Achievements.ts`).
+- `projects/` split → loose card images to `@portfolio/assets/projects` (updated `Projects.selectors.tsx`, `Figures.tsx`); `xmas/` + `wordduelarena/` to `@projects/assets` (updated `menuData.tsx`, `GuestIndex.tsx`, `CandlePanel.tsx`, `Xmas2025.tsx`, `Avatar.tsx`).
+- Deleted dead: `dev_tools/`, `react.svg`, `form-bg-pattern.png`, `placeholder_image.jpg`.
+- `blog/` → `@portfolio/assets/blog`; all 14 article image imports updated (see below). Grep-clean, tsc-passed.
+- `public/` unchanged (server-served statics). Step 1 recanted.
+
+**Done — `blog/` fully migrated (2026-08-30):**
+
+- `blog/` → `@portfolio/assets/blog`; all 14 article image imports updated: `articles.ts`, `CyclicEmailScheduling`, `DailyAnalyticsEmail`, `GitCheatsheet`, `GreenRooftop`, `HookPattern`, `JsDateValidation`, `JsSorting`, `Maybe`, `RactAnatomy`, `RiffMaster`, `SoundsWithHowler`, `ZIndexLayers`.
+- `src/assets/images/blog/` emptied; no stale `assets/images` refs remain (grep-clean, tsc-passed). Naming variants reconciled to canonical `@portfolio/assets/blog/*`.
+
+**Done — `files/` + `fonts/` migrated (step 8, 2026-08-30):**
+
+- **Blog files** → `@portfolio/assets/blog/files/` (`green-rooftop/` txt, `riffmaster/` txt+pdf, `sounds_with_howler/` 20 MP3). Updated imports: `RiffMaster.tsx` (`controller.txt`, `Dissertation_Online.pdf`), `GreenRooftop.tsx` (`green_rooftop.txt`), `SoundsWithHowler.tsx` (20 MP3).
+- **CV** → `@portfolio/assets/files/Tivadar_Debnar_CV_2023.pdf`; updated `HireIntro.tsx`.
+- **Fonts** → `@app/assets/fonts/` (13 ttf); `src/index.scss` `@font-face` `url()` refs updated to `@app/assets/fonts/`.
+- `src/assets/` now contains **only empty directories** (old skeleton `files/`, `fonts/`, `images/**`), zero files.
+- **Step 10 done** — deleted `src/assets/` entirely (removed the empty skeleton). The central dump is gone.
+
+**Remaining (deferred):**
+
+- Step 3 `common/ux/assets/` — dead `dev_tools` deleted; `thumbs_up`/shared placeholders went to `@portfolio/assets` instead. Generic UX share-back not pursued.
+- Step 6 in-repo projects — `wordduelarena` + `xmas` done; `typist` + `gym` have **no project-local assets** (only card thumbnails in `@portfolio/assets/projects`, Gym is data/`@types`-driven) — nothing to move.
+- `public/assets/` server-served statics — unchanged (step 1 recanted).
+
+## 12. Related docs / links
 
 - [`ARCHITECTURE.md`](../ARCHITECTURE.md) — §1 FE structure, §1.2 roles,
   §1.4 allowed suffixes, §4.4 generic components, §2.6 server `FeatureSchema`.

@@ -5,7 +5,7 @@ import Figure from '../../components/sharedComponents/Figure/Figure'
 import { codeSnippets } from './codeSnippets'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 import { getReferenceList } from '../references'
-import uiLayersImg from '../../assets/images/blog/z_index/ui_layers.png'
+import uiLayersImg from '@portfolio/assets/blog/z_index/ui_layers.png'
 
 interface Props {
     pageName: string

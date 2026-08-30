@@ -15,9 +15,15 @@ Inspect and reason silently. Only expose findings that are relevant to my decisi
 
 [Captain Tschiboka]: <summary>
 
+Questions (optional)
 1. <genuine unresolved question>
 2. <genuine unresolved question>
 n. <genuine unresolved question>
+
+Document (optional)
+1. <documentation request for x>
+2. <documentation request for y>
+3. <documentation request for z>
 
 Aye aye sir!
 ```
@@ -39,6 +45,8 @@ Rules:
 - Do not repeat established context.
 - Optimise for **making the next human decision easy**, not for demonstrating how much analysis was performed.
 - **Every response must end with exactly `Aye aye sir!`**!
+
+**Safe word — `bitch`:** if the Captain starts a message with the safe word `bitch`, the agent must IMMEDIATELY stop, re-read this `AGENTS.md` and the working-style memory, then resume in the exact format. It is a re-anchor trigger used when the agent drifts out of format or the rules.
 
 For trivial questions or simple conversational replies, answer directly rather than forcing unnecessary structure.
 
@@ -226,6 +234,44 @@ The `docs/` folder is the engineering notebook for the project. It is public, tr
 - `docs/0000-doc-template.md` defines the feature-document template.
 - Feature documents use the `NNNN-<topic>.md` naming convention.
 - Headings in documentation use numbered headings.
+
+## 4.0 Bookkeeping / project management (ticket discipline)
+
+The `docs/` feature documents are the binding record for every ticket. They serve two purposes:
+
+1. **For Captain Tschiboka** — a log, todo, notepad, reminder, and diary of all ticket-related changes.
+2. **For the agent** — the bible for the task: instructions, history, context, and the backbone of what is being done.
+
+### 4.0.1 Ticket checkout
+
+- When starting a task, the agent MUST acquire which ticket (feature document) the work is assigned to and **check out** that ticket — i.e. read it and treat it as the authoritative context.
+- At session start the Captain provides the ticket number. If not given or unsure, ask:
+  `Captain, what ticket is this next task assigned to?`
+- Do not begin work without a checked-out ticket.
+
+### 4.0.2 Logging each step
+
+- Log each step performed and tick subtasks, keeping the ticket's change notes current:
+  `[x] - Subtask: finalise file migration in x folder. Folder updated with blabla`
+
+### 4.0.3 When to suggest a ticket entry
+
+Always suggest a log entry (and ask permission before writing) when:
+
+- a task or subtask finishes (tick the box, add notes if needed);
+- a new task or subtask arises during progress;
+- new information, a discovery, or a decision is worth noting;
+- a session ends — sign out the ticket and update `INDEX.md` too.
+
+### 4.0.4 Entry rules
+
+- Requires permission from Captain Tschiboka before writing.
+- Consult `docs/0000-doc-template.md` for the shape.
+- Entries are short without losing information.
+- Language is direct; no filler words.
+- Not a dumping site for AI filler/BS.
+- When updating, check whether a new amendment affects other entries and update them as necessary.
+- **Do not abuse the ticket docs.** Only relevant content that belongs in the ticket goes there. For large/extended content that cannot fit, open a new file for it under the ticket (rather than bloating the main ticket doc).
 
 ## 4.1 When to update docs
 

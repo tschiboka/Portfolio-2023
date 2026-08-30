@@ -4,8 +4,8 @@ import Figure from '../../components/sharedComponents/Figure/Figure'
 import { Code, Heading, List, Paragraph, Section } from '@ux'
 
 // Images
-import matryoshkaImg from '../../assets/images/blog/js_sorting/Matryoshka.png'
-import sortingAlgoComplexityImg from '../../assets/images/blog/js_sorting/SortingAlgoComplexities.png'
+import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
+import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
 
 // Other Assets
 import { getReferenceList } from '../references'

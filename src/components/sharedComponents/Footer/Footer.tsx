@@ -4,7 +4,7 @@ import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { MdCopyright } from 'react-icons/md'
 import { Link } from '@ux'
-import logo from '../../../assets/images/icon-light.svg'
+import logo from '@app/assets/icon-light.svg'
 import './Footer.scss'
 import { ReactNode } from 'react'
 

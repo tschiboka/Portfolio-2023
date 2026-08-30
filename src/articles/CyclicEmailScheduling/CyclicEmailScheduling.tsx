@@ -5,12 +5,12 @@ import { Code, Heading, Paragraph, Section } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images
-import cyclicImg from '../../assets/images/blog/cyclic_email_scheduling/cyclic.png'
-import cronMenuOptionImg from '../../assets/images/blog/cyclic_email_scheduling/cron_menu_option.png'
-import newCronTaskImg from '../../assets/images/blog/cyclic_email_scheduling/new_cron_task.png'
-import editCronTaskImg from '../../assets/images/blog/cyclic_email_scheduling/edit_cron_task.png'
-import cronExpressionSyntaxImg from '../../assets/images/blog/cyclic_email_scheduling/cron_expression_syntax.png'
-import finalisedCronTaskImg from '../../assets/images/blog/cyclic_email_scheduling/finalised_cron_task.png'
+import cyclicImg from '@portfolio/assets/blog/cyclic_email_scheduling/cyclic.png'
+import cronMenuOptionImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_menu_option.png'
+import newCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/new_cron_task.png'
+import editCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/edit_cron_task.png'
+import cronExpressionSyntaxImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_expression_syntax.png'
+import finalisedCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/finalised_cron_task.png'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

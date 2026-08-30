@@ -7,8 +7,8 @@ import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography 
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images
-import CoverImg from '../../assets/images/blog/hook_pattern/cover.png'
-import ErrorImg from '../../assets/images/blog/hook_pattern/error_message.png'
+import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
+import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

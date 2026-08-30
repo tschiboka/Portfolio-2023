@@ -3,9 +3,9 @@ import {
     academicAchievements,
     certificateAchievements,
 } from '../../sharedComponents/AchievementListItem/Achievements'
-import guitarImage from '../../../assets/images/about/RiffMaster.png'
-import guitarAppImage from '../../../assets/images/about/RiffMaster_App.png'
-import guitarAppImageSm from '../../../assets/images/about/RiffMaster_App_Mobile.png'
+import guitarImage from '@portfolio/assets/about/RiffMaster.png'
+import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
+import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'
 import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@ux'
 import { Screen } from '../../sharedComponents/Screen/Screen'
 import { PageSideMenu } from '../../sharedComponents/PageSideMenu/PageSideMenu'

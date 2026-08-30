@@ -1,4 +1,4 @@
-import logo from '../../assets/images/icon-light.svg'
+import logo from '@app/assets/icon-light.svg'
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'

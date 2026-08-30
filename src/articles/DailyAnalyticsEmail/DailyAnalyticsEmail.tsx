@@ -3,7 +3,7 @@ import InlineReference from '../../components/sharedComponents/InlineReference/I
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@ux'
 import codeSnippets from './codeSnippets'
 import { getReferenceList } from '../references'
-import CronJobsImg from '../../assets/images/blog/resend_email_scheduling/cron_jobs.png'
+import CronJobsImg from '@portfolio/assets/blog/resend_email_scheduling/cron_jobs.png'
 import Figure from '../../components/sharedComponents/Figure/Figure'
 
 interface Props {

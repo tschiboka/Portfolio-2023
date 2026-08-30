@@ -3,7 +3,7 @@ import Article from '../../components/sharedComponents/Article/Article'
 import Figure from '../../components/sharedComponents/Figure/Figure'
 
 // Images
-import calendarImg from '../../assets/images/blog/js_date_validation/calendar.jpg'
+import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

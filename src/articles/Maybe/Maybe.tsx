@@ -5,8 +5,8 @@ import { Code, Heading, List, Paragraph, Section, Typography } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images
-import monetCoverImg from '../../assets/images/blog/Maybe/monet-cover.jpg'
-import comicImg from '../../assets/images/blog/Maybe/comic.png'
+import monetCoverImg from '@portfolio/assets/blog/Maybe/monet-cover.jpg'
+import comicImg from '@portfolio/assets/blog/Maybe/comic.png'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

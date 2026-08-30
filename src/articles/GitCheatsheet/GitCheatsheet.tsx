@@ -5,11 +5,11 @@ import { Code, Heading, Paragraph, Section, Typography } from '@ux'
 import InlineReference from '../../components/sharedComponents/InlineReference/InlineReference'
 
 // Images
-import TreeImg from '../../assets/images/blog/git_cheatsheet/tree.jpg'
-import centralisedVsDistributedImg from '../../assets/images/blog/git_cheatsheet/centrallised-distributed-version-control.png'
-import GitStorage1Img from '../../assets/images/blog/git_cheatsheet/git-storage-1.png'
-import GitStorage2Img from '../../assets/images/blog/git_cheatsheet/git-storage-2.png'
-import SnapshotVsDeltaImg from '../../assets/images/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
+import TreeImg from '@portfolio/assets/blog/git_cheatsheet/tree.jpg'
+import centralisedVsDistributedImg from '@portfolio/assets/blog/git_cheatsheet/centrallised-distributed-version-control.png'
+import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.png'
+import GitStorage2Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-2.png'
+import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
 
 // Other Assets
 import codeSnippets from './codeSnippets'

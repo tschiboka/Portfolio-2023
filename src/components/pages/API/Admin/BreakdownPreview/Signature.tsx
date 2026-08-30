@@ -13,7 +13,7 @@ import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { FiGlobe, FiPhone } from 'react-icons/fi'
 import { MdEmail } from 'react-icons/md'
-import faceImg from '../../../../../assets/images/headshot_placeholder_grayscale.png'
+import faceImg from '@portfolio/assets/headshot_placeholder_grayscale.png'
 
 const smallStyle: React.CSSProperties = {
     fontSize: '0.58rem',

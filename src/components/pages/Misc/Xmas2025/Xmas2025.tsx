@@ -6,15 +6,15 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { xmasSchema } from './Xmas2025.schema'
 import { XmasFormData } from './Xmas2025.types'
-import './Xmas2025.styles.scss'
 import { useLogout } from '../../API/Logout/Logout'
 import { xmasTransformer } from './Xmas2025.transformers'
-import Reindeer from '../../../../assets/images/projects/xmas/reindeer.png'
+import Reindeer from '@projects/assets/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
 import { Session } from '../../../../context/SessionContext'
 import { CandlePanel } from './CandlePanel'
+import './Xmas2025.styles.scss'
 
 const Xmas2025 = () => {
     const { user } = Session.useContext().session || {}
