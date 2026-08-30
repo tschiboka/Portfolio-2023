@@ -10,7 +10,8 @@ Index of all numbered feature documents. Each row links to its feature doc.
 | 0003 | [`0003-gym-exercises-routines.md`](./0003-gym-exercises-routines.md)     | Finalise gym exercises & routines features            | In progress | 2026-08-22 | 2026-08-23   |
 | 0004 | [`0004-api-responder.md`](./0004-api-responder.md)                       | Centralised API response handling (ApiResponder)      | Done        | 2026-08-22 | 2026-08-29   |
 | 0005 | [`0005-be-test-sweep.md`](./0005-be-test-sweep.md)                       | Server (BE) test suite sweep & runner                 | TBA         | 2026-08-29 | 2026-08-29   |
-| 0006 | [`0006-fe-file-structure-sweep.md`](./0006-fe-file-structure-sweep.md)   | FE file structure sweep                               | Done        | 2026-08-29 | 2026-08-30   |
+| 0006 | [`0006-fe-file-structure-sweep.md`](./0006-fe-file-structure-sweep.md)   | FE file structure sweep                               | In progress | 2026-08-29 | 2026-08-30   |
+| 0007 | [`0007-light-mode.md`](./0007-light-mode.md)                             | Light mode sweep across the whole app                 | Planned     | 2026-08-30 | 2026-08-30   |
 
 ---
 

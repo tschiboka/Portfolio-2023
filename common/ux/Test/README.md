@@ -191,9 +191,9 @@ await overlay.Do.close()
 ### Navigation
 
 ```ts
-expect(Test.Page.Get.navigatedTo()).toBe('/api/register')
-expect(Test.Page.Has.navigated()).toBe(false)
-await Test.Page.Wait.navigatedTo('/api/index')
+expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
+expect(TestScreen.Has.navigated()).toBe(false)
+await TestScreen.Wait.navigatedTo('/api/index')
 ```
 
 ### Server mocking

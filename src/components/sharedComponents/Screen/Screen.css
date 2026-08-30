@@ -1,0 +1,17 @@
+.Screen {
+    position: relative;
+    min-width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 4rem;
+}
+
+@media (min-width: 768px) {
+    .Screen {
+        padding-top: 4rem;
+    }
+
+    .Screen.Screen--submenu-open {
+        padding-top: 8rem;
+    }
+}

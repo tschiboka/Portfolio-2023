@@ -1,7 +1,7 @@
 import BlogCard from '../BlogCard/BlogCard'
 import { blogArticles } from '../../../articles/articles'
 import './SuggestedArticle.scss'
-import { useGetLikeSummary, useGetVisitSummary } from '../../../../common/queries'
+import { useGetLikeSummary, useGetVisitSummary } from '../../../common/queries'
 
 interface Props {
     articles?: string[]

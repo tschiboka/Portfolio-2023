@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@ux/Test'
+import { TestScreen } from '../../../../sharedComponents/Screen/tests/Screen.spec.utils'
 import { ApiRoutes } from '../../../../../routing/ApiRoutes'
 import { mockRegisterSuccess } from './Register.mocks'
 import { defaultHandlers, handlePostRegisterError } from './Register.mockHandles'
@@ -8,7 +9,7 @@ import { RegisterLabels } from './Register.spec.utils'
 const { form: FORM, fields, buttons, errors } = RegisterLabels
 
 const setupRegister = async () => {
-    Test.Page.Do.render({
+    TestScreen.Do.render({
         path: ApiRoutes.Register,
         handlers: defaultHandlers,
     })
@@ -75,7 +76,7 @@ describe('Register', () => {
         it('should navigate to /api/login when login button is clicked', async () => {
             const { form } = await setupRegister()
             await form.Button(buttons.login).Do.click()
-            expect(Test.Page.Get.navigatedTo()).toBe('/api/login')
+            expect(TestScreen.Get.navigatedTo()).toBe('/api/login')
         })
     })
 
@@ -126,7 +127,7 @@ describe('Register', () => {
             const { form } = await setupRegister()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
-            expect(Test.Page.Has.navigated()).toBe(false)
+            expect(TestScreen.Has.navigated()).toBe(false)
         })
     })
 
@@ -161,7 +162,7 @@ describe('Register', () => {
     describe('Failed registration', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = await setupRegister()
-            Test.Page.Set.handlers(handlePostRegisterError(errors.registrationFailed))
+            TestScreen.Set.handlers(handlePostRegisterError(errors.registrationFailed))
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('taken@email.com')

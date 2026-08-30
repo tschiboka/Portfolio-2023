@@ -46,11 +46,6 @@ export const stories: StoryEntry[] = [
         description: 'Animated spinner with conditional visibility and custom color.',
     },
     {
-        label: 'Nav',
-        path: '/api/ux-stories/nav',
-        description: 'Responsive navigation bar with submenus and mobile menu.',
-    },
-    {
         label: 'Overlays',
         path: '/api/ux-stories/overlays',
         description: 'Modal dialogs, popups, and action menus.',
@@ -74,6 +69,11 @@ export const stories: StoryEntry[] = [
         label: 'Test Accessor',
         path: '/api/ux-stories/test-accessor',
         description: 'Structured test utility layer for consistent component testing.',
+    },
+    {
+        label: 'Toggles',
+        path: '/api/ux-stories/toggles',
+        description: 'Switch control with icon label, controlled state, and keyboard access.',
     },
     {
         label: 'Typography',

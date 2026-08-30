@@ -1,10 +1,10 @@
 import { Screen } from '../../../sharedComponents/Screen/Screen'
-import { PageContainerProps } from '../../../../../common/ux/Page/Page.types'
+import type { ScreenProps } from '../../../sharedComponents/Screen/Screen'
 import { Editor } from './Editor/Editor'
 import { TypistContextProvider } from './Typist.context'
 import { HeadsUpDisplay } from './HeadsUpDisplay/HeadsUpDisplay'
 
-export const Typist = ({ pageName }: PageContainerProps) => {
+export const Typist = ({ pageName }: Pick<ScreenProps, 'pageName' | 'path'>) => {
     return (
         <TypistContextProvider>
             <Screen

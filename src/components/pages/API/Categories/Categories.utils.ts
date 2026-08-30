@@ -1,10 +1,8 @@
-import { SearchInputOption } from '@ux'
+import { SearchInputOption, Const, CellMeta, CellValue } from '@ux'
 import { GetCategoryResponse } from '@types'
-import { colors } from './colors'
 import { icons } from './icons'
 import { isDefined } from '@utils'
 import { ReactNode } from 'react'
-import { CellMeta, CellValue } from '@ux'
 
 export const iconOptions: SearchInputOption[] = Object.keys(icons)
     .map((icon) => ({
@@ -14,10 +12,10 @@ export const iconOptions: SearchInputOption[] = Object.keys(icons)
     }))
     .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))
 
-export const colorOptions: SearchInputOption[] = Object.keys(colors)
+export const colorOptions: SearchInputOption[] = Object.keys(Const.ColorSign)
     .map((color) => ({
         label: color,
-        icon: colors[color],
+        icon: Const.ColorSign[color],
         value: color,
     }))
     .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label))

@@ -1,6 +1,6 @@
 # 0006 — FE file structure sweep
 
-> **Status:** In progress — alias migration applied (2026-08-30); structure/role sweep pending
+> **Status:** In progress — alias migration, server restructure, asset distribution, and `common/` impurity sweep done (2026-08-30); feature-page moves / role-suffix / barrel / `App.tsx` work pending
 > **Last updated:** 2026-08-30
 > **Created:** 2026-08-29
 
@@ -330,7 +330,8 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 - [ ] Delete empty `src/sharedComponents/Article/`
 - [ ] Add FE `App.tsx` composition root; slim `main.tsx` (§3.1)
 - [ ] Rename/fold `context/AppContext/App.context.tsx` naming trap
-- [ ] Resolve `Nav/` + app-level component placement (§8)
+- [x] Resolve `Nav/` + app-level component placement (§8) — moved whole Nav package to `src/components/Nav/`
+- [x] Purify `common/ux/` — remove app imports from `Page`, `AccessGuard`, `Nav`/`MobileMenu`/`SubNav`, `SearchInput` (§11.5) — done: `colors→Const`, `Toggle` in, `Nav`/`AccessGuard`/`Page` moved out
 
 **Role suffixes** (per feature batch)
 
@@ -476,6 +477,153 @@ Distribute static assets by domain ownership so each area owns the files it uses
 - Step 3 `common/ux/assets/` — dead `dev_tools` deleted; `thumbs_up`/shared placeholders went to `@portfolio/assets` instead. Generic UX share-back not pursued.
 - Step 6 in-repo projects — `wordduelarena` + `xmas` done; `typist` + `gym` have **no project-local assets** (only card thumbnails in `@portfolio/assets/projects`, Gym is data/`@types`-driven) — nothing to move.
 - `public/assets/` server-served statics — unchanged (step 1 recanted).
+
+### 11.5 UX component purity audit (2026-08-30)
+
+**Concern:** `common/ux/` is a generic layer and must not import app-specific
+code (`src/`). Dependency rule is `feature → common/utils → common/types`
+(AGENTS.md §2.3); `common/ux` should sit alongside `common/utils` as a shared
+primitives layer. Components that reach into `src/context`, `src/routing`,
+feature folders, or `common/queries` are **impure** and bind the generic layer
+to this app. Audited all files under `common/ux/`.
+
+**Impure — import app code:**
+
+| Component        | File                               | App-specific import                                                                                       | Coupling                                                    |
+| ---------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| `Page`           | `Page/Page.tsx`                    | `Session` (`src/context/SessionContext`), `useAppContext` (`App.context`), `postVisit` (`common/queries`) | record-visit + document-title side effects; login/app state |
+| `AccessGuard`    | `AccessGuard/AccessGuard.hooks.ts` | `Session` (`src/context/SessionContext`)                                                                  | builds access map from `session.user/settings`              |
+| `Nav`            | `Nav/Nav.tsx`                      | `useAppContext` (`App.context`)                                                                           | default burger reads/writes app mobile-menu state           |
+| `Nav/MobileMenu` | `Nav/MobileMenu/MobileMenu.tsx`    | `useAppContext`                                                                                           | app context (theme + menu visibility)                       |
+| `Nav/SubNav`     | `Nav/SubNav/SubNav.tsx`            | `useAppContext`                                                                                           | app context (theme + submenu visibility)                    |
+| `SearchInput`    | `Form/SearchInput.tsx`             | ~~`colors`~~ → **FIXED** (→ `Const.ColorSign`, #1)                                                        | ~~app palette~~ none                                        |
+
+**Test-only impurity (acceptable category, flagged):** `Test/` helpers import app
+contexts/routes (`AppContextProvider`, `SessionContext`, `ApiRoute`) — test
+infrastructure, not runtime generic code. Isolated concern.
+
+**Clean** (no app imports): Button, Code, Const, ContentNavigator, CounterBadge,
+Figure, Layout (Box/Grid/Inline/Spacer/Split/Stack/Visibility), Link,
+LoadingIndicator, Overlay, Pill, Region, SideMenu, Table (all), Toggle,
+Typography, ZoomedImage.
+
+**Grey area:** `common/queries/` (`postVisit`) is shared-but-app-served; see
+ticket §2 note (out of scope for content change, but re-imports allowed).
+
+**Remediation direction (decide, don't implement yet):** pure components receive
+app state via props / context-injection rather than importing `src/` directly.
+Worst offenders: `Page` (visit-recording), `SearchInput` (palette). `Nav` burger
+is pattern-able via a `render-prop` default. Links to §8 `Nav/` + app-level
+placement decision.
+
+### 11.6 Purity remediation progress (2026-08-30)
+
+**Done — #1 `colors` → `Const.ColorSign`:**
+
+- `colors` was a generic CSS-color-swatch `Dictionary<ReactNode>` misplaced in
+  `src/components/pages/API/Categories/`. Moved into constants.
+- New `common/ux/Const/ColorSign.tsx` (named export `ColorSign`); added to the
+  `Const` object in `Const/index.ts`.
+- Updated §consumers: `SearchInput.tsx` (`colors[x]` → `Const.ColorSign[x]`),
+  `Categories.schema.ts`, `Categories.utils.ts`. Deleted the old `colors.tsx`.
+- Decision: `Const/` (design tokens) vs new folder — chose `Const.ColorSign`;
+  though it's JSX swatches, keeping it with the other constants was the call.
+- Resolved via single-file edits; grep-clean; no errors.
+
+**In progress — #2 Nav / MobileMenu / SubNav (props-injection, B1):**
+
+- **#2A `Toggle` migration — DONE (2026-08-30):** `Toggle` is a generic switch
+  (`children`/`handleClick`/`active`) whose only production consumers are
+  `MobileMenu` + `SubNav` inside `common/ux`; it lived in
+  `src/components/sharedComponents/Toggle/` (wrong layer — `common/ux` imported
+  from `src/`). Migrated to `common/ux` as a full citizen:
+    - `common/ux/Toggle/Toggle.tsx` (named export `Toggle` + `ToggleProps`),
+      `Toggle.css` (scss→css, `palette.$X` → `var(--X)`, flat selectors),
+      `index.ts` barrel; `@ux` barrel updated.
+    - Tests: `Toggle/tests/Toggle.spec.tsx` via `Test.Toggle` accessor +
+      `Set.toggle` spec util (`Toggle.spec.utils.tsx`).
+    - Test accessor: `common/ux/Test/Toggle/Toggle.tsx` (Get: role/active;
+      Do: toggle), registered in `Test`.
+    - UxStories story: `UxStories/components/Toggles/` (`Toggles.tsx` +
+      `Toggles.code.ts`), wired in `components/index.ts`, `stories.ts`
+      (`/api/ux-stories/toggles`), `ApiRoutes.tsx`.
+    - Consumers `MobileMenu.tsx` + `SubNav.tsx` now `import { Toggle } from '@ux'`.
+    - Deleted `src/components/sharedComponents/Toggle/`.
+    - **Enhancements (same session):** `children` made optional (icon-less bare
+      switch, `<Toggle__icon>` omitted when absent); `activeColor?: string` prop
+      (applies `backgroundColor` when active); softened inner shadow in both
+      dark/light themes (dedicated custom shadows, shared tokens untouched).
+- **#2B (next):** decouple `useAppContext` from `Nav` (DefaultBurger),
+  `MobileMenu`, `SubNav` via props-injection (B1).
+
+---
+
+**Done — whole `Nav` package moved out of `common/ux` (supersedes #2):**
+
+Not props-injection (B1) — the whole `common/ux/Nav/` package is **app navigation
+chrome**, not generic primitives. Moved to `src/components/Nav/`:
+
+- `Nav.tsx`, `NavMenu.tsx`, `Nav.types.ts`, `Nav.utils.ts`, `Nav.styles.css`,
+  `Components/`, `MobileMenu/`, `SubNav/`, `Submenu/`, tests.
+- `src/components/Nav/index.ts` barrel now exports the full package alongside
+  `PageNav`/`PageMobileMenu`/`PageSubNav`.
+- Consumers (`PageNav`, `menuData`) → relative imports; moved components keep
+  `useAppContext` (app-level now); shared deps via `@ux`.
+- `@ux` barrel no longer exports Nav; UxStories Nav story deleted + unwired.
+- Accessor moved to `src/components/Nav/tests/Nav.spec.utils.tsx`; removed from
+  `@ux/Test`.
+- Deleted `common/ux/Nav/`. Result: `Nav`/`MobileMenu`/`SubNav`/`NavMenu` are
+  app-level and may use `useAppContext` directly — no props-injection needed.
+
+**Done — `AccessGuard` moved out of `common/ux` (#4):**
+
+App access-control (admin + xmas2025 on this app's `Session`), same standard as
+Nav. Moved `common/ux/AccessGuard/` → `src/components/AccessGuard/` (incl.
+renderers + tests). Removed from `@ux` barrel. Consumers updated (Nav×3, API
+Index, Xmas2025×2, AccessGuards story). `useAccess` keeps its `Session` import
+(app-level now); `AccessGuard.types` `Capability` → `@types`. Deleted
+`common/ux/AccessGuard/`.
+
+**Done — `Page` collapsed into `Screen` (#3, last):**
+
+`Page` had one production consumer (`Screen`) — a 1:1 wrapper with no reuse, so
+the layer was removed rather than moved:
+
+- `Screen.tsx` now owns Page's logic (document title, scroll reset, incognito
+  visit tracking, `loginRequired` redirect, `subMenuVisible` class) + chrome.
+  `ScreenProps` supersedes `PageProps`.
+- `.Page` shell → `.Screen`; `Page.css` → `Screen.css`.
+- `Typist` `PageContainerProps` → `Pick<ScreenProps,'pageName'|'path'>`.
+- Test harness `Test/Page` → `Screen/tests/Screen.spec.utils.tsx` (exports
+  `TestScreen`); `Page.spec` → `Screen/tests/Screen.spec.tsx`.
+- All `Test.Page` → `TestScreen` in 8 specs + docs/snippets; removed `Screen`
+  from `@ux/Test` barrel. Deleted `common/ux/Page/`.
+- **No `Page` name remains** (component, harness, helpers).
+
+**Done — `Region` light-theme overrides (from login dark-section bug):**
+
+`.region__content`, `.region__header`, `.region__header:hover`,
+`.region--dialog`, `.region--sidebar` all lacked `.light` overrides and stayed
+dark in light mode. Added light variants (`white-2`/`white-3`; dialog also flips
+text to `black-x`). Full region light-theme audit closed.
+
+**Done — `common/queries` → `src/common/queries/` (Likes/Visits):**
+
+Likes + Visits queries (`useGetLikes`, `usePostLike`, `useGetVisits`,
+`postVisit`, `usePostVisit`, `useGetVisitSummary`, `useGetLikeSummary`) are
+**app-served API queries**, used across 9 features (Screen, Blog, Article,
+BlogCard, LikeButton, PageSideMenu, Breadcrumb, SuggestedArticles). Not generic
+`common/` infra. Moved `common/queries/` → `src/common/queries/`
+(`index.ts`, `Likes.queries.ts`, `Visits.queries.ts`). Updated 9 consumer
+imports; moved files use only `@types`/`@utils` aliases. Top-level `common/`
+now `{types, utils, ux}`.
+
+Note: not feature-owned because they're cross-cutting (span many features), not
+one feature's private query. `src/common/queries/` is the app-level shared home.
+
+**Net result:** `common/ux` no longer imports any `src/` code. The impurity sweep
+(`colors`, `Toggle`, `Nav`, `AccessGuard`, `Page`) is complete. `tsc` clean,
+pages render.
 
 ## 12. Related docs / links
 

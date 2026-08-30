@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Accessor, Test } from '@ux/Test'
+import { TestScreen } from '../../Screen/tests/Screen.spec.utils'
 import { PageSideMenu } from '../PageSideMenu'
 import {
     pageSideMenuHandlers,
@@ -10,7 +11,7 @@ import {
 import { mockLikesWithCount, mockVisitsWithCount } from './PageSideMenu.mocks'
 
 const setupPageSideMenu = () => {
-    Test.Page.Do.render({
+    TestScreen.Do.render({
         path: '/projects',
         children: <PageSideMenu />,
         handlers: [...pageSideMenuHandlers, handlePostLike],
@@ -54,7 +55,7 @@ describe('PageSideMenu', () => {
     describe('Likes and visits', () => {
         it('should fetch and display likes count', async () => {
             setupPageSideMenu()
-            Test.Page.Set.handlers(
+            TestScreen.Set.handlers(
                 handleGetLikes.updateResponse((builder) => builder.modify(mockLikesWithCount)),
             )
 
@@ -66,7 +67,7 @@ describe('PageSideMenu', () => {
 
         it('should fetch and display visits count', async () => {
             setupPageSideMenu()
-            Test.Page.Set.handlers(
+            TestScreen.Set.handlers(
                 handleGetVisits.updateResponse((builder) => builder.modify(mockVisitsWithCount)),
             )
 
@@ -121,7 +122,7 @@ describe('PageSideMenu', () => {
             setupPageSideMenu()
             const menu = getSideMenu()
 
-            Test.Page.Set.handlers(
+            TestScreen.Set.handlers(
                 handleGetLikes.updateResponse((builder) => builder.modify(mockLikesWithCount)),
             )
             await menu.Do.clickItem('Like')

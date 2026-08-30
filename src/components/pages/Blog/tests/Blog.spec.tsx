@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import { Accessor, Test } from '@ux/Test'
+import { TestScreen } from '../../../sharedComponents/Screen/tests/Screen.spec.utils'
 import Blogs from '../Blog'
 import { handlers } from './Blog.mockHandles'
 import { blogArticles } from '../../../../articles/articles'
@@ -8,7 +9,7 @@ const publishedArticles = blogArticles.filter((a) => !a.upcoming)
 const upcomingArticles = blogArticles.filter((a) => a.upcoming)
 
 const setupBlogs = () => {
-    Test.Page.Do.render({
+    TestScreen.Do.render({
         path: '/blog',
         children: <Blogs pageName="blog" path="/blog" />,
         handlers,
@@ -56,7 +57,10 @@ describe('Blogs', () => {
                 expect(Test.Typography.byLabel(article.title)).toBeDefined()
             })
         })
-        // This test is skipped because the "Coming Soon..." heading is not currently rendered in the Blog component. It may be added back in the future when there are planned blog articles.
+        // Skipped: the "Coming Soon..." <h3> header is conditionally rendered by Blog.tsx only
+        // when `comingSoonArticles` is non-empty. There are currently no upcoming articles in
+        // the data, so the block (and its header) does not render. Restore when upcoming
+        // articles are added (see Blog.tsx `{hasLength(comingSoonArticles) && ...}`).
         it.skip('should render the "Coming Soon..." heading', () => {
             setupBlogs()
             expect(Test.Heading('Coming Soon...', 3)).toBeDefined()
@@ -120,7 +124,7 @@ describe('Blogs', () => {
             const article = publishedArticles[0]
             const card = Test.Typography.byLabel(article.title)
             await card.Do.click()
-            expect(Test.Page.Get.navigatedTo()).toBe(article.to)
+            expect(TestScreen.Get.navigatedTo()).toBe(article.to)
         })
     })
 

@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@ux/Test'
+import { TestScreen } from '../../../sharedComponents/Screen/tests/Screen.spec.utils'
 import Contact from '../Contact'
 import { defaultHandlers, handlePostMessageError } from './Contact.mockHandles'
 import { ContactLabels } from './Contact.spec.utils'
@@ -7,7 +8,7 @@ import { ContactLabels } from './Contact.spec.utils'
 const { form: FORM, fields, buttons, errors } = ContactLabels
 
 const setupContact = () => {
-    Test.Page.Do.render({
+    TestScreen.Do.render({
         path: '/contact',
         children: <Contact pageName="Contact" path="/contact" />,
         handlers: defaultHandlers,
@@ -123,7 +124,7 @@ describe('Contact', () => {
     describe('Failed submission', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = setupContact()
-            Test.Page.Set.handlers(handlePostMessageError(errors.sendFailed))
+            TestScreen.Set.handlers(handlePostMessageError(errors.sendFailed))
             await form.Input(fields.name).Do.type('John Doe')
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.message).Do.type('This is a valid message text')

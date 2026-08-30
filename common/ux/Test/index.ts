@@ -13,9 +13,7 @@ import { Heading } from './Heading/Heading'
 import { Input } from './Input/Input'
 import { Link } from './Link/Link'
 import { LoadingIndicator } from './Loading/Loading'
-import { Nav } from './Nav/Nav'
 import { Overlay } from './Overlay/Overlay'
-import { Page } from './Page/Page'
 import { Pill } from './Pill/Pill'
 import { Radio } from './Radio/Radio'
 import { Region } from './Region/Region'
@@ -23,6 +21,7 @@ import { SearchInput } from './SearchInput/SearchInput'
 import { Section } from './Section/Section'
 import { SideMenu } from './SideMenu/SideMenu'
 import { Table } from './Table/Table'
+import { Toggle } from './Toggle/Toggle'
 import { Typography } from './Typography/Typography'
 export { Accessor, TestError } from './Accessor/Accessor'
 export { server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
@@ -42,9 +41,7 @@ export const Test = {
     Input,
     Link,
     LoadingIndicator,
-    Nav,
     Overlay,
-    Page,
     Pill,
     Radio,
     Region,
@@ -52,6 +49,7 @@ export const Test = {
     Section,
     SideMenu,
     Table,
+    Toggle,
     Typography,
     server,
     MockBuilder,

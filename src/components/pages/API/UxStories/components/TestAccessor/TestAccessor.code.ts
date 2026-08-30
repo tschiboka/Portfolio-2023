@@ -67,9 +67,9 @@ expect(submit.Get.isDisabled()).toBe(true)`,
         overlay: `const overlay = Test.Overlay('Confirm delete')
 overlay.Get.heading() // scoped inside the dialog
 await overlay.Do.close()`,
-        navigation: `expect(Test.Page.Get.navigatedTo()).toBe('/api/register')
-expect(Test.Page.Has.navigated()).toBe(false)
-await Test.Page.Wait.navigatedTo('/api/index')`,
+        navigation: `expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
+expect(TestScreen.Has.navigated()).toBe(false)
+await TestScreen.Wait.navigatedTo('/api/index')`,
         serverMocking: `const getUsers = RequestBuilder({
     path: '/api/users',
     method: HttpMethods.GET,

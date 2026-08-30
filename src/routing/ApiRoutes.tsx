@@ -24,12 +24,12 @@ import {
     Layouts,
     Links,
     LoadingIndicators,
-    NavStory,
     Pills,
     Regions,
     Tables,
     Overlays,
     TestAccessor,
+    Toggles,
     TypographyStory,
 } from '../components/pages/API/UxStories'
 import { ReactElement } from 'react'
@@ -167,11 +167,6 @@ export const ApiRoutes = {
         path: '/api/ux-stories/loading-indicators',
         element: <LoadingIndicators path="/api/ux-stories/loading-indicators" />,
     },
-    NavStory: {
-        name: 'Nav Story',
-        path: '/api/ux-stories/nav',
-        element: <NavStory path="/api/ux-stories/nav" />,
-    },
     Overlays: {
         name: 'Overlays',
         path: '/api/ux-stories/overlays',
@@ -196,6 +191,11 @@ export const ApiRoutes = {
         name: 'Test Accessor',
         path: '/api/ux-stories/test-accessor',
         element: <TestAccessor path="/api/ux-stories/test-accessor" />,
+    },
+    Toggles: {
+        name: 'Toggles',
+        path: '/api/ux-stories/toggles',
+        element: <Toggles path="/api/ux-stories/toggles" />,
     },
     Typography: {
         name: 'Typography',

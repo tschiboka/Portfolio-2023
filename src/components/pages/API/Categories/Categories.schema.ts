@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import { colors } from './colors'
+import { Const } from '@ux'
 import { icons } from './icons'
 import { CategoryFormData } from './Categories.types'
 
@@ -22,5 +22,5 @@ export const categoriesSchema = (parentOptions: string[]): yup.ObjectSchema<Cate
         color: yup
             .string()
             .required()
-            .test('is-valid-color', 'Invalid option', (value) => Boolean(colors[value])),
+            .test('is-valid-color', 'Invalid option', (value) => Boolean(Const.ColorSign[value])),
     })

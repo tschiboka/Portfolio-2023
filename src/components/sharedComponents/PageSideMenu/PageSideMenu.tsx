@@ -11,7 +11,7 @@ import { CounterBadge } from '@ux'
 import type { SideMenuItem } from '@ux'
 import { QueryKey } from '@utils'
 import ShareMenu from '../ShareMenu/ShareMenu'
-import { useGetLikes, useGetVisits, usePostLike } from '../../../../common/queries'
+import { useGetLikes, useGetVisits, usePostLike } from '../../../common/queries'
 import './PageSideMenu.css'
 
 const scrollToTop = () => {

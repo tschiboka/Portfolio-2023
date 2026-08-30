@@ -2,7 +2,6 @@ import { Control, Controller, Path } from 'react-hook-form'
 import { BsChevronBarDown, BsChevronBarUp, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import { hasLength } from '@utils'
-import { colors } from '../../../src/components/pages/API/Categories/colors'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
 import { Const, SearchInputOption } from '@ux'
@@ -153,7 +152,7 @@ export const SearchInput = <
                             {showIconWithInput && (open || (!open && field.value)) && (
                                 <div className="show-icon">
                                     {options.find((o: SearchInputOption) => o.label === value)
-                                        ?.icon || colors[field.value]}
+                                        ?.icon || Const.ColorSign[field.value]}
                                 </div>
                             )}
                             <input

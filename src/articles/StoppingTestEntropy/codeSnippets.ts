@@ -422,7 +422,7 @@ Test.Pill('Active')             // PillAccessor
 Test.Code('snippet')            // CodeAccessor
 Test.Figure('chart')            // FigureAccessor
 Test.LoadingIndicator           // Static: LoadingIndicator.Has.isLoading()
-Test.Page                       // Page-level: Test.Page.Do.render({ ... })`,
+TestScreen                       // Page-level: TestScreen.Do.render({ ... })`,
 
     // ── Design Rules ─────────────────────────────────────────────────────────
     designRules: `// ✅ Accessors locate elements, read state, and perform single actions

@@ -1,4 +1,4 @@
-import { Guard } from '@ux'
+import { Guard } from '../../../../../AccessGuard'
 
 const alwaysDenied: Guard = {
     when: { type: 'custom', predicate: () => false },

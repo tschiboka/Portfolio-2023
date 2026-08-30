@@ -1,4 +1,4 @@
-import { useGetVisits } from '../../../../common/queries'
+import { useGetVisits } from '../../../common/queries'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
 import { Link } from '@ux'

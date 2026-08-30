@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { AccessGuard } from '@ux'
+import { AccessGuard } from '../../../AccessGuard'
 import { XmasMessage } from '@types'
 import { DateTime } from '@utils'
 

@@ -1,4 +1,5 @@
-import { collectMenuGroups, MenuItem } from '@ux'
+import { collectMenuGroups } from './Nav.utils'
+import { MenuItem } from './Nav.types'
 import SantaHat from '@projects/assets/xmas/santa_hat.png'
 
 export const portfolioMenu: MenuItem[] = [

@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@ux/Test'
+import { TestScreen } from '../../../../sharedComponents/Screen/tests/Screen.spec.utils'
 import { ApiRoutes } from '../../../../../routing/ApiRoutes'
 import { mockSetSession, mockUser, defaultSettings } from './Login.mocks'
 import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandles'
@@ -8,7 +9,7 @@ import { LoginLabels } from './Login.spec.utils'
 const { form: FORM, fields, buttons, errors } = LoginLabels
 
 const setupLogin = () => {
-    Test.Page.Do.render({
+    TestScreen.Do.render({
         path: ApiRoutes.Login,
         session: { setSession: mockSetSession },
         handlers: defaultHandlers,
@@ -59,7 +60,7 @@ describe('Login', () => {
 
         it('should not render the register button when registration is disabled', async () => {
             const { form } = setupLogin()
-            Test.Page.Set.handlers(
+            TestScreen.Set.handlers(
                 handleGetSettings.updateResponse((builder) =>
                     builder.setValue('settings', {
                         ...defaultSettings,
@@ -78,7 +79,7 @@ describe('Login', () => {
 
             expect(button).toBeDefined()
             await form.Button(buttons.register).Do.click()
-            expect(Test.Page.Get.navigatedTo()).toBe('/api/register')
+            expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
         })
     })
 
@@ -116,7 +117,7 @@ describe('Login', () => {
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
             expect(mockSetSession).not.toHaveBeenCalled()
-            expect(Test.Page.Has.navigated()).toBe(false)
+            expect(TestScreen.Has.navigated()).toBe(false)
         })
     })
 
@@ -141,14 +142,14 @@ describe('Login', () => {
 
         it('should navigate to /api/index on successful login', async () => {
             await fillAndSubmitForm()
-            await Test.Page.Wait.navigatedTo('/api/index')
+            await TestScreen.Wait.navigatedTo('/api/index')
         })
     })
 
     describe('Failed login', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = setupLogin()
-            Test.Page.Set.handlers(handlePostLoginError(errors.invalidCredentials))
+            TestScreen.Set.handlers(handlePostLoginError(errors.invalidCredentials))
             await form.Input(fields.email).Do.type('wrong@email.com')
             await form.Input(fields.password).Do.type('wrongpassword1')
             await form.Do.submit()
@@ -163,7 +164,7 @@ describe('Login', () => {
         it('should not navigate on login failure', async () => {
             const form = await fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
-            expect(Test.Page.Has.navigated()).toBe(false)
+            expect(TestScreen.Has.navigated()).toBe(false)
         })
 
         it('should not set session on login failure', async () => {

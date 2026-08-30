@@ -1,4 +1,4 @@
-import { AccessGuard } from '@ux'
+import { AccessGuard } from '../../../../../AccessGuard'
 import { useForm } from 'react-hook-form'
 import { Guards } from './Guards'
 import { Button, Code, CodeText, Form, Heading, Main, Paragraph, Section, Stack, Text } from '@ux'

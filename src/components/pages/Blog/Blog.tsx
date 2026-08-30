@@ -16,7 +16,7 @@ import {
 
 import './Blog.scss'
 import { BlogSortBy } from './Blog.type'
-import { useGetLikeSummary, useGetVisitSummary } from '../../../../common/queries'
+import { useGetLikeSummary, useGetVisitSummary } from '../../../common/queries'
 
 interface Props {
     pageName: string

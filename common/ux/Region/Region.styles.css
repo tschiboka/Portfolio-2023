@@ -170,6 +170,27 @@
     background-color: var(--white-2);
 }
 
+.light .region__content {
+    background-color: transparent;
+}
+
+.light .region__header {
+    background-color: var(--white-2);
+}
+
+.light .region__header:hover:not(.region__header--static) {
+    background-color: var(--white-3);
+}
+
+.light .region--dialog {
+    background-color: var(--white-2);
+    color: var(--black-x);
+}
+
+.light .region--sidebar {
+    background-color: var(--white-2);
+}
+
 .light .region--header {
     background-color: white;
 }

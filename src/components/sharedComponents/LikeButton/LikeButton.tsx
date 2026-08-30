@@ -1,4 +1,4 @@
-import { usePostLike } from '../../../../common/queries'
+import { usePostLike } from '../../../common/queries'
 import { AiFillHeart } from 'react-icons/ai'
 import './LikeButton.scss'
 

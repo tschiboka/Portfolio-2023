@@ -6,7 +6,7 @@ import { AiFillHeart, AiFillStar } from 'react-icons/ai'
 import { BiSolidTimeFive } from 'react-icons/bi'
 import { FaEye, FaCode } from 'react-icons/fa'
 import { BsFillCalendar2DateFill } from 'react-icons/bs'
-import { usePostLike } from '../../../../common/queries'
+import { usePostLike } from '../../../common/queries'
 import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@ux'
 import './BlogCard.scss'
 

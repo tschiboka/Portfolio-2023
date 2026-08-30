@@ -14,7 +14,7 @@ import { blogArticles } from '../../../articles/articles'
 // Styles
 import SuggestedArticles from '../SuggestedArticles/SuggestedArticles'
 import { PageSideMenu } from '../PageSideMenu/PageSideMenu'
-import { useGetLikes } from '../../../../common/queries'
+import { useGetLikes } from '../../../common/queries'
 import './Articles.scss'
 
 interface Props {
