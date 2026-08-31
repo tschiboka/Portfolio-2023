@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { CellMeta, TableSelection } from '../Table.types'
 import { getAllSelected, getSelectableIds } from './TableCheckbox.selectors'
-import { isEmpty } from '@utils'
+import { isEmpty } from '@common-utils'
 import './TableCheckbox.styles.css'
 
 type TableCheckboxHeaderProps<TData extends Record<string, ReactNode>, TContext> = {

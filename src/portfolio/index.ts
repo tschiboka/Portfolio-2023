@@ -1,0 +1,7 @@
+export { Home } from './Home/Home'
+export { About } from './About/About'
+export { Blog } from './Blog/Blog'
+export { Contact } from './Contact/Contact'
+export { PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy'
+export { Projects } from './Projects'
+export { PortfolioRoutes, PortfolioRoutesList, type PortfolioRoute } from './Portfolio.routes'

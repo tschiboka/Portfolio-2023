@@ -1,0 +1,15 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+
+.Blog__title {
+    @include bp.md {
+        margin-bottom: 3rem;
+    }
+}
+
+.BlogList__header {
+    font-variant: small-caps;
+}
+
+hr.BlogList__hr {
+    margin-top: 1.5rem;
+}

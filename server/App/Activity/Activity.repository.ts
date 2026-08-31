@@ -1,4 +1,4 @@
-﻿import type { Dictionary } from '@utils'
+﻿import type { Dictionary } from '@common-utils'
 import { VisitModel } from '../Visit/Visit.model'
 import { LikeModel } from '../Like/Like.model'
 import { MessageModel } from '../Message/Message.model'

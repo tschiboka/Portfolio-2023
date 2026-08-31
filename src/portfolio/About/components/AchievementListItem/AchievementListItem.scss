@@ -1,0 +1,123 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+
+.AchievementListItem {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0.75rem 0;
+    display: flex;
+    align-items: center;
+    color: var(--white-1);
+    border-bottom: 1px solid var(--black-3);
+    cursor: pointer;
+
+    @include bp.md {
+        padding: 0.75rem 1rem;
+    }
+
+    &:last-child {
+        border-color: transparent;
+    }
+
+    &:hover {
+        background-color: var(--black-1);
+        border-color: var(--black-3);
+    }
+
+    &:hover .AchievementListItem__view {
+        color: var(--accent-dark-2);
+    }
+
+    span {
+        font-size: var(--font-sm);
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.75rem;
+        border: 1px solid var(--black-5);
+        border-radius: 100%;
+        object-fit: cover;
+    }
+
+    .AchievementListItem__title {
+        font-weight: 700;
+    }
+
+    .AchievementListItem__detail,
+    .AchievementListItem__year {
+        color: var(--white-3);
+        font-style: italic;
+    }
+
+    .AchievementListItem__year {
+        color: var(--white-5);
+    }
+
+    .AchievementListItem__view {
+        margin-left: 0.5rem;
+        color: var(--black-3);
+        font-size: 1.25rem;
+
+        @include bp.md {
+            margin-left: auto;
+        }
+    }
+
+    .AchievementListItem__hover-text {
+        position: absolute;
+        display: none;
+        right: 0;
+        padding: 0.25rem 1rem;
+        bottom: -0.75rem;
+        background-color: var(--black-1);
+        color: var(--accent-dark-3);
+        font-size: var(--font-xs);
+        border: 1px solid var(--black-3);
+        border-radius: 1rem;
+    }
+
+    &:hover .AchievementListItem__hover-text {
+        @include bp.md {
+            display: block;
+        }
+    }
+}
+
+.light {
+    .AchievementListItem {
+        border-bottom: 1px solid var(--white-3);
+        color: var(--black-1);
+
+        &:last-child {
+            border-color: transparent;
+        }
+
+        &:hover {
+            background-color: var(--white-2);
+            border-color: var(--white-3);
+        }
+
+        .AchievementListItem__detail {
+            color: var(--black-3);
+        }
+
+        .AchievementListItem__year {
+            color: var(--black-5);
+        }
+
+        .AchievementListItem__view {
+            color: var(--black-5);
+        }
+
+        &:hover .AchievementListItem__view {
+            color: var(--accent-dark-3);
+        }
+
+        .AchievementListItem__hover-text {
+            background-color: var(--white-2);
+            border-color: var(--white-3);
+        }
+    }
+}

@@ -12,7 +12,7 @@ import type {
     WdaMatchPlayerStatus,
     WdaMatchEndReason,
 } from '../../../common/types/projects/wda'
-import type { Nullable, Dictionary } from '@utils'
+import type { Nullable, Dictionary } from '@common-utils'
 
 export type { PlayerRole, OptionalPlayerRole, LastWordAttempt }
 

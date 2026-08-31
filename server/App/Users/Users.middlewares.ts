@@ -1,7 +1,7 @@
 ﻿import jwt from 'jsonwebtoken'
 import type { Request, Response, NextFunction } from 'express'
-import { ApiMessage, ApiResponder } from '@utils'
-import { isError } from '@utils'
+import { ApiMessage, ApiResponder } from '@common-utils'
+import { isError } from '@common-utils'
 import type { AuthedRequest, UserToken } from './Users.types'
 
 /** Verifies the bearer JWT and attaches its payload to `req.user`; throws UNAUTHORIZED otherwise. */

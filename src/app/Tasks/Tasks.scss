@@ -1,0 +1,19 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+@use '@shared-styles/palette.scss';
+@use '@shared-styles/font_sizes.scss';
+@use '@shared-styles/animations.scss';
+
+.Tasks {
+    .form-container {
+        margin: 0.5rem;
+        @include bp.md {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        form {
+            max-width: 1000px;
+        }
+    }
+}

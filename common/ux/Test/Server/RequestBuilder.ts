@@ -1,6 +1,6 @@
 import { http, HttpResponse, RequestHandler, JsonBodyType } from 'msw'
 import { MockBuilder, MockBuilderType } from './MockBuilder'
-import { HttpStatus } from '@utils'
+import { HttpStatus } from '@common-utils'
 
 export enum HttpMethods {
     GET = 'get',

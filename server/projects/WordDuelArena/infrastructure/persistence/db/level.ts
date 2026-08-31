@@ -1,7 +1,7 @@
 ﻿import type { SessionState } from '../../../types'
 import { Level } from '../../../model/level'
-import { Arrays } from '@utils'
-import { isEmpty } from '@utils'
+import { Arrays } from '@common-utils'
+import { isEmpty } from '@common-utils'
 
 type DbLevel = {
     name: string

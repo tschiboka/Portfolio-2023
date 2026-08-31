@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiMessage, ApiResponder } from '@utils'
+import { ApiMessage, ApiResponder } from '@common-utils'
 import { UsersAuth } from '../../../App/Users/Users.auth'
 import { auth } from '../../../App/Users/Users.middlewares'
 import { RoutinesService } from './Routines.service'

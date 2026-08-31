@@ -1,0 +1,65 @@
+import { createContext, ReactNode, useContext, useRef, useState } from 'react'
+import { SessionContextType, SessionStatuses, WebSocketSessionState } from './Session.types'
+import { useParams } from 'react-router'
+import { Storage } from '@common-utils'
+import type { Optional } from '@common-utils'
+
+const WDA_KEY = 'word-duel-arena'
+
+const defaultState: WebSocketSessionState = {
+    id: '',
+    role: undefined,
+    status: SessionStatuses.LOBBY,
+    players: {
+        player1: undefined,
+        player2: undefined,
+    },
+    level: undefined,
+    currentMatch: undefined,
+    previousMatches: [],
+}
+
+export const SessionContext = createContext<Optional<SessionContextType>>(undefined)
+type SessionProviderProps = {
+    children: ReactNode
+}
+
+type DeviceIdStorage = {
+    deviceId: string
+}
+
+export const SessionProvider = ({ children }: SessionProviderProps) => {
+    const [sessionState, setSessionState] = useState<WebSocketSessionState>(defaultState)
+
+    console.log('SessionState:', sessionState)
+
+    const deviceId = useRef(Storage.get<DeviceIdStorage>(WDA_KEY)?.deviceId ?? '').current
+    const { sessionId } = useParams()
+
+    if (!sessionId) throw new Error('sessionId param is missing')
+
+    return (
+        <SessionContext.Provider
+            value={{
+                sessionId,
+                deviceId,
+                allowKeyboardInput: true,
+                sessionState,
+                setSessionState,
+            }}
+        >
+            {children}
+        </SessionContext.Provider>
+    )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useSession = () => {
+    const context = useContext(SessionContext)
+
+    if (!context) {
+        throw new Error('useSession must be used within a SessionProvider')
+    }
+
+    return context
+}

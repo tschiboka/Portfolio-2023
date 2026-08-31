@@ -1,8 +1,8 @@
 ﻿import { MovePayload } from '../../../../../common/types'
 import { SessionState } from '../../types'
-import type { Optional } from '@utils'
-import { isDefined, isEmpty } from '@utils'
-import { Arrays } from '@utils'
+import type { Optional } from '@common-utils'
+import { isDefined, isEmpty } from '@common-utils'
+import { Arrays } from '@common-utils'
 import { GIVE_HINTS_AFTER_FAILED_ATTEMPTS } from '../../config/constants/game'
 
 export const getIsHintDue = (draft: SessionState, payload: MovePayload) => {

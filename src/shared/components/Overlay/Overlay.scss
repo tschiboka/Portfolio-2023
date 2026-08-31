@@ -1,0 +1,9 @@
+@use '@shared-styles/palette.scss' as palette;
+
+.Overlay {
+    background-color: palette.$black_2;
+}
+
+.light .Overlay {
+    background-color: palette.$white_1;
+}

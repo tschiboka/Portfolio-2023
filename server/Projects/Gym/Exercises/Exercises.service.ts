@@ -3,9 +3,9 @@
     GymExerciseResource,
     PatchGymExerciseRequest,
 } from '../../../../common/types'
-import { ApiResponder } from '@utils'
-import { ApiTransformers } from '@utils'
-import { isValidObjectId } from '@utils'
+import { ApiResponder } from '@common-utils'
+import { ApiTransformers } from '@common-utils'
+import { isValidObjectId } from '@common-utils'
 import { ExercisesRepository } from './Exercises.repository'
 import { ExercisesPermissions } from './Exercises.permissions'
 import { ExerciseSchema } from './Exercises.schema'

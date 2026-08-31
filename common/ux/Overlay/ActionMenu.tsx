@@ -1,11 +1,11 @@
-import { Const } from '@ux'
+import { Const } from '@common-ux'
 import './Overlay.styles.css'
 import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties, ReactNode, RefObject } from 'react'
 import type { AccessibleProps } from '../index.types'
 import type { AnchorResult } from './Overlay.types'
-import type { Optional } from '@utils'
+import type { Optional } from '@common-utils'
 import { ArrowClass, getAnchorPosition } from './Popup.utils'
 
 export type ActionMenuItem = {

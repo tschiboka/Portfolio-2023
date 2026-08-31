@@ -1,4 +1,4 @@
-﻿import { DateTime } from '@utils'
+﻿import { DateTime } from '@common-utils'
 
 /** Floor/constraint for settings fields â€” single source of truth for schema + model. */
 export const SettingsFieldLimits = {

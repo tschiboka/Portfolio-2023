@@ -1,6 +1,6 @@
 ﻿import type { SessionState, PlayerRole, LevelWord } from '../../types'
 import type { MovePayload } from '../../../../../common/types/projects/wda'
-import type { Optional } from '@utils'
+import type { Optional } from '@common-utils'
 import { calculatePoints } from './points'
 import { MatchStatuses } from '../../config/constants/game'
 import { getIsHintDue, getRandomUnsolvedWordIndex } from './hint'

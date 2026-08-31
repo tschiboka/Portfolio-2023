@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { MessageService } from './Message.service'
 import type { PostMessageReq, PostMessageRes } from './Message.types'
 

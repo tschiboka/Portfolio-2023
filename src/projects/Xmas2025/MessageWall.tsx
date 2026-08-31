@@ -1,0 +1,39 @@
+import moment from 'moment'
+import { AccessGuard } from '@shared-components/AccessGuard'
+import { XmasMessage } from '@common-types'
+import { DateTime } from '@common-utils'
+
+export type MessageWallProps = {
+    messages?: XmasMessage[]
+}
+
+export const MessageWall = ({ messages }: MessageWallProps) =>
+    messages ? (
+        <AccessGuard
+            guards={[
+                { when: { type: 'capability', capabilities: ['admin'] }, then: { mode: 'hidden' } },
+            ]}
+        >
+            <h2>Messaging wall</h2>
+            <table className="message-wall">
+                <thead>
+                    <tr>
+                        <td className="sm">Date</td>
+                        <td>Name</td>
+                        <td>Message</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {messages.map((msg) => (
+                        <tr key={msg._id}>
+                            <td>
+                                {moment(msg.createdAt).format(DateTime.Formats.DisplayDateTime)}
+                            </td>
+                            <td>{msg.name}</td>
+                            <td>{msg.message}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </AccessGuard>
+    ) : null

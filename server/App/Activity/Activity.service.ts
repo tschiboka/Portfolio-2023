@@ -4,8 +4,8 @@
     GetActivityFeedQuery,
     GetActivityFeedResponse,
 } from '../../../common/types'
-import { Paging } from '@utils'
-import type { Dictionary } from '@utils'
+import { Paging } from '@common-utils'
+import type { Dictionary } from '@common-utils'
 import { ActivityRepository } from './Activity.repository'
 import { ActivityTransformers } from './Activity.transformers'
 import { ActivityFeedLimits } from './Activity.constants'

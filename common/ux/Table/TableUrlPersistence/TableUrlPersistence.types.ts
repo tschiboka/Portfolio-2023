@@ -1,4 +1,4 @@
-import type { Dictionary, Nullable } from '@utils'
+import type { Dictionary, Nullable } from '@common-utils'
 import type {
     Paging,
     TableSortState,

@@ -4,9 +4,9 @@
     PatchGymRoutineRequest,
     PostGymRoutineRequest,
 } from '../../../../common/types'
-import { ApiResponder } from '@utils'
-import { ApiTransformers } from '@utils'
-import { isValidObjectId } from '@utils'
+import { ApiResponder } from '@common-utils'
+import { ApiTransformers } from '@common-utils'
+import { isValidObjectId } from '@common-utils'
 import { RoutinesRepository } from './Routines.repository'
 import { RoutinesPermissions } from './Routines.permissions'
 import { RoutineSchema } from './Routines.schema'

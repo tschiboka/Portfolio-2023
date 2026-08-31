@@ -1,0 +1,67 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+@use '@shared-styles/shadows.scss' as shadows;
+@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/font_sizes.scss' as font;
+@use '@shared-styles/animations.scss' as animations;
+
+$clock-container-max-size: 600px;
+
+.ClockWidget {
+    width: 100vw;
+    height: 100vh;
+    min-width: bp.$screen-2xs-min;
+    min-height: bp.$screen-2xs-min-height;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: palette.$black_1;
+    font-size: font.$font_sm;
+
+    .ClockContainer {
+        min-width: bp.$screen-2xs-min;
+        min-height: bp.$screen-2xs-min;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: palette.$black_x;
+        border-radius: 100%;
+        border: 10px solid palette.$black_1;
+        box-shadow: shadows.quad-box-shadow(15px, 15px, 10px);
+
+        @include bp.lg {
+            min-width: $clock-container-max-size;
+            min-height: $clock-container-max-size;
+            font-size: font.$font_md;
+        }
+
+        .ClockFace {
+            width: calc(bp.$screen-2xs-min - 15vw);
+            height: calc(bp.$screen-2xs-min - 15vw);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 100%;
+            border: 1px palette.$black_1 solid;
+
+            @include bp.lg {
+                width: calc($clock-container-max-size - 5vw);
+                height: calc($clock-container-max-size - 5vw);
+                max-height: 80vh;
+            }
+        }
+    }
+
+    header,
+    footer {
+        width: 100%;
+        height: 100%;
+    }
+
+    @media (orientation: landscape) {
+        min-width: bp.$screen-2xs-min-height;
+        min-height: bp.$screen-2xs-min;
+        flex-direction: row;
+    }
+}

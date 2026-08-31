@@ -2,7 +2,7 @@
 import bcrypt from 'bcrypt'
 import type { Request } from 'express'
 import type { CurrentUser } from '../../../common/types'
-import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@utils'
+import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@common-utils'
 import { UsersModel } from './Users.model'
 import type { RegistrationPayload, UserToken } from './Users.types'
 import { UserPassword } from './Users.constants'

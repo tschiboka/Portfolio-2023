@@ -1,5 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
-import { isDefined } from '@utils'
+import { isDefined } from '@common-utils'
 
 export class LoadingIndicatorAccessor extends Accessor {
     get Get() {

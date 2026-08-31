@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { ExerciseModel } from './Exercises.models'
 import type { IGymExercise } from './Exercises.types'
 

@@ -6,7 +6,7 @@ import type {
     WdaWsResponse,
 } from '../../../../../common/types/projects/wda'
 import { WdaWsResponseTypes } from '../../../../../common/types/projects/wda'
-import type { Nullable } from '@utils'
+import type { Nullable } from '@common-utils'
 import WebSocket from 'ws'
 
 import { validateSession } from './validation/session/session'

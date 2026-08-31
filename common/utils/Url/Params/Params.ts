@@ -1,4 +1,4 @@
-import type { Optional, Dictionary } from '@utils'
+import type { Optional, Dictionary } from '@common-utils'
 
 const build = (namespace: Optional<string>, key: string): string =>
     namespace ? `${namespace}.${key}` : key

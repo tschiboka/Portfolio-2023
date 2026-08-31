@@ -1,5 +1,5 @@
 ﻿import { Resend } from 'resend'
-import { ApiMessage } from '@utils'
+import { ApiMessage } from '@common-utils'
 import type { PostMessageRequest } from '../../../common/types'
 
 /** Builds the owner-notification email HTML for a contact message. */

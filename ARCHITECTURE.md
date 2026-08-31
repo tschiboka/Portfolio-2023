@@ -35,6 +35,7 @@ When uncertain, prefer the singular entity name.
 ```text
 Feature/
 ├── Feature.tsx
+├── Feature.routes.tsx
 ├── Feature.columns.tsx
 ├── Feature.actions.ts
 ├── Feature.filters.ts
@@ -407,6 +408,53 @@ common/utils/
 Type-only imports from the barrel are safe because they are erased at runtime, but value imports should prefer specific subpaths.
 
 This is especially important in server code, where importing through the common barrel can unnecessarily pull frontend-only React/CSS dependencies into the server.
+
+## 5.2 Import ordering
+
+Order imports by **source**, not by role. This is a mechanical rule that is easy to enforce and avoids case-by-case judgement.
+
+**FE (React) files — 4 tiers:**
+
+1. **External / third-party** — `react`, npm packages (`react-router-dom`, `@tanstack/react-query`, `detectincognitojs`, …)
+2. **Internal aliased imports** — `@common-*`, `@app`, `@portfolio`, `@projects`, `@shared-*`, `@ux`, `@types`
+3. **Relative imports** — `./`, `../` local files
+4. **Side-effect / asset imports** — `'./x.scss'`, `'./style.css'`, no bindings. Always last.
+
+```tsx
+// 1. External
+import { ReactNode, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+// 2. Aliased internal
+import { Session } from '@shared-context/SessionContext'
+import { Browser } from '@common-utils'
+// 3. Relative
+import { PageNav } from '../Nav'
+import { Footer } from '../Footer/Footer'
+// 4. Side-effect / asset
+import './Screen.css'
+```
+
+Within a tier, no strict ordering is required beyond keeping the tier contiguous.
+
+**BE (server) files — reduced 3 tiers** (no React, no asset tier):
+
+1. **External / node** — `express`, npm packages
+2. **Aliased internal** — `@common-*`
+3. **Relative local** — `./`, `../` (including relative `common/` imports where used)
+
+```ts
+// 1. External
+import express from 'express'
+// 2. Aliased internal
+import { ApiResponder } from '@common-utils'
+// 3. Relative local
+import { auth, admin } from '../Users/Users.middlewares'
+import { ActivityService } from './Activity.service'
+```
+
+> Why "source, not role": a component and a util from the same path belong
+> together, so splitting them (e.g. "components" vs "utils" tiers) forces a
+> judgement call on every line. Grouping by source is objective and lintable.
 
 # 6. Architectural decision rule
 

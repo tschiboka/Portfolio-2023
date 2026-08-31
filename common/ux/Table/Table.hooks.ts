@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { TableBreakpoint } from './Table.types'
-import { Const } from '@ux'
-import { isEmpty } from '@utils'
+import { Const } from '@common-ux'
+import { isEmpty } from '@common-utils'
 
 export const useHiddenBreakpoints = (breakpoints: TableBreakpoint[]) => {
     const isHidden = (bp: TableBreakpoint) => window.innerWidth < Const.Breakpoint[bp]

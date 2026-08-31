@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { LikeModel } from './Like.model'
 import type { ILike } from './Like.types'
 

@@ -1,4 +1,4 @@
-import { isDefined } from '@utils'
+import { isDefined } from '@common-utils'
 import { StackAlign, StackJustify } from './Stack.types'
 
 const AlignMap: Record<StackAlign, string> = {

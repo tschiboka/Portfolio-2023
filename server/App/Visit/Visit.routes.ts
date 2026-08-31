@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { VisitService } from './Visit.service'
 import type { GetVisitReq, GetVisitRes, PostVisitReq, PostVisitRes } from './Visit.types'
 

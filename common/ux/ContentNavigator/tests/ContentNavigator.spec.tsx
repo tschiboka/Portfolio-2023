@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
-import { Browser } from '@utils'
-import { Test } from '@ux/Test'
+import { Browser } from '@common-utils'
+import { Test } from '@common-ux/Test'
 
 // Mock useIsVisible — return all elements as visible by default
 let mockVisibility: { element: Element; isVisible: boolean }[] = []

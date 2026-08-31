@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { SettingsModel } from './Settings.model'
 import type { ISetting } from './Settings.types'
 

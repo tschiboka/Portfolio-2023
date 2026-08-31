@@ -1,5 +1,5 @@
 ﻿import type { PostBackfillResponse } from '../../../common/types'
-import { chunk } from '@utils'
+import { chunk } from '@common-utils'
 import { BreakdownRepository } from './Breakdown.repository'
 import { BreakdownBatchLimits } from './Breakdown.constants'
 import { buildBreakdownOperations, mergeBreakdownCounts } from './Breakdown.utils'

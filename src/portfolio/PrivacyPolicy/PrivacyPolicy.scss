@@ -1,0 +1,18 @@
+@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/font_sizes.scss' as font;
+
+.privacy-policy {
+    .updated-date {
+        font-style: italic;
+        font-size: font.$font_xs;
+    }
+    font-size: font.$font_sm;
+
+    a {
+        color: palette.$accent_dark_3;
+    }
+
+    a:hover {
+        color: palette.$accent_dark_1;
+    }
+}

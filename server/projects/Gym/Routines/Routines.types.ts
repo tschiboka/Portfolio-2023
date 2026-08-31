@@ -6,7 +6,7 @@
     TypedRequest,
     TypedResponse,
 } from '../../../../common/types'
-import type { Dictionary, WithoutId } from '@utils'
+import type { Dictionary, WithoutId } from '@common-utils'
 import type { GymRoutineSource } from '../../../../common/types'
 import type mongoose from 'mongoose'
 import type { Document } from 'mongoose'

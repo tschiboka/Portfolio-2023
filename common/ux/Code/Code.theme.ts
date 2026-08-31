@@ -30,7 +30,7 @@
  */
 
 import type { CSSProperties } from 'react'
-import type { Dictionary } from '@utils'
+import type { Dictionary } from '@common-utils'
 
 type HljsStyle = Dictionary<CSSProperties>
 

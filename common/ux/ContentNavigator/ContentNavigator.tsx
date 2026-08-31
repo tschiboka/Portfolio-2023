@@ -1,10 +1,10 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AccessibleProps } from '../index.types'
-import { Browser } from '@utils'
+import { Browser } from '@common-utils'
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
-import { Const } from '@ux'
-import { isEmpty, isNonEmpty } from '@utils'
+import { Const } from '@common-ux'
+import { isEmpty, isNonEmpty } from '@common-utils'
 import './ContentNavigator.styles.css'
 import {
     getActiveHeaders,

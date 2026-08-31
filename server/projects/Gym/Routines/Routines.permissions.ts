@@ -1,4 +1,4 @@
-﻿import { requireAdminManaged, requireOwned } from '@utils'
+﻿import { requireAdminManaged, requireOwned } from '@common-utils'
 import type { CurrentUser } from '../../../../common/types'
 import type { RoutineOwnership } from './Routines.types'
 

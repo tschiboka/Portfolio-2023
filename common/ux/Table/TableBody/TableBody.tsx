@@ -7,8 +7,8 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength } from '@utils'
-import type { Optional } from '@utils'
+import { hasLength } from '@common-utils'
+import type { Optional } from '@common-utils'
 import { TableRow } from '../TableRow/TableRow'
 import { getTotalCols } from '../Table.utils'
 import './TableBody.styles.css'

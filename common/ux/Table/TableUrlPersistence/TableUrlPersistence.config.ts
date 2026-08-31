@@ -1,5 +1,5 @@
-import type { Codec } from '@utils'
-import { Codecs } from '@utils'
+import type { Codec } from '@common-utils'
+import { Codecs } from '@common-utils'
 import type { FilterConfig } from '../TableFilterConfig'
 
 // Each filter's `type` guarantees its value type, so widening the concrete codecs to

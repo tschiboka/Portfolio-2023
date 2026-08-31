@@ -1,5 +1,5 @@
-﻿import { hasLength } from '@utils'
-import { ApiMessage, ApiResponder } from '@utils'
+﻿import { hasLength } from '@common-utils'
+import { ApiMessage, ApiResponder } from '@common-utils'
 import type { PostMessageRequest, PostMessageResponse } from '../../../common/types'
 import { MessageRepository } from './Message.repository'
 import { MessageSchema } from './Message.schema'

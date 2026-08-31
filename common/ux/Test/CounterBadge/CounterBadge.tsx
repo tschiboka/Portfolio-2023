@@ -1,5 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
-import type { Nullable } from '@utils'
+import type { Nullable } from '@common-utils'
 
 export class CounterBadgeAccessor extends Accessor {
     get Get() {

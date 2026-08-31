@@ -3,7 +3,6 @@ import type { MockInstance } from 'vitest'
 import axios from 'axios'
 import * as apiPathBuilderModule from '../../Path/apiPathBuilder'
 import { RequestBuilder } from '../Query'
-import { LocalSession } from '../../../../src/context/SessionContext'
 
 const mockedAxios = axios as unknown as {
     get: MockInstance
@@ -29,12 +28,6 @@ function mockApiPathBuilder() {
         if (pathName in projectRoutes) return `http://localhost:5000/${projectRoutes[pathName]}`
         return `http://localhost:5000/api/${apiRoutes[pathName]}`
     })
-}
-
-function mockLocalSession(token: string | null) {
-    vi.spyOn(LocalSession, 'getInstance').mockReturnValue({
-        get: () => (token ? { token } : null),
-    } as unknown as LocalSession)
 }
 
 describe('RequestBuilder', () => {
@@ -214,12 +207,8 @@ describe('RequestBuilder', () => {
     })
 
     describe('withAuthToken', () => {
-        beforeEach(() => {
-            mockLocalSession(TEST_TOKEN)
-        })
-
-        it('should set x-auth-token header from LocalSession token', async () => {
-            await new RequestBuilder('Message').withAuthToken().build().get()
+        it('should set x-auth-token header from the provided token', async () => {
+            await new RequestBuilder('Message').withAuthToken(TEST_TOKEN).build().get()
             expect(mockedAxios.get).toHaveBeenCalledWith(
                 expect.any(String),
                 expect.objectContaining({
@@ -228,18 +217,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('should prefer an explicit token override over LocalSession', async () => {
-            await new RequestBuilder('Message').withAuthToken('explicit-token').build().get()
-            expect(mockedAxios.get).toHaveBeenCalledWith(
-                expect.any(String),
-                expect.objectContaining({
-                    headers: { 'x-auth-token': 'explicit-token' },
-                }),
-            )
-        })
-
-        it('should not set header when no token is available', async () => {
-            mockLocalSession(null)
+        it('should not set a header when no token is provided', async () => {
             await new RequestBuilder('Login').withAuthToken().build().get()
             const config = mockedAxios.get.mock.calls[0][1]
             expect(config).not.toHaveProperty('headers')
@@ -435,10 +413,9 @@ describe('RequestBuilder', () => {
 
         it('put should call axios.put with url, payload, and config', async () => {
             const payload = { candle1: true }
-            mockLocalSession('tok')
             await new RequestBuilder('Gym')
                 .setSubpath('/candles')
-                .withAuthToken()
+                .withAuthToken('tok')
                 .build()
                 .put(payload)
             expect(mockedAxios.put).toHaveBeenCalledWith(
@@ -487,7 +464,6 @@ describe('RequestBuilder', () => {
 
     describe('full builder chain', () => {
         it('should combine setSubpath, setQuery, setParams, withAuthToken, and withHeader', async () => {
-            mockLocalSession('my-token')
             const mockBuilder = apiPathBuilderModule as { apiPathBuilder: ReturnType<typeof vi.fn> }
             mockBuilder.apiPathBuilder.mockReturnValueOnce(
                 'http://localhost:5000/api/messages/:orgId',
@@ -497,7 +473,7 @@ describe('RequestBuilder', () => {
                 .setSubpath('/inbox')
                 .setParams({ orgId: 'acme' })
                 .setQuery({ userId: '42' })
-                .withAuthToken()
+                .withAuthToken('my-token')
                 .withHeader('x-correlation-id', 'abc-123')
                 .build()
                 .get()
@@ -521,11 +497,10 @@ describe('RequestBuilder', () => {
             expect(builder.appendParams({})).toBe(builder)
             expect(builder.removeParams()).toBe(builder)
             expect(builder.resetParams()).toBe(builder)
-            expect(builder.setQuery({})).toBe(builder)
             expect(builder.appendQuery({})).toBe(builder)
             expect(builder.removeQuery()).toBe(builder)
             expect(builder.resetQuery()).toBe(builder)
-            expect(builder.withAuthToken()).toBe(builder)
+            expect(builder.withAuthToken(TEST_TOKEN)).toBe(builder)
             expect(builder.withHeader('k', 'v')).toBe(builder)
             expect(builder.removeHeader('k')).toBe(builder)
             expect(builder.resetHeaders()).toBe(builder)

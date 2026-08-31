@@ -14,12 +14,12 @@
         "resolveJsonModule": true,
         "sourceMap": true,
         "paths": {
-            "@types": ["../common/types"],
-            "@types/*": ["../common/types/*"],
-            "@ux": ["../common/ux"],
-            "@ux/*": ["../common/ux/*"],
-            "@utils": ["../common/utils"],
-            "@utils/*": ["../common/utils/*"]
+            "@common-types": ["../common/types"],
+            "@common-types/*": ["../common/types/*"],
+            "@common-ux": ["../common/ux"],
+            "@common-ux/*": ["../common/ux/*"],
+            "@common-utils": ["../common/utils"],
+            "@common-utils/*": ["../common/utils/*"]
         }
     },
     "include": ["./**/*.ts"],

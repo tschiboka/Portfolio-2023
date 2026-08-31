@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { MessageModel } from './Message.model'
 import type { IMessage } from './Message.types'
 

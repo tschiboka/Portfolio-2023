@@ -1,7 +1,7 @@
 ﻿import type { SessionState, Level, LevelWord } from '../../types'
 
-import { isDefined } from '@utils'
-import { Arrays } from '@utils'
+import { isDefined } from '@common-utils'
+import { Arrays } from '@common-utils'
 import { produce } from 'immer'
 import { levelPersistance } from '../../infrastructure/persistence/db/level'
 import { LevelWordStatuses } from '../../config/constants/game'

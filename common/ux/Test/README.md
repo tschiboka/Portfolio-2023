@@ -5,7 +5,7 @@
 Accessors **locate elements**, **expose direct state**, and **perform single user actions**. Nothing more.
 
 ```ts
-import { Test } from '@ux'
+import { Test } from '@common-ux'
 ```
 
 ---
@@ -193,7 +193,7 @@ await overlay.Do.close()
 ```ts
 expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
 expect(TestScreen.Has.navigated()).toBe(false)
-await TestScreen.Wait.navigatedTo('/api/index')
+await TestScreen.Wait.navigatedTo('/api/home')
 ```
 
 ### Server mocking
@@ -447,7 +447,7 @@ export const TestError = {
 ```
 
 - `TestError.notFound('Form("Login").Input("Email")')` → `Form("Login").Input("Email"): not found`
-- `TestError.navigation('/api/index', '/api/login')` → `Expected navigation to "/api/index", actual: "/api/login"`
+- `TestError.navigation('/api/home', '/api/login')` → `Expected navigation to "/api/home", actual: "/api/login"`
 
 ### `MockBuilder`
 

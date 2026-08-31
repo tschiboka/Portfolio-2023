@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { Pill } from '../Pill'
-import { Test } from '@ux/Test'
+import { Test } from '@common-ux/Test'
 
 describe('Pill', () => {
     it('should render the label', () => {

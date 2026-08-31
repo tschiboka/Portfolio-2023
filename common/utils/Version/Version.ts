@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { DateTime } from '@utils'
-import type { Nullable } from '@utils'
+import { DateTime } from '@common-utils'
+import type { Nullable } from '@common-utils'
 import { GetVersionResponse } from '../../types'
 
 export const useVersionCheck = () => {

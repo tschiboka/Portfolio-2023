@@ -3,8 +3,8 @@
     GetLikeResponse,
     PostLikeResponse,
 } from '../../../common/types'
-import { ApiResponder } from '@utils'
-import { DateTime } from '@utils'
+import { ApiResponder } from '@common-utils'
+import { DateTime } from '@common-utils'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
 import { LikeRepository } from './Like.repository'
 import { LikeSchema } from './Like.schema'

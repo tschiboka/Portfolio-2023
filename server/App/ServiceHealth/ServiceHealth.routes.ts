@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import type { ServiceHealthRes } from './ServiceHealth.types'
 
 const router = express.Router()

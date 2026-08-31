@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { LogModel } from './Log.model'
 import type { ILog } from './Log.types'
 

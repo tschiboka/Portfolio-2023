@@ -1,0 +1,19 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+@use '@shared-styles/palette.scss';
+@use '@shared-styles/font_sizes.scss';
+@use '@shared-styles/animations.scss';
+
+.ZoomedImage {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        padding: 0;
+        object-fit: contain;
+        @include bp.md {
+            padding: 1.5rem;
+        }
+    }
+}

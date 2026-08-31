@@ -1,6 +1,6 @@
 ﻿import express from 'express'
 import { auth } from '../../App/Users/Users.middlewares'
-import { ApiResponder, ApiMessage } from '@utils'
+import { ApiResponder, ApiMessage } from '@common-utils'
 import { MessageSchema, CandleSchema } from './Xmas.schema'
 import { XmasMessageModel, XmasCandleModel } from './Xmas.model'
 import { UsersModel } from '../../App/Users/Users.model'
@@ -18,7 +18,7 @@ import type {
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
 } from '../../../common/types'
-import { isEmpty } from '@utils'
+import { isEmpty } from '@common-utils'
 
 const router = express.Router()
 

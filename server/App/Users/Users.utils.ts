@@ -1,5 +1,5 @@
 ﻿import { Resend } from 'resend'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 
 const appUrl = (): string =>
     process.env.NODE_ENV === 'development' ? 'http://localhost:5173' : 'https://tschiboka.com'

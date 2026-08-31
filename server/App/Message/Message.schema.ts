@@ -1,5 +1,5 @@
 ﻿import Joi from 'joi'
-import { isDigits } from '@utils'
+import { isDigits } from '@common-utils'
 import type { MessageInput } from './Message.types'
 import { MessageFieldLimits } from './Message.constants'
 

@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { LikeService } from './Like.service'
 import type { GetLikeReq, GetLikeRes, PostLikeReq, PostLikeRes } from './Like.types'
 

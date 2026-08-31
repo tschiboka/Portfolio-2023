@@ -1,4 +1,4 @@
-import type { UrlDecode, UrlEncode } from '@utils'
+import type { UrlDecode, UrlEncode } from '@common-utils'
 import type { DropdownOption } from '../TableInputs/TableDropdown'
 
 type BaseFilterConfig = {

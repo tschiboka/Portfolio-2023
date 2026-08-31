@@ -11,7 +11,7 @@ import { validateLevel } from '../validation/level'
 import { levelPersistance } from '../../../infrastructure/persistence/db/level'
 import { ApiResponder, ApiMessage } from '../../../../../../common/utils/Server'
 import { ApiTransformers } from '../../../../../../common/utils/Transformer'
-import { isEmpty } from '@utils'
+import { isEmpty } from '@common-utils'
 
 type GetLevelsRes = TypedResponse<GetWdaLevelsResponse | WdaErrorResponse>
 async function handleListLevels(_req: TypedRequest, res: GetLevelsRes) {

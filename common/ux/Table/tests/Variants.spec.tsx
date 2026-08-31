@@ -1,4 +1,4 @@
-import { Test } from '@ux/Test'
+import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { rows } from './Table.mocks'
 

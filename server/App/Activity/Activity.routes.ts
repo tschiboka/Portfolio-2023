@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { auth, admin } from '../Users/Users.middlewares'
 import { ActivityService } from './Activity.service'
 import type { GetActivityFeedReq, GetActivityFeedRes } from './Activity.types'

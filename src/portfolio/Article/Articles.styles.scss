@@ -1,0 +1,21 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/font_sizes.scss' as font;
+@use '@shared-styles/animations.scss' as animations;
+
+// Every common blog style here
+.blog-component {
+    overflow-x: hidden;
+
+    article:not(.BlogCard) {
+        margin: 0 auto;
+        padding: 0;
+
+        max-width: 1200px;
+    }
+
+    strong.bold {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+    }
+}

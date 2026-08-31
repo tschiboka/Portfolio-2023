@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { ScheduleAuth } from './Schedule.auth'
 import { ScheduleService } from './Schedule.service'
 import type { PostDailyBreakdownReq, PostDailyBreakdownRes } from './Schedule.types'

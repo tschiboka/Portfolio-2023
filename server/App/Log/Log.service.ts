@@ -5,8 +5,8 @@
     DeleteLogResponse,
     Log,
 } from '../../../common/types'
-import { ApiTransformers } from '@utils'
-import { Paging } from '@utils'
+import { ApiTransformers } from '@common-utils'
+import { Paging } from '@common-utils'
 import { LogRepository } from './Log.repository'
 
 /** Business logic for logs â€” persistence via the repository. */

@@ -1,0 +1,13 @@
+@use '@shared-styles/palette.scss' as palette;
+
+.codewars {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.codewars-img {
+    max-width: 100%;
+    width: 400px;
+    border-radius: 4px;
+}

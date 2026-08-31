@@ -2,7 +2,7 @@ import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } fro
 import type { TableFilteringInput, TableFiltering } from '../Table.types'
 import { FilterInput } from './FilterInput'
 import './TableFilterPanel.styles.css'
-import type { Dictionary } from '@utils'
+import type { Dictionary } from '@common-utils'
 
 type FilterValues = Dictionary
 

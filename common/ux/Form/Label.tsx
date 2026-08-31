@@ -1,5 +1,5 @@
 import type { AccessibleProps } from '../index.types'
-import { Const } from '@ux'
+import { Const } from '@common-ux'
 import './Form.styles.css'
 
 type LabelProps = AccessibleProps & {

@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { UsersAuth } from '../Users/Users.auth'
 import { auth } from '../Users/Users.middlewares'
 import { CategoryService } from './Category.service'

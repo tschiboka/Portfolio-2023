@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { CellMeta, TableSelection } from '../Table.types'
-import { hasLength, includesAll } from '@utils'
+import { hasLength, includesAll } from '@common-utils'
 
 type SelectionContext<TData extends Record<string, ReactNode>, TContext> = {
     data: TData[]

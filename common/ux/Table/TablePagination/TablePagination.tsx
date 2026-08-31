@@ -1,8 +1,8 @@
 import type { TablePagination as TablePaginationProps } from '../Table.types'
 import { TableDropdown } from '../TableInputs/TableDropdown'
-import { Table } from '@utils'
+import { Table } from '@common-utils'
 import './TablePagination.styles.css'
-import { isDefined } from '@utils'
+import { isDefined } from '@common-utils'
 
 export const TablePagination = ({
     pageNumber,

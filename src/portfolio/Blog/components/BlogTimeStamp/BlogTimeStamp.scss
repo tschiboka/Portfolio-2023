@@ -1,0 +1,17 @@
+@use '@shared-styles/breakpoints.scss' as bp;
+@use '@shared-styles/font_sizes.scss' as font;
+
+.BlogTimeStamp {
+    margin: 3rem 0 0 0;
+    p.BlogTimeStamp__text {
+        text-align: center;
+        font-style: italic;
+        font-size: font.$font_sm;
+        @include bp.lg {
+            font-size: font.$font_md;
+        }
+    }
+    time {
+        font-weight: bold;
+    }
+}

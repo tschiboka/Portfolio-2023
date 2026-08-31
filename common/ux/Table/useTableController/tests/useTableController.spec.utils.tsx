@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { MemoryRouter, useLocation, useSearchParams } from 'react-router-dom'
 import { useTableController } from '../useTableController'
-import { Arrays } from '@utils'
+import { Arrays } from '@common-utils'
 import type { Filters } from './useTableController.spec.types'
 import { filterDefs } from './useTableController.mocks'
 

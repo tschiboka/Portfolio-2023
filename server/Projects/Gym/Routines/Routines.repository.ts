@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { RoutineModel } from './Routines.models'
 import type { IGymRoutine } from './Routines.types'
 

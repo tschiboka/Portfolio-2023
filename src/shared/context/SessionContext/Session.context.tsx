@@ -1,0 +1,50 @@
+import { createContext, useEffect, useState } from 'react'
+import type { Optional } from '@common-utils'
+import { Session, SessionContextValues } from './SessionContext.types'
+import { LocalSession } from './LocalSession'
+import { useRehydrateSessionResources } from './Session.query'
+
+type SessionContextProviderProps = {
+    children: React.ReactNode
+}
+
+export const SessionContext = createContext<Optional<SessionContextValues>>(undefined)
+
+export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ children }) => {
+    const [session, setSession] = useState<Session>()
+    const localSession = LocalSession.getInstance().get() || {}
+
+    const token = localSession?.token || session?.token
+    const { data: sessionRehydrateData, ...sessionRehydrateResponse } =
+        useRehydrateSessionResources(token)
+
+    const isAuthLoading =
+        !!token &&
+        (sessionRehydrateResponse.isLoading || !session) &&
+        !sessionRehydrateResponse.isError
+    const isAuthenticated = Boolean(session?.user)
+
+    const contextValues: SessionContextValues = {
+        session,
+        isAuthLoading,
+        isAuthenticated,
+        setSession,
+    }
+
+    useEffect(() => {
+        if (session) {
+            LocalSession.getInstance().set({ ...session })
+        }
+    }, [session])
+
+    useEffect(() => {
+        const response = sessionRehydrateData?.data
+
+        if (token && sessionRehydrateResponse.isSuccess && response?.user) {
+            const { user, settings } = response
+            setSession({ user, settings, token })
+        }
+    }, [token, sessionRehydrateResponse.isSuccess, sessionRehydrateData])
+
+    return <SessionContext.Provider value={contextValues}>{children}</SessionContext.Provider>
+}

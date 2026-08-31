@@ -1,4 +1,4 @@
-import { Test, Accessor } from '@ux/Test'
+import { Test, Accessor } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 

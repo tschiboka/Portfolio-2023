@@ -1,4 +1,4 @@
-﻿import { ApiMessage, ApiResponder } from '@utils'
+﻿import { ApiMessage, ApiResponder } from '@common-utils'
 import { SettingsRepository } from './Settings.repository'
 import { SettingsSchema } from './Settings.schema'
 import type { SettingsInput } from './Settings.types'

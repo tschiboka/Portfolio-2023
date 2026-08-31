@@ -1,5 +1,5 @@
 ﻿import type { PostDailyBreakdownResponse } from '../../../common/types'
-import { DateTime } from '@utils'
+import { DateTime } from '@common-utils'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
 import { createMessage, sendEmail } from './Schedule.utils'
 import type { Breakdown } from './Schedule.types'

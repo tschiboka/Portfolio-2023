@@ -1,7 +1,7 @@
 # 0006 — FE file structure sweep
 
-> **Status:** In progress — alias migration, server restructure, asset distribution, and `common/` impurity sweep done (2026-08-30); feature-page moves / role-suffix / barrel / `App.tsx` work pending
-> **Last updated:** 2026-08-30
+> **Status:** In progress — alias migration, server restructure, asset distribution, `common/` impurity sweep, shared-components sweep, `routing/` dissolve + feature-route pattern, and app-page de-default done (2026-08-31); remaining role-suffix / barrel / `App.tsx`-composition / ARCHITECTURE updates pending
+> **Last updated:** 2026-08-31
 > **Created:** 2026-08-29
 
 ---
@@ -330,8 +330,9 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 - [ ] Delete empty `src/sharedComponents/Article/`
 - [ ] Add FE `App.tsx` composition root; slim `main.tsx` (§3.1)
 - [ ] Rename/fold `context/AppContext/App.context.tsx` naming trap
-- [x] Resolve `Nav/` + app-level component placement (§8) — moved whole Nav package to `src/components/Nav/`
+- [x] Resolve `Nav/` + app-level component placement (§8) — moved entire app-level shared set to `src/shared/components/` (`Nav`, `AccessGuard`, `Screen`, `Footer`, `PageSideMenu`, `ShareMenu`, `RouteError`, `VersionChecker`, `Figure`, `ZoomedImage`, `Overlay`); see §11.12
 - [x] Purify `common/ux/` — remove app imports from `Page`, `AccessGuard`, `Nav`/`MobileMenu`/`SubNav`, `SearchInput` (§11.5) — done: `colors→Const`, `Toggle` in, `Nav`/`AccessGuard`/`Page` moved out
+- [x] Dissolve `src/routing/` → routes into feature folders; unify on keyed-map + `XRoutesList` pattern (§11.13) — `App.routes`/`Projects.routes`/`Portfolio.routes` + `router.tsx`; `routing/` deleted; app `Index`→`Dashboard`→`Home` rename
 
 **Role suffixes** (per feature batch)
 
@@ -345,7 +346,7 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 
 - [ ] `.schema.ts` → `FeatureSchema` namespace (Contact, Categories, Xmas2025, ...)
 - [ ] `.columns.*` → `FeatureColumns` (BreakdownTable, Categories)
-- [ ] Main files → `export const Feature` (drop `export default`)
+- [x] Main files → `export const Feature` (drop `export default`) — partial: all 15 app pages + `Xmas2025` de-defaulted (§11.13); portfolio pages pending
 - [ ] `Blog.tsx` → export `Blog` (not `Blogs`)
 
 **Barrels & verify**
@@ -369,19 +370,21 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
 Domain aliases added across root `tsconfig.json`, `server/tsconfig.json`, `vite.config.ts`, `jest.config.cjs`:
 
 ```
-@types/*     → common/types/*
-@ux/*        → common/ux/*
-@utils/*     → common/utils/*
+@common-types/* → common/types/*
+@common-ux/*    → common/ux/*
+@common-utils/* → common/utils/*
 @app/*       → src/app/*
 @portfolio/* → src/portfolio/*
 @projects/*  → src/projects/*
 @public/*    → public/*
 ```
 
-- Server subset: `@types`, `@ux`, `@utils` (no FE domain aliases).
+- Server subset: `@common-types`, `@common-ux`, `@common-utils` (no FE domain aliases).
 - Each tool requires bare + wildcard patterns (tsconfig `paths`, jest `moduleNameMapper` regex).
 - `@common/*` dropped from tsconfig/vite/server (kept only in jest until `common/queries` leaves `common/`).
 - Bulk-migrated `@common/ux|utils|types` → domain aliases across FE + server.
+- **2026-08-31 rename:** the three short `@types/@ux/@utils` aliases were renamed to the
+  `@common-*` family (see §11.14) for symmetry with `@shared-*`.
 
 ### 10.3 Component/relocation + export fixes
 
@@ -450,7 +453,7 @@ Distribute static assets by domain ownership so each area owns the files it uses
 **Done:**
 
 - Created `src/app/assets/`, `common/ux/assets/`, `src/portfolio/assets/projects/`.
-- App chrome → `@app/assets` (`icon.svg`, `icon-light.svg`); updated `Logo.tsx`, `Footer.tsx`, `UnderConstruction.tsx`, `index.html`. Deleted dead `form-bg-pattern.png`.
+- App chrome → `@app/assets` (`icon.svg`, `icon-light.svg`); updated `Logo.tsx`, `Footer.tsx`, `UnderConstruction.tsx`, `index.html`. Deleted dead `form-bg-pattern.png`. **Corrected later (2026-08-30): icons + fonts are shared branding, not app chrome — moved to `src/shared/assets/`, alias `@shared-assets` (see §11.10).**
 - Portfolio loose → `@portfolio/assets` (`headshot_placeholder*`, `testing.png`, `thumbs_up.png`); updated `Welcome.tsx`, `Disclaimer.tsx`, `Signature.tsx`, `articles.ts`, `MessageAcknowledgement.tsx`. Deleted dead `placeholder_image.jpg`.
 - `about/` → `@portfolio/assets/about` (updated `About.tsx`, `RiffMaster.tsx`).
 - `certificates/` → `@portfolio/assets/certificates` (updated `Achievements.ts`).
@@ -468,7 +471,7 @@ Distribute static assets by domain ownership so each area owns the files it uses
 
 - **Blog files** → `@portfolio/assets/blog/files/` (`green-rooftop/` txt, `riffmaster/` txt+pdf, `sounds_with_howler/` 20 MP3). Updated imports: `RiffMaster.tsx` (`controller.txt`, `Dissertation_Online.pdf`), `GreenRooftop.tsx` (`green_rooftop.txt`), `SoundsWithHowler.tsx` (20 MP3).
 - **CV** → `@portfolio/assets/files/Tivadar_Debnar_CV_2023.pdf`; updated `HireIntro.tsx`.
-- **Fonts** → `@app/assets/fonts/` (13 ttf); `src/index.scss` `@font-face` `url()` refs updated to `@app/assets/fonts/`.
+- **Fonts** → `@app/assets/fonts/` (13 ttf); `src/index.scss` `@font-face` `url()` refs updated to `@app/assets/fonts/`. **Corrected later (2026-08-30): fonts → `@shared-assets/fonts/` (see §11.10).**
 - `src/assets/` now contains **only empty directories** (old skeleton `files/`, `fonts/`, `images/**`), zero files.
 - **Step 10 done** — deleted `src/assets/` entirely (removed the empty skeleton). The central dump is gone.
 
@@ -547,7 +550,7 @@ placement decision.
     - UxStories story: `UxStories/components/Toggles/` (`Toggles.tsx` +
       `Toggles.code.ts`), wired in `components/index.ts`, `stories.ts`
       (`/api/ux-stories/toggles`), `ApiRoutes.tsx`.
-    - Consumers `MobileMenu.tsx` + `SubNav.tsx` now `import { Toggle } from '@ux'`.
+    - Consumers `MobileMenu.tsx` + `SubNav.tsx` now `import { Toggle } from '@common-ux'`.
     - Deleted `src/components/sharedComponents/Toggle/`.
     - **Enhancements (same session):** `children` made optional (icon-less bare
       switch, `<Toggle__icon>` omitted when absent); `activeColor?: string` prop
@@ -624,6 +627,352 @@ one feature's private query. `src/common/queries/` is the app-level shared home.
 **Net result:** `common/ux` no longer imports any `src/` code. The impurity sweep
 (`colors`, `Toggle`, `Nav`, `AccessGuard`, `Page`) is complete. `tsc` clean,
 pages render.
+
+### 11.8 Portfolio feature move + wiring (2026-08-30)
+
+**Done — portfolio pages moved to `src/portfolio/` + barrel + router + named exports:**
+
+- Moved the portfolio page folders (`Home`, `About`, `Blog`, `Contact`,
+  `PrivacyPolicy`, `Projects`, `UnderConstruction`) into `src/portfolio/`
+  (alias `@portfolio`).
+- **Named exports** (ticket §3.4): `About`, `Blog`, `Contact`, `Home`,
+  `PrivacyPolicy` converted from `export default` to `export const`; `Blog`'s
+  component renamed `Blogs` → `Blog`. `Projects` was already named.
+- **New `src/portfolio/Portfolio.routers.ts`** — `PortfolioRoutes` array moved
+  out of `src/routing/PortfolioRoutes.tsx`; carries the page + blog-article +
+  `/clock` routes. Imports repointed to `./Home/Home` (etc.) and `../articles/*`.
+- **New `src/portfolio/index.ts`** barrel — re-exports the six pages +
+  `PortfolioRoutes`.
+- **Wiring:** `src/routing/routes.tsx` imports `PortfolioRoutes` from
+  `'../portfolio'`.
+- **`RouteError` decoupled (Option A, decided):** the shared `RouteError` used
+  to render `<Home>` verbatim — importing a now-feature-local portfolio page
+  into shared chrome (layering violation) and silently showing the homepage on
+  unknown routes. Rewritten as a real app-level 404 page ("404 — Page not
+  found" + home link) using `@ux` primitives (`Heading`, `Paragraph`, `Link`,
+  `Stack`) + colocated `RouteError.scss`. No `Home`/portfolio import remains.
+- **Moved-file import repair** (root cause: pages deepened from
+  `src/components/pages/X` → `src/portfolio/X`):
+    - `sharedComponents` refs → `components/sharedComponents` (page + test files);
+    - `articles` + `context` + `common/queries` refs shortened by one `..`;
+    - page imports in tests → named (`{ Blog }`, `{ Home }`, `{ Contact }`).
+- **Pending:** delete the now-orphaned `src/routing/PortfolioRoutes.tsx`
+  (superseded; `routes.tsx` no longer imports it). Requires terminal delete.
+
+**Deferred — WHOLE-APP ALIAS SWEEP (explicitly required, NOT yet done):**
+
+> **Every import across the ENTIRE app must be swept to use aliases. ALL app —
+> ALL imports.**
+
+Currently most cross-directory imports are relative (`../../components/...`,
+`../../articles/...`, `../common/queries`, `../../../context/...`), which are
+brittle and break every time a file moves. This ticket's page move is the
+latest instance of relative-path breakage. A later dedicated sweep must convert
+**all** relative imports app-wide to domain aliases:
+
+- `@portfolio/*` → `src/portfolio/*`
+- `@projects/*` → `src/projects/*`
+- `@app/*` → `src/app/*`
+- `@ux/*`, `@utils/*`, `@types/*` → `common/{ux,utils,types}/*`
+- `@public/*` → `public/*`
+
+Intra-folder/subfeature relative imports (`./X`, `../X` within the same feature)
+may stay relative; the sweep targets imports that cross feature/directory
+boundaries. The move here leaves `components/sharedComponents/` refs as
+relative temporarily because that folder is slated to dissolve into `common/ux`
+(ticket §3.2 — those become `@ux` in that batch), and a `@shared` alias was
+deliberately **not** added for a soon-dead target. This whole-app alias sweep is
+a distinct ticket so the current move stays small and reviewable.
+
+### 11.9 `src/shared/` + `@shared-*` aliases (DECIDED 2026-08-30 — Option 5)
+
+**Problem:** the portfolio move broke every SCSS `@use '...styles/...'` reference
+silently (Vite Sass only; Jest mocks CSS), and `src/common/queries` importers
+hang off fragile relative paths. Root `common/` (generic `ux/utils/types`) vs
+`src/common/` (app-level shared `queries`, `styles`) share the word "common",
+which is permanently confusing.
+
+**Decision — rename the folder to kill the ambiguity at the source (Option 5):**
+`src/common/` → **`src/shared/`**. "Shared" is the word that actually separates
+app-level cross-cutting code (`src/shared`) from root-generic `common/`. Alias
+the concrete subfolders, not the whole folder.
+
+```text
+@shared-styles  → src/shared/styles   (moved from src/styles/: animations, breakpoints, font_sizes, mixins, palette, shadows)
+@shared-queries → src/shared/queries  (moved from src/common/queries/: index, Likes.queries, Visits.queries)
+```
+
+**Rejected alternatives (why):**
+
+- `src/app-shared/` — more explicit but longer; `shared` alone is sufficient.
+- `@app-styles`/`@app-queries` — collides conceptually with `@app → src/app`.
+- `@common-styles`/`@common-queries` — `common` prefix still reads like
+  root-generic `common/`.
+- `@styles`/`@queries` — clean short form, but loses the shared provenance.
+- Keep `src/common/` and alias in place — doesn't remove the word "common",
+  the root-vs-src confusion persists.
+
+**Scope to convert (this batch):**
+
+- `src/common/` → `src/shared/` (folder rename; currently holds `queries/`).
+- `src/styles/` → `src/shared/styles/` (folder move).
+- All **41 SCSS** `@use '...styles/*'` → `@use '@shared-styles/*'` (namespaces
+  preserved: `as bp/palette/font/shadows/animations`).
+- `src/index.scss` `@use './styles/*'` → `@use '@shared-styles/*'`.
+- All **9** `...common/queries` importers → `@shared-queries`.
+- Config: `vite.config.ts` `resolve.alias`, root `tsconfig.json` `paths`,
+  `jest.config.cjs` `moduleNameMapper` (map `^@shared-styles/(.*)$`,
+  `^@shared-queries/(.*)$`).
+
+**Naming convention adopted:** `@shared-*` = app-level cross-cutting shared
+(`src/shared/*`); root-generic `common/` uses `@common-ux/@common-utils/@common-types`
+(renamed from `@ux/@utils/@types` on 2026-08-31, see §11.14). Vite
+resolves `resolve.alias` inside Sass `@use`, so dev/build works; Jest needs
+nothing for SCSS (mocked) beyond the mapper for any TS-side `@shared-queries`.
+
+**EXECUTED (2026-08-30):** `tsc` green.
+
+- Folders: `src/common/` → `src/shared/` (holds `queries/` + `styles/`);
+  `src/styles/` → `src/shared/styles/`.
+- Config: `@shared-styles` + `@shared-queries` aliases added to
+  `vite.config.ts`, root `tsconfig.json`, `jest.config.cjs`.
+- All **40 SCSS + `src/index.scss`** `@use` → `@shared-styles/*`; all **9**
+  `common/queries` importers → `@shared-queries`. No live relative `styles/` or
+  `common/queries` refs remain.
+- tsc fixes during verification: `HireIntro.tsx` `common/ux` depth (5-up was
+  pre-move; 4-up now); `BlogCard.tsx` `getColourName` → moved portfolio path;
+  deleted superseded `src/routing/PortfolioRoutes.tsx`.
+- Alias resolution verified by `tsc` (the `Screen.spec.tsx` `any` on
+  `import * as @shared-queries` is an editor-diagnostic lag only, not a tsc
+  error).
+
+### 11.10 `@shared-assets` — app chrome corrected to shared branding (2026-08-30)
+
+**Decision:** `src/app/assets/` (`icon.svg`, `icon-light.svg`, `fonts/` × 13)
+was classed as "app chrome → `@app/assets`" (§11.1/§11.4), but audit showed it
+is **shared branding**, not app-scaffolding-private: consumed by `Logo.tsx`
+(app nav), `Footer.tsx` (shared), `UnderConstruction.tsx` (portfolio), plus the
+root `index.html` and global `index.scss` `@font-face`. Moved to
+`src/shared/assets/`, new alias `@shared-assets` → `src/shared/assets`
+(wired in vite/tsconfig/jest). Consumers repointed: `Logo.tsx` (2), `Footer.tsx`
+(1), `UnderConstruction.tsx` (1) via `@shared-assets/...`; `index.html` (2)
+via physical `/src/shared/assets/...` (html can't use aliases); `index.scss` (6
+`@font-face`) via `@shared-assets/fonts/...`. `src/app/` no longer holds assets.
+`@shared-*` = cross-cutting shared used by app+projects+portfolio.
+
+### 11.11 `Article/` feature restructure + barrel (2026-08-30)
+
+**Moved** blog article content from `src/articles/` → `src/portfolio/Article/`
+(feature root): `Article.tsx` shell, `articles.ts` registry (`blogArticles` +
+`BlogArticle`), `references.ts` (`getReferenceList`), and all 14 article
+content folders + `TemplateArticle/` (flat under `Article/`). The shell
+`Article` (previously `components/sharedComponents/Article/Article`) was **only
+consumed by the article pages**, so it left `sharedComponents` — it's
+blog-article-specific, not generic shared.
+
+**New barrel** `src/portfolio/Article/index.ts` re-exports the registry
+(`blogArticles`, `BlogArticle`, `getReferenceList`) and all 14 article page
+components (all **named** exports — see default→named note below).
+
+**Import repair — via `@portfolio/Article` alias** (not relative) for
+cross-folder consumers: `Blog/utils.ts`, `Blog/spec.tsx` (already aliased by
+user), shared `BlogCard.tsx` + `SuggestedArticles.tsx`. `Article.tsx` internal
+registry imports stay same-folder relative (`./articles`, `./references`); the
+router (`Portfolio.routes.tsx`) uses the `./Article` barrel (same feature); the
+14 article pages import the shell via intra-feature `../Article`. Fixed
+`Article.tsx` scss bug: `./Articles.scss` → `./Articles.styles.scss`.
+
+**Layering note (pre-existing, revisit):** shared `BlogCard`/`SuggestedArticles`
+import `@portfolio/Article` — a shared → feature edge; aliased for now, but
+these blog-UI components may belong in the blog domain.
+
+**Completed (2026-08-30):**
+
+- **Default → named exports** (ticket §3.4): all 14 article page components +
+  the `Article` shell converted from `export default X` → `export const X`;
+  article pages now `import { Article } from '../Article'`; the barrel uses
+  plain named re-exports (no `export { default as X }`). Only the
+  `codeSnippets.ts/.tsx` **data** modules remain default (data, not components;
+  separate scoped decision).
+- **Depth-repair (moved one level deeper):** the 12 article pages'
+  `'../../components/sharedComponents/…'` → `'../../../components/sharedComponents/…'`
+  (they sit at `src/portfolio/Article/<Name>/`, one deeper than the old
+  `src/articles/<Name>/`); `HookPattern` `context` import depth fixed.
+- **`references.ts` root cause** of the `Unsafe assignment of any` noise: it
+  imported `Reference` from `'../components/sharedComponents/…'` (too shallow →
+  `any`), cascading through every `references[N]`; fixed to
+  `'../../components/sharedComponents/References/References'`. Note the depth
+  differs by location: `Article/` root files need 2 ups, article pages 3 ups.
+
+### 11.12 `shared-components` — feature-local move + `@shared-components` alias (2026-08-30)
+
+**Decision:** eliminated `src/components/sharedComponents/` — it mixed
+feature-local and app-level components with no coherent owner. Adopted
+**`src/shared/components/`** (alias `@shared-components`, matching the
+`@shared-styles/queries/assets` family) as the home for genuinely cross-cutting
+app-level components, and moved feature-local components **into their owning
+feature**.
+
+**Placed in `src/shared/components/` (app-level / shared):** `Nav`, `AccessGuard`,
+`Screen`, `Footer`, `PageSideMenu`, `ShareMenu`, `RouteError`, `VersionChecker`,
+`Figure`, `ZoomedImage`, `Overlay`.
+
+**Moved feature-local → owning feature:**
+
+- `portfolio/About/components/` — `AchievementList` (+ `AchievementListItem`).
+- `portfolio/Blog/components/` — `BlogCard`, `SuggestedArticles`.
+- `portfolio/Article/components/` — `LikeButton`, `References`,
+  `InlineReference`, `Disclaimer`, `Figure`-wrapper.
+
+**Runtime findings during the sweep:**
+
+- `Overlay` was **not** a dead duplicate — `Screen` imports its named export
+  `FullScreenOverlay` (a thin `useAppContext` + `@ux/Overlay.FullScreen`
+  wrapper). It was restored at `src/shared/components/Overlay/` (adapted scss to
+  `@shared-styles/palette`). Only `LoadingIndicator` was a true duplicate of
+  `@ux`.
+- `Screen.tsx`'s `../Overlay/Overlay` dependency required restoring the folder
+  in the **new** shared location, not the old one.
+
+**Result:** `src/components/` fully removed. `@shared-components` alias added to
+`tsconfig.json` (paths), `vite.config.ts` (resolve.alias), `jest.config.cjs`
+(moduleNameMapper). All `AccessGuard`/`Nav` consumers repointed to
+`@shared-components/...`. `tsc` green.
+
+### 11.13 `routing/` dissolve + unified feature-route pattern (2026-08-31)
+
+**Decision:** dissolved `src/routing/` — routes now live **inside each feature**
+(`Feature.routes.tsx`) and all three features use the **same shape**: a keyed
+map (ergonomic access) + a derived array (for the router).
+
+**Standard pattern (applied to all three):**
+
+```ts
+export type XRoute = { name?: string; path: string; element: ReactElement }
+export const XRoutes: Dictionary<XRoute> = { Key: { path, element }, ... }
+export const XRoutesList: XRoute[] = Object.values(XRoutes)
+```
+
+- `src/app/App.routes.tsx` → `AppRoutes`/`AppRoutesList` (renamed from `ApiRoutes`; URLs stay `/api/*`).
+- `src/projects/Projects.routes.tsx` → `ProjectRoutes`/`ProjectRoutesList`.
+- `src/portfolio/Portfolio.routes.tsx` → `PortfolioRoutes`/`PortfolioRoutesList`.
+
+**Wiring:**
+
+- `router.tsx` spreads `...AppRoutesList, ...PortfolioRoutesList, ...ProjectRoutesList` + `RouteError` catchall.
+- Feature barrels export map + list + type (`export { XRoutes, XRoutesList, type XRoute }`).
+- Spec files use ergonomic keyed access: `TestScreen.Do.render({ path: AppRoutes.Login })`.
+
+**Design notes / decisions:**
+
+- `Dictionary<T> = Record<string, T>` annotation (not `satisfies`) — gives the map an
+  index signature so `Object.values` infers `T[]` cleanly, avoiding the `any`/generic workaround.
+- **Keyed map retained over plain array** because the app tests (and routing-by-name) need
+  `AppRoutes.Login` — earlier "array for consistency" call was reverted as it broke that ergonomics.
+- **`Index/` → `Dashboard/` → `Home/`** feature rename (component, props, sub-features
+  `AdminIndex`→`AdminDashboard`→`AdminHome`/`GuestIndex`→`GuestDashboard`→`GuestHome`, URL
+  `/api/index`→`/api/dashboard`→`/api/home`).
+  The `Index/`→`Dashboard/` step fixed a barrel `any` bug: a `Index/` directory colliding with
+  `index.ts` on Windows' case-insensitive FS made the whole `src/app` barrel resolve to `any`.
+  `Dashboard/`→`Home/` (2026-08-31) resolved a second naming collision: the landing page shared
+  the word "Dashboard" with the admin menu group — the landing is now `Home`/`GuestHome`/`AdminHome`.
+- **De-default sweep**: 15 app pages converted `export default` → `export const`; both `App.routes`
+  and the app barrel re-export named.
+- **Data note (decision, no action):** `Visit`/`Breakdown` store the route `path` as data.
+  Renaming `/api/index`→`/api/dashboard`→`/api/home` splits historical analytics (old
+  `/api/index` and `/api/dashboard` rows remain) — chosen deliberately to keep the DB truthful;
+  no migration, handle continuity at the view layer if needed.
+- `react-refresh/only-export-components` warns on `*.routes.*` (JSX-in-const). Accepted as expected;
+  no eslint override added.
+
+**Result:** `src/routing/` **deleted**. `main.tsx` imports `router` from `./router`.
+Keys for `AppRoutes` include `Home` (the renamed app landing); spec files updated
+(`Login.spec`/`Register.spec` → `AppRoutes.Login`/`AppRoutes.Register`; `Screen` test types → `@app`).
+
+### 11.14 `src/context/` dissolve → `src/shared/context/` + `@shared-context` alias (2026-08-31)
+
+**Decision:** removed the top-level `src/context/` bucket. Cross-cutting contexts
+(`AppContext`, `SessionContext`) now live in `src/shared/context/`, reachable via a
+new `@shared-context` alias. This dissolves the second root bucket of the old
+layout (after `routing/`) and keeps `common/` free of app state.
+
+**Alias added (all three configs — tsconfig.json `paths`, vite `resolve.alias`,
+jest `moduleNameMapper`):**
+
+```jsonc
+"@shared-context": ["./src/shared/context"],
+"@shared-context/*": ["./src/shared/context/*"]
+```
+
+**Moves:**
+
+- `src/context/SessionContext/` → `src/shared/context/SessionContext/`
+- `src/context/AppContext/` → `src/shared/context/AppContext/`
+
+**Leak A — `common/` purity (rejected `common/utils/Session`):**
+
+- `common/utils/Query/Query.ts` `withAuthToken(token?: string)` no longer falls back
+  to a `LocalSession`; it **requires the token explicitly**.
+- 9 query files now read the token from `Session.useContext().session?.token` and pass it
+  to `withAuthToken(...)`: `Categories`, `Admin`, `Home/WebsiteStats`, `Gym`,
+  `LevelCreator`, `Xmas2025` (multiple hooks each; `Login.query` already passed explicitly).
+- `Query.spec.ts` rewritten — removed `mockLocalSession`, tests pass explicit tokens.
+- A proposed `common/utils/Session/` module was **rejected** (too app-specific: `APP_KEY`,
+  `Session` type), reverted; `LocalSession` stays local to `shared/context/SessionContext/`.
+
+**Leak B — SessionContext self-contained:**
+
+- `useRehydrateSessionResources` moved from `app/Login/Login.query.ts` into
+  `shared/context/SessionContext/Session.query.ts` (passes the token explicitly via `withAuthToken`).
+- Removed from `Login.query.ts`; `Session.context.tsx` imports it from `./Session.query`.
+
+**Consumer repoint (~21 files):** `main.tsx`, `app/{Login,Logout}`, `projects/Xmas2025`,
+portfolio (`About/AchievementListItem`, `Article/HookPattern`, `Home/Welcome`), all
+`shared/components` contexts (`AccessGuard`, `Figure`, `Nav` family, `Overlay`, `Screen`)
+and test utils (`Nav.spec.utils`, `Screen.mocks`, `Screen.spec.types`, `Screen.spec.utils`)
+now import from `@shared-context/...`. `Logout` uses `@shared-context/SessionContext/LocalSession`.
+
+**Result:** `src/context/` **deleted**. `tsc --noEmit` passes; a transient
+`Cannot find module './LocalSession'` diagnostic in `Session.context.tsx` was stale
+TS-cache (same-folder `index.ts` resolves the identical import) and cleared on fresh rebuild.
+
+### Amendment — `@common-*` alias family (2026-08-31)
+
+Renamed the three short `common/` aliases to a symmetric `@common-*` family,
+mirroring `@shared-*`:
+
+```text
+@types  → @common-types   → common/types
+@ux     → @common-ux      → common/ux
+@utils  → @common-utils   → common/utils
+```
+
+- Applied in **all three configs** (tsconfig `paths`, vite `resolve.alias`,
+  jest `moduleNameMapper`), each with bare + wildcard entries.
+- All ~477 references across `common/`, `src/`, and `server/` migrated via
+  search-and-replace; `tsc` green.
+- **Removed** the stale jest-only `'^@common/(.*)$'` mapping (dead — nothing imported
+  `@common/...`; never defined in tsconfig/vite).
+- Grouping standardized across configs: **feature → `@common-*` → `@shared-*` → `@public`**.
+- Doc note: dated §11 narrative logs (pre-rename) still mention `@types/@ux/@utils`
+  verbatim as historical record; canonical alias table (§10.2) + naming convention (§11.9)
+  updated to the new family.
+
+### Amendment — `server/tsconfig.json` alias fix + import-ordering convention (2026-08-31)
+
+- **Server alias gap fixed:** `server/tsconfig.json` still defined the old
+  `@types/@ux/@utils` while migrated server code imported `@common-*` (resolved only via
+  the run tool's loose resolver). Updated `server/` to the `@common-*` family (bare +
+  wildcard), keeping BE resolving like FE. No old-alias imports remain in `server/`.
+- **Import-ordering convention adopted** in `ARCHITECTURE.md` §5.2 — order by **source,
+  not role**:
+    - **FE (4 tiers):** 1) external/third-party → 2) internal aliased (`@common-*`, `@app`,
+      `@shared-*`, …) → 3) relative (`./`, `../`) → 4) side-effect/asset (`'./x.scss'`, no bindings, last).
+    - **BE (3 tiers, reduced):** 1) external/node → 2) aliased internal (`@common-*`) → 3) relative local (`./`, `../`, incl. relative `common/`).
+    - Rationale: grouping by source is mechanical/enforceable; role-based tiers ("components"
+      vs "utils") force per-line judgement and would reorder existing interleaved imports.
+- **Next step (FE sweep):** a pass to check **each FE file** conforms to §5.2 ordering.
+  Out of scope for this batch; logged as the next sweep item.
 
 ## 12. Related docs / links
 

@@ -1,5 +1,5 @@
 ﻿import { EQUIPMENT_OPTIONS } from '../../../../common/types'
-import { Option } from '@utils'
+import { Option } from '@common-utils'
 import { muscleGroupOptions } from '../MuscleGroup/MuscleGroup.options'
 
 /** Option `value`s for muscle groups (used as the enum set for the muscle-group fields). */

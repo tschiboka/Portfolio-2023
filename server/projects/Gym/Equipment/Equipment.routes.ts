@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { equipmentOptions } from './Equipment.options'
 import type { GetEquipmentOptionsRes, GetEquipmentReq } from './Equipment.types'
 const router = express.Router()

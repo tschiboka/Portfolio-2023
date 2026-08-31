@@ -3,8 +3,8 @@
     GetVisitResponse,
     PostVisitResponse,
 } from '../../../common/types'
-import { ApiResponder } from '@utils'
-import { DateTime } from '@utils'
+import { ApiResponder } from '@common-utils'
+import { DateTime } from '@common-utils'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
 import { VisitRepository } from './Visit.repository'
 import { VisitSchema } from './Visit.schema'

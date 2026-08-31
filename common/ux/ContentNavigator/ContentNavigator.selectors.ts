@@ -1,5 +1,5 @@
-import { Arrays, Browser, hasLength } from '@utils'
-import { VisibilityEntry } from '@utils/Browser/useIsVisible'
+import { Arrays, Browser, hasLength } from '@common-utils'
+import { VisibilityEntry } from '@common-utils/Browser/useIsVisible'
 
 export const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
     entries

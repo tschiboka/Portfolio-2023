@@ -4,7 +4,7 @@ import {
     getSelectableIds,
     getAllSelected,
 } from '../TableCheckbox/TableCheckbox.selectors'
-import { Test } from '@ux/Test'
+import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { basicColumns, rows } from './Table.mocks'
 

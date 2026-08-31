@@ -1,5 +1,4 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
-import { LocalSession } from '../../../src/context/SessionContext'
 import { apiPathBuilder } from '../Path/apiPathBuilder'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'
@@ -130,12 +129,10 @@ export class RequestBuilder {
     // AUTH
     // -----------------------
     /**
-     * Sets the `x-auth-token` header using the provided token, or falls back
-     * to the session stored in {@link LocalSession}.
+     * Sets the `x-auth-token` header to the provided token, when present.
      */
     withAuthToken(token?: string): this {
-        const t = token ?? LocalSession.getInstance().get()?.token
-        if (t) this.headers['x-auth-token'] = t
+        if (token) this.headers['x-auth-token'] = token
 
         return this
     }

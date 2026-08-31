@@ -1,6 +1,6 @@
 ﻿import type mongoose from 'mongoose'
 import type { Document } from 'mongoose'
-import type { Nullable } from '@utils'
+import type { Nullable } from '@common-utils'
 import type {
     GetCategoryResponse,
     PostCategoryRequest,

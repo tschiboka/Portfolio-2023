@@ -1,0 +1,36 @@
+@use '@shared-styles/palette.scss' as palette;
+
+.Register {
+    width: 100%;
+
+    main {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .submit-error-message {
+        color: deeppink;
+    }
+
+    .submit-success-message {
+        color: aqua;
+    }
+}
+
+.light {
+    form {
+        background: palette.$white_3;
+    }
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

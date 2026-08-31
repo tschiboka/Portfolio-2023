@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 import type { FigureProps, FigureSource } from './Figure.types'
-import type { Optional } from '@utils'
+import type { Optional } from '@common-utils'
 import { Caption } from '../Typography'
 import './Figure.styles.css'
 

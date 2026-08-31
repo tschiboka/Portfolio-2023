@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { useVersionCheck } from '../Version'
 import { GetVersionResponse } from '../../../types'
-import { Functions } from '@utils'
+import { Functions } from '@common-utils'
 
 const VALID_SHA = 'a'.repeat(40)
 const OTHER_SHA = 'b'.repeat(40)

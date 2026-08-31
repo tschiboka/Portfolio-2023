@@ -1,6 +1,6 @@
 ﻿import fs from 'fs/promises'
 import path from 'path'
-import type { Nullable, Dictionary } from '@utils'
+import type { Nullable, Dictionary } from '@common-utils'
 
 type WordResources = {
     wordList: string[]

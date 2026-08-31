@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { Test } from '@ux/Test'
+import { Test } from '@common-ux/Test'
 import { Link } from '../Link'
 import type { LinkAsRoute, LinkAsAnchor } from '../Link.types'
 

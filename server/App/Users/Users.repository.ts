@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { UsersModel } from './Users.model'
 import type { IUser } from './Users.types'
 

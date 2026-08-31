@@ -1,4 +1,4 @@
-import type { Paging, TableSortState } from '@types'
+import type { Paging, TableSortState } from '@common-types'
 
 /** First page, 10 rows — applied when no pagination is configured. */
 export const TablePagingDefaults: Paging = { pageNumber: 1, pageSize: 10 }

@@ -1,5 +1,5 @@
 ﻿import type { ActivityEvent } from '../../../common/types'
-import { DateTime } from '@utils'
+import { DateTime } from '@common-utils'
 import type { IVisit } from '../Visit/Visit.types'
 import type { ILike } from '../Like/Like.types'
 import type { IMessage } from '../Message/Message.types'

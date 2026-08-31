@@ -7,11 +7,11 @@ import {
     TypedRequest,
     TypedResponse,
 } from '../../../common/types'
-import { ApiResponder } from '@utils'
+import { ApiResponder } from '@common-utils'
 import { TypistUserSettings } from './Typist.constants'
-import { isTruthy, isNonEmpty } from '@utils'
-import { Arrays } from '@utils'
-import { Strings } from '@utils'
+import { isTruthy, isNonEmpty } from '@common-utils'
+import { Arrays } from '@common-utils'
+import { Strings } from '@common-utils'
 
 const router = express.Router()
 

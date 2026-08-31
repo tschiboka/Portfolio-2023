@@ -1,1 +1,1 @@
-export { default as gymRouter } from './routes'
+export { GymRouter } from './Gym.routes.'

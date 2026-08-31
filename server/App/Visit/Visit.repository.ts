@@ -1,4 +1,4 @@
-﻿import { Repository } from '@utils'
+﻿import { Repository } from '@common-utils'
 import { VisitModel } from './Visit.model'
 import type { IVisit } from './Visit.types'
 
