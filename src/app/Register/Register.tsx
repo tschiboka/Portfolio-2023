@@ -6,11 +6,9 @@ import { Form, LoadingIndicator } from '@common-ux'
 import { registrationSchema } from './Register.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegistrationFormData } from './Register.types'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
-import { useRegisterApi } from './Register.query'
+import { ClientMessage, Paths, errorMessage } from '@common-utils'
+import { RegisterQueries } from './Register.query'
 import { useNavigate } from 'react-router-dom'
-import { ErrorResponse, PostUserResponse } from '@common-types'
 
 type RegisterProps = {
     path: string
@@ -19,7 +17,6 @@ type RegisterProps = {
 
 export const Register = ({ path, pageName }: RegisterProps) => {
     const navigate = useNavigate()
-    const { registerFormRequest } = useRegisterApi()
 
     const [revealPassword, setRevealPassword] = useState(false)
     const [registrationErrorMessage, setRegistrationErrorMessage] = useState('')
@@ -36,22 +33,15 @@ export const Register = ({ path, pageName }: RegisterProps) => {
         resolver: yupResolver(registrationSchema),
     })
 
-    const registerRequest = useMutation<
-        PostUserResponse,
-        AxiosError<ErrorResponse>,
-        RegistrationFormData
-    >({
-        mutationFn: async (data: RegistrationFormData) => {
-            const res = await registerFormRequest(data)
-            return res.data
-        },
+    const registerRequest = RegisterQueries.usePost({
         onSuccess: (response) => {
             setRegistrationErrorMessage('')
             setSuccessfulRegistration(response.message)
         },
-        onError: (error) => {
-            setRegistrationErrorMessage(error.response?.data?.message ?? error.message)
-        },
+        onError: (error) =>
+            setRegistrationErrorMessage(
+                errorMessage(error, ClientMessage.Failure.Create('account')),
+            ),
     })
 
     const submitHandler = (data: RegistrationFormData, event?: React.BaseSyntheticEvent) => {
@@ -127,7 +117,10 @@ export const Register = ({ path, pageName }: RegisterProps) => {
                         <p className="submit-success-message">{successfulRegistration}</p>
                     )}
                     <Form.ButtonGroup>
-                        <Form.Button variant="secondary" onClick={() => navigate('/api/login')}>
+                        <Form.Button
+                            variant="secondary"
+                            onClick={() => navigate(Paths.Client.Login)}
+                        >
                             Login
                         </Form.Button>
                         <Form.Button type="submit" disabled={Boolean(successfulRegistration)}>

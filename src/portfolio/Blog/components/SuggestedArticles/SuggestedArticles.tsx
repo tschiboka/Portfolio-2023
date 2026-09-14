@@ -1,15 +1,15 @@
 import BlogCard from '../BlogCard/BlogCard'
 import { blogArticles } from '@portfolio/Article'
 import './SuggestedArticle.scss'
-import { useGetLikeSummary, useGetVisitSummary } from '@shared-queries'
+import { LikesQueries, VisitsQueries } from '@shared-queries'
 
 interface Props {
     articles?: string[]
 }
 
 const SuggestedArticles = ({ articles }: Props) => {
-    const { data: visitsData } = useGetVisitSummary()
-    const { data: likesData } = useGetLikeSummary()
+    const { data: visitsData } = VisitsQueries.Summary.useGet()
+    const { data: likesData } = LikesQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null
     const likes = likesData?.likes ?? null
 

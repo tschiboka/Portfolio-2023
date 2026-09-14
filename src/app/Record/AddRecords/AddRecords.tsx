@@ -11,7 +11,7 @@ export const AddRecords = ({ path }: AddRecordProps) => {
             title={'tschiboka | Add Records'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Add Records"
         >
             <main className="AddRecords">

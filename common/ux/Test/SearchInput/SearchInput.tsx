@@ -1,13 +1,28 @@
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor, TestError } from '../Accessor/Accessor'
 
 export class SearchAccessor extends Accessor {
+    /** The SearchInput wrapper (`.wrapped-component`) — hosts the input + option dropdown. */
+    protected get wrapper(): HTMLElement {
+        const wrapper = this.element.closest('.wrapped-component')
+        if (!wrapper) throw TestError.notFound(this.context, '.wrapped-component')
+        return wrapper as HTMLElement
+    }
+
     get Get() {
         return {
             ...super.Get,
             icon: (): HTMLElement => this.scope.getByRole('button', { name: 'Search action' }),
-            dropdown: () => this.element.querySelector('.option-dropdown'),
-            options: () => this.element.querySelectorAll('.option'),
-            highlight: () => this.element.querySelector('.option .highlight'),
+            dropdown: () => this.wrapper.querySelector('.option-dropdown'),
+            options: () => this.wrapper.querySelectorAll('.option'),
+            highlight: () => this.wrapper.querySelector('.option .highlight'),
+            option: (name: string | RegExp): HTMLElement => {
+                const option = Array.from(this.wrapper.querySelectorAll('.option')).find((el) => {
+                    const text = (el as HTMLElement).textContent?.trim() ?? ''
+                    return typeof name === 'string' ? text === name : name.test(text)
+                })
+                if (!option) throw TestError.notFound(this.context, `option '${String(name)}'`)
+                return option as HTMLElement
+            },
         }
     }
 
@@ -19,10 +34,9 @@ export class SearchAccessor extends Accessor {
                 const inner = wrapper.firstElementChild as HTMLElement | null
                 await Accessor.user.click(inner ?? wrapper)
             },
-            selectOption: async (label: string, typeText: string, optionName: string | RegExp) => {
-                const input = this.scope.getByLabelText(label)
-                await Accessor.user.type(input, typeText)
-                const option = this.scope.getByText(optionName)
+            selectOption: async (typeText: string, optionName: string | RegExp) => {
+                await Accessor.user.type(this.element, typeText)
+                const option = this.Get.option(optionName)
                 await Accessor.user.click(option)
             },
         }

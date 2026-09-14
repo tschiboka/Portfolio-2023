@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Maybe } from 'monet'
-import { useAppContext } from '@shared-context/AppContext/App.context'
-import { Session } from '@shared-context/SessionContext'
+import { Session, AppHooks } from '@shared-context'
 import { MobileMenu } from './MobileMenu/MobileMenu'
 import { NavMenu } from './NavMenu'
 import { MenuItem, SubmenuState } from './Nav.types'
@@ -11,7 +10,7 @@ import { Logo } from './Logo'
 import { SocialLinks, SubNavTitle } from './PersonalContent'
 import { apiMenu, portfolioMenu, getMenuItemImage } from './menuData'
 
-export type PageVariant = 'portfolio' | 'api'
+export type PageVariant = 'portfolio' | 'app'
 
 type PageNavProps = {
     variant: PageVariant
@@ -19,11 +18,11 @@ type PageNavProps = {
 }
 
 export const PageNav = ({ variant, pageName }: PageNavProps) => {
-    const { mainMenuVisible, subMenuVisible, setSubMenuVisible } = useAppContext()
+    const { mainMenuVisible, subMenuVisible, setSubMenuVisible } = AppHooks.useContext()
     const [submenuStack, setSubmenuStack] = useState<SubmenuState[]>([])
 
-    const isApi = variant === 'api'
-    const items = isApi ? apiMenu : portfolioMenu
+    const isApp = variant === 'app'
+    const items = isApp ? apiMenu : portfolioMenu
 
     const handleItemClick = (item: MenuItem) => {
         Maybe.fromNull(item.submenu).cata(
@@ -43,22 +42,22 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
     }
 
     const sessionContext = Session.useContext()
-    const isAuthLoading = isApi ? sessionContext.isAuthLoading : false
+    const isAuthLoading = isApp ? sessionContext.isAuthLoading : false
 
     return (
         <>
             <NavMenu
                 items={items}
                 pageName={pageName}
-                visible={isApi ? true : mainMenuVisible}
-                isLoading={isApi ? isAuthLoading : false}
+                visible={isApp ? true : mainMenuVisible}
+                isLoading={isApp ? isAuthLoading : false}
                 submenu={submenuStack?.[0]}
                 renderImage={getMenuItemImage}
                 onItemClick={handleItemClick}
                 onSubmenuToggle={() => setSubMenuVisible(!subMenuVisible)}
                 logo={<Logo />}
             />
-            {isApi && Boolean(submenuStack.length) && (
+            {isApp && Boolean(submenuStack.length) && (
                 <SubmenuPanel
                     key={submenuStack[0].parentLabel}
                     submenu={submenuStack[0]}
@@ -72,8 +71,8 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
 }
 
 export const PageMobileMenu = ({ variant, pageName }: PageNavProps) => {
-    const isApi = variant === 'api'
-    const items = isApi ? apiMenu : portfolioMenu
+    const isApp = variant === 'app'
+    const items = isApp ? apiMenu : portfolioMenu
 
     return (
         <MobileMenu

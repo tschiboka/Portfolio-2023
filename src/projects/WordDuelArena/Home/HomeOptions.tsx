@@ -1,8 +1,8 @@
-import { OptionPanel, useModal } from '../common/components'
+import { OptionPanel, ModalHooks } from '../common/components'
 import { Functions } from '@common-utils'
 
 export const HomeOptions = () => {
-    const { setOpen } = useModal()
+    const { setOpen } = ModalHooks.useContext()
 
     return (
         <OptionPanel>

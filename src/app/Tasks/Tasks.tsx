@@ -23,7 +23,7 @@ export const Tasks = ({ path }: TaskProps) => {
             title={'tschiboka | Tasks'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Tasks"
         >
             <main className="Tasks">

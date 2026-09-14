@@ -1,15 +1,23 @@
-import { RegistrationFormData } from './Register.types'
-import { omit } from 'ramda'
-import { PostUserResponse } from '@common-types'
-import { Paths, Query } from '@common-utils'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { Query } from '@common-utils'
+import type { ErrorResponse } from '@common-utils'
+import type { PostUserRequest, PostUserResponse } from '@common-types'
 
-export const useRegisterApi = () => {
-    const registerRequest = new Query.RequestBuilder(Paths.Api.RegisterUser).build()
+type UsePostOptions = {
+    onSuccess?: (response: PostUserResponse) => void
+    onError?: (error: AxiosError<ErrorResponse>) => void
+}
 
-    return {
-        registerFormRequest: (data: RegistrationFormData) => {
-            const user = omit(['passwordConfirmation'])(data)
-            return registerRequest.post<PostUserResponse>(user)
-        },
-    }
+/** Registers a new user account. */
+const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+    const request = Query.FeatureQuery().path('RegisterUser').build()
+
+    return useMutation<PostUserResponse, AxiosError<ErrorResponse>, PostUserRequest>({
+        ...request.Post({ onSuccess, onError }),
+    })
+}
+
+export const RegisterQueries = {
+    usePost,
 }

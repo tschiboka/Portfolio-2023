@@ -50,9 +50,10 @@ export type TypedRequest<
 
 export type TypedResponse<T = unknown> = Response<T | ErrorResponse>
 
-// Generic error response for all API endpoints
+// Generic error response for all API endpoints — `message` is optional because a
+// failure may carry none; callers fall back to a client message via `errorMessage`.
 export type ErrorResponse = {
-    message: string
+    message?: string
 }
 
 // The minimal subset of a user that permission checks rely on (duck-typed: a User doc or token).

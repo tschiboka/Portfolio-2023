@@ -1,6 +1,6 @@
-import { SessionProvider } from './Session.context'
+import { SessionProvider } from './Session.provider'
 import { SessionGame } from './SessionGame/SessionGame'
-import { SessionWebSocketProvider } from './SessionWebSocket'
+import { SessionWebSocketProvider } from './SessionWebSocket.provider'
 import { Browser } from '@common-utils'
 import './Sessions.styles.css'
 

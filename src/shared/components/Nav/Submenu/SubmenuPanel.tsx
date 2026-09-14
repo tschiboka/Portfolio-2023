@@ -16,7 +16,7 @@ export const SubmenuPanel = ({
     setSubmenuStack,
     pageName,
 }: SubmenuPanelProps) => {
-    const [_, setCoords] = useState<Coordinates>(() => findParentMenuCoords(submenu?.parentLabel))
+    const [, setCoords] = useState<Coordinates>(() => findParentMenuCoords(submenu?.parentLabel))
 
     useEffect(() => {
         const updateCoords = () => setCoords(findParentMenuCoords(submenu?.parentLabel))

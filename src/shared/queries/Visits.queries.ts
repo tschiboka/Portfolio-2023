@@ -1,21 +1,42 @@
+import { useEffect } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
+import { detectIncognito } from 'detectincognitojs'
 import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common-types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common-utils'
+import { Browser, Query, QueryKey } from '@common-utils'
 
-export const postVisit = async (path: string): Promise<PostVisitResponse> => {
-    const request = new Query.RequestBuilder(Paths.Api.Visit).build()
+const postVisit = async (path: string): Promise<PostVisitResponse> => {
+    const request = new Query.RequestBuilder('Visit').build()
     const res = await request.post<PostVisitResponse>({ path })
     return res.data
 }
 
-export const usePostVisit = () =>
+const usePostVisit = () =>
     useMutation<PostVisitResponse, AxiosError, { path: string }>({
         mutationFn: ({ path }) => postVisit(path),
     })
 
-export const useGetVisits = (path: string) => {
-    const request = new Query.RequestBuilder(Paths.Api.Visit).setQuery({ path }).build()
+/**
+ * Records a visit for the given path, once per change. Skips local development
+ * and private browsing so local traffic and incognito sessions stay out of the stats.
+ *
+ * @example
+ * useRecordVisit(location.pathname)
+ */
+const useRecordVisit = (path: string) => {
+    const { mutate } = usePostVisit()
+
+    useEffect(() => {
+        if (!path || Browser.isLocalhost()) return
+
+        void detectIncognito().then((result) => {
+            if (!result.isPrivate) mutate({ path })
+        })
+    }, [path, mutate])
+}
+
+const useGetVisits = (path: string) => {
+    const request = new Query.RequestBuilder('Visit').setQuery({ path }).build()
 
     return useQuery<GetVisitResponse, AxiosError>({
         queryKey: QueryKey.Visits.byFilters({ path }).build(),
@@ -27,8 +48,8 @@ export const useGetVisits = (path: string) => {
     })
 }
 
-export const useGetVisitSummary = () => {
-    const request = new Query.RequestBuilder(Paths.Api.Visit).build()
+const useGetVisitSummary = () => {
+    const request = new Query.RequestBuilder('Visit').build()
 
     return useQuery<GetVisitSummaryResponse, AxiosError>({
         queryKey: QueryKey.Visits.build(),
@@ -37,4 +58,13 @@ export const useGetVisitSummary = () => {
             return res.data
         },
     })
+}
+
+export const VisitsQueries = {
+    usePost: usePostVisit,
+    useGet: useGetVisits,
+    useRecord: useRecordVisit,
+    Summary: {
+        useGet: useGetVisitSummary,
+    },
 }

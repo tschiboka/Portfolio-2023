@@ -1,4 +1,4 @@
-import { useGetVisits } from '@shared-queries'
+import { VisitsQueries } from '@shared-queries'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
 import { Link } from '@common-ux'
@@ -15,7 +15,7 @@ const getBreadCrumbPath = (breadcrumbs: string[], index: number) => {
 }
 
 const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
-    const { data: visitsData } = useGetVisits(path)
+    const { data: visitsData } = VisitsQueries.useGet(path)
     const visits = visitsPreLoaded ? (visitCount ?? 0) : (visitsData?.visits ?? 0)
     const noLeadingSlash = path.replace('/', '')
     const breadcrumbPaths = noLeadingSlash.split('/')

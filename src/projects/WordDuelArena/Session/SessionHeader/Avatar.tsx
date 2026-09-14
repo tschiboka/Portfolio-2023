@@ -1,6 +1,6 @@
 import BoyAvatar from '@projects/assets/wordduelarena/player_1.jpg'
 import GirlAvatar from '@projects/assets/wordduelarena/player_2.jpg'
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 
 type PlayerSlot = 'me' | 'opponent'
 
@@ -9,7 +9,7 @@ type SessionPlayerInfoProps = {
 }
 
 export const Avatar = ({ slot }: SessionPlayerInfoProps) => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     if (!sessionState?.players || !sessionState.role) return null
 
     const { role, players } = sessionState

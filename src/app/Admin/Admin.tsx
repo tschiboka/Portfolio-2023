@@ -1,47 +1,31 @@
 import { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { Button, Code, Heading, Main, Paragraph, Section, Spacer } from '@common-ux'
 import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@common-types'
 import { Screen } from '@shared-components/Screen/Screen'
 import type { Nullable } from '@common-utils'
-import { useAdminApi } from './Admin.query'
-import { BreakdownPreview, MOCK_BREAKDOWN } from './BreakdownPreview'
+import { AdminQueries } from './Admin.queries'
+import { BreakdownPreview, MockBreakdown } from './BreakdownPreview'
 
-interface AdminProps {
+type AdminProps = {
     path: string
 }
 
 export const Admin = ({ path }: AdminProps) => {
-    const { triggerDailyBreakdown, triggerBackfill } = useAdminApi()
     const [response, setResponse] = useState<Nullable<PostDailyBreakdownResponse>>(null)
     const [backfillResult, setBackfillResult] = useState<Nullable<PostBackfillResponse>>(null)
 
-    const { mutate: sendDailyBreakdown, isPending } = useMutation<
-        PostDailyBreakdownResponse,
-        AxiosError<ErrorResponse>
-    >({
-        mutationFn: async () => {
-            const res = await triggerDailyBreakdown()
-            return res.data
-        },
-        onSuccess: (data) => setResponse(data),
-        onError: (error) =>
+    const { mutate: sendDailyBreakdown, isPending } = AdminQueries.DailyBreakdown.usePost({
+        onSuccess: (res) => setResponse(res.data),
+        onError: (error: AxiosError<ErrorResponse>) =>
             setResponse({
                 success: false,
                 error: error.response?.data?.message ?? error.message,
             }),
     })
 
-    const { mutate: runBackfill, isPending: isBackfillPending } = useMutation<
-        PostBackfillResponse,
-        AxiosError<ErrorResponse>
-    >({
-        mutationFn: async () => {
-            const res = await triggerBackfill()
-            return res.data
-        },
-        onSuccess: (data) => setBackfillResult(data),
+    const { mutate: runBackfill, isPending: isBackfillPending } = AdminQueries.Backfill.usePost({
+        onSuccess: (res) => setBackfillResult(res.data),
     })
 
     return (
@@ -49,12 +33,11 @@ export const Admin = ({ path }: AdminProps) => {
             title={'tschiboka | Admin'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Admin"
         >
             <Main>
                 <Heading>Admin</Heading>
-
                 <Section title="Portfolio and API Daily Breakdown" expandable defaultOpen={false}>
                     <Paragraph>
                         You can trigger the daily breakdown manually or let it run automatically on
@@ -80,7 +63,7 @@ export const Admin = ({ path }: AdminProps) => {
                         <Paragraph>
                             This is a preview of the email that would be sent when triggering the
                         </Paragraph>
-                        <BreakdownPreview breakdown={MOCK_BREAKDOWN} />
+                        <BreakdownPreview breakdown={MockBreakdown} />
                     </Section>
                     <Section title="Backfill Breakdowns" expandable defaultOpen={false}>
                         <Paragraph>

@@ -3,22 +3,9 @@ const YELLOW_OUTLINE = '#926b00'
 const YELLOW_BRIGHT = '#ffe17d'
 
 export const Coin = () => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         {/* Coin base */}
-        <circle
-            cx="12"
-            cy="12"
-            r="10"
-            fill={YELLOW_BASE}
-            stroke={YELLOW_OUTLINE}
-            strokeWidth="2"
-        />
-
+        <circle cx="12" cy="12" r="10" fill={YELLOW_BASE} stroke={YELLOW_OUTLINE} strokeWidth="2" />
         {/* Top-left curved shine */}
         {/* ROTATED: start point and end point moved for light from top-left */}
         <path
@@ -29,7 +16,6 @@ export const Coin = () => (
             strokeWidth="2.5"
             strokeLinecap="round"
         />
-
         {/* Centered 5-point star */}
         <polygon
             fill={YELLOW_BRIGHT}

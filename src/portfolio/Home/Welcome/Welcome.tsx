@@ -1,11 +1,11 @@
 import headshot from '@portfolio/assets/home/headshot_placeholder.png'
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import { useNavigate } from 'react-router-dom'
 import './Welcome.scss'
 
 const Welcome = () => {
     const navigate = useNavigate()
-    const { subMenuVisible } = useAppContext()
+    const { subMenuVisible } = AppHooks.useContext()
 
     return (
         <div className={'Welcome' + (!subMenuVisible ? ' extended' : '')}>

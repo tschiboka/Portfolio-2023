@@ -1,4 +1,4 @@
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { LastWordAttempt } from '../Session.types'
 import { getCharClass } from './SessionHeader.selectors'
 
@@ -7,7 +7,7 @@ type AttemptWordProps = {
 }
 
 export const AttemptWord = ({ attempt }: AttemptWordProps) => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     if (!sessionState?.role) return null
 
     return (

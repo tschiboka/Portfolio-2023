@@ -14,7 +14,7 @@ export const Home = ({ path }: HomeProps) => {
             title={'tschiboka | Home'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Home"
             footerProps={{ info: <p>Xmas edition - 2025</p> }}
         >

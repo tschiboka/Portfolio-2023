@@ -4,13 +4,11 @@ import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgem
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 import { Form, Heading, LoadingIndicator, Main, Paragraph, Section } from '@common-ux'
-import { ErrorResponse, PostMessageResponse } from '@common-types'
+import { ClientMessage, errorMessage } from '@common-utils'
 import { ContactFormData } from './Contact.types'
 import { contactSchema, MAX_MESSAGE_CHARACTERS } from './Contact.schema'
-import { useContactApi } from './Contact.query'
+import { ContactQueries } from './Contact.query'
 import './Contact.scss'
 
 type ContactProps = {
@@ -19,8 +17,6 @@ type ContactProps = {
 }
 
 export const Contact = ({ pageName, path }: ContactProps) => {
-    const { sendMessageRequest } = useContactApi()
-
     const [submitErrorMessage, setSubmitErrorMessage] = useState('')
     const [showMessageAck, setShowMessageAck] = useState(false)
 
@@ -34,28 +30,13 @@ export const Contact = ({ pageName, path }: ContactProps) => {
         resolver: yupResolver(contactSchema),
     })
 
-    const sendMessage = useMutation<
-        PostMessageResponse,
-        AxiosError<ErrorResponse>,
-        ContactFormData
-    >({
-        mutationFn: async (data: ContactFormData) => {
-            const payload = {
-                name: data.name,
-                email: data.email.toLowerCase(),
-                phone: data.phone?.replace(/\D/g, '') || undefined,
-                message: data.message,
-            }
-            const res = await sendMessageRequest(payload)
-            return res.data
-        },
+    const sendMessage = ContactQueries.usePost({
         onSuccess: () => {
             setSubmitErrorMessage('')
             setShowMessageAck(true)
         },
-        onError: (error) => {
-            setSubmitErrorMessage(error.response?.data?.message ?? error.message)
-        },
+        onError: (error) =>
+            setSubmitErrorMessage(errorMessage(error, ClientMessage.Failure.Send('message'))),
     })
 
     const submitHandler = (data: ContactFormData, event?: React.BaseSyntheticEvent) => {
@@ -74,7 +55,6 @@ export const Contact = ({ pageName, path }: ContactProps) => {
             sideMenu={<PageSideMenu />}
         >
             {showMessageAck && <MessageAcknowledgement />}
-
             <Main className="contact">
                 <Heading as="h1" align="center">
                     Get in Touch!

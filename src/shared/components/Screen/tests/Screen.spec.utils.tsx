@@ -9,8 +9,7 @@ import { isString, isNonEmpty } from '@common-utils'
 import type { Optional } from '@common-utils'
 import { mockDefaultQueryOptions, mockDefaultSessionContext, mockNavigate } from './Screen.mocks'
 import type { AppRoute } from '@app'
-import { SessionContext } from '@shared-context/SessionContext/Session.context'
-import { AppContextProvider } from '@shared-context/AppContext/App.context'
+import { AppContextProvider, SessionContext } from '@shared-context'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: mockDefaultQueryOptions })
 
@@ -70,6 +69,10 @@ export const TestScreen = {
     },
     Do: {
         render: (options: ScreenSetupOptions) => {
+            // mockNavigate is module-level and shared by every spec that renders through
+            // TestScreen; clear it so a navigation assertion cannot read a previous test's call.
+            mockNavigate.mockClear()
+
             if (options.handlers?.length) {
                 server.use(...options.handlers.map((h) => h.build()))
             }

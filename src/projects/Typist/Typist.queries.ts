@@ -1,13 +1,26 @@
 import { useMutation } from '@tanstack/react-query'
-import { Keystroke, RoundResponse } from './Typist.types'
-import { Paths, Query, QueryKey } from '@common-utils'
+import { AxiosError } from 'axios'
+import { Query, QueryKey } from '@common-utils'
+import type { ErrorResponse } from '@common-utils'
+import type { Keystroke, PostTypistRoundResponse } from '@common-types'
 
-export const usePostRound = () => {
-    const request = new Query.RequestBuilder(Paths.Projects.Typist).setSubpath('/round').build()
+type PostRoundRequest = { keystrokes: Keystroke[] }
 
-    return useMutation<RoundResponse, Error, Keystroke[]>({
+type UsePostOptions = {
+    onSuccess?: (response: PostTypistRoundResponse) => void
+    onError?: (error: AxiosError<ErrorResponse>) => void
+}
+
+/** Submits a completed round of keystrokes. */
+const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+    const request = Query.FeatureQuery().path('Typist').group('Projects').build()
+
+    return useMutation<PostTypistRoundResponse, AxiosError<ErrorResponse>, PostRoundRequest>({
         mutationKey: QueryKey.TypistRound.build(),
-        mutationFn: async (keystrokes: Keystroke[]) =>
-            request.post<RoundResponse>({ keystrokes }).then((res) => res.data),
+        ...request.Post({ onSuccess, onError }),
     })
+}
+
+export const TypistQueries = {
+    usePost,
 }

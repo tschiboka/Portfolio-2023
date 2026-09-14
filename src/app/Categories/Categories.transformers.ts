@@ -1,8 +1,8 @@
 import { GetCategoryResponse } from '@common-types'
-import { icons } from './icons'
 import { SearchInputOption } from '@common-ux'
+import { icons } from './icons'
 
-export const getParents = {
+export const CategoriesTransformers = {
     fromApi: (categories: GetCategoryResponse[]): SearchInputOption[] =>
         categories.map((c) => ({
             label: c.name,

@@ -1,14 +1,16 @@
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils'
 import { isEmpty } from '@common-utils'
-import { useSession } from '../../Session.context'
+import { SessionHooks } from '../../Session.hooks'
 import { PlayableLevelWord } from '../../Session.types'
 import { SolvedSolutionWord, UnsolvedSolutionWord } from './SolutionWord'
 import './SolutionBoard.styles.css'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { getColumnConfig } from './SolutionBoard.utils'
 
+const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
+
 export const SolutionBoard = () => {
-    const { level } = useSession().sessionState || {}
+    const { level } = SessionHooks.useContext().sessionState || {}
     const words = level ? level.targetWords : []
     const boardRef = useRef<HTMLDivElement>(null)
     const [containerWidth, setContainerWidth] = useState(0)
@@ -27,15 +29,14 @@ export const SolutionBoard = () => {
         updateSize()
         window.addEventListener('resize', updateSize)
         return () => window.removeEventListener('resize', updateSize)
-    }, [boardRef.current])
+    }, [])
 
-    const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
-
-    const columns = useMemo(() => {
-        const column1 = words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) || []
-        const column2 = words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) || []
-        return { column1, column2 }
-    }, [words, MAX_WORDS_PER_COLUMN])
+    const flatWords = words.flat()
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- columns is derived from words on every render; the container sizes are the real inputs
+    const columns = {
+        column1: flatWords.filter((_, index) => index < MAX_WORDS_PER_COLUMN),
+        column2: flatWords.filter((_, index) => index >= MAX_WORDS_PER_COLUMN),
+    }
 
     const columnConfig = useMemo(
         () => getColumnConfig({ columns, containerWidth, containerHeight }),

@@ -1,6 +1,6 @@
 import { Achievement } from './Achievements'
 import { TbCertificate, TbZoomOutFilled } from 'react-icons/tb'
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import './AchievementListItem.scss'
 import ZoomedImage from '@shared-components/ZoomedImage/ZoomedImage'
 
@@ -10,7 +10,7 @@ interface Props {
 
 const AchievementListItem = ({ achievement }: Props) => {
     const { setOverlayVisible, setOverlayContent, setMainMenuVisible, setSubMenuVisible } =
-        useAppContext()
+        AppHooks.useContext()
 
     const displayZoomOverlay = (image?: string) => {
         if (!image) return
@@ -43,7 +43,6 @@ const AchievementListItem = ({ achievement }: Props) => {
             }}
         >
             <img src={achievement.image} alt={achievement.image_alt} />
-
             <span>
                 <span className="AchievementListItem__title">{achievement.title}, </span>
                 {achievement.details?.map((detail) => (

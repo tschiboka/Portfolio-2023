@@ -14,7 +14,7 @@ import { blogArticles } from './articles'
 // Styles
 import SuggestedArticles from '../Blog/components/SuggestedArticles/SuggestedArticles'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { useGetLikes } from '@shared-queries'
+import { LikesQueries } from '@shared-queries'
 import './Articles.styles.scss'
 
 interface Props {
@@ -30,7 +30,7 @@ export const Article = ({ pageName, path, title, children, hasContentNavigator =
     const [articleLiked, setArticleLiked] = useState(false)
     const references = getReferenceList(path)
 
-    const { data: likesData } = useGetLikes(path)
+    const { data: likesData } = LikesQueries.useGet(path)
     const likes = likesData?.likes ?? 0
 
     return (

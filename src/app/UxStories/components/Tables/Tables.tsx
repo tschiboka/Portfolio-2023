@@ -28,7 +28,7 @@ export const Tables = ({ path }: TablesProps) => (
     <Screen
         title={'tschiboka | Tables'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator

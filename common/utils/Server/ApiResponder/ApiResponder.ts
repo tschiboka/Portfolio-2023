@@ -2,7 +2,7 @@ import type { Response } from 'express'
 import type { Dictionary } from '../../Generics'
 import { isUndefined } from '../../Predicate'
 import { ApiError } from '../ApiError'
-import { ApiMessage } from '../ApiMessage'
+import { ApiMessage } from '../../Messages/ApiMessage'
 import { HttpStatus } from '../HttpStatus'
 import { resolveErrorMessage } from '../ResolveErrorMessage'
 

@@ -2,7 +2,7 @@ import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { InteractionOverlay } from '../SessionOverlay/SessionOverlay'
 import { Arrays } from '@common-utils'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { useEffect, useState } from 'react'
 import { GameControls } from './GameControls/GameControls'
 import { ExtraWords } from './ExtraWords/ExtraWords'
@@ -14,14 +14,14 @@ type SessionGameProps = {
 }
 
 export const SessionGame = ({ enterFullScreen, isFullscreen }: SessionGameProps) => {
-    const { level } = useSession().sessionState || {}
+    const { level } = SessionHooks.useContext().sessionState || {}
     const levelName = level?.name || ''
     const [inputLetters, setInputLetters] = useState<string>('')
     const [extraWordsOpen, setExtraWordsOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        if (level) {
-            const shuffledLetters = Arrays.shuffleArray(level.name.split('')).join('')
+        if (levelName) {
+            const shuffledLetters = Arrays.shuffleArray(levelName.split('')).join('')
             setInputLetters(shuffledLetters)
         }
     }, [levelName])

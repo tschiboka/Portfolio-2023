@@ -34,27 +34,30 @@ When uncertain, prefer the singular entity name.
 
 ```text
 Feature/
-├── Feature.tsx
-├── Feature.routes.tsx
-├── Feature.columns.tsx
+├── Feature.tsx              (primary file)
 ├── Feature.actions.ts
+├── Feature.business.md
+├── Feature.columns.tsx
+├── Feature.config.ts
+├── Feature.constants.ts
+├── Feature.context.ts
+├── Feature.controller.ts
+├── Feature.defaults.ts
 ├── Feature.filters.ts
+├── Feature.handlers.ts
+├── Feature.hooks.ts
+├── Feature.options.ts
+├── Feature.provider.tsx
+├── Feature.queries.ts
+├── Feature.routes.tsx
+├── Feature.schema.ts
+├── Feature.selectors.ts
 ├── Feature.styles.css
 ├── Feature.styles.scss
 ├── Feature.styles.ts
-├── Feature.types.ts
-├── Feature.schema.ts
 ├── Feature.transformers.ts
-├── Feature.selectors.ts
-├── Feature.controller.ts
-├── Feature.hooks.ts
-├── Feature.context.tsx
-├── Feature.queries.ts
+├── Feature.types.ts
 ├── Feature.utils.ts
-├── Feature.options.ts
-├── Feature.constants.ts
-├── Feature.defaults.ts
-├── Feature.config.ts
 ├── SubFeature/
 │   └── SubFeature.tsx
 ├── components/
@@ -69,6 +72,150 @@ Feature/
 ```
 
 Not every feature requires every file. Create files only when the corresponding role exists.
+
+## 1.2.1 Feature role returns
+
+Each role file returns a `Feature`-named symbol (`Feature<Role>`), typed and
+grouped where the role is a set. Adjust as conventions are added.
+
+| extension                      | returns                                                                                   | comment                                                                                                                                                                |
+| ------------------------------ | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Feature.tsx`                  | `Feature`                                                                                 | named export (no default)                                                                                                                                              |
+| `Feature.tsx` props            | `FeatureProps`                                                                            | top-level type in the same file, above the component — **never** moved to `.types.ts`                                                                                  |
+| `Feature.routes.tsx`           | `FeatureRoutes` + `FeatureRoutesList`                                                     | keyed map + derived array                                                                                                                                              |
+| `Feature.columns`              | `FeatureColumns`                                                                          | typed `TableColumns<T>`                                                                                                                                                |
+| `Feature.types.ts`             | named domain types                                                                        | `xyz` interfaces/aliases — **not** the main component's props (see `Feature.tsx` props)                                                                                |
+| `Feature.schema.ts`            | `FeatureSchema = { schema, validate }`                                                    | yup/Joi                                                                                                                                                                |
+| `Feature.queries.ts`           | `FeatureQueries.use<Verb>` per CRUD op; sub-feature `FeatureQueries.SubFeature.use<Verb>` | react-query, `use` prefix required                                                                                                                                     |
+| `Feature.styles.ts`            | `FeatureStyles: { name: CSSProperties }`                                                  | typed style set                                                                                                                                                        |
+| `Feature.styles.css` / `.scss` | class rules under `FeatureStyles` scope                                                   | plain CSS, feature-scoped                                                                                                                                              |
+| `Feature.utils.ts`             | `FeatureUtils`                                                                            | grouped helper functions                                                                                                                                               |
+| `Feature.constants.ts`         | `FeatureConstants` (cohesive) / `Feature<Name>` (distinct)                                | never bare consts                                                                                                                                                      |
+| `Feature.defaults.ts`          | `FeatureDefaults`                                                                         | default values                                                                                                                                                         |
+| `Feature.config.ts`            | `FeatureConfig`                                                                           | config                                                                                                                                                                 |
+| `Feature.hooks.ts`             | `FeatureHooks.useX` ≥2 hooks; `useX` for a single                                         | grouped custom hooks — includes `FeatureHooks.useContext`, re-exporting the `ContextBuilder` `Use`                                                                     |
+| `Feature.context.ts`           | `FeatureContext = ContextBuilder.CreateContext<Values>('Feature', initialValues)`         | one call supplying `Context`, `Provider` and `Use` — never a hand-rolled `createContext`                                                                               |
+| `Feature.provider.tsx`         | `FeatureContextProvider`                                                                  | only when the provider holds state; otherwise the builder's `Provider` is used directly                                                                                |
+| `Feature.transformers.ts`      | `FeatureTransformers`                                                                     | grouped mappers                                                                                                                                                        |
+| `Feature.options.ts`           | `FeatureOptions`                                                                          | options/choices                                                                                                                                                        |
+| `Feature.actions.ts`           | `FeatureActions` (factory → `TableAction<T>[]`)                                           | table row actions (`id`/`label`/`onClick`/`href`/`filter`) — not form/event handlers                                                                                   |
+| `Feature.handlers.ts`          | `FeatureHandlers`                                                                         | group of form/event handlers (e.g. `submit`) orchestrating form→mutation                                                                                               |
+| `Feature.filters.ts`           | `FeatureFilters`                                                                          | filter builders                                                                                                                                                        |
+| `Feature.selectors.ts`         | `FeatureSelectors`                                                                        | selectors                                                                                                                                                              |
+| `Feature.controller.ts`        | `FeatureController`                                                                       | controller                                                                                                                                                             |
+| `Feature.business.md`          | `–` (none)                                                                                | documentation only — business rules / why, no code symbol; non-executable                                                                                              |
+| `tests/Feature.mocks.ts`       | `FeatureMocks`                                                                            | grouped fixture data, e.g. `FeatureMocks.resourceName`                                                                                                                 |
+| `tests/Feature.mockHandles.ts` | `FeatureMockHandlers.<SubFeature>.<Verb>`                                                 | **unbuilt** MSW `RequestBuilder`s (never `.build()`); umbrella grouped subfeature → verb (`Post`, `PostError`); `Defaults` holds the spec's handler set                |
+| `tests/Feature.spec.utils.ts`  | `FeatureTestUtils`                                                                        | **one umbrella** — `labels` + `customRender(handlers = FeatureMockHandlers.Defaults)` + interaction helpers; everything above `describe` lives here, never in the spec |
+
+## 1.2.2 Testing
+
+Tests live in the feature `tests/` folder. **Not every file needs a direct
+spec** — most behavior is exercised indirectly through the feature spec.
+Add a direct spec only when the role has pure/isolated behavior worth pinning
+down; declarative and thin-lead roles are covered indirectly.
+
+| Role file                                            | Direct spec?                   | How tested                                                                 |
+| ---------------------------------------------------- | ------------------------------ | -------------------------------------------------------------------------- |
+| `Feature.tsx` (+ sub-components)                     | YES — `tests/Feature.spec.tsx` | feature spec; also covers `components/`, the wiring, and query hooks       |
+| `Feature.queries.ts`                                 | NO — indirect                  | covered by the feature spec's server harness (`TestScreen` + MSW handlers) |
+| `Feature.hooks.ts`                                   | NO — indirect                  | covered via the feature spec                                               |
+| `Feature.handlers.ts`                                | YES                            | pure handler spec (form → mutation)                                        |
+| `Feature.transformers.ts`                            | YES                            | pure mapper spec                                                           |
+| `Feature.options.ts`                                 | YES                            | pure options spec                                                          |
+| `Feature.utils.ts`                                   | YES                            | pure util spec                                                             |
+| `Feature.schema.ts`                                  | NO — indirect                  | covered by feature-spec form submission                                    |
+| `Feature.columns.ts`                                 | NO — indirect                  | covered by feature-spec table render                                       |
+| `Feature.filters.ts` / `selectors.ts` / `actions.ts` | NO — indirect                  | covered via feature/table spec                                             |
+| `Feature.types.ts`                                   | NO                             | no behavior                                                                |
+| `Feature.constants.ts` / `defaults.ts` / `config.ts` | NO                             | no behavior                                                                |
+| `Feature.styles.*` / `index.ts`                      | NO                             | no behavior                                                                |
+
+Test fixtures — mock data, handler/query stubs and option/colour factories in
+`tests/` — carry a one-line JSDoc stating their purpose (precedent:
+`Feature.mocks.ts`, `Register.mockHandlers.ts` / `Register.spec.utils.ts`).
+`FeatureTestUtils.customRender` renders the subject and returns `userEvent`
+(when used by tests), keeping render + interaction concerns out of the spec body.
+
+### Test interaction — always use the built-in accessors
+
+`common/ux/Test/` exposes an accessor per component. Reach for one **before**
+writing a raw query: a raw `screen.getByRole(...)` guesses at the DOM, whereas
+the accessor is the component's contracted test surface.
+
+- `Test.Section(label)` → `.Do.toggle()`, `.Get.title()`, `.Get.isOpen()` — for
+  any `Section`/`Region`; never query it as a `button`.
+- `Test.Form(label)` → `.Input(name)`, `.Button(name)`, `.Search(name)`.
+- `Test.LoadingIndicator.Has.isLoading()` — never a hand-rolled loading `waitFor`.
+- `Accessor.user` is the only sanctioned interaction singleton (`user.click(…)`).
+
+If an accessor lacks a needed method, **add it to the accessor** — do not
+work around it in the spec.
+
+## 1.2.3 Business documentation
+
+A feature may contain a `Feature.business.md` file when the feature has
+meaningful business rules, scenarios, decisions, restrictions, legal
+requirements or other business context that explains its intended behaviour.
+
+The business document describes **why the feature behaves as it does**, rather
+than how it is implemented. It provides a short feature overview and documents
+significant business rules using a stable numbered hierarchy.
+
+It is a concise **lookup of the whys** — a reference for quickly finding and
+reviewing business requirements — not a change log. It is distinct from the
+per-ticket documentation (`docs/NNNN-*.md`), which is lengthy, change-oriented
+history. `Feature.business.md` holds only the tight, stable business rationale
+and nothing else.
+
+Business documentation must be **intentionally concise without losing relevant
+information**. Prefer precise statements, structured rules and references over
+lengthy explanations. Information is included because it helps explain or
+verify the intended business behaviour — it is not a dumping ground for
+meeting notes, discussion history or general prose.
+
+Rules use a stable numbered hierarchy:
+
+- `## N. <Topic>` — a business area.
+- `### N.M <Rule>` — a numbered business rule that may be referenced.
+
+Each rule may carry the following (not mandatory):
+
+```
+### 1.1 Administration
+
+Only administrators may manually regenerate a breakdown.
+
+**Reason:** Regeneration consumes an external service resource.
+
+@see BreakdownSelectors.isRegenerateAvailable
+```
+
+The numbered rule structure provides a stable reference for discussing
+requirements, reviewing implementation or explaining behaviour to developers,
+testers or other stakeholders.
+
+The document may record whether a feature or individual business requirement
+is active, deprecated or otherwise no longer applicable.
+
+Where business requirements require explicit approval or have been materially
+changed, a `Sign-off` section at the bottom may be included:
+
+```
+## Sign-off
+
+| Date | By | Change |
+|------|----|--------|
+| 2026-08-31 | Jane Smith | Initial business rules |
+| 2026-09-12 | John Smith | Updated availability rules |
+```
+
+The document must stay focused on **business intent, rules, decisions and
+rationale**. Implementation details belong in the appropriate feature role
+file.
+
+`Feature.business.md` is documentation, not executable business logic, and does
+not require a corresponding test file.
 
 ## 1.3 Main feature export
 
@@ -102,6 +249,9 @@ Adding a new architectural role requires documenting it here first.
 
 This prevents feature folders from accumulating arbitrary "dump" files.
 
+`Feature.business.md` is the sole non-code role permit — it documents the
+feature's business intent and is exempt from the "no dump files" rule.
+
 # 2. Server architecture
 
 ## 2.1 Feature organisation
@@ -133,24 +283,25 @@ Co-locate feature-specific code inside the feature folder.
 
 ```text
 Feature/
-├── Feature.routes.ts
+├── Feature.auth.ts
+├── Feature.business.md
+├── Feature.config.ts
+├── Feature.constants.ts
 ├── Feature.controller.ts
+├── Feature.defaults.ts
+├── Feature.errors.ts
 ├── Feature.middlewares.ts
-├── Feature.service.ts
+├── Feature.model.ts
+├── Feature.options.ts
 ├── Feature.permissions.ts
 ├── Feature.repository.ts
-├── Feature.model.ts
-├── Feature.auth.ts
-├── Feature.seed.ts
-├── Feature.types.ts
+├── Feature.routes.ts
 ├── Feature.schema.ts
+├── Feature.seed.ts
+├── Feature.service.ts
 ├── Feature.transformers.ts
+├── Feature.types.ts
 ├── Feature.utils.ts
-├── Feature.constants.ts
-├── Feature.options.ts
-├── Feature.defaults.ts
-├── Feature.config.ts
-├── Feature.errors.ts
 ├── index.ts
 └── tests/
     ├── Feature.spec.ts
@@ -190,6 +341,50 @@ router
 ```
 
 Never `route`.
+
+### 2.3.1 Feature role returns
+
+| extension                 | returns                                | comment                                                                   |
+| ------------------------- | -------------------------------------- | ------------------------------------------------------------------------- |
+| `Feature.model.ts`        | `FeatureModel`                         | mongoose model                                                            |
+| `Feature.routes.ts`       | `FeatureRoutes`                        | router (local var `router`)                                               |
+| `Feature.controller.ts`   | `FeatureController`                    | route handlers                                                            |
+| `Feature.middlewares.ts`  | `FeatureMiddlewares`                   | grouped middleware                                                        |
+| `Feature.service.ts`      | `FeatureService`                       | business logic                                                            |
+| `Feature.repository.ts`   | `FeatureRepository`                    | data access                                                               |
+| `Feature.permissions.ts`  | `FeaturePermissions`                   | permission rules                                                          |
+| `Feature.auth.ts`         | `FeatureAuth`                          | auth helpers                                                              |
+| `Feature.seed.ts`         | `FeatureSeed`                          | seed data / runner                                                        |
+| `Feature.schema.ts`       | `FeatureSchema = { schema, validate }` | Joi/yup validation                                                        |
+| `Feature.transformers.ts` | `FeatureTransformers`                  | grouped mappers                                                           |
+| `Feature.utils.ts`        | `FeatureUtils`                         | grouped helpers                                                           |
+| `Feature.constants.ts`    | `FeatureConstants`                     | grouped constants                                                         |
+| `Feature.options.ts`      | `FeatureOptions`                       | options/choices                                                           |
+| `Feature.defaults.ts`     | `FeatureDefaults`                      | default values                                                            |
+| `Feature.config.ts`       | `FeatureConfig`                        | config                                                                    |
+| `Feature.errors.ts`       | `FeatureErrors`                        | grouped error types/factories                                             |
+| `Feature.business.md`     | `–` (none)                             | documentation only — business rules / why, no code symbol; non-executable |
+| `Feature.types.ts`        | named domain types                     | `xyz` interfaces/aliases                                                  |
+
+### 2.3.2 Testing
+
+Tests live in the feature `tests/` folder. Services, repositories, schemas and
+transformers have deterministic behavior and get direct specs; routers and
+controllers are covered through the route spec.
+
+| Role file                                                                    | Direct spec?                       | How tested                            |
+| ---------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------- |
+| `Feature.service.ts`                                                         | YES — `tests/Feature.spec.ts`      | service spec (mock repo)              |
+| `Feature.repository.ts`                                                      | YES                                | repository spec (in-memory / mock)    |
+| `Feature.schema.ts`                                                          | YES                                | validation spec                       |
+| `Feature.transformers.ts`                                                    | YES                                | pure mapper spec                      |
+| `Feature.utils.ts`                                                           | YES                                | pure util spec                        |
+| `Feature.seed.ts`                                                            | YES — `tests/Feature.seed.spec.ts` | seed spec                             |
+| `Feature.routes.ts`                                                          | YES — `tests/Feature.spec.ts`      | route/integration spec, mocks service |
+| `Feature.controller.ts`                                                      | NO — indirect                      | covered by route spec                 |
+| `Feature.middlewares.ts`                                                     | NO — indirect                      | covered by route spec                 |
+| `Feature.permissions.ts` / `auth.ts`                                         | NO — indirect                      | covered by route/feature spec         |
+| `Feature.types.ts` / `constants.ts` / `config.ts` / `errors.ts` / `index.ts` | NO                                 | no behavior                           |
 
 ## 2.4 Models and repositories
 
@@ -413,12 +608,13 @@ This is especially important in server code, where importing through the common 
 
 Order imports by **source**, not by role. This is a mechanical rule that is easy to enforce and avoids case-by-case judgement.
 
-**FE (React) files — 4 tiers:**
+**FE (React) files — 5 tiers:**
 
 1. **External / third-party** — `react`, npm packages (`react-router-dom`, `@tanstack/react-query`, `detectincognitojs`, …)
-2. **Internal aliased imports** — `@common-*`, `@app`, `@portfolio`, `@projects`, `@shared-*`, `@ux`, `@types`
+2. **Internal aliased imports** — `@common-*`, `@app`, `@portfolio`, `@projects`, `@shared-*`
 3. **Relative imports** — `./`, `../` local files
-4. **Side-effect / asset imports** — `'./x.scss'`, `'./style.css'`, no bindings. Always last.
+4. **Type-only imports** — every `import type`, gathered here regardless of source
+5. **Side-effect / asset imports** — `'./x.scss'`, `'./style.css'`, no bindings. Always last.
 
 ```tsx
 // 1. External
@@ -430,17 +626,24 @@ import { Browser } from '@common-utils'
 // 3. Relative
 import { PageNav } from '../Nav'
 import { Footer } from '../Footer/Footer'
-// 4. Side-effect / asset
+// 4. Type-only
+import type { SessionContextValues } from '@shared-context'
+// 5. Side-effect / asset
 import './Screen.css'
 ```
 
 Within a tier, no strict ordering is required beyond keeping the tier contiguous.
 
-**BE (server) files — reduced 3 tiers** (no React, no asset tier):
+Types are the one deliberate exception to ordering by source: they are gathered
+into a single tier immediately above the assets, so there is no per-tier
+value/type ordering to reason about.
+
+**BE (server) files — reduced 4 tiers** (no React, no asset tier):
 
 1. **External / node** — `express`, npm packages
 2. **Aliased internal** — `@common-*`
 3. **Relative local** — `./`, `../` (including relative `common/` imports where used)
+4. **Type-only** — every `import type`
 
 ```ts
 // 1. External
@@ -450,6 +653,8 @@ import { ApiResponder } from '@common-utils'
 // 3. Relative local
 import { auth, admin } from '../Users/Users.middlewares'
 import { ActivityService } from './Activity.service'
+// 4. Type-only
+import type { Request } from 'express'
 ```
 
 > Why "source, not role": a component and a util from the same path belong

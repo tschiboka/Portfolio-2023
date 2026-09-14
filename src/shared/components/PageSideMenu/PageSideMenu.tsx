@@ -11,7 +11,7 @@ import { CounterBadge } from '@common-ux'
 import type { SideMenuItem } from '@common-ux'
 import { QueryKey } from '@common-utils'
 import ShareMenu from '../ShareMenu/ShareMenu'
-import { useGetLikes, useGetVisits, usePostLike } from '@shared-queries'
+import { LikesQueries, VisitsQueries } from '@shared-queries'
 import './PageSideMenu.css'
 
 const scrollToTop = () => {
@@ -25,9 +25,9 @@ export const PageSideMenu = () => {
 
     const { pathname } = useLocation()
     const queryClient = useQueryClient()
-    const { data: likesData } = useGetLikes(pathname)
-    const { data: visitsData } = useGetVisits(pathname)
-    const { mutate: doPostLike } = usePostLike()
+    const { data: likesData } = LikesQueries.useGet(pathname)
+    const { data: visitsData } = VisitsQueries.useGet(pathname)
+    const { mutate: doPostLike } = LikesQueries.usePost()
 
     const visits = visitsData?.visits ?? 0
     const likes = likesData?.likes ?? 0

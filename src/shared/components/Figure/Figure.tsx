@@ -1,4 +1,4 @@
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import ZoomedImage from '../ZoomedImage/ZoomedImage'
 import { TbZoomOutFilled } from 'react-icons/tb'
 import { Reference } from '../../../portfolio/Article/components/References/References'
@@ -29,7 +29,7 @@ const Figure = ({
     size,
 }: Props) => {
     const { setOverlayVisible, setOverlayContent, setMainMenuVisible, setSubMenuVisible } =
-        useAppContext()
+        AppHooks.useContext()
 
     const displayZoomOverlay = () => {
         const closeZoom = () => {

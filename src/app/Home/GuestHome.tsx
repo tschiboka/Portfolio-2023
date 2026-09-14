@@ -29,6 +29,9 @@ export const GuestHome = () => {
             <button className="button" onClick={handleXmasClick}>
                 Xmas Corner
             </button>
+            <div className="Padding-Test">
+                <span>padded child</span>
+            </div>
         </div>
     )
 }

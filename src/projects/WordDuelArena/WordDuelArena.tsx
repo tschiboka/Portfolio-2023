@@ -1,4 +1,4 @@
-import { ModalProvider } from './common/components/Modal/Modals'
+import { ModalProvider } from './common/components/Modal/Modal.provider'
 import { Home } from './Home/Home'
 import './WordDuelArena.styles.css'
 

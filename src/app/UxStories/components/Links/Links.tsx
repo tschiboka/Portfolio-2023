@@ -10,7 +10,7 @@ export const Links = ({ path }: LinksProps) => (
     <Screen
         title={'tschiboka | Links'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -41,7 +41,6 @@ export const Links = ({ path }: LinksProps) => (
                 <Code language="tsx" content={Snippets.Basic.asRoute} />
                 <Code language="tsx" content={Snippets.Basic.asAnchor} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="internal-vs-external">
                     Internal vs External
@@ -55,7 +54,6 @@ export const Links = ({ path }: LinksProps) => (
                 <Code language="tsx" content={Snippets.Behaviour.external} />
                 <Code language="tsx" content={Snippets.Behaviour.internal} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="download">
                     Download
@@ -66,7 +64,6 @@ export const Links = ({ path }: LinksProps) => (
                 </Paragraph>
                 <Code language="tsx" content={Snippets.Download.file} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility

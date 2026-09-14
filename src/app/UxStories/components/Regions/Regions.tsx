@@ -24,7 +24,7 @@ export const Regions = ({ path }: RegionsProps) => (
     <Screen
         title={'tschiboka | Regions'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -58,7 +58,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 <Code language="tsx" content={Snippets.Card.basic} />
                 <Code language="tsx" content={Snippets.Card.withTitle} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="section">
                     Section
@@ -82,7 +81,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 <Code language="tsx" content={Snippets.Section.expandable} />
                 <Code language="tsx" content={Snippets.Section.collapsed} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="dialog">
                     Dialog
@@ -98,7 +96,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Dialog>
                 <Code language="tsx" content={Snippets.Dialog.basic} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="sidebar">
                     Sidebar
@@ -125,7 +122,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Box>
                 <Code language="tsx" content={Snippets.Sidebar.basic} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="header">
                     Header
@@ -150,7 +146,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Box>
                 <Code language="tsx" content={Snippets.Header.basic} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="main">
                     Main
@@ -173,7 +168,6 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Box>
                 <Code language="tsx" content={Snippets.Main.basic} />
             </Box>
-
             <Box as="section">
                 <Heading as="h2" id="using-region-directly">
                     Using Region Directly

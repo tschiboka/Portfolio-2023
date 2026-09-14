@@ -1,8 +1,13 @@
-import { getParentCategory } from './Categories.utils'
-import { TableColumns } from '@common-ux'
+import { type ReactNode } from 'react'
+import { CellMeta, CellValue, TableColumns } from '@common-ux'
 import type { GetCategoryResponse } from '@common-types'
 
-export const columns: TableColumns<GetCategoryResponse> = [
+const getParentCategory = (
+    cell: CellValue<GetCategoryResponse>,
+    { data }: CellMeta<GetCategoryResponse>,
+): ReactNode => data.find((c) => c._id === cell)?.name
+
+export const CategoriesColumns: TableColumns<GetCategoryResponse> = [
     { header: 'Name', accessor: 'name' },
     {
         header: 'Parent',

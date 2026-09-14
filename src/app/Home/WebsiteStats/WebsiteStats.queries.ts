@@ -1,25 +1,24 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment */
 import { useQuery } from '@tanstack/react-query'
-import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common-types'
 import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common-utils'
-import { Session } from '@shared-context/SessionContext'
+import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common-types'
+import { Query, QueryKey } from '@common-utils'
+import type { ErrorResponse } from '@common-utils'
+import { Session } from '@shared-context'
 
-type UseGetActivityFeedProps = {
+type UseGetActivityFeedOptions = {
     params: GetActivityFeedQuery
 }
 
-export const useGetActivityFeed = ({ params }: UseGetActivityFeedProps) => {
+/** Reads a page of the activity feed for the website stats table. */
+const useGetActivityFeed = ({ params }: UseGetActivityFeedOptions) => {
     const token = Session.useContext().session?.token
+    const request = Query.FeatureQuery().path('Activity').subpath('admin').token(token).build()
 
-    const request = new Query.RequestBuilder(Paths.Api.Activity)
-        .setSubpath('admin')
-        .setQuery(params)
-        .withAuthToken(token)
-        .build()
-
-    return useQuery<GetActivityFeedResponse, AxiosError>({
-        queryKey: QueryKey.ActivityFeed.byFilters(params).build(),
-        queryFn: () => request.get<GetActivityFeedResponse>().then(Query.extractAxiosData),
+    return useQuery<GetActivityFeedResponse, AxiosError<ErrorResponse>>({
+        ...request.Get<GetActivityFeedResponse>(QueryKey.ActivityFeed.byFilters(params).build()),
     })
+}
+
+export const WebsiteStatsQueries = {
+    useGet: useGetActivityFeed,
 }

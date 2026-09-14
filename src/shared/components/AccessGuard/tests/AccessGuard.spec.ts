@@ -28,7 +28,7 @@ describe('isConditionDenied', () => {
         })
 
         it('should return false when capabilities is undefined (defaults to empty)', () => {
-            const noCapsProp: GuardCondition = { type: 'capability' } as GuardCondition
+            const noCapsProp: GuardCondition = { type: 'capability' }
             expect(isConditionDenied(noCapsProp, noAccess)).toBe(false)
         })
     })
@@ -88,7 +88,7 @@ describe('isConditionDenied', () => {
         })
 
         it('should return false when features is undefined (defaults to empty)', () => {
-            const noFeaturesProp: GuardCondition = { type: 'feature' } as GuardCondition
+            const noFeaturesProp: GuardCondition = { type: 'feature' }
             expect(isConditionDenied(noFeaturesProp, noAccess)).toBe(false)
         })
     })

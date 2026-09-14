@@ -2,8 +2,7 @@ import { MemoryRouterProps } from 'react-router-dom'
 import { RenderOptions } from '@testing-library/react'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 import type { AppRoute } from '@app'
-import { SessionContextValues } from '@shared-context/SessionContext/SessionContext.types'
-import { AppContextValues } from '@shared-context/AppContext/AppContext.types'
+import type { AppContextValues, SessionContextValues } from '@shared-context'
 
 export type ScreenRenderOptions = {
     route?: MemoryRouterProps['initialEntries']

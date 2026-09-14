@@ -51,7 +51,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
     <Screen
         title={'tschiboka | Layouts'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -71,13 +71,11 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     A generic container with spacing, background, border-radius, and display props.
                     Renders a <CodeText>div</CodeText> by default.
                 </Paragraph>
-
                 <Heading as="h3">Basic Usage</Heading>
                 <Box padding="16" background="surface" borderRadius="md">
                     <p style={{ margin: 0 }}>A padded container with surface background.</p>
                 </Box>
                 <Code language="tsx" content={Snippets.Box.basic} />
-
                 <Heading as="h3">Padding</Heading>
                 <Paragraph>
                     Use <CodeText>padding</CodeText> for uniform spacing, or{' '}
@@ -93,7 +91,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </Box>
                 </Stack>
                 <Code language="tsx" content={Snippets.Box.padding} />
-
                 <Heading as="h3">Background</Heading>
                 <Stack gap="8">
                     {(['transparent', 'sunken', 'surface', 'raised', 'accent'] as const).map(
@@ -107,7 +104,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     )}
                 </Stack>
                 <Code language="tsx" content={Snippets.Box.background} />
-
                 <Heading as="h3">Border Radius</Heading>
                 <Inline gap="8" wrap>
                     {(['none', 'sm', 'md', 'lg', 'full'] as const).map((br) => (
@@ -119,7 +115,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     ))}
                 </Inline>
                 <Code language="tsx" content={Snippets.Box.borderRadius} />
-
                 <Heading as="h3">Display</Heading>
                 <Box
                     display="flex"
@@ -136,7 +131,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </Box>
                 </Box>
                 <Code language="tsx" content={Snippets.Box.display} />
-
                 <Heading as="h3">Polymorphic Element</Heading>
                 <Stack gap="8">
                     <Box as="section" padding="16" background="surface" borderRadius="md">
@@ -148,7 +142,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Stack>
                 <Code language="tsx" content={Snippets.Box.polymorphic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="stack">
                     Stack
@@ -158,7 +151,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <CodeText>Stack.Horizontal</CodeText> for rows. Bare <CodeText>Stack</CodeText>{' '}
                     defaults to vertical.
                 </Paragraph>
-
                 <Heading as="h3">Direction</Heading>
                 <Heading as="h4">Vertical</Heading>
                 <Stack.Vertical gap="8">
@@ -167,7 +159,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <span style={cell()}>Third</span>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Stack.vertical} />
-
                 <Heading as="h4">Horizontal</Heading>
                 <Stack.Horizontal gap="8">
                     <span style={cell()}>Left</span>
@@ -176,7 +167,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Stack.horizontal} />
                 <Code language="tsx" content={Snippets.Stack.default} />
-
                 <Heading as="h3">Gap</Heading>
                 {(['4', '16', '48'] as const).map((gap) => (
                     <div key={gap} style={{ marginBottom: 16 }}>
@@ -191,7 +181,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </div>
                 ))}
                 <Code language="tsx" content={Snippets.Stack.gap} />
-
                 <Heading as="h3">Align</Heading>
                 {(['start', 'center', 'end', 'stretch'] as const).map((align) => (
                     <div key={align} style={{ marginBottom: 16 }}>
@@ -214,7 +203,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </div>
                 ))}
                 <Code language="tsx" content={Snippets.Stack.align} />
-
                 <Heading as="h3">Justify</Heading>
                 {(['start', 'center', 'end', 'between', 'around'] as const).map((justify) => (
                     <div key={justify} style={{ marginBottom: 16 }}>
@@ -236,7 +224,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </div>
                 ))}
                 <Code language="tsx" content={Snippets.Stack.justify} />
-
                 <Heading as="h3">Wrap</Heading>
                 <Stack.Horizontal gap="8" wrap>
                     {wrapItems.map((item) => (
@@ -244,7 +231,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     ))}
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Stack.wrap} />
-
                 <Heading as="h3">Polymorphic Element</Heading>
                 <Stack.Vertical as="ul" gap="4" style={{ paddingLeft: 20 }}>
                     <li>Item one</li>
@@ -252,7 +238,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <li>Item three</li>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Stack.polymorphic} />
-
                 <Heading as="h3">Nested Stacks</Heading>
                 <Stack.Vertical
                     gap="16"
@@ -269,7 +254,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Stack.nested} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="inline">
                     Inline
@@ -279,7 +263,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     Shares the same <CodeText>gap</CodeText>, <CodeText>align</CodeText>,{' '}
                     <CodeText>justify</CodeText>, and <CodeText>wrap</CodeText> props.
                 </Paragraph>
-
                 <Heading as="h3">Basic</Heading>
                 <Inline gap="8">
                     <span style={cell()}>One</span>
@@ -287,7 +270,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <span style={cell()}>Three</span>
                 </Inline>
                 <Code language="tsx" content={Snippets.Inline.basic} />
-
                 <Heading as="h3">Wrap</Heading>
                 <Inline gap="8" wrap>
                     <Pill label="React" color="accent" />
@@ -296,7 +278,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <Pill label="Node" color="yellow" />
                 </Inline>
                 <Code language="tsx" content={Snippets.Inline.wrap} />
-
                 <Heading as="h3">Align</Heading>
                 <Inline
                     gap="8"
@@ -308,7 +289,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Inline>
                 <Code language="tsx" content={Snippets.Inline.align} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="grid">
                     Grid
@@ -318,7 +298,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <CodeText>gap</CodeText> / <CodeText>rowGap</CodeText> /{' '}
                     <CodeText>columnGap</CodeText> for spacing.
                 </Paragraph>
-
                 <Heading as="h3">Basic</Heading>
                 <Grid columns={3} gap="8">
                     {['A', 'B', 'C', 'D', 'E', 'F'].map((item) => (
@@ -328,7 +307,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     ))}
                 </Grid>
                 <Code language="tsx" content={Snippets.Grid.basic} />
-
                 <Heading as="h3">Column Counts</Heading>
                 {([2, 3, 4] as const).map((cols) => (
                     <div key={cols} style={{ marginBottom: 16 }}>
@@ -345,7 +323,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </div>
                 ))}
                 <Code language="tsx" content={Snippets.Grid.columns} />
-
                 <Heading as="h3">Row &amp; Column Gap</Heading>
                 <Grid columns={3} rowGap="16" columnGap="4">
                     {Arrays.times(6, (i) => (
@@ -355,7 +332,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     ))}
                 </Grid>
                 <Code language="tsx" content={Snippets.Grid.rowColumnGap} />
-
                 <Heading as="h3">Responsive Columns</Heading>
                 <Paragraph>
                     Pass an object to <CodeText>columns</CodeText> for responsive breakpoints. The{' '}
@@ -373,7 +349,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Grid>
                 <Code language="tsx" content={Snippets.Grid.responsive} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="split">
                     Split
@@ -385,7 +360,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <CodeText>"3/1"</CodeText>, <CodeText>"1/4"</CodeText>,{' '}
                     <CodeText>"4/1"</CodeText>.
                 </Paragraph>
-
                 <Heading as="h3">Basic</Heading>
                 <Split
                     gap="16"
@@ -393,7 +367,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     right={<div style={cell()}>Right pane</div>}
                 />
                 <Code language="tsx" content={Snippets.Split.basic} />
-
                 <Heading as="h3">Ratios</Heading>
                 {(['1/3', '1/1', '3/1'] as const).map((ratio) => (
                     <div key={ratio} style={{ marginBottom: 16 }}>
@@ -410,7 +383,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 ))}
                 <Code language="tsx" content={Snippets.Split.ratio} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="spacer">
                     Spacer
@@ -419,13 +391,11 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     Explicit spacing primitive for non-Stack contexts. Prefer Stack{' '}
                     <CodeText>gap</CodeText> where possible.
                 </Paragraph>
-
                 <Heading as="h3">Vertical</Heading>
                 <div style={cell()}>Above</div>
                 <Spacer size="24" />
                 <div style={cell()}>Below — 24px gap</div>
                 <Code language="tsx" content={Snippets.Spacer.vertical} />
-
                 <Heading as="h3">Horizontal</Heading>
                 <div style={{ display: 'flex' }}>
                     <span style={cell()}>Left</span>
@@ -434,7 +404,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </div>
                 <Code language="tsx" content={Snippets.Spacer.horizontal} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="show-hide">
                     Show &amp; Hide
@@ -451,7 +420,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <CodeText>md</CodeText> (768), <CodeText>lg</CodeText> (992),{' '}
                     <CodeText>xl</CodeText> (1200), <CodeText>2xl</CodeText> (1580).
                 </Paragraph>
-
                 <Heading as="h3">Show</Heading>
                 <Paragraph>
                     Resize the browser to see elements appear at their breakpoints.
@@ -471,7 +439,6 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     </Show>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Visibility.show} />
-
                 <Heading as="h3">Hide</Heading>
                 <Paragraph>
                     Resize the browser to see elements disappear at their breakpoints.

@@ -10,7 +10,7 @@ export const Stats = ({ path }: StatProps) => {
             title={'tschiboka | Stats'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Stats"
         >
             <h1>Stats</h1>

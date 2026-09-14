@@ -1,3 +1,5 @@
+import type { ModalAction } from './Modal.types'
+
 type ModalActionsProps = {
     actions: ModalAction[]
 }

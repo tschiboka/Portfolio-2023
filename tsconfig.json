@@ -20,6 +20,8 @@
             "@common-ux/*": ["./common/ux/*"],
             "@common-utils": ["./common/utils"],
             "@common-utils/*": ["./common/utils/*"],
+            "@common-mocks": ["./common/mocks"],
+            "@common-mocks/*": ["./common/mocks/*"],
             "@shared-styles": ["./src/shared/styles"],
             "@shared-styles/*": ["./src/shared/styles/*"],
             "@shared-queries": ["./src/shared/queries"],
@@ -48,6 +50,6 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": ["src", "common", "public/source/projects"],
+    "include": ["src", "common", "rules", "public/source/projects"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

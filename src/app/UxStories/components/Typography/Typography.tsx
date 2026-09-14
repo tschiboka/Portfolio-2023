@@ -24,7 +24,7 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
     <Screen
         title={'tschiboka | Typography'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -46,7 +46,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     default sizes and <CodeText>bold</CodeText> weight. Override with{' '}
                     <CodeText>size</CodeText> or <CodeText>weight</CodeText>.
                 </Paragraph>
-
                 <Heading as="h3">Levels</Heading>
                 <Stack gap="8">
                     <Heading as="h1" includeInTableOfContents={false}>
@@ -69,14 +68,12 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     </Heading>
                 </Stack>
                 <Code language="tsx" content={Snippets.Heading.levels} />
-
                 <Heading as="h3">Custom Size</Heading>
                 <Heading as="h2" size="sm" includeInTableOfContents={false}>
                     An h2 element rendered at sm size.
                 </Heading>
                 <Code language="tsx" content={Snippets.Heading.customSize} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="paragraph">
                     Paragraph
@@ -85,11 +82,9 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Renders a <CodeText>p</CodeText> element. Defaults to <CodeText>md</CodeText>{' '}
                     size and <CodeText>regular</CodeText> weight.
                 </Paragraph>
-
                 <Heading as="h3">Basic</Heading>
                 <Paragraph>The quick brown fox jumps over the lazy dog.</Paragraph>
                 <Code language="tsx" content={Snippets.Paragraph.basic} />
-
                 <Heading as="h3">Sizes</Heading>
                 <Stack gap="4">
                     <Paragraph size="xs">Extra small paragraph.</Paragraph>
@@ -99,7 +94,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 </Stack>
                 <Code language="tsx" content={Snippets.Paragraph.sizes} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="text">
                     Text
@@ -108,7 +102,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Renders a <CodeText>span</CodeText>. Use for inline text with prop-driven
                     styling.
                 </Paragraph>
-
                 <Stack gap="8">
                     <Text>Default inline text.</Text>
                     <Text weight="bold">Bold text.</Text>
@@ -118,7 +111,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 </Stack>
                 <Code language="tsx" content={Snippets.Text.basic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="caption">
                     Caption
@@ -128,14 +120,12 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     <CodeText>span</CodeText>, <CodeText>p</CodeText>, or{' '}
                     <CodeText>figcaption</CodeText>.
                 </Paragraph>
-
                 <Stack gap="4">
                     <Caption>A small muted caption.</Caption>
                     <Caption as="figcaption">A figcaption element.</Caption>
                 </Stack>
                 <Code language="tsx" content={Snippets.Caption.basic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="codetext">
                     CodeText
@@ -144,11 +134,9 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Renders a <CodeText>code</CodeText> element with monospace font and subtle
                     background.
                 </Paragraph>
-
                 <CodeText>const x = 42</CodeText>
                 <Code language="tsx" content={Snippets.CodeText.basic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="blockquote">
                     BlockQuote
@@ -157,11 +145,9 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Renders a <CodeText>blockquote</CodeText> with a left accent border and italic
                     style.
                 </Paragraph>
-
                 <BlockQuote>The only way to do great work is to love what you do.</BlockQuote>
                 <Code language="tsx" content={Snippets.BlockQuote.basic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="overline">
                     Overline
@@ -170,7 +156,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Uppercase, letter-spaced label text. Fixed at <CodeText>xs</CodeText> size with{' '}
                     <CodeText>semibold</CodeText> weight by default.
                 </Paragraph>
-
                 <Stack gap="8">
                     <Stack gap="4">
                         <Overline>Section Label</Overline>
@@ -183,7 +168,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 </Stack>
                 <Code language="tsx" content={Snippets.Overline.basic} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="list">
                     List
@@ -194,15 +178,12 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     <CodeText>size</CodeText>, <CodeText>tone</CodeText>, and{' '}
                     <CodeText>weight</CodeText>.
                 </Paragraph>
-
                 <Heading as="h3">Unordered (default)</Heading>
                 <List items={['Apples', 'Bananas', 'Cherries']} />
                 <Code language="tsx" content={Snippets.List.unordered} />
-
                 <Heading as="h3">Ordered</Heading>
                 <List as="ol" items={['First step', 'Second step', 'Third step']} />
                 <Code language="tsx" content={Snippets.List.ordered} />
-
                 <Heading as="h3">With Tone &amp; Size</Heading>
                 <List
                     items={['Info-toned item', 'Another item', 'And one more']}
@@ -210,7 +191,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     size="lg"
                 />
                 <Code language="tsx" content={Snippets.List.toneSize} />
-
                 <Heading as="h3">ReactNode Items</Heading>
                 <List
                     items={[
@@ -227,7 +207,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 />
                 <Code language="tsx" content={Snippets.List.reactNode} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="inline-reference">
                     InlineReference
@@ -236,7 +215,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     Renders a bracketed author link, pointing to an external URL or internal route.
                     Used inside article paragraphs to cite sources inline.
                 </Paragraph>
-
                 <Heading as="h3">External Link</Heading>
                 <Paragraph>
                     IoT has the potential to play a significant role.
@@ -249,7 +227,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     />
                 </Paragraph>
                 <Code language="tsx" content={Snippets.InlineReference.external} />
-
                 <Heading as="h3">Internal Link</Heading>
                 <Paragraph>
                     Read more about sorting algorithms.
@@ -263,7 +240,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 </Paragraph>
                 <Code language="tsx" content={Snippets.InlineReference.internal} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="shared-props">
                     Shared Props
@@ -272,7 +248,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     All typography components share these props. Examples use{' '}
                     <CodeText>Text</CodeText> but they apply to every component.
                 </Paragraph>
-
                 <Heading as="h3">Size</Heading>
                 <Paragraph>
                     Token values: <CodeText>xs</CodeText>, <CodeText>sm</CodeText>,{' '}
@@ -287,7 +262,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     ))}
                 </Stack>
                 <Code language="tsx" content={Snippets.Size.demo} />
-
                 <Heading as="h3">Weight</Heading>
                 <Stack gap="4">
                     {(['regular', 'medium', 'semibold', 'bold'] as const).map((weight) => (
@@ -305,7 +279,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     ))}
                 </Stack>
                 <Code language="tsx" content={Snippets.Weight.demo} />
-
                 <Heading as="h3">Alignment</Heading>
                 <Stack gap="4">
                     {(['left', 'center', 'right', 'justify'] as const).map((align) => (
@@ -317,7 +290,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     ))}
                 </Stack>
                 <Code language="tsx" content={Snippets.Align.demo} />
-
                 <Heading as="h3">Tone</Heading>
                 <Stack gap="4">
                     {(['default', 'muted', 'info', 'success', 'warning', 'error'] as const).map(
@@ -329,7 +301,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     )}
                 </Stack>
                 <Code language="tsx" content={Snippets.Tone.demo} />
-
                 <Heading as="h3">Truncate</Heading>
                 <div style={{ maxWidth: 300, border: '1px dashed var(--black-4)', padding: 8 }}>
                     <Text truncate>
@@ -338,7 +309,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     </Text>
                 </div>
                 <Code language="tsx" content={Snippets.Truncate.demo} />
-
                 <Heading as="h3">Wrap</Heading>
                 <Stack gap="8">
                     <div
@@ -363,7 +333,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     </div>
                 </Stack>
                 <Code language="tsx" content={Snippets.Wrap.demo} />
-
                 <Heading as="h3">Family</Heading>
                 <Paragraph>
                     The <CodeText>family</CodeText> prop sets the font family:{' '}
@@ -378,7 +347,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     ))}
                 </Stack>
                 <Code language="tsx" content={Snippets.Family.demo} />
-
                 <Heading as="h3">Decoration</Heading>
                 <Paragraph>
                     The <CodeText>decoration</CodeText> prop sets text decoration:{' '}
@@ -397,7 +365,6 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                     </Text>
                 </Stack>
                 <Code language="tsx" content={Snippets.Decoration.demo} />
-
                 <Heading as="h3">Transform</Heading>
                 <Paragraph>
                     The <CodeText>transform</CodeText> prop sets text transformation:{' '}

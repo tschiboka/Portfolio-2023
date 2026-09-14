@@ -16,7 +16,7 @@ import {
 
 import './Blog.scss'
 import { BlogSortBy } from './Blog.type'
-import { useGetLikeSummary, useGetVisitSummary } from '@shared-queries'
+import { LikesQueries, VisitsQueries } from '@shared-queries'
 
 interface Props {
     pageName: string
@@ -27,8 +27,8 @@ export const Blog = ({ pageName, path }: Props) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
     const [sortedBy, setSortedBy] = useState<BlogSortBy>('mostRelevant')
 
-    const { data: visitsData } = useGetVisitSummary()
-    const { data: likesData } = useGetLikeSummary()
+    const { data: visitsData } = VisitsQueries.Summary.useGet()
+    const { data: likesData } = LikesQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null
     const likes = likesData?.likes ?? null
 

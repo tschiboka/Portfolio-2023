@@ -1,8 +1,9 @@
 import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
-import { apiPathBuilder } from '../Path/apiPathBuilder'
+import { apiPathBuilder } from '../Paths/apiPathBuilder'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'
-import { PathKey } from '../Path/Path.types'
+import { PathKey } from '../Paths/Path.types'
+import type { ServerGroup } from '../Paths/Path.types'
 import type { Dictionary } from '../Generics'
 
 export class RequestBuilder {
@@ -16,14 +17,13 @@ export class RequestBuilder {
     /**
      * Creates a new request builder for the given API path.
      * @param pathName - The API route key used to resolve the base URL.
+     * @param group - The `Paths.Server` group the key lives in. Defaults to `'Api'`.
      * @throws If `pathName` is falsy.
      */
-    constructor(pathName: PathKey) {
-        if (!pathName) {
-            throw new Error('RequestBuilder: pathName is required')
-        }
+    constructor(pathName: PathKey, group: ServerGroup = 'Api') {
+        if (!pathName) throw new Error('RequestBuilder: pathName is required')
 
-        this.baseUrl = apiPathBuilder(pathName)
+        this.baseUrl = apiPathBuilder(pathName, group)
     }
 
     // -----------------------

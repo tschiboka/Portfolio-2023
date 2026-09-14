@@ -162,7 +162,7 @@ export type PostLikeRequest = {
 
 // POST /api/like response
 export type PostLikeResponse = {
-    like: { path: string; likeDate: Date }
+    like: { path: string; likeDate: string }
 }
 
 // POST /api/like error
@@ -302,7 +302,7 @@ export type PostVisitRequest = {
 
 // POST /api/visit response
 export type PostVisitResponse = {
-    visit: { path: string; visitDate: Date }
+    visit: { path: string; visitDate: string }
 }
 
 // POST /api/visit error (validation failure)

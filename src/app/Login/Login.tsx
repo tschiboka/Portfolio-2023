@@ -1,16 +1,14 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from './Login.schema'
-import { AxiosError } from 'axios'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@common-ux'
-import { PostLoginResponse, PostLoginRequest, ErrorResponse } from '@common-types'
-import { useLoginApi } from './Login.query'
+import { ClientMessage, Paths, errorMessage } from '@common-utils'
+import { LoginQueries } from './Login.query'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { Session } from '@shared-context/SessionContext'
-import { QueryKey } from '@common-utils'
+import { Session } from '@shared-context'
+import type { PostLoginRequest } from '@common-types'
 
 type LoginProps = {
     path: string
@@ -20,7 +18,6 @@ type LoginProps = {
 export const Login = ({ path, pageName }: LoginProps) => {
     const { setSession } = Session.useContext()
     const navigate = useNavigate()
-    const { loginFormRequest, settingsRequest } = useLoginApi()
 
     const [revealPassword, setRevealPassword] = useState(false)
     const [loginErrorMessage, setLoginErrorMessage] = useState('')
@@ -32,33 +29,17 @@ export const Login = ({ path, pageName }: LoginProps) => {
         resolver: yupResolver(loginSchema),
     })
 
-    const { data: settingsData, isLoading: settingIsLoading } = useQuery({
-        queryKey: QueryKey.AppSettings.build(),
-        queryFn: async () => {
-            const res = await settingsRequest()
-            return res.data
-        },
-    })
+    const { data: settingsData, isLoading: settingIsLoading } = LoginQueries.Settings.useGet()
 
-    const loginRequest = useMutation<
-        PostLoginResponse,
-        AxiosError<ErrorResponse>,
-        PostLoginRequest
-    >({
-        mutationFn: async (data: PostLoginRequest) => {
-            const res = await loginFormRequest(data)
-            return res.data
-        },
+    const loginRequest = LoginQueries.usePost({
         onSuccess: (response) => {
             setLoginErrorMessage('')
             const { token, user, settings } = response
-            const session = { token, user, settings: settings[0] }
-            setSession(session)
-            navigate('/api/home')
+            setSession({ token, user, settings: settings[0] })
+            navigate(Paths.Client.Home)
         },
-        onError: (error) => {
-            setLoginErrorMessage(error.response?.data?.message ?? error.message)
-        },
+        onError: (error) =>
+            setLoginErrorMessage(errorMessage(error, ClientMessage.Failure.Login())),
     })
 
     const submitHandler = (data: PostLoginRequest, event?: React.BaseSyntheticEvent) => {

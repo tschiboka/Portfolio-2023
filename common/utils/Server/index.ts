@@ -1,4 +1,3 @@
-export * from './ApiMessage'
 export * from './ApiError'
 export * from './ApiResponder'
 export * from './HttpStatus'

@@ -10,7 +10,7 @@ export const ViewRecord = ({ path }: ViewRecordProps) => {
             title={'tschiboka | View Records'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="View Records"
         >
             <main>

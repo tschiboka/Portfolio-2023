@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { append, dropLast } from 'ramda'
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import { Const, Link, Toggle } from '@common-ux'
 import { AccessGuard } from '../../AccessGuard'
 import { MenuItem } from '../Nav.types'
@@ -24,7 +24,8 @@ export const MobileMenu = ({
     renderImage,
     extras,
 }: MobileMenuProps) => {
-    const { mobileMenuVisible, setMobileMenuVisible, themeMode, setThemeMode } = useAppContext()
+    const { mobileMenuVisible, setMobileMenuVisible, themeMode, setThemeMode } =
+        AppHooks.useContext()
 
     const rootMenu = items.filter((item) => !item.showSubmenuToggle)
 
@@ -99,7 +100,6 @@ export const MobileMenu = ({
                     </li>
                 )}
             </div>
-
             <div className="MobileMenu__extras">
                 <div className="theme-toggle" title="Toggle Colour Theme">
                     <Toggle

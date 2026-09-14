@@ -1,8 +1,8 @@
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { getHeaderInfo } from './SessionHeader.selectors'
 
 export const MomentumBar = () => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     if (!sessionState) return null
 
     const headerInfo = getHeaderInfo({ sessionState })

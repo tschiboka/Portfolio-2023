@@ -1,7 +1,7 @@
 import type { MockInstance } from 'vitest'
 /* eslint-disable @typescript-eslint/unbound-method, @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios'
-import * as apiPathBuilderModule from '../../Path/apiPathBuilder'
+import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import { RequestBuilder } from '../Query'
 
 const mockedAxios = axios as unknown as {

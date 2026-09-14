@@ -2,6 +2,7 @@ import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
+import { Paths } from '@common-utils'
 import { mockRegisterSuccess } from './Register.mocks'
 import { defaultHandlers, handlePostRegisterError } from './Register.mockHandles'
 import { RegisterLabels } from './Register.spec.utils'
@@ -76,7 +77,7 @@ describe('Register', () => {
         it('should navigate to /api/login when login button is clicked', async () => {
             const { form } = await setupRegister()
             await form.Button(buttons.login).Do.click()
-            expect(TestScreen.Get.navigatedTo()).toBe('/api/login')
+            expect(TestScreen.Get.navigatedTo()).toBe(Paths.Client.Login)
         })
     })
 

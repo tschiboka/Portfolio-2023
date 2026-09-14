@@ -1,18 +1,16 @@
 import { CheckMark, Coin } from '../../common/components'
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { getHeaderInfo } from './SessionHeader.selectors'
 
 export const Info = () => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     if (!sessionState?.players || !sessionState.role) return null
 
     const headerInfo = getHeaderInfo({ sessionState })
     if (!headerInfo) return null
 
-    const playerWords =
-        headerInfo.player.targetWords + headerInfo.player.extraWords
-    const opponentWords =
-        headerInfo.opponent.targetWords + headerInfo.opponent.extraWords
+    const playerWords = headerInfo.player.targetWords + headerInfo.player.extraWords
+    const opponentWords = headerInfo.opponent.targetWords + headerInfo.opponent.extraWords
 
     return (
         <div className="session-player-info">

@@ -13,7 +13,7 @@ export const Toggles = ({ path }: TogglesProps) => (
     <Screen
         title={'tschiboka | Toggles'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -26,7 +26,6 @@ export const Toggles = ({ path }: TogglesProps) => (
                 thumb. It is used for boolean state, e.g. theme switching, and is fully keyboard
                 accessible (Enter / Space).
             </Paragraph>
-
             <Section>
                 <Heading as="h2" id="no-icon">
                     Without Icons
@@ -41,7 +40,6 @@ export const Toggles = ({ path }: TogglesProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.NoIcon.bare} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="basic-usage">
                     Basic Usage
@@ -62,7 +60,6 @@ export const Toggles = ({ path }: TogglesProps) => (
                 <Code language="tsx" content={Snippets.Basic.inactive} />
                 <Code language="tsx" content={Snippets.Basic.active} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="colors">
                     Active Colour
@@ -77,7 +74,6 @@ export const Toggles = ({ path }: TogglesProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Colors.activeColor} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="controlled">
                     Controlled State

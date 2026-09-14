@@ -10,7 +10,7 @@ export const Events = ({ path }: EventsProp) => {
             title={'tschiboka | Events'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Events"
         >
             <h1>Events</h1>

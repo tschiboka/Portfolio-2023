@@ -24,11 +24,7 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
     const animationRef = useRef<number>(0)
     const lightsRef = useRef<Light[]>([])
 
-    const getPositionOnBorder = (
-        progress: number,
-        width: number,
-        height: number,
-    ) => {
+    const getPositionOnBorder = (progress: number, width: number, height: number) => {
         const topPadding = 20
         const sidePadding = 20
         const bottomPadding = 10
@@ -47,19 +43,13 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
             }
         } else if (distance < 2 * adjustedWidth + adjustedHeight) {
             return {
-                x:
-                    width -
-                    sidePadding -
-                    (distance - adjustedWidth - adjustedHeight),
+                x: width - sidePadding - (distance - adjustedWidth - adjustedHeight),
                 y: height - bottomPadding,
             }
         } else {
             return {
                 x: sidePadding,
-                y:
-                    height -
-                    bottomPadding -
-                    (distance - 2 * adjustedWidth - adjustedHeight),
+                y: height - bottomPadding - (distance - 2 * adjustedWidth - adjustedHeight),
             }
         }
     }
@@ -94,17 +84,13 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
         lightsRef.current.forEach((light, index) => {
             // Create twinkling effect with different speeds for each light
             const twinkleSpeed = 0.003 + (index % 3) * 0.001
-            const twinkle =
-                Math.sin(time * twinkleSpeed + light.phase) * 0.3 + 0.7
+            const twinkle = Math.sin(time * twinkleSpeed + light.phase) * 0.3 + 0.7
             const opacity = light.baseOpacity * twinkle
 
             // Alternate colors every 1 second (1000ms)
             const colorCycleTime = Math.floor(time / 1000) % 2
             const isInitiallyRed = index % 2 === 0
-            const currentColor =
-                (colorCycleTime === 0) === isInitiallyRed
-                    ? '#ff0000'
-                    : '#00ff00'
+            const currentColor = (colorCycleTime === 0) === isInitiallyRed ? '#ff0000' : '#00ff00'
 
             // Draw the light with glow effect
             ctx.globalAlpha = opacity
@@ -157,9 +143,7 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
         if (!canvas || !container) return
 
         // Get the content area (excluding padding)
-        const contentDiv = container.querySelector(
-            'div:nth-child(2)',
-        ) as HTMLElement
+        const contentDiv = container.querySelector('div:nth-child(2)') as HTMLElement
         if (!contentDiv) return
 
         const contentRect = contentDiv.getBoundingClientRect()
@@ -196,6 +180,7 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
                 cancelAnimationFrame(animationRef.current)
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- the effect restarts on lightCount/lightSize by design; drawLights and resizeCanvas change identity every render, so listing them would tear down the listener and frame loop each pass
     }, [lightCount, lightSize])
 
     return (

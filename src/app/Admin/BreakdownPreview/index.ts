@@ -1,5 +1,5 @@
 export { BreakdownPreview } from './BreakdownPreview'
-export { MOCK_BREAKDOWN } from './BreakdownPreview.mocks'
+export { MockBreakdown } from './tests/BreakdownPreview.mocks'
 export type {
     Breakdown,
     PathBreakdownItem,

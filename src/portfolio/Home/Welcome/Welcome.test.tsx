@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AppContextProvider } from '@shared-context/AppContext/App.context'
+import { AppContextProvider } from '@shared-context'
 import Welcome from './Welcome'
 
 function renderComponent() {

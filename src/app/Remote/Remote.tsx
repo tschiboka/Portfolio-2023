@@ -12,7 +12,7 @@ export const Remote = ({ path }: RemoteProps) => {
             title={'tschiboka | Remote'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Remote"
         >
             <Main>

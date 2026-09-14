@@ -12,7 +12,7 @@ export const Figures = ({ path }: FiguresProps) => (
     <Screen
         title={'tschiboka | Figures'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -58,7 +58,6 @@ export const Figures = ({ path }: FiguresProps) => (
                 <Code language="tsx" content={Snippets.Basic.simple} />
                 <Code language="tsx" content={Snippets.Basic.withCaption} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="sizes">
                     Sizes
@@ -99,7 +98,6 @@ export const Figures = ({ path }: FiguresProps) => (
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Sizes.all} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="zoomable">
                     Zoomable
@@ -117,7 +115,6 @@ export const Figures = ({ path }: FiguresProps) => (
                 />
                 <Code language="tsx" content={Snippets.Zoom.onZoom} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="responsive-sources">
                     Responsive Sources
@@ -130,7 +127,6 @@ export const Figures = ({ path }: FiguresProps) => (
                 </Paragraph>
                 <Code language="tsx" content={Snippets.Responsive.sources} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility
@@ -142,7 +138,6 @@ export const Figures = ({ path }: FiguresProps) => (
                 </Paragraph>
                 <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="background-color">
                     Background Color

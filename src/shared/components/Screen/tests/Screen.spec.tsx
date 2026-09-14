@@ -1,37 +1,36 @@
 import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
-import { postVisit } from '@shared-queries'
-import { Browser } from '@common-utils'
-import type { PostVisitResponse } from '@common-types'
+import { VisitsQueries } from '@shared-queries'
+import { Browser, Paths } from '@common-utils'
 import { Screen } from '../Screen'
 import { TestScreen } from './Screen.spec.utils'
 
-// detectincognitojs is async and browser-detection dependent; stub it as "not private" so
-// visit recording is deterministic in tests.
-vi.mock('detectincognitojs', () => ({
-    detectIncognito: vi.fn().mockResolvedValue({ isPrivate: false }),
-}))
-
 // Mock the shared-queries barrel so visit recording is a typed vi.fn we can drive directly;
 // stub the remaining hooks to avoid undefined-method crashes in any subcomponent.
-vi.mock('@shared-queries', () => ({
-    postVisit: vi.fn(),
-    usePostVisit: vi.fn(),
-    useGetVisits: vi.fn().mockReturnValue({ data: undefined }),
-    useGetVisitSummary: vi.fn().mockReturnValue({ data: undefined }),
-    useGetLikes: vi.fn().mockReturnValue({ data: undefined }),
-    useGetLikeSummary: vi.fn(),
-    usePostLike: vi.fn(),
-}))
+vi.mock(
+    '@shared-queries',
+    () =>
+        ({
+            VisitsQueries: {
+                usePost: vi.fn(),
+                useGet: vi.fn().mockReturnValue({ data: undefined }),
+                useRecord: vi.fn(),
+                Summary: { useGet: vi.fn().mockReturnValue({ data: undefined }) },
+            },
+            LikesQueries: {
+                usePost: vi.fn(),
+                useGet: vi.fn().mockReturnValue({ data: undefined }),
+                Summary: { useGet: vi.fn() },
+            },
+        }) satisfies typeof import('@shared-queries'),
+)
 
-const visitResponse: PostVisitResponse = {
-    visit: { path: '/home', visitDate: new Date() },
-}
+const useRecordMock = vi.mocked(VisitsQueries.useRecord)
 
 beforeEach(() => {
     vi.clearAllMocks()
-    vi.mocked(postVisit).mockResolvedValue(visitResponse)
+    useRecordMock.mockReturnValue(undefined)
     // Screen skips visit recording on localhost; force a non-localhost environment.
     vi.spyOn(Browser, 'isLocalhost').mockReturnValue(false)
 })
@@ -110,7 +109,7 @@ describe('Screen', () => {
     })
 
     describe('Visit recording', () => {
-        it('records a visit by default', async () => {
+        it('records a visit for the screen path', async () => {
             TestScreen.Do.render({
                 path: '/home',
                 children: (
@@ -120,20 +119,7 @@ describe('Screen', () => {
                 ),
             })
 
-            await waitFor(() => expect(postVisit).toHaveBeenCalledWith('/home'))
-        })
-
-        it('skips visit recording when recordVisit is false', async () => {
-            TestScreen.Do.render({
-                path: '/home',
-                children: (
-                    <Screen title="Test" path="/home" recordVisit={false}>
-                        <div />
-                    </Screen>
-                ),
-            })
-
-            await waitFor(() => expect(postVisit).not.toHaveBeenCalled())
+            await waitFor(() => expect(useRecordMock).toHaveBeenCalledWith('/home'))
         })
     })
 
@@ -149,7 +135,7 @@ describe('Screen', () => {
                 session: { isAuthenticated: false, isAuthLoading: false },
             })
 
-            expect(TestScreen.Get.navigatedTo()).toBe('/api/login')
+            expect(TestScreen.Get.navigatedTo()).toBe(Paths.Client.Login)
         })
 
         it('does not redirect when loginRequired and authenticated', () => {
@@ -194,6 +180,7 @@ describe('Screen', () => {
                 ),
             })
 
+            // eslint-disable-next-line @typescript-eslint/unbound-method -- window.scrollTo is a vi.fn() spy set in setupTests.ts, so no receiver can be lost
             expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
         })
     })

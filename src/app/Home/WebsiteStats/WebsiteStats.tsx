@@ -1,22 +1,18 @@
 import { Stack, Section } from '@common-ux'
-import { useGetActivityFeed } from './WebsiteStats.queries'
-import { AxiosError } from 'axios'
+import { WebsiteStatsQueries } from './WebsiteStats.queries'
 import { BreakdownTable, useBreakdownTableController } from './BreakdownTable'
-import type { Dictionary } from '@common-utils'
+import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 
 export const WebsiteStats = () => {
     const controller = useBreakdownTableController()
-    const { data, ...activityFeedResponse } = useGetActivityFeed({ params: controller.params })
+    const { data: websiteStats, ...websiteStatsQuery } = WebsiteStatsQueries.useGet({
+        params: controller.params,
+    })
 
     // TODO: Add toast notification for errors
-    const errorMessage =
-        activityFeedResponse.error instanceof AxiosError
-            ? String(
-                  (activityFeedResponse.error.response?.data as Dictionary)?.message ??
-                      activityFeedResponse.error.message ??
-                      'Unknown error',
-              )
-            : undefined
+    const errorMessage = websiteStatsQuery.error
+        ? getErrorMessage(websiteStatsQuery.error, ClientMessage.Failure.Fetch('activity feed'))
+        : undefined
 
     return (
         <Section title="Website Stats">
@@ -36,12 +32,12 @@ export const WebsiteStats = () => {
                     </div>
                 )}
                 <BreakdownTable
-                    data={data?.data}
-                    meta={data?.meta}
+                    data={websiteStats?.data}
+                    meta={websiteStats?.meta}
                     controller={controller}
-                    context={data?.context}
-                    isLoading={activityFeedResponse.isLoading}
-                    onRefresh={activityFeedResponse.refetch}
+                    context={websiteStats?.context}
+                    isLoading={websiteStatsQuery.isLoading}
+                    onRefresh={websiteStatsQuery.refetch}
                 />
             </Stack.Vertical>
         </Section>

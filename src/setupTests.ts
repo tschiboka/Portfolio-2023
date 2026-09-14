@@ -41,7 +41,7 @@ vi.mock('react-router-dom', async (importOriginal) => ({
 ;(globalThis as Dictionary).mockNavigate = mockNavigate
 
 // jsdom does not implement window.scrollTo
-window.scrollTo = vi.fn() as unknown as typeof window.scrollTo
+window.scrollTo = vi.fn()
 
 // Suppress benign act() warnings that are false positives.
 // These are caused by components that use scroll listeners, IntersectionObserver,

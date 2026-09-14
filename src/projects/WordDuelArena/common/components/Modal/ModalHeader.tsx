@@ -1,11 +1,11 @@
-import { useModal } from './Modals'
+import { ModalHooks } from './Modal.hooks'
 
 type ModalHeaderProps = {
     title: string
 }
 
 export const ModalHeader = ({ title }: ModalHeaderProps) => {
-    const { setClose } = useModal()
+    const { setClose } = ModalHooks.useContext()
     return (
         <div className="modal-header">
             <h2>{title}</h2>

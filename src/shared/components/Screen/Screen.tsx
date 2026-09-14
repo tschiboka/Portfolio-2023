@@ -1,14 +1,12 @@
 import { ReactNode, useEffect } from 'react'
-import { detectIncognito } from 'detectincognitojs'
 import { useNavigate } from 'react-router-dom'
 import { FullScreenOverlay } from '../Overlay/Overlay'
 import { PageNav, PageMobileMenu, PageSubNav } from '@shared-components/Nav'
 import type { PageVariant } from '@shared-components/Nav'
 import Footer, { type FooterProps } from '../Footer/Footer'
-import { Session } from '@shared-context/SessionContext'
-import { useAppContext } from '@shared-context/AppContext/App.context'
-import { postVisit } from '@shared-queries'
-import { Browser } from '@common-utils'
+import { Session, AppHooks } from '@shared-context'
+import { VisitsQueries } from '@shared-queries'
+import { Paths } from '@common-utils'
 import { ContentNavigator } from '@common-ux'
 import './Screen.css'
 
@@ -19,7 +17,6 @@ export type ScreenProps = {
     pageName?: string
     variant?: PageVariant
     className?: string
-    recordVisit?: boolean
     loginRequired?: boolean
     sideMenu?: ReactNode
     hideFooter?: boolean
@@ -35,7 +32,6 @@ export const Screen = ({
     pageName,
     variant,
     className,
-    recordVisit = true,
     loginRequired = false,
     sideMenu,
     hideFooter,
@@ -43,23 +39,19 @@ export const Screen = ({
     hasContentNavigator = false,
     contentNavigatorDepth = 6,
 }: ScreenProps) => {
-    const { subMenuVisible } = useAppContext()
+    const { subMenuVisible } = AppHooks.useContext()
     const navigate = useNavigate()
     const { isAuthenticated, isAuthLoading } = Session.useContext()
+
+    VisitsQueries.useRecord(path)
 
     useEffect(() => {
         document.title = title
         window.scrollTo(0, 0)
-
-        if (Browser.isLocalhost()) return
-
-        void detectIncognito().then((result) => {
-            if (!result.isPrivate && recordVisit) void postVisit(path)
-        })
-    }, [path, recordVisit, title])
+    }, [title])
 
     useEffect(() => {
-        if (loginRequired && !isAuthLoading && !isAuthenticated) navigate('/api/login')
+        if (loginRequired && !isAuthLoading && !isAuthenticated) navigate(Paths.Client.Login)
     }, [loginRequired, isAuthenticated, isAuthLoading, navigate])
 
     const getClassName = () => {

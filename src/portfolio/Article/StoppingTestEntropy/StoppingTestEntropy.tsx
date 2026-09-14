@@ -16,7 +16,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     How inconsistent testing patterns quietly destroy maintainability — and what we
                     can do about it.
                 </Paragraph>
-
                 {/* ── The Problem ───────────────────────────────────────── */}
                 <Heading as="h2">The Problem</Heading>
                 <Paragraph>
@@ -35,7 +34,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     We call this <Typography weight="bold">test entropy</Typography>.
                 </Paragraph>
             </Section>
-
             {/* ── What Test Entropy Looks Like ──────────────────────── */}
             <Section>
                 <Heading as="h2">What Test Entropy Looks Like</Heading>
@@ -70,7 +68,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     patterns.
                 </Paragraph>
             </Section>
-
             {/* ── Why Documentation Doesn't Solve It ───────────────── */}
             <Section>
                 <Heading as="h2">Why Documentation Doesn't Solve It</Heading>
@@ -89,7 +86,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     through documentation.
                 </Paragraph>
             </Section>
-
             {/* ── The Idea ─────────────────────────────────────────── */}
             <Section>
                 <Heading as="h2">The Idea: Reduce Valid Mental Models</Heading>
@@ -113,7 +109,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     <Typography weight="bold">intent</Typography> rather than mechanics.
                 </Paragraph>
             </Section>
-
             {/* ── The Accessor Base Class ───────────────────────────── */}
             <Section>
                 <Heading as="h2">The Accessor Base Class</Heading>
@@ -132,7 +127,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 </Paragraph>
                 <Code fileName="TestError.ts" language="tsx" content={codeSnippets.errorMessages} />
             </Section>
-
             {/* ── The Five Namespaces ───────────────────────────────── */}
             <Section>
                 <Heading as="h2">The Five Namespaces</Heading>
@@ -141,7 +135,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     five core namespaces. Only three are authored — the other two are automatically
                     derived.
                 </Paragraph>
-
                 <Heading as="h3">Get — Read State</Heading>
                 <Paragraph>
                     <CodeText>Get</CodeText> contains synchronous queries that read DOM state. The
@@ -150,7 +143,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     extend via spread:
                 </Paragraph>
                 <Code fileName="Get.ts" language="tsx" content={codeSnippets.getNamespace} />
-
                 <Heading as="h3">Do — User Interactions</Heading>
                 <Paragraph>
                     <CodeText>Do</CodeText> contains async user actions. The base class provides{' '}
@@ -159,7 +151,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     component-specific actions:
                 </Paragraph>
                 <Code fileName="Do.ts" language="tsx" content={codeSnippets.doNamespace} />
-
                 <Heading as="h3">Has & Wait — Derived Automatically</Heading>
                 <Paragraph>
                     <CodeText>Has</CodeText> and <CodeText>Wait</CodeText> are not authored
@@ -176,7 +167,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     and you immediately get <CodeText>Has.calendar()</CodeText> and{' '}
                     <CodeText>Wait.calendar()</CodeText> for free.
                 </Paragraph>
-
                 <Heading as="h3">Set — Rendering & Mocking</Heading>
                 <Paragraph>
                     <CodeText>Set</CodeText> is different. It lives{' '}
@@ -186,7 +176,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 </Paragraph>
                 <Code fileName="Set.ts" language="tsx" content={codeSnippets.setPattern} />
             </Section>
-
             {/* ── Building a Component Accessor ─────────────────────── */}
             <Section>
                 <Heading as="h2">Building a Component Accessor</Heading>
@@ -203,7 +192,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     the <CodeText>Accessor</CodeText> constructor throws with the context.
                 </Paragraph>
             </Section>
-
             {/* ── Composite Accessors ───────────────────────────────── */}
             <Section>
                 <Heading as="h2">Composite Accessors</Heading>
@@ -223,7 +211,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     exactly which component in which parent failed.
                 </Paragraph>
             </Section>
-
             {/* ── Real-World Tests ──────────────────────────────────── */}
             <Section>
                 <Heading as="h2">Tests: Before and After</Heading>
@@ -249,11 +236,9 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     everywhere.
                 </Paragraph>
             </Section>
-
             {/* ── More Examples ─────────────────────────────────────── */}
             <Section>
                 <Heading as="h2">More Real-World Examples</Heading>
-
                 <Heading as="h3">Table</Heading>
                 <Paragraph>
                     The <CodeText>Table</CodeText> accessor is the most feature-rich, with getters
@@ -261,7 +246,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     downloads:
                 </Paragraph>
                 <Code fileName="Table.spec.tsx" language="tsx" content={codeSnippets.tableTest} />
-
                 <Heading as="h3">Overlay</Heading>
                 <Paragraph>
                     The <CodeText>Overlay</CodeText> accessor handles popups, action menus, and
@@ -273,7 +257,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     content={codeSnippets.overlayTest}
                 />
             </Section>
-
             {/* ── The Full Test Namespace ───────────────────────────── */}
             <Section>
                 <Heading as="h2">The Full Test Namespace</Heading>
@@ -287,7 +270,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     content={codeSnippets.testNamespace}
                 />
             </Section>
-
             {/* ── Design Rules ──────────────────────────────────────── */}
             <Section>
                 <Heading as="h2">Design Rules</Heading>
@@ -310,7 +292,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     content={codeSnippets.designRules}
                 />
             </Section>
-
             {/* ── What This Is Not ──────────────────────────────────── */}
             <Section>
                 <Heading as="h2">What This Is Not</Heading>
@@ -331,7 +312,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     fracturing into incompatible local interpretations of itself.
                 </Paragraph>
             </Section>
-
             {/* ── What Success Looks Like ───────────────────────────── */}
             <Section>
                 <Heading as="h2">What Success Looks Like</Heading>
@@ -351,7 +331,6 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 />
                 <Paragraph>In short: tests start feeling like one system again.</Paragraph>
             </Section>
-
             {/* ── Closing Thought ───────────────────────────────────── */}
             <Section>
                 <Heading as="h2">Closing Thought</Heading>

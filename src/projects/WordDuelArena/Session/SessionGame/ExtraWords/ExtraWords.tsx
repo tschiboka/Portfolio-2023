@@ -1,4 +1,4 @@
-import { useSession } from '../../Session.context'
+import { SessionHooks } from '../../Session.hooks'
 import './ExtraWords.styles.css'
 
 type ExtraWordsProps = {
@@ -6,7 +6,7 @@ type ExtraWordsProps = {
     setExtraWordsOpen: (open: boolean) => void
 }
 export const ExtraWords = ({ isOpen, setExtraWordsOpen }: ExtraWordsProps) => {
-    const session = useSession()
+    const session = SessionHooks.useContext()
     const { level } = session.sessionState || {}
     const extraWords = level?.extraWords || []
     const role = session?.sessionState?.role || ''

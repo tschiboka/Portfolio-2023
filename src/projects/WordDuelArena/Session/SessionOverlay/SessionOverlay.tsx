@@ -1,9 +1,9 @@
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { InteractionModes } from './SessionOverlay.types'
 import { useGetInteractionOverlayState } from './SessionOverlay.hooks'
 import './SessionOverlay.styles.css'
 import { Browser } from '@common-utils'
-import { useSessionWS } from '../SessionWebSocket'
+import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
 
 export const InteractionOverlay = ({
     enterFullScreen,
@@ -13,8 +13,8 @@ export const InteractionOverlay = ({
     isFullscreen: boolean
 }) => {
     const { orientation, isMobile } = Browser.useOrientation()
-    const { sessionState } = useSession()
-    const { errorMessage } = useSessionWS()
+    const { sessionState } = SessionHooks.useContext()
+    const { errorMessage } = SessionWebSocketHooks.useContext()
     let message = errorMessage
     let mode: InteractionModes = 'none'
 

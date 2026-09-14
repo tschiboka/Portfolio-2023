@@ -93,6 +93,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
 
     useEffect(() => {
         if (audio) audio[firstAudio].play()
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- firstAudio is set atomically with audio in playAudio; depending on it would double-play
     }, [audio])
 
     // Audio Howler

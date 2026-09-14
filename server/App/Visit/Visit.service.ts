@@ -44,6 +44,6 @@ export const VisitService = {
             { upsert: true },
         )
 
-        return { visit: { path: input.path, visitDate: visit.visitDate } }
+        return { visit: { path: input.path, visitDate: DateTime.Format.toIso(visit.visitDate) } }
     },
 }

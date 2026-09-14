@@ -10,7 +10,7 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
     <Screen
         title={'tschiboka | Code Blocks'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -35,7 +35,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                 <Code language="tsx" content={`const x = 42`} />
                 <Code language="tsx" content={Snippets.Basic.minimal} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="file-name">
                     File Name
@@ -51,7 +50,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                 />
                 <Code language="tsx" content={Snippets.Basic.withFileName} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="languages">
                     Languages
@@ -60,24 +58,19 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     Any language supported by <CodeText>react-syntax-highlighter</CodeText> works.
                     Here are a few common examples.
                 </Paragraph>
-
                 <Heading as="h3">TSX</Heading>
                 <Code fileName="Counter.tsx" language="tsx" content={Snippets.tsxExample} />
                 <Code language="tsx" content={Snippets.Languages.tsx} />
-
                 <Heading as="h3">CSS</Heading>
                 <Code fileName="card.css" language="css" content={Snippets.cssExample} />
                 <Code language="tsx" content={Snippets.Languages.css} />
-
                 <Heading as="h3">JSON</Heading>
                 <Code fileName="package.json" language="json" content={Snippets.jsonExample} />
                 <Code language="tsx" content={Snippets.Languages.json} />
-
                 <Heading as="h3">Bash</Heading>
                 <Code fileName="build.sh" language="bash" content={Snippets.bashExample} />
                 <Code language="tsx" content={Snippets.Languages.bash} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="copy-to-clipboard">
                     Copy to Clipboard
@@ -93,7 +86,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                 />
                 <Code language="tsx" content={Snippets.CopyToClipboard.demo} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility
@@ -109,7 +101,6 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                 />
                 <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="custom-styling">
                     Custom Styling

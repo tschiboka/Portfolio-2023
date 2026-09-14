@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import type { CellValue, CellVariant, CellMeta, TableAction, SortDirection } from '@common-ux'
 import { Pill } from '@common-ux'
-import type { Optional, Dictionary } from '@common-utils'
+import type { Optional, Dictionary, Sortable } from '@common-utils'
 import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.mocks'
 
 export const statusPillColors: Dictionary<'success' | 'error' | 'orange'> = {
@@ -163,7 +163,7 @@ export const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
     },
 ]
 
-export const sortRows = <T extends Record<string, ReactNode>>(
+export const sortRows = <T extends Record<string, Sortable>>(
     data: T[],
     column: keyof T,
     direction: SortDirection,

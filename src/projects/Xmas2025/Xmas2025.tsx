@@ -6,13 +6,13 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { xmasSchema } from './Xmas2025.schema'
 import { XmasFormData } from './Xmas2025.types'
-import { useLogout } from '../../app/Logout/Logout'
+import { LogoutHooks } from '../../app/Logout/Logout.hooks'
 import { xmasTransformer } from './Xmas2025.transformers'
 import Reindeer from '@projects/assets/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
 import { YourMessages } from './YourMessages'
-import { Session } from '@shared-context/SessionContext'
+import { Session } from '@shared-context'
 import { CandlePanel } from './CandlePanel'
 import './Xmas2025.styles.scss'
 
@@ -44,7 +44,7 @@ export const Xmas2025 = () => {
     })
     const { data: messages } = useGetMessages({ userId: user?.id })
 
-    const logout = useLogout()
+    const logout = LogoutHooks.useLogout()
     const submitHandler = (data: XmasFormData) =>
         user ? submitMessage(xmasTransformer.toApi(data, user)) : logout()
 
@@ -76,7 +76,7 @@ export const Xmas2025 = () => {
             path="/xmas2025"
             loginRequired
             className="Xmas"
-            variant="api"
+            variant="app"
             pageName="Xmas"
             footerProps={{ info: <p>Page ping message: {pagePingStatus}</p> }}
         >

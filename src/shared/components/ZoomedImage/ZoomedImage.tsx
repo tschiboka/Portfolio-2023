@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useRef } from 'react'
+import { ReactNode, useEffect } from 'react'
 import './ZoomedImage.scss'
 
 interface Props {
@@ -9,15 +9,14 @@ interface Props {
 }
 
 const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Props) => {
-    const ref = useRef<HTMLDivElement>(null)
-    const escHandler = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') handleEscKeyPress()
-    }
-
     useEffect(() => {
+        const escHandler = (event: KeyboardEvent) => {
+            if (event.key === 'Escape') handleEscKeyPress()
+        }
+
         window.addEventListener('keydown', escHandler)
         return () => window.removeEventListener('keydown', escHandler)
-    }, [])
+    }, [handleEscKeyPress])
 
     return (
         <div
@@ -26,7 +25,6 @@ const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Prop
                 e.stopPropagation()
                 handleClick()
             }}
-            ref={ref}
             style={bgColor ? { backgroundColor: bgColor } : undefined}
         >
             {children}

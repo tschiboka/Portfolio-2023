@@ -1,9 +1,9 @@
-import { useSession } from '../Session.context'
+import { SessionHooks } from '../Session.hooks'
 import { AttemptWord } from './AttemptWord'
 import { getLastAttempt } from './SessionHeader.selectors'
 
 export const LastAttempts = () => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     if (!sessionState?.role) return null
 
     const lastAttempt = getLastAttempt(sessionState)

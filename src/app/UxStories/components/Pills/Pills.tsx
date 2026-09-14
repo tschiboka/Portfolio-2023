@@ -12,7 +12,7 @@ export const Pills = ({ path }: PillsProps) => (
     <Screen
         title={'tschiboka | Pills'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -40,7 +40,6 @@ export const Pills = ({ path }: PillsProps) => (
                 <Code language="tsx" content={Snippets.Basic.minimal} />
                 <Code language="tsx" content={Snippets.Basic.withColor} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="colours">
                     Colours
@@ -58,7 +57,6 @@ export const Pills = ({ path }: PillsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Colors.allColors} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="variants">
                     Variants
@@ -83,12 +81,10 @@ export const Pills = ({ path }: PillsProps) => (
                 <Code language="tsx" content={Snippets.Variants.outlined} />
                 <Code language="tsx" content={Snippets.Variants.solid} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="use-cases">
                     Use Cases
                 </Heading>
-
                 <Heading as="h3">Status Badge</Heading>
                 <Paragraph>Map a data value to a colour to display row-level status.</Paragraph>
                 <Stack.Horizontal gap="8" style={{ flexWrap: 'wrap' }}>
@@ -97,7 +93,6 @@ export const Pills = ({ path }: PillsProps) => (
                     <Pill label="INACTIVE" color="error" />
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.UseCases.statusBadge} />
-
                 <Heading as="h3">Tags</Heading>
                 <Paragraph>Render a list of labels as pills.</Paragraph>
                 <Stack.Horizontal gap="8" style={{ flexWrap: 'wrap' }}>
@@ -106,7 +101,6 @@ export const Pills = ({ path }: PillsProps) => (
                     <Pill label="CSS" color="purple" />
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.UseCases.tags} />
-
                 <Heading as="h3">Legend</Heading>
                 <Paragraph>Combine pills with counts for chart or table legends.</Paragraph>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
@@ -122,7 +116,6 @@ export const Pills = ({ path }: PillsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.UseCases.legend} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility
@@ -134,7 +127,6 @@ export const Pills = ({ path }: PillsProps) => (
                 <Pill label="3 errors" color="error" ariaLabel="3 validation errors found" />
                 <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="custom-styling">
                     Custom Styling

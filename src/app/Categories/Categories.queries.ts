@@ -1,37 +1,33 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { ErrorResponse, GetCategoryResponse, PostCategoryRequest } from '@common-types'
-import { AxiosError } from 'axios'
-import { Paths, Query, QueryKey } from '@common-utils'
-import { Session } from '@shared-context/SessionContext'
+import type { ErrorResponse, GetCategoryResponse, PostCategoryRequest } from '@common-types'
+import { Query, QueryKey } from '@common-utils'
+import { Session } from '@shared-context'
+import type { AxiosError } from 'axios'
 
-type UsePostCategory = {
-    onSuccess: () => void
-}
-export const usePostCategory = ({ onSuccess }: UsePostCategory) => {
+/** Every category, for the parent selector and the table. */
+const useGet = () => {
     const token = Session.useContext().session?.token
+    const request = Query.FeatureQuery().path('Categories').token(token).build()
 
-    const request = new Query.RequestBuilder(Paths.Api.Categories).withAuthToken(token).build()
+    return useQuery<{ data: GetCategoryResponse[] }, AxiosError<ErrorResponse>>(
+        request.Get(QueryKey.Categories.build()),
+    )
+}
+
+type UsePost = { onSuccess: () => void }
+
+/** Creates a category. */
+const usePost = ({ onSuccess }: UsePost) => {
+    const token = Session.useContext().session?.token
+    const request = Query.FeatureQuery().path('Categories').token(token).build()
+
     return useMutation<void, AxiosError<ErrorResponse>, PostCategoryRequest>({
-        mutationFn: async (payload: PostCategoryRequest) => {
-            await request.post(payload)
-        },
-        onSuccess,
+        mutationKey: QueryKey.Categories.build(),
+        ...request.Post({ onSuccess }),
     })
 }
 
-type CategoriesGetResponse = {
-    data: GetCategoryResponse[]
-}
-
-export const useGetCategories = () => {
-    const token = Session.useContext().session?.token
-
-    const request = new Query.RequestBuilder(Paths.Api.Categories).withAuthToken(token).build()
-    return useQuery<CategoriesGetResponse, AxiosError<ErrorResponse>>({
-        queryKey: QueryKey.Categories.build(),
-        queryFn: async (): Promise<CategoriesGetResponse> => {
-            const res = await request.get<CategoriesGetResponse>()
-            return res.data
-        },
-    })
+export const CategoriesQueries = {
+    useGet,
+    usePost,
 }

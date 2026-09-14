@@ -11,7 +11,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
     <Screen
         title={'tschiboka | Buttons'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -43,7 +43,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 <Code language="tsx" content={Snippets.Basic.primary} />
                 <Code language="tsx" content={Snippets.Basic.secondary} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="variants">
                     Variants
@@ -60,7 +59,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Variants.side} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="sizes">
                     Sizes
@@ -85,7 +83,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Sizes.both} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="disabled">
                     Disabled
@@ -102,7 +99,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 </Stack.Horizontal>
                 <Code language="tsx" content={Snippets.Disabled.disabled} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="as-anchor">
                     As Anchor
@@ -128,7 +124,6 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 <Code language="tsx" content={Snippets.AsAnchor.link} />
                 <Code language="tsx" content={Snippets.AsAnchor.external} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility

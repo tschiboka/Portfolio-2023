@@ -1,4 +1,4 @@
-import { Session } from '@shared-context/SessionContext'
+import { Session } from '@shared-context'
 import { AccessMap } from './AccessGuard.types'
 
 export const useAccess = (): AccessMap => {

@@ -61,7 +61,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
         <Screen
             title={'tschiboka | Overlays'}
             path={path}
-            variant="api"
+            variant="app"
             pageName="Projects"
             sideMenu={<PageSideMenu />}
             hasContentNavigator
@@ -78,7 +78,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Heading as="h2" id="popup">
                     Popup
                 </Heading>
-
                 <Section>
                     <Heading as="h3">Modes</Heading>
                     <Paragraph>Each mode has a distinct color scheme and default icon:</Paragraph>
@@ -109,7 +108,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.Popup.modes} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Sizes</Heading>
                     <Paragraph>Popups come in three sizes — sm, md, and lg:</Paragraph>
@@ -139,7 +137,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.Popup.sizes} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Actions</Heading>
                     <Paragraph>
@@ -168,7 +165,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.Popup.actions} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Anchored</Heading>
                     <Paragraph>
@@ -191,7 +187,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.Popup.anchored} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Custom Content</Heading>
                     <Paragraph>Popups accept children for fully custom body content:</Paragraph>
@@ -220,9 +215,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.Popup.customContent} />
                 </Section>
-
                 {/* ── ActionMenu ──────────────────────────────────── */}
-
                 <Heading as="h2" id="action-menu">
                     ActionMenu
                 </Heading>
@@ -231,7 +224,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <CodeText>document.body</CodeText> via <CodeText>createPortal</CodeText>,
                     avoiding overflow clipping. Closes on Escape, click outside, scroll, and resize.
                 </Paragraph>
-
                 <Section>
                     <Heading as="h3">Basic</Heading>
                     <Paragraph>A simple action menu with three items:</Paragraph>
@@ -247,7 +239,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.basic} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Alignment</Heading>
                     <Paragraph>
@@ -280,7 +271,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.align} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Variants</Heading>
                     <Paragraph>
@@ -299,7 +289,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.variants} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Disabled Items</Heading>
                     <Paragraph>
@@ -318,7 +307,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.disabled} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Icons</Heading>
                     <Paragraph>Items can include an icon rendered before the label:</Paragraph>
@@ -334,7 +322,6 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     )}
                     <Code language="tsx" content={Snippets.ActionMenu.icons} />
                 </Section>
-
                 <Section>
                     <Heading as="h3">Custom aria-label</Heading>
                     <Paragraph>

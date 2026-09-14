@@ -43,6 +43,6 @@ export const LikeService = {
             { upsert: true },
         )
 
-        return { like: { path: input.path, likeDate: like.likeDate } }
+        return { like: { path: input.path, likeDate: DateTime.Format.toIso(like.likeDate) } }
     },
 }

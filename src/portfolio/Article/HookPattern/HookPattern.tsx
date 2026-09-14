@@ -15,7 +15,7 @@ import codeSnippets from './codeSnippets'
 import { getReferenceList } from '../references'
 
 // Styles
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 
 interface Props {
     pageName: string
@@ -42,7 +42,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
     const count = useRef(0)
     console.log('Counter: ', count)
 
-    const { themeMode, setThemeMode } = useAppContext()
+    const { themeMode, setThemeMode } = AppHooks.useContext()
 
     return (
         <Article pageName={pageName} path={path} title="Hook Pattern">

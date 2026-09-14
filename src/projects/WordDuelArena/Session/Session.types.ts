@@ -38,6 +38,10 @@ export type SessionContextType = {
     setSessionState: (state: WdaClientSessionState) => void
 }
 
+export type DeviceIdStorage = {
+    deviceId: string
+}
+
 export type WebSocketContextType = {
     lastState?: WdaWsResponse
     readyState: number

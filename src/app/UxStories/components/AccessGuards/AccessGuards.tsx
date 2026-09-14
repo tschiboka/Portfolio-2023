@@ -38,7 +38,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
         <Screen
             title={'tschiboka | Access Guards'}
             path={path}
-            variant="api"
+            variant="app"
             pageName="Projects"
             sideMenu={<PageSideMenu />}
             hasContentNavigator

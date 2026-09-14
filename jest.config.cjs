@@ -16,6 +16,8 @@ module.exports = {
         '^@common-ux/(.*)$': '<rootDir>/common/ux/$1',
         '^@common-utils$': '<rootDir>/common/utils',
         '^@common-utils/(.*)$': '<rootDir>/common/utils/$1',
+        '^@common-mocks$': '<rootDir>/common/mocks',
+        '^@common-mocks/(.*)$': '<rootDir>/common/mocks/$1',
         '^@shared-styles/(.*)$': '<rootDir>/src/shared/styles/$1',
         '^@shared-queries/(.*)$': '<rootDir>/src/shared/queries/$1',
         '^@shared-assets/(.*)$': '<rootDir>/src/shared/assets/$1',

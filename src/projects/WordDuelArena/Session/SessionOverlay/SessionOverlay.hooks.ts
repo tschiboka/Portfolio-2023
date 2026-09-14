@@ -1,5 +1,5 @@
 import type { Nullable } from '@common-utils'
-import { useSessionWS } from '../SessionWebSocket'
+import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
 import { InteractionModes, InteractionOverlayConfig } from './SessionOverlay.types'
 
 type UseGetInteractionOverlayStateProps = {
@@ -13,7 +13,7 @@ export const useGetInteractionOverlayState = ({
     message,
     enterFullScreen,
 }: UseGetInteractionOverlayStateProps) => {
-    const { connect } = useSessionWS()
+    const { connect } = SessionWebSocketHooks.useContext()
 
     const config: InteractionOverlayConfig = (() => {
         switch (mode) {

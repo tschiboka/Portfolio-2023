@@ -19,7 +19,7 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
     <Screen
         title={'tschiboka | Loading Indicators'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -46,7 +46,6 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
                 <Code language="tsx" content={Snippets.Basic.show} />
                 <Code language="tsx" content={Snippets.Basic.conditional} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="custom-color">
                     Custom Color
@@ -62,7 +61,6 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
                 </Inline>
                 <Code language="tsx" content={Snippets.Color.custom} />
             </Section>
-
             <Section>
                 <Heading as="h2" id="accessibility">
                     Accessibility

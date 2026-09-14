@@ -1,8 +1,9 @@
 import { MouseEvent } from 'react'
-import { MODALS, ModalState } from './Modals'
+import { ModalRegistry } from './Modal.defaults'
 import { ModalHeader } from './ModalHeader'
 import { ModalBody } from './ModalBody'
 import { ModalActions } from './ModalActions'
+import type { ModalState } from './Modal.types'
 import './Modal.styles.css'
 
 type ModalProps = {
@@ -12,7 +13,7 @@ type ModalProps = {
 
 export const Modal = ({ modal, onClose }: ModalProps) => {
     if (!modal.name) return null
-    const ModalComponent = MODALS[modal.name]
+    const ModalComponent = ModalRegistry[modal.name]
 
     return (
         <div className="modal-backdrop" onClick={onClose}>

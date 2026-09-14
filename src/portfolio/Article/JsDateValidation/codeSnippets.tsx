@@ -15,11 +15,11 @@ isValidDate("Not a valid date.");        // => NaN`,
     // How about this?
     new Date("2023/2/32");               // => Date Invalid`,
     regex: `// Check Date Format DD.MM.YYYY
-const dateRegex = /^\d\d\.\d\d\.\d\d\d\d$/;
+const dateRegex = /^\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d$/;
 if (!dateRegex.test(dateStr)) return false;
 
 // Destruct Date
-const matchResults = dateStr.match(/\d+/g);
+const matchResults = dateStr.match(/\\d+/g);
 if (matchResults) {
     const [dayStr, monthStr, yearStr] = matchResults;
     const [day, month, year] = [
@@ -31,11 +31,11 @@ if (matchResults) {
     daysArray: `let lastDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];`,
     finalSolution: `const validateDate = (dateStr: string) => {
         // Check Date Format DD.MM.YYYY
-        const dateRegex = /^\d\d\.\d\d\.\d\d\d\d$/;
+        const dateRegex = /^\\d\\d\\.\\d\\d\\.\\d\\d\\d\\d$/;
         if (!dateRegex.test(dateStr)) return false;
 
         // Destruct Date
-        const matchResults = dateStr.match(/\d+/g);
+        const matchResults = dateStr.match(/\\d+/g);
         if (matchResults) {
             const [dayStr, monthStr, yearStr] = matchResults;
             const [day, month, year] = [
@@ -63,6 +63,6 @@ if (matchResults) {
         }
         return true;
     };`,
-};
+}
 
-export default codeSnippets;
+export default codeSnippets

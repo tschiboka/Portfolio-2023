@@ -10,7 +10,7 @@ export const UpdateRecords = ({ path }: UpdateRecordsProps) => {
             title={'tschiboka | Update Records'}
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Update Records"
         >
             <main>

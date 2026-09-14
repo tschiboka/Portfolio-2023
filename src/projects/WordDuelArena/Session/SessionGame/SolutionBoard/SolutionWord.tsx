@@ -1,5 +1,5 @@
 import { SolvedLevelWord, UnsolvedLevelWord } from '../../Session.types'
-import { useSession } from '../../Session.context'
+import { SessionHooks } from '../../Session.hooks'
 
 type SolvedSolutionWordProps = {
     playableWord: SolvedLevelWord
@@ -7,7 +7,7 @@ type SolvedSolutionWordProps = {
 }
 
 export const SolvedSolutionWord = ({ playableWord, letterSize }: SolvedSolutionWordProps) => {
-    const { sessionState } = useSession()
+    const { sessionState } = SessionHooks.useContext()
     const role = sessionState?.role
     const solvedByClass = role === playableWord.solvedBy ? 'solved-by-player' : 'solved-by-opponent'
 

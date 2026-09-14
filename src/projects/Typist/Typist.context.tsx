@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useRef } from 'react'
 import { RoundResponse, TypistContextValues, TypistEditorState } from './Typist.types'
 import { ContextBuilder, Functions } from '@common-utils'
 import { textToWords } from './Typist.utils'
-import { usePostRound } from './Typist.queries'
+import { TypistQueries } from './Typist.queries'
 import { editorReducer } from './Editor/Editor.reducer'
 
 const initialState: TypistEditorState = {
@@ -37,7 +37,7 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const prevStatusRef = useRef(editorState.status)
     const editorStateRef = useRef(editorState)
     editorStateRef.current = editorState
-    const { mutate: postRound, isPending } = usePostRound()
+    const { mutate: postRound, isPending } = TypistQueries.usePost()
 
     useEffect(() => {
         const prevStatus = prevStatusRef.current
@@ -49,15 +49,18 @@ export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({
             editorState.status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
 
         if (isFreshlyLoaded || justEnded) {
-            postRound(keystrokes, {
-                onSuccess: (data: RoundResponse) => {
-                    dispatch({
-                        type: 'RESET',
-                        text: data.text,
-                        stats: data.stats,
-                    })
+            postRound(
+                { keystrokes },
+                {
+                    onSuccess: (data: RoundResponse) => {
+                        dispatch({
+                            type: 'RESET',
+                            text: data.text,
+                            stats: data.stats,
+                        })
+                    },
                 },
-            })
+            )
         }
     }, [editorState.status, postRound])
 

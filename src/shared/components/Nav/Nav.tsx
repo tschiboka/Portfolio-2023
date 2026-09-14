@@ -1,12 +1,12 @@
 import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import { NavProps } from './Nav.types'
 import { Const } from '@common-ux'
 import './Nav.styles.css'
 
 const DefaultBurger = () => {
-    const { mobileMenuVisible, setMobileMenuVisible } = useAppContext()
+    const { mobileMenuVisible, setMobileMenuVisible } = AppHooks.useContext()
 
     return !mobileMenuVisible ? (
         <HiOutlineMenuAlt3

@@ -1,15 +1,30 @@
-import { PostMessageResponse } from '@common-types'
-import { Paths, Query } from '@common-utils'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+import { Query } from '@common-utils'
+import type { ErrorResponse } from '@common-utils'
+import type { PostMessageResponse } from '@common-types'
+import { contactTransformer } from './Contact.transformers'
+import type { ContactFormData } from './Contact.types'
 
-export const useContactApi = () => {
-    const messageRequest = new Query.RequestBuilder(Paths.Api.Message).build()
+type UsePostOptions = {
+    onSuccess?: (response: PostMessageResponse) => void
+    onError?: (error: AxiosError<ErrorResponse>) => void
+}
 
-    return {
-        sendMessageRequest: (data: {
-            name: string
-            email: string
-            phone?: string
-            message: string
-        }) => messageRequest.post<PostMessageResponse>(data),
-    }
+/** Sends a contact message to the API. */
+const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+    const request = new Query.RequestBuilder('Message').build()
+
+    return useMutation<PostMessageResponse, AxiosError<ErrorResponse>, ContactFormData>({
+        mutationFn: (data) =>
+            request
+                .post<PostMessageResponse>(contactTransformer.toApi(data))
+                .then((res) => res.data),
+        onSuccess,
+        onError,
+    })
+}
+
+export const ContactQueries = {
+    usePost,
 }

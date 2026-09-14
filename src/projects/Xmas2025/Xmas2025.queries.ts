@@ -8,11 +8,11 @@ import {
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
 } from '@common-types'
-import { Paths, QueryKey, Query } from '@common-utils'
-import { Session } from '@shared-context/SessionContext'
+import { QueryKey, Query } from '@common-utils'
+import { Session } from '@shared-context'
 
 export const useGetPagePingData = () => {
-    const request = new Query.RequestBuilder(Paths.Projects.Xmas).build()
+    const request = new Query.RequestBuilder('Xmas', 'Projects').build()
 
     return useQuery({
         queryKey: QueryKey.XmasPagePing.build(),
@@ -24,7 +24,7 @@ type UsePostMessage = { onSuccess: () => void }
 export const usePostMessage = ({ onSuccess }: UsePostMessage) => {
     const token = Session.useContext().session?.token
 
-    const request = new Query.RequestBuilder(Paths.Projects.Xmas)
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
         .setSubpath('/message')
         .withAuthToken(token)
         .build()
@@ -40,7 +40,7 @@ export const usePostMessage = ({ onSuccess }: UsePostMessage) => {
 type UseGetMessages = { userId?: string }
 export const useGetMessages = ({ userId }: UseGetMessages) => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.Xmas)
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
         .setSubpath('/message')
         .setQuery({ userId })
         .withAuthToken(token)
@@ -55,7 +55,7 @@ export const useGetMessages = ({ userId }: UseGetMessages) => {
 
 export const useGetCandles = () => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.Xmas)
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
         .setSubpath('/candles')
         .withAuthToken(token)
         .build()
@@ -69,7 +69,7 @@ export const useGetCandles = () => {
 
 export const usePutCandles = () => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.Xmas)
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
         .setSubpath('/candles')
         .withAuthToken(token)
         .build()

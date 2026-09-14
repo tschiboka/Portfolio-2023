@@ -5,33 +5,30 @@ const WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
 
 export const levelSchema = yup.object({
     selectedWords: yup
-        .array()
+        .array(yup.object({ word: yup.string().required() }).required())
         .min(
             MIN_WORDS_PER_LEVEL,
-            `Please select at least ${MIN_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`
+            `Please select at least ${MIN_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`,
         )
         .max(
             MAX_WORDS_PER_LEVEL,
-            `Please select no more than ${MAX_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`
+            `Please select no more than ${MAX_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`,
         )
         .test(
             'row-width',
             `Combined length of words in a row must not exceed ${MAX_WORDS_IN_ROW_LENGTH} characters`,
             (value) => {
-                if (!value || value.length === 0) return true
-                
-                for (let i = 0; i < WORDS_PER_COLUMN; i++) {
-                    const leftWord = value[i]?.word || ''
-                    const rightWord = value[i + WORDS_PER_COLUMN]?.word || ''
-                    const combinedLength = leftWord.length + rightWord.length
-                    
-                    if (combinedLength > MAX_WORDS_IN_ROW_LENGTH) {
-                        return false
-                    }
-                }
-                
-                return true
-            }
+                if (!value?.length) return true
+
+                return value.every((word, i) => {
+                    if (i >= WORDS_PER_COLUMN) return true
+
+                    const rightWord = value[i + WORDS_PER_COLUMN]?.word ?? ''
+                    const combinedLength = (word?.word ?? '').length + rightWord.length
+
+                    return combinedLength <= MAX_WORDS_IN_ROW_LENGTH
+                })
+            },
         )
         .required('Please select words'),
 })

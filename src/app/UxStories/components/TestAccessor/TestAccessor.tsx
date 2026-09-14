@@ -11,7 +11,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
     <Screen
         title={'tschiboka | Test Accessor'}
         path={path}
-        variant="api"
+        variant="app"
         pageName="Projects"
         sideMenu={<PageSideMenu />}
         hasContentNavigator
@@ -24,7 +24,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 and <strong>perform single user actions</strong>. Nothing more.
             </Paragraph>
             <Code language="ts" content={Snippets.Import} />
-
             <Section>
                 <Heading as="h2" id="what-it-is">
                     What it is
@@ -36,7 +35,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     simulating user interactions across the entire test suite.
                 </Paragraph>
             </Section>
-
             {/* What it is not */}
             <Section>
                 <Heading as="h2" id="what-it-is-not">
@@ -70,14 +68,11 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     If a test is simpler with raw RTL, use raw RTL. The framework prevents drift on
                     repeated patterns — it doesn&apos;t ban direct DOM access.
                 </BlockQuote>
-
                 <Heading as="h3">Before</Heading>
                 <Code language="ts" content={Snippets.Before} />
-
                 <Heading as="h3">After</Heading>
                 <Code language="ts" content={Snippets.After} />
             </Section>
-
             {/* Core Problem */}
             <Section>
                 <Heading as="h2" id="core-problem">
@@ -90,13 +85,11 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 </Paragraph>
                 <Code language="ts" content={Snippets.Problem} />
             </Section>
-
             {/* Public API */}
             <Section>
                 <Heading as="h2" id="public-api">
                     Public API
                 </Heading>
-
                 <Heading as="h3">Namespaces</Heading>
                 <Paragraph>3 authored + 2 derived:</Paragraph>
                 <table>
@@ -151,19 +144,16 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                         </tr>
                     </tbody>
                 </table>
-
                 <Heading as="h3">
                     Base <CodeText>Get</CodeText>
                 </Heading>
                 <Paragraph>Inherited by all accessors:</Paragraph>
                 <Code language="ts" content={Snippets.API.get} />
-
                 <Heading as="h3">
                     Base <CodeText>Do</CodeText>
                 </Heading>
                 <Paragraph>Inherited by all accessors:</Paragraph>
                 <Code language="ts" content={Snippets.API.do} />
-
                 <Heading as="h3">
                     <CodeText>Has</CodeText> (derived from <CodeText>Get</CodeText>)
                 </Heading>
@@ -178,7 +168,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     runtime bugs like <CodeText>TypeError</CodeText> from broken accessor code
                     should still surface. Keep accessor unit tests healthy to catch these early.
                 </BlockQuote>
-
                 <Heading as="h3">
                     <CodeText>Wait</CodeText> (derived from <CodeText>Get</CodeText>)
                 </Heading>
@@ -189,7 +178,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     <CodeText>Wait</CodeText> doesn&apos;t wrap matchers.
                 </Paragraph>
                 <Code language="ts" content={Snippets.API.wait} />
-
                 <Heading as="h3">
                     <CodeText>Set</CodeText> (static, pre-render)
                 </Heading>
@@ -202,41 +190,31 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 </Paragraph>
                 <Code language="ts" content={Snippets.API.set} />
             </Section>
-
             {/* Usage Examples */}
             <Section>
                 <Heading as="h2" id="usage-examples">
                     Usage Examples
                 </Heading>
-
                 <Heading as="h3">Basic interaction</Heading>
                 <Code language="ts" content={Snippets.Usage.basic} />
-
                 <Heading as="h3">Conditional checks</Heading>
                 <Code language="ts" content={Snippets.Usage.conditional} />
-
                 <Heading as="h3">Composite accessors</Heading>
                 <Code language="ts" content={Snippets.Usage.composite} />
-
                 <Heading as="h3">Portaled overlays</Heading>
                 <Code language="ts" content={Snippets.Usage.overlay} />
-
                 <Heading as="h3">Navigation</Heading>
                 <Code language="ts" content={Snippets.Usage.navigation} />
-
                 <Heading as="h3">Server mocking</Heading>
                 <Code language="ts" content={Snippets.Usage.serverMocking} />
-
                 <Heading as="h3">Page render</Heading>
                 <Code language="ts" content={Snippets.Usage.pageRender} />
             </Section>
-
             {/* Design Constraints */}
             <Section>
                 <Heading as="h2" id="design-constraints">
                     Design Constraints
                 </Heading>
-
                 <Heading as="h3">Why only three authored namespaces?</Heading>
                 <Paragraph>
                     Previous iterations had <CodeText>Get</CodeText>, <CodeText>Query</CodeText>,{' '}
@@ -291,7 +269,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                         </tr>
                     </tbody>
                 </table>
-
                 <Heading as="h3">Enforcement</Heading>
                 <Paragraph>
                     The base <CodeText>Accessor</CodeText> class only defines{' '}
@@ -302,15 +279,11 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     Adding a new namespace requires modifying the base class — that&apos;s the
                     enforcement point.
                 </Paragraph>
-
                 <Heading as="h3">Principles</Heading>
-
                 <Heading as="h4">Good</Heading>
                 <Code language="ts" content={Snippets.Constraints.namespaceGood} />
-
                 <Heading as="h4">Bad</Heading>
                 <Code language="ts" content={Snippets.Constraints.namespaceBad} />
-
                 <ul>
                     <li>
                         <Text>
@@ -356,19 +329,15 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                         </Text>
                     </li>
                 </ul>
-
                 <Heading as="h3">Query Strategy</Heading>
                 <BlockQuote>
                     If the element has a role or label, use an accessible query. If it only has a
                     CSS class, use <CodeText>querySelector</CodeText>.
                 </BlockQuote>
-
                 <Heading as="h4">Good</Heading>
                 <Code language="ts" content={Snippets.Constraints.queryGood} />
-
                 <Heading as="h4">Bad</Heading>
                 <Code language="ts" content={Snippets.Constraints.queryBad} />
-
                 <Heading as="h3">Locator Contracts</Heading>
                 <Paragraph>
                     When labels are repeated across test files, co-locate an{' '}
@@ -376,7 +345,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 </Paragraph>
                 <Code language="ts" content={Snippets.Constraints.locatorContract} />
             </Section>
-
             {/* Implementation Internals */}
             <Section>
                 <Heading as="h2" id="implementation-internals">
@@ -389,10 +357,8 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                         modifying the base class or adding new accessors.
                     </em>
                 </Paragraph>
-
                 <Heading as="h3">The Accessor Base Class</Heading>
                 <Code language="ts" content={Snippets.Internals.baseClass} />
-
                 <Heading as="h4">Key decisions</Heading>
                 <ul>
                     <li>
@@ -443,7 +409,6 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                         </Text>
                     </li>
                 </ul>
-
                 <Heading as="h3">Inheritance Model</Heading>
                 <Paragraph>
                     Subclasses extend <CodeText>Get</CodeText> and <CodeText>Do</CodeText> via
@@ -451,13 +416,10 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     <CodeText>Wait</CodeText> proxies see the merged result automatically.
                 </Paragraph>
                 <Code language="ts" content={Snippets.Constraints.inheritance} />
-
                 <Heading as="h3">TestError</Heading>
                 <Code language="ts" content={Snippets.Internals.testError} />
-
                 <Heading as="h3">MockBuilder</Heading>
                 <Code language="ts" content={Snippets.Internals.mockBuilder} />
-
                 <Heading as="h3">Page.render</Heading>
                 <Paragraph>
                     Standard test entry point. Wraps the component in all required providers (React

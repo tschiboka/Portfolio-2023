@@ -64,7 +64,6 @@ export const SoftDisabledRenderer = ({
             >
                 {children}
             </div>
-
             {showPopup && (
                 <Overlay.Popup
                     title={title}

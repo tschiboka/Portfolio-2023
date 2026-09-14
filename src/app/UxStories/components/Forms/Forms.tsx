@@ -150,7 +150,7 @@ export const Forms = ({ path }: FormsProps) => {
         <Screen
             title={'tschiboka | Forms'}
             path={path}
-            variant="api"
+            variant="app"
             pageName="Projects"
             sideMenu={<PageSideMenu />}
             hasContentNavigator
@@ -176,21 +176,18 @@ export const Forms = ({ path }: FormsProps) => {
                         with its input, and <CodeText>Form.Label</CodeText> provides a styled label
                         element.
                     </Paragraph>
-
                     <Heading as="h3">Form</Heading>
                     <Paragraph>
                         A thin wrapper around <CodeText>&lt;form&gt;</CodeText> that forwards all
                         native attributes and applies neumorphic panel styling.
                     </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.form} />
-
                     <Heading as="h3">Form.Fieldset</Heading>
                     <Paragraph>
                         Groups a label and input together. The label floats above the fieldset
                         border and highlights on focus-within.
                     </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.fieldset} />
-
                     <Heading as="h3">Form.Label</Heading>
                     <Paragraph>
                         A styled <CodeText>&lt;label&gt;</CodeText> with a <CodeText>for</CodeText>{' '}
@@ -199,7 +196,6 @@ export const Forms = ({ path }: FormsProps) => {
                     </Paragraph>
                     <Code language="tsx" content={Snippets.Layout.label} />
                 </Section>
-
                 {/* ─── TEXT INPUTS ─── */}
                 <Section>
                     <Heading as="h2" id="text-inputs">
@@ -210,7 +206,6 @@ export const Forms = ({ path }: FormsProps) => {
                         <CodeText>Form.TextArea</CodeText> provides a multi-line variant with
                         optional character counter.
                     </Paragraph>
-
                     <Heading as="h3">Text</Heading>
                     <Form autoComplete="off" ariaLabel="Text input demo">
                         <Form.Fieldset>
@@ -224,7 +219,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.Fieldset>
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.text} />
-
                     <Heading as="h3">Email</Heading>
                     <Form autoComplete="off" ariaLabel="Email input demo">
                         <Form.Fieldset>
@@ -238,7 +232,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.Fieldset>
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.email} />
-
                     <Heading as="h3">Password</Heading>
                     <Paragraph>
                         Set <CodeText>addRevealPasswordIcon</CodeText> to show a toggle eye icon.
@@ -258,7 +251,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.Fieldset>
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.password} />
-
                     <Heading as="h3">Number</Heading>
                     <Form autoComplete="off" ariaLabel="Number input demo">
                         <Form.Fieldset>
@@ -267,7 +259,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.Fieldset>
                     </Form>
                     <Code language="tsx" content={Snippets.TextInputs.number} />
-
                     <Heading as="h3">TextArea</Heading>
                     <Paragraph>
                         Set <CodeText>maxLength</CodeText> to show a live character counter.{' '}
@@ -297,7 +288,6 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.TextInputs.textareaMax} />
                     <Code language="tsx" content={Snippets.TextInputs.types} />
                 </Section>
-
                 {/* ─── DATE PICKERS ─── */}
                 <Section>
                     <Heading as="h2" id="date-pickers">
@@ -308,7 +298,6 @@ export const Forms = ({ path }: FormsProps) => {
                         (limited styling) and the custom <CodeText>Form.DateInput</CodeText> with a
                         full calendar popup.
                     </Paragraph>
-
                     <Heading as="h3">Native Date</Heading>
                     <Form autoComplete="off" ariaLabel="Native date demo">
                         <Form.Fieldset>
@@ -317,7 +306,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.Fieldset>
                     </Form>
                     <Code language="tsx" content={Snippets.DatePickers.native} />
-
                     <Heading as="h3">Custom DateInput</Heading>
                     <Paragraph>
                         Full-featured calendar picker with text mask, keyboard navigation,
@@ -333,7 +321,6 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.DatePickers.customWithMinMax} />
                     <Code language="tsx" content={Snippets.DatePickers.features} />
                 </Section>
-
                 {/* ─── SELECTION ─── */}
                 <Section>
                     <Heading as="h2" id="selection">
@@ -343,7 +330,6 @@ export const Forms = ({ path }: FormsProps) => {
                         Components for picking from predefined options: radio buttons, checkboxes,
                         and a searchable dropdown.
                     </Paragraph>
-
                     <Heading as="h3">RadioButton &amp; RadioGroup</Heading>
                     <Paragraph>
                         Wrap radios in <CodeText>Form.RadioGroup</CodeText> for accessible grouping.
@@ -371,7 +357,6 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.Selection.radio} />
                     <Code language="tsx" content={Snippets.Selection.radioBoolean} />
-
                     <Heading as="h3">Checkbox</Heading>
                     <Paragraph>
                         A styled checkbox with built-in label. The optional{' '}
@@ -385,7 +370,6 @@ export const Forms = ({ path }: FormsProps) => {
                         />
                     </Form>
                     <Code language="tsx" content={Snippets.Selection.checkbox} />
-
                     <Heading as="h3">SearchInput</Heading>
                     <Paragraph>
                         A filterable dropdown with <CodeText>highlightMatch</CodeText> support,
@@ -409,7 +393,6 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.Selection.search} />
                     <Code language="tsx" content={Snippets.Selection.searchIcons} />
                 </Section>
-
                 {/* ─── ACTIONS ─── */}
                 <Section>
                     <Heading as="h2" id="actions">
@@ -421,7 +404,6 @@ export const Forms = ({ path }: FormsProps) => {
                         variant. <CodeText>Form.ButtonGroup</CodeText> arranges buttons in a row
                         with consistent spacing.
                     </Paragraph>
-
                     <Form autoComplete="off" ariaLabel="Button demo">
                         <Form.ButtonGroup>
                             <Form.Button variant="secondary">Cancel</Form.Button>
@@ -433,7 +415,6 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.Actions.disabled} />
                     <Code language="tsx" content={Snippets.Actions.group} />
                 </Section>
-
                 {/* ─── ALL INPUTS: EMPTY ─── */}
                 <Section>
                     <Heading as="h2" id="all-inputs-empty">
@@ -543,7 +524,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.ButtonGroup>
                     </Form>
                 </Section>
-
                 {/* ─── ALL INPUTS: WITH VALUES ─── */}
                 <Section>
                     <Heading as="h2" id="all-inputs-with-values">
@@ -652,7 +632,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.ButtonGroup>
                     </Form>
                 </Section>
-
                 {/* ─── ERROR STATES: EMPTY ─── */}
                 <Section>
                     <Heading as="h2" id="error-states-empty">
@@ -767,7 +746,6 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.ErrorStates.demo} />
                 </Section>
-
                 {/* ─── ERROR STATES: WITH VALUES ─── */}
                 <Section>
                     <Heading as="h2" id="error-states-with-values">
@@ -878,7 +856,6 @@ export const Forms = ({ path }: FormsProps) => {
                         </Form.ButtonGroup>
                     </Form>
                 </Section>
-
                 {/* ─── SUBMIT ERROR MESSAGE ─── */}
                 <Section>
                     <Heading as="h2" id="submit-error-message">
@@ -891,7 +868,6 @@ export const Forms = ({ path }: FormsProps) => {
                         <CodeText>role="alert"</CodeText>. Use the <CodeText>variant</CodeText> prop
                         to convey the type of message.
                     </Paragraph>
-
                     <Heading as="h3">Variants</Heading>
                     <Form autoComplete="off" ariaLabel="SubmitErrorMessage demo">
                         <Form.SubmitErrorMessage
@@ -914,7 +890,6 @@ export const Forms = ({ path }: FormsProps) => {
                     <Code language="tsx" content={Snippets.SubmitErrorMessage.basic} />
                     <Code language="tsx" content={Snippets.SubmitErrorMessage.variants} />
                 </Section>
-
                 {/* ─── DISABLED STATES: EMPTY ─── */}
                 <Section>
                     <Heading as="h2" id="disabled-states-empty">
@@ -1031,7 +1006,6 @@ export const Forms = ({ path }: FormsProps) => {
                     </Form>
                     <Code language="tsx" content={Snippets.DisabledStates.demo} />
                 </Section>
-
                 {/* ─── DISABLED STATES: WITH VALUES ─── */}
                 <Section>
                     <Heading as="h2" id="disabled-states-with-values">

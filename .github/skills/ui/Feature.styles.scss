@@ -1,0 +1,15 @@
+/* Everything a CSSProperties object cannot hold: media queries, pseudo-classes. */
+
+.feature-shell {
+    display: flex;
+}
+
+.feature-shell:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .feature-shell {
+        padding: 12px 6px !important;
+    }
+}

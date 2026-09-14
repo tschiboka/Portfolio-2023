@@ -4,8 +4,7 @@ import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { router } from './router'
 import './main.styles.scss'
-import { AppContextProvider } from '@shared-context/AppContext/App.context'
-import { Session } from '@shared-context/SessionContext'
+import { AppContextProvider, Session } from '@shared-context'
 import { VersionChecker } from '@shared-components/VersionChecker/VersionChecker'
 
 const client = new QueryClient()

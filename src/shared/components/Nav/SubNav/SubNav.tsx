@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
-import { useAppContext } from '@shared-context/AppContext/App.context'
+import { AppHooks } from '@shared-context'
 import { Const, Toggle } from '@common-ux'
 import './SubNav.styles.css'
 
@@ -10,7 +10,7 @@ export type SubNavProps = {
 }
 
 export const SubNav = ({ title, links }: SubNavProps) => {
-    const { themeMode, setThemeMode, subMenuVisible } = useAppContext()
+    const { themeMode, setThemeMode, subMenuVisible } = AppHooks.useContext()
 
     if (!subMenuVisible) return null
     return (

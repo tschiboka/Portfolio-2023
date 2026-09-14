@@ -1,7 +1,7 @@
 # 0006 — FE file structure sweep
 
-> **Status:** In progress — alias migration, server restructure, asset distribution, `common/` impurity sweep, shared-components sweep, `routing/` dissolve + feature-route pattern, and app-page de-default done (2026-08-31); remaining role-suffix / barrel / `App.tsx`-composition / ARCHITECTURE updates pending
-> **Last updated:** 2026-08-31
+> **Status:** In progress — alias migration, server restructure, asset distribution, `common/` impurity sweep, shared-components sweep, `routing/` dissolve + feature-route pattern, `context/` dissolve, app-page de-default done (2026-08-31); **individual file review (next step, §11.16) — rubric finalized (§11.16.2), review in progress** + query conventions / umbrella naming / `Date`→ISO types settled (§11.16.5); `Contact.query.ts` and `Session.query.ts` still to rebuild
+> **Last updated:** 2026-09-12
 > **Created:** 2026-08-29
 
 ---
@@ -237,24 +237,24 @@ execute it feature-by-feature (C) so each move stays small and reviewable per
 
 **`src/components/pages/`** (feature pages)
 
-| Feature                               | Files                                                                                                                        | Main export                   | `index.ts` | Deviations                                                           |
-| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------- | -------------------------------------------------------------------- |
-| About                                 | `About.tsx`, `.scss`                                                                                                         | `export default`              | ❌         | default; no barrel                                                   |
-| Home                                  | `Home.tsx`, `tests/`, subfeatures                                                                                            | `export default`              | ❌         | default; no barrel                                                   |
-| Blog                                  | `Blog.tsx`, `.scss`, **`Blog.type.ts`**, `Blog.utils.ts`, `BlogFilter/`, `tests/`                                            | `export default Blogs`        | ❌         | singular `.type`; `Blogs`≠`Blog`; `.utils` unlisted                  |
-| Contact                               | `Contact.tsx`, `.scss`, `Contact.types.ts`, `Contact.schema.ts`, **`Contact.query.ts`**, `MessageAcknowledgement/`, `tests/` | `export default`              | ❌         | singular `.query`; schema = lowercase `contactSchema`                |
-| PrivacyPolicy                         | `PrivacyPolicy.tsx`, `.scss`                                                                                                 | `export default`              | ❌         | default; no barrel                                                   |
-| UnderConstruction                     | `UnderConstruction.tsx`, `.scss`                                                                                             | `export default`              | ❌         | default; no barrel                                                   |
-| Projects                              | `Projects.tsx`, `.types`, `.defaults`, `.selectors.tsx`, `ProjectCard/`, `ProjectFilter/`, `tests/`                          | `export const Projects`       | ✅         | `.selectors.tsx` extension; OK otherwise                             |
-| API/Categories                        | `Categories.tsx`, `.scss`, `.types`, `.schema`, `.columns`, `.queries`, `.transformers`, `.utils`, `icons.tsx`, `colors.tsx` | `export default Categories`   | ✅         | default; `categoriesSchema` factory; `icons.tsx`/`colors.tsx` ad-hoc |
-| API/Login, Register                   | `.tsx`, `.scss`, `.types`, `.schema`, `.query.ts` (singular), `tests/`                                                       | default                       | ❌         | singular `.query`                                                    |
-| API/Admin                             | `Admin.tsx`, `Admin.query.ts`                                                                                                | —                             | ❌         | singular `.query`                                                    |
-| API/EmailVerification                 | `.tsx`, `.scss`, `.query.ts`, `Index.tsx`                                                                                    | —                             | ❌         | singular `.query`; capitalised `Index.tsx`                           |
-| Misc/Xmas2025                         | `.tsx`, `.styles.scss`, `.types`, `.schema`, `.queries`, `.transformers`, subfeatures, `tests/`                              | `export default Xmas2025`     | ❌         | `.styles.scss`; default                                              |
-| Misc/Typist                           | `.tsx`, `.utils`, `.types`, `.transformers`, `.queries`, `.context`, subfeatures                                             | —                             | ❌         | `.context`; unlisted                                                 |
-| Misc/WordDuelArena                    | deep tree; `LevelCreator/`, `Home/`, `common/`, `Session/`                                                                   | named                         | mixed      | `.hooks`, `.handlers`, `.schema`, `.context`, `.reducer`             |
-| Misc/Gym                              | `Gym.tsx`, `Gym.queries.ts`, `components/ExerciesesSection/`                                                                 | —                             | ❌         | typo `Exercieses`                                                    |
-| API/Index/WebsiteStats/BreakdownTable | `.tsx`, `.types`, `.columns`, `.actions`, `.filters`, `.transformers`, `.controller`, `index.ts`                             | `export const BreakdownTable` | ✅         | `.filters`/`.controller` unlisted; `activityColumns` naming          |
+| Feature                               | Files                                                                                                                                                       | Main export                   | `index.ts` | Deviations                                                  |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | ---------- | ----------------------------------------------------------- |
+| About                                 | `About.tsx`, `.scss`                                                                                                                                        | `export default`              | ❌         | default; no barrel                                          |
+| Home                                  | `Home.tsx`, `tests/`, subfeatures                                                                                                                           | `export default`              | ❌         | default; no barrel                                          |
+| Blog                                  | `Blog.tsx`, `.scss`, **`Blog.type.ts`**, `Blog.utils.ts`, `BlogFilter/`, `tests/`                                                                           | `export default Blogs`        | ❌         | singular `.type`; `Blogs`≠`Blog`; `.utils` unlisted         |
+| Contact                               | `Contact.tsx`, `.scss`, `Contact.types.ts`, `Contact.schema.ts`, **`Contact.query.ts`**, `MessageAcknowledgement/`, `tests/`                                | `export default`              | ❌         | singular `.query`; schema = lowercase `contactSchema`       |
+| PrivacyPolicy                         | `PrivacyPolicy.tsx`, `.scss`                                                                                                                                | `export default`              | ❌         | default; no barrel                                          |
+| UnderConstruction                     | `UnderConstruction.tsx`, `.scss`                                                                                                                            | `export default`              | ❌         | default; no barrel                                          |
+| Projects                              | `Projects.tsx`, `.types`, `.defaults`, `.selectors.tsx`, `ProjectCard/`, `ProjectFilter/`, `tests/`                                                         | `export const Projects`       | ✅         | `.selectors.tsx` extension; OK otherwise                    |
+| API/Categories                        | `Categories.tsx`, `.styles.scss`, `.types`, `.schema`, `.columns`, `.queries`, `.handlers`, `.options`, `.defaults`, `.transformers`, `icons.tsx`, `tests/` | `export const Categories`     | ✅         | — (conformant — §11.16.3 rows 10–21)                        |
+| API/Login, Register                   | `.tsx`, `.scss`, `.types`, `.schema`, `.query.ts` (singular), `tests/`                                                                                      | default                       | ❌         | singular `.query`                                           |
+| API/Admin                             | `Admin.tsx`, `Admin.query.ts`                                                                                                                               | —                             | ❌         | singular `.query`                                           |
+| API/EmailVerification                 | `.tsx`, `.scss`, `.query.ts`, `Index.tsx`                                                                                                                   | —                             | ❌         | singular `.query`; capitalised `Index.tsx`                  |
+| Misc/Xmas2025                         | `.tsx`, `.styles.scss`, `.types`, `.schema`, `.queries`, `.transformers`, subfeatures, `tests/`                                                             | `export default Xmas2025`     | ❌         | `.styles.scss`; default                                     |
+| Misc/Typist                           | `.tsx`, `.utils`, `.types`, `.transformers`, `.queries`, `.context`, subfeatures                                                                            | —                             | ❌         | `.context`; unlisted                                        |
+| Misc/WordDuelArena                    | deep tree; `LevelCreator/`, `Home/`, `common/`, `Session/`                                                                                                  | named                         | mixed      | `.hooks`, `.handlers`, `.schema`, `.context`, `.reducer`    |
+| Misc/Gym                              | `Gym.tsx`, `Gym.queries.ts`, `components/ExerciesesSection/`                                                                                                | —                             | ❌         | typo `Exercieses`                                           |
+| API/Index/WebsiteStats/BreakdownTable | `.tsx`, `.types`, `.columns`, `.actions`, `.filters`, `.transformers`, `.controller`, `index.ts`                                                            | `export const BreakdownTable` | ✅         | `.filters`/`.controller` unlisted; `activityColumns` naming |
 
 **`src/components/sharedComponents/`** (21 folders — see §3.2 for verdicts):
 `AchievementList`, `AchievementListItem`, `Article`, `BlogCard`, `BlogTimeStamp`,
@@ -318,6 +318,22 @@ export const BreakdownTableColumns: TableColumns<BreakdownRow> = [ ... ]
   new `src/App.tsx`?
 
 ## 9. Feature dev checklist
+
+**Blocked — verify before ticket can be ticked** (parked, runtime-only findings; see §11.15)
+
+These are **pre-existing** WDA issues surfaced while regression-checking the app — not
+regressions from this ticket's restructure (the WDA tree moved unchanged except aliases),
+but they must be looked into before 0006 is marked done. Neither is code-fixable from a
+static diff; both need a runtime pass.
+
+- [ ] **WordDuelArena letter wheel — no mouse/pointer events.** The wheel attaches only
+      `touchstart/move/end` + `keydown` (both HEAD and current code). Desktop mouse does
+      nothing. Decision: add proper `pointer`/`mousedown/mousemove/mouseup` handling as a
+      deliberate feature, or confirm touch/keyboard-only is intended. Tracked in §11.15.
+- [ ] **WordDuelArena Extra Words popup — "half see-through" / background.** `ExtraWords.styles.css`
+      (`rgba(0,0,0,.9)` bg, `z-index:100`, absolute full-size) and all WDA scoped vars are
+      byte-identical to HEAD. The see-through render is upstream of WDA (parent stacking
+      context / theme / `InteractionOverlay` interplay) and needs runtime diagnosis. Tracked in §11.15.
 
 **Structural roles**
 
@@ -973,6 +989,487 @@ mirroring `@shared-*`:
       vs "utils") force per-line judgement and would reorder existing interleaved imports.
 - **Next step (FE sweep):** a pass to check **each FE file** conforms to §5.2 ordering.
   Out of scope for this batch; logged as the next sweep item.
+
+### 11.15 WDA runtime regressions — parked as pre-tick blockers (2026-08-31)
+
+Surfaced while regression-checking the app after this restructure. **Both are
+pre-existing** — the WDA tree moved from `src/components/pages/Misc/WordDuelArena/`
+to `src/projects/WordDuelArena/` unchanged except alias imports (`@utils`→`@common-utils`).
+Diff-verified: `LetterWheel.hooks.ts`, `ExtraWords.styles.css`, `SessionGame.styles.css`
+and the `.word-duel-arena` scoped vars (`--color-bg-medium:#111`, etc.) are identical to
+HEAD. Neither is fixable from a static diff; both need a runtime pass. Blocking issue per
+§9 checklist.
+
+1. **Letter wheel — no mouse/pointer support.** `LetterWheel.hooks.ts` attaches only
+   `touchstart/move/end` + `keydown` (identical in HEAD and current). Desktop mouse does
+   nothing. Decision required: add pointer/`mousedown-mousemove-mouseup` handling as a
+   deliberate feature, or confirm touch/keyboard-only is intended. `LetterWheel.handlers.ts`
+   also only knows `TouchEvent` (`touches[0]`, `elementFromPoint`) — mouse would need
+   handlers generalised to a shared pointer model.
+2. **Extra Words popup — "half see-through" / background.** `.extra-words` is
+   `position:absolute`, `rgba(0,0,0,.9)`, `z-index:100`, full-size; CSS byte-identical to
+   HEAD. The see-through render is upstream of WDA (parent stacking context, theme load, or
+   `InteractionOverlay` interplay) and needs runtime diagnosis in the browser.
+
+Both deferred to the next FE sweep; logged here so `0006` cannot be ticked until looked into.
+
+### 11.15.1 Amendment — context location + barrel convention (2026-09-11)
+
+**Correction to §11.14.** That log states `src/context/` was **deleted** and
+`Session` moved to `src/app/Session/`, with `AppContext` at
+`src/app/App.context.tsx`. **No such artifacts exist.** The context layer
+survived at a different path:
+
+```text
+src/shared/context/
+├── index.ts               ← barrel (single entry point)
+├── AppContext/            App.context.tsx, AppContext.types.ts, index.ts
+└── SessionContext/        Session.context.tsx, SessionContext.types.ts,
+                           LocalSession.ts, Session.query.ts,
+                           useSessionContext.ts, index.ts
+```
+
+The `@shared-context` alias is intact in `tsconfig.json`, `vite.config.ts`, and
+the jest mapper, pointing at `src/shared/context`. `src/context/` itself no
+longer exists — so a move did happen, but to `src/shared/context/`, not to
+`src/app/`.
+
+**Barrel convention adopted.** `src/shared/context/index.ts` is the **single
+public entry point** for the context layer, re-exporting `AppContextProvider`,
+`useAppContext`, `AppContextValues`, `LocalStorage`, `Session`, `LocalSession`,
+`SessionContext`, `SessionContextValues`. `AppContext/index.ts` also barrels.
+
+- **Consumers MUST import `@shared-context` only — never a deep subpath**
+  (`@shared-context/SessionContext`, `@shared-context/AppContext/App.context`,
+  or any `.types` path). Deep paths defeat the barrel: a future move becomes an
+  N-file sweep instead of a one-line change.
+- **Applied 2026-09-11:** 27 consumer files collapsed from deep paths onto the
+  barrel (app, portfolio, projects, shared/components, and test helpers).
+  `tsc` green.
+- `SessionContext` — the raw context object — is exported from the barrel
+  **solely** for test helpers (`Nav.spec.utils`, `Screen.spec.utils`). It is a
+  test-only escape hatch, not public API.
+- Same sweep renamed `Admin.query.ts` → `Admin.queries.ts` (role-suffix
+  conformance, §3.3).
+
+**Consequence for §8.** The `AppContext` naming trap open question is resolved:
+`App.context.tsx` denotes the app _context_, not the app _root_, and correctly
+lives under `shared/context/AppContext/`.
+
+### 11.16 Individual file review — next step (2026-08-31, requirements in progress)
+
+**Next step in this ticket: review each FE file individually** against the
+conventions locked in by the structural work above, and log a per-file verdict.
+The structure/placement sweeps (relocation, aliasing, dissolving `routing/`,
+`context/`, `shared-components`) are done; what remains is a **per-file
+conformance pass** so role-suffix, return-value naming, aliasing, and import
+ordering are **verified file-by-file**, not just batch-moved.
+
+`REQUIREMENTS PENDING — Captain Tschiboka is drafting the exact requirements.`
+This section is a scaffold; fill in the concrete rules/checklist once they land.
+
+**Execution order (decided):** every FEATURE and SUBFEATURE is addressed, and
+every folder (`common/`, `shared/`, and their subfolders) is covered. **Every
+file in `src/` is reviewed individually.** The checklist below enumerates every
+feature and subfeature to tick out and comment on, in review order. File-level
+detail per folder is captured in the per-file review log (§11.16 rows) once the
+review steps for each are collected.
+
+### 11.16.1 Feature / subfeature review checklist (`src/`)
+
+**Root files (`src/`):** `main.tsx`, `main.styles.scss`, `router.tsx`,
+`globals.d.ts`, `vite-env.d.ts`, `setupTests.ts`
+
+**APP — `src/app/`**
+
+```
+APP
+
+[ ] App root files / barrels
+[x] Activities
+[x] Admin
+ok [x]   Admin BreakdownPreview
+ok [x]   Categories
+[ ] EmailVerification
+[ ] Events
+[ ] Home
+[ ]   Home WebsiteStats
+[ ]     WebsiteStats ActivityDetailsModal
+[ ]     WebsiteStats ActivityTypePill
+[ ]     WebsiteStats BreakdownTable
+[ ] Login
+[ ] Logout
+[ ] Record
+[ ]   Record AddRecords
+[ ] Register
+[ ] Remote
+[ ] Stats
+[ ] Tasks
+[ ] User
+[ ] UxStories
+[ ]   UxStories components
+[ ]     AccessGuards
+[ ]     Buttons
+[ ]     CodeBlocks
+[ ]     Figures
+[ ]     Forms
+[ ]     Layouts
+[ ]     Links
+[ ]     LoadingIndicators
+[ ]     Overlays
+[ ]     Pills
+[ ]     Regions
+[ ]     StoryNav
+[ ]     Tables
+[ ]     TestAccessor
+[ ]     Toggles
+[ ]     Typography
+[ ] App.routes
+```
+
+**PORTFOLIO — `src/portfolio/`**
+
+```
+PORTFOLIO
+
+[ ] Portfolio root files / barrels / routes
+[ ] About
+[ ]   About components (AchievementList, AchievementListItem)
+[ ] Article
+[ ]   Article shell + registry (articles.ts, references.ts)
+[ ]   Article content (14 articles + TemplateArticle)
+[ ]     CyclicEmailScheduling
+[ ]     DailyAnalyticsEmail
+[ ]     GitCheatsheet
+[ ]     GreenRooftop
+[ ]     HookPattern
+[ ]     JsDateValidation
+[ ]     JsSorting
+[ ]     Maybe
+[ ]     ReactAnatomy
+[ ]     RiffMaster
+[ ]     SoundsWithHowler
+[ ]     StoppingTestEntropy
+[ ]     TemplateArticle
+[ ]     ZIndexLayers
+[ ]   Article components (LikeButton, References, InlineReference, Disclaimer)
+[ ] Blog
+[ ]   Blog components (BlogCard, BlogFilter, BlogTimeStamp, SuggestedArticles)
+[ ] Clock
+[ ] Contact
+[ ]   Contact MessageAcknowledgement
+[ ] Home
+[ ] PrivacyPolicy
+[ ] Projects
+[ ]   Projects ProjectCard
+[ ]   Projects ProjectFilter
+[ ] UnderConstruction
+[ ] Portfolio assets
+[ ] Portfolio.routes
+```
+
+**PROJECTS — `src/projects/`**
+
+```
+PROJECTS
+
+[ ] Projects root files / barrels / routes
+[ ] Gym
+[ ]   Gym components (ExerciesesSection → ExercisesSection typo)
+[ ] Typist
+[ ]   Typist Editor
+[ ]   Typist HeadsUpDisplay
+[ ] WordDuelArena
+[ ]   WordDuelArena common
+[ ]     common components (Modal, Options, Svg)
+[ ]     common utils (ApiPaths, Navigation, Queries, Types, Word)
+[ ]   WordDuelArena Home
+[ ]     Home InvitationModal
+[ ]   WordDuelArena LevelCreator
+[ ]     LevelCreator LevelPreview
+[ ]     LevelCreator WordOptionList
+[ ]   WordDuelArena Session
+[ ]     Session SessionGame
+[ ]       SessionGame ExtraWords
+[ ]       SessionGame GameControls
+[ ]       SessionGame LetterWheel
+[ ]       SessionGame SolutionBoard
+[ ]     Session SessionHeader
+[ ]     Session SessionOverlay
+[ ]   WordDuelArena SessionWebSocket
+[ ] Xmas2025
+[ ] Projects assets
+[ ] Projects.routes
+```
+
+**SHARED — `src/shared/`** (cross-cutting shared — reviewed as folders/subfolders)
+
+```
+SHARED
+
+[ ] shared assets
+[ ] shared components
+[ ]   AccessGuard
+[ ]   Figure
+[ ]   Footer
+[ ]   Nav
+[ ]     Nav Components
+[ ]     Nav MobileMenu
+[ ]     Nav Submenu
+[ ]     Nav SubNav
+[ ]   Overlay
+[ ]   PageSideMenu
+[ ]   RouteError
+[ ]   Screen
+[ ]   ShareMenu
+[ ]   VersionChecker
+[ ]   ZoomedImage
+[ ] shared context
+[ ]   AppContext
+[ ]   SessionContext
+[ ] shared queries (Likes, Visits)
+[ ] shared styles (animations, breakpoints, font_sizes, mixins, palette, shadows)
+```
+
+### 11.16.2 Review steps (definitive rubric in the skill)
+
+> **The strict review rubric now lives in `.github/skills/review/SKILL.md`**
+> (agent-invocable) — that file is the single source of truth. The ticket below
+> only records the key decisions and the review format; keep it in sync with
+> the skill when the rubric changes.
+
+**Strict Requirement List for Auditing Source Files — Review Results.** Scores
+0.0–10.0 (0.0 = non-existent, 10.0 = impeccable). **GENERIC SCORE** = mean of
+the scored dimensions, 1dp; **N/A dims excluded**. Standards of reference:
+`ARCHITECTURE.md` (EXTENSION/NAMING both trace to it). Full per-dimension
+anchors (3/6/8/10), severity floor (any dim ≤3 ⇒ not passing), generic-score
+cutoff (≥7 pass / 5–6.9 weak / <5 fail), VERDICT, and ARCHITECTURE gaps note —
+all in the skill.
+
+**Layer-aware (FE + BE):** a `LAYER: FE | BE` field selects the anchor set —
+Architecture §1 (FE) or §2 (BE). Most dimensions are identical; only EXTENSION
+(suffix set), IMPORTS (FE 4-tier vs BE 3-tier + §5.1 dependency check), and the
+RETURN example vary. BE is the canonical `Feature<Role>` anchor (§2.3).
+
+**Review format (exact):**
+
+```
+FILE: <path>
+LAYER: <FE | BE>   # anchors from Architecture §1 (FE) or §2 (BE)
+VERDICT: <CONFORMS | DEVIATES | CHANGE-ACCEPTED | CHANGE-REJECTED>  <reason>
+GENERIC SCORE: <0.0-10.0>
+COHESIVENESS | LOCATION | EXTENSION | IMPORTS | NAMING | RETURN
+TYPED | ERRORFREE | STANDARD | TESTED:  <0.0-10.0 each, N/A allowed>
+IMPROVEMENTS: <MUST/SHOULD/COULD, or NONE>
+APPROVED: <YES|NO>   # optional — tracked sweep or on request
+STATUS: <NOT STARTED | WIP | PAUSED | DONE>
+NOTES: <only on PAUSED - handover instructions>
+```
+
+**Key decisions landed during rubric design:**
+
+- **IMPROVEMENTS** prioritised `MUST / SHOULD / COULD` (+ `none`), unscored.
+- **APPROVED** is optional — used for the long-list sweep, omitted for one-off
+  reviews. APPROVED=NO ⇒ not DONE regardless of score.
+- **Persist is optional** — reviews are ephemeral by default; persist to this
+  ticket only on request or during the tracked sweep. On PAUSE: save current
+  score + last-reviewed row.
+- **Severity floor** added — a mean hides a single broken axis.
+- **Anchor scale + N/A** added for reproducibility and fair non-code scoring.
+- **Layer-aware (FE + BE)** — one skill, `LAYER` field; EXTENSION/IMPORTS/RETURN
+  anchors carry both variants; keeps BE from needing a forked skill.
+
+**Run protocol:**
+
+1. Agent gives the nth feature + file name (prompts if none given).
+2. Captain opens the file; edits or suggests.
+3. Agent argues compliance (records VERDICT, pushes back where off-standard).
+4. Agent fills the review result and scores strictly/realistically.
+5. Persist (optional): update this ticket on request; on PAUSE save score + row.
+
+### 11.16.3 Running review log (persisted rows)
+
+> **Honesty gate:** sweep is tooling-in-progress for the _remaining_ features;
+> `BreakdownPreview` (rows 2–9) and `Categories` (rows 10–21) are **build/
+> test-verified and approved**. Unreviewed/queued rows stay `APPROVED=NO`,
+> provisional scores of conformance — not verified builds — until a real
+> build + regression pass. The severity floor stands: TESTED=0 ⇒ not passing.
+
+| #   | File                                                           | LAYER | VERDICT  | COH | LOC | EXT | IMP | NAM | RET | TYP | ERR | STD | TEST | **GEN** | IMPROVEMENTS                                                 | APPROVED | STATUS |
+| --- | -------------------------------------------------------------- | ----- | -------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---- | ------- | ------------------------------------------------------------ | -------- | ------ |
+| 1   | `src/app/Activities/Activities.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 10  | 9   | 8   | 8   | 10  | 8   | N/A  | **8.7** | N/A (TESTED) — placeholder leaf, not yet a feature           | YES      | DONE   |
+| 2   | `src/app/Admin/BreakdownPreview/BreakdownPreview.tsx`          | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0** | COULD — dedicated sub-component specs                        | YES      | DONE   |
+| 3   | `src/app/Admin/BreakdownPreview/BreakdownPreview.constants.ts` | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 9   | 9   | 9   | 9   | N/A  | **9.0** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
+| 4   | `src/app/Admin/BreakdownPreview/BreakdownPreview.styles.ts`    | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 8   | 8   | 9   | 9   | N/A  | **8.8** | COULD — residual `6px`/`10px`/rem literals (no shared const) | YES      | DONE   |
+| 5   | `src/app/Admin/BreakdownPreview/BreakdownPreview.types.ts`     | FE    | CONFORMS | 10  | 10  | 9   | N/A | 9   | 10  | 10  | 10  | 9   | N/A  | **9.6** | N/A (IMPORTS/TESTED)                                         | YES      | DONE   |
+| 6   | `src/app/Admin/BreakdownPreview/components/Header.tsx`         | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0** | COULD — dedicated spec                                       | YES      | DONE   |
+| 7   | `src/app/Admin/BreakdownPreview/components/DataSection.tsx`    | FE    | CONFORMS | 8   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 7    | **8.8** | COULD — dedicated spec                                       | YES      | DONE   |
+| 8   | `src/app/Admin/BreakdownPreview/Signature.tsx`                 | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 8   | 7    | **8.8** | COULD — dedicated spec; London-pinned time via shared util   | YES      | DONE   |
+| 9   | `src/app/Admin/BreakdownPreview/index.ts`                      | FE    | CONFORMS | 10  | 10  | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.3** | N/A (TESTED)                                                 | YES      | DONE   |
+| 10  | `src/app/Categories/Categories.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 8   | 9   | 9   | 8   | 10  | 9   | 9    | **8.8** | COULD — type-only import (done)                              | YES      | DONE   |
+| 11  | `src/app/Categories/Categories.columns.ts`                     | FE    | CONFORMS | 9   | 9   | 8   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **8.9** | N/A (TESTED) — indirect                                      | YES      | DONE   |
+| 12  | `src/app/Categories/Categories.defaults.ts`                    | FE    | CONFORMS | 10  | 9   | 9   | 10  | 10  | 10  | 10  | 10  | 10  | N/A  | **9.4** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
+| 13  | `src/app/Categories/Categories.handlers.ts`                    | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
+| 14  | `src/app/Categories/Categories.options.ts`                     | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
+| 15  | `src/app/Categories/Categories.queries.ts`                     | FE    | CONFORMS | 8   | 9   | 9   | 8   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8** | N/A (TESTED) — indirect via feature spec                     | YES      | DONE   |
+| 16  | `src/app/Categories/Categories.schema.ts`                      | FE    | CONFORMS | 9   | 9   | 9   | 7   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8** | N/A (TESTED) — indirect; IMPORTS minor                       | YES      | DONE   |
+| 17  | `src/app/Categories/Categories.transformers.ts`                | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
+| 18  | `src/app/Categories/Categories.types.ts`                       | FE    | CONFORMS | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.2** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
+| 19  | `src/app/Categories/tests/Categories.spec.utils.ts`            | FE    | CONFORMS | 9   | 9   | 9   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.0** | N/A (TESTED) — test support                                  | YES      | DONE   |
+| 20  | `src/app/Categories/tests/Categories.mockHandles.ts`           | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | N/A  | **9.1** | N/A (TESTED) — test support                                  | YES      | DONE   |
+| 21  | `src/app/Categories/tests/Categories.mocks.ts`                 | FE    | CONFORMS | 9   | 9   | 9   | 10  | 10  | 9   | 10  | 10  | 9   | N/A  | **9.4** | N/A (TESTED) — test support                                  | YES      | DONE   |
+
+`✱` = GENERIC 7.9 but **floor violated** (TESTED 0 ≤ 3) ⇒ not passing, WIP.
+
+**2026-09-05 — `Activities` (row 1):** not yet a real feature — a placeholder
+Screen-shell leaf with no data/handlers/logic. TESTED set to N/A (no behaviour
+to assert), GEN recomputed 8.7, no floor violation. Marked **DONE**, `APPROVED=YES`.
+Checklist `Activities` reviewed. Revisit when it gains real behaviour.
+
+**2026-08-31 — `BreakdownPreview` group (rows 2–9):** reviewed + refactored to conform — sub-components split to `components/`, styles region-grouped + single-sourced to `Const.Color`/`Const.Spacing`/`DateTime`, `Signature` de-defaulted + deterministic (`sentAt`), icons via shared `common/ux/Icon`. All CONFORMS (no floor). **DONE** — 14-test spec green + live test passed; Captain approved (`APPROVED=YES`). Checklist `Admin BreakdownPreview` reviewed. Residual COULDs (dedicated sub-specs, London-pinned time) are non-blocking.
+
+**2026-08-31 — `Categories` group (rows 10–21):** reviewed + refactored to conform — roles grouped (`CategoriesQueries`/`CategoriesHandlers`/`CategoriesOptions`/`CategoriesSchema`/`CategoriesTransformers`/`CategoriesDefaults`), `columns` → `CategoriesColumns`, `getParent` → `CategoriesTransformers`, §5.2 import tiers + type-only imports, `Styles.scss` import corrected, a11y label `for="name"` wired, handler swallows post rejection (no unhandled error), feature test scaffold added in `tests/` (`CategoriesMocks`/`CategoriesMockHandlers`/`CategoriesTestUtils` + 9-test feature spec + pure specs for handlers/options/transformers). All CONFORMS (no floor; min 7). **DONE** — 15/15 specs green, zero unhandled errors; Captain approved (`APPROVED=YES`). Checklist `Categories` reviewed. Also codified the `tests/` support-file return convention (`FeatureMocks`/`FeatureMockHandlers`/`FeatureTestUtils`, incl. `customRender`) into ARCHITECTURE §1.2.1.
+
+**2026-09-12 — `Admin` (parent feature):** reviewed + closed. Renamed
+`Admin.query.ts` → `Admin.queries.ts`; `useAdminApi` → `useAdminQueries`;
+`AdminProps` kept as a top-level type on the component (ARCHITECTURE §1.2.1 row
+added so the rule is explicit). Test scaffold added: `AdminMocks` (MockBuilder),
+`AdminMockHandlers.Backfill.Post` + `Defaults`, `AdminTestUtils` umbrella, and a
+3-test feature spec (backfill happy path). **DONE** — spec green. Checklist
+`Admin` reviewed.
+
+### 11.16.4 Amendment — mock + test conventions (2026-09-12)
+
+New `create-tests` skill (`.github/skills/create-tests/SKILL.md`) plus supporting
+infrastructure, all now documented:
+
+1. **`common/mocks/`** — the common mock home, aliased **`@common-mocks`**
+   (tsconfig, vite, jest). One file per API resource (`User.mocks.ts` →
+   `MockUser`), plus `TestMocks.ts` (shared primitives) and an `index.ts` barrel
+   whose exports are **alphabetical by exported symbol**. Feature-local variants
+   stay in `Feature/tests/Feature.mocks.ts`.
+2. **`MockBuilder`** extended to `modify`/`setValue`/`set`/`update`/`omit`/`pick`/
+   `asList`/`buildList`/`build` + `MockEntitiesBuilder`, with a 51-test spec.
+   Spread-overrides are banned; derivations go through the builder.
+3. **`FeatureMockHandlers.<SubFeature>.<Verb>`** umbrella (ARCHITECTURE §1.2.1),
+   with `Defaults` holding the spec's handler set and the shared builder hoisted
+   to a local const.
+4. **`FeatureTestUtils`** umbrella (ARCHITECTURE §1.2.1 / §1.2.2) —
+   everything above `describe` lives there: `labels`, `customRender(handlers =
+FeatureMockHandlers.Defaults)`, section accessors. The spec is imports +
+   `describe` only.
+5. **Spec style** — every `it` reads `it('should <verb> …')`; no braces around a
+   single-statement arrow body; built-in accessors (`Test.Section`, `Test.Form`,
+   `Accessor.user`) used in preference to raw queries.
+6. **ARCHITECTURE §5.2 is now 5-tier (FE) / 4-tier (BE)** — type-only imports are
+   gathered into a single tier immediately above assets, the one deliberate
+   exception to "order by source, not by role".
+
+`Admin` was the first feature to apply all of the above.
+
+### 11.16.5 Amendment — query conventions + `Paths` restructure (2026-09-12)
+
+New `create-query` skill (`.github/skills/create-query/SKILL.md`), written from
+`Admin.queries.ts` and `EmailVerification.queries.ts`.
+
+**`Paths` (was `Path.ts`, folder `common/utils/Paths/`)**
+
+1. One file, one export: **`Paths`** holds `Api`, `Projects` and `Client`.
+   `Api`/`Projects` are server endpoints (URL fragments); `Client` holds page
+   routes used as-is by the router. They share `/api` by mounting convention,
+   not by relationship.
+2. **`apiPathBuilder` no longer does a lookup** — it prefixes the host onto the
+   value. `ProjectKey`-style key tables are gone; `PathKey = keyof typeof
+Paths.Api | keyof typeof Paths.Projects` is derived.
+3. **Call sites pass the key, not the value**: `new RequestBuilder('Gym')`, never
+   `RequestBuilder(Paths.Projects.Gym)` — the latter is the URL.
+4. **Redirects use `Paths.Client.*`** (`navigate(Paths.Client.Login)`), replacing
+   five hand-written `'/api/login'` literals in `EmailVerification.queries.ts`,
+   `Screen.tsx`, `Register.tsx` and two specs. `App.routes.tsx` reads the same
+   constants for its first four routes.
+5. `PathKey` and `ClientRoute` are exported from `@common-utils` (the barrel),
+   not deep-imported.
+
+**Queries**
+
+6. Two builders, one rule: **`FeatureQuery`** when the mutation has a body and
+   `.data` should be unwrapped; **`RequestBuilder`** for a payload-less POST or
+   when the caller needs the raw `AxiosResponse`.
+7. A body-less mutation is typed `useMutation<TData, TError, void>` with
+   `mutationFn: () => …`. `FeatureQuery.Post` requires `TRequest extends object`
+   and returns hook options, so it does not fit — casting it to fit is the bug
+   this rule exists to prevent.
+8. The token is read with `Session.useContext()` **inside the hook**. A plain
+   helper calling it is a Rules-of-Hooks violation; a shared hook in `common/`
+   takes `token` as a parameter instead (no `common/` → `src/` import).
+9. Umbrella export — **`<FileName>Queries`, verbatim** (`Likes.queries.ts` →
+   `LikesQueries`, no singularising), and the **hooks themselves are never
+   exported**: the umbrella is the file's whole public surface. Inside it, a flat
+   file keeps the plain verb — `RegisterQueries.usePost`, `CategoriesQueries.useGet`
+   — and a group appears only when a **second noun** enters the file:
+   `LoginQueries.usePost` beside `LoginQueries.Settings.useGet`. A group marks a
+   noun change, never a subfeature. Options are a plain object, never
+   `Pick<UseMutationOptions…>`.
+10. **A feature query is the generic approach.** The hook declares how the request
+    is handled — path, token, `QueryKey`, plus whatever policy belongs to it:
+    default success/error messages, invalidation, retry, `staleTime`. The component
+    owns the flow (what to render, where to redirect, when to fire). **Every shared
+    default is overridable** — spread `...request.Post({ onSuccess })`, never
+    `...request.Post({ onSuccess: () => … })`. The hook sets defaults; it never takes
+    the decision away. One caller may supply callbacks in the component; two
+    sharing behaviour moves that behaviour into the hook.
+11. **Hooks return react-query's own result**, unwrapped — no `res.data` off an
+    axios response, no hand-picked `{ data, refetch }`. `Admin.tsx` is the shape:
+    `const { mutate, isPending } = AdminQueries.DailyBreakdown.usePost({ … })`.
+    **Exception — a single-screen flow:** when one screen, one request fired on
+    mount, and no second caller, the `.queries.ts` may own the token, the message
+    state, the redirect and the firing effect, returning a shaped object. This is
+    now `EmailVerification`'s shape again, reversed from the earlier note: the
+    effect belongs with the request it fires, and the screen renders only.
+    The moment a second caller appears, drop back to the plain rule.
+12. **Errors go through `errorMessage(error, fallback)`** from `@common-utils`,
+    with the fallback a `ClientMessage` call — never a handwritten sentence. Server
+    message primary, FE catalogue message fallback, which is why
+    `ErrorResponse.message` is optional. The inline
+    `error.response?.data?.message ?? error.message` pattern is retired — the axios
+    `error.message` fallback leaks library text ("Network Error") to the user.
+    Applied in `Login.tsx` and `Register.tsx` this round; `Register` uses
+    `ClientMessage.Failure.Create('account')`, `Login` uses `Failure.Login()`.
+13. **`common/types` response shapes carry ISO strings, not `Date`.** A `Date`
+    cannot survive JSON serialisation — the browser receives a string — so a
+    `Date` in a response type is inaccurate _and_ blocks `RequestBuilder`, whose
+    `JsonBodyType` constraint rejects it (the "Unsafe assignment of an `any`"
+    symptom). `PostVisitResponse.visitDate` and `PostLikeResponse.likeDate` were
+    the two offenders; both are now `string`, with
+    `Visit.service.ts` and `Like.service.ts` piping through
+    `DateTime.Format.toIso`, matching what `Activity.transformers.ts` already did.
+14. **Clobber list — five files destroyed and rebuilt.** A mis-escaped bulk rename
+    overwrote these with `Visits.queries.ts` content; each was rebuilt against its
+    consumer's contract:
+
+    | File                                                 | Rebuilt as                                                                                                      |
+    | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+    | `src/app/Home/WebsiteStats/WebsiteStats.queries.ts`  | `WebsiteStatsQueries.useGet` — `FeatureQuery('Activity').subpath('admin')`, unwrapped `GetActivityFeedResponse` |
+    | `src/app/Login/Login.query.ts`                       | `LoginQueries.usePost` + `LoginQueries.Settings.useGet` — converted from a request-factory bundle to real hooks |
+    | `src/app/Register/Register.query.ts`                 | `RegisterQueries.usePost`                                                                                       |
+    | `src/portfolio/Contact/Contact.query.ts`             | _(outstanding)_                                                                                                 |
+    | `src/shared/context/SessionContext/Session.query.ts` | _(outstanding)_                                                                                                 |
+
+    `Categories.queries.ts` and `Likes.queries.ts` were hit by the same mishap and
+    are both rebuilt (`CategoriesQueries`, `LikesQueries`). `Visits.queries.ts` is
+    the source file the others were overwritten with; it is intact.
+
+**Also fixed:** `EmailVerification.queries.ts` and `Admin.queries.ts` follow points
+7 and 11. `Visits.queries.ts` gained `useRecordVisit` (owns the empty-path,
+localhost and incognito guards, calls the private `postVisit`); `Screen.tsx` calls
+`VisitsQueries.useRecord(path)` and no longer imports `@shared-queries`,
+`detectincognitojs` or `Browser`. The `recordVisit` prop was deleted — nothing
+passed it.
+
+**Open:** `Contact.query.ts` and `Session.query.ts` are still clobbered. The
+`Login`/`Register`/`Contact` screens were converted from a `useXApi()` bundle of
+raw request functions to real hooks this round; `Contact` still needs the same
+treatment.
 
 ## 12. Related docs / links
 

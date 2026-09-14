@@ -7,10 +7,10 @@ interface ActivitiesProps {
 export const Activities = ({ path }: ActivitiesProps) => {
     return (
         <Screen
-            title={'tschiboka | Activities'}
+            title="tschiboka | Activities"
             path={path}
             loginRequired
-            variant="api"
+            variant="app"
             pageName="Activities"
         >
             <h1>Activities</h1>

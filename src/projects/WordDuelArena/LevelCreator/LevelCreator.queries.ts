@@ -1,14 +1,14 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
-import { Paths, Query, QueryKey } from '@common-utils'
+import { Query, QueryKey } from '@common-utils'
 import type { ErrorResponse } from '@common-utils'
 import type { LevelNameResponse } from '../common/utils/Types/Level'
 import type { FrequencyType } from '../common/utils/Types/Words'
-import { Session } from '@shared-context/SessionContext'
+import { Session } from '@shared-context'
 
 export const useGetLevelNames = () => {
-    const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)
+    const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level/name')
         .build()
 
@@ -22,7 +22,7 @@ export const useGetLevelNames = () => {
 }
 
 export const useGetLevel = (name: string) => {
-    const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)
+    const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level/name/' + name)
         .build()
 
@@ -38,7 +38,7 @@ export const useGetLevel = (name: string) => {
 type UsePostLevel = { onSuccess: () => void }
 export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)
+    const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level')
         .withAuthToken(token)
         .build()
@@ -54,7 +54,7 @@ export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
 
 export const useGetAnagramMap = () => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)
+    const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/word/anagrams')
         .withAuthToken(token)
         .build()
@@ -70,7 +70,7 @@ export const useGetAnagramMap = () => {
 
 export const useGetWordFrequencies = () => {
     const token = Session.useContext().session?.token
-    const request = new Query.RequestBuilder(Paths.Projects.WordDuelArena)
+    const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/word/frequencies')
         .withAuthToken(token)
         .build()

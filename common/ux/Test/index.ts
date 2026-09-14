@@ -10,6 +10,7 @@ import { DateInput } from './DateInput/DateInput'
 import { Figure } from './Figure/Figure'
 import { Form } from './Form/Form'
 import { Heading } from './Heading/Heading'
+import { Icon } from './Icon/Icon'
 import { Input } from './Input/Input'
 import { Link } from './Link/Link'
 import { LoadingIndicator } from './Loading/Loading'
@@ -38,6 +39,7 @@ export const Test = {
     Figure,
     Form,
     Heading,
+    Icon,
     Input,
     Link,
     LoadingIndicator,

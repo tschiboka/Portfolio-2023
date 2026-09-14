@@ -1,9 +1,9 @@
-import { useSessionContext } from './useSessionContext'
-import { SessionContextProvider } from './Session.context'
+import { SessionHooks } from './Session.hooks'
+import { SessionContextProvider } from './Session.provider'
 import { LocalSession } from './LocalSession'
 
 export const Session = {
-    useContext: useSessionContext,
+    useContext: SessionHooks.useContext,
     Provider: SessionContextProvider,
 }
 

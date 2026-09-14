@@ -38,6 +38,15 @@ export type Truthy<T> = Exclude<T, Falsy>
 export type Primitive = string | number | boolean | bigint | symbol
 
 /**
+ * A value that stringifies to something meaningful, so it can be compared
+ * or sorted without risking `'[object Object]'`.
+ *
+ * @example
+ * sortRows(data, 'joined', 'asc') // records whose values are Sortable
+ */
+export type Sortable = Primitive | Date
+
+/**
  * ============================================================================
  * Object Types
  * ============================================================================
