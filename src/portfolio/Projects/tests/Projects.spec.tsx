@@ -2,7 +2,7 @@ import { screen, waitFor, within } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Projects } from '../Projects'
-import { pageSideMenuHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandles'
+import { pageSideMenuHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupProjects = async () => {
     TestScreen.Do.render({

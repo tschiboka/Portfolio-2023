@@ -23,6 +23,9 @@
 //
 // If two endpoints genuinely share the same shape, create a core entity type
 // and compose endpoint-specific types from it (e.g. via intersection or Pick/Omit).
+//
+// See .github/skills/types/SKILL.md — the feature-type file shape, the worked
+// example, and the server-side statement of this same convention.
 
 export * from './app'
 export * from './projects/typist'

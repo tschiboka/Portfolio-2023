@@ -1,5 +1,16 @@
 import { useRef, useState } from 'react'
-import { Code, CodeText, Heading, Main, Overlay, Paragraph, Section, Stack } from '@common-ux'
+import {
+    Button,
+    Code,
+    CodeText,
+    Heading,
+    List,
+    Main,
+    Overlay,
+    Paragraph,
+    Section,
+    Stack,
+} from '@common-ux'
 import type { ActionMenuItem } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
@@ -7,6 +18,7 @@ import { StoryNav } from '../StoryNav/StoryNav'
 import type { Nullable } from '@common-utils'
 import { Code as Snippets } from './Overlays.code'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
+import './Overlays.styles.css'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']
 const sizes: PopupSize[] = ['sm', 'md', 'lg']
@@ -83,13 +95,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <Paragraph>Each mode has a distinct color scheme and default icon:</Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {modes.map((mode) => (
-                            <button
+                            <Button
                                 key={mode}
                                 ref={refFor(`mode-${mode}`)}
                                 onClick={() => open(`mode-${mode}`)}
                             >
                                 {mode}
-                            </button>
+                            </Button>
                         ))}
                     </Stack.Horizontal>
                     {modes.map(
@@ -113,13 +125,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <Paragraph>Popups come in three sizes — sm, md, and lg:</Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {sizes.map((size) => (
-                            <button
+                            <Button
                                 key={size}
                                 ref={refFor(`size-${size}`)}
                                 onClick={() => open(`size-${size}`)}
                             >
                                 {size}
-                            </button>
+                            </Button>
                         ))}
                     </Stack.Horizontal>
                     {sizes.map(
@@ -142,9 +154,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <Paragraph>
                         Popups can have multiple action buttons, with conditional visibility:
                     </Paragraph>
-                    <button ref={refFor('actions')} onClick={() => open('actions')}>
+                    <Button ref={refFor('actions')} onClick={() => open('actions')}>
                         Open with actions
-                    </button>
+                    </Button>
                     {activePopup === 'actions' && (
                         <Overlay.Popup
                             mode="info"
@@ -171,9 +183,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Popups anchor to the trigger button and auto-position above or below:
                     </Paragraph>
                     <Stack.Horizontal gap="24" wrap style={{ padding: '40px 0' }}>
-                        <button ref={refFor('anchored')} onClick={() => open('anchored')}>
+                        <Button ref={refFor('anchored')} onClick={() => open('anchored')}>
                             Open anchored
-                        </button>
+                        </Button>
                     </Stack.Horizontal>
                     {activePopup === 'anchored' && (
                         <Overlay.Popup
@@ -190,9 +202,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Custom Content</Heading>
                     <Paragraph>Popups accept children for fully custom body content:</Paragraph>
-                    <button ref={refFor('custom')} onClick={() => open('custom')}>
+                    <Button ref={refFor('custom')} onClick={() => open('custom')}>
                         Open custom popup
-                    </button>
+                    </Button>
                     {activePopup === 'custom' && (
                         <Overlay.Popup
                             mode="warning"
@@ -201,15 +213,18 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                             size="lg"
                         >
-                            <div style={{ padding: '12px 0' }}>
-                                <p style={{ margin: 0 }}>
+                            <div className="overlays-popup-body">
+                                <Paragraph className="overlays-popup-text">
                                     This popup has custom children rendered below the title.
-                                </p>
-                                <ul style={{ margin: '8px 0 0', paddingLeft: 20 }}>
-                                    <li>Custom list item 1</li>
-                                    <li>Custom list item 2</li>
-                                    <li>Custom list item 3</li>
-                                </ul>
+                                </Paragraph>
+                                <List
+                                    className="overlays-popup-list"
+                                    items={[
+                                        { key: 'one', content: 'Custom list item 1' },
+                                        { key: 'two', content: 'Custom list item 2' },
+                                        { key: 'three', content: 'Custom list item 3' },
+                                    ]}
+                                />
                             </div>
                         </Overlay.Popup>
                     )}
@@ -227,9 +242,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Basic</Heading>
                     <Paragraph>A simple action menu with three items:</Paragraph>
-                    <button ref={refFor('am-basic')} onClick={() => open('am-basic')}>
+                    <Button ref={refFor('am-basic')} onClick={() => open('am-basic')}>
                         Open menu
-                    </button>
+                    </Button>
                     {activePopup === 'am-basic' && (
                         <Overlay.ActionMenu
                             anchorRef={anchorFor('am-basic')}
@@ -248,13 +263,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     </Paragraph>
                     <Stack.Horizontal gap="12" wrap>
                         {aligns.map((align) => (
-                            <button
+                            <Button
                                 key={align}
                                 ref={refFor(`am-align-${align}`)}
                                 onClick={() => open(`am-align-${align}`)}
                             >
                                 align=&quot;{align}&quot;
-                            </button>
+                            </Button>
                         ))}
                     </Stack.Horizontal>
                     {aligns.map(
@@ -277,9 +292,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Items support colour variants: <CodeText>primary</CodeText>,{' '}
                         <CodeText>secondary</CodeText>, and <CodeText>danger</CodeText>.
                     </Paragraph>
-                    <button ref={refFor('am-variants')} onClick={() => open('am-variants')}>
+                    <Button ref={refFor('am-variants')} onClick={() => open('am-variants')}>
                         Open with variants
-                    </button>
+                    </Button>
                     {activePopup === 'am-variants' && (
                         <Overlay.ActionMenu
                             anchorRef={anchorFor('am-variants')}
@@ -295,9 +310,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Items with <CodeText>disabled: true</CodeText> are greyed out and
                         unclickable:
                     </Paragraph>
-                    <button ref={refFor('am-disabled')} onClick={() => open('am-disabled')}>
+                    <Button ref={refFor('am-disabled')} onClick={() => open('am-disabled')}>
                         Open with disabled
-                    </button>
+                    </Button>
                     {activePopup === 'am-disabled' && (
                         <Overlay.ActionMenu
                             anchorRef={anchorFor('am-disabled')}
@@ -310,9 +325,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Icons</Heading>
                     <Paragraph>Items can include an icon rendered before the label:</Paragraph>
-                    <button ref={refFor('am-icons')} onClick={() => open('am-icons')}>
+                    <Button ref={refFor('am-icons')} onClick={() => open('am-icons')}>
                         Open with icons
-                    </button>
+                    </Button>
                     {activePopup === 'am-icons' && (
                         <Overlay.ActionMenu
                             anchorRef={anchorFor('am-icons')}
@@ -328,9 +343,9 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Override the default <CodeText>&quot;Action menu&quot;</CodeText> label for
                         screen readers:
                     </Paragraph>
-                    <button ref={refFor('am-aria')} onClick={() => open('am-aria')}>
+                    <Button ref={refFor('am-aria')} onClick={() => open('am-aria')}>
                         Open with custom label
-                    </button>
+                    </Button>
                     {activePopup === 'am-aria' && (
                         <Overlay.ActionMenu
                             anchorRef={anchorFor('am-aria')}

@@ -2,11 +2,11 @@
 # name — one lowercase word, must match the folder name exactly
 name: 'queries'
 
-# kind — area | index | rule. See §Template for what each one is.
-kind: 'area'
+# access — read | write. Required for every skill; omitted for reference skills.
+access: write
 
-# stack — optional, area only. Omit for index and rule.
-# the libraries this skill's rules are about, so a reader knows the vocabulary
+# stack — optional. The libraries this skill's rules are about,
+# so a reader knows the vocabulary.
 stack: 'tanstack-query, msw'
 
 # description — one sentence of what it does, then one clause of what it covers.
@@ -16,22 +16,22 @@ description: 'Writing a feature `.queries.ts` file, query/mutation hooks. Payloa
 
 # Template
 
-**Every skill is one of three kinds. Pick one and write only its block.**
+**Every skill carries these four sections, in this order.**
 
-| Kind    | Use it for                                         | Block                               |
-| ------- | -------------------------------------------------- | ----------------------------------- |
-| `area`  | a body of rules for one area — queries, test, auth | §File structure → §Rules            |
-| `index` | an index over an axis — lifecycle, domains         | §The axis → §Dispatch rule          |
-| `rule`  | an invariant with no area — dry, standards, reuse  | §What it asserts → §What it forbids |
+| Section       | Holds                                         |
+| ------------- | --------------------------------------------- |
+| `When to use` | the trigger conditions, in the caller's words |
+| `Scope`       | what the skill owns, and what it does not     |
+| `Rules`       | how it does what it does — always / never     |
+| `Workflow`    | the steps it runs                             |
 
-Everything above the first block — frontmatter, §When to use, §Scope — is shared
-by all three. The blocks are separated by `---`; delete the two you are not
-writing, and the `# <Kind> block` headings with them.
+`File structure` and `Files and folders` are conditional — only for a skill whose
+area has a folder shape. Omit them when the skill has none.
 
 **A skill carries no code.** Describe shapes, name conventions and point at the
 example files in the skill's own folder beside `SKILL.md`. Never reference a live
 source file — those move. The example belongs to the skill and changes only when
-the skill changes. Only the `text` file tree is fenced here.
+the skill changes.
 
 ---
 
@@ -42,21 +42,24 @@ the skill changes. Only the `text` file tree is fenced here.
 - The trigger conditions, as bullets.
 - What this skill fires on, in the words a caller would use.
 
-Standards of reference: <path to the doc that owns the rules this skill enforces>
+Standards of reference: only when another document is the authoritative source.
 
-## Scope of Expertise / Domain
+<path to source>
 
-Where the area starts and ends, in a few short sentences.
+## Scope
 
-- FE: from the API app layer to the transformed UI data layer
-- BE: from incoming request transformation to the service or persistence layer
-- X: from x to y
+Define where this skill's responsibility starts and ends.
+
+## Rules
+
+Always do this.
+Never do that.
+
+## Workflow
+
+The steps the skill runs, in order.
 
 ## File structure
-
-_Area only. An index replaces this section, §Methodology and §Files and folders
-with §The axis, §Members and §Dispatch rule. A rule replaces all three with
-§What it asserts._
 
 The shape of the folder — what exists and how it nests. Not what is in the files.
 
@@ -64,15 +67,8 @@ The shape of the folder — what exists and how it nests. Not what is in the fil
 Feature/
 ├── Feature.filetype1.ts
 ├── Feature.filetype2.tsx
-├── Feature.filetype3.tsx
-├── SubFeature/
+└── Feature.filetype3.tsx
 ```
-
-## Methodology
-
-The currently accepted direction of thought.
-The design.
-The steps.
 
 ## Files and folders
 
@@ -88,54 +84,3 @@ Rules:
 
 - Always do this.
 - Never do that.
-
-## Rules
-
-General rules that hold across every file above — the ones that are not owned by
-any single file. Same do / never shape as the per-file rules.
-
-- Always do this.
-- Never do that.
-
----
-
-# Index block — `kind: 'index'`
-
-An index routes: it names an axis and dispatches to the skills on it. It has no
-file structure, no methodology and no per-file blocks. Write these three sections
-in place of the area ones, then roll up into the shared §Rules.
-
-## The axis
-
-What the axis is, and which kind of thing it sorts by — an ordered sequence the
-caller walks, or an unordered partition the caller picks from.
-
-## Members
-
-| Slash   | Owns | Skill                    |
-| ------- | ---- | ------------------------ |
-| `/name` | …    | [name](../name/SKILL.md) |
-
-## Dispatch rule
-
-How a caller chooses between two members that both look applicable. Name the
-tie-breakers and the order they apply in. Without this section an index is only
-a list — the dispatch rule is what makes it route.
-
----
-
-# Rule block — `kind: 'rule'`
-
-A rule is an invariant: it holds at every stage and in every domain, so it has
-no files and no area of its own. Write these two sections in place of the area
-ones.
-
-## What it asserts
-
-The invariant, in one or two sentences, and why it holds everywhere rather than
-in one area.
-
-## What it forbids
-
-- Never do that.
-- Never do this either.

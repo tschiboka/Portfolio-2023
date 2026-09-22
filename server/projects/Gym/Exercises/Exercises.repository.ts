@@ -2,7 +2,7 @@
 import { ExerciseModel } from './Exercises.models'
 import type { IGymExercise } from './Exercises.types'
 
-/** Data-access layer for exercises â€” generic CRUD plus exercise-specific queries. */
+/** Data-access layer for exercises - generic CRUD plus exercise-specific queries. */
 export const ExercisesRepository = Repository.define<typeof ExerciseModel, IGymExercise>(
     ExerciseModel,
 ).withQueries({

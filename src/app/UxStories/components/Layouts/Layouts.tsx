@@ -11,6 +11,7 @@
     Pill,
     Section,
     Show,
+    Sidebar,
     Spacer,
     Split,
     Stack,
@@ -20,6 +21,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './Layouts.code'
+import './Layouts.styles.css'
 
 type LayoutsProps = { path: string }
 
@@ -73,7 +75,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Paragraph>
                 <Heading as="h3">Basic Usage</Heading>
                 <Box padding="16" background="surface" borderRadius="md">
-                    <p style={{ margin: 0 }}>A padded container with surface background.</p>
+                    <Paragraph>A padded container with surface background.</Paragraph>
                 </Box>
                 <Code language="tsx" content={Snippets.Box.basic} />
                 <Heading as="h3">Padding</Heading>
@@ -247,9 +249,9 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         <span style={cell()}>Logo</span>
                         <span style={{ ...cell(), flex: 1 }}>Nav</span>
                     </Stack.Horizontal>
-                    <Stack.Horizontal gap="24">
-                        <aside style={{ ...cell(), width: 120 }}>Sidebar</aside>
-                        <main style={{ ...cell(), flex: 1 }}>Content</main>
+                    <Stack.Horizontal gap="24" className="layouts-nested">
+                        <Sidebar>Sidebar</Sidebar>
+                        <Main>Content</Main>
                     </Stack.Horizontal>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Stack.nested} />

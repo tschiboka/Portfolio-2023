@@ -6,7 +6,7 @@ import type { PostDailyBreakdownReq, PostDailyBreakdownRes } from './Schedule.ty
 
 const router = express.Router()
 
-// POST /api/schedule/daily-breakdown â€” trigger the daily breakdown email (cron or admin).
+// POST /api/schedule/daily-breakdown - trigger the daily breakdown email (cron or admin).
 router.post(
     '/daily-breakdown',
     [ScheduleAuth.cronOrAdmin],

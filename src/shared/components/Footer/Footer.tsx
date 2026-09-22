@@ -7,6 +7,7 @@ import { Link } from '@common-ux'
 import logo from '@shared-assets/icon-light.svg'
 import './Footer.scss'
 import { ReactNode } from 'react'
+import { Paragraph } from '@common-ux'
 
 export interface FooterProps {
     path: string
@@ -39,14 +40,14 @@ const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
                     <TfiLinkedin title="LinkedIn Link" />
                 </Link>
             </div>
-            <p className="copyright">
+            <Paragraph className="copyright">
                 <MdCopyright className="copyright__icon" />
                 <time>
                     <Link href="#/clock">{year}</Link>
                 </time>
                 <span className="copyright__pipe">|</span>
                 Tivadar Debnar. All rights reserved.{' '}
-            </p>
+            </Paragraph>
             <div className="additional-info">{info}</div>
         </footer>
     )

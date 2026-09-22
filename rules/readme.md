@@ -39,7 +39,7 @@ Every field, with generic values:
 | `title`         | yes      | imperative, one clause                                             |
 | `description`   | yes      | the assertion, not the reason                                      |
 | `rationale`     | yes      | the _why_ — what a reader needs to judge a false positive          |
-| `scope.include` | yes      | globs; drives the generated lint config                            |
+| `scope.include` | yes      | globs; emitted as the rule's `files` list                          |
 | `scope.exclude` | yes      | `[]` when nothing is excluded, never omitted                       |
 | `severity`      | yes      | `'error'                                                           | 'warn'` |
 | `enforcement`   | yes      | keyed by backend — `eslint` today, others as keys                  |

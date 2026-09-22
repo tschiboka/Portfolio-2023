@@ -325,7 +325,10 @@ describe('Typography', () => {
 
         it('should render ReactNode items', () => {
             const list = Set.list({
-                items: [<strong key="a">Bold</strong>, <em key="b">Italic</em>],
+                items: [
+                    { key: 'a', content: <strong>Bold</strong> },
+                    { key: 'b', content: <em>Italic</em> },
+                ],
             })
             expect(list.Get.textContent()).toContain('Bold')
             expect(list.Get.textContent()).toContain('Italic')

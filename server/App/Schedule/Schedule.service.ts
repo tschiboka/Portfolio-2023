@@ -4,7 +4,7 @@ import { BreakdownModel } from '../Breakdown/Breakdown.model'
 import { createMessage, sendEmail } from './Schedule.utils'
 import type { Breakdown } from './Schedule.types'
 
-/** Business logic for the daily-breakdown schedule â€” builds and sends the report email. */
+/** Business logic for the daily-breakdown schedule — builds and sends the report email. */
 export const ScheduleService = {
     /** Sends the daily breakdown email (cron-triggered). */
     triggerDailyBreakdown: async (): Promise<PostDailyBreakdownResponse> => {

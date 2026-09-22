@@ -2,6 +2,7 @@ import headshot from '@portfolio/assets/home/headshot_placeholder.png'
 import { AppHooks } from '@shared-context'
 import { useNavigate } from 'react-router-dom'
 import './Welcome.scss'
+import { Heading } from '@common-ux'
 
 const Welcome = () => {
     const navigate = useNavigate()
@@ -17,11 +18,11 @@ const Welcome = () => {
                     onClick={() => navigate('./api/login')}
                 />
             </div>
-            <h1>
+            <Heading as="h1">
                 <strong>Tivadar Debnar</strong>
                 <span>|</span>
                 <span>Web Developer</span>
-            </h1>
+            </Heading>
         </div>
     )
 }

@@ -5,7 +5,7 @@ import type { PostMessageReq, PostMessageRes } from './Message.types'
 
 const router = express.Router()
 
-// POST /api/message â€” submit a contact message (validates + persists + notifies owner).
+// POST /api/message - submit a contact message (validates + persists + notifies owner).
 router.post('/', async (req: PostMessageReq, res: PostMessageRes) => {
     const data = await MessageService.create(req.body)
     ApiResponder.created(res, data)

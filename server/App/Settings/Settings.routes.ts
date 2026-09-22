@@ -9,11 +9,12 @@ import type {
 } from './Settings.types'
 const router = express.Router()
 
+// GET /api/settings - retrieve the current settings.
 router.get('/', async (req: GetSettingsReq, res: GetSettingsRes) => {
     const settings = await SettingsService.get()
     ApiResponder.ok(res, { settings })
 })
-
+// POST /api/settings - create or update the settings.
 router.post('/', async (req: PostSettingsReq, res: PostSettingsRes) => {
     const settings = await SettingsService.create(req.body)
     ApiResponder.created(res, { settings })

@@ -53,7 +53,6 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     const { slot: headerSlot } = extractSlot(children, 'Table.Header')
     const { slot: infoSlot } = extractSlot(children, 'Table.Info')
     const { slot: legendSlot } = extractSlot(children, 'Table.Legend')
-    const { slot: _downloadSlot } = extractSlot(children, 'Table.Download')
 
     const sorting = (controller?.sorting ?? sortingProp) as TableProps<TData, TContext>['sorting']
     const filtering = controller?.filtering ?? filteringProp
@@ -198,7 +197,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
                     ref={tableRef}
                     aria-label={titleId ? undefined : ariaLabel}
                     aria-labelledby={titleId}
-                    style={enableColumnResize ? { tableLayout: 'fixed' } : undefined}
+                    style={{ ...style, ...(enableColumnResize ? { tableLayout: 'fixed' } : {}) }}
                 >
                     <TableHead
                         columns={columns}

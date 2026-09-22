@@ -1,5 +1,6 @@
 import { DateTime } from '@common-utils'
 import './BlogTimeStamp.scss'
+import { Paragraph } from '@common-ux/Typography/Paragraph'
 
 interface Props {
     created: string
@@ -16,19 +17,19 @@ const BlogTimeStamp = ({ created, updated }: Props) => {
         return (
             <div className="BlogTimeStamp">
                 <hr />
-                <p className="BlogTimeStamp__text">
+                <Paragraph className="BlogTimeStamp__text">
                     This article was created on <time dateTime={created}>{createdDisplay}</time> and
                     last updated on <time dateTime={updated}>{updatedDisplay}</time>.
-                </p>
+                </Paragraph>
             </div>
         )
 
     return (
         <div className="BlogTimeStamp">
             <hr />
-            <p className="BlogTimeStamp__text">
+            <Paragraph className="BlogTimeStamp__text">
                 This article was created on <time dateTime={created}>{createdDisplay}</time>.
-            </p>
+            </Paragraph>
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import { Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
 interface StatProps {
@@ -13,7 +14,7 @@ export const Stats = ({ path }: StatProps) => {
             variant="app"
             pageName="Stats"
         >
-            <h1>Stats</h1>
+            <Heading as="h1">Stats</Heading>
         </Screen>
     )
 }

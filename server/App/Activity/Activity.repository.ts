@@ -4,7 +4,7 @@ import { LikeModel } from '../Like/Like.model'
 import { MessageModel } from '../Message/Message.model'
 import { LogModel } from '../Log/Log.model'
 
-/** Data-access layer for the activity feed â€” reads across the visit/like/message/log collections. */
+/** Data-access layer for the activity feed - reads across the visit/like/message/log collections. */
 export const ActivityRepository = {
     findVisits: (filter: Dictionary) => VisitModel.find(filter).lean(),
     findLikes: (filter: Dictionary) => LikeModel.find(filter).lean(),

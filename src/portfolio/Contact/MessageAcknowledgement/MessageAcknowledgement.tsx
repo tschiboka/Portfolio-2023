@@ -1,13 +1,13 @@
 import './MessageAcknowledgement.scss'
 import thumbsupImg from '@portfolio/assets/messages/thumbs_up.png'
-import { Link } from '@common-ux'
+import { Heading, Link, Paragraph } from '@common-ux'
 
 const MessageAcknowledgement = () => {
     return (
         <div className="MessageAcknowledgement">
             <img src={thumbsupImg} alt="Thumbs Up" />
-            <h1>Thank You for Your Message!</h1>
-            <p>
+            <Heading as="h1">Thank You for Your Message!</Heading>
+            <Paragraph>
                 I truly appreciate you taking the time to get in touch, I'm excited to hear about
                 your inquiry. Rest assured that I'll get back to you as soon as possible. In the
                 meantime, feel free to explore more about me and my work on my website.
@@ -18,7 +18,7 @@ const MessageAcknowledgement = () => {
                 can be of assistance.
                 <br />
                 Best regards, Tivadar.
-            </p>
+            </Paragraph>
             <Link to="/">Back to Home</Link>
         </div>
     )

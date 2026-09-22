@@ -194,15 +194,30 @@ export const TypographyStory = ({ path }: TypographyStoryProps) => (
                 <Heading as="h3">ReactNode Items</Heading>
                 <List
                     items={[
-                        <>
-                            <CodeText>npm install</CodeText> — install dependencies
-                        </>,
-                        <>
-                            <CodeText>npm run dev</CodeText> — start dev server
-                        </>,
-                        <>
-                            <CodeText>npm test</CodeText> — run tests
-                        </>,
+                        {
+                            key: 'install',
+                            content: (
+                                <>
+                                    <CodeText>npm install</CodeText> — install dependencies
+                                </>
+                            ),
+                        },
+                        {
+                            key: 'dev',
+                            content: (
+                                <>
+                                    <CodeText>npm run dev</CodeText> — start dev server
+                                </>
+                            ),
+                        },
+                        {
+                            key: 'test',
+                            content: (
+                                <>
+                                    <CodeText>npm test</CodeText> — run tests
+                                </>
+                            ),
+                        },
                     ]}
                 />
                 <Code language="tsx" content={Snippets.List.reactNode} />

@@ -20,7 +20,7 @@ class NavAccessor extends Accessor {
         return {
             ...super.Get,
             linksList: () => this.element.querySelector('.nav_links'),
-            burger: (title: string) => this.scope.getByTitle(title),
+            burger: (name: string) => this.scope.getByLabelText(name),
         }
     }
 

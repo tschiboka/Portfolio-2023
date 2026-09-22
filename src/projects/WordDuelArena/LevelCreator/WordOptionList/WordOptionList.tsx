@@ -1,9 +1,6 @@
 import { MAX_WORDS_PER_LEVEL } from '../../common/utils/Word/constants'
 import './WordOptionList.styles.css'
-import {
-    getWordGroups,
-    getWordLengthGroups,
-} from '../../common/utils/Word/wordGroups'
+import { getWordGroups, getWordLengthGroups } from '../../common/utils/Word/wordGroups'
 import { LevelWord } from '../../common/utils'
 
 type WordOptionListProps = {
@@ -30,9 +27,7 @@ export const WordOptionList = ({
                             <WordOption
                                 key={word.word}
                                 word={word}
-                                hasWord={selectedWords.some(
-                                    (sw) => sw.word === word.word,
-                                )}
+                                hasWord={selectedWords.some((sw) => sw.word === word.word)}
                                 selectedWords={selectedWords}
                                 setSelectedWords={setSelectedWords}
                             />
@@ -50,12 +45,7 @@ type WordOptionProps = {
     setSelectedWords: (words: LevelWord[]) => void
 }
 
-const WordOption = ({
-    word,
-    hasWord,
-    selectedWords,
-    setSelectedWords,
-}: WordOptionProps) => {
+const WordOption = ({ word, hasWord, selectedWords, setSelectedWords }: WordOptionProps) => {
     const addWord = () =>
         setSelectedWords(
             [...selectedWords, word].sort((a, b) =>
@@ -65,8 +55,7 @@ const WordOption = ({
             ),
         )
 
-    const removeWord = () =>
-        setSelectedWords(selectedWords.filter((w) => w.word !== word.word))
+    const removeWord = () => setSelectedWords(selectedWords.filter((w) => w.word !== word.word))
 
     const hasMaxWords = selectedWords.length >= MAX_WORDS_PER_LEVEL
     const canAdd = !hasWord && !hasMaxWords
@@ -85,18 +74,10 @@ const WordOption = ({
                     <span className="frequency">[{word.frequency}]</span>
                 </span>
                 <div>
-                    <button
-                        className="add-word"
-                        disabled={!canAdd}
-                        onClick={addWord}
-                    >
+                    <button className="add-word" disabled={!canAdd} onClick={addWord}>
                         {'\u2713'}
                     </button>
-                    <button
-                        className="remove-word"
-                        disabled={!canRemove}
-                        onClick={removeWord}
-                    >
+                    <button className="remove-word" disabled={!canRemove} onClick={removeWord}>
                         {'\u00D7'}
                     </button>
                 </div>

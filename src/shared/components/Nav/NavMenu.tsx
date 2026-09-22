@@ -9,7 +9,7 @@ import { Chevron } from './Components/Chevron'
 
 export type NavMenuProps = Pick<
     NavProps,
-    'visible' | 'className' | 'ariaLabel' | 'style' | 'logo' | 'burger'
+    'visible' | 'className' | 'ariaLabel' | 'logo' | 'burger'
 > & {
     items: MenuItem[]
     pageName: string
@@ -31,14 +31,14 @@ export const NavMenu = ({
     ...navProps
 }: NavMenuProps) => {
     // Render empty nav while loading to prevent items popping in
-    if (isLoading) return <Nav {...navProps}>{null}</Nav>
+    if (isLoading) return <Nav {...navProps}>{[]}</Nav>
 
     return (
         <Nav {...navProps}>
             {items.map((item) =>
                 item.showSubmenuToggle ? (
                     <li key="submenu-toggle" onClick={onSubmenuToggle}>
-                        <BsThreeDotsVertical title="Toggle Submenu Visibility" />
+                        <BsThreeDotsVertical aria-label="Toggle Submenu Visibility" />
                     </li>
                 ) : (
                     <AccessGuard

@@ -4,6 +4,7 @@ import './Typography.styles.css'
 export const Typography = ({
     as: Element = 'span',
     id,
+    style,
     size,
     weight,
     align,
@@ -44,6 +45,7 @@ export const Typography = ({
         <Element
             id={id}
             className={cls}
+            style={style}
             aria-label={ariaLabel}
             data-toc={includeInTableOfContents ? '' : undefined}
             onClick={onClick}

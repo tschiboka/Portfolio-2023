@@ -1,7 +1,7 @@
 // Components
 import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
-import { Code, Heading, Paragraph, Section, Typography } from '@common-ux'
+import { Code, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import InlineReference from '../components/InlineReference/InlineReference'
 
 // Images
@@ -443,15 +443,26 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                     For most projects, there will be files and folders that should not be included
                     or tracked in the repository. Such files either do not add any value to our
                     project or pose a security threat:
-                    <ul></ul>
-                    <li>Npm and Yarn: dependencies can be regenerated from the package JSON,</li>
-                    <li>Build and Dist folders: they are compiled from the source code,</li>
-                    <li>Development log files,</li>
-                    <li>
-                        Environment configurations, such as .ENV files, may contain sensitive
-                        information, such as API keys and credentials, and exposing them may cause
-                        security breaches.
-                    </li>
+                    <List
+                        items={[
+                            {
+                                key: 'dependencies',
+                                content:
+                                    'Npm and Yarn: dependencies can be regenerated from the package JSON,',
+                            },
+                            {
+                                key: 'build',
+                                content:
+                                    'Build and Dist folders: they are compiled from the source code,',
+                            },
+                            { key: 'logs', content: 'Development log files,' },
+                            {
+                                key: 'env',
+                                content:
+                                    'Environment configurations, such as .ENV files, may contain sensitive information, such as API keys and credentials, and exposing them may cause security breaches.',
+                            },
+                        ]}
+                    />
                 </Paragraph>
                 <Code fileName="Git Ignore" language="powershell" content={codeSnippets.ignore} />
                 <Paragraph>

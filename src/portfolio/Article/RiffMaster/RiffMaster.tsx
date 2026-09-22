@@ -54,7 +54,7 @@ import { getReferenceList } from '../references'
 // Styles
 import './RiffMaster.scss'
 import InlineReference from '../components/InlineReference/InlineReference'
-import { Button, Code, Heading, Link, Paragraph, Section } from '@common-ux'
+import { Button, Code, Heading, Link, List, Paragraph, Section } from '@common-ux'
 
 interface Props {
     pageName: string
@@ -560,26 +560,44 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                     the computer. Additionally, three LEDs will provide further information about
                     the device's state:
                 </Paragraph>
-                <ul className="ul--riffmaster-leds">
-                    <li>
-                        <div className="circle">
-                            <i className="red"></i>
-                        </div>
-                        <strong>Red</strong>: Device connected to USB,
-                    </li>
-                    <li>
-                        <div className="circle">
-                            <i className="green"></i>
-                        </div>
-                        <strong>Green</strong>: USB communication is ON,
-                    </li>
-                    <li>
-                        <div className="circle">
-                            <i className="blue"></i>
-                        </div>
-                        <strong>Blue</strong>: USB data transfer.
-                    </li>
-                </ul>
+                <List
+                    className="ul--riffmaster-leds"
+                    items={[
+                        {
+                            key: 'red',
+                            content: (
+                                <>
+                                    <div className="circle">
+                                        <i className="red"></i>
+                                    </div>
+                                    <strong>Red</strong>: Device connected to USB,
+                                </>
+                            ),
+                        },
+                        {
+                            key: 'green',
+                            content: (
+                                <>
+                                    <div className="circle">
+                                        <i className="green"></i>
+                                    </div>
+                                    <strong>Green</strong>: USB communication is ON,
+                                </>
+                            ),
+                        },
+                        {
+                            key: 'blue',
+                            content: (
+                                <>
+                                    <div className="circle">
+                                        <i className="blue"></i>
+                                    </div>
+                                    <strong>Blue</strong>: USB data transfer.
+                                </>
+                            ),
+                        },
+                    ]}
+                />
                 <br />
                 <Figure
                     image={toggleLEDsDesignImg}

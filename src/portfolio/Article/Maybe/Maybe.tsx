@@ -195,49 +195,65 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <List
                     as="ul"
                     items={[
-                        <Paragraph>
-                            <Typography weight="bold">Map</Typography> We have already mentioned the
-                            map function, and you have probably used map on arrays million times
-                            before, however in the context of Monads, the map function applies a
-                            given function to the values inside the Monadic context and returns a
-                            new Monad containing the transformed values. This allows you to apply a
-                            function to the contents of the Monad without changing the context
-                            itself.
-                        </Paragraph>,
-                        <>
-                            <Paragraph>
-                                <Typography weight="bold">Flatmap</Typography> The flatMap
-                                operation, also known as bind, allows you to chain together
-                                operations on Monads that return Monads, flattening nested Monads
-                                into a single Monad. The flatMap function applies a function to the
-                                values inside the Monadic context and returns a new Monad. Unlike
-                                map, the function passed to flatMap returns a Monad itself, and
-                                flatMap then flattens the resulting nested Monads into a single
-                                Monad.
-                            </Paragraph>
-                            <Code
-                                fileName="flatmap.ts"
-                                language="typescript"
-                                content={codeSnippets.flatMap}
-                            />
-                        </>,
-                        <>
-                            <Paragraph>
-                                <Typography weight="bold">Unit</Typography> or pure operation is a
-                                way to lift a value into a Monadic context. It takes a non-monadic
-                                value and wraps it inside a Monad, thus introducing it to the
-                                computational context of the Monad. This operation is essential for
-                                constructing Monadic values from regular values. For the complete
-                                list of monadic constructors please refer the official monet.js
-                                documentation.
-                                <InlineReference reference={references[7]} />
-                            </Paragraph>
-                            <Code
-                                fileName="constructors.ts"
-                                language="typescript"
-                                content={codeSnippets.constructor}
-                            />
-                        </>,
+                        {
+                            key: 'Map',
+                            content: (
+                                <Paragraph>
+                                    <Typography weight="bold">Map</Typography> We have already
+                                    mentioned the map function, and you have probably used map on
+                                    arrays million times before, however in the context of Monads,
+                                    the map function applies a given function to the values inside
+                                    the Monadic context and returns a new Monad containing the
+                                    transformed values. This allows you to apply a function to the
+                                    contents of the Monad without changing the context itself.
+                                </Paragraph>
+                            ),
+                        },
+                        {
+                            key: 'Flatmap',
+                            content: (
+                                <>
+                                    <Paragraph>
+                                        <Typography weight="bold">Flatmap</Typography> The flatMap
+                                        operation, also known as bind, allows you to chain together
+                                        operations on Monads that return Monads, flattening nested
+                                        Monads into a single Monad. The flatMap function applies a
+                                        function to the values inside the Monadic context and
+                                        returns a new Monad. Unlike map, the function passed to
+                                        flatMap returns a Monad itself, and flatMap then flattens
+                                        the resulting nested Monads into a single Monad.
+                                    </Paragraph>
+                                    <Code
+                                        fileName="flatmap.ts"
+                                        language="typescript"
+                                        content={codeSnippets.flatMap}
+                                    />
+                                </>
+                            ),
+                        },
+                        {
+                            key: 'Unit',
+                            content: (
+                                <>
+                                    <Paragraph>
+                                        <Typography weight="bold">Unit</Typography> or pure
+                                        operation is a way to lift a value into a Monadic context.
+                                        It takes a non-monadic value and wraps it inside a Monad,
+                                        thus introducing it to the computational context of the
+                                        Monad. This operation is essential for constructing Monadic
+                                        values from regular values. For the complete list of monadic
+                                        constructors please refer the official monet.js
+                                        documentation.
+                                        <InlineReference reference={references[7]} />
+                                    </Paragraph>
+                                    <Code
+                                        fileName="constructors.ts"
+                                        language="typescript"
+                                        content={codeSnippets.constructor}
+                                    />
+                                </>
+                            ),
+                        },
                     ]}
                 />
             </Section>

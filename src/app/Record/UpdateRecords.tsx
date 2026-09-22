@@ -1,3 +1,4 @@
+import { Heading, Main } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
 interface UpdateRecordsProps {
@@ -13,9 +14,9 @@ export const UpdateRecords = ({ path }: UpdateRecordsProps) => {
             variant="app"
             pageName="Update Records"
         >
-            <main>
-                <h1>Update Records</h1>
-            </main>
+            <Main>
+                <Heading as="h1">Update Records</Heading>
+            </Main>
         </Screen>
     )
 }

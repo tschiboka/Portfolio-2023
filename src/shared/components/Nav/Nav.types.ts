@@ -23,7 +23,7 @@ export type SubmenuState = {
 export type NavProps = AccessibleProps &
     InteractiveProps & {
         visible?: boolean
-        children: ReactNode
+        children: ReactNode[]
         logo?: ReactNode
         burger?: ReactNode
     }

@@ -10,7 +10,7 @@ import { VisitRepository } from './Visit.repository'
 import { VisitSchema } from './Visit.schema'
 import type { VisitInput } from './Visit.types'
 
-/** Business logic for visits â€” persistence via the repository, validation via the schema. */
+/** Business logic for visits - persistence via the repository, validation via the schema. */
 export const VisitService = {
     /** Returns visits grouped by path, plus the paths that have at least one visit. */
     summary: async (): Promise<GetVisitSummaryResponse> => {

@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Xmas2025 } from '../Xmas2025'
-import { handlers } from './Xmas2025.mockHandles'
+import { handlers } from './Xmas2025.mockHandlers'
 import { mockUser } from './Xmas2025.mocks'
 
 const setupXmas2025 = () => {
@@ -101,7 +101,7 @@ describe('Xmas2025', () => {
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
-                expect(Test.Typography(/Min 4 chars/)).toBeDefined()
+                expect(Test.Typography(/Name must be at least 4 characters/)).toBeDefined()
             })
         })
 
@@ -111,7 +111,7 @@ describe('Xmas2025', () => {
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
-                expect(Test.Typography(/Required/)).toBeDefined()
+                expect(Test.Typography(/Message is required/)).toBeDefined()
             })
         })
 
@@ -121,7 +121,7 @@ describe('Xmas2025', () => {
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
-                expect(Test.Typography(/Only alphanumerics/)).toBeDefined()
+                expect(Test.Typography(/Name allows only alphanumerics/)).toBeDefined()
             })
         })
 
@@ -136,7 +136,7 @@ describe('Xmas2025', () => {
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
-                expect(Test.Typography(/Max 50 chars/i)).toBeDefined()
+                expect(Test.Typography(/Message must be under 50 characters/)).toBeDefined()
             })
         })
     })

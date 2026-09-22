@@ -1,4 +1,5 @@
 import { Screen } from '@shared-components/Screen/Screen'
+import { Heading } from '@common-ux'
 
 interface EventsProp {
     path: string
@@ -13,7 +14,7 @@ export const Events = ({ path }: EventsProp) => {
             variant="app"
             pageName="Events"
         >
-            <h1>Events</h1>
+            <Heading as="h1">Events</Heading>
         </Screen>
     )
 }

@@ -1,4 +1,4 @@
-import { Link } from '@common-ux'
+import { Link, List } from '@common-ux'
 import { MenuItem } from '../Nav.types'
 import { isActive } from '../Nav.utils'
 
@@ -10,15 +10,17 @@ type MenuAccordionProps = {
 const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
     return (
         items && (
-            <ul className="MenuAccordion">
-                {items.map((item) => (
-                    <li key={item.label}>
+            <List
+                className="MenuAccordion"
+                items={items.map((item) => ({
+                    key: item.label,
+                    content: (
                         <Link to={item?.path || ''}>
                             <span className={isActive(item.label, pageName)}>{item.label}</span>
                         </Link>
-                    </li>
-                ))}
-            </ul>
+                    ),
+                }))}
+            />
         )
     )
 }

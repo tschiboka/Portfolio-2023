@@ -5,10 +5,17 @@ import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
-import { settings, standards } from './rules/dist/standards.config.js'
+import { scopes, settings, standards } from './rules/dist/standards.config.js'
 
 /** Repo root. `import.meta.dirname` needs Node 20.11+, which the editor's server may not be. */
 const rootDir = dirname(fileURLToPath(import.meta.url))
+
+/** One config block per scoped rule, so `scope` in the registrar binds the rule to its files. */
+const scopedRules = Object.entries(scopes).map(([ruleId, scope]) => ({
+    files: scope.include,
+    ignores: scope.exclude,
+    rules: { [ruleId]: settings[ruleId] },
+}))
 
 export default tseslint.config(
     { ignores: ['server/**', 'public/**', 'dist/**', '.github/**'] },
@@ -36,7 +43,6 @@ export default tseslint.config(
                 'error',
                 { checksVoidReturn: { attributes: false } },
             ],
-            ...settings,
         },
     },
     {
@@ -44,4 +50,5 @@ export default tseslint.config(
         languageOptions: { parserOptions: { projectService: false, project: false } },
         rules: { '@typescript-eslint/no-var-requires': 'off' },
     },
+    ...scopedRules,
 )

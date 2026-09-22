@@ -27,4 +27,4 @@ npm run lint     # ESLint
 ## Documentation
 
 Engineering notes and feature plans live in [`docs/`](docs/README.md).
-Architecture and conventions are in [`ARCHITECTURE.md`](ARCHITECTURE.md) and [`AGENTS.md`](AGENTS.md).
+Conventions are in [`AGENTS.md`](AGENTS.md) and the skills in [`.github/skills/`](.github/skills/).

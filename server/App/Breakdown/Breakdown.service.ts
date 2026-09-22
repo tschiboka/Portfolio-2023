@@ -5,7 +5,7 @@ import { BreakdownBatchLimits } from './Breakdown.constants'
 import { buildBreakdownOperations, mergeBreakdownCounts } from './Breakdown.utils'
 
 /**
- * Business logic for daily breakdowns â€” aggregates all existing visit and like records by
+ * Business logic for daily breakdowns - aggregates all existing visit and like records by
  * (date, path) and upserts them into the breakdown collection. Safe to call repeatedly.
  */
 export const BreakdownService = {

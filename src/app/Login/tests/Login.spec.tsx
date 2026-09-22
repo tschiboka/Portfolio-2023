@@ -3,7 +3,7 @@ import { Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
 import { mockSetSession, mockUser, defaultSettings } from './Login.mocks'
-import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandles'
+import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandlers'
 import { LoginLabels } from './Login.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = LoginLabels

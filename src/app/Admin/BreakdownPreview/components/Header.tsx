@@ -1,10 +1,10 @@
-import { Icon } from '@common-ux'
+import { Heading, Icon, Paragraph } from '@common-ux'
 import { BreakdownPreviewConstants } from '../BreakdownPreview.constants'
 import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 
 export const Header = () => (
     <div className="bp-header" style={BreakdownPreviewStyles.header.style}>
-        <h2 style={BreakdownPreviewStyles.header.title}>
+        <Heading as="h2" style={BreakdownPreviewStyles.header.title}>
             <Icon
                 name="chart"
                 size={BreakdownPreviewConstants.icon.chart.size}
@@ -12,7 +12,7 @@ export const Header = () => (
                 style={BreakdownPreviewStyles.header.icon}
             />
             Daily Breakdown Report
-        </h2>
-        <p style={BreakdownPreviewStyles.header.sub}>Automated analytics summary</p>
+        </Heading>
+        <Paragraph style={BreakdownPreviewStyles.header.sub}>Automated analytics summary</Paragraph>
     </div>
 )

@@ -1,7 +1,7 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import './Tasks.scss'
 import { useForm } from 'react-hook-form'
-import { Form } from '@common-ux'
+import { Form, Heading, Main, Paragraph } from '@common-ux'
 
 interface TaskProps {
     path: string
@@ -26,43 +26,43 @@ export const Tasks = ({ path }: TaskProps) => {
             variant="app"
             pageName="Tasks"
         >
-            <main className="Tasks">
-                <h1>Tasks</h1>
-                <p>
+            <Main className="Tasks">
+                <Heading as="h1">Tasks</Heading>
+                <Paragraph>
                     Your tasks may include work related actions or any other chores that you wish to
                     record. Do bear in mind that tasks are individual actions that may have
                     deadlines or alarms associated, and tasks are suitable for actions that do not
                     repeat. For reoccuring tasks, you may wish to set up an activity instead.
-                </p>
-                <h2>Set up a new task</h2>
+                </Paragraph>
+                <Heading as="h2">Set up a new task</Heading>
                 <div className="form-container">
-                    <form>
-                        <fieldset>
-                            <label htmlFor="taskName">Task name</label>
+                    <Form>
+                        <Form.Fieldset>
+                            <Form.Label for="taskName">Task name</Form.Label>
                             <Form.Input
                                 name="taskName"
                                 control={control}
                                 type="text"
                                 placeholder="Important task"
                             />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="activityType">Type</label>
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="activityType">Type</Form.Label>
                             <Form.Input name="activityType" control={control} type="text" />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="deadline">Deadline</label>
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="deadline">Deadline</Form.Label>
                             <Form.Input name="deadline" control={control} type="text" />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="alarm">Alarm</label>
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="alarm">Alarm</Form.Label>
                             <Form.Input name="alarm" control={control} type="text" />
-                        </fieldset>
+                        </Form.Fieldset>
                         <Form.Button type="submit">Submit</Form.Button>
-                    </form>
+                    </Form>
                 </div>
-                <h2>See previously set tasks</h2>
-            </main>
+                <Heading as="h2">See previously set tasks</Heading>
+            </Main>
         </Screen>
     )
 }

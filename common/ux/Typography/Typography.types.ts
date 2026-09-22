@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import type { AccessibleProps, InteractiveProps } from '../index.types'
 
 export type TypographyElement =
@@ -26,12 +27,13 @@ export type TypographyDecoration = 'underline' | 'line-through' | 'none'
 export type TypographyTransform = 'uppercase' | 'lowercase' | 'capitalize' | 'none'
 export type CaptureElement = 'span' | 'p' | 'figcaption'
 
-// Uses Pick (not Omit) on AccessibleProps to intentionally exclude `style` —
-// all visual control flows through the Typography prop API (size, weight, tone, etc.)
-// to prevent inline style abuse.
+// Uses Pick (not Omit) on AccessibleProps to control the surface explicitly.
+// Visual control defaults to the Typography prop API (size, weight, tone, etc.);
+// `style` is permitted for the values that API does not express.
 type TypographyBaseProps = Pick<AccessibleProps, 'ariaLabel' | 'className'> &
     InteractiveProps & {
         id?: string
+        style?: CSSProperties
         size?: TypographySize
         weight?: TypographyWeight
         align?: TypographyAlign
@@ -56,14 +58,24 @@ export type BlockQuoteProps = TypographyBaseProps
 export type OverlineProps = Omit<TypographyBaseProps, 'size'>
 
 export type ListType = 'ul' | 'ol'
+
+/** A list item: its content, plus the attributes `List` puts on the generated `<li>`. */
+export type ListItem =
+    | string
+    | number
+    | {
+          content: React.ReactNode
+          key?: string
+          className?: string
+      }
+
 export type ListProps = Pick<
     TypographyBaseProps,
     'size' | 'weight' | 'align' | 'tone' | 'family' | 'ariaLabel' | 'className'
 > &
     InteractiveProps & {
         as?: ListType
-        items: React.ReactNode[]
-        children?: React.ReactNode
+        items: ListItem[]
     }
 
 export interface InlineReferenceSource {

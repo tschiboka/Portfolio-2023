@@ -1,148 +1,141 @@
 ---
-name: 'ui'
-kind: 'area'
-stack: 'react, css, scss'
-description: 'How a component looks and behaves. Layout, spacing, styling, responsive behaviour, animation, and the generic interaction patterns the app reuses.'
+name: ui
+access: write
+stack: 'react, typescript, css, scss'
+description: 'Creating and structuring UI components, from screens and feature components to reusable shared components, including styling and layout.'
 ---
 
-# UI
-
-Looks and behaviour. `component` decides what a thing _is_; this decides how it
-appears and how it responds.
-
-No code here — every claim points at an example file beside this one.
+# /ui
 
 ## When to use
 
-- Styling a feature, or a component inside one.
-- Choosing between a style object, a class, a token and a literal.
-- Adding a breakpoint or a responsive rule.
-- Reaching for `common/ux` instead of writing your own.
+- Creating a feature, screen, or shared component.
+- Decomposing or extracting UI, including choosing shared versus custom.
+- Styling, laying out, or adding responsive behaviour.
+- Wiring a screen into the router.
 
-## Scope of Expertise / Domain
+## Scope
 
-Owns appearance: spacing, colour, typography, layout, breakpoints, transition and
-animation. Not structure — which file a thing lives in is `component` — and not
-behaviour under test, which is `test`.
+Owns UI structure, composition, layout, styling, accessibility, context, and
+screen routing.
+
+Does not own data or requests (`queries`), persistence (`db`), endpoints
+(`router`), or tests (`test`).
+
+## Rules
+
+### Reuse
+
+- Check `@common` before creating custom UI.
+- Prefer existing components such as `<Stack />`, `<Grid />` and `<Typography />`.
+- Generalise reusable components and patterns early.
+- Generic components and styles belong in `@common`.
+
+### Components
+
+- Screens, feature components and shared components follow the same component principles.
+- Extract when there is a clear name, boundary and reason.
+- Props stay with their component.
+- Named exports only. No default exports.
+- Do not create empty role files.
+
+### Styling
+
+- Feature styling defaults to `<Feature>.styles.ts` with one styles object.
+- Common UI uses CSS. Do not introduce SCSS into `@common`.
+- SCSS is retiring. Add `<Feature>.styles.scss` only when CSS-in-TS cannot express the required selector, pseudo-class or media query.
+- Every value comes from `Const`, a styling index, or a justified literal.
+- Breakpoints come from `Const.Breakpoint`.
+- Feature SCSS uses a feature prefix and is imported by its consumer.
+
+### Context
+
+- Put context at the smallest required scope: app, feature or component.
+- `<Feature>.context.ts` declares the context; `<Feature>.provider.tsx` owns state, effects and the provider.
+- Use `ContextBuilder.CreateContext<T>()` from `@common-utils`.
+- Wrap the feature root. Nothing below reads the context directly.
+
+### Accessibility
+
+- Every interactive control has its own accessible name.
+- Use semantic elements before ARIA.
+- `role` and `aria-*` belong on the element they describe.
+- Use ARIA attributes for extended accessibility.
+
+## Workflow
+
+1. Identify the UI scope: screen, feature or shared component.
+2. Check `@common` for reusable components and patterns.
+3. Define the component boundary and extract reusable UI where appropriate.
+4. Add context only when state is shared by the component tree.
+5. Style with `<Feature>.styles.ts`; add SCSS only when required.
+6. Register the route for screens.
+7. Hand data, behaviour and tests to their specialist skills.
 
 ## File structure
 
 ```text
-Feature/
-├── Feature.styles.ts     ← CSSProperties, keyed like the markup
-├── Feature.styles.scss   ← classes and media queries only
-└── components/
-    └── ComponentFoo.tsx  ← consumes both
+<Feature>/
+├── <Feature>.tsx
+├── <Feature>.types.ts
+├── <Feature>.styles.ts
+├── <Feature>.selectors.ts
+├── <Feature>.utils.ts
+├── <Feature>.context.ts
+├── <Feature>.provider.tsx
+├── components/
+│   └── index.ts
+├── index.ts
+└── tests/
 ```
 
-## Methodology
-
-### Every value comes from a source
-
-No raw hex, no bare pixel, no ad-hoc colour. Values arrive three ways:
-
-| Source                    | For                                                                  | Example                                    |
-| ------------------------- | -------------------------------------------------------------------- | ------------------------------------------ |
-| `Const` from `@common-ux` | the design system — colour ramps, spacing, font, breakpoint, z-index | `Const.Spacing[8]`, `Const.Color.White[4]` |
-| A styling _index_         | large bespoke sets a feature needs beyond `Const`                    | the feature's own index module             |
-| A literal                 | nothing else fits — genuinely local, genuinely one-off               | `maxWidth: '600px'`                        |
-
-`Const` is the default and covers most of it. Reach for a styling index when a
-feature has a set too large or too specific for the ramp — and if you reach for a
-literal, say why in the code.
-
-Reference: [`Feature.styles.ts`](./Feature.styles.ts)
-
-### The style object
-
-`Feature.styles.ts` exports one `<Feature>Styles` object. Its keys mirror the
-markup — `shell`, `card`, `header.title` — each holding a `CSSProperties`, so a
-consumer reads exactly the path it renders.
-
-Static property values live here: everything a `CSSProperties` object can hold.
-
-Reference: [`Feature.styles.ts`](./Feature.styles.ts)
-
-### The class, and what only CSS can do
-
-A class and a style object sit on the same element and do different jobs.
-`Feature.styles.scss` holds what a `CSSProperties` object **cannot**:
-
-- media queries and `@supports`
-- pseudo-classes and pseudo-elements
-- selectors reaching past the element
-
-Everything else is the object. A class is the hook for CSS the object can't
-express — not a second place to put properties the object already holds.
-
-Class names are prefixed by the feature — `bp-` for `BreakdownPreview` — so a
-feature's rules cannot collide with another's.
-
-The component that uses the classes imports the `.scss` itself.
-
-Reference: [`components/ComponentFoo.tsx`](./components/ComponentFoo.tsx)
-
-### Responsive
-
-Breakpoints come from `Const.Breakpoint`. Set them up once, in the `.scss`, as a
-named set of overrides rather than touching every declaration.
-
-A media query cannot read `Const` — the value is written into the `.scss` by hand.
-That is the one place a raw number is correct.
-
-Reference: [`Feature.styles.scss`](./Feature.styles.scss)
-
-### Generic before custom
-
-`common/ux` holds the shared components — `Button`, `Layout`, `Overlay`, `Pill`,
-`Region`, `Table`, `Toggle`, `Typography` and the rest. Reach for one before
-styling a bespoke equivalent, and extend `common/ux` rather than forking it.
-
-Reference: [`Feature.styles.ts`](./Feature.styles.ts)
+Add files only when their role exists. `<Feature>.styles.scss` is exceptional
+and retiring.
 
 ## Files and folders
 
-### `Feature.styles.ts`
+### `<Feature>.tsx`
 
-Naming convention: `<Feature>.styles.ts`, beside the primary file.
-Return type: one `<Feature>Styles` object of `CSSProperties`.
-Example: [`Feature.styles.ts`](./Feature.styles.ts)
+Named after the folder, PascalCase. Primary component; named export, props stay
+here.
+
+### `<Feature>.selectors.ts`
+
+Returns `get<Thing>` / `select<Prop>` functions that turn the feature's own state
+or props into a rendered value — a class name, an alignment, a label.
+Example: [`Feature.selectors.ts`](./Feature.selectors.ts)
+
+- It knows the feature's vocabulary; a helper that does not belongs in `utils.ts`.
+- It holds no values — `styles.ts` says what a property is, a selector says which one applies.
+
+### `<Feature>.utils.ts`
+
+Generic helpers for this feature only. No knowledge of the component's props,
+class names or rendered output.
+
+### `<Feature>.context.ts`
+
+Returns the context from `ContextBuilder.CreateContext<T>('Feature', initialValues)`
+— its `Use` throws outside the provider. Declares the initial shape only; no JSX
+or state.
+
+### `<Feature>.provider.tsx`
+
+Returns `<Feature>Provider`, taking `{ children }`. Owns the state, effects and
+wrapping of the feature root.
+
+### `components/`
+
+Presentational parts used only by the feature. If a part could serve another
+feature, it belongs in `@common` instead.
+
+Example: [`components/index.ts`](./components/index.ts)
+
+### `index.ts`
+
+The barrel for the feature — nothing outside reaches past it into a sibling file.
+
+Example: [`index.ts`](./index.ts)
 Rules:
 
-- Every value from `Const`, a styling index, or a justified literal.
-- Keys mirror the markup, nested as deep as the consumer reads.
-- Static properties only — nothing CSS alone can do.
-
-### `Feature.styles.scss`
-
-Naming convention: `<Feature>.styles.scss`, beside the styles object.
-Return type: class rules under the feature's prefix.
-Example: [`Feature.styles.scss`](./Feature.styles.scss)
-Rules:
-
-- Media queries, pseudo-classes, pseudo-elements, descendant selectors — nothing
-  a `CSSProperties` object already covers.
-- One prefix per feature, used on every class.
-
-### `components/ComponentFoo.tsx`
-
-Naming convention: consumes both, via the styles object and a class.
-Return type: unchanged — `component` owns its shape.
-Example: [`components/ComponentFoo.tsx`](./components/ComponentFoo.tsx)
-Rules:
-
-- `style={FeatureStyles.x.y}` for static values.
-- `className="prefix-element"` only where CSS is needed.
-
-## Rules
-
-- **Every value has a source.** `Const` first; a styling index when the set
-  outgrows it; a literal only with a stated reason.
-- **One `<Feature>Styles` object**, keys mirroring the markup.
-- **The object holds static properties only** — media queries, pseudo-classes and
-  descendant selectors go in the `.scss`.
-- **One class prefix per feature.**
-- **The component imports its own `.scss`** — an unimported stylesheet does nothing.
-- **Breakpoints come from `Const.Breakpoint`**, written into the `.scss` by hand.
-- **`common/ux` before custom.** Extend the shared component, never fork it.
-- **A component's structure is not this skill's business** — that is `component`.
+- Exports are **alphabetical by exported symbol**, types last as `export type`.

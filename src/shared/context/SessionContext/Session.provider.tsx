@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SessionContext } from './Session.context'
 import type { Session, SessionContextValues } from './SessionContext.types'
 import { LocalSession } from './LocalSession'
-import { SessionQueries } from './Session.query'
+import { SessionQueries } from './Session.queries'
 
 type SessionContextProviderProps = {
     children: React.ReactNode

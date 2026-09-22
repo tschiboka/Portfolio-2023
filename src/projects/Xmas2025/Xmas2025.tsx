@@ -1,13 +1,13 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { useGetMessages, useGetPagePingData, usePostMessage } from './Xmas2025.queries'
 import { useEffect, useState } from 'react'
-import { Form, LoadingIndicator } from '@common-ux'
+import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { xmasSchema } from './Xmas2025.schema'
+import { XmasSchema } from './Xmas2025.schema'
 import { XmasFormData } from './Xmas2025.types'
+import { XmasTransformers } from './Xmas2025.transformers'
 import { LogoutHooks } from '../../app/Logout/Logout.hooks'
-import { xmasTransformer } from './Xmas2025.transformers'
 import Reindeer from '@projects/assets/xmas/reindeer.png'
 import XmasFormCanvas from './XmasFormCanvas'
 import { MessageWall } from './MessageWall'
@@ -30,7 +30,7 @@ export const Xmas2025 = () => {
             name: user?.userName || '',
             message: '',
         },
-        resolver: yupResolver(xmasSchema),
+        resolver: yupResolver(XmasSchema),
         mode: 'onSubmit',
     })
 
@@ -46,7 +46,7 @@ export const Xmas2025 = () => {
 
     const logout = LogoutHooks.useLogout()
     const submitHandler = (data: XmasFormData) =>
-        user ? submitMessage(xmasTransformer.toApi(data, user)) : logout()
+        user ? submitMessage(XmasTransformers.Post(data, user)) : logout()
 
     useEffect(() => {
         const loadingMessage = pingResponse.isLoading && 'LOADING...'
@@ -78,40 +78,44 @@ export const Xmas2025 = () => {
             className="Xmas"
             variant="app"
             pageName="Xmas"
-            footerProps={{ info: <p>Page ping message: {pagePingStatus}</p> }}
+            footerProps={{
+                info: <Paragraph>Page ping message: {pagePingStatus}</Paragraph>,
+            }}
         >
-            <main>
+            <Main>
                 <img className="reindeer-image" src={Reindeer} alt="Reindeer Image" />
                 <XmasFormCanvas lightCount={30} lightSize={6}>
-                    <form onSubmit={handleSubmit(submitHandler)}>
-                        <fieldset>
-                            <label htmlFor="name">Name</label>
+                    <Form onSubmit={handleSubmit(submitHandler)}>
+                        <Form.Fieldset>
+                            <Form.Label for="name">Name</Form.Label>
                             <Form.Input name="name" control={control} type="text" />
-                        </fieldset>
-                        <fieldset>
-                            <label htmlFor="message">Message</label>
+                        </Form.Fieldset>
+                        <Form.Fieldset>
+                            <Form.Label for="message">Message</Form.Label>
                             <Form.Input name="message" control={control} type="text" />
-                        </fieldset>
+                        </Form.Fieldset>
                         <LoadingIndicator show={submitMessageResponse.isPending} />
                         {submitMessageResponse.isError && (
-                            <p className="submit-error-message">
+                            <Paragraph className="submit-error-message">
                                 {submitMessageResponse.error?.message}
-                            </p>
+                            </Paragraph>
                         )}
                         {submitMessageResponse.isSuccess && (
-                            <p className="submit-success-message">Successful submission</p>
+                            <Paragraph className="submit-success-message">
+                                Successful submission
+                            </Paragraph>
                         )}
                         <div className="button-box">
-                            <button name="submit">Submit</button>
+                            <Form.Button type="submit">Submit</Form.Button>
                         </div>
-                    </form>
+                    </Form>
                 </XmasFormCanvas>
-                <h2>Candles</h2>
+                <Heading as="h2">Candles</Heading>
                 <CandlePanel />
-                <p>Click on a candle to mess up my candle settings.</p>
+                <Paragraph>Click on a candle to mess up my candle settings.</Paragraph>
                 <MessageWall messages={messages?.data.data} />
                 <YourMessages messages={messages?.data.data} />
-            </main>
+            </Main>
         </Screen>
     )
 }

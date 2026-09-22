@@ -1,3 +1,4 @@
+import { List } from '@common-ux/Typography/List'
 import AchievementListItem from '../AchievementListItem/AchievementListItem'
 import Achievement from '../AchievementListItem/Achievements'
 import './AchievementList.scss'
@@ -8,11 +9,13 @@ interface Props {
 
 const AchievementList = ({ achievements }: Props) => {
     return (
-        <ul className="AchievementList">
-            {achievements.map((achievement) => (
-                <AchievementListItem key={achievement.title} achievement={achievement} />
-            ))}
-        </ul>
+        <List
+            className="AchievementList"
+            items={achievements.map((achievement) => ({
+                key: achievement.title,
+                content: <AchievementListItem achievement={achievement} />,
+            }))}
+        />
     )
 }
 

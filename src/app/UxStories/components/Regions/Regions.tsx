@@ -49,10 +49,10 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Paragraph>
                 <Stack.Vertical gap="16">
                     <Card ariaLabel="Basic card">
-                        <p>Card content goes here.</p>
+                        <Paragraph>Card content goes here.</Paragraph>
                     </Card>
                     <Card ariaLabel="Summary" title="Summary" icon={<FaChartBar />}>
-                        <p>Monthly usage overview.</p>
+                        <Paragraph>Monthly usage overview.</Paragraph>
                     </Card>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Card.basic} />
@@ -68,13 +68,13 @@ export const Regions = ({ path }: RegionsProps) => (
                 </Paragraph>
                 <Stack.Vertical gap="16">
                     <Section title="Details" ariaLabel="Details">
-                        <p>Section content is always visible.</p>
+                        <Paragraph>Section content is always visible.</Paragraph>
                     </Section>
                     <Section title="Advanced" expandable ariaLabel="Advanced" icon={<FaCog />}>
-                        <p>This section can be toggled open and closed.</p>
+                        <Paragraph>This section can be toggled open and closed.</Paragraph>
                     </Section>
                     <Section title="Collapsed" expandable defaultOpen={false} ariaLabel="Collapsed">
-                        <p>Starts collapsed — click the header to expand.</p>
+                        <Paragraph>Starts collapsed — click the header to expand.</Paragraph>
                     </Section>
                 </Stack.Vertical>
                 <Code language="tsx" content={Snippets.Section.static} />
@@ -92,7 +92,7 @@ export const Regions = ({ path }: RegionsProps) => (
                     <CodeText>Overlay</CodeText> for backdrop and focus trapping.
                 </Paragraph>
                 <Dialog ariaLabel="Confirm action">
-                    <p>Are you sure you want to proceed?</p>
+                    <Paragraph>Are you sure you want to proceed?</Paragraph>
                 </Dialog>
                 <Code language="tsx" content={Snippets.Dialog.basic} />
             </Box>
@@ -114,9 +114,9 @@ export const Regions = ({ path }: RegionsProps) => (
                 >
                     <Sidebar ariaLabel="App navigation">
                         <nav>
-                            <p>Home</p>
-                            <p>About</p>
-                            <p>Contact</p>
+                            <Paragraph>Home</Paragraph>
+                            <Paragraph>About</Paragraph>
+                            <Paragraph>Contact</Paragraph>
                         </nav>
                     </Sidebar>
                 </Box>
@@ -162,8 +162,8 @@ export const Regions = ({ path }: RegionsProps) => (
                     }}
                 >
                     <Main ariaLabel="Page content" style={{ padding: '1rem' }}>
-                        <h3>Welcome</h3>
-                        <p>Primary content area.</p>
+                        <Heading as="h3">Welcome</Heading>
+                        <Paragraph>Primary content area.</Paragraph>
                     </Main>
                 </Box>
                 <Code language="tsx" content={Snippets.Main.basic} />

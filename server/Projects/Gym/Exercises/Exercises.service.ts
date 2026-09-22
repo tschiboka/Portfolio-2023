@@ -11,7 +11,7 @@ import { ExercisesPermissions } from './Exercises.permissions'
 import { ExerciseSchema } from './Exercises.schema'
 import type { ExerciseValidationInput } from './Exercises.types'
 
-/** Business logic for exercises â€” persistence via the repository, authorisation via permissions. */
+/** Business logic for exercises - persistence via the repository, authorisation via permissions. */
 export const ExercisesService = {
     /** Lists canonical exercises plus the requesting user's own private ones. */
     listVisibleTo: async (user: CurrentUser): Promise<GymExerciseResource[]> => {

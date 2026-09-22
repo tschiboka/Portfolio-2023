@@ -5,7 +5,7 @@ import { Home } from '../Home'
 import {
     pageSideMenuHandlers,
     handlePostLike,
-} from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandles'
+} from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupHome = () => {
     TestScreen.Do.render({

@@ -22,7 +22,7 @@ const usePostLike = () => {
 
 /** Reads the like count for one page path. */
 const useGetLikes = (path: string) => {
-    const request = Query.FeatureQuery().path('Like').build()
+    const request = Query.FeatureQuery().path('Like').query({ path }).build()
 
     return useQuery<GetLikeResponse, AxiosError<ErrorResponse>>({
         ...request.Get<GetLikeResponse>(QueryKey.Likes.byFilters({ path }).build()),

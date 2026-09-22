@@ -1,5 +1,6 @@
 import { LikesQueries } from '@shared-queries'
 import { AiFillHeart } from 'react-icons/ai'
+import { Paragraph } from '@common-ux'
 import './LikeButton.scss'
 
 interface Props {
@@ -15,7 +16,7 @@ const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
     return (
         <div className="LikeButton">
             <hr />
-            <p>Like What You Read? Show Me Your Support!</p>
+            <Paragraph>Like What You Read? Show Me Your Support!</Paragraph>
             <div
                 className="LikeButton__button-wrapper"
                 onClick={(event) => {

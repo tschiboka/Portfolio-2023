@@ -6,7 +6,7 @@ import { CategoryRepository } from './Category.repository'
 import { CategorySchema } from './Category.schema'
 import type { ICategory } from './Category.types'
 
-/** Business logic for categories â€” persistence via the repository, validation via the schema. */
+/** Business logic for categories persistence via the repository, validation via the schema. */
 export const CategoryService = {
     /**
      * Lists the requesting user's categories. When `isParent` is set, returns only parent

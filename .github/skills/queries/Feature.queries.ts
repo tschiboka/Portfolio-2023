@@ -1,9 +1,16 @@
 // @ts-nocheck — skill example, outside the tsconfig include.
 
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { ClientMessage, ErrorResponse, Query, QueryKey, errorMessage } from '@common-utils'
+import {
+    ClientMessage,
+    ErrorResponse,
+    Query,
+    QueryKey,
+    errorMessage,
+    isTruthy,
+} from '@common-utils'
 import { Session } from '@shared-context'
-import { featureTransformer } from './Feature.transformers'
+import { FeatureTransformers } from './Feature.transformers'
 import type {
     GetFeatureResponse,
     GetFeatureSubfeatureResponse,
@@ -19,7 +26,7 @@ const useGet = (path: string) => {
 
     return useQuery<GetFeatureResponse, AxiosError<ErrorResponse>>({
         ...request.Get<GetFeatureResponse>(QueryKey.Feature.byFilters({ filter1: path }).build()),
-        enabled: Boolean(path),
+        enabled: isTruthy(path),
     })
 }
 
@@ -33,7 +40,7 @@ const useGetSubfeature = () => {
     )
 }
 
-type UsePost = { onSuccess?: () => void; onError?: (error: AxiosError<ErrorResponse>) => void }
+type UsePost = { onSuccess?: VoidFunction; onError?: (error: AxiosError<ErrorResponse>) => void }
 
 /** Authenticated write — callbacks spread, so a caller can override. */
 const usePost = ({ onSuccess, onError }: UsePost) => {
@@ -47,7 +54,7 @@ const usePost = ({ onSuccess, onError }: UsePost) => {
 }
 
 type UsePostForm = {
-    onSuccess?: () => void
+    onSuccess?: VoidFunction
     onError?: (error: AxiosError<ErrorResponse>) => void
     setField?: (field: string) => void
 }
@@ -62,7 +69,7 @@ const usePostForm = ({ onSuccess, onError, setField }: UsePostForm = {}) => {
 
     return useMutation<PostFeatureResponse, AxiosError<ErrorResponse>, FeatureFormData>({
         mutationFn: (data: FeatureFormData) =>
-            request.post<PostFeatureResponse>(featureTransformer.toApi(data)),
+            request.post<PostFeatureResponse>(FeatureTransformers.Post(data)),
         onSuccess,
         onError: (error) => {
             setField?.(errorMessage(error, ClientMessage.Failure.Create('feature')))

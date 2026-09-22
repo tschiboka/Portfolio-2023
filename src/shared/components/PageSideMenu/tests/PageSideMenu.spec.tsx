@@ -7,7 +7,7 @@ import {
     handleGetLikes,
     handleGetVisits,
     handlePostLike,
-} from './PageSideMenu.mockHandles'
+} from './PageSideMenu.mockHandlers'
 import { mockLikesWithCount, mockVisitsWithCount } from './PageSideMenu.mocks'
 
 const setupPageSideMenu = () => {
@@ -156,7 +156,7 @@ describe('Close menu', () => {
         await menu.Do.close()
 
         await waitFor(() => {
-            expect(screen.getByTitle('Open Menu')).toBeInTheDocument()
+            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument()
         })
     })
 
@@ -169,7 +169,7 @@ describe('Close menu', () => {
             expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
         })
 
-        await Accessor.user.click(screen.getByTitle('Open Menu'))
+        await Accessor.user.click(screen.getByRole('button', { name: 'Open Menu' }))
 
         await waitFor(() => {
             expect(screen.getByRole('complementary')).toBeInTheDocument()
@@ -182,13 +182,13 @@ describe('Close menu', () => {
         await menu.Do.close()
 
         await waitFor(() => {
-            expect(screen.getByTitle('Open Menu')).toBeInTheDocument()
+            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument()
         })
 
-        await Accessor.user.click(screen.getByTitle('Open Menu'))
+        await Accessor.user.click(screen.getByRole('button', { name: 'Open Menu' }))
 
         await waitFor(() => {
-            expect(screen.queryByTitle('Open Menu')).not.toBeInTheDocument()
+            expect(screen.queryByRole('button', { name: 'Open Menu' })).not.toBeInTheDocument()
         })
     })
 })

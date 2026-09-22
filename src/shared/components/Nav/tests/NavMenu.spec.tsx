@@ -95,7 +95,7 @@ describe('NavMenu', () => {
                 onSubmenuToggle,
             })
 
-            const toggle = screen.getByTitle('Toggle Submenu Visibility')
+            const toggle = screen.getByLabelText('Toggle Submenu Visibility')
             expect(toggle).toBeInTheDocument()
 
             await TestNav().Do.toggle('Toggle Submenu Visibility')

@@ -1,3 +1,4 @@
+import { Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
 interface ActivitiesProps {
@@ -13,7 +14,7 @@ export const Activities = ({ path }: ActivitiesProps) => {
             variant="app"
             pageName="Activities"
         >
-            <h1>Activities</h1>
+            <Heading as="h1">Activities</Heading>
         </Screen>
     )
 }

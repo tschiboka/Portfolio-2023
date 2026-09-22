@@ -1,2 +1,2 @@
-export { BaseTransformer } from './BaseTransformer'
 export { ApiTransformers } from './ApiTransformers'
+export { ClientTransformers } from './ClientTransformers'

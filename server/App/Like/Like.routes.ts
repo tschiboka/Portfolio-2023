@@ -5,7 +5,7 @@ import type { GetLikeReq, GetLikeRes, PostLikeReq, PostLikeRes } from './Like.ty
 
 const router = express.Router()
 
-// GET /api/like?path= â€” per-path count when `path` is given, otherwise the grouped summary.
+// GET /api/like?path= per-path count when `path` is given, otherwise the grouped summary.
 router.get('/', async (req: GetLikeReq, res: GetLikeRes) => {
     const data = req.query.path
         ? await LikeService.countByPath(req.query.path)
@@ -13,7 +13,7 @@ router.get('/', async (req: GetLikeReq, res: GetLikeRes) => {
     ApiResponder.ok(res, data)
 })
 
-// POST /api/like â€” record a like.
+// POST /api/like — record a like.
 router.post('/', async (req: PostLikeReq, res: PostLikeRes) => {
     const data = await LikeService.create(req.body)
     ApiResponder.created(res, data)

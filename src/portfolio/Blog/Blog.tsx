@@ -3,7 +3,7 @@ import BlogCard from './components/BlogCard/BlogCard'
 import { BlogFilter } from './components/BlogFilter/BlogFilter'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { Screen } from '@shared-components/Screen/Screen'
-import { Heading, Paragraph, Stack, Section } from '@common-ux'
+import { Heading, Paragraph, Stack, Section, Main } from '@common-ux'
 import { hasLength } from '@common-utils'
 import { BsSliders2 } from 'react-icons/bs'
 import {
@@ -15,7 +15,7 @@ import {
 } from './Blog.utils'
 
 import './Blog.scss'
-import { BlogSortBy } from './Blog.type'
+import { BlogSortBy } from './Blog.types'
 import { LikesQueries, VisitsQueries } from '@shared-queries'
 
 interface Props {
@@ -75,7 +75,7 @@ export const Blog = ({ pageName, path }: Props) => {
             pageName={pageName}
             sideMenu={<PageSideMenu />}
         >
-            <main>
+            <Main>
                 <Heading as="h1" className="Blog__title">
                     Blog
                 </Heading>
@@ -128,7 +128,7 @@ export const Blog = ({ pageName, path }: Props) => {
                         </Stack>
                     </>
                 )}
-            </main>
+            </Main>
         </Screen>
     )
 }

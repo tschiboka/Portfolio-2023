@@ -1,7 +1,15 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Form, LoadingIndicator, Table, type SearchInputOption } from '@common-ux'
+import {
+    Form,
+    Heading,
+    LoadingIndicator,
+    Main,
+    Paragraph,
+    Table,
+    type SearchInputOption,
+} from '@common-ux'
 import { ClientMessage, errorMessage } from '@common-utils'
 import type { GetCategoryResponse } from '@common-types'
 import { Screen } from '@shared-components/Screen/Screen'
@@ -40,19 +48,19 @@ export const Categories = ({ path }: CategoriesProps) => {
             variant="app"
             pageName="Categories"
         >
-            <main className="Categories">
-                <h1>Categories</h1>
-                <p>
+            <Main className="Categories">
+                <Heading as="h1">Categories</Heading>
+                <Paragraph>
                     You can set a wide range of categories for your activities. Please note that
                     each tasks and activities must have a category assigned to, and optionally, you
                     set categories for your events as well.
-                </p>
-                <h2>Create a new category</h2>
-                <p>
+                </Paragraph>
+                <Heading as="h2">Create a new category</Heading>
+                <Paragraph>
                     Each category must have a name, a description, an icon and colour. If you don't
                     set your colour, it will be assigned a random one. Your category may also be a
                     parent of other categories, be a child category, or a standalone.
-                </p>
+                </Paragraph>
                 <div className="form-container">
                     <Form
                         onSubmit={handleSubmit(
@@ -174,7 +182,7 @@ export const Categories = ({ path }: CategoriesProps) => {
                     data={categories?.data || []}
                     columns={CategoriesColumns}
                 />
-            </main>
+            </Main>
         </Screen>
     )
 }

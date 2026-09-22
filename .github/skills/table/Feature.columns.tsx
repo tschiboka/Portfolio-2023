@@ -1,11 +1,15 @@
 // @ts-nocheck — skill example, outside the tsconfig include.
 
 import { CodeText } from '@common-ux'
-import { DateTime } from '@common-utils'
+import { DateTime, isNullish } from '@common-utils'
 import type { TableColumns } from '@common-ux'
 import type { FeatureRow } from './Feature.types'
 
-const formatValue = (iso: string) => DateTime.Format.to('DisplayDateTime', iso) ?? iso
+const formatValue = (iso: string) => {
+    const formatted = DateTime.Format.to('DisplayDateTime', iso)
+
+    return isNullish(formatted) ? iso : formatted
+}
 
 export const FeatureColumns: TableColumns<FeatureRow> = [
     {

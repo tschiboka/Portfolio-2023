@@ -1,3 +1,5 @@
+import { Paragraph } from '@common-ux/Typography/Paragraph'
+import { Heading } from '@common-ux/Typography/Heading'
 import { Article } from '../Article'
 // Components
 // import Figure from "../../sharedComponents/Figure/Figure";
@@ -22,18 +24,18 @@ export const __ArticleTemplate__ = ({ pageName, path }: Props) => {
     //const references = getReferenceList(path);
     return (
         <Article pageName={pageName} path={path} title="">
-            <h1>Template Header</h1>
+            <Heading as="h1">Template Header</Heading>
             {/* <Figure
                 image={calendarImg}
                 className={"image--med bg--white"}
                 alt={"Calendar"}
                 zoomAllowed={false}
             /> */}
-            <p>
+            <Paragraph>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet itaque explicabo
                 corrupti! Distinctio placeat repellat, fugiat amet autem temporibus quis officia
                 nobis aperiam accusamus sapiente, aspernatur, molestiae nostrum velit possimus.
-            </p>
+            </Paragraph>
             {/* <Code
                 fileName="validateDate.tsx"
                 language="arduino"

@@ -1,0 +1,18 @@
+.layouts-nested .region--sidebar,
+.layouts-nested .region--main {
+    padding: 8px 16px;
+    background: var(--black-3);
+    border: 1px solid var(--accent-dark-3);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layouts-nested .region--sidebar {
+    width: 120px;
+}
+
+.layouts-nested .region--main {
+    flex: 1;
+}

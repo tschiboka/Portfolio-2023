@@ -6,7 +6,7 @@ import { HiShare } from 'react-icons/hi'
 import { FaEye } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
 import { IoMdClose } from 'react-icons/io'
-import { SideMenu } from '@common-ux'
+import { Button, SideMenu } from '@common-ux'
 import { CounterBadge } from '@common-ux'
 import type { SideMenuItem } from '@common-ux'
 import { QueryKey } from '@common-utils'
@@ -77,13 +77,13 @@ export const PageSideMenu = () => {
             {shareMenuVisible && <ShareMenu path={pathname} />}
             <SideMenu items={items} visible={visible} onClose={() => setVisible(false)} />
             {!visible && (
-                <button
+                <Button
                     className="PageSideMenu__reopen"
-                    title="Open Menu"
+                    ariaLabel="Open Menu"
                     onClick={() => setVisible(true)}
                 >
                     <IoMdClose style={{ transform: 'rotate(45deg)' }} />
-                </button>
+                </Button>
             )}
         </div>
     )

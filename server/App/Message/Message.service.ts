@@ -5,7 +5,7 @@ import { MessageRepository } from './Message.repository'
 import { MessageSchema } from './Message.schema'
 import { sendNotificationEmail } from './Message.utils'
 
-/** Business logic for contact messages â€” persistence via the repository, validation via the schema. */
+/** Business logic for contact messages - persistence via the repository, validation via the schema. */
 export const MessageService = {
     /** Validates and persists a contact message, then notifies the owner by email. */
     create: async (input: PostMessageRequest): Promise<PostMessageResponse> => {

@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { LoadingIndicator, Section } from '@common-ux'
+import { LoadingIndicator, Section, Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { EmailVerificationQueries } from './EmailVerification.queries'
 import './EmailVerification.styles.scss'
@@ -16,8 +16,8 @@ export const EmailVerification = ({ path }: EmailVerificationProps) => {
         <Screen className="EmailVerification" title={'tschiboka | Email Verification'} path={path}>
             <LoadingIndicator show={isPending} />
             <Section>
-                <h1>Verifying your email address</h1>
-                {message && <h2>{message}</h2>}
+                <Heading as="h1">Verifying your email address</Heading>
+                {message && <Heading as="h2">{message}</Heading>}
             </Section>
         </Screen>
     )

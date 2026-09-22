@@ -5,6 +5,7 @@ import { VisitsQueries } from '@shared-queries'
 import { Browser, Paths } from '@common-utils'
 import { Screen } from '../Screen'
 import { TestScreen } from './Screen.spec.utils'
+import { Heading } from '@common-ux'
 
 // Mock the shared-queries barrel so visit recording is a typed vi.fn we can drive directly;
 // stub the remaining hooks to avoid undefined-method crashes in any subcomponent.
@@ -57,7 +58,7 @@ describe('Screen', () => {
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test">
-                        <h1>Hello World</h1>
+                        <Heading as="h1">Hello World</Heading>
                     </Screen>
                 ),
             })

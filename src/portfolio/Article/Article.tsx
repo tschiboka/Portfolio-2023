@@ -7,6 +7,7 @@ import References from './components/References/References'
 import { getReferenceList } from './references'
 import BlogTimeStamp from '../Blog/components/BlogTimeStamp/BlogTimeStamp'
 import Disclaimer from './components/Disclaimer/Disclaimer'
+import { Main } from '@common-ux/Region/Main'
 
 // Other Assets
 import { blogArticles } from './articles'
@@ -42,7 +43,7 @@ export const Article = ({ pageName, path, title, children, hasContentNavigator =
             sideMenu={<PageSideMenu />}
             hasContentNavigator={hasContentNavigator}
         >
-            <main className="blog-component">
+            <Main className="blog-component">
                 <article>{children}</article>
                 <LikeButton
                     path={path}
@@ -56,7 +57,7 @@ export const Article = ({ pageName, path, title, children, hasContentNavigator =
                 )}
                 <Disclaimer />
                 <SuggestedArticles articles={article?.suggestedArticles} />
-            </main>
+            </Main>
         </Screen>
     )
 }

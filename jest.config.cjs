@@ -25,7 +25,6 @@ module.exports = {
         '^@shared-context/(.*)$': '<rootDir>/src/shared/context/$1',
         '^@public/(.*)$': '<rootDir>/public/$1',
         '^react-syntax-highlighter/dist/esm/styles/(.*)$': '<rootDir>/file-mock.js',
-        '^react-syntax-highlighter$': '<rootDir>/__mocks__/react-syntax-highlighter.js',
         '\\.s?css$': 'identity-obj-proxy',
         '\\.svg$': '<rootDir>/file-mock.js',
         '\\.pdf$': '<rootDir>/file-mock.js',

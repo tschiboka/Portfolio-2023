@@ -6,6 +6,10 @@
     padding-top: 4rem;
 }
 
+.Screen .Header {
+    z-index: var(--z-sticky);
+}
+
 @media (min-width: 768px) {
     .Screen {
         padding-top: 4rem;

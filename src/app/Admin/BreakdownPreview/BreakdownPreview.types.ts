@@ -10,6 +10,12 @@ export interface SectionData {
     totalCount: number
 }
 
+export type BreakdownRow = {
+    path: string
+    today: number
+    total: number
+}
+
 export interface Breakdown {
     visits: SectionData
     likes: SectionData

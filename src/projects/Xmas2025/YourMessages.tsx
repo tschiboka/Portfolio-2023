@@ -1,7 +1,9 @@
-import moment from 'moment'
 import { AccessGuard } from '@shared-components/AccessGuard'
 import { XmasMessage } from '@common-types'
-import { DateTime } from '@common-utils'
+import { Heading } from '@common-ux'
+import { Table } from '@common-ux/Table/Table'
+import { YourMessagesColumns } from './YourMessages.columns'
+import { MessageTransformers } from './Xmas2025.transformers'
 
 export type YourMessagesProps = {
     messages?: XmasMessage[]
@@ -17,24 +19,12 @@ export const YourMessages = ({ messages }: YourMessagesProps) =>
                 },
             ]}
         >
-            <h2>Your Messages</h2>
-            <table className="message-wall">
-                <thead>
-                    <tr>
-                        <td className="sm">Date</td>
-                        <td>Message</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {messages.map((msg) => (
-                        <tr key={msg._id}>
-                            <td>
-                                {moment(msg.createdAt).format(DateTime.Formats.DisplayDateTime)}
-                            </td>
-                            <td>{msg.message}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <Heading>Your Messages</Heading>
+            <Table
+                className="message-wall"
+                data={messages.map(MessageTransformers.toMessageRow)}
+                columns={YourMessagesColumns}
+                rowAriaLabel="Your message"
+            />
         </AccessGuard>
     ) : null

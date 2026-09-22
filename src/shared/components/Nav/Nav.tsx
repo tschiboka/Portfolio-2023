@@ -2,7 +2,6 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi'
 import { CgClose } from 'react-icons/cg'
 import { AppHooks } from '@shared-context'
 import { NavProps } from './Nav.types'
-import { Const } from '@common-ux'
 import './Nav.styles.css'
 
 const DefaultBurger = () => {
@@ -11,13 +10,13 @@ const DefaultBurger = () => {
     return !mobileMenuVisible ? (
         <HiOutlineMenuAlt3
             className="burger"
-            title="Extend Mobile Menu"
+            aria-label="Extend Mobile Menu"
             onClick={() => setMobileMenuVisible(true)}
         />
     ) : (
         <CgClose
-            title="Close Mobile Menu"
             className="burger"
+            aria-label="Close Mobile Menu"
             onClick={() => setMobileMenuVisible(false)}
         />
     )
@@ -41,10 +40,12 @@ export const Nav = ({
     if (!visible) return null
 
     return (
+        // Region's Header wraps children, breaking this header's flex layout.
+        // eslint-disable-next-line standards/no-raw-semantic-jsx
         <header
             className={`Header${className ? ` ${className}` : ''}`}
             aria-label={ariaLabel}
-            style={{ zIndex: Const.ZIndex.sticky, ...style }}
+            style={style}
             onClick={onClick}
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
@@ -54,6 +55,8 @@ export const Nav = ({
         >
             {logo ?? null}
             {burger ?? <DefaultBurger />}
+            {/* List wraps every item in an <li>, but NavMenu needs per-item onClick. */}
+            {/* eslint-disable-next-line standards/no-raw-semantic-jsx */}
             <ul className="nav_links">{children}</ul>
         </header>
     )

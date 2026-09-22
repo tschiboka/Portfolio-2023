@@ -1,4 +1,5 @@
 import type { ListProps } from './Typography.types'
+import { isObject } from '@common-utils'
 import './Typography.styles.css'
 
 export const List = ({ as: Element = 'ul', items, size = 'md', ...rest }: ListProps) => {
@@ -7,7 +8,6 @@ export const List = ({ as: Element = 'ul', items, size = 'md', ...rest }: ListPr
         align,
         tone,
         family,
-        children,
         ariaLabel,
         className,
         onClick,
@@ -42,10 +42,15 @@ export const List = ({ as: Element = 'ul', items, size = 'md', ...rest }: ListPr
             onFocus={onFocus}
             onBlur={onBlur}
         >
-            {items.map((item, index) => (
-                <li key={index}>{item}</li>
-            ))}
-            {children}
+            {items.map((item, index) => {
+                if (isObject(item))
+                    return (
+                        <li key={item.key ?? index} className={item.className}>
+                            {item.content}
+                        </li>
+                    )
+                return <li key={index}>{item}</li>
+            })}
         </Element>
     )
 }

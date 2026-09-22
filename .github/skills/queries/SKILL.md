@@ -1,15 +1,11 @@
 ---
-name: 'queries'
-kind: 'area'
+name: queries
+access: write
 stack: 'tanstack-query, axios'
-description: 'Writing a feature `.queries.ts` file, query/mutation hooks. Payloads, request builders, and response handling, including data transformation between the API and the FE.'
+description: 'Authoring feature query and mutation hooks, including payloads, request builders, response handling, and API-to-FE data transformation.'
 ---
 
-# Queries
-
-One file per feature: `Feature.queries.ts`. It owns the **request** — path, token,
-method, generics, `QueryKey` — and returns react-query's own result. The component
-owns the **flow**: what to show, where to go, and when to fire.
+# /queries
 
 This file carries no code. Every claim below points at the real file that
 demonstrates it; read those, not this.
@@ -24,7 +20,11 @@ demonstrates it; read those, not this.
 
 Standards of reference: `common/utils/Query/`
 
-## Scope of Expertise / Domain
+## Scope
+
+One file per feature: `Feature.queries.ts`. It owns the **request** — path, token,
+method, generics, `QueryKey` — and returns react-query's own result. The component
+owns the **flow**: what to show, where to go, and when to fire.
 
 Starts at the request boundary: a hook declares a path, a token, a method and its
 generics against the `Query` umbrella, and returns react-query's own result.
@@ -36,6 +36,12 @@ component.
 
 Between those two points, this skill owns everything: the builder choice, the
 `QueryKey`, the error message, and the transform from form data to API payload.
+
+| Hook owns (shared policy)                                       | Component owns (this screen)                   |
+| --------------------------------------------------------------- | ---------------------------------------------- |
+| path, token, method, generics, `QueryKey`                       | what to render, where to redirect              |
+| default `onSuccess` / `onError` — messages, invalidation, toast | when to fire, and any screen-specific override |
+| default `retry`, `staleTime`, `enabled`                         | —                                              |
 
 ## File structure
 
@@ -49,127 +55,50 @@ Feature/
 ```
 
 `Feature.queries.ts` is the only file this skill creates unconditionally.
-`Feature.transformers.ts` appears only for the third `RequestBuilder` case below —
-a form whose fields must be mapped onto a different API payload.
+`Feature.transformers.ts` appears only when a form's fields must be mapped onto a
+different API payload.
 
-## Methodology
+## Rules
 
-### The hook owns the request, the component owns the flow
+**Choosing a builder**
 
-The hook declares **how this request is handled**, once, so every caller inherits
-it. That includes the request itself and whatever policy belongs to it — default
-success/error messages, cache invalidation, retry, `staleTime`.
+- `Query.FeatureQuery()` when the mutation has a **body** and you want `.data` unwrapped.
+- `Query.RequestBuilder` for a payload-less POST, a raw response, or a body that needs mapping. When the body needs mapping, see `### Feature.transformers.ts`.
+- Never spread a `FeatureQuery` factory into `useMutation` and never cast its `mutationFn`. If it does not fit, `RequestBuilder` is what it is for.
 
-| Hook owns (shared policy)                                       | Component owns (this screen)                   |
-| --------------------------------------------------------------- | ---------------------------------------------- |
-| path, token, method, generics, `QueryKey`                       | what to render, where to redirect              |
-| default `onSuccess` / `onError` — messages, invalidation, toast | when to fire, and any screen-specific override |
-| default `retry`, `staleTime`, `enabled`                         | —                                              |
+**The token**
 
-**Anything shared must be overridable.** A hook sets defaults, it never takes the
-decision away: one caller means the component supplies the callbacks; two or more
-sharing behaviour means that behaviour moves into the hook as a default.
+- Read it inside the hook: `Session.useContext().session?.token`.
+- `FeatureQuery` takes it on the chain — `.path('Like').token(token).build()`.
+- `RequestBuilder` takes it as a setter — `.withAuthToken(token).build()`.
+- A public read omits it entirely rather than passing `undefined`.
 
-The pattern is `...request.Post({ onSuccess })` — spread, so the caller can
-override — never `...request.Post({ onSuccess: () => refresh() })`.
+**Errors**
 
-Reference: [`Feature.queries.ts`](./Feature.queries.ts)
-— `usePost` takes `{ onSuccess }` and spreads it into `request.Post`.
+- Never inline `error.response?.data?.message ?? 'some literal'`. Use `errorMessage(error, fallback)` from `@common-utils`, typed `AxiosError<ErrorResponse>`.
+- Server message primary, FE message fallback — that is why `ErrorResponse.message` is optional.
+- Never fall back to `error.message`; that is axios's own text and it leaks library wording to a user.
+- The fallback is always a `ClientMessage` call, never a handwritten sentence. If the catalogue lacks the verb, add it there.
+- `ErrorResponse` comes from `@common-utils`, never from `common/types`. Both exist; that copy does not match `FeatureQuery`'s generics, and the wrong one fails inside the builder.
+- `ErrorResponse` is the exception to type-only-last: the `AxiosError<ErrorResponse>` generic sits with the other imports, so a type-only import is correct.
 
-### Two builders, one rule
+**Typing**
 
-| Use                    | When                                                          |
-| ---------------------- | ------------------------------------------------------------- |
-| `Query.FeatureQuery()` | the mutation has a **body** and you want `.data` unwrapped    |
-| `Query.RequestBuilder` | payload-less POST, raw response, or a body that needs mapping |
+- Third generic is the variable type. A mutation with no body is `useMutation<TData, TError, void>` with `mutationFn: () =>`. Never cast to make a payload fit.
+- `FeatureQuery` unwraps `.data`, so its read is typed on the value itself. `RequestBuilder` does not — type it `AxiosResponse<T>` when you want the envelope.
+- Options are a plain object type — `{ onSuccess?, onError? }` written out, never `Pick<UseMutationOptions<…>>`.
+- One path key, many operations → `setSubpath`. Not a new `PathKey` per endpoint.
+- A response type carries ISO strings, never `Date` — JSON cannot carry one, and `RequestBuilder`'s `JsonBodyType` rejects it.
 
-Never spread a `FeatureQuery` factory into `useMutation` and never cast its
-`mutationFn`. If it doesn't fit, use `RequestBuilder` — that's what it's for.
+## Workflow
 
-Reference: [`Feature.queries.ts`](./Feature.queries.ts) and
-[`Feature.transformers.ts`](./Feature.transformers.ts) — `FeatureQuery` and
-`RequestBuilder` in the same file.
-
-### Attaching the session token
-
-The token comes from `Session.useContext().session?.token`, read inside the hook.
-Two ways to attach it, and the builder decides which:
-
-- **`FeatureQuery`** takes it as part of the chain — `.path('Like').token(token).build()`.
-- **`RequestBuilder`** takes it as a setter — `.setSubpath('/subfeature1').withAuthToken(token).build()`.
-
-A **public read needs no token at all** — omit it rather than passing `undefined`.
-
-Reference: [`Feature.queries.ts`](./Feature.queries.ts) — token via chain in
-`useGetSubfeature`, token via setter in `usePost`, and a token-free public read in
-`useGet`.
-
-### `FeatureQuery` — with a body
-
-- `.path(key)` / `.subpath(value)` / `.token(value?)` / `.build()` — chain in any order.
-- `build()` throws when `path` was never set.
-- `.Get(cacheKey, options?)`, `.Post(options?)`, `.Put`, `.Patch`, `.Delete` return
-  **hook options**; the `useQuery`/`useMutation` call stays in the file.
-- Options win over the built defaults: the caller's keys are spread last.
-
-Reference: [`Feature.queries.ts`](./Feature.queries.ts) — `useGet`, `useGetSubfeature`
-and `usePost` show the query and mutation shapes.
-
-> **Open question — is `.data` unwrapped?**
-> The example types its reads on the unwrapped value. If a real feature keeps the
-> envelope instead — `useGet<{ data: T }>` — this example is wrong and should be
-> corrected to match. Resolve before copying the shape.
-
-### `RequestBuilder` — no body, raw response, or a body transform
-
-Three cases. Always `RequestBuilder` when:
-
-- **the mutation has no body** — a payload-less POST, `mutationFn: () => …`;
-- **the caller needs the raw `AxiosResponse`** rather than the unwrapped `.data`;
-- **the request body is not the mutation variable** — a form whose fields must be
-  mapped onto a different API payload before posting.
-
-That third case is the one that catches people. `FeatureQuery.Post<TRequest, TResponse>`
-takes the mutation variable **as** the request body — there is no seam for a
-transform. Reaching into `request.Post(...).mutationFn` or overriding `mutationFn`
-inside the options object both produce working-_looking_ code that silently corrupts
-the request: the first is a cast into builder internals, the second replaces the
-real request with a no-op that posts nothing.
-
-The mapping itself belongs in a **`.transformers.ts`** beside the feature, as a
-`FeatureTransformer` object with a `toApi` method — never inline in the queries
-file.
-
-Reference: [`Feature.transformers.ts`](./Feature.transformers.ts) for the `toApi`
-shape, and [`Feature.queries.ts`](./Feature.queries.ts) for its use in a POST.
-
-Chain `setSubpath`, `setQuery`, `setParams`, `withHeader`, `withAuthToken` before
-`.build()`. The built object exposes `get`/`post`/`put`/`patch`/`delete`/`head`/`options`.
-
-### Error messages
-
-Never inline `error.response?.data?.message ?? 'some literal'`. Two shared things
-exist for it:
-
-- **`ErrorResponse`** lives in `common/utils/Query/mergeStatus.ts` and is
-  re-exported from `@common-utils`.
-- **`errorMessage(error, fallback)`** from `@common-utils` returns the server
-  message, or the fallback when the response carries none.
-
-Rules:
-
-- **Server message primary, FE message fallback** — that is the house convention,
-  which is why `ErrorResponse.message` is optional.
-- **Never fall back to `error.message`.** That is axios's own text — "Network
-  Error", "Request failed with status code 500" — and it leaks library wording to
-  a user.
-- **The fallback is always a `ClientMessage` call**, never a handwritten sentence:
-  `ClientMessage.Failure.Create('category')`, `ClientMessage.Success.Created('category')`.
-  If the catalogue lacks the verb, add it there rather than writing the string.
-- **The noun is an argument**, not part of the string — that is what the catalogue is for.
-
-Reference: [`Feature.queries.ts`](./Feature.queries.ts) — both reads and the
-mutation type their errors `AxiosError<ErrorResponse>`.
+1. Decide whether the request is a read or a write, and whether it carries a body.
+2. Pick the builder — `FeatureQuery` for a body, `RequestBuilder` otherwise.
+3. Read the token inside the hook and attach it the way that builder takes it. Omit it for a public read.
+4. Set the hook's defaults — messages, invalidation, retry, `staleTime` — and spread the caller's options last so every one is overridable.
+5. If the body is not the mutation variable, add `Feature.transformers.ts` and map it there.
+6. Type the result and the error: `AxiosResponse<T>` or `T`, and `AxiosError<ErrorResponse>`.
+7. Export the hooks on a single `<Feature>Queries` object.
 
 ## Files and folders
 
@@ -188,41 +117,16 @@ Rules:
 ### `Feature.transformers.ts`
 
 Naming convention: `<Feature>.transformers.ts`, beside the queries file.
-Return type: a `<feature>Transformer` object exposing `toApi`.
+Return type: a `<Feature>Transformers` object from `ClientTransformers`,
+holding one verb per request the feature makes.
 Example: [`Feature.transformers.ts`](./Feature.transformers.ts)
 Rules:
 
 - Only exists when a body needs mapping — never create one pre-emptively.
+- Build it with `ClientTransformers` from `@common-utils` — never a hand-rolled object.
 - The mapping lives here, never inline in the queries file.
-- The hook stays typed on the form; the transformer returns the API payload.
-
-## Rules
-
-- **Third generic is the variable type.** A mutation with no body is
-  `useMutation<TData, TError, void>` and `mutationFn: () =>`. Anything else forces
-  a payload that doesn't exist — never reach for a cast to make it fit.
-- **Type the result as `AxiosResponse<T>` when the caller needs `.data`.** If the
-  hook unwraps instead, type it `T` and use `FeatureQuery`.
-- **Options are a plain object type.** `{ onSuccess?, onError? }` written out —
-  never `Pick<UseMutationOptions<…>>`, which drags the library's generic order
-  into your file for two callbacks.
-- **One path key, many operations → `setSubpath`.** Several endpoints under the
-  same key are distinguished by subpath, not by new `PathKey` entries.
-- **A response type carries ISO strings, never `Date`.** JSON cannot carry a `Date`
-  — the browser receives a string — so declaring one is inaccurate, and it breaks
-  `RequestBuilder`, whose `JsonBodyType` constraint rejects it. Server side, pipe
-  the value through `DateTime.Format.toIso`; FE side, type it `string`.
-
-## ErrorResponse
-
-One import rule is specific to a `.queries.ts`:
-
-- **`ErrorResponse` comes from `@common-utils`, never from `common/types`.** Both
-  exist; `common/types` re-declares it, and that copy does not match
-  `FeatureQuery`'s generics. The wrong one compiles and then fails inside the
-  builder.
-- **`ErrorResponse` is the exception to type-only-last** — it is a type, but the
-  `AxiosError<ErrorResponse>` generic that uses it sits with the other imports,
-  so importing it as a type in the type-only group is correct and expected.
-
-The hook declares **how this request is handled**, once, so every caller inherits
+- `FeatureQuery.Post<TRequest, TResponse>` takes the mutation variable **as** the body — there is no seam for a transform. Reaching into `request.Post(...).mutationFn` casts into builder internals; overriding `mutationFn` in the options replaces the request with a no-op. Both produce working-looking code that silently corrupts the request.
+- One verb per request, named for the verb: `Post`, `Patch`, `Get`.
+- All five verbs come back, always. One the caller did not supply throws when called,
+  naming itself — so the surface is complete and nothing is mapped by the wrong rule.
+- The hook stays typed on the form; each verb returns that request's payload.

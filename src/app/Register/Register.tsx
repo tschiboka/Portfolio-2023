@@ -1,14 +1,14 @@
-import { Screen } from '@shared-components/Screen/Screen'
-import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import './Register.scss'
-import { Form, LoadingIndicator } from '@common-ux'
+import { useForm } from 'react-hook-form'
+import { Screen } from '@shared-components/Screen/Screen'
+import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
 import { registrationSchema } from './Register.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegistrationFormData } from './Register.types'
 import { ClientMessage, Paths, errorMessage } from '@common-utils'
-import { RegisterQueries } from './Register.query'
+import { RegisterQueries } from './Register.queries'
 import { useNavigate } from 'react-router-dom'
+import './Register.scss'
 
 type RegisterProps = {
     path: string
@@ -59,10 +59,10 @@ export const Register = ({ path, pageName }: RegisterProps) => {
             variant="portfolio"
             pageName={pageName}
         >
-            <main>
+            <Main>
                 <div>
-                    <h1>Register</h1>
-                    <h2>Tschiboka Personal App</h2>
+                    <Heading as="h1">Register</Heading>
+                    <Heading as="h2">Tschiboka Personal App</Heading>
                 </div>
                 <Form onSubmit={handleSubmit(submitHandler)} ariaLabel="Register form">
                     <Form.Fieldset>
@@ -111,10 +111,14 @@ export const Register = ({ path, pageName }: RegisterProps) => {
                     </Form.Fieldset>
                     <LoadingIndicator show={isLoading} />
                     {registrationErrorMessage && (
-                        <p className="submit-error-message">{registrationErrorMessage}</p>
+                        <Paragraph className="submit-error-message">
+                            {registrationErrorMessage}
+                        </Paragraph>
                     )}
                     {successfulRegistration && (
-                        <p className="submit-success-message">{successfulRegistration}</p>
+                        <Paragraph className="submit-success-message">
+                            {successfulRegistration}
+                        </Paragraph>
                     )}
                     <Form.ButtonGroup>
                         <Form.Button
@@ -128,7 +132,7 @@ export const Register = ({ path, pageName }: RegisterProps) => {
                         </Form.Button>
                     </Form.ButtonGroup>
                 </Form>
-            </main>
+            </Main>
         </Screen>
     )
 }

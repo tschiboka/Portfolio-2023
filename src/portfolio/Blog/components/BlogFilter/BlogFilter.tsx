@@ -1,7 +1,7 @@
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
 import { getColourName, technologies, Technology } from '../../../Projects/Projects.selectors'
 import './BlogFilter.scss'
-import { BlogSortBy } from '../../Blog.type'
+import { BlogSortBy } from '../../Blog.types'
 import type { Dictionary } from '@common-utils'
 
 interface Props {

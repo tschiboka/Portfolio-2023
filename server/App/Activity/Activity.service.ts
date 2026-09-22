@@ -11,7 +11,7 @@ import { ActivityTransformers } from './Activity.transformers'
 import { ActivityFeedLimits } from './Activity.constants'
 
 /**
- * Business logic for the activity feed â€” aggregates the latest activity across visits, likes,
+ * Business logic for the activity feed - aggregates the latest activity across visits, likes,
  * messages and error logs, then filters / sorts / paginates the merged feed.
  */
 export const ActivityService = {

@@ -162,7 +162,7 @@ export interface Table<
     enableColumnReorder?: boolean
     onColumnResize?: (columnIndex: number, width: number) => void
     onColumnReorder?: (columnIndex: number, toIndex: number) => void
-    controller?: TableControl<any, any>
+    controller?: TableControl
     meta?: PageMeta
     sorting?: TableSorting<TData>
     filtering?: TableFiltering

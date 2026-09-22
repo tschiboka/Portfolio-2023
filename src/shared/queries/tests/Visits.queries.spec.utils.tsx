@@ -2,7 +2,7 @@ import { waitFor } from '@testing-library/react'
 import { Paths } from '@common-utils'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { VisitsQueries } from '../index.ts'
-import { VisitsMockHandlers } from './Visits.queries.mockHandles'
+import { VisitsMockHandlers } from './Visits.queries.mockHandlers.ts'
 
 const { detectIncognito } = vi.hoisted(() => ({ detectIncognito: vi.fn() }))
 

@@ -4,7 +4,7 @@ import { ClientMessage } from '@common-utils'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
-import { defaultHandlers } from './Categories.mockHandles'
+import { defaultHandlers } from './Categories.mockHandlers'
 
 type CategoriesForm = ReturnType<typeof Test.Form>
 

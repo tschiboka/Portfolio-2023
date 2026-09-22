@@ -10,7 +10,7 @@ import { LikeRepository } from './Like.repository'
 import { LikeSchema } from './Like.schema'
 import type { LikeInput } from './Like.types'
 
-/** Business logic for likes â€” persistence via the repository, validation via the schema. */
+/** Business logic for likes - persistence via the repository, validation via the schema. */
 export const LikeService = {
     /** Returns likes grouped by path. */
     summary: async (): Promise<GetLikeSummaryResponse> => {

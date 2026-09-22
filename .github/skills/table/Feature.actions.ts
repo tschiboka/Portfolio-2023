@@ -1,6 +1,7 @@
 // @ts-nocheck — skill example, outside the tsconfig include.
 
 import type { TableAction } from '@common-ux'
+import { isTruthy } from '@common-utils'
 import type { FeatureRow } from './Feature.types'
 type FeatureActionHandlers = {
     onAct: (row: FeatureRow) => void
@@ -18,7 +19,7 @@ export const FeatureActions = {
             id: 'action2',
             label: 'Action 2',
             onClick: onAct,
-            filter: (meta) => Boolean(meta.row.prop1),
+            filter: (meta) => isTruthy(meta.row.prop1),
         },
     ],
 }

@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Blog } from '../Blog'
-import { handlers } from './Blog.mockHandles'
+import { handlers } from './Blog.mockHandlers'
 import { blogArticles } from '@portfolio/Article'
 
 const publishedArticles = blogArticles.filter((a) => !a.upcoming)

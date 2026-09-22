@@ -3,7 +3,7 @@ import { Regexp } from '@common-utils'
 import { CategoryModel } from './Category.model'
 import type { ICategory } from './Category.types'
 
-/** Data-access layer for categories â€” generic CRUD over the category model. */
+/** Data-access layer for categories - generic CRUD over the category model. */
 export const CategoryRepository = Repository.define<typeof CategoryModel, ICategory>(
     CategoryModel,
 ).withQueries({

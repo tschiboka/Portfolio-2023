@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Contact } from '../Contact'
-import { defaultHandlers, handlePostMessageError } from './Contact.mockHandles'
+import { defaultHandlers, handlePostMessageError } from './Contact.mockHandlers'
 import { ContactLabels } from './Contact.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = ContactLabels

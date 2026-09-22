@@ -8,7 +8,7 @@ import { Form, Heading, LoadingIndicator, Main, Paragraph, Section } from '@comm
 import { ClientMessage, errorMessage } from '@common-utils'
 import { ContactFormData } from './Contact.types'
 import { contactSchema, MAX_MESSAGE_CHARACTERS } from './Contact.schema'
-import { ContactQueries } from './Contact.query'
+import { ContactQueries } from './Contact.queries'
 import './Contact.scss'
 
 type ContactProps = {

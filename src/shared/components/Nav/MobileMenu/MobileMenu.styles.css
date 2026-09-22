@@ -86,6 +86,12 @@
     text-decoration: inherit;
 }
 
+/* The wrapper is a div, so it needs to be inline to sit beside the label. */
+.MobileMenu .chevron-wrapper {
+    display: inline-flex;
+    vertical-align: middle;
+}
+
 .MobileMenu a:hover,
 .MobileMenu .link:hover {
     color: white;

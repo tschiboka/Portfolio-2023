@@ -6,7 +6,7 @@ import type { PostBackfillReq, PostBackfillRes } from './Breakdown.types'
 
 const router = express.Router()
 
-// POST /api/breakdowns/backfill â€” rebuild the daily breakdown from raw visit/like records.
+// POST /api/breakdowns/backfill — rebuild the daily breakdown from raw visit/like records.
 router.post('/backfill', [auth, admin], async (_req: PostBackfillReq, res: PostBackfillRes) => {
     const data = await BreakdownService.backfill()
     ApiResponder.ok(res, data)

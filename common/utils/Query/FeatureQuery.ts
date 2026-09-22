@@ -55,11 +55,13 @@ export const FeatureQuery = () => {
     let group: ServerGroup = 'Api'
     let subpath: string | undefined
     let token: string | undefined
+    let query: Record<string, unknown> = {}
 
     const buildRequest = () =>
         new RequestBuilder(path!, group)
             .setSubpath(subpath ?? '')
             .withAuthToken(token)
+            .setQuery(query)
             .build()
 
     const mutation =
@@ -87,6 +89,14 @@ export const FeatureQuery = () => {
         },
         token(value?: string) {
             token = value
+            return featureQuery
+        },
+        /**
+         * Sets the query-string parameters the request is sent with.
+         * These are not the cache key — pass filters to `Get`'s key as well.
+         */
+        query(value: Record<string, unknown>) {
+            query = value
             return featureQuery
         },
         build(): FeatureQueryBuilt {

@@ -2,7 +2,7 @@ import { DateTime } from '@common-utils'
 import { blogArticles, BlogArticle } from '@portfolio/Article'
 import { isEmpty } from '@common-utils'
 import type { Nullable, Dictionary } from '@common-utils'
-import { BlogSortBy } from './Blog.type'
+import { BlogSortBy } from './Blog.types'
 
 export const getPublishedArticles = () => blogArticles.filter((article) => !!article.created)
 
@@ -53,8 +53,8 @@ export const getSortedArticlesBy = (
             case 'mostRelevant':
                 return 0
             case 'mostLiked':
-                return (likes ? likes[b.to] : 0) - (likes ? likes[a.to] : 0)
+                return (likes?.[b.to] ?? 0) - (likes?.[a.to] ?? 0)
             case 'mostVisited':
-                return (visits ? visits[b.to] : 0) - (visits ? visits[a.to] : 0)
+                return (visits?.[b.to] ?? 0) - (visits?.[a.to] ?? 0)
         }
     })

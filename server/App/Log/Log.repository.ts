@@ -2,7 +2,7 @@
 import { LogModel } from './Log.model'
 import type { ILog } from './Log.types'
 
-/** Data-access layer for logs â€” generic CRUD over the log model. */
+/** Data-access layer for logs - generic CRUD over the log model. */
 export const LogRepository = Repository.define<typeof LogModel, ILog>(LogModel).withQueries({
     findPaged: (sortString: string, skip: number, limit: number, select?: string) =>
         LogModel.find()

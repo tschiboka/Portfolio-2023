@@ -16,6 +16,7 @@ import { MdEmail } from 'react-icons/md'
 import { DateTime } from '@common-utils'
 import faceImg from '@portfolio/assets/home/headshot_placeholder_grayscale.png'
 import { BreakdownPreviewStyles } from './BreakdownPreview.styles'
+import { Link } from '@common-ux'
 
 const S = BreakdownPreviewStyles.signature
 
@@ -52,53 +53,33 @@ export const Signature = ({ sentAt = new Date() }: SignatureProps) => (
                     <div style={S.links} className="bp-signature-links">
                         <span style={S.linkItem}>
                             <FiGlobe size={12} style={S.linkIcon} />
-                            <a
-                                href="https://tschiboka.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={S.linkUnderline}
-                            >
+                            <Link href="https://tschiboka.com" style={S.linkUnderline}>
                                 tschiboka.com
-                            </a>
+                            </Link>
                         </span>
                         <span style={S.linkItem}>
                             <FiPhone size={12} style={S.linkIcon} />
-                            <a href="tel:+447474999334" style={S.linkUnderline}>
+                            <Link href="tel:+447474999334" style={S.linkUnderline}>
                                 +44 7474 999 334
-                            </a>
+                            </Link>
                         </span>
                         <span style={S.linkItem}>
                             <MdEmail size={12} style={S.linkIcon} />
-                            <a href="mailto:tibi.aki.tivadar@gmail.com" style={S.linkUnderline}>
+                            <Link href="mailto:tibi.aki.tivadar@gmail.com" style={S.linkUnderline}>
                                 tibi.aki.tivadar@gmail.com
-                            </a>
+                            </Link>
                         </span>
                         <div style={S.linksGap} />
                         <div style={S.socials}>
-                            <a
-                                href="https://github.com/tschiboka"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={S.link}
-                            >
+                            <Link href="https://github.com/tschiboka" style={S.link}>
                                 <TbBrandGithubFilled size={12} style={{ display: 'block' }} />
-                            </a>
-                            <a
-                                href="https://www.linkedin.com/in/tivadar-debnar/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={S.link}
-                            >
+                            </Link>
+                            <Link href="https://www.linkedin.com/in/tivadar-debnar/" style={S.link}>
                                 <TfiLinkedin size={12} style={{ display: 'block' }} />
-                            </a>
-                            <a
-                                href="https://www.facebook.com/tschiboka/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={S.link}
-                            >
+                            </Link>
+                            <Link href="https://www.facebook.com/tschiboka/" style={S.link}>
                                 <FaFacebookF size={12} style={{ display: 'block' }} />
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

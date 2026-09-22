@@ -8,6 +8,7 @@ import { Session, AppHooks } from '@shared-context'
 import { VisitsQueries } from '@shared-queries'
 import { Paths } from '@common-utils'
 import { ContentNavigator } from '@common-ux'
+import { ScreenStyles } from './Screen.styles'
 import './Screen.css'
 
 export type ScreenProps = {
@@ -63,7 +64,7 @@ export const Screen = ({
 
     return (
         <ContentNavigator showNavigator={hasContentNavigator} depth={contentNavigatorDepth}>
-            <div className={getClassName()}>
+            <div className={getClassName()} style={ScreenStyles.shell}>
                 {variant && pageName && <PageNav variant={variant} pageName={pageName} />}
                 {variant && pageName && <PageMobileMenu variant={variant} pageName={pageName} />}
                 <PageSubNav />

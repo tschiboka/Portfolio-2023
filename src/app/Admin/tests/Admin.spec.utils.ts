@@ -3,7 +3,7 @@ import { Section } from '@common-ux/Test/Section/Section'
 import { MockSession } from '@common-mocks'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
-import { AdminMockHandlers } from './Admin.mockHandles'
+import { AdminMockHandlers } from './Admin.mockHandlers'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 
 export const AdminTestUtils = {

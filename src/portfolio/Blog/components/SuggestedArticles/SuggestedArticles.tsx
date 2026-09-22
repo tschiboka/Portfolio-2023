@@ -1,7 +1,8 @@
 import BlogCard from '../BlogCard/BlogCard'
+import { Heading } from '@common-ux'
 import { blogArticles } from '@portfolio/Article'
-import './SuggestedArticle.scss'
 import { LikesQueries, VisitsQueries } from '@shared-queries'
+import './SuggestedArticles.scss'
 
 interface Props {
     articles?: string[]
@@ -33,7 +34,7 @@ const SuggestedArticles = ({ articles }: Props) => {
     if (articles)
         return (
             <div className="SuggestedArticles">
-                <h3>Suggested Articles</h3>
+                <Heading as="h3">Suggested Articles</Heading>
                 {articles.map((article) => getBlogArticle(article))}
             </div>
         )

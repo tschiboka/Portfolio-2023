@@ -4,7 +4,13 @@ import { fileURLToPath } from 'node:url'
 import type { Rule } from 'eslint'
 import { ESLint } from 'eslint'
 import { RuleRegistry } from './registry.js'
-import type { LinterKind, RuleRequirement, RuleRegistrar, RuleSeverity } from './types.js'
+import type {
+    LinterKind,
+    RuleRequirement,
+    RuleRegistrar,
+    RuleScope,
+    RuleSeverity,
+} from './types.js'
 
 /** Installed version per linter, e.g. `{ eslint: '9.39.5' }`. Missing means unavailable. */
 export type LinterVersions = Partial<Record<LinterKind, string>>
@@ -14,6 +20,7 @@ export type BuiltStandards = {
     pluginName: string
     rules: Record<string, Rule.RuleModule>
     settings: Record<string, RuleSeverity>
+    scopes: Record<string, RuleScope>
 }
 
 /**
@@ -76,6 +83,15 @@ export const ruleBuilder = {
                     registrar.severity,
                 ]),
             ),
+            scopes: Object.fromEntries(
+                enabled.map(({ registrar }) => [
+                    `${pluginName}/${registrar.id}`,
+                    {
+                        include: registrar.scope.include,
+                        exclude: registrar.scope.exclude,
+                    },
+                ]),
+            ),
         }
     },
 
@@ -88,7 +104,7 @@ export const ruleBuilder = {
      * emit('rules/dist/standards.config.js')
      */
     emit: (target: string, pluginName: string): void => {
-        const { rules, settings } = ruleBuilder.build(RuleRegistry, pluginName, {
+        const { rules, settings, scopes } = ruleBuilder.build(RuleRegistry, pluginName, {
             eslint: ESLint.version,
         })
 
@@ -110,6 +126,8 @@ export const ruleBuilder = {
             `export const ${pluginName} = { rules: collectRules(${ids}) }`,
             '',
             `export const settings = ${JSON.stringify(settings, null, 4)}`,
+            '',
+            `export const scopes = ${JSON.stringify(scopes, null, 4)}`,
             '',
         ].join('\n')
 

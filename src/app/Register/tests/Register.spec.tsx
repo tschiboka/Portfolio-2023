@@ -4,7 +4,7 @@ import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
 import { Paths } from '@common-utils'
 import { mockRegisterSuccess } from './Register.mocks'
-import { defaultHandlers, handlePostRegisterError } from './Register.mockHandles'
+import { defaultHandlers, handlePostRegisterError } from './Register.mockHandlers'
 import { RegisterLabels } from './Register.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = RegisterLabels

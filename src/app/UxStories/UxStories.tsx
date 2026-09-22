@@ -1,4 +1,4 @@
-import { Link } from '@common-ux'
+import { Link, Main, Heading, Paragraph } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Table } from '@common-ux'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
@@ -27,15 +27,15 @@ export const UxStories = ({ path }: UxStoriesProps) => {
             pageName="UX Stories"
             sideMenu={<PageSideMenu />}
         >
-            <main>
+            <Main>
                 <Stack.Vertical gap="12">
-                    <h1>UX Stories</h1>
-                    <p>
+                    <Heading as="h1">UX Stories</Heading>
+                    <Paragraph>
                         This section showcases various UX components and patterns through
                         interactive stories. Each story demonstrates a specific component or design
                         pattern in action, allowing you to explore their features and behaviors in a
                         real-world context.
-                    </p>
+                    </Paragraph>
                     <div className="UxStories__table">
                         <Table<StoryRow>
                             ariaLabel="UX Stories"
@@ -52,7 +52,7 @@ export const UxStories = ({ path }: UxStoriesProps) => {
                         />
                     </div>
                 </Stack.Vertical>
-            </main>
+            </Main>
         </Screen>
     )
 }

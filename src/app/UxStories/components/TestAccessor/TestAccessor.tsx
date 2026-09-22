@@ -1,8 +1,25 @@
-import { BlockQuote, Code, CodeText, Heading, Main, Paragraph, Section, Text } from '@common-ux'
+import {
+    BlockQuote,
+    Code,
+    CodeText,
+    Heading,
+    List,
+    Main,
+    Paragraph,
+    Section,
+    Text,
+} from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './TestAccessor.code'
+import {
+    NameSpaceColumns,
+    NameSpaceRows,
+    NamespaceGuideColumns,
+    NamespaceGuideRows,
+} from './TestAccessor.columns'
+import { Table } from '@common-ux/Table/Table'
 import './TestAccessor.styles.css'
 
 type TestAccessorProps = { path: string }
@@ -40,30 +57,42 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 <Heading as="h2" id="what-it-is-not">
                     What it is not
                 </Heading>
-                <ul>
-                    <li>
-                        <Text>
-                            <strong>Not a replacement for RTL</strong> — It wraps RTL.{' '}
-                            <CodeText>screen</CodeText>, <CodeText>render</CodeText>,{' '}
-                            <CodeText>waitFor</CodeText>, <CodeText>within</CodeText> are still
-                            valid when an accessor doesn&apos;t cover a case.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>Not a page-object pattern</strong> — Page objects bundle state +
-                            assertions + navigation. Accessors are stateless element wrappers with
-                            no assertions and no business logic.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>Not a workflow abstraction</strong> — Accessors expose single
-                            actions (<CodeText>Do.click</CodeText>, <CodeText>Do.type</CodeText>).
-                            Multi-step sequences belong in the test body, not the accessor.
-                        </Text>
-                    </li>
-                </ul>
+                <List
+                    items={[
+                        {
+                            key: 'rtl',
+                            content: (
+                                <Text>
+                                    <strong>Not a replacement for RTL</strong> — It wraps RTL.{' '}
+                                    <CodeText>screen</CodeText>, <CodeText>render</CodeText>,{' '}
+                                    <CodeText>waitFor</CodeText>, <CodeText>within</CodeText> are
+                                    still valid when an accessor doesn&apos;t cover a case.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'page-object',
+                            content: (
+                                <Text>
+                                    <strong>Not a page-object pattern</strong> — Page objects bundle
+                                    state + assertions + navigation. Accessors are stateless element
+                                    wrappers with no assertions and no business logic.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'workflow',
+                            content: (
+                                <Text>
+                                    <strong>Not a workflow abstraction</strong> — Accessors expose
+                                    single actions (<CodeText>Do.click</CodeText>,{' '}
+                                    <CodeText>Do.type</CodeText>). Multi-step sequences belong in
+                                    the test body, not the accessor.
+                                </Text>
+                            ),
+                        },
+                    ]}
+                />
                 <BlockQuote>
                     If a test is simpler with raw RTL, use raw RTL. The framework prevents drift on
                     repeated patterns — it doesn&apos;t ban direct DOM access.
@@ -92,58 +121,11 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 </Heading>
                 <Heading as="h3">Namespaces</Heading>
                 <Paragraph>3 authored + 2 derived:</Paragraph>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Purpose</th>
-                            <th>Sync/Async</th>
-                            <th>Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <CodeText>Get</CodeText>
-                            </td>
-                            <td>Read DOM state</td>
-                            <td>Sync</td>
-                            <td>Authored</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <CodeText>Do</CodeText>
-                            </td>
-                            <td>Simulate user actions</td>
-                            <td>Async</td>
-                            <td>Authored</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <CodeText>Set</CodeText>
-                            </td>
-                            <td>Pre-render setup/mocking</td>
-                            <td>Sync</td>
-                            <td>Authored</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <CodeText>Has</CodeText>
-                            </td>
-                            <td>Check element existence</td>
-                            <td>Sync</td>
-                            <td>Derived</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <CodeText>Wait</CodeText>
-                            </td>
-                            <td>Wait for element</td>
-                            <td>Async</td>
-                            <td>Derived</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <Table
+                    columns={NameSpaceColumns}
+                    data={NameSpaceRows}
+                    rowAriaLabel="Accessor namespace"
+                />
                 <Heading as="h3">
                     Base <CodeText>Get</CodeText>
                 </Heading>
@@ -221,54 +203,43 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     <CodeText>Click</CodeText>, <CodeText>Act</CodeText> — five categories with
                     overlapping semantics. More namespaces cause three problems:
                 </Paragraph>
-                <ol>
-                    <li>
-                        <Text>
-                            <strong>Decision fatigue</strong> — &quot;Does this belong in{' '}
-                            <CodeText>Act</CodeText> or <CodeText>Click</CodeText>?&quot;
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>Fragmented discovery</strong> — Contributors must learn where
-                            each method lives across multiple namespaces.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>Maintenance drift</strong> — The same concept ends up in
-                            different namespaces across different accessors.
-                        </Text>
-                    </li>
-                </ol>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>If you&apos;re...</th>
-                            <th>Use</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Reading DOM state</td>
-                            <td>
-                                <CodeText>Get</CodeText>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Simulating interaction</td>
-                            <td>
-                                <CodeText>Do</CodeText>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Setting up before render</td>
-                            <td>
-                                <CodeText>Set</CodeText>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <List
+                    as="ol"
+                    items={[
+                        {
+                            key: 'fatigue',
+                            content: (
+                                <Text>
+                                    <strong>Decision fatigue</strong> — &quot;Does this belong in{' '}
+                                    <CodeText>Act</CodeText> or <CodeText>Click</CodeText>?&quot;
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'discovery',
+                            content: (
+                                <Text>
+                                    <strong>Fragmented discovery</strong> — Contributors must learn
+                                    where each method lives across multiple namespaces.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'drift',
+                            content: (
+                                <Text>
+                                    <strong>Maintenance drift</strong> — The same concept ends up in
+                                    different namespaces across different accessors.
+                                </Text>
+                            ),
+                        },
+                    ]}
+                />
+                <Table
+                    columns={NamespaceGuideColumns}
+                    data={NamespaceGuideRows}
+                    rowAriaLabel="Namespace guide"
+                />
                 <Heading as="h3">Enforcement</Heading>
                 <Paragraph>
                     The base <CodeText>Accessor</CodeText> class only defines{' '}
@@ -284,51 +255,76 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 <Code language="ts" content={Snippets.Constraints.namespaceGood} />
                 <Heading as="h4">Bad</Heading>
                 <Code language="ts" content={Snippets.Constraints.namespaceBad} />
-                <ul>
-                    <li>
-                        <Text>
-                            <strong>No assertions</strong> — Use <CodeText>expect(...)</CodeText> in
-                            the test, never <CodeText>accessor.Expect.*()</CodeText>.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>No retries or polling</strong> — The caller decides when to wait
-                            via <CodeText>Wait</CodeText> or <CodeText>waitFor</CodeText>.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>No business logic</strong> —{' '}
-                            <CodeText>Do.selectDay(14)</CodeText> (one click) is fine.{' '}
-                            <CodeText>Do.pickNextAvailableWeekday()</CodeText> (logic + reads) is a
-                            test helper.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>No multi-step workflows</strong> —{' '}
-                            <CodeText>Do.click()</CodeText>, <CodeText>Do.type(text)</CodeText>,{' '}
-                            <CodeText>Do.toggle()</CodeText> — not{' '}
-                            <CodeText>Do.fillFormAndSubmit()</CodeText>.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>No hidden waits</strong> — <CodeText>Get</CodeText> is
-                            synchronous, <CodeText>Do</CodeText> is a single async interaction.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>
-                                <CodeText>Do</CodeText> methods start with a verb
-                            </strong>{' '}
-                            — <CodeText>Do.click()</CodeText>, <CodeText>Do.toggle()</CodeText>,{' '}
-                            <CodeText>Do.selectDay(14)</CodeText>.
-                        </Text>
-                    </li>
-                </ul>
+                <List
+                    items={[
+                        {
+                            key: 'assertions',
+                            content: (
+                                <Text>
+                                    <strong>No assertions</strong> — Use{' '}
+                                    <CodeText>expect(...)</CodeText> in the test, never{' '}
+                                    <CodeText>accessor.Expect.*()</CodeText>.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'retries',
+                            content: (
+                                <Text>
+                                    <strong>No retries or polling</strong> — The caller decides when
+                                    to wait via <CodeText>Wait</CodeText> or{' '}
+                                    <CodeText>waitFor</CodeText>.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'logic',
+                            content: (
+                                <Text>
+                                    <strong>No business logic</strong> —{' '}
+                                    <CodeText>Do.selectDay(14)</CodeText> (one click) is fine.{' '}
+                                    <CodeText>Do.pickNextAvailableWeekday()</CodeText> (logic +
+                                    reads) is a test helper.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'workflows',
+                            content: (
+                                <Text>
+                                    <strong>No multi-step workflows</strong> —{' '}
+                                    <CodeText>Do.click()</CodeText>,{' '}
+                                    <CodeText>Do.type(text)</CodeText>,{' '}
+                                    <CodeText>Do.toggle()</CodeText> — not{' '}
+                                    <CodeText>Do.fillFormAndSubmit()</CodeText>.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'waits',
+                            content: (
+                                <Text>
+                                    <strong>No hidden waits</strong> — <CodeText>Get</CodeText> is
+                                    synchronous, <CodeText>Do</CodeText> is a single async
+                                    interaction.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'verbs',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        <CodeText>Do</CodeText> methods start with a verb
+                                    </strong>{' '}
+                                    — <CodeText>Do.click()</CodeText>,{' '}
+                                    <CodeText>Do.toggle()</CodeText>,{' '}
+                                    <CodeText>Do.selectDay(14)</CodeText>.
+                                </Text>
+                            ),
+                        },
+                    ]}
+                />
                 <Heading as="h3">Query Strategy</Heading>
                 <BlockQuote>
                     If the element has a role or label, use an accessible query. If it only has a
@@ -360,55 +356,75 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 <Heading as="h3">The Accessor Base Class</Heading>
                 <Code language="ts" content={Snippets.Internals.baseClass} />
                 <Heading as="h4">Key decisions</Heading>
-                <ul>
-                    <li>
-                        <Text>
-                            <strong>
-                                <CodeText>static screen</CodeText>
-                            </strong>{' '}
-                            — Centralises RTL&apos;s <CodeText>screen</CodeText>. Scoped vs. global
-                            is explicit: <CodeText>this.scope</CodeText> for children,{' '}
-                            <CodeText>Accessor.screen</CodeText> for portaled elements.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>
-                                <CodeText>within()</CodeText> scoping
-                            </strong>{' '}
-                            — Every accessor is bound to a specific DOM element. Two forms on one
-                            page won&apos;t interfere.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>
-                                Singleton <CodeText>user</CodeText>
-                            </strong>{' '}
-                            — One <CodeText>userEvent.setup()</CodeText> instance per test. Prevents
-                            desynced keyboard/pointer state.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>
-                                <CodeText>context</CodeText>
-                            </strong>{' '}
-                            — Hierarchical caller chain (e.g.{' '}
-                            <CodeText>Form(&apos;Login&apos;).Input(&apos;Email&apos;)</CodeText>
-                            ). Error messages show the full accessor chain.
-                        </Text>
-                    </li>
-                    <li>
-                        <Text>
-                            <strong>
-                                <CodeText>require()</CodeText>
-                            </strong>{' '}
-                            — <CodeText>querySelector</CodeText> + throw. Makes must-exist vs.
-                            might-be-absent explicit.
-                        </Text>
-                    </li>
-                </ul>
+                <List
+                    items={[
+                        {
+                            key: 'screen',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        <CodeText>static screen</CodeText>
+                                    </strong>{' '}
+                                    — Centralises RTL&apos;s <CodeText>screen</CodeText>. Scoped vs.
+                                    global is explicit: <CodeText>this.scope</CodeText> for
+                                    children, <CodeText>Accessor.screen</CodeText> for portaled
+                                    elements.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'within',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        <CodeText>within()</CodeText> scoping
+                                    </strong>{' '}
+                                    — Every accessor is bound to a specific DOM element. Two forms
+                                    on one page won&apos;t interfere.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'user',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        Singleton <CodeText>user</CodeText>
+                                    </strong>{' '}
+                                    — One <CodeText>userEvent.setup()</CodeText> instance per test.
+                                    Prevents desynced keyboard/pointer state.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'context',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        <CodeText>context</CodeText>
+                                    </strong>{' '}
+                                    — Hierarchical caller chain (e.g.{' '}
+                                    <CodeText>
+                                        Form(&apos;Login&apos;).Input(&apos;Email&apos;)
+                                    </CodeText>
+                                    ). Error messages show the full accessor chain.
+                                </Text>
+                            ),
+                        },
+                        {
+                            key: 'require',
+                            content: (
+                                <Text>
+                                    <strong>
+                                        <CodeText>require()</CodeText>
+                                    </strong>{' '}
+                                    — <CodeText>querySelector</CodeText> + throw. Makes must-exist
+                                    vs. might-be-absent explicit.
+                                </Text>
+                            ),
+                        },
+                    ]}
+                />
                 <Heading as="h3">Inheritance Model</Heading>
                 <Paragraph>
                     Subclasses extend <CodeText>Get</CodeText> and <CodeText>Do</CodeText> via

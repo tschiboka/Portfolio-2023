@@ -4,7 +4,7 @@ import { SettingsSchema } from './Settings.schema'
 import type { SettingsInput } from './Settings.types'
 import type { ISetting } from './Settings.types'
 
-/** Business logic for settings â€” persistence via the repository, validation via the schema. */
+/** Business logic for settings - persistence via the repository, validation via the schema. */
 export const SettingsService = {
     /** Returns the app's settings (a singleton document). */
     get: async (): Promise<ISetting> => {

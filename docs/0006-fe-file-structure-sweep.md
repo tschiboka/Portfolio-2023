@@ -1065,7 +1065,7 @@ The structure/placement sweeps (relocation, aliasing, dissolving `routing/`,
 conformance pass** so role-suffix, return-value naming, aliasing, and import
 ordering are **verified file-by-file**, not just batch-moved.
 
-`REQUIREMENTS PENDING — Captain Tschiboka is drafting the exact requirements.`
+`REQUIREMENTS PENDING — Tschiboka is drafting the exact requirements.`
 This section is a scaffold; fill in the concrete rules/checklist once they land.
 
 **Execution order (decided):** every FEATURE and SUBFEATURE is addressed, and
@@ -1282,7 +1282,7 @@ NOTES: <only on PAUSED - handover instructions>
 **Run protocol:**
 
 1. Agent gives the nth feature + file name (prompts if none given).
-2. Captain opens the file; edits or suggests.
+2. User opens the file; edits or suggests.
 3. Agent argues compliance (records VERDICT, pushes back where off-standard).
 4. Agent fills the review result and scores strictly/realistically.
 5. Persist (optional): update this ticket on request; on PAUSE save score + row.
@@ -1326,9 +1326,9 @@ Screen-shell leaf with no data/handlers/logic. TESTED set to N/A (no behaviour
 to assert), GEN recomputed 8.7, no floor violation. Marked **DONE**, `APPROVED=YES`.
 Checklist `Activities` reviewed. Revisit when it gains real behaviour.
 
-**2026-08-31 — `BreakdownPreview` group (rows 2–9):** reviewed + refactored to conform — sub-components split to `components/`, styles region-grouped + single-sourced to `Const.Color`/`Const.Spacing`/`DateTime`, `Signature` de-defaulted + deterministic (`sentAt`), icons via shared `common/ux/Icon`. All CONFORMS (no floor). **DONE** — 14-test spec green + live test passed; Captain approved (`APPROVED=YES`). Checklist `Admin BreakdownPreview` reviewed. Residual COULDs (dedicated sub-specs, London-pinned time) are non-blocking.
+**2026-08-31 — `BreakdownPreview` group (rows 2–9):** reviewed + refactored to conform — sub-components split to `components/`, styles region-grouped + single-sourced to `Const.Color`/`Const.Spacing`/`DateTime`, `Signature` de-defaulted + deterministic (`sentAt`), icons via shared `common/ux/Icon`. All CONFORMS (no floor). **DONE** — 14-test spec green + live test passed approved (`APPROVED=YES`). Checklist `Admin BreakdownPreview` reviewed. Residual COULDs (dedicated sub-specs, London-pinned time) are non-blocking.
 
-**2026-08-31 — `Categories` group (rows 10–21):** reviewed + refactored to conform — roles grouped (`CategoriesQueries`/`CategoriesHandlers`/`CategoriesOptions`/`CategoriesSchema`/`CategoriesTransformers`/`CategoriesDefaults`), `columns` → `CategoriesColumns`, `getParent` → `CategoriesTransformers`, §5.2 import tiers + type-only imports, `Styles.scss` import corrected, a11y label `for="name"` wired, handler swallows post rejection (no unhandled error), feature test scaffold added in `tests/` (`CategoriesMocks`/`CategoriesMockHandlers`/`CategoriesTestUtils` + 9-test feature spec + pure specs for handlers/options/transformers). All CONFORMS (no floor; min 7). **DONE** — 15/15 specs green, zero unhandled errors; Captain approved (`APPROVED=YES`). Checklist `Categories` reviewed. Also codified the `tests/` support-file return convention (`FeatureMocks`/`FeatureMockHandlers`/`FeatureTestUtils`, incl. `customRender`) into ARCHITECTURE §1.2.1.
+**2026-08-31 — `Categories` group (rows 10–21):** reviewed + refactored to conform — roles grouped (`CategoriesQueries`/`CategoriesHandlers`/`CategoriesOptions`/`CategoriesSchema`/`CategoriesTransformers`/`CategoriesDefaults`), `columns` → `CategoriesColumns`, `getParent` → `CategoriesTransformers`, §5.2 import tiers + type-only imports, `Styles.scss` import corrected, a11y label `for="name"` wired, handler swallows post rejection (no unhandled error), feature test scaffold added in `tests/` (`CategoriesMocks`/`CategoriesMockHandlers`/`CategoriesTestUtils` + 9-test feature spec + pure specs for handlers/options/transformers). All CONFORMS (no floor; min 7). **DONE** — 15/15 specs green, zero unhandled errors; approved (`APPROVED=YES`). Checklist `Categories` reviewed. Also codified the `tests/` support-file return convention (`FeatureMocks`/`FeatureMockHandlers`/`FeatureTestUtils`, incl. `customRender`) into ARCHITECTURE §1.2.1.
 
 **2026-09-12 — `Admin` (parent feature):** reviewed + closed. Renamed
 `Admin.query.ts` → `Admin.queries.ts`; `useAdminApi` → `useAdminQueries`;

@@ -1,4 +1,4 @@
-import { Link } from '@common-ux'
+import { Heading, Link, List } from '@common-ux'
 import './References.scss'
 
 export interface Reference {
@@ -16,23 +16,26 @@ const References = ({ references }: Props) => {
         return (
             <section className="References">
                 <hr />
-                <h4>References</h4>
-                <ul>
-                    {references.map((reference, index) => (
-                        <li key={index}>
-                            <span className="left">
-                                <span className="References__index">[ {index + 1} ]</span>
-                                <span className="References__author">{reference.author}</span>
-                                <span className="References__title">{reference.title}</span>
-                            </span>
-                            {/^https?:\/\//.test(reference.source) ? (
-                                <Link href={reference.source}>{reference.source}</Link>
-                            ) : (
-                                <Link to={reference.source}>{reference.source}</Link>
-                            )}
-                        </li>
-                    ))}
-                </ul>
+                <Heading as="h4">References</Heading>
+                <List
+                    items={references.map((reference, index) => ({
+                        key: reference.title,
+                        content: (
+                            <>
+                                <span className="left">
+                                    <span className="References__index">[ {index + 1} ]</span>
+                                    <span className="References__author">{reference.author}</span>
+                                    <span className="References__title">{reference.title}</span>
+                                </span>
+                                {/^https?:\/\//.test(reference.source) ? (
+                                    <Link href={reference.source}>{reference.source}</Link>
+                                ) : (
+                                    <Link to={reference.source}>{reference.source}</Link>
+                                )}
+                            </>
+                        ),
+                    }))}
+                />
             </section>
         )
 }

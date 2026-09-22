@@ -1,6 +1,6 @@
 ﻿import { DateTime } from '@common-utils'
 
-/** Floor/constraint for settings fields â€” single source of truth for schema + model. */
+/** Floor/constraint for settings fields - single source of truth for schema + model. */
 export const SettingsFieldLimits = {
     maxUsers: { min: 1, max: 100 },
     enabledFeatures: { min: 5, max: 20 },

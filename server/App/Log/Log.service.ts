@@ -9,7 +9,7 @@ import { ApiTransformers } from '@common-utils'
 import { Paging } from '@common-utils'
 import { LogRepository } from './Log.repository'
 
-/** Business logic for logs â€” persistence via the repository. */
+/** Business logic for logs - persistence via the repository. */
 export const LogService = {
     /** Returns the full log table for the admin UI. */
     table: async (): Promise<GetLogTableResponse> => {

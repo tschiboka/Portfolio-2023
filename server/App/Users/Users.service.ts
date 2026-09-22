@@ -18,7 +18,7 @@ import { SettingsService } from '../Settings/Settings.service'
 import type { IUser } from './Users.types'
 import { TokenModel } from '../Token'
 
-/** Business logic for users & auth â€” persistence via the repository, validation via the schema. */
+/** Business logic for users & auth - persistence via the repository, validation via the schema. */
 export const UsersService = {
     /** Lists all users (admin-facing). */
     list: async (): Promise<User[]> => {

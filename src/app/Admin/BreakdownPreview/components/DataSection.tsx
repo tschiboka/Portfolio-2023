@@ -1,6 +1,10 @@
-import { isEmpty, type Option } from '@common-utils'
+import { type Option } from '@common-utils'
 import type { SectionData } from '../BreakdownPreview.types'
 import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
+import { Heading } from '@common-ux'
+import { Table } from '@common-ux/Table/Table'
+import { breakdownColumns } from '../BreakdownPreview.columns'
+import { BreakdownTransformers } from '../BreakdownPreview.transformers'
 
 export type DataSectionProps = {
     title: string
@@ -19,10 +23,10 @@ const StatCard = ({ label, value }: Option<number>) => (
 
 export const DataSection = ({ title, data, icon }: DataSectionProps) => (
     <>
-        <h3 style={BreakdownPreviewStyles.section.title}>
+        <Heading as="h3" style={BreakdownPreviewStyles.section.title}>
             {icon}
             {title}
-        </h3>
+        </Heading>
         <div
             style={{
                 display: 'flex',
@@ -33,33 +37,12 @@ export const DataSection = ({ title, data, icon }: DataSectionProps) => (
             <StatCard label="Today" value={data.todayCount} />
             <StatCard label="Total" value={data.totalCount} />
         </div>
-        <table style={BreakdownPreviewStyles.table.style}>
-            <thead>
-                <tr>
-                    <th style={BreakdownPreviewStyles.table.th}>Path</th>
-                    <th style={BreakdownPreviewStyles.table.thRight}>Today</th>
-                    <th style={BreakdownPreviewStyles.table.thRight}>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {isEmpty(data.today) ? (
-                    <tr>
-                        <td style={BreakdownPreviewStyles.table.empty} colSpan={3}>
-                            No data today
-                        </td>
-                    </tr>
-                ) : (
-                    data.today.map((item) => (
-                        <tr key={item.path}>
-                            <td style={BreakdownPreviewStyles.table.td}>{item.path}</td>
-                            <td style={BreakdownPreviewStyles.table.tdRight}>{item.count}</td>
-                            <td style={BreakdownPreviewStyles.table.tdTotal}>
-                                {data.total.find((t) => t.path === item.path)?.count ?? 0}
-                            </td>
-                        </tr>
-                    ))
-                )}
-            </tbody>
-        </table>
+        <Table
+            style={BreakdownPreviewStyles.table.style}
+            data={BreakdownTransformers.toRows(data)}
+            columns={breakdownColumns}
+            emptyState="No data today"
+            rowAriaLabel={title}
+        />
     </>
 )

@@ -49,7 +49,7 @@ const error = (doc: ILog): ActivityEvent => ({
     }),
 })
 
-/** Maps each activity collection's raw docs to feed rows â€” one per activity type. */
+/** Maps each activity collection's raw docs to feed rows - one per activity type. */
 export const ActivityTransformers = {
     visit,
     like,

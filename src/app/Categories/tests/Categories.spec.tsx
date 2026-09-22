@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { CategoriesMocks } from './Categories.mocks'
-import { CategoriesMockHandlers } from './Categories.mockHandles'
+import { CategoriesMockHandlers } from './Categories.mockHandlers'
 import { CategoriesTestUtils } from './Categories.spec.utils'
 
 const { fields, buttons, messages } = CategoriesTestUtils.labels

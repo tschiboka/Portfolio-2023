@@ -59,7 +59,7 @@ const getCurrentUser = async (req: Request): Promise<CurrentUser> => {
 }
 
 /**
- * Auth utilities for users â€” grouped by concern: `password`, `token`, `user`.
+ * Auth utilities for users - grouped by concern: `password`, `token`, `user`.
  * Reads like sentences: `UsersAuth.password.hash(plain)`, `UsersAuth.token.generate({...})`.
  */
 export const UsersAuth = {

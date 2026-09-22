@@ -1,18 +1,19 @@
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
 import { Nav } from './Nav.spec.utils'
+import { Button } from '@common-ux'
 
 const Set = Nav.Set
 
 describe('Nav', () => {
     describe('Visibility', () => {
         it('renders a header element when visible (default)', () => {
-            Set.mock({ children: <li>Home</li> })
+            Set.mock({ children: [<li key="home">Home</li>] })
             expect(Nav().Has.textContent()).toBe(true)
         })
 
         it('returns null when visible is false', () => {
-            Set.mock({ visible: false, children: <li>Home</li> })
+            Set.mock({ visible: false, children: [<li key="home">Home</li>] })
             expect(screen.queryByRole('banner')).not.toBeInTheDocument()
         })
     })
@@ -20,12 +21,7 @@ describe('Nav', () => {
     describe('Content', () => {
         it('renders children inside the nav_links list', () => {
             Set.mock({
-                children: (
-                    <>
-                        <li>Home</li>
-                        <li>About</li>
-                    </>
-                ),
+                children: [<li key="home">Home</li>, <li key="about">About</li>],
             })
 
             const nav = Nav()
@@ -36,7 +32,7 @@ describe('Nav', () => {
 
         it('renders a custom logo element', () => {
             Set.mock({
-                children: <li>Home</li>,
+                children: [<li key="home">Home</li>],
                 logo: <img src="logo.png" alt="Logo" />,
             })
 
@@ -46,7 +42,7 @@ describe('Nav', () => {
 
     describe('Styling', () => {
         it('applies custom className alongside Header class', () => {
-            Set.mock({ children: <li>Home</li>, className: 'CustomNav' })
+            Set.mock({ children: [<li key="home">Home</li>], className: 'CustomNav' })
             const nav = Nav()
             expect(nav.Get.className()).toContain('Header')
             expect(nav.Get.className()).toContain('CustomNav')
@@ -54,7 +50,7 @@ describe('Nav', () => {
 
         it('sets aria-label on the header', () => {
             Set.mock({
-                children: <li>Home</li>,
+                children: [<li key="home">Home</li>],
                 ariaLabel: 'Main navigation',
             })
 
@@ -63,7 +59,7 @@ describe('Nav', () => {
 
         it('applies inline style to the header', () => {
             Set.mock({
-                children: <li>Home</li>,
+                children: [<li key="home">Home</li>],
                 style: { backgroundColor: 'red' },
             })
 
@@ -73,21 +69,21 @@ describe('Nav', () => {
 
     describe('Burger', () => {
         it('renders the default burger icon when no burger prop is provided', () => {
-            Set.mock({ children: <li>Home</li> })
+            Set.mock({ children: [<li key="home">Home</li>] })
             expect(Nav().Has.burger('Extend Mobile Menu')).toBe(true)
         })
 
         it('renders a custom burger element instead of default', () => {
             Set.mock({
-                children: <li>Home</li>,
-                burger: <button title="Custom Burger">☰</button>,
+                children: [<li key="home">Home</li>],
+                burger: <Button ariaLabel="Custom Burger">☰</Button>,
             })
 
             expect(Nav().Has.burger('Custom Burger')).toBe(true)
         })
 
         it('toggles default burger from open to close icon on click', async () => {
-            Set.mock({ children: <li>Home</li> })
+            Set.mock({ children: [<li key="home">Home</li>] })
             const nav = Nav()
 
             await nav.Do.toggle('Extend Mobile Menu')
@@ -96,7 +92,7 @@ describe('Nav', () => {
         })
 
         it('toggles default burger back to open icon on second click', async () => {
-            Set.mock({ children: <li>Home</li> })
+            Set.mock({ children: [<li key="home">Home</li>] })
             const nav = Nav()
 
             await nav.Do.toggle('Extend Mobile Menu')

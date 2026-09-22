@@ -1,3 +1,4 @@
+import { Main, Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
 interface ViewRecordProps {
@@ -13,9 +14,9 @@ export const ViewRecord = ({ path }: ViewRecordProps) => {
             variant="app"
             pageName="View Records"
         >
-            <main>
-                <h1>View Records</h1>
-            </main>
+            <Main>
+                <Heading as="h1">View Records</Heading>
+            </Main>
         </Screen>
     )
 }

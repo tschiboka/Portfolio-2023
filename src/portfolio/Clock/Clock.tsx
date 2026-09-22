@@ -12,7 +12,6 @@ export const Clock = () => {
 
     return (
         <div className="ClockWidget">
-            <header></header>
             <div className="ClockContainer">
                 <div className="ClockFace">{clock && <ClockFaceCanvas clock={clock} />}</div>
             </div>

@@ -11,7 +11,7 @@ import { RoutinesRepository } from './Routines.repository'
 import { RoutinesPermissions } from './Routines.permissions'
 import { RoutineSchema } from './Routines.schema'
 
-/** Business logic for routines â€” persistence via the repository, authorisation via permissions. */
+/** Business logic for routines - persistence via the repository, authorisation via permissions. */
 export const RoutinesService = {
     /** Lists the requesting user's own routines plus any system routines. */
     listVisibleTo: async (user: CurrentUser): Promise<GymRoutineResource[]> => {
