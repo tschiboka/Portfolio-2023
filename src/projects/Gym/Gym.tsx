@@ -1,7 +1,7 @@
 import { Button, Code, Main, Section } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { useGetGymExercises, useGetGymUserRoutines } from './Gym.queries'
-import { ExercisesSection } from './components/ExerciesesSection/ExercisesSection'
+import { ExercisesSection } from './components/ExercisesSection/ExercisesSection'
 
 interface GymProps {
     path: string

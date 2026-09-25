@@ -4,9 +4,9 @@ import { Accessor } from '@common-ux/Test'
 import { AppContextProvider, SessionContext } from '@shared-context'
 import type { AppContextValues } from '@shared-context'
 import { Nav as NavComponent } from '../Nav'
-import { NavMenu as NavMenuComponent } from '../NavMenu'
+import { NavMenu as NavMenuComponent } from '../components/NavMenu'
 import type { NavProps } from '../Nav.types'
-import type { NavMenuProps } from '../NavMenu'
+import type { NavMenuProps } from '../components/NavMenu'
 
 const mockSessionValue = {
     session: undefined,

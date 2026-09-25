@@ -1,6 +1,4 @@
 import { ReactNode, useState } from 'react'
-
-// Components
 import { Screen } from '@shared-components/Screen/Screen'
 import LikeButton from './components/LikeButton/LikeButton'
 import References from './components/References/References'
@@ -8,11 +6,7 @@ import { getReferenceList } from './references'
 import BlogTimeStamp from '../Blog/components/BlogTimeStamp/BlogTimeStamp'
 import Disclaimer from './components/Disclaimer/Disclaimer'
 import { Main } from '@common-ux/Region/Main'
-
-// Other Assets
 import { blogArticles } from './articles'
-
-// Styles
 import SuggestedArticles from '../Blog/components/SuggestedArticles/SuggestedArticles'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { LikesQueries } from '@shared-queries'

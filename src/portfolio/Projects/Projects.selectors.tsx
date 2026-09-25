@@ -16,6 +16,7 @@ import tschibokaDarkImg from '@portfolio/assets/projects/TschibokaDark.png'
 import adrikaClockImg from '@portfolio/assets/projects/AdrikaClock.png'
 import { Strings } from '@common-utils'
 import { Project } from '.'
+import type { PillColor } from '@common-ux'
 
 const projects: Project[] = [
     {
@@ -476,8 +477,6 @@ export const technologies: Technology[] = [
         groupName: 'Backend',
     },
 ]
-
-import type { PillColor } from '@common-ux'
 
 export const getTechnologies = (technology: string) => {
     return technologies.find((tech) => Strings.equalIgnoreCase(tech.name, technology))

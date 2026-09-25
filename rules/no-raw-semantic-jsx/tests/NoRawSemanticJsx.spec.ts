@@ -1,13 +1,5 @@
-import { RuleTester } from 'eslint'
+import { ruleTester } from '../../config'
 import { ErrorMessage, Rules } from '../NoRawSemanticJsx.rules'
-
-const ruleTester = new RuleTester({
-    languageOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-        parserOptions: { ecmaFeatures: { jsx: true } },
-    },
-})
 
 const messageFor = (detail: string) => [ErrorMessage, detail].join(' ')
 

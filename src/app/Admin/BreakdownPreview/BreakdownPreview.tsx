@@ -17,7 +17,7 @@ import type { BreakdownPreviewProps } from './BreakdownPreview.types'
 import { DataSection } from './components/DataSection'
 import { Header } from './components/Header'
 import { BreakdownPreviewStyles, responsiveOverrides } from './BreakdownPreview.styles'
-import { Signature } from './Signature'
+import { Signature } from './components/Signature'
 
 export const BreakdownPreview = ({ breakdown }: BreakdownPreviewProps) => (
     <div className="bp-shell" style={BreakdownPreviewStyles.shell}>

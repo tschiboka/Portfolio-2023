@@ -1,5 +1,5 @@
 import { Const, SearchInputOption } from '@common-ux'
-import { icons } from './icons'
+import { icons } from './components/Icons'
 
 export const CategoriesOptions = {
     iconOptions: Object.keys(icons)

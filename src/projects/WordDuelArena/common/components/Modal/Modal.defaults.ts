@@ -1,4 +1,4 @@
-import { InvitationModal } from '../../../Home/InvitationModal/InvitationModal'
+import { InvitationModal } from '../../../Home/components/InvitationModal/InvitationModal'
 
 export const ModalRegistry = {
     invite: InvitationModal,

@@ -1,6 +1,6 @@
 import { GetCategoryResponse } from '@common-types'
 import { SearchInputOption } from '@common-ux'
-import { icons } from './icons'
+import { icons } from './components/Icons'
 
 export const CategoriesTransformers = {
     fromApi: (categories: GetCategoryResponse[]): SearchInputOption[] =>

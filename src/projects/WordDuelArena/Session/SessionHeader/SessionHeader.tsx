@@ -1,7 +1,7 @@
-import { Avatar } from './Avatar'
-import { Info } from './Info'
-import { LastAttempts } from './LastAttempts'
-import { MomentumBar } from './MomentumBar'
+import { Avatar } from './components/Avatar'
+import { Info } from './components/Info'
+import { LastAttempts } from './components/LastAttempts'
+import { MomentumBar } from './components/MomentumBar'
 import './SessionHeader.styles.css'
 
 export const SessionHeader = () => (

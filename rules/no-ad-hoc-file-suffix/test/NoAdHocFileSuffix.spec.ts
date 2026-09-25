@@ -1,14 +1,6 @@
-import { RuleTester } from 'eslint'
+import { ruleTester } from '../../config'
 import { NoAdHocFileSuffixConstants } from '../NoAdHocFileSuffix.constants'
 import { ErrorMessage, Rules } from '../NoAdHocFileSuffix.rules'
-
-const ruleTester = new RuleTester({
-    languageOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-        parserOptions: { ecmaFeatures: { jsx: true } },
-    },
-})
 
 const { AllowedRoles } = NoAdHocFileSuffixConstants
 

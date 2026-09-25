@@ -1,3 +1,3 @@
-export { Coin } from './Coin'
-export { Star } from './Star'
-export { CheckMark } from './CheckMark'
+export { Coin } from './components/Coin'
+export { Star } from './components/Star'
+export { CheckMark } from './components/CheckMark'

@@ -1,18 +1,13 @@
-// Components
 import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
 import { Code, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import InlineReference from '../components/InlineReference/InlineReference'
-
-// Images
 import TreeImg from '@portfolio/assets/blog/git_cheatsheet/tree.jpg'
 import centralisedVsDistributedImg from '@portfolio/assets/blog/git_cheatsheet/centrallised-distributed-version-control.png'
 import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.png'
 import GitStorage2Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-2.png'
 import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
-
-// Other Assets
-import codeSnippets from './codeSnippets'
+import codeSnippets from './GitCheatSheet.code'
 import { getReferenceList } from '../references'
 
 type Props = {

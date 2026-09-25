@@ -13,7 +13,6 @@ import {
     getComingSoonArticles,
     getSortedArticlesBy,
 } from './Blog.utils'
-
 import './Blog.scss'
 import { BlogSortBy } from './Blog.types'
 import { LikesQueries, VisitsQueries } from '@shared-queries'

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { Const } from '@common-ux'
 import { CategoriesOptions } from '../Categories.options'
-import { icons } from '../icons'
+import { icons } from '../components/Icons'
 
 describe('CategoriesOptions', () => {
     describe('iconOptions', () => {

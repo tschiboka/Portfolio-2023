@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
 import { Nav as TestNav } from './Nav.spec.utils'
 import type { MenuItem } from '../Nav.types'
-import type { NavMenuProps } from '../NavMenu'
+import type { NavMenuProps } from '../components/NavMenu'
 
 const baseItems: MenuItem[] = [
     { label: 'Home', path: '/' },

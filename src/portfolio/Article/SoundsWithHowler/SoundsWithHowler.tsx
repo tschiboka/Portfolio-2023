@@ -3,15 +3,12 @@ import { useEffect, useState } from 'react'
 import type { Nullable } from '@common-utils'
 import Figure from '@shared-components/Figure/Figure'
 import { Howl } from 'howler'
-
 // Images
 import equalizerImg from '@portfolio/assets/blog/soundsWithHowler/equalizer.jpg'
 import fretBoardImg from '@portfolio/assets/blog/soundsWithHowler/Fretboard.png'
 import highlightImg from '@portfolio/assets/blog/soundsWithHowler/Highlighted.png'
-
 // Icons
 import { BsSoundwave } from 'react-icons/bs'
-
 // Audio
 import E2MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/E2.mp3'
 import F2MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/F2.mp3'
@@ -34,15 +31,12 @@ import C4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds
 import D4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/D4.mp3'
 import Fs4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/Fs4.mp3'
 import G4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/G4.mp3'
-
 // Images
 import riffMasterHomeImg from '@portfolio/assets/blog/soundsWithHowler/RiffmasterHomePage.png'
 import fretboardNotesImg from '@portfolio/assets/blog/soundsWithHowler/FretboardNotes.png'
-
 // Other Assets
-import codeSnippets from './codeSnipets'
+import codeSnippets from './SoundsWithHowler.code'
 import { getReferenceList } from '../references'
-
 // Styles
 import './SoundsWithHowler.scss'
 import { Article } from '../Article'

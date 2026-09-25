@@ -1,15 +1,8 @@
-// Components
 import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
-
-// Images
 import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
-
-// Other Assets
-import codeSnippets from './codeSnippets'
+import codeSnippets from './JsDateValidation.code'
 import { getReferenceList } from '../references'
-
-// Styles
 import InlineReference from '../components/InlineReference/InlineReference'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
 

@@ -2,10 +2,10 @@ import { useRef, useState } from 'react'
 import { SessionHooks } from '../../Session.hooks'
 import { SessionWebSocketHooks } from '../../SessionWebSocket.hooks'
 import { useLetterWheelListeners } from './LetterWheel.hooks'
-import { Letter } from './Letter'
-import { LetterLines } from './LetterLines'
+import { Letter } from './components/Letter'
+import { LetterLines } from './components/LetterLines'
 import { LetterPosition, TouchState } from './LetterWheel.types'
-import { WordPreview } from './WordPreview'
+import { WordPreview } from './components/WordPreview'
 import './LetterWheel.styles.css'
 
 type LetterWheelProps = {

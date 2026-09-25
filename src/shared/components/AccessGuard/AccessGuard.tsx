@@ -2,12 +2,7 @@ import { AccessGuardProps } from './AccessGuard.types'
 import { useAccess } from './AccessGuard.hooks'
 import { resolveGuards } from './AccessGuard.utils'
 import { FaLock } from 'react-icons/fa'
-import {
-    HiddenRenderer,
-    DisabledRenderer,
-    SoftDisabledRenderer,
-    TooltipRenderer,
-} from './renderers'
+import { HiddenRenderer, DisabledRenderer, SoftDisabledRenderer, TooltipRenderer } from './utils'
 
 export const AccessGuard = ({ children, guards }: AccessGuardProps) => {
     const access = useAccess()

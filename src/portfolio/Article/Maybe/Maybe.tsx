@@ -3,11 +3,9 @@ import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
 import { Code, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import InlineReference from '../components/InlineReference/InlineReference'
-
 // Images
 import monetCoverImg from '@portfolio/assets/blog/Maybe/monet-cover.jpg'
 import comicImg from '@portfolio/assets/blog/Maybe/comic.png'
-
 // Other Assets
 import codeSnippets from './codeSnippets'
 import { getReferenceList } from '../references'

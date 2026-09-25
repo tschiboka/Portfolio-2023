@@ -1,8 +1,8 @@
 import { MouseEvent } from 'react'
 import { ModalRegistry } from './Modal.defaults'
-import { ModalHeader } from './ModalHeader'
-import { ModalBody } from './ModalBody'
-import { ModalActions } from './ModalActions'
+import { ModalHeader } from './components/ModalHeader'
+import { ModalBody } from './components/ModalBody'
+import { ModalActions } from './components/ModalActions'
 import type { ModalState } from './Modal.types'
 import './Modal.styles.css'
 

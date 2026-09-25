@@ -47,14 +47,15 @@ A skill describes the work a caller is doing, not a topic. Where two skills clai
 - [x] Step 10: Delete `ARCHITECTURE.md`
 - [x] Step 11: Rewrite `AGENTS.md` — §§1–2 rewritten and de-bloated, §2.1/§2.2 extracted as lint steps, §4 trimmed to conduct `working-style.md` does not already carry
 - [x] Step 12: Add a lint rule forbidding raw semantic elements in UI code — `h1`–`h6`, `section`, `div` — where a `common/ux` component exists. Rule `no-raw-semantic-jsx` registered with `scope.include`/`scope.exclude`; 26 tags enforced as errors. `section` and `div` sit in the unreachable `Warn[]` table, so they are not yet reported
-- [ ] Step 12.1: Add a lint rule forbidding ad-hoc role suffixes — a file's dot-segments must come from the role lists in [`docs/references/file-structure.md`](references/file-structure.md)
-    - [ ] Step 12.1.1: Add the `spec` prefix and `spec.<role>` infix forms to §1.1 and §1.3
-    - [ ] Step 12.1.2: Build `rules/no-ad-hoc-role-suffix/` — constants, rules, registrar, utils
-    - [ ] Step 12.1.3: Register it in `rules/registry.ts` as `severity: 'error'`
-    - [ ] Step 12.1.4: Scope to `src/**`, `common/**`, `server/**`
-    - [ ] Step 12.1.5: Add `tests/NoAdHocRoleSuffix.spec.ts`
-- [ ] Step 12.2: Add a lint rule requiring the primary feature file to be named after its folder — `Button/Button.tsx`, `BreakdownTable/BreakdownTable.tsx`
+- [x] Step 12.1: Add a lint rule forbidding ad-hoc role suffixes — a file's dot-segments must come from the role lists in [`docs/references/file-structure.md`](references/file-structure.md)
+    - [x] Step 12.1.1: Add the `spec` prefix and `spec.<role>` infix forms to §1.1 and §1.3
+    - [x] Step 12.1.2: Build `rules/no-ad-hoc-role-suffix/` — constants, rules, registrar, utils
+    - [x] Step 12.1.3: Register it in `rules/registry.ts` as `severity: 'error'`
+    - [x] Step 12.1.4: Scope to `src/**`, `common/**`, `server/**`
+    - [x] Step 12.1.5: Add `tests/NoAdHocRoleSuffix.spec.ts`
+- [x] Step 12.2: Add a lint rule requiring the primary feature file to be named after its folder — `Button/Button.tsx`, `BreakdownTable/BreakdownTable.tsx`
 - [ ] Step 12.3: Add a lint rule forbidding newlines between imports — imports stay contiguous, no blank lines inside the block
+- [ ] Step 12.4: Add a lint rule requiring a file's export to match its name — `Feature.tsx` → `Feature`, `Feature.queries.ts` → `FeatureQueries`, checked against the matching table in [`docs/references/file-structure.md`](references/file-structure.md)
 - [x] Step 13: Add the Predicate and Generics rule to `AGENTS.md`, then scan every skill for misuse of both
     - [x] Step 13.1: The `AGENTS.md` half — done with Step 11: `AGENTS.md` §1.2 carries the Generics and Predicate rule
 - [x] Step 14: Retire `component` into `ui` — one skill for a folder's shape and its look

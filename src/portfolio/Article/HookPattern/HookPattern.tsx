@@ -1,20 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
-
-// Components
 import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
 import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography } from '@common-ux'
 import InlineReference from '../components/InlineReference/InlineReference'
-
-// Images
 import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
 import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
-
-// Other Assets
-import codeSnippets from './codeSnippets'
+import codeSnippets from './HookPattern.code'
 import { getReferenceList } from '../references'
-
-// Styles
 import { AppHooks } from '@shared-context'
 
 interface Props {

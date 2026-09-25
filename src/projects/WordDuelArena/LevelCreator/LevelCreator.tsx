@@ -1,11 +1,11 @@
 import { ChangeEvent, useState } from 'react'
 import './LevelCreator.styles.css'
 import '../WordDuelArena.styles.css'
-import { LevelCreatorModal } from './LevelCreatorModal'
+import { LevelCreatorModal } from './components/LevelCreatorModal'
 import { getAnagramKey } from '../common/utils/Word/getAnagramKey'
 import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../common/utils/Word/constants'
 import { useGetLevelNames } from './LevelCreator.queries'
-import { LevelList } from './LevelList'
+import { LevelList } from './components/LevelList'
 import { LoadingIndicator } from '@common-ux'
 import { Browser } from '@common-utils'
 

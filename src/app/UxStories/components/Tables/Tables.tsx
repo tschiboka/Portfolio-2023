@@ -18,7 +18,7 @@ import {
     ColumnCustomization,
     Accessibility,
     AllFeaturesCombined,
-} from './Sections'
+} from './components'
 
 type TablesProps = {
     path: string

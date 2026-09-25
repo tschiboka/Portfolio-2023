@@ -1,7 +1,7 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { AccessGuard } from '@shared-components/AccessGuard'
-import { AdminHome } from './AdminHome'
-import { GuestHome } from './GuestHome'
+import { AdminHome } from './components/AdminHome'
+import { GuestHome } from './components/GuestHome'
 import { Heading, Main, Paragraph } from '@common-ux'
 
 interface HomeProps {

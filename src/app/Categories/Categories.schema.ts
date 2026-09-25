@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { Const } from '@common-ux'
-import { icons } from './icons'
+import { icons } from './components/Icons'
 import type { CategoryFormData } from './Categories.types'
 
 export const CategoriesSchema = {

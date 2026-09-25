@@ -1,13 +1,5 @@
-import { RuleTester } from 'eslint'
+import { ruleTester } from '../../config'
 import { Rules, ErrorMessage } from '../NoEmptyRowInJsx.rules'
-
-const ruleTester = new RuleTester({
-    languageOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module',
-        parserOptions: { ecmaFeatures: { jsx: true } },
-    },
-})
 
 ruleTester.run('no-newline-in-jsx', Rules.Eslint.Min9, {
     valid: [

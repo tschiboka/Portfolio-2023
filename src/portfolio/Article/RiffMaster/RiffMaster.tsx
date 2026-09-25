@@ -1,10 +1,8 @@
 // Components
 import Figure from '@shared-components/Figure/Figure'
 import { Article } from '../Article'
-
 // Icons
 import { FiDownload } from 'react-icons/fi'
-
 // Imges
 import buildGiutarStockImg from '@portfolio/assets/blog/riffMaster/BuildGuitarStockPhoto.png'
 import guitarImg from '@portfolio/assets/about/RiffMaster.png'
@@ -44,13 +42,11 @@ import headStockDesignImg from '@portfolio/assets/blog/riffMaster/HeadStock.png'
 import headStockBackImg from '@portfolio/assets/blog/riffMaster/HeadStockBack.jpg'
 import headStockFrontImg from '@portfolio/assets/blog/riffMaster/HeadStockFront.jpg'
 import saddleImg from '@portfolio/assets/blog/riffMaster/Saddle.jpg'
-
 // Other Assets
 import controllerCode from '@portfolio/assets/blog/files/riffmaster/controller.txt'
 import dissertation from '@portfolio/assets/blog/files/riffmaster/Dissertation_Online.pdf'
-import codeSnippets from './codeSnippets'
+import codeSnippets from './RiffMaster.code'
 import { getReferenceList } from '../references'
-
 // Styles
 import './RiffMaster.scss'
 import InlineReference from '../components/InlineReference/InlineReference'
