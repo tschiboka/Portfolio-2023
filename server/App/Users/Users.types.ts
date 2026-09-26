@@ -15,8 +15,8 @@ import type {
     TypedResponse,
 } from '../../../common/types'
 
-/** Mongoose document shape for a user. */
-export interface IUser extends Document {
+/** Mongoose document shape for a user. `Document<ObjectId>` types `_id`, which defaults to `any`. */
+export interface IUser extends Document<mongoose.Types.ObjectId> {
     fullName: string
     userName: string
     email: string
@@ -98,5 +98,3 @@ export type PostConfirmRes = TypedResponse<PostConfirmResponse>
 // /api/session
 export type SessionReq = TypedRequest
 export type SessionRes = TypedResponse<GetSessionResponse>
-
-

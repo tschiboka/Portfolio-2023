@@ -26,6 +26,7 @@ const schema = Joi.object({
 })
 
 export const SettingsSchema = {
-    validate: (settings: SettingsInput) => schema.validate(settings),
+    validate: (settings: SettingsInput): Joi.ValidationResult<SettingsInput> =>
+        schema.validate(settings),
     schema,
 }

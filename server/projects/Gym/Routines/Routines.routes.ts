@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiMessage, ApiResponder } from '@common-utils'
 import { UsersAuth } from '../../../App/Users/Users.auth'
-import { auth } from '../../../App/Users/Users.middlewares'
+import { auth } from '../../../App/Users/Users.middleware'
 import { RoutinesService } from './Routines.service'
 import type {
     DeleteRoutineReq,

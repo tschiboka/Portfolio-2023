@@ -1,5 +1,5 @@
 ﻿import { Repository } from '@common-utils'
-import { RoutineModel } from './Routines.models'
+import { RoutineModel } from './Routines.model'
 import type { IGymRoutine } from './Routines.types'
 
 /** Data-access layer for routines - generic CRUD plus routine-specific queries. */

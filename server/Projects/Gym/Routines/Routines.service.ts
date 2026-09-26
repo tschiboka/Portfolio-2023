@@ -1,15 +1,14 @@
-﻿import type {
+﻿import mongoose from 'mongoose'
+import { ApiResponder, ApiTransformers, isValidObjectId } from '@common-utils'
+import { RoutinesRepository } from './Routines.repository'
+import { RoutinesPermissions } from './Routines.permissions'
+import { RoutineSchema } from './Routines.schema'
+import type {
     CurrentUser,
     GymRoutineResource,
     PatchGymRoutineRequest,
     PostGymRoutineRequest,
 } from '../../../../common/types'
-import { ApiResponder } from '@common-utils'
-import { ApiTransformers } from '@common-utils'
-import { isValidObjectId } from '@common-utils'
-import { RoutinesRepository } from './Routines.repository'
-import { RoutinesPermissions } from './Routines.permissions'
-import { RoutineSchema } from './Routines.schema'
 
 /** Business logic for routines - persistence via the repository, authorisation via permissions. */
 export const RoutinesService = {
@@ -24,14 +23,22 @@ export const RoutinesService = {
         input: PostGymRoutineRequest,
         user: CurrentUser,
     ): Promise<GymRoutineResource> => {
-        const { error, value } = RoutineSchema.validate({
+        const result = RoutineSchema.validate({
             ...input,
             source: 'user',
-            ownerId: user._id,
+            ownerId: user._id.toString(),
         })
-        if (error) throw ApiResponder.badRequest(error)
+        if (result.error) throw ApiResponder.badRequest(result.error)
+        const { value } = result
 
-        const routine = RoutinesRepository.create(value)
+        const routine = RoutinesRepository.create({
+            ...value,
+            ownerId: new mongoose.Types.ObjectId(String(value.ownerId)),
+            entries: value.entries.map(({ exerciseId, order }) => ({
+                exerciseId: new mongoose.Types.ObjectId(exerciseId),
+                order,
+            })),
+        })
         await RoutinesRepository.save(routine)
 
         return ApiTransformers.toApiResource<GymRoutineResource>(routine)

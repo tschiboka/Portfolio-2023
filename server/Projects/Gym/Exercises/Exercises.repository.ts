@@ -1,5 +1,5 @@
 ﻿import { Repository } from '@common-utils'
-import { ExerciseModel } from './Exercises.models'
+import { ExerciseModel } from './Exercises.model'
 import type { IGymExercise } from './Exercises.types'
 
 /** Data-access layer for exercises - generic CRUD plus exercise-specific queries. */

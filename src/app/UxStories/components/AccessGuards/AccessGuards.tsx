@@ -1,6 +1,6 @@
 import { AccessGuard } from '@shared-components/AccessGuard'
 import { useForm } from 'react-hook-form'
-import { Guards } from './Guards'
+import { Guards } from './AccessGuards.data'
 import {
     Button,
     Code,

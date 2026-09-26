@@ -1,0 +1,719 @@
+# 0009 — Linting rules
+
+## 1. Description
+
+New registry rules that bind conventions a skill can only describe: a file's
+export surface, a file's role-named export, a role file's spec companion, a
+barrel's export order, the ban on default exports, the ban on SCSS in `common/`,
+provenance for breakpoints, colours, z-index and font size, the `it('should
+<verb> …')` test-name form, the placement of a spec helper in its role file, and
+the brace-free single-statement arrow body, the export shape of a feature's
+queries object, validation bounds and patterns drawn from a constant, and
+validation messages drawn from `ValidationMessage`, the resolver bound in its
+schema file, one import per path and kind, the ban on `for` / `while` loops, and
+a `TODO` that carries a ticket reference. Each is registered in
+`rules/registry.ts` with scope, severity and a matching spec, following the shape
+of the rules already shipping.
+
+The candidates came from an audit of every `SKILL.md` and every example file
+beside one — §5 holds the result. These twenty are the first pass; the remaining
+`New` rows stay there until a later ticket picks them up.
+
+## 1.1 Info
+
+| Status       | In progress |
+| ------------ | ----------- |
+| Last updated | 2026-09-26  |
+| Created      | 2026-09-25  |
+| Scope        | `rules/`    |
+
+Every step's "Run `rules sync`" substep means `npm run build:rules` — the script
+that compiles `rules/` and runs `builder.ts`. No `rules sync` command exists.
+`npm run lint` now runs `eslint src server common`, and `server/**` has left the
+top-level `ignores`, so the whole tree is linted. `rules/` and `scripts/` still are
+not.
+
+## 2. Feature Dev Checklist
+
+- [x] Step 0: Close the filename-convention gaps found by the role audit
+    - [x] Step 0.1: Decide whether `codeSnippets.ts` keeps its name or gains a role —
+          Steps 10, 14 and 20.3 all key their shared displayed-code exemption on it
+    - [x] Step 0.2: Rename or allow-list the plain leaves in `src/portfolio/Article/` —
+          `references.ts`, `articles.ts`, `stories.ts` under `UxStories/`, and the six
+          `codeSnippets.ts` files under `Article/`
+    - [x] Step 0.3: Rename or allow-list the `Word/` leaves in
+          `src/projects/WordDuelArena/common/utils/Word/` — `wordGroups.ts`,
+          `getAnagramKey.ts`, `getPossibleWords.ts`
+    - [x] Step 0.4: Resolve the `server/` unlisted role forms — `service`, `middlewares`
+          (2 files), `models` (2 files) — against the allowed `middleware` / `model`
+    - [x] Step 0.5: Fix `server/Projects/Gym/Gym.routes..ts` — the double dot matches no
+          allowed shape
+    - [x] Step 0.6: Decide the folder-role question for `server/Projects/WordDuelArena/**`
+          — ~30 files carry the role in the folder, not the filename; the convention
+          either accepts folder-role or the tree is refactored
+    - [x] Step 0.7: Confirm `DailyAnaliticsEmail.code.ts` — `Analitics` reads as a typo
+          for `Analytics`
+    - [x] Step 0.8: Fold whatever Step 0.1–0.7 decide into
+          [`no-ad-hoc-file-suffix`](../rules/no-ad-hoc-file-suffix) so the rule and the
+          codebase agree
+    - [x] Step 0.9: Widen the lint script to `eslint src server common` — done, and it
+          is what surfaced 0.10–0.14
+    - [x] Step 0.10: Clear the live `standards/*` violations the widen exposed — these
+          are the ticket's own rules, never reachable before
+        - [x] Step 0.10.1: `no-newline-in-imports` — 14 sites, concentrated in
+              `server/Projects/WordDuelArena/**`
+        - [x] Step 0.10.2: `no-empty-row-in-jsx` — 9 sites, `common/ux/**`
+        - [x] Step 0.10.3: `no-ad-hoc-file-suffix` — the 9 sites from 0.1–0.7
+    - [x] Step 0.11: Close the config gaps that report deliberate code as a defect
+        - [x] Step 0.11.1: `no-unused-vars` on `_`-prefixed names — `_`, `_args`,
+              `_sessionState`, `deviceId`, `Sessions`; the underscore is the project's
+              own "intentionally unused" marker, so the fix is an ignore pattern, not
+              deleting the bindings
+        - [x] Step 0.11.2: Positionally-required middleware args — `next` in
+              `App.middlewares.ts`, `Users.middlewares.ts`; same pattern, and 0.4 may
+              rename these files anyway
+        - [x] Step 0.11.3: The 5 unused `eslint-disable` directives — `Predicate.spec.ts`,
+              `FeatureQuery.spec.ts`, `Query.spec.ts`, `Link.spec.tsx`,
+              `Section.spec.tsx`, `Filtering.spec.tsx`, `Form.tsx`; each is a stale
+              suppression, so check what it once silenced before removing it
+    - [x] Step 0.12: Resolve the redundant type assertions — `common/` carries most of
+          them, `common/utils/Predicate/Predicate.ts` alone has 5
+        - [x] Step 0.12.1: `common/`, ~15 sites including `Browser.spec.ts`,
+              `ApiMessage.spec.ts`, `Query/Key.ts`, `useTableController.ts`,
+              `Test/Section`, `Test/Server/MockBuilder.ts`, `Test/Table/Table.tsx`
+        - [x] Step 0.12.2: `server/`, ~4 sites — `Category.schema.ts`, `Users.schema.ts`,
+              `Users.middlewares.ts`, `Users.service.ts`
+        - [x] Step 0.12.3: Where this rule and `no-unsafe-*` collide on one site, fix the
+              type rather than re-adding the assertion
+    - [x] Step 0.13: Type the `any` boundaries in `server/` — ~45 sites, the largest and
+          riskiest group; every one is `any` flowing from Mongoose documents or
+          `req`/socket payloads, so the fix is a typed boundary, not a cast
+        - [x] Step 0.13.1: `Schedule.service.ts` — 10 sites from one `any`; likely one
+              typed accessor rather than 10 edits
+        - [x] Step 0.13.2: `Users.service.ts` — 7 sites
+        - [x] Step 0.13.3: `Users.auth.ts` — 3 sites
+        - [x] Step 0.13.4: `Settings.service.ts`, `Exercises.service.ts`,
+              `Routines.service.ts` — destructuring and argument sites
+        - [x] Step 0.13.5: `WordDuelArena/transport/ws/index.ts` — socket message
+              payloads; also carries the 2 `no-misused-promises` sites
+        - [x] Step 0.13.6: `WordDuelArena/infrastructure/resources/word.ts`,
+              `Message.schema.ts` — the remainder
+    - [x] Step 0.14: Review the per-site judgement calls
+        - [x] Step 0.14.1: `require-await` — 8 sites in `Gym/*.routes.ts`,
+              `Xmas.routes.ts`, `WordDuelArena/transport/http/handlers/word.ts`; drop
+              `async` or add the missing `await`, per site
+        - [x] Step 0.14.2: `no-floating-promises` — `server/index.ts:6,11`; prefer
+              `await` or `.catch` over `void`, which would silence a real rejection risk
+        - [x] Step 0.14.3: `only-throw-error` — `Schedule.utils.ts:161`
+        - [x] Step 0.14.4: `no-base-to-string` — 5 sites in `Predicate.ts`,
+              `Strings/optional/trim.ts`, `ApiTransformers.ts`, `FilterInput.tsx`
+        - [x] Step 0.14.5: `no-unused-expressions` — `Canvas.ts:70`, `Input.tsx:52`
+        - [x] Step 0.14.6: `no-unexpected-multiline`, `jsx-newline` — `Test/Table/Table.tsx:28`,
+              `DateInput.tsx`
+    - [x] Step 0.15: Confirm a green `tsc`, lint, and test run
+- [ ] Step 1: Rule — a role file exports exactly one value
+    - [ ] Step 1.1: Build `rules/no-multiple-exports/`
+    - [ ] Step 1.2: Scope to the filenames listed in the rule's own constant — not to
+          roles, since `codeSnippets.ts` and the `WordDuelArena` tree are not role-named
+    - [ ] Step 1.3: Register as `severity: 'error'`
+    - [ ] Step 1.4: Add `tests/NoMultipleExports.spec.ts`
+    - [ ] Step 1.5: Run `rules sync`, then verify the generated config
+    - [ ] Step 1.6: Sweep every file in scope and fix or suppress each violation
+    - [ ] Step 1.7: Confirm a green `tsc`, lint, and test run
+- [ ] Step 2: Rule — a role file's export name matches its role
+    - [ ] Step 2.1: Build `rules/role-export-name/`
+    - [ ] Step 2.2: Read the expected name from §1.2's role-returns table
+    - [ ] Step 2.3: Cover the `use<Verb>` forms for `queries` and `hooks`
+    - [ ] Step 2.4: Register as `severity: 'error'`
+    - [ ] Step 2.5: Add `tests/RoleExportName.spec.ts`
+    - [ ] Step 2.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 2.7: Sweep every file in scope and fix or suppress each violation
+    - [ ] Step 2.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 3: Rule — a testable role file has a matching spec
+    - [ ] Step 3.1: Build `rules/matching-spec/`
+    - [ ] Step 3.2: Scope `include` to the `YES` rows in §1.3, `exclude` the rest
+    - [ ] Step 3.3: Register as `severity: 'error'`
+    - [ ] Step 3.4: Add `tests/MatchingSpec.spec.ts`
+    - [ ] Step 3.5: Run `rules sync`, then verify the generated config
+    - [ ] Step 3.6: Sweep every file in scope and fix or suppress each violation
+    - [ ] Step 3.7: Confirm a green `tsc`, lint, and test run
+- [ ] Step 4: Rule — a barrel's exports are alphabetical, types last
+    - [ ] Step 4.1: Build `rules/barrel-order/`
+    - [ ] Step 4.2: Scope `include` to every `index.ts` under `src/`, `common/`, `server/`
+    - [ ] Step 4.3: Sort by exported symbol, not by source path — `export type` last
+    - [ ] Step 4.4: Register as `severity: 'error'`
+    - [ ] Step 4.5: Add `tests/BarrelOrder.spec.ts`
+    - [ ] Step 4.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 4.7: Sweep every barrel and fix or suppress each violation
+    - [ ] Step 4.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 5: Rule — a module has no default export
+    - [ ] Step 5.1: Build `rules/no-default-export/`
+    - [ ] Step 5.2: Cover `export default`, `export { x as default }`, and a bare `export default` expression
+    - [ ] Step 5.3: Scope to `src/**`, `common/**`, `server/**` — config files are `cjs` and exempt
+    - [ ] Step 5.4: Register as `severity: 'error'`
+    - [ ] Step 5.5: Add `tests/NoDefaultExport.spec.ts`
+    - [ ] Step 5.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 5.7: Sweep every module and fix or suppress each violation
+    - [ ] Step 5.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 6: Rule — `common/` imports no SCSS
+    - [ ] Step 6.1: Build `rules/no-scss-in-common/`
+    - [ ] Step 6.2: Flag an import of a `.scss` / `.sass` path that resolves under `common/`
+    - [ ] Step 6.3: Scope `include` to `common/**`, since the import may sit in either folder
+    - [ ] Step 6.4: Register as `severity: 'error'`
+    - [ ] Step 6.5: Add `tests/NoScssInCommon.spec.ts`
+    - [ ] Step 6.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 6.7: Confirm no violation exists — `common/` is 31 CSS files and no SCSS today
+    - [ ] Step 6.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 7: Reach CSS — decide the mechanism the CSS rules need
+    - [ ] Step 7.1: Confirm `eslint.config.js` parses `**/*.{ts,tsx}` only — it does
+    - [ ] Step 7.2: Pick one: a CSS parser, a `no-restricted-syntax`-style config block, or a non-ESLint checker in the registry
+    - [ ] Step 7.3: Record the choice in §3 — Steps 8–10 cannot land without it
+- [ ] Step 8: Rule — a media query uses a named breakpoint
+    - [ ] Step 8.1: Build `rules/no-magic-breakpoint/`
+    - [ ] Step 8.2: Flag a px value in `@media` that is not in `Const.Breakpoint`
+    - [ ] Step 8.3: Accept `max-width` forms as the token minus one — `max-width: 767px` is `md`
+    - [ ] Step 8.4: Scope to `common/**/*.css` and `src/**/*.{css,scss}`
+    - [ ] Step 8.5: Register as `severity: 'error'`
+    - [ ] Step 8.6: Add `tests/NoMagicBreakpoint.spec.ts`
+    - [ ] Step 8.7: Run `rules sync`, then verify the generated config
+    - [ ] Step 8.8: Fix `ContentNavigator.styles.css:35` — `1024px` is not a token
+    - [ ] Step 8.9: Fix `Region.styles.css:132` — `168px` is not a token
+    - [ ] Step 8.10: Sweep the remaining `@media` blocks — 80 across 11 files
+    - [ ] Step 8.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 9: Rule — a colour comes from `Const.Color`
+    - [ ] Step 9.1: Build `rules/no-raw-color/`
+    - [ ] Step 9.2: Flag a hex, `rgb()` or `hsl()` value that is not in the palette
+    - [ ] Step 9.3: Accept CSS custom properties — `var(--black-2)` is already the palette
+    - [ ] Step 9.4: Cover `.styles.ts` and `.css` in one rule, so both surfaces agree
+    - [ ] Step 9.5: Register as `severity: 'error'`
+    - [ ] Step 9.6: Add `tests/NoRawColor.spec.ts`
+    - [ ] Step 9.7: Run `rules sync`, then verify the generated config
+    - [ ] Step 9.8: Fix `Code.styles.css:65` — `#191b21` is not in the palette
+    - [ ] Step 9.9: Sweep the remaining colour literals and fix or suppress each
+    - [ ] Step 9.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 10: Rule — a z-index comes from `Const.ZIndex`
+    - [ ] Step 10.1: Build `rules/no-raw-zindex/`
+    - [ ] Step 10.2: Flag a numeric `zIndex` in `.styles.ts` outside `Const.ZIndex`
+    - [ ] Step 10.3: Exempt displayed code — `codeSnippets.ts` holds samples, not styling
+    - [ ] Step 10.4: Register as `severity: 'error'`
+    - [ ] Step 10.5: Add `tests/NoRawZindex.spec.ts`
+    - [ ] Step 10.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 10.7: Sweep every `zIndex` and fix or suppress each
+    - [ ] Step 10.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 11: Rule — a font size comes from `Const.Font`
+    - [ ] Step 11.1: Build `rules/no-raw-font-size/`
+    - [ ] Step 11.2: Flag a `font-size` / `fontSize` not expressed as a token
+    - [ ] Step 11.3: Accept the `em` scale — `Font` is `em`-based, so a `rem` or `px` size is the tell
+    - [ ] Step 11.4: Register as `severity: 'warn'` — no live violations known, unlike Steps 8 and 9
+    - [ ] Step 11.5: Add `tests/NoRawFontSize.spec.ts`
+    - [ ] Step 11.6: Run `rules sync`, then verify the generated config
+    - [ ] Step 11.7: Sweep every font size, and raise to `error` if the sweep is clean
+    - [ ] Step 11.8: Confirm a green `tsc`, lint, and test run
+- [ ] Step 12: Rule — a test name reads `it('should <verb> …')`
+    - [ ] Step 12.1: Build `rules/test-name-verb/`
+    - [ ] Step 12.2: Flag an `it` / `test` whose name does not open with `should `
+    - [ ] Step 12.3: Accept `it.each` — the template still carries the literal opening
+    - [ ] Step 12.4: Accept a spec whose parent `describe` supplies the subject; only the `it` is checked
+    - [ ] Step 12.5: Scope `include` to `**/tests/**/*.spec.{ts,tsx}` and `**/*.spec.{ts,tsx}`
+    - [ ] Step 12.6: Register as `severity: 'error'`
+    - [ ] Step 12.7: Add `tests/TestNameVerb.spec.ts`
+    - [ ] Step 12.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 12.9: Decide the migration — fix `should` into all 302 names, or suppress the files wholesale
+    - [ ] Step 12.10: Apply the migration across the 23 offending spec files
+    - [ ] Step 12.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 13: Rule — no helper above `describe` outside its role file
+    - [ ] Step 13.1: Build `rules/no-helper-above-describe/`
+    - [ ] Step 13.2: Flag a function declared above the first `describe` in a spec
+    - [ ] Step 13.3: Allow an alias, a destructure, and a `vi.mock` / `vi.mocked` handle
+    - [ ] Step 13.4: Allow `beforeEach` / `afterEach` — they are hooks, not helpers
+    - [ ] Step 13.5: Point the message at the role file the helper belongs in — `.spec.utils.ts` for a render or interaction helper, `.mocks.ts` for data
+    - [ ] Step 13.6: Scope `include` to `**/tests/**/*.spec.{ts,tsx}` and `**/*.spec.{ts,tsx}`
+    - [ ] Step 13.7: Register as `severity: 'error'`
+    - [ ] Step 13.8: Add `tests/NoHelperAboveDescribe.spec.ts`
+    - [ ] Step 13.9: Run `rules sync`, then verify the generated config
+    - [ ] Step 13.10: Move the seven `setup*` helpers into their `.spec.utils.ts` files
+    - [ ] Step 13.11: Sweep the remaining local builders and identity constants
+    - [ ] Step 13.12: Confirm a green `tsc`, lint, and test run
+- [ ] Step 14: Rule — no braces around a single-statement arrow body
+    - [ ] Step 14.1: Build `rules/no-braced-arrow-body/`
+    - [ ] Step 14.2: Flag an arrow body that is a block holding one expression statement and no return
+    - [ ] Step 14.3: Leave a body with an explicit `return` alone — it is a different shape, not a brace to strip
+    - [ ] Step 14.4: Leave a body of one `await` with a discarded value alone, where dropping the brace changes the return
+    - [ ] Step 14.5: Scope to `src/**`, `common/**`, `server/**` — a `.code.ts` sample is displayed, not run
+    - [ ] Step 14.6: Register as `severity: 'warn'`
+    - [ ] Step 14.7: Add `tests/NoBracedArrowBody.spec.ts`
+    - [ ] Step 14.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 14.9: Sweep every offending arrow and fix or suppress each
+    - [ ] Step 14.10: Raise to `error` once the sweep is clean
+    - [ ] Step 14.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 15: Rule — a queries object exports `use*` leaves and PascalCase groups
+    - [ ] Step 15.1: Build `rules/queries-export-shape/`
+    - [ ] Step 15.2: Locate the exported `<Feature>Queries` object and read its keys
+    - [ ] Step 15.3: Flag a depth-1 key that does not start with `use`
+    - [ ] Step 15.4: Flag a depth-1 key whose remainder is not PascalCase — `useGetActivityFeed`
+    - [ ] Step 15.5: Flag a depth-2 key that _does_ start with `use` — a group is PascalCase, `Settings` not `useSettings`
+    - [ ] Step 15.6: Check the **key**, never the referenced function — `useGet: useGetActivityFeed` is correct
+    - [ ] Step 15.7: Allow leaves only at depth 2 — a group does not nest again
+    - [ ] Step 15.8: Scope `include` to `**/*.queries.ts`
+    - [ ] Step 15.9: Register as `severity: 'error'`
+    - [ ] Step 15.10: Add `tests/QueriesExportShape.spec.ts`
+    - [ ] Step 15.11: Run `rules sync`, then verify the generated config
+    - [ ] Step 15.12: Confirm no violation exists — 12 files, 23 hooks, 5 groups, all conforming
+    - [ ] Step 15.13: Confirm a green `tsc`, lint, and test run
+- [ ] Step 16: Rule — a validation bound or pattern comes from a constant
+    - [ ] Step 16.1: Build `rules/no-inline-validation-literal/`
+    - [ ] Step 16.2: Flag a numeric literal argument to `.min()` / `.max()` / `.length()`
+    - [ ] Step 16.3: Flag an inline regex literal in `.matches()`
+    - [ ] Step 16.4: Flag a numeric comparison in a `.test()` callback — `val.length >= 10`
+    - [ ] Step 16.5: Allow `.min(1)` — the identity case for presence, not a field bound
+    - [ ] Step 16.6: Point the message at the home the value needs — `Regexp` when shared, `<Feature>.constants.ts` when the feature's own
+    - [ ] Step 16.7: Resolve the `server/**` ignore — `eslint.config.js` skips it, and the BE schemas are in scope
+    - [ ] Step 16.8: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
+    - [ ] Step 16.9: Register as `severity: 'error'`
+    - [ ] Step 16.10: Add `tests/NoInlineValidationLiteral.spec.ts`
+    - [ ] Step 16.11: Run `rules sync`, then verify the generated config
+    - [ ] Step 16.12: Fix `Contact.schema.ts` — `.max(50)`, `.min(6)`, `.min(10)`, both regexes, `>= 10`, `<= 16`
+    - [ ] Step 16.13: Fix `Categories.schema.ts` — `.max(20)`, `.min(10)`, `.max(255)`
+    - [ ] Step 16.14: Fix `Login.schema.ts` — `.min(8)`, `.max(255)`, `.min(8)`, `.max(40)`
+    - [ ] Step 16.15: Fix `Exercises.schema.ts` — `.min(1)`, unless 16.5 exempts it
+    - [ ] Step 16.16: Sweep the remaining schemas and fix or suppress each violation
+    - [ ] Step 16.17: Confirm a green `tsc`, lint, and test run
+- [ ] Step 17: Rule — a validation message comes from `ValidationMessage`
+    - [ ] Step 17.1: Build `rules/validation-message-source/`
+    - [ ] Step 17.2: Flag a string literal passed as a yup method's message argument
+    - [ ] Step 17.3: Flag a string literal as a `.test()` second argument
+    - [ ] Step 17.4: Flag a `message:` property whose value is a string literal
+    - [ ] Step 17.5: Accept any `ValidationMessage.*` call — the set is six methods and may grow
+    - [ ] Step 17.6: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
+    - [ ] Step 17.7: Register as `severity: 'error'`
+    - [ ] Step 17.8: Add `tests/ValidationMessageSource.spec.ts`
+    - [ ] Step 17.9: Run `rules sync`, then verify the generated config
+    - [ ] Step 17.10: Design the catalogue entries the sweep needs — `Invalid('option')` covers the three in `Categories.schema.ts`, and `Contact.schema.ts` needs a phone-format and a character-set entry, since no method names either
+    - [ ] Step 17.11: Fix `Categories.schema.ts` — three `.test()` message strings
+    - [ ] Step 17.12: Fix `Contact.schema.ts` — `.email()`, three `.test()` strings, two `message:` blocks, `.min(10, …)`
+    - [ ] Step 17.13: Fix `LevelCreator.schema.ts` — `.required('Please select words')`
+    - [ ] Step 17.14: Sweep the remaining schemas and fix or suppress each violation
+    - [ ] Step 17.15: Confirm a green `tsc`, lint, and test run
+- [ ] Step 18: Rule — a schema file exports its own bound resolver
+    - [ ] Step 18.1: Build `rules/resolver-in-schema/`
+    - [ ] Step 18.2: Flag a `yupResolver(...)` call outside a `*.schema.ts` file
+    - [ ] Step 18.3: Flag a `*.schema.ts` that declares a schema but exports no resolver
+    - [ ] Step 18.4: Accept a schema built by a factory — `Categories.schema.ts` takes options, so its resolver is a factory too
+    - [ ] Step 18.5: Scope `include` to `src/**/*.tsx` and `src/**/*.schema.ts`
+    - [ ] Step 18.6: Register as `severity: 'error'`
+    - [ ] Step 18.7: Add `tests/ResolverInSchema.spec.ts`
+    - [ ] Step 18.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 18.9: Fix `Login.tsx`, `Register.tsx`, `Contact.tsx`, `Xmas2025.tsx` — export a resolver from each schema and read it
+    - [ ] Step 18.10: Fix `Categories.tsx` — the schema is a factory, so the resolver must be one too
+    - [ ] Step 18.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 19: Rule — one import per path and kind
+    - [ ] Step 19.1: Build `rules/no-duplicate-import/`
+    - [ ] Step 19.2: Count `ImportDeclaration` by source path per file
+    - [ ] Step 19.3: Flag two imports of one path with the same `importKind`
+    - [ ] Step 19.4: Allow one value and one type import of the same path — §1.2 requires the type-only group
+    - [ ] Step 19.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 19.6: Register as `severity: 'error'`
+    - [ ] Step 19.7: Add `tests/NoDuplicateImport.spec.ts`
+    - [ ] Step 19.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 19.9: Sweep every module and fix or suppress each violation
+    - [ ] Step 19.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 20: Rule — no `for` or `while` loop
+    - [ ] Step 20.1: Build `rules/no-loop-statement/`
+    - [ ] Step 20.2: Flag `ForStatement`, `WhileStatement`, `DoWhileStatement`, `ForOfStatement` and `ForInStatement`
+    - [ ] Step 20.3: Exempt a displayed code sample — `*.code.ts`, `*.code.tsx`, `codeSnippets.ts`, as in Steps 10 and 14
+    - [ ] Step 20.4: Review the 8 arithmetic sites individually — see §2.1, they may not convert
+    - [ ] Step 20.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 20.6: Register as `severity: 'error'`
+    - [ ] Step 20.7: Add `tests/NoLoopStatement.spec.ts`
+    - [ ] Step 20.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 20.9: Convert the straightforward iterations — `.forEach` for side effects, `reduce` where it accumulates
+    - [ ] Step 20.10: Sweep the remaining loophole or suppress each, with the reason recorded
+    - [ ] Step 20.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 21: Rule — a `TODO` carries a ticket reference
+    - [ ] Step 21.1: Build `rules/todo-ticket-ref/`
+    - [ ] Step 21.2: Flag a `TODO` comment without a ticket reference
+    - [ ] Step 21.3: Check the reference is well formed and resolves to a `docs/` ticket
+    - [ ] Step 21.4: Scope `include` to `src/**`, `common/**`, `server/**`, `rules/**`
+    - [ ] Step 21.5: Register as `severity: 'error'`
+    - [ ] Step 21.6: Add `tests/TodoTicketRef.spec.ts`
+    - [ ] Step 21.7: Run `rules sync`, then verify the generated config
+    - [ ] Step 21.8: Fix the four bare `TODO`s — `Typist.routes.ts`, `move.ts`, `level.ts`, `WebsiteStats.tsx`
+    - [ ] Step 21.9: Confirm a green `tsc`, lint, and test run
+
+## 2.1. Task Details
+
+**Step 0 precedes this ticket's real subject.** It is not a linting step — it is
+the audit result that Steps 1, 10, 14 and 20 silently depend on. Steps 10, 14 and
+20.3 each propose a shared "displayed code" exemption keyed on `*.code.ts` /
+`codeSnippets.ts`, and six of those files were named `codeSnippets.ts`, which is
+not a role. Step 0.1 settles the name those three steps must then key on.
+
+**Step 0.9–0.14 absorbed the `server/` and `common/` lint debt.** Widening the
+script to `eslint src server common` surfaced **124 errors** that `eslint src` had
+never reached. Only 23 of them belong to this ticket's own rules; the rest is
+accumulated debt from trees that were unreachable, and it is now Step 0's work by
+explicit decision. The families:
+
+| Count | Family                                                                                                                                     | Grouped under |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| 23    | `standards/*` — suffix, newline-in-imports, empty-row-in-jsx                                                                               | 0.10          |
+| 9     | `no-unused-vars`, mostly `_`-prefixed                                                                                                      | 0.11          |
+| 5     | unused `eslint-disable` directives                                                                                                         | 0.11          |
+| ~19   | `no-unnecessary-type-assertion`                                                                                                            | 0.12          |
+| ~45   | `no-unsafe-*` (`any` from Mongoose and `req`/socket)                                                                                       | 0.13          |
+| 8     | `require-await`                                                                                                                            | 0.14          |
+| ~15   | `no-floating-promises`, `no-misused-promises`, `only-throw-error`, `no-base-to-string`, `no-unused-expressions`, `no-unexpected-multiline` | 0.14          |
+
+Two of these are **config gaps, not code defects**: the `_`-prefix convention and
+positionally-required middleware args are reported because no ignore pattern is
+set. Clearing them by editing code would destroy deliberate markers.
+
+**`no-unsafe-*` and `no-unnecessary-type-assertion` can demand opposite things at
+one site** — one wants a narrower type, the other says the cast you would add is
+redundant. Where they collide the type is fixed, never the assertion re-added.
+That is 0.12.3 and it is the rule that keeps the sweep from trading type debt for
+lint-passing noise.
+
+**Step 0 is complete — 124 errors to 0.** Widening the script to `eslint src server
+common` exposed 124 accumulated errors. All are cleared, and `tsc` and lint are both
+green. Three findings decided the sweep and are worth reading before Step 1:
+
+- **`extends Document` without a type argument makes `_id` `any`.** `Document<T = any>`
+  is generic over its id type, so omitting it makes every `_id` read unsafe — that single
+  defect accounted for most of the `no-unsafe-*` group, including `Schedule`'s ten.
+  `Document<mongoose.Types.ObjectId>` fixes it, and then exposes real `ObjectId`-vs-`string`
+  bugs that `any` had been hiding. Twelve interfaces still carry the defect — see §3.
+- **`tsc` clean does not mean lint clean, and the editor lies both ways.** The type-aware
+  pass resolves a few symbols differently from the compiler. Every probe run through the
+  compiler settled a question; every guess made by reading did not.
+- **Two `standards/*` violations were config gaps, not code defects** — the `_`-prefix
+  convention and unused `eslint-disable` directives. They were closed by config, not by
+  editing the code they flagged.
+
+**Step 16 and Step 17 both touch `Contact.schema.ts`.** Landing 17 first is the
+cheaper order: it is the smaller sweep, and it rewrites the `.min(10, 'Min 10
+characters')` call that Step 16.12 would otherwise fix twice.
+
+**Step 20 has 50 violations across 24 files**, but roughly half are displayed
+code samples and fall to 20.3. Of the rest, some are arithmetic rather than
+iteration and may not convert cleanly:
+
+- `Arrays.ts:7` — a Fisher-Yates shuffle mutates in place with an index pair.
+- `ContentNavigator.selectors.ts:44,50` — index arithmetic over sibling elements.
+- `DateInput.tsx:94` — a two-counter digit parse bounded by `i < 8`.
+- `WordDuelArena/level.ts:51` and `getPossibleWords.ts:18` — in-place draws.
+
+`.forEach` and `reduce` cover most of these, but the shuffle and the digit parse
+read more plainly as loops. Step 20.4 exists so the decision is taken per site
+rather than by pattern, and 20.10 records whichever way each went.
+
+## 3. Decisions & Rationale
+
+- **A bare filename is legal when its folder already states the context.**
+  `file-structure.md` §1.1 documents `components/ComponentFoo.tsx` — a component is named for
+  the component, not a role or its folder — so the rule allows a bare name inside a grouping
+  folder (`components`, `utils`, `tests`). That list is extracted to `rules/constants.ts` and
+  read by both this rule and `no-misnamed-primary-file`, which had the same list inline.
+  Without it the tighten produced 187 false positives, almost all component files.
+- **`src/` was not role-conforming, and `no-ad-hoc-file-suffix` could not tell.** Its
+  extension-only pattern accepted any bare name, so `references.ts` passed while stating no
+  role. That is why 0.1–0.3 could not be verified from a green lint, and why the bare-name
+  ban is the change that makes "role file" a decidable question.
+- **The `Word/` folder collapses.** `wordGroups.ts`, `getAnagramKey.ts` and
+  `getPossibleWords.ts` are all the `utils` role, so §1.2's `Feature.utils.ts` expresses them
+  as one file exporting a single grouped value. `constants.ts` has five bare consts and
+  becomes `Word.constants.ts`. Consolidating now satisfies Step 1 rather than renaming and
+  rediscovering it: a `utils` file exporting two values is exactly what `no-multiple-exports`
+  flags, and `getPossibleWords.ts` exporting `transformAnagramMap` is a name the file does
+  not define. `Types/Level.ts` and `Types/Words.ts` fold the same way into `Word.types.ts`.
+- **`LocalSession.ts` is the session's slice of `localStorage`, so it stays with Session.**
+  It shares `APP_KEY` with `App.provider.tsx` and mirrors `WordDuelArena`'s device-id slice,
+  so the folder is right and only the role was missing — `Session.repository.ts`, §1.2's
+  "data access". Moving it to `common/` would put session knowledge in shared code. The three
+  slices reimplementing "read my key, update my slice" is a `/generalise` candidate.
+- **`src/router.tsx` is a routes file, not an entry point** — it exports `routes` and
+  `router`, and §1.2's `Feature.routes.tsx` is documented as a keyed map plus a derived
+  array, so two exports is the shape. Renamed `src/router.routes.tsx`.
+- **`extends Document` must carry its id type.** Twelve `*.types.ts` interfaces still
+  declare `extends Document` with no argument, which makes `_id` `any` and trips five
+  `no-unsafe-*` rules at every `_id` read. `server/App/Users/Users.types.ts` is the one
+  fixed so far, and it took `server/App/Users` from 10 errors to 0. `.github/skills/db/`
+  carries the defect too, so the `db` skill teaches it and should be corrected with them.
+  The remainder are latent rather than live — they only report where a caller reads `_id`.
+- **`no-ad-hoc-file-suffix` gained `service`, `middlewares` and `**/\*.d.ts`as exclusions
+or roles** rather than renaming files.`file-structure.md`§2.1 documents`Feature.middlewares.ts`as plural, so the rule was out of step with the doc. A
+declaration file's name describes what it augments, not a role, so`.d.ts` leaves scope.
+- **`no-unused-vars` needed an ignore pattern, not nine edits.** `@typescript-eslint`'s
+  replacement for the core rule honours no `_` convention by default, unlike the ESLint
+  original — which is why the project's own deliberate-unused marker was reported.
+- **`no-base-to-string` fires on an `object` narrowing.** Where a guard has narrowed to
+  bare `object`, `object` carries `Object.prototype.toString`; naming a
+  `{ toString(): string }` binding, or narrowing straight from `unknown`, satisfies it.
+  `Predicate.isObjectId` and `ApiTransformers.toApiValue` both needed this.
+- **`Repository`'s `ModelLike` is generic over the document type.** Threading `D` through
+  `makeCrud` removed four `as Promise<…>` casts that the type-aware pass saw through.
+  No mongoose coupling was added, so `0004`'s duck-typed design stands.
+- Step 0 absorbs the `server/` and `common/` lint debt rather than the debt
+  becoming a separate ticket. Measured at 124 errors; only 23 are this ticket's
+  own rules. The remainder is fixed properly — the `no-unsafe-*` boundary types
+  are resolved rather than cast quiet, because a cast that satisfies the linter
+  while leaving `any` in place contradicts `no-unnecessary-type-assertion` in the
+  same run.
+- The lint script widened from `eslint src` to `eslint src server common`, and
+  `server/**` left the top-level `ignores`. Both were required: a CLI path filter
+  cannot be widened by config, and a config `files` glob cannot reach a file the
+  CLI never selected. The ignore alone changed nothing — the script was the gate
+  that mattered.
+- `no-ad-hoc-file-suffix` is the right home for the bare-source ban. The rule
+  already owns "is this filename legal?" and a bare `.ts` is currently legal by
+  omission, not by decision — the extension-only pattern accepts any name.
+  Widening its scope to `server/` is what made 23 accumulated violations visible
+  for the first time.
+- `rules/readme.md` now documents the shipped `RuleRegistrar` shape — folder,
+  entry, field table — after months of describing a `title` / `rationale` /
+  `enforcement` shape that `types.ts` never implemented. The readme's folder
+  shape states `tests/` as plural, matching the rename in
+  `no-ad-hoc-file-suffix`.
+- Step 1's id stays `no-multiple-exports`. The rule is a **filename lookup**, not
+  a shape analysis, so the id describes the assertion rather than the file's role
+  — which is why `role` in the name was never load-bearing.
+- Step 0 is a prerequisite, not a separate ticket, because Steps 10, 14 and 20.3
+  each need to name the displayed-code files and would otherwise encode a name
+  Step 0 is about to change.
+- Step 2 overlaps `no-misnamed-primary-file`, which only covers the primary
+  file. This rule generalises it to every role file, so the two must agree on
+  naming or `no-misnamed-primary-file` should fold in.
+- Step 4 covers §5 rows 8, 52 and 64 as one rule. `ui` and `db` each state the
+  barrel convention for their own folder and `AGENTS.md` §1.4 states it for all
+  of them — three sources, one assertion, so one rule and one spec.
+- Each step verifies itself: sync, sweep, then a green `tsc` / lint / test run.
+  A shared verification step at the end would report four rules' violations at
+  once, and a failure would not name the rule that caused it.
+- Step 7 gates Steps 8 to 10. `eslint.config.js` parses `**/*.{ts,tsx}` only, and
+  `builder.ts` emits globs without inspecting them — so a rule scoped to `*.css`
+  registers cleanly and then never fires. The breakpoints and the `#191b21` both
+  live in `.css`, so the mechanism has to be chosen before those steps are built.
+- Step 11 is `warn` rather than `error`. `Const.Font` is `em`-based, so a `px`
+  size may be legitimate where Steps 8 and 9 have live violations to prove the
+  rule bites. It rises to `error` once the sweep comes back clean.
+- Step 13 is a **placement** rule, not a prohibition. `test` already gives each
+  kind of setup a home — `.mocks.ts` for data, `.mockHandlers.ts` for handlers,
+  `.spec.utils.ts` for labels, render helpers and interaction helpers. The rule
+  asks whether a helper is in the right file, not whether the region above
+  `describe` is empty. `Login.spec.tsx` shows why the distinction matters: its
+  imports are already correct, and only `setupLogin` is misplaced.
+- Step 13.3 allows `vi.mock` and `vi.mocked` because they **cannot** hoist.
+  `vi.mock` is hoisted above the imports by the transform, so moving it to
+  another module mocks that module's imports instead. `vi.mocked` depends on the
+  call above it. The exception is a constraint of the mocking model, not a
+  preference.
+- Step 14 starts as `warn`, not `error`. The skill draws its example from a call
+  body — `waitFor(() => expect(…))` — but the same shape appears in ordinary
+  callbacks, where a brace is a reasonable choice and not a defect. Steps 14.2 to
+  14.4 narrow it to the case the skill names, and 14.10 raises it to `error`
+  once the sweep shows the narrowed form leaves nothing arguable behind.
+- **A candidate must assert a value against a closed set, or a shape of the
+  code itself.** It must not assert that one piece of code calls another. The
+  first kind survives a refactor — change how `Const` is _used_ and the rule still
+  holds, because the set is the invariant. The second kind encodes today's
+  implementation and turns a lint failure into an architecture freeze.
+- Step 15.6 exists because the key and the value are different things.
+  `WebsiteStats.queries.ts` writes `useGet: useGetActivityFeed` — a conventional
+  key over a feature-named function — and `Likes.queries.ts` writes
+  `usePost: usePostLike`. Checking the value would flag both, and both are right.
+- Step 16.5 exempts `.min(1)`. `1` asserts presence — at least one item — rather
+  than expressing a field's bound, so it has no constant to come from.
+- Step 16 is the most heavily violated rule in this ticket: 14 hits across 5
+  files. `Contact.schema.ts` shows why it earns its place — it declares
+  `MAX_MESSAGE_CHARACTERS` and uses it on `message`, then writes `.max(50)` on
+  `name` three lines above. The file demonstrates both forms side by side.
+- The defect Step 16 prevents is drift, not tidiness. `.min(10, 'Min 10
+characters')` writes the bound twice, so editing one copy makes the message
+  lie. A constant lets the rule and its message read one value, which is why the
+  `form` example composes the message from it.- Step 17 passes the criterion above and a rejected candidate did not, which is
+  why the test is worth stating. Both concern a message catalogue:
+  `errorMessage(error, ClientMessage.Failure.Create('x'))` was **dropped**, since
+  it asserts that one function's second argument calls another function — a call
+  target, which a refactor invalidates. Step 17 **asserts a value against a
+  closed set of six methods**, and a seventh method added later still satisfies
+  it. Same subject, opposite verdicts.
+- Step 17.10 is not a substitution step. `Contact.schema.ts` validates a phone
+  format and a character set that no `ValidationMessage` method names, so the
+  catalogue has to gain entries before those call sites can conform — the
+  skill's own instruction, "if the catalogue lacks the verb, add it there".
+- Step 18 has no conforming file except the skill's own example. Six components
+  call `yupResolver` themselves — `Login`, `Register`, `Contact`, `Xmas2025`,
+  `Categories` — and no real `*.schema.ts` exports a resolver. The rule is stated
+  in `form` and demonstrated in `form/Feature.schema.ts`, and the codebase has
+  never adopted it, so the sweep is a genuine six-file change rather than a
+  tidy-up.
+- Step 18.4 exists because a schema may be a factory. `Categories.schema.ts`
+  takes `parentOptions` and builds the schema per call, so a single exported
+  resolver cannot exist — the factory's shape has to be mirrored by a resolver
+  factory. The rule must accept that rather than demand a constant.
+- Step 19.4 narrows §1.2's wording, which reads absolutely and contradicts the
+  line below it. §1.2 also requires `import type` in the type-only group, so a
+  file with both a value and a type from one path _must_ write two imports —
+  `queries/Feature.transformers.ts` does exactly that. The rule therefore counts
+  per path **and** kind, flagging a redundant split while leaving the mandated
+  one alone. ESLint's built-in `no-duplicate-imports` is not enabled today, and
+  its default reading would flag that file, so the rule is written rather than
+  switched on.
+- Step 20.3 exists because three rules now need the same exemption. Steps 10, 14
+  and 20 each flag something a displayed code sample legitimately contains —
+  `zIndex: 1000`, a braced callback, a `for` loop. The `*.code.ts` /
+  `codeSnippets.ts` convention already marks those files, so the exemption is one
+  shared list rather than three.
+- Step 20 is the first rule in this ticket whose sweep may not finish cleanly.
+  §1.3 says "Do not: `for`, `while`" without an exception, but the shuffle and the
+  digit parse are arithmetic over an index, which `map` / `filter` / `reduce`
+  express poorly. Steps 20.4 and 20.10 exist so each site is judged rather than
+  converted by pattern, and so a suppression carries a reason.
+- Step 12 lands on **302** existing violations across 23 spec files — the
+  largest sweep in this ticket by an order of magnitude. The rule is right and
+  the naming is consistent once applied, but Step 12.9 is a real decision:
+  rewriting 302 test names is a material change to files this ticket otherwise
+  does not touch, and a name is a claim about behaviour that only a reader can
+  verify. A suppression baseline is the alternative.
+- Spacing stays out. `Const.Spacing` is thirteen steps, and a `600px` layout
+  width or a `1px` hairline is not a spacing step — `ui`'s own example writes
+  both. Breakpoints, colours, z-index and font size are closed sets, so a value
+  outside them is always wrong; spacing is not, so it stays with `review-file`.
+- **`no-unused-vars` took the API down**, and it is this ticket's doing. Enabling
+  the rule at `eslint.config.js:46-48` left `args` at its default `'after-used'`,
+  which reports only arguments **after the last used one**. In
+  `AppMiddleware.error` — `(err, req, res, next)`, where the body reads only `err`
+  and `res` — that flagged exactly one name: `next`. Deleting it to go green
+  turned an Express error handler into ordinary middleware, because Express
+  identifies one by `fn.length === 4`; the handler then received `(req, res, next)`,
+  so `res` was `next` and every request died on `res.status is not a function`.
+  Restored as `_next: NextFunction` — the prefix the same rule's
+  `argsIgnorePattern` exists for. Blast radius was one file: `grep '\(err'`
+  across `server/**` returns this handler and two catch blocks. A parameter can be
+  load-bearing by **position**, not by use, so an unused-argument sweep must
+  prefix rather than delete.
+
+## 4. Open Questions
+
+- Step 1: does "only one value" mean one `export` statement, or one exported
+  binding where a type-only export alongside a value is allowed?
+  Status: Answered — the rule is driven by a list of filenames, not by the
+  language semantics of the export statement. A filename in the list may not
+  export more than one thing; `routes.tsx` is an entry decision, not an
+  exception carved into the rule.
+- Step 3: is a missing spec an `error` or a `warn` while the direct-spec gap is
+  still being closed?
+  Status: Open
+- Step 4: where does an `export *` line sort? It has no symbol to sort by.
+  `common/ux/index.ts` mixes both forms.
+  Status: Open
+- Step 0: is the convention filename-based or folder-based? The `WordDuelArena`
+  server tree carries its role in the folder, and the `common/` and `rules/`
+  areas are 100% filename-conforming. Step 0.6 decides.
+  Status: Open
+- Step 0: do `service`, `middlewares` and `models` join the allowed role list, or
+  do the files rename to `middleware` and `model`? The list currently holds the
+  singular forms only.
+  Status: Open
+
+## 5. Appendix — Skill lint audit
+
+Every `SKILL.md` and every example file beside one, read against the five
+shipping rules. `Already` means a rule covers it; `New` means no rule does;
+`Human` means no static check can decide it.
+
+| #   | Source                   | Rule in the skill                                                | Decidable? | Severity | Verdict |
+| --- | ------------------------ | ---------------------------------------------------------------- | ---------- | -------- | ------- |
+| 1   | `ui` Rules               | Named exports only. No default exports                           | Yes        | error    | New     |
+| 2   | `ui` Rules               | Every value comes from `Const`, an index, or a justified literal | Yes        | warn     | New     |
+| 3   | `ui` Rules               | Do not introduce SCSS into `@common`                             | Yes        | error    | New     |
+| 4   | `ui` Rules               | Breakpoints come from `Const.Breakpoint`                         | Yes        | error    | New     |
+| 5   | `ui` Rules               | Wrap the feature root; nothing below reads context directly      | Partly     | warn     | Human   |
+| 6   | `ui` Rules               | Use `ContextBuilder.CreateContext`, never hand-rolled            | Yes        | error    | New     |
+| 7   | `ui` Rules               | No raw semantic element where a `common/ux` one exists           | Yes        | error    | Already |
+| 8   | `ui` index.ts example    | Barrel is alphabetical, types last as `export type`              | Yes        | error    | New     |
+| 9   | `ui` Feature.selectors   | Predicate comes from `@common-utils`, never written inline       | Partly     | warn     | New     |
+| 10  | `test` Rules             | No spread-overrides of a built mock                              | Yes        | error    | New     |
+| 11  | `test` Rules             | `HttpMethods` / `HttpStatus` never spelled as strings/numbers    | Yes        | error    | New     |
+| 12  | `test` Rules             | `response` takes the builder, not `.build()`                     | Yes        | error    | New     |
+| 13  | `test` Rules             | Every test sits inside a `describe`                              | Yes        | error    | New     |
+| 14  | `test` Rules             | Tests named `it('should <verb> …')`                              | Yes        | error    | New     |
+| 15  | `test` Rules             | No raw `screen.getBy*` where an accessor exists                  | Yes        | error    | New     |
+| 16  | `test` Workflow          | A helper above `describe` lives in its role file                 | Partly     | error    | Step 13 |
+| 17  | `test` Workflow          | No braces around a single-statement arrow body                   | Yes        | warn     | New     |
+| 18  | `test` Workflow          | A mock lives in one of two homes only                            | Partly     | warn     | New     |
+| 19  | `test` spec example      | No single-character DOM variable names (`const s = …`)           | Yes        | warn     | New     |
+| 20  | `queries` Rules          | Never inline an error message — `errorMessage(...)`              | Yes        | error    | New     |
+| 21  | `queries` Rules          | Fallback is a `ClientMessage` call, never a handwritten string   | Yes        | error    | New     |
+| 22  | `queries` Rules          | `ErrorResponse` from `@common-utils`, never `common/types`       | Yes        | error    | New     |
+| 23  | `queries` Rules          | One path key, many operations → `setSubpath`                     | Partly     | warn     | Human   |
+| 24  | `queries` Rules          | A response type carries ISO strings, never `Date`                | Partly     | warn     | New     |
+| 25  | `queries` File structure | Exports `<Feature>Queries` as one object, never hooks singly     | Yes        | error    | New     |
+| 26  | `queries` Rules          | Never spread a `FeatureQuery` factory into `useMutation`         | Yes        | error    | New     |
+| 27  | `types` Rules            | Never redeclare a shape a shared type expresses                  | Human      | —        | Human   |
+| 28  | `types` Rules            | Domain type moves to `common/types` on its second consumer       | Human      | —        | Human   |
+| 29  | `types` Naming           | One type per endpoint and direction — `Get<X>Req` / `Res` etc.   | Yes        | error    | New     |
+| 30  | `types` Rules            | `<Feature>.types.ts` never declares the component's props        | Yes        | error    | New     |
+| 31  | `table` Rules            | The columns constant is named for the domain, lowercase-plural   | Yes        | error    | New     |
+| 32  | `table` Rules            | `accessor` is a bare key, never a string path                    | Partly     | error    | New     |
+| 33  | `table` Rules            | Formatting goes in a hoisted helper, never inline in the array   | Yes        | warn     | New     |
+| 34  | `table` Rules            | Persistence is the default; opt out is explicit                  | Human      | —        | Human   |
+| 35  | `form` Rules             | Every validation message from `ValidationMessage`                | Yes        | error    | New     |
+| 36  | `form` Rules             | Patterns and bounds from a constant, never an inline literal     | Yes        | error    | New     |
+| 37  | `form` Rules             | Bind `yupResolver(schema)` in the schema file                    | Yes        | error    | New     |
+| 38  | `form` Rules             | Initial values declared once, asserted against `FormData`        | Partly     | error    | New     |
+| 39  | `form` Rules             | One `<Field>` per field in the schema                            | Yes        | error    | New     |
+| 40  | `form` Rules             | A handler never calls a mutation hook                            | Yes        | error    | New     |
+| 41  | `router` Rules           | A route never calls `res.status` / `res.send` itself             | Yes        | error    | New     |
+| 42  | `router` Rules           | A failure is thrown as an `ApiError`, never returned             | Partly     | error    | New     |
+| 43  | `router` Rules           | Every endpoint lives in `Paths.Server`, grouped by server        | Yes        | error    | New     |
+| 44  | `router` Rules           | Path values carry no scheme, host, or leading slash              | Yes        | error    | New     |
+| 45  | `router` Rules           | A fixed path is declared before a parameterised one              | Yes        | error    | New     |
+| 46  | `router` Rules           | A route's request/response typed as a named `Req`/`Res` pair     | Partly     | warn     | New     |
+| 47  | `router` App.constants   | No call site writes a port number                                | Yes        | error    | New     |
+| 48  | `db` Rules               | A service never assembles a filter — repository only             | Partly     | warn     | New     |
+| 49  | `db` Rules               | A missing record is a thrown `ApiResponder`, never `undefined`   | Partly     | error    | New     |
+| 50  | `db` Rules               | Limits grouped by field and `as const`                           | Yes        | error    | New     |
+| 51  | `db` Rules               | A timing uses `DateTime.Units`, never a bare millisecond count   | Yes        | error    | New     |
+| 52  | `db` Rules               | `index.ts` exports are alphabetical, types last as `export type` | Yes        | error    | New     |
+| 53  | `db` Rules               | The route delegates in one call — no validation, no queries      | Partly     | warn     | New     |
+| 54  | `auth` Rules             | Permission guards are complete imperative sentences              | Yes        | error    | New     |
+| 55  | `auth` Rules             | A guard throws `ApiResponder.forbidden()`, never returns bool    | Yes        | error    | New     |
+| 56  | `auth` Rules             | Guard at the boundary closest to the protected content           | Human      | —        | Human   |
+| 57  | `tests` spec             | Global `describe` named for the feature in PascalCase            | Yes        | error    | New     |
+| 58  | `README` Lookup          | Every role file's export matches its role table                  | Yes        | error    | Step 2  |
+| 59  | `file-structure` §1.3    | A testable role file has a direct spec                           | Yes        | error    | Step 3  |
+| 60  | `AGENTS.md` §1.1         | Never write one-off generic code                                 | Human      | —        | Human   |
+| 61  | `AGENTS.md` §1.2         | No duplicate imports from one path, same kind only               | Partly     | error    | Step 19 |
+| 62  | `AGENTS.md` §1.3         | No `for` / `while` loops                                         | Yes        | error    | New     |
+| 63  | `AGENTS.md` §1.3         | Never mutate arguments or shared state                           | Human      | —        | Human   |
+| 64  | `AGENTS.md` §1.4         | Barrel exports alphabetical, types last                          | Yes        | error    | New     |
+| 65  | `AGENTS.md` §3           | No TODO comments — the ticket doc carries the task list          | Yes        | error    | New     |
+
+### 5.1 Read as a whole
+
+- **Rows 1–2** share one shape: a file with exactly one export, and that export
+  named for its role. Both are Step 1 and Step 2, so the audit already folds in.
+- **Rows 8, 52 and 64 are one rule, not three.** Every skill that shows a barrel
+  states alphabetical-with-types-last, and `AGENTS.md` §1.4 repeats it. One
+  `barrel-order` rule covers all three.
+- **Rows 10, 11 and 12 are `test`'s whole safety surface**, and they are the
+  highest-value entries here: each is a silent correctness failure, not a style
+  drift. Spread-overrides bypass typing; a stringly-typed method never matches
+  the interceptor; `.build()` drops the builder contract.
+- **Rows 5, 23, 27, 28, 34, 56, 60 and 63 are `Human`.** Each needs judgement
+  about intent — whether a shape "already expresses" another, whether a
+  generalisation is "for the sake of abstraction". A rule that guessed would
+  produce false positives on correct code, so `review-file` keeps them.
+- **Rows 3 and 4 look enforceable but are not cheap.** `no-raw-semantic-jsx`
+  already resolves the `@common-ux` component list; a `Const`-provenance rule
+  needs the same resolution for the styling index, so both ride that machinery.
+  They are `New` rather than `Already` for that reason.
+- **Row 19 is a working-style rule, not a skill rule.** It was agreed in
+  conversation, not written into `test`, so it has no home to cite. Either
+  `test` gains the rule or the lint entry has nothing to point at.
+- **Step 15 has the same gap.** `queries` states that the hooks are exported as
+  one object, but never names the key convention — `use<Verb>` for a leaf,
+  PascalCase for a subfeature group. The `Feature.queries.ts` example shows the
+  shape without asserting it, so the rule currently cites a convention that is
+  only implicit. `queries` should state it before Step 15 lands.

@@ -26,8 +26,8 @@ export type MockBuilderType<T> = {
 }
 
 export const MockBuilder = <T>(state: T): MockBuilderType<T> => ({
-    modify: (overrides) => MockBuilder({ ...state, ...overrides }),
-    setValue: (property, value) => MockBuilder({ ...state, [property]: value } as T),
+    modify: (overrides) => MockBuilder<T>({ ...state, ...overrides }),
+    setValue: (property, value) => MockBuilder<T>({ ...state, [property]: value }),
     set: (modifier) => MockBuilder(modifier({ ...state })),
     update: (lens, modifier) => MockBuilder(over(lens, modifier, state) as T),
     omit: (...keys) =>

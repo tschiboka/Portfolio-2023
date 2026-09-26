@@ -1,3 +1,2 @@
-export * from './getAnagramKey'
-export * from './constants'
-export * from './wordGroups'
+export * from './Word.constants'
+export * from './Word.utils'

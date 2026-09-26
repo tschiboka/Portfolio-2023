@@ -3,8 +3,8 @@ import { AxiosError } from 'axios'
 import { AnagramMapType, Level } from '../common/utils'
 import { Query, QueryKey } from '@common-utils'
 import type { ErrorResponse } from '@common-utils'
-import type { LevelNameResponse } from '../common/utils/Types/Level'
-import type { FrequencyType } from '../common/utils/Types/Words'
+import type { LevelNameResponse } from '../common/utils/Types/Level.types'
+import type { FrequencyType } from '../common/utils/Types/Words.types'
 import { Session } from '@shared-context'
 
 export const useGetLevelNames = () => {

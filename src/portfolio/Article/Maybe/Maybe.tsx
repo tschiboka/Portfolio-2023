@@ -7,8 +7,8 @@ import InlineReference from '../components/InlineReference/InlineReference'
 import monetCoverImg from '@portfolio/assets/blog/Maybe/monet-cover.jpg'
 import comicImg from '@portfolio/assets/blog/Maybe/comic.png'
 // Other Assets
-import codeSnippets from './codeSnippets'
-import { getReferenceList } from '../references'
+import codeSnippets from './Maybe.code'
+import { getReferenceList } from '../References.data'
 
 interface Props {
     pageName: string

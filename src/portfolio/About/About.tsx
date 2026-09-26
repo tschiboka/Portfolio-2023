@@ -2,7 +2,7 @@ import AchievementList from './components/AchievementList/AchievementList'
 import {
     academicAchievements,
     certificateAchievements,
-} from './components/AchievementListItem/Achievements'
+} from './components/AchievementListItem/Achievements.data'
 import guitarImage from '@portfolio/assets/about/RiffMaster.png'
 import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
 import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'

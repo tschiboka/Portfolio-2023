@@ -20,7 +20,6 @@ describe('Section', () => {
         it('should render a static title when not expandable', () => {
             const section = Set.section({ title: 'Info' })
             expect(section.Get.title()).toBe('Info')
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             expect(section.Get.isExpandable()).toBe(false)
         })
 
@@ -31,13 +30,11 @@ describe('Section', () => {
 
         it('should render without an icon by default', () => {
             const section = Set.section({ title: 'Info' })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             expect(section.Get.icon()).toBeNull()
         })
 
         it('should render an icon next to the title', () => {
             const section = Set.section({ title: 'Info', icon: <span>★</span> })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             expect(section.Get.icon()).not.toBeNull()
         })
 

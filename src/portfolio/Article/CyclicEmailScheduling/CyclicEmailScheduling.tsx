@@ -9,7 +9,7 @@ import editCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/edit
 import cronExpressionSyntaxImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_expression_syntax.png'
 import finalisedCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/finalised_cron_task.png'
 import codeSnippets from './CyclicEmailScheduling.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 
 type Props = {
     pageName: string

@@ -1,3 +1,5 @@
+import { AllowedParentFolders } from '../constants.js'
+
 const AllowedRoles = [
     'actions',
     'auth',
@@ -28,6 +30,7 @@ const AllowedRoles = [
     'routes',
     'schema',
     'selectors',
+    'service',
     'spec',
     'styles',
     'transformers',
@@ -36,6 +39,12 @@ const AllowedRoles = [
 ]
 
 const role = `(${AllowedRoles.join('|')})`
+
+/**
+ * Bare filenames that carry no role and are not named after their folder — entry points.
+ * Any other bare name is a file that never stated its role.
+ */
+const AllowedBareNames = ['index', 'main', 'setupTests']
 
 /** Any word — a `spec` composite names its subject, so the subject need not be a role. */
 const word = '[a-zA-Z][a-zA-Z0-9]*'
@@ -59,9 +68,10 @@ const extension = '(d\\.ts|ts|tsx|js|jsx)'
  */
 export const NoAdHocFileSuffixConstants = {
     AllowedRoles,
-    /** One pattern per legal shape: an extension, then a role or up to two roles, one of them `spec`. */
+    AllowedBareNames,
+    AllowedParentFolders,
+    /** One pattern per legal shape: a role or up to two roles, one of them `spec`. */
     AllowedSuffixRegexps: [
-        new RegExp(`^${extension}$`),
         new RegExp(`^${role}\\.${extension}$`),
         new RegExp(`^${role}\\.${role}\\.${extension}$`),
         new RegExp(`^spec\\.${role}\\.${role}\\.${extension}$`),

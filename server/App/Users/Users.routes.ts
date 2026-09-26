@@ -2,7 +2,7 @@
 import { ApiResponder } from '@common-utils'
 import { UsersService } from './Users.service'
 import { UsersAuth } from './Users.auth'
-import { auth, admin } from './Users.middlewares'
+import { auth, admin } from './Users.middleware'
 import type {
     GetUserReq,
     GetUserRes,

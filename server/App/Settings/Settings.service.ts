@@ -16,13 +16,13 @@ export const SettingsService = {
 
     /** Creates the app's settings if none exist. */
     create: async (input: SettingsInput): Promise<ISetting> => {
+        const result = SettingsSchema.validate(input)
         const existing = await SettingsRepository.findOne()
         if (existing) throw ApiResponder.conflict(ApiMessage.exists('settings'))
 
-        const { error, value } = SettingsSchema.validate(input)
-        if (error) throw ApiResponder.badRequest(error)
+        if (result.error) throw ApiResponder.badRequest(result.error)
 
-        const settings = SettingsRepository.create(value)
+        const settings = SettingsRepository.create(result.value)
         await SettingsRepository.save(settings)
 
         return settings

@@ -1,5 +1,4 @@
 import type { MockInstance } from 'vitest'
-/* eslint-disable @typescript-eslint/unbound-method */
 import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'

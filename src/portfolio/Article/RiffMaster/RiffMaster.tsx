@@ -46,7 +46,7 @@ import saddleImg from '@portfolio/assets/blog/riffMaster/Saddle.jpg'
 import controllerCode from '@portfolio/assets/blog/files/riffmaster/controller.txt'
 import dissertation from '@portfolio/assets/blog/files/riffmaster/Dissertation_Online.pdf'
 import codeSnippets from './RiffMaster.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 // Styles
 import './RiffMaster.scss'
 import InlineReference from '../components/InlineReference/InlineReference'

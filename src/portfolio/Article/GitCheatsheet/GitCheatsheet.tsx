@@ -8,7 +8,7 @@ import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.
 import GitStorage2Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-2.png'
 import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
 import codeSnippets from './GitCheatSheet.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 
 type Props = {
     pageName: string

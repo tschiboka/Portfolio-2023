@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import type { Optional } from '../../../Generics'
+import type { Nullish, Optional, Primitive } from '../../../Generics'
 import { trim } from '../trim'
 
 describe('Strings.Optional.trim', () => {
-    it.each<[unknown, Optional<string>]>([
+    it.each<[Nullish<Primitive>, Optional<string>]>([
         ['  hi  ', 'hi'],
         ['hi', 'hi'],
         ['', undefined],

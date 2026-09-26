@@ -359,8 +359,6 @@ describe('Table — Filtering', () => {
             await table.Do.toggleFilters()
             await Accessor.user.type(Accessor.screen.getByLabelText('Name'), 'X')
             await table.Do.applyFilters()
-            // The onFilter receives both keys
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
             const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as Record<
                 string,
                 unknown

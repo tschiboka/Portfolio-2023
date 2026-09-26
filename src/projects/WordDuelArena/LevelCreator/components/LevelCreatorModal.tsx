@@ -5,7 +5,7 @@ import { Level, LevelWord } from '../../common/utils'
 import { Query } from '@common-utils'
 import type { Nullable } from '@common-utils'
 import { isEmpty } from '@common-utils'
-import { transformAnagramMap } from '../../common/utils/Word/getPossibleWords'
+import { transformAnagramMap } from '../../common/utils/Word/Word.utils'
 import {
     useGetAnagramMap,
     useGetLevel,
@@ -15,7 +15,7 @@ import {
 import { LoadingIndicator } from '@common-ux'
 import { useQueryClient } from '@tanstack/react-query'
 import { QueryKey } from '@common-utils'
-import { FrequencyType } from '../../common/utils/Types/Words'
+import { FrequencyType } from '../../common/utils/Types/Words.types'
 import { levelSchema } from '../LevelCreator.schema'
 
 type LevelCreatorModalProps = {

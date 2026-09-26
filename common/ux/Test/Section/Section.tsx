@@ -34,5 +34,5 @@ export const Section = (label: string): SectionAccessor => {
 
 Section.byTitle = (title: string | RegExp): SectionAccessor => {
     const element = Accessor.screen.getByText(title).closest('section')
-    return new SectionAccessor(element as HTMLElement, `Section.byTitle('${String(title)}')`)
+    return new SectionAccessor(element, `Section.byTitle('${String(title)}')`)
 }

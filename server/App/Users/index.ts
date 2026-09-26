@@ -4,7 +4,7 @@ export { UsersRepository } from './Users.repository'
 export { UsersSchema } from './Users.schema'
 export { UsersAuth } from './Users.auth'
 export { UserFieldLimits, UserPassword } from './Users.constants'
-export { auth, admin, UsersMiddleware } from './Users.middlewares'
+export { auth, admin, UsersMiddleware } from './Users.middleware'
 export { UsersModel } from './Users.model'
 export type {
     IUser,

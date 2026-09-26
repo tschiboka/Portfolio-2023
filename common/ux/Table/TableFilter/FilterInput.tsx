@@ -1,3 +1,4 @@
+import { isNumber, isString } from '@common-utils'
 import type { TableFilteringInput } from '../Table.types'
 import { TableTextInput } from '../TableInputs/TableTextInput'
 import { TableNumberInput } from '../TableInputs/TableNumberInput'
@@ -12,6 +13,9 @@ type FilterInputProps = {
     onChange: (key: string, value: unknown) => void
 }
 
+const asInputValue = (value: unknown): string =>
+    isString(value) || isNumber(value) ? String(value) : ''
+
 export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
     const id = `filter-${input.key}`
 
@@ -21,7 +25,7 @@ export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
                 <TableTextInput
                     id={id}
                     label={input.label}
-                    value={String(value ?? '')}
+                    value={asInputValue(value)}
                     placeholder={input.placeholder}
                     required={input.required}
                     onChange={(v) => onChange(input.key, v)}
@@ -45,7 +49,7 @@ export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
                 <TableSearchInput
                     id={id}
                     label={input.label}
-                    value={String(value ?? '')}
+                    value={asInputValue(value)}
                     placeholder={input.placeholder}
                     required={input.required}
                     onChange={(v) => onChange(input.key, v)}
@@ -56,7 +60,7 @@ export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
                 <TableDateInput
                     id={id}
                     label={input.label}
-                    value={String(value ?? '')}
+                    value={asInputValue(value)}
                     required={input.required}
                     min={input.min}
                     max={input.max}
@@ -68,7 +72,7 @@ export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
                 <TableSelectInput
                     id={id}
                     label={input.label}
-                    value={String(value ?? '')}
+                    value={asInputValue(value)}
                     options={input.options}
                     required={input.required}
                     onChange={(v) => onChange(input.key, v)}

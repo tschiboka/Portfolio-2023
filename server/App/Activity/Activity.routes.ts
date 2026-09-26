@@ -1,6 +1,6 @@
 ﻿import express from 'express'
 import { ApiResponder } from '@common-utils'
-import { auth, admin } from '../Users/Users.middlewares'
+import { auth, admin } from '../Users/Users.middleware'
 import { ActivityService } from './Activity.service'
 import type { GetActivityFeedReq, GetActivityFeedRes } from './Activity.types'
 

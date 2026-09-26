@@ -1,7 +1,6 @@
-import type { SessionState } from '../../types'
-
 import { produce } from 'immer'
-import { SessionStatuses } from '../../config/constants/session'
+import { SessionStatuses } from '../../config/constants/Session.constants'
+import type { SessionState } from '../../WordDuelArena.types'
 
 const initialiseSession = (state: SessionState, deviceId: string): SessionState =>
     produce(state, (draft: SessionState) => {

@@ -20,4 +20,8 @@ export interface Breakdown {
     likes: SectionData
 }
 
-
+export interface BreakdownAggregate {
+    _id: string
+    visits: number
+    likes: number
+}

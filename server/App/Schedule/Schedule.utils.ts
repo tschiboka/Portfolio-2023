@@ -158,6 +158,6 @@ export const sendEmail = async (message: string) => {
         html: message,
     })
 
-    if (error) throw error
+    if (error) throw new Error(error.message)
     return data
 }

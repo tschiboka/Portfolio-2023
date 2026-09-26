@@ -156,7 +156,9 @@ export const isDigits = (value: unknown): value is string =>
  */
 export const isObjectId = (value: unknown): value is { toString(): string } => {
     if (isPrimitive(value) || !isObject(value)) return false
-    return Regexp.ObjectId.test(String(value))
+
+    const stringifiable: { toString(): string } = value
+    return Regexp.ObjectId.test(String(stringifiable))
 }
 
 /**
@@ -323,7 +325,7 @@ export const isEmpty = (value: unknown): boolean => {
 
     if (value instanceof Set || value instanceof Map) return value.size === 0
 
-    if (typeof value === 'object') return Object.keys(value as Record<string, unknown>).length === 0
+    if (typeof value === 'object') return Object.keys(value).length === 0
 
     return false
 }
@@ -458,8 +460,8 @@ export const isShallowEqual = (a: unknown, b: unknown): boolean => {
     if (Array.isArray(a) && Array.isArray(b))
         return a.length === b.length && a.every((v, i) => v === b[i])
     if (typeof a === 'object' && typeof b === 'object') {
-        const keysA = Object.keys(a as Record<string, unknown>)
-        const keysB = Object.keys(b as Record<string, unknown>)
+        const keysA = Object.keys(a)
+        const keysB = Object.keys(b)
         return (
             keysA.length === keysB.length &&
             keysA.every(
@@ -493,8 +495,8 @@ export const isEqual = (a: unknown, b: unknown): boolean => {
     if (Array.isArray(a) && Array.isArray(b))
         return a.length === b.length && a.every((v, i) => isEqual(v, b[i]))
     if (typeof a === 'object' && typeof b === 'object') {
-        const keysA = Object.keys(a as Record<string, unknown>)
-        const keysB = Object.keys(b as Record<string, unknown>)
+        const keysA = Object.keys(a)
+        const keysB = Object.keys(b)
         return (
             keysA.length === keysB.length &&
             keysA.every((k) =>

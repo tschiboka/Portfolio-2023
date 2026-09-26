@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
-;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi as never)
+;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
 import type { LoginInput, TokenInput, UserInput } from './Users.types'
 import { UserFieldLimits } from './Users.constants'
 

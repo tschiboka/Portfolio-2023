@@ -21,9 +21,10 @@ export const ExercisesService = {
 
     /** Creates a canonical exercise from validated input. */
     create: async (input: ExerciseValidationInput): Promise<GymExerciseResource> => {
-        const { error, value } = ExerciseSchema.validate(input)
-        if (error) throw ApiResponder.badRequest(error)
+        const result = ExerciseSchema.validate(input)
+        if (result.error) throw ApiResponder.badRequest(result.error)
 
+        const { value } = result
         const exercise = ExercisesRepository.create({ ...value, source: 'canonical' })
         await ExercisesRepository.save(exercise)
 

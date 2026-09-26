@@ -7,23 +7,41 @@ export type FormatKey = keyof typeof Formats
 
 type InputValue = Nullish<string | number | Date>
 
-/** Ordered list of format strings to try when parsing date strings. */
-const PARSE_FORMATS = Object.values(Formats)
+/** The formats the app itself produces. A string is held to these exactly. */
+const DISPLAY_FORMATS = Object.values(Formats)
 
+/**
+ * Held to only after the strict pass fails, and always leniently. An array cannot do this
+ * job: moment resolves an array by best-match and does not fall through, so one pass
+ * rejects `12/06/2026 3:4:5` on the `HH` of a two-digit format.
+ */
+const LOOSE_FORMATS = [
+    'D/M/YYYY',
+    'D/M/YYYY H:m',
+    'D/M/YYYY H:m:s',
+    'D/M/YYYY H:m:s Z',
+    'ddd, D. MMM. YYYY',
+    'YYYY-MM-DDTHH:mm:ss.SSSZ',
+]
+
+/**
+ * Parses a value to a moment. A string must match a known format; anything else returns
+ * `undefined` rather than being handed to `new Date()`, which reads slashed dates
+ * month-first and would silently turn `12/6/2026` into December.
+ */
 function toMoment(value: InputValue): Optional<moment.Moment> {
     if (isNullish(value) || value === '') return undefined
 
-    // For strings, try our known formats first (e.g. DD/MM/YYYY) before falling
-    // back to moment's auto-detection (which assumes US date format).
-    if (isString(value)) {
-        const parsed = moment(value, PARSE_FORMATS, true)
-        if (parsed.isValid()) return parsed
+    if (!isString(value)) {
+        const asMoment = moment(value)
+        return asMoment.isValid() ? asMoment : undefined
     }
 
-    const m = moment(value)
-    if (!m.isValid()) return undefined
+    const strict = moment(value, DISPLAY_FORMATS, true)
+    if (strict.isValid()) return strict
 
-    return m
+    const loose = moment(value, LOOSE_FORMATS)
+    return loose.isValid() ? loose : undefined
 }
 
 export const Format = {

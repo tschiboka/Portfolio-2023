@@ -43,6 +43,8 @@ describe('ClientMessage.Failure', () => {
         ['Send', 'message', 'Failed to send message'],
         ['Verify', 'email', 'Failed to verify email'],
         ['Submit', 'form', 'Failed to submit form'],
+        ['Join', 'session', 'Failed to join session'],
+        ['Handle', 'message', 'Failed to handle message'],
     ] as const)('%s lowercases the resource', (key, resource, expected) => {
         expect(ClientMessage.Failure[key](resource)).toBe(expected)
     })
@@ -70,9 +72,12 @@ describe('ClientMessage.Progress', () => {
         ['Uploading', 'avatar', 'Uploading avatar…'],
         ['Fetching', 'visits', 'Fetching visits…'],
         ['Submitting', 'form', 'Submitting form…'],
-    ] as const)('%s lowercases the resource and ends with an ellipsis', (key, resource, expected) => {
-        expect(ClientMessage.Progress[key](resource)).toBe(expected)
-    })
+    ] as const)(
+        '%s lowercases the resource and ends with an ellipsis',
+        (key, resource, expected) => {
+            expect(ClientMessage.Progress[key](resource)).toBe(expected)
+        },
+    )
 
     it('always ends with the ellipsis character', () => {
         expect(ClientMessage.Progress.Loading('categories').endsWith('…')).toBe(true)

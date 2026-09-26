@@ -24,10 +24,10 @@ export type CrudRepository<M, D = DocFrom<M>> = {
 }
 
 /** A Mongoose-like model exposing the query methods the CRUD layer relies on. */
-export type ModelLike = {
-    find: (filter?: Filter) => Promise<unknown[]>
-    findById: (id: string) => Promise<unknown>
-    findOne: (filter?: Filter) => Promise<unknown>
+export type ModelLike<D = unknown> = {
+    find: (filter?: Filter) => Promise<D[]>
+    findById: (id: string) => Promise<D | null>
+    findOne: (filter?: Filter) => Promise<D | null>
     countDocuments: (filter?: Filter) => Promise<number>
 }
 

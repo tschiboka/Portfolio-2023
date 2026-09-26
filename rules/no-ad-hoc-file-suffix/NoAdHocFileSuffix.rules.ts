@@ -10,15 +10,30 @@ const Eslint = {
             docs: { description: ErrorMessage },
         },
         create(context) {
-            const [, ...suffixParts] = context.filename.split('.')
+            const segments = context.filename.replace(/\\/g, '/').split('/')
+            const fileName = segments[segments.length - 1] ?? ''
+            const parentFolder = segments[segments.length - 2] ?? ''
+
+            const [baseName = '', ...suffixParts] = fileName.split('.')
             const suffix = suffixParts.join('.')
 
-            const { AllowedSuffixRegexps } = NoAdHocFileSuffixConstants
-            const isAllowed = AllowedSuffixRegexps.some((regexp) => regexp.test(suffix))
+            const { AllowedSuffixRegexps, AllowedBareNames, AllowedParentFolders } =
+                NoAdHocFileSuffixConstants
+
+            // A bare name states no role, so it is legal as a named entry point, as the file named
+            // after its own folder, or inside a folder that already carries the context
+            // (`components/`, `utils/`, `tests/`). `no-misnamed-primary-file` owns the spelling.
+            const isBare = suffixParts.length === 1
+            const isAllowed = isBare
+                ? AllowedBareNames.includes(baseName) ||
+                  baseName === parentFolder ||
+                  AllowedParentFolders.includes(parentFolder)
+                : AllowedSuffixRegexps.some((regexp) => regexp.test(suffix))
             if (isAllowed) return {}
 
+            const reported = isBare ? fileName : `.${suffix}`
             context.report({
-                message: [ErrorMessage, `Got .${suffix}.`].join(' '),
+                message: [ErrorMessage, `Got ${reported}.`].join(' '),
                 loc: { line: 1, column: 0 },
             })
 

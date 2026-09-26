@@ -11,7 +11,7 @@ const schema = Joi.object({
         .required()
         .email({ tlds: { allow: false } }),
     phone: Joi.string()
-        .custom((value) => (value === '' || isDigits(value) ? value : undefined))
+        .custom((value: string) => (value === '' || isDigits(value) ? value : undefined))
         .min(MessageFieldLimits.phone.min)
         .max(MessageFieldLimits.phone.max)
         .allow(''),

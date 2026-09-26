@@ -170,7 +170,7 @@ describe('ApiMessage fixed wordings', () => {
         ['serviceUnavailable', 'Service unavailable'],
         ['gatewayTimeout', 'Gateway timeout'],
     ] as const)('%s() returns the canonical wording', (method, expected) => {
-        const call = (ApiMessage[method] as () => string)()
+        const call = ApiMessage[method]()
         expect(call).toBe(expected)
     })
 })

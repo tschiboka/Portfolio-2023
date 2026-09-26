@@ -36,7 +36,7 @@ import riffMasterHomeImg from '@portfolio/assets/blog/soundsWithHowler/Riffmaste
 import fretboardNotesImg from '@portfolio/assets/blog/soundsWithHowler/FretboardNotes.png'
 // Other Assets
 import codeSnippets from './SoundsWithHowler.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 // Styles
 import './SoundsWithHowler.scss'
 import { Article } from '../Article'

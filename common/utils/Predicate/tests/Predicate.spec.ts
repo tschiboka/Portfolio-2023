@@ -40,7 +40,6 @@ import {
     isAny,
 } from '../Predicate'
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = (): void => {}
 
 describe('isDefined', () => {
@@ -1076,7 +1075,7 @@ describe('isAll', () => {
     })
 
     it('returns false when any element does not match', () => {
-        expect(allStrings(['a', 1 as unknown, 'c'])).toBe(false)
+        expect(allStrings(['a', 1, 'c'])).toBe(false)
     })
 
     it('returns true for empty arrays', () => {

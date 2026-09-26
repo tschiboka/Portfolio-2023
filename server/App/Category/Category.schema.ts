@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
-;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi as never)
+;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
 import type { CategoryInput } from './Category.types'
 import { CategoryFieldLimits } from './Category.constants'
 

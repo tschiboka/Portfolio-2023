@@ -1,17 +1,20 @@
 import type { MockInstance } from 'vitest'
-/* eslint-disable @typescript-eslint/unbound-method, @typescript-eslint/no-unsafe-assignment */
 import axios from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import { RequestBuilder } from '../Query'
 
+/** An axios method stubbed by `vi.spyOn`, recording its `(url, config)` arguments. */
+type AxiosMethodMock = MockInstance<(url: string, config?: AxiosRequestConfig) => unknown>
+
 const mockedAxios = axios as unknown as {
-    get: MockInstance
-    post: MockInstance
-    put: MockInstance
-    patch: MockInstance
-    delete: MockInstance
-    head: MockInstance
-    options: MockInstance
+    get: AxiosMethodMock
+    post: AxiosMethodMock
+    put: AxiosMethodMock
+    patch: AxiosMethodMock
+    delete: AxiosMethodMock
+    head: AxiosMethodMock
+    options: AxiosMethodMock
 }
 
 const TEST_TOKEN = 'test-session-token'

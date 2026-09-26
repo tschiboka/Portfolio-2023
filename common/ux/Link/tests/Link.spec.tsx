@@ -63,7 +63,6 @@ describe('Link', () => {
 
         it('should auto-add target and rel for external URLs', () => {
             const link = Set.anchor({ href: 'https://github.com' })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             expect(link.Get.isExternal()).toBe(true)
             expect(link.Get.target()).toBe('_blank')
             expect(link.Get.rel()).toBe('noopener noreferrer')
@@ -83,7 +82,6 @@ describe('Link', () => {
 
         it('should support download attribute', () => {
             const link = Set.anchor({ href: '/file.pdf', download: true })
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             expect(link.Get.hasDownload()).toBe(true)
         })
 

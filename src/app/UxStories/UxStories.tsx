@@ -2,7 +2,7 @@ import { Link, Main, Heading, Paragraph } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Table } from '@common-ux'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { stories } from './stories'
+import { stories } from './UxStories.data'
 import { Stack } from '@common-ux'
 import './UxStories.styles.css'
 

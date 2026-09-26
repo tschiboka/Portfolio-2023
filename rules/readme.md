@@ -1,65 +1,81 @@
 # Rules
 
-The rule registry. One typed entry per rule; `rules sync` reads it and emits the
-linter config.
+The rule registry. One typed entry per rule; `npm run build:rules` reads it and
+emits the linter config.
 
 - **Source of truth.** Skills describe _why_; this folder decides _what is
   enforced_.
-- **Typed, not JSON** — the enforcement block is a discriminated union.
-- **Generated output is never hand-edited.**
+- **Typed, not JSON** — one registrar per rule, validated by `RuleRegistrar`.
+- **Generated output is never hand-edited.** `rules/dist/` is build output.
+
+## Folder
+
+One folder per rule, named for the rule's `id` in PascalCase. Files inside take
+that name as their prefix:
+
+```text
+rules/
+├── registry.ts                     the only file edited to add a rule
+├── types.ts                        RuleRegistrar, RuleScope, RuleFunction
+├── config.ts                       the shared ruleTester
+├── builder.ts                      reads the registry, emits dist/standards.config.js
+└── no-ad-hoc-file-suffix/
+    ├── NoAdHocFileSuffix.constants.ts    lists, patterns, magic values
+    ├── NoAdHocFileSuffix.rules.ts        the RuleModule, exported as Rules
+    ├── NoAdHocFileSuffix.registrar.ts    the RuleRegistrar, exported as registrar
+    └── tests/
+        └── NoAdHocFileSuffix.spec.ts     ruleTester.run cases
+```
+
+- `.constants.ts` is optional — a rule with no lists does not need one.
+- `.rules.ts` exports `Rules`, a `{ Eslint: { <Name>9: … } }` object. The
+  version in the key names the linter major it targets.
+- `.registrar.ts` exports `registrar` as the default shape of the entry.
+- `tests/` is plural, matching the feature convention in
+  [`file-structure.md`](../docs/references/file-structure.md).
+
+Registration is two edits: import the registrar in `registry.ts`, then add it to
+the `RuleRegistry` array.
 
 ## Entry
 
 Every field, with generic values:
 
 ```ts
-{
+export const registrar: RuleRegistrar = {
     id: 'domain-rule-name',
-    title: 'A short statement of the rule',
     description: 'What it asserts, in one sentence, naming the files it applies to.',
-    rationale: 'Why the rule exists. What goes wrong without it.',
     scope: {
         include: ['src/**/*.ts'],
         exclude: ['**/*.spec.*'],
     },
+    enabled: true,
     severity: 'error',
-    enforcement: {
-        eslint: {
-            requires: '>=8',
-            plugin: 'local/rules/domain-rule-name',
-            options: {},
+    rules: [
+        {
+            requires: { linter: 'eslint', min: '9.0.0' },
+            rule: Rules.Eslint.DomainRuleName9,
         },
-    },
+    ],
 }
 ```
 
 | Field           | Required | Notes                                                              |
-| --------------- | -------- | ------------------------------------------------------------------ | ------- |
+| --------------- | -------- | ------------------------------------------------------------------ |
 | `id`            | yes      | kebab-case, unique, stable — it is the handle everything else uses |
-| `title`         | yes      | imperative, one clause                                             |
 | `description`   | yes      | the assertion, not the reason                                      |
-| `rationale`     | yes      | the _why_ — what a reader needs to judge a false positive          |
 | `scope.include` | yes      | globs; emitted as the rule's `files` list                          |
 | `scope.exclude` | yes      | `[]` when nothing is excluded, never omitted                       |
-| `severity`      | yes      | `'error'                                                           | 'warn'` |
-| `enforcement`   | yes      | keyed by backend — `eslint` today, others as keys                  |
-| ↳ `requires`    | yes      | semver range of the linter this rule needs, e.g. `'>=8'`           |
-| ↳ `plugin`      | yes      | the rule module the generated config points at                     |
+| `enabled`       | yes      | `false` keeps the rule registered but unbuilt                      |
+| `severity`      | yes      | `'error'` or `'warn'`                                              |
+| `rules`         | yes      | a tuple of `RuleFunction` — one per linter backend                 |
+| ↳ `requires`    | yes      | `{ linter, min, max? }`; `min` inclusive, `max` exclusive          |
+| ↳ `rule`        | yes      | the `RuleModule` the generated config points at                    |
 
-A rule with no mechanical check:
-
-```ts
-{
-    id: 'domain-unenforceable-rule',
-    title: 'A statement no linter can decide',
-    description: 'What it asserts.',
-    rationale: 'Why it exists.',
-    scope: { include: ['src/**/*.ts'], exclude: [] },
-    severity: 'error',
-    enforcement: null,
-    unenforced: 'Why no static check is possible, and who reviews it instead.',
-}
-```
+A rule is built only when `enabled` is `true` **and** its `requires` is
+satisfied by the installed linter version — see `ruleBuilder.build` in
+`builder.ts`. An unsatisfied requirement is skipped silently, so a mistyped
+`min` reads exactly like a rule that never fires.
 
 ## Rule
 

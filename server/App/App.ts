@@ -4,8 +4,7 @@ import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import cors from 'cors'
 import { ApiMessage } from '@common-utils'
-import { AppRoutes } from './App.routes'
-import { AppMiddleware } from './App.middlewares'
+import { AppMiddleware } from './App.middleware'
 import { AppConstants } from './App.constants'
 
 /** Application composition root - builds the Express app and (optionally) boots it. */

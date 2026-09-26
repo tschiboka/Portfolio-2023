@@ -12,7 +12,7 @@ import FiberImg from '@portfolio/assets/blog/react_anatomy/fiber.png'
 import LifeCycleMethodsImg from '@portfolio/assets/blog/react_anatomy/component-lifecycle-methods.webp'
 // Other Assets
 import codeSnippets from './ReactAnatomy.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 
 // Styles
 //import "./";

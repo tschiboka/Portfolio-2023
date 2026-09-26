@@ -1,6 +1,6 @@
 import { LevelWord } from '../../../common/utils'
-import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/constants'
-import { getWordGroups } from '../../../common/utils/Word/wordGroups'
+import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/Word.constants'
+import { getWordGroups } from '../../../common/utils/Word/Word.utils'
 import './LevelPreview.styles.css'
 
 type LevelPreviewProps = {

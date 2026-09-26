@@ -1,6 +1,6 @@
-import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/constants'
+import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/Word.constants'
 import './WordOptionList.styles.css'
-import { getWordGroups, getWordLengthGroups } from '../../../common/utils/Word/wordGroups'
+import { getWordGroups, getWordLengthGroups } from '../../../common/utils/Word/Word.utils'
 import { LevelWord } from '../../../common/utils'
 
 type WordOptionListProps = {

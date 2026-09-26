@@ -217,15 +217,13 @@ export const DateInput = <T extends FieldValues>({
             control={control}
             render={({ field, fieldState }) => {
                 // Derive display from field value when textValue hasn't been manually set
-                const displayValue = field.value ? formatDate(field.value as string) : ''
+                const displayValue = field.value ? formatDate(field.value) : ''
                 const inputValue = textValue || displayValue
-
                 const daysInMonth = getDaysInMonth(viewYear, viewMonth)
                 const firstDay = getFirstDayOfMonth(viewYear, viewMonth)
                 const today = new Date()
                 const todayISO = toISODate(today.getFullYear(), today.getMonth(), today.getDate())
                 const selectedISO = field.value as string
-
                 return (
                     <div
                         ref={containerRef}
@@ -251,7 +249,6 @@ export const DateInput = <T extends FieldValues>({
                                 <BsCalendar3 />
                             </div>
                         </div>
-
                         {open && (
                             <div
                                 ref={calendarRef}
@@ -274,7 +271,6 @@ export const DateInput = <T extends FieldValues>({
                                         <BsChevronRight />
                                     </button>
                                 </div>
-
                                 {yearPickerOpen ? (
                                     <div className="date-input__year-picker">
                                         <div className="date-input__year-list" ref={yearListRef}>
@@ -329,7 +325,6 @@ export const DateInput = <T extends FieldValues>({
                                                 const isDisabled =
                                                     (min && iso < min) || (max && iso > max)
                                                 const isFocused = day === focusedDay
-
                                                 const classes = [
                                                     'date-input__day',
                                                     isSelected && 'selected',
@@ -340,7 +335,6 @@ export const DateInput = <T extends FieldValues>({
                                                 ]
                                                     .filter(Boolean)
                                                     .join(' ')
-
                                                 return (
                                                     <button
                                                         key={day}
@@ -359,7 +353,6 @@ export const DateInput = <T extends FieldValues>({
                                         </div>
                                     </>
                                 )}
-
                                 <div className="date-input__footer">
                                     <button
                                         type="button"

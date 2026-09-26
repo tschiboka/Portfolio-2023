@@ -27,7 +27,7 @@
         "tsc": "tsc",
         "build": "tsc && vite build && node scripts/generate-version.js",
         "build:rules": "tsc -p rules/tsconfig.json && node rules/dist/builder.js",
-        "lint": "npm run build:rules && eslint src --report-unused-disable-directives --max-warnings 0",
+        "lint": "npm run build:rules && eslint src server common --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "test": "vitest",
         "test:watch": "vitest --watch"

@@ -54,8 +54,8 @@ A skill describes the work a caller is doing, not a topic. Where two skills clai
     - [x] Step 12.1.4: Scope to `src/**`, `common/**`, `server/**`
     - [x] Step 12.1.5: Add `tests/NoAdHocRoleSuffix.spec.ts`
 - [x] Step 12.2: Add a lint rule requiring the primary feature file to be named after its folder — `Button/Button.tsx`, `BreakdownTable/BreakdownTable.tsx`
-- [ ] Step 12.3: Add a lint rule forbidding newlines between imports — imports stay contiguous, no blank lines inside the block
-- [ ] Step 12.4: Add a lint rule requiring a file's export to match its name — `Feature.tsx` → `Feature`, `Feature.queries.ts` → `FeatureQueries`, checked against the matching table in [`docs/references/file-structure.md`](references/file-structure.md)
+- [x] Step 12.3: Add a lint rule forbidding newlines between imports — imports stay contiguous, no blank lines inside the block
+- [x] Step 12.4: Add a lint rule requiring a file's export to match its name — `Feature.tsx` → `Feature`, `Feature.queries.ts` → `FeatureQueries`, checked against the matching table in [`docs/references/file-structure.md`](references/file-structure.md)
 - [x] Step 13: Add the Predicate and Generics rule to `AGENTS.md`, then scan every skill for misuse of both
     - [x] Step 13.1: The `AGENTS.md` half — done with Step 11: `AGENTS.md` §1.2 carries the Generics and Predicate rule
 - [x] Step 14: Retire `component` into `ui` — one skill for a folder's shape and its look

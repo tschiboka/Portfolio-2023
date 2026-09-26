@@ -20,19 +20,19 @@ export class CacheKeyBuilder {
     feature(feature: string): CacheKeyBuilder {
         return Object.assign(new CacheKeyBuilder(this.state.key), {
             state: { ...this.state, feature },
-        }) as CacheKeyBuilder
+        })
     }
 
     byId(id?: string | number): CacheKeyBuilder {
         return Object.assign(new CacheKeyBuilder(this.state.key), {
             state: { ...this.state, id },
-        }) as CacheKeyBuilder
+        })
     }
 
     byFilters(filters: Record<string, unknown>): CacheKeyBuilder {
         return Object.assign(new CacheKeyBuilder(this.state.key), {
             state: { ...this.state, filters },
-        }) as CacheKeyBuilder
+        })
     }
 
     build(): CacheKey {

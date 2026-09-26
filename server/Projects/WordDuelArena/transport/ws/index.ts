@@ -1,18 +1,23 @@
 import type { Server } from 'http'
 import type WebSocket from 'ws'
-
 import { WebSocketServer } from 'ws'
 import url from 'url'
-import { startPresenceLoop } from '../../infrastructure/presence/loop'
-import { validateDeviceConnection } from './validation/connection/validateDevice'
+import { ClientMessage } from '@common-utils'
+import { startPresenceLoop } from '../../infrastructure/presence/Loop.service'
+import { validateDeviceConnection } from './validation/connection/ValidateDevice.schema'
 import routeMessage from './handlers'
-import { getSession, cleanupSessionIfEmpty } from '../../infrastructure/persistence/server/session'
-import { loadWordResources } from '../../infrastructure/resources/word'
+import {
+    getSession,
+    cleanupSessionIfEmpty,
+} from '../../infrastructure/persistence/server/Session.repository'
+import { loadWordResources } from '../../infrastructure/resources/Word.repository'
 
 interface DeviceWebSocket extends WebSocket {
     sessionId: string
     deviceId: string
 }
+
+type DeviceWebSocketRequest = { type: string; payload?: unknown }
 
 export default async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })
@@ -20,7 +25,7 @@ export default async function initWebSocket(server: Server) {
 
     startPresenceLoop()
 
-    wss.on('connection', async (ws: DeviceWebSocket, req: { url?: string }) => {
+    wss.on('connection', (ws: DeviceWebSocket, req: { url?: string }) => {
         const { sessionId, deviceId } = url.parse(req.url || '', true).query
 
         if (!sessionId || !deviceId) {
@@ -41,14 +46,18 @@ export default async function initWebSocket(server: Server) {
         ws.deviceId = deviceId as string
         session.connections.add(ws)
 
-        await routeMessage('join', { session, deviceId: deviceId as string })
+        routeMessage('join', { session, deviceId: deviceId as string }).catch((err) => {
+            console.error(ClientMessage.Failure.Join('session'), err)
+        })
 
-        ws.on('message', async (msg: string) => {
-            const parsed = JSON.parse(msg.toString())
-            await routeMessage(parsed.type, {
+        ws.on('message', (message: string) => {
+            const request = JSON.parse(message.toString()) as DeviceWebSocketRequest
+            routeMessage(request.type, {
                 session,
                 deviceId: ws.deviceId,
-                payload: parsed.payload,
+                payload: request.payload,
+            }).catch((err) => {
+                console.error(ClientMessage.Failure.Handle('message'), err)
             })
         })
 

@@ -1,9 +1,6 @@
-// Article registry & references
-export { blogArticles } from './articles'
-export type { BlogArticle } from './articles'
-export { getReferenceList } from './references'
-
-// Article page components
+export { blogArticles } from './Article.data'
+export type { BlogArticle } from './Article.data'
+export { getReferenceList } from './References.data'
 export { CyclicEmailScheduling } from './CyclicEmailScheduling/CyclicEmailScheduling'
 export { DailyAnalyticsEmail } from './DailyAnalyticsEmail/DailyAnalyticsEmail'
 export { GitCheatsheet } from './GitCheatsheet/GitCheatsheet'

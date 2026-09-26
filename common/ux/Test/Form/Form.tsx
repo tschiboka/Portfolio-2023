@@ -56,7 +56,6 @@ class FormInstance extends Accessor {
             submit: async () => {
                 const buttons = this.scope.getAllByRole('button')
                 const submit = buttons.find((b) => (b as HTMLButtonElement).type === 'submit')
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                 if (!submit) throw TestError.notFound(this.context, 'submit button')
                 await Accessor.user.click(submit)
             },

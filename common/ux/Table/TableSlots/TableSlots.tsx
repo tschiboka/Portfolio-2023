@@ -5,7 +5,6 @@ export const Header = createSlot('Table.Header', ({ children }: { children?: Rea
     <>{children}</>
 ))
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Info = createSlot('Table.Info', (_props: { text: string }) => null)
 
 export const Legend = createSlot('Table.Legend', ({ children }: { children?: ReactNode }) => (

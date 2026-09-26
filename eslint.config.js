@@ -10,15 +10,20 @@ import { scopes, settings, standards } from './rules/dist/standards.config.js'
 /** Repo root. `import.meta.dirname` needs Node 20.11+, which the editor's server may not be. */
 const rootDir = dirname(fileURLToPath(import.meta.url))
 
-/** One config block per scoped rule, so `scope` in the registrar binds the rule to its files. */
+/**
+ * One config block per scoped rule, so `scope` in the registrar binds the rule to its files.
+ * `standards` is declared here as well as below: a plugin is only in scope for the files its
+ * own config object matches, and these scopes are wider than `**\/*.{ts,tsx}`.
+ */
 const scopedRules = Object.entries(scopes).map(([ruleId, scope]) => ({
     files: scope.include,
     ignores: scope.exclude,
+    plugins: { standards },
     rules: { [ruleId]: settings[ruleId] },
 }))
 
 export default tseslint.config(
-    { ignores: ['server/**', 'public/**', 'dist/**', '.github/**'] },
+    { ignores: ['public/**', 'dist/**', '.github/**'] },
     js.configs.recommended,
     { languageOptions: { parserOptions: { tsconfigRootDir: rootDir } } },
     ...tseslint.configs.recommended,
@@ -42,6 +47,10 @@ export default tseslint.config(
             '@typescript-eslint/no-misused-promises': [
                 'error',
                 { checksVoidReturn: { attributes: false } },
+            ],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
             ],
         },
     },

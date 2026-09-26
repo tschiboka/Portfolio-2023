@@ -32,6 +32,8 @@ const schema = Joi.object({
     }),
 })
 
-const validate = (exercise: ExerciseValidationInput) => schema.validate(exercise)
+const validate = (
+    exercise: ExerciseValidationInput,
+): Joi.ValidationResult<ExerciseValidationInput> => schema.validate(exercise)
 
 export const ExerciseSchema = { schema, validate }

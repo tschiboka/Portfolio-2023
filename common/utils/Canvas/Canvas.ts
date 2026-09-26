@@ -67,7 +67,8 @@ export const useCanvas = (ref: RefObject<HTMLCanvasElement | null>): Canvas => {
             ctx.strokeStyle = color
             ctx.fillStyle = color
             ctx.lineWidth = width
-            fill ? ctx.fill() : ctx.stroke()
+            if (fill) ctx.fill()
+            else ctx.stroke()
         }
     }
     return {

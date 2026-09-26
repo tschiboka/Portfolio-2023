@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiMessage, ApiResponder } from '@common-utils'
 import { UsersAuth } from '../../../App/Users/Users.auth'
-import { auth, admin } from '../../../App/Users/Users.middlewares'
+import { auth, admin } from '../../../App/Users/Users.middleware'
 import { ExercisesService } from './Exercises.service'
 import type {
     DeleteExerciseReq,

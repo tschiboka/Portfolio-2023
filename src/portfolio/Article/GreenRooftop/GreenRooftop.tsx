@@ -33,7 +33,7 @@ import assembly3Img from '@portfolio/assets/blog/greenRooftop/assembly_3.png'
 import assembly4Img from '@portfolio/assets/blog/greenRooftop/assembly_4.png'
 import finalProductImg from '@portfolio/assets/blog/greenRooftop/final_product.png'
 // Other Assets
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 import codeSnippets from './GreenRooftop.code'
 import greenRooftopCode from '@portfolio/assets/blog/files/green-rooftop/green_rooftop.txt'
 

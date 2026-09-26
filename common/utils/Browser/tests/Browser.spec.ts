@@ -95,7 +95,7 @@ describe('Browser', () => {
                 // Remove clipboard to trigger fallback
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
                 delete (navigator as any).clipboard
-                execCommandMock = vi.fn().mockReturnValue(true) as unknown as MockInstance
+                execCommandMock = vi.fn().mockReturnValue(true)
                 document.execCommand = execCommandMock as unknown as typeof document.execCommand
             })
 

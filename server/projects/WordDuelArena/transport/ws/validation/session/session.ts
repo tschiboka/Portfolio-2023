@@ -1,10 +1,9 @@
 import Joi from 'joi'
-import type { SessionState } from '../../../../types'
-
-import { SessionStatuses } from '../../../../config/constants/session'
-import { MatchSchema } from './match'
-import { PlayerSchema } from './player'
-import { LevelSchema } from './level'
+import type { SessionState } from '../../../../WordDuelArena.types'
+import { SessionStatuses } from '../../../../config/constants/Session.constants'
+import { MatchSchema } from './Match.schema'
+import { PlayerSchema } from './Player.schema'
+import { LevelSchema } from './Level.schema'
 
 const SessionStateSchema = Joi.object({
     id: Joi.string().required(),

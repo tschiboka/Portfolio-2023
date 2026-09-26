@@ -82,7 +82,7 @@ export const useTableController = <TFilters extends Dictionary, TParams = unknow
             commit(
                 (prev) => ({
                     ...prev,
-                    filters: { ...prev.filters, ...values } as TFilters,
+                    filters: { ...prev.filters, ...values },
                     pagination: {
                         ...prev.pagination,
                         pageNumber: Table.Paging.defaults.pageNumber,

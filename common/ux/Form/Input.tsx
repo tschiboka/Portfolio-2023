@@ -48,9 +48,7 @@ export const Input = <T extends FieldValues>({
                             className="action-icon"
                             role="button"
                             aria-label="Toggle password visibility"
-                            onClick={() => {
-                                setRevealPassword && setRevealPassword(!revealPassword)
-                            }}
+                            onClick={() => setRevealPassword?.(!revealPassword)}
                         >
                             {revealPassword ? <BsEyeSlash /> : <BsEye />}
                         </div>

@@ -130,13 +130,11 @@ export const SearchInput = <
                     value,
                     ...restFieldProps
                 } = field
-
                 const handleOnBlur = () => fieldOnBlur?.()
                 const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
                     fieldOnChange?.(event)
                     setOpen(true)
                 }
-
                 return (
                     <div
                         ref={containerRef}

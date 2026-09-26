@@ -4,7 +4,7 @@ import { equipmentOptions } from './Equipment.options'
 import type { GetEquipmentOptionsRes, GetEquipmentReq } from './Equipment.types'
 const router = express.Router()
 
-router.get('/', async (_: GetEquipmentReq, res: GetEquipmentOptionsRes) => {
+router.get('/', (_: GetEquipmentReq, res: GetEquipmentOptionsRes) => {
     ApiResponder.ok(res, { equipment: [...equipmentOptions] })
 })
 

@@ -6,8 +6,8 @@ import { Code, Heading, List, Paragraph, Section } from '@common-ux'
 import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
 import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
 // Other Assets
-import { getReferenceList } from '../references'
-import codeSnippets from './codeSnippets'
+import { getReferenceList } from '../References.data'
+import codeSnippets from './JsSorting.code'
 // Styles
 import './JsSorting.scss'
 import InlineReference from '../components/InlineReference/InlineReference'

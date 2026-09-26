@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { auth } from '../../App/Users/Users.middlewares'
+import { auth } from '../../App/Users/Users.middleware'
 import { ApiResponder, ApiMessage } from '@common-utils'
 import { MessageSchema, CandleSchema } from './Xmas.schema'
 import { XmasMessageModel, XmasCandleModel } from './Xmas.model'
@@ -23,11 +23,11 @@ import { isEmpty } from '@common-utils'
 const router = express.Router()
 
 type GetPingRes = TypedResponse<GetXmasPingResponse>
-router.get('/', async (_req: TypedRequest, res: GetPingRes) => {
+router.get('/', (_req: TypedRequest, res: GetPingRes) => {
     return ApiResponder.ok(res, { data: { message: ApiMessage.ok() } })
 })
 
-router.get('/device', async (_req: TypedRequest, res) => {
+router.get('/device', (_req: TypedRequest, res) => {
     return ApiResponder.text(res, '<<<OK>>>')
 })
 

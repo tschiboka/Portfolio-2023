@@ -8,10 +8,10 @@ import type {
     Saveable,
 } from './Repository.types'
 
-const makeCrud = <M extends ModelLike, D = DocFrom<M>>(Model: M): CrudRepository<M, D> => ({
-    find: (filter?: Filter) => Model.find(filter) as Promise<D[]>,
-    findById: (id: string) => Model.findById(id) as Promise<D | null>,
-    findOne: (filter?: Filter) => Model.findOne(filter) as Promise<D | null>,
+const makeCrud = <M extends ModelLike<D>, D>(Model: M): CrudRepository<M, D> => ({
+    find: (filter?: Filter) => Model.find(filter),
+    findById: (id: string) => Model.findById(id),
+    findOne: (filter?: Filter) => Model.findOne(filter),
     count: (filter?: Filter) => Model.countDocuments(filter),
     create: (input: Partial<D>) => new (Model as unknown as new (input: Partial<D>) => D)(input),
     save: (doc: Saveable<D>) => doc.save(),
@@ -38,7 +38,7 @@ const makeCrud = <M extends ModelLike, D = DocFrom<M>>(Model: M): CrudRepository
  *     })
  */
 export const Repository = {
-    define: <M extends ModelLike, D = DocFrom<M>>(Model: M): RepositoryBuilder<M, D> => {
+    define: <M extends ModelLike<D>, D = DocFrom<M>>(Model: M): RepositoryBuilder<M, D> => {
         const layer = <Q extends object>(queries: Q): RepositoryBuilder<M, D, Q> => ({
             ...makeCrud<M, D>(Model),
             ...queries,

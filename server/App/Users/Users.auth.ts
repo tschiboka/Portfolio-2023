@@ -4,7 +4,7 @@ import type { Request } from 'express'
 import type { CurrentUser } from '../../../common/types'
 import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@common-utils'
 import { UsersModel } from './Users.model'
-import type { RegistrationPayload, UserToken } from './Users.types'
+import type { IUser, RegistrationPayload, UserToken } from './Users.types'
 import { UserPassword } from './Users.constants'
 import { SettingsFieldLimits } from '../Settings/Settings.constants'
 
@@ -41,7 +41,7 @@ const buildRegistration = (
 }
 
 /** Resolves the full user document from the bearer token on the request. */
-const getUserToken = async (req: Request) => {
+const getUserToken = async (req: Request): Promise<IUser | null> => {
     const token = req.headers['x-auth-token'] as string
     const secret = process.env.JWT_PRIVATE_KEY
     if (!secret) throw Error(ApiMessage.jwtSecretMissing())
@@ -55,7 +55,7 @@ const getCurrentUser = async (req: Request): Promise<CurrentUser> => {
     const user = await getUserToken(req)
     if (!user) throw ApiResponder.notFound('user')
 
-    return { _id: user._id.toString(), isAdmin: user.isAdmin }
+    return { _id: String(user._id), isAdmin: user.isAdmin }
 }
 
 /**

@@ -19,13 +19,13 @@ class TableAccessor extends Accessor {
             refreshButton: () => this.scope.getByRole('button', { name: 'Refresh data' }),
 
             // Skeleton — rows are aria-hidden, detect by class
-            skeleton: () => this.element.querySelector('.table-skeleton-row') as HTMLElement | null,
+            skeleton: () => this.element.querySelector('.table-skeleton-row'),
 
             // Column resize
-            resizeHandle: (colIndex: number) =>
-                this.scope
-                    .getAllByRole('columnheader')
-                    [colIndex]?.querySelector('.th-resize-handle') as HTMLElement | null,
+            resizeHandle: (colIndex: number) => {
+                const headers = this.scope.getAllByRole('columnheader')
+                return headers[colIndex]?.querySelector('.th-resize-handle')
+            },
 
             // Column reorder
             reorderLeftButton: (header: string) =>

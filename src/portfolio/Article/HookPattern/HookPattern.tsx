@@ -6,7 +6,7 @@ import InlineReference from '../components/InlineReference/InlineReference'
 import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
 import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
 import codeSnippets from './HookPattern.code'
-import { getReferenceList } from '../references'
+import { getReferenceList } from '../References.data'
 import { AppHooks } from '@shared-context'
 
 interface Props {

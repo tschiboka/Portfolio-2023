@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from 'express'
-import { auth, admin } from '../Users/Users.middlewares'
+import { auth, admin } from '../Users/Users.middleware'
 
 /** Auth helpers for the Schedule feature. */
 export const ScheduleAuth = {

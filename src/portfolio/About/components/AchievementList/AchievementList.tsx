@@ -1,6 +1,6 @@
 import { List } from '@common-ux/Typography/List'
 import AchievementListItem from '../AchievementListItem/AchievementListItem'
-import Achievement from '../AchievementListItem/Achievements'
+import type { Achievement } from '../AchievementListItem/Achievements.data'
 import './AchievementList.scss'
 
 interface Props {

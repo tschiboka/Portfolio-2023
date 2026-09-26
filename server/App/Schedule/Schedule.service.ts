@@ -2,7 +2,7 @@
 import { DateTime } from '@common-utils'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
 import { createMessage, sendEmail } from './Schedule.utils'
-import type { Breakdown } from './Schedule.types'
+import type { Breakdown, BreakdownAggregate } from './Schedule.types'
 
 /** Business logic for the daily-breakdown schedule — builds and sends the report email. */
 export const ScheduleService = {
@@ -11,7 +11,7 @@ export const ScheduleService = {
         const today = DateTime.Format.to('ApiDate', new Date()) ?? ''
 
         const todayBreakdowns = await BreakdownModel.find({ date: today })
-        const totalAggregated = await BreakdownModel.aggregate([
+        const totalAggregated = await BreakdownModel.aggregate<BreakdownAggregate>([
             {
                 $group: {
                     _id: '$path',

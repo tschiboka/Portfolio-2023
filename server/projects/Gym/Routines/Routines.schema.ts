@@ -22,7 +22,6 @@ const schema = Joi.object({
 
 export const RoutineSchema = {
     schema,
-    validate: (routine: RoutineValidationInput) => schema.validate(routine),
+    validate: (routine: RoutineValidationInput): Joi.ValidationResult<RoutineValidationInput> =>
+        schema.validate(routine),
 }
-
-

@@ -27,6 +27,8 @@ export const ClientMessage = {
         Send: (r: string) => `Failed to send ${r.toLowerCase()}`,
         Verify: (r: string) => `Failed to verify ${r.toLowerCase()}`,
         Submit: (r: string) => `Failed to submit ${r.toLowerCase()}`,
+        Join: (r: string) => `Failed to join ${r.toLowerCase()}`,
+        Handle: (r: string) => `Failed to handle ${r.toLowerCase()}`,
         Login: () => 'Failed to log in',
         Logout: () => 'Failed to log out',
     },

@@ -7,8 +7,8 @@ type SerializableDocument = { toObject(): unknown }
 /** Recursively convert `ObjectId`s → strings and strip Mongoose version keys (`__v`/`__t`). */
 const toApiValue = (value: unknown): unknown => {
     if (isArray(value)) return value.map(toApiValue)
+    if (isObjectId(value)) return value.toString()
     if (isObject(value)) {
-        if (isObjectId(value)) return String(value)
         return Object.entries(value).reduce<Dictionary>((out, [key, item]) => {
             if (key === '__v' || key === '__t') return out
             out[key] = toApiValue(item)

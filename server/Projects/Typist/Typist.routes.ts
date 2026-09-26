@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { loadWordResources } from '../WordDuelArena/infrastructure/resources/word'
+import { loadWordResources } from '../WordDuelArena/infrastructure/resources/Word.repository'
 import {
     Keystroke,
     PostTypistRoundRequest,

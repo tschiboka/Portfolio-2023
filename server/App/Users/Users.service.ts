@@ -1,5 +1,10 @@
-﻿import { hasLength, isEmpty, isValidObjectId } from '@common-utils'
-import { ApiMessage, ApiResponder } from '@common-utils'
+﻿import { ApiMessage, ApiResponder, hasLength, isEmpty, isValidObjectId } from '@common-utils'
+import { UsersRepository } from './Users.repository'
+import { UsersSchema } from './Users.schema'
+import { UsersAuth } from './Users.auth'
+import { sendConfirmationEmail } from './Users.utils'
+import { SettingsService } from '../Settings/Settings.service'
+import { TokenModel } from '../Token'
 import type {
     CurrentUser,
     GetSessionResponse,
@@ -10,13 +15,6 @@ import type {
     PostUserRequest,
     User,
 } from '../../../common/types'
-import { UsersRepository } from './Users.repository'
-import { UsersSchema } from './Users.schema'
-import { UsersAuth } from './Users.auth'
-import { sendConfirmationEmail } from './Users.utils'
-import { SettingsService } from '../Settings/Settings.service'
-import type { IUser } from './Users.types'
-import { TokenModel } from '../Token'
 
 /** Business logic for users & auth - persistence via the repository, validation via the schema. */
 export const UsersService = {
@@ -86,7 +84,7 @@ export const UsersService = {
 
         const decoded = UsersAuth.token.verify(token.token) as Record<string, unknown>
 
-        const { expires, iat, ...userFields } = decoded
+        const { _, __, ...userFields } = decoded
         const activeUser: Record<string, unknown> = { ...userFields, verified: true, active: true }
 
         const userNameExists = await UsersRepository.find({
@@ -96,7 +94,7 @@ export const UsersService = {
         const emailExists = await UsersRepository.find({ email: activeUser.email as string })
         if (hasLength(emailExists)) throw ApiResponder.conflict(ApiMessage.exists('user'))
 
-        const user = UsersRepository.create(activeUser as unknown as Partial<IUser>)
+        const user = UsersRepository.create(activeUser)
         await UsersRepository.save(user)
         return { token }
     },
@@ -113,12 +111,12 @@ export const UsersService = {
         if (!auth) throw ApiResponder.badRequest(ApiMessage.invalidCredentials())
 
         const { _id, isAdmin } = user
-        const token = UsersAuth.token.generate({ id: _id, isAdmin })
+        const token = UsersAuth.token.generate({ id: String(_id), isAdmin })
 
         const settings = await SettingsService.get()
         return {
             token,
-            user: { ...user.toObject(), id: _id },
+            user: { ...user.toObject(), id: String(_id) },
             settings: [settings],
         }
     },
@@ -129,6 +127,6 @@ export const UsersService = {
         if (!found) throw ApiResponder.notFound('user')
 
         const settings = await SettingsService.get()
-        return { user: { ...found.toObject(), id: found._id }, settings }
+        return { user: { ...found.toObject(), id: String(found._id) }, settings }
     },
 }
