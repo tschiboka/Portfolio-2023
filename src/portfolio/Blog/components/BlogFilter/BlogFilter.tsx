@@ -1,5 +1,6 @@
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
-import { getColourName, technologies, Technology } from '../../../Projects/Projects.selectors'
+import { ProjectsSelectors } from '../../../Projects/Projects.selectors'
+import type { Technology } from '../../../Projects/Projects.types'
 import './BlogFilter.scss'
 import { BlogSortBy } from '../../Blog.types'
 import type { Dictionary } from '@common-utils'
@@ -25,7 +26,7 @@ export const BlogFilter = ({
 }: Props) => {
     const hasFilter = selectedLanguages.size > 0
 
-    const languageGroups = technologies.reduce(
+    const languageGroups = ProjectsSelectors.technologies.reduce(
         (groups, tech) => {
             if (!tech.groupName) return groups
             if (!groups[tech.groupName]) groups[tech.groupName] = []
@@ -49,7 +50,7 @@ export const BlogFilter = ({
                                     <Pill
                                         key={tech.name}
                                         label={tech.name}
-                                        color={getColourName(tech.name)}
+                                        color={ProjectsSelectors.getColourName(tech.name)}
                                         variant="solid"
                                         className={isActive ? '' : 'BlogFilter__pill--dimmed'}
                                         onClick={() => onToggle(tech.name)}

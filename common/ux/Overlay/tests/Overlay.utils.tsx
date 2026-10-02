@@ -3,7 +3,7 @@ import { render } from '@testing-library/react'
 import { Test } from '../../Test'
 import { Overlay } from '../index'
 import type { ActionMenuProps } from '../ActionMenu'
-import { mocks } from './Overlay.mocks'
+import { OverlayMocks } from './Overlay.mocks'
 
 const mockAnchorRef = () => {
     const ref = createRef<HTMLButtonElement>()
@@ -29,7 +29,8 @@ export const Set = {
     actionMenu: (overrides: Partial<ActionMenuProps> = {}) => {
         const { ref, Wrapper } = mockAnchorRef()
         const onClose = vi.fn()
-        const items = overrides.items ?? mocks.default.map((i) => ({ ...i, onClick: vi.fn() }))
+        const items =
+            overrides.items ?? OverlayMocks.default.map((i) => ({ ...i, onClick: vi.fn() }))
         const label = overrides.ariaLabel ?? 'Action menu'
         const result = render(
             <Wrapper>

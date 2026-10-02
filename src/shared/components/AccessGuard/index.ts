@@ -1,6 +1,6 @@
 export { AccessGuard } from './AccessGuard'
 export { useAccess } from './AccessGuard.hooks'
-export { resolveGuards, isGuardActive, isConditionDenied } from './AccessGuard.utils'
+export { AccessGuardUtils } from './AccessGuard.utils'
 export type {
     AccessMap,
     AccessDeniedMode,

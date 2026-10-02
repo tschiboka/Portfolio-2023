@@ -1,8 +1,12 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Pill, Section } from '@common-ux'
-import { type Row, rows } from '../Tables.mocks'
-import { renderStatus } from '../Tables.config'
+import { TablesMocks } from '../Tables.mocks'
+import type { Row } from '../Tables.types'
+import { TablesConfig } from '../Tables.config'
 import { Code as Snippets } from '../Tables.code'
+
+const { rows } = TablesMocks
+const { renderStatus } = TablesConfig
 
 export const Fundamentals = () => (
     <>

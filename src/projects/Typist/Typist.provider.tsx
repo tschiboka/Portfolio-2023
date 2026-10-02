@@ -1,39 +1,12 @@
 import React, { useEffect, useReducer, useRef } from 'react'
-import { RoundResponse, TypistContextValues, TypistEditorState } from './Typist.types'
-import { ContextBuilder, Functions } from '@common-utils'
-import { textToWords } from './Typist.utils'
+import { TypistContext } from './Typist.context'
+import { TypistDefaults } from './Typist.defaults'
 import { TypistQueries } from './Typist.queries'
 import { editorReducer } from './Editor/Editor.reducer'
-
-const initialState: TypistEditorState = {
-    status: 'idle',
-    lastEvent: 'none',
-    text: '',
-    stats: {
-        practiceMode: 'error',
-        errorCombinations: [],
-        speed: { wpm: 0, cpm: 0 },
-        accuracy: 0,
-        score: 0,
-    },
-    cursorPosition: 0,
-    words: textToWords(''),
-    keystrokes: [],
-}
-
-const initialValues: TypistContextValues = {
-    editorState: initialState,
-    dispatch: Functions.noop,
-    isLoading: false,
-}
-
-export const TypistContext = ContextBuilder.CreateContext<TypistContextValues>(
-    'Typist',
-    initialValues,
-)
+import type { RoundResponse, TypistContextValues } from './Typist.types'
 
 export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [editorState, dispatch] = useReducer(editorReducer, initialState)
+    const [editorState, dispatch] = useReducer(editorReducer, TypistDefaults.initialState)
     const prevStatusRef = useRef(editorState.status)
     const editorStateRef = useRef(editorState)
     editorStateRef.current = editorState

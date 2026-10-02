@@ -10,7 +10,7 @@ type GetCharClassProps = {
     sessionState: WebSocketSessionState
 }
 
-export const getCharClass = ({ attempt, sessionState }: GetCharClassProps) => {
+const getCharClass = ({ attempt, sessionState }: GetCharClassProps) => {
     if (!attempt) return 'last-attempt-char'
     if (attempt.isTarget) return 'last-attempt-char target'
     if (attempt.isExtra) return 'last-attempt-char extra'
@@ -33,7 +33,7 @@ export const getCharClass = ({ attempt, sessionState }: GetCharClassProps) => {
 type GetWordCountsProps = {
     sessionState: WebSocketSessionState
 }
-export const getHeaderInfo = ({ sessionState }: GetWordCountsProps) => {
+const getHeaderInfo = ({ sessionState }: GetWordCountsProps) => {
     if (!sessionState?.players || !sessionState.role) return null
 
     const { role } = sessionState
@@ -49,15 +49,11 @@ export const getHeaderInfo = ({ sessionState }: GetWordCountsProps) => {
     const extraWords = level?.extraWords || []
 
     const totalPoints = playerPoints + opponentPoints
-    const playerPercentage =
-        totalPoints > 0 ? (playerPoints / totalPoints) * 100 : 50
-    const opponentPercentage =
-        totalPoints > 0 ? (opponentPoints / totalPoints) * 100 : 50
+    const playerPercentage = totalPoints > 0 ? (playerPoints / totalPoints) * 100 : 50
+    const opponentPercentage = totalPoints > 0 ? (opponentPoints / totalPoints) * 100 : 50
 
     const getWords = (words: PlayableLevelWord[], playerRole: PlayerRole) =>
-        words.filter(
-            (word) => word.status === 'SOLVED' && word.solvedBy === playerRole,
-        ).length
+        words.filter((word) => word.status === 'SOLVED' && word.solvedBy === playerRole).length
 
     const playerTargetWords = getWords(targetWords, role)
     const playerExtraWords = getWords(extraWords, role)
@@ -80,7 +76,7 @@ export const getHeaderInfo = ({ sessionState }: GetWordCountsProps) => {
     }
 }
 
-export const getLastAttempt = (sessionState: WebSocketSessionState) => {
+const getLastAttempt = (sessionState: WebSocketSessionState) => {
     const { role } = sessionState
     if (!role) return { player: undefined, opponent: undefined }
 
@@ -93,3 +89,5 @@ export const getLastAttempt = (sessionState: WebSocketSessionState) => {
 
     return { player, opponent }
 }
+
+export const SessionHeaderSelectors = { getCharClass, getHeaderInfo, getLastAttempt }

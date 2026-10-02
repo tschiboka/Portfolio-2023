@@ -1,7 +1,9 @@
 import { Accessor, Test } from '@common-ux/Test'
 import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
-import { basicColumns, rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
+
+const { rows, basicColumns } = TableMocks
 
 describe('Table — Responsive / Breakpoints', () => {
     const table = () => Test.Table('test')

@@ -4,20 +4,20 @@ import { isEmpty } from '@common-utils'
 import type { Nullable, Dictionary } from '@common-utils'
 import { BlogSortBy } from './Blog.types'
 
-export const getPublishedArticles = () => blogArticles.filter((article) => !!article.created)
+const getPublishedArticles = () => blogArticles.filter((article) => !!article.created)
 
-export const getSortedArticles = () => {
+const getSortedArticles = () => {
     const published = getPublishedArticles()
     return [...published].sort(
         (a, b) => DateTime.Format.ms(b.created) - DateTime.Format.ms(a.created),
     )
 }
 
-export const getNewestArticle = () => getSortedArticles()[0]
+const getNewestArticle = () => getSortedArticles()[0]
 
-export const getPublishedBlogArticles = () => blogArticles.filter((article) => !article.upcoming)
+const getPublishedBlogArticles = () => blogArticles.filter((article) => !article.upcoming)
 
-export const getFilteredArticles = (selectedLanguages: Set<string>) => {
+const getFilteredArticles = (selectedLanguages: Set<string>) => {
     const published = getPublishedBlogArticles()
     return isEmpty(selectedLanguages)
         ? published
@@ -26,7 +26,7 @@ export const getFilteredArticles = (selectedLanguages: Set<string>) => {
           )
 }
 
-export const getComingSoonArticles = (
+const getComingSoonArticles = (
     visits: Nullable<Dictionary<number>>,
     likes: Nullable<Dictionary<number>>,
 ) =>
@@ -38,7 +38,7 @@ export const getComingSoonArticles = (
             likes: likes ? likes[article.to] : 0,
         }))
 
-export const getSortedArticlesBy = (
+const getSortedArticlesBy = (
     articles: BlogArticle[],
     sortedBy: BlogSortBy,
     likes: Nullable<Dictionary<number>>,
@@ -58,3 +58,11 @@ export const getSortedArticlesBy = (
                 return (visits?.[b.to] ?? 0) - (visits?.[a.to] ?? 0)
         }
     })
+
+export const BlogUtils = {
+    getNewestArticle,
+    getPublishedBlogArticles,
+    getFilteredArticles,
+    getComingSoonArticles,
+    getSortedArticlesBy,
+}

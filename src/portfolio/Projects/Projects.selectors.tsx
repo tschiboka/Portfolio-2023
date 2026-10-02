@@ -17,6 +17,7 @@ import adrikaClockImg from '@portfolio/assets/projects/AdrikaClock.png'
 import { Strings } from '@common-utils'
 import { Project } from '.'
 import type { PillColor } from '@common-ux'
+import type { Technology } from './Projects.types'
 
 const projects: Project[] = [
     {
@@ -354,14 +355,7 @@ const projects: Project[] = [
     },
 ]
 
-export type Technology = {
-    name: string
-    color: PillColor
-    tech?: string
-    groupName?: string
-}
-
-export const technologies: Technology[] = [
+const technologies: Technology[] = [
     {
         name: 'HTML',
         color: 'orange',
@@ -478,11 +472,11 @@ export const technologies: Technology[] = [
     },
 ]
 
-export const getTechnologies = (technology: string) => {
+const getTechnologies = (technology: string) => {
     return technologies.find((tech) => Strings.equalIgnoreCase(tech.name, technology))
 }
 
-export function getColourName(str: string): PillColor {
+function getColourName(str: string): PillColor {
     switch (str.toLowerCase()) {
         case 'html':
             return 'orange'
@@ -537,11 +531,19 @@ export function getColourName(str: string): PillColor {
     }
 }
 
-export const getProjects = () => projects
+const getProjects = () => projects
 
-export const filterProjects = (by: string, projects: Project[] = getProjects()) => {
+const filterProjects = (by: string, projects: Project[] = getProjects()) => {
     if (by === 'featured') return projects.filter((project) => project.type === 'featured')
     if (by === 'inProgress') return projects.filter((project) => project.type === 'inProgress')
     if (by === 'archived') return projects.filter((project) => project.type === 'archived')
     return projects
+}
+
+export const ProjectsSelectors = {
+    technologies,
+    getTechnologies,
+    getColourName,
+    getProjects,
+    filterProjects,
 }

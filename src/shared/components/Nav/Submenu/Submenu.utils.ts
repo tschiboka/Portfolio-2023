@@ -1,9 +1,7 @@
 import { Maybe } from 'monet'
-import { SubmenuState } from '../Nav.types'
+import { Coordinates, SubmenuState } from '../Nav.types'
 
-export type Coordinates = { x: number; y: number }
-
-export const findParentMenuCoords = (parentLabel?: string): Coordinates =>
+const findParentMenuCoords = (parentLabel?: string): Coordinates =>
     Maybe.fromNull(parentLabel)
         .map((label) => {
             const elem = document.getElementById(label)
@@ -12,5 +10,6 @@ export const findParentMenuCoords = (parentLabel?: string): Coordinates =>
         })
         .orSome({ x: 0, y: 0 })
 
-export const isParentMenu = (label: string, stack: SubmenuState[]) =>
-    stack[1]?.parentLabel === label
+const isParentMenu = (label: string, stack: SubmenuState[]) => stack[1]?.parentLabel === label
+
+export const SubmenuUtils = { findParentMenuCoords, isParentMenu }

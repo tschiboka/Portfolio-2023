@@ -2,7 +2,7 @@ import { MockBuilder } from '../MockBuilder'
 import type { MockItem } from './MockBuilder.spec.types'
 
 /** Base fixture every `MockBuilder` spec derives from. */
-export const baseMock: MockItem = {
+const baseMock: MockItem = {
     id: 1,
     name: 'foo',
     status: 'active',
@@ -10,4 +10,6 @@ export const baseMock: MockItem = {
 }
 
 /** Reusable builder over `baseMock`. */
-export const baseBuilder = MockBuilder(baseMock)
+const baseBuilder = MockBuilder(baseMock)
+
+export const MockBuilderMocks = { baseMock, baseBuilder }

@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { ClockData, drawGrooves, drawHands } from '..'
+import { ClockData, ClockUtils } from '..'
 import { Canvas } from '@common-utils'
 
 type ClockFaceCanvasProps = { clock: ClockData }
@@ -12,8 +12,8 @@ export const ClockFaceCanvas = ({ clock }: ClockFaceCanvasProps) => {
 
     useEffect(() => {
         if (ctx) {
-            drawGrooves(canvas)
-            drawHands(clock, canvas)
+            ClockUtils.drawGrooves(canvas)
+            ClockUtils.drawHands(clock, canvas)
         }
     }, [clock, ctx, canvas])
 

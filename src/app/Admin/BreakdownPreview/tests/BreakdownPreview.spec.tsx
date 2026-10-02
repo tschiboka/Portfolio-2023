@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { BreakdownPreviewTestUtils } from './BreakdownPreview.spec.utils'
-import { EmptyBreakdown, FallbackBreakdown, MockBreakdown } from './BreakdownPreview.mocks'
+import { BreakdownPreviewMocks } from './BreakdownPreview.mocks'
 
 const labels = BreakdownPreviewTestUtils.labels
 
@@ -40,32 +40,38 @@ describe('BreakdownPreview', () => {
 
         it('renders the visits totals from the mock', () => {
             const preview = BreakdownPreviewTestUtils.renderPreview()
-            expect(preview.Get.statValue(MockBreakdown.visits.todayCount)).toBeDefined()
-            expect(preview.Get.statValue(MockBreakdown.visits.totalCount)).toBeDefined()
+            expect(
+                preview.Get.statValue(BreakdownPreviewMocks.breakdown.visits.todayCount),
+            ).toBeDefined()
+            expect(
+                preview.Get.statValue(BreakdownPreviewMocks.breakdown.visits.totalCount),
+            ).toBeDefined()
         })
     })
 
     describe('Breakdown table', () => {
         it('renders a row for each visited path', () => {
             const preview = BreakdownPreviewTestUtils.renderPreview()
-            for (const item of MockBreakdown.visits.today) {
+            for (const item of BreakdownPreviewMocks.breakdown.visits.today) {
                 expect(preview.Get.allByText(item.path).length).toBeGreaterThan(0)
             }
         })
 
         it('renders the today count for a path', () => {
             const preview = BreakdownPreviewTestUtils.renderPreview()
-            expect(preview.Get.statValue(MockBreakdown.visits.today[0].count)).toBeDefined()
+            expect(
+                preview.Get.statValue(BreakdownPreviewMocks.breakdown.visits.today[0].count),
+            ).toBeDefined()
         })
 
         it('matches a total against its path', () => {
             const preview = BreakdownPreviewTestUtils.renderPreview()
-            const first = MockBreakdown.visits.total[0]
+            const first = BreakdownPreviewMocks.breakdown.visits.total[0]
             expect(preview.Get.statValue(first.count)).toBeDefined()
         })
 
         it('falls back to 0 for the total when a path is absent from totals', () => {
-            BreakdownPreviewTestUtils.render({ breakdown: FallbackBreakdown })
+            BreakdownPreviewTestUtils.render({ breakdown: BreakdownPreviewMocks.fallbackBreakdown })
             const preview = BreakdownPreviewTestUtils.get()
             const totalCell = preview.Get.tableRowTotal('/orphan')
             expect(totalCell?.textContent).toBe('0')
@@ -87,13 +93,13 @@ describe('BreakdownPreview', () => {
 
 describe('BreakdownPreview — empty data', () => {
     it('shows the empty-state message for both sections', () => {
-        BreakdownPreviewTestUtils.render({ breakdown: EmptyBreakdown })
+        BreakdownPreviewTestUtils.render({ breakdown: BreakdownPreviewMocks.emptyBreakdown })
         const preview = BreakdownPreviewTestUtils.get()
         expect(preview.Get.allByText(labels.empty)).toHaveLength(2)
     })
 
     it('renders zero stat values', () => {
-        BreakdownPreviewTestUtils.render({ breakdown: EmptyBreakdown })
+        BreakdownPreviewTestUtils.render({ breakdown: BreakdownPreviewMocks.emptyBreakdown })
         const preview = BreakdownPreviewTestUtils.get()
         expect(preview.Get.allByText('0').length).toBeGreaterThan(0)
     })

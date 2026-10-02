@@ -1,10 +1,10 @@
 import { RequestBuilder, HttpMethods } from '@common-ux/Test'
-import { MockPostVisit } from './Visits.queries.mocks'
+import { VisitsMocks } from './Visits.queries.mocks'
 
 const postVisit = RequestBuilder({
     path: '/api/visit',
     method: HttpMethods.POST,
-    response: MockPostVisit,
+    response: VisitsMocks.postVisit,
 })
 
 export const VisitsMockHandlers = {

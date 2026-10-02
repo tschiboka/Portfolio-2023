@@ -4,7 +4,7 @@ import { ClientMessage } from '@common-utils'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
-import { defaultHandlers } from './Categories.mockHandlers'
+import { CategoriesMockHandlers } from './Categories.mockHandlers'
 
 type CategoriesForm = ReturnType<typeof Test.Form>
 
@@ -37,7 +37,7 @@ export const CategoriesTestUtils = {
 
     /** Renders the Categories screen behind the given handlers and returns the bound form. */
     customRender: async (
-        handlers: Buildable[] = defaultHandlers,
+        handlers: Buildable[] = CategoriesMockHandlers.Defaults,
     ): Promise<{ form: CategoriesForm }> => {
         TestScreen.Do.render({
             path: AppRoutes.Categories,

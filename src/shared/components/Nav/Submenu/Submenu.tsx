@@ -2,10 +2,10 @@ import { Maybe } from 'monet'
 import { useEffect, useState } from 'react'
 import { Link } from '@common-ux'
 import { AccessGuard } from '../../AccessGuard'
-import { MenuItem, SubmenuState } from '../Nav.types'
+import { Coordinates, MenuItem, SubmenuState } from '../Nav.types'
 import { find } from 'ramda'
-import { Coordinates, findParentMenuCoords, isParentMenu } from './Submenu.utils'
-import { isActive } from '../Nav.utils'
+import { SubmenuUtils } from './Submenu.utils'
+import { NavUtils } from '../Nav.utils'
 import { Const } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
 import './Submenu.styles.css'
@@ -44,11 +44,12 @@ export const Submenu = ({ submenu, submenuStack, setSubmenuStack, pageName }: Su
     }
 
     const [coords, setCoords] = useState<Coordinates>(() =>
-        findParentMenuCoords(submenu?.parentLabel),
+        SubmenuUtils.findParentMenuCoords(submenu?.parentLabel),
     )
 
     useEffect(() => {
-        const updateCoords = () => setCoords(findParentMenuCoords(submenu?.parentLabel))
+        const updateCoords = () =>
+            setCoords(SubmenuUtils.findParentMenuCoords(submenu?.parentLabel))
         window.addEventListener('resize', updateCoords)
         return () => window.removeEventListener('resize', updateCoords)
     }, [submenu?.parentLabel])
@@ -75,7 +76,8 @@ export const Submenu = ({ submenu, submenuStack, setSubmenuStack, pageName }: Su
                     <li
                         id={item.label}
                         className={
-                            isParentMenu(item.label, submenuStack) || isActive(item.label, pageName)
+                            SubmenuUtils.isParentMenu(item.label, submenuStack) ||
+                            NavUtils.isActive(item.label, pageName)
                                 ? 'active'
                                 : ''
                         }

@@ -1,7 +1,7 @@
 import type { Breakdown } from '../BreakdownPreview.types'
 
 /** Mock data for visual testing in the Admin panel. */
-export const MockBreakdown: Breakdown = {
+const breakdown: Breakdown = {
     visits: {
         today: [
             { path: '/', count: 42 },
@@ -33,13 +33,15 @@ export const MockBreakdown: Breakdown = {
 }
 
 /** Breakdown with no data — exercises the empty state. */
-export const EmptyBreakdown: Breakdown = {
+const emptyBreakdown: Breakdown = {
     visits: { today: [], total: [], todayCount: 0, totalCount: 0 },
     likes: { today: [], total: [], todayCount: 0, totalCount: 0 },
 }
 
 /** Breakdown with a today-path absent from totals — exercises the `?? 0` fallback. */
-export const FallbackBreakdown: Breakdown = {
+const fallbackBreakdown: Breakdown = {
     visits: { today: [{ path: '/orphan', count: 7 }], total: [], todayCount: 7, totalCount: 0 },
     likes: { today: [], total: [], todayCount: 0, totalCount: 0 },
 }
+
+export const BreakdownPreviewMocks = { breakdown, emptyBreakdown, fallbackBreakdown }

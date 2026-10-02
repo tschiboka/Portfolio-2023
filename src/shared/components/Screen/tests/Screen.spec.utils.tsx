@@ -7,11 +7,11 @@ import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 import { TestError, server } from '@common-ux/Test'
 import { isString, isNonEmpty } from '@common-utils'
 import type { Optional } from '@common-utils'
-import { mockDefaultQueryOptions, mockDefaultSessionContext, mockNavigate } from './Screen.mocks'
+import { ScreenMocks } from './Screen.mocks'
 import type { AppRoute } from '@app'
 import { AppContextProvider, SessionContext } from '@shared-context'
 
-const createQueryClient = () => new QueryClient({ defaultOptions: mockDefaultQueryOptions })
+const createQueryClient = () => new QueryClient({ defaultOptions: ScreenMocks.defaultQueryOptions })
 
 const resolvePath = (path: string | AppRoute) => (isString(path) ? path : path.path)
 
@@ -25,7 +25,7 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
     const queryClient = createQueryClient()
     const path = resolvePath(options.path)
     const { route = [path], session, appContext } = options
-    const sessionValue = { ...mockDefaultSessionContext, ...session }
+    const sessionValue = { ...ScreenMocks.defaultSessionContext, ...session }
 
     const Providers = ({ children }: { children: React.ReactNode }) => (
         <QueryClientProvider client={queryClient}>
@@ -47,16 +47,16 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
 
 export const TestScreen = {
     Get: {
-        navigatedTo: () => mockNavigate.mock.lastCall?.[0] as Optional<string>,
+        navigatedTo: () => ScreenMocks.navigate.mock.lastCall?.[0] as Optional<string>,
     },
     Has: {
-        navigated: () => isNonEmpty(mockNavigate.mock.calls),
+        navigated: () => isNonEmpty(ScreenMocks.navigate.mock.calls),
     },
     Wait: {
         navigatedTo: async (path: string) => {
             await waitFor(() => {
-                if (!mockNavigate.mock.calls.some(([p]: unknown[]) => p === path)) {
-                    const actual = mockNavigate.mock.lastCall?.[0] as Optional<string>
+                if (!ScreenMocks.navigate.mock.calls.some(([p]: unknown[]) => p === path)) {
+                    const actual = ScreenMocks.navigate.mock.lastCall?.[0] as Optional<string>
                     throw TestError.navigation(path, actual)
                 }
             })
@@ -69,9 +69,9 @@ export const TestScreen = {
     },
     Do: {
         render: (options: ScreenSetupOptions) => {
-            // mockNavigate is module-level and shared by every spec that renders through
+            // ScreenMocks.navigate is module-level and shared by every spec that renders through
             // TestScreen; clear it so a navigation assertion cannot read a previous test's call.
-            mockNavigate.mockClear()
+            ScreenMocks.navigate.mockClear()
 
             if (options.handlers?.length) {
                 server.use(...options.handlers.map((h) => h.build()))

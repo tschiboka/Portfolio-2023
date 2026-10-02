@@ -1,10 +1,18 @@
 import { TestMocks } from '@common-mocks'
 import { GetLikeResponse, GetVisitResponse, PostLikeResponse } from '@common-types'
 
-export const mockLikes: GetLikeResponse = { likes: 0 }
-export const mockLikesWithCount: GetLikeResponse = { likes: 5 }
-export const mockVisits: GetVisitResponse = { visits: 0 }
-export const mockVisitsWithCount: GetVisitResponse = { visits: 42 }
-export const mockPostLikeSuccess: PostLikeResponse = {
+const likes: GetLikeResponse = { likes: 0 }
+const likesWithCount: GetLikeResponse = { likes: 5 }
+const visits: GetVisitResponse = { visits: 0 }
+const visitsWithCount: GetVisitResponse = { visits: 42 }
+const postLikeSuccess: PostLikeResponse = {
     like: { path: '/projects', likeDate: TestMocks.createdAt },
+}
+
+export const PageSideMenuMocks = {
+    likes,
+    likesWithCount,
+    visits,
+    visitsWithCount,
+    postLikeSuccess,
 }

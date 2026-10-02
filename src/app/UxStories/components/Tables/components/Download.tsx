@@ -1,7 +1,10 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import { type Row, rows } from '../Tables.mocks'
+import { TablesMocks } from '../Tables.mocks'
+import type { Row } from '../Tables.types'
 import { Code as Snippets } from '../Tables.code'
+
+const { rows } = TablesMocks
 
 export const Download = () => (
     <>

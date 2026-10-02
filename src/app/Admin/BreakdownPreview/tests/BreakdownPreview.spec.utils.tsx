@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { BreakdownPreview as BreakdownPreviewComponent } from '../BreakdownPreview'
-import { MockBreakdown } from './BreakdownPreview.mocks'
+import { BreakdownPreviewMocks } from './BreakdownPreview.mocks'
 import type { BreakdownPreviewProps } from '../BreakdownPreview.types'
 
 class BreakdownPreviewAccessor extends Accessor {
@@ -44,7 +44,7 @@ export const BreakdownPreviewTestUtils = {
 
     /** Renders the preview with the standard mock and returns an accessor bound to it. */
     renderPreview: (): BreakdownPreviewAccessor => {
-        BreakdownPreviewTestUtils.render({ breakdown: MockBreakdown })
+        BreakdownPreviewTestUtils.render({ breakdown: BreakdownPreviewMocks.breakdown })
         return BreakdownPreviewTestUtils.get()
     },
 }

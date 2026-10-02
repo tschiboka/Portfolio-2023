@@ -2,39 +2,39 @@ import type { ReactNode } from 'react'
 import type { CellValue, CellVariant, CellMeta, TableAction, SortDirection } from '@common-ux'
 import { Pill } from '@common-ux'
 import type { Optional, Dictionary, Sortable } from '@common-utils'
-import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.mocks'
+import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.types'
 
-export const statusPillColors: Dictionary<'success' | 'error' | 'orange'> = {
+const statusPillColors: Dictionary<'success' | 'error' | 'orange'> = {
     active: 'success',
     inactive: 'error',
     pending: 'orange',
     error: 'error',
 }
 
-export const renderStatus = (cell: CellValue<Row>): ReactNode => (
+const renderStatus = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
 )
 
-export const renderBadge = (cell: CellValue<Row>): ReactNode => (
+const renderBadge = (cell: CellValue<Row>): ReactNode => (
     <Pill label={String(cell)} color="purple" />
 )
 
-export const statusToVariant: Dictionary<CellVariant> = {
+const statusToVariant: Dictionary<CellVariant> = {
     active: 'primary',
     pending: 'secondary',
     inactive: 'disabled',
     error: 'danger',
 }
 
-export const cellVariantFn = (
+const cellVariantFn = (
     _cell: CellValue<VariantRow>,
     meta: CellMeta<VariantRow>,
 ): Optional<CellVariant> => statusToVariant[meta.row.status]
 
-export const rowVariantFn = (meta: CellMeta<VariantRow>): Optional<CellVariant> =>
+const rowVariantFn = (meta: CellMeta<VariantRow>): Optional<CellVariant> =>
     statusToVariant[meta.row.status]
 
-export const clickAction: TableAction<ActionRow>[] = [
+const clickAction: TableAction<ActionRow>[] = [
     {
         id: 'onClick',
         label: 'Click me',
@@ -42,7 +42,7 @@ export const clickAction: TableAction<ActionRow>[] = [
     },
 ]
 
-export const hrefAction: TableAction<ActionRow>[] = [
+const hrefAction: TableAction<ActionRow>[] = [
     {
         id: 'href',
         label: 'Open link',
@@ -50,7 +50,7 @@ export const hrefAction: TableAction<ActionRow>[] = [
     },
 ]
 
-export const filterAction: TableAction<ActionRow>[] = [
+const filterAction: TableAction<ActionRow>[] = [
     {
         id: 'filter',
         label: 'Activate',
@@ -58,7 +58,7 @@ export const filterAction: TableAction<ActionRow>[] = [
     },
 ]
 
-export const disabledItemAction: TableAction<ActionRow>[] = [
+const disabledItemAction: TableAction<ActionRow>[] = [
     {
         id: 'disabled',
         label: 'Delete',
@@ -67,14 +67,14 @@ export const disabledItemAction: TableAction<ActionRow>[] = [
     },
 ]
 
-export const variantActions: TableAction<ActionRow>[] = [
+const variantActions: TableAction<ActionRow>[] = [
     { id: 'primary', label: 'Primary', variant: 'primary' },
     { id: 'secondary', label: 'Secondary', variant: 'secondary' },
     { id: 'danger', label: 'Danger', variant: 'danger' },
     { id: 'default', label: 'Default' },
 ]
 
-export const allActions: TableAction<Row>[] = [
+const allActions: TableAction<Row>[] = [
     {
         id: 'onClick',
         label: 'Edit',
@@ -100,9 +100,9 @@ export const allActions: TableAction<Row>[] = [
     },
 ]
 
-export const getSelectionRowId = (row: SelectionRow) => row.id
+const getSelectionRowId = (row: SelectionRow) => row.id
 
-export const selectionActions: TableAction<SelectionRow>[] = [
+const selectionActions: TableAction<SelectionRow>[] = [
     {
         id: 'edit',
         label: 'Edit',
@@ -117,11 +117,11 @@ export const selectionActions: TableAction<SelectionRow>[] = [
     },
 ]
 
-export const allFeaturesStatusPill = (cell: CellValue<AllFeaturesRow>): ReactNode => (
+const allFeaturesStatusPill = (cell: CellValue<AllFeaturesRow>): ReactNode => (
     <Pill label={String(cell).toUpperCase()} color={statusPillColors[cell] || 'accent'} />
 )
 
-export const allFeaturesStatusVariant = (
+const allFeaturesStatusVariant = (
     _cell: CellValue<AllFeaturesRow>,
     meta: CellMeta<AllFeaturesRow>,
 ): Optional<CellVariant> => {
@@ -131,13 +131,13 @@ export const allFeaturesStatusVariant = (
     return undefined
 }
 
-export const allFeaturesRowVariant = (meta: CellMeta<AllFeaturesRow>): Optional<CellVariant> => {
+const allFeaturesRowVariant = (meta: CellMeta<AllFeaturesRow>): Optional<CellVariant> => {
     if (meta.row.status === 'inactive') return 'disabled'
     if (meta.row.status === 'error') return 'danger'
     return undefined
 }
 
-export const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
+const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
     {
         id: 'edit',
         label: 'Edit',
@@ -163,7 +163,7 @@ export const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
     },
 ]
 
-export const sortRows = <T extends Record<string, Sortable>>(
+const sortRows = <T extends Record<string, Sortable>>(
     data: T[],
     column: keyof T,
     direction: SortDirection,
@@ -174,3 +174,23 @@ export const sortRows = <T extends Record<string, Sortable>>(
         const cmp = aVal.localeCompare(bVal, undefined, { numeric: true })
         return direction === 'asc' ? cmp : -cmp
     })
+
+export const TablesConfig = {
+    renderStatus,
+    renderBadge,
+    cellVariantFn,
+    rowVariantFn,
+    clickAction,
+    hrefAction,
+    filterAction,
+    disabledItemAction,
+    variantActions,
+    allActions,
+    getSelectionRowId,
+    selectionActions,
+    allFeaturesStatusPill,
+    allFeaturesStatusVariant,
+    allFeaturesRowVariant,
+    allFeaturesActions,
+    sortRows,
+}

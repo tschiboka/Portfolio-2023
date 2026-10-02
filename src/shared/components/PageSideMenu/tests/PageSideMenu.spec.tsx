@@ -2,19 +2,14 @@ import { screen, waitFor } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '../../Screen/tests/Screen.spec.utils'
 import { PageSideMenu } from '../PageSideMenu'
-import {
-    pageSideMenuHandlers,
-    handleGetLikes,
-    handleGetVisits,
-    handlePostLike,
-} from './PageSideMenu.mockHandlers'
-import { mockLikesWithCount, mockVisitsWithCount } from './PageSideMenu.mocks'
+import { PageSideMenuMockHandlers } from './PageSideMenu.mockHandlers'
+import { PageSideMenuMocks } from './PageSideMenu.mocks'
 
 const setupPageSideMenu = () => {
     TestScreen.Do.render({
         path: '/projects',
         children: <PageSideMenu />,
-        handlers: [...pageSideMenuHandlers, handlePostLike],
+        handlers: [...PageSideMenuMockHandlers.Defaults, PageSideMenuMockHandlers.Likes.Post],
     })
 }
 
@@ -56,7 +51,9 @@ describe('PageSideMenu', () => {
         it('should fetch and display likes count', async () => {
             setupPageSideMenu()
             TestScreen.Set.handlers(
-                handleGetLikes.updateResponse((builder) => builder.modify(mockLikesWithCount)),
+                PageSideMenuMockHandlers.Likes.Get.updateResponse((builder) =>
+                    builder.modify(PageSideMenuMocks.likesWithCount),
+                ),
             )
 
             const menu = getSideMenu()
@@ -68,7 +65,9 @@ describe('PageSideMenu', () => {
         it('should fetch and display visits count', async () => {
             setupPageSideMenu()
             TestScreen.Set.handlers(
-                handleGetVisits.updateResponse((builder) => builder.modify(mockVisitsWithCount)),
+                PageSideMenuMockHandlers.Visits.Get.updateResponse((builder) =>
+                    builder.modify(PageSideMenuMocks.visitsWithCount),
+                ),
             )
 
             const menu = getSideMenu()
@@ -123,7 +122,9 @@ describe('PageSideMenu', () => {
             const menu = getSideMenu()
 
             TestScreen.Set.handlers(
-                handleGetLikes.updateResponse((builder) => builder.modify(mockLikesWithCount)),
+                PageSideMenuMockHandlers.Likes.Get.updateResponse((builder) =>
+                    builder.modify(PageSideMenuMocks.likesWithCount),
+                ),
             )
             await menu.Do.clickItem('Like')
 

@@ -3,7 +3,7 @@ import { ClockData } from '.'
 import { CanvasType, Centre, DateTime, Line } from '@common-utils'
 import type { Nullable } from '@common-utils'
 
-export const getDateTime = (): ClockData => {
+const getDateTime = (): ClockData => {
     const dateTime = Date.now()
     return {
         dayOfWeek: moment(dateTime).format('ddd'),
@@ -18,7 +18,7 @@ export const getDateTime = (): ClockData => {
 }
 
 type StartLoopProps = { setClock: (clock: Nullable<ClockData>) => void }
-export const startLoop = ({ setClock }: StartLoopProps) =>
+const startLoop = ({ setClock }: StartLoopProps) =>
     setInterval(() => {
         const updatedDateTime = getDateTime()
         setClock(updatedDateTime)
@@ -48,7 +48,7 @@ const getHands = ({ sec, min, hour }: ClockData) => [
     },
 ]
 
-export const drawHands = (clock: ClockData, canvasObj: CanvasType) => {
+const drawHands = (clock: ClockData, canvasObj: CanvasType) => {
     const { radius, centre, line } = canvasObj
 
     const hands = getHands(clock)
@@ -107,7 +107,7 @@ const drawFromCentre = (
     circle(props)
 }
 
-export const drawGrooves = (canvasObj: CanvasType) => {
+const drawGrooves = (canvasObj: CanvasType) => {
     const { radius, centre, line } = canvasObj
 
     const degreesMin = [...Array(60).keys()]
@@ -122,3 +122,5 @@ export const drawGrooves = (canvasObj: CanvasType) => {
 
     drawFromCentre(canvasObj, radius * 0.95, 1, '#0a0a0a', true)
 }
+
+export const ClockUtils = { getDateTime, startLoop, drawHands, drawGrooves }

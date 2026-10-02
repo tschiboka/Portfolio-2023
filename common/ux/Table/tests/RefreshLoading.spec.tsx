@@ -1,7 +1,9 @@
 import { screen } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
-import { basicColumns, rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
+
+const { rows, basicColumns } = TableMocks
 
 describe('Table — Refresh & Loading', () => {
     describe('Refresh button', () => {

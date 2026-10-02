@@ -1,28 +1,12 @@
 import { vi } from 'vitest'
+import { MockSettings, MockUser } from '@common-mocks'
 
-export const mockSetSession = vi.fn()
+const setSession = vi.fn()
 
-export const defaultSettings = {
-    maxUsers: 10,
-    enableMaintenanceMode: false,
-    enableUserRegistration: true,
-    enableAutomaticLogoff: false,
-    enabledFeatures: [] as string[],
-    registrationTokensExpireInMs: 86400000,
-    sessionTokensExpireInMs: 86400000,
-}
-
-export const mockUser = {
-    id: '123',
-    userName: 'testuser',
-    email: 'test@example.com',
-    password: '',
-    fullName: 'Test User',
-    isAdmin: false,
-}
-
-export const mockLoginSuccess = {
+const loginSuccess = {
     token: 'mock-jwt-token',
-    user: mockUser,
-    settings: [defaultSettings],
+    user: MockUser.build(),
+    settings: [MockSettings.build()],
 }
+
+export const LoginMocks = { setSession, loginSuccess }

@@ -6,7 +6,7 @@ import { AppHooks } from '@shared-context'
 import { Const, Link, Toggle } from '@common-ux'
 import { AccessGuard } from '../../AccessGuard'
 import { MenuItem } from '../Nav.types'
-import { isHighlighted } from '../Nav.utils'
+import { NavUtils } from '../Nav.utils'
 import './MobileMenu.styles.css'
 
 export type MobileMenuProps = {
@@ -79,7 +79,7 @@ export const MobileMenu = ({
                         key={item.label}
                     >
                         <li
-                            className={isHighlighted(item, pageName)}
+                            className={NavUtils.isHighlighted(item, pageName)}
                             onClick={() => handleItemClick(item)}
                         >
                             <Link to={item?.path || ''}>

@@ -13,12 +13,8 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import { Code as Snippets } from './TestAccessor.code'
-import {
-    NameSpaceColumns,
-    NameSpaceRows,
-    NamespaceGuideColumns,
-    NamespaceGuideRows,
-} from './TestAccessor.columns'
+import { TestAccessorColumns } from './TestAccessor.columns'
+import { TestAccessorData } from './TestAccessor.data'
 import { Table } from '@common-ux/Table/Table'
 import './TestAccessor.styles.css'
 
@@ -122,8 +118,8 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 <Heading as="h3">Namespaces</Heading>
                 <Paragraph>3 authored + 2 derived:</Paragraph>
                 <Table
-                    columns={NameSpaceColumns}
-                    data={NameSpaceRows}
+                    columns={TestAccessorColumns.nameSpace}
+                    data={TestAccessorData.nameSpace}
                     rowAriaLabel="Accessor namespace"
                 />
                 <Heading as="h3">
@@ -236,8 +232,8 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     ]}
                 />
                 <Table
-                    columns={NamespaceGuideColumns}
-                    data={NamespaceGuideRows}
+                    columns={TestAccessorColumns.namespaceGuide}
+                    data={TestAccessorData.namespaceGuide}
                     rowAriaLabel="Namespace guide"
                 />
                 <Heading as="h3">Enforcement</Heading>

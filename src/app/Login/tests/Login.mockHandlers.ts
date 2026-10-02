@@ -1,25 +1,29 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
 import { HttpStatus } from '@common-utils'
-import { defaultSettings, mockLoginSuccess } from './Login.mocks'
+import { MockSettings } from '@common-mocks'
+import { LoginMocks } from './Login.mocks'
 
-export const handleGetSettings = RequestBuilder({
+const getSettings = RequestBuilder({
     path: '/api/settings',
     method: HttpMethods.GET,
-    response: MockBuilder({ settings: defaultSettings }),
+    response: MockBuilder({ settings: MockSettings.build() }),
 })
 
-export const handlePostLogin = RequestBuilder({
+const postLogin = RequestBuilder({
     path: '/api/user/login',
     method: HttpMethods.POST,
-    response: MockBuilder(mockLoginSuccess),
+    response: MockBuilder(LoginMocks.loginSuccess),
 })
 
-export const handlePostLoginError = (message: string, status = HttpStatus.BAD_REQUEST) =>
-    RequestBuilder({
-        path: '/api/user/login',
-        method: HttpMethods.POST,
-        response: MockBuilder({ message }),
-        status,
-    })
+const postLoginRejected = RequestBuilder({
+    path: '/api/user/login',
+    method: HttpMethods.POST,
+    status: HttpStatus.BAD_REQUEST,
+    response: MockBuilder({ message: 'Invalid email or password' }),
+})
 
-export const defaultHandlers = [handleGetSettings, handlePostLogin]
+export const LoginMockHandlers = {
+    Settings: { Get: getSettings },
+    Login: { Post: postLogin, PostRejected: postLoginRejected },
+    Defaults: [getSettings, postLogin],
+}

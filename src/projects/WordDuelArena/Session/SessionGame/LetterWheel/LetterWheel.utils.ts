@@ -10,7 +10,7 @@ type CalculateLetterPositionsProps = {
     containerRef: RefObject<HTMLElement | null>
 }
 
-export const calculateLetterPositions = ({
+const calculateLetterPositions = ({
     letters,
     containerRef,
 }: CalculateLetterPositionsProps): LetterPosition[] => {
@@ -50,7 +50,7 @@ type RecalculatePositionsProps = CalculateLetterPositionsProps & {
     setPositions: (positions: LetterPosition[]) => void
 }
 
-export const recalculatePositions = ({
+const recalculatePositions = ({
     letters,
     containerRef,
     setPositions,
@@ -61,7 +61,7 @@ export const recalculatePositions = ({
     setPositions(newPositions)
 }
 
-export const getLetterComponent = (target: Element | null): Nullable<HTMLElement> => {
+const getLetterComponent = (target: Element | null): Nullable<HTMLElement> => {
     const isLetter = target instanceof HTMLElement && target.dataset.letterId !== undefined
     return isLetter ? target : null
 }
@@ -72,7 +72,7 @@ type SubmitMoveParams = {
     setTouchState: (state: TouchState) => void
 }
 
-export const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) => {
+const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) => {
     if (letters.length >= MIN_WORD_LENGTH) {
         send({
             type: WebSocketRequestType.ATTEMPT_MOVE,
@@ -82,9 +82,9 @@ export const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) =
     setTouchState({ touchedIds: [], touchedLetters: '' })
 }
 
-export const isSubmitKeyStroke = (key: string) => key === 'Enter' || key === 'Return' || key === ' '
+const isSubmitKeyStroke = (key: string) => key === 'Enter' || key === 'Return' || key === ' '
 
-export const getTouchState = (
+const getTouchState = (
     prevIds: number[],
     prevLetters: string,
     letter: string,
@@ -105,4 +105,13 @@ export const getTouchState = (
     }
 
     return { touchedIds: prevIds, touchedLetters: prevLetters }
+}
+
+export const LetterWheelUtils = {
+    calculateLetterPositions,
+    recalculatePositions,
+    getLetterComponent,
+    submitMove,
+    isSubmitKeyStroke,
+    getTouchState,
 }

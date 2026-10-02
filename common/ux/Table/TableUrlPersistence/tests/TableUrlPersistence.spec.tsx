@@ -1,15 +1,12 @@
 import { describe, it, expect } from 'vitest'
 import { act, renderHook } from '@testing-library/react'
 import { useTableUrlPersistence } from '../TableUrlPersistence'
-import {
-    defaultPaging,
-    defaultSort,
-    filterDefs,
-    makeFilterState,
-    nextState,
-} from './TableUrlPersistence.mocks'
+import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import { setup } from './TableUrlPersistence.spec.utils'
 import type { Filters } from './TableUrlPersistence.spec.types'
+
+const { defaultPaging, defaultSort, filterDefs, makeFilterState, nextState } =
+    TableUrlPersistenceMocks
 
 describe('useTableUrlPersistence', () => {
     describe('enabled', () => {

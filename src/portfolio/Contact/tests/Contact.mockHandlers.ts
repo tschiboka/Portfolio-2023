@@ -1,19 +1,22 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
 import { HttpStatus } from '@common-utils'
-import { mockMessageSuccess } from './Contact.mocks'
+import { ContactMocks } from './Contact.mocks'
 
-export const handlePostMessage = RequestBuilder({
+const postMessage = RequestBuilder({
     path: '/api/message',
     method: HttpMethods.POST,
-    response: MockBuilder(mockMessageSuccess),
+    response: MockBuilder(ContactMocks.messageSuccess),
 })
 
-export const handlePostMessageError = (message: string, status = HttpStatus.BAD_REQUEST) =>
-    RequestBuilder({
-        path: '/api/message',
-        method: HttpMethods.POST,
-        response: MockBuilder({ message }),
-        status,
-    })
+const postMessageRejected = RequestBuilder({
+    path: '/api/message',
+    method: HttpMethods.POST,
+    status: HttpStatus.BAD_REQUEST,
+    response: MockBuilder({ message: 'Failed to send message' }),
+})
 
-export const defaultHandlers = [handlePostMessage]
+export const ContactMockHandlers = {
+    Post: postMessage,
+    PostRejected: postMessageRejected,
+    Defaults: [postMessage],
+}

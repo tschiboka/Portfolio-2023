@@ -1,6 +1,6 @@
 import { Link, List } from '@common-ux'
 import { MenuItem } from '../../Nav.types'
-import { isActive } from '../../Nav.utils'
+import { NavUtils } from '../../Nav.utils'
 
 type MenuAccordionProps = {
     items?: MenuItem[]
@@ -16,7 +16,9 @@ const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
                     key: item.label,
                     content: (
                         <Link to={item?.path || ''}>
-                            <span className={isActive(item.label, pageName)}>{item.label}</span>
+                            <span className={NavUtils.isActive(item.label, pageName)}>
+                                {item.label}
+                            </span>
                         </Link>
                     ),
                 }))}

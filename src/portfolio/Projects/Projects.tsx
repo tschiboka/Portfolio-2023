@@ -6,7 +6,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { Heading, Paragraph, Main, Section } from '@common-ux'
 import { isEmpty } from '@common-utils'
 import { BsSliders2 } from 'react-icons/bs'
-import { DEFAULT_PROJECT_FILTER, filterProjects, getProjects } from '.'
+import { ProjectsDefaults, ProjectsSelectors } from '.'
 
 interface Props {
     pageName: string
@@ -15,16 +15,19 @@ interface Props {
 
 export const Projects = ({ pageName }: Props) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
-    const [selectedFilter, setSelectedFilter] = useState<string>(DEFAULT_PROJECT_FILTER)
+    const [selectedFilter, setSelectedFilter] = useState<string>(ProjectsDefaults.defaultFilter)
 
-    const allProjects = getProjects()
+    const allProjects = ProjectsSelectors.getProjects()
     const filteredProjectsByLanguage = isEmpty(selectedLanguages)
         ? allProjects
         : allProjects.filter((project) =>
               project.badges.some((badge) => selectedLanguages.has(badge)),
           )
 
-    const filteredProjects = filterProjects(selectedFilter, filteredProjectsByLanguage)
+    const filteredProjects = ProjectsSelectors.filterProjects(
+        selectedFilter,
+        filteredProjectsByLanguage,
+    )
 
     const handleToggle = (language: string) => {
         setSelectedLanguages((prev) => {
@@ -41,7 +44,7 @@ export const Projects = ({ pageName }: Props) => {
 
     const handleClearFilters = () => {
         setSelectedLanguages(new Set())
-        setSelectedFilter(DEFAULT_PROJECT_FILTER)
+        setSelectedFilter(ProjectsDefaults.defaultFilter)
     }
 
     return (

@@ -1,6 +1,6 @@
-import { SubmenuState } from '../../Nav.types'
+import { Coordinates, SubmenuState } from '../../Nav.types'
 import { useEffect, useState } from 'react'
-import { Coordinates, findParentMenuCoords } from '../Submenu.utils'
+import { SubmenuUtils } from '../Submenu.utils'
 import { Submenu } from '../Submenu'
 
 type SubmenuPanelProps = {
@@ -16,10 +16,13 @@ export const SubmenuPanel = ({
     setSubmenuStack,
     pageName,
 }: SubmenuPanelProps) => {
-    const [, setCoords] = useState<Coordinates>(() => findParentMenuCoords(submenu?.parentLabel))
+    const [, setCoords] = useState<Coordinates>(() =>
+        SubmenuUtils.findParentMenuCoords(submenu?.parentLabel),
+    )
 
     useEffect(() => {
-        const updateCoords = () => setCoords(findParentMenuCoords(submenu?.parentLabel))
+        const updateCoords = () =>
+            setCoords(SubmenuUtils.findParentMenuCoords(submenu?.parentLabel))
         window.addEventListener('resize', updateCoords)
         return () => window.removeEventListener('resize', updateCoords)
     }, [submenu?.parentLabel])

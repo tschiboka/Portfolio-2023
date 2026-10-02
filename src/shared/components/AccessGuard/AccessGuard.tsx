@@ -1,12 +1,12 @@
 import { AccessGuardProps } from './AccessGuard.types'
 import { useAccess } from './AccessGuard.hooks'
-import { resolveGuards } from './AccessGuard.utils'
+import { AccessGuardUtils } from './AccessGuard.utils'
 import { FaLock } from 'react-icons/fa'
 import { HiddenRenderer, DisabledRenderer, SoftDisabledRenderer, TooltipRenderer } from './utils'
 
 export const AccessGuard = ({ children, guards }: AccessGuardProps) => {
     const access = useAccess()
-    const activeModeConfig = resolveGuards(guards, access)
+    const activeModeConfig = AccessGuardUtils.resolveGuards(guards, access)
 
     if (!activeModeConfig) return <>{children}</>
 

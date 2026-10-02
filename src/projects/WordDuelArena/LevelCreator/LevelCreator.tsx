@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react'
 import './LevelCreator.styles.css'
 import '../WordDuelArena.styles.css'
 import { LevelCreatorModal } from './components/LevelCreatorModal'
-import { getAnagramKey } from '../common/utils/Word/Word.utils'
+import { WordUtils } from '../common/utils/Word/Word.utils'
 import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../common/utils/Word/Word.constants'
 import { useGetLevelNames } from './LevelCreator.queries'
 import { LevelList } from './components/LevelList'
@@ -55,7 +55,7 @@ export const LevelCreator = () => {
                 />
                 {modalOpen && (
                     <LevelCreatorModal
-                        levelName={getAnagramKey(levelName)}
+                        levelName={WordUtils.getAnagramKey(levelName)}
                         setModalOpen={setModalOpen}
                     />
                 )}

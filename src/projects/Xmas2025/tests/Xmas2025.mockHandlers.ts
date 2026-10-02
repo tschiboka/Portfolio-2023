@@ -1,52 +1,48 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
-import {
-    pageSideMenuHandlers,
-    handlePostLike,
-} from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
-import {
-    mockXmasPing,
-    mockXmasMessagesResponse,
-    mockPostMessageSuccess,
-    mockXmasCandles,
-    mockPutCandlesSuccess,
-} from './Xmas2025.mocks'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { Xmas2025Mocks } from './Xmas2025.mocks'
 
-const handleXmasPing = RequestBuilder({
+const getPing = RequestBuilder({
     path: '/projects/xmas_2025',
     method: HttpMethods.GET,
-    response: MockBuilder(mockXmasPing),
+    response: MockBuilder(Xmas2025Mocks.xmasPing),
 })
 
-const handleXmasGetMessages = RequestBuilder({
+const getMessages = RequestBuilder({
     path: '/projects/xmas_2025/message',
     method: HttpMethods.GET,
-    response: MockBuilder(mockXmasMessagesResponse),
+    response: MockBuilder(Xmas2025Mocks.xmasMessagesResponse),
 })
 
-const handleXmasPostMessage = RequestBuilder({
+const postMessage = RequestBuilder({
     path: '/projects/xmas_2025/message',
     method: HttpMethods.POST,
-    response: MockBuilder(mockPostMessageSuccess),
+    response: MockBuilder(Xmas2025Mocks.postMessageSuccess),
 })
 
-const handleXmasGetCandles = RequestBuilder({
+const getCandles = RequestBuilder({
     path: '/projects/xmas_2025/candles',
     method: HttpMethods.GET,
-    response: MockBuilder(mockXmasCandles),
+    response: MockBuilder(Xmas2025Mocks.xmasCandles),
 })
 
-const handleXmasPutCandles = RequestBuilder({
+const putCandles = RequestBuilder({
     path: '/projects/xmas_2025/candles',
     method: HttpMethods.PUT,
-    response: MockBuilder(mockPutCandlesSuccess),
+    response: MockBuilder(Xmas2025Mocks.putCandlesSuccess),
 })
 
-export const handlers = [
-    ...pageSideMenuHandlers,
-    handlePostLike,
-    handleXmasPing,
-    handleXmasGetMessages,
-    handleXmasPostMessage,
-    handleXmasGetCandles,
-    handleXmasPutCandles,
-]
+export const Xmas2025MockHandlers = {
+    Ping: { Get: getPing },
+    Messages: { Get: getMessages, Post: postMessage },
+    Candles: { Get: getCandles, Put: putCandles },
+    Defaults: [
+        ...PageSideMenuMockHandlers.Defaults,
+        PageSideMenuMockHandlers.Likes.Post,
+        getPing,
+        getMessages,
+        postMessage,
+        getCandles,
+        putCandles,
+    ],
+}

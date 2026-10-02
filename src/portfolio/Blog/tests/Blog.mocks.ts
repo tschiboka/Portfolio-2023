@@ -1,6 +1,6 @@
 import type { GetLikeSummaryResponse, GetVisitSummaryResponse } from '@common-types'
 
-export const mockBlogVisits: GetVisitSummaryResponse = {
+const visits: GetVisitSummaryResponse = {
     visits: {
         '/blog/riffmaster': 120,
         '/blog/sounds-with-howler': 85,
@@ -16,7 +16,7 @@ export const mockBlogVisits: GetVisitSummaryResponse = {
     },
 }
 
-export const mockBlogLikes: GetLikeSummaryResponse = {
+const likes: GetLikeSummaryResponse = {
     likes: {
         '/blog/riffmaster': 12,
         '/blog/sounds-with-howler': 8,
@@ -31,3 +31,5 @@ export const mockBlogLikes: GetLikeSummaryResponse = {
         '/blog/stopping-test-entropy': 9,
     },
 }
+
+export const BlogMocks = { visits, likes }

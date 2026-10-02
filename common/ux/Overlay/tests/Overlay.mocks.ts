@@ -1,6 +1,6 @@
 import type { ActionMenuItem } from '../ActionMenu'
 
-export const mocks = {
+export const OverlayMocks = {
     default: [
         { id: 'edit', label: 'Edit', onClick: vi.fn() },
         { id: 'delete', label: 'Delete', onClick: vi.fn() },

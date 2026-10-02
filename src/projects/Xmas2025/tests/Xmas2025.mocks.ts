@@ -8,7 +8,7 @@ import type {
     User,
 } from '@common-types'
 
-export const mockUser: User = {
+const user: User = {
     id: 'test-user-id',
     userName: 'TestUser',
     email: 'test@example.com',
@@ -16,11 +16,11 @@ export const mockUser: User = {
     fullName: 'Test User',
 }
 
-export const mockXmasPing: GetXmasPingResponse = {
+const xmasPing: GetXmasPingResponse = {
     data: { message: 'Xmas API is running' },
 }
 
-export const mockXmasMessages: XmasMessage[] = [
+const xmasMessages: XmasMessage[] = [
     {
         _id: '1',
         name: 'TestUser',
@@ -37,15 +37,15 @@ export const mockXmasMessages: XmasMessage[] = [
     },
 ]
 
-export const mockXmasMessagesResponse: GetXmasMessagesResponse = {
-    data: mockXmasMessages,
+const xmasMessagesResponse: GetXmasMessagesResponse = {
+    data: xmasMessages,
 }
 
-export const mockPostMessageSuccess: PostXmasMessageResponse = {
+const postMessageSuccess: PostXmasMessageResponse = {
     message: 'Message sent successfully',
 }
 
-export const mockXmasCandles: GetXmasCandlesResponse = {
+const xmasCandles: GetXmasCandlesResponse = {
     data: {
         candles: {
             _id: 'candles-1',
@@ -57,7 +57,7 @@ export const mockXmasCandles: GetXmasCandlesResponse = {
     },
 }
 
-export const mockPutCandlesSuccess: PutXmasCandlesResponse = {
+const putCandlesSuccess: PutXmasCandlesResponse = {
     data: {
         candles: {
             _id: 'candles-1',
@@ -67,4 +67,14 @@ export const mockPutCandlesSuccess: PutXmasCandlesResponse = {
             candle4: false,
         },
     },
+}
+
+export const Xmas2025Mocks = {
+    user,
+    xmasPing,
+    xmasMessages,
+    xmasMessagesResponse,
+    postMessageSuccess,
+    xmasCandles,
+    putCandlesSuccess,
 }

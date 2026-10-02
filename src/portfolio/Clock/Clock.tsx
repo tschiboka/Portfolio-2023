@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import type { Nullable } from '@common-utils'
-import { ClockData, ClockFaceCanvas, startLoop } from '.'
+import { ClockData, ClockFaceCanvas, ClockUtils } from '.'
 import './Clock.scss'
 
 export const Clock = () => {
     const [clock, setClock] = useState<Nullable<ClockData>>(null)
 
     useEffect(() => {
-        startLoop({ setClock })
+        ClockUtils.startLoop({ setClock })
     }, [])
 
     return (

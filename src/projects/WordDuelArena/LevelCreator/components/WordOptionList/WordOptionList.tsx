@@ -1,6 +1,6 @@
 import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/Word.constants'
 import './WordOptionList.styles.css'
-import { getWordGroups, getWordLengthGroups } from '../../../common/utils/Word/Word.utils'
+import { WordUtils } from '../../../common/utils/Word/Word.utils'
 import { LevelWord } from '../../../common/utils'
 
 type WordOptionListProps = {
@@ -14,8 +14,8 @@ export const WordOptionList = ({
     selectedWords,
     setSelectedWords,
 }: WordOptionListProps) => {
-    const wordGroupsByLength = getWordLengthGroups()
-    const wordGroups = getWordGroups(possibleWords)
+    const wordGroupsByLength = WordUtils.getWordLengthGroups()
+    const wordGroups = WordUtils.getWordGroups(possibleWords)
     return (
         <div className="word-option-list">
             {wordGroups.map((words, index) => (

@@ -20,6 +20,8 @@ export type SubmenuState = {
     extended: boolean
 }
 
+export type Coordinates = { x: number; y: number }
+
 export type NavProps = AccessibleProps &
     InteractiveProps & {
         visible?: boolean

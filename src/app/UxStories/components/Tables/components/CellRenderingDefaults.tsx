@@ -1,9 +1,13 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { toUpper } from 'ramda'
-import { type Row, rows } from '../Tables.mocks'
-import { renderStatus, renderBadge } from '../Tables.config'
+import { TablesMocks } from '../Tables.mocks'
+import type { Row } from '../Tables.types'
+import { TablesConfig } from '../Tables.config'
 import { Code as Snippets } from '../Tables.code'
+
+const { rows } = TablesMocks
+const { renderStatus, renderBadge } = TablesConfig
 
 export const CellRenderingDefaults = () => (
     <>

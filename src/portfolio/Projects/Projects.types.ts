@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import type { PillColor } from '@common-ux'
 
 /**
  * Featured: Projects that are complete and represent my best work, showcasing a range of skills and technologies.
@@ -6,6 +7,13 @@ import { ReactNode } from 'react'
  * Archived: Older projects that may not reflect my current skill level but are included for historical context and to show my growth over time.
  */
 export type ProjectType = 'featured' | 'complete' | 'inProgress' | 'archived'
+
+export type Technology = {
+    name: string
+    color: PillColor
+    tech?: string
+    groupName?: string
+}
 
 export interface Project {
     title: string

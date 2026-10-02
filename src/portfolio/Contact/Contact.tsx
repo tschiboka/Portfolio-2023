@@ -7,7 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Paragraph, Section } from '@common-ux'
 import { ClientMessage, errorMessage } from '@common-utils'
 import { ContactFormData } from './Contact.types'
-import { contactSchema, MAX_MESSAGE_CHARACTERS } from './Contact.schema'
+import { ContactSchema } from './Contact.schema'
+import { ContactConstants } from './Contact.constants'
 import { ContactQueries } from './Contact.queries'
 import './Contact.scss'
 
@@ -27,7 +28,7 @@ export const Contact = ({ pageName, path }: ContactProps) => {
             phone: '',
             message: '',
         },
-        resolver: yupResolver(contactSchema),
+        resolver: yupResolver(ContactSchema),
     })
 
     const sendMessage = ContactQueries.usePost({
@@ -93,7 +94,7 @@ export const Contact = ({ pageName, path }: ContactProps) => {
                             <Form.TextArea
                                 name="message"
                                 control={control}
-                                maxLength={MAX_MESSAGE_CHARACTERS}
+                                maxLength={ContactConstants.maxMessageCharacters}
                                 rows={5}
                             />
                         </Form.Fieldset>

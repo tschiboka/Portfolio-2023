@@ -2,13 +2,13 @@ import { screen, waitFor, within } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Projects } from '../Projects'
-import { pageSideMenuHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupProjects = async () => {
     TestScreen.Do.render({
         path: '/projects',
         children: <Projects pageName="projects" path="/projects" />,
-        handlers: [...pageSideMenuHandlers],
+        handlers: [...PageSideMenuMockHandlers.Defaults],
     })
     await waitFor(() => {
         expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)

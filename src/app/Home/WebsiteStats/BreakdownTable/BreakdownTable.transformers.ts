@@ -1,5 +1,5 @@
 import type { ActivityFeedSortBy, GetActivityFeedQuery } from '@common-types'
-import type { ActivityFiltersData } from './BreakdownTable.filters'
+import type { ActivityFiltersData } from './BreakdownTable.types'
 import { ClientTransformers } from '@common-utils'
 import { TableState } from '@common-ux/Table/useTableController'
 

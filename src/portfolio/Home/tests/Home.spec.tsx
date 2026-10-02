@@ -2,16 +2,13 @@ import { screen, waitFor } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Home } from '../Home'
-import {
-    pageSideMenuHandlers,
-    handlePostLike,
-} from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupHome = () => {
     TestScreen.Do.render({
         path: '/',
         children: <Home pageName="home" />,
-        handlers: [...pageSideMenuHandlers, handlePostLike],
+        handlers: [...PageSideMenuMockHandlers.Defaults, PageSideMenuMockHandlers.Likes.Post],
     })
 }
 

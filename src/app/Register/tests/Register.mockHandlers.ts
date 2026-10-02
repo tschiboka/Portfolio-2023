@@ -1,19 +1,22 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
 import { HttpStatus } from '@common-utils'
-import { mockRegisterSuccess } from './Register.mocks'
+import { RegisterMocks } from './Register.mocks'
 
-export const handlePostRegister = RequestBuilder({
+const postRegister = RequestBuilder({
     path: '/api/user/register',
     method: HttpMethods.POST,
-    response: MockBuilder(mockRegisterSuccess),
+    response: MockBuilder(RegisterMocks.registerSuccess),
 })
 
-export const handlePostRegisterError = (message: string, status = HttpStatus.BAD_REQUEST) =>
-    RequestBuilder({
-        path: '/api/user/register',
-        method: HttpMethods.POST,
-        response: MockBuilder({ message }),
-        status,
-    })
+const postRegisterRejected = RequestBuilder({
+    path: '/api/user/register',
+    method: HttpMethods.POST,
+    status: HttpStatus.BAD_REQUEST,
+    response: MockBuilder({ message: 'Registration failed' }),
+})
 
-export const defaultHandlers = [handlePostRegister]
+export const RegisterMockHandlers = {
+    Post: postRegister,
+    PostRejected: postRegisterRejected,
+    Defaults: [postRegister],
+}

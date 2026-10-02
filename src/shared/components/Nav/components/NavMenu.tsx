@@ -4,7 +4,7 @@ import { Link } from '@common-ux'
 import { AccessGuard } from '../../AccessGuard'
 import { Nav } from '../Nav'
 import { MenuItem, NavProps, SubmenuState } from '../Nav.types'
-import { isHighlighted } from '../Nav.utils'
+import { NavUtils } from '../Nav.utils'
 import { Chevron } from './Chevron'
 
 export type NavMenuProps = Pick<
@@ -56,7 +56,7 @@ export const NavMenu = ({
                     >
                         <li
                             id={item.label}
-                            className={isHighlighted(item, pageName, submenu)}
+                            className={NavUtils.isHighlighted(item, pageName, submenu)}
                             onClick={() => onItemClick?.(item)}
                         >
                             <Link to={item?.path || ''}>

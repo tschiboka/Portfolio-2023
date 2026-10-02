@@ -1,11 +1,6 @@
 import { useEffect, RefObject, Dispatch, SetStateAction } from 'react'
-import {
-    createHandleKeyPress,
-    createHandleTouchStart,
-    createHandleTouchMove,
-    createHandleTouchEnd,
-} from './LetterWheel.handlers'
-import { recalculatePositions } from './LetterWheel.utils'
+import { LetterWheelHandlers } from './LetterWheel.handlers'
+import { LetterWheelUtils } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 import type { Dictionary } from '@common-utils'
@@ -34,7 +29,11 @@ export const useLetterWheelListeners = ({
     // Keyboard
     useEffect(() => {
         if (!allowKeyboardInput) return
-        const handler = createHandleKeyPress({ touchState, setTouchState, send })
+        const handler = LetterWheelHandlers.createHandleKeyPress({
+            touchState,
+            setTouchState,
+            send,
+        })
         window.addEventListener('keydown', handler)
 
         return () => window.removeEventListener('keydown', handler)
@@ -43,7 +42,7 @@ export const useLetterWheelListeners = ({
     // Resize
     useEffect(() => {
         const updatePositions = () =>
-            recalculatePositions({
+            LetterWheelUtils.recalculatePositions({
                 letters: inputLetters.split(''),
                 containerRef,
                 setPositions,
@@ -60,9 +59,9 @@ export const useLetterWheelListeners = ({
         if (!wheel) return
 
         const handlers: Dictionary<EventListener> = {
-            touchstart: createHandleTouchStart({ setTouchState }),
-            touchmove: createHandleTouchMove({ setTouchState }),
-            touchend: createHandleTouchEnd({ touchState, setTouchState, send }),
+            touchstart: LetterWheelHandlers.createHandleTouchStart({ setTouchState }),
+            touchmove: LetterWheelHandlers.createHandleTouchMove({ setTouchState }),
+            touchend: LetterWheelHandlers.createHandleTouchEnd({ touchState, setTouchState, send }),
         }
 
         Object.entries(handlers).forEach(([event, handler]) =>

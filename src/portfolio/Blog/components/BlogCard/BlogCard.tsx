@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BlogArticle } from '@portfolio/Article'
-import { getColourName } from '../../../Projects/Projects.selectors'
+import { ProjectsSelectors } from '../../../Projects/Projects.selectors'
 import { useNavigate } from 'react-router-dom'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'
 import { BiSolidTimeFive } from 'react-icons/bi'
@@ -37,7 +37,8 @@ const pillColorMap: Record<
     error: 'error',
 }
 
-const toPillColor = (badge: string) => pillColorMap[getColourName(badge)] ?? 'gray'
+const toPillColor = (badge: string) =>
+    pillColorMap[ProjectsSelectors.getColourName(badge)] ?? 'gray'
 
 const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, newest }: Props) => {
     const navigate = useNavigate()

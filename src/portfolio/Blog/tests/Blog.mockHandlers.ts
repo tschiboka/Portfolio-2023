@@ -1,25 +1,26 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
-import { mockBlogVisits, mockBlogLikes } from './Blog.mocks'
-import {
-    pageSideMenuHandlers,
-    handlePostLike,
-} from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { BlogMocks } from './Blog.mocks'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
-const handleGetVisitSummary = RequestBuilder({
+const getVisits = RequestBuilder({
     path: '/api/visit',
     method: HttpMethods.GET,
-    response: MockBuilder(mockBlogVisits),
+    response: MockBuilder(BlogMocks.visits),
 })
 
-const handleGetLikeSummary = RequestBuilder({
+const getLikes = RequestBuilder({
     path: '/api/like',
     method: HttpMethods.GET,
-    response: MockBuilder(mockBlogLikes),
+    response: MockBuilder(BlogMocks.likes),
 })
 
-export const handlers = [
-    ...pageSideMenuHandlers,
-    handlePostLike,
-    handleGetVisitSummary,
-    handleGetLikeSummary,
-]
+export const BlogMockHandlers = {
+    Visits: { Get: getVisits },
+    Likes: { Get: getLikes },
+    Defaults: [
+        ...PageSideMenuMockHandlers.Defaults,
+        PageSideMenuMockHandlers.Likes.Post,
+        getVisits,
+        getLikes,
+    ],
+}

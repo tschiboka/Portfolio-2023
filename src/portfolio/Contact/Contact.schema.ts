@@ -1,9 +1,8 @@
 import * as yup from 'yup'
 import { ContactFormData } from './Contact.types'
+import { ContactConstants } from './Contact.constants'
 
-export const MAX_MESSAGE_CHARACTERS = 1000
-
-export const contactSchema: yup.ObjectSchema<ContactFormData> = yup.object({
+export const ContactSchema: yup.ObjectSchema<ContactFormData> = yup.object({
     name: yup
         .string()
         .required()
@@ -32,7 +31,7 @@ export const contactSchema: yup.ObjectSchema<ContactFormData> = yup.object({
         .string()
         .required()
         .min(10, 'Min 10 characters')
-        .max(MAX_MESSAGE_CHARACTERS)
+        .max(ContactConstants.maxMessageCharacters)
         .matches(/^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"\-\s]*$/, {
             message: 'Contains invalid characters',
         }),

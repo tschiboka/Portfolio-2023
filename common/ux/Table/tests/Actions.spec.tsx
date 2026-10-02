@@ -1,7 +1,9 @@
 import { fireEvent, screen } from '@testing-library/react'
 import { Row } from './Table.spec.types'
-import { basicColumns, rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
 import { Test } from '@common-ux/Test'
+
+const { rows, basicColumns } = TableMocks
 
 describe('Table — Actions', () => {
     describe('Basic actions', () => {

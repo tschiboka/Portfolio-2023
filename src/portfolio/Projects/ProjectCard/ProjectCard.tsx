@@ -1,4 +1,4 @@
-import { getColourName } from '../Projects.selectors'
+import { ProjectsSelectors } from '../Projects.selectors'
 import {
     Link,
     Heading,
@@ -14,7 +14,7 @@ import { FaGithub } from 'react-icons/fa'
 import { TbWorldWww } from 'react-icons/tb'
 import { PiReadCvLogoFill } from 'react-icons/pi'
 import './ProjectCard.scss'
-import { Project, ProjectTypeDisplayNames } from '..'
+import { Project, ProjectsDefaults } from '..'
 
 interface Props {
     project: Project
@@ -39,8 +39,8 @@ export const ProjectCard = ({
                             {type && (
                                 <Pill
                                     className="ProjectCard__type--desktop"
-                                    label={ProjectTypeDisplayNames[type]}
-                                    color={getColourName(type)}
+                                    label={ProjectsDefaults.typeDisplayNames[type]}
+                                    color={ProjectsSelectors.getColourName(type)}
                                     variant="outlined"
                                 />
                             )}
@@ -48,8 +48,8 @@ export const ProjectCard = ({
                         {type && (
                             <Pill
                                 className="ProjectCard__type--mobile"
-                                label={ProjectTypeDisplayNames[type]}
-                                color={getColourName(type)}
+                                label={ProjectsDefaults.typeDisplayNames[type]}
+                                color={ProjectsSelectors.getColourName(type)}
                                 variant="outlined"
                             />
                         )}
@@ -93,7 +93,7 @@ export const ProjectCard = ({
                             <Pill
                                 key={badge}
                                 label={badge}
-                                color={getColourName(badge)}
+                                color={ProjectsSelectors.getColourName(badge)}
                                 variant="solid"
                             />
                         ))}

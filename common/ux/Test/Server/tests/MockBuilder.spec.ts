@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { lensPath } from 'ramda'
 import { MockBuilder, MockEntitiesBuilder } from '../MockBuilder'
-import { baseBuilder, baseMock } from './MockBuilder.mocks'
+import { MockBuilderMocks } from './MockBuilder.mocks'
+
+const { baseMock, baseBuilder } = MockBuilderMocks
 
 describe('MockBuilder', () => {
     describe('build', () => {

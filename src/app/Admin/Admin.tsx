@@ -5,7 +5,7 @@ import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from 
 import { Screen } from '@shared-components/Screen/Screen'
 import type { Nullable } from '@common-utils'
 import { AdminQueries } from './Admin.queries'
-import { BreakdownPreview, MockBreakdown } from './BreakdownPreview'
+import { BreakdownPreview, BreakdownPreviewMocks } from './BreakdownPreview'
 
 type AdminProps = {
     path: string
@@ -63,7 +63,7 @@ export const Admin = ({ path }: AdminProps) => {
                         <Paragraph>
                             This is a preview of the email that would be sent when triggering the
                         </Paragraph>
-                        <BreakdownPreview breakdown={MockBreakdown} />
+                        <BreakdownPreview breakdown={BreakdownPreviewMocks.breakdown} />
                     </Section>
                     <Section title="Backfill Breakdowns" expandable defaultOpen={false}>
                         <Paragraph>

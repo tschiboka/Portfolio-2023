@@ -1,9 +1,12 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import {
-    type Row,
+import { TablesMocks } from '../Tables.mocks'
+import type { ActionRow, Row } from '../Tables.types'
+import { TablesConfig } from '../Tables.config'
+import { Code as Snippets } from '../Tables.code'
+
+const {
     rows,
-    type ActionRow,
     actionRows,
     isActionDisabledData,
     onClickData,
@@ -11,16 +14,10 @@ import {
     filterData,
     isDisabledData,
     variantData,
-} from '../Tables.mocks'
-import {
-    clickAction,
-    hrefAction,
-    filterAction,
-    disabledItemAction,
-    variantActions,
-    allActions,
-} from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+} = TablesMocks
+
+const { clickAction, hrefAction, filterAction, disabledItemAction, variantActions, allActions } =
+    TablesConfig
 
 export const Actions = () => (
     <>

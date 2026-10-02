@@ -2,17 +2,17 @@ import { screen, waitFor } from '@testing-library/react'
 import { Accessor, Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { Xmas2025 } from '../Xmas2025'
-import { handlers } from './Xmas2025.mockHandlers'
-import { mockUser } from './Xmas2025.mocks'
+import { Xmas2025MockHandlers } from './Xmas2025.mockHandlers'
+import { Xmas2025Mocks } from './Xmas2025.mocks'
 
 const setupXmas2025 = () => {
     TestScreen.Do.render({
         path: '/xmas2025',
         children: <Xmas2025 />,
-        handlers,
+        handlers: Xmas2025MockHandlers.Defaults,
         session: {
             isAuthenticated: true,
-            session: { user: mockUser },
+            session: { user: Xmas2025Mocks.user },
         },
     })
 }
@@ -72,7 +72,7 @@ describe('Xmas2025', () => {
     })
 
     // Skipped: MessageWall.tsx renders only when `messages` is present and is wrapped in an
-    // AccessGuard that hides it for `admin`-capability users. The test's mockUser isn't admin,
+    // AccessGuard that hides it for `admin`-capability users. The test's Xmas2025Mocks.user isn't admin,
     // but the wall's rendering is also tied to the messages query/handlers in this setup, so it
     // isn't deterministically visible here. Kept as documentation of the component's behaviour.
     describe.skip('Message wall', () => {

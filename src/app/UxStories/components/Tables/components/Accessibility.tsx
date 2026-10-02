@@ -1,7 +1,10 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import { type Row, rows, type AriaRow, ariaReferenceRows } from '../Tables.mocks'
+import { TablesMocks } from '../Tables.mocks'
+import type { AriaRow, Row } from '../Tables.types'
 import { Code as Snippets } from '../Tables.code'
+
+const { rows, ariaReferenceRows } = TablesMocks
 
 export const Accessibility = () => (
     <>

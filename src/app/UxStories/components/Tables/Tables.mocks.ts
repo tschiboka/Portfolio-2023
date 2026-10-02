@@ -1,32 +1,24 @@
 import { Arrays } from '@common-utils'
+import type {
+    ActionRow,
+    AllFeaturesRow,
+    AriaRow,
+    BreakpointRow,
+    PaginationRow,
+    Row,
+    SelectionRow,
+    SortingRow,
+    VariantRow,
+} from './Tables.types'
 
-export type Row = {
-    name: string
-    value: string
-    status: string
-    note: string
-}
-
-export const rows: Row[] = [
+const rows: Row[] = [
     { name: 'Alpha', value: '10', status: 'active', note: 'First entry' },
     { name: 'Beta', value: '20', status: 'inactive', note: '' },
     { name: 'Gamma', value: '30', status: 'active', note: 'Third entry' },
     { name: 'Delta', value: '40', status: 'pending', note: '' },
 ]
 
-export type BreakpointRow = {
-    property: string
-    '2xs': string
-    xs: string
-    sm: string
-    mx: string
-    md: string
-    lg: string
-    xl: string
-    '2xl': string
-}
-
-export const breakpointData: BreakpointRow[] = [
+const breakpointData: BreakpointRow[] = [
     {
         property: 'Min Width',
         '2xs': '375px',
@@ -51,14 +43,7 @@ export const breakpointData: BreakpointRow[] = [
     },
 ]
 
-export type VariantRow = {
-    label: string
-    variant: string
-    description: string
-    status: string
-}
-
-export const variantRows: VariantRow[] = [
+const variantRows: VariantRow[] = [
     {
         label: 'Default',
         variant: 'none',
@@ -91,14 +76,7 @@ export const variantRows: VariantRow[] = [
     },
 ]
 
-export type AriaRow = {
-    component: string
-    element: string
-    attribute: string
-    value: string
-}
-
-export const ariaReferenceRows: AriaRow[] = [
+const ariaReferenceRows: AriaRow[] = [
     {
         component: 'Table',
         element: '<div>',
@@ -239,12 +217,7 @@ export const ariaReferenceRows: AriaRow[] = [
     },
 ]
 
-export type ActionRow = {
-    name: string
-    function: string
-}
-
-export const actionRows: ActionRow[] = [
+const actionRows: ActionRow[] = [
     { name: 'isActionDisabled', function: 'Disables the entire action menu for this row' },
     { name: 'onClick', function: 'Triggers a callback on click' },
     { name: 'href', function: 'Navigates to a computed URL' },
@@ -256,39 +229,30 @@ export const actionRows: ActionRow[] = [
     { name: 'All props', function: 'All action features combined' },
 ]
 
-export const isActionDisabledData: ActionRow[] = [
+const isActionDisabledData: ActionRow[] = [
     { name: 'Enabled row', function: 'Action menu is active' },
     { name: 'Disabled row', function: 'Action menu is disabled and greyed out' },
 ]
 
-export const onClickData: ActionRow[] = [
-    { name: 'onClick', function: 'Triggers alert with row name' },
-]
+const onClickData: ActionRow[] = [{ name: 'onClick', function: 'Triggers alert with row name' }]
 
-export const hrefData: ActionRow[] = [{ name: 'href', function: 'Navigates to computed URL' }]
+const hrefData: ActionRow[] = [{ name: 'href', function: 'Navigates to computed URL' }]
 
-export const filterData: ActionRow[] = [
+const filterData: ActionRow[] = [
     { name: 'Visible row', function: 'Action appears in the menu' },
     { name: 'Hidden row', function: 'Action is filtered out of the menu' },
 ]
 
-export const isDisabledData: ActionRow[] = [
+const isDisabledData: ActionRow[] = [
     { name: 'Enabled action', function: 'Action is clickable' },
     { name: 'Disabled action', function: 'Action is greyed out and unclickable' },
 ]
 
-export const variantData: ActionRow[] = [
+const variantData: ActionRow[] = [
     { name: 'Variants', function: 'primary, secondary, danger, and default colours' },
 ]
 
-export type SelectionRow = {
-    id: string
-    name: string
-    role: string
-    status: string
-}
-
-export const selectionRows: SelectionRow[] = [
+const selectionRows: SelectionRow[] = [
     { id: '1', name: 'Alice', role: 'Admin', status: 'active' },
     { id: '2', name: 'Bob', role: 'Editor', status: 'active' },
     { id: '3', name: 'Charlie', role: 'Viewer', status: 'inactive' },
@@ -296,20 +260,7 @@ export const selectionRows: SelectionRow[] = [
     { id: '5', name: 'Eve', role: 'Viewer', status: 'inactive' },
 ]
 
-export type AllFeaturesRow = {
-    id: string
-    name: string
-    email: string
-    role: string
-    status: string
-    department: string
-    joined: string
-    phone: string
-    location: string
-    note: string
-}
-
-export const allFeaturesData: AllFeaturesRow[] = [
+const allFeaturesData: AllFeaturesRow[] = [
     {
         id: '1',
         name: 'Alice Johnson',
@@ -492,31 +443,41 @@ export const allFeaturesData: AllFeaturesRow[] = [
     },
 ]
 
-export type PaginationRow = { id: string; name: string; value: string }
-
-export const allPaginationRows: PaginationRow[] = Arrays.times(87, (i) => ({
+const allPaginationRows: PaginationRow[] = Arrays.times(87, (i) => ({
     id: String(i + 1),
     name: `Item ${i + 1}`,
     value: `${(i + 1) * 10}`,
 }))
 
-export const paginationColumns = [
+const paginationColumns = [
     { header: 'ID', accessor: 'id' as const },
     { header: 'Name', accessor: 'name' as const },
     { header: 'Value', accessor: 'value' as const },
 ]
 
-export type SortingRow = {
-    name: string
-    age: string
-    score: string
-    status: string
-}
-
-export const sortingRows: SortingRow[] = [
+const sortingRows: SortingRow[] = [
     { name: 'Alice', age: '29', score: '88', status: 'active' },
     { name: 'Charlie', age: '34', score: '72', status: 'inactive' },
     { name: 'Bob', age: '25', score: '95', status: 'active' },
     { name: 'Diana', age: '31', score: '61', status: 'pending' },
     { name: 'Eve', age: '27', score: '84', status: 'active' },
 ]
+
+export const TablesMocks = {
+    rows,
+    breakpointData,
+    variantRows,
+    ariaReferenceRows,
+    actionRows,
+    isActionDisabledData,
+    onClickData,
+    hrefData,
+    filterData,
+    isDisabledData,
+    variantData,
+    selectionRows,
+    allFeaturesData,
+    allPaginationRows,
+    paginationColumns,
+    sortingRows,
+}

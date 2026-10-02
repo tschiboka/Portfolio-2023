@@ -4,7 +4,9 @@ import { MemoryRouter, useLocation, useSearchParams } from 'react-router-dom'
 import { useTableController } from '../useTableController'
 import { Arrays } from '@common-utils'
 import type { Filters } from './useTableController.spec.types'
-import { filterDefs } from './useTableController.mocks'
+import { TableControllerMocks } from './useTableController.mocks'
+
+const { filterDefs } = TableControllerMocks
 
 /** Renders the controller without a router (URL persistence disabled). */
 export const setup = (overrides?: Partial<Parameters<typeof useTableController<Filters>>[0]>) => {

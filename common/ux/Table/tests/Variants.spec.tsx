@@ -1,6 +1,8 @@
 import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
-import { rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
+
+const { rows } = TableMocks
 
 describe('Table — Variants', () => {
     describe('Static column variant', () => {

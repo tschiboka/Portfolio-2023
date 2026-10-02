@@ -2,10 +2,14 @@ import { useState } from 'react'
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
-import { type Row, rows } from '../Tables.mocks'
+import { TablesMocks } from '../Tables.mocks'
+import type { Row } from '../Tables.types'
 import { Code as Snippets } from '../Tables.code'
-import { renderStatus } from '../Tables.config'
+import { TablesConfig } from '../Tables.config'
 import type { TableColumns } from '@common-ux'
+
+const { rows } = TablesMocks
+const { renderStatus } = TablesConfig
 
 export const ColumnCustomization = () => {
     const [cols, setCols] = useState<TableColumns<Row>>([

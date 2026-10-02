@@ -23,6 +23,8 @@ describe('Storage', () => {
         })
 
         it('should return null for malformed JSON', () => {
+            // The util logs the parse failure before degrading — suppress that noise.
+            vi.spyOn(console, 'error').mockImplementation(vi.fn())
             localStorage.setItem(TEST_KEY, '{ broken json')
             expect(Storage.get(TEST_KEY)).toBeNull()
         })

@@ -2,7 +2,7 @@ import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
 import { TestMocks } from '@common-mocks'
 import { Paths } from '@common-utils'
-import { EmailVerificationMockHandlers } from './EmailVerification.mocks'
+import { EmailVerificationMockHandlers } from './EmailVerification.mockHandlers'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 
 export const EmailVerificationTestUtils = {

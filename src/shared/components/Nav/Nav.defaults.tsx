@@ -1,8 +1,7 @@
-import { collectMenuGroups } from './Nav.utils'
+import { NavUtils } from './Nav.utils'
 import { MenuItem } from './Nav.types'
-import SantaHat from '@projects/assets/xmas/santa_hat.png'
 
-export const portfolioMenu: MenuItem[] = [
+const portfolioMenu: MenuItem[] = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/about' },
     { label: 'Projects', path: '/projects' },
@@ -11,7 +10,7 @@ export const portfolioMenu: MenuItem[] = [
     { label: '', showSubmenuToggle: true },
 ]
 
-export const apiMenu: MenuItem[] = [
+const apiMenu: MenuItem[] = [
     { label: 'Home', path: '/api/home' },
     {
         label: 'Dashboard',
@@ -138,14 +137,12 @@ export const apiMenu: MenuItem[] = [
     { label: '', showSubmenuToggle: true },
 ]
 
-export const getMenuItemImage = (imageName: string) => {
-    switch (imageName) {
-        case 'xmas_hat':
-            return <img className="xmas-hat" src={SantaHat} alt="Xmas Hat" />
-        default:
-            return null
-    }
-}
+const apiMenuGroups: MenuItem[][] = NavUtils.collectMenuGroups(apiMenu)
+const portfolioMenuGroups: MenuItem[][] = NavUtils.collectMenuGroups(portfolioMenu)
 
-export const apiMenuGroups: MenuItem[][] = collectMenuGroups(apiMenu)
-export const portfolioMenuGroups: MenuItem[][] = collectMenuGroups(portfolioMenu)
+export const NavDefaults = {
+    apiMenu,
+    portfolioMenu,
+    apiMenuGroups,
+    portfolioMenuGroups,
+}

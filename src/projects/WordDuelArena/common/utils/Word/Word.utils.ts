@@ -2,19 +2,19 @@ import { Arrays } from '@common-utils'
 import type { AnagramMapType, LevelWord } from '../Types'
 import { MAX_WORD_LENGTH } from './Word.constants'
 
-export const getAnagramKey = (word: string) => {
+const getAnagramKey = (word: string) => {
     return word.split('').sort().join('').toUpperCase()
 }
 
-export const getWordGroups = (words: LevelWord[] = []) =>
+const getWordGroups = (words: LevelWord[] = []) =>
     getWordLengthGroups()
         .map((length) => words.filter((word) => word.word.length === length))
         .map((words) => words.sort())
 
-export const getWordLengthGroups = () =>
+const getWordLengthGroups = () =>
     Array.from({ length: MAX_WORD_LENGTH - 2 }, (_, i) => MAX_WORD_LENGTH - i)
 
-export const transformAnagramMap = (input: string, anagramMap: AnagramMapType): string[] => {
+const transformAnagramMap = (input: string, anagramMap: AnagramMapType): string[] => {
     const anagrams = getPossibleAnagrams(input)
     const dictionary = anagrams.flatMap((a) => anagramMap[a] ?? [])
     return Arrays.unique(dictionary)
@@ -35,4 +35,11 @@ function getPossibleAnagrams(letters: string) {
 
     helper('', letters.split(''))
     return Array.from(results).map((anagram) => anagram.toUpperCase())
+}
+
+export const WordUtils = {
+    getAnagramKey,
+    getWordGroups,
+    getWordLengthGroups,
+    transformAnagramMap,
 }

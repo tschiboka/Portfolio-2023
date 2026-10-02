@@ -14,8 +14,7 @@ const toMessageRow = ({ createdAt, ...rest }: XmasMessage): XmasMessageRow => ({
     date: moment(createdAt).format(DateTime.Formats.DisplayDateTime),
 })
 
-export const XmasTransformers = ClientTransformers<XmasFormData, PostXmasMessageRequest, User>({
-    Post,
-})
-
-export const MessageTransformers = { toMessageRow }
+export const XmasTransformers = {
+    ...ClientTransformers<XmasFormData, PostXmasMessageRequest, User>({ Post }),
+    toMessageRow,
+}

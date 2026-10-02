@@ -1,8 +1,10 @@
 import { within } from '@testing-library/react'
 import { Row } from './Table.spec.types'
-import { basicColumns, rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
 import { Test, Accessor } from '@common-ux/Test'
 import { Table } from '..'
+
+const { rows, basicColumns } = TableMocks
 
 describe('Table — Accessibility', () => {
     describe('Region wrapper', () => {

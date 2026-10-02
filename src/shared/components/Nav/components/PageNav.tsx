@@ -8,7 +8,8 @@ import { Submenu } from '../Submenu/Submenu'
 import { SubNav } from '../SubNav/SubNav'
 import { Logo } from './Logo'
 import { SocialLinks, SubNavTitle } from './PersonalContent'
-import { apiMenu, portfolioMenu, getMenuItemImage } from '../Nav.defaults'
+import { NavDefaults } from '../Nav.defaults'
+import { NavUtils } from '../Nav.utils'
 
 export type PageVariant = 'portfolio' | 'app'
 
@@ -22,7 +23,7 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
     const [submenuStack, setSubmenuStack] = useState<SubmenuState[]>([])
 
     const isApp = variant === 'app'
-    const items = isApp ? apiMenu : portfolioMenu
+    const items = isApp ? NavDefaults.apiMenu : NavDefaults.portfolioMenu
 
     const handleItemClick = (item: MenuItem) => {
         Maybe.fromNull(item.submenu).cata(
@@ -52,7 +53,7 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
                 visible={isApp ? true : mainMenuVisible}
                 isLoading={isApp ? isAuthLoading : false}
                 submenu={submenuStack?.[0]}
-                renderImage={getMenuItemImage}
+                renderImage={NavUtils.getMenuItemImage}
                 onItemClick={handleItemClick}
                 onSubmenuToggle={() => setSubMenuVisible(!subMenuVisible)}
                 logo={<Logo />}
@@ -72,14 +73,14 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
 
 export const PageMobileMenu = ({ variant, pageName }: PageNavProps) => {
     const isApp = variant === 'app'
-    const items = isApp ? apiMenu : portfolioMenu
+    const items = isApp ? NavDefaults.apiMenu : NavDefaults.portfolioMenu
 
     return (
         <MobileMenu
             items={items}
             pageName={pageName}
             className={`MobileMenu--${variant}`}
-            renderImage={getMenuItemImage}
+            renderImage={NavUtils.getMenuItemImage}
             extras={
                 <div className="social-links">
                     <SocialLinks />

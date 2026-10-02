@@ -4,18 +4,15 @@ import type { SortDirection, TableColumns } from '@common-ux'
 import { Pill } from '@common-ux'
 import { Strings } from '@common-utils'
 import { toUpper } from 'ramda'
-import {
-    type SelectionRow,
-    selectionRows,
-    type AllFeaturesRow,
-    allFeaturesData,
-    type PaginationRow,
-    allPaginationRows,
-    paginationColumns,
-    type SortingRow,
-    sortingRows,
-} from './Tables.mocks'
-import {
+import { TablesMocks } from './Tables.mocks'
+import type { AllFeaturesRow, PaginationRow, SelectionRow, SortingRow } from './Tables.types'
+import { TablesConfig } from './Tables.config'
+import { UrlPersistenceConfig } from '@common-ux/Table/useTableController/useTableController.types'
+
+const { selectionRows, allFeaturesData, allPaginationRows, paginationColumns, sortingRows } =
+    TablesMocks
+
+const {
     getSelectionRowId,
     selectionActions,
     allFeaturesStatusPill,
@@ -23,8 +20,7 @@ import {
     allFeaturesRowVariant,
     allFeaturesActions,
     sortRows,
-} from './Tables.config'
-import { UrlPersistenceConfig } from '@common-ux/Table/useTableController/useTableController.types'
+} = TablesConfig
 
 export const MultipleSelectionDemo = () => {
     const [selected, setSelected] = useState<string[]>([])

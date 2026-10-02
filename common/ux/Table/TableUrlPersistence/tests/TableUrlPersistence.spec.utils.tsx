@@ -5,8 +5,10 @@ import { useTableUrlPersistence } from '../TableUrlPersistence'
 import type { UseTableUrlPersistenceArgs } from '../TableUrlPersistence.types'
 import type { TableSortState, Paging } from '../../useTableController/useTableController.types'
 import type { FilterDefinitions } from '../../TableFilterConfig'
-import { defaultPaging, defaultSort, filterDefs } from './TableUrlPersistence.mocks'
+import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import type { Filters } from './TableUrlPersistence.spec.types'
+
+const { filterDefs, defaultSort, defaultPaging } = TableUrlPersistenceMocks
 
 /** Captures the router's current search string from inside the router context. */
 const useSearchProbeResult = (): string => useLocation().search

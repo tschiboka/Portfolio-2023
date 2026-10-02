@@ -6,13 +6,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { Heading, Paragraph, Stack, Section, Main } from '@common-ux'
 import { hasLength } from '@common-utils'
 import { BsSliders2 } from 'react-icons/bs'
-import {
-    getNewestArticle,
-    getFilteredArticles,
-    getPublishedBlogArticles,
-    getComingSoonArticles,
-    getSortedArticlesBy,
-} from './Blog.utils'
+import { BlogUtils } from './Blog.utils'
 import './Blog.scss'
 import { BlogSortBy } from './Blog.types'
 import { LikesQueries, VisitsQueries } from '@shared-queries'
@@ -31,12 +25,17 @@ export const Blog = ({ pageName, path }: Props) => {
     const visits = visitsData?.visits ?? null
     const likes = likesData?.likes ?? null
 
-    const newArticle = getNewestArticle()
-    const publishedBlogArticles = getPublishedBlogArticles()
-    const filteredArticles = getFilteredArticles(selectedLanguages)
-    const blogArticlesSorted = getSortedArticlesBy(filteredArticles, sortedBy, likes, visits)
+    const newArticle = BlogUtils.getNewestArticle()
+    const publishedBlogArticles = BlogUtils.getPublishedBlogArticles()
+    const filteredArticles = BlogUtils.getFilteredArticles(selectedLanguages)
+    const blogArticlesSorted = BlogUtils.getSortedArticlesBy(
+        filteredArticles,
+        sortedBy,
+        likes,
+        visits,
+    )
 
-    const comingSoonArticles = getComingSoonArticles(visits, likes).map(
+    const comingSoonArticles = BlogUtils.getComingSoonArticles(visits, likes).map(
         ({ article, visits: v, likes: l }) => (
             <BlogCard
                 key={article.title}

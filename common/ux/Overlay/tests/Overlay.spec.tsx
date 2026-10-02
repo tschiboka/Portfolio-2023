@@ -4,7 +4,7 @@ import { Overlay } from '../index'
 import type { ActionMenuItem } from '../ActionMenu'
 import type { Key } from '@common-utils'
 import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
-import { mocks } from './Overlay.mocks'
+import { OverlayMocks } from './Overlay.mocks'
 import { Set, mockAnchorRef } from './Overlay.utils'
 
 // jsdom does not implement window.scrollTo
@@ -12,22 +12,22 @@ window.scrollTo = vi.fn()
 
 describe('Overlay.FullScreen', () => {
     it('should render children', () => {
-        expect(Set.fullScreen(mocks.fullScreen).Get.byText('Content')).toBeInTheDocument()
+        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.byText('Content')).toBeInTheDocument()
     })
 
     it('should use the default "Overlay" class', () => {
-        expect(Set.fullScreen(mocks.fullScreen).Get.className()).toContain('Overlay')
+        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.className()).toContain('Overlay')
     })
 
     it('should apply custom className', () => {
         expect(
-            Set.fullScreen({ ...mocks.fullScreen, className: 'custom' }).Get.className(),
+            Set.fullScreen({ ...OverlayMocks.fullScreen, className: 'custom' }).Get.className(),
         ).toContain('custom')
     })
 
     it('should apply ariaLabel', () => {
         expect(
-            Set.fullScreen({ ...mocks.fullScreen, ariaLabel: 'overlay' }).Get.attribute(
+            Set.fullScreen({ ...OverlayMocks.fullScreen, ariaLabel: 'overlay' }).Get.attribute(
                 'aria-label',
             ),
         ).toBe('overlay')

@@ -23,7 +23,7 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-09-26  |
+| Last updated | 2026-09-27  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
@@ -112,11 +112,12 @@ not.
               `DateInput.tsx`
     - [x] Step 0.15: Confirm a green `tsc`, lint, and test run
 - [ ] Step 1: Rule — a role file exports exactly one value
-    - [ ] Step 1.1: Build `rules/no-multiple-exports/`
-    - [ ] Step 1.2: Scope to the filenames listed in the rule's own constant — not to
-          roles, since `codeSnippets.ts` and the `WordDuelArena` tree are not role-named
+    - [x] Step 1.1: Build `rules/exactly-one-export/`
+    - [x] Step 1.2: Scope to the filenames listed in the rule's own constant — not to
+          roles; Step 0 named the `codeSnippets.ts` and `WordDuelArena` leaves, so the
+          list carries roles and `code`
     - [ ] Step 1.3: Register as `severity: 'error'`
-    - [ ] Step 1.4: Add `tests/NoMultipleExports.spec.ts`
+    - [x] Step 1.4: Add `tests/ExactlyOneExport.spec.ts`
     - [ ] Step 1.5: Run `rules sync`, then verify the generated config
     - [ ] Step 1.6: Sweep every file in scope and fix or suppress each violation
     - [ ] Step 1.7: Confirm a green `tsc`, lint, and test run
@@ -423,7 +424,7 @@ rather than by pattern, and 20.10 records whichever way each went.
   `getPossibleWords.ts` are all the `utils` role, so §1.2's `Feature.utils.ts` expresses them
   as one file exporting a single grouped value. `constants.ts` has five bare consts and
   becomes `Word.constants.ts`. Consolidating now satisfies Step 1 rather than renaming and
-  rediscovering it: a `utils` file exporting two values is exactly what `no-multiple-exports`
+  rediscovering it: a `utils` file exporting two values is exactly what `exactly-one-export`
   flags, and `getPossibleWords.ts` exporting `transformAnagramMap` is a name the file does
   not define. `Types/Level.ts` and `Types/Words.ts` fold the same way into `Word.types.ts`.
 - **`LocalSession.ts` is the session's slice of `localStorage`, so it stays with Session.**
@@ -474,9 +475,10 @@ declaration file's name describes what it augments, not a role, so`.d.ts` leaves
   `enforcement` shape that `types.ts` never implemented. The readme's folder
   shape states `tests/` as plural, matching the rename in
   `no-ad-hoc-file-suffix`.
-- Step 1's id stays `no-multiple-exports`. The rule is a **filename lookup**, not
-  a shape analysis, so the id describes the assertion rather than the file's role
-  — which is why `role` in the name was never load-bearing.
+- Step 1's id is `exactly-one-export`. The rule is a **filename lookup**, not a
+  shape analysis, so the id describes the assertion rather than the file's role.
+  The assertion is "exactly one", and a file exporting nothing fails it, so a
+  `no-` id would state only half of what the rule enforces.
 - Step 0 is a prerequisite, not a separate ticket, because Steps 10, 14 and 20.3
   each need to name the displayed-code files and would otherwise encode a name
   Step 0 is about to change.
@@ -598,8 +600,8 @@ characters')` writes the bound twice, so editing one copy makes the message
 - Step 1: does "only one value" mean one `export` statement, or one exported
   binding where a type-only export alongside a value is allowed?
   Status: Answered — the rule is driven by a list of filenames, not by the
-  language semantics of the export statement. A filename in the list may not
-  export more than one thing; `routes.tsx` is an entry decision, not an
+  language semantics of the export statement. A filename in the list must
+  export exactly one thing; `routes.tsx` is an entry decision, not an
   exception carved into the rule.
 - Step 3: is a missing spec an `error` or a `warn` while the direct-spec gap is
   still being closed?

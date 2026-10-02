@@ -23,11 +23,14 @@ const scopedRules = Object.entries(scopes).map(([ruleId, scope]) => ({
 }))
 
 export default tseslint.config(
-    { ignores: ['public/**', 'dist/**', '.github/**'] },
+    { ignores: ['public/**', '**/dist/**', '.github/**'] },
     js.configs.recommended,
     { languageOptions: { parserOptions: { tsconfigRootDir: rootDir } } },
     ...tseslint.configs.recommended,
-    ...tseslint.configs.recommendedTypeChecked,
+    ...tseslint.configs.recommendedTypeChecked.map((config) => ({
+        ...config,
+        files: ['**/*.{ts,tsx}'],
+    })),
     {
         files: ['**/*.{ts,tsx}'],
         languageOptions: {

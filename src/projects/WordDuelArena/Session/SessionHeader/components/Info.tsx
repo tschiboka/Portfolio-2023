@@ -1,12 +1,12 @@
 import { CheckMark, Coin } from '../../../common/components'
 import { SessionHooks } from '../../Session.hooks'
-import { getHeaderInfo } from '../SessionHeader.selectors'
+import { SessionHeaderSelectors } from '../SessionHeader.selectors'
 
 export const Info = () => {
     const { sessionState } = SessionHooks.useContext()
     if (!sessionState?.players || !sessionState.role) return null
 
-    const headerInfo = getHeaderInfo({ sessionState })
+    const headerInfo = SessionHeaderSelectors.getHeaderInfo({ sessionState })
     if (!headerInfo) return null
 
     const playerWords = headerInfo.player.targetWords + headerInfo.player.extraWords

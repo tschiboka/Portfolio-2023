@@ -1,8 +1,11 @@
 import { Table, Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { Functions } from '@common-utils'
 import { Code as Snippets } from '../Tables.code'
-import { type Row, rows } from '../Tables.mocks'
+import { TablesMocks } from '../Tables.mocks'
+import type { Row } from '../Tables.types'
 import { ControllerSingleDemo, ControllerNamedDemo, ControllerOffDemo } from '../Tables.demos'
+
+const { rows } = TablesMocks
 
 export const Controller = () => (
     <>

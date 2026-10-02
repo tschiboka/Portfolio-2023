@@ -66,8 +66,8 @@ describe('Categories', () => {
 
         it('shows an error message when the category post fails', async () => {
             const { form } = await CategoriesTestUtils.customRender([
-                CategoriesMockHandlers.get,
-                CategoriesMockHandlers.postError('Nope'),
+                CategoriesMockHandlers.Get,
+                CategoriesMockHandlers.PostRejected,
             ])
             await CategoriesTestUtils.fillValidCategory(form)
             await form.Do.submit()

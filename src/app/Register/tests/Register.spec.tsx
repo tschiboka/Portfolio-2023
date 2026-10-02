@@ -3,8 +3,8 @@ import { Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
 import { Paths } from '@common-utils'
-import { mockRegisterSuccess } from './Register.mocks'
-import { defaultHandlers, handlePostRegisterError } from './Register.mockHandlers'
+import { RegisterMocks } from './Register.mocks'
+import { RegisterMockHandlers } from './Register.mockHandlers'
 import { RegisterLabels } from './Register.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = RegisterLabels
@@ -12,7 +12,7 @@ const { form: FORM, fields, buttons, errors } = RegisterLabels
 const setupRegister = async () => {
     TestScreen.Do.render({
         path: AppRoutes.Register,
-        handlers: defaultHandlers,
+        handlers: RegisterMockHandlers.Defaults,
     })
 
     await waitFor(() => expect(Test.LoadingIndicator.Has.isLoading()).toBe(false))
@@ -149,7 +149,9 @@ describe('Register', () => {
 
         it('should display success message on successful registration', async () => {
             const form = await fillAndSubmitForm()
-            expect(await form.Wait.byText(mockRegisterSuccess.message)).toBeInTheDocument()
+            expect(
+                await form.Wait.byText(RegisterMocks.registerSuccess.message),
+            ).toBeInTheDocument()
         })
 
         it('should disable submit button after successful registration', async () => {
@@ -163,7 +165,7 @@ describe('Register', () => {
     describe('Failed registration', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = await setupRegister()
-            TestScreen.Set.handlers(handlePostRegisterError(errors.registrationFailed))
+            TestScreen.Set.handlers(RegisterMockHandlers.PostRejected)
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('taken@email.com')

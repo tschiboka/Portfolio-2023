@@ -1,5 +1,7 @@
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
-import { getColourName, technologies, Technology } from '../Projects.selectors'
+import { ProjectsSelectors } from '../Projects.selectors'
+import { ProjectsDefaults } from '../Projects.defaults'
+import type { Technology } from '../Projects.types'
 import type { Dictionary } from '@common-utils'
 import './ProjectFilter.scss'
 
@@ -13,8 +15,6 @@ interface Props {
     onClear: () => void
 }
 
-const DEFAULT_PROJECT_FILTER = 'all' // Set this to featured if you wanna use this as a portfolio
-
 export const ProjectFilter = ({
     selectedLanguages,
     onToggle,
@@ -24,8 +24,9 @@ export const ProjectFilter = ({
     filteredCount,
     selectedFilter,
 }: Props) => {
-    const hasFilter = selectedLanguages.size > 0 || selectedFilter !== DEFAULT_PROJECT_FILTER
-    const languageGroups = technologies.reduce(
+    const hasFilter =
+        selectedLanguages.size > 0 || selectedFilter !== ProjectsDefaults.defaultFilter
+    const languageGroups = ProjectsSelectors.technologies.reduce(
         (groups, tech) => {
             if (!tech.groupName) return groups
             if (!groups[tech.groupName]) groups[tech.groupName] = []
@@ -49,7 +50,7 @@ export const ProjectFilter = ({
                                     <Pill
                                         key={tech.name}
                                         label={tech.name}
-                                        color={getColourName(tech.name)}
+                                        color={ProjectsSelectors.getColourName(tech.name)}
                                         variant="solid"
                                         className={isActive ? '' : 'ProjectFilter__pill--dimmed'}
                                         onClick={() => onToggle(tech.name)}

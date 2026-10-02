@@ -2,8 +2,9 @@ import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
-import { mockSetSession, mockUser, defaultSettings } from './Login.mocks'
-import { defaultHandlers, handleGetSettings, handlePostLoginError } from './Login.mockHandlers'
+import { MockSettings, MockUser } from '@common-mocks'
+import { LoginMocks } from './Login.mocks'
+import { LoginMockHandlers } from './Login.mockHandlers'
 import { LoginLabels } from './Login.spec.utils'
 
 const { form: FORM, fields, buttons, errors } = LoginLabels
@@ -11,8 +12,8 @@ const { form: FORM, fields, buttons, errors } = LoginLabels
 const setupLogin = () => {
     TestScreen.Do.render({
         path: AppRoutes.Login,
-        session: { setSession: mockSetSession },
-        handlers: defaultHandlers,
+        session: { setSession: LoginMocks.setSession },
+        handlers: LoginMockHandlers.Defaults,
     })
 
     return { form: Test.Form(FORM) }
@@ -61,9 +62,9 @@ describe('Login', () => {
         it('should not render the register button when registration is disabled', async () => {
             const { form } = setupLogin()
             TestScreen.Set.handlers(
-                handleGetSettings.updateResponse((builder) =>
+                LoginMockHandlers.Settings.Get.updateResponse((builder) =>
                     builder.setValue('settings', {
-                        ...defaultSettings,
+                        ...MockSettings.build(),
                         enableUserRegistration: false,
                     }),
                 ),
@@ -116,7 +117,7 @@ describe('Login', () => {
             const { form } = setupLogin()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
-            expect(mockSetSession).not.toHaveBeenCalled()
+            expect(LoginMocks.setSession).not.toHaveBeenCalled()
             expect(TestScreen.Has.navigated()).toBe(false)
         })
     })
@@ -132,10 +133,10 @@ describe('Login', () => {
         it('should set session with token, user, and settings on success', async () => {
             await fillAndSubmitForm()
             await waitFor(() => {
-                expect(mockSetSession).toHaveBeenCalledWith({
+                expect(LoginMocks.setSession).toHaveBeenCalledWith({
                     token: 'mock-jwt-token',
-                    user: mockUser,
-                    settings: defaultSettings,
+                    user: MockUser.build(),
+                    settings: MockSettings.build(),
                 })
             })
         })
@@ -149,7 +150,7 @@ describe('Login', () => {
     describe('Failed login', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = setupLogin()
-            TestScreen.Set.handlers(handlePostLoginError(errors.invalidCredentials))
+            TestScreen.Set.handlers(LoginMockHandlers.Login.PostRejected)
             await form.Input(fields.email).Do.type('wrong@email.com')
             await form.Input(fields.password).Do.type('wrongpassword1')
             await form.Do.submit()
@@ -170,7 +171,7 @@ describe('Login', () => {
         it('should not set session on login failure', async () => {
             const form = await fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
-            expect(mockSetSession).not.toHaveBeenCalled()
+            expect(LoginMocks.setSession).not.toHaveBeenCalled()
         })
     })
 

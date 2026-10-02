@@ -1,6 +1,6 @@
 import { SessionHooks } from '../../Session.hooks'
 import { LastWordAttempt } from '../../Session.types'
-import { getCharClass } from '../SessionHeader.selectors'
+import { SessionHeaderSelectors } from '../SessionHeader.selectors'
 
 type AttemptWordProps = {
     attempt?: LastWordAttempt
@@ -14,7 +14,7 @@ export const AttemptWord = ({ attempt }: AttemptWordProps) => {
         attempt &&
         attempt.word.split('').map((char, index) => (
             <div
-                className={getCharClass({
+                className={SessionHeaderSelectors.getCharClass({
                     attempt,
                     sessionState,
                 })}

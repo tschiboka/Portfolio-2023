@@ -1,8 +1,10 @@
 import { Accessor, Test } from '@common-ux/Test'
 import { screen } from '@testing-library/react'
 import { Row } from './Table.spec.types'
-import { basicColumns, rows } from './Table.mocks'
+import { TableMocks } from './Table.mocks'
 import { Table } from '..'
+
+const { rows, basicColumns } = TableMocks
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  FUNDAMENTALS

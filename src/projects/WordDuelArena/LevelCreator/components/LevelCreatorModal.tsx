@@ -5,7 +5,7 @@ import { Level, LevelWord } from '../../common/utils'
 import { Query } from '@common-utils'
 import type { Nullable } from '@common-utils'
 import { isEmpty } from '@common-utils'
-import { transformAnagramMap } from '../../common/utils/Word/Word.utils'
+import { WordUtils } from '../../common/utils/Word/Word.utils'
 import {
     useGetAnagramMap,
     useGetLevel,
@@ -57,7 +57,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
             setFrequencies(wordFrequencies)
         }
         if (frequencies && isEmpty(possibleWords) && anagramMap) {
-            const newWordSet = transformAnagramMap(levelName, anagramMap).map((word) => ({
+            const newWordSet = WordUtils.transformAnagramMap(levelName, anagramMap).map((word) => ({
                 word,
                 frequency: frequencies[word.toUpperCase()] || 0,
             }))
