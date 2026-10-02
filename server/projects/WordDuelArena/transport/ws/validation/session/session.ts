@@ -14,7 +14,7 @@ const SessionStateSchema = Joi.object({
         player1: PlayerSchema.allow(null).optional(),
         player2: PlayerSchema.allow(null).optional(),
     }).required(),
-    level: LevelSchema.allow(null).optional(),
+    level: LevelSchema.schema.allow(null).optional(),
     currentMatch: MatchSchema.allow(null).optional(),
     previousMatches: Joi.array().items(MatchSchema).optional(),
     connections: Joi.any(), // WARNING: cannot validate Set<WebSocket> in Joi

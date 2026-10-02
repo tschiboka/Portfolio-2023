@@ -12,11 +12,6 @@ const messageSchema = Joi.object({
     userId: Joi.string().required(),
 })
 
-const MessageSchema = {
-    schema: messageSchema,
-    validate: (input: XmasMessageInput) => messageSchema.validate(input),
-}
-
 const candleSchema = Joi.object({
     candle1: Joi.boolean().required(),
     candle2: Joi.boolean().required(),
@@ -24,10 +19,13 @@ const candleSchema = Joi.object({
     candle4: Joi.boolean().required(),
 })
 
-const CandleSchema = {
-    schema: candleSchema,
-    validate: (input: XmasCandleInput) => candleSchema.validate(input),
+export const XmasSchema = {
+    Message: {
+        schema: messageSchema,
+        validate: (input: XmasMessageInput) => messageSchema.validate(input),
+    },
+    Candle: {
+        schema: candleSchema,
+        validate: (input: XmasCandleInput) => candleSchema.validate(input),
+    },
 }
-
-export { MessageSchema, CandleSchema }
-// keybinding test bottom

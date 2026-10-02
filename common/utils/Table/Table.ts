@@ -1,5 +1,7 @@
 import { TablePagingDefaults, TablePageSizeOptions, TableSortingDefaults } from './Table.constants'
-import { getPageWindow, isFirstPage, isLastPage } from './Table.utils'
+import { TableUtils } from './Table.utils'
+
+const { getPageWindow, isFirstPage, isLastPage } = TableUtils
 
 /**
  * Shared table state defaults and paging helpers.
@@ -22,4 +24,4 @@ export const Table = {
     },
 }
 
-export { getPageWindow, isFirstPage, isLastPage }
+export { TableUtils }

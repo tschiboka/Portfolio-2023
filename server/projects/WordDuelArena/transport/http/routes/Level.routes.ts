@@ -1,10 +1,12 @@
 import express from 'express'
 const router = express.Router()
-import { handleListLevels, handleGetLevel, handleUpsertLevel } from '../handlers/Level.controller'
-import { auth } from '../../../../../App/Users/Users.middleware'
+import { LevelController } from '../handlers/Level.controller'
+import { UsersMiddleware } from '../../../../../App/Users/Users.middleware'
 
-router.get('/name', handleListLevels)
-router.get('/name/:name', handleGetLevel)
-router.post('/', [auth], handleUpsertLevel)
+const { auth } = UsersMiddleware
+
+router.get('/name', LevelController.ListLevels)
+router.get('/name/:name', LevelController.GetLevel)
+router.post('/', [auth], LevelController.UpsertLevel)
 
 export default router

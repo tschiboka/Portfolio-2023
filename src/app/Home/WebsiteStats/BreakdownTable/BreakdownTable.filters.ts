@@ -1,6 +1,8 @@
-import { text, select, date } from '@common-ux'
+import { TableFilterConfig } from '@common-ux'
 import type { FilterConfig } from '@common-ux/Table/TableFilterConfig'
 import type { Dictionary } from '@common-utils'
+
+const { text, select, date } = TableFilterConfig
 
 export const BreakdownTableFilters: Dictionary<FilterConfig> = {
     path: text({ label: 'Path', placeholder: 'Filter by path...' }),

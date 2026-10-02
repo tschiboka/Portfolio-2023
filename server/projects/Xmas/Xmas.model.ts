@@ -42,4 +42,7 @@ const XmasCandleSchema = new mongoose.Schema({
 
 const XmasCandleModel = mongoose.model('XmasCandle', XmasCandleSchema)
 
-export { XmasMessageModel, XmasCandleModel }
+export const XmasModel = {
+    Message: XmasMessageModel,
+    Candle: XmasCandleModel,
+}

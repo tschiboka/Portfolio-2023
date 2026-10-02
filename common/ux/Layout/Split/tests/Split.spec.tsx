@@ -1,4 +1,6 @@
-import { Set, selectRatio } from './Split.spec.utils'
+import { SplitTestUtils } from './Split.spec.utils'
+
+const { Set, selectRatio } = SplitTestUtils
 
 describe('Split', () => {
     describe('selectRatio', () => {

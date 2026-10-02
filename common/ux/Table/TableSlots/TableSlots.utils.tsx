@@ -3,7 +3,7 @@ import { isNonEmpty } from '@common-utils'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
 
-export const createSlot = <P extends object>(displayName: string, Component: React.FC<P>) => {
+const createSlot = <P extends object>(displayName: string, Component: React.FC<P>) => {
     const Slot: React.FC<P> = (props) => <Component {...props} />
     Slot.displayName = displayName
     return Slot
@@ -30,7 +30,7 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
     return [node]
 }
 
-export const extractSlot = (
+const extractSlot = (
     children: ReactNode,
     slotName: string,
 ): { slot: ReactNode; rest: ReactNode[] } => {
@@ -55,3 +55,5 @@ export const extractSlot = (
 
     return { slot: isNonEmpty(slots) ? slots[0] : undefined, rest }
 }
+
+export const TableSlotsUtils = { createSlot, extractSlot }

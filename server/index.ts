@@ -1,8 +1,8 @@
 import http from 'http'
 import { App, AppConstants, AppRoutes } from './App'
-import { ProjectsRoutes } from './Projects'
+import { ProjectsRoutes } from './projects'
 import { ApiMessage } from '../common/utils/Messages'
-import setupWs from './Projects/WordDuelArena/transport/ws'
+import setupWs from './projects/WordDuelArena/transport/ws'
 ;(async () => {
     const app = await App.start()
     AppRoutes.register(app)

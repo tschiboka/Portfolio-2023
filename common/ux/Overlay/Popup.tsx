@@ -5,16 +5,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
 import type { AnchorResult, PopupProps } from './Overlay.types'
 import type { Optional } from '@common-utils'
-import {
-    ArrowClass,
-    DefaultIcon,
-    ModeClass,
-    SizeStyle,
-    getAnchorPosition,
-    useScrollLock,
-} from './Popup.utils'
+import { PopupUtils } from './Popup.utils'
 import { isNonEmpty } from '@common-utils'
 import { Stack } from '../Layout'
+
+const { ArrowClass, DefaultIcon, ModeClass, SizeStyle, getAnchorPosition, useScrollLock } =
+    PopupUtils
 
 export const Popup = ({
     ariaLabel,

@@ -1,4 +1,6 @@
-import { Set, selectBackground, selectBorderRadius } from './Box.spec.utils'
+import { BoxTestUtils } from './Box.spec.utils'
+
+const { Set, selectBackground, selectBorderRadius } = BoxTestUtils
 
 describe('Box', () => {
     describe('selectBackground', () => {

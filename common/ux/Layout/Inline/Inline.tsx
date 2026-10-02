@@ -1,5 +1,7 @@
-import { selectAlign, selectJustify } from '../Stack/Stack.selectors'
+import { StackSelectors } from '../Stack/Stack.selectors'
 import type { InlineProps } from './Inline.types'
+
+const { selectAlign, selectJustify } = StackSelectors
 
 export const Inline = ({
     children,

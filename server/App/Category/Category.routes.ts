@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiResponder } from '@common-utils'
 import { UsersAuth } from '../Users/Users.auth'
-import { auth } from '../Users/Users.middleware'
+import { UsersMiddleware } from '../Users/Users.middleware'
 import { CategoryService } from './Category.service'
 import type {
     GetCategoriesReq,
@@ -9,6 +9,8 @@ import type {
     PostCategoryReq,
     PostCategoryRes,
 } from './Category.types'
+
+const { auth } = UsersMiddleware
 
 const router = express.Router()
 

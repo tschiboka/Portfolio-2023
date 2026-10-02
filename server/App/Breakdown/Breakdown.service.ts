@@ -2,7 +2,7 @@
 import { chunk } from '@common-utils'
 import { BreakdownRepository } from './Breakdown.repository'
 import { BreakdownBatchLimits } from './Breakdown.constants'
-import { buildBreakdownOperations, mergeBreakdownCounts } from './Breakdown.utils'
+import { BreakdownUtils } from './Breakdown.utils'
 
 /**
  * Business logic for daily breakdowns - aggregates all existing visit and like records by
@@ -15,8 +15,11 @@ export const BreakdownService = {
             BreakdownRepository.aggregateLikes(),
         ])
 
-        const breakdownCounts = mergeBreakdownCounts(visitAggregation, likeAggregation)
-        const operations = buildBreakdownOperations(breakdownCounts)
+        const breakdownCounts = BreakdownUtils.MergeBreakdownCounts(
+            visitAggregation,
+            likeAggregation,
+        )
+        const operations = BreakdownUtils.BuildBreakdownOperations(breakdownCounts)
 
         const batches = chunk(operations, BreakdownBatchLimits.size)
         const totalUpserted = await batches.reduce(

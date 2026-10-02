@@ -1,7 +1,9 @@
 import { describe, it, expect, vi, expectTypeOf } from 'vitest'
 import { Repository } from '../Repository'
-import { FakeModel } from './Repository.spec.utils'
+import { RepositoryTestUtils } from './Repository.spec.utils'
 import type { TestDoc } from './Repository.spec.types'
+
+const { FakeModel } = RepositoryTestUtils
 
 describe('Repository.define', () => {
     it('returns a repository with the full CRUD surface and withQueries', () => {

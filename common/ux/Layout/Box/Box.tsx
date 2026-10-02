@@ -1,5 +1,7 @@
-import { selectBackground, selectBorderRadius } from './Box.selectors'
+import { BoxSelectors } from './Box.selectors'
 import type { BoxProps } from './Box.types'
+
+const { selectBackground, selectBorderRadius } = BoxSelectors
 
 export const Box = ({
     children,

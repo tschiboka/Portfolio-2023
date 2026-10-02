@@ -1,4 +1,6 @@
-import { getTotalCols } from '../Table.utils'
+import { TableUtils } from '../Table.utils'
+
+const { getTotalCols } = TableUtils
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  UTILITY FUNCTIONS

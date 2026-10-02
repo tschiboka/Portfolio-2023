@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Table, useTableController, text, select } from '@common-ux'
+import { Table, useTableController, TableFilterConfig } from '@common-ux'
 import type { SortDirection, TableColumns } from '@common-ux'
 import { Pill } from '@common-ux'
 import { Strings } from '@common-utils'
@@ -21,6 +21,8 @@ const {
     allFeaturesActions,
     sortRows,
 } = TablesConfig
+
+const { text, select } = TableFilterConfig
 
 export const MultipleSelectionDemo = () => {
     const [selected, setSelected] = useState<string[]>([])

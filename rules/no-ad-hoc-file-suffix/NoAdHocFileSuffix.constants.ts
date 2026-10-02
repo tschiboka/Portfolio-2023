@@ -32,6 +32,8 @@ const AllowedRoles = [
     'selectors',
     'service',
     'spec',
+    'states',
+    'storage',
     'styles',
     'transformers',
     'types',

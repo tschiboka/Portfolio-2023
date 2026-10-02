@@ -3,7 +3,7 @@ import type { Dictionary } from '../../../Generics'
 import type { TestDoc } from './Repository.spec.types'
 
 /** A duck-typed model-like fixture: static query methods + a constructor that builds docs. */
-export class FakeModel {
+class FakeModel {
     static docs: TestDoc[] = []
     static resetDocs = (seed: TestDoc[]): void => {
         FakeModel.docs = [...seed]
@@ -46,7 +46,9 @@ export class FakeModel {
 }
 
 /** Convenience for building a document fixture. */
-export const makeDoc = (input: Partial<TestDoc> = {}): TestDoc => ({
+const makeDoc = (input: Partial<TestDoc> = {}): TestDoc => ({
     _id: input._id ?? '1',
     name: input.name ?? 'a',
 })
+
+export const RepositoryTestUtils = { FakeModel, makeDoc }

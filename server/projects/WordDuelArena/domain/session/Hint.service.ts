@@ -5,7 +5,7 @@ import { isDefined, isEmpty } from '@common-utils'
 import { Arrays } from '@common-utils'
 import { GIVE_HINTS_AFTER_FAILED_ATTEMPTS } from '../../config/constants/Game.constants'
 
-export const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
+const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
     if (!draft.currentMatch) return false
 
     const lastCorrectIndex = draft.currentMatch.moves.findLastIndex(
@@ -35,7 +35,7 @@ export const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
     )
 }
 
-export const getRandomUnsolvedWordIndex = (draft: SessionState): Optional<number> => {
+const getRandomUnsolvedWordIndex = (draft: SessionState): Optional<number> => {
     if (!draft.level) return undefined
     const unsolvedIndices = draft.level.targetWords
         .map((word, index) => (word.status === 'UNSOLVED' ? index : null))
@@ -43,4 +43,9 @@ export const getRandomUnsolvedWordIndex = (draft: SessionState): Optional<number
     if (isEmpty(unsolvedIndices)) return undefined
 
     return Arrays.random(unsolvedIndices)
+}
+
+export const HintService = {
+    GetIsHintDue: getIsHintDue,
+    GetRandomUnsolvedWordIndex: getRandomUnsolvedWordIndex,
 }

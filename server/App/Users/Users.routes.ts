@@ -2,7 +2,7 @@
 import { ApiResponder } from '@common-utils'
 import { UsersService } from './Users.service'
 import { UsersAuth } from './Users.auth'
-import { auth, admin } from './Users.middleware'
+import { UsersMiddleware } from './Users.middleware'
 import type {
     GetUserReq,
     GetUserRes,
@@ -17,6 +17,8 @@ import type {
     SessionReq,
     SessionRes,
 } from './Users.types'
+
+const { auth, admin } = UsersMiddleware
 
 const router = express.Router()
 

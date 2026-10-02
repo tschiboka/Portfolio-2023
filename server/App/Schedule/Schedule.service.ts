@@ -1,7 +1,7 @@
 ﻿import type { PostDailyBreakdownResponse } from '../../../common/types'
 import { DateTime } from '@common-utils'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
-import { createMessage, sendEmail } from './Schedule.utils'
+import { ScheduleUtils } from './Schedule.utils'
 import type { Breakdown, BreakdownAggregate } from './Schedule.types'
 
 /** Business logic for the daily-breakdown schedule — builds and sends the report email. */
@@ -42,8 +42,8 @@ export const ScheduleService = {
             },
         }
 
-        const message = createMessage(breakdown)
-        await sendEmail(message)
+        const message = ScheduleUtils.CreateMessage(breakdown)
+        await ScheduleUtils.SendEmail(message)
         return { success: true }
     },
 }

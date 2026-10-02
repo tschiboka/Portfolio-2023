@@ -5,7 +5,14 @@ export const registrar: RuleRegistrar = {
     id: 'exactly-one-export',
     description: 'A role file must export exactly one thing.',
     scope: {
-        include: ['src/**/*.tsx', 'src/**/*.ts'],
+        include: [
+            'src/**/*.tsx',
+            'src/**/*.ts',
+            'common/**/*.tsx',
+            'common/**/*.ts',
+            'server/**/*.tsx',
+            'server/**/*.ts',
+        ],
         exclude: ['public/**'],
     },
     enabled: true,

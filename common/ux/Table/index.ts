@@ -1,6 +1,6 @@
 export { Table } from './Table'
 export { useTableController } from './useTableController'
-export { text, select, date, number, search, checkbox } from './TableFilterConfig'
+export { TableFilterConfig } from './TableFilterConfig'
 export type * from './TableFilterConfig'
 export { useTableUrlPersistence, buildCodec } from './TableUrlPersistence'
 export type {

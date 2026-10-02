@@ -6,7 +6,7 @@ import type { SplitProps } from '../Split.types'
 
 type SetProps = Partial<SplitProps> & { ariaLabel: string }
 
-export const Set = {
+const Set = {
     split: (props: SetProps) => {
         render(
             <Split
@@ -19,4 +19,4 @@ export const Set = {
     },
 }
 
-export { selectRatio }
+export const SplitTestUtils = { Set, selectRatio }

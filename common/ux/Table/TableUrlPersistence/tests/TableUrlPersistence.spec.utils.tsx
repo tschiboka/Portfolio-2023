@@ -13,7 +13,7 @@ const { filterDefs, defaultSort, defaultPaging } = TableUrlPersistenceMocks
 /** Captures the router's current search string from inside the router context. */
 const useSearchProbeResult = (): string => useLocation().search
 
-export type SetupOptions = {
+type SetupOptions = {
     initialEntries?: string[]
     filters?: FilterDefinitions<Filters>
     config?: UseTableUrlPersistenceArgs<Filters>['config']
@@ -22,7 +22,7 @@ export type SetupOptions = {
 }
 
 /** Renders the hook inside a MemoryRouter, exposing the live search string for assertions. */
-export const setup = (options: SetupOptions = {}) => {
+const setup = (options: SetupOptions = {}) => {
     const { initialEntries = ['/'], config, sort = defaultSort, paging = defaultPaging } = options
     // Only default the filter defs when the key is absent — an explicit `undefined`
     // (no filter definitions) must pass through untouched.
@@ -52,3 +52,5 @@ export const setup = (options: SetupOptions = {}) => {
     )
     return { result, search }
 }
+
+export const TableUrlPersistenceTestUtils = { setup }

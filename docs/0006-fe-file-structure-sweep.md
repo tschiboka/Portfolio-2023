@@ -377,9 +377,9 @@ static diff; both need a runtime pass.
 
 ### 10.1 Server restructure
 
-- Extracted project routes out of `server/App/`; created `server/Projects/Projects.routes.ts` + `server/Projects/index.ts` barrel.
+- Extracted project routes out of `server/App/`; created `server/projects/Projects.routes.ts` + `server/projects/index.ts` barrel.
 - `server/index.ts` now registers `AppRoutes` + `ProjectsRoutes` at the top level; `/session` route moved before `/api/user/:id` (Express ordering bug — fixed refresh token loss).
-- Renamed `server/projects/` → `server/Projects/`; normalized git index casing.
+- Renamed `server/projects/` → `server/projects/`; normalized git index casing.
 
 ### 10.2 Import alias infrastructure (applied)
 

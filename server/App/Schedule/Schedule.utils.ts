@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 import type { Breakdown, PathBreakdownItem, SectionData } from './Schedule.types'
 
-export const renderHeader = () => `
+const renderHeader = () => `
     <div style="background:#111; color:#eee; padding:24px 20px; border-bottom:1px solid #333;">
         <h2 style="margin:0; font-size:1.53rem; font-weight:700; font-variant:small-caps;">
             <img src="https://tschiboka.com/assets/icons/icon-chart.svg" alt="" width="20" height="20" style="vertical-align:middle; margin-right:8px;" />Daily Breakdown Report
@@ -12,7 +12,7 @@ export const renderHeader = () => `
     </div>
 `
 
-export const renderFooter = () => `
+const renderFooter = () => `
     <p style="margin-top:24px; font-size:0.58rem; color:#888; text-align:center; font-weight:300; font-family:'Fira Code',monospace;">
         tschiboka.com &bull; automated report system
     </p>
@@ -37,7 +37,7 @@ const renderRows = (today: PathBreakdownItem[], total: PathBreakdownItem[]) => {
         .join('')
 }
 
-export const renderSection = (title: string, data: SectionData) => {
+const renderSection = (title: string, data: SectionData) => {
     const iconUrl =
         title === 'Visits'
             ? 'https://tschiboka.com/assets/icons/icon-eye.svg'
@@ -82,7 +82,7 @@ export const renderSection = (title: string, data: SectionData) => {
 }
 
 /** Branded email signature footer used in automated email templates. */
-export const renderSignature = () => `
+const renderSignature = () => `
     <table style="width:100%; margin-top:24px; border-top:1px solid #333; padding-top:16px;">
         <tr>
             <td style="width:84px; vertical-align:top; text-align:center; padding:0; white-space:nowrap;">
@@ -128,7 +128,7 @@ export const renderSignature = () => `
 `
 
 /** Composes the full daily-breakdown report email HTML. */
-export const createMessage = (breakdown: Breakdown) => `
+const createMessage = (breakdown: Breakdown) => `
     <div style="font-family:Roboto, Arial, Helvetica, sans-serif; font-weight:300; background:#111; padding:24px 12px; color:#eee;">
         <div style="max-width:600px; margin:0 auto; background:#0a0a0a; border-radius:10px; overflow:hidden; border:2px solid #222; box-shadow:10px 10px 30px rgba(0,0,0,0.7), -5px -5px 5px rgba(255,255,255,0.02), inset 10px 10px 20px black;">
 
@@ -145,7 +145,7 @@ export const createMessage = (breakdown: Breakdown) => `
 `
 
 /** Sends an email via Resend; throws when the API key is missing or the send fails. */
-export const sendEmail = async (message: string) => {
+const sendEmail = async (message: string) => {
     const resendApiKey = process.env.RESEND_API_KEY
     if (!resendApiKey) throw new Error('RESEND_API_KEY environment variable is not set')
 
@@ -160,4 +160,13 @@ export const sendEmail = async (message: string) => {
 
     if (error) throw new Error(error.message)
     return data
+}
+
+export const ScheduleUtils = {
+    RenderHeader: renderHeader,
+    RenderFooter: renderFooter,
+    RenderSection: renderSection,
+    RenderSignature: renderSignature,
+    CreateMessage: createMessage,
+    SendEmail: sendEmail,
 }

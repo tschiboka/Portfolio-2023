@@ -1,5 +1,5 @@
-import type { Session } from '../../../WordDuelArena.types'
-import { moveHandler, type MoveHandlerParams } from './Move.handlers'
+import type { MoveHandlerParams, Session } from '../../../WordDuelArena.types'
+import { MoveHandlers } from './Move.handlers'
 import { joinHandler } from './Join.handlers'
 
 interface HandlerContext {
@@ -14,7 +14,7 @@ async function routeMessage(type: string, ctx: HandlerContext) {
             return await joinHandler(ctx)
 
         case 'attempt_move':
-            return moveHandler(ctx as MoveHandlerParams)
+            return MoveHandlers.move(ctx as MoveHandlerParams)
 
         default:
             console.warn('Unknown message type:', type)

@@ -1,4 +1,4 @@
-export { text, select, date, number, search, checkbox } from './TableFilterConfig.config'
+export { TableFilterConfig } from './TableFilterConfig.config'
 export type {
     TextFilterConfig,
     SelectFilterConfig,

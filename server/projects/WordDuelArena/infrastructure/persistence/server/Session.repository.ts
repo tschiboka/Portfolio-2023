@@ -35,4 +35,8 @@ function cleanupSessionIfEmpty(sessionId: string): void {
     }
 }
 
-export { sessions, getSession, cleanupSessionIfEmpty }
+export const SessionRepository = {
+    All: sessions,
+    Get: getSession,
+    CleanupIfEmpty: cleanupSessionIfEmpty,
+}

@@ -16,7 +16,7 @@ const mockAnchorRef = () => {
     return { ref, Wrapper }
 }
 
-export const Set = {
+const Set = {
     fullScreen: (
         props: Partial<React.ComponentProps<typeof Overlay.FullScreen>> & {
             ariaLabel: string
@@ -79,4 +79,4 @@ export const Set = {
     },
 }
 
-export { mockAnchorRef }
+export const OverlayTestUtils = { Set, mockAnchorRef }

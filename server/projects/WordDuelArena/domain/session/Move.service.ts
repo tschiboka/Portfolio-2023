@@ -3,7 +3,7 @@ import type { MovePayload } from '../../../../../common/types/projects/wda'
 import type { Optional } from '@common-utils'
 import { calculatePoints } from './Points.service'
 import { MatchStatuses } from '../../config/constants/Game.constants'
-import { getIsHintDue, getRandomUnsolvedWordIndex } from './Hint.service'
+import { HintService } from './Hint.service'
 
 function getSolutionState(draft: SessionState, deviceId: string, payload: MovePayload): void {
     if (!draft.players.player1 || !draft.players.player2 || !draft.level || !draft.currentMatch)
@@ -73,9 +73,9 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
             isExtra: false,
         }
 
-        const isHintDue = getIsHintDue(draft, payload)
+        const isHintDue = HintService.GetIsHintDue(draft, payload)
         if (isHintDue) {
-            const hintIndex = getRandomUnsolvedWordIndex(draft)
+            const hintIndex = HintService.GetRandomUnsolvedWordIndex(draft)
             if (hintIndex !== undefined) {
                 const targetWord = draft.level.targetWords[hintIndex]
                 const nextIndex = targetWord.hintIndices.length // 0, 1, 2, ...

@@ -31,6 +31,8 @@ export const ExactlyOneExportConstants = {
         'schema',
         'selectors',
         'service',
+        'states',
+        'storage',
         'transformers',
         'utils',
     ],

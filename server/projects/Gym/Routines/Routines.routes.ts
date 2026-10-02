@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiMessage, ApiResponder } from '@common-utils'
 import { UsersAuth } from '../../../App/Users/Users.auth'
-import { auth } from '../../../App/Users/Users.middleware'
+import { UsersMiddleware } from '../../../App/Users/Users.middleware'
 import { RoutinesService } from './Routines.service'
 import type {
     DeleteRoutineReq,
@@ -13,6 +13,8 @@ import type {
     PostRoutineReq,
     PostRoutineRes,
 } from './Routines.types'
+
+const { auth } = UsersMiddleware
 const router = express.Router()
 
 // Return the requesting user's own routines plus any system routines.

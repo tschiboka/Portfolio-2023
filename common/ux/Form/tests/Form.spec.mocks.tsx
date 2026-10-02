@@ -1,12 +1,12 @@
 import type { SearchInputOption } from '../SearchInput'
 
-export const testOptions: SearchInputOption[] = [
+const testOptions: SearchInputOption[] = [
     { label: 'Apple', value: 'apple' },
     { label: 'Banana', value: 'banana' },
     { label: 'Cherry', value: 'cherry' },
 ]
 
-export const iconOptions: SearchInputOption[] = [
+const iconOptions: SearchInputOption[] = [
     { label: 'Home', value: 'home', icon: <span data-testid="icon-home">H</span> },
     {
         label: 'Settings',
@@ -15,3 +15,5 @@ export const iconOptions: SearchInputOption[] = [
         iconColor: 'red',
     },
 ]
+
+export const FormMocks = { testOptions, iconOptions }

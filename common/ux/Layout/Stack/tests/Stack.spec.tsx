@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import { Stack } from '../Stack'
-import { selectAlign, selectJustify } from '../Stack.selectors'
+import { StackSelectors } from '../Stack.selectors'
 import { StackProps } from '../Stack.types'
 import { Accessor } from '../../../Test'
+
+const { selectAlign, selectJustify } = StackSelectors
 
 type SetProps = Omit<StackProps, 'ariaLabel' | 'children'> & {
     ariaLabel: string

@@ -6,11 +6,8 @@ import { ClientMessage } from '@common-utils'
 import { startPresenceLoop } from '../../infrastructure/presence/Loop.service'
 import { validateDeviceConnection } from './validation/connection/ValidateDevice.schema'
 import routeMessage from './handlers'
-import {
-    getSession,
-    cleanupSessionIfEmpty,
-} from '../../infrastructure/persistence/server/Session.repository'
-import { loadWordResources } from '../../infrastructure/resources/Word.repository'
+import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
+import { WordRepository } from '../../infrastructure/resources/Word.repository'
 
 interface DeviceWebSocket extends WebSocket {
     sessionId: string
@@ -21,7 +18,7 @@ type DeviceWebSocketRequest = { type: string; payload?: unknown }
 
 export default async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })
-    await loadWordResources()
+    await WordRepository.Load()
 
     startPresenceLoop()
 
@@ -33,7 +30,7 @@ export default async function initWebSocket(server: Server) {
             return
         }
 
-        const session = getSession(sessionId as string)
+        const session = SessionRepository.Get(sessionId as string)
         const result = validateDeviceConnection(session, deviceId as string)
 
         if (!result.allowed) {
@@ -63,7 +60,7 @@ export default async function initWebSocket(server: Server) {
 
         ws.on('close', () => {
             session.connections.delete(ws)
-            cleanupSessionIfEmpty(sessionId as string)
+            SessionRepository.CleanupIfEmpty(sessionId as string)
         })
     })
 }

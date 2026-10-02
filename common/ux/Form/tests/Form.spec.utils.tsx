@@ -5,7 +5,9 @@ import { useForm } from 'react-hook-form'
 import { Form as FormExports } from '..'
 import type { SearchInputOption } from '..'
 import type { FormValues } from './Form.spec.types'
-import { testOptions } from './Form.spec.mocks'
+import { FormMocks } from './Form.spec.mocks'
+
+const { testOptions } = FormMocks
 
 const {
     Input,
@@ -23,7 +25,7 @@ const {
 } = FormExports
 const FormElement = FormExports
 
-export const FORM_LABEL = 'Test form'
+const FORM_LABEL = 'Test form'
 
 const renderInForm = (ui: React.ReactElement) =>
     render(<FormElement ariaLabel={FORM_LABEL}>{ui}</FormElement>)
@@ -231,7 +233,7 @@ const SubmitErrorMessageWrapper = (props: Parameters<typeof SubmitErrorMessage>[
 // Set
 // ═════════════════════════════════════════════════════════════════════════════
 
-export const Set = {
+const Set = {
     input: (props?: Partial<Parameters<typeof Input<FormValues>>[0]>) =>
         renderInForm(<InputWrapper {...props} />),
     password: (props?: {
@@ -300,3 +302,5 @@ export const Set = {
     submitErrorMessage: (props: Parameters<typeof SubmitErrorMessage>[0]) =>
         renderInForm(<SubmitErrorMessageWrapper {...props} />),
 }
+
+export const FormTestUtils = { FORM_LABEL, Set }

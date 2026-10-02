@@ -5,34 +5,34 @@ import { FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaLock } from
 
 const ARROW_GAP = 10
 
-export const SizeStyle: Record<PopupSize, CSSProperties> = {
+const SizeStyle: Record<PopupSize, CSSProperties> = {
     sm: { minWidth: 280, maxWidth: 360 },
     md: { minWidth: 360, maxWidth: 480 },
     lg: { minWidth: 480, maxWidth: 640 },
 }
 
-export const ModeClass: Record<PopupMode, string> = {
+const ModeClass: Record<PopupMode, string> = {
     primary: 'Overlay--popup--primary',
     warning: 'Overlay--popup--warning',
     danger: 'Overlay--popup--danger',
     info: 'Overlay--popup--info',
 }
 
-export const DefaultIcon: Record<PopupMode, ReactNode> = {
+const DefaultIcon: Record<PopupMode, ReactNode> = {
     primary: <FaLock />,
     warning: <FaExclamationTriangle />,
     danger: <FaExclamationCircle />,
     info: <FaInfoCircle />,
 }
 
-export const ArrowClass: Record<PopupArrow, string> = {
+const ArrowClass: Record<PopupArrow, string> = {
     top: 'Overlay--popup__arrow--bottom',
     bottom: 'Overlay--popup__arrow--top',
     left: 'Overlay--popup__arrow--right',
     right: 'Overlay--popup__arrow--left',
 }
 
-export const getAnchorPosition = (
+const getAnchorPosition = (
     anchorEl: HTMLElement,
     popupEl: HTMLElement,
     align: AnchorAlign = 'center',
@@ -125,7 +125,7 @@ export const getAnchorPosition = (
     }
 }
 
-export const useScrollLock = () => {
+const useScrollLock = () => {
     useLayoutEffect(() => {
         const html = document.documentElement
         const prevBody = document.body.style.overflow
@@ -155,4 +155,13 @@ export const useScrollLock = () => {
             document.removeEventListener('touchmove', preventScroll)
         }
     }, [])
+}
+
+export const PopupUtils = {
+    SizeStyle,
+    ModeClass,
+    DefaultIcon,
+    ArrowClass,
+    getAnchorPosition,
+    useScrollLock,
 }

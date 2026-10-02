@@ -5,7 +5,7 @@ import { isError } from '@common-utils'
 import type { AuthedRequest, UserToken } from './Users.types'
 
 /** Verifies the bearer JWT and attaches its payload to `req.user`; throws UNAUTHORIZED otherwise. */
-export const auth = (req: Request, res: Response, next: NextFunction): void => {
+const auth = (req: Request, res: Response, next: NextFunction): void => {
     const token = req.header('x-auth-token')
     if (!token) throw ApiResponder.unauthorized(ApiMessage.missingToken())
 
@@ -26,7 +26,7 @@ export const auth = (req: Request, res: Response, next: NextFunction): void => {
 }
 
 /** Throws FORBIDDEN unless the authenticated user is an admin. */
-export const admin = (req: Request, _: Response, next: NextFunction): void => {
+const admin = (req: Request, _: Response, next: NextFunction): void => {
     const isAdmin = (req as AuthedRequest).user?.isAdmin
     if (!isAdmin) throw ApiResponder.forbidden()
     next()

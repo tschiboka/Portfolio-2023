@@ -4,7 +4,7 @@ import { Arrays } from '@common-utils'
 import { produce } from 'immer'
 import { levelPersistance } from '../../infrastructure/persistence/db/Level.repository'
 import { LevelWordStatuses } from '../../config/constants/Game.constants'
-import { getWordResources } from '../../infrastructure/resources/Word.repository'
+import { WordRepository } from '../../infrastructure/resources/Word.repository'
 import { getInitialMatchState } from './Match.service'
 
 type DbLevel = {
@@ -57,7 +57,7 @@ function getPossibleAnagrams(letters: string): string[] {
 }
 
 const getExtraWords = (levelName: string, targetWords: string[]): string[] => {
-    const resources = getWordResources()
+    const resources = WordRepository.Get()
     if (!resources) return []
     const { anagramMap } = resources
     if (!anagramMap) return []

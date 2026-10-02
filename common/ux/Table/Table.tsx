@@ -18,7 +18,7 @@ import { TableDownloadButton } from './TableDownload/TableDownload'
 import { Overlay } from '../Overlay'
 import { hasLength, isNonEmpty, type Optional } from '@common-utils'
 import { TableSkeleton } from './TableSkeleton/TableSkeleton'
-import { extractSlot } from './TableSlots/TableSlots.utils'
+import { TableSlotsUtils } from './TableSlots/TableSlots.utils'
 import { Header, Info, Legend, Filters, Download, Empty } from './TableSlots'
 import './Table.styles.css'
 
@@ -50,9 +50,9 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     pagination: paginationProp,
     actions: actionsProp,
 }: TableProps<TData, TContext>) => {
-    const { slot: headerSlot } = extractSlot(children, 'Table.Header')
-    const { slot: infoSlot } = extractSlot(children, 'Table.Info')
-    const { slot: legendSlot } = extractSlot(children, 'Table.Legend')
+    const { slot: headerSlot } = TableSlotsUtils.extractSlot(children, 'Table.Header')
+    const { slot: infoSlot } = TableSlotsUtils.extractSlot(children, 'Table.Info')
+    const { slot: legendSlot } = TableSlotsUtils.extractSlot(children, 'Table.Legend')
 
     const sorting = (controller?.sorting ?? sortingProp) as TableProps<TData, TContext>['sorting']
     const filtering = controller?.filtering ?? filteringProp

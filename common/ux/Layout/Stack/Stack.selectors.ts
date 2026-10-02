@@ -16,7 +16,9 @@ const JustifyMap: Record<StackJustify, string> = {
     around: 'space-around',
 } as const
 
-export const selectAlign = (align?: StackAlign) => (isDefined(align) ? AlignMap[align] : undefined)
+const selectAlign = (align?: StackAlign) => (isDefined(align) ? AlignMap[align] : undefined)
 
-export const selectJustify = (justify?: StackJustify) =>
+const selectJustify = (justify?: StackJustify) =>
     isDefined(justify) ? JustifyMap[justify] : undefined
+
+export const StackSelectors = { selectAlign, selectJustify }

@@ -8,7 +8,7 @@ type SelectionContext<TData extends Record<string, ReactNode>, TContext> = {
     context?: TContext
 }
 
-export const getSelectableRows = <TData extends Record<string, ReactNode>, TContext>({
+const getSelectableRows = <TData extends Record<string, ReactNode>, TContext>({
     data,
     selection,
     context,
@@ -28,13 +28,15 @@ export const getSelectableRows = <TData extends Record<string, ReactNode>, TCont
     })
 }
 
-export const getSelectableIds = <TData extends Record<string, ReactNode>, TContext>(
+const getSelectableIds = <TData extends Record<string, ReactNode>, TContext>(
     ctx: SelectionContext<TData, TContext>,
 ): string[] => getSelectableRows(ctx).map(ctx.selection.getRowId)
 
-export const getAllSelected = <TData extends Record<string, ReactNode>, TContext>(
+const getAllSelected = <TData extends Record<string, ReactNode>, TContext>(
     ctx: SelectionContext<TData, TContext>,
 ): boolean => {
     const ids = getSelectableIds(ctx)
     return hasLength(ids) && includesAll(ids, ctx.selection.selectedRowIds)
 }
+
+export const TableCheckboxSelectors = { getSelectableRows, getSelectableIds, getAllSelected }

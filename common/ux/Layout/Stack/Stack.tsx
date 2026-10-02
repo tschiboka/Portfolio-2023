@@ -1,5 +1,7 @@
-import { selectAlign, selectJustify } from './Stack.selectors'
+import { StackSelectors } from './Stack.selectors'
 import { StackDirection, StackProps } from './Stack.types'
+
+const { selectAlign, selectJustify } = StackSelectors
 
 const StackBase = ({
     children,

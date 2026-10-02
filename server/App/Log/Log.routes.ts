@@ -1,9 +1,11 @@
 ﻿import express from 'express'
 import { ApiResponder } from '@common-utils'
 import { isEmpty } from '@common-utils'
-import { auth, admin } from '../Users/Users.middleware'
+import { UsersMiddleware } from '../Users/Users.middleware'
 import { LogService } from './Log.service'
 import type { DeleteLogReq, DeleteLogRes, GetLogReq, GetLogRes } from './Log.types'
+
+const { auth, admin } = UsersMiddleware
 
 const router = express.Router()
 

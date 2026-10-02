@@ -51,4 +51,8 @@ async function handleUpsertLevel(req: PostLevelReq, res: PostLevelRes) {
     return ApiResponder.ok(res, { data: { message: ApiMessage.ok(), level: updatedLevel } })
 }
 
-export { handleListLevels, handleGetLevel, handleUpsertLevel }
+export const LevelController = {
+    ListLevels: handleListLevels,
+    GetLevel: handleGetLevel,
+    UpsertLevel: handleUpsertLevel,
+}

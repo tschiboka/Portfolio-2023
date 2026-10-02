@@ -96,3 +96,11 @@ export type SessionState = {
     currentMatch: Nullable<Match>
     previousMatches: Match[]
 }
+
+// --- ws handlers (message contracts) ---
+
+export type MoveHandlerParams = {
+    session: Session
+    deviceId: string
+    payload: unknown
+}

@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
 import { TableColumns } from '../Table.types'
-import { getCellContent } from '../Table.utils'
+import { TableUtils } from '../Table.utils'
 import { Stack } from '../../Layout'
+
+const { getCellContent } = TableUtils
 
 type ExpandedRowProps<TData extends Record<string, ReactNode>, TContext> = {
     row: TData

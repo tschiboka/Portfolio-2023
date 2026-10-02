@@ -10,8 +10,10 @@ import {
 import { hasLength } from '@common-utils'
 import type { Optional } from '@common-utils'
 import { TableRow } from '../TableRow/TableRow'
-import { getTotalCols } from '../Table.utils'
+import { TableUtils } from '../Table.utils'
 import './TableBody.styles.css'
+
+const { getTotalCols } = TableUtils
 
 type TableBodyProps<TData extends Record<string, ReactNode>, TContext> = {
     data: TData[]

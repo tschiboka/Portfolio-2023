@@ -30,4 +30,7 @@ const loadWordResources = async () => {
 
 const getWordResources = () => resources
 
-export { loadWordResources, getWordResources }
+export const WordRepository = {
+    Load: loadWordResources,
+    Get: getWordResources,
+}

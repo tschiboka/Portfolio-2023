@@ -16,6 +16,8 @@ const BorderRadiusMap: Record<BoxBorderRadius, string> = {
     full: 'var(--radius-full)',
 }
 
-export const selectBackground = (bg?: BoxBackground) => (bg ? BackgroundMap[bg] : undefined)
+const selectBackground = (bg?: BoxBackground) => (bg ? BackgroundMap[bg] : undefined)
 
-export const selectBorderRadius = (br?: BoxBorderRadius) => (br ? BorderRadiusMap[br] : undefined)
+const selectBorderRadius = (br?: BoxBorderRadius) => (br ? BorderRadiusMap[br] : undefined)
+
+export const BoxSelectors = { selectBackground, selectBorderRadius }

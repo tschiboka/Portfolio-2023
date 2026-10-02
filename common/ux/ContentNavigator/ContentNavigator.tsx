@@ -6,11 +6,9 @@ import { IoClose } from 'react-icons/io5'
 import { Const } from '@common-ux'
 import { isEmpty, isNonEmpty } from '@common-utils'
 import './ContentNavigator.styles.css'
-import {
-    getActiveHeaders,
-    getHeadingNodes,
-    getVisibleHeaderEntries,
-} from './ContentNavigator.selectors'
+import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
+
+const { getActiveHeaders, getHeadingNodes, getVisibleHeaderEntries } = ContentNavigatorSelectors
 
 /**
  * Props for the {@link ContentNavigator} component.

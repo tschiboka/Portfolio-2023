@@ -9,7 +9,7 @@ import { TableControllerMocks } from './useTableController.mocks'
 const { filterDefs } = TableControllerMocks
 
 /** Renders the controller without a router (URL persistence disabled). */
-export const setup = (overrides?: Partial<Parameters<typeof useTableController<Filters>>[0]>) => {
+const setup = (overrides?: Partial<Parameters<typeof useTableController<Filters>>[0]>) => {
     const toParams = vi.fn()
     const { result } = renderHook(() => useTableController<Filters>({ ...overrides, toParams }))
     return { result, toParams }
@@ -29,7 +29,7 @@ const useRouterProbe = (onSearch: (search: string) => void) => {
 
 /** Renders one or more controllers inside a single MemoryRouter, capturing the live URL and a
  * `setUrl` handle to simulate external navigation (back/forward, manual URL edits). */
-export const setupWithUrl = (initialSearch = '', count: 1 | 2 = 1) => {
+const setupWithUrl = (initialSearch = '', count: 1 | 2 = 1) => {
     const state: UrlState = { search: initialSearch, setUrl: () => undefined }
 
     const wrapper = ({ children }: { children: ReactNode }) => {
@@ -64,3 +64,5 @@ export const setupWithUrl = (initialSearch = '', count: 1 | 2 = 1) => {
 
     return { controllers, state }
 }
+
+export const TableControllerTestUtils = { setup, setupWithUrl }

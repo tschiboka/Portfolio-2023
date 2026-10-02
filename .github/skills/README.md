@@ -54,6 +54,7 @@ before touching the file.
 | `Feature.context.ts`          | FE   | `ui`        |
 | `Feature.provider.tsx`        | FE   | `ui`        |
 | `Feature.selectors.ts`        | FE   | `ui`        |
+| `Feature.storage.ts`          | FE   | `ui`        |
 | `Feature.handlers.ts`         | FE   | `form`      |
 | `Feature.fields.ts`           | FE   | `form`      |
 | `Feature.schema.ts`           | FE   | `form`      |
@@ -81,6 +82,7 @@ before touching the file.
 | `Feature.config.ts`           | both | `implement` |
 | `Feature.defaults.ts`         | both | `implement` |
 | `Feature.options.ts`          | both | `implement` |
+| `Feature.states.ts`           | both | `implement` |
 
 ## Reference
 

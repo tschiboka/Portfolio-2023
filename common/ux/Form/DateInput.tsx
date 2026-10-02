@@ -4,16 +4,12 @@ import { BsCalendar3, BsChevronLeft, BsChevronRight, BsX } from 'react-icons/bs'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
 import { Const } from '@common-ux'
-import {
-    getDaysInMonth,
-    getFirstDayOfMonth,
-    formatDate,
-    parseDate,
-    toISODate,
-} from './DateInput.utils'
+import { DateInputUtils } from './DateInput.utils'
 import './Form.styles.css'
 import { Arrays } from '@common-utils'
 import type { Nullable } from '@common-utils'
+
+const { getDaysInMonth, getFirstDayOfMonth, formatDate, parseDate, toISODate } = DateInputUtils
 
 type DateInputProps<TFieldValues extends FieldValues = FieldValues> = AccessibleProps & {
     name: Path<TFieldValues>

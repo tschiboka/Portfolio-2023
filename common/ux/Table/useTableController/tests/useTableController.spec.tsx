@@ -1,9 +1,10 @@
 import { act } from '@testing-library/react'
 import type { SortDirection } from '../useTableController.types'
 import { TableControllerMocks } from './useTableController.mocks'
-import { setup, setupWithUrl } from './useTableController.spec.utils'
+import { TableControllerTestUtils } from './useTableController.spec.utils'
 
 const { filterDefs } = TableControllerMocks
+const { setup, setupWithUrl } = TableControllerTestUtils
 
 describe('useTableController', () => {
     it('initializes with default filters, sort, and paging', () => {

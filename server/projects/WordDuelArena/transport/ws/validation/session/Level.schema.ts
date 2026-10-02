@@ -3,7 +3,7 @@ import type { Level } from '../../../../WordDuelArena.types'
 
 const PlayerRole = ['player1', 'player2', null]
 
-const LevelWordSchema = Joi.object({
+const levelWordSchema = Joi.object({
     status: Joi.string().valid('SOLVED', 'UNSOLVED').required(),
     word: Joi.string().required(),
     mask: Joi.string().required(),
@@ -13,16 +13,15 @@ const LevelWordSchema = Joi.object({
         .allow(null),
 })
 
-const LevelSchema = Joi.object({
+const levelSchema = Joi.object({
     id: Joi.string().required(),
     name: Joi.string().required(),
     difficulty: Joi.number().required(),
-    targetWords: Joi.array().items(LevelWordSchema).required(),
-    extraWords: Joi.array().items(LevelWordSchema).required(),
+    targetWords: Joi.array().items(levelWordSchema).required(),
+    extraWords: Joi.array().items(levelWordSchema).required(),
 })
 
-function validateLevel(level: Level) {
-    return LevelSchema.validate(level, { abortEarly: false })
+export const LevelSchema = {
+    schema: levelSchema,
+    validate: (level: Level) => levelSchema.validate(level, { abortEarly: false }),
 }
-
-export { LevelSchema, validateLevel }

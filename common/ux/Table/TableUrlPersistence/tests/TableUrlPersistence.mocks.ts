@@ -1,7 +1,9 @@
 import type { FilterDefinitions } from '../../TableFilterConfig'
-import { text, number, checkbox } from '../../TableFilterConfig'
+import { TableFilterConfig } from '../../TableFilterConfig'
 import type { TableSortState, Paging } from '../../useTableController/useTableController.types'
 import type { Filters } from './TableUrlPersistence.spec.types'
+
+const { text, number, checkbox } = TableFilterConfig
 
 const filterDefs: FilterDefinitions<Filters> = {
     search: text({ label: 'Search' }),

@@ -1,20 +1,23 @@
 import { type ReactNode } from 'react'
-import { createSlot } from './TableSlots.utils'
+import { TableSlotsUtils } from './TableSlots.utils'
 
-export const Header = createSlot('Table.Header', ({ children }: { children?: ReactNode }) => (
-    <>{children}</>
-))
+export const Header = TableSlotsUtils.createSlot(
+    'Table.Header',
+    ({ children }: { children?: ReactNode }) => <>{children}</>,
+)
 
-export const Info = createSlot('Table.Info', (_props: { text: string }) => null)
+export const Info = TableSlotsUtils.createSlot('Table.Info', (_props: { text: string }) => null)
 
-export const Legend = createSlot('Table.Legend', ({ children }: { children?: ReactNode }) => (
-    <>{children}</>
-))
+export const Legend = TableSlotsUtils.createSlot(
+    'Table.Legend',
+    ({ children }: { children?: ReactNode }) => <>{children}</>,
+)
 
-export const Filters = createSlot('Table.Filters', () => null)
+export const Filters = TableSlotsUtils.createSlot('Table.Filters', () => null)
 
-export const Download = createSlot('Table.Download', () => null)
+export const Download = TableSlotsUtils.createSlot('Table.Download', () => null)
 
-export const Empty = createSlot('Table.Empty', ({ children }: { children?: ReactNode }) => (
-    <>{children}</>
-))
+export const Empty = TableSlotsUtils.createSlot(
+    'Table.Empty',
+    ({ children }: { children?: ReactNode }) => <>{children}</>,
+)

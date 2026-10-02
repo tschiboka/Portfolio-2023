@@ -6,7 +6,9 @@ import type { CSSProperties, ReactNode, RefObject } from 'react'
 import type { AccessibleProps } from '../index.types'
 import type { AnchorResult } from './Overlay.types'
 import type { Optional } from '@common-utils'
-import { ArrowClass, getAnchorPosition } from './Popup.utils'
+import { PopupUtils } from './Popup.utils'
+
+const { ArrowClass, getAnchorPosition } = PopupUtils
 
 export type ActionMenuItem = {
     id: string

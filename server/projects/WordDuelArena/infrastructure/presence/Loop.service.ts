@@ -1,5 +1,5 @@
 import type { Session, SessionState } from '../../WordDuelArena.types'
-import { sessions } from '../persistence/server/Session.repository'
+import { SessionRepository } from '../persistence/server/Session.repository'
 import { commitSessionState } from '../../transport/ws/Broadcast.service'
 import {
     CHECK_INTERVAL,
@@ -13,7 +13,7 @@ function startPresenceLoop() {
     setInterval(() => {
         const now = Date.now()
 
-        Object.values(sessions).forEach((session: Session) => {
+        Object.values(SessionRepository.All).forEach((session: Session) => {
             let changed = false
 
             const updatedState = produce(session.state, (draft: SessionState) => {

@@ -1,10 +1,6 @@
-import {
-    getDaysInMonth,
-    getFirstDayOfMonth,
-    formatDate,
-    parseDate,
-    toISODate,
-} from '../DateInput.utils'
+import { DateInputUtils } from '../DateInput.utils'
+
+const { getDaysInMonth, getFirstDayOfMonth, formatDate, parseDate, toISODate } = DateInputUtils
 
 describe('DateInput.utils', () => {
     describe('getDaysInMonth', () => {

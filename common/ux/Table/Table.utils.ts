@@ -10,7 +10,7 @@ type RenderCellArgs<TData extends Record<string, ReactNode>, TContext> = {
     context?: TContext
 }
 
-export const getCellContent = <TData extends Record<string, ReactNode>, TContext>({
+const getCellContent = <TData extends Record<string, ReactNode>, TContext>({
     col,
     row,
     index,
@@ -24,9 +24,11 @@ export const getCellContent = <TData extends Record<string, ReactNode>, TContext
     return isDefined(value) && value !== '' ? value : (col.defaultValue ?? '-')
 }
 
-export const getTotalCols = (
+const getTotalCols = (
     colCount: number,
     hasBreakpoints: boolean,
     hasActions: boolean,
     hasSelection: boolean,
 ): number => colCount + (hasBreakpoints ? 1 : 0) + (hasActions ? 1 : 0) + (hasSelection ? 1 : 0)
+
+export const TableUtils = { getCellContent, getTotalCols }

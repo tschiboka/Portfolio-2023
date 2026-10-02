@@ -1,8 +1,8 @@
 ﻿import express from 'express'
-import { auth } from '../../App/Users/Users.middleware'
+import { UsersMiddleware } from '../../App/Users/Users.middleware'
 import { ApiResponder, ApiMessage } from '@common-utils'
-import { MessageSchema, CandleSchema } from './Xmas.schema'
-import { XmasMessageModel, XmasCandleModel } from './Xmas.model'
+import { XmasSchema } from './Xmas.schema'
+import { XmasModel } from './Xmas.model'
 import { UsersModel } from '../../App/Users/Users.model'
 import { last } from 'ramda'
 import { TypedRequest, TypedResponse } from '../../../common/types'
@@ -20,6 +20,8 @@ import type {
 } from '../../../common/types'
 import { isEmpty } from '@common-utils'
 
+const { auth } = UsersMiddleware
+
 const router = express.Router()
 
 type GetPingRes = TypedResponse<GetXmasPingResponse>
@@ -34,10 +36,10 @@ router.get('/device', (_req: TypedRequest, res) => {
 type PostMessageReq = TypedRequest<{ body: PostXmasMessageRequest }>
 type PostMessageRes = TypedResponse<PostXmasMessageResponse>
 router.post('/message', auth, async (req: PostMessageReq, res: PostMessageRes) => {
-    const { error } = MessageSchema.validate(req.body)
+    const { error } = XmasSchema.Message.validate(req.body)
     if (error) throw ApiResponder.badRequest(error)
 
-    const xmasMessage = new XmasMessageModel(req.body)
+    const xmasMessage = new XmasModel.Message(req.body)
     await xmasMessage.save()
 
     return ApiResponder.created(res, { message: ApiMessage.sent('message') })
@@ -53,20 +55,20 @@ router.get('/message', auth, async (req: GetMessagesReq, res: GetMessagesRes) =>
     if (!user) throw ApiResponder.notFound('user')
 
     if (user.isAdmin) {
-        const messages = await XmasMessageModel.find()
+        const messages = await XmasModel.Message.find()
             .sort({ createdAt: -1 })
             .lean<XmasMessageEntity[]>()
         return ApiResponder.ok(res, { data: messages })
     }
 
-    const messages = await XmasMessageModel.find({ userId: user._id })
+    const messages = await XmasModel.Message.find({ userId: user._id })
         .sort({ createdAt: -1 })
         .lean<XmasMessageEntity[]>()
     return ApiResponder.ok(res, { data: messages })
 })
 
 router.get('/message/device', async (_req: TypedRequest, res) => {
-    const messages = await XmasMessageModel.find()
+    const messages = await XmasModel.Message.find()
     const unreadMessages = messages.filter(({ isRead }: { isRead: boolean }) => !isRead)
 
     const lastMsg = last(messages)
@@ -80,17 +82,17 @@ router.get('/message/device', async (_req: TypedRequest, res) => {
 })
 
 router.put('/message/device/markread', async (_req: TypedRequest, res) => {
-    await XmasMessageModel.updateOne({ isRead: { $ne: true } }, { $set: { isRead: true } })
+    await XmasModel.Message.updateOne({ isRead: { $ne: true } }, { $set: { isRead: true } })
 
     return ApiResponder.text(res, '<<<OK>>>')
 })
 
 type GetCandlesRes = TypedResponse<GetXmasCandlesResponse>
 router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
-    const candles = await XmasCandleModel.find().lean<XmasCandles[]>()
+    const candles = await XmasModel.Candle.find().lean<XmasCandles[]>()
 
     if (isEmpty(candles)) {
-        const newCandle = new XmasCandleModel({
+        const newCandle = new XmasModel.Candle({
             candle1: false,
             candle2: false,
             candle3: false,
@@ -106,10 +108,10 @@ router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
 type PutCandlesReq = TypedRequest<{ body: PutXmasCandlesRequest }>
 type PutCandlesRes = TypedResponse<PutXmasCandlesResponse>
 router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
-    const { error } = CandleSchema.validate(req.body)
+    const { error } = XmasSchema.Candle.validate(req.body)
     if (error) throw ApiResponder.badRequest(error)
 
-    const candles = await XmasCandleModel.find()
+    const candles = await XmasModel.Candle.find()
     if (isEmpty(candles)) throw ApiResponder.notFound('candles')
 
     const firstCandle = candles[0]
@@ -120,7 +122,7 @@ router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
 })
 
 router.get('/candles/device', async (_req: TypedRequest, res) => {
-    const candles = await XmasCandleModel.find()
+    const candles = await XmasModel.Candle.find()
 
     if (isEmpty(candles)) {
         return ApiResponder.text(res, '<<<0000>>>')

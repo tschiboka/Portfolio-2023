@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { loadWordResources } from '../WordDuelArena/infrastructure/resources/Word.repository'
+import { WordRepository } from '../WordDuelArena/infrastructure/resources/Word.repository'
 import {
     Keystroke,
     PostTypistRoundRequest,
@@ -44,7 +44,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
 
     const uniqueErrorCombinations = [...new Set(errorCombinations)]
 
-    const { frequency } = await loadWordResources()
+    const { frequency } = await WordRepository.Load()
     const words = Object.keys(frequency)
     const hasTargetFilteringCriteria =
         TypistUserSettings.targetLetter || isNonEmpty(uniqueErrorCombinations)

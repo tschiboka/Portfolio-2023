@@ -11,8 +11,10 @@ import { hasLength, isDefined, type Optional } from '@common-utils'
 import { ExpandedRow } from './ExpandedRow'
 import { TableActions } from '../TableAction/TableAction'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckbox'
-import { getCellContent } from '../Table.utils'
+import { TableUtils } from '../Table.utils'
 import './TableRow.styles.css'
+
+const { getCellContent } = TableUtils
 
 type TableRowProps<TData extends Record<string, ReactNode>, TContext> = {
     row: TData

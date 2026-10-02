@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiMessage, ApiResponder } from '@common-utils'
 import { UsersAuth } from '../../../App/Users/Users.auth'
-import { auth, admin } from '../../../App/Users/Users.middleware'
+import { UsersMiddleware } from '../../../App/Users/Users.middleware'
 import { ExercisesService } from './Exercises.service'
 import type {
     DeleteExerciseReq,
@@ -13,6 +13,8 @@ import type {
     PostExerciseReq,
     PostExerciseRes,
 } from './Exercises.types'
+
+const { auth, admin } = UsersMiddleware
 const router = express.Router()
 
 // Return canonical exercises plus the requesting user's own private exercises.

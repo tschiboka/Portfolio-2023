@@ -3,9 +3,12 @@ import userEvent from '@testing-library/user-event'
 import { Overlay } from '../index'
 import type { ActionMenuItem } from '../ActionMenu'
 import type { Key } from '@common-utils'
-import { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } from '../Popup.utils'
+import { PopupUtils } from '../Popup.utils'
 import { OverlayMocks } from './Overlay.mocks'
-import { Set, mockAnchorRef } from './Overlay.utils'
+import { OverlayTestUtils } from './Overlay.utils'
+
+const { Set, mockAnchorRef } = OverlayTestUtils
+const { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } = PopupUtils
 
 // jsdom does not implement window.scrollTo
 window.scrollTo = vi.fn()

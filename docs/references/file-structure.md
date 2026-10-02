@@ -24,6 +24,8 @@ Feature/
 ├── Feature.routes.tsx
 ├── Feature.schema.ts
 ├── Feature.selectors.ts
+├── Feature.states.ts
+├── Feature.storage.ts
 ├── Feature.styles.css
 ├── Feature.styles.scss
 ├── Feature.styles.ts
@@ -53,6 +55,8 @@ Feature/
 | `Feature.columns`              | `FeatureColumns`                                                                          | typed `TableColumns<T>`                                                                                                                                                |
 | `Feature.types.ts`             | named domain types                                                                        | `xyz` interfaces/aliases — **not** the main component's props (see `Feature.tsx` props)                                                                                |
 | `Feature.schema.ts`            | `FeatureSchema = { schema, validate }`                                                    | yup/Joi                                                                                                                                                                |
+| `Feature.states.ts`            | `FeatureStates`                                                                           | state machine states and transitions                                                                                                                                   |
+| `Feature.storage.ts`           | `FeatureStorage`                                                                          | local-storage keys, the shape they hold, and the accessors                                                                                                             |
 | `Feature.queries.ts`           | `FeatureQueries.use<Verb>` per CRUD op; sub-feature `FeatureQueries.SubFeature.use<Verb>` | react-query, `use` prefix required                                                                                                                                     |
 | `Feature.styles.ts`            | `FeatureStyles: { name: CSSProperties }`                                                  | typed style set                                                                                                                                                        |
 | `Feature.styles.css` / `.scss` | class rules under `FeatureStyles` scope                                                   | plain CSS, feature-scoped                                                                                                                                              |
@@ -91,6 +95,8 @@ Feature/
 | `Feature.filters.ts` / `selectors.ts` / `actions.ts` | NO — indirect                  | covered via feature/table spec                                             |
 | `Feature.types.ts`                                   | NO                             | no behavior                                                                |
 | `Feature.constants.ts` / `defaults.ts` / `config.ts` | NO                             | no behavior                                                                |
+| `Feature.states.ts`                                  | YES                            | pure transition spec                                                       |
+| `Feature.storage.ts`                                 | NO                             | no behavior                                                                |
 | `Feature.styles.*` / `index.ts`                      | NO                             | no behavior                                                                |
 
 ## 2. Server
@@ -115,6 +121,7 @@ Feature/
 ├── Feature.schema.ts
 ├── Feature.seed.ts
 ├── Feature.service.ts
+├── Feature.states.ts
 ├── Feature.transformers.ts
 ├── Feature.types.ts
 ├── Feature.utils.ts
@@ -140,6 +147,7 @@ Feature/
 | `Feature.permissions.ts`  | `FeaturePermissions`                   | permission rules                                                          |
 | `Feature.auth.ts`         | `FeatureAuth`                          | auth helpers                                                              |
 | `Feature.schema.ts`       | `FeatureSchema = { schema, validate }` | Joi/yup validation                                                        |
+| `Feature.states.ts`       | `FeatureStates`                        | state machine states and transitions                                      |
 | `Feature.transformers.ts` | `FeatureTransformers`                  | grouped mappers                                                           |
 | `Feature.utils.ts`        | `FeatureUtils`                         | grouped helpers                                                           |
 | `Feature.constants.ts`    | `FeatureConstants`                     | grouped constants                                                         |
@@ -157,6 +165,7 @@ Feature/
 | `Feature.service.ts`                                                         | YES — `tests/Feature.spec.ts`      | service spec (mock repo)              |
 | `Feature.repository.ts`                                                      | YES                                | repository spec (in-memory / mock)    |
 | `Feature.schema.ts`                                                          | YES                                | validation spec                       |
+| `Feature.states.ts`                                                          | YES                                | pure transition spec                  |
 | `Feature.transformers.ts`                                                    | YES                                | pure mapper spec                      |
 | `Feature.utils.ts`                                                           | YES                                | pure util spec                        |
 | `Feature.seed.ts`                                                            | YES — `tests/Feature.seed.spec.ts` | seed spec                             |

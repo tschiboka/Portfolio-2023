@@ -4,7 +4,7 @@ import type { BreakdownBulkOperation, BreakdownCountRow, BreakdownCounts } from 
  * Merges the visit and like aggregation rows into one per-(date,path) counts map,
  * keyed by `"date|path"`. Pure — no side effects.
  */
-export const mergeBreakdownCounts = (
+const mergeBreakdownCounts = (
     visitAggregation: BreakdownCountRow<'visits'>[],
     likeAggregation: BreakdownCountRow<'likes'>[],
 ): ReadonlyMap<string, BreakdownCounts> => {
@@ -24,7 +24,7 @@ export const mergeBreakdownCounts = (
  * Builds the MongoDB bulk `updateOne`/upsert operations from per-(date,path) counts.
  * Pure — the returned operations are ready to pass to `DailyBreakdown.bulkWrite`.
  */
-export const buildBreakdownOperations = (
+const buildBreakdownOperations = (
     counts: ReadonlyMap<string, BreakdownCounts>,
 ): BreakdownBulkOperation[] =>
     Array.from(counts.entries()).map(([key, { visits, likes }]) => {
@@ -37,3 +37,8 @@ export const buildBreakdownOperations = (
             },
         }
     })
+
+export const BreakdownUtils = {
+    MergeBreakdownCounts: mergeBreakdownCounts,
+    BuildBreakdownOperations: buildBreakdownOperations,
+}

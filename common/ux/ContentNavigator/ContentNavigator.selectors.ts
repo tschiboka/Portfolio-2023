@@ -1,7 +1,7 @@
 import { Arrays, Browser, hasLength } from '@common-utils'
 import { VisibilityEntry } from '@common-utils/Browser/useIsVisible'
 
-export const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
+const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
     entries
         .map(({ element, isVisible }) => ({
             id: element.id,
@@ -11,7 +11,7 @@ export const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
         }))
         .filter(({ text }) => hasLength(text.trim()))
 
-export const getHeadingNodes = (
+const getHeadingNodes = (
     contentRef: React.RefObject<HTMLDivElement | null>,
     depth: number,
 ): Element[] => {
@@ -33,7 +33,7 @@ export const getHeadingNodes = (
     return nodes
 }
 
-export const getActiveHeaders = (elems: Element[]) => {
+const getActiveHeaders = (elems: Element[]) => {
     if (!hasLength(elems)) return new Set<number>()
 
     const active = new Set<number>()
@@ -53,4 +53,10 @@ export const getActiveHeaders = (elems: Element[]) => {
     }
 
     return active
+}
+
+export const ContentNavigatorSelectors = {
+    getVisibleHeaderEntries,
+    getHeadingNodes,
+    getActiveHeaders,
 }

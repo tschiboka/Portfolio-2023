@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
-import { Table, getPageWindow, isFirstPage, isLastPage } from '../Table'
+import { Table, TableUtils } from '../Table'
+
+const { getPageWindow, isFirstPage, isLastPage } = TableUtils
 
 describe('Table.Paging.defaults', () => {
     it('is first page with 10 rows', () => {

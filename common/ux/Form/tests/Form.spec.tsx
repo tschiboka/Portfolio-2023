@@ -1,8 +1,11 @@
 import React from 'react'
 import { screen } from '@testing-library/react'
 import { Test, Accessor } from '../../Test'
-import { Set, FORM_LABEL } from './Form.spec.utils'
-import { iconOptions } from './Form.spec.mocks'
+import { FormTestUtils } from './Form.spec.utils'
+import { FormMocks } from './Form.spec.mocks'
+
+const { Set, FORM_LABEL } = FormTestUtils
+const { iconOptions } = FormMocks
 
 beforeAll(() => {
     Element.prototype.scrollIntoView = vi.fn()
