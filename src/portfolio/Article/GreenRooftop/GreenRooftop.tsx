@@ -1,8 +1,8 @@
 // Components
 import { Article } from '../Article'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 import { Code, Heading, Link, Paragraph, Section } from '@common-ux'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 // Images
 import introImg from '@portfolio/assets/blog/greenRooftop/intro.png'
 import conceptImg from '@portfolio/assets/blog/greenRooftop/concept_sketch.png'
@@ -34,7 +34,7 @@ import assembly4Img from '@portfolio/assets/blog/greenRooftop/assembly_4.png'
 import finalProductImg from '@portfolio/assets/blog/greenRooftop/final_product.png'
 // Other Assets
 import { getReferenceList } from '../References.data'
-import GreenRooftopCode from './GreenRooftop.code'
+import { GreenRooftopCode } from './GreenRooftop.code'
 import greenRooftopCode from '@portfolio/assets/blog/files/green-rooftop/green_rooftop.txt'
 
 interface Props {

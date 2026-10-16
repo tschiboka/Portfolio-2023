@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import './Welcome.scss'
 import { Heading } from '@common-ux'
 
-const Welcome = () => {
+export const Welcome = () => {
     const navigate = useNavigate()
     const { subMenuVisible } = AppHooks.useContext()
 
@@ -26,5 +26,3 @@ const Welcome = () => {
         </div>
     )
 }
-
-export default Welcome

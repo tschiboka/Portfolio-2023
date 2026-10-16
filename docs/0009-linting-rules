@@ -151,15 +151,16 @@ not.
     - [ ] Step 4.6: Run `rules sync`, then verify the generated config
     - [ ] Step 4.7: Sweep every barrel and fix or suppress each violation
     - [ ] Step 4.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 5: Rule — a module has no default export
-    - [ ] Step 5.1: Build `rules/no-default-export/`
-    - [ ] Step 5.2: Cover `export default`, `export { x as default }`, and a bare `export default` expression
-    - [ ] Step 5.3: Scope to `src/**`, `common/**`, `server/**` — config files are `cjs` and exempt
-    - [ ] Step 5.4: Register as `severity: 'error'`
-    - [ ] Step 5.5: Add `tests/NoDefaultExport.spec.ts`
-    - [ ] Step 5.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 5.7: Sweep every module and fix or suppress each violation
-    - [ ] Step 5.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 5: Rule — a module has no default export
+    - [x] Step 5.1: Build `rules/no-default-export/`
+    - [x] Step 5.2: Cover `export default`, `export { x as default }`, and a bare `export default` expression
+    - [x] Step 5.3: Scope to `src/**`, `common/**`, `server/**` — config files are `cjs` and exempt
+    - [x] Step 5.4: Register as `severity: 'error'`
+    - [x] Step 5.5: Add `tests/NoDefaultExport.spec.ts`
+    - [x] Step 5.6: Run `rules sync`, then verify the generated config
+    - [x] Step 5.7: Sweep every module and fix or suppress each violation
+        - [x] The two defaults left are the root `eslint.config.js` and `vite.config.ts`, both outside the three trees
+    - [x] Step 5.8: Confirm a green `tsc`, lint, and test run
 - [ ] Step 6: Rule — `common/` imports no SCSS
     - [ ] Step 6.1: Build `rules/no-scss-in-common/`
     - [ ] Step 6.2: Flag an import of a `.scss` / `.sass` path that resolves under `common/`

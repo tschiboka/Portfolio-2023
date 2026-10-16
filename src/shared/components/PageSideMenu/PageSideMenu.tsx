@@ -10,7 +10,7 @@ import { Button, SideMenu } from '@common-ux'
 import { CounterBadge } from '@common-ux'
 import type { SideMenuItem } from '@common-ux'
 import { QueryKey } from '@common-utils'
-import ShareMenu from '../ShareMenu/ShareMenu'
+import { ShareMenu } from '../ShareMenu/ShareMenu'
 import { LikeQueries, VisitQueries } from '@shared-queries'
 import './PageSideMenu.css'
 

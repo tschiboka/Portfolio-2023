@@ -7,7 +7,7 @@ interface Props {
     updated?: string
 }
 
-const BlogTimeStamp = ({ created, updated }: Props) => {
+export const BlogTimeStamp = ({ created, updated }: Props) => {
     const createdDisplay = DateTime.Format.to('DisplayLongDate', created) ?? created
     const updatedDisplay = updated
         ? (DateTime.Format.to('DisplayLongDate', updated) ?? updated)
@@ -33,5 +33,3 @@ const BlogTimeStamp = ({ created, updated }: Props) => {
         </div>
     )
 }
-
-export default BlogTimeStamp

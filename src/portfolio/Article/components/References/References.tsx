@@ -11,7 +11,7 @@ interface Props {
     references: Reference[]
 }
 
-const References = ({ references }: Props) => {
+export const References = ({ references }: Props) => {
     if (references && references.length)
         return (
             <section className="References">
@@ -39,5 +39,3 @@ const References = ({ references }: Props) => {
             </section>
         )
 }
-
-export default References

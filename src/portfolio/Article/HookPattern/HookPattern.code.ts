@@ -1,4 +1,4 @@
-const HookPatternCode = {
+export const HookPatternCode = {
     useState: `const [fullName, setFullName] = useState<string>("")
 const handleOnButtonClick = () => setFullName(firstName + lastName)
 `,
@@ -131,5 +131,3 @@ export const Component2 = () => {
     const [value2, setValue2] = useState(0)                      // React says: Index what?
 }`,
 }
-
-export default HookPatternCode

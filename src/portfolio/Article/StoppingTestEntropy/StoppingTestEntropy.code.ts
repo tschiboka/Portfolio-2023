@@ -1,4 +1,4 @@
-const StoppingTestEntropyCode = {
+export const StoppingTestEntropyCode = {
     // ── The Problem: Inconsistent Patterns ───────────────────────────────────
     entropyBefore: `// Developer A — role queries
 const dialog = screen.getByRole('dialog', { name: 'Confirm' })
@@ -445,5 +445,3 @@ await table.Wait.heading('Users')
 // ❌ Never put business logic inside accessors
 // ❌ Never put multi-step sequences inside accessors`,
 }
-
-export default StoppingTestEntropyCode

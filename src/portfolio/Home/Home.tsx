@@ -1,5 +1,5 @@
-import Welcome from './Welcome/Welcome'
-import Intro from './Intro/Intro'
+import { Welcome } from './Welcome/Welcome'
+import { Intro } from './Intro/Intro'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { Main } from '@common-ux'

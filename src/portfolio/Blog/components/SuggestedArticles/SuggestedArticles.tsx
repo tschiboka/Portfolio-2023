@@ -1,4 +1,4 @@
-import BlogCard from '../BlogCard/BlogCard'
+import { BlogCard } from '../BlogCard/BlogCard'
 import { Heading } from '@common-ux'
 import { blogArticles } from '@portfolio/Article'
 import { LikeQueries, VisitQueries } from '@shared-queries'
@@ -8,7 +8,7 @@ interface Props {
     articles?: string[]
 }
 
-const SuggestedArticles = ({ articles }: Props) => {
+export const SuggestedArticles = ({ articles }: Props) => {
     const { data: visitsData } = VisitQueries.Summary.useGet()
     const { data: likesData } = LikeQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null
@@ -39,5 +39,3 @@ const SuggestedArticles = ({ articles }: Props) => {
             </div>
         )
 }
-
-export default SuggestedArticles

@@ -38,7 +38,7 @@ const skillColumns: TableColumns<Skill> = [
     { header: 'Focus', accessor: 'focus' },
 ]
 
-const HireIntro = () => {
+export const HireIntro = () => {
     return (
         <>
             <Paragraph className="delay-0 anim-fade-from-left">
@@ -90,5 +90,3 @@ const HireIntro = () => {
         </>
     )
 }
-
-export default HireIntro

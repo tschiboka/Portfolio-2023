@@ -2,7 +2,7 @@ import './MessageAcknowledgement.scss'
 import thumbsupImg from '@portfolio/assets/messages/thumbs_up.png'
 import { Heading, Link, Paragraph } from '@common-ux'
 
-const MessageAcknowledgement = () => {
+export const MessageAcknowledgement = () => {
     return (
         <div className="MessageAcknowledgement">
             <img src={thumbsupImg} alt="Thumbs Up" />
@@ -23,5 +23,3 @@ const MessageAcknowledgement = () => {
         </div>
     )
 }
-
-export default MessageAcknowledgement

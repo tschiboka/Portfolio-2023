@@ -5,7 +5,7 @@ import url from 'url'
 import { ClientMessage } from '@common-utils'
 import { LoopService } from '../../infrastructure/presence/Loop.service'
 import { ValidateDeviceSchema } from './validation/connection/ValidateDevice.schema'
-import routeMessage from './handlers'
+import { routeMessage } from './handlers'
 import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
 
@@ -16,7 +16,7 @@ interface DeviceWebSocket extends WebSocket {
 
 type DeviceWebSocketRequest = { type: string; payload?: unknown }
 
-export default async function initWebSocket(server: Server) {
+export async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })
     await WordRepository.Load()
 

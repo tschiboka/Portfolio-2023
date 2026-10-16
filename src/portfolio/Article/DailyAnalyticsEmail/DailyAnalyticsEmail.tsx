@@ -1,10 +1,10 @@
 import { Article } from '../Article'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@common-ux'
-import DailyAnaliticsEmailCode from './DailyAnaliticsEmail.code'
+import { DailyAnaliticsEmailCode } from './DailyAnaliticsEmail.code'
 import { getReferenceList } from '../References.data'
 import CronJobsImg from '@portfolio/assets/blog/resend_email_scheduling/cron_jobs.png'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 
 interface Props {
     pageName: string

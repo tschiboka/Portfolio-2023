@@ -1,5 +1,5 @@
 import { createHashRouter } from 'react-router-dom'
-import RouteError from '@shared-components/RouteError/RouteError'
+import { RouteError } from '@shared-components/RouteError/RouteError'
 import { AppRoutes } from './app'
 import { ProjectsRoutes } from './projects'
 import { PortfolioRoutes } from './portfolio'

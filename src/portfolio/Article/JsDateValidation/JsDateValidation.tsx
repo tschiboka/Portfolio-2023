@@ -1,9 +1,9 @@
 import { Article } from '../Article'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
-import JsDateValidationCode from './JsDateValidation.code'
+import { JsDateValidationCode } from './JsDateValidation.code'
 import { getReferenceList } from '../References.data'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
 
 interface Props {

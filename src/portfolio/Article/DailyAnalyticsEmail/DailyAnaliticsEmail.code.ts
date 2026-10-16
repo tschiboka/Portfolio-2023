@@ -1,4 +1,4 @@
-const DailyAnaliticsEmailCode = {
+export const DailyAnaliticsEmailCode = {
     cronAuthValidation: `if (req.header('X-Cron-Secret') !== process.env.CRON_SECRET) {
     return res.status(401).json({ success: false })
 }`,
@@ -97,5 +97,3 @@ GET /health
 // 23:55 — Perform the work
 POST /api/schedule/daily-breakdown`,
 }
-
-export default DailyAnaliticsEmailCode

@@ -8,7 +8,7 @@ interface HandlerContext {
     payload?: unknown
 }
 
-async function routeMessage(type: string, ctx: HandlerContext) {
+export async function routeMessage(type: string, ctx: HandlerContext) {
     switch (type) {
         case 'join':
             return await JoinHandlers.join(ctx)
@@ -21,5 +21,3 @@ async function routeMessage(type: string, ctx: HandlerContext) {
             return false
     }
 }
-
-export default routeMessage

@@ -1,4 +1,4 @@
-const GitCheatSheetCode = {
+export const GitCheatSheetCode = {
     checkVersion: `git --version`,
     configUserName: `git config --global user.name "Tivadar Debnar"\ngit config --global user.email your.email@gmail.com\ngit config --global core.editor "code --wait"\ngit config --global diff.tool vscode\ngit config --global difftool.vscode.cmd "code --wait --diff $LOCAL $REMOTE"`,
     openConfig: `git config --global -e`,
@@ -22,5 +22,3 @@ const GitCheatSheetCode = {
     clean: `git restore . # Restore Everything\ngit clean -fd # Remove Everything\n`,
     restoreLast: `git restore --source=HEAD~1 file1.txt`,
 }
-
-export default GitCheatSheetCode

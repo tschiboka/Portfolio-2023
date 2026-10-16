@@ -10,7 +10,7 @@ interface Props {
     setArticleLiked: (liked: boolean) => void
 }
 
-const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
+export const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
     const { mutate: doPostLike } = LikeQueries.usePost()
 
     return (
@@ -33,5 +33,3 @@ const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
         </div>
     )
 }
-
-export default LikeButton

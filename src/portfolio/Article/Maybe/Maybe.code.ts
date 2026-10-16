@@ -1,4 +1,4 @@
-const MaybeCode = {
+export const MaybeCode = {
     immutability: `const mutableArray: number[] = [1, 2, 3]
 mutableArray.push(4)                                // Modifies the original array
 
@@ -67,5 +67,3 @@ value();                   // TypeError: value is not a function`,
     console.log("Street address is not available.");
 }`,
 }
-
-export default MaybeCode

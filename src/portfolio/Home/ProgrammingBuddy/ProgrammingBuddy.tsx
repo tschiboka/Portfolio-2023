@@ -2,7 +2,7 @@ import { Link, Paragraph } from '@common-ux'
 import { Box } from '@common-ux'
 import './ProgrammingBuddy.scss'
 
-const ProgrammingBuddy = () => {
+export const ProgrammingBuddy = () => {
     return (
         <>
             <Paragraph>
@@ -28,5 +28,3 @@ const ProgrammingBuddy = () => {
         </>
     )
 }
-
-export default ProgrammingBuddy

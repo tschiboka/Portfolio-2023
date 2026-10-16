@@ -14,7 +14,7 @@ const getBreadCrumbPath = (breadcrumbs: string[], index: number) => {
     return '/' + breadcrumbs.filter((_, i) => i <= index).join('/')
 }
 
-const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
+export const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
     const { data: visitsData } = VisitQueries.useGet(path)
     const visits = visitsPreLoaded ? (visitCount ?? 0) : (visitsData?.visits ?? 0)
     const noLeadingSlash = path.replace('/', '')
@@ -41,5 +41,3 @@ const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
         </div>
     )
 }
-
-export default Breadcrumb

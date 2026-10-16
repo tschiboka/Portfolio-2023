@@ -6,8 +6,6 @@ interface Props {
     reference: Reference
 }
 
-const InlineReference = ({ reference }: Props) => {
+export const InlineReference = ({ reference }: Props) => {
     return <UxInlineReference reference={reference} />
 }
-
-export default InlineReference

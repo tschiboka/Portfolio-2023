@@ -8,7 +8,7 @@ interface Props {
     bgColor?: string
 }
 
-const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Props) => {
+export const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Props) => {
     useEffect(() => {
         const escHandler = (event: KeyboardEvent) => {
             if (event.key === 'Escape') handleEscKeyPress()
@@ -31,5 +31,3 @@ const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Prop
         </div>
     )
 }
-
-export default ZoomedImage

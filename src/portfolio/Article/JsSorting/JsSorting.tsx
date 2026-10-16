@@ -1,16 +1,16 @@
 // Components
 import { Article } from '../Article'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 import { Code, Heading, List, Paragraph, Section } from '@common-ux'
 // Images
 import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
 import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
 // Other Assets
 import { getReferenceList } from '../References.data'
-import JsSortingCode from './JsSorting.code'
+import { JsSortingCode } from './JsSorting.code'
 // Styles
 import './JsSorting.scss'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 
 interface Props {
     pageName: string

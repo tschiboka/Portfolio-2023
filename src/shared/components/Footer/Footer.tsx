@@ -1,4 +1,4 @@
-import Breadcrumb from './components/Breadcrumb'
+import { Breadcrumb } from './components/Breadcrumb'
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
@@ -16,7 +16,7 @@ export interface FooterProps {
     info?: ReactNode
 }
 
-const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
+export const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
     const date = new Date()
     const year = date.getFullYear()
     return (
@@ -52,5 +52,3 @@ const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
         </footer>
     )
 }
-
-export default Footer

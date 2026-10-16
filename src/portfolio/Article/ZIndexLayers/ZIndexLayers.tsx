@@ -1,9 +1,9 @@
 import { Article } from '../Article'
 import { Code, CodeText, Heading, Paragraph, Pill, PillColor, Section, Table } from '@common-ux'
 import type { Dictionary } from '@common-utils'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 import { ZIndexLayersCode } from './ZIndexLayers.code'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 import uiLayersImg from '@portfolio/assets/blog/z_index/ui_layers.png'
 

@@ -15,7 +15,7 @@ interface Props {
     path: string
 }
 
-const ShareMenu = ({ path }: Props) => {
+export const ShareMenu = ({ path }: Props) => {
     const domain = 'https://tschiboka.com/#'
 
     return (
@@ -38,5 +38,3 @@ const ShareMenu = ({ path }: Props) => {
         </div>
     )
 }
-
-export default ShareMenu

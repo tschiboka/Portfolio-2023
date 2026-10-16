@@ -2,7 +2,7 @@ import './Disclaimer.scss'
 import faceImg from '@portfolio/assets/home/headshot_placeholder.png'
 import { Button, Link, Paragraph, Section } from '@common-ux'
 
-const Disclaimer = () => {
+export const Disclaimer = () => {
     return (
         <Section className="Disclaimer">
             <img src={faceImg} alt="Profile Photo" />
@@ -18,5 +18,3 @@ const Disclaimer = () => {
         </Section>
     )
 }
-
-export default Disclaimer

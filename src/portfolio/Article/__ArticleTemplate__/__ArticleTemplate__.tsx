@@ -2,9 +2,9 @@ import { Paragraph } from '@common-ux/Typography/Paragraph'
 import { Heading } from '@common-ux/Typography/Heading'
 import { Article } from '../Article'
 // Components
-// import Figure from "../../sharedComponents/Figure/Figure";
+// import { Figure } from "../../sharedComponents/Figure/Figure";
 // import Code from "../../sharedComponents/Code/Code";
-// import InlineReference from "../../sharedComponents/InlineReference/InlineReference";
+// import { InlineReference } from "../../sharedComponents/InlineReference/InlineReference";
 
 // Images
 

@@ -1,7 +1,7 @@
 // Components
 import { useEffect, useState } from 'react'
 import type { Nullable } from '@common-utils'
-import Figure from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure/Figure'
 import { Howl } from 'howler'
 // Images
 import equalizerImg from '@portfolio/assets/blog/soundsWithHowler/equalizer.jpg'
@@ -35,12 +35,12 @@ import G4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds
 import riffMasterHomeImg from '@portfolio/assets/blog/soundsWithHowler/RiffmasterHomePage.png'
 import fretboardNotesImg from '@portfolio/assets/blog/soundsWithHowler/FretboardNotes.png'
 // Other Assets
-import SoundsWithHowlerCode from './SoundsWithHowler.code'
+import { SoundsWithHowlerCode } from './SoundsWithHowler.code'
 import { getReferenceList } from '../References.data'
 // Styles
 import './SoundsWithHowler.scss'
 import { Article } from '../Article'
-import InlineReference from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 import { Button, Code, CodeText, Grid, Heading, Link, Paragraph, Section } from '@common-ux'
 
 interface Props {

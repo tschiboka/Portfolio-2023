@@ -14,7 +14,7 @@ interface Light {
     baseOpacity: number
 }
 
-const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
+export const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
     children,
     lightCount = 50,
     lightSize = 8,
@@ -207,5 +207,3 @@ const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
         </div>
     )
 }
-
-export default XmasFormCanvas

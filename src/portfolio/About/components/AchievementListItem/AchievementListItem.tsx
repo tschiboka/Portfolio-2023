@@ -2,13 +2,13 @@ import type { Achievement } from './Achievements.data'
 import { TbCertificate, TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'
 import './AchievementListItem.scss'
-import ZoomedImage from '@shared-components/ZoomedImage/ZoomedImage'
+import { ZoomedImage } from '@shared-components/ZoomedImage/ZoomedImage'
 
 interface Props {
     achievement: Achievement
 }
 
-const AchievementListItem = ({ achievement }: Props) => {
+export const AchievementListItem = ({ achievement }: Props) => {
     const { setOverlayVisible, setOverlayContent, setMainMenuVisible, setSubMenuVisible } =
         AppHooks.useContext()
 
@@ -63,5 +63,3 @@ const AchievementListItem = ({ achievement }: Props) => {
         </li>
     )
 }
-
-export default AchievementListItem

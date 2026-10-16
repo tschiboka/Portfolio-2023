@@ -5,7 +5,7 @@ import { TfiLinkedin } from 'react-icons/tfi'
 import { Heading, Link, Paragraph } from '@common-ux'
 import './UnderConstruction.scss'
 
-const UnderConstruction = () => {
+export const UnderConstruction = () => {
     return (
         <div className="UnderConstruction">
             <Heading as="h1">Coming Soon...</Heading>
@@ -35,5 +35,3 @@ const UnderConstruction = () => {
         </div>
     )
 }
-
-export default UnderConstruction

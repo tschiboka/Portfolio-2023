@@ -1,6 +1,6 @@
 import { Paragraph } from '@common-ux'
 
-const GetToKnowMe = () => {
+export const GetToKnowMe = () => {
     return (
         <>
             <Paragraph>
@@ -14,5 +14,3 @@ const GetToKnowMe = () => {
         </>
     )
 }
-
-export default GetToKnowMe

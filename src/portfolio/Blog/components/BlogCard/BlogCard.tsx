@@ -40,7 +40,15 @@ const pillColorMap: Record<
 const toPillColor = (badge: string) =>
     pillColorMap[ProjectsSelectors.getColourName(badge)] ?? 'gray'
 
-const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, newest }: Props) => {
+export const BlogCard = ({
+    blogArticle,
+    visits,
+    readingTime,
+    codeTime,
+    likes,
+    path,
+    newest,
+}: Props) => {
     const navigate = useNavigate()
     const [articleLiked, setArticleLiked] = useState(false)
     const { mutate: doPostLike } = LikeQueries.usePost()
@@ -147,5 +155,3 @@ const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, new
         </Card>
     )
 }
-
-export default BlogCard

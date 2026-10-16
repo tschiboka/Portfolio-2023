@@ -1,4 +1,4 @@
-const ReactAnatomyCode = {
+export const ReactAnatomyCode = {
     batching: `const [variable_1, setVariable_1] = React.useState(false);
 const [variable_2, setVariable_2] = React.useState(false);
   
@@ -112,5 +112,3 @@ function ChildComponent() {
     return <div>{data}</div>;
 }`,
 }
-
-export default ReactAnatomyCode

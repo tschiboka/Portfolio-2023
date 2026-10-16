@@ -10,7 +10,7 @@ import { Const } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
 import './Submenu.styles.css'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
-import MenuAccordion from './components/MenuAccordion'
+import { MenuAccordion } from './components/MenuAccordion'
 
 type SubmenuProps = {
     submenu?: SubmenuState

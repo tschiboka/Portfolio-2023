@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import BlogCard from './components/BlogCard/BlogCard'
+import { BlogCard } from './components/BlogCard/BlogCard'
 import { BlogFilter } from './components/BlogFilter/BlogFilter'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { Screen } from '@shared-components/Screen/Screen'

@@ -7,7 +7,7 @@ type MenuAccordionProps = {
     pageName: string
 }
 
-const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
+export const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
     return (
         items && (
             <List
@@ -26,5 +26,3 @@ const MenuAccordion = ({ items, pageName }: MenuAccordionProps) => {
         )
     )
 }
-
-export default MenuAccordion

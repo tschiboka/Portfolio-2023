@@ -1,7 +1,7 @@
 import { Heading, Paragraph, Link, Stack, Main } from '@common-ux'
 import './RouteError.styles.scss'
 
-const RouteError = () => {
+export const RouteError = () => {
     return (
         <Main className="route-error">
             <Stack align="center" gap="16">
@@ -16,5 +16,3 @@ const RouteError = () => {
         </Main>
     )
 }
-
-export default RouteError

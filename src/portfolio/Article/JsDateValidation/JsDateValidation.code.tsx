@@ -1,4 +1,4 @@
-const JsDateValidationCode = {
+export const JsDateValidationCode = {
     basicDateValidation: `const isValidDate = (date) =>  {
     const d = new Date(date);
     
@@ -64,5 +64,3 @@ if (matchResults) {
         return true;
     };`,
 }
-
-export default JsDateValidationCode

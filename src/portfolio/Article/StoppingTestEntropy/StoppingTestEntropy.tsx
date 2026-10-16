@@ -1,6 +1,6 @@
 import { Article } from '../Article'
 import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@common-ux'
-import StoppingTestEntropyCode from './StoppingTestEntropy.code'
+import { StoppingTestEntropyCode } from './StoppingTestEntropy.code'
 
 interface Props {
     pageName: string

@@ -1,4 +1,4 @@
-import AchievementList from './components/AchievementList/AchievementList'
+import { AchievementList } from './components/AchievementList/AchievementList'
 import {
     academicAchievements,
     certificateAchievements,

@@ -1,12 +1,12 @@
 import { Heading, Paragraph, Section } from '@common-ux'
-import HireIntro from '../HireIntro/HireIntro'
-import ProgrammingBuddy from '../ProgrammingBuddy/ProgrammingBuddy'
-import GetToKnowMe from '../GetToKnowMe/GetToKnowMe'
+import { HireIntro } from '../HireIntro/HireIntro'
+import { ProgrammingBuddy } from '../ProgrammingBuddy/ProgrammingBuddy'
+import { GetToKnowMe } from '../GetToKnowMe/GetToKnowMe'
 import { FaGlasses, FaCode } from 'react-icons/fa'
 import { IoMdHand } from 'react-icons/io'
 import './Intro.scss'
 
-const Intro = () => {
+export const Intro = () => {
     return (
         <>
             <Heading as="h2" className="left">
@@ -50,5 +50,3 @@ const Intro = () => {
         </>
     )
 }
-
-export default Intro

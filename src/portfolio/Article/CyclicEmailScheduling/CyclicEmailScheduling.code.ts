@@ -1,4 +1,4 @@
-const CyclicEmailSchedulingCode = {
+export const CyclicEmailSchedulingCode = {
     nodeCron: `const cron = require('node-cron');                // Import NodeCron for Scheduling Tasks
 const nodemailer = require('nodemailer');         // Import NodeMailer for Sending Emails
 
@@ -53,5 +53,3 @@ route.post("/daily-breakdown", async (req, res) => {
 
 module.exports = route;`,
 }
-
-export default CyclicEmailSchedulingCode

@@ -1,4 +1,4 @@
-const JsSortingCode = {
+export const JsSortingCode = {
     basicExample: `const names = ["Happy", "Doc", "Grumpy", "Dopey", "Bashful", "Sleepy", "Sneezy"];
 names.sort();        // Sorts the array in-place
 console.log(names);  // Output: [ "Bashful", "Doc", "Dopey", "Grumpy", "Happy", "Sleepy", "Sneezy" ]`,
@@ -140,4 +140,3 @@ console.log(numbersWithNaN);                 // Output: [ NaN, -2, -1, 0, 1, 2, 
     return arr;
 }`,
 }
-export default JsSortingCode

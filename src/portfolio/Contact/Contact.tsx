@@ -1,6 +1,6 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import MessageAcknowledgement from './MessageAcknowledgement/MessageAcknowledgement'
+import { MessageAcknowledgement } from './MessageAcknowledgement/MessageAcknowledgement'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'

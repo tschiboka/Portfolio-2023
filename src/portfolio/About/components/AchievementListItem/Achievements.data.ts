@@ -109,5 +109,3 @@ export const certificateAchievements: Achievement[] = [
         certificate_img: FCCAlgorithmsImg,
     },
 ]
-
-export default Achievement
