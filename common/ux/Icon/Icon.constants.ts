@@ -1,5 +1,3 @@
-export type IconName = 'chart' | 'eye' | 'heart'
-
 /** Icon geometry + render defaults (each path string = one `<path>` `d`). */
 export const IconConstants = {
     viewBox: '0 0 24 24',

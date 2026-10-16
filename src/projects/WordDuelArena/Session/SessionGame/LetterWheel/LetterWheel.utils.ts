@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
 import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
-import { MIN_WORD_LENGTH } from '../../../common/utils'
+import { WordConstants } from '../../../common/utils'
 import type { Nullable } from '@common-utils'
 import { isEmpty } from '@common-utils'
 
@@ -73,7 +73,7 @@ type SubmitMoveParams = {
 }
 
 const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) => {
-    if (letters.length >= MIN_WORD_LENGTH) {
+    if (letters.length >= WordConstants.minLength) {
         send({
             type: WebSocketRequestType.ATTEMPT_MOVE,
             payload: { attempt: letters },

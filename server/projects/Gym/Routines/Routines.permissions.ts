@@ -1,4 +1,4 @@
-﻿import { requireAdminManaged, requireOwned } from '@common-utils'
+﻿import { Permissions } from '@common-utils'
 import type { CurrentUser } from '../../../../common/types'
 import type { RoutineOwnership } from './Routines.types'
 
@@ -9,7 +9,7 @@ export const RoutinesPermissions = {
      * routines; a user routine may only be changed by its owner.
      */
     requireUserCanModify: (routine: RoutineOwnership, user: CurrentUser): void => {
-        requireAdminManaged(routine, user, 'system')
-        requireOwned(routine, user)
+        Permissions.requireAdminManaged(routine, user, 'system')
+        Permissions.requireOwned(routine, user)
     },
 }

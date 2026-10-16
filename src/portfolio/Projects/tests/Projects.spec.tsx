@@ -1,11 +1,11 @@
 import { screen, waitFor, within } from '@testing-library/react'
-import { Accessor, Test } from '@common-ux/Test'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Accessor } from '@common-ux/Test'
+import { Test } from '@shared-components/Screen/tests'
 import { Projects } from '../Projects'
 import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupProjects = async () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: '/projects',
         children: <Projects pageName="projects" path="/projects" />,
         handlers: [...PageSideMenuMockHandlers.Defaults],

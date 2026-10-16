@@ -290,7 +290,7 @@ import { GoClockFill } from 'react-icons/go'
 import { Icon } from '..'
 import { ImCancelCircle } from 'react-icons/im'
 
-export const icons: Icon = {
+export const Icons: Icon = {
     // Shapes
     circle: <BsCircle />,
     circle_fill: <BsCircleFill />,

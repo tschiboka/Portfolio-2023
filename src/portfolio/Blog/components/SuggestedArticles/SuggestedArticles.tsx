@@ -1,7 +1,7 @@
 import BlogCard from '../BlogCard/BlogCard'
 import { Heading } from '@common-ux'
 import { blogArticles } from '@portfolio/Article'
-import { LikesQueries, VisitsQueries } from '@shared-queries'
+import { LikeQueries, VisitQueries } from '@shared-queries'
 import './SuggestedArticles.scss'
 
 interface Props {
@@ -9,8 +9,8 @@ interface Props {
 }
 
 const SuggestedArticles = ({ articles }: Props) => {
-    const { data: visitsData } = VisitsQueries.Summary.useGet()
-    const { data: likesData } = LikesQueries.Summary.useGet()
+    const { data: visitsData } = VisitQueries.Summary.useGet()
+    const { data: likesData } = LikeQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null
     const likes = likesData?.likes ?? null
 

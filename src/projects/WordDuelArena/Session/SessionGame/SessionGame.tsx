@@ -1,5 +1,5 @@
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
-import { InteractionOverlay } from '../SessionOverlay/SessionOverlay'
+import { SessionOverlay } from '../SessionOverlay/SessionOverlay'
 import { Arrays } from '@common-utils'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
 import { SessionHooks } from '../Session.hooks'
@@ -28,7 +28,7 @@ export const SessionGame = ({ enterFullScreen, isFullscreen }: SessionGameProps)
 
     return (
         <div className="session-game">
-            <InteractionOverlay enterFullScreen={enterFullScreen} isFullscreen={isFullscreen} />
+            <SessionOverlay enterFullScreen={enterFullScreen} isFullscreen={isFullscreen} />
             <>
                 <SessionHeader />
                 <SolutionBoard />

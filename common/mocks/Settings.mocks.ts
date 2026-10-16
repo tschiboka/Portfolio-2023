@@ -2,7 +2,7 @@ import { MockBuilder } from '@common-ux/Test'
 import { DateTime } from '@common-utils'
 import type { Settings } from '@common-types'
 
-export const MockSettings = MockBuilder<Settings>({
+export const SettingsMocks = MockBuilder<Settings>({
     maxUsers: 10,
     enableMaintenanceMode: false,
     enableUserRegistration: true,

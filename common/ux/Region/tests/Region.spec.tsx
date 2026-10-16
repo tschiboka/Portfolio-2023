@@ -1,4 +1,6 @@
-import { Set } from './Region.spec.utils'
+import { RegionTestUtils } from './Region.spec.utils'
+
+const { Set } = RegionTestUtils
 
 describe('Region', () => {
     describe('default variant', () => {

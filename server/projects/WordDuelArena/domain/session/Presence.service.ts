@@ -20,4 +20,4 @@ function applyPresenceRules(
     return changed
 }
 
-export { applyPresenceRules }
+export const PresenceService = { applyRules: applyPresenceRules }

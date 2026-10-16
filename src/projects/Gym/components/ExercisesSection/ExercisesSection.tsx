@@ -2,19 +2,15 @@ import { GymExerciseResource } from '@common-types'
 import { Code, Form, LoadingIndicator, Section } from '@common-ux'
 import { Query } from '@common-utils'
 import { useForm } from 'react-hook-form'
-import {
-    useGetGymDifficultyOptions,
-    useGetGymEquipmentOptions,
-    useGetGymMuscleGroupOptions,
-} from '../../Gym.queries'
+import { GymQueries } from '../../Gym.queries'
 
 type ExercisesSectionProps = {
     exercises: GymExerciseResource[]
 }
 export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
-    const { data: difficultyData, ...difficultyResponse } = useGetGymDifficultyOptions()
-    const { data: equipmentData, ...equipmentResponse } = useGetGymEquipmentOptions()
-    const { data: muscleGroupData, ...muscleGroupResponse } = useGetGymMuscleGroupOptions()
+    const { data: difficultyData, ...difficultyResponse } = GymQueries.Difficulty.useGet()
+    const { data: equipmentData, ...equipmentResponse } = GymQueries.Equipment.useGet()
+    const { data: muscleGroupData, ...muscleGroupResponse } = GymQueries.MuscleGroup.useGet()
     const difficulties = Query.extractEntities(difficultyData, 'difficulties')
     const equipment = Query.extractEntities(equipmentData, 'equipment')
     const muscleGroups = Query.extractEntities(muscleGroupData, 'muscleGroups')

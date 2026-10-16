@@ -1,10 +1,10 @@
 ﻿import type { MoveHandlerParams, SessionState } from '../../../WordDuelArena.types'
 import { produce } from 'immer'
-import { commitSessionState } from '../Broadcast.service'
+import { BroadcastService } from '../Broadcast.service'
 import { markAliveByDevice } from '../../../domain/session/session'
-import { SessionStatuses } from '../../../config/constants/Session.constants'
-import { MatchStatuses } from '../../../config/constants/Game.constants'
-import { getSolutionState } from '../../../domain/session/Move.service'
+import { SessionConstants } from '../../../config/constants/Session.constants'
+import { GameConstants } from '../../../config/constants/Game.constants'
+import { MoveService } from '../../../domain/session/Move.service'
 import { MovePayload } from '../../../../../../common/types'
 
 const moveHandler = ({ session, deviceId, payload }: MoveHandlerParams) => {
@@ -13,14 +13,15 @@ const moveHandler = ({ session, deviceId, payload }: MoveHandlerParams) => {
         handleMove(draft, deviceId, payload)
     })
 
-    commitSessionState(session, nextState)
+    BroadcastService.commit(session, nextState)
 }
 
 function handleMove(draft: SessionState, deviceId: string, payload: unknown) {
-    if (draft.status !== SessionStatuses.ACTIVE) return
-    if (!draft.currentMatch || draft.currentMatch.status !== MatchStatuses.ACTIVE) return
+    if (draft.status !== SessionConstants.statuses.ACTIVE) return
+    if (!draft.currentMatch || draft.currentMatch.status !== GameConstants.matchStatuses.ACTIVE)
+        return
 
-    getSolutionState(draft, deviceId, payload as MovePayload)
+    MoveService.getSolutionState(draft, deviceId, payload as MovePayload)
 }
 
 export const MoveHandlers = {

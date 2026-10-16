@@ -35,7 +35,7 @@ import G4MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds
 import riffMasterHomeImg from '@portfolio/assets/blog/soundsWithHowler/RiffmasterHomePage.png'
 import fretboardNotesImg from '@portfolio/assets/blog/soundsWithHowler/FretboardNotes.png'
 // Other Assets
-import codeSnippets from './SoundsWithHowler.code'
+import SoundsWithHowlerCode from './SoundsWithHowler.code'
 import { getReferenceList } from '../References.data'
 // Styles
 import './SoundsWithHowler.scss'
@@ -138,13 +138,21 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                     playback. So after creating the html boilerplate for our app, one of the first
                     things we need to do is to import the Howler JS script in our header.
                 </Paragraph>
-                <Code fileName="jam.html" language="html" content={codeSnippets.importHowler} />
+                <Code
+                    fileName="jam.html"
+                    language="html"
+                    content={SoundsWithHowlerCode.importHowler}
+                />
                 <Paragraph>
                     However, for React users, installing the package through NPM or Yarn is the best
                     way. If the application is written with TypeScript, the type definitions must
                     also be installed for the TypeScript compiler.
                 </Paragraph>
-                <Code fileName="Terminal" language="powershell" content={codeSnippets.npmHowler} />
+                <Code
+                    fileName="Terminal"
+                    language="powershell"
+                    content={SoundsWithHowlerCode.npmHowler}
+                />
             </Section>
             <Section>
                 <Heading as="h3">Audio Files</Heading>
@@ -340,7 +348,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.js"
                     language="javascript"
-                    content={codeSnippets.controller}
+                    content={SoundsWithHowlerCode.controller}
                 />
                 <Paragraph>
                     Each four-digit message invokes our translate function, which keeps our highest
@@ -353,13 +361,13 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.js"
                     language="javascript"
-                    content={codeSnippets.translateMessages}
+                    content={SoundsWithHowlerCode.translateMessages}
                 />
                 <Paragraph>Now we can include our controller listener in the html file.</Paragraph>
                 <Code
                     fileName="jam.html"
                     language="html"
-                    content={codeSnippets.loadController}
+                    content={SoundsWithHowlerCode.loadController}
                     highlightRow={[2]}
                 />
             </Section>
@@ -391,8 +399,16 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                     calculated relative to the lower E2 string, and each string has an offset to
                     adjust the fret number.
                 </Paragraph>
-                <Code fileName="jam.js" language="javascript" content={codeSnippets.guitarNotes} />
-                <Code fileName="jam.js" language="javascript" content={codeSnippets.fretCallback} />
+                <Code
+                    fileName="jam.js"
+                    language="javascript"
+                    content={SoundsWithHowlerCode.guitarNotes}
+                />
+                <Code
+                    fileName="jam.js"
+                    language="javascript"
+                    content={SoundsWithHowlerCode.fretCallback}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Reading the Strums</Heading>
@@ -407,7 +423,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="jam.js"
                     language="javascript"
-                    content={codeSnippets.strumCallback}
+                    content={SoundsWithHowlerCode.strumCallback}
                 />
             </Section>
             <Section>
@@ -425,7 +441,11 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                     list of properties, see
                     <InlineReference reference={references[4]} />.
                 </Paragraph>
-                <Code fileName="jam.js" language="javascript" content={codeSnippets.audioObject} />
+                <Code
+                    fileName="jam.js"
+                    language="javascript"
+                    content={SoundsWithHowlerCode.audioObject}
+                />
                 <Paragraph>
                     One of the things that we must be careful of is that the function preloading
                     Howler audio needs to be user-initiated. The reason is the current autoplay
@@ -441,7 +461,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="jam.js"
                     language="javascript"
-                    content={codeSnippets.playStopNotes}
+                    content={SoundsWithHowlerCode.playStopNotes}
                 />
                 <Paragraph>
                     You can manipulate audio play by simply calling play or stop functions.
@@ -461,7 +481,11 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                     either use specific IDs for references or store our DOM elements in arrays and
                     refer them by the index.
                 </Paragraph>
-                <Code fileName="jam.js" language="javascript" content={codeSnippets.domStorage} />
+                <Code
+                    fileName="jam.js"
+                    language="javascript"
+                    content={SoundsWithHowlerCode.domStorage}
+                />
                 <Paragraph>
                     If we want to create a more authentic guitar fretboard, we need to be able to
                     calculate the distances on the frets, just like for the real instrument, where
@@ -475,7 +499,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="jam.js"
                     language="javascript"
-                    content={codeSnippets.fretDistances}
+                    content={SoundsWithHowlerCode.fretDistances}
                 />
                 <Paragraph>
                     We will create our guitar component with several different types of DOM
@@ -488,16 +512,20 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="util.js"
                     language="javascript"
-                    content={codeSnippets.utilityAppend}
+                    content={SoundsWithHowlerCode.utilityAppend}
                 />
                 <Paragraph>
                     Now, we can create the guitar component by traversing seven rows (the last row
                     is for the fret numbering) and 21 fret columns (again, the last one is the
                     string component).
                 </Paragraph>
-                <Code fileName="jam.js" language="javascript" content={codeSnippets.createGuitar} />
+                <Code
+                    fileName="jam.js"
+                    language="javascript"
+                    content={SoundsWithHowlerCode.createGuitar}
+                />
                 <Paragraph>You can copy the following CSS code to have the same result.</Paragraph>
-                <Code fileName="jam.css" language="css" content={codeSnippets.guitarCSS} />
+                <Code fileName="jam.css" language="css" content={SoundsWithHowlerCode.guitarCSS} />
                 <Paragraph>The result is this simple GUI for our guitar.</Paragraph>
                 <Figure image={fretBoardImg} size="lg" alt={'Fret Board'} caption={'Guitar GUI'} />
                 <Paragraph>
@@ -512,7 +540,7 @@ export const SoundsWithHowler = ({ pageName, path }: Props) => {
                 <Code
                     fileName="jam.js"
                     language="javascript"
-                    content={codeSnippets.displayGuitar}
+                    content={SoundsWithHowlerCode.displayGuitar}
                 />
                 <Paragraph>
                     Let's test out our Guitar interface. The screenshot below shows when the guitar

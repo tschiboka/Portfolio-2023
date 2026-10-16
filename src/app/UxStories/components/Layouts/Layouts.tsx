@@ -4,23 +4,22 @@
     CodeText,
     Grid,
     Heading,
-    Hide,
     Inline,
     Main,
     Paragraph,
     Pill,
     Section,
-    Show,
     Sidebar,
     Spacer,
     Split,
     Stack,
+    Visibility,
 } from '@common-ux'
 import { Arrays } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Layouts.code'
+import { LayoutsCode } from './Layouts.code'
 import './Layouts.styles.css'
 
 type LayoutsProps = { path: string }
@@ -77,7 +76,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 <Box padding="16" background="surface" borderRadius="md">
                     <Paragraph>A padded container with surface background.</Paragraph>
                 </Box>
-                <Code language="tsx" content={Snippets.Box.basic} />
+                <Code language="tsx" content={LayoutsCode.Box.basic} />
                 <Heading as="h3">Padding</Heading>
                 <Paragraph>
                     Use <CodeText>padding</CodeText> for uniform spacing, or{' '}
@@ -92,7 +91,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         Horizontal 32px, vertical 8px.
                     </Box>
                 </Stack>
-                <Code language="tsx" content={Snippets.Box.padding} />
+                <Code language="tsx" content={LayoutsCode.Box.padding} />
                 <Heading as="h3">Background</Heading>
                 <Stack gap="8">
                     {(['transparent', 'sunken', 'surface', 'raised', 'accent'] as const).map(
@@ -105,7 +104,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         ),
                     )}
                 </Stack>
-                <Code language="tsx" content={Snippets.Box.background} />
+                <Code language="tsx" content={LayoutsCode.Box.background} />
                 <Heading as="h3">Border Radius</Heading>
                 <Inline gap="8" wrap>
                     {(['none', 'sm', 'md', 'lg', 'full'] as const).map((br) => (
@@ -116,7 +115,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </Box>
                     ))}
                 </Inline>
-                <Code language="tsx" content={Snippets.Box.borderRadius} />
+                <Code language="tsx" content={LayoutsCode.Box.borderRadius} />
                 <Heading as="h3">Display</Heading>
                 <Box
                     display="flex"
@@ -132,7 +131,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         Flex child B
                     </Box>
                 </Box>
-                <Code language="tsx" content={Snippets.Box.display} />
+                <Code language="tsx" content={LayoutsCode.Box.display} />
                 <Heading as="h3">Polymorphic Element</Heading>
                 <Stack gap="8">
                     <Box as="section" padding="16" background="surface" borderRadius="md">
@@ -142,7 +141,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         Rendered as an <CodeText>&lt;aside&gt;</CodeText> element.
                     </Box>
                 </Stack>
-                <Code language="tsx" content={Snippets.Box.polymorphic} />
+                <Code language="tsx" content={LayoutsCode.Box.polymorphic} />
             </Section>
             <Section>
                 <Heading as="h2" id="stack">
@@ -160,15 +159,15 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <span style={cell()}>Second</span>
                     <span style={cell()}>Third</span>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Stack.vertical} />
+                <Code language="tsx" content={LayoutsCode.Stack.vertical} />
                 <Heading as="h4">Horizontal</Heading>
                 <Stack.Horizontal gap="8">
                     <span style={cell()}>Left</span>
                     <span style={cell()}>Centre</span>
                     <span style={cell()}>Right</span>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Stack.horizontal} />
-                <Code language="tsx" content={Snippets.Stack.default} />
+                <Code language="tsx" content={LayoutsCode.Stack.horizontal} />
+                <Code language="tsx" content={LayoutsCode.Stack.default} />
                 <Heading as="h3">Gap</Heading>
                 {(['4', '16', '48'] as const).map((gap) => (
                     <div key={gap} style={{ marginBottom: 16 }}>
@@ -182,7 +181,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </Stack.Horizontal>
                     </div>
                 ))}
-                <Code language="tsx" content={Snippets.Stack.gap} />
+                <Code language="tsx" content={LayoutsCode.Stack.gap} />
                 <Heading as="h3">Align</Heading>
                 {(['start', 'center', 'end', 'stretch'] as const).map((align) => (
                     <div key={align} style={{ marginBottom: 16 }}>
@@ -204,7 +203,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </Stack.Horizontal>
                     </div>
                 ))}
-                <Code language="tsx" content={Snippets.Stack.align} />
+                <Code language="tsx" content={LayoutsCode.Stack.align} />
                 <Heading as="h3">Justify</Heading>
                 {(['start', 'center', 'end', 'between', 'around'] as const).map((justify) => (
                     <div key={justify} style={{ marginBottom: 16 }}>
@@ -225,21 +224,21 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </Stack.Horizontal>
                     </div>
                 ))}
-                <Code language="tsx" content={Snippets.Stack.justify} />
+                <Code language="tsx" content={LayoutsCode.Stack.justify} />
                 <Heading as="h3">Wrap</Heading>
                 <Stack.Horizontal gap="8" wrap>
                     {wrapItems.map((item) => (
                         <Pill key={item} label={item} color="accent" />
                     ))}
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Stack.wrap} />
+                <Code language="tsx" content={LayoutsCode.Stack.wrap} />
                 <Heading as="h3">Polymorphic Element</Heading>
                 <Stack.Vertical as="ul" gap="4" style={{ paddingLeft: 20 }}>
                     <li>Item one</li>
                     <li>Item two</li>
                     <li>Item three</li>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Stack.polymorphic} />
+                <Code language="tsx" content={LayoutsCode.Stack.polymorphic} />
                 <Heading as="h3">Nested Stacks</Heading>
                 <Stack.Vertical
                     gap="16"
@@ -254,7 +253,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         <Main>Content</Main>
                     </Stack.Horizontal>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Stack.nested} />
+                <Code language="tsx" content={LayoutsCode.Stack.nested} />
             </Section>
             <Section>
                 <Heading as="h2" id="inline">
@@ -271,7 +270,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <span style={cell()}>Two</span>
                     <span style={cell()}>Three</span>
                 </Inline>
-                <Code language="tsx" content={Snippets.Inline.basic} />
+                <Code language="tsx" content={LayoutsCode.Inline.basic} />
                 <Heading as="h3">Wrap</Heading>
                 <Inline gap="8" wrap>
                     <Pill label="React" color="accent" />
@@ -279,7 +278,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <Pill label="CSS" color="success" />
                     <Pill label="Node" color="yellow" />
                 </Inline>
-                <Code language="tsx" content={Snippets.Inline.wrap} />
+                <Code language="tsx" content={LayoutsCode.Inline.wrap} />
                 <Heading as="h3">Align</Heading>
                 <Inline
                     gap="8"
@@ -289,7 +288,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <span style={{ ...cell(), fontSize: 24 }}>Big</span>
                     <span style={{ ...cell(), fontSize: 12 }}>Small</span>
                 </Inline>
-                <Code language="tsx" content={Snippets.Inline.align} />
+                <Code language="tsx" content={LayoutsCode.Inline.align} />
             </Section>
             <Section>
                 <Heading as="h2" id="grid">
@@ -308,7 +307,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </span>
                     ))}
                 </Grid>
-                <Code language="tsx" content={Snippets.Grid.basic} />
+                <Code language="tsx" content={LayoutsCode.Grid.basic} />
                 <Heading as="h3">Column Counts</Heading>
                 {([2, 3, 4] as const).map((cols) => (
                     <div key={cols} style={{ marginBottom: 16 }}>
@@ -324,7 +323,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </Grid>
                     </div>
                 ))}
-                <Code language="tsx" content={Snippets.Grid.columns} />
+                <Code language="tsx" content={LayoutsCode.Grid.columns} />
                 <Heading as="h3">Row &amp; Column Gap</Heading>
                 <Grid columns={3} rowGap="16" columnGap="4">
                     {Arrays.times(6, (i) => (
@@ -333,7 +332,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </span>
                     ))}
                 </Grid>
-                <Code language="tsx" content={Snippets.Grid.rowColumnGap} />
+                <Code language="tsx" content={LayoutsCode.Grid.rowColumnGap} />
                 <Heading as="h3">Responsive Columns</Heading>
                 <Paragraph>
                     Pass an object to <CodeText>columns</CodeText> for responsive breakpoints. The{' '}
@@ -349,7 +348,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         </span>
                     ))}
                 </Grid>
-                <Code language="tsx" content={Snippets.Grid.responsive} />
+                <Code language="tsx" content={LayoutsCode.Grid.responsive} />
             </Section>
             <Section>
                 <Heading as="h2" id="split">
@@ -368,7 +367,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     left={<div style={cell()}>Left pane</div>}
                     right={<div style={cell()}>Right pane</div>}
                 />
-                <Code language="tsx" content={Snippets.Split.basic} />
+                <Code language="tsx" content={LayoutsCode.Split.basic} />
                 <Heading as="h3">Ratios</Heading>
                 {(['1/3', '1/1', '3/1'] as const).map((ratio) => (
                     <div key={ratio} style={{ marginBottom: 16 }}>
@@ -383,7 +382,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         />
                     </div>
                 ))}
-                <Code language="tsx" content={Snippets.Split.ratio} />
+                <Code language="tsx" content={LayoutsCode.Split.ratio} />
             </Section>
             <Section>
                 <Heading as="h2" id="spacer">
@@ -397,14 +396,14 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 <div style={cell()}>Above</div>
                 <Spacer size="24" />
                 <div style={cell()}>Below — 24px gap</div>
-                <Code language="tsx" content={Snippets.Spacer.vertical} />
+                <Code language="tsx" content={LayoutsCode.Spacer.vertical} />
                 <Heading as="h3">Horizontal</Heading>
                 <div style={{ display: 'flex' }}>
                     <span style={cell()}>Left</span>
                     <Spacer size="32" axis="horizontal" />
                     <span style={cell()}>Right — 32px gap</span>
                 </div>
-                <Code language="tsx" content={Snippets.Spacer.horizontal} />
+                <Code language="tsx" content={LayoutsCode.Spacer.horizontal} />
             </Section>
             <Section>
                 <Heading as="h2" id="show-hide">
@@ -427,33 +426,33 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     Resize the browser to see elements appear at their breakpoints.
                 </Paragraph>
                 <Stack.Vertical gap="8">
-                    <Show above="sm">
+                    <Visibility.Show above="sm">
                         <Pill label="Visible above sm (576px)" color="success" />
-                    </Show>
-                    <Show above="md">
+                    </Visibility.Show>
+                    <Visibility.Show above="md">
                         <Pill label="Visible above md (768px)" color="accent" />
-                    </Show>
-                    <Show above="lg">
+                    </Visibility.Show>
+                    <Visibility.Show above="lg">
                         <Pill label="Visible above lg (992px)" color="purple" />
-                    </Show>
-                    <Show below="md">
+                    </Visibility.Show>
+                    <Visibility.Show below="md">
                         <Pill label="Visible below md (768px)" color="orange" />
-                    </Show>
+                    </Visibility.Show>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Visibility.show} />
+                <Code language="tsx" content={LayoutsCode.Visibility.show} />
                 <Heading as="h3">Hide</Heading>
                 <Paragraph>
                     Resize the browser to see elements disappear at their breakpoints.
                 </Paragraph>
                 <Stack.Vertical gap="8">
-                    <Hide above="lg">
+                    <Visibility.Hide above="lg">
                         <Pill label="Hidden above lg (992px)" color="error" />
-                    </Hide>
-                    <Hide below="sm">
+                    </Visibility.Hide>
+                    <Visibility.Hide below="sm">
                         <Pill label="Hidden below sm (576px)" color="yellow" />
-                    </Hide>
+                    </Visibility.Hide>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Visibility.hide} />
+                <Code language="tsx" content={LayoutsCode.Visibility.hide} />
             </Section>
         </Main>
     </Screen>

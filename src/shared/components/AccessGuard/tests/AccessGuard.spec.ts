@@ -1,9 +1,9 @@
 import { AccessMap, Guard, GuardCondition, ModeConfig } from '../AccessGuard.types'
 import { AccessGuardUtils } from '../AccessGuard.utils'
-import { accessGuardTestUtils } from './AccessGuard.spec.utils'
+import { AccessGuardTestUtils } from './AccessGuard.spec.utils'
 
 const { isConditionDenied, isGuardActive, resolveGuards } = AccessGuardUtils
-const { fullAccess, noAccess, partialAccess } = accessGuardTestUtils
+const { fullAccess, noAccess, partialAccess } = AccessGuardTestUtils
 
 describe('isConditionDenied', () => {
     describe('capability condition', () => {

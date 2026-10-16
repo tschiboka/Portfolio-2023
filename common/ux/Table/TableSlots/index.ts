@@ -1,1 +1,1 @@
-export { Header, Info, Legend, Filters, Download, Empty } from './TableSlots'
+export { TableSlots } from './TableSlots'

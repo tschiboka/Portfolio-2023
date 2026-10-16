@@ -7,7 +7,7 @@ import type { LevelNameResponse } from '../common/utils/Types/Level.types'
 import type { FrequencyType } from '../common/utils/Types/Words.types'
 import { Session } from '@shared-context'
 
-export const useGetLevelNames = () => {
+const useGetLevelNames = () => {
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level/name')
         .build()
@@ -21,7 +21,7 @@ export const useGetLevelNames = () => {
     })
 }
 
-export const useGetLevel = (name: string) => {
+const useGetLevel = (name: string) => {
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level/name/' + name)
         .build()
@@ -36,7 +36,7 @@ export const useGetLevel = (name: string) => {
 }
 
 type UsePostLevel = { onSuccess: () => void }
-export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
+const usePostLevel = ({ onSuccess }: UsePostLevel) => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level')
@@ -52,7 +52,7 @@ export const usePostLevel = ({ onSuccess }: UsePostLevel) => {
     })
 }
 
-export const useGetAnagramMap = () => {
+const useGetAnagramMap = () => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/word/anagrams')
@@ -68,7 +68,7 @@ export const useGetAnagramMap = () => {
     })
 }
 
-export const useGetWordFrequencies = () => {
+const useGetWordFrequencies = () => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/word/frequencies')
@@ -82,4 +82,18 @@ export const useGetWordFrequencies = () => {
             return response.data
         },
     })
+}
+
+export const LevelCreatorQueries = {
+    useGet: useGetLevel,
+    usePost: usePostLevel,
+    Names: {
+        useGet: useGetLevelNames,
+    },
+    AnagramMap: {
+        useGet: useGetAnagramMap,
+    },
+    Frequencies: {
+        useGet: useGetWordFrequencies,
+    },
 }

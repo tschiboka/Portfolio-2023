@@ -69,7 +69,7 @@ server/App/
 ├── App.routes.ts
 ├── App.middlewares.ts
 └── <Domain>/
-    ├── <Domain>.routes.ts
+    ├── <Domain>.router.ts
     └── <Domain>.middlewares.ts
 ```
 
@@ -99,10 +99,10 @@ Rules:
 - Holds the listen port and the CORS policy.
 - The port is named once. No call site writes a port number.
 
-### `<Domain>.routes.ts`
+### `<Domain>.router.ts`
 
 Return type: an `express.Router`, exported as `<Domain>Router`.
-Example: [`Feature.routes.ts`](./Feature.routes.ts)
+Example: [`Feature.router.ts`](./Feature.router.ts)
 
 ### `<Domain>.middlewares.ts`
 

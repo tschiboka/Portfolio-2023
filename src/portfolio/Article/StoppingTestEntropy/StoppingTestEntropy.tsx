@@ -1,6 +1,6 @@
 import { Article } from '../Article'
 import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@common-ux'
-import codeSnippets from './StoppingTestEntropy.code'
+import StoppingTestEntropyCode from './StoppingTestEntropy.code'
 
 interface Props {
     pageName: string
@@ -45,7 +45,7 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="entropy-examples.spec.tsx"
                     language="tsx"
-                    content={codeSnippets.entropyBefore}
+                    content={StoppingTestEntropyCode.entropyBefore}
                 />
                 <Paragraph>
                     Each approach solves a local problem. But together they create global
@@ -101,7 +101,7 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="accessor-examples.spec.tsx"
                     language="tsx"
-                    content={codeSnippets.entropyAfter}
+                    content={StoppingTestEntropyCode.entropyAfter}
                 />
                 <Paragraph>
                     What changed is not just syntax. Query logic is centralised, scoping logic is
@@ -119,13 +119,21 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     messages, and shares a singleton <CodeText>userEvent</CodeText> instance across
                     all accessors.
                 </Paragraph>
-                <Code fileName="Accessor.tsx" language="tsx" content={codeSnippets.accessorBase} />
+                <Code
+                    fileName="Accessor.tsx"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.accessorBase}
+                />
                 <Paragraph>
                     The <CodeText>context</CodeText> string is one of the most practical features.
                     When a lookup fails, the error tells you exactly where in the accessor chain the
                     failure occurred — not just that "an element was not found":
                 </Paragraph>
-                <Code fileName="TestError.ts" language="tsx" content={codeSnippets.errorMessages} />
+                <Code
+                    fileName="TestError.ts"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.errorMessages}
+                />
             </Section>
             {/* ── The Five Namespaces ───────────────────────────────── */}
             <Section>
@@ -142,7 +150,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     <CodeText>attribute</CodeText>, and <CodeText>byText</CodeText>. Subclasses
                     extend via spread:
                 </Paragraph>
-                <Code fileName="Get.ts" language="tsx" content={codeSnippets.getNamespace} />
+                <Code
+                    fileName="Get.ts"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.getNamespace}
+                />
                 <Heading as="h3">Do — User Interactions</Heading>
                 <Paragraph>
                     <CodeText>Do</CodeText> contains async user actions. The base class provides{' '}
@@ -150,7 +162,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     <CodeText>focus</CodeText>, and <CodeText>keyboard</CodeText>. Subclasses add
                     component-specific actions:
                 </Paragraph>
-                <Code fileName="Do.ts" language="tsx" content={codeSnippets.doNamespace} />
+                <Code
+                    fileName="Do.ts"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.doNamespace}
+                />
                 <Heading as="h3">Has & Wait — Derived Automatically</Heading>
                 <Paragraph>
                     <CodeText>Has</CodeText> and <CodeText>Wait</CodeText> are not authored
@@ -159,7 +175,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     try-catch and returns a boolean — it never throws. <CodeText>Wait</CodeText>{' '}
                     wraps each getter in RTL's <CodeText>waitFor()</CodeText> for async retrying.
                 </Paragraph>
-                <Code fileName="Has-Wait.ts" language="tsx" content={codeSnippets.hasWait} />
+                <Code
+                    fileName="Has-Wait.ts"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.hasWait}
+                />
                 <Paragraph>
                     This means every <CodeText>Get</CodeText> method a subclass adds automatically
                     becomes available on <CodeText>Has</CodeText> and <CodeText>Wait</CodeText> with
@@ -174,7 +194,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     It belongs to the pre-render phase: rendering components, registering MSW
                     handlers, providing context.
                 </Paragraph>
-                <Code fileName="Set.ts" language="tsx" content={codeSnippets.setPattern} />
+                <Code
+                    fileName="Set.ts"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.setPattern}
+                />
             </Section>
             {/* ── Building a Component Accessor ─────────────────────── */}
             <Section>
@@ -185,7 +209,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     component-specific methods, and is instantiated by a factory function that
                     locates the root element:
                 </Paragraph>
-                <Code fileName="Button.tsx" language="tsx" content={codeSnippets.buttonAccessor} />
+                <Code
+                    fileName="Button.tsx"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.buttonAccessor}
+                />
                 <Paragraph>
                     The factory function is the public API. It uses an RTL role query to find the
                     element and passes a descriptive context string. If the element doesn't exist,
@@ -203,7 +231,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     <CodeText>this.scope</CodeText> instead of the global screen, so lookups never
                     leak across component boundaries.
                 </Paragraph>
-                <Code fileName="Form.tsx" language="tsx" content={codeSnippets.formAccessor} />
+                <Code
+                    fileName="Form.tsx"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.formAccessor}
+                />
                 <Paragraph>
                     The context chain builds hierarchically. If you call{' '}
                     <CodeText>form.Input('Email')</CodeText> and the input doesn't exist, the error
@@ -221,13 +253,13 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="LoginForm.spec.tsx (before)"
                     language="tsx"
-                    content={codeSnippets.testBefore}
+                    content={StoppingTestEntropyCode.testBefore}
                 />
                 <Paragraph>And the same tests rewritten with the accessor pattern:</Paragraph>
                 <Code
                     fileName="LoginForm.spec.tsx (after)"
                     language="tsx"
-                    content={codeSnippets.testAfter}
+                    content={StoppingTestEntropyCode.testAfter}
                 />
                 <Paragraph>
                     The difference isn't just fewer lines. It's fewer decisions. The developer
@@ -245,7 +277,11 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                     and actions for sorting, filtering, pagination, row selection, expansion, and
                     downloads:
                 </Paragraph>
-                <Code fileName="Table.spec.tsx" language="tsx" content={codeSnippets.tableTest} />
+                <Code
+                    fileName="Table.spec.tsx"
+                    language="tsx"
+                    content={StoppingTestEntropyCode.tableTest}
+                />
                 <Heading as="h3">Overlay</Heading>
                 <Paragraph>
                     The <CodeText>Overlay</CodeText> accessor handles popups, action menus, and
@@ -254,7 +290,7 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Overlay.spec.tsx"
                     language="tsx"
-                    content={codeSnippets.overlayTest}
+                    content={StoppingTestEntropyCode.overlayTest}
                 />
             </Section>
             {/* ── The Full Test Namespace ───────────────────────────── */}
@@ -267,7 +303,7 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Test namespace"
                     language="tsx"
-                    content={codeSnippets.testNamespace}
+                    content={StoppingTestEntropyCode.testNamespace}
                 />
             </Section>
             {/* ── Design Rules ──────────────────────────────────────── */}
@@ -289,7 +325,7 @@ export const StoppingTestEntropy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="design-rules.ts"
                     language="tsx"
-                    content={codeSnippets.designRules}
+                    content={StoppingTestEntropyCode.designRules}
                 />
             </Section>
             {/* ── What This Is Not ──────────────────────────────────── */}

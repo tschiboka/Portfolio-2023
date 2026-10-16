@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { getNextSortDirection } from '../TableHead/TableHead.utils'
+import { TableHeadUtils } from '../TableHead/TableHead.utils'
 import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
@@ -190,19 +190,19 @@ describe('Table — Sorting', () => {
 
     describe('getNextSortDirection utility', () => {
         it('returns desc when current column is same and direction is asc', () => {
-            expect(getNextSortDirection('name', 'asc', 'name')).toBe('desc')
+            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'name')).toBe('desc')
         })
 
         it('returns asc when current column is same and direction is desc', () => {
-            expect(getNextSortDirection('name', 'desc', 'name')).toBe('asc')
+            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'name')).toBe('asc')
         })
 
         it('returns asc when target column is different', () => {
-            expect(getNextSortDirection('name', 'asc', 'value')).toBe('asc')
+            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'value')).toBe('asc')
         })
 
         it('returns asc when target column is different and current is desc', () => {
-            expect(getNextSortDirection('name', 'desc', 'value')).toBe('asc')
+            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'value')).toBe('asc')
         })
     })
 })

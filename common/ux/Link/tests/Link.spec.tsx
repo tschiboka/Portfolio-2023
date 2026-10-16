@@ -1,4 +1,6 @@
-import { Set } from './Link.spec.utils'
+import { LinkTestUtils } from './Link.spec.utils'
+
+const { Set } = LinkTestUtils
 
 describe('Link', () => {
     describe('as route (internal)', () => {

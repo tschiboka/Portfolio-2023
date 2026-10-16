@@ -3,16 +3,16 @@ import './LevelCreator.styles.css'
 import '../WordDuelArena.styles.css'
 import { LevelCreatorModal } from './components/LevelCreatorModal'
 import { WordUtils } from '../common/utils/Word/Word.utils'
-import { MAX_WORD_LENGTH, MIN_WORD_LENGTH } from '../common/utils/Word/Word.constants'
-import { useGetLevelNames } from './LevelCreator.queries'
+import { WordConstants } from '../common/utils/Word/Word.constants'
+import { LevelCreatorQueries } from './LevelCreator.queries'
 import { LevelList } from './components/LevelList'
 import { LoadingIndicator } from '@common-ux'
-import { Browser } from '@common-utils'
+import { BrowserHooks } from '@common-utils'
 
 export const LevelCreator = () => {
-    const { ref, enterFullScreen } = Browser.useFullScreen<HTMLDivElement>()
+    const { ref, enterFullScreen } = BrowserHooks.useFullScreen<HTMLDivElement>()
 
-    const { data, isLoading, error } = useGetLevelNames()
+    const { data, isLoading, error } = LevelCreatorQueries.Names.useGet()
     const levels = data?.levels
 
     const [levelName, setLevelName] = useState('')
@@ -35,8 +35,8 @@ export const LevelCreator = () => {
                         id="levelName"
                         name="levelName"
                         value={levelName}
-                        minLength={MIN_WORD_LENGTH}
-                        maxLength={MAX_WORD_LENGTH}
+                        minLength={WordConstants.minLength}
+                        maxLength={WordConstants.maxLength}
                         onChange={handleInputChange}
                     />
                     <button onClick={handleNewLevelClick}>Create</button>

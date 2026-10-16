@@ -99,16 +99,18 @@ export const ruleBuilder = {
      * Writes the built standards as a module the eslint config can import.
      *
      * Rules hold `create` functions, so they are re-imported rather than serialised.
+     * `target` is relative to the compiled builder, which `rootDir: ".."` places one
+     * level below `dist/`, so the config itself is written there.
      *
      * @example
-     * emit('rules/dist/standards.config.js')
+     * emit('../standards.config.js', 'standards')
      */
     emit: (target: string, pluginName: string): void => {
         const { rules, settings, scopes } = ruleBuilder.build(RuleRegistry, pluginName, {
             eslint: ESLint.version,
         })
 
-        const relativeRegistry = './registry.js'
+        const relativeRegistry = './rules/registry.js'
         const ids = JSON.stringify(Object.keys(rules), null, 4)
 
         const source = [
@@ -135,4 +137,4 @@ export const ruleBuilder = {
     },
 }
 
-ruleBuilder.emit('standards.config.js', 'standards')
+ruleBuilder.emit('../standards.config.js', 'standards')

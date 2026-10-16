@@ -1,6 +1,6 @@
 export { Gym } from './Gym/Gym'
 export { Typist } from './Typist/Typist'
 export { WordDuelArena } from './WordDuelArena/WordDuelArena'
-export { Xmas2025 } from './Xmas2025/Xmas2025'
-export { ProjectRoutesList } from './Projects.routes'
+export { Xmas } from './Xmas'
+export { ProjectsRoutes } from './Projects.routes'
 export type { ProjectRoute } from './Projects.types'

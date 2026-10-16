@@ -1,4 +1,4 @@
-import { AppRouteConfigs } from './App.constants'
+import { AppConfig } from './App.config'
 import type { Dictionary } from '@common-utils'
 import type { AppRoute, AppRouteConfig } from './App.types'
 
@@ -9,10 +9,8 @@ const buildElement = ({ Component, props, fallback }: AppRouteConfig) => {
 }
 
 export const AppRoutes: Dictionary<AppRoute> = Object.fromEntries(
-    Object.entries(AppRouteConfigs).map(([name, config]) => [
+    Object.entries(AppConfig).map(([name, config]) => [
         name,
         { name: config.name, path: config.path, element: buildElement(config) },
     ]),
 )
-
-export const AppRoutesList: AppRoute[] = Object.values<AppRoute>(AppRoutes)

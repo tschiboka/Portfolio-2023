@@ -1,4 +1,4 @@
-import { LikesQueries } from '@shared-queries'
+import { LikeQueries } from '@shared-queries'
 import { AiFillHeart } from 'react-icons/ai'
 import { Paragraph } from '@common-ux'
 import './LikeButton.scss'
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
-    const { mutate: doPostLike } = LikesQueries.usePost()
+    const { mutate: doPostLike } = LikeQueries.usePost()
 
     return (
         <div className="LikeButton">

@@ -7,7 +7,7 @@ type FormProps = AccessibleProps &
         children: ReactNode
     }
 
-export const FormElement = ({ children, ariaLabel, className, style, ...rest }: FormProps) => {
+export const Form = ({ children, ariaLabel, className, style, ...rest }: FormProps) => {
     return (
         <form aria-label={ariaLabel} className={className} style={style} {...rest}>
             {children}

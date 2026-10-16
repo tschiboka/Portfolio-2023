@@ -5,7 +5,7 @@ import { WebSocketRequest } from '../../Session.types'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 import type { Dictionary } from '@common-utils'
 
-type UseLetterWheelListenersProps = {
+type UseListenersProps = {
     containerRef: RefObject<HTMLDivElement | null>
     wheelRef: RefObject<HTMLDivElement | null>
     inputLetters: string
@@ -16,7 +16,7 @@ type UseLetterWheelListenersProps = {
     send: (msg: WebSocketRequest) => void
 }
 
-export const useLetterWheelListeners = ({
+const useListeners = ({
     containerRef,
     wheelRef,
     inputLetters,
@@ -25,7 +25,7 @@ export const useLetterWheelListeners = ({
     setPositions,
     setTouchState,
     send,
-}: UseLetterWheelListenersProps) => {
+}: UseListenersProps) => {
     // Keyboard
     useEffect(() => {
         if (!allowKeyboardInput) return
@@ -73,4 +73,8 @@ export const useLetterWheelListeners = ({
                 wheel.removeEventListener(event, handler),
             )
     }, [touchState, setTouchState, send, wheelRef])
+}
+
+export const LetterWheelHooks = {
+    useListeners,
 }

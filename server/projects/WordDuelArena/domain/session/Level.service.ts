@@ -2,10 +2,10 @@
 import { isDefined } from '@common-utils'
 import { Arrays } from '@common-utils'
 import { produce } from 'immer'
-import { levelPersistance } from '../../infrastructure/persistence/db/Level.repository'
-import { LevelWordStatuses } from '../../config/constants/Game.constants'
+import { LevelRepository } from '../../infrastructure/persistence/db/Level.repository'
+import { GameConstants } from '../../config/constants/Game.constants'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
-import { getInitialMatchState } from './Match.service'
+import { MatchService } from './Match.service'
 
 type DbLevel = {
     _id: { toString(): string }
@@ -21,18 +21,18 @@ async function initialiseLevel(state: SessionState): Promise<SessionState> {
 
     if (!shouldInitialiseLevel) return state
 
-    const levelFromDb = await levelPersistance.findLevelForSession()
+    const levelFromDb = await LevelRepository.findForSession()
     if (!levelFromDb) return state
     const level = transformLevelFromDb(levelFromDb)
 
     return produce(state, (draft: SessionState) => {
         draft.level = level
-        draft.currentMatch = getInitialMatchState()
+        draft.currentMatch = MatchService.getInitialState()
     })
 }
 
 const transformLevelWord = (word: string): LevelWord => ({
-    status: LevelWordStatuses.UNSOLVED,
+    status: GameConstants.levelWordStatuses.UNSOLVED,
     mask: '*'.repeat(word.length),
     word: word,
     hintIndices: [],
@@ -78,4 +78,4 @@ const transformLevelFromDb = (level: DbLevel): Level => ({
     extraWords: getExtraWords(level.name, level.targetWords).map(transformLevelWord),
 })
 
-export { initialiseLevel }
+export const LevelService = { initialise: initialiseLevel }

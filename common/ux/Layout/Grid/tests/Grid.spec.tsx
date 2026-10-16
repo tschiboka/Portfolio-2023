@@ -1,4 +1,6 @@
-import { Set } from './Grid.spec.utils'
+import { GridTestUtils } from './Grid.spec.utils'
+
+const { Set } = GridTestUtils
 
 describe('Grid', () => {
     describe('rendering', () => {

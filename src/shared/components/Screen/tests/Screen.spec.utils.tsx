@@ -4,12 +4,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { MemoryRouter } from 'react-router-dom'
 import { ScreenSetupOptions } from './Screen.spec.types'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
-import { TestError, server } from '@common-ux/Test'
+import { TestError, Server } from '@common-ux/Test'
 import { isString, isNonEmpty } from '@common-utils'
 import type { Optional } from '@common-utils'
 import { ScreenMocks } from './Screen.mocks'
 import type { AppRoute } from '@app'
-import { AppContextProvider, SessionContext } from '@shared-context'
+import { AppProvider, SessionContext } from '@shared-context'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: ScreenMocks.defaultQueryOptions })
 
@@ -30,14 +30,14 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
     const Providers = ({ children }: { children: React.ReactNode }) => (
         <QueryClientProvider client={queryClient}>
             <SessionContext.Provider value={sessionValue}>
-                <AppContextProvider initialState={appContext}>
+                <AppProvider initialState={appContext}>
                     <MemoryRouter
                         initialEntries={route}
                         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
                     >
                         {children}
                     </MemoryRouter>
-                </AppContextProvider>
+                </AppProvider>
             </SessionContext.Provider>
         </QueryClientProvider>
     )
@@ -45,7 +45,7 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
     return Providers
 }
 
-export const TestScreen = {
+export const ScreenTestUtils = {
     Get: {
         navigatedTo: () => ScreenMocks.navigate.mock.lastCall?.[0] as Optional<string>,
     },
@@ -64,17 +64,19 @@ export const TestScreen = {
     },
     Set: {
         handlers: (...handlers: Buildable[]) => {
-            server.use(...handlers.map((h) => h.build()))
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            Server.use(...handlers.map((h) => h.build()))
         },
     },
     Do: {
         render: (options: ScreenSetupOptions) => {
             // ScreenMocks.navigate is module-level and shared by every spec that renders through
-            // TestScreen; clear it so a navigation assertion cannot read a previous test's call.
+            // ScreenTestUtils; clear it so a navigation assertion cannot read a previous test's call.
             ScreenMocks.navigate.mockClear()
 
             if (options.handlers?.length) {
-                server.use(...options.handlers.map((h) => h.build()))
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                Server.use(...options.handlers.map((h) => h.build()))
             }
             options.beforeRender?.()
             const Wrapper = withScreenProviders(options)

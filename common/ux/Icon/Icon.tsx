@@ -1,5 +1,5 @@
 import type { CSSProperties } from 'react'
-import type { IconName } from './Icon.constants'
+import type { IconName } from './Icon.types'
 import { IconConstants } from './Icon.constants'
 
 export type { IconName }

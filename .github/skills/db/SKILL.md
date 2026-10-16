@@ -48,7 +48,7 @@ server/App/<Domain>/
 ├── <Domain>.model.ts
 ├── <Domain>.repository.ts
 ├── <Domain>.service.ts
-├── <Domain>.routes.ts
+├── <Domain>.router.ts
 └── index.ts
 ```
 
@@ -111,9 +111,9 @@ Rules:
 - A missing record is a thrown `ApiResponder`, never a returned `undefined`.
 - Calls the repository; never a model directly.
 
-### `<Domain>.routes.ts`
+### `<Domain>.router.ts`
 
-Example: [`Feature.routes.ts`](./Feature.routes.ts) — a lean reference; `router` owns this file.
+Example: [`Feature.router.ts`](./Feature.router.ts) — a lean reference; `router` owns this file.
 Rules:
 
 - Delegates to the service in one call. No validation, no queries, no rules.

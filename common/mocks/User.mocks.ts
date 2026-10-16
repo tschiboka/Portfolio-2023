@@ -2,7 +2,7 @@ import { MockBuilder } from '@common-ux/Test'
 import { TestMocks } from './TestMocks'
 import type { User } from '@common-types'
 
-export const MockUser = MockBuilder<User>({
+export const UserMocks = MockBuilder<User>({
     id: TestMocks.userId,
     userName: TestMocks.userName,
     email: TestMocks.userEmail,

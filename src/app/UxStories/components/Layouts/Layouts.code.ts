@@ -1,4 +1,4 @@
-export const Code = {
+export const LayoutsCode = {
     // ── Box ──────────────────────────────────────────────
     Box: {
         basic: `<Box padding="16" background="surface" borderRadius="md">

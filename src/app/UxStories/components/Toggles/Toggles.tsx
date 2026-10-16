@@ -5,7 +5,7 @@ import { Code, CodeText, Heading, Main, Paragraph, Section, Stack, Toggle } from
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Toggles.code'
+import { TogglesCode } from './Toggles.code'
 
 type TogglesProps = { path: string }
 
@@ -38,7 +38,7 @@ export const Toggles = ({ path }: TogglesProps) => (
                     <Toggle handleClick={Functions.noop} active={false} />
                     <Toggle handleClick={Functions.noop} active />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.NoIcon.bare} />
+                <Code language="tsx" content={TogglesCode.NoIcon.bare} />
             </Section>
             <Section>
                 <Heading as="h2" id="basic-usage">
@@ -57,8 +57,8 @@ export const Toggles = ({ path }: TogglesProps) => (
                         <BsMoonStars className="theme-icon" />
                     </Toggle>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Basic.inactive} />
-                <Code language="tsx" content={Snippets.Basic.active} />
+                <Code language="tsx" content={TogglesCode.Basic.inactive} />
+                <Code language="tsx" content={TogglesCode.Basic.active} />
             </Section>
             <Section>
                 <Heading as="h2" id="colors">
@@ -72,7 +72,7 @@ export const Toggles = ({ path }: TogglesProps) => (
                     <Toggle handleClick={Functions.noop} active={false} />
                     <Toggle handleClick={Functions.noop} active activeColor="#00ff00" />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Colors.activeColor} />
+                <Code language="tsx" content={TogglesCode.Colors.activeColor} />
             </Section>
             <Section>
                 <Heading as="h2" id="controlled">
@@ -82,7 +82,7 @@ export const Toggles = ({ path }: TogglesProps) => (
                     Tie the toggle to local state to flip between the two states on interaction.
                 </Paragraph>
                 <ControlledToggle />
-                <Code language="tsx" content={Snippets.States.controlled} />
+                <Code language="tsx" content={TogglesCode.States.controlled} />
             </Section>
         </Main>
     </Screen>

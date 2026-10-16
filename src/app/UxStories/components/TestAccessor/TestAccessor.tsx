@@ -12,7 +12,7 @@ import {
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './TestAccessor.code'
+import { TestAccessorCode } from './TestAccessor.code'
 import { TestAccessorColumns } from './TestAccessor.columns'
 import { TestAccessorData } from './TestAccessor.data'
 import { Table } from '@common-ux/Table/Table'
@@ -36,7 +36,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 Accessors <strong>locate elements</strong>, <strong>expose direct state</strong>,
                 and <strong>perform single user actions</strong>. Nothing more.
             </Paragraph>
-            <Code language="ts" content={Snippets.Import} />
+            <Code language="ts" content={TestAccessorCode.Import} />
             <Section>
                 <Heading as="h2" id="what-it-is">
                     What it is
@@ -94,9 +94,9 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     repeated patterns — it doesn&apos;t ban direct DOM access.
                 </BlockQuote>
                 <Heading as="h3">Before</Heading>
-                <Code language="ts" content={Snippets.Before} />
+                <Code language="ts" content={TestAccessorCode.Before} />
                 <Heading as="h3">After</Heading>
-                <Code language="ts" content={Snippets.After} />
+                <Code language="ts" content={TestAccessorCode.After} />
             </Section>
             {/* Core Problem */}
             <Section>
@@ -108,7 +108,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     strategies, three user-event lifecycle patterns — multiplied across 100+ test
                     files, this becomes unmaintainable.
                 </Paragraph>
-                <Code language="ts" content={Snippets.Problem} />
+                <Code language="ts" content={TestAccessorCode.Problem} />
             </Section>
             {/* Public API */}
             <Section>
@@ -126,12 +126,12 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     Base <CodeText>Get</CodeText>
                 </Heading>
                 <Paragraph>Inherited by all accessors:</Paragraph>
-                <Code language="ts" content={Snippets.API.get} />
+                <Code language="ts" content={TestAccessorCode.API.get} />
                 <Heading as="h3">
                     Base <CodeText>Do</CodeText>
                 </Heading>
                 <Paragraph>Inherited by all accessors:</Paragraph>
-                <Code language="ts" content={Snippets.API.do} />
+                <Code language="ts" content={TestAccessorCode.API.do} />
                 <Heading as="h3">
                     <CodeText>Has</CodeText> (derived from <CodeText>Get</CodeText>)
                 </Heading>
@@ -139,7 +139,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     Wraps any <CodeText>Get</CodeText> method — returns <CodeText>true</CodeText> if
                     the getter succeeds, <CodeText>false</CodeText> if it throws or returns null:
                 </Paragraph>
-                <Code language="ts" content={Snippets.API.has} />
+                <Code language="ts" content={TestAccessorCode.API.has} />
                 <BlockQuote>
                     <strong>Caveat:</strong> <CodeText>Has</CodeText> should only suppress expected
                     lookup failures (element not found). It is not a general error silencer —
@@ -155,7 +155,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     <CodeText>expect</CodeText>, use <CodeText>waitFor</CodeText> directly since{' '}
                     <CodeText>Wait</CodeText> doesn&apos;t wrap matchers.
                 </Paragraph>
-                <Code language="ts" content={Snippets.API.wait} />
+                <Code language="ts" content={TestAccessorCode.API.wait} />
                 <Heading as="h3">
                     <CodeText>Set</CodeText> (static, pre-render)
                 </Heading>
@@ -166,7 +166,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     contract — simple components expose <CodeText>Set.mock(props)</CodeText>,
                     complex ones define domain-specific methods.
                 </Paragraph>
-                <Code language="ts" content={Snippets.API.set} />
+                <Code language="ts" content={TestAccessorCode.API.set} />
             </Section>
             {/* Usage Examples */}
             <Section>
@@ -174,19 +174,19 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     Usage Examples
                 </Heading>
                 <Heading as="h3">Basic interaction</Heading>
-                <Code language="ts" content={Snippets.Usage.basic} />
+                <Code language="ts" content={TestAccessorCode.Usage.basic} />
                 <Heading as="h3">Conditional checks</Heading>
-                <Code language="ts" content={Snippets.Usage.conditional} />
+                <Code language="ts" content={TestAccessorCode.Usage.conditional} />
                 <Heading as="h3">Composite accessors</Heading>
-                <Code language="ts" content={Snippets.Usage.composite} />
+                <Code language="ts" content={TestAccessorCode.Usage.composite} />
                 <Heading as="h3">Portaled overlays</Heading>
-                <Code language="ts" content={Snippets.Usage.overlay} />
+                <Code language="ts" content={TestAccessorCode.Usage.overlay} />
                 <Heading as="h3">Navigation</Heading>
-                <Code language="ts" content={Snippets.Usage.navigation} />
+                <Code language="ts" content={TestAccessorCode.Usage.navigation} />
                 <Heading as="h3">Server mocking</Heading>
-                <Code language="ts" content={Snippets.Usage.serverMocking} />
+                <Code language="ts" content={TestAccessorCode.Usage.serverMocking} />
                 <Heading as="h3">Page render</Heading>
-                <Code language="ts" content={Snippets.Usage.pageRender} />
+                <Code language="ts" content={TestAccessorCode.Usage.pageRender} />
             </Section>
             {/* Design Constraints */}
             <Section>
@@ -248,9 +248,9 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                 </Paragraph>
                 <Heading as="h3">Principles</Heading>
                 <Heading as="h4">Good</Heading>
-                <Code language="ts" content={Snippets.Constraints.namespaceGood} />
+                <Code language="ts" content={TestAccessorCode.Constraints.namespaceGood} />
                 <Heading as="h4">Bad</Heading>
-                <Code language="ts" content={Snippets.Constraints.namespaceBad} />
+                <Code language="ts" content={TestAccessorCode.Constraints.namespaceBad} />
                 <List
                     items={[
                         {
@@ -327,15 +327,15 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     CSS class, use <CodeText>querySelector</CodeText>.
                 </BlockQuote>
                 <Heading as="h4">Good</Heading>
-                <Code language="ts" content={Snippets.Constraints.queryGood} />
+                <Code language="ts" content={TestAccessorCode.Constraints.queryGood} />
                 <Heading as="h4">Bad</Heading>
-                <Code language="ts" content={Snippets.Constraints.queryBad} />
+                <Code language="ts" content={TestAccessorCode.Constraints.queryBad} />
                 <Heading as="h3">Locator Contracts</Heading>
                 <Paragraph>
                     When labels are repeated across test files, co-locate an{' '}
                     <CodeText>as const</CodeText> object as the single source of truth:
                 </Paragraph>
-                <Code language="ts" content={Snippets.Constraints.locatorContract} />
+                <Code language="ts" content={TestAccessorCode.Constraints.locatorContract} />
             </Section>
             {/* Implementation Internals */}
             <Section>
@@ -350,7 +350,7 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     </em>
                 </Paragraph>
                 <Heading as="h3">The Accessor Base Class</Heading>
-                <Code language="ts" content={Snippets.Internals.baseClass} />
+                <Code language="ts" content={TestAccessorCode.Internals.baseClass} />
                 <Heading as="h4">Key decisions</Heading>
                 <List
                     items={[
@@ -427,11 +427,11 @@ export const TestAccessor = ({ path }: TestAccessorProps) => (
                     getter override with spread. <CodeText>Has</CodeText> and{' '}
                     <CodeText>Wait</CodeText> proxies see the merged result automatically.
                 </Paragraph>
-                <Code language="ts" content={Snippets.Constraints.inheritance} />
+                <Code language="ts" content={TestAccessorCode.Constraints.inheritance} />
                 <Heading as="h3">TestError</Heading>
-                <Code language="ts" content={Snippets.Internals.testError} />
+                <Code language="ts" content={TestAccessorCode.Internals.testError} />
                 <Heading as="h3">MockBuilder</Heading>
-                <Code language="ts" content={Snippets.Internals.mockBuilder} />
+                <Code language="ts" content={TestAccessorCode.Internals.mockBuilder} />
                 <Heading as="h3">Page.render</Heading>
                 <Paragraph>
                     Standard test entry point. Wraps the component in all required providers (React

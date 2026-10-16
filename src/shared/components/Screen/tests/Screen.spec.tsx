@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
-import { VisitsQueries } from '@shared-queries'
+import { VisitQueries } from '@shared-queries'
 import { Browser, Paths } from '@common-utils'
 import { Screen } from '../Screen'
-import { TestScreen } from './Screen.spec.utils'
+import { Test } from './index'
 import { Heading } from '@common-ux'
 
 // Mock the shared-queries barrel so visit recording is a typed vi.fn we can drive directly;
@@ -13,13 +13,12 @@ vi.mock(
     '@shared-queries',
     () =>
         ({
-            VisitsQueries: {
+            VisitQueries: {
                 usePost: vi.fn(),
                 useGet: vi.fn().mockReturnValue({ data: undefined }),
-                useRecord: vi.fn(),
                 Summary: { useGet: vi.fn().mockReturnValue({ data: undefined }) },
             },
-            LikesQueries: {
+            LikeQueries: {
                 usePost: vi.fn(),
                 useGet: vi.fn().mockReturnValue({ data: undefined }),
                 Summary: { useGet: vi.fn() },
@@ -27,7 +26,7 @@ vi.mock(
         }) satisfies typeof import('@shared-queries'),
 )
 
-const useRecordMock = vi.mocked(VisitsQueries.useRecord)
+const useRecordMock = vi.mocked(VisitQueries.usePost)
 
 beforeEach(() => {
     vi.clearAllMocks()
@@ -39,7 +38,7 @@ beforeEach(() => {
 describe('Screen', () => {
     describe('Document title', () => {
         it('sets the document title on mount', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="My Page" path="/test">
@@ -54,7 +53,7 @@ describe('Screen', () => {
 
     describe('Content', () => {
         it('renders children', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test">
@@ -69,7 +68,7 @@ describe('Screen', () => {
 
     describe('CSS class', () => {
         it('has the base Screen class', () => {
-            const { container } = TestScreen.Do.render({
+            const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test">
@@ -82,7 +81,7 @@ describe('Screen', () => {
         })
 
         it('applies custom className', () => {
-            const { container } = TestScreen.Do.render({
+            const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test" className="CustomScreen">
@@ -95,7 +94,7 @@ describe('Screen', () => {
         })
 
         it('adds submenu-open class when subMenuVisible is true', () => {
-            const { container } = TestScreen.Do.render({
+            const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test">
@@ -111,7 +110,7 @@ describe('Screen', () => {
 
     describe('Visit recording', () => {
         it('records a visit for the screen path', async () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/home',
                 children: (
                     <Screen title="Test" path="/home">
@@ -126,7 +125,7 @@ describe('Screen', () => {
 
     describe('Login redirect', () => {
         it('redirects to /api/login when loginRequired and not authenticated', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/admin',
                 children: (
                     <Screen title="Test" path="/admin" loginRequired>
@@ -136,11 +135,11 @@ describe('Screen', () => {
                 session: { isAuthenticated: false, isAuthLoading: false },
             })
 
-            expect(TestScreen.Get.navigatedTo()).toBe(Paths.Client.Login)
+            expect(Test.Screen.Get.navigatedTo()).toBe(Paths.Client.Login)
         })
 
         it('does not redirect when loginRequired and authenticated', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/admin',
                 children: (
                     <Screen title="Test" path="/admin" loginRequired>
@@ -150,12 +149,12 @@ describe('Screen', () => {
                 session: { isAuthenticated: true, isAuthLoading: false },
             })
 
-            expect(TestScreen.Has.navigated()).toBe(false)
+            expect(Test.Screen.Has.navigated()).toBe(false)
             expect(Accessor.screen.getByText('Protected')).toBeInTheDocument()
         })
 
         it('does not redirect when loginRequired is false (default)', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/public',
                 children: (
                     <Screen title="Test" path="/public">
@@ -165,14 +164,14 @@ describe('Screen', () => {
                 session: { isAuthenticated: false, isAuthLoading: false },
             })
 
-            expect(TestScreen.Has.navigated()).toBe(false)
+            expect(Test.Screen.Has.navigated()).toBe(false)
             expect(Accessor.screen.getByText('Public')).toBeInTheDocument()
         })
     })
 
     describe('Scroll', () => {
         it('scrolls to top on mount', () => {
-            TestScreen.Do.render({
+            Test.Screen.Do.render({
                 path: '/test',
                 children: (
                     <Screen title="Test" path="/test">

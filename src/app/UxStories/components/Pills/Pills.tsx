@@ -2,7 +2,7 @@ import { Code, CodeText, Heading, Main, Paragraph, Pill, Section, Stack } from '
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Pills.code'
+import { PillsCode } from './Pills.code'
 
 type PillsProps = { path: string }
 
@@ -37,8 +37,8 @@ export const Pills = ({ path }: PillsProps) => (
                     <Pill label="Active" />
                     <Pill label="ERROR" color="error" />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Basic.minimal} />
-                <Code language="tsx" content={Snippets.Basic.withColor} />
+                <Code language="tsx" content={PillsCode.Basic.minimal} />
+                <Code language="tsx" content={PillsCode.Basic.withColor} />
             </Section>
             <Section>
                 <Heading as="h2" id="colours">
@@ -55,7 +55,7 @@ export const Pills = ({ path }: PillsProps) => (
                         <Pill key={c} label={c.toUpperCase()} color={c} />
                     ))}
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Colors.allColors} />
+                <Code language="tsx" content={PillsCode.Colors.allColors} />
             </Section>
             <Section>
                 <Heading as="h2" id="variants">
@@ -78,8 +78,8 @@ export const Pills = ({ path }: PillsProps) => (
                         <Pill key={c} label={c.toUpperCase()} color={c} variant="solid" />
                     ))}
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Variants.outlined} />
-                <Code language="tsx" content={Snippets.Variants.solid} />
+                <Code language="tsx" content={PillsCode.Variants.outlined} />
+                <Code language="tsx" content={PillsCode.Variants.solid} />
             </Section>
             <Section>
                 <Heading as="h2" id="use-cases">
@@ -92,7 +92,7 @@ export const Pills = ({ path }: PillsProps) => (
                     <Pill label="PENDING" color="orange" />
                     <Pill label="INACTIVE" color="error" />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.UseCases.statusBadge} />
+                <Code language="tsx" content={PillsCode.UseCases.statusBadge} />
                 <Heading as="h3">Tags</Heading>
                 <Paragraph>Render a list of labels as pills.</Paragraph>
                 <Stack.Horizontal gap="8" style={{ flexWrap: 'wrap' }}>
@@ -100,7 +100,7 @@ export const Pills = ({ path }: PillsProps) => (
                     <Pill label="TypeScript" color="purple" />
                     <Pill label="CSS" color="purple" />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.UseCases.tags} />
+                <Code language="tsx" content={PillsCode.UseCases.tags} />
                 <Heading as="h3">Legend</Heading>
                 <Paragraph>Combine pills with counts for chart or table legends.</Paragraph>
                 <Stack.Horizontal gap="12" style={{ flexWrap: 'wrap', alignItems: 'center' }}>
@@ -114,7 +114,7 @@ export const Pills = ({ path }: PillsProps) => (
                         <Pill label="INACTIVE" color="error" /> = 3
                     </span>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.UseCases.legend} />
+                <Code language="tsx" content={PillsCode.UseCases.legend} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -125,7 +125,7 @@ export const Pills = ({ path }: PillsProps) => (
                     convey enough context for screen readers.
                 </Paragraph>
                 <Pill label="3 errors" color="error" ariaLabel="3 validation errors found" />
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={PillsCode.Accessibility.ariaLabel} />
             </Section>
             <Section>
                 <Heading as="h2" id="custom-styling">
@@ -143,8 +143,8 @@ export const Pills = ({ path }: PillsProps) => (
                         style={{ padding: '6px 24px', fontSize: '1rem' }}
                     />
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.CustomStyling.className} />
-                <Code language="tsx" content={Snippets.CustomStyling.style} />
+                <Code language="tsx" content={PillsCode.CustomStyling.className} />
+                <Code language="tsx" content={PillsCode.CustomStyling.style} />
             </Section>
         </Main>
     </Screen>

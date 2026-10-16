@@ -1,0 +1,96 @@
+import { useMutation, useQuery } from '@tanstack/react-query'
+import {
+    GetXmasCandlesResponse,
+    GetXmasMessagesResponse,
+    GetXmasPingResponse,
+    PostXmasMessageRequest,
+    PostXmasMessageResponse,
+    PutXmasCandlesRequest,
+    PutXmasCandlesResponse,
+} from '@common-types'
+import { QueryKey, Query } from '@common-utils'
+import { Session } from '@shared-context'
+
+const useGetPagePingData = () => {
+    const request = new Query.RequestBuilder('Xmas', 'Projects').build()
+
+    return useQuery({
+        queryKey: QueryKey.XmasPagePing.build(),
+        queryFn: async () => await request.get<GetXmasPingResponse>(),
+    })
+}
+
+type UsePostMessage = { onSuccess: () => void }
+const usePostMessage = ({ onSuccess }: UsePostMessage) => {
+    const token = Session.useContext().session?.token
+
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
+        .setSubpath('/message')
+        .withAuthToken(token)
+        .build()
+
+    return useMutation({
+        mutationKey: QueryKey.XmasMessage.build(),
+        mutationFn: async (payload: PostXmasMessageRequest) =>
+            await request.post<PostXmasMessageResponse>(payload),
+        onSuccess,
+    })
+}
+
+type UseGetMessages = { userId?: string }
+const useGetMessages = ({ userId }: UseGetMessages) => {
+    const token = Session.useContext().session?.token
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
+        .setSubpath('/message')
+        .setQuery({ userId })
+        .withAuthToken(token)
+        .build()
+
+    return useQuery({
+        queryKey: QueryKey.XmasMessage.build(),
+        queryFn: async () => await request.get<GetXmasMessagesResponse>(),
+        enabled: Boolean(userId),
+    })
+}
+
+const useGetCandles = () => {
+    const token = Session.useContext().session?.token
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
+        .setSubpath('/candles')
+        .withAuthToken(token)
+        .build()
+
+    return useQuery({
+        queryKey: QueryKey.XmasCandles.build(),
+        queryFn: async () => await request.get<GetXmasCandlesResponse>(),
+        enabled: Boolean(request),
+    })
+}
+
+const usePutCandles = () => {
+    const token = Session.useContext().session?.token
+    const request = new Query.RequestBuilder('Xmas', 'Projects')
+        .setSubpath('/candles')
+        .withAuthToken(token)
+        .build()
+
+    return useMutation({
+        mutationKey: QueryKey.XmasCandles.build(),
+        mutationFn: async (payload: PutXmasCandlesRequest) =>
+            await request.put<PutXmasCandlesResponse>(payload),
+    })
+}
+
+export const XmasQueries = {
+    PagePing: {
+        useGet: useGetPagePingData,
+    },
+    Messages: {
+        useGet: useGetMessages,
+        usePost: usePostMessage,
+    },
+    Candles: {
+        useGet: useGetCandles,
+        usePut: usePutCandles,
+    },
+}

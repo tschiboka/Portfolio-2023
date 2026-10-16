@@ -1,4 +1,4 @@
-export const Code = {
+export const RegionsCode = {
     Card: {
         basic: `<Card ariaLabel="User profile">
     <p>Card content goes here.</p>

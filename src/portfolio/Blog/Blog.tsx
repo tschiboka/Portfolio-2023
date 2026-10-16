@@ -9,7 +9,7 @@ import { BsSliders2 } from 'react-icons/bs'
 import { BlogUtils } from './Blog.utils'
 import './Blog.scss'
 import { BlogSortBy } from './Blog.types'
-import { LikesQueries, VisitsQueries } from '@shared-queries'
+import { LikeQueries, VisitQueries } from '@shared-queries'
 
 interface Props {
     pageName: string
@@ -20,8 +20,8 @@ export const Blog = ({ pageName, path }: Props) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
     const [sortedBy, setSortedBy] = useState<BlogSortBy>('mostRelevant')
 
-    const { data: visitsData } = VisitsQueries.Summary.useGet()
-    const { data: likesData } = LikesQueries.Summary.useGet()
+    const { data: visitsData } = VisitQueries.Summary.useGet()
+    const { data: likesData } = LikeQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null
     const likes = likesData?.likes ?? null
 

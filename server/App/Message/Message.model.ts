@@ -1,26 +1,26 @@
 import mongoose from 'mongoose'
 import type { IMessage } from './Message.types'
-import { MessageFieldLimits } from './Message.constants'
+import { MessageConstants } from './Message.constants'
 
 const schema = new mongoose.Schema<IMessage>({
     name: {
         type: String,
         required: true,
-        maxlength: MessageFieldLimits.name.max,
-        minlength: MessageFieldLimits.name.min,
+        maxlength: MessageConstants.fieldLimits.name.max,
+        minlength: MessageConstants.fieldLimits.name.min,
         trim: true,
     },
     email: {
         type: String,
         required: true,
-        maxlength: MessageFieldLimits.email.max,
+        maxlength: MessageConstants.fieldLimits.email.max,
         trim: true,
         lowercase: true,
     },
     phone: {
         type: String,
-        maxlength: MessageFieldLimits.phone.max,
-        minlength: MessageFieldLimits.phone.min,
+        maxlength: MessageConstants.fieldLimits.phone.max,
+        minlength: MessageConstants.fieldLimits.phone.min,
         trim: true,
     },
     message: {

@@ -1,8 +1,9 @@
 import type { MockInstance } from 'vitest'
-import { Browser } from '../index'
+import { Browser, BrowserHooks } from '../index'
 import { renderHook, act } from '@testing-library/react'
 
-const { copyToClipboard, useFullScreen } = Browser
+const { copyToClipboard } = Browser
+const { useFullScreen, useIsVisible, useOrientation } = BrowserHooks
 
 // Vendor-prefixed Fullscreen API types — mirrors the hook's interfaces
 interface FullScreenElement {
@@ -153,7 +154,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            renderHook(() => Browser.useIsVisible([el1, el2]))
+            renderHook(() => useIsVisible([el1, el2]))
 
             const observer = instances[0]
             expect(observer.observe).toHaveBeenCalledTimes(2)
@@ -163,7 +164,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            const { result } = renderHook(() => Browser.useIsVisible([el1, el2]))
+            const { result } = renderHook(() => useIsVisible([el1, el2]))
 
             const observer = instances[0]
 
@@ -183,7 +184,7 @@ describe('Browser', () => {
             const el1 = createElement()
             const el2 = createElement()
 
-            const { result } = renderHook(() => Browser.useIsVisible([el1, el2]))
+            const { result } = renderHook(() => useIsVisible([el1, el2]))
 
             const observer = instances[0]
 
@@ -209,7 +210,7 @@ describe('Browser', () => {
         it('disconnects on unmount', () => {
             const el1 = createElement()
 
-            const { unmount } = renderHook(() => Browser.useIsVisible([el1]))
+            const { unmount } = renderHook(() => useIsVisible([el1]))
 
             const observer = instances[0]
 
@@ -440,7 +441,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(PORTRAIT.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(PORTRAIT.innerHeight)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('portrait')
         })
 
@@ -448,7 +449,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('landscape')
         })
 
@@ -456,7 +457,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(MOBILE.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(MOBILE.innerHeight)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(true)
         })
 
@@ -464,7 +465,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(DESKTOP.innerHeight)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(false)
         })
 
@@ -472,7 +473,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('landscape')
 
             // Change to portrait
@@ -489,7 +490,7 @@ describe('Browser', () => {
         it('should update isMobile on resize', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
 
-            const { result } = renderHook(() => Browser.useOrientation())
+            const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(false)
 
             // Resize to mobile width
@@ -504,7 +505,7 @@ describe('Browser', () => {
 
         it('should clean up the resize listener on unmount', () => {
             const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
-            const { unmount } = renderHook(() => Browser.useOrientation())
+            const { unmount } = renderHook(() => useOrientation())
 
             unmount()
 

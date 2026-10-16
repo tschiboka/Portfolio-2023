@@ -1,16 +1,15 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common-ux/Test'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Test } from '@shared-components/Screen/tests'
 import { AppRoutes } from '../../../app'
-import { MockSettings, MockUser } from '@common-mocks'
+import { SettingsMocks, UserMocks } from '@common-mocks'
 import { LoginMocks } from './Login.mocks'
 import { LoginMockHandlers } from './Login.mockHandlers'
-import { LoginLabels } from './Login.spec.utils'
+import { LoginTestUtils } from './Login.spec.utils'
 
-const { form: FORM, fields, buttons, errors } = LoginLabels
+const { form: FORM, fields, buttons, errors } = LoginTestUtils.labels
 
 const setupLogin = () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: AppRoutes.Login,
         session: { setSession: LoginMocks.setSession },
         handlers: LoginMockHandlers.Defaults,
@@ -61,10 +60,10 @@ describe('Login', () => {
 
         it('should not render the register button when registration is disabled', async () => {
             const { form } = setupLogin()
-            TestScreen.Set.handlers(
+            Test.Screen.Set.handlers(
                 LoginMockHandlers.Settings.Get.updateResponse((builder) =>
                     builder.setValue('settings', {
-                        ...MockSettings.build(),
+                        ...SettingsMocks.build(),
                         enableUserRegistration: false,
                     }),
                 ),
@@ -80,7 +79,7 @@ describe('Login', () => {
 
             expect(button).toBeDefined()
             await form.Button(buttons.register).Do.click()
-            expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
+            expect(Test.Screen.Get.navigatedTo()).toBe('/api/register')
         })
     })
 
@@ -118,7 +117,7 @@ describe('Login', () => {
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
             expect(LoginMocks.setSession).not.toHaveBeenCalled()
-            expect(TestScreen.Has.navigated()).toBe(false)
+            expect(Test.Screen.Has.navigated()).toBe(false)
         })
     })
 
@@ -135,22 +134,22 @@ describe('Login', () => {
             await waitFor(() => {
                 expect(LoginMocks.setSession).toHaveBeenCalledWith({
                     token: 'mock-jwt-token',
-                    user: MockUser.build(),
-                    settings: MockSettings.build(),
+                    user: UserMocks.build(),
+                    settings: SettingsMocks.build(),
                 })
             })
         })
 
         it('should navigate to /api/home on successful login', async () => {
             await fillAndSubmitForm()
-            await TestScreen.Wait.navigatedTo('/api/home')
+            await Test.Screen.Wait.navigatedTo('/api/home')
         })
     })
 
     describe('Failed login', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = setupLogin()
-            TestScreen.Set.handlers(LoginMockHandlers.Login.PostRejected)
+            Test.Screen.Set.handlers(LoginMockHandlers.Login.PostRejected)
             await form.Input(fields.email).Do.type('wrong@email.com')
             await form.Input(fields.password).Do.type('wrongpassword1')
             await form.Do.submit()
@@ -165,7 +164,7 @@ describe('Login', () => {
         it('should not navigate on login failure', async () => {
             const form = await fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
-            expect(TestScreen.Has.navigated()).toBe(false)
+            expect(Test.Screen.Has.navigated()).toBe(false)
         })
 
         it('should not set session on login failure', async () => {

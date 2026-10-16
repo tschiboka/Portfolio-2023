@@ -1,4 +1,6 @@
-import { Set } from './Figure.spec.utils'
+import { FigureTestUtils } from './Figure.spec.utils'
+
+const { Set } = FigureTestUtils
 
 describe('Figure', () => {
     it('should render a <figure> element', () => {

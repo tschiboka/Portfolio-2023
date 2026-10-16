@@ -98,7 +98,7 @@ different API payload.
 4. Set the hook's defaults — messages, invalidation, retry, `staleTime` — and spread the caller's options last so every one is overridable.
 5. If the body is not the mutation variable, add `Feature.transformers.ts` and map it there.
 6. Type the result and the error: `AxiosResponse<T>` or `T`, and `AxiosError<ErrorResponse>`.
-7. Export the hooks on a single `<Feature>Queries` object.
+7. Export the hooks on a single `<Feature>Queries` object — verbs at the top level, sub-resources nested.
 
 ## Files and folders
 
@@ -110,6 +110,8 @@ Example: [`Feature.queries.ts`](./Feature.queries.ts)
 Rules:
 
 - Exports `<Feature>Queries` as one object — never the hooks individually.
+- The feature's own request is the top-level verb: `useGet`, `usePost`, `usePut`.
+- Any other request sits under a key named for its sub-resource, whose leaves are the verbs: `SubFeature: { useGet }`, `Form: { usePost }`. The leaf stays `useGet`/`usePost`, never `useGetSubfeature`, so the verb reads at the call site.
 - One file per feature; shared hooks live under `src/shared/queries/`.
 - The hook sets defaults; every caller must be able to override them.
 - Reads and writes from the same feature share the file.

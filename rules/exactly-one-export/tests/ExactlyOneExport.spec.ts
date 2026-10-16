@@ -1,9 +1,8 @@
 import { ruleTester } from '../../config'
-import { ExactlyOneExportConstants } from '../ExactlyOneExport.constants'
+import { SingleExportRoles } from '../../constants'
 import { Rules } from '../ExactlyOneExport.rules'
 import { ExactlyOneExportTestUtils } from './ExactlyOneExport.spec.utils'
 
-const { SingleExportRoles } = ExactlyOneExportConstants
 const { messageFor, roleFile } = ExactlyOneExportTestUtils
 
 ruleTester.run('exactly-one-export', Rules.Eslint.ExactlyOneExport9, {
@@ -57,6 +56,11 @@ ruleTester.run('exactly-one-export', Rules.Eslint.ExactlyOneExport9, {
             name: 'should not throw for a bare component, which names no role',
             code: 'export const Blog = 1\nexport const BlogProps = {}',
             filename: '/a/Feature/Blog.tsx',
+        },
+        {
+            name: 'should not throw for a bare file whose own name spells a role',
+            code: 'export const routes = []\nexport const router = {}',
+            filename: '/a/src/routes.tsx',
         },
         {
             name: 'should not throw for a spec, whose role is spec rather than the file it covers',

@@ -1,2 +1,2 @@
-export { requireAdminManaged, requireOwned } from './Permissions'
-export type { OwnedResource } from './Permissions'
+export { Permissions } from './Permissions'
+export type { OwnedResource } from './Permissions.types'

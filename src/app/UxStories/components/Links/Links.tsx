@@ -2,7 +2,7 @@ import { Code, CodeText, Heading, Inline, Link, Main, Paragraph, Section, Stack 
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Links.code'
+import { LinksCode } from './Links.code'
 
 type LinksProps = { path: string }
 
@@ -38,8 +38,8 @@ export const Links = ({ path }: LinksProps) => (
                         <Link href="https://github.com">External anchor link</Link>
                     </Inline>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Basic.asRoute} />
-                <Code language="tsx" content={Snippets.Basic.asAnchor} />
+                <Code language="tsx" content={LinksCode.Basic.asRoute} />
+                <Code language="tsx" content={LinksCode.Basic.asAnchor} />
             </Section>
             <Section>
                 <Heading as="h2" id="internal-vs-external">
@@ -51,8 +51,8 @@ export const Links = ({ path }: LinksProps) => (
                     set <CodeText>target=&quot;_blank&quot;</CodeText> and{' '}
                     <CodeText>rel=&quot;noopener noreferrer&quot;</CodeText>.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Behaviour.external} />
-                <Code language="tsx" content={Snippets.Behaviour.internal} />
+                <Code language="tsx" content={LinksCode.Behaviour.external} />
+                <Code language="tsx" content={LinksCode.Behaviour.internal} />
             </Section>
             <Section>
                 <Heading as="h2" id="download">
@@ -62,7 +62,7 @@ export const Links = ({ path }: LinksProps) => (
                     Pass <CodeText>download</CodeText> on anchor links to trigger a file download. A
                     string value overrides the filename.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Download.file} />
+                <Code language="tsx" content={LinksCode.Download.file} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -72,7 +72,7 @@ export const Links = ({ path }: LinksProps) => (
                     Use <CodeText>ariaLabel</CodeText> when the link text alone doesn{"'"}t describe
                     the destination.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={LinksCode.Accessibility.ariaLabel} />
             </Section>
         </Main>
     </Screen>

@@ -1,21 +1,23 @@
 import mongoose from 'mongoose'
 import type { IXmasMessage } from './Xmas.types'
-import { XmasFieldLimits } from './Xmas.constants'
+import { XmasConstants } from './Xmas.constants'
+
+const { fieldLimits } = XmasConstants
 
 const xmasMessageSchema = new mongoose.Schema<IXmasMessage>(
     {
         name: {
             type: String,
             required: true,
-            minLength: XmasFieldLimits.name.min,
-            maxLength: XmasFieldLimits.name.max,
+            minLength: fieldLimits.name.min,
+            maxLength: fieldLimits.name.max,
             trim: true,
         },
         message: {
             type: String,
             required: true,
-            minLength: XmasFieldLimits.message.min,
-            maxLength: XmasFieldLimits.message.max,
+            minLength: fieldLimits.message.min,
+            maxLength: fieldLimits.message.max,
             trim: true,
         },
         isRead: {

@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { Const } from '@common-ux'
-import { icons } from './components/Icons'
+import { Icons } from './components/Icons'
 import type { CategoryFormData } from './Categories.types'
 
 export const CategoriesSchema = {
@@ -19,7 +19,7 @@ export const CategoriesSchema = {
             icon: yup
                 .string()
                 .required()
-                .test('is-valid-icon', 'Invalid option', (value) => Boolean(icons[value])),
+                .test('is-valid-icon', 'Invalid option', (value) => Boolean(Icons[value])),
             color: yup
                 .string()
                 .required()

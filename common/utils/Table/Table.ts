@@ -1,4 +1,5 @@
-import { TablePagingDefaults, TablePageSizeOptions, TableSortingDefaults } from './Table.constants'
+import { TableDefaults } from './Table.defaults'
+import { TableOptions } from './Table.options'
 import { TableUtils } from './Table.utils'
 
 const { getPageWindow, isFirstPage, isLastPage } = TableUtils
@@ -13,14 +14,14 @@ const { getPageWindow, isFirstPage, isLastPage } = TableUtils
  */
 export const Table = {
     Paging: {
-        defaults: TablePagingDefaults,
-        pageSizeOptions: TablePageSizeOptions,
+        defaults: TableDefaults.paging,
+        pageSizeOptions: TableOptions.pageSizes,
         getWindow: getPageWindow,
         isFirst: isFirstPage,
         isLast: isLastPage,
     },
     Sorting: {
-        defaults: TableSortingDefaults,
+        defaults: TableDefaults.sorting,
     },
 }
 

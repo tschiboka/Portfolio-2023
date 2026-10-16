@@ -1,8 +1,8 @@
 ﻿import type { SessionState, PlayerRole, LevelWord } from '../../WordDuelArena.types'
 import type { MovePayload } from '../../../../../common/types/projects/wda'
 import type { Optional } from '@common-utils'
-import { calculatePoints } from './Points.service'
-import { MatchStatuses } from '../../config/constants/Game.constants'
+import { PointsService } from './Points.service'
+import { GameConstants } from '../../config/constants/Game.constants'
 import { HintService } from './Hint.service'
 
 function getSolutionState(draft: SessionState, deviceId: string, payload: MovePayload): void {
@@ -33,7 +33,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
         foundTarget = true
 
         const player = draft.currentMatch.perPlayerStatus[playerKey]
-        player.points += calculatePoints(payload.attempt, true)
+        player.points += PointsService.calculate(payload.attempt, true)
         player.lastWordAttempt = {
             word: payload.attempt,
             isTarget: true,
@@ -43,7 +43,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
         // End the match when all target words have been found
         const allTargetsSolved = targetWords.every((w: LevelWord) => w.status === 'SOLVED')
         if (allTargetsSolved) {
-            draft.currentMatch.status = MatchStatuses.FINISHED
+            draft.currentMatch.status = GameConstants.matchStatuses.FINISHED
         }
     }
 
@@ -56,7 +56,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
         foundExtra = true
 
         const player = draft.currentMatch.perPlayerStatus[playerKey]
-        player.points += calculatePoints(payload.attempt, false)
+        player.points += PointsService.calculate(payload.attempt, false)
         player.lastWordAttempt = {
             word: payload.attempt,
             isTarget: false,
@@ -95,4 +95,4 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
     })
 }
 
-export { getSolutionState }
+export const MoveService = { getSolutionState }

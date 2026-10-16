@@ -1,4 +1,4 @@
-export const Code = {
+export const FiguresCode = {
     Basic: {
         simple: `<Figure src={placeholder_image} alt="Mountain landscape" />`,
         withCaption: `<Figure

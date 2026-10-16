@@ -1,7 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import { Button } from '../Button'
-import { Set } from './Button.spec.utils'
+import { ButtonTestUtils } from './Button.spec.utils'
+
+const { Set } = ButtonTestUtils
 
 describe('Button', () => {
     describe('as button (default)', () => {

@@ -15,7 +15,7 @@ const partialAccess: AccessMap = {
     features: { xmas2025: true },
 }
 
-export const accessGuardTestUtils = {
+export const AccessGuardTestUtils = {
     fullAccess,
     noAccess,
     partialAccess,

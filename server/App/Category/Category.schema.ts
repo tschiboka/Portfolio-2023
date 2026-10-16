@@ -2,13 +2,13 @@ import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 ;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
 import type { CategoryInput } from './Category.types'
-import { CategoryFieldLimits } from './Category.constants'
+import { CategoryConstants } from './Category.constants'
 
 const schema = Joi.object({
-    name: Joi.string().max(CategoryFieldLimits.name.max).required(),
+    name: Joi.string().max(CategoryConstants.fieldLimits.name.max).required(),
     description: Joi.string()
-        .min(CategoryFieldLimits.description.min)
-        .max(CategoryFieldLimits.description.max)
+        .min(CategoryConstants.fieldLimits.description.min)
+        .max(CategoryConstants.fieldLimits.description.max)
         .required(),
     icon: Joi.string().required(),
     color: Joi.string(),

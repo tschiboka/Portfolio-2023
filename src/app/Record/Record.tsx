@@ -1,11 +1,11 @@
 import { Main, Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
-interface ViewRecordProps {
+interface RecordProps {
     path: string
 }
 
-export const ViewRecord = ({ path }: ViewRecordProps) => {
+export const Record = ({ path }: RecordProps) => {
     return (
         <Screen
             title={'tschiboka | View Records'}

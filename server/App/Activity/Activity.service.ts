@@ -8,7 +8,7 @@ import { Paging } from '@common-utils'
 import type { Dictionary } from '@common-utils'
 import { ActivityRepository } from './Activity.repository'
 import { ActivityTransformers } from './Activity.transformers'
-import { ActivityFeedLimits } from './Activity.constants'
+import { ActivityConstants } from './Activity.constants'
 
 /**
  * Business logic for the activity feed - aggregates the latest activity across visits, likes,
@@ -23,9 +23,9 @@ export const ActivityService = {
             limit,
             skip,
         } = Paging.parse(pageNumber, pageSize, {
-            pageNumberMin: ActivityFeedLimits.pageNumber.min,
-            pageSizeMin: ActivityFeedLimits.pageSize.min,
-            pageSizeMax: ActivityFeedLimits.pageSize.max,
+            pageNumberMin: ActivityConstants.feedLimits.pageNumber.min,
+            pageSizeMin: ActivityConstants.feedLimits.pageSize.min,
+            pageSizeMax: ActivityConstants.feedLimits.pageSize.max,
         })
         const dir = asc === 'true' ? 1 : -1
 

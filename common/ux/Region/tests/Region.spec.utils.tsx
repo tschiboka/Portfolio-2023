@@ -5,7 +5,7 @@ import { RegionAccessor } from '../../Test/Region/Region'
 
 type Props = Partial<RegionProps> & { ariaLabel: string }
 
-export const Set = {
+const Set = {
     region: (props: Props) => {
         render(<Region {...props}>{props.children ?? <p>Region content</p>}</Region>)
         return new RegionAccessor(
@@ -14,3 +14,5 @@ export const Set = {
         )
     },
 }
+
+export const RegionTestUtils = { Set }

@@ -4,7 +4,7 @@ import { Test } from '@common-ux/Test'
 import { Link } from '../Link'
 import type { LinkAsRoute, LinkAsAnchor } from '../Link.types'
 
-export const Set = {
+const Set = {
     route: (props: Partial<LinkAsRoute> = {}) => {
         const label = (props.children as string) ?? 'Route link'
         render(
@@ -26,3 +26,5 @@ export const Set = {
         return Test.Link(props.ariaLabel ?? label)
     },
 }
+
+export const LinkTestUtils = { Set }

@@ -2,7 +2,7 @@ import { Article } from '../Article'
 import { Code, CodeText, Heading, Paragraph, Pill, PillColor, Section, Table } from '@common-ux'
 import type { Dictionary } from '@common-utils'
 import Figure from '@shared-components/Figure/Figure'
-import { codeSnippets } from './ZIndexLayers.code'
+import { ZIndexLayersCode } from './ZIndexLayers.code'
 import InlineReference from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 import uiLayersImg from '@portfolio/assets/blog/z_index/ui_layers.png'
@@ -47,7 +47,7 @@ export const ZIndexLayers = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Const.ts"
                     language="typescript"
-                    content={codeSnippets.layerDefinition}
+                    content={ZIndexLayersCode.layerDefinition}
                 />
                 <Figure
                     image={uiLayersImg}
@@ -70,7 +70,7 @@ export const ZIndexLayers = ({ pageName, path }: Props) => {
                     Using the layer system is straightforward — import <CodeText>Const</CodeText>{' '}
                     and reference the semantic name:
                 </Paragraph>
-                <Code fileName="Component.tsx" language="tsx" content={codeSnippets.usage} />
+                <Code fileName="Component.tsx" language="tsx" content={ZIndexLayersCode.usage} />
                 <Paragraph>
                     The CSS file no longer contains any raw z-index values — they all come from{' '}
                     <CodeText>ZIndex</CodeText> via inline styles. Every z-index decision is
@@ -98,7 +98,7 @@ export const ZIndexLayers = ({ pageName, path }: Props) => {
                 <Code
                     fileName="StackingContextTrap.tsx"
                     language="tsx"
-                    content={codeSnippets.stackingContextTrap}
+                    content={ZIndexLayersCode.stackingContextTrap}
                 />
                 <Paragraph>
                     This is where the layer system's real value becomes clear. By always using{' '}

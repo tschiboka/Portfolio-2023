@@ -2,16 +2,16 @@ import { ReactNode, FC } from 'react'
 import { OptionButton } from './components/OptionButton'
 import './Options.css'
 
-type OptionPanelProps = {
+type OptionsProps = {
     children?: ReactNode
 }
 
-type OptionPanelComponent = FC<OptionPanelProps> & {
+type OptionsComponent = FC<OptionsProps> & {
     Button: typeof OptionButton
 }
 
-export const OptionPanel: OptionPanelComponent = ({ children }) => {
+export const Options: OptionsComponent = ({ children }) => {
     return <div className="option-panel">{children}</div>
 }
 
-OptionPanel.Button = OptionButton
+Options.Button = OptionButton

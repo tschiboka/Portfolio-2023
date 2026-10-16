@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
-import { Accessor, Test } from '@common-ux/Test'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Accessor } from '@common-ux/Test'
+import { Test } from '@shared-components/Screen/tests'
 import { Blog } from '../Blog'
 import { BlogMockHandlers } from './Blog.mockHandlers'
 import { blogArticles } from '@portfolio/Article'
@@ -9,7 +9,7 @@ const publishedArticles = blogArticles.filter((a) => !a.upcoming)
 const upcomingArticles = blogArticles.filter((a) => a.upcoming)
 
 const setupBlogs = () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: '/blog',
         children: <Blog pageName="blog" path="/blog" />,
         handlers: BlogMockHandlers.Defaults,
@@ -124,7 +124,7 @@ describe('Blog', () => {
             const article = publishedArticles[0]
             const card = Test.Typography.byLabel(article.title)
             await card.Do.click()
-            expect(TestScreen.Get.navigatedTo()).toBe(article.to)
+            expect(Test.Screen.Get.navigatedTo()).toBe(article.to)
         })
     })
 

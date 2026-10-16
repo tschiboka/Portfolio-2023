@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import { SessionContext } from './Session.context'
 import type { Session, SessionContextValues } from './SessionContext.types'
-import { LocalSession } from './Session.utils'
+import { SessionStorage } from './Session.storage'
 import { SessionQueries } from './Session.queries'
 
-type SessionContextProviderProps = {
+type SessionProviderProps = {
     children: React.ReactNode
 }
 
-export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ children }) => {
+export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
     const [session, setSession] = useState<Session>()
-    const localSession = LocalSession.getInstance().get() || {}
+    const localSession = SessionStorage.getInstance().get() || {}
 
     const token = localSession?.token || session?.token
     const { data: sessionRehydrateData, ...sessionRehydrateResponse } = SessionQueries.useGet(token)
@@ -30,7 +30,7 @@ export const SessionContextProvider: React.FC<SessionContextProviderProps> = ({ 
 
     useEffect(() => {
         if (session) {
-            LocalSession.getInstance().set({ ...session })
+            SessionStorage.getInstance().set({ ...session })
         }
     }, [session])
 

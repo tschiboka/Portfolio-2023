@@ -270,13 +270,8 @@ export const BreakdownPreviewStyles = {
             color: Const.Color.White[5],
         },
     },
-} as const
-
-// ---------------------------------------------------------------------------
-// Responsive overrides (rendered in a real <style> element, not dangerously)
-// ---------------------------------------------------------------------------
-
-export const responsiveOverrides = `
+    /** CSS rendered into a real `<style>` element, never dangerously set. */
+    responsiveOverrides: `
     @media (max-width: 600px) {
         .bp-shell { padding: 12px 6px !important; }
         .bp-header { padding: 16px !important; }
@@ -285,4 +280,5 @@ export const responsiveOverrides = `
         .bp-signature-row { flex-direction: column !important; align-items: flex-start !important; }
         .bp-signature-links { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
     }
-`
+`,
+} as const

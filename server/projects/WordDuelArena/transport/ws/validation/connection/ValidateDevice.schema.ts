@@ -8,7 +8,7 @@ type DeniedConnectionResult = {
 }
 type ValidationResult = AllowedConnectionResult | DeniedConnectionResult
 
-function validateDeviceConnection(session: Session, deviceId: string): ValidationResult {
+const validate = (session: Session, deviceId: string): ValidationResult => {
     const { player1, player2 } = session.state?.players ?? {}
     const isKnownDevice = player1?.deviceId === deviceId || player2?.deviceId === deviceId
     const hasFreeSeat = !player1 || !player2
@@ -25,4 +25,4 @@ function validateDeviceConnection(session: Session, deviceId: string): Validatio
     return { allowed: true }
 }
 
-export { validateDeviceConnection }
+export const ValidateDeviceSchema = { validate }

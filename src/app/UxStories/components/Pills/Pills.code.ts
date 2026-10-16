@@ -1,4 +1,4 @@
-export const Code = {
+export const PillsCode = {
     Basic: {
         minimal: `<Pill label="Active" />`,
         withColor: `<Pill label="ERROR" color="error" />`,

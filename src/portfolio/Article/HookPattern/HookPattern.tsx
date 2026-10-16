@@ -5,7 +5,7 @@ import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography 
 import InlineReference from '../components/InlineReference/InlineReference'
 import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
 import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
-import codeSnippets from './HookPattern.code'
+import HookPatternCode from './HookPattern.code'
 import { getReferenceList } from '../References.data'
 import { AppHooks } from '@shared-context'
 
@@ -82,7 +82,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="stateHook.tsx"
                     language="typeScript"
-                    content={codeSnippets.useState}
+                    content={HookPatternCode.useState}
                 />
                 <Paragraph>
                     The useEffect hook enables us to implement logic for all component lifecycles -
@@ -101,7 +101,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="effectHook.tsx"
                     language="typeScript"
-                    content={codeSnippets.useEffect}
+                    content={HookPatternCode.useEffect}
                 />
                 <Stack.Horizontal gap="12" justify="center" align="center">
                     <Button className="button" onClick={() => setValue(!value)}>
@@ -123,7 +123,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="contextHook.tsx"
                     language="typeScript"
-                    content={codeSnippets.useContext}
+                    content={HookPatternCode.useContext}
                 />
                 <Stack.Horizontal gap="12" justify="center" align="center">
                     <Button
@@ -140,7 +140,11 @@ export const HookPattern = ({ pageName, path }: Props) => {
                     re-renders when it changes. It's commonly used to access or store references to
                     DOM elements or other values that need to persist between renders.
                 </Paragraph>
-                <Code fileName="refHook.tsx" language="typeScript" content={codeSnippets.useRef} />
+                <Code
+                    fileName="refHook.tsx"
+                    language="typeScript"
+                    content={HookPatternCode.useRef}
+                />
                 <Stack.Horizontal gap="12" justify="center" align="center">
                     <Button onClick={() => count.current++}>Increment count reference</Button>
                 </Stack.Horizontal>
@@ -172,7 +176,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="customHook.tsx"
                     language="typeScript"
-                    content={codeSnippets.customHook}
+                    content={HookPatternCode.customHook}
                 />
                 <Heading as="h3">3 Rules of Hooks</Heading>
                 <Paragraph>
@@ -185,7 +189,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="hookRule1.tsx"
                     language="javascript"
-                    content={codeSnippets.hookRule1}
+                    content={HookPatternCode.hookRule1}
                 />
                 <Paragraph>
                     Hooks should only be called from{' '}
@@ -214,7 +218,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="hookRule1.tsx"
                     language="javascript"
-                    content={codeSnippets.hookRule2}
+                    content={HookPatternCode.hookRule2}
                 />
                 <Paragraph>
                     Loops, conditions and nested function calls cannot guarantee a persistent
@@ -242,7 +246,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Component.tsx"
                     language="typescript"
-                    content={codeSnippets.exampleComponent}
+                    content={HookPatternCode.exampleComponent}
                 />
                 <Paragraph>
                     In my custom fetch hooks, I've employed useQuery to facilitate basic data
@@ -254,7 +258,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Component.hooks.ts"
                     language="typescript"
-                    content={codeSnippets.exampleHooks}
+                    content={HookPatternCode.exampleHooks}
                 />
                 <Paragraph>
                     Unfortunately, executing this program and pressign the button will inevitably
@@ -275,7 +279,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Component.tsx"
                     language="typescript"
-                    content={codeSnippets.errorLine}
+                    content={HookPatternCode.errorLine}
                 />
             </Section>
             <Section>
@@ -293,13 +297,17 @@ export const HookPattern = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Component.hooks.ts"
                     language="typescript"
-                    content={codeSnippets.wrappedHook}
+                    content={HookPatternCode.wrappedHook}
                 />
                 <Paragraph>
                     And you can use the fetch function in your component by destructing the object
                     returned by the hook.
                 </Paragraph>
-                <Code fileName="Component.tsx" language="typescript" content={codeSnippets.fetch} />
+                <Code
+                    fileName="Component.tsx"
+                    language="typescript"
+                    content={HookPatternCode.fetch}
+                />
                 <Paragraph>
                     This approach is a common pattern in React development, where you encapsulate
                     complex logic or data-fetching operations within custom hooks to provide a clean

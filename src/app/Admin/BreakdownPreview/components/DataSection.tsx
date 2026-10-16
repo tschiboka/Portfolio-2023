@@ -3,8 +3,8 @@ import type { SectionData } from '../BreakdownPreview.types'
 import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 import { Heading } from '@common-ux'
 import { Table } from '@common-ux/Table/Table'
-import { breakdownColumns } from '../BreakdownPreview.columns'
-import { BreakdownTransformers } from '../BreakdownPreview.transformers'
+import { BreakdownPreviewColumns } from '../BreakdownPreview.columns'
+import { BreakdownPreviewTransformers } from '../BreakdownPreview.transformers'
 
 export type DataSectionProps = {
     title: string
@@ -39,8 +39,8 @@ export const DataSection = ({ title, data, icon }: DataSectionProps) => (
         </div>
         <Table
             style={BreakdownPreviewStyles.table.style}
-            data={BreakdownTransformers.toRows(data)}
-            columns={breakdownColumns}
+            data={BreakdownPreviewTransformers.toRows(data)}
+            columns={BreakdownPreviewColumns}
             emptyState="No data today"
             rowAriaLabel={title}
         />

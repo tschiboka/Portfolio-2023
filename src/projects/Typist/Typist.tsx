@@ -1,13 +1,13 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import type { ScreenProps } from '@shared-components/Screen/Screen'
 import { Editor } from './Editor/Editor'
-import { TypistContextProvider } from './Typist.provider'
+import { TypistProvider } from './Typist.provider'
 import { HeadsUpDisplay } from './HeadsUpDisplay/HeadsUpDisplay'
 import { Main } from '@common-ux/Region/Main'
 
 export const Typist = ({ pageName }: Pick<ScreenProps, 'pageName' | 'path'>) => {
     return (
-        <TypistContextProvider>
+        <TypistProvider>
             <Screen
                 title="tschiboka | Typist"
                 path="/projects/typist"
@@ -20,6 +20,6 @@ export const Typist = ({ pageName }: Pick<ScreenProps, 'pageName' | 'path'>) => 
                     <Editor />
                 </Main>
             </Screen>
-        </TypistContextProvider>
+        </TypistProvider>
     )
 }

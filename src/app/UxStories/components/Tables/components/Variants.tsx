@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { VariantRow } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { variantRows } = TablesMocks
 const { cellVariantFn, rowVariantFn } = TablesConfig
@@ -39,7 +39,7 @@ export const Variants = () => (
                 ]}
                 title="Column Variants — Static"
             />
-            <Code language="tsx" content={Snippets.Variants.columnStatic} />
+            <Code language="tsx" content={TablesCode.Variants.columnStatic} />
         </Section>
         <Section>
             <Heading as="h3">Row Variants</Heading>
@@ -63,7 +63,7 @@ export const Variants = () => (
                 ]}
                 title="Row Variants"
             />
-            <Code language="tsx" content={Snippets.Variants.rowVariants} />
+            <Code language="tsx" content={TablesCode.Variants.rowVariants} />
         </Section>
         <Section>
             <Heading as="h3">Cell Variants — Dynamic</Heading>
@@ -87,7 +87,7 @@ export const Variants = () => (
                 ]}
                 title="Cell Variants — Dynamic"
             />
-            <Code language="tsx" content={Snippets.Variants.cellDynamic} />
+            <Code language="tsx" content={TablesCode.Variants.cellDynamic} />
         </Section>
         <Section>
             <Heading as="h3">Variant Priority</Heading>
@@ -114,7 +114,7 @@ export const Variants = () => (
                 ]}
                 title="Variant Priority"
             />
-            <Code language="tsx" content={Snippets.Variants.priority} />
+            <Code language="tsx" content={TablesCode.Variants.priority} />
         </Section>
     </>
 )

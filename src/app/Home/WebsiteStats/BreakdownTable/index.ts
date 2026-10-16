@@ -1,2 +1,2 @@
 export { BreakdownTable } from './BreakdownTable'
-export { useBreakdownTableController } from './BreakdownTable.controller'
+export { BreakdownTableController } from './BreakdownTable.controller'

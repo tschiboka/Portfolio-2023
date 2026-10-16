@@ -7,7 +7,7 @@ import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
 import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
 // Other Assets
 import { getReferenceList } from '../References.data'
-import codeSnippets from './JsSorting.code'
+import JsSortingCode from './JsSorting.code'
 // Styles
 import './JsSorting.scss'
 import InlineReference from '../components/InlineReference/InlineReference'
@@ -55,7 +55,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortMyDwarfs.js"
                     language="javascript"
-                    content={codeSnippets.basicExample}
+                    content={JsSortingCode.basicExample}
                 />
                 <Paragraph>
                     A critical aspect of the example above is that sorting mutates our original
@@ -71,7 +71,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortMyDwarfs.js"
                     language="javascript"
-                    content={codeSnippets.mutation}
+                    content={JsSortingCode.mutation}
                 />
                 <Paragraph>
                     Another thing to remember is that default sorting is case-sensitive. When
@@ -85,7 +85,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortLetters.js"
                     language="javascript"
-                    content={codeSnippets.sortingLetters}
+                    content={JsSortingCode.sortingLetters}
                 />
             </Section>
             <Section>
@@ -96,7 +96,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortNumbers.js"
                     language="javascript"
-                    content={codeSnippets.sortingNumbers}
+                    content={JsSortingCode.sortingNumbers}
                 />
                 <Paragraph>
                     Knowing that JavaScript uses type conversion, it is unsurprising that our
@@ -118,7 +118,11 @@ export const JsSorting = ({ pageName, path }: Props) => {
                         'Arrow Comparison Function.',
                     ]}
                 />
-                <Code fileName="sort.js" language="javascript" content={codeSnippets.sortOptions} />
+                <Code
+                    fileName="sort.js"
+                    language="javascript"
+                    content={JsSortingCode.sortOptions}
+                />
                 <Paragraph>
                     We can compare numbers with a comparator in any of the previously mentioned
                     methods (except, of course, the functionless sort call).
@@ -126,7 +130,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="comparators.js"
                     language="javascript"
-                    content={codeSnippets.sortNumberOptions}
+                    content={JsSortingCode.sortNumberOptions}
                 />
             </Section>
             <Section>
@@ -144,7 +148,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="comparators.js"
                     language="javascript"
-                    content={codeSnippets.comparator}
+                    content={JsSortingCode.comparator}
                 />
             </Section>
             <Section>
@@ -157,7 +161,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="reverse_v1.js"
                     language="javascript"
-                    content={codeSnippets.reverse1}
+                    content={JsSortingCode.reverse1}
                 />
                 <Paragraph>
                     Or we can modify our comparator function in the following way:
@@ -165,7 +169,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="reverse_v2.js"
                     language="javascript"
-                    content={codeSnippets.reverse2}
+                    content={JsSortingCode.reverse2}
                 />
                 <Paragraph>
                     In most cases, it does not matter which method we use. Reversing the sorted
@@ -186,7 +190,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                     timestamps. Let's consider a simple scenario where users are ordered by their
                     registration date.
                 </Paragraph>
-                <Code fileName="users.js" language="javascript" content={codeSnippets.users} />
+                <Code fileName="users.js" language="javascript" content={JsSortingCode.users} />
                 <Paragraph>
                     We can simply refer to the object property values in our comparison function to
                     sort users by name.
@@ -194,7 +198,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortByName.js"
                     language="javascript"
-                    content={codeSnippets.sortByName}
+                    content={JsSortingCode.sortByName}
                 />
                 <Paragraph>
                     However, please beware of the string comparison because we cannot rely on the
@@ -211,7 +215,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortOptions.js"
                     language="javascript"
-                    content={codeSnippets.localeCompare}
+                    content={JsSortingCode.localeCompare}
                 />
                 <Paragraph>
                     Lastly, we can sort our users by dates, for example, their date of birth. In
@@ -220,7 +224,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sortByDate.js"
                     language="javascript"
-                    content={codeSnippets.sortByDate}
+                    content={JsSortingCode.sortByDate}
                 />
             </Section>
             <Section>
@@ -237,7 +241,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                 <Code
                     fileName="edgeCases.js"
                     language="javascript"
-                    content={codeSnippets.edgeCases}
+                    content={JsSortingCode.edgeCases}
                 />
             </Section>
             <Section>
@@ -289,7 +293,7 @@ export const JsSorting = ({ pageName, path }: Props) => {
                     when the size of the given array is relatively small. When the runs are sorted,
                     we can merge them two by two iteratively until every run is merged.
                 </Paragraph>
-                <Code fileName="timSort.js" language="javascript" content={codeSnippets.timSort} />
+                <Code fileName="timSort.js" language="javascript" content={JsSortingCode.timSort} />
                 <Paragraph>
                     In summary, JavaScript sorting is a versatile tool in web development but comes
                     with nuances. Be aware of browser-specific variations and consider using custom

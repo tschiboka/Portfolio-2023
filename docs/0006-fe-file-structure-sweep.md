@@ -843,7 +843,7 @@ feature**.
 **Runtime findings during the sweep:**
 
 - `Overlay` was **not** a dead duplicate — `Screen` imports its named export
-  `FullScreenOverlay` (a thin `useAppContext` + `@ux/Overlay.FullScreen`
+  `Overlay` (a thin `useAppContext` + `@ux/Overlay.FullScreen`
   wrapper). It was restored at `src/shared/components/Overlay/` (adapted scss to
   `@shared-styles/palette`). Only `LoadingIndicator` was a true duplicate of
   `@ux`.

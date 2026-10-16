@@ -1,1 +1,1 @@
-export * from './Generics.types'
+export * from './Generics.types.js'

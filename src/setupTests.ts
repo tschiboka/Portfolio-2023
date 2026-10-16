@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { http, HttpResponse } from 'msw'
-import { server } from '@common-ux/Test/Server'
+import { Server } from '@common-ux/Test/Server'
 import type { Dictionary } from '@common-utils'
 
 // Default handlers for common API routes — components like PageSideMenu fetch
@@ -15,10 +15,10 @@ const defaultHandlers = [
 ]
 
 // MSW server lifecycle
-beforeAll(() => server.listen({ onUnhandledRequest: 'warn' }))
-beforeEach(() => defaultHandlers.forEach((h) => server.use(h)))
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
+beforeAll(() => Server.listen({ onUnhandledRequest: 'warn' }))
+beforeEach(() => defaultHandlers.forEach((h) => Server.use(h)))
+afterEach(() => Server.resetHandlers())
+afterAll(() => Server.close())
 
 // detectincognitojs does not work in jsdom — stub it globally
 vi.mock('detectincognitojs', () => ({

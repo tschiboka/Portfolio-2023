@@ -1,6 +1,5 @@
 import { Suspense } from 'react'
-import { PortfolioRouteConfigs } from './Portfolio.constants'
-import type { Dictionary } from '@common-utils'
+import { PortfolioConfig } from './Portfolio.config'
 import type { PortfolioRoute, PortfolioRouteConfig } from './Portfolio.types'
 
 const buildElement = ({ Component, props, fallback }: PortfolioRouteConfig) => {
@@ -9,11 +8,7 @@ const buildElement = ({ Component, props, fallback }: PortfolioRouteConfig) => {
     return fallback ? <Suspense fallback={<div>Loading...</div>}>{element}</Suspense> : element
 }
 
-export const PortfolioRoutes: Dictionary<PortfolioRoute> = Object.fromEntries(
-    Object.entries(PortfolioRouteConfigs).map(([name, config]) => [
-        name,
-        { path: config.path, element: buildElement(config) },
-    ]),
-)
-
-export const PortfolioRoutesList: PortfolioRoute[] = Object.values(PortfolioRoutes)
+export const PortfolioRoutes: PortfolioRoute[] = Object.values(PortfolioConfig).map((config) => ({
+    path: config.path,
+    element: buildElement(config),
+}))

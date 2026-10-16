@@ -1,13 +1,14 @@
-import { MAX_WORDS_PER_LEVEL } from '../../../common/utils'
+import { WordConstants } from '../../../common/utils'
 import { isEmpty } from '@common-utils'
 import { SessionHooks } from '../../Session.hooks'
 import { PlayableLevelWord } from '../../Session.types'
-import { SolvedSolutionWord, UnsolvedSolutionWord } from './components/SolutionWord'
+import { SolvedSolutionWord } from './components/SolvedSolutionWord'
+import { UnsolvedSolutionWord } from './components/UnsolvedSolutionWord'
 import './SolutionBoard.styles.css'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { getColumnConfig } from './SolutionBoard.utils'
+import { SolutionBoardUtils } from './SolutionBoard.utils'
 
-const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
+const MAX_WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
 
 export const SolutionBoard = () => {
     const { level } = SessionHooks.useContext().sessionState || {}
@@ -39,7 +40,7 @@ export const SolutionBoard = () => {
     }
 
     const columnConfig = useMemo(
-        () => getColumnConfig({ columns, containerWidth, containerHeight }),
+        () => SolutionBoardUtils.getColumnConfig({ columns, containerWidth, containerHeight }),
         [columns, containerWidth, containerHeight],
     )
 

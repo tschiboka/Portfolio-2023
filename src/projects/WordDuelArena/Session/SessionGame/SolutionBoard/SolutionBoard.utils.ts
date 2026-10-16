@@ -9,7 +9,7 @@ type GetColumnConfigProps = {
     containerHeight: number
 }
 
-export const getColumnConfig = ({
+const getColumnConfig = ({
     columns,
     containerWidth,
     containerHeight,
@@ -65,4 +65,8 @@ export const getColumnConfig = ({
         col1: { width: col1WidthPercent, letterSize: uniformLetterSize },
         col2: { width: col2WidthPercent, letterSize: uniformLetterSize },
     }
+}
+
+export const SolutionBoardUtils = {
+    getColumnConfig,
 }

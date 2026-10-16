@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/react'
-import { Browser } from '@common-utils'
+import { BrowserHooks } from '@common-utils'
 import { Test } from '@common-ux/Test'
 
 // Mock useIsVisible — return all elements as visible by default
 let mockVisibility: { element: Element; isVisible: boolean }[] = []
-vi.spyOn(Browser, 'useIsVisible').mockImplementation((elements: Element[]) => {
+vi.spyOn(BrowserHooks, 'useIsVisible').mockImplementation((elements: Element[]) => {
     mockVisibility = elements.map((element) => ({ element, isVisible: true }))
     return mockVisibility
 })

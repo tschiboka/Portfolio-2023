@@ -34,7 +34,7 @@ import assembly4Img from '@portfolio/assets/blog/greenRooftop/assembly_4.png'
 import finalProductImg from '@portfolio/assets/blog/greenRooftop/final_product.png'
 // Other Assets
 import { getReferenceList } from '../References.data'
-import codeSnippets from './GreenRooftop.code'
+import GreenRooftopCode from './GreenRooftop.code'
 import greenRooftopCode from '@portfolio/assets/blog/files/green-rooftop/green_rooftop.txt'
 
 interface Props {
@@ -530,14 +530,18 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                 <Code
                     fileName="green_rooftop.ino"
                     language="arduino"
-                    content={codeSnippets.readSensors}
+                    content={GreenRooftopCode.readSensors}
                 />
                 <Paragraph>
                     We will use LCD cursor settings and printing extensively in our nested menu. A
                     print LCD subroutine that encapsulates these functionalities is easier to reuse.
                     Additionally, we can add a function responsible for text content centring.
                 </Paragraph>
-                <Code fileName="green_rooftop.ino" language="arduino" content={codeSnippets.lcd} />
+                <Code
+                    fileName="green_rooftop.ino"
+                    language="arduino"
+                    content={GreenRooftopCode.lcd}
+                />
                 <Paragraph>
                     Finally, we can listen to button presses. Left, right and select buttons will
                     receive their handling functions, and they may stop incrementing/decrementing
@@ -548,7 +552,7 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                 <Code
                     fileName="green_rooftop.ino"
                     language="arduino"
-                    content={codeSnippets.handleBtnPress}
+                    content={GreenRooftopCode.handleBtnPress}
                 />
             </Section>
             <Section>
@@ -563,7 +567,7 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                 <Code
                     fileName="green_rooftop.ino"
                     language="arduino"
-                    content={codeSnippets.intervals}
+                    content={GreenRooftopCode.intervals}
                 />
             </Section>
             <Section>
@@ -574,7 +578,11 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                     communication. One of the simplest ways to connect our Arduino is to use the
                     WIFININA library. Our algorithm will be based on our earlier the diagram.
                 </Paragraph>
-                <Code fileName="green_rooftop.ino" language="arduino" content={codeSnippets.wifi} />
+                <Code
+                    fileName="green_rooftop.ino"
+                    language="arduino"
+                    content={GreenRooftopCode.wifi}
+                />
             </Section>
             <Section>
                 <Heading as="h2">POST Requests</Heading>
@@ -587,7 +595,11 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                     Additionally, our WiFi password and SSID are hardcoded for now, but the
                     commercial application should have alternatives to set these values dynamically.
                 </Paragraph>
-                <Code fileName="green_rooftop.ino" language="arduino" content={codeSnippets.post} />
+                <Code
+                    fileName="green_rooftop.ino"
+                    language="arduino"
+                    content={GreenRooftopCode.post}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Request Routes</Heading>
@@ -598,7 +610,11 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                     index, users, devices and reports. After registering a mock user and a device
                     for testing, we can validate and save sensor data on our database.
                 </Paragraph>
-                <Code fileName="report.js" language="javascript" content={codeSnippets.postRoute} />
+                <Code
+                    fileName="report.js"
+                    language="javascript"
+                    content={GreenRooftopCode.postRoute}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Email Alert</Heading>
@@ -609,7 +625,7 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                     construct an email template with Nodemailer using HTML content to produce mail
                     services.
                 </Paragraph>
-                <Code fileName="report.js" language="javascript" content={codeSnippets.email} />
+                <Code fileName="report.js" language="javascript" content={GreenRooftopCode.email} />
             </Section>
             <Section>
                 <Heading as="h2">Frontend</Heading>
@@ -630,7 +646,7 @@ export const GreenRooftop = ({ pageName, path }: Props) => {
                     concise, and is not nested, meaning multiple calls would never end up in a
                     so-called callback hell.
                 </Paragraph>
-                <Code fileName="index.js" language="javascript" content={codeSnippets.fetch} />
+                <Code fileName="index.js" language="javascript" content={GreenRooftopCode.fetch} />
             </Section>
             <Section>
                 <Heading as="h2">Conclusion</Heading>

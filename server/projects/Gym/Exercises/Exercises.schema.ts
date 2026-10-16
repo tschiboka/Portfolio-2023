@@ -1,5 +1,5 @@
 ﻿import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
-import { EQUIPMENT_VALUES, MUSCLE_GROUP_VALUES } from './Exercises.constants'
+import { ExercisesConstants } from './Exercises.constants'
 import type { ExerciseValidationInput } from './Exercises.types'
 import Joi from 'joi'
 
@@ -11,12 +11,14 @@ const schema = Joi.object({
     difficulty: Joi.string().valid(...DIFFICULTY_LEVELS),
     description: Joi.string(),
     primaryMuscleGroups: Joi.array()
-        .items(Joi.string().valid(...MUSCLE_GROUP_VALUES))
+        .items(Joi.string().valid(...ExercisesConstants.muscleGroupValues))
         .min(1)
         .required(),
-    secondaryMuscleGroups: Joi.array().items(Joi.string().valid(...MUSCLE_GROUP_VALUES)),
+    secondaryMuscleGroups: Joi.array().items(
+        Joi.string().valid(...ExercisesConstants.muscleGroupValues),
+    ),
     unilateral: Joi.boolean(),
-    equipment: Joi.array().items(Joi.string().valid(...EQUIPMENT_VALUES)),
+    equipment: Joi.array().items(Joi.string().valid(...ExercisesConstants.equipmentValues)),
     instructions: Joi.string(),
     notes: Joi.string(),
     image: Joi.string(),
@@ -36,4 +38,4 @@ const validate = (
     exercise: ExerciseValidationInput,
 ): Joi.ValidationResult<ExerciseValidationInput> => schema.validate(exercise)
 
-export const ExerciseSchema = { schema, validate }
+export const ExercisesSchema = { schema, validate }

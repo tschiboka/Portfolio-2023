@@ -1,5 +1,5 @@
 import { produce } from 'immer'
-import { SessionStatuses } from '../../config/constants/Session.constants'
+import { SessionConstants } from '../../config/constants/Session.constants'
 import type { SessionState } from '../../WordDuelArena.types'
 
 const initialiseSession = (state: SessionState, deviceId: string): SessionState =>
@@ -17,7 +17,7 @@ const initialiseSession = (state: SessionState, deviceId: string): SessionState 
         }
 
         const hasTwoPlayers = draft.players.player1 && draft.players.player2
-        if (hasTwoPlayers && draft.status) draft.status = SessionStatuses.ACTIVE
+        if (hasTwoPlayers && draft.status) draft.status = SessionConstants.statuses.ACTIVE
     })
 
 function markAliveByDevice(draft: SessionState, deviceId: string): void {

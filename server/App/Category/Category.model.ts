@@ -1,9 +1,9 @@
 import mongoose from 'mongoose'
 import type { ICategory } from './Category.types'
-import { CategoryFieldLimits } from './Category.constants'
+import { CategoryConstants } from './Category.constants'
 
 const schema = new mongoose.Schema<ICategory>({
-    name: { type: String, required: true, maxLength: CategoryFieldLimits.name.max },
+    name: { type: String, required: true, maxLength: CategoryConstants.fieldLimits.name.max },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -12,8 +12,8 @@ const schema = new mongoose.Schema<ICategory>({
     description: {
         type: String,
         required: true,
-        minLength: CategoryFieldLimits.description.min,
-        maxLength: CategoryFieldLimits.description.max,
+        minLength: CategoryConstants.fieldLimits.description.min,
+        maxLength: CategoryConstants.fieldLimits.description.max,
     },
     icon: String,
     color: String,

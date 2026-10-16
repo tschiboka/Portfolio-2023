@@ -1,7 +1,13 @@
-﻿export {
-    WdaPlayerDerivedStatuses as PlayerDerivedStatus,
-    WdaMatchStatuses as MatchStatuses,
-    WdaLevelWordStatuses as LevelWordStatuses,
+﻿import {
+    WdaLevelWordStatuses,
+    WdaMatchStatuses,
+    WdaPlayerDerivedStatuses,
 } from '../../../../../common/types/projects/wda'
 
-export const GIVE_HINTS_AFTER_FAILED_ATTEMPTS = 5
+/** The match, level-word and derived-status enums, plus the hint threshold. */
+export const GameConstants = {
+    matchStatuses: WdaMatchStatuses,
+    levelWordStatuses: WdaLevelWordStatuses,
+    playerDerivedStatuses: WdaPlayerDerivedStatuses,
+    hintsAfterFailedAttempts: 5,
+}

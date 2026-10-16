@@ -1,4 +1,4 @@
-export const Code = {
+export const AccessGuardsCode = {
     hidden: `const guard: Guard[] = [
     {
         when: { type: 'custom', predicate: () => false },

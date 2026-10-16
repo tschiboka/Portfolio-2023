@@ -4,7 +4,7 @@ import { Code, CodeText, Form, Heading, Main, Paragraph, Section } from '@common
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Forms.code'
+import { FormsCode } from './Forms.code'
 
 type FormsProps = { path: string }
 
@@ -181,20 +181,20 @@ export const Forms = ({ path }: FormsProps) => {
                         A thin wrapper around <CodeText>&lt;form&gt;</CodeText> that forwards all
                         native attributes and applies neumorphic panel styling.
                     </Paragraph>
-                    <Code language="tsx" content={Snippets.Layout.form} />
+                    <Code language="tsx" content={FormsCode.Layout.form} />
                     <Heading as="h3">Form.Fieldset</Heading>
                     <Paragraph>
                         Groups a label and input together. The label floats above the fieldset
                         border and highlights on focus-within.
                     </Paragraph>
-                    <Code language="tsx" content={Snippets.Layout.fieldset} />
+                    <Code language="tsx" content={FormsCode.Layout.fieldset} />
                     <Heading as="h3">Form.Label</Heading>
                     <Paragraph>
                         A styled <CodeText>&lt;label&gt;</CodeText> with a <CodeText>for</CodeText>{' '}
                         prop (mapped to <CodeText>htmlFor</CodeText>). Turns accent when its
                         fieldset is focused.
                     </Paragraph>
-                    <Code language="tsx" content={Snippets.Layout.label} />
+                    <Code language="tsx" content={FormsCode.Layout.label} />
                 </Section>
                 {/* ─── TEXT INPUTS ─── */}
                 <Section>
@@ -218,7 +218,7 @@ export const Forms = ({ path }: FormsProps) => {
                             />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.TextInputs.text} />
+                    <Code language="tsx" content={FormsCode.TextInputs.text} />
                     <Heading as="h3">Email</Heading>
                     <Form autoComplete="off" ariaLabel="Email input demo">
                         <Form.Fieldset>
@@ -231,7 +231,7 @@ export const Forms = ({ path }: FormsProps) => {
                             />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.TextInputs.email} />
+                    <Code language="tsx" content={FormsCode.TextInputs.email} />
                     <Heading as="h3">Password</Heading>
                     <Paragraph>
                         Set <CodeText>addRevealPasswordIcon</CodeText> to show a toggle eye icon.
@@ -250,7 +250,7 @@ export const Forms = ({ path }: FormsProps) => {
                             />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.TextInputs.password} />
+                    <Code language="tsx" content={FormsCode.TextInputs.password} />
                     <Heading as="h3">Number</Heading>
                     <Form autoComplete="off" ariaLabel="Number input demo">
                         <Form.Fieldset>
@@ -258,7 +258,7 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Input name="age" control={control} type="number" />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.TextInputs.number} />
+                    <Code language="tsx" content={FormsCode.TextInputs.number} />
                     <Heading as="h3">TextArea</Heading>
                     <Paragraph>
                         Set <CodeText>maxLength</CodeText> to show a live character counter.{' '}
@@ -284,9 +284,9 @@ export const Forms = ({ path }: FormsProps) => {
                             />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.TextInputs.textarea} />
-                    <Code language="tsx" content={Snippets.TextInputs.textareaMax} />
-                    <Code language="tsx" content={Snippets.TextInputs.types} />
+                    <Code language="tsx" content={FormsCode.TextInputs.textarea} />
+                    <Code language="tsx" content={FormsCode.TextInputs.textareaMax} />
+                    <Code language="tsx" content={FormsCode.TextInputs.types} />
                 </Section>
                 {/* ─── DATE PICKERS ─── */}
                 <Section>
@@ -305,7 +305,7 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Input name="dob" control={control} type="date" />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.DatePickers.native} />
+                    <Code language="tsx" content={FormsCode.DatePickers.native} />
                     <Heading as="h3">Custom DateInput</Heading>
                     <Paragraph>
                         Full-featured calendar picker with text mask, keyboard navigation,
@@ -317,9 +317,9 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.DateInput name="dob" control={control} />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.DatePickers.custom} />
-                    <Code language="tsx" content={Snippets.DatePickers.customWithMinMax} />
-                    <Code language="tsx" content={Snippets.DatePickers.features} />
+                    <Code language="tsx" content={FormsCode.DatePickers.custom} />
+                    <Code language="tsx" content={FormsCode.DatePickers.customWithMinMax} />
+                    <Code language="tsx" content={FormsCode.DatePickers.features} />
                 </Section>
                 {/* ─── SELECTION ─── */}
                 <Section>
@@ -355,8 +355,8 @@ export const Forms = ({ path }: FormsProps) => {
                             </Form.RadioGroup>
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.Selection.radio} />
-                    <Code language="tsx" content={Snippets.Selection.radioBoolean} />
+                    <Code language="tsx" content={FormsCode.Selection.radio} />
+                    <Code language="tsx" content={FormsCode.Selection.radioBoolean} />
                     <Heading as="h3">Checkbox</Heading>
                     <Paragraph>
                         A styled checkbox with built-in label. The optional{' '}
@@ -369,7 +369,7 @@ export const Forms = ({ path }: FormsProps) => {
                             label="I agree to the terms"
                         />
                     </Form>
-                    <Code language="tsx" content={Snippets.Selection.checkbox} />
+                    <Code language="tsx" content={FormsCode.Selection.checkbox} />
                     <Heading as="h3">SearchInput</Heading>
                     <Paragraph>
                         A filterable dropdown with <CodeText>highlightMatch</CodeText> support,
@@ -390,8 +390,8 @@ export const Forms = ({ path }: FormsProps) => {
                             />
                         </Form.Fieldset>
                     </Form>
-                    <Code language="tsx" content={Snippets.Selection.search} />
-                    <Code language="tsx" content={Snippets.Selection.searchIcons} />
+                    <Code language="tsx" content={FormsCode.Selection.search} />
+                    <Code language="tsx" content={FormsCode.Selection.searchIcons} />
                 </Section>
                 {/* ─── ACTIONS ─── */}
                 <Section>
@@ -410,10 +410,10 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button type="submit">Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                    <Code language="tsx" content={Snippets.Actions.primary} />
-                    <Code language="tsx" content={Snippets.Actions.secondary} />
-                    <Code language="tsx" content={Snippets.Actions.disabled} />
-                    <Code language="tsx" content={Snippets.Actions.group} />
+                    <Code language="tsx" content={FormsCode.Actions.primary} />
+                    <Code language="tsx" content={FormsCode.Actions.secondary} />
+                    <Code language="tsx" content={FormsCode.Actions.disabled} />
+                    <Code language="tsx" content={FormsCode.Actions.group} />
                 </Section>
                 {/* ─── ALL INPUTS: EMPTY ─── */}
                 <Section>
@@ -744,7 +744,7 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button type="submit">Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                    <Code language="tsx" content={Snippets.ErrorStates.demo} />
+                    <Code language="tsx" content={FormsCode.ErrorStates.demo} />
                 </Section>
                 {/* ─── ERROR STATES: WITH VALUES ─── */}
                 <Section>
@@ -887,8 +887,8 @@ export const Forms = ({ path }: FormsProps) => {
                             variant="warning"
                         />
                     </Form>
-                    <Code language="tsx" content={Snippets.SubmitErrorMessage.basic} />
-                    <Code language="tsx" content={Snippets.SubmitErrorMessage.variants} />
+                    <Code language="tsx" content={FormsCode.SubmitErrorMessage.basic} />
+                    <Code language="tsx" content={FormsCode.SubmitErrorMessage.variants} />
                 </Section>
                 {/* ─── DISABLED STATES: EMPTY ─── */}
                 <Section>
@@ -1004,7 +1004,7 @@ export const Forms = ({ path }: FormsProps) => {
                             <Form.Button disabled>Submit</Form.Button>
                         </Form.ButtonGroup>
                     </Form>
-                    <Code language="tsx" content={Snippets.DisabledStates.demo} />
+                    <Code language="tsx" content={FormsCode.DisabledStates.demo} />
                 </Section>
                 {/* ─── DISABLED STATES: WITH VALUES ─── */}
                 <Section>

@@ -1,5 +1,5 @@
 ﻿import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
-import { EQUIPMENT_VALUES, MUSCLE_GROUP_VALUES } from './Exercises.constants'
+import { ExercisesConstants } from './Exercises.constants'
 import mongoose from 'mongoose'
 import type { IGymExercise } from './Exercises.types'
 
@@ -13,15 +13,15 @@ const schema = new mongoose.Schema<IGymExercise>({
     difficulty: { type: String, enum: DIFFICULTY_LEVELS },
     description: { type: String, trim: true },
     primaryMuscleGroups: {
-        type: [{ type: String, enum: MUSCLE_GROUP_VALUES }],
+        type: [{ type: String, enum: ExercisesConstants.muscleGroupValues }],
         required: true,
     },
     secondaryMuscleGroups: {
-        type: [{ type: String, enum: MUSCLE_GROUP_VALUES }],
+        type: [{ type: String, enum: ExercisesConstants.muscleGroupValues }],
     },
     unilateral: { type: Boolean, default: false },
     equipment: {
-        type: [{ type: String, enum: EQUIPMENT_VALUES }],
+        type: [{ type: String, enum: ExercisesConstants.equipmentValues }],
     },
     instructions: { type: String },
     notes: { type: String },
@@ -35,4 +35,4 @@ const schema = new mongoose.Schema<IGymExercise>({
     },
 })
 
-export const ExerciseModel = mongoose.model<IGymExercise>('GymExercise', schema)
+export const ExercisesModel = mongoose.model<IGymExercise>('GymExercise', schema)

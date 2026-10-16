@@ -5,9 +5,11 @@ import type { SpacerProps } from '../Spacer.types'
 
 type SetProps = Partial<SpacerProps> & { ariaLabel: string }
 
-export const Set = {
+const Set = {
     spacer: (props: SetProps) => {
         render(<Spacer size={props.size ?? '16'} {...props} />)
         return new Accessor(screen.getByLabelText(props.ariaLabel), `Spacer(${props.ariaLabel})`)
     },
 }
+
+export const SpacerTestUtils = { Set }

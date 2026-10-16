@@ -1,9 +1,12 @@
 import Joi from 'joi'
 import type { LikeInput } from './Like.types'
-import { LikeFieldLimits } from './Like.constants'
+import { LikeConstants } from './Like.constants'
 
 const schema = Joi.object({
-    path: Joi.string().min(LikeFieldLimits.path.min).max(LikeFieldLimits.path.max).required(),
+    path: Joi.string()
+        .min(LikeConstants.fieldLimits.path.min)
+        .max(LikeConstants.fieldLimits.path.max)
+        .required(),
 })
 
 export const LikeSchema = {

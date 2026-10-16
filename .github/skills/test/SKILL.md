@@ -43,6 +43,7 @@ Does not decide what a feature should do, and does not score code quality — th
 - **Every test sits inside a `describe`**, named for the feature or subfeature in PascalCase.
 - **Tests are named `it('should <verb> …')`** — never a bare declarative.
 - **Everything above `describe`** belongs in `Feature.spec.utils.ts`, never in the spec body.
+- **Specs render through the page-level harness** — `Test.Screen.Do.render({ path, handlers, session })`, with `Test` imported from `@shared-components/Screen/tests`.
 
 ## Workflow
 
@@ -107,7 +108,7 @@ Reference: `Feature.mocks.ts` — the handler umbrella shape.
 
 ### Specs
 
-Feature spec: `tests/Feature.spec.tsx` — renders through `TestScreen.Do.render({ path: AppRoutes.Feature })`. Covers the main component, its `components/`, the wiring and the query hooks.
+Feature spec: `tests/Feature.spec.tsx` — renders through `Test.Screen.Do.render({ path: AppRoutes.Feature })`. Covers the main component, its `components/`, the wiring and the query hooks.
 
 Role spec: `tests/Feature.<role>.spec.ts` — only where the role has pure, isolated behaviour.
 
@@ -149,3 +150,5 @@ common/mocks/
 ├── TestMocks.ts
 └── <Type>.mocks.ts
 ```
+
+The page-level harness lives at `@shared-components/Screen/tests/Screen.spec.utils.tsx` and exports `ScreenTestUtils`. The `index.ts` beside it merges that harness with the common toolkit, so a spec imports `Test` from that barrel and reads one vocabulary throughout — `Test.Button`, `Test.Form`, `Test.Screen`.

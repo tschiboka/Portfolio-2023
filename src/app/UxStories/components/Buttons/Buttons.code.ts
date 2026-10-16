@@ -1,4 +1,4 @@
-export const Code = {
+export const ButtonsCode = {
     Basic: {
         primary: `<Button onClick={() => alert('Clicked!')}>Submit</Button>`,
         secondary: `<Button variant="secondary" onClick={handleCancel}>Cancel</Button>`,

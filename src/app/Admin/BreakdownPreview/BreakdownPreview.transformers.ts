@@ -14,4 +14,4 @@ const toRows = ({ today, total }: SectionData): BreakdownRow[] =>
         total: total.find((candidate) => candidate.path === path)?.count ?? 0,
     }))
 
-export const BreakdownTransformers = { toRows }
+export const BreakdownPreviewTransformers = { toRows }

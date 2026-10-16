@@ -1,11 +1,11 @@
 import { extractAxiosData } from './extractAxiosData'
 import { extractEntities } from './extractEntities'
 import { mergeApiStatuses } from './mergeStatus'
-import { RequestBuilder } from './Query'
+import { RequestBuilder } from './RequestBuilder'
 import { FeatureQuery } from './FeatureQuery'
 import { errorMessage } from './errorMessage'
 
-export { QueryKey } from './Key'
+export { QueryKey } from './QueryKey'
 export { FeatureQuery } from './FeatureQuery'
 export { errorMessage } from './errorMessage'
 export type { FeatureQueryBuilt } from './FeatureQuery'

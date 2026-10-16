@@ -1,11 +1,11 @@
 import { Const, SearchInputOption } from '@common-ux'
-import { icons } from './components/Icons'
+import { Icons } from './components/Icons'
 
 export const CategoriesOptions = {
-    iconOptions: Object.keys(icons)
+    iconOptions: Object.keys(Icons)
         .map((icon) => ({
             label: icon,
-            icon: icons[icon],
+            icon: Icons[icon],
             value: icon,
         }))
         .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label)),

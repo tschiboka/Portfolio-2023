@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows } = TablesMocks
 const { renderStatus } = TablesConfig
@@ -47,7 +47,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('text filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.text} />
+            <Code language="tsx" content={TablesCode.Filtering.text} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — Number</Heading>
@@ -78,7 +78,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('number filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.number} />
+            <Code language="tsx" content={TablesCode.Filtering.number} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — Search</Heading>
@@ -107,7 +107,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('search filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.search} />
+            <Code language="tsx" content={TablesCode.Filtering.search} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — Option</Heading>
@@ -140,7 +140,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('option filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.option} />
+            <Code language="tsx" content={TablesCode.Filtering.option} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — Date</Heading>
@@ -165,7 +165,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('date filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.date} />
+            <Code language="tsx" content={TablesCode.Filtering.date} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — Checkbox</Heading>
@@ -186,7 +186,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('checkbox filter:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.checkbox} />
+            <Code language="tsx" content={TablesCode.Filtering.checkbox} />
         </Section>
         <Section>
             <Heading as="h3">Filtering — All Types Combined</Heading>
@@ -237,7 +237,7 @@ export const Filtering = () => (
                     onFilter: (values) => console.log('all filters:', values),
                 }}
             />
-            <Code language="tsx" content={Snippets.Filtering.allTypes} />
+            <Code language="tsx" content={TablesCode.Filtering.allTypes} />
         </Section>
     </>
 )

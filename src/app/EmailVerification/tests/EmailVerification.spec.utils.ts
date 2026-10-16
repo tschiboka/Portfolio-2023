@@ -1,4 +1,4 @@
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Test } from '@shared-components/Screen/tests'
 import { AppRoutes } from '../../../app'
 import { TestMocks } from '@common-mocks'
 import { Paths } from '@common-utils'
@@ -20,7 +20,7 @@ export const EmailVerificationTestUtils = {
         EmailVerificationMockHandlers.Confirm.PostRejectedNoMessage,
     ] as Buildable[],
     customRender: (handlers: Buildable[] = EmailVerificationMockHandlers.Defaults) => {
-        TestScreen.Do.render({
+        Test.Screen.Do.render({
             path: AppRoutes.EmailVerification,
             route: [EmailVerificationTestUtils.route],
             handlers,

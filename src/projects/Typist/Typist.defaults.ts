@@ -1,5 +1,5 @@
 import { TypistEditorState } from './Typist.types'
-import { textToWords } from './Typist.utils'
+import { TypistUtils } from './Typist.utils'
 
 const initialState: TypistEditorState = {
     status: 'idle',
@@ -13,7 +13,7 @@ const initialState: TypistEditorState = {
         score: 0,
     },
     cursorPosition: 0,
-    words: textToWords(''),
+    words: TypistUtils.textToWords(''),
     keystrokes: [],
 }
 

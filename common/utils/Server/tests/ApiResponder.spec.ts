@@ -2,7 +2,9 @@ import { describe, it, expect } from 'vitest'
 import { ApiResponder } from '../ApiResponder'
 import { ApiError } from '../ApiError'
 import { HttpStatus } from '../HttpStatus'
-import { createResponse } from './ApiResponder.spec.utils'
+import { ApiResponderTestUtils } from './ApiResponder.spec.utils'
+
+const { createResponse } = ApiResponderTestUtils
 
 describe('ApiResponder error methods', () => {
     it('badRequest produces a 400 ApiError from a string', () => {
@@ -43,7 +45,7 @@ describe('ApiResponder error methods', () => {
         ['a boolean', true],
     ])('badRequest throws when it cannot extract a message from %s', (_label, input) => {
         expect(() => ApiResponder.badRequest(input)).toThrow(
-            'resolveErrorMessage: expected a string, an Error, or a validation result',
+            'ResolveErrorMessage: expected a string, an Error, or a validation result',
         )
     })
 

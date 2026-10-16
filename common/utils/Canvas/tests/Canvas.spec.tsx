@@ -1,6 +1,6 @@
 import type { Mock } from 'vitest'
 import { renderHook } from '@testing-library/react'
-import { Canvas } from '..'
+import { CanvasHooks } from '..'
 import { RefObject } from 'react'
 
 type MockCtx = {
@@ -66,18 +66,18 @@ const createMockCanvas = (
 const makeRef = (canvas: HTMLCanvasElement | null): RefObject<HTMLCanvasElement> =>
     ({ current: canvas }) as RefObject<HTMLCanvasElement>
 
-describe('Canvas.useCanvas', () => {
+describe('CanvasHooks.useCanvas', () => {
     describe('when ref.current is null', () => {
         it('should return undefined ctx', () => {
             const ref = makeRef(null)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBeUndefined()
         })
 
         it('should return zero dimensions', () => {
             const ref = makeRef(null)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.width).toBe(0)
             expect(result.current.height).toBe(0)
@@ -85,14 +85,14 @@ describe('Canvas.useCanvas', () => {
 
         it('should return zero radius', () => {
             const ref = makeRef(null)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.radius).toBe(0)
         })
 
         it('should return { x: 0, y: 0 } centre', () => {
             const ref = makeRef(null)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.centre).toEqual({ x: 0, y: 0 })
         })
@@ -102,7 +102,7 @@ describe('Canvas.useCanvas', () => {
         it('should return undefined ctx when parentElement is null', () => {
             const { canvas } = createMockCanvas({ noParent: true })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBeUndefined()
         })
@@ -110,7 +110,7 @@ describe('Canvas.useCanvas', () => {
         it('should return undefined ctx when grandparent is null', () => {
             const { canvas } = createMockCanvas({ noGrandparent: true })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBeUndefined()
         })
@@ -120,7 +120,7 @@ describe('Canvas.useCanvas', () => {
         it('should return undefined ctx', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBeUndefined()
         })
@@ -133,7 +133,7 @@ describe('Canvas.useCanvas', () => {
         it('should call getContext with "2d"', () => {
             const { canvas, getContext } = createMockCanvas({ parentWidth, parentHeight })
             const ref = makeRef(canvas)
-            renderHook(() => Canvas.useCanvas(ref))
+            renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(getContext).toHaveBeenCalledWith('2d')
         })
@@ -141,7 +141,7 @@ describe('Canvas.useCanvas', () => {
         it('should set canvas dimensions to grandparent dimensions', () => {
             const { canvas } = createMockCanvas({ parentWidth, parentHeight })
             const ref = makeRef(canvas)
-            renderHook(() => Canvas.useCanvas(ref))
+            renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(canvas.width).toBe(parentWidth)
             expect(canvas.height).toBe(parentHeight)
@@ -150,7 +150,7 @@ describe('Canvas.useCanvas', () => {
         it('should return correct width and height', () => {
             const { canvas } = createMockCanvas({ parentWidth, parentHeight })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.width).toBe(parentWidth)
             expect(result.current.height).toBe(parentHeight)
@@ -160,7 +160,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBe(mockCtx)
         })
@@ -168,7 +168,7 @@ describe('Canvas.useCanvas', () => {
         it('should compute radius as half of the shorter side', () => {
             const { canvas } = createMockCanvas({ parentWidth: 600, parentHeight: 300 })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.radius).toBe(150) // min(600,300)/2
         })
@@ -176,7 +176,7 @@ describe('Canvas.useCanvas', () => {
         it('should compute radius correctly when width < height', () => {
             const { canvas } = createMockCanvas({ parentWidth: 100, parentHeight: 500 })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.radius).toBe(50) // min(100,500)/2
         })
@@ -184,7 +184,7 @@ describe('Canvas.useCanvas', () => {
         it('should compute radius correctly for a square canvas', () => {
             const { canvas } = createMockCanvas({ parentWidth: 300, parentHeight: 300 })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.radius).toBe(150)
         })
@@ -192,7 +192,7 @@ describe('Canvas.useCanvas', () => {
         it('should compute centre as midpoint of dimensions', () => {
             const { canvas } = createMockCanvas({ parentWidth, parentHeight })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.centre).toEqual({
                 x: parentWidth / 2,
@@ -208,7 +208,7 @@ describe('Canvas.useCanvas', () => {
         it('should not throw when ctx is undefined (no-op)', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(() =>
                 result.current.line({
@@ -223,7 +223,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: { value: 10 }, y: { value: 20 } },
@@ -243,7 +243,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: {
@@ -265,7 +265,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: { value: 0 }, y: { value: 0 } },
@@ -280,7 +280,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: { value: 0 }, y: { value: 0 } },
@@ -295,7 +295,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 config: { color: 'green' },
@@ -309,7 +309,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: {
@@ -335,7 +335,7 @@ describe('Canvas.useCanvas', () => {
         it('should not throw when ctx is undefined (no-op)', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(() =>
                 result.current.circle({
@@ -350,7 +350,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: { x: { value: 100 }, y: { value: 50 } },
@@ -371,7 +371,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: { x: { value: 100 }, y: { value: 50 } },
@@ -387,7 +387,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: { x: { value: 0 }, y: { value: 0 } },
@@ -403,7 +403,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: { x: { value: 0 }, y: { value: 0 } },
@@ -418,7 +418,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: {
@@ -443,7 +443,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 radius: 15,
@@ -462,7 +462,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: { value: 42 }, y: { value: 99 } },
@@ -477,7 +477,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: {
@@ -495,7 +495,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: {
@@ -513,7 +513,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: {
@@ -531,7 +531,7 @@ describe('Canvas.useCanvas', () => {
             const mockCtx = createMockCtx()
             const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: {}, y: {} },
@@ -547,7 +547,7 @@ describe('Canvas.useCanvas', () => {
         it('should return all expected properties', () => {
             const { canvas } = createMockCanvas()
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             const c = result.current
             expect(c.ctx).toBeDefined()
@@ -563,7 +563,7 @@ describe('Canvas.useCanvas', () => {
         it('should return line and circle as callable functions', () => {
             const { canvas } = createMockCanvas()
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(typeof result.current.line).toBe('function')
             expect(typeof result.current.circle).toBe('function')
@@ -579,7 +579,7 @@ describe('Canvas.useCanvas', () => {
                 ctx: mockCtx,
             })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
                 start: { x: { value: 0 }, y: { value: 0 } },
@@ -604,7 +604,7 @@ describe('Canvas.useCanvas', () => {
                 ctx: mockCtx,
             })
             const ref = makeRef(canvas)
-            const { result } = renderHook(() => Canvas.useCanvas(ref))
+            const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.circle({
                 start: { x: { value: 50 }, y: { value: 50 } },

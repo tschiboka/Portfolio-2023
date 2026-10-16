@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { act, renderHook } from '@testing-library/react'
-import { useTableUrlPersistence } from '../TableUrlPersistence'
+import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import { TableUrlPersistenceTestUtils } from './TableUrlPersistence.spec.utils'
 import type { Filters } from './TableUrlPersistence.spec.types'
@@ -35,7 +35,7 @@ describe('useTableUrlPersistence', () => {
     describe('outside a router', () => {
         it('is disabled, exposes null state, and persist is a no-op', () => {
             const { result } = renderHook(() =>
-                useTableUrlPersistence<Filters>({
+                TableUrlPersistenceHooks.useUrlState<Filters>({
                     filters: filterDefs,
                     defaultSort,
                     defaultPaging,

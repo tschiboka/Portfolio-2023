@@ -11,7 +11,7 @@ import StackReconciliationImg from '@portfolio/assets/blog/react_anatomy/stack-r
 import FiberImg from '@portfolio/assets/blog/react_anatomy/fiber.png'
 import LifeCycleMethodsImg from '@portfolio/assets/blog/react_anatomy/component-lifecycle-methods.webp'
 // Other Assets
-import codeSnippets from './ReactAnatomy.code'
+import ReactAnatomyCode from './ReactAnatomy.code'
 import { getReferenceList } from '../References.data'
 
 // Styles
@@ -312,7 +312,7 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="batching.js"
                     language="javascript"
-                    content={codeSnippets.batching}
+                    content={ReactAnatomyCode.batching}
                 />
                 <Paragraph>
                     Before React 18, not all state updates were batched, though. For example, state
@@ -327,7 +327,7 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="flush.js"
                     language="javascript"
-                    content={codeSnippets.flushedRender}
+                    content={ReactAnatomyCode.flushedRender}
                 />
             </Section>
             <Section>
@@ -404,7 +404,7 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="component.js"
                     language="javascript"
-                    content={codeSnippets.funtionalVsClass}
+                    content={ReactAnatomyCode.funtionalVsClass}
                 />
                 <Paragraph>
                     A class component requires you to import and extend the Component class from
@@ -570,7 +570,7 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                 <Code
                     fileName="useCallback.js"
                     language="javascript"
-                    content={codeSnippets.useCallbackSnippet}
+                    content={ReactAnatomyCode.useCallbackSnippet}
                 />
                 <Paragraph>
                     UseMemo is used to memoize values. It takes a function and an array of
@@ -578,7 +578,11 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                     changed; it is useful when you want to optimise expensive calculations in terms
                     of time or computation.
                 </Paragraph>
-                <Code fileName="useMemo.js" language="javascript" content={codeSnippets.useMemo} />
+                <Code
+                    fileName="useMemo.js"
+                    language="javascript"
+                    content={ReactAnatomyCode.useMemo}
+                />
                 <Paragraph>
                     The useCallback and useMemo Hooks are similar. The main difference is that
                     useMemo returns a memoized value and useCallback returns a memoized function.
@@ -609,7 +613,11 @@ export const ReactAnatomy = ({ pageName, path }: Props) => {
                     be placed in any component that needs access to the data, and it will
                     automatically subscribe to updates when the data changes.
                 </Paragraph>
-                <Code fileName="context.js" language="javascript" content={codeSnippets.context} />
+                <Code
+                    fileName="context.js"
+                    language="javascript"
+                    content={ReactAnatomyCode.context}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Conclusion</Heading>

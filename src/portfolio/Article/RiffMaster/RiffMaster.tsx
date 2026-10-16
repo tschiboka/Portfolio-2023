@@ -45,7 +45,7 @@ import saddleImg from '@portfolio/assets/blog/riffMaster/Saddle.jpg'
 // Other Assets
 import controllerCode from '@portfolio/assets/blog/files/riffmaster/controller.txt'
 import dissertation from '@portfolio/assets/blog/files/riffmaster/Dissertation_Online.pdf'
-import codeSnippets from './RiffMaster.code'
+import RiffMasterCode from './RiffMaster.code'
 import { getReferenceList } from '../References.data'
 // Styles
 import './RiffMaster.scss'
@@ -297,7 +297,7 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.arduinoInitialisation}
+                    content={RiffMasterCode.arduinoInitialisation}
                 />
                 <Paragraph>
                     Next, we need to initialise our digital pins. We may apply Arduino's internal
@@ -306,7 +306,7 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.pinSetup}
+                    content={RiffMasterCode.pinSetup}
                 />
                 <Paragraph>
                     We activate the column pins with each loop and read individual row values,
@@ -316,7 +316,7 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.fretTest}
+                    content={RiffMasterCode.fretTest}
                 />
             </Section>
             <Section>
@@ -641,13 +641,13 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.constants}
+                    content={RiffMasterCode.constants}
                 />
                 <Paragraph>First, we need to initialise our pins in the setup function.</Paragraph>
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.strumSetup}
+                    content={RiffMasterCode.strumSetup}
                 />
                 <Paragraph>
                     We can flag cycles where a state change happens by setting a transaction
@@ -660,7 +660,7 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.setControllerState}
+                    content={RiffMasterCode.setControllerState}
                 />
             </Section>
             <Section>
@@ -738,7 +738,7 @@ export const RiffMaster = ({ pageName, path }: Props) => {
                 <Code
                     fileName="controller.ino"
                     language="arduino"
-                    content={codeSnippets.messaging}
+                    content={RiffMasterCode.messaging}
                 />
             </Section>
             <Section>

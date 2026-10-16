@@ -5,7 +5,7 @@ import type { ResponseMockState } from './ApiResponder.spec.types'
  * Minimal Express `Response` mock. Returns the live `captured` state (mutated as the responder
  * emits) plus the mock `response` — read `captured.statusCode`/`captured.body` AFTER the call.
  */
-export const createResponse = () => {
+const createResponse = () => {
     const captured: ResponseMockState = {
         statusCode: 0,
         body: undefined,
@@ -29,3 +29,5 @@ export const createResponse = () => {
     } as Response
     return { captured, response }
 }
+
+export const ApiResponderTestUtils = { createResponse }

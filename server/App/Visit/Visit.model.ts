@@ -1,13 +1,13 @@
 import mongoose from 'mongoose'
 import type { IVisit } from './Visit.types'
-import { VisitFieldLimits } from './Visit.constants'
+import { VisitConstants } from './Visit.constants'
 
 const schema = new mongoose.Schema<IVisit>({
     path: {
         type: String,
         required: true,
         lowercase: true,
-        maxlength: VisitFieldLimits.path.max,
+        maxlength: VisitConstants.fieldLimits.path.max,
         trim: true,
     },
     visitDate: {

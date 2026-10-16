@@ -3,8 +3,8 @@ import type WebSocket from 'ws'
 import { WebSocketServer } from 'ws'
 import url from 'url'
 import { ClientMessage } from '@common-utils'
-import { startPresenceLoop } from '../../infrastructure/presence/Loop.service'
-import { validateDeviceConnection } from './validation/connection/ValidateDevice.schema'
+import { LoopService } from '../../infrastructure/presence/Loop.service'
+import { ValidateDeviceSchema } from './validation/connection/ValidateDevice.schema'
 import routeMessage from './handlers'
 import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
@@ -20,7 +20,7 @@ export default async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })
     await WordRepository.Load()
 
-    startPresenceLoop()
+    LoopService.start()
 
     wss.on('connection', (ws: DeviceWebSocket, req: { url?: string }) => {
         const { sessionId, deviceId } = url.parse(req.url || '', true).query
@@ -31,7 +31,7 @@ export default async function initWebSocket(server: Server) {
         }
 
         const session = SessionRepository.Get(sessionId as string)
-        const result = validateDeviceConnection(session, deviceId as string)
+        const result = ValidateDeviceSchema.validate(session, deviceId as string)
 
         if (!result.allowed) {
             ws.send(JSON.stringify({ type: 'error', message: result.message }))

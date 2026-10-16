@@ -3,7 +3,7 @@ import { ApiMessage, ApiResponder } from '@common-utils'
 import type { PostMessageRequest, PostMessageResponse } from '../../../common/types'
 import { MessageRepository } from './Message.repository'
 import { MessageSchema } from './Message.schema'
-import { sendNotificationEmail } from './Message.utils'
+import { MessageUtils } from './Message.utils'
 
 /** Business logic for contact messages - persistence via the repository, validation via the schema. */
 export const MessageService = {
@@ -21,7 +21,7 @@ export const MessageService = {
         })
 
         await MessageRepository.save(entry)
-        await sendNotificationEmail({ name, email, phone, message })
+        await MessageUtils.sendNotificationEmail({ name, email, phone, message })
 
         return { message: ApiMessage.sent('message') }
     },

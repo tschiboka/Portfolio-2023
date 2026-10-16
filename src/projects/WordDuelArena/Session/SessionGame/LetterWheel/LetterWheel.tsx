@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { SessionHooks } from '../../Session.hooks'
 import { SessionWebSocketHooks } from '../../SessionWebSocket.hooks'
-import { useLetterWheelListeners } from './LetterWheel.hooks'
+import { LetterWheelHooks } from './LetterWheel.hooks'
 import { Letter } from './components/Letter'
 import { LetterLines } from './components/LetterLines'
 import { LetterPosition, TouchState } from './LetterWheel.types'
@@ -24,7 +24,7 @@ export const LetterWheel = ({ inputLetters }: LetterWheelProps) => {
         touchedLetters: '',
     })
 
-    useLetterWheelListeners({
+    LetterWheelHooks.useListeners({
         containerRef,
         wheelRef,
         inputLetters,

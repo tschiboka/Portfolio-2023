@@ -36,6 +36,4 @@ const levelSchema = new mongoose.Schema<ILevel>({
     },
 })
 
-const Level = mongoose.model<ILevel>('WDA_Level', levelSchema)
-
-export { Level }
+export const LevelModel = mongoose.model<ILevel>('WDA_Level', levelSchema)

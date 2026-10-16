@@ -1,4 +1,4 @@
-const codeSnippets = {
+const JsDateValidationCode = {
     basicDateValidation: `const isValidDate = (date) =>  {
     const d = new Date(date);
     
@@ -65,4 +65,4 @@ if (matchResults) {
     };`,
 }
 
-export default codeSnippets
+export default JsDateValidationCode

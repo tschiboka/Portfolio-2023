@@ -1,11 +1,11 @@
 import { Stack, Section } from '@common-ux'
 import { WebsiteStatsQueries } from './WebsiteStats.queries'
-import { BreakdownTable, useBreakdownTableController } from './BreakdownTable'
+import { BreakdownTable, BreakdownTableController } from './BreakdownTable'
 import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 
 export const WebsiteStats = () => {
-    const controller = useBreakdownTableController()
-    const { data: websiteStats, ...websiteStatsQuery } = WebsiteStatsQueries.useGet({
+    const controller = BreakdownTableController.useTable()
+    const { data: websiteStats, ...websiteStatsQuery } = WebsiteStatsQueries.ActivityFeed.useGet({
         params: controller.params,
     })
 

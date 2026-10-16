@@ -1,6 +1,6 @@
 import type { Rule } from 'eslint'
 import { basename } from 'node:path'
-import { ExactlyOneExportConstants } from './ExactlyOneExport.constants.js'
+import { SingleExportRoles } from '../constants.js'
 
 export const ErrorMessage = 'A role file must export exactly one thing.'
 
@@ -18,8 +18,9 @@ const Eslint = {
         },
         create(context) {
             const segments = basename(context.filename).split('.')
-            const role = segments[segments.length - 2]
-            if (!role || !ExactlyOneExportConstants.SingleExportRoles.includes(role)) return {}
+            const roles = segments.slice(1, -1)
+            const role = roles[roles.length - 1]
+            if (!role || !SingleExportRoles.includes(role)) return {}
 
             let count = 0
 

@@ -11,7 +11,7 @@ import {
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './LoadingIndicators.code'
+import { LoadingIndicatorsCode } from './LoadingIndicators.code'
 
 type LoadingIndicatorsProps = { path: string }
 
@@ -43,8 +43,8 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
                 <Inline gap="32">
                     <LoadingIndicator show />
                 </Inline>
-                <Code language="tsx" content={Snippets.Basic.show} />
-                <Code language="tsx" content={Snippets.Basic.conditional} />
+                <Code language="tsx" content={LoadingIndicatorsCode.Basic.show} />
+                <Code language="tsx" content={LoadingIndicatorsCode.Basic.conditional} />
             </Section>
             <Section>
                 <Heading as="h2" id="custom-color">
@@ -59,7 +59,7 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
                     <LoadingIndicator show color="#ff6b6b" />
                     <LoadingIndicator show color="white" />
                 </Inline>
-                <Code language="tsx" content={Snippets.Color.custom} />
+                <Code language="tsx" content={LoadingIndicatorsCode.Color.custom} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -70,7 +70,7 @@ export const LoadingIndicators = ({ path }: LoadingIndicatorsProps) => (
                     <CodeText>&quot;Loading&quot;</CodeText>. Override it to describe what is
                     loading for screen readers.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={LoadingIndicatorsCode.Accessibility.ariaLabel} />
             </Section>
         </Main>
     </Screen>

@@ -1,4 +1,4 @@
-const codeSnippets = {
+const GreenRooftopCode = {
     readSensors: `int analogToPercentage(float input) {                                // Input Value Between 0 and 1023
     return (int)((input / 1023.00) * 100);                           // Get the Percentage Value
 }
@@ -247,7 +247,7 @@ if (elapsedTime >= reportTimingInSec[reportTiming]) {              // If Time to
         return responseJSON;                                       
     }
     catch (ex) { return ({ success: false, message: ex })}         // On Error Set Success Flag False and Return the Full Error Msg
-}`
+}`,
 }
 
-export default codeSnippets;
+export default GreenRooftopCode

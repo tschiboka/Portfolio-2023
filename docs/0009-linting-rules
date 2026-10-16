@@ -23,7 +23,7 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-09-27  |
+| Last updated | 2026-10-16  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
@@ -121,15 +121,19 @@ not.
     - [x] Step 1.5: Run `rules sync`, then verify the generated config
     - [x] Step 1.6: Sweep every file in scope and fix or suppress each violation
     - [x] Step 1.7: Confirm a green `tsc`, lint, and test run
-- [ ] Step 2: Rule — a role file's export name matches its role
-    - [ ] Step 2.1: Build `rules/role-export-name/`
-    - [ ] Step 2.2: Read the expected name from §1.2's role-returns table
-    - [ ] Step 2.3: Cover the `use<Verb>` forms for `queries` and `hooks`
-    - [ ] Step 2.4: Register as `severity: 'error'`
-    - [ ] Step 2.5: Add `tests/RoleExportName.spec.ts`
-    - [ ] Step 2.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 2.7: Sweep every file in scope and fix or suppress each violation
-    - [ ] Step 2.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 2: Rule — a role file's export name matches its role
+    - [x] Step 2.1: Build `rules/role-export-name/`
+    - [x] Step 2.2: Read the expected name from the role-returns table in [`file-structure.md`](references/file-structure.md)
+    - [x] Step 2.3: Expect the `<Stem>Queries` / `<Stem>Hooks` umbrella, never a `use<Verb>` leaf
+    - [x] Step 2.4: Register as `severity: 'error'`
+    - [x] Step 2.5: Add `tests/RoleExportName.spec.ts`
+    - [x] Step 2.6: Run `rules sync`, then verify the generated config
+    - [x] Step 2.7: Sweep every file in scope and fix or suppress each violation
+        - [x] `common/ux/Const/Const.ts` — the umbrella moved in from the barrel
+        - [x] `common/utils/Server/Permissions/Permissions.ts` — the guards wrapped as `Permissions`
+        - [x] `common/utils/Query/Query.ts` → `RequestBuilder.ts`, `Key.ts` → `QueryKey.ts`
+        - [x] `common/utils/Paths/Path.ts` — deleted, a stale duplicate of `Paths.ts`
+    - [x] Step 2.8: Confirm a green `tsc`, lint, and test run
 - [ ] Step 3: Rule — a testable role file has a matching spec
     - [ ] Step 3.1: Build `rules/matching-spec/`
     - [ ] Step 3.2: Scope `include` to the `YES` rows in §1.3, `exclude` the rest
@@ -340,6 +344,23 @@ not.
     - [ ] Step 21.7: Run `rules sync`, then verify the generated config
     - [ ] Step 21.8: Fix the four bare `TODO`s — `Typist.routes.ts`, `move.ts`, `level.ts`, `WebsiteStats.tsx`
     - [ ] Step 21.9: Confirm a green `tsc`, lint, and test run
+- [ ] Step 22: Rule — a role file's stem is PascalCase
+    - [ ] Step 22.1: Build `rules/role-file-pascal/`
+    - [ ] Step 22.2: Flag a stem that does not start uppercase when a listed role
+          follows it — the files that motivated the step are resolved, so re-measure
+          the offender list before building it
+    - [ ] Step 22.3: Read the roles from `no-ad-hoc-file-suffix`'s `AllowedRoles`, so
+          one list decides both what a role is and how its file is named
+    - [ ] Step 22.4: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 22.5: Register as `severity: 'error'`
+    - [ ] Step 22.6: Add `tests/RoleFilePascal.spec.ts`
+    - [ ] Step 22.7: Run `rules sync`, then verify the generated config
+    - [ ] Step 22.8: Rename whatever the re-measure finds, so each offender comes back
+          into `role-export-name`'s reach — the three files this step once named are
+          settled: the controller's `useTableController.mocks.ts` and
+          `useTableController.spec.utils.tsx` are gone (their specs are now the
+          role-named `Table.hooks.*`), and `src/router.routes.tsx` no longer exists
+    - [ ] Step 22.9: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -520,8 +541,8 @@ declaration file's name describes what it augments, not a role, so`.d.ts` leaves
   holds, because the set is the invariant. The second kind encodes today's
   implementation and turns a lint failure into an architecture freeze.
 - Step 15.6 exists because the key and the value are different things.
-  `WebsiteStats.queries.ts` writes `useGet: useGetActivityFeed` — a conventional
-  key over a feature-named function — and `Likes.queries.ts` writes
+  `Gym.queries.ts` writes `Routines: { useGet: useGetGymUserRoutines }` — a
+  conventional key over a feature-named function — and `Like.queries.ts` writes
   `usePost: usePostLike`. Checking the value would flag both, and both are right.
 - Step 16.5 exempts `.min(1)`. `1` asserts presence — at least one item — rather
   than expressing a field's bound, so it has no constant to come from.
@@ -594,6 +615,33 @@ characters')` writes the bound twice, so editing one copy makes the message
   across `server/**` returns this handler and two catch blocks. A parameter can be
   load-bearing by **position**, not by use, so an unused-argument sweep must
   prefix rather than delete.
+
+- **`role-export-name` is driven by one map, not by derivation.** `{Stem}` is the
+  file's first dot-segment and each role carries one strict template, so
+  `Word.repository.ts` reads `WordRepository`. Strict was chosen over per-file
+  exceptions: `Xmas.constants.ts` exporting `XmasFieldLimits` gets renamed rather than
+  excused. A composite key wins over a single one, so `Form.spec.utils.tsx`
+  reads `{Stem}TestUtils`, never `{Stem}Utils`.
+- **A name that carries no role asserts nothing.** A spec names nothing, an unmapped
+  role (`types`) names nothing, and a bare name that does not start uppercase names
+  nothing — which keeps `index.ts`, `main.tsx` and `setupTests.ts` out with no list
+  to maintain. A bare PascalCase name is a feature file and must export itself:
+  `Blog.tsx` exports `Blog`.
+- **That PascalCase guard hid three files, and the fold retired two of them.**
+  `tests/useTableController.mocks.ts` and `tests/useTableController.spec.utils.tsx` are
+  gone: the controller folded into `common/ux/Table/Table.hooks.ts`, so its specs are the
+  role-named `Table.hooks.*` and `role-export-name` reaches them again. `src/router.routes.tsx`
+  no longer exists either, so the offender list needs re-measuring when the rule is built.
+  Every other lowercase stem is skipped by another branch already — `.d.ts`, a spec, or the
+  unmapped `types`. Step 22 closes the gap by turning the convention into a rule
+  instead of an escape.
+- **The rules carry their own `predicates.ts` and `generics.ts`.** A rule cannot
+  reach `common/utils` at runtime: the sources sit in `rules/` while the emitted
+  plugin runs from `rules/dist/`, one level deeper, so a relative specifier that
+  compiles resolves one directory too high. The two files mirror the checks the
+  rules make — `isDefined`, `isEmpty`, `isNonEmpty`, `isString`; `Nil`, `Defined`,
+  `Optional`, `Nullable`. A rule folder keeps `constants` / `types` / `utils`
+  separate so `rules.ts` holds the rule and nothing else.
 
 ## 4. Open Questions
 

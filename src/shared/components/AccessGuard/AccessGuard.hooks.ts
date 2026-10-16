@@ -1,7 +1,7 @@
 import { Session } from '@shared-context'
 import { AccessMap } from './AccessGuard.types'
 
-export const useAccess = (): AccessMap => {
+const useAccess = (): AccessMap => {
     const { session } = Session.useContext()
     const { user, settings } = session || {}
 
@@ -11,4 +11,8 @@ export const useAccess = (): AccessMap => {
             xmas2025: settings?.enabledFeatures?.includes('xmas2025') || false,
         },
     }
+}
+
+export const AccessGuardHooks = {
+    useAccess,
 }

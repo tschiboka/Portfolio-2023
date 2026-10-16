@@ -1,8 +1,7 @@
 import { waitFor } from '@testing-library/react'
-import { Test } from '@common-ux/Test'
+import { Test } from '@shared-components/Screen/tests'
 import { ClientMessage } from '@common-utils'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
 import { AppRoutes } from '../../../app'
 import { CategoriesMockHandlers } from './Categories.mockHandlers'
 
@@ -39,7 +38,7 @@ export const CategoriesTestUtils = {
     customRender: async (
         handlers: Buildable[] = CategoriesMockHandlers.Defaults,
     ): Promise<{ form: CategoriesForm }> => {
-        TestScreen.Do.render({
+        Test.Screen.Do.render({
             path: AppRoutes.Categories,
             handlers,
             session: { session: { token: 'mock-jwt-token' } },

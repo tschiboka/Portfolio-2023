@@ -2,11 +2,11 @@ import React, { useEffect, useReducer, useRef } from 'react'
 import { TypistContext } from './Typist.context'
 import { TypistDefaults } from './Typist.defaults'
 import { TypistQueries } from './Typist.queries'
-import { editorReducer } from './Editor/Editor.reducer'
+import { EditorReducer } from './Editor/Editor.reducer'
 import type { RoundResponse, TypistContextValues } from './Typist.types'
 
-export const TypistContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [editorState, dispatch] = useReducer(editorReducer, TypistDefaults.initialState)
+export const TypistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [editorState, dispatch] = useReducer(EditorReducer, TypistDefaults.initialState)
     const prevStatusRef = useRef(editorState.status)
     const editorStateRef = useRef(editorState)
     editorStateRef.current = editorState

@@ -10,7 +10,7 @@ import { ErrorResponse, Query, QueryKey } from '@common-utils'
 import { AxiosError } from 'axios'
 import { Session } from '@shared-context'
 
-export const useGetGymUserRoutines = () => {
+const useGetGymUserRoutines = () => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('Gym', 'Projects')
         .setSubpath('/routines')
@@ -23,7 +23,7 @@ export const useGetGymUserRoutines = () => {
     })
 }
 
-export const useGetGymExercises = () => {
+const useGetGymExercises = () => {
     const token = Session.useContext().session?.token
 
     const request = new Query.RequestBuilder('Gym', 'Projects')
@@ -37,7 +37,7 @@ export const useGetGymExercises = () => {
     })
 }
 
-export const useGetGymDifficultyOptions = () => {
+const useGetGymDifficultyOptions = () => {
     const request = new Query.RequestBuilder('Gym', 'Projects').setSubpath('/difficulty').build()
 
     return useQuery<GetGymDifficultyOptionsResponse, AxiosError<ErrorResponse>>({
@@ -47,7 +47,7 @@ export const useGetGymDifficultyOptions = () => {
     })
 }
 
-export const useGetGymEquipmentOptions = () => {
+const useGetGymEquipmentOptions = () => {
     const request = new Query.RequestBuilder('Gym', 'Projects').setSubpath('/equipment').build()
 
     return useQuery<GetGymEquipmentOptionsResponse, AxiosError<ErrorResponse>>({
@@ -57,7 +57,7 @@ export const useGetGymEquipmentOptions = () => {
     })
 }
 
-export const useGetGymMuscleGroupOptions = () => {
+const useGetGymMuscleGroupOptions = () => {
     const request = new Query.RequestBuilder('Gym', 'Projects').setSubpath('/muscle-group').build()
 
     return useQuery<GetGymMuscleGroupOptionsResponse, AxiosError<ErrorResponse>>({
@@ -65,4 +65,22 @@ export const useGetGymMuscleGroupOptions = () => {
         queryFn: async () =>
             request.get<GetGymMuscleGroupOptionsResponse>().then(Query.extractAxiosData),
     })
+}
+
+export const GymQueries = {
+    Routines: {
+        useGet: useGetGymUserRoutines,
+    },
+    Exercises: {
+        useGet: useGetGymExercises,
+    },
+    Difficulty: {
+        useGet: useGetGymDifficultyOptions,
+    },
+    Equipment: {
+        useGet: useGetGymEquipmentOptions,
+    },
+    MuscleGroup: {
+        useGet: useGetGymMuscleGroupOptions,
+    },
 }

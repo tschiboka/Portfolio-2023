@@ -111,4 +111,4 @@ function transformSessionForClient(
     }
 }
 
-export { commitSessionState }
+export const BroadcastService = { commit: commitSessionState }

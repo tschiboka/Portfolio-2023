@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Accessor } from '@common-ux/Test'
-import { AppContextProvider, SessionContext } from '@shared-context'
+import { AppProvider, SessionContext } from '@shared-context'
 import type { AppContextValues } from '@shared-context'
 import { Nav as NavComponent } from '../Nav'
 import { NavMenu as NavMenuComponent } from '../components/NavMenu'
@@ -38,7 +38,7 @@ class NavAccessor extends Accessor {
 }
 
 // Set is static (renders the component), Get/Do are instance-level (require a rendered element)
-export const Nav = Object.assign(
+export const NavTestUtils = Object.assign(
     (label?: string): NavAccessor => {
         const element = label
             ? Accessor.screen.getByRole('banner', { name: label })
@@ -49,18 +49,18 @@ export const Nav = Object.assign(
         Set: {
             mock: (props: NavProps, appContext?: Partial<AppContextValues>) =>
                 render(
-                    <AppContextProvider initialState={appContext}>
+                    <AppProvider initialState={appContext}>
                         <NavComponent {...props} />
-                    </AppContextProvider>,
+                    </AppProvider>,
                 ),
             mockMenu: (props: NavMenuProps, appContext?: Partial<AppContextValues>) =>
                 render(
                     <SessionContext.Provider value={mockSessionValue}>
-                        <AppContextProvider initialState={appContext}>
+                        <AppProvider initialState={appContext}>
                             <MemoryRouter>
                                 <NavMenuComponent {...props} />
                             </MemoryRouter>
-                        </AppContextProvider>
+                        </AppProvider>
                     </SessionContext.Provider>,
                 ),
         },

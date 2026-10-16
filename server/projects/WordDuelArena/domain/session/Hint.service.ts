@@ -3,7 +3,7 @@ import { SessionState } from '../../WordDuelArena.types'
 import type { Optional } from '@common-utils'
 import { isDefined, isEmpty } from '@common-utils'
 import { Arrays } from '@common-utils'
-import { GIVE_HINTS_AFTER_FAILED_ATTEMPTS } from '../../config/constants/Game.constants'
+import { GameConstants } from '../../config/constants/Game.constants'
 
 const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
     if (!draft.currentMatch) return false
@@ -31,7 +31,7 @@ const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
 
     return (
         failedAttemptsSinceLastHint > 0 &&
-        failedAttemptsSinceLastHint % GIVE_HINTS_AFTER_FAILED_ATTEMPTS === 0
+        failedAttemptsSinceLastHint % GameConstants.hintsAfterFailedAttempts === 0
     )
 }
 

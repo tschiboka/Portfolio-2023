@@ -3,7 +3,7 @@ import axios from 'axios'
 import type { AxiosRequestConfig } from 'axios'
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import { FeatureQuery } from '../FeatureQuery'
-import type { CacheKey } from '../Key'
+import type { CacheKey } from '../QueryKey'
 
 const mockedAxios = axios as unknown as {
     get: MockInstance

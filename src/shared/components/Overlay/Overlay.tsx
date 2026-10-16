@@ -1,9 +1,8 @@
 import './Overlay.scss'
-import { Overlay } from '@common-ux'
+import { FullScreen } from '@common-ux/Overlay/FullScreen'
 import { AppHooks } from '@shared-context'
 
-export const FullScreenOverlay = () => {
+export const Overlay = () => {
     const { overlayVisible, overlayContent } = AppHooks.useContext()
-
-    if (overlayVisible) return <Overlay.FullScreen>{overlayContent}</Overlay.FullScreen>
+    if (overlayVisible) return <FullScreen>{overlayContent}</FullScreen>
 }

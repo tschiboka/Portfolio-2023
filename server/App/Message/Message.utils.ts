@@ -24,7 +24,7 @@ const notificationEmail = (
 }
 
 /** Sends a notification email to the site owner via Resend (best-effort, non-fatal on failure). */
-export const sendNotificationEmail = async (
+const sendNotificationEmail = async (
     input: Pick<PostMessageRequest, 'name' | 'email' | 'phone' | 'message'>,
 ): Promise<void> => {
     const { email } = input
@@ -47,3 +47,5 @@ export const sendNotificationEmail = async (
         console.error(ApiMessage.failed('send notification email'), err)
     }
 }
+
+export const MessageUtils = { sendNotificationEmail }

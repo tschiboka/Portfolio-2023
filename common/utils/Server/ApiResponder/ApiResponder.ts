@@ -4,7 +4,7 @@ import { isUndefined } from '../../Predicate'
 import { ApiError } from '../ApiError'
 import { ApiMessage } from '../../Messages/ApiMessage'
 import { HttpStatus } from '../HttpStatus'
-import { resolveErrorMessage } from '../ResolveErrorMessage'
+import { ResolveErrorMessage } from '../ResolveErrorMessage'
 
 /**
  * Single route-facing abstraction for API response behaviour.
@@ -15,7 +15,7 @@ export const ApiResponder = {
     notFound: (resource: string): ApiError =>
         new ApiError(HttpStatus.NOT_FOUND, ApiMessage.notFound(resource)),
     badRequest: (input: unknown): ApiError =>
-        new ApiError(HttpStatus.BAD_REQUEST, resolveErrorMessage(input)),
+        new ApiError(HttpStatus.BAD_REQUEST, ResolveErrorMessage(input)),
     invalidId: (resource: string): ApiError =>
         new ApiError(HttpStatus.BAD_REQUEST, ApiMessage.invalidId(resource)),
     forbidden: (): ApiError => new ApiError(HttpStatus.FORBIDDEN, ApiMessage.forbidden()),

@@ -1,5 +1,7 @@
-export const MIN_WORD_LENGTH = 3
-export const MAX_WORD_LENGTH = 8
-export const MIN_WORDS_PER_LEVEL = 10
-export const MAX_WORDS_PER_LEVEL = 20
-export const MAX_WORDS_IN_ROW_LENGTH = 13
+export const WordConstants = {
+    minLength: 3,
+    maxLength: 8,
+    minWordsPerLevel: 10,
+    maxWordsPerLevel: 20,
+    maxWordsInRowLength: 13,
+}

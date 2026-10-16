@@ -5,6 +5,8 @@ import { registrar as noMisnamedPrimaryFileRegistrar } from './no-misnamed-prima
 import { RuleRegistrar } from './types.js'
 import { registrar as noNewlineInImportsRegistrar } from './no-newline-in-imports/NoNewLineInImports.registrar.js'
 import { registrar as exactlyOneExportRegistrar } from './exactly-one-export/ExactlyOneExport.registrar.js'
+import { registrar as roleExportNameRegistrar } from './role-export-name/RoleExportName.registrar.js'
+import { withPrefixedReports } from './prefixReports.js'
 
 export const RuleRegistry: RuleRegistrar[] = [
     noEmptyRowInJsxRegistrar,
@@ -13,4 +15,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noNewlineInImportsRegistrar,
     noMisnamedPrimaryFileRegistrar,
     exactlyOneExportRegistrar,
-]
+    roleExportNameRegistrar,
+].map(withPrefixedReports)

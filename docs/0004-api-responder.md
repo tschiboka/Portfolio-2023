@@ -234,7 +234,7 @@ These were identified during review and are load-bearing, not optional.
 ### 4.1 Session progress (2026-08-22)
 
 - All `common/utils/Server` building blocks (`ApiMessage`, `ApiError`, `ApiResponder`,
-  `HttpStatus`, `resolveErrorMessage`) shipped with specs, plus `capitalise`.
+  `HttpStatus`, `ResolveErrorMessage`) shipped with specs, plus `capitalise`.
 - **ObjectId-serialisation prerequisite landed for gym GETs:** `ApiTransformers.toApiResource`
   (in `common/utils/Transformer`) now serialises exercise/routine docs (`ObjectId` → `string`,
   recursive) in `exercises.ts` / `routines.ts`, replacing the `as unknown as` cast and the
@@ -316,7 +316,7 @@ These were identified during review and are load-bearing, not optional.
 
 - [x] `capitalise` in `common/utils/Strings`
 - [x] `ApiMessage` namespace
-- [x] `resolveErrorMessage` util (string | Error | validation-result extraction) + spec
+- [x] `ResolveErrorMessage` util (string | Error | validation-result extraction) + spec
 - [x] `ApiResponder` (`ok`/`created`/`badRequest`/`notFound`/`forbidden`) + full surface (7 error, 3 success) + spec
 - [x] Internal `ApiError` throwable type
 - [x] ~~`wrapHandler`~~ async wrapper — **not needed** (§3.1): `express-async-errors` already forwards async handler rejections to the error middleware

@@ -1,10 +1,10 @@
 import { Table } from '@common-ux'
-import { activityColumns as defaultColumns } from './BreakdownTable.columns'
+import { BreakdownTableColumns as defaultColumns } from './BreakdownTable.columns'
 import { ActivityTypeLegend } from '../ActivityTypePill/ActivityTypePill'
 import type { TableControl } from '@common-ux'
 import type { ActivityFeedContext, PageMeta } from '@common-types'
 import type { BreakdownRow } from './BreakdownTable.types'
-import { breakdownActions } from './BreakdownTable.actions'
+import { BreakdownTableActions } from './BreakdownTable.actions'
 import { useState } from 'react'
 import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
 import type { Nullable } from '@common-utils'
@@ -37,7 +37,7 @@ export const BreakdownTable = ({
                 controller={controller}
                 isLoading={isLoading}
                 onRefresh={onRefresh}
-                actions={breakdownActions(setShowDetails)}
+                actions={BreakdownTableActions(setShowDetails)}
                 enableColumnResize
                 enableColumnReorder
                 ariaLabel="Activity Feed Table"

@@ -1,4 +1,4 @@
-const codeSnippets = {
+const StoppingTestEntropyCode = {
     // ── The Problem: Inconsistent Patterns ───────────────────────────────────
     entropyBefore: `// Developer A — role queries
 const dialog = screen.getByRole('dialog', { name: 'Confirm' })
@@ -213,7 +213,7 @@ export const Table = Object.assign(
 // Pattern 2: Spec utility file (Button, Overlay)
 // Button.spec.utils.tsx
 const label = 'Test Button'
-export const Set = {
+const Set = {
     button: (props = {}) => {
         render(<Button {...props}>{label}</Button>)
         return Test.Button(label) // render + locate in one call
@@ -222,7 +222,9 @@ export const Set = {
         render(<Button as="a" href="/test" {...props}>{label}</Button>)
         return Test.Button.Link(label)
     },
-}`,
+}
+
+export const ButtonTestUtils = { Set }`,
 
     // ── Test Examples: Before & After ────────────────────────────────────────
     testBefore: `describe('LoginForm', () => {
@@ -422,7 +424,7 @@ Test.Pill('Active')             // PillAccessor
 Test.Code('snippet')            // CodeAccessor
 Test.Figure('chart')            // FigureAccessor
 Test.LoadingIndicator           // Static: LoadingIndicator.Has.isLoading()
-TestScreen                       // Page-level: TestScreen.Do.render({ ... })`,
+Test.Screen                      // Page-level: Test.Screen.Do.render({ ... })`,
 
     // ── Design Rules ─────────────────────────────────────────────────────────
     designRules: `// ✅ Accessors locate elements, read state, and perform single actions
@@ -444,4 +446,4 @@ await table.Wait.heading('Users')
 // ❌ Never put multi-step sequences inside accessors`,
 }
 
-export default codeSnippets
+export default StoppingTestEntropyCode

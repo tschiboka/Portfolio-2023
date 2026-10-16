@@ -1,4 +1,4 @@
-import { selectRatio } from './Split.selectors'
+import { SplitSelectors } from './Split.selectors'
 import type { SplitProps } from './Split.types'
 
 export const Split = ({
@@ -22,7 +22,7 @@ export const Split = ({
         className={className}
         style={{
             display: 'grid',
-            gridTemplateColumns: selectRatio(ratio),
+            gridTemplateColumns: SplitSelectors.selectRatio(ratio),
             gap: gap ? `${gap}px` : undefined,
             ...style,
         }}

@@ -1,4 +1,4 @@
-const codeSnippets = {
+const ReactAnatomyCode = {
     batching: `const [variable_1, setVariable_1] = React.useState(false);
 const [variable_2, setVariable_2] = React.useState(false);
   
@@ -110,7 +110,7 @@ function ParentComponent() {
 function ChildComponent() {
     const data = useContext(MyContext);
     return <div>{data}</div>;
-}`
+}`,
 }
 
-export default codeSnippets;
+export default ReactAnatomyCode

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { Session, LocalSession } from '@shared-context'
+import { Session, SessionStorage } from '@shared-context'
 
 export const LogoutHooks = {
     useLogout: () => {
@@ -7,7 +7,7 @@ export const LogoutHooks = {
         const { setSession } = Session.useContext()
 
         return () => {
-            LocalSession.getInstance().drop()
+            SessionStorage.getInstance().drop()
             setSession(undefined)
             navigate('/api/home')
         }

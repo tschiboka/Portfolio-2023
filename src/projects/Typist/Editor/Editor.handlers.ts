@@ -1,17 +1,17 @@
 import { TypistEditorState, EditorAction } from '../Typist.types'
-import { editorSelectors } from './Editor.selectors'
+import { EditorSelectors } from './Editor.selectors'
 
 type EditorHandlerArgs = {
     editorState: TypistEditorState
     dispatch: React.Dispatch<EditorAction>
 }
 
-export const createEditorHandler =
+const create =
     ({ editorState, dispatch }: EditorHandlerArgs) =>
     (event: KeyboardEvent) => {
         event.preventDefault()
 
-        if (editorSelectors.isControlKey(event)) {
+        if (EditorSelectors.isControlKey(event)) {
             if (event.key === 'Enter' && editorState.status === 'playing') {
                 dispatch({ type: 'END' })
             }
@@ -25,3 +25,7 @@ export const createEditorHandler =
             dispatch({ type: 'KEYSTROKE', key: event.key })
         }
     }
+
+export const EditorHandlers = {
+    create,
+}

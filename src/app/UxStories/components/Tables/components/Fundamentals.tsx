@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Paragraph, Pill, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows } = TablesMocks
 const { renderStatus } = TablesConfig
@@ -33,7 +33,7 @@ export const Fundamentals = () => (
                     { header: 'Status', accessor: 'status' },
                 ]}
             />
-            <Code language="tsx" content={Snippets.Fundamentals.noTitle} />
+            <Code language="tsx" content={TablesCode.Fundamentals.noTitle} />
         </Section>
         <Section>
             <Heading as="h3">Empty State</Heading>
@@ -52,7 +52,7 @@ export const Fundamentals = () => (
                 ]}
                 title="Empty State"
             />
-            <Code language="tsx" content={Snippets.Fundamentals.emptyState} />
+            <Code language="tsx" content={TablesCode.Fundamentals.emptyState} />
         </Section>
         <Section>
             <Heading as="h3">Custom Empty State</Heading>
@@ -71,7 +71,7 @@ export const Fundamentals = () => (
                 title="Custom Empty State"
                 emptyState={<em>Nothing to display — try adjusting your filters.</em>}
             />
-            <Code language="tsx" content={Snippets.Fundamentals.customEmptyState} />
+            <Code language="tsx" content={TablesCode.Fundamentals.customEmptyState} />
         </Section>
         <Section>
             <Heading as="h3">Basic Usage</Heading>
@@ -91,7 +91,7 @@ export const Fundamentals = () => (
                 ]}
                 title="Basic Usage"
             />
-            <Code language="tsx" content={Snippets.Fundamentals.basicUsage} />
+            <Code language="tsx" content={TablesCode.Fundamentals.basicUsage} />
         </Section>
         <Section>
             <Heading as="h3">Description</Heading>
@@ -114,7 +114,7 @@ export const Fundamentals = () => (
             >
                 <Table.Header>Overview of the first four entries sorted by name.</Table.Header>
             </Table>
-            <Code language="tsx" content={Snippets.Fundamentals.description} />
+            <Code language="tsx" content={TablesCode.Fundamentals.description} />
         </Section>
         <Section>
             <Heading as="h3">Description with Download</Heading>
@@ -141,7 +141,7 @@ export const Fundamentals = () => (
                     Showing <strong>{rows.length}</strong> rows — click the download icon to export.
                 </Table.Header>
             </Table>
-            <Code language="tsx" content={Snippets.Fundamentals.descriptionWithDownload} />
+            <Code language="tsx" content={TablesCode.Fundamentals.descriptionWithDownload} />
         </Section>
         <Section>
             <Heading as="h3">Info Button</Heading>
@@ -162,7 +162,7 @@ export const Fundamentals = () => (
             >
                 <Table.Info text="Info clicked — open a modal, tooltip, or help panel here." />
             </Table>
-            <Code language="tsx" content={Snippets.Fundamentals.infoButton} />
+            <Code language="tsx" content={TablesCode.Fundamentals.infoButton} />
         </Section>
         <Section>
             <Heading as="h3">Legend</Heading>
@@ -200,7 +200,7 @@ export const Fundamentals = () => (
                     </div>
                 </Table.Legend>
             </Table>{' '}
-            <Code language="tsx" content={Snippets.Fundamentals.legend} />{' '}
+            <Code language="tsx" content={TablesCode.Fundamentals.legend} />{' '}
         </Section>
     </>
 )

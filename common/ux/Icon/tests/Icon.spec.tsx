@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { Set } from './Icon.spec.utils'
+import { IconTestUtils } from './Icon.spec.utils'
+
+const { Set } = IconTestUtils
 
 describe('Icon', () => {
     it('should render an svg element', () => {

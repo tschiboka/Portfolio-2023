@@ -1,5 +1,5 @@
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import {
     BasicSortingDemo,
     MixedSortableDemo,
@@ -38,7 +38,7 @@ export const Sorting = () => (
                 result to <CodeText>data</CodeText>.
             </Paragraph>
             <BasicSortingDemo />
-            <Code language="tsx" content={Snippets.Sorting.basic} />
+            <Code language="tsx" content={TablesCode.Sorting.basic} />
         </Section>
         <Section>
             <Heading as="h3">Mixed Sortable Columns</Heading>
@@ -49,7 +49,7 @@ export const Sorting = () => (
                 contain non-orderable content like action labels or status badges.
             </Paragraph>
             <MixedSortableDemo />
-            <Code language="tsx" content={Snippets.Sorting.mixedSortable} />
+            <Code language="tsx" content={TablesCode.Sorting.mixedSortable} />
         </Section>
         <Section>
             <Heading as="h3">Sorting with Selection</Heading>
@@ -61,7 +61,7 @@ export const Sorting = () => (
                 follow the data.
             </Paragraph>
             <SortingWithSelectionDemo />
-            <Code language="tsx" content={Snippets.Sorting.withSelection} />
+            <Code language="tsx" content={TablesCode.Sorting.withSelection} />
         </Section>
         <Section>
             <Heading as="h3">Sorting with Pagination</Heading>
@@ -73,7 +73,7 @@ export const Sorting = () => (
                 callback by calling <CodeText>setPage(1)</CodeText> alongside the sort state update.
             </Paragraph>
             <SortingWithPaginationDemo />
-            <Code language="tsx" content={Snippets.Sorting.withPagination} />
+            <Code language="tsx" content={TablesCode.Sorting.withPagination} />
         </Section>
     </>
 )

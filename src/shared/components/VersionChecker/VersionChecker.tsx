@@ -1,6 +1,6 @@
-import { Version } from '@common-utils'
+import { VersionHooks } from '@common-utils'
 
 export const VersionChecker = () => {
-    Version.useVersionCheck()
+    VersionHooks.useVersionCheck()
     return null
 }

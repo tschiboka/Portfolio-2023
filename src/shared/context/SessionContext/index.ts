@@ -1,10 +1,10 @@
 import { SessionHooks } from './Session.hooks'
-import { SessionContextProvider } from './Session.provider'
-import { LocalSession } from './Session.utils'
+import { SessionProvider } from './Session.provider'
+import { SessionStorage } from './Session.storage'
 
 export const Session = {
     useContext: SessionHooks.useContext,
-    Provider: SessionContextProvider,
+    Provider: SessionProvider,
 }
 
-export { LocalSession }
+export { SessionStorage }

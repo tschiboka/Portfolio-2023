@@ -1,4 +1,4 @@
-export const Code = {
+export const LoadingIndicatorsCode = {
     Basic: {
         show: `<LoadingIndicator show={isLoading} />`,
         conditional: `const [loading, setLoading] = useState(true)

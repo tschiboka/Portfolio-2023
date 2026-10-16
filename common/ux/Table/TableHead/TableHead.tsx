@@ -1,8 +1,8 @@
 import type { ReactNode, MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
 import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
-import { TableCheckboxHeader } from '../TableCheckbox/TableCheckbox'
-import { getNextSortDirection } from './TableHead.utils'
+import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
+import { TableHeadUtils } from './TableHead.utils'
 import './TableHead.styles.css'
 
 type TableHeadProps<TData extends Record<string, ReactNode>, TContext> = {
@@ -44,7 +44,11 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
 
     const handleSort = (accessor: keyof TData) => {
         if (!sorting) return
-        const direction = getNextSortDirection(sorting.column, sorting.direction, accessor)
+        const direction = TableHeadUtils.getNextSortDirection(
+            sorting.column,
+            sorting.direction,
+            accessor,
+        )
         sorting.onSortChange(accessor, direction)
     }
 

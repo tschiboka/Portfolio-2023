@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Accessor } from '../../../Test'
 import { Split } from '../Split'
-import { selectRatio } from '../Split.selectors'
+import { SplitSelectors } from '../Split.selectors'
 import type { SplitProps } from '../Split.types'
 
 type SetProps = Partial<SplitProps> & { ariaLabel: string }
@@ -19,4 +19,4 @@ const Set = {
     },
 }
 
-export const SplitTestUtils = { Set, selectRatio }
+export const SplitTestUtils = { Set, SplitSelectors }

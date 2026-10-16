@@ -7,7 +7,7 @@ import type { ActivityType } from '@common-types'
 
 const formatDate = (iso: string) => DateTime.Format.to('DisplayDateTime', iso) ?? iso
 
-export const activityColumns: TableColumns<BreakdownRow> = [
+export const BreakdownTableColumns: TableColumns<BreakdownRow> = [
     {
         header: 'Date',
         accessor: 'datetime',

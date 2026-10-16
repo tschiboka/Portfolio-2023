@@ -5,7 +5,7 @@ import type { ActionMenuItem } from '../ActionMenu'
 import type { Key } from '@common-utils'
 import { PopupUtils } from '../Popup.utils'
 import { OverlayMocks } from './Overlay.mocks'
-import { OverlayTestUtils } from './Overlay.utils'
+import { OverlayTestUtils } from './Overlay.spec.utils'
 
 const { Set, mockAnchorRef } = OverlayTestUtils
 const { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } = PopupUtils

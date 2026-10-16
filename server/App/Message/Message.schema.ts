@@ -1,23 +1,23 @@
 ﻿import Joi from 'joi'
 import { isDigits } from '@common-utils'
 import type { MessageInput } from './Message.types'
-import { MessageFieldLimits } from './Message.constants'
+import { MessageConstants } from './Message.constants'
 
 const schema = Joi.object({
-    name: Joi.string().max(MessageFieldLimits.name.max).required(),
+    name: Joi.string().max(MessageConstants.fieldLimits.name.max).required(),
     email: Joi.string()
-        .min(MessageFieldLimits.email.min)
-        .max(MessageFieldLimits.email.max)
+        .min(MessageConstants.fieldLimits.email.min)
+        .max(MessageConstants.fieldLimits.email.max)
         .required()
         .email({ tlds: { allow: false } }),
     phone: Joi.string()
         .custom((value: string) => (value === '' || isDigits(value) ? value : undefined))
-        .min(MessageFieldLimits.phone.min)
-        .max(MessageFieldLimits.phone.max)
+        .min(MessageConstants.fieldLimits.phone.min)
+        .max(MessageConstants.fieldLimits.phone.max)
         .allow(''),
     message: Joi.string()
-        .min(MessageFieldLimits.message.min)
-        .max(MessageFieldLimits.message.max)
+        .min(MessageConstants.fieldLimits.message.min)
+        .max(MessageConstants.fieldLimits.message.max)
         .required(),
     isRead: Joi.boolean(),
     date: Joi.date(),

@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { AppContextProvider } from '@shared-context'
+import { AppProvider } from '@shared-context'
 import Welcome from './Welcome'
 
 function renderComponent() {
     render(
         <MemoryRouter>
-            <AppContextProvider>
+            <AppProvider>
                 <Welcome />
-            </AppContextProvider>
+            </AppProvider>
         </MemoryRouter>,
     )
 }

@@ -1,6 +1,6 @@
 import type { MoveHandlerParams, Session } from '../../../WordDuelArena.types'
 import { MoveHandlers } from './Move.handlers'
-import { joinHandler } from './Join.handlers'
+import { JoinHandlers } from './Join.handlers'
 
 interface HandlerContext {
     session: Session
@@ -11,7 +11,7 @@ interface HandlerContext {
 async function routeMessage(type: string, ctx: HandlerContext) {
     switch (type) {
         case 'join':
-            return await joinHandler(ctx)
+            return await JoinHandlers.join(ctx)
 
         case 'attempt_move':
             return MoveHandlers.move(ctx as MoveHandlerParams)

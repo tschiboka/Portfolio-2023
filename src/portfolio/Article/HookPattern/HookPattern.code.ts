@@ -1,7 +1,7 @@
-const codeSnippets = { 
+const HookPatternCode = {
     useState: `const [fullName, setFullName] = useState<string>("")
 const handleOnButtonClick = () => setFullName(firstName + lastName)
-`, 
+`,
     useEffect: `useEffect(() => {})                                                 // Run on every render
 useEffect(() => { console.log('1. Mount') }, [])                    // Run once on mount
 useEffect(() => { console.log('2. Mount and every state change') }) // Run on every state change
@@ -97,7 +97,7 @@ export const useFetchComments = (): UseQueryResult<Comment[], AxiosError> =>
     queryKey: ["comments"],
     queryFn: () => axios.get("https://jsonplaceholder.typicode.com/comments").then(data => data.data)
   });`,
-  errorLine: `const onSubmit = () => {
+    errorLine: `const onSubmit = () => {
     const { data } = useFetchComments()  // I called a React hook within a regular JS function
 }`,
     wrappedHook: `export const useComments = () => {
@@ -112,7 +112,7 @@ export const useFetchComments = (): UseQueryResult<Comment[], AxiosError> =>
 const onSubmit = () => {
     const comments = getComments()    // Use the function returned from the hook
 }`,
-hookRule1: `export const Component = () => {
+    hookRule1: `export const Component = () => {
     const [value, setValue] = useState(0)                      // Top level of functional component
     const fn = () => { const [value, setValue] = useState(0) } // This would throw, as this is not the top level of a function component
     for (let i = 0; i < 10; i++) {
@@ -120,7 +120,7 @@ hookRule1: `export const Component = () => {
     }
     if (x > 0) const [value, setValue] = useState(0)           // This would throw, as hook is in a condition
 }`,
-hookRule2: `export const Component1 = () => {
+    hookRule2: `export const Component1 = () => {
     const [value0, setValue0] = useState(0)                      // Index 0
     const [value1, setValue1] = useState(0)                      // Index 1
     const [value2, setValue2] = useState(0)                      // Index 2
@@ -129,7 +129,7 @@ export const Component2 = () => {
     const [value0, setValue0] = useState(0)                      // Index 0
     if (value0 === 1) const [value1, setValue1] = useState(0)    // Now you messed up indexing, ta
     const [value2, setValue2] = useState(0)                      // React says: Index what?
-}`
+}`,
 }
 
-export default codeSnippets
+export default HookPatternCode

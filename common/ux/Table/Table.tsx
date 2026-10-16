@@ -9,17 +9,17 @@ import {
 } from 'react'
 import { BsInfoCircle, BsSliders2, BsArrowClockwise } from 'react-icons/bs'
 import type { Table as TableProps, TableColumns } from './Table.types'
-import { useHiddenBreakpoints } from './Table.hooks'
+import { TableHooks } from './Table.hooks'
 import { TableBody } from './TableBody/TableBody'
 import { TableHead } from './TableHead/TableHead'
 import { TableFilterPanel, type TableFilterPanelHandle } from './TableFilter/TableFilterPanel'
 import { TablePagination } from './TablePagination/TablePagination'
-import { TableDownloadButton } from './TableDownload/TableDownload'
+import { TableDownloadButton } from './TableDownloadButton/TableDownloadButton'
 import { Overlay } from '../Overlay'
 import { hasLength, isNonEmpty, type Optional } from '@common-utils'
 import { TableSkeleton } from './TableSkeleton/TableSkeleton'
 import { TableSlotsUtils } from './TableSlots/TableSlots.utils'
-import { Header, Info, Legend, Filters, Download, Empty } from './TableSlots'
+import { TableSlots } from './TableSlots'
 import './Table.styles.css'
 
 export const Table = <TData extends Record<string, ReactNode>, TContext = unknown>({
@@ -68,7 +68,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
 
     const hasActions = isNonEmpty(actionsProp)
     const breakpoints = columns.flatMap((col) => (col.breakpoint ? [col.breakpoint] : []))
-    const hiddenBreakpoints = useHiddenBreakpoints(breakpoints)
+    const hiddenBreakpoints = TableHooks.useHiddenBreakpoints(breakpoints)
     const hasHiddenColumns = isNonEmpty(hiddenBreakpoints)
     const hiddenColumns = columns.filter((col) => hiddenBreakpoints.includes(col.breakpoint!))
     const autoId = useId()
@@ -253,9 +253,9 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     )
 }
 
-Table.Header = Header
-Table.Info = Info
-Table.Legend = Legend
-Table.Filters = Filters
-Table.Download = Download
-Table.Empty = Empty
+Table.Header = TableSlots.Header
+Table.Info = TableSlots.Info
+Table.Legend = TableSlots.Legend
+Table.Filters = TableSlots.Filters
+Table.Download = TableSlots.Download
+Table.Empty = TableSlots.Empty

@@ -1,3 +1,3 @@
-export { MuscleGroupRouter } from './MuscleGroup.routes'
-export { muscleGroupOptions } from './MuscleGroup.options'
+export { MuscleGroupRouter } from './MuscleGroup.router'
+export { MuscleGroupOptions } from './MuscleGroup.options'
 export type { GetMuscleGroupOptionsRes, GetMuscleGroupReq } from './MuscleGroup.types'

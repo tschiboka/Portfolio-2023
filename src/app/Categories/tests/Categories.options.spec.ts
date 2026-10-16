@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { Const } from '@common-ux'
 import { CategoriesOptions } from '../Categories.options'
-import { icons } from '../components/Icons'
+import { Icons } from '../components/Icons'
 
 describe('CategoriesOptions', () => {
     describe('iconOptions', () => {
         it('builds one option per icon key', () => {
-            expect(CategoriesOptions.iconOptions).toHaveLength(Object.keys(icons).length)
+            expect(CategoriesOptions.iconOptions).toHaveLength(Object.keys(Icons).length)
         })
 
         it('maps every icon key to an option with label/value/icon', () => {
-            for (const key of Object.keys(icons)) {
+            for (const key of Object.keys(Icons)) {
                 const option = CategoriesOptions.iconOptions.find((o) => o.value === key)
                 expect(option).toBeDefined()
                 expect(option?.label).toBe(key)

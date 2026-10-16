@@ -1,4 +1,6 @@
-import { Set } from './Section.spec.utils'
+import { SectionTestUtils } from './Section.spec.utils'
+
+const { Set } = SectionTestUtils
 
 describe('Section', () => {
     describe('as semantic section', () => {

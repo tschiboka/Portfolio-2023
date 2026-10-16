@@ -1,6 +1,9 @@
-﻿export { WdaSessionStatuses as SessionStatuses } from '../../../../../common/types/projects/wda'
+﻿import { DateTime } from '@common-utils'
+import { WdaSessionStatuses } from '../../../../../common/types/projects/wda'
 
-const CHECK_INTERVAL = 5_000
-const INACTIVE_TIMEOUT = 30_000
-
-export { CHECK_INTERVAL, INACTIVE_TIMEOUT }
+/** Session statuses and the presence-loop timing, each in its own unit. */
+export const SessionConstants = {
+    statuses: WdaSessionStatuses,
+    checkIntervalMs: DateTime.Units.Ms.fromSec(5),
+    inactiveTimeoutMs: DateTime.Units.Ms.fromSec(30),
+}

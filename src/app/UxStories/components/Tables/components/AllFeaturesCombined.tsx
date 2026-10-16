@@ -1,5 +1,5 @@
 import { Code, CodeText, Heading, Paragraph } from '@common-ux'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import { AllFeaturesCombinedDemo } from '../Tables.demos'
 
 export const AllFeaturesCombined = () => (
@@ -20,6 +20,6 @@ export const AllFeaturesCombined = () => (
             row.
         </Paragraph>
         <AllFeaturesCombinedDemo />
-        <Code language="tsx" content={Snippets.AllFeaturesCombined.demo} />
+        <Code language="tsx" content={TablesCode.AllFeaturesCombined.demo} />
     </>
 )

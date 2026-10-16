@@ -1,5 +1,5 @@
-export { ActivityRouter } from './Activity.routes'
+export { ActivityRouter } from './Activity.router'
 export { ActivityService } from './Activity.service'
 export { ActivityRepository } from './Activity.repository'
 export { ActivityTransformers } from './Activity.transformers'
-export { ActivityFeedLimits } from './Activity.constants'
+export { ActivityConstants } from './Activity.constants'

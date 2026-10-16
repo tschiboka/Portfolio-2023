@@ -6,17 +6,12 @@ import { Query } from '@common-utils'
 import type { Nullable } from '@common-utils'
 import { isEmpty } from '@common-utils'
 import { WordUtils } from '../../common/utils/Word/Word.utils'
-import {
-    useGetAnagramMap,
-    useGetLevel,
-    useGetWordFrequencies,
-    usePostLevel,
-} from '../LevelCreator.queries'
+import { LevelCreatorQueries } from '../LevelCreator.queries'
 import { LoadingIndicator } from '@common-ux'
 import { useQueryClient } from '@tanstack/react-query'
 import { QueryKey } from '@common-utils'
 import { FrequencyType } from '../../common/utils/Types/Words.types'
-import { levelSchema } from '../LevelCreator.schema'
+import { LevelCreatorSchema } from '../LevelCreator.schema'
 
 type LevelCreatorModalProps = {
     levelName: string
@@ -26,10 +21,11 @@ type LevelCreatorModalProps = {
 export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModalProps) => {
     const queryClient = useQueryClient()
 
-    const { data: levelData, ...levelDataResponse } = useGetLevel(levelName)
-    const { data: anagramMap, ...anagramMapResponse } = useGetAnagramMap()
-    const { data: wordFrequencies, ...wordFrequenciesResponse } = useGetWordFrequencies()
-    const { mutate: postLevel, ...postLevelResponse } = usePostLevel({
+    const { data: levelData, ...levelDataResponse } = LevelCreatorQueries.useGet(levelName)
+    const { data: anagramMap, ...anagramMapResponse } = LevelCreatorQueries.AnagramMap.useGet()
+    const { data: wordFrequencies, ...wordFrequenciesResponse } =
+        LevelCreatorQueries.Frequencies.useGet()
+    const { mutate: postLevel, ...postLevelResponse } = LevelCreatorQueries.usePost({
         onSuccess: () => {
             setModalOpen(false)
             void queryClient.invalidateQueries({ queryKey: QueryKey.LevelNames.build() })
@@ -93,8 +89,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     }
 
     const onSave = async () => {
-        const validation: Nullable<string> = await levelSchema
-            .validate({ selectedWords })
+        const validation: Nullable<string> = await LevelCreatorSchema.validate({ selectedWords })
             .then(() => null)
             .catch((error: Error) => error.message)
 

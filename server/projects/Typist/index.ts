@@ -1,2 +1,2 @@
-export { TypistRouter } from './Typist.routes'
-export { TypistUserSettings } from './Typist.constants'
+export { TypistRouter } from './Typist.router'
+export { TypistConstants } from './Typist.constants'

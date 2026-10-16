@@ -1,4 +1,4 @@
-export { LogRouter } from './Log.routes'
+export { LogRouter } from './Log.router'
 export { LogService } from './Log.service'
 export { LogRepository } from './Log.repository'
 export { LogModel } from './Log.model'

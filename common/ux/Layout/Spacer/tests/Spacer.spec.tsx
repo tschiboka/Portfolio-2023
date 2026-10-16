@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react'
 import { Spacer } from '../Spacer'
-import { Set } from './Spacer.spec.utils'
+import { SpacerTestUtils } from './Spacer.spec.utils'
+
+const { Set } = SpacerTestUtils
 
 describe('Spacer', () => {
     describe('vertical (default)', () => {

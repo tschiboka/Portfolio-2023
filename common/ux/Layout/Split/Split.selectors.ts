@@ -10,4 +10,8 @@ const RatioMap: Record<SplitRatio, string> = {
     '4/1': '4fr 1fr',
 }
 
-export const selectRatio = (ratio?: SplitRatio) => (ratio ? RatioMap[ratio] : RatioMap['1/1'])
+const selectRatio = (ratio?: SplitRatio) => (ratio ? RatioMap[ratio] : RatioMap['1/1'])
+
+export const SplitSelectors = {
+    selectRatio,
+}

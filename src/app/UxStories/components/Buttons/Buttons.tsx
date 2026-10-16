@@ -2,7 +2,7 @@ import { Button, Code, CodeText, Heading, Main, Paragraph, Section, Stack } from
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Buttons.code'
+import { ButtonsCode } from './Buttons.code'
 import { Functions } from '@common-utils'
 
 type ButtonsProps = { path: string }
@@ -40,8 +40,8 @@ export const Buttons = ({ path }: ButtonsProps) => (
                         Cancel
                     </Button>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Basic.primary} />
-                <Code language="tsx" content={Snippets.Basic.secondary} />
+                <Code language="tsx" content={ButtonsCode.Basic.primary} />
+                <Code language="tsx" content={ButtonsCode.Basic.secondary} />
             </Section>
             <Section>
                 <Heading as="h2" id="variants">
@@ -57,7 +57,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
                         Secondary
                     </Button>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Variants.side} />
+                <Code language="tsx" content={ButtonsCode.Variants.side} />
             </Section>
             <Section>
                 <Heading as="h2" id="sizes">
@@ -81,7 +81,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
                         Compact
                     </Button>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Sizes.both} />
+                <Code language="tsx" content={ButtonsCode.Sizes.both} />
             </Section>
             <Section>
                 <Heading as="h2" id="disabled">
@@ -97,7 +97,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
                         Also Disabled
                     </Button>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.Disabled.disabled} />
+                <Code language="tsx" content={ButtonsCode.Disabled.disabled} />
             </Section>
             <Section>
                 <Heading as="h2" id="as-anchor">
@@ -121,8 +121,8 @@ export const Buttons = ({ path }: ButtonsProps) => (
                         GitHub
                     </Button>
                 </Stack.Horizontal>
-                <Code language="tsx" content={Snippets.AsAnchor.link} />
-                <Code language="tsx" content={Snippets.AsAnchor.external} />
+                <Code language="tsx" content={ButtonsCode.AsAnchor.link} />
+                <Code language="tsx" content={ButtonsCode.AsAnchor.external} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -135,7 +135,7 @@ export const Buttons = ({ path }: ButtonsProps) => (
                 <Button ariaLabel="Save current document" onClick={Functions.noop}>
                     Save
                 </Button>
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={ButtonsCode.Accessibility.ariaLabel} />
             </Section>
         </Main>
     </Screen>

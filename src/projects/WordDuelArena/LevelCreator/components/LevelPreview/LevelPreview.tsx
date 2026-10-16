@@ -1,5 +1,5 @@
 import { LevelWord } from '../../../common/utils'
-import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/Word.constants'
+import { WordConstants } from '../../../common/utils/Word/Word.constants'
 import { WordUtils } from '../../../common/utils/Word/Word.utils'
 import './LevelPreview.styles.css'
 
@@ -9,7 +9,7 @@ type LevelPreviewProps = {
 
 export const LevelPreview = ({ selectedWords }: LevelPreviewProps) => {
     const words = WordUtils.getWordGroups(selectedWords).reverse()
-    const MAX_WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
+    const MAX_WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
     const column1 = words.flat().filter((_, index) => index < MAX_WORDS_PER_COLUMN) || []
     const column2 = words.flat().filter((_, index) => index >= MAX_WORDS_PER_COLUMN) || []
 

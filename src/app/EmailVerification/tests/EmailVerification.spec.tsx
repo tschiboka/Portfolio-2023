@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import { ClientMessage } from '@common-utils'
 import { EmailVerificationTestUtils } from './EmailVerification.spec.utils'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Test } from '@shared-components/Screen/tests'
 
 const { labels, messages, rejectedHandlers, rejectedWithoutMessageHandlers } =
     EmailVerificationTestUtils
@@ -42,14 +42,14 @@ describe('EmailVerification', () => {
         it('should navigate to the login page after a success', async () => {
             EmailVerificationTestUtils.customRender()
 
-            await TestScreen.Wait.navigatedTo(EmailVerificationTestUtils.loginPath)
+            await Test.Screen.Wait.navigatedTo(EmailVerificationTestUtils.loginPath)
         })
 
         it('should not navigate when the token is rejected', async () => {
             EmailVerificationTestUtils.customRender(rejectedHandlers)
 
             await waitFor(() => expect(screen.getByText(messages.rejected)).toBeDefined())
-            expect(TestScreen.Get.navigatedTo()).not.toBe(EmailVerificationTestUtils.loginPath)
+            expect(Test.Screen.Get.navigatedTo()).not.toBe(EmailVerificationTestUtils.loginPath)
         })
     })
 })

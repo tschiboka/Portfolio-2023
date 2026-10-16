@@ -1,5 +1,8 @@
 import { AllowedParentFolders } from '../constants.js'
 
+/** Names a file may carry with no role and no subject: the app's entry points. */
+const AllowedBareNames = ['index', 'main', 'setupTests']
+
 const AllowedRoles = [
     'actions',
     'auth',
@@ -27,6 +30,7 @@ const AllowedRoles = [
     'reducer',
     'queries',
     'repository',
+    'router',
     'routes',
     'schema',
     'selectors',
@@ -41,12 +45,6 @@ const AllowedRoles = [
 ]
 
 const role = `(${AllowedRoles.join('|')})`
-
-/**
- * Bare filenames that carry no role and are not named after their folder — entry points.
- * Any other bare name is a file that never stated its role.
- */
-const AllowedBareNames = ['index', 'main', 'setupTests']
 
 /** Any word — a `spec` composite names its subject, so the subject need not be a role. */
 const word = '[a-zA-Z][a-zA-Z0-9]*'

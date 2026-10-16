@@ -1,5 +1,5 @@
 import type { Session, Sessions, SessionState } from '../../../WordDuelArena.types'
-import { SessionStatuses } from '../../../config/constants/Session.constants'
+import { SessionConstants } from '../../../config/constants/Session.constants'
 
 const sessions: Sessions = {}
 
@@ -10,7 +10,7 @@ function getDefaultSessionState(id: string): SessionState {
             player1: null,
             player2: null,
         },
-        status: SessionStatuses.LOBBY,
+        status: SessionConstants.statuses.LOBBY,
         level: null,
         currentMatch: null,
         previousMatches: [],

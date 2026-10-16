@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form'
 import { Form as FormExports } from '..'
 import type { SearchInputOption } from '..'
 import type { FormValues } from './Form.spec.types'
-import { FormMocks } from './Form.spec.mocks'
+import { FormTestMocks } from './Form.spec.mocks'
 
-const { testOptions } = FormMocks
+const { testOptions } = FormTestMocks
 
 const {
     Input,

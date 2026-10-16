@@ -1,4 +1,3 @@
-import { useCanvas } from './Canvas'
 import type {
     Canvas as CanvasType,
     Centre,
@@ -10,5 +9,5 @@ import type {
     StyleConfig,
 } from './Canvas.types'
 
-export const Canvas = { useCanvas }
+export { CanvasHooks } from './Canvas.hooks'
 export type { CanvasType, Centre, Circle, Coord, Direction, Line, Point, StyleConfig }

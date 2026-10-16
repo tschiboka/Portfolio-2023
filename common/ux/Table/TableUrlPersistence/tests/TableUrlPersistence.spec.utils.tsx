@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { MemoryRouter, useLocation } from 'react-router-dom'
-import { useTableUrlPersistence } from '../TableUrlPersistence'
+import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import type { UseTableUrlPersistenceArgs } from '../TableUrlPersistence.types'
-import type { TableSortState, Paging } from '../../useTableController/useTableController.types'
-import type { FilterDefinitions } from '../../TableFilterConfig'
+import type { TableSortState, Paging } from '../../Table.hooks.types'
+import type { FilterDefinitions } from '../../TableFilter'
 import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import type { Filters } from './TableUrlPersistence.spec.types'
 
@@ -42,7 +42,7 @@ const setup = (options: SetupOptions = {}) => {
 
     const { result } = renderHook(
         () =>
-            useTableUrlPersistence<Filters>({
+            TableUrlPersistenceHooks.useUrlState<Filters>({
                 filters,
                 defaultSort: sort,
                 defaultPaging: paging,

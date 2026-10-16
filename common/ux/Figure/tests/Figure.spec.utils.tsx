@@ -3,7 +3,7 @@ import { Figure } from '../Figure'
 import type { FigureProps } from '../Figure.types'
 import { FigureAccessor } from '../../Test/Figure/Figure'
 
-export const Set = {
+const Set = {
     figure: (props: Partial<FigureProps> = {}) => {
         const label = props.ariaLabel ?? 'Test figure'
         render(
@@ -17,3 +17,5 @@ export const Set = {
         return new FigureAccessor(screen.getByLabelText(label), `Figure('${label}')`)
     },
 }
+
+export const FigureTestUtils = { Set }

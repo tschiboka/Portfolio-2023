@@ -1,3 +1,1 @@
-import { useVersionCheck } from './Version'
-
-export const Version = { useVersionCheck }
+export { VersionHooks } from './Version.hooks'

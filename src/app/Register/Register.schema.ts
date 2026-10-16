@@ -1,11 +1,12 @@
 import * as yup from 'yup'
 import { ValidationMessage } from '@common-utils'
-import { FULL_NAME_PATTERN, PASSWORD_RULES, RegisterFieldLimits } from './Register.constants'
+import { RegisterConstants } from './Register.constants'
 import { RegistrationFormData } from './Register.types'
 
-const { fullName, userName, email, password } = RegisterFieldLimits
+const { fieldLimits, fullNamePattern, passwordRules } = RegisterConstants
+const { fullName, userName, email, password } = fieldLimits
 
-export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.object({
+export const RegisterSchema: yup.ObjectSchema<RegistrationFormData> = yup.object({
     fullName: yup
         .string()
         .required(ValidationMessage.Required('full name'))
@@ -18,7 +19,7 @@ export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.ob
             ValidationMessage.Bound('full name', fullName.max, 'characters', 'under'),
         )
         .matches(
-            FULL_NAME_PATTERN,
+            fullNamePattern,
             ValidationMessage.Allowed('full name', "letters, space, ' and -"),
         ),
     userName: yup
@@ -37,7 +38,7 @@ export const registrationSchema: yup.ObjectSchema<RegistrationFormData> = yup.ob
         .required(ValidationMessage.Required('email'))
         .min(email.min, ValidationMessage.Bound('email', email.min, 'characters', 'at least'))
         .max(email.max, ValidationMessage.Bound('email', email.max, 'characters', 'under')),
-    password: PASSWORD_RULES.reduce(
+    password: passwordRules.reduce(
         (schema, { pattern, subject }) =>
             schema.matches(pattern, ValidationMessage.Allowed('password', subject, 'contains')),
         yup

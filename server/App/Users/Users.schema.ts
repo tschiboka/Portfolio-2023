@@ -2,29 +2,31 @@ import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 ;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
 import type { LoginInput, TokenInput, UserInput } from './Users.types'
-import { UserFieldLimits } from './Users.constants'
+import { UsersConstants } from './Users.constants'
 
 const schema = Joi.object({
     fullName: Joi.string()
         .required()
-        .min(UserFieldLimits.fullName.min)
-        .max(UserFieldLimits.fullName.max),
+        .min(UsersConstants.fieldLimits.fullName.min)
+        .max(UsersConstants.fieldLimits.fullName.max),
     userName: Joi.string()
         .required()
-        .min(UserFieldLimits.userName.min)
-        .max(UserFieldLimits.userName.max),
+        .min(UsersConstants.fieldLimits.userName.min)
+        .max(UsersConstants.fieldLimits.userName.max),
     email: Joi.string()
         .required()
-        .min(UserFieldLimits.email.min)
-        .max(UserFieldLimits.email.max)
+        .min(UsersConstants.fieldLimits.email.min)
+        .max(UsersConstants.fieldLimits.email.max)
         .email({ tlds: { allow: false } }),
     password: Joi.string()
-        .min(UserFieldLimits.password.min)
-        .max(UserFieldLimits.password.max)
+        .min(UsersConstants.fieldLimits.password.min)
+        .max(UsersConstants.fieldLimits.password.max)
         .required(),
     isAdmin: Joi.boolean(),
     capabilities: Joi.array().items(
-        Joi.string().min(UserFieldLimits.capability.min).max(UserFieldLimits.capability.max),
+        Joi.string()
+            .min(UsersConstants.fieldLimits.capability.min)
+            .max(UsersConstants.fieldLimits.capability.max),
     ),
     avatarId: (Joi as unknown as { objectId: (schema: unknown) => Joi.Schema }).objectId(
         Joi as never,

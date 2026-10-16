@@ -20,4 +20,4 @@ const schema = new mongoose.Schema<IGymRoutine>({
     },
 })
 
-export const RoutineModel = mongoose.model<IGymRoutine>('GymRoutine', schema)
+export const RoutinesModel = mongoose.model<IGymRoutine>('GymRoutine', schema)

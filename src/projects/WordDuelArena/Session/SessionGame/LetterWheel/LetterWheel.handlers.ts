@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
 import { WebSocketRequest } from '../../Session.types'
-import { MAX_WORD_LENGTH } from '../../../common/utils'
+import { WordConstants } from '../../../common/utils'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { TouchState } from './LetterWheel.types'
 
@@ -14,7 +14,7 @@ const createHandleKeyPress =
     ({ touchState, setTouchState, send }: HandleKeyPressDepsProps) =>
     (e: KeyboardEvent) => {
         const isLetter = e.key.length === 1 && e.key.match(/[a-z]/i)
-        if (isLetter && touchState.touchedLetters.length < MAX_WORD_LENGTH)
+        if (isLetter && touchState.touchedLetters.length < WordConstants.maxLength)
             setTouchState((prev) => ({
                 ...prev,
                 touchedLetters: prev.touchedLetters + e.key.toUpperCase(),

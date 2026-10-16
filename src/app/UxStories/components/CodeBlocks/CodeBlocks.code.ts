@@ -1,4 +1,4 @@
-export const Code = {
+export const CodeBlocksCode = {
     Basic: {
         minimal: `<Code language="tsx" content={\`const x = 42\`} />`,
         withFileName: `<Code

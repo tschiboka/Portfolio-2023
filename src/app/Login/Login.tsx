@@ -1,6 +1,6 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { useForm } from 'react-hook-form'
-import { loginSchema } from './Login.schema'
+import { LoginSchema } from './Login.schema'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@common-ux'
 import { ClientMessage, Paths, errorMessage } from '@common-utils'
@@ -26,7 +26,7 @@ export const Login = ({ path, pageName }: LoginProps) => {
             email: '',
             password: '',
         },
-        resolver: yupResolver(loginSchema),
+        resolver: yupResolver(LoginSchema),
     })
 
     const { data: settingsData, isLoading: settingIsLoading } = LoginQueries.Settings.useGet()

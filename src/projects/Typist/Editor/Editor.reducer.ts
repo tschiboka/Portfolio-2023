@@ -1,6 +1,6 @@
 import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import { EditorWord, CharStatus } from './Character/Character.types'
-import { textToWords } from '../Typist.utils'
+import { TypistUtils } from '../Typist.utils'
 import type { Optional } from '@common-utils'
 
 const updateCharStatus = (
@@ -64,7 +64,7 @@ const handleKeystroke = (state: TypistEditorState, key: string): TypistEditorSta
     }
 }
 
-export const editorReducer = (
+export const EditorReducer = (
     state: TypistEditorState,
     action: EditorAction,
 ): TypistEditorState => {
@@ -93,7 +93,7 @@ export const editorReducer = (
                 text: action.text,
                 stats: action.stats,
                 cursorPosition: 0,
-                words: textToWords(action.text),
+                words: TypistUtils.textToWords(action.text),
                 keystrokes: [],
             }
 

@@ -6,7 +6,7 @@ import { AiFillHeart, AiFillStar } from 'react-icons/ai'
 import { BiSolidTimeFive } from 'react-icons/bi'
 import { FaEye, FaCode } from 'react-icons/fa'
 import { BsFillCalendar2DateFill } from 'react-icons/bs'
-import { LikesQueries } from '@shared-queries'
+import { LikeQueries } from '@shared-queries'
 import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@common-ux'
 import './BlogCard.scss'
 
@@ -43,7 +43,7 @@ const toPillColor = (badge: string) =>
 const BlogCard = ({ blogArticle, visits, readingTime, codeTime, likes, path, newest }: Props) => {
     const navigate = useNavigate()
     const [articleLiked, setArticleLiked] = useState(false)
-    const { mutate: doPostLike } = LikesQueries.usePost()
+    const { mutate: doPostLike } = LikeQueries.usePost()
 
     return (
         <Card

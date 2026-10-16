@@ -1,4 +1,4 @@
-export const Code = {
+export const LinksCode = {
     Basic: {
         asRoute: `<Link to="/blog">Go to Blog</Link>`,
         asAnchor: `<Link href="https://github.com">GitHub</Link>`,

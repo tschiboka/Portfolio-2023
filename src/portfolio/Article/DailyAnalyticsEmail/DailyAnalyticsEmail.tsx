@@ -1,7 +1,7 @@
 import { Article } from '../Article'
 import InlineReference from '../components/InlineReference/InlineReference'
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@common-ux'
-import codeSnippets from './DailyAnaliticsEmail.code'
+import DailyAnaliticsEmailCode from './DailyAnaliticsEmail.code'
 import { getReferenceList } from '../References.data'
 import CronJobsImg from '@portfolio/assets/blog/resend_email_scheduling/cron_jobs.png'
 import Figure from '@shared-components/Figure/Figure'
@@ -52,7 +52,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="server/routes/schedule.ts"
                     language="typescript"
-                    content={codeSnippets.routeEndpoint}
+                    content={DailyAnaliticsEmailCode.routeEndpoint}
                 />
                 <Paragraph>
                     Initially I exposed this endpoint publicly. Later I realised anyone could
@@ -75,7 +75,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="server/middlewares/cronOrAdminAuth.ts"
                     language="typescript"
-                    content={codeSnippets.cronAuthValidation}
+                    content={DailyAnaliticsEmailCode.cronAuthValidation}
                 />
                 <Paragraph>
                     This is significantly simpler than JWTs or IP allowlists and is perfectly
@@ -99,7 +99,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sendEmail.ts"
                     language="typescript"
-                    content={codeSnippets.sendWithResend}
+                    content={DailyAnaliticsEmailCode.sendWithResend}
                 />
             </Section>
             <Section>
@@ -127,7 +127,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="bad-pattern.ts"
                     language="typescript"
-                    content={codeSnippets.silentFail}
+                    content={DailyAnaliticsEmailCode.silentFail}
                 />
                 <Paragraph>
                     Since the helper returned errors instead of throwing them, the outer function
@@ -141,7 +141,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="good-pattern.ts"
                     language="typescript"
-                    content={codeSnippets.throwInstead}
+                    content={DailyAnaliticsEmailCode.throwInstead}
                 />
                 <Paragraph>
                     This single bug cost more debugging time than the email implementation itself.
@@ -168,7 +168,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="warm-up-strategy"
                     language="text"
-                    content={codeSnippets.warmUpStrategy}
+                    content={DailyAnaliticsEmailCode.warmUpStrategy}
                 />
                 <Paragraph>
                     The first request wakes the service. The second performs the work. This
@@ -201,7 +201,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="scaling.ts"
                     language="typescript"
-                    content={codeSnippets.inefficientQuery}
+                    content={DailyAnaliticsEmailCode.inefficientQuery}
                 />
                 <Paragraph>
                     For a portfolio site this is acceptable. For larger datasets it becomes
@@ -219,7 +219,7 @@ export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
                 <Code
                     fileName="server/cron/emails/breakdown/breakdown.ts"
                     language="typescript"
-                    content={codeSnippets.breakdownFunction}
+                    content={DailyAnaliticsEmailCode.breakdownFunction}
                 />
             </Section>
             <Section>

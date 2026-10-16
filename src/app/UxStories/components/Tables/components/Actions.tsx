@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { ActionRow, Row } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const {
     rows,
@@ -65,7 +65,7 @@ export const Actions = () => (
                 actions={clickAction}
                 title="isActionDisabled"
             />
-            <Code language="tsx" content={Snippets.Actions.isActionDisabled} />
+            <Code language="tsx" content={TablesCode.Actions.isActionDisabled} />
         </Section>
         <Section>
             <Heading as="h3">onClick</Heading>
@@ -83,7 +83,7 @@ export const Actions = () => (
                 actions={clickAction}
                 title="onClick"
             />
-            <Code language="tsx" content={Snippets.Actions.onClick} />
+            <Code language="tsx" content={TablesCode.Actions.onClick} />
         </Section>
         <Section>
             <Heading as="h3">href</Heading>
@@ -101,7 +101,7 @@ export const Actions = () => (
                 actions={hrefAction}
                 title="href"
             />
-            <Code language="tsx" content={Snippets.Actions.href} />
+            <Code language="tsx" content={TablesCode.Actions.href} />
         </Section>
         <Section>
             <Heading as="h3">filter</Heading>
@@ -120,7 +120,7 @@ export const Actions = () => (
                 actions={filterAction}
                 title="filter"
             />
-            <Code language="tsx" content={Snippets.Actions.filter} />
+            <Code language="tsx" content={TablesCode.Actions.filter} />
         </Section>
         <Section>
             <Heading as="h3">isDisabled</Heading>
@@ -138,7 +138,7 @@ export const Actions = () => (
                 actions={disabledItemAction}
                 title="isDisabled"
             />
-            <Code language="tsx" content={Snippets.Actions.isDisabled} />
+            <Code language="tsx" content={TablesCode.Actions.isDisabled} />
         </Section>
         <Section>
             <Heading as="h3">Variants</Heading>
@@ -157,7 +157,7 @@ export const Actions = () => (
                 actions={variantActions}
                 title="Variants"
             />
-            <Code language="tsx" content={Snippets.Actions.variants} />
+            <Code language="tsx" content={TablesCode.Actions.variants} />
         </Section>
         <Section>
             <Heading as="h3">All Actions Combined</Heading>
@@ -176,7 +176,7 @@ export const Actions = () => (
                 actions={allActions}
                 title="All Actions Combined"
             />
-            <Code language="tsx" content={Snippets.Actions.allCombined} />
+            <Code language="tsx" content={TablesCode.Actions.allCombined} />
         </Section>
     </>
 )

@@ -1,7 +1,7 @@
 import { Article } from '../Article'
 import Figure from '@shared-components/Figure/Figure'
 import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
-import codeSnippets from './JsDateValidation.code'
+import JsDateValidationCode from './JsDateValidation.code'
 import { getReferenceList } from '../References.data'
 import InlineReference from '../components/InlineReference/InlineReference'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
@@ -34,7 +34,7 @@ export const JsDateValidation = ({ pageName, path }: Props) => {
                 <Code
                     fileName="validateDate.tsx"
                     language="arduino"
-                    content={codeSnippets.basicDateValidation}
+                    content={JsDateValidationCode.basicDateValidation}
                 />
                 <Paragraph>
                     The getTime function returns a date object or Not a Number (NaN) according to
@@ -46,7 +46,7 @@ export const JsDateValidation = ({ pageName, path }: Props) => {
                 <Code
                     fileName="validateDate.tsx"
                     language="arduino"
-                    content={codeSnippets.dateOverFlow}
+                    content={JsDateValidationCode.dateOverFlow}
                 />
                 <Paragraph>
                     As it turns out, according to MDN, "If you specify a number outside the expected
@@ -65,14 +65,18 @@ export const JsDateValidation = ({ pageName, path }: Props) => {
                     format, which is [DD.MM.YYYY]. We can match our string with a simple RegEx and
                     extract the day, month and year information as numbers.
                 </Paragraph>
-                <Code fileName="validateDate.tsx" language="arduino" content={codeSnippets.regex} />
+                <Code
+                    fileName="validateDate.tsx"
+                    language="arduino"
+                    content={JsDateValidationCode.regex}
+                />
                 <Paragraph>
                     The last day of each month can be assigned using an array of numbers:
                 </Paragraph>
                 <Code
                     fileName="validateDate.tsx"
                     language="arduino"
-                    content={codeSnippets.daysArray}
+                    content={JsDateValidationCode.daysArray}
                 />
                 <Paragraph>
                     However, we must consider leap years for February (the second item of the array
@@ -92,7 +96,7 @@ export const JsDateValidation = ({ pageName, path }: Props) => {
                 <Code
                     fileName="validateDate.tsx"
                     language="arduino"
-                    content={codeSnippets.finalSolution}
+                    content={JsDateValidationCode.finalSolution}
                 />
                 <Paragraph>
                     Our date validation does not accept date strings with day overflow and returns

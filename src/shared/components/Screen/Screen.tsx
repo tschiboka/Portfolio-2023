@@ -1,11 +1,11 @@
 import { ReactNode, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FullScreenOverlay } from '../Overlay/Overlay'
+import { Overlay } from '../Overlay/Overlay'
 import { PageNav, PageMobileMenu, PageSubNav } from '@shared-components/Nav'
 import type { PageVariant } from '@shared-components/Nav'
 import Footer, { type FooterProps } from '../Footer/Footer'
 import { Session, AppHooks } from '@shared-context'
-import { VisitsQueries } from '@shared-queries'
+import { VisitQueries } from '@shared-queries'
 import { Paths } from '@common-utils'
 import { ContentNavigator } from '@common-ux'
 import { ScreenStyles } from './Screen.styles'
@@ -44,7 +44,7 @@ export const Screen = ({
     const navigate = useNavigate()
     const { isAuthenticated, isAuthLoading } = Session.useContext()
 
-    VisitsQueries.useRecord(path)
+    VisitQueries.usePost(path)
 
     useEffect(() => {
         document.title = title
@@ -71,7 +71,7 @@ export const Screen = ({
                 {sideMenu}
                 {children}
                 {!hideFooter && <Footer path={path} {...footerProps} />}
-                <FullScreenOverlay />
+                <Overlay />
             </div>
         </ContentNavigator>
     )

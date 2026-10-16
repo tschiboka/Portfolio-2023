@@ -7,7 +7,7 @@ import InlineReference from '../components/InlineReference/InlineReference'
 import monetCoverImg from '@portfolio/assets/blog/Maybe/monet-cover.jpg'
 import comicImg from '@portfolio/assets/blog/Maybe/comic.png'
 // Other Assets
-import codeSnippets from './Maybe.code'
+import MaybeCode from './Maybe.code'
 import { getReferenceList } from '../References.data'
 
 interface Props {
@@ -86,7 +86,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="immutable.ts"
                     language="typescript"
-                    content={codeSnippets.immutability}
+                    content={MaybeCode.immutability}
                 />
                 <Paragraph>
                     <strong>First-Class Functions</strong>: Functions are treated as first-class
@@ -98,7 +98,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="characteristics.ts"
                     language="typescript"
-                    content={codeSnippets.characteristics}
+                    content={MaybeCode.characteristics}
                 />
                 <Paragraph>
                     <strong>Pure Functions</strong>: Functions in functional programming are pure,
@@ -107,7 +107,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                     effects may be: modifying a variable or a data structure outside of the function
                     scope, modify a field of an object, throw exceptions, IO operations etc.
                 </Paragraph>
-                <Code fileName="pure.ts" language="typescript" content={codeSnippets.pure} />
+                <Code fileName="pure.ts" language="typescript" content={MaybeCode.pure} />
                 <Paragraph>
                     <strong>Referential Transparency</strong>: It emphasizes referential
                     transparency, where a function call with a given set of parameters can be
@@ -116,17 +116,13 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="referencialTransparency.ts"
                     language="typescript"
-                    content={codeSnippets.referencialTransparency}
+                    content={MaybeCode.referencialTransparency}
                 />
                 <Paragraph>
                     <strong>Recursion</strong>: Functional programming often uses recursion as an
                     alternative to traditional iterative loops.
                 </Paragraph>
-                <Code
-                    fileName="recursion.ts"
-                    language="typescript"
-                    content={codeSnippets.recursive}
-                />
+                <Code fileName="recursion.ts" language="typescript" content={MaybeCode.recursive} />
                 <Paragraph>
                     <strong>Declarative Style</strong>: Functional programming emphasizes a
                     declarative style, where the programmer describes what the program should
@@ -135,7 +131,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="declarative.ts"
                     language="typescript"
-                    content={codeSnippets.declarative}
+                    content={MaybeCode.declarative}
                 />
             </Section>
             <Section>
@@ -162,7 +158,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                     considered functors, but instead of map we apply our function in the then method
                     which in exchange returns a new Promise.
                 </Paragraph>
-                <Code fileName="functor.ts" language="typescript" content={codeSnippets.functors} />
+                <Code fileName="functor.ts" language="typescript" content={MaybeCode.functors} />
             </Section>
             <Section>
                 <Heading as="h2">What are Monads?</Heading>
@@ -224,7 +220,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                                     <Code
                                         fileName="flatmap.ts"
                                         language="typescript"
-                                        content={codeSnippets.flatMap}
+                                        content={MaybeCode.flatMap}
                                     />
                                 </>
                             ),
@@ -247,7 +243,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                                     <Code
                                         fileName="constructors.ts"
                                         language="typescript"
-                                        content={codeSnippets.constructor}
+                                        content={MaybeCode.constructor}
                                     />
                                 </>
                             ),
@@ -281,7 +277,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="nullpointer.ts"
                     language="typescript"
-                    content={codeSnippets.nullpointer}
+                    content={MaybeCode.nullpointer}
                 />
                 <Paragraph>
                     To rectify such situations, developers often resort to writing multiple
@@ -290,7 +286,7 @@ export const Maybe = ({ pageName, path }: Props) => {
                 <Code
                     fileName="nullCheck.ts"
                     language="typescript"
-                    content={codeSnippets.nullChecks}
+                    content={MaybeCode.nullChecks}
                 />
             </Section>
         </Article>

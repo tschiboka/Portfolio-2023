@@ -2,7 +2,7 @@ import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { BreakpointRow, Row } from '../Tables.types'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows, breakpointData } = TablesMocks
 
@@ -37,7 +37,7 @@ export const Responsive = () => (
                     { header: '2xl', accessor: '2xl', breakpoint: '2xl' },
                 ]}
             />
-            <Code language="tsx" content={Snippets.Responsive.breakpoints} />
+            <Code language="tsx" content={TablesCode.Responsive.breakpoints} />
         </Section>
         <Section>
             <Heading as="h3">Accordion</Heading>
@@ -58,7 +58,7 @@ export const Responsive = () => (
                     { header: 'Note', accessor: 'note', breakpoint: 'accordion' },
                 ]}
             />
-            <Code language="tsx" content={Snippets.Responsive.accordion} />
+            <Code language="tsx" content={TablesCode.Responsive.accordion} />
         </Section>
     </>
 )

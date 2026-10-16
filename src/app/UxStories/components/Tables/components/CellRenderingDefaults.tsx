@@ -4,7 +4,7 @@ import { toUpper } from 'ramda'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows } = TablesMocks
 const { renderStatus, renderBadge } = TablesConfig
@@ -36,7 +36,7 @@ export const CellRenderingDefaults = () => (
                     { header: 'Status', accessor: 'status', cell: renderStatus },
                 ]}
             />
-            <Code language="tsx" content={Snippets.CellRenderingDefaults.customRenderers} />
+            <Code language="tsx" content={TablesCode.CellRenderingDefaults.customRenderers} />
         </Section>
         <Section>
             <Heading as="h3">Default Values</Heading>
@@ -94,7 +94,7 @@ export const CellRenderingDefaults = () => (
                     },
                 ]}
             />
-            <Code language="tsx" content={Snippets.CellRenderingDefaults.defaultValues} />
+            <Code language="tsx" content={TablesCode.CellRenderingDefaults.defaultValues} />
         </Section>
     </>
 )

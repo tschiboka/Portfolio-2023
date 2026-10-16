@@ -1,4 +1,4 @@
-export const Code = {
+export const TypographyCode = {
     // ── Heading ──────────────────────────────────────────
     Heading: {
         levels: `<Heading as="h1">Heading 1</Heading>

@@ -13,7 +13,7 @@ type UsePostOptions = {
 
 /** Submits a completed round of keystrokes. */
 const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
-    const request = Query.FeatureQuery().path('Typist').group('Projects').build()
+    const request = Query.FeatureQuery().path('Typist').group('Projects').subpath('/round').build()
 
     return useMutation<PostTypistRoundResponse, AxiosError<ErrorResponse>, PostRoundRequest>({
         mutationKey: QueryKey.TypistRound.build(),

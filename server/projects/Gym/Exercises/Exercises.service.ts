@@ -8,7 +8,7 @@ import { ApiTransformers } from '@common-utils'
 import { isValidObjectId } from '@common-utils'
 import { ExercisesRepository } from './Exercises.repository'
 import { ExercisesPermissions } from './Exercises.permissions'
-import { ExerciseSchema } from './Exercises.schema'
+import { ExercisesSchema } from './Exercises.schema'
 import type { ExerciseValidationInput } from './Exercises.types'
 
 /** Business logic for exercises - persistence via the repository, authorisation via permissions. */
@@ -21,7 +21,7 @@ export const ExercisesService = {
 
     /** Creates a canonical exercise from validated input. */
     create: async (input: ExerciseValidationInput): Promise<GymExerciseResource> => {
-        const result = ExerciseSchema.validate(input)
+        const result = ExercisesSchema.validate(input)
         if (result.error) throw ApiResponder.badRequest(result.error)
 
         const { value } = result
@@ -43,7 +43,7 @@ export const ExercisesService = {
         if (!exercise) throw ApiResponder.notFound('exercise')
         ExercisesPermissions.requireUserCanModify(exercise, user)
 
-        const { error } = ExerciseSchema.validate({ ...exercise.toObject(), ...patch })
+        const { error } = ExercisesSchema.validate({ ...exercise.toObject(), ...patch })
         if (error) throw ApiResponder.badRequest(error)
 
         exercise.set(patch)

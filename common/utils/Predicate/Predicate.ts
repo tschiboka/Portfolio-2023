@@ -1,5 +1,13 @@
-import type { Defined, Emptiable, Falsy, Nil, Nullish, Primitive, Truthy } from '../Generics'
-import { Regexp } from '../Regexp'
+import type {
+    Defined,
+    Emptiable,
+    Falsy,
+    Nil,
+    Nullish,
+    Primitive,
+    Truthy,
+} from '../Generics/index.js'
+import { Regexp } from '../Regexp/index.js'
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.

@@ -1,22 +1,22 @@
 import * as yup from 'yup'
-import { MIN_WORDS_PER_LEVEL, MAX_WORDS_PER_LEVEL, MAX_WORDS_IN_ROW_LENGTH } from '../common/utils'
+import { WordConstants } from '../common/utils'
 
-const WORDS_PER_COLUMN = MAX_WORDS_PER_LEVEL / 2
+const WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
 
-export const levelSchema = yup.object({
+export const LevelCreatorSchema = yup.object({
     selectedWords: yup
         .array(yup.object({ word: yup.string().required() }).required())
         .min(
-            MIN_WORDS_PER_LEVEL,
-            `Please select at least ${MIN_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`,
+            WordConstants.minWordsPerLevel,
+            `Please select at least ${WordConstants.minWordsPerLevel} words. Currently selected: \${value.length}`,
         )
         .max(
-            MAX_WORDS_PER_LEVEL,
-            `Please select no more than ${MAX_WORDS_PER_LEVEL} words. Currently selected: \${value.length}`,
+            WordConstants.maxWordsPerLevel,
+            `Please select no more than ${WordConstants.maxWordsPerLevel} words. Currently selected: \${value.length}`,
         )
         .test(
             'row-width',
-            `Combined length of words in a row must not exceed ${MAX_WORDS_IN_ROW_LENGTH} characters`,
+            `Combined length of words in a row must not exceed ${WordConstants.maxWordsInRowLength} characters`,
             (value) => {
                 if (!value?.length) return true
 
@@ -26,7 +26,7 @@ export const levelSchema = yup.object({
                     const rightWord = value[i + WORDS_PER_COLUMN]?.word ?? ''
                     const combinedLength = (word?.word ?? '').length + rightWord.length
 
-                    return combinedLength <= MAX_WORDS_IN_ROW_LENGTH
+                    return combinedLength <= WordConstants.maxWordsInRowLength
                 })
             },
         )

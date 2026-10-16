@@ -4,7 +4,7 @@ import { Test } from '@common-ux/Test'
 import { Toggle } from '../Toggle'
 import type { ToggleProps } from '../Toggle'
 
-export const Set = {
+const Set = {
     toggle: (props: Partial<ToggleProps> = {}) => {
         render(
             <Toggle handleClick={Functions.noop} active={false} {...props}>
@@ -14,3 +14,5 @@ export const Set = {
         return Test.Toggle()
     },
 }
+
+export const ToggleTestUtils = { Set }

@@ -1,5 +1,5 @@
 import { InvitationModal } from '../../../Home/components/InvitationModal/InvitationModal'
 
-export const ModalRegistry = {
+export const ModalDefaults = {
     invite: InvitationModal,
 }

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Table, useTableController, TableFilterConfig } from '@common-ux'
+import { Table, TableHooks, TableFilterConfig } from '@common-ux'
 import type { SortDirection, TableColumns } from '@common-ux'
 import { Pill } from '@common-ux'
 import { Strings } from '@common-utils'
@@ -7,7 +7,7 @@ import { toUpper } from 'ramda'
 import { TablesMocks } from './Tables.mocks'
 import type { AllFeaturesRow, PaginationRow, SelectionRow, SortingRow } from './Tables.types'
 import { TablesConfig } from './Tables.config'
-import { UrlPersistenceConfig } from '@common-ux/Table/useTableController/useTableController.types'
+import type { UrlPersistenceConfig } from '@common-ux/Table/Table.hooks.types'
 
 const { selectionRows, allFeaturesData, allPaginationRows, paginationColumns, sortingRows } =
     TablesMocks
@@ -541,7 +541,7 @@ const ControllerPersistenceDemo = ({
 }: {
     urlPersistence?: UrlPersistenceConfig
 }) => {
-    const controller = useTableController<ControllerDemoFilters>({
+    const controller = TableHooks.useTableController<ControllerDemoFilters>({
         filters: CONTROLLER_DEMO_FILTERS,
         sorting: { default: { column: 'name', direction: 'asc' } },
         pagination: { pageSize: 5, pageSizeOptions: [5, 10, 25] },

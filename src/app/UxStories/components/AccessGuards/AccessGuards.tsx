@@ -16,7 +16,7 @@ import {
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './AccessGuards.code'
+import { AccessGuardsCode } from './AccessGuards.code'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards
 
@@ -78,7 +78,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
-                    <Code language="tsx" content={Snippets.hidden} />
+                    <Code language="tsx" content={AccessGuardsCode.hidden} />
                 </Section>
                 <Section>
                     <Heading as="h3" id="visible-mode">
@@ -106,7 +106,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
-                    <Code language="tsx" content={Snippets.visible} />
+                    <Code language="tsx" content={AccessGuardsCode.visible} />
                 </Section>
                 <Section>
                     <Heading as="h3" id="disabled-mode">
@@ -134,7 +134,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
-                    <Code language="tsx" content={Snippets.disabled} />
+                    <Code language="tsx" content={AccessGuardsCode.disabled} />
                 </Section>
                 <Section>
                     <Heading as="h3" id="soft-disabled-mode">
@@ -162,7 +162,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
-                    <Code language="tsx" content={Snippets.softDisabled} />
+                    <Code language="tsx" content={AccessGuardsCode.softDisabled} />
                 </Section>
                 <Section>
                     <Heading as="h3" id="tooltip-mode">
@@ -190,7 +190,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                             />
                         </AccessGuard>
                     </Stack.Horizontal>
-                    <Code language="tsx" content={Snippets.tooltip} />
+                    <Code language="tsx" content={AccessGuardsCode.tooltip} />
                 </Section>
                 <Section>
                     <Heading as="h3" id="condition-types">
@@ -202,7 +202,7 @@ export const AccessGuards = ({ path }: AccessGuardsProps) => {
                         <CodeText>unless</CodeText> instead of <CodeText>when</CodeText> to invert
                         the condition.
                     </Paragraph>
-                    <Code language="tsx" content={Snippets.conditionTypes} />
+                    <Code language="tsx" content={AccessGuardsCode.conditionTypes} />
                 </Section>
             </Main>
         </Screen>

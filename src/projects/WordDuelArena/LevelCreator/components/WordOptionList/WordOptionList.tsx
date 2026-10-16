@@ -1,4 +1,4 @@
-import { MAX_WORDS_PER_LEVEL } from '../../../common/utils/Word/Word.constants'
+import { WordConstants } from '../../../common/utils/Word/Word.constants'
 import './WordOptionList.styles.css'
 import { WordUtils } from '../../../common/utils/Word/Word.utils'
 import { LevelWord } from '../../../common/utils'
@@ -57,7 +57,7 @@ const WordOption = ({ word, hasWord, selectedWords, setSelectedWords }: WordOpti
 
     const removeWord = () => setSelectedWords(selectedWords.filter((w) => w.word !== word.word))
 
-    const hasMaxWords = selectedWords.length >= MAX_WORDS_PER_LEVEL
+    const hasMaxWords = selectedWords.length >= WordConstants.maxWordsPerLevel
     const canAdd = !hasWord && !hasMaxWords
     const canRemove = hasWord
 

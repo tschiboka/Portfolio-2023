@@ -1,9 +1,6 @@
 import { EditorWord } from './Editor/Character/Character.types'
 
-export const textToWords = (
-    text: string,
-    cursorPosition: number = 0,
-): EditorWord[] =>
+const textToWords = (text: string, cursorPosition: number = 0): EditorWord[] =>
     text.split(' ').reduce<{ words: EditorWord[]; offset: number }>(
         (acc, word, index, arr) => {
             const wordWithSpace = index !== arr.length - 1 ? word + ' ' : word
@@ -12,10 +9,7 @@ export const textToWords = (
                 return {
                     char: ch,
                     index: charIndex,
-                    status:
-                        charIndex === cursorPosition
-                            ? ('pending' as const)
-                            : undefined,
+                    status: charIndex === cursorPosition ? ('pending' as const) : undefined,
                 }
             })
             acc.words.push({ chars, index: acc.offset })
@@ -24,3 +18,7 @@ export const textToWords = (
         },
         { words: [], offset: 0 },
     ).words
+
+export const TypistUtils = {
+    textToWords,
+}

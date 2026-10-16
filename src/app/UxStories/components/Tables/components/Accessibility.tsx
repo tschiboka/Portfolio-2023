@@ -2,7 +2,7 @@ import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { AriaRow, Row } from '../Tables.types'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows, ariaReferenceRows } = TablesMocks
 
@@ -54,7 +54,7 @@ export const Accessibility = () => (
                 ]}
                 title="ariaLabel"
             />
-            <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+            <Code language="tsx" content={TablesCode.Accessibility.ariaLabel} />
         </Section>
         <Section>
             <Heading as="h3">rowAriaLabel</Heading>
@@ -74,7 +74,7 @@ export const Accessibility = () => (
                 ]}
                 title="rowAriaLabel"
             />
-            <Code language="tsx" content={Snippets.Accessibility.rowAriaLabel} />
+            <Code language="tsx" content={TablesCode.Accessibility.rowAriaLabel} />
         </Section>
         <Section>
             <Heading as="h3">className</Heading>
@@ -96,7 +96,7 @@ export const Accessibility = () => (
                 ]}
                 title="className"
             />
-            <Code language="tsx" content={Snippets.Accessibility.className} />
+            <Code language="tsx" content={TablesCode.Accessibility.className} />
         </Section>
         <Section>
             <Heading as="h3">style</Heading>
@@ -119,7 +119,7 @@ export const Accessibility = () => (
                 ]}
                 title="style"
             />
-            <Code language="tsx" content={Snippets.Accessibility.style} />
+            <Code language="tsx" content={TablesCode.Accessibility.style} />
         </Section>
         <Section>
             <Heading as="h3">id</Heading>
@@ -140,7 +140,7 @@ export const Accessibility = () => (
                 ]}
                 title="id"
             />
-            <Code language="tsx" content={Snippets.Accessibility.id} />
+            <Code language="tsx" content={TablesCode.Accessibility.id} />
         </Section>
         <Section>
             <Heading as="h3">scope=&quot;col&quot; on Headers</Heading>
@@ -169,7 +169,7 @@ export const Accessibility = () => (
                 ]}
                 title="scope on Headers"
             />
-            <Code language="tsx" content={Snippets.Accessibility.scopeCol} />
+            <Code language="tsx" content={TablesCode.Accessibility.scopeCol} />
         </Section>
         <Section>
             <Heading as="h3">Action Menu ARIA</Heading>
@@ -206,7 +206,7 @@ export const Accessibility = () => (
                     },
                 ]}
             />
-            <Code language="tsx" content={Snippets.Accessibility.actionMenuAria} />
+            <Code language="tsx" content={TablesCode.Accessibility.actionMenuAria} />
         </Section>
         <Section>
             <Heading as="h3">Expanded Row ARIA</Heading>
@@ -234,7 +234,7 @@ export const Accessibility = () => (
                     },
                 ]}
             />
-            <Code language="tsx" content={Snippets.Accessibility.expandedRowAria} />
+            <Code language="tsx" content={TablesCode.Accessibility.expandedRowAria} />
         </Section>
         <Section>
             <Heading as="h3">Empty State role=&quot;status&quot;</Heading>
@@ -259,7 +259,7 @@ export const Accessibility = () => (
                     </em>
                 }
             />{' '}
-            <Code language="tsx" content={Snippets.Accessibility.emptyStateRole} />{' '}
+            <Code language="tsx" content={TablesCode.Accessibility.emptyStateRole} />{' '}
         </Section>
     </>
 )

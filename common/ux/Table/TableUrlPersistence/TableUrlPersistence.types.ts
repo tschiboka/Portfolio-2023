@@ -1,11 +1,7 @@
 import type { Dictionary, Nullable } from '@common-utils'
-import type {
-    Paging,
-    TableSortState,
-    TableState,
-} from '../useTableController/useTableController.types'
-import type { UrlPersistenceConfig } from '../useTableController/useTableController.types'
-import type { FilterDefinitions } from '../TableFilterConfig'
+import type { Paging, TableSortState, TableState } from '../Table.hooks.types'
+import type { UrlPersistenceConfig } from '../Table.hooks.types'
+import type { FilterDefinitions } from '../TableFilter'
 
 /** Args to the URL-persistence hook — mirrors `UseTableConfig` naming. */
 export type UseTableUrlPersistenceArgs<TFilters extends Dictionary> = {

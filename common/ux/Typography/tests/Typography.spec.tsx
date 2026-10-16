@@ -1,4 +1,6 @@
-import { Set } from './Typography.spec.utils'
+import { TypographyTestUtils } from './Typography.spec.utils'
+
+const { Set } = TypographyTestUtils
 
 describe('Typography', () => {
     describe('base component', () => {

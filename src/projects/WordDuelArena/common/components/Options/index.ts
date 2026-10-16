@@ -1,1 +1,1 @@
-export { OptionPanel } from './Options'
+export { Options } from './Options'

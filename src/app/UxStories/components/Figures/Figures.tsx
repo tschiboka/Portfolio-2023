@@ -3,7 +3,7 @@ import Figure from '@shared-components/Figure/Figure'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Figures.code'
+import { FiguresCode } from './Figures.code'
 import placeholder_image from '@portfolio/assets/projects/GradientGenerator.png'
 
 type FiguresProps = { path: string }
@@ -55,8 +55,8 @@ export const Figures = ({ path }: FiguresProps) => (
                     caption="This is an optional caption"
                     zoomAllowed={false}
                 />
-                <Code language="tsx" content={Snippets.Basic.simple} />
-                <Code language="tsx" content={Snippets.Basic.withCaption} />
+                <Code language="tsx" content={FiguresCode.Basic.simple} />
+                <Code language="tsx" content={FiguresCode.Basic.withCaption} />
             </Section>
             <Section>
                 <Heading as="h2" id="sizes">
@@ -96,7 +96,7 @@ export const Figures = ({ path }: FiguresProps) => (
                         zoomAllowed={false}
                     />
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Sizes.all} />
+                <Code language="tsx" content={FiguresCode.Sizes.all} />
             </Section>
             <Section>
                 <Heading as="h2" id="zoomable">
@@ -113,7 +113,7 @@ export const Figures = ({ path }: FiguresProps) => (
                     caption="Click me to zoom"
                     zoomAllowed
                 />
-                <Code language="tsx" content={Snippets.Zoom.onZoom} />
+                <Code language="tsx" content={FiguresCode.Zoom.onZoom} />
             </Section>
             <Section>
                 <Heading as="h2" id="responsive-sources">
@@ -125,7 +125,7 @@ export const Figures = ({ path }: FiguresProps) => (
                     the best match based on <CodeText>minWidth</CodeText>,{' '}
                     <CodeText>maxWidth</CodeText>, and <CodeText>type</CodeText>.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Responsive.sources} />
+                <Code language="tsx" content={FiguresCode.Responsive.sources} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -136,7 +136,7 @@ export const Figures = ({ path }: FiguresProps) => (
                     the alt text alone doesn{"'"}t provide enough context. The caption renders as a{' '}
                     <CodeText>{'<figcaption>'}</CodeText>.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={FiguresCode.Accessibility.ariaLabel} />
             </Section>
             <Section>
                 <Heading as="h2" id="background-color">
@@ -162,7 +162,7 @@ export const Figures = ({ path }: FiguresProps) => (
                     caption="No bgColor — transparent"
                     zoomAllowed
                 />
-                <Code language="tsx" content={Snippets.BgColor.example} />
+                <Code language="tsx" content={FiguresCode.BgColor.example} />
             </Section>
         </Main>
     </Screen>

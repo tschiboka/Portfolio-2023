@@ -1,4 +1,4 @@
-export const Code = {
+export const TogglesCode = {
     Basic: {
         inactive: `<Toggle handleClick={handleClick} active={false}>
     <BsSun className="theme-icon" />

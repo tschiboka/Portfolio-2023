@@ -9,8 +9,8 @@ import {
 } from '../Table.types'
 import { hasLength, isDefined, type Optional } from '@common-utils'
 import { ExpandedRow } from './ExpandedRow'
-import { TableActions } from '../TableAction/TableAction'
-import { TableCheckboxCell } from '../TableCheckbox/TableCheckbox'
+import { TableActions } from '../TableActions/TableActions'
+import { TableCheckboxCell } from '../TableCheckbox/TableCheckboxCell'
 import { TableUtils } from '../Table.utils'
 import './TableRow.styles.css'
 

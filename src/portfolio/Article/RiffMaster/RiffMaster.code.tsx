@@ -1,4 +1,4 @@
-const codeSnippets = {
+const RiffMasterCode = {
     arduinoInitialisation: `// Left Hand Inputs
 const byte ROW_PINS[6] = { 7, 6, 5, 4, 3, 2 };                       // Row PINs (Strings): Read Voltage on a Fret
 const byte STRUM_PINS[6]  = {A0, A1, A2, A3, A4, A5};                // Analogue Pins as Digital Pins
@@ -128,5 +128,5 @@ for (byte ri = 0; ri < ROW_LEN; ri++) {                          // Iterate Rows
         }            
     }
 }`,
-};
-export default codeSnippets;
+}
+export default RiffMasterCode

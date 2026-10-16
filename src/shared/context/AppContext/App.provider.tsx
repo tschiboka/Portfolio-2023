@@ -5,7 +5,7 @@ import type { AppContextValues, LocalStorage } from './App.types'
 
 const APP_KEY = 'tschiboka'
 
-type AppContextProviderProps = {
+type AppProviderProps = {
     children: React.ReactNode
     initialState?: Partial<AppContextValues>
 }
@@ -17,10 +17,7 @@ const readTheme = (): string => {
     return 'dark'
 }
 
-export const AppContextProvider: React.FC<AppContextProviderProps> = ({
-    children,
-    initialState,
-}) => {
+export const AppProvider: React.FC<AppProviderProps> = ({ children, initialState }) => {
     const [themeMode, setThemeMode] = useState(initialState?.themeMode ?? readTheme())
     const [mainMenuVisible, setMainMenuVisible] = useState(initialState?.mainMenuVisible ?? true)
     const [mobileMenuVisible, setMobileMenuVisible] = useState(

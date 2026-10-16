@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 import type { ISetting } from './Settings.types'
-import { SettingsFieldLimits } from './Settings.constants'
+import { SettingsConstants } from './Settings.constants'
 
 const schema = new mongoose.Schema<ISetting>({
     maxUsers: {
         type: Number,
-        default: SettingsFieldLimits.maxUsers.min,
+        default: SettingsConstants.fieldLimits.maxUsers.min,
     },
     enableMaintenanceMode: {
         type: Boolean,
@@ -25,11 +25,11 @@ const schema = new mongoose.Schema<ISetting>({
     },
     registrationTokensExpireInMs: {
         type: Number,
-        default: SettingsFieldLimits.registrationTokensExpireInMs.min,
+        default: SettingsConstants.fieldLimits.registrationTokensExpireInMs.min,
     },
     sessionTokensExpireInMs: {
         type: Number,
-        default: SettingsFieldLimits.sessionTokensExpireInMs.min,
+        default: SettingsConstants.fieldLimits.sessionTokensExpireInMs.min,
     },
 })
 

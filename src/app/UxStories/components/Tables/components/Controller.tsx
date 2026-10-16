@@ -1,6 +1,6 @@
 import { Table, Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { Functions } from '@common-utils'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
 import { ControllerSingleDemo, ControllerNamedDemo, ControllerOffDemo } from '../Tables.demos'
@@ -13,10 +13,10 @@ export const Controller = () => (
             Controller API
         </Heading>
         <Paragraph>
-            The <CodeText>useTableController</CodeText> hook (typically wrapped in a domain-specific
-            hook like <CodeText>useBreakdownController</CodeText>) manages sorting, filtering, and
-            pagination state together. It returns a <CodeText>controller</CodeText> object with
-            built-in <CodeText>.sorting</CodeText>, <CodeText>.filtering</CodeText>,{' '}
+            The <CodeText>TableHooks.useTableController</CodeText> hook (typically wrapped in a
+            domain-specific hook like <CodeText>useBreakdownController</CodeText>) manages sorting,
+            filtering, and pagination state together. It returns a <CodeText>controller</CodeText>{' '}
+            object with built-in <CodeText>.sorting</CodeText>, <CodeText>.filtering</CodeText>,{' '}
             <CodeText>.pagination</CodeText>, and <CodeText>.params</CodeText> derived from the
             current state — ready to pass directly to an API query.
         </Paragraph>
@@ -29,9 +29,10 @@ export const Controller = () => (
         <Section>
             <Heading as="h3">Basic Controller Usage</Heading>
             <Paragraph>
-                Create a controller with <CodeText>useTableController</CodeText>, wire it to your
-                data query via <CodeText>controller.params</CodeText>, and pass it to the Table. The
-                controller handles sort direction, filter values, and page state automatically.
+                Create a controller with <CodeText>TableHooks.useTableController</CodeText>, wire it
+                to your data query via <CodeText>controller.params</CodeText>, and pass it to the
+                Table. The controller handles sort direction, filter values, and page state
+                automatically.
             </Paragraph>
             <Table<Row>
                 ariaLabel="Controller demo"
@@ -55,7 +56,7 @@ export const Controller = () => (
                 }}
                 title="Controller API"
             />
-            <Code language="tsx" content={Snippets.Controller.basic} />
+            <Code language="tsx" content={TablesCode.Controller.basic} />
         </Section>
         <Section>
             <Heading as="h3">URL State Persistence</Heading>
@@ -75,7 +76,7 @@ export const Controller = () => (
             </Paragraph>
             <Code
                 language="tsx"
-                content={`useTableController({
+                content={`TableHooks.useTableController({
     filters,
     sorting: { default: { column: 'datetime', direction: 'desc' } },
     urlPersistence: { namespace: 'breakdown' }, // opt-in; namespace for multi-table pages
@@ -120,7 +121,7 @@ export const Controller = () => (
                 content={`
 {Feature}Table/
 ├── {Feature}Table.tsx              # Component — assembles Table with slots
-├── {Feature}Table.controller.ts    # Hook — useTableController config
+├── {Feature}Table.controller.ts    # Hook — TableHooks.useTableController config
 ├── {Feature}Table.filters.ts       # Filter input definitions
 ├── {Feature}Table.transformers.ts  # toParams mapping (API params)
 ├── {Feature}Table.columns.tsx      # Column definitions

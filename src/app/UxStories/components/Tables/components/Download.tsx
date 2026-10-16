@@ -2,7 +2,7 @@ import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 
 const { rows } = TablesMocks
 
@@ -39,7 +39,7 @@ export const Download = () => (
                     onDownload: (data: Row[]) => alert(`Downloading ${data.length} rows`),
                 }}
             />
-            <Code language="tsx" content={Snippets.Download.single} />
+            <Code language="tsx" content={TablesCode.Download.single} />
         </Section>
         <Section>
             <Heading as="h3">Single Download with Label</Heading>
@@ -62,7 +62,7 @@ export const Download = () => (
                     onDownload: (data: Row[]) => alert(`Exporting ${data.length} rows`),
                 }}
             />
-            <Code language="tsx" content={Snippets.Download.singleWithLabel} />
+            <Code language="tsx" content={TablesCode.Download.singleWithLabel} />
         </Section>
         <Section>
             <Heading as="h3">Multiple Formats</Heading>
@@ -92,7 +92,7 @@ export const Download = () => (
                     onDownload: (value, data) => alert(`${value}: ${data.length} rows`),
                 }}
             />
-            <Code language="tsx" content={Snippets.Download.multipleFormats} />
+            <Code language="tsx" content={TablesCode.Download.multipleFormats} />
         </Section>
         <Section>
             <Heading as="h3">Download without Title</Heading>
@@ -112,7 +112,7 @@ export const Download = () => (
                     onDownload: (data: Row[]) => alert(`Exporting ${data.length} rows`),
                 }}
             />
-            <Code language="tsx" content={Snippets.Download.withoutTitle} />
+            <Code language="tsx" content={TablesCode.Download.withoutTitle} />
         </Section>
     </>
 )

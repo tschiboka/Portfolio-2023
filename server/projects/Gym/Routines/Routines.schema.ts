@@ -20,7 +20,7 @@ const schema = Joi.object({
     }),
 })
 
-export const RoutineSchema = {
+export const RoutinesSchema = {
     schema,
     validate: (routine: RoutineValidationInput): Joi.ValidationResult<RoutineValidationInput> =>
         schema.validate(routine),

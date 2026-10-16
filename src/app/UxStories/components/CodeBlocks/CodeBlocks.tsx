@@ -2,7 +2,7 @@ import { Code, CodeText, Heading, Main, Paragraph, Section } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './CodeBlocks.code'
+import { CodeBlocksCode } from './CodeBlocks.code'
 
 type CodeBlocksProps = { path: string }
 
@@ -33,7 +33,7 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     tag in the header.
                 </Paragraph>
                 <Code language="tsx" content={`const x = 42`} />
-                <Code language="tsx" content={Snippets.Basic.minimal} />
+                <Code language="tsx" content={CodeBlocksCode.Basic.minimal} />
             </Section>
             <Section>
                 <Heading as="h2" id="file-name">
@@ -48,7 +48,7 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     language="typescript"
                     content={`export const sum = (a: number, b: number) => a + b`}
                 />
-                <Code language="tsx" content={Snippets.Basic.withFileName} />
+                <Code language="tsx" content={CodeBlocksCode.Basic.withFileName} />
             </Section>
             <Section>
                 <Heading as="h2" id="languages">
@@ -59,17 +59,21 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     Here are a few common examples.
                 </Paragraph>
                 <Heading as="h3">TSX</Heading>
-                <Code fileName="Counter.tsx" language="tsx" content={Snippets.tsxExample} />
-                <Code language="tsx" content={Snippets.Languages.tsx} />
+                <Code fileName="Counter.tsx" language="tsx" content={CodeBlocksCode.tsxExample} />
+                <Code language="tsx" content={CodeBlocksCode.Languages.tsx} />
                 <Heading as="h3">CSS</Heading>
-                <Code fileName="card.css" language="css" content={Snippets.cssExample} />
-                <Code language="tsx" content={Snippets.Languages.css} />
+                <Code fileName="card.css" language="css" content={CodeBlocksCode.cssExample} />
+                <Code language="tsx" content={CodeBlocksCode.Languages.css} />
                 <Heading as="h3">JSON</Heading>
-                <Code fileName="package.json" language="json" content={Snippets.jsonExample} />
-                <Code language="tsx" content={Snippets.Languages.json} />
+                <Code
+                    fileName="package.json"
+                    language="json"
+                    content={CodeBlocksCode.jsonExample}
+                />
+                <Code language="tsx" content={CodeBlocksCode.Languages.json} />
                 <Heading as="h3">Bash</Heading>
-                <Code fileName="build.sh" language="bash" content={Snippets.bashExample} />
-                <Code language="tsx" content={Snippets.Languages.bash} />
+                <Code fileName="build.sh" language="bash" content={CodeBlocksCode.bashExample} />
+                <Code language="tsx" content={CodeBlocksCode.Languages.bash} />
             </Section>
             <Section>
                 <Heading as="h2" id="copy-to-clipboard">
@@ -84,7 +88,7 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     language="typescript"
                     content={`const greeting = 'Try copying this snippet!'`}
                 />
-                <Code language="tsx" content={Snippets.CopyToClipboard.demo} />
+                <Code language="tsx" content={CodeBlocksCode.CopyToClipboard.demo} />
             </Section>
             <Section>
                 <Heading as="h2" id="accessibility">
@@ -99,7 +103,7 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     language="typescript"
                     content={`export const greet = (name: string) => \`Hello, \${name}!\``}
                 />
-                <Code language="tsx" content={Snippets.Accessibility.ariaLabel} />
+                <Code language="tsx" content={CodeBlocksCode.Accessibility.ariaLabel} />
             </Section>
             <Section>
                 <Heading as="h2" id="custom-styling">
@@ -114,8 +118,8 @@ export const CodeBlocks = ({ path }: CodeBlocksProps) => (
                     content={`<Code className="my-custom-code" ... />`}
                     style={{ maxWidth: 600, border: '2px solid var(--accent)' }}
                 />
-                <Code language="tsx" content={Snippets.CustomStyling.className} />
-                <Code language="tsx" content={Snippets.CustomStyling.style} />
+                <Code language="tsx" content={CodeBlocksCode.CustomStyling.className} />
+                <Code language="tsx" content={CodeBlocksCode.CustomStyling.style} />
             </Section>
         </Main>
     </Screen>

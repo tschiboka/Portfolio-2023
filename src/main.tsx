@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { router } from './router.routes'
+import { router } from './routes'
 import './main.styles.scss'
-import { AppContextProvider, Session } from '@shared-context'
+import { AppProvider, Session } from '@shared-context'
 import { VersionChecker } from '@shared-components/VersionChecker/VersionChecker'
 
 const client = new QueryClient()
@@ -13,10 +13,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <QueryClientProvider client={client}>
             <Session.Provider>
-                <AppContextProvider>
+                <AppProvider>
                     <VersionChecker />
                     <RouterProvider router={router} />
-                </AppContextProvider>
+                </AppProvider>
             </Session.Provider>
         </QueryClientProvider>
     </React.StrictMode>,

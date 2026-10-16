@@ -24,7 +24,7 @@ import type {
     InlineReferenceProps,
 } from '../Typography.types'
 
-export const Set = {
+const Set = {
     typography: (props: Partial<TypographyProps> = {}) => {
         const label = props.ariaLabel ?? 'Test typography'
         const children = props.children ?? 'Hello world'
@@ -124,3 +124,5 @@ export const Set = {
         return Test.Link(label)
     },
 }
+
+export const TypographyTestUtils = { Set }

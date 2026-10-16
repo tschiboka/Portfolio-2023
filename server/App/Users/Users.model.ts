@@ -1,36 +1,36 @@
 import mongoose from 'mongoose'
 import type { IUser } from './Users.types'
-import { UserFieldLimits, UserPassword } from './Users.constants'
+import { UsersConstants } from './Users.constants'
 
 const schema = new mongoose.Schema<IUser>({
     fullName: {
         type: String,
         required: true,
-        minLength: UserFieldLimits.fullName.min,
-        maxLength: UserFieldLimits.fullName.max,
+        minLength: UsersConstants.fieldLimits.fullName.min,
+        maxLength: UsersConstants.fieldLimits.fullName.max,
         trim: true,
     },
     userName: {
         type: String,
         unique: true,
         required: true,
-        minLength: UserFieldLimits.userName.min,
-        maxLength: UserFieldLimits.userName.max,
+        minLength: UsersConstants.fieldLimits.userName.min,
+        maxLength: UsersConstants.fieldLimits.userName.max,
         trim: true,
     },
     email: {
         type: String,
         unique: true,
         required: true,
-        minLength: UserFieldLimits.email.min,
-        maxLength: UserFieldLimits.email.max,
+        minLength: UsersConstants.fieldLimits.email.min,
+        maxLength: UsersConstants.fieldLimits.email.max,
         trim: true,
         lowercase: true,
     },
     password: {
         type: String,
-        minLength: UserFieldLimits.password.min,
-        maxLength: UserPassword.hashLength,
+        minLength: UsersConstants.fieldLimits.password.min,
+        maxLength: UsersConstants.password.hashLength,
         required: true,
         trim: true,
     },

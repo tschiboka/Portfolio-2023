@@ -1,6 +1,6 @@
-export const Code = {
+export const TablesCode = {
     Controller: {
-        basic: `const controller = useTableController({
+        basic: `const controller = TableHooks.useTableController({
     sorting: { default: { column: 'datetime', direction: 'desc' } },
     pagination: { pageSize: 10 },
     filters: {

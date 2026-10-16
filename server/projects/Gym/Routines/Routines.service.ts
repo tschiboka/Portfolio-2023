@@ -2,7 +2,7 @@
 import { ApiResponder, ApiTransformers, isValidObjectId } from '@common-utils'
 import { RoutinesRepository } from './Routines.repository'
 import { RoutinesPermissions } from './Routines.permissions'
-import { RoutineSchema } from './Routines.schema'
+import { RoutinesSchema } from './Routines.schema'
 import type {
     CurrentUser,
     GymRoutineResource,
@@ -23,7 +23,7 @@ export const RoutinesService = {
         input: PostGymRoutineRequest,
         user: CurrentUser,
     ): Promise<GymRoutineResource> => {
-        const result = RoutineSchema.validate({
+        const result = RoutinesSchema.validate({
             ...input,
             source: 'user',
             ownerId: user._id.toString(),
@@ -56,7 +56,7 @@ export const RoutinesService = {
         if (!routine) throw ApiResponder.notFound('routine')
         RoutinesPermissions.requireUserCanModify(routine, user)
 
-        const { error } = RoutineSchema.validate({ ...routine.toObject(), ...patch })
+        const { error } = RoutinesSchema.validate({ ...routine.toObject(), ...patch })
         if (error) throw ApiResponder.badRequest(error)
 
         routine.set(patch)

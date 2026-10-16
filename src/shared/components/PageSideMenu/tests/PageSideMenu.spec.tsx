@@ -1,12 +1,12 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Accessor, Test } from '@common-ux/Test'
-import { TestScreen } from '../../Screen/tests/Screen.spec.utils'
+import { Accessor } from '@common-ux/Test'
+import { Test } from '../../Screen/tests'
 import { PageSideMenu } from '../PageSideMenu'
 import { PageSideMenuMockHandlers } from './PageSideMenu.mockHandlers'
 import { PageSideMenuMocks } from './PageSideMenu.mocks'
 
 const setupPageSideMenu = () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: '/projects',
         children: <PageSideMenu />,
         handlers: [...PageSideMenuMockHandlers.Defaults, PageSideMenuMockHandlers.Likes.Post],
@@ -50,7 +50,7 @@ describe('PageSideMenu', () => {
     describe('Likes and visits', () => {
         it('should fetch and display likes count', async () => {
             setupPageSideMenu()
-            TestScreen.Set.handlers(
+            Test.Screen.Set.handlers(
                 PageSideMenuMockHandlers.Likes.Get.updateResponse((builder) =>
                     builder.modify(PageSideMenuMocks.likesWithCount),
                 ),
@@ -64,7 +64,7 @@ describe('PageSideMenu', () => {
 
         it('should fetch and display visits count', async () => {
             setupPageSideMenu()
-            TestScreen.Set.handlers(
+            Test.Screen.Set.handlers(
                 PageSideMenuMockHandlers.Visits.Get.updateResponse((builder) =>
                     builder.modify(PageSideMenuMocks.visitsWithCount),
                 ),
@@ -121,7 +121,7 @@ describe('PageSideMenu', () => {
             setupPageSideMenu()
             const menu = getSideMenu()
 
-            TestScreen.Set.handlers(
+            Test.Screen.Set.handlers(
                 PageSideMenuMockHandlers.Likes.Get.updateResponse((builder) =>
                     builder.modify(PageSideMenuMocks.likesWithCount),
                 ),

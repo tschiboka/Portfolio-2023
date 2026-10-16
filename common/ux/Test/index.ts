@@ -13,7 +13,7 @@ import { Heading } from './Heading/Heading'
 import { Icon } from './Icon/Icon'
 import { Input } from './Input/Input'
 import { Link } from './Link/Link'
-import { LoadingIndicator } from './Loading/Loading'
+import { LoadingIndicator } from './LoadingIndicator/LoadingIndicator'
 import { Overlay } from './Overlay/Overlay'
 import { Pill } from './Pill/Pill'
 import { Radio } from './Radio/Radio'
@@ -25,8 +25,8 @@ import { Table } from './Table/Table'
 import { Toggle } from './Toggle/Toggle'
 import { Typography } from './Typography/Typography'
 export { Accessor, TestError } from './Accessor/Accessor'
-export { server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
-import { server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
+export { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
+import { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 
 export const Test = {
     Box,
@@ -53,7 +53,7 @@ export const Test = {
     Table,
     Toggle,
     Typography,
-    server,
+    Server,
     MockBuilder,
     RequestBuilder,
     HttpMethods,

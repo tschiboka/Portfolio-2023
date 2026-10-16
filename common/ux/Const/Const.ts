@@ -1,3 +1,5 @@
+import { ColorSign } from './ColorSign'
+
 export const Color = {
     Black: {
         X: '#0a0a0a',
@@ -151,3 +153,12 @@ export const ZIndex = {
 
     top: 50,
 } as const
+
+export const Const = {
+    Breakpoint,
+    Color,
+    ColorSign,
+    Font,
+    Spacing,
+    ZIndex,
+}

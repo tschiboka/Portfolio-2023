@@ -2,7 +2,9 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { Functions } from '@common-utils'
 import { Test } from '@common-ux/Test'
 import { Toggle } from '../Toggle'
-import { Set } from './Toggle.spec.utils'
+import { ToggleTestUtils } from './Toggle.spec.utils'
+
+const { Set } = ToggleTestUtils
 
 describe('Toggle', () => {
     describe('Layout', () => {

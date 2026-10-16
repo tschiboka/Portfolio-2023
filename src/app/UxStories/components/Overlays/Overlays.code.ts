@@ -1,4 +1,4 @@
-export const Code = {
+export const OverlaysCode = {
     Popup: {
         modes: `<Overlay.Popup
     mode="warning"

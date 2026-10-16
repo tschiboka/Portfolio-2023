@@ -65,7 +65,7 @@ before touching the file.
 | `Feature.transformers.ts`     | FE   | `queries`   |
 | `Feature.types.ts`            | both | `types`     |
 | `Feature.routes.tsx`          | FE   | `router`    |
-| `Feature.routes.ts`           | BE   | `router`    |
+| `Feature.router.ts`           | BE   | `router`    |
 | `Feature.middlewares.ts`      | BE   | `router`    |
 | `Feature.auth.ts`             | BE   | `auth`      |
 | `Feature.permissions.ts`      | BE   | `auth`      |

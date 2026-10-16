@@ -2,7 +2,7 @@
 import { UsersRepository } from './Users.repository'
 import { UsersSchema } from './Users.schema'
 import { UsersAuth } from './Users.auth'
-import { sendConfirmationEmail } from './Users.utils'
+import { UsersUtils } from './Users.utils'
 import { SettingsService } from '../Settings/Settings.service'
 import { TokenModel } from '../Token'
 import type {
@@ -70,7 +70,7 @@ export const UsersService = {
         const tokenString = UsersAuth.token.generate(userToken)
         await new TokenModel({ token: tokenString }).save()
 
-        await sendConfirmationEmail(input.email, tokenString)
+        await UsersUtils.sendConfirmationEmail(input.email, tokenString)
         return ApiMessage.sent('confirmation email')
     },
 

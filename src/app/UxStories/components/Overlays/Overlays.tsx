@@ -16,7 +16,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
 import type { Nullable } from '@common-utils'
-import { Code as Snippets } from './Overlays.code'
+import { OverlaysCode } from './Overlays.code'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
 import './Overlays.styles.css'
 
@@ -118,7 +118,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                                 />
                             ),
                     )}
-                    <Code language="tsx" content={Snippets.Popup.modes} />
+                    <Code language="tsx" content={OverlaysCode.Popup.modes} />
                 </Section>
                 <Section>
                     <Heading as="h3">Sizes</Heading>
@@ -147,7 +147,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                                 />
                             ),
                     )}
-                    <Code language="tsx" content={Snippets.Popup.sizes} />
+                    <Code language="tsx" content={OverlaysCode.Popup.sizes} />
                 </Section>
                 <Section>
                     <Heading as="h3">Actions</Heading>
@@ -175,7 +175,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             ]}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.Popup.actions} />
+                    <Code language="tsx" content={OverlaysCode.Popup.actions} />
                 </Section>
                 <Section>
                     <Heading as="h3">Anchored</Heading>
@@ -197,7 +197,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             size="sm"
                         />
                     )}
-                    <Code language="tsx" content={Snippets.Popup.anchored} />
+                    <Code language="tsx" content={OverlaysCode.Popup.anchored} />
                 </Section>
                 <Section>
                     <Heading as="h3">Custom Content</Heading>
@@ -228,7 +228,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             </div>
                         </Overlay.Popup>
                     )}
-                    <Code language="tsx" content={Snippets.Popup.customContent} />
+                    <Code language="tsx" content={OverlaysCode.Popup.customContent} />
                 </Section>
                 {/* ── ActionMenu ──────────────────────────────────── */}
                 <Heading as="h2" id="action-menu">
@@ -252,7 +252,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.basic} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.basic} />
                 </Section>
                 <Section>
                     <Heading as="h3">Alignment</Heading>
@@ -284,7 +284,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                                 />
                             ),
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.align} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.align} />
                 </Section>
                 <Section>
                     <Heading as="h3">Variants</Heading>
@@ -302,7 +302,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.variants} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.variants} />
                 </Section>
                 <Section>
                     <Heading as="h3">Disabled Items</Heading>
@@ -320,7 +320,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.disabled} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.disabled} />
                 </Section>
                 <Section>
                     <Heading as="h3">Icons</Heading>
@@ -335,7 +335,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.icons} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.icons} />
                 </Section>
                 <Section>
                     <Heading as="h3">Custom aria-label</Heading>
@@ -354,7 +354,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             onClose={close}
                         />
                     )}
-                    <Code language="tsx" content={Snippets.ActionMenu.ariaLabel} />
+                    <Code language="tsx" content={OverlaysCode.ActionMenu.ariaLabel} />
                 </Section>
             </Main>
         </Screen>

@@ -1,7 +1,7 @@
 import type { ActivityFeedSortBy, GetActivityFeedQuery } from '@common-types'
 import type { ActivityFiltersData } from './BreakdownTable.types'
 import { ClientTransformers } from '@common-utils'
-import { TableState } from '@common-ux/Table/useTableController'
+import type { TableState } from '@common-ux/Table/Table.hooks.types'
 
 type BreakdownParamsInput = TableState<ActivityFiltersData>
 
@@ -16,8 +16,9 @@ const Get = (state: BreakdownParamsInput): GetActivityFeedQuery => ({
     pageSize: String(state.pagination.pageSize),
 })
 
-export const BreakdownTransformers = ClientTransformers<BreakdownParamsInput, GetActivityFeedQuery>(
-    {
-        Get,
-    },
-)
+export const BreakdownTableTransformers = ClientTransformers<
+    BreakdownParamsInput,
+    GetActivityFeedQuery
+>({
+    Get,
+})

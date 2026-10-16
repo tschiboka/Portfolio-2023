@@ -1,4 +1,4 @@
-export const Code = {
+export const TestAccessorCode = {
     Import: `import { Test } from '@common-ux'`,
     Before: `// Without accessor — scattered patterns, fragile selectors, repeated setup
 const user = userEvent.setup()
@@ -67,9 +67,9 @@ expect(submit.Get.isDisabled()).toBe(true)`,
         overlay: `const overlay = Test.Overlay('Confirm delete')
 overlay.Get.heading() // scoped inside the dialog
 await overlay.Do.close()`,
-        navigation: `expect(TestScreen.Get.navigatedTo()).toBe('/api/register')
-expect(TestScreen.Has.navigated()).toBe(false)
-await TestScreen.Wait.navigatedTo('/api/home')`,
+        navigation: `expect(Test.Screen.Get.navigatedTo()).toBe('/api/register')
+expect(Test.Screen.Has.navigated()).toBe(false)
+await Test.Screen.Wait.navigatedTo('/api/home')`,
         serverMocking: `const getUsers = RequestBuilder({
     path: '/api/users',
     method: HttpMethods.GET,

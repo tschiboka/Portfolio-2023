@@ -1,7 +1,6 @@
-const RESOURCE_FILES = {
-    WORD_LIST: 'wordList.json',
-    ANAGRAM_MAP: 'anagramMap.json',
-    FREQUENCIES: 'frequencies.json',
+/** The JSON files the word list, anagram map and frequency table are loaded from. */
+export const ResourcesConstants = {
+    wordList: 'wordList.json',
+    anagramMap: 'anagramMap.json',
+    frequencies: 'frequencies.json',
 } as const
-
-export { RESOURCE_FILES }

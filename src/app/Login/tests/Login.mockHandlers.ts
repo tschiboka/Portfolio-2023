@@ -1,12 +1,12 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
 import { HttpStatus } from '@common-utils'
-import { MockSettings } from '@common-mocks'
+import { SettingsMocks } from '@common-mocks'
 import { LoginMocks } from './Login.mocks'
 
 const getSettings = RequestBuilder({
     path: '/api/settings',
     method: HttpMethods.GET,
-    response: MockBuilder({ settings: MockSettings.build() }),
+    response: MockBuilder({ settings: SettingsMocks.build() }),
 })
 
 const postLogin = RequestBuilder({

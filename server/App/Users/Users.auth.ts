@@ -5,11 +5,12 @@ import type { CurrentUser } from '../../../common/types'
 import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@common-utils'
 import { UsersModel } from './Users.model'
 import type { IUser, RegistrationPayload, UserToken } from './Users.types'
-import { UserPassword } from './Users.constants'
-import { SettingsFieldLimits } from '../Settings/Settings.constants'
+import { UsersConstants } from './Users.constants'
+import { SettingsConstants } from '../Settings/Settings.constants'
 
 /** Hashes a plain-text password with bcrypt. */
-const hashPassword = (plain: string): Promise<string> => bcrypt.hash(plain, UserPassword.saltRounds)
+const hashPassword = (plain: string): Promise<string> =>
+    bcrypt.hash(plain, UsersConstants.password.saltRounds)
 
 /** Verifies a plain-text password against a stored bcrypt hash. */
 const verifyPassword = (plain: string, hash: string): Promise<boolean> =>
@@ -35,7 +36,10 @@ const buildRegistration = (
     expiresMs: number | undefined,
 ): UserToken => {
     const iat = Math.floor(DateTime.Units.Ms.toSec(Date.now()))
-    if (isUndefined(expiresMs) || expiresMs < SettingsFieldLimits.registrationTokensExpireInMs.min)
+    if (
+        isUndefined(expiresMs) ||
+        expiresMs < SettingsConstants.fieldLimits.registrationTokensExpireInMs.min
+    )
         throw ApiResponder.badRequest(ApiMessage.invalid('expiration time'))
     return { expires: iat + expiresMs, ...payload }
 }
@@ -64,7 +68,7 @@ const getCurrentUser = async (req: Request): Promise<CurrentUser> => {
  */
 export const UsersAuth = {
     password: {
-        SALT_ROUNDS: UserPassword.saltRounds,
+        SALT_ROUNDS: UsersConstants.password.saltRounds,
         hash: hashPassword,
         verify: verifyPassword,
     },

@@ -1,13 +1,12 @@
 import Joi from 'joi'
 import type { XmasMessageInput, XmasCandleInput } from './Xmas.types'
-import { XmasFieldLimits } from './Xmas.constants'
+import { XmasConstants } from './Xmas.constants'
+
+const { fieldLimits } = XmasConstants
 
 const messageSchema = Joi.object({
-    name: Joi.string().required().min(XmasFieldLimits.name.min).max(XmasFieldLimits.name.max),
-    message: Joi.string()
-        .required()
-        .min(XmasFieldLimits.message.min)
-        .max(XmasFieldLimits.message.max),
+    name: Joi.string().required().min(fieldLimits.name.min).max(fieldLimits.name.max),
+    message: Joi.string().required().min(fieldLimits.message.min).max(fieldLimits.message.max),
     isRead: Joi.boolean(),
     userId: Joi.string().required(),
 })

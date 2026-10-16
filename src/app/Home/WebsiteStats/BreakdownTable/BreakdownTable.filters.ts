@@ -1,5 +1,5 @@
 import { TableFilterConfig } from '@common-ux'
-import type { FilterConfig } from '@common-ux/Table/TableFilterConfig'
+import type { FilterConfig } from '@common-ux/Table/TableFilter'
 import type { Dictionary } from '@common-utils'
 
 const { text, select, date } = TableFilterConfig

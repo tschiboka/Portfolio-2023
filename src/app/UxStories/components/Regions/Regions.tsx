@@ -15,7 +15,7 @@ import {
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { StoryNav } from '../StoryNav/StoryNav'
-import { Code as Snippets } from './Regions.code'
+import { RegionsCode } from './Regions.code'
 import { FaChartBar, FaCog } from 'react-icons/fa'
 
 type RegionsProps = { path: string }
@@ -55,8 +55,8 @@ export const Regions = ({ path }: RegionsProps) => (
                         <Paragraph>Monthly usage overview.</Paragraph>
                     </Card>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Card.basic} />
-                <Code language="tsx" content={Snippets.Card.withTitle} />
+                <Code language="tsx" content={RegionsCode.Card.basic} />
+                <Code language="tsx" content={RegionsCode.Card.withTitle} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="section">
@@ -77,9 +77,9 @@ export const Regions = ({ path }: RegionsProps) => (
                         <Paragraph>Starts collapsed — click the header to expand.</Paragraph>
                     </Section>
                 </Stack.Vertical>
-                <Code language="tsx" content={Snippets.Section.static} />
-                <Code language="tsx" content={Snippets.Section.expandable} />
-                <Code language="tsx" content={Snippets.Section.collapsed} />
+                <Code language="tsx" content={RegionsCode.Section.static} />
+                <Code language="tsx" content={RegionsCode.Section.expandable} />
+                <Code language="tsx" content={RegionsCode.Section.collapsed} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="dialog">
@@ -94,7 +94,7 @@ export const Regions = ({ path }: RegionsProps) => (
                 <Dialog ariaLabel="Confirm action">
                     <Paragraph>Are you sure you want to proceed?</Paragraph>
                 </Dialog>
-                <Code language="tsx" content={Snippets.Dialog.basic} />
+                <Code language="tsx" content={RegionsCode.Dialog.basic} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="sidebar">
@@ -120,7 +120,7 @@ export const Regions = ({ path }: RegionsProps) => (
                         </nav>
                     </Sidebar>
                 </Box>
-                <Code language="tsx" content={Snippets.Sidebar.basic} />
+                <Code language="tsx" content={RegionsCode.Sidebar.basic} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="header">
@@ -144,7 +144,7 @@ export const Regions = ({ path }: RegionsProps) => (
                         <nav>Navigation links</nav>
                     </Header>
                 </Box>
-                <Code language="tsx" content={Snippets.Header.basic} />
+                <Code language="tsx" content={RegionsCode.Header.basic} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="main">
@@ -166,7 +166,7 @@ export const Regions = ({ path }: RegionsProps) => (
                         <Paragraph>Primary content area.</Paragraph>
                     </Main>
                 </Box>
-                <Code language="tsx" content={Snippets.Main.basic} />
+                <Code language="tsx" content={RegionsCode.Main.basic} />
             </Box>
             <Box as="section">
                 <Heading as="h2" id="using-region-directly">
@@ -177,7 +177,7 @@ export const Regions = ({ path }: RegionsProps) => (
                     You can also use <CodeText>Region</CodeText> directly with a{' '}
                     <CodeText>variant</CodeText> prop.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.Region.direct} />
+                <Code language="tsx" content={RegionsCode.Region.direct} />
             </Box>
         </Main>
     </Screen>

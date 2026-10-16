@@ -1,7 +1,7 @@
 import type { Dictionary } from '@common-utils'
-import { ModalRegistry } from './Modal.defaults'
+import { ModalDefaults } from './Modal.defaults'
 
-export type ModalName = keyof typeof ModalRegistry
+export type ModalName = keyof typeof ModalDefaults
 
 export type ModalState = { name: null } | { name: ModalName; props?: Dictionary }
 

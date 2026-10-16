@@ -1,12 +1,12 @@
 import { useRef, useEffect } from 'react'
 import { ClockData, ClockUtils } from '..'
-import { Canvas } from '@common-utils'
+import { CanvasHooks } from '@common-utils'
 
 type ClockFaceCanvasProps = { clock: ClockData }
 
 export const ClockFaceCanvas = ({ clock }: ClockFaceCanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
-    const canvas = Canvas.useCanvas(canvasRef)
+    const canvas = CanvasHooks.useCanvas(canvasRef)
     const { ctx, width, height } = canvas
     ctx?.clearRect(0, 0, width, height)
 

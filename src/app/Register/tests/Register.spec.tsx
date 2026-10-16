@@ -1,16 +1,15 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@common-ux/Test'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Test } from '@shared-components/Screen/tests'
 import { AppRoutes } from '../../../app'
 import { Paths } from '@common-utils'
 import { RegisterMocks } from './Register.mocks'
 import { RegisterMockHandlers } from './Register.mockHandlers'
-import { RegisterLabels } from './Register.spec.utils'
+import { RegisterTestUtils } from './Register.spec.utils'
 
-const { form: FORM, fields, buttons, errors } = RegisterLabels
+const { form: FORM, fields, buttons, errors } = RegisterTestUtils.labels
 
 const setupRegister = async () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: AppRoutes.Register,
         handlers: RegisterMockHandlers.Defaults,
     })
@@ -77,7 +76,7 @@ describe('Register', () => {
         it('should navigate to /api/login when login button is clicked', async () => {
             const { form } = await setupRegister()
             await form.Button(buttons.login).Do.click()
-            expect(TestScreen.Get.navigatedTo()).toBe(Paths.Client.Login)
+            expect(Test.Screen.Get.navigatedTo()).toBe(Paths.Client.Login)
         })
     })
 
@@ -128,7 +127,7 @@ describe('Register', () => {
             const { form } = await setupRegister()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
-            expect(TestScreen.Has.navigated()).toBe(false)
+            expect(Test.Screen.Has.navigated()).toBe(false)
         })
     })
 
@@ -165,7 +164,7 @@ describe('Register', () => {
     describe('Failed registration', () => {
         const fillAndSubmitInvalid = async () => {
             const { form } = await setupRegister()
-            TestScreen.Set.handlers(RegisterMockHandlers.PostRejected)
+            Test.Screen.Set.handlers(RegisterMockHandlers.PostRejected)
             await form.Input(fields.fullName).Do.type('Valid Name')
             await form.Input(fields.userName).Do.type('validuser')
             await form.Input(fields.email).Do.type('taken@email.com')

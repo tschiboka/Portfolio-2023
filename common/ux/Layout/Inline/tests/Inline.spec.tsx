@@ -1,4 +1,6 @@
-import { Set } from './Inline.spec.utils'
+import { InlineTestUtils } from './Inline.spec.utils'
+
+const { Set } = InlineTestUtils
 
 describe('Inline', () => {
     describe('rendering', () => {

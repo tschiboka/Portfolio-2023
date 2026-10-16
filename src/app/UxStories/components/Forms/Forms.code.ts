@@ -1,4 +1,4 @@
-export const Code = {
+export const FormsCode = {
     Layout: {
         form: `<Form onSubmit={handleSubmit(onSubmit)} ariaLabel="Registration form">
     <Form.Fieldset>

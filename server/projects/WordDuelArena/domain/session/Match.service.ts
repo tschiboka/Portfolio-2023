@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { MatchStatuses } from '../../config/constants/Game.constants'
+import { GameConstants } from '../../config/constants/Game.constants'
 import type { Match, MatchPlayerStatus } from '../../WordDuelArena.types'
 
 const defaultPlayer: MatchPlayerStatus = {
@@ -10,7 +10,7 @@ const defaultPlayer: MatchPlayerStatus = {
 }
 const getInitialMatchState = (): Match => ({
     id: nanoid(),
-    status: MatchStatuses.ACTIVE,
+    status: GameConstants.matchStatuses.ACTIVE,
     perPlayerStatus: {
         player1: { ...defaultPlayer },
         player2: { ...defaultPlayer },
@@ -20,4 +20,4 @@ const getInitialMatchState = (): Match => ({
     reason: null,
 })
 
-export { getInitialMatchState }
+export const MatchService = { getInitialState: getInitialMatchState }

@@ -5,7 +5,7 @@ import type { SectionProps } from '../Region.types'
 
 type Props = Partial<SectionProps>
 
-export const Set = {
+const Set = {
     section: (props: Props = {}) => {
         const label = props.ariaLabel ?? props.title ?? 'Test Section'
         render(
@@ -16,3 +16,5 @@ export const Set = {
         return Test.Section(label)
     },
 }
+
+export const SectionTestUtils = { Set }

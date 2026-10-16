@@ -1,4 +1,4 @@
-export const codeSnippets = {
+export const ZIndexLayersCode = {
     layerDefinition: `export const ZIndex = {
     base: 10,
     sticky: 20,

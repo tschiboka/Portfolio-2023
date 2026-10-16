@@ -1,10 +1,9 @@
 import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AccessibleProps } from '../index.types'
-import { Browser } from '@common-utils'
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
 import { Const } from '@common-ux'
-import { isEmpty, isNonEmpty } from '@common-utils'
+import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
 import './ContentNavigator.styles.css'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
 
@@ -79,7 +78,7 @@ export const ContentNavigator = ({
     const [elements, setElements] = useState<Element[]>([])
     const [isOpen, setIsOpen] = useState(true)
 
-    const visibleElems = Browser.useIsVisible(elements)
+    const visibleElems = BrowserHooks.useIsVisible(elements)
     const headings = useMemo(() => getVisibleHeaderEntries(visibleElems), [visibleElems])
     const baseLevel = useMemo(() => (headings.length ? minLevel(headings) : 1), [headings])
 

@@ -15,7 +15,7 @@ export const Tasks = ({ path }: TaskProps) => {
             deadline: '',
             alarm: '',
         },
-        // resolver: yupResolver(loginSchema),
+        // resolver: yupResolver(LoginSchema),
     })
 
     return (

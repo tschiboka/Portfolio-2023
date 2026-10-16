@@ -1,7 +1,7 @@
 ﻿import type { PostBackfillResponse } from '../../../common/types'
 import { chunk } from '@common-utils'
 import { BreakdownRepository } from './Breakdown.repository'
-import { BreakdownBatchLimits } from './Breakdown.constants'
+import { BreakdownConstants } from './Breakdown.constants'
 import { BreakdownUtils } from './Breakdown.utils'
 
 /**
@@ -21,7 +21,7 @@ export const BreakdownService = {
         )
         const operations = BreakdownUtils.BuildBreakdownOperations(breakdownCounts)
 
-        const batches = chunk(operations, BreakdownBatchLimits.size)
+        const batches = chunk(operations, BreakdownConstants.batchLimits.size)
         const totalUpserted = await batches.reduce(
             async (accumulator, batch) =>
                 (await accumulator) + (await BreakdownRepository.bulkUpsert(batch)),

@@ -1,7 +1,7 @@
 ﻿import type { MuscleGroupResource } from '../../../../common/types'
 import type { SearchInputOption } from '@common-ux/Form/SearchInput.types'
 
-export const muscleGroupOptions: SearchInputOption<MuscleGroupResource>[] = [
+export const MuscleGroupOptions: SearchInputOption<MuscleGroupResource>[] = [
     { value: 'upper_chest', label: 'Upper Chest' },
     { value: 'middle_chest', label: 'Middle Chest' },
     { value: 'lower_chest', label: 'Lower Chest' },

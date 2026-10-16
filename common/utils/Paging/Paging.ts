@@ -1,5 +1,5 @@
 import type { PageMeta } from '@common-types'
-import { TablePagingDefaults } from '../Table/Table.constants'
+import { TableDefaults } from '../Table/Table.defaults'
 import { isDefined, isDigits } from '../Predicate'
 
 /** Bounds for parsing page/pageSize query params. */
@@ -32,11 +32,11 @@ const parseSafeInt = (value: string | undefined, fallback: number): number =>
  */
 export const Paging = {
     parse: (page?: string, pageSize?: string, bounds: PagingBounds = {}): Paged => {
-        const pageNumberMin = bounds.pageNumberMin ?? TablePagingDefaults.pageNumber
-        const pageSizeMin = bounds.pageSizeMin ?? TablePagingDefaults.pageSize
+        const pageNumberMin = bounds.pageNumberMin ?? TableDefaults.paging.pageNumber
+        const pageSizeMin = bounds.pageSizeMin ?? TableDefaults.paging.pageSize
         const pageSizeMax = bounds.pageSizeMax ?? Number.POSITIVE_INFINITY
-        const defaultPageNumber = bounds.defaultPageNumber ?? TablePagingDefaults.pageNumber
-        const defaultPageSize = bounds.defaultPageSize ?? TablePagingDefaults.pageSize
+        const defaultPageNumber = bounds.defaultPageNumber ?? TableDefaults.paging.pageNumber
+        const defaultPageSize = bounds.defaultPageSize ?? TableDefaults.paging.pageSize
         const pageNumber = Math.max(parseSafeInt(page, defaultPageNumber), pageNumberMin)
         const limit = Math.min(
             Math.max(parseSafeInt(pageSize, defaultPageSize), pageSizeMin),

@@ -1,6 +1,6 @@
 import Joi from 'joi'
 import type { SessionState } from '../../../../WordDuelArena.types'
-import { SessionStatuses } from '../../../../config/constants/Session.constants'
+import { SessionConstants } from '../../../../config/constants/Session.constants'
 import { MatchSchema } from './Match.schema'
 import { PlayerSchema } from './Player.schema'
 import { LevelSchema } from './Level.schema'
@@ -8,7 +8,7 @@ import { LevelSchema } from './Level.schema'
 const SessionStateSchema = Joi.object({
     id: Joi.string().required(),
     status: Joi.string()
-        .valid(...Object.values(SessionStatuses))
+        .valid(...Object.values(SessionConstants.statuses))
         .required(),
     players: Joi.object({
         player1: PlayerSchema.allow(null).optional(),

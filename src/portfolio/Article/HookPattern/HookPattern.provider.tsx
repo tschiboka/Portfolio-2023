@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import type { ReactNode } from 'react'
-import { ThemeContext } from './HookPattern.context'
+import { HookPatternContext } from './HookPattern.context'
 
-type ThemeContextProviderProps = {
+type HookPatternProviderProps = {
     children: ReactNode
 }
 
-export const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
+export const HookPatternProvider = ({ children }: HookPatternProviderProps) => {
     const [theme, setTheme] = useState<string>('dark')
 
-    return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>
+    return (
+        <HookPatternContext.Provider value={{ theme, setTheme }}>
+            {children}
+        </HookPatternContext.Provider>
+    )
 }

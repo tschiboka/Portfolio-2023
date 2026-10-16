@@ -20,5 +20,7 @@ const useGetActivityFeed = ({ params }: UseGetActivityFeedOptions) => {
 }
 
 export const WebsiteStatsQueries = {
-    useGet: useGetActivityFeed,
+    ActivityFeed: {
+        useGet: useGetActivityFeed,
+    },
 }

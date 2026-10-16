@@ -1,4 +1,4 @@
-export { BreakdownRouter } from './Breakdown.routes'
+export { BreakdownRouter } from './Breakdown.router'
 export { BreakdownService } from './Breakdown.service'
 export { BreakdownRepository } from './Breakdown.repository'
 export { BreakdownModel } from './Breakdown.model'

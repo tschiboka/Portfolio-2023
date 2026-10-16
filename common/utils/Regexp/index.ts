@@ -1,1 +1,1 @@
-export { Regexp } from './Regexp'
+export { Regexp } from './Regexp.js'

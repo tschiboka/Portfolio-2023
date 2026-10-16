@@ -16,4 +16,4 @@ const iconOptions: SearchInputOption[] = [
     },
 ]
 
-export const FormMocks = { testOptions, iconOptions }
+export const FormTestMocks = { testOptions, iconOptions }

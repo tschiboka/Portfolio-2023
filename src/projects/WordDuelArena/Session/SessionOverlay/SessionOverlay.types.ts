@@ -1,20 +1,20 @@
 import { ReactNode } from 'react'
 
-export type InteractioinOverlayActions = {
+export type SessionOverlayActions = {
     label: string
     onClick: () => void
 }
 
-export type InteractionOverlayConfigType = 'info' | 'warning' | 'error'
+export type SessionOverlayConfigType = 'info' | 'warning' | 'error'
 
-export type InteractionOverlayConfig = {
+export type SessionOverlayConfig = {
     title?: string
     description?: string | ReactNode
-    type?: InteractionOverlayConfigType
-    actions?: InteractioinOverlayActions[]
+    type?: SessionOverlayConfigType
+    actions?: SessionOverlayActions[]
 }
 
-export type InteractionModes =
+export type SessionOverlayModes =
     | 'connect'
     | 'load-session'
     | 'no-fullscreen'

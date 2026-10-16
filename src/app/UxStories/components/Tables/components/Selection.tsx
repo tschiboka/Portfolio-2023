@@ -1,5 +1,5 @@
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import {
     MultipleSelectionDemo,
     SingleSelectionDemo,
@@ -27,7 +27,7 @@ export const Selection = () => (
                 rows at once and is only checked when every selectable row is selected.
             </Paragraph>
             <MultipleSelectionDemo />
-            <Code language="tsx" content={Snippets.Selection.multiple} />
+            <Code language="tsx" content={TablesCode.Selection.multiple} />
         </Section>
         <Section>
             <Heading as="h3">Single Selection</Heading>
@@ -37,7 +37,7 @@ export const Selection = () => (
                 automatically deselects the previous one.
             </Paragraph>
             <SingleSelectionDemo />
-            <Code language="tsx" content={Snippets.Selection.single} />
+            <Code language="tsx" content={TablesCode.Selection.single} />
         </Section>
         <Section>
             <Heading as="h3">isRowSelectable</Heading>
@@ -47,7 +47,7 @@ export const Selection = () => (
                 from select-all. Below, rows with an &quot;inactive&quot; status cannot be selected.
             </Paragraph>
             <SelectableDemo />
-            <Code language="tsx" content={Snippets.Selection.isRowSelectable} />
+            <Code language="tsx" content={TablesCode.Selection.isRowSelectable} />
         </Section>
         <Section>
             <Heading as="h3">Selection with Actions</Heading>
@@ -57,7 +57,7 @@ export const Selection = () => (
                 features share the same row meta.
             </Paragraph>
             <SelectionWithActionsDemo />
-            <Code language="tsx" content={Snippets.Selection.withActions} />
+            <Code language="tsx" content={TablesCode.Selection.withActions} />
         </Section>
     </>
 )

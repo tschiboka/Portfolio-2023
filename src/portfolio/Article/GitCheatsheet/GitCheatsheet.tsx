@@ -7,7 +7,7 @@ import centralisedVsDistributedImg from '@portfolio/assets/blog/git_cheatsheet/c
 import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.png'
 import GitStorage2Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-2.png'
 import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
-import codeSnippets from './GitCheatSheet.code'
+import GitCheatSheetCode from './GitCheatSheet.code'
 import { getReferenceList } from '../References.data'
 
 type Props = {
@@ -81,7 +81,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Check Version"
                     language="powershell"
-                    content={codeSnippets.checkVersion}
+                    content={GitCheatSheetCode.checkVersion}
                 />
                 <Paragraph>
                     You can download the latest version of Git on
@@ -134,7 +134,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Configure Global User Name"
                     language="powershell"
-                    content={codeSnippets.configUserName}
+                    content={GitCheatSheetCode.configUserName}
                 />
                 <Paragraph>
                     Beware that the double quote is necessary if the name contains white space.
@@ -148,7 +148,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName=".gitconfig"
                     language="powershell"
-                    content={codeSnippets.openConfig}
+                    content={GitCheatSheetCode.openConfig}
                 />
                 <Paragraph>
                     The "Auto Carriage Return Line Feed" property, often called autocrlf in Git,
@@ -159,13 +159,13 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Windows Configuration"
                     language="powershell"
-                    content={codeSnippets.lineFeedWin}
+                    content={GitCheatSheetCode.lineFeedWin}
                 />
                 <Paragraph>For everything else:</Paragraph>
                 <Code
                     fileName="Linux Configuration"
                     language="powershell"
-                    content={codeSnippets.lineFeedUnix}
+                    content={GitCheatSheetCode.lineFeedUnix}
                 />
                 <Heading as="h3">Initialising Repositories</Heading>
                 <Paragraph>
@@ -175,7 +175,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Initialise Repository"
                     language="powershell"
-                    content={codeSnippets.initialiseRepo}
+                    content={GitCheatSheetCode.initialiseRepo}
                 />
                 <Paragraph>
                     The command line will return with the full path of our initialised repository
@@ -189,7 +189,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="List Hidden Folder Items"
                     language="powershell"
-                    content={codeSnippets.listAll}
+                    content={GitCheatSheetCode.listAll}
                 />
                 <Paragraph>
                     This folder contains all the information and metadata that Git needs to manage
@@ -298,7 +298,11 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                     of the working directory of the staging area, we use the GIT STATUS. For
                     shorter, less verbose status results, we also can use GIT STATUS -S.
                 </Paragraph>
-                <Code fileName="Staging" language="powershell" content={codeSnippets.staging} />
+                <Code
+                    fileName="Staging"
+                    language="powershell"
+                    content={GitCheatSheetCode.staging}
+                />
                 <Paragraph>
                     The primary function of the git ADD command is to promote pending changes in the
                     working directory to the git staging area. The staging area is one of Git's more
@@ -306,13 +310,13 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                     and the project history.
                     <InlineReference reference={references[6]} />
                 </Paragraph>
-                <Code fileName="Staging" language="powershell" content={codeSnippets.add} />
+                <Code fileName="Staging" language="powershell" content={GitCheatSheetCode.add} />
                 <Paragraph>
                     Since we have added our files to the staging area, modifying any file and
                     querying a git status will result in a message where the file appears green as a
                     new file already added and red as unstaged changes are present in the file.
                 </Paragraph>
-                <Code fileName="Staging" language="powershell" content={codeSnippets.modify} />
+                <Code fileName="Staging" language="powershell" content={GitCheatSheetCode.modify} />
                 <Heading as="h3">Committing Changes</Heading>
                 <Paragraph>
                     Adding commits keeps track of our progress and changes as we work. Git considers
@@ -330,7 +334,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Commit with Short Message"
                     language="powershell"
-                    content={codeSnippets.commit}
+                    content={GitCheatSheetCode.commit}
                 />
                 <Paragraph>
                     The quickest way to write a git commit is to use the command with the -M message
@@ -346,7 +350,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Commit with Long Message"
                     language="powershell"
-                    content={codeSnippets.commitWithVerboseMessage}
+                    content={GitCheatSheetCode.commitWithVerboseMessage}
                 />
                 <Heading as="h3">Commit Best Practices</Heading>
                 <Paragraph>
@@ -399,7 +403,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Skipping Staging"
                     language="powershell"
-                    content={codeSnippets.skippingStaging}
+                    content={GitCheatSheetCode.skippingStaging}
                 />
             </Section>
             <Section>
@@ -415,7 +419,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Removing Files"
                     language="powershell"
-                    content={codeSnippets.removeFile}
+                    content={GitCheatSheetCode.removeFile}
                 />
                 <Heading as="h3">Renaming and Moving Files</Heading>
                 <Paragraph>
@@ -429,7 +433,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Renaming Files"
                     language="powershell"
-                    content={codeSnippets.renameFile}
+                    content={GitCheatSheetCode.renameFile}
                 />
             </Section>
             <Section>
@@ -459,12 +463,20 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                         ]}
                     />
                 </Paragraph>
-                <Code fileName="Git Ignore" language="powershell" content={codeSnippets.ignore} />
+                <Code
+                    fileName="Git Ignore"
+                    language="powershell"
+                    content={GitCheatSheetCode.ignore}
+                />
                 <Paragraph>
                     However, if Git has already tracked a file, it won't be able to ignore it
                     anymore, and we need to remove it from the staging area.
                 </Paragraph>
-                <Code fileName="Git Untrack" language="powershell" content={codeSnippets.untrack} />
+                <Code
+                    fileName="Git Untrack"
+                    language="powershell"
+                    content={GitCheatSheetCode.untrack}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Viewing History and Commits</Heading>
@@ -479,7 +491,11 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                     To get a less verbose version of the history, we use the GIT LOG with the
                     --ONELINE flag, and to reverse the sorting of the list, use the -REVERSE flag.
                 </Paragraph>
-                <Code fileName="Git History" language="powershell" content={codeSnippets.history} />
+                <Code
+                    fileName="Git History"
+                    language="powershell"
+                    content={GitCheatSheetCode.history}
+                />
                 <Paragraph>
                     To inspect the changes in a commit, we type the GIT SHOW in the terminal with
                     the unique ID of the commit. There is no need to type the complete ID. As long
@@ -491,7 +507,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Git Show Commits"
                     language="powershell"
-                    content={codeSnippets.show}
+                    content={GitCheatSheetCode.show}
                 />
                 <Paragraph>
                     In Git the folders are represented as trees and the files as blobs. BLOB is a
@@ -513,14 +529,18 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Git Unstaging"
                     language="powershell"
-                    content={codeSnippets.unstaging}
+                    content={GitCheatSheetCode.unstaging}
                 />
                 <Paragraph>
                     We can also discard local changes in our working directory with the GIT CLEAN
                     command. This action would permanently delete the files from our working
                     directory, so we must use the -FORCE and optional -D (directories) flags.
                 </Paragraph>
-                <Code fileName="Git Clean" language="powershell" content={codeSnippets.clean} />
+                <Code
+                    fileName="Git Clean"
+                    language="powershell"
+                    content={GitCheatSheetCode.clean}
+                />
                 <Heading as="h3">Restoring Previous Versions</Heading>
                 <Paragraph>
                     To restore the last commit, list the commits with the GIT LOG -ONELINE to see
@@ -529,7 +549,7 @@ export const GitCheatsheet = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Git Restore"
                     language="powershell"
-                    content={codeSnippets.restoreLast}
+                    content={GitCheatSheetCode.restoreLast}
                 />
             </Section>
         </Article>

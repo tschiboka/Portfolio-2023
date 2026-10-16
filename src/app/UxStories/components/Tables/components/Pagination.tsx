@@ -1,5 +1,5 @@
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import {
     PaginationDemo,
     CustomPageSizeDemo,
@@ -27,7 +27,7 @@ export const Pagination = () => (
                 buttons or click a page number directly. Changing the page size resets to page 1.
             </Paragraph>
             <PaginationDemo />
-            <Code language="tsx" content={Snippets.Pagination.basic} />
+            <Code language="tsx" content={TablesCode.Pagination.basic} />
         </Section>
         <Section>
             <Heading as="h3">Custom Page Size Options</Heading>
@@ -37,7 +37,7 @@ export const Pagination = () => (
                 automatically as the total page count changes.
             </Paragraph>
             <CustomPageSizeDemo />
-            <Code language="tsx" content={Snippets.Pagination.customPageSize} />
+            <Code language="tsx" content={TablesCode.Pagination.customPageSize} />
         </Section>
         <Section>
             <Heading as="h3">Small Dataset</Heading>
@@ -47,7 +47,7 @@ export const Pagination = () => (
                 across empty / small / large datasets.
             </Paragraph>
             <SmallDatasetPaginationDemo />
-            <Code language="tsx" content={Snippets.Pagination.smallDataset} />
+            <Code language="tsx" content={TablesCode.Pagination.smallDataset} />
         </Section>
         <Section>
             <Heading as="h3">Without Total Items</Heading>
@@ -57,7 +57,7 @@ export const Pagination = () => (
                 not be known. Navigation still works via <CodeText>totalPages</CodeText>.
             </Paragraph>
             <NoTotalItemsDemo />
-            <Code language="tsx" content={Snippets.Pagination.noTotalItems} />
+            <Code language="tsx" content={TablesCode.Pagination.noTotalItems} />
         </Section>
     </>
 )

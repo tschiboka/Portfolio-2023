@@ -4,7 +4,7 @@ import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import { TablesConfig } from '../Tables.config'
 import type { TableColumns } from '@common-ux'
 
@@ -70,7 +70,7 @@ export const ColumnCustomization = () => {
                             .join(', ')}
                     </Paragraph>
                 )}
-                <Code language="tsx" content={Snippets.ColumnCustomization.resizeReorder} />
+                <Code language="tsx" content={TablesCode.ColumnCustomization.resizeReorder} />
             </Section>
             <Section>
                 <Heading as="h3">Usage</Heading>
@@ -78,7 +78,7 @@ export const ColumnCustomization = () => {
                     Both callbacks are optional. When omitted, no resize handles or reorder buttons
                     are rendered — zero visual change to existing tables.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.ColumnCustomization.usage} />
+                <Code language="tsx" content={TablesCode.ColumnCustomization.usage} />
             </Section>
         </>
     )

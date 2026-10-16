@@ -94,8 +94,14 @@ const usePostPing = () => {
 
 export const FeatureQueries = {
     useGet,
-    useGetSubfeature,
     usePost,
-    usePostForm,
-    usePostPing,
+    SubFeature: {
+        useGet: useGetSubfeature,
+    },
+    Form: {
+        usePost: usePostForm,
+    },
+    Ping: {
+        usePost: usePostPing,
+    },
 }

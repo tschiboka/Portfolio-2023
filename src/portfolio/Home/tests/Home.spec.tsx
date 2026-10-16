@@ -1,11 +1,11 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Accessor, Test } from '@common-ux/Test'
-import { TestScreen } from '@shared-components/Screen/tests/Screen.spec.utils'
+import { Accessor } from '@common-ux/Test'
+import { Test } from '@shared-components/Screen/tests'
 import { Home } from '../Home'
 import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupHome = () => {
-    TestScreen.Do.render({
+    Test.Screen.Do.render({
         path: '/',
         children: <Home pageName="home" />,
         handlers: [...PageSideMenuMockHandlers.Defaults, PageSideMenuMockHandlers.Likes.Post],
@@ -142,7 +142,7 @@ describe('Home', () => {
                 'Headshot',
             )
             await headshot.Do.click()
-            expect(TestScreen.Get.navigatedTo()).toBe('./api/login')
+            expect(Test.Screen.Get.navigatedTo()).toBe('./api/login')
         })
     })
 

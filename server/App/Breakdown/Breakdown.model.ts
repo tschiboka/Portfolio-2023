@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import type { IBreakdown } from './Breakdown.types'
-import { BreakdownFieldLimits } from './Breakdown.constants'
+import { BreakdownConstants } from './Breakdown.constants'
 
 const breakdownSchema = new mongoose.Schema<IBreakdown>({
     // Calendar date in YYYY-MM-DD format (e.g. "2026-06-15")
@@ -13,7 +13,7 @@ const breakdownSchema = new mongoose.Schema<IBreakdown>({
         type: String,
         required: true,
         lowercase: true,
-        maxLength: BreakdownFieldLimits.path.max,
+        maxLength: BreakdownConstants.fieldLimits.path.max,
         trim: true,
     },
     // Running total of visits for this (date, path) combination

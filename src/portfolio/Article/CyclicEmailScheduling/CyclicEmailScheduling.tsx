@@ -8,7 +8,7 @@ import newCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/new_c
 import editCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/edit_cron_task.png'
 import cronExpressionSyntaxImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_expression_syntax.png'
 import finalisedCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/finalised_cron_task.png'
-import codeSnippets from './CyclicEmailScheduling.code'
+import CyclicEmailSchedulingCode from './CyclicEmailScheduling.code'
 import { getReferenceList } from '../References.data'
 
 type Props = {
@@ -54,7 +54,7 @@ export const CyclicEmailScheduling = ({ pageName, path }: Props) => {
                 <Code
                     fileName="scheduler.js"
                     language="javascript"
-                    content={codeSnippets.nodeCron}
+                    content={CyclicEmailSchedulingCode.nodeCron}
                 />
                 <Paragraph>
                     However, NodeCron relies on a continuous server environment to run scheduled
@@ -80,7 +80,7 @@ export const CyclicEmailScheduling = ({ pageName, path }: Props) => {
                 <Code
                     fileName="Terminal"
                     language="powershell"
-                    content={codeSnippets.nodemailerInstall}
+                    content={CyclicEmailSchedulingCode.nodemailerInstall}
                 />
                 <Paragraph>
                     We define a function called sendEmail that sends an email message. We then set
@@ -94,13 +94,17 @@ export const CyclicEmailScheduling = ({ pageName, path }: Props) => {
                 <Code
                     fileName="sendEmail.js"
                     language="javascript"
-                    content={codeSnippets.sendEmail}
+                    content={CyclicEmailSchedulingCode.sendEmail}
                 />
                 <Paragraph>
                     Now that we have an email sender function, we may set up an API endpoint to POST
                     emails. However, as I mentioned, this endpoint is not automated with NodeJS.
                 </Paragraph>
-                <Code fileName="sheduled.js" language="javascript" content={codeSnippets.route} />
+                <Code
+                    fileName="sheduled.js"
+                    language="javascript"
+                    content={CyclicEmailSchedulingCode.route}
+                />
             </Section>
             <Section>
                 <Heading as="h2">Set Up a Cron Job on Cyclic</Heading>

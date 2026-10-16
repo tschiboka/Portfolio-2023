@@ -1,13 +1,13 @@
 export { Table } from './Table'
-export { useTableController } from './useTableController'
-export { TableFilterConfig } from './TableFilterConfig'
-export type * from './TableFilterConfig'
-export { useTableUrlPersistence, buildCodec } from './TableUrlPersistence'
+export { TableHooks } from './Table.hooks'
+export { TableFilterConfig } from './TableFilter'
+export type * from './TableFilter'
+export { TableUrlPersistenceHooks, TableUrlPersistenceConfig } from './TableUrlPersistence'
 export type {
     TableControl,
     UseTableConfig,
     TableSortState,
     Paging,
     TableState,
-} from './useTableController'
+} from './Table.hooks.types'
 export type * from './Table.types'

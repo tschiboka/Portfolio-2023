@@ -1,11 +1,11 @@
 import { SessionProvider } from './Session.provider'
 import { SessionGame } from './SessionGame/SessionGame'
 import { SessionWebSocketProvider } from './SessionWebSocket.provider'
-import { Browser } from '@common-utils'
+import { BrowserHooks } from '@common-utils'
 import './Sessions.styles.css'
 
 const SessionComponent = () => {
-    const { ref, enterFullScreen, isFullscreen } = Browser.useFullScreen<HTMLDivElement>()
+    const { ref, enterFullScreen, isFullscreen } = BrowserHooks.useFullScreen<HTMLDivElement>()
 
     return (
         <div className="session" ref={ref}>

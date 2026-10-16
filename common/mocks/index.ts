@@ -1,4 +1,4 @@
-export { MockSession } from './Session.mocks'
-export { MockSettings } from './Settings.mocks'
-export { MockUser } from './User.mocks'
+export { SessionMocks } from './Session.mocks'
+export { SettingsMocks } from './Settings.mocks'
+export { UserMocks } from './User.mocks'
 export { TestMocks } from './TestMocks'

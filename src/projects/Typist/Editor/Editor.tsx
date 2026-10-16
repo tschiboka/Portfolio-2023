@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { TypistContext } from '../Typist.context'
 import { Character } from './Character/Character'
-import { createEditorHandler } from './Editor.handlers'
+import { EditorHandlers } from './Editor.handlers'
 import { isTruthy } from '@common-utils'
 import './Editor.styles.scss'
 import { LoadingIndicator } from '@common-ux'
@@ -11,7 +11,7 @@ export const Editor = () => {
     const { words } = editorState
 
     useEffect(() => {
-        const handler = createEditorHandler({ editorState, dispatch })
+        const handler = EditorHandlers.create({ editorState, dispatch })
         window.addEventListener('keydown', handler)
         return () => window.removeEventListener('keydown', handler)
     }, [editorState, dispatch])

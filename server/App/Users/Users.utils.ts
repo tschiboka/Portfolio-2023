@@ -13,7 +13,7 @@ const confirmationEmail = (token: string): string => `
     </a></p>`
 
 /** Sends the registration confirmation email to `to`. */
-export const sendConfirmationEmail = async (to: string, token: string): Promise<void> => {
+const sendConfirmationEmail = async (to: string, token: string): Promise<void> => {
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { error } = await resend.emails.send({
         from: 'noreply@tschiboka.com',
@@ -24,3 +24,5 @@ export const sendConfirmationEmail = async (to: string, token: string): Promise<
     })
     if (error) throw ApiResponder.internalServerError('Could not send verification email')
 }
+
+export const UsersUtils = { sendConfirmationEmail }

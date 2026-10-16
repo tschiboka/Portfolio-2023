@@ -3,7 +3,7 @@ import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import type { Row } from '../Tables.types'
-import { Code as Snippets } from '../Tables.code'
+import { TablesCode } from '../Tables.code'
 import { TablesConfig } from '../Tables.config'
 import { Functions } from '@common-utils'
 
@@ -65,7 +65,7 @@ export const RefreshLoading = () => {
                         onPageSizeChange: Functions.noop,
                     }}
                 />
-                <Code language="tsx" content={Snippets.RefreshLoading.refresh} />
+                <Code language="tsx" content={TablesCode.RefreshLoading.refresh} />
             </Section>
             <Section>
                 <Heading as="h3">isLoading with emptyState</Heading>
@@ -74,7 +74,7 @@ export const RefreshLoading = () => {
                     takes precedence over <CodeText>emptyState</CodeText>. Once loading finishes and
                     the data is empty, <CodeText>emptyState</CodeText> is shown instead.
                 </Paragraph>
-                <Code language="tsx" content={Snippets.RefreshLoading.isLoading} />
+                <Code language="tsx" content={TablesCode.RefreshLoading.isLoading} />
             </Section>
         </>
     )

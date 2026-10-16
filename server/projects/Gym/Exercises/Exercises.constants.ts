@@ -1,8 +1,9 @@
 ﻿import { EQUIPMENT_OPTIONS } from '../../../../common/types'
 import { Option } from '@common-utils'
-import { muscleGroupOptions } from '../MuscleGroup/MuscleGroup.options'
+import { MuscleGroupOptions } from '../MuscleGroup/MuscleGroup.options'
 
-/** Option `value`s for muscle groups (used as the enum set for the muscle-group fields). */
-export const MUSCLE_GROUP_VALUES = Option.getValues(muscleGroupOptions)
-/** Option `value`s for equipment (used as the enum set for the equipment field). */
-export const EQUIPMENT_VALUES = Option.getValues(EQUIPMENT_OPTIONS)
+const muscleGroupValues = Option.getValues(MuscleGroupOptions)
+const equipmentValues = Option.getValues(EQUIPMENT_OPTIONS)
+
+/** Option `value`s for muscle groups and equipment — the enum sets model and schema both enforce. */
+export const ExercisesConstants = { muscleGroupValues, equipmentValues }

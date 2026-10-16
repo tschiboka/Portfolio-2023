@@ -1,6 +1,6 @@
 import type { Codec } from '@common-utils'
 import { Codecs } from '@common-utils'
-import type { FilterConfig } from '../TableFilterConfig'
+import type { FilterConfig } from '../TableFilter'
 
 // Each filter's `type` guarantees its value type, so widening the concrete codecs to
 // `Codec<unknown>` here is sound: `buildCodec` returns a generic codec the caller narrows by `type`.
@@ -22,10 +22,12 @@ const typeCodecMap = {
  * codec.encode('')         // undefined  (empty omitted)
  * codec.decode(null)       // undefined  (absent value)
  */
-export const buildCodec = (config: FilterConfig): Codec<unknown> => {
+const buildCodec = (config: FilterConfig): Codec<unknown> => {
     const base: Codec<unknown> = typeCodecMap[config.type]
     return {
         encode: config.encode ?? base.encode,
         decode: config.decode ?? base.decode,
     }
 }
+
+export const TableUrlPersistenceConfig = { buildCodec }

@@ -1,4 +1,4 @@
-﻿import { requireAdminManaged, requireOwned } from '@common-utils'
+﻿import { Permissions } from '@common-utils'
 import type { CurrentUser } from '../../../../common/types'
 import type { ExerciseOwnership } from './Exercises.types'
 
@@ -9,7 +9,7 @@ export const ExercisesPermissions = {
      * exercises; a user exercise may only be changed by its owner.
      */
     requireUserCanModify: (exercise: ExerciseOwnership, user: CurrentUser): void => {
-        requireAdminManaged(exercise, user, 'canonical')
-        requireOwned(exercise, user)
+        Permissions.requireAdminManaged(exercise, user, 'canonical')
+        Permissions.requireOwned(exercise, user)
     },
 }
