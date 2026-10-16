@@ -362,6 +362,22 @@ not.
           `useTableController.spec.utils.tsx` are gone (their specs are now the
           role-named `Table.hooks.*`), and `src/router.routes.tsx` no longer exists
     - [ ] Step 22.9: Confirm a green `tsc`, lint, and test run
+- [ ] Step 23: Rule — an import carries one kind, never both
+    - [x] Step 23.1: Build `rules/no-mixed-import-kind/`
+    - [x] Step 23.2: Flag an inline `type` specifier beside a value one —
+          `import { hasLength, type Optional }` — never a statement that is all values
+    - [ ] Step 23.3: Decide whether an all-type statement written as
+          `import { type Option }` is flagged too, since §1.2 names `import type`
+    - [x] Step 23.4: Allow `import type { … }`, the type-only group §1.2 already requires
+    - [x] Step 23.5: Read the same `ImportDeclaration` shape Step 19 reads, rather than
+          re-deriving it
+    - [x] Step 23.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 23.7: Register as `severity: 'error'`
+    - [x] Step 23.8: Add `tests/NoMixedImportKind.spec.ts`
+    - [x] Step 23.9: Run `rules sync`, then verify the generated config
+    - [x] Step 23.10: Sweep every module and fix or suppress each violation — 15 sites
+          over 14 files when measured
+    - [x] Step 23.11: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -740,6 +756,7 @@ shipping rules. `Already` means a rule covers it; `New` means no rule does;
 | 63  | `AGENTS.md` §1.3         | Never mutate arguments or shared state                           | Human      | —        | Human   |
 | 64  | `AGENTS.md` §1.4         | Barrel exports alphabetical, types last                          | Yes        | error    | New     |
 | 65  | `AGENTS.md` §3           | No TODO comments — the ticket doc carries the task list          | Yes        | error    | New     |
+| 66  | `AGENTS.md` §1.2         | An import is all values or all types, never both                 | Partly     | error    | Step 23 |
 
 ### 5.1 Read as a whole
 

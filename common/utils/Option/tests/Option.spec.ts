@@ -1,5 +1,6 @@
 import { describe, it, expect, expectTypeOf } from 'vitest'
-import { Option, type Option as OptionT } from '../Option'
+import { Option } from '../Option'
+import type { Option as OptionT } from '../Option'
 
 describe('Option type', () => {
     it('requires value and label', () => {

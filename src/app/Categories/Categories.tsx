@@ -1,17 +1,8 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import {
-    Form,
-    Heading,
-    LoadingIndicator,
-    Main,
-    Paragraph,
-    Table,
-    type SearchInputOption,
-} from '@common-ux'
+import { Form, Heading, LoadingIndicator, Main, Paragraph, Table } from '@common-ux'
 import { ClientMessage, errorMessage } from '@common-utils'
-import type { GetCategoryResponse } from '@common-types'
 import { Screen } from '@shared-components/Screen/Screen'
 import { CategoriesColumns } from './Categories.columns'
 import { CategoriesDefaults } from './Categories.defaults'
@@ -21,6 +12,8 @@ import { CategoriesQueries } from './Categories.queries'
 import { CategoriesSchema } from './Categories.schema'
 import { CategoriesTransformers } from './Categories.transformers'
 import type { CategoryFormData } from './Categories.types'
+import type { GetCategoryResponse } from '@common-types'
+import type { SearchInputOption } from '@common-ux'
 import './Categories.styles.scss'
 
 type CategoriesProps = { path: string }

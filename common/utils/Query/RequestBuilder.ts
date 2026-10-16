@@ -1,4 +1,5 @@
-import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import axios from 'axios'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { apiPathBuilder } from '../Paths/apiPathBuilder'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'

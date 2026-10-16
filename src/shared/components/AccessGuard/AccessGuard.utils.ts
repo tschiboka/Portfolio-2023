@@ -1,5 +1,6 @@
 import { AccessMap, Guard, GuardCondition, ModeConfig } from './AccessGuard.types'
-import { includesAll, type Nullable } from '@common-utils'
+import { includesAll } from '@common-utils'
+import type { Nullable } from '@common-utils'
 
 /**
  * Evaluates a single condition against the current access map.

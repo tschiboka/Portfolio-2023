@@ -1,4 +1,5 @@
-import { TableDropdown, type DropdownOption } from './TableDropdown'
+import { TableDropdown } from './TableDropdown'
+import type { DropdownOption } from './TableDropdown'
 import './TableInput.styles.css'
 
 type TableSelectInputProps = {

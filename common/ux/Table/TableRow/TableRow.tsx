@@ -7,11 +7,12 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength, isDefined, type Optional } from '@common-utils'
+import { hasLength, isDefined } from '@common-utils'
 import { ExpandedRow } from './ExpandedRow'
 import { TableActions } from '../TableActions/TableActions'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckboxCell'
 import { TableUtils } from '../Table.utils'
+import type { Optional } from '@common-utils'
 import './TableRow.styles.css'
 
 const { getCellContent } = TableUtils

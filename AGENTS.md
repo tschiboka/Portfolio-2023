@@ -17,10 +17,10 @@
 ## 1.2 Dependencies
 
 - Extend an existing import from the same path. Never create duplicate imports.
-- Import order:
-    - FE: external → aliased internal → relative → type-only → assets/side effects.
-    - BE: external/node → aliased internal → relative → type-only.
-- `import type` always goes in the type-only group.
+- Import order is two tiers — style first, path second. Within one style and path, order is free.
+    - Style: namespace → default → mixed default and named → named → type-only → side-effect.
+    - Path: external → aliased internal → parent-relative shallowest first → same-directory → styles and assets.
+- `import type` is its own style, whatever shape carries it; side-effect imports come last.
 - `common/types` must not depend on `common/utils` at runtime.
 - Prefer value subpaths over the common barrel.
 

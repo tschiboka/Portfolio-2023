@@ -1,4 +1,5 @@
-import { type ReactNode, useEffect, useId, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { Const } from '@common-ux'
 import './TableDropdown.styles.css'
 

@@ -1,25 +1,20 @@
-import {
-    type ReactNode,
-    isValidElement,
-    useCallback,
-    useEffect,
-    useId,
-    useRef,
-    useState,
-} from 'react'
+import { isValidElement, useCallback, useEffect, useId, useRef, useState } from 'react'
 import { BsInfoCircle, BsSliders2, BsArrowClockwise } from 'react-icons/bs'
 import type { Table as TableProps, TableColumns } from './Table.types'
 import { TableHooks } from './Table.hooks'
 import { TableBody } from './TableBody/TableBody'
 import { TableHead } from './TableHead/TableHead'
-import { TableFilterPanel, type TableFilterPanelHandle } from './TableFilter/TableFilterPanel'
+import { TableFilterPanel } from './TableFilter/TableFilterPanel'
 import { TablePagination } from './TablePagination/TablePagination'
 import { TableDownloadButton } from './TableDownloadButton/TableDownloadButton'
 import { Overlay } from '../Overlay'
-import { hasLength, isNonEmpty, type Optional } from '@common-utils'
+import { hasLength, isNonEmpty } from '@common-utils'
 import { TableSkeleton } from './TableSkeleton/TableSkeleton'
 import { TableSlotsUtils } from './TableSlots/TableSlots.utils'
+import type { ReactNode } from 'react'
+import type { Optional } from '@common-utils'
 import { TableSlots } from './TableSlots'
+import type { TableFilterPanelHandle } from './TableFilter/TableFilterPanel'
 import './Table.styles.css'
 
 export const Table = <TData extends Record<string, ReactNode>, TContext = unknown>({
