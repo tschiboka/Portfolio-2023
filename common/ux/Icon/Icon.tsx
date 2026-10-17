@@ -1,16 +1,5 @@
 import { IconConstants } from './Icon.constants'
-import type { CSSProperties } from 'react'
-import type { IconName } from './Icon.types'
-
-export type { IconName }
-
-export interface IconProps {
-    name: IconName
-    size?: number
-    color?: string
-    className?: string
-    style?: CSSProperties
-}
+import type { IconProps } from './Icon.types'
 
 const { viewBox, defaultSize, strokeWidth, fill, paths } = IconConstants
 

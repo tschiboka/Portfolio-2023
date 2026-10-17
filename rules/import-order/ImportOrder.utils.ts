@@ -1,11 +1,6 @@
+import { AssetExtensions, ImportStyleRanks } from './ImportOrder.constants.js'
+import { PathRanks, pathRankOf as basePathRankOf } from '../paths.js'
 import { isEmpty, isString } from '../../common/utils/Predicate/Predicate.js'
-import {
-    AliasMarker,
-    AliasPrefixes,
-    AssetExtensions,
-    ImportStyleRanks,
-    PathRanks,
-} from './ImportOrder.constants.js'
 import type { ImportRanks, ImportSpecifierShape, ImportStatement } from './ImportOrder.types.js'
 
 const isNamespace = (specifier: ImportSpecifierShape): boolean =>
@@ -32,33 +27,9 @@ export const sourceOf = (statement: ImportStatement): string =>
 const hasAssetSuffix = (source: string): boolean =>
     AssetExtensions.some((extension) => source.endsWith(extension))
 
-/** How many `../` steps a parent-relative specifier opens with. */
-const depthOf = (source: string): number => {
-    const segments = source.split('/')
-    const first = segments.findIndex((segment) => segment !== '..')
-
-    return first === -1 ? segments.length : first
-}
-
-const isAlias = (source: string): boolean =>
-    AliasPrefixes.some((alias) => source === alias || source.startsWith(`${alias}/`))
-
-/** The directory itself, which carries no `./` when written bare. */
-const isSameDirectory = (source: string): boolean => source === '.' || source.startsWith('./')
-
-/** A directory above, which carries no `../` when written bare. */
-const isParentRelative = (source: string): boolean => source === '..' || source.startsWith('../')
-
-/** The path a specifier takes, ranked — its suffix first, then its shape, then its alias. */
-export const pathRankOf = (source: string): number => {
-    if (hasAssetSuffix(source)) return PathRanks.Assets
-    if (isSameDirectory(source)) return PathRanks.SameDirectory
-    if (isParentRelative(source)) return PathRanks.ParentRelative + depthOf(source) - 1
-    if (isAlias(source)) return PathRanks.Aliased
-    if (source.startsWith(AliasMarker)) return PathRanks.ExternalScoped
-
-    return PathRanks.External
-}
+/** The path a specifier takes, ranked — its asset suffix first, then the shared path ranks. */
+export const pathRankOf = (source: string): number =>
+    hasAssetSuffix(source) ? PathRanks.Assets : basePathRankOf(source)
 
 /** The two ranks a statement carries — style first, path second. */
 export const ranksOf = (statement: ImportStatement): ImportRanks => ({

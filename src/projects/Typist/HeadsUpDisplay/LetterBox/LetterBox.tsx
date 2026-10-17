@@ -1,11 +1,6 @@
 import './LetterBox.styles.scss'
 
-export type ProficiencyLevel =
-    | 'extreme'
-    | 'outstanding'
-    | 'high'
-    | 'moderate'
-    | 'low'
+type ProficiencyLevel = 'extreme' | 'outstanding' | 'high' | 'moderate' | 'low'
 export const LetterBox = ({
     letter,
     proficiency,
@@ -14,9 +9,7 @@ export const LetterBox = ({
     proficiency?: ProficiencyLevel
 }) => {
     return (
-        <div
-            className={`LetterBox${proficiency ? ` proficiency-${proficiency}` : ''}`}
-        >
+        <div className={`LetterBox${proficiency ? ` proficiency-${proficiency}` : ''}`}>
             <span>{letter}</span>
         </div>
     )

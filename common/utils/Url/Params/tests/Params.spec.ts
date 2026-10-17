@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Params } from '../Params'
+import { Params } from '..'
 import type { Optional } from '../../../Generics'
 
 describe('Params.build', () => {

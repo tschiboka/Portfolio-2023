@@ -11,12 +11,12 @@ below is not yet written there.
 
 | #   | Style               | Example                                 |
 | --- | ------------------- | --------------------------------------- |
-| 3   | namespace re-export | `export * as utils from './utils'`      |
-| 4   | star re-export      | `export * from './utils'`               |
-| 6   | default declaration | `export default Component`              |
-| 2   | default re-export   | `export { default } from './Component'` |
-| 1   | named re-export     | `export { Button } from './Button'`     |
-| 5   | named declaration   | `export const isDefined = ...`          |
+| 1   | namespace re-export | `export * as utils from './utils'`      |
+| 2   | star re-export      | `export * from './utils'`               |
+| 3   | default declaration | `export default Component`              |
+| 4   | default re-export   | `export { default } from './Component'` |
+| 5   | named re-export     | `export { Button } from './Button'`     |
+| 6   | named declaration   | `export const isDefined = ...`          |
 | 7   | type-only export    | `export type { User } from './types'`   |
 
 ## Path
@@ -24,30 +24,34 @@ below is not yet written there.
 | #   | Path                              | Example                                       |
 | --- | --------------------------------- | --------------------------------------------- |
 | 1   | external package                  | `'react'`, `'date-fns'`                       |
-| 2   | aliased internal                  | `'@common-utils'`, `'@shared-components/Nav'` |
-| 3   | same-directory relative           | `'./Button'`, `'./types'`                     |
-| 4   | parent-relative, shallowest first | `'../Button'` before `'../../utils'`          |
+| 2   | external package, scoped          | `'@tanstack/react-query'`                     |
+| 3   | aliased internal                  | `'@common-utils'`, `'@shared-components/Nav'` |
+| 4   | same-directory relative           | `'./Button'`, `'./types'`                     |
+| 5   | parent-relative, shallowest first | `'../Button'` before `'../../utils'`          |
 
 The path rank applies only to re-exports with a module source. Local declarations have
 no source path and are ordered by style alone.
 
 ## Edges
 
-- A named re-export is style 1 whether it renames an export or not:
+- A named re-export is style 5 whether it renames an export or not:
   `export { X as Y } from './x'`.
-- `export { default as Button } from './Button'` is style 1 — a named re-export, even
+- `export { default as Button } from './Button'` is style 5 — a named re-export, even
   though its source is the default export.
-- `export { default } from './Component'` is style 2 — a default re-export.
-- `export * as utils from './utils'` is style 3 — a namespace re-export.
-- `export * from './utils'` is style 4 — a star re-export.
+- `export { default } from './Component'` is style 4 — a default re-export.
+- `export * as utils from './utils'` is style 1 — a namespace re-export.
+- `export * from './utils'` is style 2 — a star re-export.
 - `export type { User } from './types'` is style 7 — a type-only export.
 - `export interface User {}` and `export type User = ...` are style 7 — local type
   declarations.
-- `export const`, `export function` and `export class` are style 5 — named declarations.
-- `export default Component` and `export default function Component() {}` are style 6 —
+- `export const`, `export function` and `export class` are style 6 — named declarations.
+- `export default Component` and `export default function Component() {}` are style 3 —
   default declarations.
 - `export type * from './types'` is style 7, if supported by the project's TypeScript
   version.
+- A package and an alias are told apart by the alias list the rules carry, not by the `@`:
+  `export * from '@tanstack/react-query'` is a scoped package at rank 2, while
+  `'@common-utils'` is ours at rank 3.
 - `export = value` is out of scope unless the project explicitly supports TypeScript's
   export assignment syntax.
 - Imports must precede exports. This rule checks export ordering; import ordering
@@ -65,18 +69,18 @@ similar named re-exports.
 ## Worked example
 
 ```ts
-export { Button } from './Button'
-export { default } from './Component'
 export * as utils from './utils'
 export * from './helpers'
-export const isDefined = (value: unknown) => value != null
 export default Component
+export { default } from './Component'
+export { Button } from './Button'
+export const isDefined = (value: unknown) => value != null
 export type { User } from './types'
 export interface UserConfig {}
 ```
 
-Named re-exports precede default re-exports, namespace re-exports, and star re-exports.
-Local value declarations follow re-exports, and type-only exports finish the file.
+Namespace re-exports lead, a star re-export follows, then the default pair and the named
+pair, and type-only exports finish the file.
 
 ## What the rule can check
 

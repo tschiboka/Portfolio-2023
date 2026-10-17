@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ApiMessage } from '../ApiMessage'
+import { ApiMessage } from '..'
 
 describe('ApiMessage.ok', () => {
     it('defaults to "OK" when called with no argument', () => {

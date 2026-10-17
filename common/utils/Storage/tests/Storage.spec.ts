@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
-import { Storage } from '../Storage'
+import { Storage } from '..'
 
 describe('Storage', () => {
     const TEST_KEY = '__storage_test__'

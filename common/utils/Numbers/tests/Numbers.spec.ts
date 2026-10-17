@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Numbers } from '../Numbers'
+import { Numbers } from '..'
 
 describe('Numbers.truncateTo', () => {
     it.each<[number, number, number]>([

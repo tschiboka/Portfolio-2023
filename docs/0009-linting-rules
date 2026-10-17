@@ -396,35 +396,37 @@ not.
     - [x] Step 24.9: Sweep every module and fix each violation — measure the count first, since
           nearly every file predates this order
     - [x] Step 24.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 25: Rule — an export's style and path set the file's order
-    - [ ] Step 25.1: Build `rules/export-order/`, whose `README.md` is the standard
-    - [ ] Step 25.2: Flag the first statement out of order, keyed by style then path —
-          named re-export → default re-export → namespace re-export → star re-export →
-          named declaration → default declaration → type-only export, and within a style
+- [x] Step 25: Rule — an export's style and path set the file's order
+    - [x] Step 25.1: Build `rules/export-order/`, whose `README.md` is the standard
+    - [x] Step 25.2: Flag the first statement out of order, keyed by style then path —
+          namespace re-export → star re-export → default declaration → default re-export →
+          named re-export → named declaration → type-only export, and within a style
           external → aliased → same-directory → parent-relative shallowest first
-    - [ ] Step 25.3: Leave order free inside one style and one path — no alphabetical pass
-    - [ ] Step 25.4: Keep type-only exports last, preserving the incoming → transformation →
+    - [x] Step 25.3: Leave order free inside one style and one path — no alphabetical pass
+    - [x] Step 25.4: Keep type-only exports last, preserving the incoming → transformation →
           outgoing flow
-    - [ ] Step 25.5: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 25.6: Register as `severity: 'error'`
-    - [ ] Step 25.7: Add `tests/ExportOrder.spec.ts`
-    - [ ] Step 25.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 25.9: Sweep every module and fix each violation — measure the count first
-    - [ ] Step 25.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 26: Rule — one re-export per path and kind
-    - [ ] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
+    - [x] Step 25.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 25.6: Register as `severity: 'error'`
+    - [x] Step 25.7: Add `tests/ExportOrder.spec.ts`
+    - [x] Step 25.8: Run `rules sync`, then verify the generated config
+    - [x] Step 25.9: Sweep every module and fix each violation — 30 files touched over three
+          lint runs, most of them fixed by moving an exported type below its value
+    - [x] Step 25.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 26: Rule — one re-export per path and kind
+    - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
           own so each id names exactly what it covers
-    - [ ] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either
-    - [ ] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
+    - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
+    './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
+    - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
           carry `export type` beside its value exports
-    - [ ] Step 26.4: Leave a local export alone — it names no source
-    - [ ] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
-    - [ ] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 26.7: Register as `severity: 'error'`
-    - [ ] Step 26.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 26.9: Sweep every barrel and fix or suppress each violation
-    - [ ] Step 26.10: Confirm a green `tsc`, lint, and test run
+    - [x] Step 26.4: Leave a local export alone — it names no source
+    - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
+    - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 26.7: Register as `severity: 'error'`
+    - [x] Step 26.8: Run `rules sync`, then verify the generated config
+    - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
+          nothing; every value-plus-type pair was legal under 26.3
+    - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -735,6 +737,22 @@ characters')` writes the bound twice, so editing one copy makes the message
   and `toApiResource` then rejected every routine; the same pass dropped `ApiResponder` from
   `Routines.service.ts` while the body still called it. Both are restored — and `server/**`
   sits outside `npm run tsc`, so only the editor saw either.
+- **A re-export ranks below a local declaration.** `export { BrowserHooks } from './Browser.hooks'`
+  is a named re-export (style 5) while `export const Browser = {…}` is a named declaration
+  (style 6), so a folder barrel that builds its value from imports puts the re-exports first and
+  `export type` last. The same edge caught `Form/index.ts` and `common/utils/Browser`.
+- **A barrel cannot carry one name as both a value and a type from two files.**
+  `export { Option } from './Option'` beside `export type { Option } from './Option.types'`
+  hands consumers only the value, so `Option<T>` degraded to `error` and every `onSelect`
+  callback downstream lost its parameter type. A type and its value must share one module —
+  the value first, the type below it — and the barrel re-export that single file.
+- **`'../X'` from a `tests/` folder means the file, not the folder.** TypeScript prefers
+  `Icon.tsx` over `Icon/index.ts`, so a spec naming `'../Icon'` reads the component and misses
+  the types its barrel carries. Specs import `'..'` for the index, or `'../X.types'` for the
+  type when the barrel re-exports it from a second file.
+- **A barrel's export list is the contract its specs rely on.** `Predicate`'s index re-exports
+  23 of the predicates its own spec uses, so moving that spec to `'..'` broke 100 call sites.
+  Sweeping import paths must first check that the target barrel actually carries every symbol.
 
 ## 4. Open Questions
 
@@ -749,7 +767,13 @@ characters')` writes the bound twice, so editing one copy makes the message
   Status: Open
 - Step 4: where does an `export *` line sort? It has no symbol to sort by.
   `common/ux/index.ts` mixes both forms.
-  Status: Open
+  Status: Answered by Step 25 — a plain `export *` is a star re-export (style 2) and
+  `export type *` carries `exportKind: 'type'`, so it ranks type-only and sorts last. Step 4
+  narrows to the alphabetical tie-break inside one style and path.
+- `file-structure.md` §1.2 says a component's props type sits above the component and is
+  "never moved to `.types.ts`". Step 25 requires exported types last, and the `common/ux` and
+  `shared/components` sweep put those props in `Component.types.ts` beside it.
+  Status: Open — the doc line needs correcting before another component copies the old shape.
 - Step 0: is the convention filename-based or folder-based? The `WordDuelArena`
   server tree carries its role in the folder, and the `common/` and `rules/`
   areas are 100% filename-conforming. Step 0.6 decides.

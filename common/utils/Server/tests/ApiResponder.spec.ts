@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { ApiResponderTestUtils } from './ApiResponder.spec.utils'
-import { ApiResponder } from '../ApiResponder'
-import { ApiError } from '../ApiError'
-import { HttpStatus } from '../HttpStatus'
+import { ApiError, ApiResponder, HttpStatus } from '..'
 
 const { createResponse } = ApiResponderTestUtils
 

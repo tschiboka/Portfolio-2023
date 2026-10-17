@@ -11,22 +11,7 @@ import hookimg from '@portfolio/assets/blog/hook.png'
 import testingImg from '@portfolio/assets/blog/testing.png'
 import emailImg2 from '@portfolio/assets/blog/resend_email_scheduling.png'
 import zIndexImg from '@portfolio/assets/blog/z_index.png'
-
-export interface BlogArticle {
-    title: string
-    image: string
-    imageAlt: string
-    abstract: string
-    badges: string[]
-    to: string
-    readingTime?: string
-    codeTime?: string
-    suggestedArticles?: string[]
-    created?: string
-    updated?: string
-    upcoming?: boolean
-    upcomingDate?: string
-}
+import type { BlogArticle } from './Article.types'
 
 export const blogArticles: BlogArticle[] = [
     {

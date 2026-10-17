@@ -9,7 +9,7 @@ import {
     Section,
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { LoadingIndicatorsCode } from './LoadingIndicators.code'
 import { StoryNav } from '../StoryNav/StoryNav'
 

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react'
-import { Browser, BrowserHooks } from '../index'
+import { Browser, BrowserHooks } from '..'
 import type { MockInstance } from 'vitest'
 
 const { copyToClipboard } = Browser

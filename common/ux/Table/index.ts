@@ -1,8 +1,8 @@
 export { Table } from './Table'
 export { TableHooks } from './Table.hooks'
 export { TableFilterConfig } from './TableFilter'
-export type * from './TableFilter'
 export { TableUrlPersistenceHooks, TableUrlPersistenceConfig } from './TableUrlPersistence'
+export type * from './TableFilter'
 export type {
     TableControl,
     UseTableConfig,

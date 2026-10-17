@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Objects } from '../Objects'
+import { Objects } from '..'
 
 describe('Objects.fromEntries', () => {
     it('builds an object identical to Object.fromEntries', () => {

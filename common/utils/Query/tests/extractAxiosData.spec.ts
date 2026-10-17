@@ -1,4 +1,4 @@
-import { extractAxiosData } from '../extractAxiosData'
+import { extractAxiosData } from '..'
 import type { AxiosResponse } from 'axios'
 
 describe('extractAxiosData', () => {

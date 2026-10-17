@@ -13,8 +13,8 @@ import { TableSlotsUtils } from './TableSlots/TableSlots.utils'
 import { Overlay } from '../Overlay'
 import type { ReactNode } from 'react'
 import type { Optional } from '@common-utils'
+import type { TableFilterPanelHandle } from './TableFilter'
 import type { Table as TableProps, TableColumns } from './Table.types'
-import type { TableFilterPanelHandle } from './TableFilter/TableFilterPanel'
 import './Table.styles.css'
 
 export const Table = <TData extends Record<string, ReactNode>, TContext = unknown>({

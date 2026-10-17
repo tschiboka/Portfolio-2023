@@ -1,4 +1,4 @@
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Link, Main, Paragraph, Heading } from '@common-ux'
 import './PrivacyPolicy.scss'

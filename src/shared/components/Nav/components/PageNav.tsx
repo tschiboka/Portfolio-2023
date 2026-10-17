@@ -5,19 +5,12 @@ import { Logo } from './Logo'
 import { NavMenu } from './NavMenu'
 import { SocialLinks } from './SocialLinks'
 import { SubNavTitle } from './SubNavTitle'
-import { MobileMenu } from '../MobileMenu/MobileMenu'
+import { MobileMenu } from '../MobileMenu'
 import { MenuItem, SubmenuState } from '../Nav.types'
-import { Submenu } from '../Submenu/Submenu'
-import { SubNav } from '../SubNav/SubNav'
+import { Submenu } from '../Submenu'
+import { SubNav } from '../SubNav'
 import { NavDefaults } from '../Nav.defaults'
 import { NavUtils } from '../Nav.utils'
-
-export type PageVariant = 'portfolio' | 'app'
-
-type PageNavProps = {
-    variant: PageVariant
-    pageName: string
-}
 
 export const PageNav = ({ variant, pageName }: PageNavProps) => {
     const { mainMenuVisible, subMenuVisible, setSubMenuVisible } = AppHooks.useContext()
@@ -92,3 +85,10 @@ export const PageMobileMenu = ({ variant, pageName }: PageNavProps) => {
 }
 
 export const PageSubNav = () => <SubNav title={<SubNavTitle />} links={<SocialLinks />} />
+
+export type PageVariant = 'portfolio' | 'app'
+
+type PageNavProps = {
+    variant: PageVariant
+    pageName: string
+}

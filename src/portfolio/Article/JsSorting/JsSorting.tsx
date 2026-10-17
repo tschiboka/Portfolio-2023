@@ -1,6 +1,6 @@
 import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
 import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { Code, Heading, List, Paragraph, Section } from '@common-ux'
 import { JsSortingCode } from './JsSorting.code'
 import { Article } from '../Article'

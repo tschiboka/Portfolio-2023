@@ -1,4 +1,4 @@
-import type { SearchInputOption } from '../SearchInput'
+import { SearchInputOption } from '..'
 
 const testOptions: SearchInputOption[] = [
     { label: 'Apple', value: 'apple' },

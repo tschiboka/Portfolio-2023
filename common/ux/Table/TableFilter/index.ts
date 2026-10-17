@@ -8,4 +8,5 @@ export type {
     CheckboxFilterConfig,
     FilterConfig,
     FilterDefinitions,
+    TableFilterPanelHandle,
 } from './TableFilter.types'

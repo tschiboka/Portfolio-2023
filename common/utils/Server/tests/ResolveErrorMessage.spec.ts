@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ResolveErrorMessage } from '../ResolveErrorMessage'
+import { ResolveErrorMessage } from '..'
 
 describe('ResolveErrorMessage', () => {
     it('returns a plain string unchanged', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Paging } from '../Paging'
+import { Paging } from '..'
 
 describe('Paging.parse', () => {
     it('falls back to shared defaults when params are absent', () => {

@@ -10,7 +10,7 @@ export default defineConfig({
     },
     resolve: {
         // WARNING! A new alias belongs in tsconfig.json, jest.config.cjs and
-        // rules/import-order/ImportOrder.constants.ts too.
+        // rules/aliases.ts too.
         alias: {
             '@app': path.resolve(__dirname, 'src/app'),
             '@portfolio': path.resolve(__dirname, 'src/portfolio'),

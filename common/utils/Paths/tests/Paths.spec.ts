@@ -1,7 +1,5 @@
-import { apiPathBuilder } from '../apiPathBuilder'
-import { Paths } from '../Paths'
-import { getURL } from '../getURL'
-import type { PathKey } from '../Path.types'
+import { apiPathBuilder, Paths, getURL } from '..'
+import type { PathKey } from '..'
 
 describe('getURL', () => {
     const originalHostname = window.location.hostname

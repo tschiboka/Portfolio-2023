@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ApiError } from '../ApiError'
-import { HttpStatus } from '../HttpStatus'
+import { ApiError, HttpStatus } from '..'
 
 describe('ApiError', () => {
     it('is an instance of Error', () => {

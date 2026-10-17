@@ -3,7 +3,7 @@ import { AppHooks } from '@shared-context'
 import { Figure as UxFigure } from '@common-ux'
 import { ZoomedImage } from '../ZoomedImage/ZoomedImage'
 import { InlineReference } from '../../../portfolio/Article/components/InlineReference/InlineReference'
-import { Reference } from '../../../portfolio/Article/components/References/References'
+import type { Reference } from '../../../portfolio/Article/components/References/References.types'
 import type { FigureSize } from '../../../../common/ux/Figure/Figure.types'
 import './Figure.scss'
 

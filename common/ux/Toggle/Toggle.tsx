@@ -1,12 +1,5 @@
-import { ReactNode } from 'react'
+import type { ToggleProps } from './Toggle.types'
 import './Toggle.css'
-
-export type ToggleProps = {
-    children?: ReactNode
-    handleClick: () => void
-    active: boolean
-    activeColor?: string
-}
 
 export const Toggle = ({ children, handleClick, active, activeColor }: ToggleProps) => {
     return (

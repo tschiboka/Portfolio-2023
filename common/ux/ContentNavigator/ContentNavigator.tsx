@@ -1,27 +1,13 @@
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Const } from '@common-ux'
 import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
-import { AccessibleProps } from '../index.types'
+import type { ContentNavigatorProps } from './ContentNavigator.types'
 import './ContentNavigator.styles.css'
 
 const { getActiveHeaders, getHeadingNodes, getVisibleHeaderEntries } = ContentNavigatorSelectors
-
-/**
- * Props for the {@link ContentNavigator} component.
- *
- * @property children  - Page content that contains headings to navigate.
- * @property depth     - Maximum heading depth to include (1–6). Defaults to `3` (h1–h3).
- * @property showNavigator - Whether to render the TOC sidebar. When `false`, only the
- *   content wrapper is rendered. Defaults to `true`.
- */
-export type ContentNavigatorProps = {
-    children: ReactNode
-    depth?: number
-    showNavigator?: boolean
-} & AccessibleProps
 
 /** Internal representation of a heading element extracted from the content. */
 interface Heading {

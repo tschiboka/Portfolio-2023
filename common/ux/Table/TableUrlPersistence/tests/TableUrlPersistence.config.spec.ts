@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { TableUrlPersistenceConfig } from '../TableUrlPersistence.config'
+import { TableUrlPersistenceConfig } from '..'
 import type { FilterConfig } from '../../TableFilter'
 
 describe('buildCodec', () => {

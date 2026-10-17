@@ -2,29 +2,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { Const } from '@common-ux'
 import { PopupUtils } from './Popup.utils'
-import type { CSSProperties, ReactNode, RefObject } from 'react'
+import type { CSSProperties } from 'react'
 import type { Optional } from '@common-utils'
+import type { ActionMenuProps } from './ActionMenu.types'
 import type { AnchorResult } from './Overlay.types'
-import type { AccessibleProps } from '../index.types'
 import './Overlay.styles.css'
 
 const { ArrowClass, getAnchorPosition } = PopupUtils
-
-export type ActionMenuItem = {
-    id: string
-    label: string
-    icon?: ReactNode
-    variant?: string
-    disabled?: boolean
-    onClick: () => void
-}
-
-export type ActionMenuProps = AccessibleProps & {
-    anchorRef: RefObject<HTMLElement | null>
-    items: ActionMenuItem[]
-    align?: 'center' | 'start' | 'end'
-    onClose: () => void
-}
 
 export const ActionMenu = ({
     anchorRef,

@@ -8,7 +8,7 @@ import { isString, isNonEmpty } from '@common-utils'
 import { ScreenSetupOptions } from './Screen.spec.types'
 import { ScreenMocks } from './Screen.mocks'
 import type { AppRoute } from '@app'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import type { Buildable } from '@common-ux/Test/Server'
 import type { Optional } from '@common-utils'
 
 const createQueryClient = () => new QueryClient({ defaultOptions: ScreenMocks.defaultQueryOptions })

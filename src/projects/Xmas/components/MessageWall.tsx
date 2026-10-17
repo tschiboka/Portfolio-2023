@@ -1,13 +1,9 @@
 import { AccessGuard } from '@shared-components/AccessGuard'
-import { XmasMessage } from '@common-types'
 import { Heading } from '@common-ux'
 import { Table } from '@common-ux/Table/Table'
 import { MessageWallColumns } from './MessageWall.columns'
 import { XmasTransformers } from '../Xmas.transformers'
-
-export type MessageWallProps = {
-    messages?: XmasMessage[]
-}
+import type { MessageWallProps } from './MessageWall.types'
 
 export const MessageWall = ({ messages }: MessageWallProps) =>
     messages ? (

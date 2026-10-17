@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toString } from '../toString'
+import { toString } from '..'
 import type { Nullish, Optional } from '../../../Generics'
 
 describe('Numbers.Optional.toString', () => {

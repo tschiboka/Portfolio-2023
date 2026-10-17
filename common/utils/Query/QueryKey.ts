@@ -1,15 +1,6 @@
 import { isDefined } from '../Predicate'
 import type { Dictionary } from '../Generics'
 
-export type CacheKey = Array<string | number | Dictionary>
-
-type CacheKeyState = {
-    key: string
-    feature?: string
-    id?: string | number
-    filters?: Record<string, unknown>
-}
-
 export class CacheKeyBuilder {
     private readonly state: CacheKeyState
 
@@ -101,3 +92,12 @@ export const QueryKey = {
         return new CacheKeyBuilder('activity-feed')
     },
 }
+
+type CacheKeyState = {
+    key: string
+    feature?: string
+    id?: string | number
+    filters?: Record<string, unknown>
+}
+
+export type CacheKey = Array<string | number | Dictionary>

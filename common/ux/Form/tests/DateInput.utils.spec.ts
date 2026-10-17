@@ -1,4 +1,4 @@
-import { DateInputUtils } from '../DateInput.utils'
+import { DateInputUtils } from '..'
 
 const { getDaysInMonth, getFirstDayOfMonth, formatDate, parseDate, toISODate } = DateInputUtils
 

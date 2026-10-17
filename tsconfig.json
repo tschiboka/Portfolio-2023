@@ -8,7 +8,7 @@
         "esModuleInterop": true,
         "types": ["vitest/globals"],
         /* WARNING! A new alias belongs in vite.config.ts, jest.config.cjs and
-           rules/import-order/ImportOrder.constants.ts too. */
+           rules/aliases.ts too. */
         "paths": {
             "@app": ["./src/app"],
             "@app/*": ["./src/app/*"],

@@ -3,7 +3,7 @@ import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { Functions } from '@common-utils'
 import { Code, CodeText, Heading, Main, Paragraph, Section, Stack, Toggle } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { TogglesCode } from './Toggles.code'
 import { StoryNav } from '../StoryNav/StoryNav'
 

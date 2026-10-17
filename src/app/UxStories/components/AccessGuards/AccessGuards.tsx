@@ -13,7 +13,7 @@ import {
     Text,
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Guards } from './AccessGuards.data'
 import { AccessGuardsCode } from './AccessGuards.code'
 import { StoryNav } from '../StoryNav/StoryNav'

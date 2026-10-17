@@ -1,17 +1,8 @@
 import { Heading, Link, List } from '@common-ux'
+import type { ReferencesProps } from './References.types'
 import './References.scss'
 
-export interface Reference {
-    title: string
-    author: string
-    source: string
-}
-
-interface Props {
-    references: Reference[]
-}
-
-export const References = ({ references }: Props) => {
+export const References = ({ references }: ReferencesProps) => {
     if (references && references.length)
         return (
             <section className="References">

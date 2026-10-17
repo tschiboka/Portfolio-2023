@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react'
 import { BsDownload } from 'react-icons/bs'
-import { TableDropdown } from '../TableInputs/TableDropdown'
+import { TableDropdown } from '../TableInputs'
 import type { TableDownload } from '../Table.types'
 import './TableDownloadButton.styles.css'
 

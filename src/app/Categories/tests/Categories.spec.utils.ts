@@ -3,7 +3,7 @@ import { Test } from '@shared-components/Screen/tests'
 import { ClientMessage } from '@common-utils'
 import { CategoriesMockHandlers } from './Categories.mockHandlers'
 import { AppRoutes } from '../../../app'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import type { Buildable } from '@common-ux/Test/Server'
 
 type CategoriesForm = ReturnType<typeof Test.Form>
 

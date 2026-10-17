@@ -1,9 +1,3 @@
-/** A selectable choice: a display label paired with a value. */
-export type Option<T = string> = {
-    value: T
-    label: string
-}
-
 /** Helper functions over {@link Option} collections. */
 export const Option = {
     /**
@@ -43,4 +37,10 @@ export const Option = {
      */
     getValueByLabel: <T>(options: readonly Option<T>[], label: string): T | undefined =>
         options.find((option) => option.label === label)?.value,
+}
+
+/** A selectable choice: a display label paired with a value. */
+export type Option<T = string> = {
+    value: T
+    label: string
 }

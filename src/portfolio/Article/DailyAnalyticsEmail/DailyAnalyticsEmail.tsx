@@ -1,6 +1,6 @@
 import CronJobsImg from '@portfolio/assets/blog/resend_email_scheduling/cron_jobs.png'
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@common-ux'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { DailyAnaliticsEmailCode } from './DailyAnaliticsEmail.code'
 import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'

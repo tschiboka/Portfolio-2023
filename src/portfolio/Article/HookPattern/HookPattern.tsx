@@ -1,7 +1,7 @@
 import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
 import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
 import { useState, useEffect, useRef } from 'react'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { AppHooks } from '@shared-context'
 import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography } from '@common-ux'
 import { HookPatternCode } from './HookPattern.code'

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toUndefined } from '../toUndefined'
+import { toUndefined } from '..'
 import type { Nullish, Optional } from '../../../Generics'
 
 describe('Strings.Optional.toUndefined', () => {

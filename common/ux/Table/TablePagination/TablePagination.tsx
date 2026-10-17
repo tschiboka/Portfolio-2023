@@ -1,5 +1,5 @@
 import { isDefined, Table } from '@common-utils'
-import { TableDropdown } from '../TableInputs/TableDropdown'
+import { TableDropdown } from '../TableInputs'
 import type { TablePagination as TablePaginationProps } from '../Table.types'
 import './TablePagination.styles.css'
 

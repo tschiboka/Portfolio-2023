@@ -1,6 +1,7 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react'
 import { FilterInput } from './FilterInput'
 import type { Dictionary } from '@common-utils'
+import type { TableFilterPanelHandle } from './TableFilter.types'
 import type { TableFilteringInput, TableFiltering } from '../Table.types'
 import './TableFilterPanel.styles.css'
 
@@ -25,11 +26,6 @@ const normalizeValues = (inputs: TableFilteringInput[], values: FilterValues): F
     Object.fromEntries(
         inputs.map((input) => [input.key, values[input.key] ?? getDefaultValue(input)]),
     )
-
-export type TableFilterPanelHandle = {
-    submit: () => void
-    reset: () => void
-}
 
 type TableFilterPanelProps = {
     id?: string

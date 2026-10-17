@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BsSliders2 } from 'react-icons/bs'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Heading, Paragraph, Main, Section } from '@common-ux'
 import { isEmpty } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'

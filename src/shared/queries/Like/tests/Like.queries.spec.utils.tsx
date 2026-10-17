@@ -6,7 +6,7 @@ import { Test } from '@shared-components/Screen/tests'
 import { LikeQueriesMockHandlers } from './Like.queries.mockHandlers.ts'
 import { LikeQueries } from '../../index.ts'
 import type { ReactElement } from 'react'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import type { Buildable } from '@common-ux/Test/Server'
 
 /** Harness component: reads the like count for one path. */
 const Counter = ({ path }: { path: string }) => {

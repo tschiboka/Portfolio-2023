@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toString } from '../toString'
+import { toString } from '..'
 import type { Optional } from '../../../Generics'
 
 describe('Booleans.Optional.toString', () => {

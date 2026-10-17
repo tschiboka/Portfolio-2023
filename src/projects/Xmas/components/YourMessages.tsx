@@ -1,13 +1,9 @@
 import { AccessGuard } from '@shared-components/AccessGuard'
-import { XmasMessage } from '@common-types'
 import { Heading } from '@common-ux'
 import { Table } from '@common-ux/Table/Table'
 import { YourMessagesColumns } from './YourMessages.columns'
 import { XmasTransformers } from '../Xmas.transformers'
-
-export type YourMessagesProps = {
-    messages?: XmasMessage[]
-}
+import type { YourMessagesProps } from './YourMessages.types'
 
 export const YourMessages = ({ messages }: YourMessagesProps) =>
     messages ? (

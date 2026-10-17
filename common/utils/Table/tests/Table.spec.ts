@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Table, TableUtils } from '../Table'
+import { Table, TableUtils } from '..'
 
 const { getPageWindow, isFirstPage, isLastPage } = TableUtils
 

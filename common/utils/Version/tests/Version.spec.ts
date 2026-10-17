@@ -1,6 +1,6 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { Functions } from '@common-utils'
-import { VersionHooks } from '../Version.hooks'
+import { VersionHooks } from '..'
 import type { GetVersionResponse } from '../../../types'
 
 const { useVersionCheck } = VersionHooks

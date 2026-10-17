@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Main } from '@common-ux/Region/Main'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { LikeQueries } from '@shared-queries'
 import { LikeButton } from './components/LikeButton/LikeButton'
 import { References } from './components/References/References'

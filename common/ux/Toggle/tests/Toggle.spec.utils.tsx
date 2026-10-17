@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react'
 import { Functions } from '@common-utils'
 import { Test } from '@common-ux/Test'
-import { Toggle } from '../Toggle'
-import type { ToggleProps } from '../Toggle'
+import { Toggle, ToggleProps } from '..'
 
 const Set = {
     toggle: (props: Partial<ToggleProps> = {}) => {

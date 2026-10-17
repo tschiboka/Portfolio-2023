@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { AppProvider, Session } from '@shared-context'
-import { VersionChecker } from '@shared-components/VersionChecker/VersionChecker'
+import { VersionChecker } from '@shared-components/VersionChecker'
 import { router } from './routes'
 import './main.styles.scss'
 

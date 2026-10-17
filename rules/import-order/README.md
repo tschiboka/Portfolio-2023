@@ -31,7 +31,7 @@ decides what is enforced.
 Ours are the aliases the rule carries, not every path that happens to carry `@`: a bare package
 ranks first, a scoped one second, ours third, so `'@tanstack/react-query'` precedes
 `'@common-utils'` though both carry `@`. An alias declared without the convention is not in
-[`AliasPrefixes`](ImportOrder.constants.ts) either, so it ranks as an external package. Each of
+[`AliasPrefixes`](../aliases.ts) either, so it ranks as an external package. Each of
 the three files that declares an alias warns that a new one belongs there too.
 
 The two relative ranks, and the one inversion left:

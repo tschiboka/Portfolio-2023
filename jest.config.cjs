@@ -7,7 +7,7 @@ module.exports = {
     resolver: '<rootDir>/jest.resolver.cjs',
     setupFiles: ['<rootDir>/jest.polyfills.cjs'],
     // WARNING! A new alias belongs in tsconfig.json, vite.config.ts and
-    // rules/import-order/ImportOrder.constants.ts too.
+    // rules/aliases.ts too.
     moduleNameMapper: {
         '^@app/(.*)$': '<rootDir>/src/app/$1',
         '^@portfolio/(.*)$': '<rootDir>/src/portfolio/$1',

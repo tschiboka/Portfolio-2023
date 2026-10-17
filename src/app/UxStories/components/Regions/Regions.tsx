@@ -14,7 +14,7 @@ import {
     Stack,
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { RegionsCode } from './Regions.code'
 import { StoryNav } from '../StoryNav/StoryNav'
 

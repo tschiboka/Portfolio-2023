@@ -1,5 +1,5 @@
 import { Arrays, Browser, hasLength } from '@common-utils'
-import type { VisibilityEntry } from '@common-utils/Browser/Browser.types'
+import type { VisibilityEntry } from '@common-utils/Browser'
 
 const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
     entries

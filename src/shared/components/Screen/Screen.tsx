@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ContentNavigator } from '@common-ux'
 import { Paths } from '@common-utils'
@@ -6,26 +6,10 @@ import { PageNav, PageMobileMenu, PageSubNav } from '@shared-components/Nav'
 import { Session, AppHooks } from '@shared-context'
 import { VisitQueries } from '@shared-queries'
 import { ScreenStyles } from './Screen.styles'
-import { Overlay } from '../Overlay/Overlay'
-import { Footer } from '../Footer/Footer'
-import type { PageVariant } from '@shared-components/Nav'
-import type { FooterProps } from '../Footer/Footer'
+import { Overlay } from '../Overlay'
+import { Footer } from '../Footer'
+import type { ScreenProps } from './Screen.types'
 import './Screen.css'
-
-export type ScreenProps = {
-    children: ReactNode
-    title: string
-    path: string
-    pageName?: string
-    variant?: PageVariant
-    className?: string
-    loginRequired?: boolean
-    sideMenu?: ReactNode
-    hideFooter?: boolean
-    footerProps?: Omit<FooterProps, 'path'>
-    hasContentNavigator?: boolean
-    contentNavigatorDepth?: number
-}
 
 export const Screen = ({
     children,

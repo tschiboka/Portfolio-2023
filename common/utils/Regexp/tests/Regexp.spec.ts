@@ -1,4 +1,4 @@
-import { Regexp } from '../Regexp'
+import { Regexp } from '..'
 
 describe('Regexp.ObjectId', () => {
     /** Valid 24-char lowercase hex ObjectId string. */

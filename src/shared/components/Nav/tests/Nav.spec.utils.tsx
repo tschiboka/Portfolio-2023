@@ -3,9 +3,9 @@ import { render } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { AppProvider, SessionContext } from '@shared-context'
 import { Nav as NavComponent } from '../Nav'
-import { NavMenu as NavMenuComponent } from '../components/NavMenu'
+import { NavMenu as NavMenuComponent } from '../components'
 import type { AppContextValues } from '@shared-context'
-import type { NavMenuProps } from '../components/NavMenu'
+import type { NavMenuProps } from '../components'
 import type { NavProps } from '../Nav.types'
 
 const mockSessionValue = {

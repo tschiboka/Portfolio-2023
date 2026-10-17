@@ -1,6 +1,6 @@
 import { MemoryRouterProps } from 'react-router-dom'
 import { RenderOptions } from '@testing-library/react'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import type { Buildable } from '@common-ux/Test/Server'
 import type { AppRoute } from '@app'
 import type { AppContextValues, SessionContextValues } from '@shared-context'
 

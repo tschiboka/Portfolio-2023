@@ -1,6 +1,6 @@
 import { CodeText, Heading, Main, Paragraph } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import {
     Fundamentals,
     Controller,

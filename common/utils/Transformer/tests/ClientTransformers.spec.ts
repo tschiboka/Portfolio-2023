@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ClientTransformers } from '../ClientTransformers'
+import { ClientTransformers } from '..'
 
 describe('ClientTransformers', () => {
     it('returns every verb, whatever the caller supplied', () => {

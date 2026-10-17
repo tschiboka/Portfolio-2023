@@ -1,6 +1,6 @@
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import axios from 'axios'
-import { FeatureQuery } from '../FeatureQuery'
+import { FeatureQuery } from '..'
 import type { MockInstance } from 'vitest'
 import type { AxiosRequestConfig } from 'axios'
 import type { CacheKey } from '../QueryKey'

@@ -4,7 +4,7 @@ import newCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/new_c
 import editCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/edit_cron_task.png'
 import cronExpressionSyntaxImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_expression_syntax.png'
 import finalisedCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/finalised_cron_task.png'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { CyclicEmailSchedulingCode } from './CyclicEmailScheduling.code'
 import { Article } from '../Article'

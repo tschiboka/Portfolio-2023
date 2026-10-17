@@ -1,5 +1,5 @@
 import type { UrlDecode, UrlEncode } from '@common-utils'
-import type { DropdownOption } from '../TableInputs/TableDropdown'
+import type { DropdownOption } from '../TableInputs'
 
 type BaseFilterConfig = {
     label: string
@@ -58,4 +58,9 @@ export type FilterConfig =
 
 export type FilterDefinitions<TFilters> = {
     [K in keyof TFilters]: FilterConfig
+}
+
+export type TableFilterPanelHandle = {
+    submit: () => void
+    reset: () => void
 }

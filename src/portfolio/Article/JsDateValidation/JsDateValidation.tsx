@@ -1,5 +1,5 @@
 import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { JsDateValidationCode } from './JsDateValidation.code'
 import { Article } from '../Article'

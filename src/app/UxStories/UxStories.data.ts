@@ -1,4 +1,4 @@
-export interface StoryEntry {
+interface StoryEntry {
     label: string
     path: string
     description?: string

@@ -1,7 +1,7 @@
+import type { PillColor } from './Pill.types'
 import type { AccessibleProps, InteractiveProps } from '../index.types'
 import './Pill.styles.css'
 
-export type PillColor = 'accent' | 'error' | 'success' | 'yellow' | 'orange' | 'purple' | 'gray'
 type PillVariant = 'outlined' | 'solid'
 
 type PillProps = AccessibleProps &

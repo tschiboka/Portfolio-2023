@@ -1,24 +1,10 @@
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { ReactNode } from 'react'
 import { Link } from '@common-ux'
 import { Chevron } from './Chevron'
-import { MenuItem, NavProps, SubmenuState } from '../Nav.types'
 import { Nav } from '../Nav'
 import { NavUtils } from '../Nav.utils'
 import { AccessGuard } from '../../AccessGuard'
-
-export type NavMenuProps = Pick<
-    NavProps,
-    'visible' | 'className' | 'ariaLabel' | 'logo' | 'burger'
-> & {
-    items: MenuItem[]
-    pageName: string
-    isLoading?: boolean
-    submenu?: SubmenuState
-    renderImage?: (imageName: string) => ReactNode
-    onItemClick?: (item: MenuItem) => void
-    onSubmenuToggle?: () => void
-}
+import type { NavMenuProps } from './NavMenu.types'
 
 export const NavMenu = ({
     items,

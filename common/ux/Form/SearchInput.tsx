@@ -7,8 +7,6 @@ import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
 import './Form.styles.css'
 
-export type { SearchInputOption } from './SearchInput.types'
-
 type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'
 
 type SearchInputProps<TValue extends string, TFieldValues extends FieldValues> = AccessibleProps & {

@@ -1,6 +1,15 @@
 import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@common-types'
 import type { Nullable } from '@common-utils'
 
+// Re-export shared constants with local names
+export {
+    WdaSessionStatuses as SessionStatuses,
+    WdaMatchStatuses as MatchStatuses,
+    WdaPlayerDerivedStatuses as PlayerDerivedStatus,
+    WdaWsRequestTypes as WebSocketRequestType,
+    WdaWsResponseTypes as WebSocketResponseType,
+} from '@common-types'
+
 // Re-export shared types with local names
 export type {
     PlayerRole,
@@ -17,15 +26,6 @@ export type {
     WdaClientSessionState as WebSocketSessionState,
     WdaWsRequest as WebSocketRequest,
     WdaWsResponse as WebSocketResponse,
-} from '@common-types'
-
-// Re-export shared constants with local names
-export {
-    WdaSessionStatuses as SessionStatuses,
-    WdaMatchStatuses as MatchStatuses,
-    WdaPlayerDerivedStatuses as PlayerDerivedStatus,
-    WdaWsRequestTypes as WebSocketRequestType,
-    WdaWsResponseTypes as WebSocketResponseType,
 } from '@common-types'
 
 // --- FE-only types ---

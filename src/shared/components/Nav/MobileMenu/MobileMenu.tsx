@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { append, dropLast } from 'ramda'
@@ -7,15 +7,8 @@ import { Const, Link, Toggle } from '@common-ux'
 import { MenuItem } from '../Nav.types'
 import { NavUtils } from '../Nav.utils'
 import { AccessGuard } from '../../AccessGuard'
+import type { MobileMenuProps } from './MobileMenu.types'
 import './MobileMenu.styles.css'
-
-export type MobileMenuProps = {
-    items: MenuItem[]
-    pageName: string
-    className?: string
-    renderImage?: (imageName: string) => ReactNode
-    extras?: ReactNode
-}
 
 export const MobileMenu = ({
     items,

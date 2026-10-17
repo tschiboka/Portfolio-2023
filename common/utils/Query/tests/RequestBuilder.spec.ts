@@ -1,6 +1,6 @@
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import axios from 'axios'
-import { RequestBuilder } from '../RequestBuilder'
+import { RequestBuilder } from '..'
 import type { MockInstance } from 'vitest'
 import type { AxiosRequestConfig } from 'axios'
 

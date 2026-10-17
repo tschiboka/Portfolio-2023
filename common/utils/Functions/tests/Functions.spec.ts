@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Functions, noop } from '../Functions'
+import { Functions, noop } from '..'
 
 describe('Functions.noop', () => {
     it('returns undefined', () => {

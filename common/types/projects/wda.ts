@@ -1,5 +1,43 @@
 // Shared types for Word Duel Arena (identical on FE and BE)
 
+// --- WebSocket Session Status Constants ---
+
+export const WdaSessionStatuses = {
+    LOBBY: 'LOBBY',
+    ACTIVE: 'ACTIVE',
+} as const
+
+export const WdaMatchStatuses = {
+    WAITING: 'WAITING',
+    ACTIVE: 'ACTIVE',
+    FINISHED: 'FINISHED',
+} as const
+
+export const WdaPlayerDerivedStatuses = {
+    ACTIVE: 'ACTIVE',
+    IDLE: 'IDLE',
+    OFFLINE: 'OFFLINE',
+    RESIGNED: 'RESIGNED',
+    PAUSED: 'PAUSED',
+} as const
+
+export const WdaLevelWordStatuses = {
+    SOLVED: 'SOLVED',
+    UNSOLVED: 'UNSOLVED',
+} as const
+
+// --- WebSocket Wire Protocol ---
+
+export const WdaWsRequestTypes = {
+    PING: 'ping',
+    ATTEMPT_MOVE: 'attempt_move',
+} as const
+
+export const WdaWsResponseTypes = {
+    STATE_UPDATE: 'state_update',
+    ERROR: 'error',
+} as const
+
 export type PlayerRole = 'player1' | 'player2'
 export type OptionalPlayerRole = PlayerRole | null
 
@@ -13,49 +51,16 @@ export type MovePayload = {
     attempt: string
 }
 
-// --- WebSocket Session Status Constants ---
-
-export const WdaSessionStatuses = {
-    LOBBY: 'LOBBY',
-    ACTIVE: 'ACTIVE',
-} as const
 export type WdaSessionStatus = (typeof WdaSessionStatuses)[keyof typeof WdaSessionStatuses]
-
-export const WdaMatchStatuses = {
-    WAITING: 'WAITING',
-    ACTIVE: 'ACTIVE',
-    FINISHED: 'FINISHED',
-} as const
 export type WdaMatchStatus = (typeof WdaMatchStatuses)[keyof typeof WdaMatchStatuses]
 
-export const WdaPlayerDerivedStatuses = {
-    ACTIVE: 'ACTIVE',
-    IDLE: 'IDLE',
-    OFFLINE: 'OFFLINE',
-    RESIGNED: 'RESIGNED',
-    PAUSED: 'PAUSED',
-} as const
 export type WdaPlayerDerivedStatus =
     (typeof WdaPlayerDerivedStatuses)[keyof typeof WdaPlayerDerivedStatuses]
 
-export const WdaLevelWordStatuses = {
-    SOLVED: 'SOLVED',
-    UNSOLVED: 'UNSOLVED',
-} as const
 export type WdaLevelWordStatus = (typeof WdaLevelWordStatuses)[keyof typeof WdaLevelWordStatuses]
 
-// --- WebSocket Wire Protocol ---
-
-export const WdaWsRequestTypes = {
-    PING: 'ping',
-    ATTEMPT_MOVE: 'attempt_move',
-} as const
 export type WdaWsRequestType = (typeof WdaWsRequestTypes)[keyof typeof WdaWsRequestTypes]
 
-export const WdaWsResponseTypes = {
-    STATE_UPDATE: 'state_update',
-    ERROR: 'error',
-} as const
 export type WdaWsResponseType = (typeof WdaWsResponseTypes)[keyof typeof WdaWsResponseTypes]
 
 export type WdaWsRequest =

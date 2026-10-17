@@ -3,7 +3,7 @@ import { Formats } from './Formats'
 import { isString, isNullish } from '../Predicate'
 import type { Optional, Nullish } from '../Generics'
 
-export type FormatKey = keyof typeof Formats
+type FormatKey = keyof typeof Formats
 
 type InputValue = Nullish<string | number | Date>
 
@@ -121,3 +121,5 @@ export const Format = {
         return (m ?? toMoment(fallback))?.toISOString() ?? ''
     },
 }
+
+export type { FormatKey }

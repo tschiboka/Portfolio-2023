@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Strings } from '../Strings'
+import { Strings } from '..'
 
 describe('Strings.equalIgnoreCase', () => {
     it('returns true for equal strings ignoring case', () => {

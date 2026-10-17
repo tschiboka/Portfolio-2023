@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ApiTransformers } from '../ApiTransformers'
+import { ApiTransformers } from '..'
 import type { EmptyObject } from '../../Generics'
 
 /** Duck-typed Mongo ObjectId (its toString() is a 24-char hex string) — no mongoose dep in tests. */

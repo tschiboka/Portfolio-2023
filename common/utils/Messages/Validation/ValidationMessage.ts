@@ -1,10 +1,10 @@
 import { Strings } from '../../Strings'
 
 /* Polarity of a validation rule — what the field forbids, or what it demands. */
-export type Mode = 'contains' | 'only'
+type Mode = 'contains' | 'only'
 
 /* Direction of a magnitude rule — the floor a field must reach, or its ceiling. */
-export type BoundMode = 'at least' | 'under'
+type BoundMode = 'at least' | 'under'
 
 const allowed = (f: string, subject: string, mode: Mode): string =>
     mode === 'only'
@@ -28,3 +28,5 @@ export const ValidationMessage = {
     Required: (f: string) => `${Strings.capitalise(f)} is required`,
     Unique: (f: string) => `${Strings.capitalise(f)} must be unique`,
 } as const
+
+export type { BoundMode, Mode }

@@ -1,6 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
-import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests'
 import { Test } from '@shared-components/Screen/tests'
 import { Home } from '../Home'
 

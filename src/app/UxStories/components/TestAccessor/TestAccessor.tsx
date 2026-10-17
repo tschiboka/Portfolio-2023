@@ -10,7 +10,7 @@ import {
     Text,
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Table } from '@common-ux/Table/Table'
 import { TestAccessorCode } from './TestAccessor.code'
 import { TestAccessorColumns } from './TestAccessor.columns'

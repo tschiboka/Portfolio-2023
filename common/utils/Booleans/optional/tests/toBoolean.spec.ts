@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { toBoolean } from '../toBoolean'
+import { toBoolean } from '..'
 import type { Nullish } from '../../../Generics'
 
 describe('Booleans.Optional.toBoolean', () => {

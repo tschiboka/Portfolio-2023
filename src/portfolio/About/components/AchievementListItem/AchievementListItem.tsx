@@ -1,6 +1,6 @@
 import { TbCertificate, TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'
-import { ZoomedImage } from '@shared-components/ZoomedImage/ZoomedImage'
+import { ZoomedImage } from '@shared-components/ZoomedImage'
 import type { Achievement } from './Achievements.data'
 import './AchievementListItem.scss'
 

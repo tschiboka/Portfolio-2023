@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { PageMeta } from '@common-types'
 import type { Optional, Predicate } from '@common-utils'
 import type { TableControl } from './Table.hooks.types'
-import type { DropdownOption } from './TableInputs/TableDropdown'
+import type { DropdownOption } from './TableInputs'
 import type { AccessibleProps } from '../index.types'
 
 export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'

@@ -40,7 +40,7 @@ import controllerCode from '@portfolio/assets/blog/files/riffmaster/controller.t
 import dissertation from '@portfolio/assets/blog/files/riffmaster/Dissertation_Online.pdf'
 import { FiDownload } from 'react-icons/fi'
 import { Button, Code, Heading, Link, List, Paragraph, Section } from '@common-ux'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { RiffMasterCode } from './RiffMaster.code'
 import { Article } from '../Article'
 import { getReferenceList } from '../References.data'

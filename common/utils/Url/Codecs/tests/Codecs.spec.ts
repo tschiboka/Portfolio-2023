@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Codecs } from '../Codecs'
+import { Codecs } from '..'
 import type { Nullish, Optional } from '../../../Generics'
 
 describe('Codecs.text', () => {

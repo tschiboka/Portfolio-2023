@@ -2,7 +2,7 @@ import guitarImage from '@portfolio/assets/about/RiffMaster.png'
 import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
 import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common-ux'
 import { AchievementList } from './components/AchievementList/AchievementList'
 import {

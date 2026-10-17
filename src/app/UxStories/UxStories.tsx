@@ -1,6 +1,6 @@
 import { Link, Main, Heading, Paragraph, Stack, Table } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { stories } from './UxStories.data'
 import './UxStories.styles.css'
 

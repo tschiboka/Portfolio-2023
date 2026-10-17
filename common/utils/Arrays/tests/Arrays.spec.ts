@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Arrays } from '../Arrays'
+import { Arrays } from '..'
 
 describe('Arrays.shuffleArray', () => {
     it('should return an array of the same length', () => {

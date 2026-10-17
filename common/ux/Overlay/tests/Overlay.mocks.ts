@@ -1,4 +1,4 @@
-import type { ActionMenuItem } from '../ActionMenu'
+import type { ActionMenuItem } from '..'
 
 export const OverlayMocks = {
     default: [

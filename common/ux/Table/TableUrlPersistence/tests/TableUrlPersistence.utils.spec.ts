@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { TableUrlPersistenceUtils } from '../TableUrlPersistence.utils'
+import { TableUrlPersistenceUtils } from '..'
 import type { TableState } from '../../Table.hooks.types'
 
 type Filters = { search?: string; min?: number; active?: boolean }

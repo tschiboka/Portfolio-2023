@@ -12,8 +12,7 @@ import { Fieldset } from './Fieldset'
 import { DateInput } from './DateInput'
 import { SubmitErrorMessage } from './SubmitErrorMessage'
 
-export type { SearchInputOption } from './SearchInput.types'
-export type { FieldValues } from './Form.types'
+export { DateInputUtils } from './DateInput.utils'
 
 export const Form = Object.assign(FormElement, {
     Button,
@@ -29,3 +28,6 @@ export const Form = Object.assign(FormElement, {
     SubmitErrorMessage,
     TextArea,
 })
+
+export type { SearchInputOption } from './SearchInput.types'
+export type { FieldValues } from './Form.types'

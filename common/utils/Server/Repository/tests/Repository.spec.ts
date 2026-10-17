@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, expectTypeOf } from 'vitest'
 import { RepositoryTestUtils } from './Repository.spec.utils'
-import { Repository } from '../Repository'
+import { Repository } from '..'
 import type { TestDoc } from './Repository.spec.types'
 
 const { FakeModel } = RepositoryTestUtils

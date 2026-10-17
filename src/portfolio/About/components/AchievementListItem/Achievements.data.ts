@@ -1,10 +1,8 @@
-// Icons
 import FalmouthUniversityIcon from '@portfolio/assets/about/certificates/icons/falmouth_university_icon.png'
 import IconCollegeIcon from '@portfolio/assets/about/certificates/icons/icon_college_icon.png'
 import UdemiIcon from '@portfolio/assets/about/certificates/icons/udemi_icon.webp'
 import MoshIcon from '@portfolio/assets/about/certificates/icons/mosh_icon.png'
 import FCCIcon from '@portfolio/assets/about/certificates/icons/fcc_icon.webp'
-// Certificates
 import HNDImg from '@portfolio/assets/about/certificates/HND_Computing_Diploma_Part_1.png'
 import ReacTestingImg from '@portfolio/assets/about/certificates/Udemi_React_Testing_Library and Jest_Certificate.png'
 import TypeScriptImg from '@portfolio/assets/about/certificates/Mosh_TypeScript_Certificate.png'
@@ -14,15 +12,6 @@ import DataStructures3Img from '@portfolio/assets/about/certificates/Mosh_Data_S
 import DataStructures1Img from '@portfolio/assets/about/certificates/Mosh_Data_Structures_Certificate_1.png'
 import FCCImg from '@portfolio/assets/about/certificates/FCC_Frontend_Certificate.png'
 import FCCAlgorithmsImg from '@portfolio/assets/about/certificates/FCC_Data_Structures_and_Algorithms.png'
-
-export interface Achievement {
-    title: string
-    details?: string[]
-    year: number
-    image?: string
-    image_alt?: string
-    certificate_img?: string
-}
 
 export const academicAchievements: Achievement[] = [
     {
@@ -109,3 +98,12 @@ export const certificateAchievements: Achievement[] = [
         certificate_img: FCCAlgorithmsImg,
     },
 ]
+
+export interface Achievement {
+    title: string
+    details?: string[]
+    year: number
+    image?: string
+    image_alt?: string
+    certificate_img?: string
+}

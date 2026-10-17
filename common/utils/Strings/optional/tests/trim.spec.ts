@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { trim } from '../trim'
+import { trim } from '..'
 import type { Nullish, Optional, Primitive } from '../../../Generics'
 
 describe('Strings.Optional.trim', () => {

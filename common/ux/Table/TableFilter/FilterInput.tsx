@@ -1,10 +1,12 @@
 import { isNumber, isString } from '@common-utils'
-import { TableTextInput } from '../TableInputs/TableTextInput'
-import { TableNumberInput } from '../TableInputs/TableNumberInput'
-import { TableSearchInput } from '../TableInputs/TableSearchInput'
-import { TableDateInput } from '../TableInputs/TableDateInput'
-import { TableSelectInput } from '../TableInputs/TableSelectInput'
-import { TableCheckboxInput } from '../TableInputs/TableCheckboxInput'
+import {
+    TableCheckboxInput,
+    TableDateInput,
+    TableNumberInput,
+    TableSearchInput,
+    TableSelectInput,
+    TableTextInput,
+} from '../TableInputs'
 import type { TableFilteringInput } from '../Table.types'
 
 type FilterInputProps = {

@@ -1,2 +1,2 @@
 export { Pill } from './Pill'
-export type { PillColor } from './Pill'
+export type { PillColor } from './Pill.types'

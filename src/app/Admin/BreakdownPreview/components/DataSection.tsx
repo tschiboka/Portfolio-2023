@@ -6,7 +6,7 @@ import { BreakdownPreviewColumns } from '../BreakdownPreview.columns'
 import { BreakdownPreviewTransformers } from '../BreakdownPreview.transformers'
 import type { SectionData } from '../BreakdownPreview.types'
 
-export type DataSectionProps = {
+type DataSectionProps = {
     title: string
     data: SectionData
     icon: React.JSX.Element

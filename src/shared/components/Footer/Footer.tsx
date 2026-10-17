@@ -3,17 +3,10 @@ import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { MdCopyright } from 'react-icons/md'
-import { ReactNode } from 'react'
 import { Link, Paragraph } from '@common-ux'
-import { Breadcrumb } from './components/Breadcrumb'
+import { Breadcrumb } from './components'
+import type { FooterProps } from './Footer.types'
 import './Footer.scss'
-
-export interface FooterProps {
-    path: string
-    visitsPreLoaded?: boolean
-    visitCount?: number
-    info?: ReactNode
-}
 
 export const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps) => {
     const date = new Date()

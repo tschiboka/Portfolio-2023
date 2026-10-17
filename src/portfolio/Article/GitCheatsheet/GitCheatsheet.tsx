@@ -3,7 +3,7 @@ import centralisedVsDistributedImg from '@portfolio/assets/blog/git_cheatsheet/c
 import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.png'
 import GitStorage2Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-2.png'
 import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-vs-delta.jpeg'
-import { Figure } from '@shared-components/Figure/Figure'
+import { Figure } from '@shared-components/Figure'
 import { Code, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import { GitCheatSheetCode } from './GitCheatSheet.code'
 import { InlineReference } from '../components/InlineReference/InlineReference'

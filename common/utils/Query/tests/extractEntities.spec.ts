@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { extractEntities } from '../extractEntities'
+import { extractEntities } from '..'
 
 describe('Query.extractEntities', () => {
     it('returns the entity collection stored under the key', () => {

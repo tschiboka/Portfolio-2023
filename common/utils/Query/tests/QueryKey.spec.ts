@@ -1,4 +1,4 @@
-import { CacheKeyBuilder, QueryKey } from '../QueryKey'
+import { CacheKeyBuilder, QueryKey } from '..'
 import type { Key } from '@common-utils'
 
 describe('CacheKeyBuilder', () => {

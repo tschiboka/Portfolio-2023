@@ -4,7 +4,7 @@ import { SessionMocks } from '@common-mocks'
 import { Test } from '@shared-components/Screen/tests'
 import { AdminMockHandlers } from './Admin.mockHandlers'
 import { AppRoutes } from '../../../app'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import type { Buildable } from '@common-ux/Test/Server'
 
 export const AdminTestUtils = {
     labels: {

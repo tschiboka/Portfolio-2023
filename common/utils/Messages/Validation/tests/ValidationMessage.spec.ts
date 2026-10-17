@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ValidationMessage } from '../ValidationMessage'
+import { ValidationMessage } from '..'
 
 describe('ValidationMessage.Allowed', () => {
     it('defaults to the only mode', () => {

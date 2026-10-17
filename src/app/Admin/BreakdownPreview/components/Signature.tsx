@@ -20,7 +20,7 @@ import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 
 const S = BreakdownPreviewStyles.signature
 
-export type SignatureProps = {
+type SignatureProps = {
     /** Timestamp rendered in the signature; defaults to now (inject for determinism). */
     sentAt?: Date
 }
