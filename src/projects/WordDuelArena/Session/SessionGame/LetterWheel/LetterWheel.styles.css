@@ -1,48 +1,48 @@
 .letter-wheel-container {
-  position: relative;
-  width: clamp(180px, 35vh, 220px);
-  height: clamp(180px, 35vh, 220px);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: relative;
+    width: clamp(180px, 35vh, 220px);
+    height: clamp(180px, 35vh, 220px);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .letter-wheel {
-  position: relative;
-  width: 90%;
-  height: 90%;
-  border: var(--border-normal);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-bg-medium);
+    position: relative;
+    width: 90%;
+    height: 90%;
+    border: var(--border-normal);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-medium);
 }
 
 .letter-wheel .letter {
-  position: absolute;
-  width: clamp(35px, 5.5vh, 45px);
-  height: clamp(35px, 5.5vh, 45px);
-  top: 50%;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform-origin: center;
-  font-size: 3vh;
-  font-weight: var(--font-bold);
-  background-color: var(--color-bg-light);
-  color: var(--color-font-accent);
-  border: 2px solid var(--color-bg-dark);
-  border-radius: 50%;
-  z-index: 20;
+    position: absolute;
+    width: clamp(35px, 5.5vh, 45px);
+    height: clamp(35px, 5.5vh, 45px);
+    top: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: center;
+    font-size: 3vh;
+    font-weight: var(--font-bold);
+    background-color: var(--color-bg-light);
+    color: var(--color-font-accent);
+    border: 2px solid var(--color-bg-dark);
+    border-radius: 50%;
+    z-index: var(--z-sticky);
 }
 
 .letter-wheel .letter.highlighted {
-  background-color: var(--color-font-accent);
-  border-color: var(--color-font-accent);
-  color: var(--color-bg-dark)
+    background-color: var(--color-font-accent);
+    border-color: var(--color-font-accent);
+    color: var(--color-bg-dark);
 }
 
 .letter-wheel .letter-lines {

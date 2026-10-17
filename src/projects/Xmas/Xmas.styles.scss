@@ -19,7 +19,7 @@
         width: 150px;
         height: auto;
         margin-bottom: calc(-2rem - 20px);
-        z-index: 10;
+        z-index: var(--z-base);
     }
     .message-wall {
         tr td:first-child {

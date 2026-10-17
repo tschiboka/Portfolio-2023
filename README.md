@@ -24,6 +24,27 @@ npm test         # Vitest
 npm run lint     # ESLint
 ```
 
+## Commit gate
+
+`.githooks/commit-msg` judges the message first — `[0009] - Message` or `[ABC-0009] - Message`,
+the number between 1 and 100000 — and only then lints the staged `.ts`/`.tsx`/`.css`/`.scss`
+files and runs `tsc` and the full suite. A bad message therefore costs one cheap check instead
+of a full run. Everything sits in `commit-msg` rather than `pre-commit` because git runs
+`pre-commit` first, where the message does not exist yet. `npm install` switches the hook on
+through the `prepare` script, which sets `core.hooksPath` to `.githooks`; to do it by hand in an
+existing clone:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Bypass it deliberately with `git commit --no-verify`.
+
+`.githooks/commit-msg` refuses a message that is not `[0009] - Message` or `[ABC-0009] - Message`:
+
+- the ticket ref sits in brackets — 1 to 6 digits, or 1 to 5 capital letters, a dash, then digits;
+- after `-` the message may hold mixed case, digits, spaces and ordinary punctuation.
+
 ## Documentation
 
 Engineering notes and feature plans live in [`docs/`](docs/README.md).

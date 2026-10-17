@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     height: 5rem;
-    z-index: 59;
+    z-index: var(--z-panel);
 }
 
 .PageSideMenu .ShareMenu .ShareMenu__icon > * {
@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 60;
+    z-index: var(--z-top);
     transition: color 0.2s;
 }
 

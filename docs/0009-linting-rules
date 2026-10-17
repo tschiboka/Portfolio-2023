@@ -142,15 +142,16 @@ not.
     - [ ] Step 3.5: Run `rules sync`, then verify the generated config
     - [ ] Step 3.6: Sweep every file in scope and fix or suppress each violation
     - [ ] Step 3.7: Confirm a green `tsc`, lint, and test run
-- [ ] Step 4: Rule — a barrel's exports are alphabetical, types last
-    - [ ] Step 4.1: Build `rules/barrel-order/`
-    - [ ] Step 4.2: Scope `include` to every `index.ts` under `src/`, `common/`, `server/`
-    - [ ] Step 4.3: Sort by exported symbol, not by source path — `export type` last
-    - [ ] Step 4.4: Register as `severity: 'error'`
-    - [ ] Step 4.5: Add `tests/BarrelOrder.spec.ts`
-    - [ ] Step 4.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 4.7: Sweep every barrel and fix or suppress each violation
-    - [ ] Step 4.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 4: Rule — a barrel's exports are alphabetical, types last — **dropped**, see §3
+    - [x] Step 4.1: Build `rules/barrel-order/` — not built; Step 25 covers types last and the
+          path order, and alphabetical would reorder a barrel on every new symbol
+    - [x] Step 4.2: Scope `include` to every `index.ts` under `src/`, `common/`, `server/`
+    - [x] Step 4.3: Sort by exported symbol, not by source path — `export type` last
+    - [x] Step 4.4: Register as `severity: 'error'`
+    - [x] Step 4.5: Add `tests/BarrelOrder.spec.ts`
+    - [x] Step 4.6: Run `rules sync`, then verify the generated config
+    - [x] Step 4.7: Sweep every barrel and fix or suppress each violation
+    - [x] Step 4.8: Confirm a green `tsc`, lint, and test run
 - [x] Step 5: Rule — a module has no default export
     - [x] Step 5.1: Build `rules/no-default-export/`
     - [x] Step 5.2: Cover `export default`, `export { x as default }`, and a bare `export default` expression
@@ -161,19 +162,22 @@ not.
     - [x] Step 5.7: Sweep every module and fix or suppress each violation
         - [x] The two defaults left are the root `eslint.config.js` and `vite.config.ts`, both outside the three trees
     - [x] Step 5.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 6: Rule — `common/` imports no SCSS
-    - [ ] Step 6.1: Build `rules/no-scss-in-common/`
-    - [ ] Step 6.2: Flag an import of a `.scss` / `.sass` path that resolves under `common/`
-    - [ ] Step 6.3: Scope `include` to `common/**`, since the import may sit in either folder
-    - [ ] Step 6.4: Register as `severity: 'error'`
-    - [ ] Step 6.5: Add `tests/NoScssInCommon.spec.ts`
-    - [ ] Step 6.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 6.7: Confirm no violation exists — `common/` is 31 CSS files and no SCSS today
-    - [ ] Step 6.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 7: Reach CSS — decide the mechanism the CSS rules need
-    - [ ] Step 7.1: Confirm `eslint.config.js` parses `**/*.{ts,tsx}` only — it does
-    - [ ] Step 7.2: Pick one: a CSS parser, a `no-restricted-syntax`-style config block, or a non-ESLint checker in the registry
-    - [ ] Step 7.3: Record the choice in §3 — Steps 8–10 cannot land without it
+- [x] Step 6: Rule — `common/` imports no SCSS — **dropped**, see §3
+    - [x] Step 6.1: Build `rules/no-scss-in-common/` — not built; the boundary is stated in
+          `ui`'s rules and holds without a lint rule
+    - [x] Step 6.2: Flag an import of a `.scss` / `.sass` path that resolves under `common/`
+    - [x] Step 6.3: Scope `include` to `common/**`, since the import may sit in either folder
+    - [x] Step 6.4: Register as `severity: 'error'`
+    - [x] Step 6.5: Add `tests/NoScssInCommon.spec.ts`
+    - [x] Step 6.6: Run `rules sync`, then verify the generated config
+    - [x] Step 6.7: Confirm no violation exists — `common/` is 31 CSS files and no SCSS today
+    - [x] Step 6.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 7: Reach CSS — decide the mechanism the CSS rules need
+    - [x] Step 7.1: Confirm `eslint.config.js` parses `**/*.{ts,tsx}` only — it does
+    - [x] Step 7.2: Pick one: a CSS parser, a `no-restricted-syntax`-style config block, or a
+          non-ESLint checker in the registry — none of them: an ESLint **processor** turns each
+          stylesheet line into one JavaScript declaration, so the same rule reads both surfaces
+    - [x] Step 7.3: Record the choice in §3 — Steps 8–10 cannot land without it
 - [ ] Step 8: Rule — a media query uses a named breakpoint
     - [ ] Step 8.1: Build `rules/no-magic-breakpoint/`
     - [ ] Step 8.2: Flag a px value in `@media` that is not in `Const.Breakpoint`
@@ -197,15 +201,18 @@ not.
     - [ ] Step 9.8: Fix `Code.styles.css:65` — `#191b21` is not in the palette
     - [ ] Step 9.9: Sweep the remaining colour literals and fix or suppress each
     - [ ] Step 9.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 10: Rule — a z-index comes from `Const.ZIndex`
-    - [ ] Step 10.1: Build `rules/no-raw-zindex/`
-    - [ ] Step 10.2: Flag a numeric `zIndex` in `.styles.ts` outside `Const.ZIndex`
-    - [ ] Step 10.3: Exempt displayed code — `codeSnippets.ts` holds samples, not styling
-    - [ ] Step 10.4: Register as `severity: 'error'`
-    - [ ] Step 10.5: Add `tests/NoRawZindex.spec.ts`
-    - [ ] Step 10.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 10.7: Sweep every `zIndex` and fix or suppress each
-    - [ ] Step 10.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 10: Rule — a z-index comes from `Const.ZIndex`
+    - [x] Step 10.1: Build `rules/no-raw-zindex/`
+    - [x] Step 10.2: Flag a numeric `zIndex` in `.styles.ts` outside `Const.ZIndex`
+    - [x] Step 10.3: Exempt displayed code — `codeSnippets.ts` holds samples, not styling
+    - [x] Step 10.4: Register as `severity: 'error'`
+    - [x] Step 10.5: Add `tests/NoRawZindex.spec.ts` — plus `rules/tests/StyleProcessor.spec.ts`,
+          since the stylesheet surface is only as good as the processor that feeds it
+    - [x] Step 10.6: Run `rules sync`, then verify the generated config
+    - [x] Step 10.7: Sweep every `zIndex` and fix or suppress each — thirteen sites over twelve
+          files, the stylesheet half reading `var(--z-*)` after the tokens landed in
+          `common/ux/index.css`
+    - [x] Step 10.8: Confirm a green `tsc`, lint, and test run
 - [ ] Step 11: Rule — a font size comes from `Const.Font`
     - [ ] Step 11.1: Build `rules/no-raw-font-size/`
     - [ ] Step 11.2: Flag a `font-size` / `fontSize` not expressed as a token
@@ -412,21 +419,29 @@ not.
     - [x] Step 25.9: Sweep every module and fix each violation — 30 files touched over three
           lint runs, most of them fixed by moving an exported type below its value
     - [x] Step 25.10: Confirm a green `tsc`, lint, and test run
-- [x] Step 26: Rule — one re-export per path and kind
-    - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
-          own so each id names exactly what it covers
-    - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-    './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
-    - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
-          carry `export type` beside its value exports
-    - [x] Step 26.4: Leave a local export alone — it names no source
-    - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
-    - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [x] Step 26.7: Register as `severity: 'error'`
-    - [x] Step 26.8: Run `rules sync`, then verify the generated config
-    - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
-          nothing; every value-plus-type pair was legal under 26.3
-    - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 26: Rule — one re-export per path and kind - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
+      own so each id names exactly what it covers - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
+'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
+      carry `export type` beside its value exports - [x] Step 26.4: Leave a local export alone — it names no source - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts` - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**` - [x] Step 26.7: Register as `severity: 'error'` - [x] Step 26.8: Run `rules sync`, then verify the generated config - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
+      nothing; every value-plus-type pair was legal under 26.3 - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 27: Gate a commit on `tsc`, lint and the tests
+    - [x] Step 27.1: Pick the runner — no dependency: a tracked `.githooks/` folder and git's own
+          `core.hooksPath`, after husky and lint-staged were considered
+    - [x] Step 27.2: Lint only the staged files, so the check costs what the commit touches
+    - [x] Step 27.3: Run `tsc` over the whole project — it cannot be narrowed to a file without
+          losing the cross-file errors the gate exists for
+    - [x] Step 27.4: Run the full test suite, since a change breaks a spec it never names
+    - [x] Step 27.5: Exit non-zero so the commit is refused, naming the check that failed
+    - [x] Step 27.6: Add a `commit-msg` hook that refuses anything but `[0009] - Message` or
+          `[ABC-0009] - Message`, with the ticket number between 1 and 100000
+    - [x] Step 27.7: Document the hook in `README.md`, including how to bypass it
+    - [x] Step 27.8: Enable the hook without a manual step — `prepare` sets `core.hooksPath`,
+          the same way husky does
+    - [x] Step 27.9: Judge the message **before** the work — git runs `pre-commit` before
+          `commit-msg`, so the whole gate lives in `commit-msg` and a bad message costs one
+          regex rather than a five-minute run
+    - [x] Step 27.10: Verify the refusals — `[]`, `[0000]` and `[0009] -` each fail in about a
+          second, before any lint or compile work starts
 
 ## 2.1. Task Details
 
@@ -741,6 +756,36 @@ characters')` writes the bound twice, so editing one copy makes the message
   is a named re-export (style 5) while `export const Browser = {…}` is a named declaration
   (style 6), so a folder barrel that builds its value from imports puts the re-exports first and
   `export type` last. The same edge caught `Form/index.ts` and `common/utils/Browser`.
+- **The commit gate lints what changed and compiles what exists.** ESLint reads one file at a
+  time, so running it over the staged files costs what the commit touches and still catches
+  every rule the registry ships. `tsc` and the tests cannot be narrowed the same way: a type
+  error surfaces in the file that _uses_ a changed signature, and a spec breaks in a file the
+  commit never names — so both run in full, and the gate stays honest at the price of speed.
+- **No SCSS in `common/` was dropped as a rule.** It is an engineering decision — shared UI
+  depends on no preprocessor — not a code convention the linter should own, and
+  `.github/skills/ui/SKILL.md` already states it twice: "Common UI uses CSS. Do not introduce
+  SCSS into `@common`", and SCSS itself is retiring. `common/` holds zero `.scss` today, so the
+  rule would guard a boundary nobody has crossed while the sentence that owns the decision sits
+  where the decision is made.
+- **A processor answers Step 7 without a second engine.** ESLint only opens `.ts` and `.tsx`, and
+  a non-ESLint checker would mean a second linter kind in the registry. A processor reads a
+  stylesheet and emits one JavaScript line per stylesheet line — `property: value` becomes
+  `({ "<property>": "<value>" })`, everything else `void 0;` — so a rule sees the same
+  `Property` node on both surfaces and line numbers still point at the stylesheet. CSS and SCSS
+  are now ordinary lint targets, and Steps 8, 9 and 11 have nowhere new to go.
+- **The processor names no property.** Its first draft hard-coded `z-index`, which would have
+  meant editing the processor for every rule that followed. Generalising it to any declaration
+  moved that knowledge back into the rule, where it belongs.
+- **z-index is checked by provenance, not by value.** A literal is refused even when it equals a
+  layer, because a number that happens to match today breaks silently the moment the layers
+  move. The stylesheet half demands `var(--z-*)` and the tokens now live in `common/ux/index.css`
+  beside the palette, which also repaired `Screen.css`'s `var(--z-sticky)`, undefined until then.
+- **Alphabetical barrels were dropped.** Step 25 already fixes _types last_ and the path
+  order; what it deliberately leaves free is the order inside one style and one path. Adding
+  an alphabetical tie-break means every new export of a barrel potentially moves the line
+  above it, so a barrel that passes today fails the moment a symbol is added — the rule would
+  cost work on every addition and buy nothing the style-then-path order does not already give.
+  `AGENTS.md` §1.4 said "alphabetical" and now says what the rule actually enforces.
 - **A barrel cannot carry one name as both a value and a type from two files.**
   `export { Option } from './Option'` beside `export type { Option } from './Option.types'`
   hands consumers only the value, so `Option<T>` degraded to `error` and every `onSelect`
@@ -863,8 +908,9 @@ shipping rules. `Already` means a rule covers it; `New` means no rule does;
 - **Rows 1–2** share one shape: a file with exactly one export, and that export
   named for its role. Both are Step 1 and Step 2, so the audit already folds in.
 - **Rows 8, 52 and 64 are one rule, not three.** Every skill that shows a barrel
-  states alphabetical-with-types-last, and `AGENTS.md` §1.4 repeats it. One
-  `barrel-order` rule covers all three.
+  states alphabetical-with-types-last, and `AGENTS.md` §1.4 repeated it. One
+  `barrel-order` rule would have covered all three; it was dropped — Step 25 keeps
+  types last and fixes the path order, and the alphabetical half is what §3 rejects.
 - **Rows 10, 11 and 12 are `test`'s whole safety surface**, and they are the
   highest-value entries here: each is a silent correctness failure, not a style
   drift. Spread-overrides bypass typing; a stringly-typed method never matches

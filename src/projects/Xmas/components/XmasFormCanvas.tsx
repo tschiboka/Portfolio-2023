@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, ReactNode } from 'react'
+import { Const } from '@common-ux'
 
 interface XmasFormCanvasProps {
     children: ReactNode
@@ -200,10 +201,10 @@ export const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
                     top: 0,
                     left: 0,
                     pointerEvents: 'none',
-                    zIndex: 5,
+                    zIndex: Const.ZIndex.sticky,
                 }}
             />
-            <div style={{ position: 'relative', zIndex: 2 }}>{children}</div>
+            <div style={{ position: 'relative', zIndex: Const.ZIndex.base }}>{children}</div>
         </div>
     )
 }

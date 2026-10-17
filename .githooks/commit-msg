@@ -1,0 +1,15 @@
+#!/bin/sh
+# Commit gate. The message is judged first, so a bad one costs nothing but this check —
+# git runs pre-commit before commit-msg, which is why the work lives here and not there.
+set -e
+
+root=$(dirname "$0")/..
+
+node "$root/scripts/check-commit-message.js" "$1"
+node "$root/scripts/check-staged.js"
+
+echo "[commit] tsc"
+npm run tsc
+
+echo "[commit] tests"
+npm run test:run

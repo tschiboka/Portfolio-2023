@@ -115,6 +115,7 @@ export const ruleBuilder = {
 
         const source = [
             `import { RuleRegistry } from ${JSON.stringify(relativeRegistry)}`,
+            `import { styleProcessor } from './rules/styleProcessor.js'`,
             '',
             'const collectRules = (ids) =>',
             '    Object.fromEntries(',
@@ -125,7 +126,10 @@ export const ruleBuilder = {
             '        }),',
             '    )',
             '',
-            `export const ${pluginName} = { rules: collectRules(${ids}) }`,
+            `export const ${pluginName} = {`,
+            `    rules: collectRules(${ids}),`,
+            '    processors: { style: styleProcessor },',
+            '}',
             '',
             `export const settings = ${JSON.stringify(settings, null, 4)}`,
             '',

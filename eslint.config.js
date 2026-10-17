@@ -22,17 +22,25 @@ const scopedRules = Object.entries(scopes).map(([ruleId, scope]) => ({
     rules: { [ruleId]: settings[ruleId] },
 }))
 
+/** Files the style processor owns; every JS/TS config below leaves them alone. */
+const styleFiles = ['**/*.{css,scss}']
+
 export default tseslint.config(
     { ignores: ['public/**', '**/dist/**', '.github/**', '.opencode/**'] },
-    js.configs.recommended,
-    { languageOptions: { parserOptions: { tsconfigRootDir: rootDir } } },
-    ...tseslint.configs.recommended,
+    { ...js.configs.recommended, ignores: styleFiles },
+    {
+        languageOptions: { parserOptions: { tsconfigRootDir: rootDir } },
+        ignores: styleFiles,
+    },
+    ...tseslint.configs.recommended.map((config) => ({ ...config, ignores: styleFiles })),
     ...tseslint.configs.recommendedTypeChecked.map((config) => ({
         ...config,
         files: ['**/*.{ts,tsx}'],
+        ignores: ['scripts/**', 'vite.config.ts'],
     })),
     {
         files: ['**/*.{ts,tsx}'],
+        ignores: ['scripts/**', 'vite.config.ts'],
         languageOptions: {
             parserOptions: { projectService: true },
         },
@@ -58,9 +66,20 @@ export default tseslint.config(
         },
     },
     {
-        files: ['**/*.{js,cjs,mjs}', 'vite.config.ts'],
-        languageOptions: { parserOptions: { projectService: false, project: false } },
+        files: ['**/*.{js,cjs,mjs}', 'vite.config.ts', 'scripts/**/*.js'],
+        languageOptions: {
+            globals: { console: 'readonly', process: 'readonly' },
+            parserOptions: { projectService: false, project: false },
+        },
         rules: { '@typescript-eslint/no-var-requires': 'off' },
     },
     ...scopedRules,
+    {
+        files: ['**/*.{css,scss}'],
+        plugins: { standards },
+        processor: 'standards/style',
+        rules: {
+            'standards/no-raw-zindex': settings['standards/no-raw-zindex'],
+        },
+    },
 )

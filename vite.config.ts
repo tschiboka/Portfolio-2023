@@ -35,6 +35,7 @@ export default defineConfig({
             'src/**/*.{test,spec}.{ts,tsx}',
             'common/**/*.{test,spec}.{ts,tsx}',
             'rules/**/*.{test,spec}.{ts,tsx}',
+            'scripts/**/*.{test,spec}.{ts,tsx}',
         ],
         css: false,
         pool: 'threads',

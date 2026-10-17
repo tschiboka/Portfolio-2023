@@ -129,6 +129,15 @@
         inset 2px 2px 4px rgba(255, 255, 255, 0.1), inset -2px -2px 4px rgba(0, 0, 0, 0.4);
     --btn-shadow-active:
         inset 2px 2px 4px rgba(0, 0, 0, 0.4), inset -2px -2px 4px rgba(255, 255, 255, 0.05);
+
+    /* Z-index — mirrors Const.ZIndex, so a layer is named rather than numbered */
+    --z-base: 10;
+    --z-sticky: 20;
+    --z-dropdown: 30;
+    --z-backdrop: 39;
+    --z-panel: 40;
+    --z-close: 41;
+    --z-top: 50;
 }
 
 .light {

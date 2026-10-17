@@ -41,7 +41,7 @@ Prefer declarative, pure functional style:
 - Group related helpers under a namespace object when they form a cohesive concern: `DateTime`.
 - Namespaces may nest when the path reads as a sentence: `Strings.Optional.trim`.
 - Short leaf names are the point: the namespace carries the context: `Url.Codecs.text`.
-- Barrel exports are alphabetical, types last as `export type`.
+- Barrel exports sort by style, then path — values first, types last.
 
 # 2. Skills
 
