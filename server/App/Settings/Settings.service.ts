@@ -1,9 +1,7 @@
 ﻿import { ApiMessage, ApiResponder } from '@common-utils'
 import { SettingsRepository } from './Settings.repository'
 import { SettingsSchema } from './Settings.schema'
-import type { SettingsInput } from './Settings.types'
-import type { ISetting } from './Settings.types'
-
+import type { SettingsInput, ISetting } from './Settings.types'
 /** Business logic for settings - persistence via the repository, validation via the schema. */
 export const SettingsService = {
     /** Returns the app's settings (a singleton document). */

@@ -1,5 +1,4 @@
-import { Table } from '@common-ux'
-import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
+import { Code, CodeText, Heading, Paragraph, Section, Table } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import { TablesCode } from '../Tables.code'
 import type { BreakpointRow, Row } from '../Tables.types'

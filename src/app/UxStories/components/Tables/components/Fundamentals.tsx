@@ -1,5 +1,4 @@
-import { Table } from '@common-ux'
-import { Code, CodeText, Heading, Paragraph, Pill, Section } from '@common-ux'
+import { Code, CodeText, Heading, Paragraph, Pill, Section, Table } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import { TablesConfig } from '../Tables.config'
 import { TablesCode } from '../Tables.code'

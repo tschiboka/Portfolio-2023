@@ -1,6 +1,4 @@
-﻿import { ApiResponder } from '@common-utils'
-import { ApiTransformers } from '@common-utils'
-import { isValidObjectId } from '@common-utils'
+﻿import { ApiResponder, ApiTransformers, isValidObjectId } from '@common-utils'
 import { ExercisesRepository } from './Exercises.repository'
 import { ExercisesPermissions } from './Exercises.permissions'
 import { ExercisesSchema } from './Exercises.schema'

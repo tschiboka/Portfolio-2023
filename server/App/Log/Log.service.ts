@@ -1,5 +1,4 @@
-﻿import { ApiTransformers } from '@common-utils'
-import { Paging } from '@common-utils'
+﻿import { ApiTransformers, Paging } from '@common-utils'
 import { LogRepository } from './Log.repository'
 import type {
     GetLogQuery,

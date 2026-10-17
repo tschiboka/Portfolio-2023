@@ -1,5 +1,4 @@
-﻿import { isDefined, isEmpty } from '@common-utils'
-import { Arrays } from '@common-utils'
+﻿import { Arrays, isDefined, isEmpty } from '@common-utils'
 import { SessionState } from '../../WordDuelArena.types'
 import { GameConstants } from '../../config/constants/Game.constants'
 import { MovePayload } from '../../../../../common/types'

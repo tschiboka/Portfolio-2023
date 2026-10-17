@@ -1,5 +1,4 @@
-﻿import { Arrays } from '@common-utils'
-import { isEmpty } from '@common-utils'
+﻿import { Arrays, isEmpty } from '@common-utils'
 import { LevelModel } from '../../../model/Level.model'
 
 type DbLevel = {

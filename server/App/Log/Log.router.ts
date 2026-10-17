@@ -1,6 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@common-utils'
-import { isEmpty } from '@common-utils'
+import { ApiResponder, isEmpty } from '@common-utils'
 import { LogService } from './Log.service'
 import { UsersMiddleware } from '../Users/Users.middleware'
 import type { DeleteLogReq, DeleteLogRes, GetLogReq, GetLogRes } from './Log.types'

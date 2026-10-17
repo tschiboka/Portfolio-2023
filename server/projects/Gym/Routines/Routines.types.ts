@@ -3,13 +3,13 @@ import type { Document } from 'mongoose'
 import type { Dictionary, WithoutId } from '@common-utils'
 import type {
     GetGymUserRoutinesResponse,
+    GymRoutineSource,
     GymRoutineResource,
     PatchGymRoutineRequest,
     PostGymRoutineRequest,
     TypedRequest,
     TypedResponse,
 } from '../../../../common/types'
-import type { GymRoutineSource } from '../../../../common/types'
 
 /** Mongoose document shape for a gym routine. */
 export interface IGymRoutine extends Document {

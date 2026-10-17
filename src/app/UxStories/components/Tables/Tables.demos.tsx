@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { toUpper } from 'ramda'
-import { Table, TableHooks, TableFilterConfig } from '@common-ux'
-import { Pill } from '@common-ux'
+import { Table, TableHooks, TableFilterConfig, Pill } from '@common-ux'
 import { Strings } from '@common-utils'
 import { TablesConfig } from './Tables.config'
 import { TablesMocks } from './Tables.mocks'

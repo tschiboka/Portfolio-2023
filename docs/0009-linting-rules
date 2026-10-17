@@ -312,26 +312,19 @@ not.
     - [ ] Step 18.9: Fix `Login.tsx`, `Register.tsx`, `Contact.tsx`, `Xmas2025.tsx` — export a resolver from each schema and read it
     - [ ] Step 18.10: Fix `Categories.tsx` — the schema is a factory, so the resolver must be one too
     - [ ] Step 18.11: Confirm a green `tsc`, lint, and test run
-- [ ] Step 19: Rule — one import or export per path and kind
-    - [ ] Step 19.1: Settle the id — `no-duplicate-import` understates the export half;
-          `no-duplicate-source` names both
-    - [ ] Step 19.2: Build the folder — constants, types, utils and the rule module
-    - [ ] Step 19.3: Imports — flag two imports of one path with the same kind
-    - [ ] Step 19.4: Imports — allow one value and one type import of one path, since §1.2
-          requires the type-only group
-    - [ ] Step 19.5: Imports — add the import cases to `tests/NoDuplicateImport.spec.ts`
-    - [ ] Step 19.6: Exports — flag two re-exports of one path with the same kind,
-          `export { A } from './x'` beside `export { B } from './x'`, and never count an
-          import against a re-export
-    - [ ] Step 19.7: Exports — allow one value and one type re-export of one path, so a
-          barrel may carry `export type` beside its value exports
-    - [ ] Step 19.8: Exports — add the re-export cases to the same spec file
-    - [ ] Step 19.9: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 19.10: Register as `severity: 'error'`
-    - [ ] Step 19.11: Run `rules sync`, then verify the generated config
-    - [ ] Step 19.12: Sweep every module — the imports first, then the barrels — and fix or
-          suppress each violation
-    - [ ] Step 19.13: Confirm a green `tsc`, lint, and test run
+- [x] Step 19: Rule — one import per path and kind
+    - [x] Step 19.1: Build `rules/no-duplicate-import/` — constants, types, utils, rule
+    - [x] Step 19.2: Flag two imports of one path with the same kind
+    - [x] Step 19.3: Allow one value and one type import of one path, since §1.2 requires
+          the type-only group — and inside the type kind a default beside named bindings,
+          which TS1363 forbids merging
+    - [x] Step 19.4: Read `importKind` behind an `in` guard — the node type does not carry it
+    - [x] Step 19.5: Add `tests/NoDuplicateImport.spec.ts` — 22 cases
+    - [x] Step 19.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 19.7: Register as `severity: 'error'`
+    - [x] Step 19.8: Run `rules sync`, then verify the generated config
+    - [x] Step 19.9: Sweep every module and fix or suppress each violation
+    - [x] Step 19.10: Confirm a green `tsc`, lint, and test run
 - [ ] Step 20: Rule — no `for` or `while` loop
     - [ ] Step 20.1: Build `rules/no-loop-statement/`
     - [ ] Step 20.2: Flag `ForStatement`, `WhileStatement`, `DoWhileStatement`, `ForOfStatement` and `ForInStatement`
@@ -418,6 +411,20 @@ not.
     - [ ] Step 25.8: Run `rules sync`, then verify the generated config
     - [ ] Step 25.9: Sweep every module and fix each violation — measure the count first
     - [ ] Step 25.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 26: Rule — one re-export per path and kind
+    - [ ] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
+          own so each id names exactly what it covers
+    - [ ] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
+'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either
+    - [ ] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
+          carry `export type` beside its value exports
+    - [ ] Step 26.4: Leave a local export alone — it names no source
+    - [ ] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
+    - [ ] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 26.7: Register as `severity: 'error'`
+    - [ ] Step 26.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 26.9: Sweep every barrel and fix or suppress each violation
+    - [ ] Step 26.10: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -715,6 +722,19 @@ characters')` writes the bound twice, so editing one copy makes the message
 - **An all-inline-type statement is not a mixed kind.** `import { type Option } from 'x'`
   carries one kind, so `no-mixed-import-kind` leaves it alone and its spec pins that. Only a
   statement holding a value and a type together is flagged.
+- **The duplicate rule splits by statement family, not by counting both in one.**
+  `no-duplicate-import` covers imports and `no-duplicate-export` covers re-exports, so each id
+  names exactly what it checks and neither has to explain the other's bucket.
+- **A type-only statement is counted by its shape.** TS1363 forbids one type-only import from
+  carrying a default and named bindings together, so `import type mongoose from 'mongoose'`
+  beside `import type { Document } from 'mongoose'` is the only way to name both — the two
+  shapes are separate groups inside the `type` kind. Value imports stay strict: `mongoose`
+  beside `{ Document }` merges into one statement, so it still reports.
+- **A hand sweep must not delete a statement it cannot merge.** Folding one path's imports
+  removed the `mongoose` `Document` import, which turned `extends Document` into the DOM type,
+  and `toApiResource` then rejected every routine; the same pass dropped `ApiResponder` from
+  `Routines.service.ts` while the body still called it. Both are restored — and `server/**`
+  sits outside `npm run tsc`, so only the editor saw either.
 
 ## 4. Open Questions
 

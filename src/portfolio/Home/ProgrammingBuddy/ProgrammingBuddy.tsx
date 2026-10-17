@@ -1,5 +1,4 @@
-import { Link, Paragraph } from '@common-ux'
-import { Box } from '@common-ux'
+import { Box, Link, Paragraph } from '@common-ux'
 import './ProgrammingBuddy.scss'
 
 export const ProgrammingBuddy = () => {

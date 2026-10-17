@@ -4,8 +4,7 @@ import type { AxiosError } from 'axios'
 import type { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query'
 import type { CacheKey } from './QueryKey'
 import type { ErrorResponse } from './mergeStatus'
-import type { PathKey } from '../Paths/Path.types'
-import type { ServerGroup } from '../Paths/Path.types'
+import type { PathKey, ServerGroup } from '../Paths/Path.types'
 
 type QueryOptions<TResponse> = Omit<
     UseQueryOptions<TResponse, AxiosError<ErrorResponse>>,

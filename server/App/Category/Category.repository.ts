@@ -1,5 +1,4 @@
-﻿import { Repository } from '@common-utils'
-import { Regexp } from '@common-utils'
+﻿import { Regexp, Repository } from '@common-utils'
 import { CategoryModel } from './Category.model'
 import type { ICategory } from './Category.types'
 

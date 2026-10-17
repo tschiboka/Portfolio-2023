@@ -1,5 +1,4 @@
-import { Table } from '@common-ux'
-import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
+import { Code, CodeText, Heading, Paragraph, Section, Table } from '@common-ux'
 import { TablesCode } from '../Tables.code'
 import { TablesMocks } from '../Tables.mocks'
 import type { AriaRow, Row } from '../Tables.types'

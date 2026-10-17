@@ -1,6 +1,5 @@
 ﻿import jwt from 'jsonwebtoken'
-import { ApiMessage, ApiResponder } from '@common-utils'
-import { isError } from '@common-utils'
+import { ApiMessage, ApiResponder, isError } from '@common-utils'
 import type { Request, Response, NextFunction } from 'express'
 import type { AuthedRequest, UserToken } from './Users.types'
 

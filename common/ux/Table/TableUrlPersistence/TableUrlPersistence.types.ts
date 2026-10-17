@@ -1,6 +1,5 @@
 import type { Dictionary, Nullable } from '@common-utils'
-import type { Paging, TableSortState, TableState } from '../Table.hooks.types'
-import type { UrlPersistenceConfig } from '../Table.hooks.types'
+import type { Paging, TableSortState, TableState, UrlPersistenceConfig } from '../Table.hooks.types'
 import type { FilterDefinitions } from '../TableFilter'
 
 /** Args to the URL-persistence hook — mirrors `UseTableConfig` naming. */
