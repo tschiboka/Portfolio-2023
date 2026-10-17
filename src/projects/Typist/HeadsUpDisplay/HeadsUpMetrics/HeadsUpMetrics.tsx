@@ -1,5 +1,5 @@
-import { TypistContext } from '../../Typist.context'
 import { LetterBox } from '../LetterBox/LetterBox'
+import { TypistContext } from '../../Typist.context'
 import './HeadsUpMetrics.scss'
 
 export const HeadsUpMetrics = () => {
@@ -14,11 +14,7 @@ export const HeadsUpMetrics = () => {
                     {stats?.errorCombinations?.map((combination, i) => (
                         <div key={i}>
                             {combination.split('').map((char, index) => (
-                                <LetterBox
-                                    key={index}
-                                    letter={char}
-                                    proficiency="extreme"
-                                />
+                                <LetterBox key={index} letter={char} proficiency="extreme" />
                             ))}
                         </div>
                     ))}

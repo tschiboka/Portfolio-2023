@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Nullish, Optional } from '../../../Generics'
 import { toUndefined } from '../toUndefined'
+import type { Nullish, Optional } from '../../../Generics'
 
 describe('Strings.Optional.toUndefined', () => {
     it.each<[Nullish<string>, Optional<string>]>([

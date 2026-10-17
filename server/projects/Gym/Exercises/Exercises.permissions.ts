@@ -1,6 +1,6 @@
 ﻿import { Permissions } from '@common-utils'
-import type { CurrentUser } from '../../../../common/types'
 import type { ExerciseOwnership } from './Exercises.types'
+import type { CurrentUser } from '../../../../common/types'
 
 /** Authorisation rules for exercises. */
 export const ExercisesPermissions = {

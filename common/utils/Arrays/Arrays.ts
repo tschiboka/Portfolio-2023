@@ -1,5 +1,5 @@
-import type { Optional } from '../Generics'
 import { isEmpty, isPositiveInteger } from '../Predicate'
+import type { Optional } from '../Generics'
 
 export const shuffleArray = <T>(array: T[]): T[] => {
     const shuffled = [...array]

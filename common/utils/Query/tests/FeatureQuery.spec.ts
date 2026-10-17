@@ -1,8 +1,8 @@
-import type { MockInstance } from 'vitest'
-import axios from 'axios'
-import type { AxiosRequestConfig } from 'axios'
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
+import axios from 'axios'
 import { FeatureQuery } from '../FeatureQuery'
+import type { MockInstance } from 'vitest'
+import type { AxiosRequestConfig } from 'axios'
 import type { CacheKey } from '../QueryKey'
 
 const mockedAxios = axios as unknown as {

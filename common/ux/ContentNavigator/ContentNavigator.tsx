@@ -1,11 +1,11 @@
-import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { AccessibleProps } from '../index.types'
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
+import { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Const } from '@common-ux'
 import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
-import './ContentNavigator.styles.css'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
+import { AccessibleProps } from '../index.types'
+import './ContentNavigator.styles.css'
 
 const { getActiveHeaders, getHeadingNodes, getVisibleHeaderEntries } = ContentNavigatorSelectors
 

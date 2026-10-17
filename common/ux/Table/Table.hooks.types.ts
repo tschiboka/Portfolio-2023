@@ -1,7 +1,7 @@
 import type { Paging, SortDirection, TableSortState } from '@common-types'
+import type { Dictionary } from '@common-utils'
 import type { TableFilteringInput } from './Table.types'
 import type { FilterDefinitions } from './TableFilter'
-import type { Dictionary } from '@common-utils'
 
 export type { SortDirection, TableSortState, Paging } from '@common-types'
 

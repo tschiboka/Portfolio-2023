@@ -1,5 +1,5 @@
-import type { Dictionary } from '@common-utils'
 import { ModalDefaults } from './Modal.defaults'
+import type { Dictionary } from '@common-utils'
 
 export type ModalName = keyof typeof ModalDefaults
 

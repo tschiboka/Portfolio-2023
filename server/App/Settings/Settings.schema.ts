@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import type { SettingsInput } from './Settings.types'
 import { SettingsConstants } from './Settings.constants'
+import type { SettingsInput } from './Settings.types'
 
 const schema = Joi.object({
     maxUsers: Joi.number()

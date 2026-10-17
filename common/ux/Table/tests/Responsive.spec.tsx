@@ -1,5 +1,5 @@
-import { Accessor, Test } from '@common-ux/Test'
 import { within } from '@testing-library/react'
+import { Accessor, Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
 

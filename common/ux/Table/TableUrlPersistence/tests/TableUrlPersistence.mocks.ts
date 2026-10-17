@@ -1,7 +1,7 @@
-import type { FilterDefinitions } from '../../TableFilter'
 import { TableFilterConfig } from '../../TableFilter'
-import type { TableSortState, Paging } from '../../Table.hooks.types'
 import type { Filters } from './TableUrlPersistence.spec.types'
+import type { FilterDefinitions } from '../../TableFilter'
+import type { TableSortState, Paging } from '../../Table.hooks.types'
 
 const { text, number, checkbox } = TableFilterConfig
 

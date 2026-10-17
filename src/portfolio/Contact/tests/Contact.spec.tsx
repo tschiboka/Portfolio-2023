@@ -1,8 +1,8 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@shared-components/Screen/tests'
-import { Contact } from '../Contact'
 import { ContactMockHandlers } from './Contact.mockHandlers'
 import { ContactTestUtils } from './Contact.spec.utils'
+import { Contact } from '../Contact'
 
 const { form: FORM, fields, buttons, errors } = ContactTestUtils.labels
 

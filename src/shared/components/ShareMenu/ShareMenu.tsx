@@ -1,4 +1,3 @@
-import './ShareMenu.scss'
 import { MdEmail } from 'react-icons/md'
 import { BsTwitter } from 'react-icons/bs'
 import { IoLogoWhatsapp } from 'react-icons/io'
@@ -6,10 +5,11 @@ import { ImLinkedin, ImFacebook2 } from 'react-icons/im'
 import {
     EmailShareButton,
     FacebookShareButton,
+    LinkedinShareButton,
     TwitterShareButton,
     WhatsappShareButton,
-    LinkedinShareButton,
 } from 'react-share'
+import './ShareMenu.scss'
 
 interface Props {
     path: string

@@ -1,7 +1,7 @@
 ﻿import Joi from 'joi'
 import { isDigits } from '@common-utils'
-import type { MessageInput } from './Message.types'
 import { MessageConstants } from './Message.constants'
+import type { MessageInput } from './Message.types'
 
 const schema = Joi.object({
     name: Joi.string().max(MessageConstants.fieldLimits.name.max).required(),

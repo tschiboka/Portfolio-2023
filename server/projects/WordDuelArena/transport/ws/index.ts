@@ -1,13 +1,13 @@
-import type { Server } from 'http'
-import type WebSocket from 'ws'
-import { WebSocketServer } from 'ws'
 import url from 'url'
+import { WebSocketServer } from 'ws'
 import { ClientMessage } from '@common-utils'
-import { LoopService } from '../../infrastructure/presence/Loop.service'
 import { ValidateDeviceSchema } from './validation/connection/ValidateDevice.schema'
 import { routeMessage } from './handlers'
+import { LoopService } from '../../infrastructure/presence/Loop.service'
 import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
+import type { Server } from 'http'
+import type WebSocket from 'ws'
 
 interface DeviceWebSocket extends WebSocket {
     sessionId: string

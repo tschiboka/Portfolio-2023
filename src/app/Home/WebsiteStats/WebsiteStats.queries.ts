@@ -1,9 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common-types'
+import { useQuery } from '@tanstack/react-query'
 import { Query, QueryKey } from '@common-utils'
-import type { ErrorResponse } from '@common-utils'
 import { Session } from '@shared-context'
+import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common-types'
+import type { ErrorResponse } from '@common-utils'
 
 type UseGetActivityFeedOptions = {
     params: GetActivityFeedQuery

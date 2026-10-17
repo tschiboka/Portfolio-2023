@@ -1,8 +1,8 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react'
-import type { TableFilteringInput, TableFiltering } from '../Table.types'
 import { FilterInput } from './FilterInput'
-import './TableFilterPanel.styles.css'
 import type { Dictionary } from '@common-utils'
+import type { TableFilteringInput, TableFiltering } from '../Table.types'
+import './TableFilterPanel.styles.css'
 
 type FilterValues = Dictionary
 

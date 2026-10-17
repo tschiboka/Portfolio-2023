@@ -1,14 +1,14 @@
+import guitarImage from '@portfolio/assets/about/RiffMaster.png'
+import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
+import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'
+import { Screen } from '@shared-components/Screen/Screen'
+import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
+import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common-ux'
 import { AchievementList } from './components/AchievementList/AchievementList'
 import {
     academicAchievements,
     certificateAchievements,
 } from './components/AchievementListItem/Achievements.data'
-import guitarImage from '@portfolio/assets/about/RiffMaster.png'
-import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
-import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'
-import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common-ux'
-import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import './About.scss'
 
 interface Props {

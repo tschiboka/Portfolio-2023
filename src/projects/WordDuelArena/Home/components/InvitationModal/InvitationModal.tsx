@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Modal } from '../../../common/components'
-import './InvitationModal.styles.css'
 import { useNavigate } from 'react-router-dom'
-import { Navigation } from '../../../common/utils/Navigation'
 import { nanoid } from 'nanoid'
 import { ModalAction } from '@projects/WordDuelArena/common/components/Modal/Modal.types'
+import { Modal } from '../../../common/components'
+import { Navigation } from '../../../common/utils/Navigation'
+import './InvitationModal.styles.css'
 
 export const InvitationModal = () => {
     const navigate = useNavigate()

@@ -23,7 +23,7 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-10-16  |
+| Last updated | 2026-10-17  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
@@ -312,17 +312,26 @@ not.
     - [ ] Step 18.9: Fix `Login.tsx`, `Register.tsx`, `Contact.tsx`, `Xmas2025.tsx` — export a resolver from each schema and read it
     - [ ] Step 18.10: Fix `Categories.tsx` — the schema is a factory, so the resolver must be one too
     - [ ] Step 18.11: Confirm a green `tsc`, lint, and test run
-- [ ] Step 19: Rule — one import per path and kind
-    - [ ] Step 19.1: Build `rules/no-duplicate-import/`
-    - [ ] Step 19.2: Count `ImportDeclaration` by source path per file
-    - [ ] Step 19.3: Flag two imports of one path with the same `importKind`
-    - [ ] Step 19.4: Allow one value and one type import of the same path — §1.2 requires the type-only group
-    - [ ] Step 19.5: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 19.6: Register as `severity: 'error'`
-    - [ ] Step 19.7: Add `tests/NoDuplicateImport.spec.ts`
-    - [ ] Step 19.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 19.9: Sweep every module and fix or suppress each violation
-    - [ ] Step 19.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 19: Rule — one import or export per path and kind
+    - [ ] Step 19.1: Settle the id — `no-duplicate-import` understates the export half;
+          `no-duplicate-source` names both
+    - [ ] Step 19.2: Build the folder — constants, types, utils and the rule module
+    - [ ] Step 19.3: Imports — flag two imports of one path with the same kind
+    - [ ] Step 19.4: Imports — allow one value and one type import of one path, since §1.2
+          requires the type-only group
+    - [ ] Step 19.5: Imports — add the import cases to `tests/NoDuplicateImport.spec.ts`
+    - [ ] Step 19.6: Exports — flag two re-exports of one path with the same kind,
+          `export { A } from './x'` beside `export { B } from './x'`, and never count an
+          import against a re-export
+    - [ ] Step 19.7: Exports — allow one value and one type re-export of one path, so a
+          barrel may carry `export type` beside its value exports
+    - [ ] Step 19.8: Exports — add the re-export cases to the same spec file
+    - [ ] Step 19.9: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 19.10: Register as `severity: 'error'`
+    - [ ] Step 19.11: Run `rules sync`, then verify the generated config
+    - [ ] Step 19.12: Sweep every module — the imports first, then the barrels — and fix or
+          suppress each violation
+    - [ ] Step 19.13: Confirm a green `tsc`, lint, and test run
 - [ ] Step 20: Rule — no `for` or `while` loop
     - [ ] Step 20.1: Build `rules/no-loop-statement/`
     - [ ] Step 20.2: Flag `ForStatement`, `WhileStatement`, `DoWhileStatement`, `ForOfStatement` and `ForInStatement`
@@ -362,12 +371,13 @@ not.
           `useTableController.spec.utils.tsx` are gone (their specs are now the
           role-named `Table.hooks.*`), and `src/router.routes.tsx` no longer exists
     - [ ] Step 22.9: Confirm a green `tsc`, lint, and test run
-- [ ] Step 23: Rule — an import carries one kind, never both
+- [x] Step 23: Rule — an import carries one kind, never both
     - [x] Step 23.1: Build `rules/no-mixed-import-kind/`
     - [x] Step 23.2: Flag an inline `type` specifier beside a value one —
           `import { hasLength, type Optional }` — never a statement that is all values
-    - [ ] Step 23.3: Decide whether an all-type statement written as
-          `import { type Option }` is flagged too, since §1.2 names `import type`
+    - [x] Step 23.3: Decide whether an all-type statement written as
+          `import { type Option }` is flagged too, since §1.2 names `import type` — it is
+          not: one kind is not a mix
     - [x] Step 23.4: Allow `import type { … }`, the type-only group §1.2 already requires
     - [x] Step 23.5: Read the same `ImportDeclaration` shape Step 19 reads, rather than
           re-deriving it
@@ -378,6 +388,36 @@ not.
     - [x] Step 23.10: Sweep every module and fix or suppress each violation — 15 sites
           over 14 files when measured
     - [x] Step 23.11: Confirm a green `tsc`, lint, and test run
+- [x] Step 24: Rule — an import's style and path set the file's order
+    - [x] Step 24.1: Build `rules/import-order/`, whose `README.md` is the standard
+    - [x] Step 24.2: Flag the first statement out of order, keyed by style then path —
+          namespace → default → mixed → named → type-only → side-effect, and within a style
+          external → external scoped → aliased → same-directory → parent-relative shallowest
+          first → styles and assets
+    - [x] Step 24.3: Leave order free inside one style and one path — no alphabetical pass
+    - [x] Step 24.4: Never sort side-effect imports among themselves; their sequence is a cascade
+    - [x] Step 24.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 24.6: Register as `severity: 'error'`
+    - [x] Step 24.7: Add `tests/ImportOrder.spec.ts`
+    - [x] Step 24.8: Run `rules sync`, then verify the generated config
+    - [x] Step 24.9: Sweep every module and fix each violation — measure the count first, since
+          nearly every file predates this order
+    - [x] Step 24.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 25: Rule — an export's style and path set the file's order
+    - [ ] Step 25.1: Build `rules/export-order/`, whose `README.md` is the standard
+    - [ ] Step 25.2: Flag the first statement out of order, keyed by style then path —
+          named re-export → default re-export → namespace re-export → star re-export →
+          named declaration → default declaration → type-only export, and within a style
+          external → aliased → same-directory → parent-relative shallowest first
+    - [ ] Step 25.3: Leave order free inside one style and one path — no alphabetical pass
+    - [ ] Step 25.4: Keep type-only exports last, preserving the incoming → transformation →
+          outgoing flow
+    - [ ] Step 25.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 25.6: Register as `severity: 'error'`
+    - [ ] Step 25.7: Add `tests/ExportOrder.spec.ts`
+    - [ ] Step 25.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 25.9: Sweep every module and fix each violation — measure the count first
+    - [ ] Step 25.10: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -659,6 +699,22 @@ characters')` writes the bound twice, so editing one copy makes the message
   rules make — `isDefined`, `isEmpty`, `isNonEmpty`, `isString`; `Nil`, `Defined`,
   `Optional`, `Nullable`. A rule folder keeps `constants` / `types` / `utils`
   separate so `rules.ts` holds the rule and nothing else.
+- **A package and an alias are told apart by a list, not by the `@`.**
+  `@tanstack/react-query` carries `@` exactly as `@common-utils` does, so the rule carries
+  `AliasPrefixes` and the three files that declare aliases each warn that a new one belongs
+  in it: `tsconfig.json`, `vite.config.ts`, `jest.config.cjs`. Reading `paths` at lint time
+  was dropped — the drift is loud (a missing alias makes that path rank as a package, and
+  every file using it reports), and the warning sits where the alias is added.
+- **Assets stay a suffix list.** A deny-list of module extensions cannot carry this:
+  `./Settings.types` is a module whose name reads as an extension. The list is broad —
+  styles, images, sound, video, fonts, documents, models, shaders — so a new file type is
+  one line rather than a redesign, and the standard points at the list instead of repeating it.
+- **A bare `'.'` is same-directory and a bare `'..'` is parent-relative.** Both were falling
+  through to the external rank because the checks matched only `'./'` and `'../'`. They are
+  relative specifiers, so they rank with the rest of the relative group.
+- **An all-inline-type statement is not a mixed kind.** `import { type Option } from 'x'`
+  carries one kind, so `no-mixed-import-kind` leaves it alone and its spec pins that. Only a
+  statement holding a value and a type together is flagged.
 
 ## 4. Open Questions
 

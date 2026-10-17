@@ -1,4 +1,8 @@
-﻿import type {
+﻿import WebSocket from 'ws'
+import { validateSession } from './validation/session/session'
+import { WdaWsResponseTypes } from '../../../../../common/types/projects/wda'
+import type { Nullable } from '@common-utils'
+import type {
     Session,
     SessionState,
     Player,
@@ -11,10 +15,6 @@ import type {
     WdaPlayableLevelWord,
     WdaWsResponse,
 } from '../../../../../common/types/projects/wda'
-import { WdaWsResponseTypes } from '../../../../../common/types/projects/wda'
-import type { Nullable } from '@common-utils'
-import WebSocket from 'ws'
-import { validateSession } from './validation/session/session'
 
 interface DeviceWebSocket extends WebSocket {
     deviceId: string

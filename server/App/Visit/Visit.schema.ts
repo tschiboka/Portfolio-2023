@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import type { VisitInput } from './Visit.types'
 import { VisitConstants } from './Visit.constants'
+import type { VisitInput } from './Visit.types'
 
 const schema = Joi.object({
     path: Joi.string()

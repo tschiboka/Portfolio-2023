@@ -1,7 +1,7 @@
 import { Control, Controller, Path } from 'react-hook-form'
+import { Const } from '@common-ux'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
-import { Const } from '@common-ux'
 import './Form.styles.css'
 
 export const DEFAULT_TEXTAREA_ROWS = 3

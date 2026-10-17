@@ -1,12 +1,12 @@
-import { WordConstants } from '../../../common/utils'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { isEmpty } from '@common-utils'
-import { SessionHooks } from '../../Session.hooks'
-import { PlayableLevelWord } from '../../Session.types'
+import { SolutionBoardUtils } from './SolutionBoard.utils'
 import { SolvedSolutionWord } from './components/SolvedSolutionWord'
 import { UnsolvedSolutionWord } from './components/UnsolvedSolutionWord'
+import { SessionHooks } from '../../Session.hooks'
+import { PlayableLevelWord } from '../../Session.types'
+import { WordConstants } from '../../../common/utils'
 import './SolutionBoard.styles.css'
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { SolutionBoardUtils } from './SolutionBoard.utils'
 
 const MAX_WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
 

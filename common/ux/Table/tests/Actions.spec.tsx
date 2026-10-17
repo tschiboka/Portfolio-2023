@@ -1,7 +1,7 @@
 import { fireEvent, screen } from '@testing-library/react'
+import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
-import { Test } from '@common-ux/Test'
 
 const { rows, basicColumns } = TableMocks
 

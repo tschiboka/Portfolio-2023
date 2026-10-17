@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Optional } from '../../../Generics'
 import { Params } from '../Params'
+import type { Optional } from '../../../Generics'
 
 describe('Params.build', () => {
     it.each<[Optional<string>, string, string]>([

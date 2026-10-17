@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import { hasLength, isDefined } from '@common-utils'
+import { ExpandedRow } from './ExpandedRow'
 import {
     CellMeta,
     CellVariant,
@@ -7,8 +9,6 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength, isDefined } from '@common-utils'
-import { ExpandedRow } from './ExpandedRow'
 import { TableActions } from '../TableActions/TableActions'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckboxCell'
 import { TableUtils } from '../Table.utils'

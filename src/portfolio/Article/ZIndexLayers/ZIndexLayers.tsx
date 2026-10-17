@@ -1,11 +1,11 @@
-import { Article } from '../Article'
+import uiLayersImg from '@portfolio/assets/blog/z_index/ui_layers.png'
 import { Code, CodeText, Heading, Paragraph, Pill, PillColor, Section, Table } from '@common-ux'
-import type { Dictionary } from '@common-utils'
 import { Figure } from '@shared-components/Figure/Figure'
 import { ZIndexLayersCode } from './ZIndexLayers.code'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
-import uiLayersImg from '@portfolio/assets/blog/z_index/ui_layers.png'
+import { Article } from '../Article'
+import type { Dictionary } from '@common-utils'
 
 interface Props {
     pageName: string

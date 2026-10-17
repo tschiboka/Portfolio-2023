@@ -1,9 +1,9 @@
 import { waitFor } from '@testing-library/react'
 import { Test } from '@shared-components/Screen/tests'
 import { ClientMessage } from '@common-utils'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
-import { AppRoutes } from '../../../app'
 import { CategoriesMockHandlers } from './Categories.mockHandlers'
+import { AppRoutes } from '../../../app'
+import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 
 type CategoriesForm = ReturnType<typeof Test.Form>
 

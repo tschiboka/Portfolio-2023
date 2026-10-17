@@ -1,7 +1,7 @@
-import { useNavigate } from 'react-router-dom'
 import XmasTree from '@projects/assets/xmas/xmas_tree.png'
-import '../Home.styles.scss'
+import { useNavigate } from 'react-router-dom'
 import { Button, Heading, Paragraph } from '@common-ux'
+import '../Home.styles.scss'
 
 export const GuestHome = () => {
     const navigate = useNavigate()

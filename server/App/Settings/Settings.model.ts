@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { ISetting } from './Settings.types'
 import { SettingsConstants } from './Settings.constants'
+import type { ISetting } from './Settings.types'
 
 const schema = new mongoose.Schema<ISetting>({
     maxUsers: {

@@ -1,7 +1,7 @@
-import type { Codec } from './Codecs.types'
 import { Booleans } from '../../Booleans'
 import { Numbers } from '../../Numbers'
 import { Strings } from '../../Strings'
+import type { Codec } from './Codecs.types'
 
 const stringCodec: Codec<string> = {
     encode: Strings.Optional.trim,

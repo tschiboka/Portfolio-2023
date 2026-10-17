@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react'
+import { Screen } from '@shared-components/Screen/Screen'
+import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import {
     Button,
     Code,
@@ -11,13 +13,11 @@ import {
     Section,
     Stack,
 } from '@common-ux'
-import type { ActionMenuItem } from '@common-ux'
-import { Screen } from '@shared-components/Screen/Screen'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
-import type { Nullable } from '@common-utils'
-import { OverlaysCode } from './Overlays.code'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
+import { OverlaysCode } from './Overlays.code'
+import { StoryNav } from '../StoryNav/StoryNav'
+import type { ActionMenuItem } from '@common-ux'
+import type { Nullable } from '@common-utils'
 import './Overlays.styles.css'
 
 const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']

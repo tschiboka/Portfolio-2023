@@ -1,10 +1,10 @@
 ﻿import mongoose from 'mongoose'
-import type { CurrentUser, GetCategoryResponse, PostCategoryRequest } from '../../../common/types'
 import { ApiMessage, ApiResponder } from '@common-utils'
 import { ApiTransformers } from '@common-utils'
 import { CategoryRepository } from './Category.repository'
 import { CategorySchema } from './Category.schema'
 import type { ICategory } from './Category.types'
+import type { CurrentUser, GetCategoryResponse, PostCategoryRequest } from '../../../common/types'
 
 /** Business logic for categories persistence via the repository, validation via the schema. */
 export const CategoryService = {

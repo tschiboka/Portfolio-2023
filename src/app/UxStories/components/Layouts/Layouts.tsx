@@ -18,8 +18,8 @@
 import { Arrays } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { LayoutsCode } from './Layouts.code'
+import { StoryNav } from '../StoryNav/StoryNav'
 import './Layouts.styles.css'
 
 type LayoutsProps = { path: string }

@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiResponder } from '@common-utils'
-import { UsersMiddleware } from '../Users/Users.middleware'
 import { ActivityService } from './Activity.service'
+import { UsersMiddleware } from '../Users/Users.middleware'
 import type { GetActivityFeedReq, GetActivityFeedRes } from './Activity.types'
 
 const { auth, admin } = UsersMiddleware

@@ -1,7 +1,7 @@
 import { ReactNode, useState, useCallback, useRef } from 'react'
+import { Const, Overlay } from '@common-ux'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
 import { GuardAction } from '../AccessGuard.types'
-import { Const, Overlay } from '@common-ux'
 import './Renderers.styles.css'
 
 type SoftDisabledRendererProps = {

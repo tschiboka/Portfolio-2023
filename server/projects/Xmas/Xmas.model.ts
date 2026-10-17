@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { IXmasMessage } from './Xmas.types'
 import { XmasConstants } from './Xmas.constants'
+import type { IXmasMessage } from './Xmas.types'
 
 const { fieldLimits } = XmasConstants
 

@@ -1,9 +1,9 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
-import { Test } from '../../Screen/tests'
-import { PageSideMenu } from '../PageSideMenu'
-import { PageSideMenuMockHandlers } from './PageSideMenu.mockHandlers'
 import { PageSideMenuMocks } from './PageSideMenu.mocks'
+import { PageSideMenuMockHandlers } from './PageSideMenu.mockHandlers'
+import { PageSideMenu } from '../PageSideMenu'
+import { Test } from '../../Screen/tests'
 
 const setupPageSideMenu = () => {
     Test.Screen.Do.render({

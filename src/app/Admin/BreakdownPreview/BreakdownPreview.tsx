@@ -12,12 +12,12 @@
  */
 
 import { Icon } from '@common-ux'
-import { BreakdownPreviewConstants } from './BreakdownPreview.constants'
-import type { BreakdownPreviewProps } from './BreakdownPreview.types'
 import { DataSection } from './components/DataSection'
+import { BreakdownPreviewConstants } from './BreakdownPreview.constants'
 import { Header } from './components/Header'
 import { BreakdownPreviewStyles } from './BreakdownPreview.styles'
 import { Signature } from './components/Signature'
+import type { BreakdownPreviewProps } from './BreakdownPreview.types'
 
 export const BreakdownPreview = ({ breakdown }: BreakdownPreviewProps) => (
     <div className="bp-shell" style={BreakdownPreviewStyles.shell}>

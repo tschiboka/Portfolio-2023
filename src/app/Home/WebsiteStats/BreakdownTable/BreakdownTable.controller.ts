@@ -1,7 +1,7 @@
 import { TableHooks } from '@common-ux'
-import type { GetActivityFeedQuery } from '@common-types'
 import { BreakdownTableFilters } from './BreakdownTable.filters'
 import { BreakdownTableTransformers } from './BreakdownTable.transformers'
+import type { GetActivityFeedQuery } from '@common-types'
 import type { ActivityFiltersData } from './BreakdownTable.types'
 
 const useTable = () =>

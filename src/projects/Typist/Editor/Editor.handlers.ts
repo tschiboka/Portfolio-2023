@@ -1,5 +1,5 @@
-import { TypistEditorState, EditorAction } from '../Typist.types'
 import { EditorSelectors } from './Editor.selectors'
+import { TypistEditorState, EditorAction } from '../Typist.types'
 
 type EditorHandlerArgs = {
     editorState: TypistEditorState

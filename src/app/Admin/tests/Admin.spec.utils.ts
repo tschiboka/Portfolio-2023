@@ -2,8 +2,8 @@ import { Accessor } from '@common-ux/Test'
 import { Section } from '@common-ux/Test/Section/Section'
 import { SessionMocks } from '@common-mocks'
 import { Test } from '@shared-components/Screen/tests'
-import { AppRoutes } from '../../../app'
 import { AdminMockHandlers } from './Admin.mockHandlers'
+import { AppRoutes } from '../../../app'
 import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 
 export const AdminTestUtils = {

@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react'
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
+import { Functions } from '@common-utils'
 import { TablesMocks } from '../Tables.mocks'
-import type { Row } from '../Tables.types'
 import { TablesCode } from '../Tables.code'
 import { TablesConfig } from '../Tables.config'
-import { Functions } from '@common-utils'
+import type { Row } from '../Tables.types'
 
 const { rows } = TablesMocks
 const { renderStatus } = TablesConfig

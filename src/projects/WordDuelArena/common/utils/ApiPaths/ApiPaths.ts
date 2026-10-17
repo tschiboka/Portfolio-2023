@@ -1,6 +1,6 @@
-import { ApiPathParams } from './ApiPaths.types'
 import { Url } from '@common-utils'
 import { Browser } from '@common-utils'
+import { ApiPathParams } from './ApiPaths.types'
 
 export class ApiPaths {
     static readonly Paths = {

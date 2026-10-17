@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
-import { Button } from '../Button'
+import { render, screen } from '@testing-library/react'
 import { ButtonTestUtils } from './Button.spec.utils'
+import { Button } from '../Button'
 
 const { Set } = ButtonTestUtils
 

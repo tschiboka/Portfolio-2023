@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { Accessor } from '../../../Test'
 import { Spacer } from '../Spacer'
+import { Accessor } from '../../../Test'
 import type { SpacerProps } from '../Spacer.types'
 
 type SetProps = Partial<SpacerProps> & { ariaLabel: string }

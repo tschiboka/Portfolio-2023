@@ -1,11 +1,11 @@
-import type { Mock } from 'vitest'
 import React from 'react'
-import { render } from '@testing-library/react'
 import { useForm } from 'react-hook-form'
-import { Form as FormExports } from '..'
-import type { SearchInputOption } from '..'
-import type { FormValues } from './Form.spec.types'
+import { render } from '@testing-library/react'
 import { FormTestMocks } from './Form.spec.mocks'
+import { Form as FormExports } from '..'
+import type { Mock } from 'vitest'
+import type { FormValues } from './Form.spec.types'
+import type { SearchInputOption } from '..'
 
 const { testOptions } = FormTestMocks
 

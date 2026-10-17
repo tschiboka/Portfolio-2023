@@ -1,7 +1,7 @@
+import { useForm } from 'react-hook-form'
 import { GymExerciseResource } from '@common-types'
 import { Code, Form, LoadingIndicator, Section } from '@common-ux'
 import { Query } from '@common-utils'
-import { useForm } from 'react-hook-form'
 import { GymQueries } from '../../Gym.queries'
 
 type ExercisesSectionProps = {

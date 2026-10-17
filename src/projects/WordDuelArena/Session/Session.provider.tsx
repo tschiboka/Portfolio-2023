@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react'
-import type { ReactNode } from 'react'
 import { useParams } from 'react-router-dom'
 import { Storage } from '@common-utils'
+import { SessionConstants } from './Session.constants'
 import { SessionContext } from './Session.context'
 import { SessionDefaults } from './Session.defaults'
-import { SessionConstants } from './Session.constants'
+import type { ReactNode } from 'react'
 import type { DeviceIdStorage, WebSocketSessionState } from './Session.types'
 
 type SessionProviderProps = {

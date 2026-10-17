@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react'
 import { BsDownload } from 'react-icons/bs'
-import type { TableDownload } from '../Table.types'
 import { TableDropdown } from '../TableInputs/TableDropdown'
+import type { TableDownload } from '../Table.types'
 import './TableDownloadButton.styles.css'
 
 type TableDownloadProps<TData extends Record<string, ReactNode>> = {

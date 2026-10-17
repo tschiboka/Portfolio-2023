@@ -1,7 +1,7 @@
-import type { ActivityFeedSortBy, GetActivityFeedQuery } from '@common-types'
-import type { ActivityFiltersData } from './BreakdownTable.types'
 import { ClientTransformers } from '@common-utils'
+import type { ActivityFeedSortBy, GetActivityFeedQuery } from '@common-types'
 import type { TableState } from '@common-ux/Table/Table.hooks.types'
+import type { ActivityFiltersData } from './BreakdownTable.types'
 
 type BreakdownParamsInput = TableState<ActivityFiltersData>
 

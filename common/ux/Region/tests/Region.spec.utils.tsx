@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Region } from '../Region'
-import type { RegionProps } from '../Region.types'
 import { RegionAccessor } from '../../Test/Region/Region'
+import type { RegionProps } from '../Region.types'
 
 type Props = Partial<RegionProps> & { ariaLabel: string }
 

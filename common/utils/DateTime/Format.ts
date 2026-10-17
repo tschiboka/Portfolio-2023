@@ -1,7 +1,7 @@
 import moment from 'moment'
 import { Formats } from './Formats'
-import type { Optional, Nullish } from '../Generics'
 import { isString, isNullish } from '../Predicate'
+import type { Optional, Nullish } from '../Generics'
 
 export type FormatKey = keyof typeof Formats
 

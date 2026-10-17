@@ -3,10 +3,10 @@ import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
 import { TablesMocks } from '../Tables.mocks'
-import type { Row } from '../Tables.types'
 import { TablesCode } from '../Tables.code'
 import { TablesConfig } from '../Tables.config'
 import type { TableColumns } from '@common-ux'
+import type { Row } from '../Tables.types'
 
 const { rows } = TablesMocks
 const { renderStatus } = TablesConfig

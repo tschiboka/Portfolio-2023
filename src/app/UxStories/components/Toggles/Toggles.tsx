@@ -4,8 +4,8 @@ import { Functions } from '@common-utils'
 import { Code, CodeText, Heading, Main, Paragraph, Section, Stack, Toggle } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { TogglesCode } from './Toggles.code'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type TogglesProps = { path: string }
 

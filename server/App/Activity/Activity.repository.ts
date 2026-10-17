@@ -1,8 +1,8 @@
-﻿import type { Dictionary } from '@common-utils'
-import { VisitModel } from '../Visit/Visit.model'
+﻿import { VisitModel } from '../Visit/Visit.model'
 import { LikeModel } from '../Like/Like.model'
 import { MessageModel } from '../Message/Message.model'
 import { LogModel } from '../Log/Log.model'
+import type { Dictionary } from '@common-utils'
 
 /** Data-access layer for the activity feed - reads across the visit/like/message/log collections. */
 export const ActivityRepository = {

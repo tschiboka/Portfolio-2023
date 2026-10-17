@@ -1,14 +1,11 @@
-import './HeadsUpDisplay.styles.scss'
 import { HeadsUpMetrics } from './HeadsUpMetrics/HeadsUpMetrics'
 import { LetterBox } from './LetterBox/LetterBox'
+import './HeadsUpDisplay.styles.scss'
 
 export const HeadsUpDisplay = () => {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz'.split('')
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-    const numbersAndPunctuation = [
-        ...'0123456789'.split(''),
-        ...'.!?,;:-\'"@&()'.split(''),
-    ]
+    const numbersAndPunctuation = [...'0123456789'.split(''), ...'.!?,;:-\'"@&()'.split('')]
 
     return (
         <div className="HeadsUpDisplay">

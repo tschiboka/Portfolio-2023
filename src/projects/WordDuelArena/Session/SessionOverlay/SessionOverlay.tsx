@@ -1,9 +1,9 @@
-import { SessionHooks } from '../Session.hooks'
+import { BrowserHooks } from '@common-utils'
 import { SessionOverlayModes } from './SessionOverlay.types'
 import { SessionOverlayHooks } from './SessionOverlay.hooks'
-import './SessionOverlay.styles.css'
-import { BrowserHooks } from '@common-utils'
+import { SessionHooks } from '../Session.hooks'
 import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
+import './SessionOverlay.styles.css'
 
 export const SessionOverlay = ({
     enterFullScreen,

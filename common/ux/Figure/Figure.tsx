@@ -1,7 +1,7 @@
-import type { CSSProperties } from 'react'
-import type { FigureProps, FigureSource } from './Figure.types'
-import type { Optional } from '@common-utils'
 import { Caption } from '../Typography'
+import type { CSSProperties } from 'react'
+import type { Optional } from '@common-utils'
+import type { FigureProps, FigureSource } from './Figure.types'
 import './Figure.styles.css'
 
 const buildMedia = (source: FigureSource): Optional<string> => {

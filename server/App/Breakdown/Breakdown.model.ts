@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { IBreakdown } from './Breakdown.types'
 import { BreakdownConstants } from './Breakdown.constants'
+import type { IBreakdown } from './Breakdown.types'
 
 const breakdownSchema = new mongoose.Schema<IBreakdown>({
     // Calendar date in YYYY-MM-DD format (e.g. "2026-06-15")

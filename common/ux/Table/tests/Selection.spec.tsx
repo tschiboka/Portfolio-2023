@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react'
-import { TableCheckboxSelectors } from '../TableCheckbox/TableCheckbox.selectors'
 import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
+import { TableCheckboxSelectors } from '../TableCheckbox/TableCheckbox.selectors'
 
 const { getSelectableRows, getSelectableIds, getAllSelected } = TableCheckboxSelectors
 const { rows, basicColumns } = TableMocks

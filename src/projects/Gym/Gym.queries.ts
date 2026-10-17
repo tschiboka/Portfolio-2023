@@ -1,3 +1,5 @@
+import { AxiosError } from 'axios'
+import { useQuery } from '@tanstack/react-query'
 import {
     GetGymDifficultyOptionsResponse,
     GetGymEquipmentOptionsResponse,
@@ -5,9 +7,7 @@ import {
     GetGymMuscleGroupOptionsResponse,
     GetGymUserRoutinesResponse,
 } from '@common-types'
-import { useQuery } from '@tanstack/react-query'
 import { ErrorResponse, Query, QueryKey } from '@common-utils'
-import { AxiosError } from 'axios'
 import { Session } from '@shared-context'
 
 const useGetGymUserRoutines = () => {

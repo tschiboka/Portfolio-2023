@@ -1,8 +1,8 @@
-import type { ReactNode, MouseEvent } from 'react'
 import { useCallback, useRef } from 'react'
-import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
-import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
 import { TableHeadUtils } from './TableHead.utils'
+import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
+import type { ReactNode, MouseEvent } from 'react'
+import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
 import './TableHead.styles.css'
 
 type TableHeadProps<TData extends Record<string, ReactNode>, TContext> = {

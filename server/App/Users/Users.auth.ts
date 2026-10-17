@@ -1,12 +1,12 @@
 ﻿import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-import type { Request } from 'express'
-import type { CurrentUser } from '../../../common/types'
 import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@common-utils'
 import { UsersModel } from './Users.model'
-import type { IUser, RegistrationPayload, UserToken } from './Users.types'
 import { UsersConstants } from './Users.constants'
 import { SettingsConstants } from '../Settings/Settings.constants'
+import type { Request } from 'express'
+import type { IUser, RegistrationPayload, UserToken } from './Users.types'
+import type { CurrentUser } from '../../../common/types'
 
 /** Hashes a plain-text password with bcrypt. */
 const hashPassword = (plain: string): Promise<string> =>

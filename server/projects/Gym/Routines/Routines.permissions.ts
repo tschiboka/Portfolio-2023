@@ -1,6 +1,6 @@
 ﻿import { Permissions } from '@common-utils'
-import type { CurrentUser } from '../../../../common/types'
 import type { RoutineOwnership } from './Routines.types'
+import type { CurrentUser } from '../../../../common/types'
 
 /** Authorisation rules for routines. */
 export const RoutinesPermissions = {

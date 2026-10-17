@@ -1,7 +1,7 @@
+import { LevelWord } from '../../../common/utils'
+import { WordUtils } from '../../../common/utils/Word/Word.utils'
 import { WordConstants } from '../../../common/utils/Word/Word.constants'
 import './WordOptionList.styles.css'
-import { WordUtils } from '../../../common/utils/Word/Word.utils'
-import { LevelWord } from '../../../common/utils'
 
 type WordOptionListProps = {
     possibleWords: LevelWord[]

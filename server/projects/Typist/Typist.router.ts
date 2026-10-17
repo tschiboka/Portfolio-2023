@@ -1,4 +1,9 @@
 ﻿import express from 'express'
+import { ApiResponder } from '@common-utils'
+import { isTruthy, isNonEmpty } from '@common-utils'
+import { Arrays } from '@common-utils'
+import { Strings } from '@common-utils'
+import { TypistConstants } from './Typist.constants'
 import { WordRepository } from '../WordDuelArena/infrastructure/resources/Word.repository'
 import {
     Keystroke,
@@ -7,11 +12,6 @@ import {
     TypedRequest,
     TypedResponse,
 } from '../../../common/types'
-import { ApiResponder } from '@common-utils'
-import { TypistConstants } from './Typist.constants'
-import { isTruthy, isNonEmpty } from '@common-utils'
-import { Arrays } from '@common-utils'
-import { Strings } from '@common-utils'
 
 const router = express.Router()
 

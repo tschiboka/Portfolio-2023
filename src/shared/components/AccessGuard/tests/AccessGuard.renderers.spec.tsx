@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { render, screen } from '@testing-library/react'
 import { DisabledRenderer } from '../utils/DisabledRenderer'
 import { HiddenRenderer } from '../utils/HiddenRenderer'
-import { TooltipRenderer } from '../utils/TooltipRenderer'
 import { SoftDisabledRenderer } from '../utils/SoftDisabledRenderer'
+import { TooltipRenderer } from '../utils/TooltipRenderer'
 
 // jsdom does not implement window.scrollTo
 window.scrollTo = vi.fn()

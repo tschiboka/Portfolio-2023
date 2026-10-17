@@ -1,7 +1,7 @@
-import { Coordinates, SubmenuState } from '../../Nav.types'
 import { useEffect, useState } from 'react'
-import { SubmenuUtils } from '../Submenu.utils'
 import { Submenu } from '../Submenu'
+import { SubmenuUtils } from '../Submenu.utils'
+import { Coordinates, SubmenuState } from '../../Nav.types'
 
 type SubmenuPanelProps = {
     submenu?: SubmenuState

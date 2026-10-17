@@ -1,9 +1,9 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { Test } from '@shared-components/Screen/tests'
-import { Xmas } from '../Xmas'
-import { XmasMockHandlers } from './Xmas.mockHandlers'
 import { XmasMocks } from './Xmas.mocks'
+import { XmasMockHandlers } from './Xmas.mockHandlers'
+import { Xmas } from '../Xmas'
 
 const setupXmas = () => {
     Test.Screen.Do.render({

@@ -1,13 +1,13 @@
-import { Breadcrumb } from './components/Breadcrumb'
+import logo from '@shared-assets/icon-light.svg'
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { MdCopyright } from 'react-icons/md'
-import { Link } from '@common-ux'
-import logo from '@shared-assets/icon-light.svg'
-import './Footer.scss'
 import { ReactNode } from 'react'
+import { Link } from '@common-ux'
 import { Paragraph } from '@common-ux'
+import { Breadcrumb } from './components/Breadcrumb'
+import './Footer.scss'
 
 export interface FooterProps {
     path: string

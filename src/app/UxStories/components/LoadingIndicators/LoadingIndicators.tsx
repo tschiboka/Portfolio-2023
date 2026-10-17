@@ -10,8 +10,8 @@ import {
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { LoadingIndicatorsCode } from './LoadingIndicators.code'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type LoadingIndicatorsProps = { path: string }
 

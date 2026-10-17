@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Nullish, Optional } from '../../../Generics'
 import { toString } from '../toString'
+import type { Nullish, Optional } from '../../../Generics'
 
 describe('Numbers.Optional.toString', () => {
     it.each<[Nullish<number>, Optional<string>]>([

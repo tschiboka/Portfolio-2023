@@ -1,6 +1,6 @@
-import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import { EditorWord, CharStatus } from './Character/Character.types'
 import { TypistUtils } from '../Typist.utils'
+import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import type { Optional } from '@common-utils'
 
 const updateCharStatus = (

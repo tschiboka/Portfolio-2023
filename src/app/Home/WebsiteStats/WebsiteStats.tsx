@@ -1,7 +1,7 @@
 import { Stack, Section } from '@common-ux'
+import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 import { WebsiteStatsQueries } from './WebsiteStats.queries'
 import { BreakdownTable, BreakdownTableController } from './BreakdownTable'
-import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 
 export const WebsiteStats = () => {
     const controller = BreakdownTableController.useTable()

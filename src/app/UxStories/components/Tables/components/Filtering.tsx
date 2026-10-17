@@ -1,9 +1,9 @@
 import { Table } from '@common-ux'
 import { Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
-import type { Row } from '../Tables.types'
 import { TablesConfig } from '../Tables.config'
 import { TablesCode } from '../Tables.code'
+import type { Row } from '../Tables.types'
 
 const { rows } = TablesMocks
 const { renderStatus } = TablesConfig

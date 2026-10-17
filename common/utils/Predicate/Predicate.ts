@@ -1,3 +1,4 @@
+import { Regexp } from '../Regexp/index.js'
 import type {
     Defined,
     Emptiable,
@@ -7,7 +8,6 @@ import type {
     Primitive,
     Truthy,
 } from '../Generics/index.js'
-import { Regexp } from '../Regexp/index.js'
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.

@@ -1,7 +1,7 @@
-﻿import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
+﻿import Joi from 'joi'
 import { ExercisesConstants } from './Exercises.constants'
+import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
 import type { ExerciseValidationInput } from './Exercises.types'
-import Joi from 'joi'
 
 const schema = Joi.object({
     name: Joi.string().required().trim(),

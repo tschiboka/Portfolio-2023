@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react'
-import type { CellMeta } from '../Table.types'
-import { TableUtils } from '../Table.utils'
-import { Row } from './Table.spec.types'
 import { Test } from '@common-ux/Test'
+import { Row } from './Table.spec.types'
+import { TableUtils } from '../Table.utils'
+import type { CellMeta } from '../Table.types'
 
 const { getCellContent } = TableUtils
 

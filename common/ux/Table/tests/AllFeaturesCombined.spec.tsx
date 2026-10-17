@@ -1,5 +1,5 @@
-import { Test } from '@common-ux/Test'
 import { screen, within } from '@testing-library/react'
+import { Test } from '@common-ux/Test'
 
 describe('Table — Combined Features', () => {
     type FullRow = {

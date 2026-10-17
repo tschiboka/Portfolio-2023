@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
-import { Link } from '@common-ux'
 import { BiChevronLeft, BiChevronRight, BiChevronsLeft } from 'react-icons/bi'
+import { Link } from '@common-ux'
 import { stories, STORIES_INDEX_PATH } from '../../UxStories.data'
 import './StoryNav.styles.css'
 

@@ -1,6 +1,6 @@
-import type { PageMeta } from '@common-types'
 import { TableDefaults } from '../Table/Table.defaults'
 import { isDefined, isDigits } from '../Predicate'
+import type { PageMeta } from '@common-types'
 
 /** Bounds for parsing page/pageSize query params. */
 export type PagingBounds = {

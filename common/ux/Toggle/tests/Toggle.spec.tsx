@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Functions } from '@common-utils'
 import { Test } from '@common-ux/Test'
-import { Toggle } from '../Toggle'
 import { ToggleTestUtils } from './Toggle.spec.utils'
+import { Toggle } from '../Toggle'
 
 const { Set } = ToggleTestUtils
 

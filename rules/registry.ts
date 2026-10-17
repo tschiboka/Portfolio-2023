@@ -7,6 +7,7 @@ import { registrar as exactlyOneExportRegistrar } from './exactly-one-export/Exa
 import { registrar as roleExportNameRegistrar } from './role-export-name/RoleExportName.registrar.js'
 import { registrar as noDefaultExportRegistrar } from './no-default-export/NoDefaultExport.registrar.js'
 import { registrar as noMixedImportKindRegistrar } from './no-mixed-import-kind/NoMixedImportKind.registrar.js'
+import { registrar as importOrderRegistrar } from './import-order/ImportOrder.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -20,4 +21,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     roleExportNameRegistrar,
     noDefaultExportRegistrar,
     noMixedImportKindRegistrar,
+    importOrderRegistrar,
 ].map(withPrefixedReports)

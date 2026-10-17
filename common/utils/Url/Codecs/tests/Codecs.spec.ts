@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Nullish, Optional } from '../../../Generics'
 import { Codecs } from '../Codecs'
+import type { Nullish, Optional } from '../../../Generics'
 
 describe('Codecs.text', () => {
     it.each<[unknown, Optional<string>]>([

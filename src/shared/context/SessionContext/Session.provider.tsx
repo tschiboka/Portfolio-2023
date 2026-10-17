@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { SessionContext } from './Session.context'
-import type { Session, SessionContextValues } from './SessionContext.types'
 import { SessionStorage } from './Session.storage'
 import { SessionQueries } from './Session.queries'
+import type { Session, SessionContextValues } from './SessionContext.types'
 
 type SessionProviderProps = {
     children: React.ReactNode

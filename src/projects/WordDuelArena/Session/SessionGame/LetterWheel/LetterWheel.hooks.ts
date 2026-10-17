@@ -1,8 +1,8 @@
 import { useEffect, RefObject, Dispatch, SetStateAction } from 'react'
+import { LetterPosition, TouchState } from './LetterWheel.types'
 import { LetterWheelHandlers } from './LetterWheel.handlers'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
-import { LetterPosition, TouchState } from './LetterWheel.types'
 import type { Dictionary } from '@common-utils'
 
 type UseListenersProps = {

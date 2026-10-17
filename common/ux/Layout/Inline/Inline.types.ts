@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { AccessibleProps, InteractiveProps } from '../../index.types'
 import { StackAlign, StackJustify, StackGap } from '../Stack/Stack.types'
+import { AccessibleProps, InteractiveProps } from '../../index.types'
 
 export type InlineProps = AccessibleProps &
     InteractiveProps & {

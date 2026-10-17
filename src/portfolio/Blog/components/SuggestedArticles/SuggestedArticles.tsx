@@ -1,7 +1,7 @@
-import { BlogCard } from '../BlogCard/BlogCard'
 import { Heading } from '@common-ux'
 import { blogArticles } from '@portfolio/Article'
 import { LikeQueries, VisitQueries } from '@shared-queries'
+import { BlogCard } from '../BlogCard/BlogCard'
 import './SuggestedArticles.scss'
 
 interface Props {

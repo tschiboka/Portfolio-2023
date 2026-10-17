@@ -1,6 +1,6 @@
-﻿import { LevelModel } from '../../../model/Level.model'
-import { Arrays } from '@common-utils'
+﻿import { Arrays } from '@common-utils'
 import { isEmpty } from '@common-utils'
+import { LevelModel } from '../../../model/Level.model'
 
 type DbLevel = {
     name: string

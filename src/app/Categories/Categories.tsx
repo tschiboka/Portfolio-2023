@@ -11,9 +11,9 @@ import { CategoriesOptions } from './Categories.options'
 import { CategoriesQueries } from './Categories.queries'
 import { CategoriesSchema } from './Categories.schema'
 import { CategoriesTransformers } from './Categories.transformers'
-import type { CategoryFormData } from './Categories.types'
 import type { GetCategoryResponse } from '@common-types'
 import type { SearchInputOption } from '@common-ux'
+import type { CategoryFormData } from './Categories.types'
 import './Categories.styles.scss'
 
 type CategoriesProps = { path: string }

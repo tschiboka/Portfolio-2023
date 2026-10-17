@@ -1,5 +1,5 @@
-import { EditorWord } from './Editor/Character/Character.types'
 import { Keystroke as SharedKeystroke, RoundResponse, TypingStats } from '@common-types'
+import { EditorWord } from './Editor/Character/Character.types'
 
 export type { RoundResponse, TypingStats }
 

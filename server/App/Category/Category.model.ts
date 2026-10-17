@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { ICategory } from './Category.types'
 import { CategoryConstants } from './Category.constants'
+import type { ICategory } from './Category.types'
 
 const schema = new mongoose.Schema<ICategory>({
     name: { type: String, required: true, maxLength: CategoryConstants.fieldLimits.name.max },

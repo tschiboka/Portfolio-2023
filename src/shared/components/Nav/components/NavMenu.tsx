@@ -1,11 +1,11 @@
-import { ReactNode } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
+import { ReactNode } from 'react'
 import { Link } from '@common-ux'
-import { AccessGuard } from '../../AccessGuard'
-import { Nav } from '../Nav'
-import { MenuItem, NavProps, SubmenuState } from '../Nav.types'
-import { NavUtils } from '../Nav.utils'
 import { Chevron } from './Chevron'
+import { MenuItem, NavProps, SubmenuState } from '../Nav.types'
+import { Nav } from '../Nav'
+import { NavUtils } from '../Nav.utils'
+import { AccessGuard } from '../../AccessGuard'
 
 export type NavMenuProps = Pick<
     NavProps,

@@ -1,6 +1,6 @@
 import { Const } from '@common-ux'
-import './Overlay.styles.css'
 import { OverlayProps } from './Overlay.types'
+import './Overlay.styles.css'
 
 export const FullScreen = ({ ariaLabel, className, style, children }: OverlayProps) => (
     <div

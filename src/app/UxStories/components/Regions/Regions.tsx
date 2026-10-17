@@ -1,3 +1,4 @@
+import { FaChartBar, FaCog } from 'react-icons/fa'
 import {
     Box,
     Code,
@@ -14,9 +15,8 @@ import {
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { RegionsCode } from './Regions.code'
-import { FaChartBar, FaCog } from 'react-icons/fa'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type RegionsProps = { path: string }
 

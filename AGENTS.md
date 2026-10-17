@@ -19,7 +19,7 @@
 - Extend an existing import from the same path. Never create duplicate imports.
 - Import order is two tiers — style first, path second. Within one style and path, order is free.
     - Style: namespace → default → mixed default and named → named → type-only → side-effect.
-    - Path: external → aliased internal → parent-relative shallowest first → same-directory → styles and assets.
+    - Path: external → aliased internal → same-directory → parent-relative shallowest first → styles and assets.
 - `import type` is its own style, whatever shape carries it; side-effect imports come last.
 - `common/types` must not depend on `common/utils` at runtime.
 - Prefer value subpaths over the common barrel.

@@ -1,10 +1,10 @@
-import { AiFillSave } from 'react-icons/ai'
 import SyntaxHighlighter from 'react-syntax-highlighter'
+import { AiFillSave } from 'react-icons/ai'
 import { useState } from 'react'
 import { Browser } from '@common-utils'
 import { DateTime } from '@common-utils'
-import type { AccessibleProps } from '../index.types'
 import { tschibokaDark } from './Code.theme'
+import type { AccessibleProps } from '../index.types'
 import './Code.styles.css'
 
 interface Props extends AccessibleProps {

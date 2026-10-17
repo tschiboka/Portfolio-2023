@@ -1,8 +1,8 @@
 import { Code, CodeText, Heading, Main, Paragraph, Pill, Section, Stack } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { PillsCode } from './Pills.code'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type PillsProps = { path: string }
 

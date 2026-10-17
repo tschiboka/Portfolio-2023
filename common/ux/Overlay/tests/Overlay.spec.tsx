@@ -1,11 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { Overlay } from '../index'
-import type { ActionMenuItem } from '../ActionMenu'
-import type { Key } from '@common-utils'
-import { PopupUtils } from '../Popup.utils'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { OverlayMocks } from './Overlay.mocks'
 import { OverlayTestUtils } from './Overlay.spec.utils'
+import { Overlay } from '../index'
+import { PopupUtils } from '../Popup.utils'
+import type { Key } from '@common-utils'
+import type { ActionMenuItem } from '../ActionMenu'
 
 const { Set, mockAnchorRef } = OverlayTestUtils
 const { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } = PopupUtils

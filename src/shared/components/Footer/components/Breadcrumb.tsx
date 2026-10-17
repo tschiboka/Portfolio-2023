@@ -1,6 +1,6 @@
-import { VisitQueries } from '@shared-queries'
 import { AiFillHome } from 'react-icons/ai'
 import { FaEye } from 'react-icons/fa'
+import { VisitQueries } from '@shared-queries'
 import { Link } from '@common-ux'
 import './Breadcrumb.css'
 

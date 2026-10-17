@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { IMessage } from './Message.types'
 import { MessageConstants } from './Message.constants'
+import type { IMessage } from './Message.types'
 
 const schema = new mongoose.Schema<IMessage>({
     name: {

@@ -1,6 +1,6 @@
+import { isDefined } from '@common-utils'
 import { StackSelectors } from '../Stack/Stack.selectors'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
-import { isDefined } from '@common-utils'
 import './Grid.styles.css'
 
 const { selectAlign, selectJustify } = StackSelectors

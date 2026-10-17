@@ -1,8 +1,8 @@
+import { Heading, Main, Paragraph } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { AccessGuard } from '@shared-components/AccessGuard'
 import { AdminHome } from './components/AdminHome'
 import { GuestHome } from './components/GuestHome'
-import { Heading, Main, Paragraph } from '@common-ux'
 
 interface HomeProps {
     path: string

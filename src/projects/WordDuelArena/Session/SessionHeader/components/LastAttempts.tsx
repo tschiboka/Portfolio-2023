@@ -1,6 +1,6 @@
-import { SessionHooks } from '../../Session.hooks'
 import { AttemptWord } from './AttemptWord'
 import { SessionHeaderSelectors } from '../SessionHeader.selectors'
+import { SessionHooks } from '../../Session.hooks'
 
 export const LastAttempts = () => {
     const { sessionState } = SessionHooks.useContext()

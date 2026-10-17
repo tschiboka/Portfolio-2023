@@ -1,9 +1,9 @@
-﻿import type { SessionState, PlayerRole, LevelWord } from '../../WordDuelArena.types'
-import type { MovePayload } from '../../../../../common/types/projects/wda'
-import type { Optional } from '@common-utils'
-import { PointsService } from './Points.service'
-import { GameConstants } from '../../config/constants/Game.constants'
+﻿import { PointsService } from './Points.service'
 import { HintService } from './Hint.service'
+import { GameConstants } from '../../config/constants/Game.constants'
+import type { Optional } from '@common-utils'
+import type { SessionState, PlayerRole, LevelWord } from '../../WordDuelArena.types'
+import type { MovePayload } from '../../../../../common/types/projects/wda'
 
 function getSolutionState(draft: SessionState, deviceId: string, payload: MovePayload): void {
     if (!draft.players.player1 || !draft.players.player2 || !draft.level || !draft.currentMatch)

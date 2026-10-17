@@ -1,6 +1,6 @@
 import { Arrays } from '@common-utils'
-import type { AnagramMapType, LevelWord } from '../Types'
 import { WordConstants } from './Word.constants'
+import type { AnagramMapType, LevelWord } from '../Types'
 
 const getAnagramKey = (word: string) => {
     return word.split('').sort().join('').toUpperCase()

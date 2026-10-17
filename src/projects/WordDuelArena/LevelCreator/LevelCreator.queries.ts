@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { AnagramMapType, Level } from '../common/utils'
+import { useMutation, useQuery } from '@tanstack/react-query'
+import { Session } from '@shared-context'
 import { Query, QueryKey } from '@common-utils'
+import { AnagramMapType, Level } from '../common/utils'
 import type { ErrorResponse } from '@common-utils'
 import type { LevelNameResponse } from '../common/utils/Types/Level.types'
 import type { FrequencyType } from '../common/utils/Types/Words.types'
-import { Session } from '@shared-context'
 
 const useGetLevelNames = () => {
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')

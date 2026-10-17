@@ -1,9 +1,9 @@
 import { RefObject } from 'react'
-import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
+import { isEmpty } from '@common-utils'
 import { LetterPosition, TouchState } from './LetterWheel.types'
+import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
 import { WordConstants } from '../../../common/utils'
 import type { Nullable } from '@common-utils'
-import { isEmpty } from '@common-utils'
 
 type CalculateLetterPositionsProps = {
     letters: string[]

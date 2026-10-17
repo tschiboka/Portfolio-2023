@@ -1,6 +1,6 @@
-import './Disclaimer.scss'
 import faceImg from '@portfolio/assets/home/headshot_placeholder.png'
 import { Button, Link, Paragraph, Section } from '@common-ux'
+import './Disclaimer.scss'
 
 export const Disclaimer = () => {
     return (

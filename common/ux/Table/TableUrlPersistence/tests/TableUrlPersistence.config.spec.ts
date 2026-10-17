@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { FilterConfig } from '../../TableFilter'
 import { TableUrlPersistenceConfig } from '../TableUrlPersistence.config'
+import type { FilterConfig } from '../../TableFilter'
 
 describe('buildCodec', () => {
     it('resolves string codecs (text/search/date/option) to the same string behavior', () => {

@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { BlogCard } from './components/BlogCard/BlogCard'
-import { BlogFilter } from './components/BlogFilter/BlogFilter'
+import { BsSliders2 } from 'react-icons/bs'
+import { hasLength } from '@common-utils'
+import { Heading, Paragraph, Stack, Section, Main } from '@common-ux'
+import { LikeQueries, VisitQueries } from '@shared-queries'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { Screen } from '@shared-components/Screen/Screen'
-import { Heading, Paragraph, Stack, Section, Main } from '@common-ux'
-import { hasLength } from '@common-utils'
-import { BsSliders2 } from 'react-icons/bs'
+import { BlogCard } from './components/BlogCard/BlogCard'
+import { BlogFilter } from './components/BlogFilter/BlogFilter'
 import { BlogUtils } from './Blog.utils'
-import './Blog.scss'
 import { BlogSortBy } from './Blog.types'
-import { LikeQueries, VisitQueries } from '@shared-queries'
+import './Blog.scss'
 
 interface Props {
     pageName: string

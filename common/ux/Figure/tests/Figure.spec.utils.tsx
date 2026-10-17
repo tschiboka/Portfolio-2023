@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Figure } from '../Figure'
-import type { FigureProps } from '../Figure.types'
 import { FigureAccessor } from '../../Test/Figure/Figure'
+import type { FigureProps } from '../Figure.types'
 
 const Set = {
     figure: (props: Partial<FigureProps> = {}) => {

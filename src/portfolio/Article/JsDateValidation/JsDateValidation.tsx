@@ -1,10 +1,10 @@
-import { Article } from '../Article'
-import { Figure } from '@shared-components/Figure/Figure'
 import calendarImg from '@portfolio/assets/blog/js_date_validation/calendar.jpg'
+import { Figure } from '@shared-components/Figure/Figure'
+import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { JsDateValidationCode } from './JsDateValidation.code'
+import { Article } from '../Article'
 import { getReferenceList } from '../References.data'
 import { InlineReference } from '../components/InlineReference/InlineReference'
-import { Code, Heading, Paragraph, Section } from '@common-ux'
 
 interface Props {
     pageName: string

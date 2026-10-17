@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { Accessor } from '../../../Test'
 import { Inline } from '../Inline'
+import { Accessor } from '../../../Test'
 import type { InlineProps } from '../Inline.types'
 
 type SetProps = Partial<InlineProps> & { ariaLabel: string }

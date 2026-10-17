@@ -1,6 +1,6 @@
 ﻿// Game state types for Word Duel Arena (server-side)
-
 import type WebSocket from 'ws'
+import type { Nullable, Dictionary } from '@common-utils'
 import type {
     PlayerRole,
     OptionalPlayerRole,
@@ -12,7 +12,6 @@ import type {
     WdaMatchPlayerStatus,
     WdaMatchEndReason,
 } from '../../../common/types/projects/wda'
-import type { Nullable, Dictionary } from '@common-utils'
 
 export type { PlayerRole, OptionalPlayerRole, LastWordAttempt }
 

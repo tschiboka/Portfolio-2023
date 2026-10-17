@@ -1,11 +1,11 @@
+import { useEffect, useState } from 'react'
+import { Arrays } from '@common-utils'
+import { ExtraWords } from './ExtraWords/ExtraWords'
+import { GameControls } from './GameControls/GameControls'
 import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { SessionOverlay } from '../SessionOverlay/SessionOverlay'
-import { Arrays } from '@common-utils'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
 import { SessionHooks } from '../Session.hooks'
-import { useEffect, useState } from 'react'
-import { GameControls } from './GameControls/GameControls'
-import { ExtraWords } from './ExtraWords/ExtraWords'
 import './SessionGame.styles.css'
 
 type SessionGameProps = {

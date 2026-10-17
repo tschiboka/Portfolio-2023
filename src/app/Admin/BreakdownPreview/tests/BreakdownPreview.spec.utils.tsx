@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
-import { BreakdownPreview as BreakdownPreviewComponent } from '../BreakdownPreview'
 import { BreakdownPreviewMocks } from './BreakdownPreview.mocks'
+import { BreakdownPreview as BreakdownPreviewComponent } from '../BreakdownPreview'
 import type { BreakdownPreviewProps } from '../BreakdownPreview.types'
 
 class BreakdownPreviewAccessor extends Accessor {

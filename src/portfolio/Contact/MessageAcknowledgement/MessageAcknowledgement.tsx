@@ -1,6 +1,6 @@
-import './MessageAcknowledgement.scss'
 import thumbsupImg from '@portfolio/assets/messages/thumbs_up.png'
 import { Heading, Link, Paragraph } from '@common-ux'
+import './MessageAcknowledgement.scss'
 
 export const MessageAcknowledgement = () => {
     return (

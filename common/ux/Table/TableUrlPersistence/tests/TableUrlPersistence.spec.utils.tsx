@@ -1,12 +1,12 @@
-import { renderHook } from '@testing-library/react'
-import type { ReactNode } from 'react'
 import { MemoryRouter, useLocation } from 'react-router-dom'
+import { renderHook } from '@testing-library/react'
+import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
+import type { ReactNode } from 'react'
+import type { Filters } from './TableUrlPersistence.spec.types'
 import type { UseTableUrlPersistenceArgs } from '../TableUrlPersistence.types'
 import type { TableSortState, Paging } from '../../Table.hooks.types'
 import type { FilterDefinitions } from '../../TableFilter'
-import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
-import type { Filters } from './TableUrlPersistence.spec.types'
 
 const { filterDefs, defaultSort, defaultPaging } = TableUrlPersistenceMocks
 

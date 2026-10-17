@@ -1,8 +1,8 @@
-import type { Achievement } from './Achievements.data'
 import { TbCertificate, TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'
-import './AchievementListItem.scss'
 import { ZoomedImage } from '@shared-components/ZoomedImage/ZoomedImage'
+import type { Achievement } from './Achievements.data'
+import './AchievementListItem.scss'
 
 interface Props {
     achievement: Achievement

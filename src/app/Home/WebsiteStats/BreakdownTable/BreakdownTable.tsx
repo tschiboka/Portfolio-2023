@@ -1,13 +1,13 @@
+import { useState } from 'react'
 import { Table } from '@common-ux'
 import { BreakdownTableColumns as defaultColumns } from './BreakdownTable.columns'
+import { BreakdownTableActions } from './BreakdownTable.actions'
 import { ActivityTypeLegend } from '../ActivityTypePill/ActivityTypePill'
+import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
 import type { TableControl } from '@common-ux'
+import type { Nullable } from '@common-utils'
 import type { ActivityFeedContext, PageMeta } from '@common-types'
 import type { BreakdownRow } from './BreakdownTable.types'
-import { BreakdownTableActions } from './BreakdownTable.actions'
-import { useState } from 'react'
-import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
-import type { Nullable } from '@common-utils'
 
 type BreakdownTableProps = {
     controller: TableControl

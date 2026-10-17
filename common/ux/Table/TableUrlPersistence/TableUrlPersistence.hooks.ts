@@ -1,11 +1,11 @@
 import { useCallback, useMemo } from 'react'
 import { useInRouterContext, useSearchParams } from 'react-router-dom'
+import { isDefined, Objects, Url, Numbers } from '@common-utils'
+import { TableUrlPersistenceConfig } from './TableUrlPersistence.config'
 import type { Dictionary, Optional, Nullable } from '@common-utils'
+import type { TableUrlPersistence, UseTableUrlPersistenceArgs } from './TableUrlPersistence.types'
 import type { TableSortState, TableState } from '../Table.hooks.types'
 import type { FilterConfig, FilterDefinitions } from '../TableFilter'
-import type { TableUrlPersistence, UseTableUrlPersistenceArgs } from './TableUrlPersistence.types'
-import { TableUrlPersistenceConfig } from './TableUrlPersistence.config'
-import { isDefined, Objects, Url, Numbers } from '@common-utils'
 
 const readFilterValues = <TFilters extends Dictionary>(
     params: URLSearchParams,

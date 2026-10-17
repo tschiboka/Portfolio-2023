@@ -1,10 +1,10 @@
-import { type Option } from '@common-utils'
-import type { SectionData } from '../BreakdownPreview.types'
-import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 import { Heading } from '@common-ux'
+import { type Option } from '@common-utils'
 import { Table } from '@common-ux/Table/Table'
+import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 import { BreakdownPreviewColumns } from '../BreakdownPreview.columns'
 import { BreakdownPreviewTransformers } from '../BreakdownPreview.transformers'
+import type { SectionData } from '../BreakdownPreview.types'
 
 export type DataSectionProps = {
     title: string

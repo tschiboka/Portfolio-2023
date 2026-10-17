@@ -1,4 +1,7 @@
-﻿import type {
+﻿import type mongoose from 'mongoose'
+import type { Document } from 'mongoose'
+import type { Dictionary, WithoutId } from '@common-utils'
+import type {
     DifficultyLevel,
     EquipmentResource,
     ExerciseType,
@@ -11,9 +14,6 @@
     TypedRequest,
     TypedResponse,
 } from '../../../../common/types'
-import type { Dictionary, WithoutId } from '@common-utils'
-import type mongoose from 'mongoose'
-import type { Document } from 'mongoose'
 
 /** Mongoose document shape for a gym exercise. */
 export interface IGymExercise extends Document {

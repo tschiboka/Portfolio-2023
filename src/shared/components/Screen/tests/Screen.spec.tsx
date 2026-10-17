@@ -1,11 +1,11 @@
-import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { VisitQueries } from '@shared-queries'
 import { Browser, Paths } from '@common-utils'
-import { Screen } from '../Screen'
-import { Test } from './index'
 import { Heading } from '@common-ux'
+import { Test } from './index'
+import { Screen } from '../Screen'
+import '@testing-library/jest-dom'
 
 // Mock the shared-queries barrel so visit recording is a typed vi.fn we can drive directly;
 // stub the remaining hooks to avoid undefined-method crashes in any subcomponent.

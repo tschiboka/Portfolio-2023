@@ -1,8 +1,8 @@
 import React from 'react'
 import { screen } from '@testing-library/react'
-import { Test, Accessor } from '../../Test'
 import { FormTestUtils } from './Form.spec.utils'
 import { FormTestMocks } from './Form.spec.mocks'
+import { Test, Accessor } from '../../Test'
 
 const { Set, FORM_LABEL } = FormTestUtils
 const { iconOptions } = FormTestMocks

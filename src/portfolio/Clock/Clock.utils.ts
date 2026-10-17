@@ -1,6 +1,6 @@
 import moment from 'moment'
-import { ClockData } from '.'
 import { CanvasType, Centre, DateTime, Line } from '@common-utils'
+import { ClockData } from '.'
 import type { Nullable } from '@common-utils'
 
 const getDateTime = (): ClockData => {

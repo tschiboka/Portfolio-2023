@@ -1,5 +1,5 @@
-import { SessionHooks } from '../../Session.hooks'
 import { SessionHeaderSelectors } from '../SessionHeader.selectors'
+import { SessionHooks } from '../../Session.hooks'
 
 export const MomentumBar = () => {
     const { sessionState } = SessionHooks.useContext()

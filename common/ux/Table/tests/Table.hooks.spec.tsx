@@ -1,7 +1,7 @@
 import { act } from '@testing-library/react'
-import type { SortDirection } from '../Table.hooks.types'
 import { TableHooksMocks } from './Table.hooks.mocks'
 import { TableHooksTestUtils } from './Table.hooks.spec.utils'
+import type { SortDirection } from '../Table.hooks.types'
 
 const { filterDefs } = TableHooksMocks
 const { setup, setupWithUrl } = TableHooksTestUtils

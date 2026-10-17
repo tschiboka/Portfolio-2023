@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import type { ErrorResponse, GetCategoryResponse, PostCategoryRequest } from '@common-types'
 import { Query, QueryKey } from '@common-utils'
 import { Session } from '@shared-context'
 import type { AxiosError } from 'axios'
+import type { ErrorResponse, GetCategoryResponse, PostCategoryRequest } from '@common-types'
 
 /** Every category, for the parent selector and the table. */
 const useGet = () => {

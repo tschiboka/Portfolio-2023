@@ -1,9 +1,9 @@
-import type { Session, SessionState } from '../../WordDuelArena.types'
+import { produce } from 'immer'
 import { SessionRepository } from '../persistence/server/Session.repository'
 import { BroadcastService } from '../../transport/ws/Broadcast.service'
 import { SessionConstants } from '../../config/constants/Session.constants'
 import { PresenceService } from '../../domain/session/Presence.service'
-import { produce } from 'immer'
+import type { Session, SessionState } from '../../WordDuelArena.types'
 
 function startPresenceLoop() {
     setInterval(() => {

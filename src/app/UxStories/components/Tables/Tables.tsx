@@ -1,7 +1,6 @@
 import { CodeText, Heading, Main, Paragraph } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import {
     Fundamentals,
     Controller,
@@ -19,6 +18,7 @@ import {
     Accessibility,
     AllFeaturesCombined,
 } from './components'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type TablesProps = {
     path: string

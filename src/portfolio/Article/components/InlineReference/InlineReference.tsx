@@ -1,5 +1,5 @@
-import { Reference } from '../References/References'
 import { InlineReference as UxInlineReference } from '@common-ux'
+import { Reference } from '../References/References'
 import './InlineReference.scss'
 
 interface Props {

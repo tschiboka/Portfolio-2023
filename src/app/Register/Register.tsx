@@ -1,13 +1,13 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Screen } from '@shared-components/Screen/Screen'
+import { ClientMessage, Paths, errorMessage } from '@common-utils'
 import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
 import { RegisterSchema } from './Register.schema'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { RegistrationFormData } from './Register.types'
-import { ClientMessage, Paths, errorMessage } from '@common-utils'
 import { RegisterQueries } from './Register.queries'
-import { useNavigate } from 'react-router-dom'
 import './Register.scss'
 
 type RegisterProps = {

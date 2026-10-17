@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import type { ReactNode } from 'react'
 import useWebSocket from 'react-use-websocket'
+import { useState } from 'react'
+import { isString } from '@common-utils'
 import { SessionHooks } from './Session.hooks'
 import { SessionWebSocketContext } from './SessionWebSocket.context'
 import { ApiPaths } from '../common/utils'
-import { isString } from '@common-utils'
+import type { ReactNode } from 'react'
 import type { Nullable } from '@common-utils'
 import type { WebSocketRequest, WebSocketResponse } from './Session.types'
 

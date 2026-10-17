@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import { DefaultOptions } from '@tanstack/react-query'
-import type { Dictionary } from '@common-utils'
 import type { Mock } from 'vitest'
+import type { Dictionary } from '@common-utils'
 import type { SessionContextValues } from '@shared-context'
 
 const navigate = (globalThis as Dictionary).mockNavigate as Mock

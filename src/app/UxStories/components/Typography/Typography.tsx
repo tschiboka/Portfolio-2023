@@ -15,8 +15,8 @@
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { TypographyCode } from './Typography.code'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type TypographyProps = { path: string }
 

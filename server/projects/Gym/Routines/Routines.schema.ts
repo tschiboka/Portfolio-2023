@@ -1,6 +1,6 @@
-﻿import { ROUTINE_SOURCES } from '../../../../common/types'
+﻿import Joi from 'joi'
+import { ROUTINE_SOURCES } from '../../../../common/types'
 import type { RoutineValidationInput } from './Routines.types'
-import Joi from 'joi'
 
 const schema = Joi.object({
     name: Joi.string().required().trim(),

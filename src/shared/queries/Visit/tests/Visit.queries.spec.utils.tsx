@@ -1,8 +1,8 @@
 import { waitFor } from '@testing-library/react'
 import { Paths } from '@common-utils'
 import { Test } from '@shared-components/Screen/tests'
-import { VisitQueries } from '../../index.ts'
 import { VisitQueriesMockHandlers } from './Visit.queries.mockHandlers.ts'
+import { VisitQueries } from '../../index.ts'
 
 const { detectIncognito } = vi.hoisted(() => ({ detectIncognito: vi.fn() }))
 

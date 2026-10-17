@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { AccessibleProps, InteractiveProps } from '../../index.types'
 import { StackGap, StackAlign, StackJustify } from '../Stack/Stack.types'
+import { AccessibleProps, InteractiveProps } from '../../index.types'
 
 export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 12
 

@@ -1,6 +1,6 @@
 import { DateTime } from '@common-utils'
-import './BlogTimeStamp.scss'
 import { Paragraph } from '@common-ux/Typography/Paragraph'
+import './BlogTimeStamp.scss'
 
 interface Props {
     created: string

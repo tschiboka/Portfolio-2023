@@ -1,6 +1,6 @@
-import { AccessMap, Guard, GuardCondition, ModeConfig } from '../AccessGuard.types'
-import { AccessGuardUtils } from '../AccessGuard.utils'
 import { AccessGuardTestUtils } from './AccessGuard.spec.utils'
+import { AccessGuardUtils } from '../AccessGuard.utils'
+import { AccessMap, Guard, GuardCondition, ModeConfig } from '../AccessGuard.types'
 
 const { isConditionDenied, isGuardActive, resolveGuards } = AccessGuardUtils
 const { fullAccess, noAccess, partialAccess } = AccessGuardTestUtils

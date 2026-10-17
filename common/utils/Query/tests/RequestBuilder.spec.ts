@@ -1,8 +1,8 @@
-import type { MockInstance } from 'vitest'
-import axios from 'axios'
-import type { AxiosRequestConfig } from 'axios'
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
+import axios from 'axios'
 import { RequestBuilder } from '../RequestBuilder'
+import type { MockInstance } from 'vitest'
+import type { AxiosRequestConfig } from 'axios'
 
 /** An axios method stubbed by `vi.spyOn`, recording its `(url, config)` arguments. */
 type AxiosMethodMock = MockInstance<(url: string, config?: AxiosRequestConfig) => unknown>

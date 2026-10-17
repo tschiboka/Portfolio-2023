@@ -1,9 +1,9 @@
 import axios from 'axios'
-import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import { apiPathBuilder } from '../Paths/apiPathBuilder'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'
 import { PathKey } from '../Paths/Path.types'
+import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import type { ServerGroup } from '../Paths/Path.types'
 import type { Dictionary } from '../Generics'
 

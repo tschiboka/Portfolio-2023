@@ -1,7 +1,7 @@
 import { within } from '@testing-library/react'
+import { Test, Accessor } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
-import { Test, Accessor } from '@common-ux/Test'
 import { Table } from '..'
 
 const { rows, basicColumns } = TableMocks

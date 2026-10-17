@@ -1,7 +1,7 @@
+import { isEmpty } from '@common-utils'
+import { TableCheckboxSelectors } from './TableCheckbox.selectors'
 import type { ReactNode } from 'react'
 import type { TableSelection } from '../Table.types'
-import { TableCheckboxSelectors } from './TableCheckbox.selectors'
-import { isEmpty } from '@common-utils'
 import './TableCheckbox.styles.css'
 
 const { getAllSelected, getSelectableIds } = TableCheckboxSelectors

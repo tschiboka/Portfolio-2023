@@ -1,10 +1,10 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Test } from '@shared-components/Screen/tests'
-import { AppRoutes } from '../../../app'
 import { Paths } from '@common-utils'
+import { Test } from '@shared-components/Screen/tests'
 import { RegisterMocks } from './Register.mocks'
 import { RegisterMockHandlers } from './Register.mockHandlers'
 import { RegisterTestUtils } from './Register.spec.utils'
+import { AppRoutes } from '../../../app'
 
 const { form: FORM, fields, buttons, errors } = RegisterTestUtils.labels
 

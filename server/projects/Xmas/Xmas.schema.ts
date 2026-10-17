@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import type { XmasMessageInput, XmasCandleInput } from './Xmas.types'
 import { XmasConstants } from './Xmas.constants'
+import type { XmasMessageInput, XmasCandleInput } from './Xmas.types'
 
 const { fieldLimits } = XmasConstants
 

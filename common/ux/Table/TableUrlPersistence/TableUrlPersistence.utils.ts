@@ -1,6 +1,6 @@
-import type { TableState } from '../Table.hooks.types'
-import type { Dictionary } from '@common-utils'
 import { Objects } from '@common-utils'
+import type { Dictionary } from '@common-utils'
+import type { TableState } from '../Table.hooks.types'
 
 /** Structural equality for a `TableState`. Filter values are primitives, so a shallow compare
  * plus the sorting/paging fields is sufficient. Used to tell a URL-derived state from the state

@@ -1,6 +1,6 @@
+import { ResolveErrorMessageConstants } from './ResolveErrorMessage.constants'
 import { isString, isError, isObject } from '../../Predicate'
 import type { ValidationResultLike } from './ResolveErrorMessage.types'
-import { ResolveErrorMessageConstants } from './ResolveErrorMessage.constants'
 
 /**
  * Resolve the human-readable message from an error-ish input.

@@ -2,8 +2,8 @@ import { Table, Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { Functions } from '@common-utils'
 import { TablesCode } from '../Tables.code'
 import { TablesMocks } from '../Tables.mocks'
-import type { Row } from '../Tables.types'
 import { ControllerSingleDemo, ControllerNamedDemo, ControllerOffDemo } from '../Tables.demos'
+import type { Row } from '../Tables.types'
 
 const { rows } = TablesMocks
 

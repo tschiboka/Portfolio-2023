@@ -1,5 +1,5 @@
-import type { ListProps } from './Typography.types'
 import { isObject } from '@common-utils'
+import type { ListProps } from './Typography.types'
 import './Typography.styles.css'
 
 export const List = ({ as: Element = 'ul', items, size = 'md', ...rest }: ListProps) => {

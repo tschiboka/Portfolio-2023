@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
-import type { Dictionary } from '../../../Generics'
 import type { TestDoc } from './Repository.spec.types'
+import type { Dictionary } from '../../../Generics'
 
 /** A duck-typed model-like fixture: static query methods + a constructor that builds docs. */
 class FakeModel {

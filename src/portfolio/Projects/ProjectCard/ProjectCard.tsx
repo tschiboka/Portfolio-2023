@@ -1,4 +1,6 @@
-import { ProjectsSelectors } from '../Projects.selectors'
+import { FaGithub } from 'react-icons/fa'
+import { TbWorldWww } from 'react-icons/tb'
+import { PiReadCvLogoFill } from 'react-icons/pi'
 import {
     Link,
     Heading,
@@ -10,11 +12,9 @@ import {
     Typography,
     Overline,
 } from '@common-ux'
-import { FaGithub } from 'react-icons/fa'
-import { TbWorldWww } from 'react-icons/tb'
-import { PiReadCvLogoFill } from 'react-icons/pi'
-import './ProjectCard.scss'
+import { ProjectsSelectors } from '../Projects.selectors'
 import { Project, ProjectsDefaults } from '..'
+import './ProjectCard.scss'
 
 interface Props {
     project: Project

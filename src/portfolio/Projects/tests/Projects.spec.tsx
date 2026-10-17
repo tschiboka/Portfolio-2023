@@ -1,8 +1,8 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
+import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 import { Test } from '@shared-components/Screen/tests'
 import { Projects } from '../Projects'
-import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
 
 const setupProjects = async () => {
     Test.Screen.Do.render({

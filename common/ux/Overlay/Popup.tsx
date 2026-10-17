@@ -1,13 +1,13 @@
-import { Const } from '@common-ux'
-import './Overlay.styles.css'
-import { createPortal } from 'react-dom'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import type { CSSProperties } from 'react'
-import type { AnchorResult, PopupProps } from './Overlay.types'
-import type { Optional } from '@common-utils'
-import { PopupUtils } from './Popup.utils'
+import { createPortal } from 'react-dom'
+import { Const } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
+import { PopupUtils } from './Popup.utils'
 import { Stack } from '../Layout'
+import type { CSSProperties } from 'react'
+import type { Optional } from '@common-utils'
+import type { AnchorResult, PopupProps } from './Overlay.types'
+import './Overlay.styles.css'
 
 const { ArrowClass, DefaultIcon, ModeClass, SizeStyle, getAnchorPosition, useScrollLock } =
     PopupUtils

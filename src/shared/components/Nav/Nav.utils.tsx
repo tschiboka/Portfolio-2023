@@ -1,7 +1,7 @@
+import SantaHat from '@projects/assets/xmas/santa_hat.png'
+import { Strings } from '@common-utils'
 import { MenuItem, SubmenuState } from './Nav.types'
 import type { Optional } from '@common-utils'
-import { Strings } from '@common-utils'
-import SantaHat from '@projects/assets/xmas/santa_hat.png'
 
 const isArticle = (path: Optional<string>): boolean => /^\/blog\//.test(path || '')
 

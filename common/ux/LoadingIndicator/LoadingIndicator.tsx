@@ -1,5 +1,5 @@
-import './LoadingIndicator.styles.css'
 import type { AccessibleProps } from '../index.types'
+import './LoadingIndicator.styles.css'
 
 type LoadingIndicatorProps = AccessibleProps & {
     show: boolean

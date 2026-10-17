@@ -1,4 +1,5 @@
 import { ReactNode, useState } from 'react'
+import { hasLength } from '@common-utils'
 import {
     CellVariant,
     CellMeta,
@@ -7,10 +8,9 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { hasLength } from '@common-utils'
-import type { Optional } from '@common-utils'
 import { TableRow } from '../TableRow/TableRow'
 import { TableUtils } from '../Table.utils'
+import type { Optional } from '@common-utils'
 import './TableBody.styles.css'
 
 const { getTotalCols } = TableUtils

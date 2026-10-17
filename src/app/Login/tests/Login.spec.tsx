@@ -1,10 +1,10 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@shared-components/Screen/tests'
-import { AppRoutes } from '../../../app'
 import { SettingsMocks, UserMocks } from '@common-mocks'
 import { LoginMocks } from './Login.mocks'
 import { LoginMockHandlers } from './Login.mockHandlers'
 import { LoginTestUtils } from './Login.spec.utils'
+import { AppRoutes } from '../../../app'
 
 const { form: FORM, fields, buttons, errors } = LoginTestUtils.labels
 

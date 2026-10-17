@@ -1,5 +1,5 @@
-import { SplitSelectors } from '../Split.selectors'
 import { SplitTestUtils } from './Split.spec.utils'
+import { SplitSelectors } from '../Split.selectors'
 
 const { Set } = SplitTestUtils
 

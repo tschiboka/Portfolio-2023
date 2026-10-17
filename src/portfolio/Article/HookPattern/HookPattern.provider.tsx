@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { ReactNode } from 'react'
 import { HookPatternContext } from './HookPattern.context'
+import type { ReactNode } from 'react'
 
 type HookPatternProviderProps = {
     children: ReactNode

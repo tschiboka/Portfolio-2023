@@ -1,9 +1,9 @@
 import { CodeText } from '@common-ux'
 import { DateTime } from '@common-utils'
-import type { TableColumns } from '@common-ux'
-import type { BreakdownRow } from './BreakdownTable.types'
 import { ActivityTypePill } from '../ActivityTypePill/ActivityTypePill'
+import type { TableColumns } from '@common-ux'
 import type { ActivityType } from '@common-types'
+import type { BreakdownRow } from './BreakdownTable.types'
 
 const formatDate = (iso: string) => DateTime.Format.to('DisplayDateTime', iso) ?? iso
 

@@ -1,13 +1,13 @@
-import { Const } from '@common-ux'
-import './Overlay.styles.css'
-import { createPortal } from 'react-dom'
 import { useEffect } from 'react'
-import type { CSSProperties } from 'react'
-import type { ModalProps } from './Overlay.types'
-import { PopupUtils } from './Popup.utils'
+import { createPortal } from 'react-dom'
+import { Const } from '@common-ux'
 import { isNonEmpty } from '@common-utils'
+import { PopupUtils } from './Popup.utils'
 import { Stack } from '../Layout'
+import type { CSSProperties } from 'react'
 import type { Dictionary } from '@common-utils'
+import type { ModalProps } from './Overlay.types'
+import './Overlay.styles.css'
 
 const { DefaultIcon, ModeClass, useScrollLock } = PopupUtils
 

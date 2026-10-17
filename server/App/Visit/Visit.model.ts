@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { IVisit } from './Visit.types'
 import { VisitConstants } from './Visit.constants'
+import type { IVisit } from './Visit.types'
 
 const schema = new mongoose.Schema<IVisit>({
     path: {

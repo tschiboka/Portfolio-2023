@@ -1,5 +1,5 @@
-import type { Session, Sessions, SessionState } from '../../../WordDuelArena.types'
 import { SessionConstants } from '../../../config/constants/Session.constants'
+import type { Session, Sessions, SessionState } from '../../../WordDuelArena.types'
 
 const sessions: Sessions = {}
 

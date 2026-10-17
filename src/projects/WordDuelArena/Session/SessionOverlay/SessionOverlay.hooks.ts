@@ -1,6 +1,6 @@
-import type { Nullable } from '@common-utils'
-import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
 import { SessionOverlayConfig, SessionOverlayModes } from './SessionOverlay.types'
+import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
+import type { Nullable } from '@common-utils'
 
 type UseConfigProps = {
     mode: SessionOverlayModes

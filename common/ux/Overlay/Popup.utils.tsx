@@ -1,7 +1,7 @@
-import type { CSSProperties, ReactNode } from 'react'
 import { useLayoutEffect } from 'react'
-import { PopupArrow, PopupMode, PopupSize, AnchorAlign, AnchorResult } from './Overlay.types'
 import { FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaLock } from 'react-icons/fa'
+import { PopupArrow, PopupMode, PopupSize, AnchorAlign, AnchorResult } from './Overlay.types'
+import type { CSSProperties, ReactNode } from 'react'
 
 const ARROW_GAP = 10
 

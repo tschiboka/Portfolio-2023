@@ -1,11 +1,11 @@
-import { AppHooks } from '@shared-context'
-import { ZoomedImage } from '../ZoomedImage/ZoomedImage'
 import { TbZoomOutFilled } from 'react-icons/tb'
-import { Reference } from '../../../portfolio/Article/components/References/References'
-import './Figure.scss'
-import { InlineReference } from '../../../portfolio/Article/components/InlineReference/InlineReference'
+import { AppHooks } from '@shared-context'
 import { Figure as UxFigure } from '@common-ux'
+import { ZoomedImage } from '../ZoomedImage/ZoomedImage'
+import { InlineReference } from '../../../portfolio/Article/components/InlineReference/InlineReference'
+import { Reference } from '../../../portfolio/Article/components/References/References'
 import type { FigureSize } from '../../../../common/ux/Figure/Figure.types'
+import './Figure.scss'
 
 interface Props {
     image: string

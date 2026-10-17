@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { render } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { Typography } from '../Typography'
 import { Heading } from '../Heading'

@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import { useQuery, useMutation } from '@tanstack/react-query'
-import { detectIncognito } from 'detectincognitojs'
-import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common-types'
 import { AxiosError } from 'axios'
+import { detectIncognito } from 'detectincognitojs'
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common-types'
 import { Browser, Query, QueryKey } from '@common-utils'
 
 const postVisit = async (path: string): Promise<PostVisitResponse> => {

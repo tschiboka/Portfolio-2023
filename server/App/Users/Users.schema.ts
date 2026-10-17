@@ -1,8 +1,8 @@
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
-;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
-import type { LoginInput, TokenInput, UserInput } from './Users.types'
 import { UsersConstants } from './Users.constants'
+import type { LoginInput, TokenInput, UserInput } from './Users.types'
+;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
 
 const schema = Joi.object({
     fullName: Joi.string()

@@ -1,6 +1,6 @@
+import { Pill } from '@common-ux'
 import type { ReactNode } from 'react'
 import type { CellValue, CellVariant, CellMeta, TableAction, SortDirection } from '@common-ux'
-import { Pill } from '@common-ux'
 import type { Optional, Dictionary, Sortable } from '@common-utils'
 import type { Row, VariantRow, ActionRow, SelectionRow, AllFeaturesRow } from './Tables.types'
 

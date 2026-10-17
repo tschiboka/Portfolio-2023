@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Nullish } from '../../../Generics'
 import { toBoolean } from '../toBoolean'
+import type { Nullish } from '../../../Generics'
 
 describe('Booleans.Optional.toBoolean', () => {
     it.each<[Nullish<string>, boolean]>([

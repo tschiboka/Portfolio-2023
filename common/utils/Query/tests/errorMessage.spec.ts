@@ -1,5 +1,5 @@
-import type { AxiosError } from 'axios'
 import { errorMessage } from '../errorMessage'
+import type { AxiosError } from 'axios'
 import type { ErrorResponse } from '../mergeStatus'
 
 const FALLBACK = 'Something went wrong'

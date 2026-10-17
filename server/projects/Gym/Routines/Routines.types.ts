@@ -1,4 +1,7 @@
-﻿import type {
+﻿import type mongoose from 'mongoose'
+import type { Document } from 'mongoose'
+import type { Dictionary, WithoutId } from '@common-utils'
+import type {
     GetGymUserRoutinesResponse,
     GymRoutineResource,
     PatchGymRoutineRequest,
@@ -6,10 +9,7 @@
     TypedRequest,
     TypedResponse,
 } from '../../../../common/types'
-import type { Dictionary, WithoutId } from '@common-utils'
 import type { GymRoutineSource } from '../../../../common/types'
-import type mongoose from 'mongoose'
-import type { Document } from 'mongoose'
 
 /** Mongoose document shape for a gym routine. */
 export interface IGymRoutine extends Document {

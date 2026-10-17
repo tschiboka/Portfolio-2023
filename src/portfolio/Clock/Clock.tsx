@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import type { Nullable } from '@common-utils'
 import { ClockData, ClockFaceCanvas, ClockUtils } from '.'
+import type { Nullable } from '@common-utils'
 import './Clock.scss'
 
 export const Clock = () => {

@@ -4,9 +4,9 @@ import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { append, dropLast } from 'ramda'
 import { AppHooks } from '@shared-context'
 import { Const, Link, Toggle } from '@common-ux'
-import { AccessGuard } from '../../AccessGuard'
 import { MenuItem } from '../Nav.types'
 import { NavUtils } from '../Nav.utils'
+import { AccessGuard } from '../../AccessGuard'
 import './MobileMenu.styles.css'
 
 export type MobileMenuProps = {

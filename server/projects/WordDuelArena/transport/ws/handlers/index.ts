@@ -1,6 +1,6 @@
-import type { MoveHandlerParams, Session } from '../../../WordDuelArena.types'
 import { MoveHandlers } from './Move.handlers'
 import { JoinHandlers } from './Join.handlers'
+import type { MoveHandlerParams, Session } from '../../../WordDuelArena.types'
 
 interface HandlerContext {
     session: Session

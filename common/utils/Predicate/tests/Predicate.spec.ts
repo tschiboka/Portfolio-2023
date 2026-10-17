@@ -1,4 +1,3 @@
-import type { Nullish } from '../../Generics'
 import {
     isDefined,
     isUndefined,
@@ -39,6 +38,7 @@ import {
     isAll,
     isAny,
 } from '../Predicate'
+import type { Nullish } from '../../Generics'
 
 const noop = (): void => {}
 

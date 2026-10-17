@@ -3,10 +3,10 @@ import { TestMocks } from '@common-mocks'
 import { Paths } from '@common-utils'
 import { Server } from '@common-ux/Test'
 import { Test } from '@shared-components/Screen/tests'
-import { LikeQueries } from '../../index.ts'
 import { LikeQueriesMockHandlers } from './Like.queries.mockHandlers.ts'
-import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
+import { LikeQueries } from '../../index.ts'
 import type { ReactElement } from 'react'
+import type { Buildable } from '@common-ux/Test/Server/RequestBuilder'
 
 /** Harness component: reads the like count for one path. */
 const Counter = ({ path }: { path: string }) => {

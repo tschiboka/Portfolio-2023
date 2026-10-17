@@ -1,6 +1,6 @@
-import type { MockInstance } from 'vitest'
-import { Browser, BrowserHooks } from '../index'
 import { renderHook, act } from '@testing-library/react'
+import { Browser, BrowserHooks } from '../index'
+import type { MockInstance } from 'vitest'
 
 const { copyToClipboard } = Browser
 const { useFullScreen, useIsVisible, useOrientation } = BrowserHooks

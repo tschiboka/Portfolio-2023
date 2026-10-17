@@ -1,5 +1,5 @@
-import type { CurrentUser } from '@common-types'
 import { ApiResponder } from '../ApiResponder'
+import type { CurrentUser } from '@common-types'
 import type { OwnedResource } from '.'
 
 /**

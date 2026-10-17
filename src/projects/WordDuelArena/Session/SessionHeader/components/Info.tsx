@@ -1,6 +1,6 @@
-import { CheckMark, Coin } from '../../../common/components'
-import { SessionHooks } from '../../Session.hooks'
 import { SessionHeaderSelectors } from '../SessionHeader.selectors'
+import { SessionHooks } from '../../Session.hooks'
+import { CheckMark, Coin } from '../../../common/components'
 
 export const Info = () => {
     const { sessionState } = SessionHooks.useContext()

@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react'
 import { Const } from '@common-ux'
+import type { CSSProperties } from 'react'
 
 /**
  * Preview shell — mirrors the project's dark-theme design.

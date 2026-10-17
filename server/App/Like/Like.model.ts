@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { ILike } from './Like.types'
 import { LikeConstants } from './Like.constants'
+import type { ILike } from './Like.types'
 
 const schema = new mongoose.Schema<ILike>({
     path: {

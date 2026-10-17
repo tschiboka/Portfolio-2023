@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
-import { Test } from '../../Test'
 import { Section } from '../Section'
+import { Test } from '../../Test'
 import type { SectionProps } from '../Region.types'
 
 type Props = Partial<SectionProps>

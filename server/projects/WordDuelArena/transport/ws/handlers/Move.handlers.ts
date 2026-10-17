@@ -1,11 +1,11 @@
-﻿import type { MoveHandlerParams, SessionState } from '../../../WordDuelArena.types'
-import { produce } from 'immer'
+﻿import { produce } from 'immer'
 import { BroadcastService } from '../Broadcast.service'
 import { markAliveByDevice } from '../../../domain/session/session'
 import { SessionConstants } from '../../../config/constants/Session.constants'
 import { GameConstants } from '../../../config/constants/Game.constants'
 import { MoveService } from '../../../domain/session/Move.service'
 import { MovePayload } from '../../../../../../common/types'
+import type { MoveHandlerParams, SessionState } from '../../../WordDuelArena.types'
 
 const moveHandler = ({ session, deviceId, payload }: MoveHandlerParams) => {
     const nextState = produce(session.state, (draft: SessionState) => {

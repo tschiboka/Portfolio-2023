@@ -1,6 +1,6 @@
 import { Storage } from '@common-utils'
-import type { Nullable } from '@common-utils'
 import { Session } from './SessionContext.types'
+import type { Nullable } from '@common-utils'
 
 const APP_KEY = 'tschiboka'
 

@@ -1,3 +1,5 @@
+import { Activities, Admin, Categories, EmailVerification } from '@app'
+import { Paths } from '@common-utils'
 import { Login } from './Login/Login'
 import { Home } from './Home/Home'
 import { Register } from './Register/Register'
@@ -28,8 +30,6 @@ import {
     Toggles,
     Typography,
 } from './UxStories'
-import { Paths } from '@common-utils'
-import { Activities, Admin, Categories, EmailVerification } from '@app'
 import type { Dictionary } from '@common-utils'
 import type { AppRouteConfig } from './App.types'
 

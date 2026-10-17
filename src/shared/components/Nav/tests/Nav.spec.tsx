@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
-import { NavTestUtils } from './Nav.spec.utils'
 import { Button } from '@common-ux'
+import { NavTestUtils } from './Nav.spec.utils'
+import '@testing-library/jest-dom'
 
 const Set = NavTestUtils.Set
 

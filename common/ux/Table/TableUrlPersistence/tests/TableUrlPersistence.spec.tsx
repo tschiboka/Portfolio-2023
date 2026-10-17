@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
 import { act, renderHook } from '@testing-library/react'
-import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import { TableUrlPersistenceTestUtils } from './TableUrlPersistence.spec.utils'
+import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import type { Filters } from './TableUrlPersistence.spec.types'
 
 const { defaultPaging, defaultSort, filterDefs, makeFilterState, nextState } =

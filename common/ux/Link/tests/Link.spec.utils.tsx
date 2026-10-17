@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { render } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
 import { Link } from '../Link'
 import type { LinkAsRoute, LinkAsAnchor } from '../Link.types'

@@ -1,9 +1,9 @@
+import cv from '@portfolio/assets/home/Tivadar_Debnar_CV_2023.pdf'
 import { BiMessageDots } from 'react-icons/bi'
 import { FiDownload } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { Button, Heading, Paragraph, Table, Stack } from '@common-ux'
 import type { TableColumns } from '@common-ux'
-import cv from '@portfolio/assets/home/Tivadar_Debnar_CV_2023.pdf'
 import './HireIntro.scss'
 
 type Skill = { area: string; technology: string; focus: string }

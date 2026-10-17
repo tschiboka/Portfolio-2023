@@ -1,6 +1,6 @@
 import { RequestBuilder, MockBuilder, HttpMethods } from '@common-ux/Test'
-import { BlogMocks } from './Blog.mocks'
 import { PageSideMenuMockHandlers } from '@shared-components/PageSideMenu/tests/PageSideMenu.mockHandlers'
+import { BlogMocks } from './Blog.mocks'
 
 const getVisits = RequestBuilder({
     path: '/api/visit',

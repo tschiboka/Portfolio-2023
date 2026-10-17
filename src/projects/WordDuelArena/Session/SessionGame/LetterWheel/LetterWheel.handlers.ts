@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
-import { WebSocketRequest } from '../../Session.types'
-import { WordConstants } from '../../../common/utils'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { TouchState } from './LetterWheel.types'
+import { WebSocketRequest } from '../../Session.types'
+import { WordConstants } from '../../../common/utils'
 
 type HandleKeyPressDepsProps = {
     touchState: TouchState

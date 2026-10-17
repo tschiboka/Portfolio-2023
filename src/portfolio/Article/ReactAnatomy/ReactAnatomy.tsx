@@ -1,21 +1,15 @@
-// Components
-import { Article } from '../Article'
-import { Figure } from '@shared-components/Figure/Figure'
-import { Code, Heading, Paragraph, Section } from '@common-ux'
-import { InlineReference } from '../components/InlineReference/InlineReference'
-// Images
 import ReactTitleImg from '@portfolio/assets/blog/react_anatomy/react.jpg'
 import DOMImg from '@portfolio/assets/blog/react_anatomy/DOM.png'
 import VDOMImg from '@portfolio/assets/blog/react_anatomy/virtual-dom.png'
 import StackReconciliationImg from '@portfolio/assets/blog/react_anatomy/stack-reconciliation.jpg'
-import FiberImg from '@portfolio/assets/blog/react_anatomy/fiber.png'
 import LifeCycleMethodsImg from '@portfolio/assets/blog/react_anatomy/component-lifecycle-methods.webp'
-// Other Assets
+import FiberImg from '@portfolio/assets/blog/react_anatomy/fiber.png'
+import { Figure } from '@shared-components/Figure/Figure'
+import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { ReactAnatomyCode } from './ReactAnatomy.code'
+import { Article } from '../Article'
+import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
-
-// Styles
-//import "./";
 
 interface Props {
     pageName: string

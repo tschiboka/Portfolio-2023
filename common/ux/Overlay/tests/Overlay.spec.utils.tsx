@@ -1,9 +1,9 @@
 import { createRef } from 'react'
 import { render } from '@testing-library/react'
-import { Test } from '../../Test'
-import { Overlay } from '../index'
-import type { ActionMenuProps } from '../ActionMenu'
 import { OverlayMocks } from './Overlay.mocks'
+import { Overlay } from '../index'
+import { Test } from '../../Test'
+import type { ActionMenuProps } from '../ActionMenu'
 
 const mockAnchorRef = () => {
     const ref = createRef<HTMLButtonElement>()

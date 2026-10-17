@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import type { RegionProps } from './Region.types'
 import { Const } from '@common-ux'
+import type { RegionProps } from './Region.types'
 import './Region.styles.css'
 
 const VariantTag = {

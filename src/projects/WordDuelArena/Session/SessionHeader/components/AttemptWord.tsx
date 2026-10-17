@@ -1,6 +1,6 @@
+import { SessionHeaderSelectors } from '../SessionHeader.selectors'
 import { SessionHooks } from '../../Session.hooks'
 import { LastWordAttempt } from '../../Session.types'
-import { SessionHeaderSelectors } from '../SessionHeader.selectors'
 
 type AttemptWordProps = {
     attempt?: LastWordAttempt

@@ -1,5 +1,5 @@
-import { render } from '@testing-library/react'
 import { ComponentProps } from 'react'
+import { render } from '@testing-library/react'
 import { Accessor } from '../Accessor/Accessor'
 import { ContentNavigator as ContentNavigatorComponent } from '../../ContentNavigator'
 

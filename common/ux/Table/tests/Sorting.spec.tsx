@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react'
-import { TableHeadUtils } from '../TableHead/TableHead.utils'
 import { Test } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
+import { TableHeadUtils } from '../TableHead/TableHead.utils'
 
 const { rows } = TableMocks
 

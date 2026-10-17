@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import type { Optional } from '../../../Generics'
 import { toString } from '../toString'
+import type { Optional } from '../../../Generics'
 
 describe('Booleans.Optional.toString', () => {
     it.each<[boolean, Optional<string>]>([

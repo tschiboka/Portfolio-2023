@@ -1,10 +1,10 @@
+import placeholder_image from '@portfolio/assets/projects/GradientGenerator.png'
 import { Code, CodeText, Heading, Main, Paragraph, Section, Stack } from '@common-ux'
 import { Figure } from '@shared-components/Figure/Figure'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
 import { FiguresCode } from './Figures.code'
-import placeholder_image from '@portfolio/assets/projects/GradientGenerator.png'
+import { StoryNav } from '../StoryNav/StoryNav'
 
 type FiguresProps = { path: string }
 

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { Accessor } from '../../../Test'
 import { Grid } from '../Grid'
+import { Accessor } from '../../../Test'
 import type { GridProps } from '../Grid.types'
 
 type SetProps = Partial<GridProps> & { ariaLabel: string }

@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import { ClientMessage } from '@common-utils'
-import { EmailVerificationTestUtils } from './EmailVerification.spec.utils'
 import { Test } from '@shared-components/Screen/tests'
+import { EmailVerificationTestUtils } from './EmailVerification.spec.utils'
 
 const { labels, messages, rejectedHandlers, rejectedWithoutMessageHandlers } =
     EmailVerificationTestUtils

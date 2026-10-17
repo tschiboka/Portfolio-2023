@@ -1,15 +1,15 @@
-﻿import type {
-    CurrentUser,
-    GymExerciseResource,
-    PatchGymExerciseRequest,
-} from '../../../../common/types'
-import { ApiResponder } from '@common-utils'
+﻿import { ApiResponder } from '@common-utils'
 import { ApiTransformers } from '@common-utils'
 import { isValidObjectId } from '@common-utils'
 import { ExercisesRepository } from './Exercises.repository'
 import { ExercisesPermissions } from './Exercises.permissions'
 import { ExercisesSchema } from './Exercises.schema'
 import type { ExerciseValidationInput } from './Exercises.types'
+import type {
+    CurrentUser,
+    GymExerciseResource,
+    PatchGymExerciseRequest,
+} from '../../../../common/types'
 
 /** Business logic for exercises - persistence via the repository, authorisation via permissions. */
 export const ExercisesService = {

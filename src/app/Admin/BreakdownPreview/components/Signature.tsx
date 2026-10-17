@@ -8,15 +8,15 @@
  * Any changes to the email signature must be reflected in BOTH places.
  */
 
+import faceImg from '@portfolio/assets/home/headshot_placeholder_grayscale.png'
 import { FaFacebookF } from 'react-icons/fa'
 import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { FiGlobe, FiPhone } from 'react-icons/fi'
 import { MdEmail } from 'react-icons/md'
-import { DateTime } from '@common-utils'
-import faceImg from '@portfolio/assets/home/headshot_placeholder_grayscale.png'
-import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 import { Link } from '@common-ux'
+import { DateTime } from '@common-utils'
+import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 
 const S = BreakdownPreviewStyles.signature
 

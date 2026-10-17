@@ -1,5 +1,5 @@
-﻿import { ROUTINE_SOURCES } from '../../../../common/types'
-import mongoose from 'mongoose'
+﻿import mongoose from 'mongoose'
+import { ROUTINE_SOURCES } from '../../../../common/types'
 import type { IGymRoutine } from './Routines.types'
 
 const schema = new mongoose.Schema<IGymRoutine>({

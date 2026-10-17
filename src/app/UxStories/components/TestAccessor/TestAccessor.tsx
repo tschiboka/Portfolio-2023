@@ -11,11 +11,11 @@ import {
 } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { Table } from '@common-ux/Table/Table'
 import { TestAccessorCode } from './TestAccessor.code'
 import { TestAccessorColumns } from './TestAccessor.columns'
 import { TestAccessorData } from './TestAccessor.data'
-import { Table } from '@common-ux/Table/Table'
+import { StoryNav } from '../StoryNav/StoryNav'
 import './TestAccessor.styles.css'
 
 type TestAccessorProps = { path: string }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import type { IUser } from './Users.types'
 import { UsersConstants } from './Users.constants'
+import type { IUser } from './Users.types'
 
 const schema = new mongoose.Schema<IUser>({
     fullName: {

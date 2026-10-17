@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import type { LikeInput } from './Like.types'
 import { LikeConstants } from './Like.constants'
+import type { LikeInput } from './Like.types'
 
 const schema = Joi.object({
     path: Joi.string()

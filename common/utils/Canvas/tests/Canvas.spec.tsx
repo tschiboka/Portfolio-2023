@@ -1,7 +1,7 @@
-import type { Mock } from 'vitest'
+import { RefObject } from 'react'
 import { renderHook } from '@testing-library/react'
 import { CanvasHooks } from '..'
-import { RefObject } from 'react'
+import type { Mock } from 'vitest'
 
 type MockCtx = {
     beginPath: Mock

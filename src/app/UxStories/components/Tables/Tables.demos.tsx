@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react'
+import { toUpper } from 'ramda'
 import { Table, TableHooks, TableFilterConfig } from '@common-ux'
-import type { SortDirection, TableColumns } from '@common-ux'
 import { Pill } from '@common-ux'
 import { Strings } from '@common-utils'
-import { toUpper } from 'ramda'
-import { TablesMocks } from './Tables.mocks'
-import type { AllFeaturesRow, PaginationRow, SelectionRow, SortingRow } from './Tables.types'
 import { TablesConfig } from './Tables.config'
+import { TablesMocks } from './Tables.mocks'
+import type { SortDirection, TableColumns } from '@common-ux'
 import type { UrlPersistenceConfig } from '@common-ux/Table/Table.hooks.types'
+import type { AllFeaturesRow, PaginationRow, SelectionRow, SortingRow } from './Tables.types'
 
 const { selectionRows, allFeaturesData, allPaginationRows, paginationColumns, sortingRows } =
     TablesMocks

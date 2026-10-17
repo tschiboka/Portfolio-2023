@@ -1,6 +1,6 @@
-import { AppHooks } from '@shared-context'
 import iconDark from '@shared-assets/icon.svg'
 import iconLight from '@shared-assets/icon-light.svg'
+import { AppHooks } from '@shared-context'
 
 export const Logo = () => {
     const { themeMode } = AppHooks.useContext()

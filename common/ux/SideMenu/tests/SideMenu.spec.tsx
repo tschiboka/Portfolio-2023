@@ -1,7 +1,7 @@
-import '@testing-library/jest-dom'
 import { Test, Accessor } from '../../Test'
 import { CounterBadge } from '../../CounterBadge/CounterBadge'
 import type { SideMenuItem, SideMenuProps } from '../SideMenu.types'
+import '@testing-library/jest-dom'
 
 const mockItems: SideMenuItem[] = [
     { icon: <span data-testid="icon-home" />, label: 'Home' },

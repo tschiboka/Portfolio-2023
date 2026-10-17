@@ -1,8 +1,8 @@
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
 import { ProjectsSelectors } from '../Projects.selectors'
 import { ProjectsDefaults } from '../Projects.defaults'
-import type { Technology } from '../Projects.types'
 import type { Dictionary } from '@common-utils'
+import type { Technology } from '../Projects.types'
 import './ProjectFilter.scss'
 
 interface Props {

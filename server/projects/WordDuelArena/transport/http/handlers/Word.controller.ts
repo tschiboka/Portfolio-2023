@@ -1,12 +1,12 @@
-﻿import { TypedRequest, TypedResponse } from '../../../../../../common/types'
+﻿import { WordRepository } from '../../../infrastructure/resources/Word.repository'
+import { TypedRequest, TypedResponse } from '../../../../../../common/types'
+import { ApiResponder } from '../../../../../../common/utils/Server'
 import type {
     WdaErrorResponse,
     GetWdaWordListResponse,
     GetWdaAnagramMapResponse,
     GetWdaFrequenciesResponse,
 } from '../../../../../../common/types'
-import { WordRepository } from '../../../infrastructure/resources/Word.repository'
-import { ApiResponder } from '../../../../../../common/utils/Server'
 
 type GetWordListRes = TypedResponse<GetWdaWordListResponse | WdaErrorResponse>
 function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {

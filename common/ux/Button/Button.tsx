@@ -1,5 +1,5 @@
-import type { ButtonProps } from './Button.types'
 import type { Dictionary } from '@common-utils'
+import type { ButtonProps } from './Button.types'
 import './Button.styles.css'
 
 const commonKeys = new Set(['as', 'variant', 'size', 'className', 'ariaLabel', 'style', 'children'])

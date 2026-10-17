@@ -1,6 +1,6 @@
-import type { FilterDefinitions } from '../TableFilter'
 import { TableFilterConfig } from '../TableFilter'
 import type { Filters } from './Table.hooks.spec.types'
+import type { FilterDefinitions } from '../TableFilter'
 
 const { text, number, checkbox } = TableFilterConfig
 

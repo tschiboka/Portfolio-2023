@@ -1,12 +1,12 @@
-import { ProjectCard } from './ProjectCard/ProjectCard'
-import { ProjectFilter } from './ProjectFilter/ProjectFilter'
-import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { useState } from 'react'
-import { Screen } from '@shared-components/Screen/Screen'
+import { BsSliders2 } from 'react-icons/bs'
+import { PageSideMenu } from '@shared-components/PageSideMenu/PageSideMenu'
 import { Heading, Paragraph, Main, Section } from '@common-ux'
 import { isEmpty } from '@common-utils'
-import { BsSliders2 } from 'react-icons/bs'
+import { Screen } from '@shared-components/Screen/Screen'
 import { ProjectsDefaults, ProjectsSelectors } from '.'
+import { ProjectCard } from './ProjectCard/ProjectCard'
+import { ProjectFilter } from './ProjectFilter/ProjectFilter'
 
 interface Props {
     pageName: string

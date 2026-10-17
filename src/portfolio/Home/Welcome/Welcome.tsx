@@ -1,8 +1,8 @@
 import headshot from '@portfolio/assets/home/headshot_placeholder.png'
-import { AppHooks } from '@shared-context'
 import { useNavigate } from 'react-router-dom'
-import './Welcome.scss'
+import { AppHooks } from '@shared-context'
 import { Heading } from '@common-ux'
+import './Welcome.scss'
 
 export const Welcome = () => {
     const navigate = useNavigate()

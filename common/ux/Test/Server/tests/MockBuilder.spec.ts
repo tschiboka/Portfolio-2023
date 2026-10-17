@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { lensPath } from 'ramda'
-import { MockBuilder, MockEntitiesBuilder } from '../MockBuilder'
 import { MockBuilderMocks } from './MockBuilder.mocks'
+import { MockBuilder, MockEntitiesBuilder } from '../MockBuilder'
 
 const { baseMock, baseBuilder } = MockBuilderMocks
 

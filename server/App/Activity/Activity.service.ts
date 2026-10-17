@@ -1,14 +1,14 @@
-﻿import type {
+﻿import { Paging } from '@common-utils'
+import { ActivityRepository } from './Activity.repository'
+import { ActivityTransformers } from './Activity.transformers'
+import { ActivityConstants } from './Activity.constants'
+import type { Dictionary } from '@common-utils'
+import type {
     ActivityEvent,
     ActivityFeedContext,
     GetActivityFeedQuery,
     GetActivityFeedResponse,
 } from '../../../common/types'
-import { Paging } from '@common-utils'
-import type { Dictionary } from '@common-utils'
-import { ActivityRepository } from './Activity.repository'
-import { ActivityTransformers } from './Activity.transformers'
-import { ActivityConstants } from './Activity.constants'
 
 /**
  * Business logic for the activity feed - aggregates the latest activity across visits, likes,

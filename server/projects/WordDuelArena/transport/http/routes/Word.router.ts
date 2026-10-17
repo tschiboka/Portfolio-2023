@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
-import { UsersMiddleware } from '../../../../../App/Users/Users.middleware'
 import { WordController } from '../handlers/Word.controller'
+import { UsersMiddleware } from '../../../../../App/Users/Users.middleware'
 
 const { auth } = UsersMiddleware
 

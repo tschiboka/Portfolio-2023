@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import { TypistContext } from '../Typist.context'
+import { isTruthy } from '@common-utils'
+import { LoadingIndicator } from '@common-ux'
 import { Character } from './Character/Character'
 import { EditorHandlers } from './Editor.handlers'
-import { isTruthy } from '@common-utils'
+import { TypistContext } from '../Typist.context'
 import './Editor.styles.scss'
-import { LoadingIndicator } from '@common-ux'
 
 export const Editor = () => {
     const { editorState, dispatch, isLoading } = TypistContext.Use()

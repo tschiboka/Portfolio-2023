@@ -1,7 +1,7 @@
+import { BrowserHooks } from '@common-utils'
 import { SessionProvider } from './Session.provider'
 import { SessionGame } from './SessionGame/SessionGame'
 import { SessionWebSocketProvider } from './SessionWebSocket.provider'
-import { BrowserHooks } from '@common-utils'
 import './Sessions.styles.css'
 
 const SessionComponent = () => {

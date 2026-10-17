@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
-import { Spacer } from '../Spacer'
 import { SpacerTestUtils } from './Spacer.spec.utils'
+import { Spacer } from '../Spacer'
 
 const { Set } = SpacerTestUtils
 
