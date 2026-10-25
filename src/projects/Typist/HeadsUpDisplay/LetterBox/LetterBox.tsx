@@ -1,6 +1,7 @@
 import './LetterBox.styles.scss'
 
 type ProficiencyLevel = 'extreme' | 'outstanding' | 'high' | 'moderate' | 'low'
+
 export const LetterBox = ({
     letter,
     proficiency,

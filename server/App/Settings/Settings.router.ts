@@ -7,6 +7,7 @@ import type {
     PostSettingsReq,
     PostSettingsRes,
 } from './Settings.types'
+
 const router = express.Router()
 
 // GET /api/settings - retrieve the current settings.

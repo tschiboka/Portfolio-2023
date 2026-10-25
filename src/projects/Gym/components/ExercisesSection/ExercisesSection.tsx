@@ -4,9 +4,8 @@ import { Code, Form, LoadingIndicator, Section } from '@common-ux'
 import { Query } from '@common-utils'
 import { GymQueries } from '../../Gym.queries'
 
-type ExercisesSectionProps = {
-    exercises: GymExerciseResource[]
-}
+type ExercisesSectionProps = { exercises: GymExerciseResource[] }
+
 export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
     const { data: difficultyData, ...difficultyResponse } = GymQueries.Difficulty.useGet()
     const { data: equipmentData, ...equipmentResponse } = GymQueries.Equipment.useGet()

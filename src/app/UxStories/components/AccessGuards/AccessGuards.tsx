@@ -20,9 +20,8 @@ import { StoryNav } from '../StoryNav/StoryNav'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards
 
-type AccessGuardsProps = {
-    path: string
-}
+type AccessGuardsProps = { path: string }
+
 export const AccessGuards = ({ path }: AccessGuardsProps) => {
     const { control } = useForm({
         defaultValues: {

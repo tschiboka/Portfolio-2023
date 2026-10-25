@@ -442,36 +442,29 @@ not.
           regex rather than a five-minute run
     - [x] Step 27.10: Verify the refusals — `[]`, `[0000]` and `[0009] -` each fail in about a
           second, before any lint or compile work starts
-- [ ] Step 28: Rule — a type is imported, never reached through a namespace
-    - [ ] Step 28.1: Build `rules/no-qualified-type/`
-    - [ ] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
-          `React.ReactNode`, `React.CSSProperties`
-    - [ ] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-'react'`, then `(e: FormEvent)`
-    - [ ] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
-          `React.StrictMode` are calls, not types
-    - [ ] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
-          default one is espree and cannot parse a qualified type
-    - [ ] Step 28.6: Register as `severity: 'error'`
-    - [ ] Step 28.7: Add `tests/NoQualifiedType.spec.ts`
-    - [ ] Step 28.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
-          roughly 55 sit in type position and the rest are values
-    - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 29: Rule — the import block is closed by a blank line, and the first export opened by one
-    - [ ] Step 29.1: Build `rules/import-export-spacing/`
-    - [ ] Step 29.2: Require exactly one blank line between the last import and the statement
-          after it, which is the complement of `no-newline-in-imports` forbidding one inside the
-          block
+- [ ] Step 28: Rule — a type is imported, never reached through a namespace - [ ] Step 28.1: Build `rules/no-qualified-type/` - [ ] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
+      `React.ReactNode`, `React.CSSProperties` - [ ] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
+'react'`, then `(e: FormEvent)` - [ ] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
+      `React.StrictMode` are calls, not types - [ ] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
+      default one is espree and cannot parse a qualified type - [ ] Step 28.6: Register as `severity: 'error'` - [ ] Step 28.7: Add `tests/NoQualifiedType.spec.ts` - [ ] Step 28.8: Run `rules sync`, then verify the generated config - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
+      roughly 55 sit in type position and the rest are values - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 29: Rule — the import block is closed by a blank line, and the first export opened by one — **configured, not built**
+    - [ ] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
+          already expresses does not need a registry entry, a registrar and a spec
+    - [ ] Step 29.2: Require at least one blank line between the last import and the statement
+          after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25
     - [ ] Step 29.3: Require a blank line before the first export, including when code sits
           between the imports and it
     - [ ] Step 29.4: Leave a file with no import, or no export, alone — the two halves are
-          independent
-    - [ ] Step 29.5: Register as `severity: 'error'`
-    - [ ] Step 29.6: Add `tests/ImportExportSpacing.spec.ts`
-    - [ ] Step 29.7: Run `rules sync`, then verify the generated config
-    - [ ] Step 29.8: Sweep every module and fix or suppress each violation
-    - [ ] Step 29.9: Confirm a green `tsc`, lint, and test run
+          independent, and neither pair matches without both sides
+    - [ ] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
+          `eslint.config.js`, not in `rules/registry.ts`
+    - [ ] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
+    'import', next: 'import' }`, placed last because the last matching pair wins over `next:
+    '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with no fixer
+          and only covered `src`, `common` and `server`
+    - [ ] Step 29.7: Sweep with `eslint --fix`, which the rule supports
+    - [ ] Step 29.8: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 

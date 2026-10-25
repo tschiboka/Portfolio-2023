@@ -24,9 +24,8 @@ const modes: PopupMode[] = ['primary', 'warning', 'danger', 'info']
 const sizes: PopupSize[] = ['sm', 'md', 'lg']
 const aligns = ['start', 'center', 'end'] as const
 
-type OverlaysProps = {
-    path: string
-}
+type OverlaysProps = { path: string }
+
 export const Overlays = ({ path }: OverlaysProps) => {
     const [activePopup, setActivePopup] = useState<Nullable<string>>(null)
     const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})

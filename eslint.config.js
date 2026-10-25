@@ -54,6 +54,13 @@ export default tseslint.config(
             ...reactHooks.configs.recommended.rules,
             'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
             'react/jsx-newline': ['error', { prevent: true }],
+            'padding-line-between-statements': [
+                'error',
+                { blankLine: 'always', prev: 'import', next: '*' },
+                { blankLine: 'always', prev: '*', next: 'export' },
+                { blankLine: 'never', prev: 'import', next: 'import' },
+                { blankLine: 'any', prev: 'export', next: 'export' },
+            ],
             '@typescript-eslint/no-non-null-assertion': 'off',
             '@typescript-eslint/no-misused-promises': [
                 'error',

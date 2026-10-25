@@ -2,7 +2,8 @@ import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import { CategoryConstants } from './Category.constants'
 import type { CategoryInput } from './Category.types'
-;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
+
+Object.assign(Joi, { objectId: joiObjectId(Joi) })
 
 const schema = Joi.object({
     name: Joi.string().max(CategoryConstants.fieldLimits.name.max).required(),

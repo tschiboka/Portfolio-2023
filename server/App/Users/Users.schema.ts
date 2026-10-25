@@ -2,7 +2,8 @@ import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import { UsersConstants } from './Users.constants'
 import type { LoginInput, TokenInput, UserInput } from './Users.types'
-;(Joi as unknown as { objectId: unknown }).objectId = joiObjectId(Joi)
+
+Object.assign(Joi, { objectId: joiObjectId(Joi) })
 
 const schema = Joi.object({
     fullName: Joi.string()

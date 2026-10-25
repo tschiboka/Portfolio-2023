@@ -15,6 +15,7 @@ type Props = {
     pageName: string
     path: string
 }
+
 export const CyclicEmailScheduling = ({ pageName, path }: Props) => {
     const references = getReferenceList(path)
     return (

@@ -5,6 +5,7 @@ type ExtraWordsProps = {
     isOpen: boolean
     setExtraWordsOpen: (open: boolean) => void
 }
+
 export const ExtraWords = ({ isOpen, setExtraWordsOpen }: ExtraWordsProps) => {
     const session = SessionHooks.useContext()
     const { level } = session.sessionState || {}

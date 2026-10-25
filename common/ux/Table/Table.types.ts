@@ -6,9 +6,7 @@ import type { DropdownOption } from './TableInputs'
 import type { AccessibleProps } from '../index.types'
 
 export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'
-
 export type CellValue<TData extends Record<string, ReactNode>> = TData[keyof TData]
-
 export type CellMeta<TData extends Record<string, ReactNode>, TContext = unknown> = {
     cell: CellValue<TData>
     index: number
@@ -18,8 +16,8 @@ export type CellMeta<TData extends Record<string, ReactNode>, TContext = unknown
 }
 
 type Variant = 'primary' | 'secondary' | 'danger'
-export type CellVariant = Variant | 'disabled'
 
+export type CellVariant = Variant | 'disabled'
 export type TableColumn<TData extends Record<string, ReactNode>, TContext = unknown> = {
     header: string
     accessor: keyof TData
@@ -40,6 +38,7 @@ export type TableColumns<TData extends Record<string, ReactNode>, TContext = unk
 >[]
 
 type TableActionVariant = Variant
+
 export type TableAction<TData extends Record<string, ReactNode>, TContext = unknown> = {
     id: string
     label: string

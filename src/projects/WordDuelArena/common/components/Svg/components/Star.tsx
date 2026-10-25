@@ -4,13 +4,9 @@ const YELLOW_OUTLINE = '#926b00'
 type StarProps = {
     isFilled?: boolean
 }
+
 export const Star = ({ isFilled = true }: StarProps) => (
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
         <polygon
             fill={isFilled ? YELLOW_BRIGHT : 'none'}
             stroke={YELLOW_OUTLINE}

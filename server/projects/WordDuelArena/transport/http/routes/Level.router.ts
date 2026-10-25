@@ -1,8 +1,8 @@
 import express from 'express'
-const router = express.Router()
 import { LevelController } from '../handlers/Level.controller'
 import { UsersMiddleware } from '../../../../../App/Users/Users.middleware'
 
+const router = express.Router()
 const { auth } = UsersMiddleware
 
 router.get('/name', LevelController.ListLevels)

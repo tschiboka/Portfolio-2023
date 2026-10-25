@@ -24,10 +24,10 @@ import { SideMenu } from './SideMenu/SideMenu'
 import { Table } from './Table/Table'
 import { Toggle } from './Toggle/Toggle'
 import { Typography } from './Typography/Typography'
-export { Accessor, TestError } from './Accessor/Accessor'
-export { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 import { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 
+export { Accessor, TestError } from './Accessor/Accessor'
+export { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 export const Test = {
     Box,
     Button,

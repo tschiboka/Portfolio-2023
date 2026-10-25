@@ -4,6 +4,7 @@ import { ExercisesRouter } from './Exercises'
 import { DifficultyRouter } from './Difficulty'
 import { EquipmentRouter } from './Equipment'
 import { MuscleGroupRouter } from './MuscleGroup'
+
 const router = express.Router()
 
 router.use('/routines', RoutinesRouter)

@@ -2,7 +2,6 @@ import { registrar as noEmptyRowInJsxRegistrar } from './no-empty-row-in-jsx/NoE
 import { registrar as noRawSemanticJsxRegistrar } from './no-raw-semantic-jsx/NoRawSemanticJsx.registrar.js'
 import { registrar as noAdHocFileSuffixRegistrar } from './no-ad-hoc-file-suffix/NoAdHocFileSuffix.registrar.js'
 import { registrar as noMisnamedPrimaryFileRegistrar } from './no-misnamed-primary-file/NoMisnamedPrimaryFile.registrar.js'
-import { registrar as noNewlineInImportsRegistrar } from './no-newline-in-imports/NoNewLineInImports.registrar.js'
 import { registrar as exactlyOneExportRegistrar } from './exactly-one-export/ExactlyOneExport.registrar.js'
 import { registrar as roleExportNameRegistrar } from './role-export-name/RoleExportName.registrar.js'
 import { registrar as noDefaultExportRegistrar } from './no-default-export/NoDefaultExport.registrar.js'
@@ -20,7 +19,6 @@ export const RuleRegistry: RuleRegistrar[] = [
     noEmptyRowInJsxRegistrar,
     noRawSemanticJsxRegistrar,
     noAdHocFileSuffixRegistrar,
-    noNewlineInImportsRegistrar,
     noMisnamedPrimaryFileRegistrar,
     exactlyOneExportRegistrar,
     roleExportNameRegistrar,
