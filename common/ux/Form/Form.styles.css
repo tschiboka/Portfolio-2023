@@ -19,7 +19,7 @@ form {
 @media (min-width: 768px) {
     form {
         padding: 1.5rem;
-        font-size: 1.3rem;
+        font-size: var(--font-md);
     }
 }
 
@@ -203,7 +203,7 @@ form input[type='date']::-webkit-calendar-picker-indicator {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1rem;
+    font-size: var(--font-sm);
     color: var(--accent-dark-1);
     cursor: pointer;
     border: 2px solid transparent;
@@ -626,7 +626,7 @@ form .submit-error-message {
     padding: 0.5rem 2.5rem;
     margin: 1rem;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: var(--font-lg);
     font-family: monospace;
     font-variant: small-caps;
     background-color: var(--black-0a50);
@@ -663,7 +663,7 @@ form .submit-success-message {
     padding: 0.5rem 2.5rem;
     margin: 1rem;
     text-align: center;
-    font-size: 1.4rem;
+    font-size: var(--font-lg);
     font-family: monospace;
     font-variant: small-caps;
     color: var(--accent-dark-2);

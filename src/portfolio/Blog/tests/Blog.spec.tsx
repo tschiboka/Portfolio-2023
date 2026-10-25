@@ -57,14 +57,6 @@ describe('Blog', () => {
                 expect(Test.Typography.byLabel(article.title)).toBeDefined()
             })
         })
-        // Skipped: the "Coming Soon..." <h3> header is conditionally rendered by Blog.tsx only
-        // when `comingSoonArticles` is non-empty. There are currently no upcoming articles in
-        // the data, so the block (and its header) does not render. Restore when upcoming
-        // articles are added (see Blog.tsx `{hasLength(comingSoonArticles) && ...}`).
-        it.skip('should render the "Coming Soon..." heading', () => {
-            setupBlogs()
-            expect(Test.Heading('Coming Soon...', 3)).toBeDefined()
-        })
     })
 
     describe('Upcoming articles', () => {

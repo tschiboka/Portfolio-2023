@@ -71,21 +71,6 @@ describe('Xmas', () => {
         })
     })
 
-    // Skipped: MessageWall.tsx renders only when `messages` is present and is wrapped in an
-    // AccessGuard that hides it for `admin`-capability users. The test's XmasMocks.user isn't admin,
-    // but the wall's rendering is also tied to the messages query/handlers in this setup, so it
-    // isn't deterministically visible here. Kept as documentation of the component's behaviour.
-    describe.skip('Message wall', () => {
-        it('should render the messaging wall heading and messages', async () => {
-            setupXmas()
-            await waitFor(() => {
-                expect(Test.Heading('Messaging wall')).toBeDefined()
-            })
-            expect(Test.Typography('Merry Christmas!')).toBeDefined()
-            expect(Test.Typography('Happy holidays!')).toBeDefined()
-        })
-    })
-
     describe('Form validation', () => {
         const fillName = async (value: string) => {
             const nameInput = screen.getByLabelText<HTMLInputElement>('Name')

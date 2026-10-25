@@ -38,7 +38,7 @@
     .name {
         margin-bottom: 1.5rem;
         color: $white_5;
-        font-size: 1.8rem;
+        font-size: var(--font-xl);
         letter-spacing: 0;
         span {
             font-family: 'Roboto', sans-serif;

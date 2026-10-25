@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     color: tokens.$white-4;
-    font-size: 1.1rem;
+    font-size: var(--font-md);
     line-height: 1.5rem;
     font-weight: bold;
     background-color: tokens.$black-1;

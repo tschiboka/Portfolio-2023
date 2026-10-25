@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: var(--font-md);
     font-weight: 900;
     background-color: tokens.$black-0;
     color: tokens.$white-5;

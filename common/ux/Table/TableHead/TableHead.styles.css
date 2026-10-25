@@ -166,7 +166,7 @@ th.has-reorder:hover .th-reorder {
     border-radius: 3px;
     color: var(--gray-4);
     cursor: pointer;
-    font-size: 12px;
+    font-size: var(--font-xs);
     font-weight: 700;
     line-height: 1;
     transition:

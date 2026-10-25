@@ -61,7 +61,7 @@ export const BreakdownPreviewStyles = {
         },
         title: {
             margin: 0,
-            fontSize: '1.53rem',
+            fontSize: 'var(--font-lg)',
             fontWeight: 700,
             fontVariant: 'small-caps',
             color: Const.Color.White[1],
@@ -69,7 +69,7 @@ export const BreakdownPreviewStyles = {
         sub: {
             margin: '6px 0 0',
             opacity: 0.7,
-            fontSize: '0.74rem',
+            fontSize: 'var(--font-xs)',
             color: Const.Color.White[3],
         },
         icon: {
@@ -80,7 +80,7 @@ export const BreakdownPreviewStyles = {
     section: {
         title: {
             margin: `0 0 ${Const.Spacing[12]}px`,
-            fontSize: '1.2rem',
+            fontSize: 'var(--font-md)',
             fontWeight: 700,
             color: Const.Color.White[2],
             fontVariant: 'small-caps',
@@ -100,13 +100,13 @@ export const BreakdownPreviewStyles = {
             color: Const.Color.White[4],
         },
         label: {
-            fontSize: '0.58rem',
+            fontSize: 'var(--font-2xs)',
             color: Const.Color.White[4],
             marginBottom: '2px',
             fontWeight: 300,
         },
         value: {
-            fontSize: '1.94rem',
+            fontSize: 'var(--font-xl)',
             fontWeight: 700,
             lineHeight: 1.1,
             color: Const.Color.Accent[0],
@@ -115,7 +115,7 @@ export const BreakdownPreviewStyles = {
     table: {
         style: {
             width: '100%',
-            fontSize: '0.74rem',
+            fontSize: 'var(--font-xs)',
             borderCollapse: 'collapse',
             color: Const.Color.White[2],
             background: 'transparent',
@@ -175,7 +175,7 @@ export const BreakdownPreviewStyles = {
         info: {
             flex: 1,
             minWidth: '200px',
-            fontSize: '0.74rem',
+            fontSize: 'var(--font-xs)',
             color: Const.Color.White[4],
             fontWeight: 300,
             lineHeight: 1.5,
@@ -191,15 +191,15 @@ export const BreakdownPreviewStyles = {
         name: {
             color: Const.Color.Accent[4],
             fontWeight: 700,
-            fontSize: '0.83rem',
+            fontSize: 'var(--font-xs)',
         },
         small: {
-            fontSize: '0.58rem',
+            fontSize: 'var(--font-2xs)',
             color: Const.Color.White[5],
             lineHeight: 1.6,
         },
         degree: {
-            fontSize: '0.52rem',
+            fontSize: 'var(--font-3xs)',
         },
         stamp: {
             fontStyle: 'italic',
@@ -218,7 +218,7 @@ export const BreakdownPreviewStyles = {
             gap: '6px',
         },
         links: {
-            fontSize: '0.5rem',
+            fontSize: 'var(--font-3xs)',
             display: 'flex',
             flexWrap: 'wrap',
             gap: '4px',
@@ -256,7 +256,7 @@ export const BreakdownPreviewStyles = {
             borderTop: `1px solid ${Const.Color.Black[3]}`,
             paddingTop: `${Const.Spacing[12]}px`,
             marginTop: `${Const.Spacing[12]}px`,
-            fontSize: '0.58rem',
+            fontSize: 'var(--font-2xs)',
             color: Const.Color.White[5],
         },
     },
@@ -266,7 +266,7 @@ export const BreakdownPreviewStyles = {
         .bp-shell { padding: 12px 6px !important; }
         .bp-header { padding: 16px !important; }
         .bp-body { padding: 16px !important; }
-        .bp-stat-value { font-size: 1.53rem !important; }
+        .bp-stat-value { font-size: var(--font-lg) !important; }
         .bp-signature-row { flex-direction: column !important; align-items: flex-start !important; }
         .bp-signature-links { flex-direction: column !important; align-items: flex-start !important; gap: 6px !important; }
     }

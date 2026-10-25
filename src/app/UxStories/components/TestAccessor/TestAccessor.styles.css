@@ -3,7 +3,7 @@
 .TestAccessor td,
 .TestAccessor th,
 .TestAccessor blockquote {
-    font-size: 1.05rem;
+    font-size: var(--font-sm);
     line-height: 1.7;
 }
 
@@ -28,6 +28,6 @@
 }
 
 .TestAccessor nav ul {
-    font-size: 1.05rem;
+    font-size: var(--font-sm);
     line-height: 2;
 }

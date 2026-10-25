@@ -40,7 +40,7 @@ table .expand-btn {
     border: none;
     color: var(--accent-dark-3);
     cursor: pointer;
-    font-size: 10px;
+    font-size: var(--font-2xs);
     padding: var(--space-4);
     transition: transform 0.2s ease;
     line-height: 1;

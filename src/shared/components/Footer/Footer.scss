@@ -32,7 +32,7 @@
     .name {
         margin-bottom: 1.5rem;
         color: tokens.$white-5;
-        font-size: 1.8rem;
+        font-size: var(--font-xl);
         letter-spacing: 0;
         span {
             font-family: 'Roboto', sans-serif;

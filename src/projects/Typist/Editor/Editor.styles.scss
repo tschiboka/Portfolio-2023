@@ -24,7 +24,7 @@
         align-items: center;
         justify-content: center;
         color: tokens.$accent;
-        font-size: 1.5rem;
+        font-size: var(--font-lg);
         font-weight: bold;
         backdrop-filter: blur(3px);
     }

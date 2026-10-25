@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: calc(var(--letter-size, 20px) * 0.6);
+    font-size: calc(var(--letter-size, var(--font-md)) * 0.6);
     font-weight: var(--font-medium);
     background-color: var(--color-bg-medium);
     border: var(--border-normal);

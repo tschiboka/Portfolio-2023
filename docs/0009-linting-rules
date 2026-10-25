@@ -219,15 +219,21 @@ not.
           files, the stylesheet half reading `var(--z-*)` after the tokens landed in
           `common/ux/index.css`
     - [x] Step 10.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 11: Rule — a font size comes from `Const.Font`
-    - [ ] Step 11.1: Build `rules/no-raw-font-size/`
-    - [ ] Step 11.2: Flag a `font-size` / `fontSize` not expressed as a token
-    - [ ] Step 11.3: Accept the `em` scale — `Font` is `em`-based, so a `rem` or `px` size is the tell
-    - [ ] Step 11.4: Register as `severity: 'warn'` — no live violations known, unlike Steps 8 and 9
-    - [ ] Step 11.5: Add `tests/NoRawFontSize.spec.ts`
-    - [ ] Step 11.6: Run `rules sync`, then verify the generated config
-    - [ ] Step 11.7: Sweep every font size, and raise to `error` if the sweep is clean
-    - [ ] Step 11.8: Confirm a green `tsc`, lint, and test run
+- [x] Step 11: Rule — a font size comes from `Const.Font`
+    - [x] Step 11.1: Build `rules/no-raw-font-size/`
+    - [x] Step 11.2: Flag a `font-size` / `fontSize` whose value carries an absolute length —
+          `px`, a physical unit, or a `rem` that bypasses the scale
+    - [x] Step 11.3: Accept the contextual units instead — `em`, `%` and `vh` are relative to
+          their own context, so `Font`'s `em` scale is not the tell; the original wording assumed
+          an em scale that the rem tokens have since replaced
+    - [x] Step 11.4: Register as `severity: 'error'`, not the `warn` this step first proposed: an
+          absolute length is wrong in every case, and the sweep landed in the same pass
+    - [x] Step 11.5: Add `tests/NoRawFontSize.spec.ts` — thirteen cases over both surfaces
+    - [x] Step 11.6: Run `rules sync`, then verify the generated config
+    - [x] Step 11.7: Sweep every font size — 51 sites to the nearest step, px mapped
+          `24→lg`, `14→sm`, `13/12→xs`, `10→2xs`, plus `calc`'s px fallback, which has to be a
+          token too
+    - [x] Step 11.8: Confirm a green `tsc`, lint, and test run
 - [ ] Step 12: Rule — a test name reads `it('should <verb> …')`
     - [ ] Step 12.1: Build `rules/test-name-verb/`
     - [ ] Step 12.2: Flag an `it` / `test` whose name does not open with `should `
@@ -425,11 +431,21 @@ not.
     - [x] Step 25.9: Sweep every module and fix each violation — 30 files touched over three
           lint runs, most of them fixed by moving an exported type below its value
     - [x] Step 25.10: Confirm a green `tsc`, lint, and test run
-- [x] Step 26: Rule — one re-export per path and kind - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
-      own so each id names exactly what it covers - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
-      carry `export type` beside its value exports - [x] Step 26.4: Leave a local export alone — it names no source - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts` - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**` - [x] Step 26.7: Register as `severity: 'error'` - [x] Step 26.8: Run `rules sync`, then verify the generated config - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
-      nothing; every value-plus-type pair was legal under 26.3 - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 26: Rule — one re-export per path and kind
+    - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
+          own so each id names exactly what it covers
+    - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
+    './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
+    - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
+          carry `export type` beside its value exports
+    - [x] Step 26.4: Leave a local export alone — it names no source
+    - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
+    - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 26.7: Register as `severity: 'error'`
+    - [x] Step 26.8: Run `rules sync`, then verify the generated config
+    - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
+          nothing; every value-plus-type pair was legal under 26.3
+    - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
 - [x] Step 27: Gate a commit on `tsc`, lint and the tests
     - [x] Step 27.1: Pick the runner — no dependency: a tracked `.githooks/` folder and git's own
           `core.hooksPath`, after husky and lint-staged were considered
@@ -448,24 +464,43 @@ not.
           regex rather than a five-minute run
     - [x] Step 27.10: Verify the refusals — `[]`, `[0000]` and `[0009] -` each fail in about a
           second, before any lint or compile work starts
-- [ ] Step 28: Rule — a type is imported, never reached through a namespace - [x] Step 28.1: Build `rules/no-qualified-type/` - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
-      `React.ReactNode`, `React.CSSProperties` - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-'react'`, then `(e: FormEvent)` - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
-      `React.StrictMode` are calls, not types - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
-      default one is espree and cannot parse a qualified type - [x] Step 28.6: Register as `severity: 'error'` - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts` - [ ] Step 28.8: Run `rules sync`, then verify the generated config - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
-      roughly 55 sit in type position and the rest are values - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
-- [x] Step 29: Rule — the import block is closed by a blank line, and the first export opened by one — **configured, not built** - [x] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
-      already expresses does not need a registry entry, a registrar and a spec - [x] Step 29.2: Require at least one blank line between the last import and the statement
-      after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25 - [x] Step 29.3: Require a blank line before the first export, including when code sits
-      between the imports and it - [x] Step 29.4: Leave a file with no import, or no export, alone — the two halves are
-      independent, and neither pair matches without both sides - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
-      `eslint.config.js`, not in `rules/registry.ts` - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
-'import', next: 'import' }`, placed last because the last matching pair wins over
-      `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
-      no fixer and only covered `src`, `common` and `server` - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports - [x] Step 29.8: Confirm a green `tsc`, lint, and test run - [x] Step 29.9: Quiet the test run with `reporters: ['dot']` in the `test` block of
-      `vite.config.ts`, so 129 per-file lines become one dot stream. Not `minimal` — its
-      `printTestModule` returns early for every module that passed, so `console.warn` from a
-      green test is dropped, and a warning nobody sees is the one that bites
+- [ ] Step 28: Rule — a type is imported, never reached through a namespace
+    - [x] Step 28.1: Build `rules/no-qualified-type/`
+    - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
+          `React.ReactNode`, `React.CSSProperties`
+    - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
+    'react'`, then `(e: FormEvent)`
+    - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
+          `React.StrictMode` are calls, not types
+    - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
+          default one is espree and cannot parse a qualified type
+    - [x] Step 28.6: Register as `severity: 'error'`
+    - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts`
+    - [ ] Step 28.8: Run `rules sync`, then verify the generated config
+    - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
+          roughly 55 sit in type position and the rest are values
+    - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 29: Rule — the import block is closed by a blank line, and the first export opened by one — **configured, not built**
+    - [x] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
+          already expresses does not need a registry entry, a registrar and a spec
+    - [x] Step 29.2: Require at least one blank line between the last import and the statement
+          after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25
+    - [x] Step 29.3: Require a blank line before the first export, including when code sits
+          between the imports and it
+    - [x] Step 29.4: Leave a file with no import, or no export, alone — the two halves are
+          independent, and neither pair matches without both sides
+    - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
+          `eslint.config.js`, not in `rules/registry.ts`
+    - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
+    'import', next: 'import' }`, placed last because the last matching pair wins over
+          `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
+          no fixer and only covered `src`, `common` and `server`
+    - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports
+    - [x] Step 29.8: Confirm a green `tsc`, lint, and test run
+    - [x] Step 29.9: Quiet the test run with `reporters: ['dot']` in the `test` block of
+          `vite.config.ts`, so 129 per-file lines become one dot stream. Not `minimal` — its
+          `printTestModule` returns early for every module that passed, so `console.warn` from a
+          green test is dropped, and a warning nobody sees is the one that bites
 - [ ] Step 30: Rule — an object holds no empty row between its properties
     - [x] Step 30.1: Build `rules/no-empty-row-in-object/`, the family's third member after
           `no-empty-row-in-jsx` and the `no-newline-in-imports` Step 29.6 retired. No core rule

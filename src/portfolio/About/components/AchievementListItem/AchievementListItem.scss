@@ -58,7 +58,7 @@
     .AchievementListItem__view {
         margin-left: 0.5rem;
         color: var(--black-3);
-        font-size: 1.25rem;
+        font-size: var(--font-md);
 
         @include bp.md {
             margin-left: auto;
