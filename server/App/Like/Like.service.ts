@@ -20,13 +20,11 @@ export const LikeService = {
         }, {})
         return { likes: likesByPath }
     },
-
     /** Returns the number of likes recorded for a single path. */
     countByPath: async (path: string): Promise<GetLikeResponse> => {
         const likes = await LikeRepository.countByPath(path)
         return { likes }
     },
-
     /** Records a like and upserts the daily aggregate for fast breakdown queries. */
     create: async (input: LikeInput): Promise<PostLikeResponse> => {
         const { error } = LikeSchema.validate(input)

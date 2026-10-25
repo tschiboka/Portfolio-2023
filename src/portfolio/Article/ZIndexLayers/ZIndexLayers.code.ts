@@ -10,7 +10,6 @@ export const ZIndexLayersCode = {
 
     top: 50,
 } as const` as const,
-
     layerValues: `Layer      Value    Use Case
 ─────────────────────────────────────
 base       10      Default content (layouts, cards, forms)
@@ -20,27 +19,23 @@ backdrop   39      Blocking layer behind panel content
 panel      40      Full-screen UI domain (modals, drawers, dialogs)
 close      41      Panel controls above content
 top        50      Highest-priority global UI (toasts, system alerts)` as const,
-
     usage: `// Before
 <div style={{ zIndex: 1000 }} />
 
 // After
 <div style={{ zIndex: Const.ZIndex.dropdown }} />` as const,
-
     before: `/* Before — arbitrary magic numbers */
 .Header     { z-index: 90;  }
 .SubNav     { z-index: 10000; }
 .Overlay    { z-index: 95;  }
 .ContentNav { z-index: 10000; }
 .SideMenu   { z-index: 60;  }` as const,
-
     after: `/* After — every value traces back to the layer system */
 .Header     { z-index: 20; }  /* Const.ZIndex.sticky  */
 .SubNav     { z-index: 20; }  /* Const.ZIndex.sticky  */
 .Overlay    { z-index: 40; }  /* Const.ZIndex.panel   */
 .ContentNav { z-index: 20; }  /* Const.ZIndex.sticky  */
 .SideMenu   { z-index: 20; }  /* Const.ZIndex.sticky  */` as const,
-
     stackingContextTrap:
         `{/* Incorrect — Panel nested inside Sticky creates a new stacking context */}
 <div style={{ zIndex: Const.ZIndex.sticky, position: 'relative' }}>

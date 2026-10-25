@@ -29,7 +29,6 @@ export const LayoutsCode = {
     Rendered as a <section> element.
 </Box>`,
     },
-
     // ── Stack ────────────────────────────────────────────
     Stack: {
         vertical: `<Stack.Vertical gap="12">
@@ -80,7 +79,6 @@ export const LayoutsCode = {
     </Stack.Horizontal>
 </Stack.Vertical>`,
     },
-
     // ── Inline ───────────────────────────────────────────
     Inline: {
         basic: `<Inline gap="8">
@@ -99,7 +97,6 @@ export const LayoutsCode = {
     <span style={{ fontSize: 12 }}>Small</span>
 </Inline>`,
     },
-
     // ── Grid ─────────────────────────────────────────────
     Grid: {
         basic: `<Grid columns={3} gap="8">
@@ -123,7 +120,6 @@ export const LayoutsCode = {
     ...
 </Grid>`,
     },
-
     // ── Split ────────────────────────────────────────────
     Split: {
         basic: `<Split
@@ -135,7 +131,6 @@ export const LayoutsCode = {
 <Split ratio="1/1" gap="16" left={<div>Left</div>} right={<div>Right</div>} />
 <Split ratio="3/1" gap="16" left={<main>Content</main>} right={<aside>Sidebar</aside>} />`,
     },
-
     // ── Spacer ───────────────────────────────────────────
     Spacer: {
         vertical: `<div>Above</div>
@@ -147,7 +142,6 @@ export const LayoutsCode = {
     <span>Right — 32px gap</span>
 </div>`,
     },
-
     // ── Visibility ───────────────────────────────────────
     Visibility: {
         show: `{/* Hidden by default, shown above the breakpoint */}

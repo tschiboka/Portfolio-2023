@@ -25,7 +25,6 @@ export const UsersService = {
 
         return users.map((user) => user.toObject())
     },
-
     /** Returns a single user by id. */
     get: async (id: string): Promise<User> => {
         if (!isValidObjectId(id)) throw ApiResponder.invalidId('user')
@@ -34,7 +33,6 @@ export const UsersService = {
         if (!user) throw ApiResponder.notFound('user')
         return user.toObject()
     },
-
     /** Registers a new user, sending a confirmation email. */
     register: async (input: PostUserRequest): Promise<string> => {
         const { fullName, userName, email, password: plainPassword } = input
@@ -73,7 +71,6 @@ export const UsersService = {
         await UsersUtils.sendConfirmationEmail(input.email, tokenString)
         return ApiMessage.sent('confirmation email')
     },
-
     /** Confirms a registration token and creates the user. */
     confirm: async (input: PostConfirmRequest): Promise<PostConfirmResponse> => {
         const { error } = UsersSchema.validateToken({ token: input.token })
@@ -98,7 +95,6 @@ export const UsersService = {
         await UsersRepository.save(user)
         return { token }
     },
-
     /** Logs a user in, returning an auth token, the user and current settings. */
     login: async (input: PostLoginRequest): Promise<PostLoginResponse> => {
         const { error } = UsersSchema.validateLogin(input)
@@ -120,7 +116,6 @@ export const UsersService = {
             settings: [settings],
         }
     },
-
     /** Returns the current session's user and settings. */
     session: async (user: CurrentUser): Promise<GetSessionResponse> => {
         const found = await UsersRepository.findById(String(user._id))

@@ -30,7 +30,6 @@ export const AppMiddleware = {
             message: ApiMessage.internalServerError(),
         })
     },
-
     /** Production hardening (helmet) and response compression. */
     prod: (app: Application) => {
         app.use(helmet())

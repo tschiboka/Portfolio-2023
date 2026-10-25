@@ -21,7 +21,6 @@ bool oldFretState[ROW_LEN][COL_LEN] = {                              // Store Ol
     { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 };
 `,
-
     pinSetup: `void setup() {
     //  FRETS INIT 
     for (byte ci = 0; ci < COL_LEN; ci++) {                          // Cycle through Columns (Frets)
@@ -34,7 +33,6 @@ bool oldFretState[ROW_LEN][COL_LEN] = {                              // Store Ol
         pinMode(ROW_PINS[ri], OUTPUT);                               // Set Row as Output
     }
 `,
-
     fretTest: `// Display the State on Serial Monitor | Use for Testing and Troubleshooting the Device
 void printState(short frequency = 0) {
     for (byte ri = 0; ri < ROW_LEN; ri++) {                          // Traverse Rows (Strings)
@@ -52,7 +50,6 @@ void printState(short frequency = 0) {
     if (frequency) delay(frequency);                                 // Optionally Delay Frequency of Loop (Only for Testing Purposes)
 }
 `,
-
     constants: `// Global Variables
 const byte COLUMN_PINS[20] = {                                       // Column PINs (Frets): Put Voltage Through
     16, 17, 18, 19, 20,                                              // PIN: 16 - 20  |  Fret:  1 - 5 
@@ -71,13 +68,11 @@ const byte TOG_IN  = 10;                                             // Toggle S
 const byte TOG_OUT = 9;                                              // Toggle Switch Output Pin
 const int maxAllowedDebounceTime = 20;                               // Set the Debounce Time to Prevent Uninitiated Button Presses
 `,
-
     strumSetup: `// STRUM INIT
 for (byte i = 0; i < 6; i++) {                                   // Cycle Strum PINS
     pinMode(STRUM_PINS[i], INPUT_PULLUP);                        // Built In Pullup On
     digitalWrite(STRUM_PINS[i], HIGH);                           // Set Strum High as Default
 }`,
-
     setControllerState: `
 // Set the Controller's State Variables (Global Vars) and Detect Fret and Strum Presses
 void setState() {
@@ -105,7 +100,6 @@ void setState() {
     }
 }
 `,
-
     messaging: `const unsigned long currentTime = millis();                      // Get the Current Time
 // Read Fret State
 for (byte ri = 0; ri < ROW_LEN; ri++) {                          // Iterate Rows (Strings)

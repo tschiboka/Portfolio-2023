@@ -65,7 +65,6 @@ export const Format = {
 
         return m.format(Formats[to])
     },
-
     /**
      * Parses a date value into a Date object.
      *
@@ -84,7 +83,6 @@ export const Format = {
         const m = toMoment(value)
         return m?.toDate()
     },
-
     /**
      * Converts a date value to a Unix timestamp (milliseconds since 1970-01-01).
      *
@@ -102,7 +100,6 @@ export const Format = {
         const m = toMoment(value)
         return m?.valueOf() ?? 0
     },
-
     /**
      * Converts a date value to an ISO `String` (e.g. `2023-08-06T14:30:00.000Z`), or the ISO form
      * of a fallback date when the value is empty or unparseable.

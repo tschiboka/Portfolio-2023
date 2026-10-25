@@ -21,13 +21,11 @@ export const VisitService = {
         }, {})
         return { visits: visitsByPath }
     },
-
     /** Returns the number of visits recorded for a single path. */
     countByPath: async (path: string): Promise<GetVisitResponse> => {
         const visits = await VisitRepository.countByPath(path)
         return { visits }
     },
-
     /** Records a visit and upserts the daily aggregate for fast breakdown queries. */
     create: async (input: VisitInput): Promise<PostVisitResponse> => {
         const { error } = VisitSchema.validate(input)

@@ -17,7 +17,6 @@ export const RoutinesService = {
         const routines = await RoutinesRepository.findVisibleTo(user._id)
         return routines.map(ApiTransformers.toApiResource<GymRoutineResource>)
     },
-
     /** Creates a user-owned routine from validated input. */
     create: async (
         input: PostGymRoutineRequest,
@@ -43,7 +42,6 @@ export const RoutinesService = {
 
         return ApiTransformers.toApiResource<GymRoutineResource>(routine)
     },
-
     /** Updates a routine the user is allowed to modify. */
     update: async (
         id: string,
@@ -64,7 +62,6 @@ export const RoutinesService = {
 
         return ApiTransformers.toApiResource<GymRoutineResource>(routine)
     },
-
     /** Deletes a routine the user is allowed to modify. */
     remove: async (id: string, user: CurrentUser): Promise<void> => {
         if (!isValidObjectId(id)) throw ApiResponder.invalidId('routine')

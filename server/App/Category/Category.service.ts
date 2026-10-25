@@ -18,7 +18,6 @@ export const CategoryService = {
             : await CategoryRepository.findByUser(_id)
         return categories.map(ApiTransformers.toApiResource<GetCategoryResponse>)
     },
-
     /** Creates a category for the requesting user, enforcing uniqueness + parent rules. */
     create: async (user: CurrentUser, input: PostCategoryRequest): Promise<GetCategoryResponse> => {
         const { _id } = user

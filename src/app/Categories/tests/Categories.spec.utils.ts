@@ -33,7 +33,6 @@ export const CategoriesTestUtils = {
             fetchError: "Couldn't fetch categories",
         },
     },
-
     /** Renders the Categories screen behind the given handlers and returns the bound form. */
     customRender: async (
         handlers: Buildable[] = CategoriesMockHandlers.Defaults,
@@ -48,7 +47,6 @@ export const CategoriesTestUtils = {
 
         return { form: Test.Form('Category form') }
     },
-
     /** Fills every required field so the form passes validation before submit. */
     fillValidCategory: async (form: CategoriesForm) => {
         const { fields } = CategoriesTestUtils.labels

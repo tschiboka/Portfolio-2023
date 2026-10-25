@@ -11,7 +11,6 @@ export const TypographyCode = {
     An h2 element rendered at sm size.
 </Heading>`,
     },
-
     // ── Paragraph ────────────────────────────────────────
     Paragraph: {
         basic: `<Paragraph>
@@ -22,38 +21,32 @@ export const TypographyCode = {
 <Paragraph size="md">Medium paragraph (default).</Paragraph>
 <Paragraph size="lg">Large paragraph.</Paragraph>`,
     },
-
     // ── Text ─────────────────────────────────────────────
     Text: {
         basic: `<Text>Default inline text.</Text>
 <Text weight="bold">Bold text.</Text>
 <Text size="lg" tone="info">Large info text.</Text>`,
     },
-
     // ── Caption ──────────────────────────────────────────
     Caption: {
         basic: `<Caption>A small muted caption.</Caption>
 <Caption as="figcaption">A figcaption element.</Caption>`,
     },
-
     // ── CodeText ─────────────────────────────────────────
     CodeText: {
         basic: `<CodeText>const x = 42</CodeText>`,
     },
-
     // ── BlockQuote ───────────────────────────────────────
     BlockQuote: {
         basic: `<BlockQuote>
     The only way to do great work is to love what you do.
 </BlockQuote>`,
     },
-
     // ── Overline ─────────────────────────────────────────
     Overline: {
         basic: `<Overline>Section Label</Overline>
 <Overline weight="bold">Bold Overline</Overline>`,
     },
-
     // ── List ──────────────────────────────────────────────
     List: {
         unordered: `<List items={['Apples', 'Bananas', 'Cherries']} />`,
@@ -71,7 +64,6 @@ export const TypographyCode = {
     ]}
 />`,
     },
-
     // ── InlineReference ───────────────────────────────────
     InlineReference: {
         external: `<Paragraph>
@@ -95,7 +87,6 @@ export const TypographyCode = {
     />
 </Paragraph>`,
     },
-
     // ── Shared Props ─────────────────────────────────────
     Size: {
         demo: `<Text size="xs">xs</Text>

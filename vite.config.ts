@@ -31,6 +31,7 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: ['./src/setupTests.ts'],
+        reporters: ['dot'],
         include: [
             'src/**/*.{test,spec}.{ts,tsx}',
             'common/**/*.{test,spec}.{ts,tsx}',

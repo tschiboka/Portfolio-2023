@@ -2,7 +2,6 @@ export const DailyAnaliticsEmailCode = {
     cronAuthValidation: `if (req.header('X-Cron-Secret') !== process.env.CRON_SECRET) {
     return res.status(401).json({ success: false })
 }`,
-
     routeEndpoint: `route.post(
     '/daily-breakdown',
     [cronOrAdminAuth],
@@ -11,7 +10,6 @@ export const DailyAnaliticsEmailCode = {
         res.status(HttpStatus.CREATED).json(result)
     },
 )`,
-
     sendWithResend: `import { Resend } from 'resend'
 
 const sendEmail = async (message: string) => {
@@ -30,7 +28,6 @@ const sendEmail = async (message: string) => {
     if (error) throw error
     return data
 }`,
-
     silentFail: `// ❌ Bad: helper returns error instead of throwing
 try {
     ...
@@ -45,11 +42,9 @@ try {
 } catch {
     // never executed
 }`,
-
     throwInstead: `// ✅ Good: throw on failure, let caller decide
 if (error) throw error
 return data`,
-
     breakdownFunction: `export async function sendDailyBreakdown() {
     const today = getDateString()
 
@@ -83,14 +78,12 @@ return data`,
     await sendEmail(message)
     return { success: true }
 }`,
-
     inefficientQuery: `// ❌ Loads everything — fine for portfolios, bad at scale
 const visits = await Visit.find()
 
 // ✅ Push aggregation to the database
 Visit.aggregate([...])
 Visit.countDocuments(...)`,
-
     warmUpStrategy: `// 23:50 — Wake the service
 GET /health
 

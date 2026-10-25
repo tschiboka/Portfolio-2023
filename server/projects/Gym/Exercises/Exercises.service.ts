@@ -16,7 +16,6 @@ export const ExercisesService = {
         const exercises = await ExercisesRepository.findVisibleTo(user._id)
         return exercises.map(ApiTransformers.toApiResource<GymExerciseResource>)
     },
-
     /** Creates a canonical exercise from validated input. */
     create: async (input: ExerciseValidationInput): Promise<GymExerciseResource> => {
         const result = ExercisesSchema.validate(input)
@@ -28,7 +27,6 @@ export const ExercisesService = {
 
         return ApiTransformers.toApiResource<GymExerciseResource>(exercise)
     },
-
     /** Updates an exercise the user is allowed to modify. */
     update: async (
         id: string,
@@ -49,7 +47,6 @@ export const ExercisesService = {
 
         return ApiTransformers.toApiResource<GymExerciseResource>(exercise)
     },
-
     /** Deletes an exercise the user is allowed to modify. */
     remove: async (id: string, user: CurrentUser): Promise<void> => {
         if (!isValidObjectId(id)) throw ApiResponder.invalidId('exercise')

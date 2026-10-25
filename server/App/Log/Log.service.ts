@@ -15,7 +15,6 @@ export const LogService = {
         const logs = await LogRepository.find()
         return { table: logs.map(ApiTransformers.toApiResource<Log>) }
     },
-
     /** Returns a paginated, sorted and projected page of logs. */
     paged: async (query: GetLogQuery): Promise<GetLogResponse> => {
         const { sortBy, select } = query
@@ -29,7 +28,6 @@ export const LogService = {
 
         return { log: logs.map(ApiTransformers.toApiResource<Log>), total }
     },
-
     /** Deletes a batch of logs by ids. */
     remove: async (ids: string[]): Promise<DeleteLogResponse> => {
         const result = await LogRepository.deleteManyByIds(ids)

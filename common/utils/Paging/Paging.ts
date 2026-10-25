@@ -31,7 +31,6 @@ export const Paging = {
 
         return { pageNumber, limit, skip }
     },
-
     /** Builds the {@link PageMeta} for a paginated response. */
     toMeta: (totalItems: number, limit: number, pageNumber: number): PageMeta => ({
         totalItems,

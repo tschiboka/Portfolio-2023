@@ -8,7 +8,6 @@ export const Option = {
      * Option.getValues(options) // ['a', 'b']
      */
     getValues: <T>(options: readonly Option<T>[]): T[] => options.map((option) => option.value),
-
     /**
      * Plucks the `label` from each option.
      *
@@ -17,7 +16,6 @@ export const Option = {
      */
     getLabels: <T>(options: readonly Option<T>[]): string[] =>
         options.map((option) => option.label),
-
     /**
      * Finds the label for a given value. Returns `undefined` when no option matches.
      *
@@ -27,7 +25,6 @@ export const Option = {
      */
     getLabelByValue: <T>(options: readonly Option<T>[], value: T): string | undefined =>
         options.find((option) => option.value === value)?.label,
-
     /**
      * Finds the value for a given label. Returns `undefined` when no option matches.
      *

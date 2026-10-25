@@ -19,11 +19,9 @@ export const App = {
             await mongoose.connect(dbString)
             console.log(ApiMessage.dbConnected())
         },
-
         /** Registers the `Joi.objectId()` extension once at bootstrap. */
         setupValidation: () => (Joi.objectId = joiObjectId(Joi)),
     },
-
     /** Builds and wires the Express application: middleware, routes, and the error handler. */
     create: (): Application => {
         const app = express()
@@ -45,7 +43,6 @@ export const App = {
 
         return app
     },
-
     /** Boots the app: connects to the DB, then returns the built application. */
     start: async (): Promise<Application> => {
         const app = App.create()

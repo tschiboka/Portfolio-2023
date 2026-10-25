@@ -17,7 +17,6 @@ await userEvent.type(el, 'a@b.com')
 // Developer D — custom helper
 await customTestUtils.click('submit-btn')
 await customTestUtils.type('email-input', 'a@b.com')`,
-
     // ── The Solution: Accessor Pattern ───────────────────────────────────────
     entropyAfter: `// Popup
 const popup = Test.Overlay('Confirm')
@@ -28,7 +27,6 @@ expect(popup.Has.dialog()).toBe(false)
 const form = Test.Form('Login')
 await form.Input('Email').Do.type('a@b.com')
 await form.Do.submit()`,
-
     // ── Accessor Base Class ──────────────────────────────────────────────────
     accessorBase: `export class Accessor {
     static screen = screen        // global RTL screen
@@ -55,7 +53,6 @@ await form.Do.submit()`,
         return el as HTMLElement
     }
 }`,
-
     // ── Get Namespace ────────────────────────────────────────────────────────
     getNamespace: `// Base Get — available on every accessor
 get Get() {
@@ -78,7 +75,6 @@ get Get() {
         href:       () => (this.element as HTMLAnchorElement).href,
     }
 }`,
-
     // ── Do Namespace ─────────────────────────────────────────────────────────
     doNamespace: `// Base Do — available on every accessor
 get Do() {
@@ -99,7 +95,6 @@ get Do() {
         type: async (text: string) => { await Accessor.user.type(this.element, text) },
     }
 }`,
-
     // ── Has & Wait (Derived) ─────────────────────────────────────────────────
     hasWait: `// Has — auto-derived via Proxy over Get. Never throws.
 get Has(): Record<string, (...args: unknown[]) => boolean> {
@@ -125,7 +120,6 @@ get Wait(): Record<string, (...args: unknown[]) => Promise<unknown>> {
         },
     })
 }`,
-
     // ── Building a Component Accessor ────────────────────────────────────────
     buttonAccessor: `import { Accessor } from '../Accessor/Accessor'
 
@@ -148,7 +142,6 @@ export const Button = (name: string | RegExp): ButtonAccessor => {
     const element = Accessor.screen.getByRole('button', { name })
     return new ButtonAccessor(element, \`Button('\${String(name)}')\`)
 }`,
-
     // ── Composite Accessor: Form ─────────────────────────────────────────────
     formAccessor: `class FormInstance extends Accessor {
     // Sub-accessors — scoped to this form, preventing cross-component leaks
@@ -193,7 +186,6 @@ export const Form = (label: string): FormInstance => {
     const element = Accessor.screen.getByRole('form', { name: label })
     return new FormInstance(element, \`Form('\${label}')\`)
 }`,
-
     // ── Set: Rendering & Mocking ─────────────────────────────────────────────
     setPattern: `// Set lives on the factory function — it belongs to the pre-render phase
 
@@ -225,7 +217,6 @@ const Set = {
 }
 
 export const ButtonTestUtils = { Set }`,
-
     // ── Test Examples: Before & After ────────────────────────────────────────
     testBefore: `describe('LoginForm', () => {
     it('shows error on invalid email', async () => {
@@ -260,7 +251,6 @@ export const ButtonTestUtils = { Set }`,
         })
     })
 })`,
-
     testAfter: `describe('LoginForm', () => {
     it('shows error on invalid email', async () => {
         Page.Do.render({ path: '/login' })
@@ -283,7 +273,6 @@ export const ButtonTestUtils = { Set }`,
         await form.Wait.byText('Welcome')
     })
 })`,
-
     // ── Real-World: Table Test ────────────────────────────────────────────────
     tableTest: `describe('Table', () => {
     it('renders heading and column headers', () => {
@@ -322,7 +311,6 @@ export const ButtonTestUtils = { Set }`,
         await table.Do.resetFilters()
     })
 })`,
-
     // ── Real-World: Overlay Test ─────────────────────────────────────────────
     overlayTest: `describe('Popup', () => {
     it('closes via close button', async () => {
@@ -348,7 +336,6 @@ export const ButtonTestUtils = { Set }`,
         expect(onClose).toHaveBeenCalled()
     })
 })`,
-
     // ── MSW Integration ──────────────────────────────────────────────────────
     mswIntegration: `import { server, MockBuilder, RequestBuilder } from '@common-ux'
 
@@ -384,7 +371,6 @@ const adminUser = MockBuilder({ id: 1, name: 'Alice', role: 'admin' })
 const regularUser = adminUser.modify({ role: 'user' })   // new builder
 const renamedUser = regularUser.setValue('name', 'Carol') // new builder
 renamedUser.build() // → { id: 1, name: 'Carol', role: 'user' }`,
-
     // ── Error Messages ───────────────────────────────────────────────────────
     errorMessages: `// When an element is not found, the error message tells you exactly where
 // the failure occurred in the accessor chain:
@@ -403,7 +389,6 @@ export const TestError = {
             }\`,
         ),
 }`,
-
     // ── Full Component List ──────────────────────────────────────────────────
     testNamespace: `import { Test } from '@common-ux'
 
@@ -425,7 +410,6 @@ Test.Code('snippet')            // CodeAccessor
 Test.Figure('chart')            // FigureAccessor
 Test.LoadingIndicator           // Static: LoadingIndicator.Has.isLoading()
 Test.Screen                      // Page-level: Test.Screen.Do.render({ ... })`,
-
     // ── Design Rules ─────────────────────────────────────────────────────────
     designRules: `// ✅ Accessors locate elements, read state, and perform single actions
 const button = Test.Button('Save')

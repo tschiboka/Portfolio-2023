@@ -30,7 +30,6 @@ export const BreakdownPreviewTestUtils = {
         empty: 'No data today',
         icons: { eye: 'eye', heart: 'heart' },
     } as const,
-
     /** Returns a preview accessor bound to the rendered shell. */
     get: (context = 'BreakdownPreview'): BreakdownPreviewAccessor => {
         const element = Accessor.screen
@@ -38,10 +37,8 @@ export const BreakdownPreviewTestUtils = {
             .closest('.bp-shell') as HTMLElement
         return new BreakdownPreviewAccessor(element, context)
     },
-
     /** Mounts the preview with the given props. */
     render: (props: BreakdownPreviewProps) => render(<BreakdownPreviewComponent {...props} />),
-
     /** Renders the preview with the standard mock and returns an accessor bound to it. */
     renderPreview: (): BreakdownPreviewAccessor => {
         BreakdownPreviewTestUtils.render({ breakdown: BreakdownPreviewMocks.breakdown })

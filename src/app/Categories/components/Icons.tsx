@@ -311,7 +311,6 @@ export const Icons: Icon = {
     check_circle: <FaRegCheckCircle />,
     expand_less: <MdExpandLess />,
     expand_more: <MdExpandMore />,
-
     // Tech
     code_1: <BsCode />,
     code_2: <FaCode />,
@@ -377,7 +376,6 @@ export const Icons: Icon = {
     padlock_closed: <IoLockClosed />,
     youtube: <IoLogoYoutube />,
     mail_open: <IoMailOpen />,
-
     // Travel
     car: <BsCarFrontFill />,
     bus: <IoBus />,
@@ -395,7 +393,6 @@ export const Icons: Icon = {
     flag: <IoFlag />,
     fish: <IoFish />,
     compass: <IoNavigateCircle />,
-
     // Places
     house: <BsHouse />,
     hospital: <BsHospitalFill />,
@@ -417,7 +414,6 @@ export const Icons: Icon = {
     fighter_jet: <FaJetFighter />,
     tank: <TbTank />,
     coffee: <IoIosCafe />,
-
     // Body
     eye: <BsEye />,
     eye_fill: <BsEyeFill />,
@@ -428,7 +424,6 @@ export const Icons: Icon = {
     hand: <IoHandRight />,
     heart: <IoHeart />,
     tooth: <FaTooth />,
-
     // Activities
     xbox: <BsXbox />,
     running: <FaRunning />,
@@ -465,14 +460,12 @@ export const Icons: Icon = {
     boxing: <RiBoxingFill />,
     karate: <TbKarate />,
     yinyang: <FaYinYang />,
-
     // Time
     moon_outline: <IoMoonOutline />,
     moon: <IoMoon />,
     sun: <IoSunny />,
     calendar: <IoCalendarNumber />,
     hourglass: <IoHourglassOutline />,
-
     // Events
     birthday: <LiaBirthdayCakeSolid />,
     sick: <MdOutlineSick />,
@@ -486,7 +479,6 @@ export const Icons: Icon = {
     home: <IoHome />,
     key: <IoKey />,
     key_outline: <IoKeyOutline />,
-
     // Misc
     medal: <IoMedal />,
     mic: <IoMic />,

@@ -14,56 +14,45 @@ class TableAccessor extends Accessor {
             columnHeaders: () => this.scope.getAllByRole('columnheader'),
             emptyState: () => this.scope.getByRole('status'),
             infoButton: () => this.scope.getByRole('button', { name: 'More information' }),
-
             // Refresh
             refreshButton: () => this.scope.getByRole('button', { name: 'Refresh data' }),
-
             // Skeleton — rows are aria-hidden, detect by class
             skeleton: () => this.element.querySelector('.table-skeleton-row'),
-
             // Column resize
             resizeHandle: (colIndex: number) => {
                 const headers = this.scope.getAllByRole('columnheader')
                 return headers[colIndex]?.querySelector('.th-resize-handle')
             },
-
             // Column reorder
             reorderLeftButton: (header: string) =>
                 this.scope.getByRole('button', { name: `Move ${header} left` }),
             reorderRightButton: (header: string) =>
                 this.scope.getByRole('button', { name: `Move ${header} right` }),
-
             // Selection
             selectAll: () => this.scope.getByRole('checkbox', { name: 'Select all rows' }),
             selectRow: (n: number) => this.scope.getByRole('checkbox', { name: `Select row ${n}` }),
-
             // Actions
             actionButtons: () => this.scope.getAllByRole('button', { name: 'Row actions' }),
             actionButton: (index = 0) =>
                 this.scope.getAllByRole('button', { name: 'Row actions' })[index],
             menu: () => Accessor.screen.getByRole('menu'),
             menuItem: (label: string) => Accessor.screen.getByRole('menuitem', { name: label }),
-
             // Sorting
             sortButton: (header: string) =>
                 this.scope.getByRole('button', { name: `Sort by ${header}` }),
-
             // Filtering
             filterToggle: () => this.scope.getByRole('button', { name: 'Toggle filters' }),
             filterPanel: () => this.scope.getByRole('search', { name: 'Table filters' }),
             applyFilters: () => this.scope.getByRole('button', { name: 'Apply filters' }),
             resetFilters: () => this.scope.getByRole('button', { name: 'Reset filters' }),
-
             // Download
             downloadButton: (label = 'Download') => this.scope.getByRole('button', { name: label }),
-
             // Expand
             expandButtons: () => this.scope.getAllByRole('button', { name: 'Expand row' }),
             expandButton: (index = 0) =>
                 this.scope.getAllByRole('button', { name: 'Expand row' })[index],
             expandedRow: (n: number) =>
                 this.scope.getByRole('row', { name: `Expanded details for row ${n}` }),
-
             // Pagination
             pagination: () => this.scope.getByRole('navigation', { name: 'Table pagination' }),
             pageButton: (n: number) => this.scope.getByRole('button', { name: `Page ${n}` }),

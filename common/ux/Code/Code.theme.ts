@@ -42,7 +42,6 @@ export const tschibokaDark: HljsStyle = {
         background: 'var(--black-x)',
         color: 'var(--white-2)',
     },
-
     comment: {
         color: 'var(--gray-1)',
         fontStyle: 'italic',
@@ -55,7 +54,6 @@ export const tschibokaDark: HljsStyle = {
         color: 'var(--gray-1)',
         fontStyle: 'italic',
     },
-
     'hljs-string': {
         color: 'var(--success)',
         fontStyle: 'italic',
@@ -63,7 +61,6 @@ export const tschibokaDark: HljsStyle = {
     'hljs-regexp': {
         color: 'var(--success)',
     },
-
     'hljs-number': {
         color: 'var(--orange)',
     },
@@ -71,16 +68,13 @@ export const tschibokaDark: HljsStyle = {
         color: 'var(--orange)',
         fontStyle: 'italic',
     },
-
     'hljs-keyword': {
         color: 'var(--purple)',
         fontStyle: 'italic',
     },
-
     'hljs-operator': {
         color: 'var(--accent-dark-1)',
     },
-
     'hljs-title': {
         color: 'var(--accent)',
     },
@@ -90,14 +84,12 @@ export const tschibokaDark: HljsStyle = {
     'hljs-title.class_': {
         color: 'var(--warning)',
     },
-
     'hljs-built_in': {
         color: 'var(--success)',
     },
     'hljs-type': {
         color: 'var(--warning)',
     },
-
     'hljs-variable': {
         color: 'var(--error)',
     },
@@ -107,11 +99,9 @@ export const tschibokaDark: HljsStyle = {
     'hljs-variable.constant_': {
         color: 'var(--orange)',
     },
-
     'hljs-params': {
         color: 'var(--white-2)',
     },
-
     'hljs-property': {
         color: 'var(--orange)',
     },
@@ -123,14 +113,12 @@ export const tschibokaDark: HljsStyle = {
         color: 'var(--orange)',
         fontStyle: 'italic',
     },
-
     'hljs-tag': {
         color: 'var(--white-2)',
     },
     'hljs-name': {
         color: 'var(--error)',
     },
-
     'hljs-selector-class': {
         color: 'var(--accent)',
     },
@@ -146,7 +134,6 @@ export const tschibokaDark: HljsStyle = {
     'hljs-selector-pseudo': {
         color: 'var(--purple)',
     },
-
     'hljs-subst': {
         color: 'var(--accent-dark-1)',
     },
@@ -156,7 +143,6 @@ export const tschibokaDark: HljsStyle = {
     'hljs-template-tag': {
         color: 'var(--purple)',
     },
-
     'hljs-symbol': {
         color: 'var(--orange)',
     },
@@ -172,7 +158,6 @@ export const tschibokaDark: HljsStyle = {
     'hljs-punctuation': {
         color: 'var(--accent)',
     },
-
     'hljs-section': {
         color: 'var(--error)',
     },
@@ -188,7 +173,6 @@ export const tschibokaDark: HljsStyle = {
     'hljs-deletion': {
         color: 'var(--error)',
     },
-
     'hljs-doctag': {
         color: 'var(--warning)',
     },

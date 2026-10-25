@@ -16,7 +16,6 @@ export const ClientMessage = {
         LoggedIn: (r: string) => `${Strings.capitalise(r)} logged in`,
         LoggedOut: (r: string) => `${Strings.capitalise(r)} logged out`,
     },
-
     Failure: {
         Create: (r: string) => `Failed to create ${r.toLowerCase()}`,
         Update: (r: string) => `Failed to update ${r.toLowerCase()}`,
@@ -32,7 +31,6 @@ export const ClientMessage = {
         Login: () => 'Failed to log in',
         Logout: () => 'Failed to log out',
     },
-
     Progress: {
         Loading: (r: string) => `Loading ${r.toLowerCase()}…`,
         Saving: (r: string) => `Saving ${r.toLowerCase()}…`,
@@ -44,7 +42,6 @@ export const ClientMessage = {
         Fetching: (r: string) => `Fetching ${r.toLowerCase()}…`,
         Submitting: (r: string) => `Submitting ${r.toLowerCase()}…`,
     },
-
     Empty: {
         NoResults: (r: string) => `No ${r.toLowerCase()} found`,
         NothingYet: (r: string) => `No ${r.toLowerCase()} yet`,
@@ -52,14 +49,12 @@ export const ClientMessage = {
         NoItems: () => 'No items to display',
         StartBy: (action: string) => `Start by ${action.toLowerCase()}`,
     },
-
     Confirm: {
         Delete: (r: string) => `Delete this ${r.toLowerCase()}?`,
         Discard: () => 'Discard your changes?',
         Unsaved: () => 'You have unsaved changes',
         CannotBeUndone: () => 'This action cannot be undone',
     },
-
     Network: {
         Offline: () => 'You appear to be offline',
         Timeout: () => 'The request timed out',

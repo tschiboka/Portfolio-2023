@@ -33,7 +33,6 @@ export const BreakdownPreviewStyles = {
         padding: `${Const.Spacing[24]}px ${Const.Spacing[12]}px`,
         color: Const.Color.White[1],
     },
-
     card: {
         maxWidth: '600px',
         margin: '0 auto',
@@ -43,19 +42,16 @@ export const BreakdownPreviewStyles = {
         border: `2px solid ${Const.Color.Black[2]}`,
         boxShadow: `10px 10px 30px ${Const.Color.Black['0a70']}, -5px -5px 5px ${Const.Color.White['0a02']}, inset 10px 10px 20px ${Const.Color.Black[0]}`,
     },
-
     body: {
         padding: `${Const.Spacing[20]}px`,
         background: Const.Color.Black.X,
         color: Const.Color.White[2],
     },
-
     divider: {
         margin: `${Const.Spacing[24]}px 0`,
         border: 'none',
         borderTop: `1px solid ${Const.Color.Black[3]}`,
     },
-
     header: {
         style: {
             background: Const.Color.Black[1],
@@ -81,7 +77,6 @@ export const BreakdownPreviewStyles = {
             verticalAlign: 'middle',
         },
     },
-
     section: {
         title: {
             margin: `0 0 ${Const.Spacing[12]}px`,
@@ -95,7 +90,6 @@ export const BreakdownPreviewStyles = {
             verticalAlign: 'middle',
         },
     },
-
     stat: {
         card: {
             flex: 1,
@@ -118,7 +112,6 @@ export const BreakdownPreviewStyles = {
             color: Const.Color.Accent[0],
         },
     },
-
     table: {
         style: {
             width: '100%',
@@ -152,7 +145,6 @@ export const BreakdownPreviewStyles = {
             background: 'transparent',
         },
     },
-
     signature: {
         container: {
             marginTop: `${Const.Spacing[24]}px`,

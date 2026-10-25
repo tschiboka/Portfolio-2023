@@ -8,7 +8,6 @@ export class OverlayAccessor extends Accessor {
             menu: () => this.element,
             menuItems: () => this.scope.getAllByRole('menuitem'),
             menuItem: (label: string) => this.scope.getByRole('menuitem', { name: label }),
-
             // Popup
             dialog: () => this.element,
             closeButton: () => this.scope.getByLabelText('Overlay Close'),

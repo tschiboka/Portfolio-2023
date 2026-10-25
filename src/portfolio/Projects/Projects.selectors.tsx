@@ -41,7 +41,6 @@ const projects: Project[] = [
             </>
         ),
         badges: ['React', 'TypeScript', 'NodeJs', 'Express', 'MongoDB', 'Jest', 'RTL'],
-
         url: '/projects/word-duel-arena',
     },
     {

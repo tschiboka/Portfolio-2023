@@ -460,11 +460,35 @@ not.
     - [ ] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
           `eslint.config.js`, not in `rules/registry.ts`
     - [ ] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
-    'import', next: 'import' }`, placed last because the last matching pair wins over `next:
-    '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with no fixer
-          and only covered `src`, `common` and `server`
+    'import', next: 'import' }`, placed last because the last matching pair wins over
+          `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
+          no fixer and only covered `src`, `common` and `server`
     - [ ] Step 29.7: Sweep with `eslint --fix`, which the rule supports
     - [ ] Step 29.8: Confirm a green `tsc`, lint, and test run
+    - [ ] Step 29.9: Quiet the test run with `reporters: ['dot']` in the `test` block of
+          `vite.config.ts`, so 129 per-file lines become one dot stream. Not `minimal` — its
+          `printTestModule` returns early for every module that passed, so `console.warn` from a
+          green test is dropped, and a warning nobody sees is the one that bites
+- [ ] Step 30: Rule — an object holds no empty row between its properties
+    - [ ] Step 30.1: Build `rules/no-empty-row-in-object/`, the family's third member after
+          `no-empty-row-in-jsx` and the `no-newline-in-imports` Step 29.6 retired. No core rule
+          reaches an object property: `padding-line-between-statements` listens on
+          `":statement"` and rejects any parent that is not a statement list
+    - [ ] Step 30.2: Measure anchor to anchor — the previous property, any comments between it
+          and the next, then the next — never the node's own text. The JSX rule's row count
+          misfires twice here: a comment on its own line would read as padding, and an empty row
+          inside a multi-row property value, such as a method body, would read as a violation of
+          the object
+    - [ ] Step 30.3: Share the measure as `Rows.hasBlankRow` in `rules/rows.ts`, the sibling of
+          `rules/css.ts`, so the next member of the family does not restate it
+    - [ ] Step 30.4: Scope to `ObjectExpression` only. Destructuring patterns and type members
+          are a separate question, to be decided when asked rather than assumed now
+    - [ ] Step 30.5: Register as `severity: 'error'` over `**/*.{ts,tsx}`
+    - [ ] Step 30.6: Add `tests/NoEmptyRowInObject.spec.ts`, including the empty row inside a
+          multi-row property value, which must stay valid
+    - [ ] Step 30.7: Run `npm run build:rules`, then verify the generated config
+    - [ ] Step 30.8: Sweep every padded object
+    - [ ] Step 30.9: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 

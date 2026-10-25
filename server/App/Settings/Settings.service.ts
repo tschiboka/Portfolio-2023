@@ -12,7 +12,6 @@ export const SettingsService = {
 
         return settings
     },
-
     /** Creates the app's settings if none exist. */
     create: async (input: SettingsInput): Promise<ISetting> => {
         const result = SettingsSchema.validate(input)

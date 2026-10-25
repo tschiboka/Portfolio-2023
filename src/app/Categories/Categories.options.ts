@@ -9,7 +9,6 @@ export const CategoriesOptions = {
             value: icon,
         }))
         .sort((a: SearchInputOption, b: SearchInputOption) => a.label.localeCompare(b.label)),
-
     colorOptions: Object.keys(Const.ColorSign)
         .map((color) => ({
             label: color,
