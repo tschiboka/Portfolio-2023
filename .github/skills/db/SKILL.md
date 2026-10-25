@@ -12,6 +12,7 @@ description: 'Storage and persistence. Schemas and models, reads and writes, ind
 - An existing stored shape needs a field, index, or validation change.
 - A read or write needs a query that belongs in the repository rather than
   the service.
+- A domain needs records that must exist before any real data — a seed.
 
 ## Scope
 
@@ -47,6 +48,7 @@ server/App/<Domain>/
 ├── <Domain>.schema.ts
 ├── <Domain>.model.ts
 ├── <Domain>.repository.ts
+├── <Domain>.seed.ts
 ├── <Domain>.service.ts
 ├── <Domain>.router.ts
 └── index.ts
@@ -99,6 +101,16 @@ Rules:
 - The only place a query is written.
 - One method per read or write the domain needs.
 - Ownership is part of the query, not something the caller filters by afterwards.
+
+### `<Domain>.seed.ts`
+
+Return type: `<Domain>Seed`, the records the domain needs to exist before real
+data arrives.
+Rules:
+
+- Writes through `<Domain>Repository`, never the model directly — the same path a request takes.
+- Safe to re-run: inserts what is absent and leaves what is already there.
+- Ships with `tests/<Domain>.seed.spec.ts`; seeding is app code, not a script beside the app.
 
 ### `<Domain>.service.ts`
 

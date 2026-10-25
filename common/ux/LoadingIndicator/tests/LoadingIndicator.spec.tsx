@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { Test } from '@common-ux/Test'
 import { LoadingIndicator } from '../LoadingIndicator'
 
@@ -38,8 +39,9 @@ describe('LoadingIndicator', () => {
     })
 
     it('should apply custom color', () => {
-        const loading = Set.loading({ color: 'red' })
-        expect(loading.Get.style().color).toBe('red')
+        const loading = Set.loading({ color: Const.Color.Accent[0] })
+        // jsdom normalises a hex colour to rgb()
+        expect(loading.Get.style().color).toBe('rgb(0, 255, 255)')
     })
 
     it('should apply className', () => {

@@ -92,7 +92,7 @@ export const LayoutsCode = {
     <Pill label="React" color="accent" />
     <Pill label="TypeScript" color="purple" />
     <Pill label="CSS" color="success" />
-    <Pill label="Node" color="yellow" />
+    <Pill label="Node" color="warning" />
 </Inline>`,
         align: `<Inline gap="8" align="center">
     <span style={{ fontSize: 24 }}>Big</span>

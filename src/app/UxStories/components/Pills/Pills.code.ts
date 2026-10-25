@@ -7,7 +7,7 @@ export const PillsCode = {
         allColors: `<Pill label="ACCENT" color="accent" />
 <Pill label="ERROR" color="error" />
 <Pill label="SUCCESS" color="success" />
-<Pill label="YELLOW" color="yellow" />
+<Pill label="WARNING" color="warning" />
 <Pill label="ORANGE" color="orange" />
 <Pill label="PURPLE" color="purple" />
 <Pill label="GRAY" color="gray" />`,

@@ -1,5 +1,6 @@
 import { RefObject } from 'react'
 import { renderHook } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { CanvasHooks } from '..'
 import type { Mock } from 'vitest'
 
@@ -214,7 +215,7 @@ describe('CanvasHooks.useCanvas', () => {
                 result.current.line({
                     start: { x: { value: 0 }, y: { value: 0 } },
                     end: { x: { value: 10 }, y: { value: 10 } },
-                    config: { color: 'red' },
+                    config: { color: Const.Color.Error[0] },
                 }),
             ).not.toThrow()
         })
@@ -228,13 +229,13 @@ describe('CanvasHooks.useCanvas', () => {
             result.current.line({
                 start: { x: { value: 10 }, y: { value: 20 } },
                 end: { x: { value: 100 }, y: { value: 150 } },
-                config: { color: 'red', width: 3 },
+                config: { color: Const.Color.Error[0], width: 3 },
             })
 
             expect(mockCtx.beginPath).toHaveBeenCalled()
             expect(mockCtx.moveTo).toHaveBeenCalledWith(10, 20)
             expect(mockCtx.lineTo).toHaveBeenCalledWith(100, 150)
-            expect(mockCtx.strokeStyle).toBe('red')
+            expect(mockCtx.strokeStyle).toBe(Const.Color.Error[0])
             expect(mockCtx.lineWidth).toBe(3)
             expect(mockCtx.stroke).toHaveBeenCalled()
         })
@@ -254,7 +255,7 @@ describe('CanvasHooks.useCanvas', () => {
                     x: { value: 100, type: 'pc' },
                     y: { value: 100, type: 'pc' },
                 },
-                config: { color: 'blue' },
+                config: { color: Const.Color.Accent[0] },
             })
 
             expect(mockCtx.moveTo).toHaveBeenCalledWith(parentWidth * 0.5, parentHeight * 0.5)
@@ -298,7 +299,7 @@ describe('CanvasHooks.useCanvas', () => {
             const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             result.current.line({
-                config: { color: 'green' },
+                config: { color: Const.Color.Success[0] },
             })
 
             expect(mockCtx.moveTo).toHaveBeenCalledWith(0, 0)
@@ -320,7 +321,7 @@ describe('CanvasHooks.useCanvas', () => {
                     x: { value: 80 },
                     y: { value: 75, type: 'pc' },
                 },
-                config: { color: 'yellow' },
+                config: { color: Const.Color.Warning[0] },
             })
 
             expect(mockCtx.moveTo).toHaveBeenCalledWith(parentWidth * 0.5, 30)
@@ -341,7 +342,7 @@ describe('CanvasHooks.useCanvas', () => {
                 result.current.circle({
                     start: { x: { value: 50 }, y: { value: 50 } },
                     radius: 25,
-                    config: { color: 'red' },
+                    config: { color: Const.Color.Error[0] },
                 }),
             ).not.toThrow()
         })
@@ -355,13 +356,13 @@ describe('CanvasHooks.useCanvas', () => {
             result.current.circle({
                 start: { x: { value: 100 }, y: { value: 50 } },
                 radius: 30,
-                config: { color: '#ff0000', width: 2 },
+                config: { color: Const.Color.Error[0], width: 2 },
             })
 
             expect(mockCtx.beginPath).toHaveBeenCalled()
             expect(mockCtx.arc).toHaveBeenCalledWith(100, 50, 30, 0, 2 * Math.PI, false)
-            expect(mockCtx.strokeStyle).toBe('#ff0000')
-            expect(mockCtx.fillStyle).toBe('#ff0000')
+            expect(mockCtx.strokeStyle).toBe(Const.Color.Error[0])
+            expect(mockCtx.fillStyle).toBe(Const.Color.Error[0])
             expect(mockCtx.lineWidth).toBe(2)
             expect(mockCtx.stroke).toHaveBeenCalled()
             expect(mockCtx.fill).not.toHaveBeenCalled()
@@ -376,7 +377,7 @@ describe('CanvasHooks.useCanvas', () => {
             result.current.circle({
                 start: { x: { value: 100 }, y: { value: 50 } },
                 radius: 30,
-                config: { color: 'green', fill: true, width: 5 },
+                config: { color: Const.Color.Success[0], fill: true, width: 5 },
             })
 
             expect(mockCtx.fill).toHaveBeenCalled()
@@ -426,7 +427,7 @@ describe('CanvasHooks.useCanvas', () => {
                     y: { value: 25, type: 'pc' },
                 },
                 radius: 20,
-                config: { color: 'cyan' },
+                config: { color: Const.Color.Accent[0] },
             })
 
             expect(mockCtx.arc).toHaveBeenCalledWith(
@@ -447,7 +448,7 @@ describe('CanvasHooks.useCanvas', () => {
 
             result.current.circle({
                 radius: 15,
-                config: { color: 'magenta' },
+                config: { color: Const.Color.Error[0] },
             })
 
             expect(mockCtx.arc).toHaveBeenCalledWith(0, 0, 15, 0, 2 * Math.PI, false)
@@ -584,12 +585,12 @@ describe('CanvasHooks.useCanvas', () => {
             result.current.line({
                 start: { x: { value: 0 }, y: { value: 0 } },
                 end: { x: { value: 10 }, y: { value: 10 } },
-                config: { color: 'red' },
+                config: { color: Const.Color.Error[0] },
             })
             result.current.line({
                 start: { x: { value: 20 }, y: { value: 20 } },
                 end: { x: { value: 30 }, y: { value: 30 } },
-                config: { color: 'blue' },
+                config: { color: Const.Color.Accent[0] },
             })
 
             expect(mockCtx.beginPath).toHaveBeenCalledTimes(2)
@@ -609,12 +610,12 @@ describe('CanvasHooks.useCanvas', () => {
             result.current.circle({
                 start: { x: { value: 50 }, y: { value: 50 } },
                 radius: 10,
-                config: { color: 'red' },
+                config: { color: Const.Color.Error[0] },
             })
             result.current.circle({
                 start: { x: { value: 100 }, y: { value: 100 } },
                 radius: 20,
-                config: { color: 'blue', fill: true },
+                config: { color: Const.Color.Accent[0], fill: true },
             })
 
             expect(mockCtx.beginPath).toHaveBeenCalledTimes(2)

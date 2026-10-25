@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { CanvasType, Centre, DateTime, Line } from '@common-utils'
+import { Const } from '@common-ux/Const'
 import { ClockData } from '.'
 import type { Nullable } from '@common-utils'
 
@@ -27,21 +28,21 @@ const startLoop = ({ setClock }: StartLoopProps) =>
 const getHands = ({ sec, min, hour }: ClockData) => [
     {
         radiusFactor: 0.9,
-        color: '#444',
+        color: Const.Color.Black[4],
         value: sec,
         degrees: 60,
         width: 1,
     },
     {
         radiusFactor: 0.8,
-        color: '#555',
+        color: Const.Color.Black[5],
         value: min,
         degrees: 60,
         width: 2,
     },
     {
         radiusFactor: 0.7,
-        color: '#666',
+        color: Const.Color.Gray[1],
         value: (hour % 12) + min * 60,
         degrees: 12,
         width: 4,

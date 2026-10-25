@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .LetterBox {
     width: 24px;
@@ -11,34 +11,34 @@
     justify-content: center;
     font-size: 1.2rem;
     font-weight: 900;
-    background-color: black;
-    color: palette.$white_5;
-    border: 1px solid palette.$black_5;
+    background-color: tokens.$black-0;
+    color: tokens.$white-5;
+    border: 1px solid tokens.$black-5;
 
     &.proficiency-extreme {
-        background-color: palette.$accent;
-        color: palette.$accent_dark_5;
-        border: 1px solid palette.$accent_dark_5;
+        background-color: tokens.$accent;
+        color: tokens.$accent-dark-5;
+        border: 1px solid tokens.$accent-dark-5;
     }
 
     &.proficiency-outstanding {
-        background-color: palette.$success;
-        color: palette.$success_dark_5;
-        border: 1px solid palette.$success_dark_5;
+        background-color: tokens.$success;
+        color: tokens.$success-dark-5;
+        border: 1px solid tokens.$success-dark-5;
     }
     &.proficiency-high {
-        background-color: palette.$yellow;
-        color: palette.$yellow_dark_5;
-        border: 1px solid palette.$yellow_dark_5;
+        background-color: tokens.$warning;
+        color: tokens.$warning-dark-5;
+        border: 1px solid tokens.$warning-dark-5;
     }
     &.proficiency-moderate {
-        background-color: palette.$orange;
-        color: palette.$orange_dark_5;
-        border: 1px solid palette.$orange_dark_5;
+        background-color: tokens.$orange;
+        color: tokens.$orange-dark-5;
+        border: 1px solid tokens.$orange-dark-5;
     }
     &.proficiency-low {
-        background-color: palette.$error;
-        color: palette.$error_dark_5;
-        border: 1px solid palette.$error_dark_5;
+        background-color: tokens.$error;
+        color: tokens.$error-dark-5;
+        border: 1px solid tokens.$error-dark-5;
     }
 }

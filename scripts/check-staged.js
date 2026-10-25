@@ -36,7 +36,14 @@ if (invokedDirectly) {
 
         const lint = spawnSync(
             'npx',
-            ['eslint', ...files, '--report-unused-disable-directives', '--max-warnings', '0'],
+            [
+                'eslint',
+                ...files,
+                '--report-unused-disable-directives',
+                '--max-warnings',
+                '0',
+                '--no-warn-ignored',
+            ],
             { stdio: 'inherit', shell: true },
         )
 

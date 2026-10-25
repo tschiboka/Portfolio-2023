@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -35,7 +35,7 @@
         line-height: normal;
         letter-spacing: normal;
         font-variant: small-caps;
-        color: palette.$white_5;
+        color: tokens.$white-5;
         white-space: nowrap;
         opacity: 0;
         animation: fade_in 500ms ease-out forwards;
@@ -50,10 +50,10 @@
         height: 20rem;
         min-height: 20rem;
         min-width: 20rem;
-        background: palette.$black_1;
+        background: tokens.$black-1;
         border-radius: 100%;
-        border: 10px solid palette.$black_2;
-        background: linear-gradient(315deg, palette.$black_1, palette.$black_2);
+        border: 10px solid tokens.$black-2;
+        background: linear-gradient(315deg, tokens.$black-1, tokens.$black-2);
         animation: fade_in 2000ms ease-out forwards;
         opacity: 0;
         @include bp.sm {
@@ -71,9 +71,9 @@
         min-width: calc(100% - 1rem);
         margin: 0.5rem;
         border-radius: 100%;
-        border: 2px solid palette.$black_2;
-        background-color: palette.$black_2;
-        background: linear-gradient(315deg, palette.$black_2, palette.$black_1);
+        border: 2px solid tokens.$black-2;
+        background-color: tokens.$black-2;
+        background: linear-gradient(315deg, tokens.$black-2, tokens.$black-1);
         object-position: 0 20px;
         filter: grayscale(1);
     }
@@ -85,13 +85,13 @@
 .light {
     .headshot-wrapper {
         opacity: 1;
-        border: 10px solid palette.$white_1;
-        background: palette.$white_2;
+        border: 10px solid tokens.$white-1;
+        background: tokens.$white-2;
     }
     .Welcome img {
         opacity: 1;
-        background: linear-gradient(315deg, white, palette.$white_3);
-        border: 2px solid palette.$white_2;
+        background: linear-gradient(315deg, tokens.$white-0, tokens.$white-3);
+        border: 2px solid tokens.$white-2;
         filter: grayscale(0);
     }
 }

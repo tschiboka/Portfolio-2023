@@ -39,142 +39,142 @@ export const tschibokaDark: HljsStyle = {
         display: 'block',
         overflowX: 'auto',
         padding: '1em',
-        background: '#0a0a0a',
-        color: '#d8d8d8',
+        background: 'var(--black-x)',
+        color: 'var(--white-2)',
     },
 
     comment: {
-        color: '#666',
+        color: 'var(--gray-1)',
         fontStyle: 'italic',
     },
     'hljs-comment': {
-        color: '#666',
+        color: 'var(--gray-1)',
         fontStyle: 'italic',
     },
     'hljs-quote': {
-        color: '#666',
+        color: 'var(--gray-1)',
         fontStyle: 'italic',
     },
 
     'hljs-string': {
-        color: '#00e676',
+        color: 'var(--success)',
         fontStyle: 'italic',
     },
     'hljs-regexp': {
-        color: '#00e676',
+        color: 'var(--success)',
     },
 
     'hljs-number': {
-        color: '#ff8000',
+        color: 'var(--orange)',
     },
     'hljs-literal': {
-        color: '#ff8000',
+        color: 'var(--orange)',
         fontStyle: 'italic',
     },
 
     'hljs-keyword': {
-        color: '#e040fb',
+        color: 'var(--purple)',
         fontStyle: 'italic',
     },
 
     'hljs-operator': {
-        color: '#00cece',
+        color: 'var(--accent-dark-1)',
     },
 
     'hljs-title': {
-        color: '#00ffff',
+        color: 'var(--accent)',
     },
     'hljs-title.function_': {
-        color: '#00ffff',
+        color: 'var(--accent)',
     },
     'hljs-title.class_': {
-        color: '#ffcc00',
+        color: 'var(--warning)',
     },
 
     'hljs-built_in': {
-        color: '#00e676',
+        color: 'var(--success)',
     },
     'hljs-type': {
-        color: '#ffcc00',
+        color: 'var(--warning)',
     },
 
     'hljs-variable': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
     'hljs-variable.language_': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
     'hljs-variable.constant_': {
-        color: '#ff8000',
+        color: 'var(--orange)',
     },
 
     'hljs-params': {
-        color: '#d8d8d8',
+        color: 'var(--white-2)',
     },
 
     'hljs-property': {
-        color: '#ff8000',
+        color: 'var(--orange)',
     },
     'hljs-attr': {
-        color: '#ff8000',
+        color: 'var(--orange)',
         fontStyle: 'italic',
     },
     'hljs-attribute': {
-        color: '#ff8000',
+        color: 'var(--orange)',
         fontStyle: 'italic',
     },
 
     'hljs-tag': {
-        color: '#d8d8d8',
+        color: 'var(--white-2)',
     },
     'hljs-name': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
 
     'hljs-selector-class': {
-        color: '#00ffff',
+        color: 'var(--accent)',
     },
     'hljs-selector-id': {
-        color: '#00ffff',
+        color: 'var(--accent)',
     },
     'hljs-selector-tag': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
     'hljs-selector-attr': {
-        color: '#ffcc00',
+        color: 'var(--warning)',
     },
     'hljs-selector-pseudo': {
-        color: '#e040fb',
+        color: 'var(--purple)',
     },
 
     'hljs-subst': {
-        color: '#00cece',
+        color: 'var(--accent-dark-1)',
     },
     'hljs-template-variable': {
-        color: '#00cece',
+        color: 'var(--accent-dark-1)',
     },
     'hljs-template-tag': {
-        color: '#e040fb',
+        color: 'var(--purple)',
     },
 
     'hljs-symbol': {
-        color: '#ff8000',
+        color: 'var(--orange)',
     },
     'hljs-bullet': {
-        color: '#00cece',
+        color: 'var(--accent-dark-1)',
     },
     'hljs-link': {
-        color: '#e040fb',
+        color: 'var(--purple)',
     },
     'hljs-meta': {
-        color: '#e040fb',
+        color: 'var(--purple)',
     },
     'hljs-punctuation': {
-        color: '#00ffff',
+        color: 'var(--accent)',
     },
 
     'hljs-section': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
     'hljs-strong': {
         fontWeight: 'bold',
@@ -183,19 +183,19 @@ export const tschibokaDark: HljsStyle = {
         fontStyle: 'italic',
     },
     'hljs-addition': {
-        color: '#00e676',
+        color: 'var(--success)',
     },
     'hljs-deletion': {
-        color: '#ff0080',
+        color: 'var(--error)',
     },
 
     'hljs-doctag': {
-        color: '#ffcc00',
+        color: 'var(--warning)',
     },
     'hljs-formula': {
-        color: '#ff8000',
+        color: 'var(--orange)',
     },
     'hljs-code': {
-        color: '#00cece',
+        color: 'var(--accent-dark-1)',
     },
 }

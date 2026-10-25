@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -70,7 +70,7 @@
                     }
                     div:last-child {
                         justify-content: end;
-                        border-left: 2px solid palette.$black_2;
+                        border-left: 2px solid tokens.$black-2;
                     }
                 }
             }
@@ -98,11 +98,11 @@
         font-size: 1.4rem;
         font-family: monospace;
         font-variant: small-caps;
-        color: palette.$accent_dark_2;
-        background-color: rgba(0, 0, 0, 0.5);
-        border: 1px solid palette.$black_3;
+        color: tokens.$accent-dark-2;
+        background-color: tokens.$black-0a50;
+        border: 1px solid tokens.$black-3;
         border-radius: 10px;
         width: calc(100% - 2rem);
-        background-color: palette.$black_1;
+        background-color: tokens.$black-1;
     }
 }

@@ -2,7 +2,7 @@
     display: block;
     margin-bottom: var(--sp-lg);
     padding: var(--sp-sm);
-    background-color: black;
+    background-color: var(--black-0);
     color: var(--color-font-accent);
     border: var(--border-normal);
     border-radius: var(--border-radius-sm);
@@ -11,5 +11,5 @@
     font-size: var(--font-sm);
     user-select: all;
     -webkit-user-select: all;
-    cursor: copy;  
+    cursor: copy;
 }

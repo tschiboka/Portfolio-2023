@@ -370,7 +370,7 @@ const technologies: Technology[] = [
     },
     {
         name: 'JavaScript',
-        color: 'yellow',
+        color: 'warning',
         tech: 'Frontend',
         groupName: 'Frontend',
     },
@@ -483,7 +483,7 @@ function getColourName(str: string): PillColor {
         case 'css':
             return 'purple'
         case 'javascript':
-            return 'yellow'
+            return 'warning'
         case 'react':
             return 'accent'
         case 'react native':
@@ -523,7 +523,7 @@ function getColourName(str: string): PillColor {
         case 'complete':
             return 'success'
         case 'inprogress':
-            return 'yellow'
+            return 'warning'
         case 'archived':
             return 'error'
         default:

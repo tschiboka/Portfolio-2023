@@ -23,9 +23,9 @@ interface Props {
 
 const pillColorMap: Record<
     string,
-    'accent' | 'error' | 'success' | 'yellow' | 'orange' | 'purple' | 'gray'
+    'accent' | 'error' | 'success' | 'warning' | 'orange' | 'purple' | 'gray'
 > = {
-    yellow: 'yellow',
+    yellow: 'warning',
     orange: 'orange',
     purple: 'purple',
     pink: 'error',

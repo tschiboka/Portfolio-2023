@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -8,7 +8,7 @@
         font-size: font.$font_lg;
         font-style: italic;
         font-weight: bold;
-        color: palette.$white_2;
+        color: tokens.$white-2;
         margin-bottom: 0.5rem;
     }
     ul {
@@ -21,7 +21,7 @@
             margin-top: 0;
             display: inline-flex;
             flex-direction: column;
-            border-bottom: 2px solid palette.$black_1;
+            border-bottom: 2px solid tokens.$black-1;
             line-height: 1;
 
             &:last-child {
@@ -49,7 +49,7 @@
                     display: inline;
                 }
                 @include bp.lg {
-                    border-right: 2px solid palette.$black_2;
+                    border-right: 2px solid tokens.$black-2;
                     min-width: 30vw;
                 }
             }
@@ -58,7 +58,7 @@
         span,
         a {
             max-width: 100%;
-            color: palette.$white_5;
+            color: tokens.$white-5;
             padding-right: 10px;
             white-space: pre-wrap; /* CSS3 */
             white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -82,12 +82,12 @@
         .References__index {
             font-style: italic;
             font-weight: bold;
-            color: palette.$white_3;
+            color: tokens.$white-3;
         }
 
         .References__author {
             font-weight: bold;
-            color: palette.$white_3;
+            color: tokens.$white-3;
         }
 
         .References__title {
@@ -99,17 +99,17 @@
             font-size: font.$font_xs;
             font-weight: lighter;
             padding-top: 1rem;
-            color: palette.$accent_dark_3;
+            color: tokens.$accent-dark-3;
 
             @include bp.md {
                 padding-left: 2rem;
             }
             &:visited {
-                color: palette.$accent_dark_4;
+                color: tokens.$accent-dark-4;
             }
 
             &:hover {
-                color: palette.$accent_dark_2;
+                color: tokens.$accent-dark-2;
                 transform: scale(1.05);
             }
         }
@@ -118,33 +118,33 @@
 
 .light {
     h4 {
-        color: palette.$black_4;
+        color: tokens.$black-4;
     }
 
     ul {
         li {
-            border-bottom: 2px solid palette.$white_2;
+            border-bottom: 2px solid tokens.$white-2;
             @include bp.md {
                 border-bottom: none;
             }
             .References__index,
             .References__title {
-                color: palette.$black_4;
+                color: tokens.$black-4;
             }
             .References__author {
-                color: palette.$black_1;
+                color: tokens.$black-1;
                 font-weight: bold;
             }
             .References__title {
                 font-weight: bold;
             }
             a {
-                color: palette.$black_5;
+                color: tokens.$black-5;
                 &:hover {
-                    color: palette.$accent_dark_3;
+                    color: tokens.$accent-dark-3;
                 }
                 &:visited {
-                    color: palette.$black_5;
+                    color: tokens.$black-5;
                 }
             }
         }

@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 .LikeButton {
@@ -25,22 +25,22 @@
         &:hover {
             transform: scale(1.1);
             .LikeButton__icon {
-                color: palette.$white_3;
+                color: tokens.$white-3;
             }
             span {
-                color: palette.$accent_dark_1;
+                color: tokens.$accent-dark-1;
             }
         }
         .LikeButton__icon {
             margin-right: 0.5rem;
             font-size: font.$font_lg;
-            color: palette.$black_5;
+            color: tokens.$black-5;
         }
         .LikeButton__icon.disabled {
-            color: white;
+            color: tokens.$white-0;
         }
         span {
-            color: palette.$accent_dark_3;
+            color: tokens.$accent-dark-3;
             font-family: monospace;
             font-size: font.$font_md;
         }
@@ -51,10 +51,10 @@
     .LikeButton {
         .LikeButton__button-wrapper {
             .LikeButton__icon:hover {
-                color: black;
+                color: tokens.$black-0;
             }
             .LikeButton__icon.disabled {
-                color: black;
+                color: tokens.$black-0;
             }
         }
     }

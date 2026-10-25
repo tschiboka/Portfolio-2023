@@ -276,7 +276,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     <Pill label="React" color="accent" />
                     <Pill label="TypeScript" color="purple" />
                     <Pill label="CSS" color="success" />
-                    <Pill label="Node" color="yellow" />
+                    <Pill label="Node" color="warning" />
                 </Inline>
                 <Code language="tsx" content={LayoutsCode.Inline.wrap} />
                 <Heading as="h3">Align</Heading>
@@ -449,7 +449,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                         <Pill label="Hidden above lg (992px)" color="error" />
                     </Visibility.Hide>
                     <Visibility.Hide below="sm">
-                        <Pill label="Hidden below sm (576px)" color="yellow" />
+                        <Pill label="Hidden below sm (576px)" color="warning" />
                     </Visibility.Hide>
                 </Stack.Vertical>
                 <Code language="tsx" content={LayoutsCode.Visibility.hide} />

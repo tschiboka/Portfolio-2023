@@ -67,10 +67,10 @@ common/utils/Server/ApiResponder/
 server/App/
 ├── App.constants.ts
 ├── App.routes.ts
-├── App.middlewares.ts
+├── App.middleware.ts
 └── <Domain>/
     ├── <Domain>.router.ts
-    └── <Domain>.middlewares.ts
+    └── <Domain>.middleware.ts
 ```
 
 ## Files and folders
@@ -104,7 +104,7 @@ Rules:
 Return type: an `express.Router`, exported as `<Domain>Router`.
 Example: [`Feature.router.ts`](./Feature.router.ts)
 
-### `<Domain>.middlewares.ts`
+### `<Domain>.middleware.ts`
 
 Return type: the domain's middleware group.
 

@@ -1,3 +1,4 @@
+/* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
 import { describe, expect, it } from 'vitest'
 import { CategoriesTransformers } from '../Categories.transformers'
 import type { GetCategoryResponse } from '@common-types'

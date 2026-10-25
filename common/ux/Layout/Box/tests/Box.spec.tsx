@@ -1,3 +1,4 @@
+import { Const } from '@common-ux/Const'
 import { BoxTestUtils } from './Box.spec.utils'
 
 const { Set, selectBackground, selectBorderRadius } = BoxTestUtils
@@ -137,8 +138,9 @@ describe('Box', () => {
         })
 
         it('should apply custom style', () => {
-            const box = Set.box({ style: { color: 'red' }, ariaLabel: 'st' })
-            expect(box.Get.style().color).toBe('red')
+            const box = Set.box({ style: { color: Const.Color.Error[0] }, ariaLabel: 'st' })
+            // jsdom normalises a hex colour to rgb()
+            expect(box.Get.style().color).toBe('rgb(255, 0, 128)')
         })
     })
 })

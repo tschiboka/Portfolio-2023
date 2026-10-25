@@ -62,10 +62,10 @@ describe('Nav', () => {
         it('applies inline style to the header', () => {
             Set.mock({
                 children: [<li key="home">Home</li>],
-                style: { backgroundColor: 'red' },
+                style: { backgroundColor: 'var(--accent)' },
             })
 
-            expect(NavTestUtils().Get.style().backgroundColor).toBe('red')
+            expect(NavTestUtils().Get.style().backgroundColor).toBe('var(--accent)')
         })
     })
 

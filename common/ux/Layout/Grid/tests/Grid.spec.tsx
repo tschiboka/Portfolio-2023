@@ -1,3 +1,4 @@
+import { Const } from '@common-ux/Const'
 import { GridTestUtils } from './Grid.spec.utils'
 
 const { Set } = GridTestUtils
@@ -145,8 +146,9 @@ describe('Grid', () => {
         })
 
         it('should apply custom style', () => {
-            const grid = Set.grid({ style: { background: 'red' }, ariaLabel: 'st' })
-            expect(grid.Get.style().background).toBe('red')
+            const grid = Set.grid({ style: { background: Const.Color.Accent[0] }, ariaLabel: 'st' })
+            // jsdom normalises a hex colour to rgb()
+            expect(grid.Get.style().background).toBe('rgb(0, 255, 255)')
         })
     })
 })

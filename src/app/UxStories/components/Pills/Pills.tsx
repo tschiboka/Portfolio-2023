@@ -6,7 +6,7 @@ import { StoryNav } from '../StoryNav/StoryNav'
 
 type PillsProps = { path: string }
 
-const colors = ['accent', 'error', 'success', 'yellow', 'orange', 'purple', 'gray'] as const
+const colors = ['accent', 'error', 'success', 'warning', 'orange', 'purple', 'gray'] as const
 
 export const Pills = ({ path }: PillsProps) => (
     <Screen
@@ -47,7 +47,7 @@ export const Pills = ({ path }: PillsProps) => (
                 <Paragraph>
                     Seven colour variants are available: <CodeText>accent</CodeText> (default),{' '}
                     <CodeText>error</CodeText>, <CodeText>success</CodeText>,{' '}
-                    <CodeText>yellow</CodeText>, <CodeText>orange</CodeText>,{' '}
+                    <CodeText>warning</CodeText>, <CodeText>orange</CodeText>,{' '}
                     <CodeText>purple</CodeText> and <CodeText>gray</CodeText>.
                 </Paragraph>
                 <Stack.Horizontal gap="8" style={{ flexWrap: 'wrap' }}>

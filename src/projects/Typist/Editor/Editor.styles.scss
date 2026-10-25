@@ -1,12 +1,12 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .Editor {
     .Editor__content {
         position: relative;
-        background-color: palette.$black_x;
+        background-color: tokens.$black-x;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px tokens.$black-0a10;
 
         .Editor__word {
             display: inline-block;
@@ -20,10 +20,10 @@
         width: 100%;
         height: 100%;
         display: flex;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: tokens.$black-0a50;
         align-items: center;
         justify-content: center;
-        color: palette.$accent;
+        color: tokens.$accent;
         font-size: 1.5rem;
         font-weight: bold;
         backdrop-filter: blur(3px);

@@ -1,16 +1,16 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .InlineReference {
     height: 100%;
     margin: 0 0.25rem;
     display: inline-block;
     transform: translateY(-2px);
-    color: palette.$accent_dark_3;
+    color: tokens.$accent-dark-3;
     text-decoration: none;
     font-family: monospace;
     &:hover {
-        color: palette.$accent_dark_1;
+        color: tokens.$accent-dark-1;
         transform: scale(1.05) translateY(-2px);
     }
 

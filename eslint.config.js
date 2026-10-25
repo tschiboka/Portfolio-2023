@@ -76,10 +76,21 @@ export default tseslint.config(
     ...scopedRules,
     {
         files: ['**/*.{css,scss}'],
+        ignores: [
+            'public/**',
+            'common/ux/index.css',
+            'common/ux/tokens.generated.css',
+            'src/shared/styles/**',
+        ],
         plugins: { standards },
         processor: 'standards/style',
         rules: {
             'standards/no-raw-zindex': settings['standards/no-raw-zindex'],
+            'standards/no-raw-color': settings['standards/no-raw-color'],
         },
+    },
+    {
+        files: ['src/projects/WordDuelArena/**/*.{css,scss}'],
+        rules: { 'standards/no-raw-color': 'off' },
     },
 )

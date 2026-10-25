@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { Stack } from '../Stack'
 import { StackSelectors } from '../Stack.selectors'
 import { StackProps } from '../Stack.types'
@@ -162,8 +163,12 @@ describe('Stack', () => {
         })
 
         it('should apply custom style', () => {
-            const stack = Set.stack({ style: { background: 'red' }, ariaLabel: 'st' })
-            expect(stack.Get.style().background).toBe('red')
+            const stack = Set.stack({
+                style: { background: Const.Color.Accent[0] },
+                ariaLabel: 'st',
+            })
+            // jsdom normalises a hex colour to rgb()
+            expect(stack.Get.style().background).toBe('rgb(0, 255, 255)')
         })
     })
 

@@ -1,104 +1,9 @@
 import { ColorSign } from './ColorSign'
+import { Breakpoint, Color, Spacing, ZIndex } from './Const.generated'
 
-export const Color = {
-    Black: {
-        X: '#0a0a0a',
-        1: '#111',
-        2: '#222',
-        3: '#333',
-        4: '#444',
-        5: '#555',
-    },
-    Gray: {
-        1: '#666',
-        2: '#777',
-        3: '#888',
-        4: '#999',
-    },
-    White: {
-        1: '#eee',
-        2: '#d8d8d8',
-        3: '#bbb',
-        4: '#a8a8a8',
-        5: '#888',
-    },
-    Accent: {
-        0: '#00ffff',
-        1: '#00cece',
-        2: '#00b5b5',
-        3: '#007676',
-        4: '#005151',
-        5: '#003434',
-    },
-    Error: {
-        0: '#ff0080',
-        1: '#e80074',
-        2: '#bd015f',
-        3: '#870043',
-        4: '#530029',
-        5: '#3a001d',
-    },
-    Success: {
-        0: '#00e676',
-        1: '#00d06b',
-        2: '#00bd61',
-        3: '#009624',
-        4: '#006400',
-        5: '#003200',
-    },
-    Yellow: {
-        0: '#ffd740',
-        1: '#e9b300',
-        2: '#d09100',
-        3: '#c17a00',
-        4: '#844b01',
-        5: '#4c2100',
-    },
-    Orange: {
-        0: '#ff8000',
-        1: '#e67300',
-        2: '#bf6600',
-        3: '#994d00',
-        4: '#733300',
-        5: '#4d1a00',
-    },
-    Purple: {
-        0: '#e040fb',
-        1: '#c43de2',
-        2: '#a338c2',
-        3: '#7f2f99',
-        4: '#5b2370',
-        5: '#3b1748',
-    },
-} as const
+export { Breakpoint, Color, Spacing, ZIndex }
 
-export const Spacing = {
-    2: 2,
-    4: 4,
-    8: 8,
-    12: 12,
-    16: 16,
-    20: 20,
-    24: 24,
-    32: 32,
-    40: 40,
-    48: 48,
-    56: 56,
-    64: 64,
-} as const
-
-export const Breakpoint = {
-    '2xs': 375,
-    xs: 420,
-    sm: 576,
-    mx: 670,
-    md: 768,
-    lg: 992,
-    xl: 1200,
-    '2xl': 1580,
-    accordion: Infinity,
-} as const
-
+/** The em scale — no generated map yet, since font sizes are still moving to `var(--font-*)`. */
 export const Font = {
     '2xs': '0.7em',
     xs: '0.8em',
@@ -107,51 +12,6 @@ export const Font = {
     lg: '1.6em',
     xl: '2.2em',
     '2xl': '3em',
-} as const
-
-/**
- * Z-Index Layer System
- *
- * Replaces arbitrary z-index usage with named semantic layers.
- * Each layer represents a UI responsibility, not a numeric value.
- *
- * Rules:
- * - Never use raw z-index values in components
- * - Always use these named layers
- * - Base is the default; everything else is explicit elevation
- *
- * Layers:
- *
- * Base     - Default page content (layouts, cards, forms)
- * Sticky   - Persistent in-page UI (headers, sticky nav)
- * Dropdown - Anchored transient UI (menus, selects, popovers)
- *
- * Panel    - Full-screen UI domain (modals, drawers, dialogs)
- * Backdrop - Blocking/dimming layer behind panel content
- * Close    - Panel controls that must sit above content
- *
- * Top      - Highest-priority global UI (toasts, system alerts)
- *
- * Mental model:
- * Base → Sticky → Dropdown → Panel → Top
- *
- * Panel internals:
- * Backdrop < Panel < Close
- *
- * Note:
- * If a z-index value is needed outside these layers, it is likely a
- * design issue, not a missing value.
- */
-export const ZIndex = {
-    base: 10,
-    sticky: 20,
-    dropdown: 30,
-
-    backdrop: 39,
-    panel: 40,
-    close: 41,
-
-    top: 50,
 } as const
 
 export const Const = {

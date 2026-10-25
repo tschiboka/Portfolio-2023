@@ -12,6 +12,11 @@ export const ViolationPrefix = 'TSCHIBOKA.COM - Coding Standards Violation: '
  * Every role a file may carry, with the token it contributes to the export name. A file's export
  * is its stem followed by one token per role segment, so `Word.queries.mocks.ts` reads
  * `WordQueriesMocks` and `Word.spec.utils.ts` reads `WordTestUtils`.
+ *
+ * A role left out asserts nothing about its export, and is exempt from `role-export-name` and
+ * `exactly-one-export`. Left out on purpose: `types` (named domain types), `data` (content of
+ * many shapes), `demos` (one component per export), `generated` (the generator decides the shape)
+ * and `business` (a document, no code symbol).
  */
 export const RoleExportTokenMap: Record<string, string> = {
     actions: 'Actions',

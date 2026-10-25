@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 .BlogCard {
@@ -62,7 +62,7 @@
             margin-left: 0;
             font-size: font.$font_sm;
             justify-content: center;
-            color: palette.$black_4;
+            color: tokens.$black-4;
             font-family: monospace;
             font-weight: bold;
 
@@ -83,7 +83,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid tokens.$black-2;
 
             @include bp.md {
                 margin-top: 0;
@@ -92,7 +92,7 @@
             }
 
             .BlogCard__title-text {
-                color: white;
+                color: tokens.$white-0;
                 font-variant: small-caps;
                 text-align: center;
                 @include bp.md {
@@ -102,7 +102,7 @@
 
             .BlogCard__info {
                 margin-top: 0.5rem;
-                color: palette.$accent_dark_3;
+                color: tokens.$accent-dark-3;
 
                 & > * {
                     font-weight: bold;
@@ -126,10 +126,10 @@
                             display: inline;
                         }
                         .BlogCard__info-icon {
-                            color: palette.$accent;
+                            color: tokens.$accent;
                         }
                         .BlogCard__info-text {
-                            color: palette.$accent_dark_1;
+                            color: tokens.$accent-dark-1;
                         }
                     }
 
@@ -140,32 +140,32 @@
                         top: -3rem;
                         min-width: 100%;
                         padding: 0.5rem 1rem;
-                        background-color: black;
-                        border: 1px solid palette.$white_5;
-                        color: palette.$accent_dark_1;
+                        background-color: tokens.$black-0;
+                        border: 1px solid tokens.$white-5;
+                        color: tokens.$accent-dark-1;
                         text-align: center;
                     }
                     .BlogCard__info-icon {
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        color: palette.$black_3;
+                        color: tokens.$black-3;
                         font-size: font.$font_md;
                         text-decoration: none;
                     }
                     .BlogCard__info-icon.disabled {
-                        fill: deeppink;
+                        fill: tokens.$error;
                         opacity: 0.3;
                     }
                     .BlogCard__info-text {
-                        color: palette.$accent_dark_3;
+                        color: tokens.$accent-dark-3;
                         margin: 0 0.5rem;
                     }
                 }
                 span.BlogCard__created {
                     display: none;
                     text-align: right;
-                    color: palette.$black_4;
+                    color: tokens.$black-4;
                     padding: 0;
                     margin: 0;
                     margin-left: auto;
@@ -200,17 +200,17 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            background-color: palette.$black_1;
+            background-color: tokens.$black-1;
             clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
             .BlogCard__overlay-icon {
                 font-size: font.$font_lg;
-                color: palette.$white_3;
+                color: tokens.$white-3;
             }
             .BlogCard__upcoming-date {
                 margin: 0 1.5rem 0 1rem;
                 font-family: monospace;
                 font-size: font.$font_md;
-                color: palette.$accent_dark_1;
+                color: tokens.$accent-dark-1;
             }
         }
 
@@ -221,15 +221,15 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            background-color: palette.$black_1;
+            background-color: tokens.$black-1;
             clip-path: polygon(0 0, 100% 0, calc(100% - 2rem) 100%, 0 100%);
             .BlogCard__overlay-icon--new {
                 font-size: font.$font_lg;
-                color: palette.$accent_dark_3;
+                color: tokens.$accent-dark-3;
             }
             .BlogCard__new-text {
                 margin: 0 2rem 0 0.5rem;
-                color: white;
+                color: tokens.$white-0;
                 font-size: font.$font_lg;
                 font-weight: bold;
                 font-family: monospace;
@@ -239,22 +239,22 @@
     }
 
     &:hover {
-        background-color: black;
+        background-color: tokens.$black-0;
         .region__content {
-            background-color: black;
+            background-color: tokens.$black-0;
         }
         .BlogCard__title-text {
-            color: white;
+            color: tokens.$white-0;
             text-decoration: underline;
         }
         .BlogCard__abstract {
-            color: white;
+            color: tokens.$white-0;
         }
         .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
-            color: palette.$accent_dark_2;
+            color: tokens.$accent-dark-2;
         }
         span.BlogCard__created {
-            color: palette.$accent_dark_3 !important;
+            color: tokens.$accent-dark-3 !important;
         }
     }
 }
@@ -262,25 +262,25 @@
 .light {
     .BlogCard {
         &:hover {
-            background-color: palette.$white_3;
+            background-color: tokens.$white-3;
             .BlogCard__title-text {
-                color: black;
+                color: tokens.$black-0;
             }
             .BlogCard__abstract {
-                color: black;
+                color: tokens.$black-0;
             }
             .BlogCard__info .BlogCard__info-datablock .BlogCard__info-text {
-                color: palette.$accent_dark_5;
+                color: tokens.$accent-dark-5;
             }
             .BlogCard__info .BlogCard__info-datablock:hover {
                 .BlogCard__info-icon {
-                    color: black;
+                    color: tokens.$black-0;
                 }
             }
         }
 
         .BlogCard__title-text {
-            color: palette.$black_2;
+            color: tokens.$black-2;
         }
 
         .BlogCard__img-wrapper {

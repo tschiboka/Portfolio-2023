@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 @font-face {
@@ -48,12 +48,12 @@ html {
     box-sizing: border-box;
     font-family: Roboto, Arial, Helvetica, sans-serif;
     font-weight: 300;
-    scrollbar-color: palette.$accent_dark_3 palette.$black_1;
+    scrollbar-color: tokens.$accent-dark-3 tokens.$black-1;
     scrollbar-width: thin;
 }
 
 // *:focus {
-//     outline: 1px solid palette.$accent_dark_3;
+//     outline: 1px solid tokens.$accent-dark-3;
 //     outline-offset: 8px;
 //     border-radius: 20px;
 // }
@@ -63,15 +63,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-    background: palette.$black_x;
+    background: tokens.$black-x;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: palette.$accent_dark_3;
+    background: tokens.$accent-dark-3;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: palette.$accent_dark_1;
+    background: tokens.$accent-dark-1;
 }
 
 .scroll::-webkit-scrollbar {
@@ -80,17 +80,17 @@ html {
 }
 
 .scroll::-webkit-scrollbar-thumb {
-    background: palette.$accent_dark_1;
+    background: tokens.$accent-dark-1;
 }
 
 body {
-    background-color: palette.$white_1;
-    color: black;
+    background-color: tokens.$white-1;
+    color: tokens.$black-0;
 }
 
 body.dark {
-    background-color: palette.$black_1;
-    color: white;
+    background-color: tokens.$black-1;
+    color: tokens.$white-0;
 }
 
 br {
@@ -98,15 +98,15 @@ br {
 }
 
 strong {
-    color: white;
+    color: tokens.$white-0;
 }
 
 .light strong {
-    color: black;
+    color: tokens.$black-0;
 }
 
 h1 {
-    color: white;
+    color: tokens.$white-0;
     font-size: font.$font_lg;
     font-variant: small-caps;
     @include bp.md {
@@ -116,7 +116,7 @@ h1 {
 
 h2 {
     margin: 3rem 0;
-    color: palette.$white_2;
+    color: tokens.$white-2;
     font-size: font.$font_lg;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
@@ -126,7 +126,7 @@ h2 {
 hr {
     height: 0;
     background-color: transparent;
-    border: 1px solid palette.$black_2;
+    border: 1px solid tokens.$black-2;
     margin-bottom: 3rem;
 }
 
@@ -142,7 +142,7 @@ main {
 
 p {
     margin: 3rem 0;
-    color: palette.$white_3;
+    color: tokens.$white-3;
 }
 
 figure {
@@ -156,7 +156,7 @@ figure {
 figcaption {
     margin-bottom: 1.5rem;
     padding-top: 1.5rem;
-    color: palette.$white_5;
+    color: tokens.$white-5;
     text-align: center;
     font-size: font.$font_md;
     font-style: italic;
@@ -166,55 +166,55 @@ figcaption {
 }
 
 span.sidenote {
-    color: palette.$white_5;
+    color: tokens.$white-5;
     font-style: italic;
 }
 
 a {
-    color: palette.$accent_dark_1;
+    color: tokens.$accent-dark-1;
     text-decoration: none;
     font-size: font.$font_md;
     transition: color 0.2s;
 
     &:hover {
-        color: palette.$accent;
+        color: tokens.$accent;
         text-decoration: underline;
     }
 
     &:visited {
-        color: palette.$accent_dark_3;
+        color: tokens.$accent-dark-3;
     }
 
     &:active {
-        color: palette.$accent_dark_2;
+        color: tokens.$accent-dark-2;
     }
 }
 
 .light {
     h1,
     h2 {
-        color: palette.$black_2;
+        color: tokens.$black-2;
         text-shadow: none;
     }
     hr {
-        border: 1px solid palette.$white_5;
+        border: 1px solid tokens.$white-5;
     }
     p {
-        color: black;
+        color: tokens.$black-0;
     }
     a {
-        color: palette.$accent_dark_3;
+        color: tokens.$accent-dark-3;
 
         &:hover {
-            color: palette.$accent_dark_2;
+            color: tokens.$accent-dark-2;
         }
 
         &:visited {
-            color: palette.$accent_dark_4;
+            color: tokens.$accent-dark-4;
         }
 
         &:active {
-            color: palette.$accent_dark_5;
+            color: tokens.$accent-dark-5;
         }
     }
 }

@@ -70,7 +70,7 @@
     color: var(--success-dark-1);
 }
 .typo.typo--warning {
-    color: var(--yellow-dark-1);
+    color: var(--warning-dark-1);
 }
 .typo.typo--error {
     color: var(--error-dark-1);

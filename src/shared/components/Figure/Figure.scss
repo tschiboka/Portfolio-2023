@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 .Figure {
@@ -11,7 +11,7 @@
         max-height: calc(100% - 10px);
 
         .Figure__icon {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: tokens.$black-0a50;
             position: absolute;
             margin: 0;
             top: 0;
@@ -22,12 +22,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            color: palette.$white_3;
+            color: tokens.$white-3;
             font-size: font.$font_xl;
         }
         &:hover {
-            background-color: black;
-            color: white;
+            background-color: tokens.$black-0;
+            color: tokens.$white-0;
         }
 
         img {
@@ -42,7 +42,7 @@
         &:hover {
             cursor: pointer;
             .Figure__icon {
-                background-color: palette.$black_1;
+                background-color: tokens.$black-1;
             }
         }
     }
@@ -51,7 +51,7 @@
 .light {
     .Figure {
         .Figure__icon {
-            color: white;
+            color: tokens.$white-0;
         }
     }
 }
@@ -67,12 +67,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: palette.$white_3;
+    background-color: tokens.$black-0a50;
+    color: tokens.$white-3;
     font-size: font.$font_xl;
     cursor: pointer;
     &:hover {
-        background-color: black;
-        color: white;
+        background-color: tokens.$black-0;
+        color: tokens.$white-0;
     }
 }

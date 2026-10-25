@@ -170,7 +170,7 @@ export const ZIndexLayers = ({ pageName, path }: Props) => {
                             cell: (cell) => {
                                 const colorMap: Dictionary<PillColor> = {
                                     '10': 'gray',
-                                    '20': 'yellow',
+                                    '20': 'warning',
                                     '30': 'orange',
                                     '39': 'success',
                                     '40': 'accent',

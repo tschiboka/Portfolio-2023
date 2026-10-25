@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Functions } from '@common-utils'
+import { Const } from '@common-ux/Const'
 import { Test } from '@common-ux/Test'
 import { ToggleTestUtils } from './Toggle.spec.utils'
 import { Toggle } from '../Toggle'
@@ -50,12 +51,12 @@ describe('Toggle', () => {
         })
 
         it('should apply activeColor as background when active', () => {
-            const toggle = Set.toggle({ active: true, activeColor: '#00ff00' })
-            expect(toggle.Get.style().backgroundColor).toBe('rgb(0, 255, 0)')
+            const toggle = Set.toggle({ active: true, activeColor: Const.Color.Success[0] })
+            expect(toggle.Get.style().backgroundColor).toBe('rgb(0, 230, 118)')
         })
 
         it('should not apply activeColor when inactive', () => {
-            const toggle = Set.toggle({ active: false, activeColor: '#00ff00' })
+            const toggle = Set.toggle({ active: false, activeColor: Const.Color.Success[0] })
             expect(toggle.Get.style().backgroundColor).toBe('')
         })
     })

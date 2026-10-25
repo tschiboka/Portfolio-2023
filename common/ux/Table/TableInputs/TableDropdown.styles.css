@@ -52,13 +52,13 @@
 .table-dropdown--up .table-dropdown__menu {
     bottom: 100%;
     margin: 0;
-    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -4px 12px var(--black-0a40);
 }
 
 .table-dropdown--down .table-dropdown__menu {
     top: 100%;
     margin: 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px var(--black-0a40);
 }
 
 .table-dropdown__menu li {

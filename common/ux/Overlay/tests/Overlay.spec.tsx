@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { fireEvent, render, screen } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { OverlayMocks } from './Overlay.mocks'
 import { OverlayTestUtils } from './Overlay.spec.utils'
 import { Overlay } from '../index'
@@ -496,8 +497,10 @@ describe('Overlay.Popup', () => {
         })
 
         it('should apply custom style', () => {
-            expect(Set.popup({ style: { border: '2px solid red' } }).popup.Get.style().border).toBe(
-                '2px solid red',
+            const border = `2px solid ${Const.Color.Black[3]}`
+            // jsdom normalises a hex colour to rgb()
+            expect(Set.popup({ style: { border } }).popup.Get.style().border).toBe(
+                '2px solid rgb(51, 51, 51)',
             )
         })
     })
@@ -1009,8 +1012,10 @@ describe('Overlay.Modal', () => {
         })
 
         it('should apply custom style', () => {
-            expect(Set.modal({ style: { border: '2px solid red' } }).modal.Get.style().border).toBe(
-                '2px solid red',
+            const border = `2px solid ${Const.Color.Black[3]}`
+            // jsdom normalises a hex colour to rgb()
+            expect(Set.modal({ style: { border } }).modal.Get.style().border).toBe(
+                '2px solid rgb(51, 51, 51)',
             )
         })
     })

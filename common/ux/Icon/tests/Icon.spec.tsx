@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { Const } from '@common-ux/Const'
 import { IconTestUtils } from './Icon.spec.utils'
 
 const { Set } = IconTestUtils
@@ -34,8 +35,8 @@ describe('Icon', () => {
     })
 
     it('applies a custom color', () => {
-        const icon = Set.icon({ name: 'chart', color: '#888' })
-        expect(icon.Get.stroke()).toBe('#888')
+        const icon = Set.icon({ name: 'chart', color: Const.Color.Gray[3] })
+        expect(icon.Get.stroke()).toBe(Const.Color.Gray[3])
     })
 
     it('sets data-icon to the icon name', () => {

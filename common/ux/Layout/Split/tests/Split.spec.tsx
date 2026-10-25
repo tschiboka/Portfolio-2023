@@ -1,3 +1,4 @@
+import { Const } from '@common-ux/Const'
 import { SplitTestUtils } from './Split.spec.utils'
 import { SplitSelectors } from '../Split.selectors'
 
@@ -94,8 +95,12 @@ describe('Split', () => {
         })
 
         it('should apply custom style', () => {
-            const split = Set.split({ style: { background: 'red' }, ariaLabel: 'st' })
-            expect(split.Get.style().background).toBe('red')
+            const split = Set.split({
+                style: { background: Const.Color.Accent[0] },
+                ariaLabel: 'st',
+            })
+            // jsdom normalises a hex colour to rgb()
+            expect(split.Get.style().background).toBe('rgb(0, 255, 255)')
         })
     })
 })

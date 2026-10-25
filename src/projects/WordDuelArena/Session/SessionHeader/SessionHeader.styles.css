@@ -222,19 +222,19 @@
 .last-attempt-char.target {
     background-color: var(--color-font-success-dark);
     border-color: var(--color-font-success);
-    color: white;
+    color: var(--white-0);
 }
 
 .last-attempt-char.extra {
     background-color: var(--color-font-warning-dark);
     border-color: var(--color-font-warning);
-    color: white;
+    color: var(--white-0);
 }
 
 .last-attempt-char.invalid {
     background-color: var(--color-font-error-dark);
     border-color: var(--color-font-error);
-    color: white;
+    color: var(--white-0);
 }
 
 @keyframes fadeInChar {

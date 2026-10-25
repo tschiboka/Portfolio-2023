@@ -24,7 +24,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--black-0a80);
 }
 
 .Overlay--popup {
@@ -202,16 +202,16 @@
 }
 
 .Overlay--popup--warning .Overlay--popup__arrow--top {
-    border-bottom-color: var(--yellow-dark-1);
+    border-bottom-color: var(--warning-dark-1);
 }
 .Overlay--popup--warning .Overlay--popup__arrow--bottom {
-    border-top-color: var(--yellow-dark-1);
+    border-top-color: var(--warning-dark-1);
 }
 .Overlay--popup--warning .Overlay--popup__arrow--left {
-    border-right-color: var(--yellow-dark-1);
+    border-right-color: var(--warning-dark-1);
 }
 .Overlay--popup--warning .Overlay--popup__arrow--right {
-    border-left-color: var(--yellow-dark-1);
+    border-left-color: var(--warning-dark-1);
 }
 
 .Overlay--popup--danger .Overlay--popup__arrow--top {
@@ -272,32 +272,32 @@
 
 /* Mode: warning */
 .Overlay--popup--warning {
-    border-color: var(--yellow-dark-1);
+    border-color: var(--warning-dark-1);
 }
 
 .Overlay--popup--warning .Overlay--popup__icon {
-    color: var(--yellow);
-    background: var(--yellow-dark-5);
+    color: var(--warning);
+    background: var(--warning-dark-5);
 }
 
 .Overlay--popup--warning .Overlay--popup__action-btn {
     background: transparent;
-    border-color: var(--yellow-dark-1);
-    color: var(--yellow-dark-1);
+    border-color: var(--warning-dark-1);
+    color: var(--warning-dark-1);
 }
 
 .Overlay--popup--warning .Overlay--popup__action-btn:hover {
-    background: var(--yellow-dark-5);
+    background: var(--warning-dark-5);
 }
 
 .Overlay--popup--warning .Overlay--popup__action-btn--secondary {
-    background: var(--yellow-dark-1);
-    border-color: var(--yellow-dark-1);
+    background: var(--warning-dark-1);
+    border-color: var(--warning-dark-1);
     color: var(--black-x);
 }
 
 .Overlay--popup--warning .Overlay--popup__action-btn--secondary:hover {
-    background: var(--yellow-dark-2);
+    background: var(--warning-dark-2);
 }
 
 /* Mode: danger */
@@ -370,7 +370,7 @@
     background: var(--black-1);
     border: 1px solid var(--black-3);
     border-radius: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px var(--black-0a40);
     padding: var(--space-4) var(--space-8);
 }
 

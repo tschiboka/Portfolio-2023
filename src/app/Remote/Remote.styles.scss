@@ -1,9 +1,9 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/breakpoints.scss' as bp;
 
 .Remote__buttons {
-    border: 1px solid palette.$black_4;
-    background-color: palette.$black_x;
+    border: 1px solid tokens.$black-4;
+    background-color: tokens.$black-x;
     margin-top: 1rem;
     padding: 2rem;
 }

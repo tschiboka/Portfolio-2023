@@ -31,6 +31,7 @@ Prefer declarative, pure functional style:
 - Do: `map`, `filter`, `reduce`.
 - Do not: `for`, `while`.
 - Never mutate arguments or shared state; compose immutable values instead.
+- Prose is British English, code is American English: comment `Colour`, name the property `color`.
 
 ## 1.4 Structure
 

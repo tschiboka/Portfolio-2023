@@ -149,7 +149,7 @@ export const FormsCode = {
 </Form.Fieldset>`,
         searchIcons: `const options = [
     { label: 'Bug', value: 'bug', icon: <BsBug />, iconColor: 'var(--error)' },
-    { label: 'Feature', value: 'feature', icon: <BsLightbulb />, iconColor: 'var(--yellow)' },
+    { label: 'Feature', value: 'feature', icon: <BsLightbulb />, iconColor: 'var(--warning)' },
     { label: 'Task', value: 'task', icon: <BsCheck />, iconColor: 'var(--success)' },
 ]
 

@@ -82,12 +82,12 @@
 }
 
 .SideMenu__item:hover {
-    color: white;
+    color: var(--white-0);
     transform: scale(1.1);
 }
 
 .SideMenu__item--highlighted {
-    color: white;
+    color: var(--white-0);
 }
 
 @media (min-width: 768px) {
@@ -122,7 +122,7 @@
 
 /* Light theme */
 .light .SideMenu {
-    background-color: white;
+    background-color: var(--white-0);
 }
 
 .light .SideMenu__line {
@@ -140,11 +140,11 @@
 }
 
 .light .SideMenu__item:hover {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .SideMenu__item--highlighted {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .SideMenu__badge {

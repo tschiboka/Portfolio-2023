@@ -10,7 +10,7 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: var(--color-bg-dark);
-    color: white;
+    color: var(--white-0);
     z-index: var(--z-top);
 }
 

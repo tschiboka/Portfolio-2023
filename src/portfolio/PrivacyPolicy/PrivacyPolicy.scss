@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 .privacy-policy {
@@ -9,10 +9,10 @@
     font-size: font.$font_sm;
 
     a {
-        color: palette.$accent_dark_3;
+        color: tokens.$accent-dark-3;
     }
 
     a:hover {
-        color: palette.$accent_dark_1;
+        color: tokens.$accent-dark-1;
     }
 }

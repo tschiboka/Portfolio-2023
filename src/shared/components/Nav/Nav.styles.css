@@ -90,7 +90,7 @@
 .Header .nav_links li.active,
 .Header .nav_links li:hover,
 .Header .nav_links li.extended {
-    color: white;
+    color: var(--white-0);
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
@@ -116,7 +116,7 @@
 
 /* Light theme */
 .light .Header {
-    background-color: white;
+    background-color: var(--white-0);
 }
 
 .light .Header .burger {
@@ -129,7 +129,7 @@
 }
 
 .light .Header .nav_links li {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .Header .nav_links li.active {

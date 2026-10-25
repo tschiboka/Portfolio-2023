@@ -1,3 +1,4 @@
+import { Const } from '@common-ux/Const'
 import { InlineTestUtils } from './Inline.spec.utils'
 
 const { Set } = InlineTestUtils
@@ -78,8 +79,12 @@ describe('Inline', () => {
         })
 
         it('should apply custom style', () => {
-            const inline = Set.inline({ style: { background: 'red' }, ariaLabel: 'st' })
-            expect(inline.Get.style().background).toBe('red')
+            const inline = Set.inline({
+                style: { background: Const.Color.Accent[0] },
+                ariaLabel: 'st',
+            })
+            // jsdom normalises a hex colour to rgb()
+            expect(inline.Get.style().background).toBe('rgb(0, 255, 255)')
         })
     })
 })

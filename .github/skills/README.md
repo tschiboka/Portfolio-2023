@@ -47,42 +47,50 @@ The order work moves through. Each hands to or from its neighbours. The
 Every feature file role and the skill that owns it. Determine the owning skill
 before touching the file.
 
-| File                          | Side | Skill       |
-| ----------------------------- | ---- | ----------- |
-| `Feature.tsx`                 | FE   | `ui`        |
-| `Feature.styles.ts` / `.scss` | FE   | `ui`        |
-| `Feature.context.ts`          | FE   | `ui`        |
-| `Feature.provider.tsx`        | FE   | `ui`        |
-| `Feature.selectors.ts`        | FE   | `ui`        |
-| `Feature.storage.ts`          | FE   | `ui`        |
-| `Feature.handlers.ts`         | FE   | `form`      |
-| `Feature.fields.ts`           | FE   | `form`      |
-| `Feature.schema.ts`           | FE   | `form`      |
-| `Feature.columns.tsx`         | FE   | `table`     |
-| `Feature.filters.ts`          | FE   | `table`     |
-| `Feature.actions.ts`          | FE   | `table`     |
-| `Feature.queries.ts`          | FE   | `queries`   |
-| `Feature.transformers.ts`     | FE   | `queries`   |
-| `Feature.types.ts`            | both | `types`     |
-| `Feature.routes.tsx`          | FE   | `router`    |
-| `Feature.router.ts`           | BE   | `router`    |
-| `Feature.middlewares.ts`      | BE   | `router`    |
-| `Feature.auth.ts`             | BE   | `auth`      |
-| `Feature.permissions.ts`      | BE   | `auth`      |
-| `Feature.model.ts`            | BE   | `db`        |
-| `Feature.repository.ts`       | BE   | `db`        |
-| `Feature.service.ts`          | BE   | `db`        |
-| `Feature.schema.ts`           | BE   | `db`        |
-| `Feature.seed.ts`             | BE   | `db`        |
-| `Feature.transformers.ts`     | BE   | `db`        |
-| `Feature.controller.ts`       | BE   | `db`        |
-| `tests/*`                     | both | `test`      |
-| `Feature.utils.ts`            | both | `implement` |
-| `Feature.constants.ts`        | both | `implement` |
-| `Feature.config.ts`           | both | `implement` |
-| `Feature.defaults.ts`         | both | `implement` |
-| `Feature.options.ts`          | both | `implement` |
-| `Feature.states.ts`           | both | `implement` |
+| File                          | Side | Skill                             |
+| ----------------------------- | ---- | --------------------------------- |
+| `Feature.tsx`                 | FE   | `ui`                              |
+| `Feature.styles.ts` / `.scss` | FE   | `ui`                              |
+| `Feature.context.ts`          | FE   | `ui`                              |
+| `Feature.provider.tsx`        | FE   | `ui`                              |
+| `Feature.selectors.ts`        | FE   | `ui`                              |
+| `Feature.storage.ts`          | FE   | `ui`                              |
+| `Feature.hooks.ts`            | both | `ui`                              |
+| `Feature.reducer.ts`          | FE   | `ui`                              |
+| `Feature.code.ts`             | FE   | `ui`                              |
+| `Feature.demos.tsx`           | FE   | `ui`                              |
+| `Feature.handlers.ts`         | FE   | `form`                            |
+| `Feature.schema.ts`           | FE   | `form`                            |
+| `Feature.columns.tsx`         | FE   | `table`                           |
+| `Feature.filters.ts`          | FE   | `table`                           |
+| `Feature.actions.ts`          | FE   | `table`                           |
+| `Feature.queries.ts`          | FE   | `queries`                         |
+| `Feature.transformers.ts`     | FE   | `queries`                         |
+| `Feature.types.ts`            | both | `types`                           |
+| `Feature.routes.tsx`          | FE   | `router`                          |
+| `Feature.router.ts`           | BE   | `router`                          |
+| `Feature.middleware.ts`       | BE   | `router`                          |
+| `Feature.auth.ts`             | BE   | `auth`                            |
+| `Feature.permissions.ts`      | BE   | `auth`                            |
+| `Feature.model.ts`            | BE   | `db`                              |
+| `Feature.repository.ts`       | BE   | `db`                              |
+| `Feature.service.ts`          | BE   | `db`                              |
+| `Feature.schema.ts`           | BE   | `db`                              |
+| `Feature.seed.ts`             | BE   | `db`                              |
+| `Feature.transformers.ts`     | BE   | `db`                              |
+| `Feature.controller.ts`       | BE   | `db`                              |
+| `tests/*`                     | both | `test`                            |
+| `Feature.mockHandlers.ts`     | both | `test`                            |
+| `Feature.utils.ts`            | both | `implement`                       |
+| `Feature.constants.ts`        | both | `implement`                       |
+| `Feature.config.ts`           | both | `implement`                       |
+| `Feature.defaults.ts`         | both | `implement`                       |
+| `Feature.options.ts`          | both | `implement`                       |
+| `Feature.states.ts`           | both | `implement`                       |
+| `Feature.data.ts`             | FE   | `implement`                       |
+| `Feature.errors.ts`           | BE   | `implement`                       |
+| `Feature.business.md`         | both | `document`                        |
+| `Feature.generated.ts`        | both | none — build output, never edited |
 
 ## Reference
 

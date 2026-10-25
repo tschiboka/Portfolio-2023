@@ -1,4 +1,5 @@
 import { within } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { Test, Accessor } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
@@ -111,11 +112,12 @@ describe('Table — Accessibility', () => {
         it('applies inline styles to the wrapper', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
-                style: { border: '2px solid red' },
+                style: { border: `2px solid ${Const.Color.Black[3]}` },
                 data: rows,
                 columns: basicColumns,
             })
-            expect(Test.Table('test').Get.style().border).toBe('2px solid red')
+            // jsdom normalises a hex colour to rgb()
+            expect(Test.Table('test').Get.style().border).toBe('2px solid rgb(51, 51, 51)')
         })
     })
 

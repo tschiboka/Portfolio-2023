@@ -41,8 +41,7 @@ export const BreakdownPreviewStyles = {
         borderRadius: '10px',
         overflow: 'hidden',
         border: `2px solid ${Const.Color.Black[2]}`,
-        boxShadow:
-            '10px 10px 30px rgba(0,0,0,0.7), -5px -5px 5px rgba(255,255,255,0.02), inset 10px 10px 20px black',
+        boxShadow: `10px 10px 30px ${Const.Color.Black['0a70']}, -5px -5px 5px ${Const.Color.White['0a02']}, inset 10px 10px 20px ${Const.Color.Black[0]}`,
     },
 
     body: {
@@ -179,8 +178,7 @@ export const BreakdownPreviewStyles = {
             borderRadius: '50%',
             display: 'inline-block',
             border: `2px solid ${Const.Color.Black[3]}`,
-            boxShadow:
-                '2px 2px 4px rgba(0,0,0,0.6), -2px -2px 4px rgba(255,255,255,0.04), inset 2px 2px 4px rgba(255,255,255,0.1), inset -2px -2px 4px rgba(0,0,0,0.4)',
+            boxShadow: `2px 2px 4px ${Const.Color.Black['0a50']}, -2px -2px 4px ${Const.Color.White['0a04']}, inset 2px 2px 4px ${Const.Color.White['0a10']}, inset -2px -2px 4px ${Const.Color.Black['0a40']}`,
         },
         info: {
             flex: 1,

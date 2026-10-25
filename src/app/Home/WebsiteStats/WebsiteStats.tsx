@@ -23,9 +23,9 @@ export const WebsiteStats = () => {
                         style={{
                             padding: '12px',
                             borderRadius: '4px',
-                            backgroundColor: 'rgba(255, 0, 0, 0.1)',
-                            border: '1px solid red',
-                            color: 'red',
+                            backgroundColor: 'var(--errora10)',
+                            border: '1px solid var(--error)',
+                            color: 'var(--error)',
                         }}
                     >
                         {errorMessage}

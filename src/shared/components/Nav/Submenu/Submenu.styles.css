@@ -5,7 +5,7 @@
     padding: 1rem 2rem;
     list-style: none;
     flex-direction: column;
-    box-shadow: 5px 5px 5px black;
+    box-shadow: 5px 5px 5px var(--black-0);
     border-top: none;
     top: 4rem;
 }
@@ -42,7 +42,7 @@
 .Submenu li.active,
 .Submenu li:hover,
 .Submenu li.extended {
-    color: white;
+    color: var(--white-0);
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
 }
@@ -102,7 +102,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: color-mix(in srgb, var(--black-0) 20%, transparent);
     list-style: none;
     border-left: 2px solid var(--black-2);
 }
@@ -116,13 +116,13 @@
 }
 
 .Submenu .MenuAccordion span.active {
-    color: white;
+    color: var(--white-0);
 }
 
 /* Light theme */
 .light .Submenu {
     background-color: var(--white-1);
-    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 3px 3px 8px color-mix(in srgb, var(--black-0) 15%, transparent);
     border: 1px solid var(--white-2);
 }
 
@@ -133,7 +133,7 @@
 .light .Submenu li.active,
 .light .Submenu li:hover,
 .light .Submenu li.extended {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .Submenu li .chevron {
@@ -141,12 +141,12 @@
 }
 
 .light .Submenu .MenuAccordion {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: color-mix(in srgb, var(--black-0) 4%, transparent);
     border-left: 2px solid var(--white-2);
 }
 
 .light .Submenu .MenuAccordion span.active {
-    color: black;
+    color: var(--black-0);
 }
 
 @keyframes fade_in {

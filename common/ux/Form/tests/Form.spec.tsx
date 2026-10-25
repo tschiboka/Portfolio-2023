@@ -1,5 +1,6 @@
 import React from 'react'
 import { screen } from '@testing-library/react'
+import { Const } from '@common-ux/Const'
 import { FormTestUtils } from './Form.spec.utils'
 import { FormTestMocks } from './Form.spec.mocks'
 import { Test, Accessor } from '../../Test'
@@ -252,10 +253,11 @@ describe('Button', () => {
     })
 
     it('should apply inline style', () => {
-        Set.button({ style: { color: 'red' } })
+        Set.button({ style: { color: Const.Color.Error[0] } })
         const form = Test.Form(FORM_LABEL)
         const button = form.Button('Click me')
-        expect(button.Get.style().color).toBe('red')
+        // jsdom normalises a hex colour to rgb()
+        expect(button.Get.style().color).toBe('rgb(255, 0, 128)')
     })
 })
 
@@ -448,9 +450,9 @@ describe('Label', () => {
     })
 
     it('should apply inline style', () => {
-        Set.label({ for: 'name', style: { color: 'red' }, children: 'Name' })
+        Set.label({ for: 'name', style: { color: Const.Color.Error[0] }, children: 'Name' })
         const form = Test.Form(FORM_LABEL)
-        expect(form.Get.byText('Name')).toHaveStyle({ color: 'rgb(255, 0, 0)' })
+        expect(form.Get.byText('Name')).toHaveStyle({ color: Const.Color.Error[0] })
     })
 
     it('should render without children', () => {

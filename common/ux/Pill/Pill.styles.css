@@ -25,10 +25,10 @@
     border: 1px solid var(--success);
 }
 
-.Pill.Pill--outlined.Pill--yellow {
-    background: var(--yellow-dark-5);
-    color: var(--yellow);
-    border: 1px solid var(--yellow);
+.Pill.Pill--outlined.Pill--warning {
+    background: var(--warning-dark-5);
+    color: var(--warning);
+    border: 1px solid var(--warning);
 }
 
 .Pill.Pill--outlined.Pill--orange {
@@ -68,8 +68,8 @@
     border: 1px solid var(--black-3);
 }
 
-.Pill.Pill--solid.Pill--yellow {
-    background: var(--yellow);
+.Pill.Pill--solid.Pill--warning {
+    background: var(--warning);
     color: var(--black-3);
     border: 1px solid var(--black-3);
 }

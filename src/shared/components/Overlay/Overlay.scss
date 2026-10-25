@@ -1,9 +1,9 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .Overlay {
-    background-color: palette.$black_2;
+    background-color: tokens.$black-2;
 }
 
 .light .Overlay {
-    background-color: palette.$white_1;
+    background-color: tokens.$white-1;
 }

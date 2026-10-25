@@ -48,7 +48,7 @@
     right: 70px;
     margin-left: auto;
     color: var(--accent);
-    background-color: #191b21;
+    background-color: var(--black-2);
     animation: fade_out 2s linear;
 }
 

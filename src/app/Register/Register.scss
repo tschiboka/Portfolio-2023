@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .Register {
     width: 100%;
@@ -12,17 +12,17 @@
     }
 
     .submit-error-message {
-        color: deeppink;
+        color: tokens.$error;
     }
 
     .submit-success-message {
-        color: aqua;
+        color: tokens.$accent;
     }
 }
 
 .light {
     form {
-        background: palette.$white_3;
+        background: tokens.$white-3;
     }
 }
 

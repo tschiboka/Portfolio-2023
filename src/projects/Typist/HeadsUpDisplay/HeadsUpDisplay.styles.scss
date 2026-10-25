@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .HeadsUpDisplay {
     width: 100%;
@@ -9,11 +9,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: palette.$white_4;
+    color: tokens.$white-4;
     font-size: 1.1rem;
     line-height: 1.5rem;
     font-weight: bold;
-    background-color: palette.$black_1;
+    background-color: tokens.$black-1;
     border-radius: 5px;
 
     .HeadsUpDisplay__entry {
@@ -21,19 +21,19 @@
         display: flex;
         align-items: center;
         width: 100%;
-        border-bottom: 2px solid palette.$black_1;
+        border-bottom: 2px solid tokens.$black-1;
 
         .label {
             width: 25%;
             font-weight: 900;
-            color: palette.$white_3;
+            color: tokens.$white-3;
         }
         .content {
             width: 75%;
             display: flex;
             align-items: center;
             flex-wrap: wrap;
-            color: palette.$white_4;
+            color: tokens.$white-4;
 
             .keys {
                 display: flex;
@@ -44,7 +44,7 @@
             div {
                 span:nth-child(2) {
                     font-weight: 900;
-                    color: palette.$accent_dark_2;
+                    color: tokens.$accent-dark-2;
                 }
             }
         }

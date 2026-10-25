@@ -118,6 +118,16 @@ ruleTester.run('no-raw-zindex', Rules.Eslint.NoRawZIndex9, {
             errors: [{ message: ErrorMessage }],
         },
         {
+            name: 'should report a layer that no token defines',
+            code: '({ "z-index": "var(--z-toast)" });',
+            errors: [{ message: ErrorMessage }],
+        },
+        {
+            name: 'should report a TS layer that no token defines',
+            code: 'const styles = { zIndex: Const.ZIndex.toast }',
+            errors: [{ message: ErrorMessage }],
+        },
+        {
             name: 'should report a negative number',
             code: 'const styles = { zIndex: -1 }',
             errors: [{ message: ErrorMessage }],

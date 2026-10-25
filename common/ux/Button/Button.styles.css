@@ -79,5 +79,5 @@ a.btn.secondary:visited {
     height: auto;
     padding: var(--space-2) var(--space-8);
     font-size: var(--font-xxs);
-    color: red;
+    color: var(--error);
 }

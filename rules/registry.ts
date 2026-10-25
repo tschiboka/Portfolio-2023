@@ -12,6 +12,7 @@ import { registrar as noDuplicateImportRegistrar } from './no-duplicate-import/N
 import { registrar as noDuplicateExportRegistrar } from './no-duplicate-export/NoDuplicateExport.registrar.js'
 import { registrar as exportOrderRegistrar } from './export-order/ExportOrder.registrar.js'
 import { registrar as noRawZindexRegistrar } from './no-raw-zindex/NoRawZIndex.registrar.js'
+import { registrar as noRawColorRegistrar } from './no-raw-color/NoRawColor.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -30,4 +31,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noDuplicateExportRegistrar,
     exportOrderRegistrar,
     noRawZindexRegistrar,
+    noRawColorRegistrar,
 ].map(withPrefixedReports)

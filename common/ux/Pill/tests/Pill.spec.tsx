@@ -54,7 +54,7 @@ describe('Pill', () => {
         ['accent'],
         ['error'],
         ['success'],
-        ['yellow'],
+        ['warning'],
         ['orange'],
         ['purple'],
         ['gray'],

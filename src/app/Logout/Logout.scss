@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -35,7 +35,7 @@
         }
 
         button:hover {
-            background-color: palette.$accent_dark_1;
+            background-color: tokens.$accent-dark-1;
         }
     }
     p {

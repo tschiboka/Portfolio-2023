@@ -31,12 +31,12 @@
     transform: translateX(-50%);
     margin-bottom: 8px;
     padding: 16px;
-    background: #1a1a2e;
-    border: 1px solid #333;
+    background: var(--black-1);
+    border: 1px solid var(--black-3);
     border-radius: 8px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 16px var(--black-0a30);
     min-width: 240px;
-    color: #e0e0e0;
+    color: var(--white-2);
 }
 
 .access-guard-soft-disabled__title {
@@ -63,19 +63,19 @@
     border-radius: 4px;
     border: none;
     cursor: pointer;
-    color: #fff;
+    color: var(--white-0);
 }
 
 .access-guard-soft-disabled__action-btn--primary {
-    background: #4a6cf7;
+    background: var(--accent);
 }
 
 .access-guard-soft-disabled__action-btn--danger {
-    background: #e74c3c;
+    background: var(--error);
 }
 
 .access-guard-soft-disabled__action-btn--default {
-    background: #333;
+    background: var(--black-3);
 }
 
 .access-guard-soft-disabled__action-btn:disabled {
@@ -87,8 +87,8 @@
     padding: 6px 12px;
     font-size: 12px;
     border-radius: 4px;
-    border: 1px solid #555;
+    border: 1px solid var(--black-5);
     background: transparent;
-    color: #aaa;
+    color: var(--white-4);
     cursor: pointer;
 }

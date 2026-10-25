@@ -72,7 +72,7 @@
 }
 
 .MobileMenu li.active {
-    color: white;
+    color: var(--white-0);
 }
 
 .MobileMenu li.active .link {
@@ -94,7 +94,7 @@
 
 .MobileMenu a:hover,
 .MobileMenu .link:hover {
-    color: white;
+    color: var(--white-0);
     transform: scale(1.1);
 }
 
@@ -149,12 +149,12 @@
 }
 
 .light .MobileMenu--portfolio li.active {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .MobileMenu--portfolio a:hover,
 .light .MobileMenu--portfolio .link:hover {
-    color: black;
+    color: var(--black-0);
 }
 
 /* API variant */
@@ -199,7 +199,7 @@
 }
 
 .light .MobileMenu--api li.active {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .MobileMenu--api li:hover,

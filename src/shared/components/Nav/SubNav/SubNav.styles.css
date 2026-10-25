@@ -71,7 +71,7 @@
 
 .SubNav .theme-icon {
     margin: var(--spacing-1);
-    color: #bbb;
+    color: var(--white-3);
 }
 
 .SubNav .social-links > * {
@@ -79,7 +79,7 @@
     margin-left: 0.5rem;
     font-size: 1.2em;
     color: var(--black-3);
-    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.7));
+    filter: drop-shadow(2px 2px 3px color-mix(in srgb, var(--black-0) 70%, transparent));
 }
 
 @media (min-width: 768px) {
@@ -89,13 +89,13 @@
 }
 
 .SubNav .social-links > *:hover {
-    color: white;
+    color: var(--white-0);
 }
 
 /* Light theme */
 .light .SubNav {
-    color: black;
-    background-color: white;
+    color: var(--black-0);
+    background-color: var(--white-0);
     border-bottom: 1px solid var(--white-3);
 }
 
@@ -105,11 +105,11 @@
 
 .light .SubNav .social-links > * {
     color: var(--gray-3);
-    filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.15));
+    filter: drop-shadow(1px 1px 2px color-mix(in srgb, var(--black-0) 15%, transparent));
 }
 
 .light .SubNav .social-links > *:hover {
-    color: black;
+    color: var(--black-0);
 }
 
 .light .SubNav .theme-icon {

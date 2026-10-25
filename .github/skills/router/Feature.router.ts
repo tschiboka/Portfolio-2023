@@ -4,7 +4,7 @@ import express from 'express'
 import { ApiResponder } from '@common-utils'
 import { FeatureService } from './Feature.service'
 import { FeatureAuth } from './Feature.auth'
-import { auth, admin } from './Feature.middlewares'
+import { auth, admin } from './Feature.middleware'
 import type {
     DeleteFeatureReq,
     DeleteFeatureRes,

@@ -1,4 +1,4 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .Login {
     width: 100%;
@@ -19,7 +19,7 @@
 
 .light {
     form {
-        background: palette.$white_3;
+        background: tokens.$white-3;
     }
 }
 

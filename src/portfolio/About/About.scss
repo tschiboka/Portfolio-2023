@@ -1,9 +1,9 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 .link--inline {
-    color: palette.$accent_dark_2;
+    color: tokens.$accent-dark-2;
     font-size: font.$font_md;
     margin-bottom: 1.5rem;
     @include bp.md {
@@ -13,9 +13,9 @@
 
 .light {
     .link--inline {
-        color: palette.$accent_dark_3;
+        color: tokens.$accent-dark-3;
     }
     .certificates {
-        color: palette.$black_2;
+        color: tokens.$black-2;
     }
 }

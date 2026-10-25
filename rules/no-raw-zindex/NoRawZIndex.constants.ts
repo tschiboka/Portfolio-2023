@@ -7,5 +7,5 @@ export const TsKey = 'zIndex'
 /** The property name the style processor gives a stylesheet declaration. */
 export const StyleKey = 'z-index'
 
-/** A stylesheet value must be one of the custom properties that mirror `Const.ZIndex`. */
-export const StyleTokenPattern = /^var\(\s*--z-[a-z]+\s*\)$/
+/** The prefix a stylesheet value must use; the layer after it is checked against the tokens. */
+export const StyleTokenPrefix = '--z-'

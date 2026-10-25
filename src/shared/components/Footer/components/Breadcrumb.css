@@ -6,7 +6,7 @@
 }
 
 .Breadcrumb * {
-    color: #555;
+    color: var(--black-5);
 }
 
 .Breadcrumb > * {
@@ -24,12 +24,12 @@
 }
 
 .Breadcrumb .Breadcrumb__icon--house:hover {
-    fill: #ddd;
+    fill: var(--white-2);
     cursor: pointer;
 }
 
 .Breadcrumb .Breadcrumb__visits {
-    color: #007676;
+    color: var(--accent-dark-3);
 }
 
 .Breadcrumb .Breadcrumb__path {
@@ -38,7 +38,7 @@
 }
 
 .Breadcrumb .Breadcrumb__path:hover {
-    color: #aaa;
+    color: var(--white-4);
     font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
@@ -46,13 +46,13 @@
 
 /* Light theme */
 .light .Breadcrumb > * {
-    color: #555;
+    color: var(--black-5);
 }
 
 .light .Breadcrumb .Breadcrumb__icon--house:hover {
-    color: #222;
+    color: var(--black-2);
 }
 
 .light .Breadcrumb .Breadcrumb__path:hover {
-    color: #222;
+    color: var(--black-2);
 }

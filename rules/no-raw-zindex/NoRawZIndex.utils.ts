@@ -1,5 +1,10 @@
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
-import { StyleTokenPattern } from './NoRawZIndex.constants.js'
+import { Css } from '../css.js'
+import { ZIndexTokens } from '../tokens.generated.js'
+import { StyleTokenPrefix } from './NoRawZIndex.constants.js'
+
+const isLayer = (name: unknown): boolean =>
+    typeof name === 'string' && (ZIndexTokens as readonly string[]).includes(name)
 
 /** An AST node seen as its type plus whatever fields the check reads. */
 type AstNode = { type: string; [field: string]: unknown }
@@ -28,22 +33,23 @@ export const isConstToken = (value: unknown): boolean => {
     const zIndex = asNode(node.object)
     if (zIndex === null || zIndex.type !== 'MemberExpression') return false
 
-    return (
-        isIdentifierNamed(asNode(zIndex.object), 'Const') &&
-        isIdentifierNamed(asNode(zIndex.property), 'ZIndex')
-    )
+    if (!isIdentifierNamed(asNode(zIndex.object), 'Const')) return false
+    if (!isIdentifierNamed(asNode(zIndex.property), 'ZIndex')) return false
+
+    const layer = asNode(node.property)
+
+    return isLayer(node.computed === true ? layer?.value : layer?.name)
 }
 
-/** True for a `var(--z-<layer>)` string — the only value a stylesheet may carry. */
+/** True for a `var(--z-<layer>)` string naming a real layer. */
 export const isStyleToken = (value: unknown): boolean => {
     const node = asNode(value)
+    if (node === null || node.type !== 'Literal' || typeof node.value !== 'string') return false
 
-    return (
-        node !== null &&
-        node.type === 'Literal' &&
-        typeof node.value === 'string' &&
-        StyleTokenPattern.test(node.value)
-    )
+    const name = Css.getTokenName(node.value)
+    if (name === null || !name.startsWith(StyleTokenPrefix)) return false
+
+    return isLayer(name.slice(StyleTokenPrefix.length))
 }
 
 /** A shorthand property names a binding rather than a value, so it carries no z-index. */

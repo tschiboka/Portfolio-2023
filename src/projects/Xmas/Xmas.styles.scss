@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -38,8 +38,8 @@
         display: flex;
         justify-content: center;
         border-radius: 10px;
-        border: 2px solid palette.$black_3;
-        background: palette.$black_x;
+        border: 2px solid tokens.$black-3;
+        background: tokens.$black-x;
 
         .candle {
             width: 50px;

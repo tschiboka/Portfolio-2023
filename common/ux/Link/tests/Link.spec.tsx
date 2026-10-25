@@ -1,3 +1,4 @@
+import { Const } from '@common-ux/Const'
 import { LinkTestUtils } from './Link.spec.utils'
 
 const { Set } = LinkTestUtils
@@ -42,8 +43,9 @@ describe('Link', () => {
         })
 
         it('should apply custom style', () => {
-            const link = Set.route({ style: { color: 'red' } })
-            expect(link.Get.style().color).toBe('red')
+            const link = Set.route({ style: { color: Const.Color.Error[0] } })
+            // jsdom normalises a hex colour to rgb()
+            expect(link.Get.style().color).toBe('rgb(255, 0, 128)')
         })
     })
 

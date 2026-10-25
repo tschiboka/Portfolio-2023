@@ -12,8 +12,8 @@
     border: 1px solid var(--black-3);
     border-radius: var(--panel-radius);
     box-shadow:
-        10px 10px 30px rgba(0, 0, 0, 0.7),
-        -5px -5px 5px rgba(255, 255, 255, 0.02);
+        10px 10px 30px var(--black-0a70),
+        -5px -5px 5px var(--white-0a02);
     overflow: hidden;
 }
 
@@ -192,5 +192,5 @@
 }
 
 .light .region--header {
-    background-color: white;
+    background-color: var(--white-0);
 }

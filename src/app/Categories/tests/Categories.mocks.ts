@@ -1,3 +1,5 @@
+/* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
+
 import type { GetCategoryResponse, PostCategoryRequest } from '@common-types'
 
 export const CategoriesMocks: {

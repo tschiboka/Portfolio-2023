@@ -1,1 +1,1 @@
-export type PillColor = 'accent' | 'error' | 'success' | 'yellow' | 'orange' | 'purple' | 'gray'
+export type PillColor = 'accent' | 'error' | 'success' | 'warning' | 'orange' | 'purple' | 'gray'

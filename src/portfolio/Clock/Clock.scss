@@ -1,6 +1,6 @@
 @use '@shared-styles/breakpoints.scss' as bp;
 @use '@shared-styles/shadows.scss' as shadows;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 @use '@shared-styles/animations.scss' as animations;
 
@@ -9,25 +9,25 @@ $clock-container-max-size: 600px;
 .ClockWidget {
     width: 100vw;
     height: 100vh;
-    min-width: bp.$screen-2xs-min;
-    min-height: bp.$screen-2xs-min-height;
+    min-width: tokens.$screen-2xs-min;
+    min-height: tokens.$screen-2xs-min;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: palette.$black_1;
+    background-color: tokens.$black-1;
     font-size: font.$font_sm;
 
     .ClockContainer {
-        min-width: bp.$screen-2xs-min;
-        min-height: bp.$screen-2xs-min;
+        min-width: tokens.$screen-2xs-min;
+        min-height: tokens.$screen-2xs-min;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: palette.$black_x;
+        background-color: tokens.$black-x;
         border-radius: 100%;
-        border: 10px solid palette.$black_1;
+        border: 10px solid tokens.$black-1;
         box-shadow: shadows.quad-box-shadow(15px, 15px, 10px);
 
         @include bp.lg {
@@ -37,13 +37,13 @@ $clock-container-max-size: 600px;
         }
 
         .ClockFace {
-            width: calc(bp.$screen-2xs-min - 15vw);
-            height: calc(bp.$screen-2xs-min - 15vw);
+            width: calc(tokens.$screen-2xs-min - 15vw);
+            height: calc(tokens.$screen-2xs-min - 15vw);
             display: flex;
             justify-content: center;
             align-items: center;
             border-radius: 100%;
-            border: 1px palette.$black_1 solid;
+            border: 1px tokens.$black-1 solid;
 
             @include bp.lg {
                 width: calc($clock-container-max-size - 5vw);
@@ -60,8 +60,6 @@ $clock-container-max-size: 600px;
     }
 
     @media (orientation: landscape) {
-        min-width: bp.$screen-2xs-min-height;
-        min-height: bp.$screen-2xs-min;
         flex-direction: row;
     }
 }

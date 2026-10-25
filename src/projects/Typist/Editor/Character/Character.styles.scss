@@ -1,10 +1,10 @@
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 
 .Character {
     width: 1ch;
     margin-bottom: 0.5rem;
     display: inline-block;
-    color: palette.$white_2;
+    color: tokens.$white-2;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1.5rem;
@@ -15,15 +15,15 @@
     user-select: none;
 
     &.active {
-        border-bottom: 3px solid palette.$accent;
+        border-bottom: 3px solid tokens.$accent;
     }
     &.active.incorrect {
-        border-bottom: 3px solid palette.$error;
+        border-bottom: 3px solid tokens.$error;
     }
     &.correct {
-        color: palette.$black_5;
+        color: tokens.$black-5;
     }
     &.incorrect {
-        color: palette.$error;
+        color: tokens.$error;
     }
 }

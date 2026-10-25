@@ -1,3 +1,5 @@
+/* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
+
 import { describe, expect, it, vi } from 'vitest'
 import { CategoriesHandlers } from '../Categories.handlers'
 import type { SearchInputOption } from '@common-ux'

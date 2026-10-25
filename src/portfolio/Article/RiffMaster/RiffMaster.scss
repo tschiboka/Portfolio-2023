@@ -1,5 +1,5 @@
 @use '@shared-styles/breakpoints.scss' as bp;
-@use '@shared-styles/palette.scss' as palette;
+@use '@shared-styles/tokens.scss' as tokens;
 @use '@shared-styles/font_sizes.scss' as font;
 
 figure div.guitar {
@@ -13,7 +13,7 @@ figure div.guitar {
 ul.ul--riffmaster-leds {
     display: flex;
     flex-direction: column;
-    color: palette.$white_3;
+    color: tokens.$white-3;
     font-size: font.$font_md;
     margin-top: 1.5rem;
     list-style: none;
@@ -39,23 +39,23 @@ ul .circle i {
     width: 25px;
     height: 15px;
     border-radius: 5px;
-    border: 2px solid black;
+    border: 2px solid tokens.$black-0;
 }
 
 ul .circle i.red {
-    background-color: deeppink;
+    background-color: tokens.$error;
 }
 
 ul .circle i.green {
-    background-color: lightgreen;
+    background-color: tokens.$success;
 }
 
 ul .circle i.blue {
-    background-color: aqua;
+    background-color: tokens.$accent;
 }
 
 .light {
     ul.ul--riffmaster-leds {
-        color: palette.$black_2;
+        color: tokens.$black-2;
     }
 }
