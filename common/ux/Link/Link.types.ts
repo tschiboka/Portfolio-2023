@@ -1,9 +1,10 @@
+import type { ReactNode, MouseEventHandler } from 'react'
 import type { AccessibleProps } from '../index.types'
 
 type SharedProps = AccessibleProps & {
-    children: React.ReactNode
+    children: ReactNode
     title?: string
-    onClick?: React.MouseEventHandler<HTMLAnchorElement>
+    onClick?: MouseEventHandler<HTMLAnchorElement>
 }
 
 export type LinkAsRoute = SharedProps & {

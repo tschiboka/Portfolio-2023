@@ -1,11 +1,11 @@
 import { isValidElement } from 'react'
 import { isNonEmpty } from '@common-utils'
-import type { ReactNode } from 'react'
+import type { FC, ReactElement, ReactNode } from 'react'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
 
-const createSlot = <P extends object>(displayName: string, Component: React.FC<P>) => {
-    const Slot: React.FC<P> = (props) => <Component {...props} />
+const createSlot = <P extends object>(displayName: string, Component: FC<P>) => {
+    const Slot: FC<P> = (props) => <Component {...props} />
     Slot.displayName = displayName
     return Slot
 }
@@ -24,9 +24,7 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
         return node.flatMap(flattenChildren)
     }
     if (isValidElement(node) && (node.type as unknown) === FRAGMENT_TYPE) {
-        return flattenChildren(
-            ((node as React.ReactElement).props as { children?: ReactNode }).children,
-        )
+        return flattenChildren(((node as ReactElement).props as { children?: ReactNode }).children)
     }
     return [node]
 }
@@ -42,7 +40,7 @@ const extractSlot = (
 
     for (const child of flat) {
         if (isValidElement(child)) {
-            const el = child as React.ReactElement
+            const el = child as ReactElement
             const type = el.type as { displayName?: string }
             if (type.displayName === slotName) {
                 slots.push(child)

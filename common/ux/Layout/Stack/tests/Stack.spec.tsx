@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { render, screen } from '@testing-library/react'
 import { Const } from '@common-ux/Const'
 import { Stack } from '../Stack'
@@ -9,7 +10,7 @@ const { selectAlign, selectJustify } = StackSelectors
 
 type SetProps = Omit<StackProps, 'ariaLabel' | 'children'> & {
     ariaLabel: string
-    children?: React.ReactNode
+    children?: ReactNode
 }
 
 const Set = {

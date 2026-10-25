@@ -1,6 +1,7 @@
 ﻿import Joi from 'joi'
 import { ExercisesConstants } from './Exercises.constants'
 import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
+import type { ValidationResult } from 'joi'
 import type { ExerciseValidationInput } from './Exercises.types'
 
 const schema = Joi.object({
@@ -34,8 +35,7 @@ const schema = Joi.object({
     }),
 })
 
-const validate = (
-    exercise: ExerciseValidationInput,
-): Joi.ValidationResult<ExerciseValidationInput> => schema.validate(exercise)
+const validate = (exercise: ExerciseValidationInput): ValidationResult<ExerciseValidationInput> =>
+    schema.validate(exercise)
 
 export const ExercisesSchema = { schema, validate }

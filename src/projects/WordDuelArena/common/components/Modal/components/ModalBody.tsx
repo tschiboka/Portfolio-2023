@@ -1,5 +1,7 @@
+import { ReactNode } from 'react'
+
 type ModalBodyProps = {
-    children: React.ReactNode
+    children: ReactNode
 }
 
 export const ModalBody = ({ children }: ModalBodyProps) => {

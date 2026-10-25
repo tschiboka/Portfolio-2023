@@ -8,6 +8,7 @@ import { BlogArticle } from '@portfolio/Article'
 import { LikeQueries } from '@shared-queries'
 import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@common-ux'
 import { ProjectsSelectors } from '../../../Projects/Projects.selectors'
+import type { MouseEvent } from 'react'
 import './BlogCard.scss'
 
 interface Props {
@@ -117,7 +118,7 @@ export const BlogCard = ({
                             <Inline gap="4">
                                 <Text
                                     className="BlogCard__info-datablock like"
-                                    onClick={(event: React.MouseEvent) => {
+                                    onClick={(event: MouseEvent) => {
                                         event.preventDefault()
                                         event.stopPropagation()
                                         if (!articleLiked)

@@ -25,6 +25,7 @@
         "joi": "^17.9.2",
         "joi-objectid": "^4.0.2",
         "jsonwebtoken": "^9.0.2",
+        "mongodb": "^5.9.2",
         "mongoose": "^7.4.2",
         "nanoid": "^3.3.7",
         "node-cron": "^4.2.1",

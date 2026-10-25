@@ -3,11 +3,12 @@ import { render } from '@testing-library/react'
 import { OverlayMocks } from './Overlay.mocks'
 import { Overlay } from '../index'
 import { Test } from '../../Test'
+import type { ComponentProps, ReactNode } from 'react'
 import type { ActionMenuProps } from '..'
 
 const mockAnchorRef = () => {
     const ref = createRef<HTMLButtonElement>()
-    const Wrapper = ({ children }: { children: React.ReactNode }) => (
+    const Wrapper = ({ children }: { children: ReactNode }) => (
         <>
             <button ref={ref}>trigger</button>
             {children}
@@ -18,9 +19,9 @@ const mockAnchorRef = () => {
 
 const Set = {
     fullScreen: (
-        props: Partial<React.ComponentProps<typeof Overlay.FullScreen>> & {
+        props: Partial<ComponentProps<typeof Overlay.FullScreen>> & {
             ariaLabel: string
-            children: React.ReactNode
+            children: ReactNode
         },
     ) => {
         render(<Overlay.FullScreen {...props}>{props.children}</Overlay.FullScreen>)
@@ -45,7 +46,7 @@ const Set = {
         const menu = Test.Overlay(label)
         return { ...result, onClose, anchorRef: ref, items, menu }
     },
-    popup: (props: Partial<React.ComponentProps<typeof Overlay.Popup>> = {}) => {
+    popup: (props: Partial<ComponentProps<typeof Overlay.Popup>> = {}) => {
         const { ref, Wrapper } = mockAnchorRef()
         const onClose = vi.fn()
         const label = props.ariaLabel ?? props.title ?? 'Test Popup'
@@ -63,7 +64,7 @@ const Set = {
         const popup = Test.Overlay(label)
         return { ...result, onClose, anchorRef: ref, popup }
     },
-    modal: (props: Partial<React.ComponentProps<typeof Overlay.Modal>> = {}) => {
+    modal: (props: Partial<ComponentProps<typeof Overlay.Modal>> = {}) => {
         const onClose = vi.fn()
         const label = props.ariaLabel ?? props.title ?? 'Test Modal'
         const result = render(

@@ -1,6 +1,7 @@
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import { UsersConstants } from './Users.constants'
+import type { Schema } from 'joi'
 import type { LoginInput, TokenInput, UserInput } from './Users.types'
 
 Object.assign(Joi, { objectId: joiObjectId(Joi) })
@@ -29,9 +30,7 @@ const schema = Joi.object({
             .min(UsersConstants.fieldLimits.capability.min)
             .max(UsersConstants.fieldLimits.capability.max),
     ),
-    avatarId: (Joi as unknown as { objectId: (schema: unknown) => Joi.Schema }).objectId(
-        Joi as never,
-    ),
+    avatarId: (Joi as unknown as { objectId: (schema: unknown) => Schema }).objectId(Joi as never),
     created: Joi.date(),
     updated: Joi.date(),
     lastLogin: Joi.date().optional(),

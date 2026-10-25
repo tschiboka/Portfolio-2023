@@ -1,6 +1,7 @@
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'
 import { CategoryConstants } from './Category.constants'
+import type { Schema } from 'joi'
 import type { CategoryInput } from './Category.types'
 
 Object.assign(Joi, { objectId: joiObjectId(Joi) })
@@ -14,7 +15,7 @@ const schema = Joi.object({
     icon: Joi.string().required(),
     color: Joi.string(),
     status: Joi.string().valid('active', 'inactive', 'deleted'),
-    parentId: (Joi as unknown as { objectId: (schema: unknown) => Joi.Schema })
+    parentId: (Joi as unknown as { objectId: (schema: unknown) => Schema })
         .objectId(Joi as never)
         .optional(),
 })

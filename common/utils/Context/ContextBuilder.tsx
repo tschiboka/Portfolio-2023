@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+import type { FC, ReactNode } from 'react'
 import type { Optional } from '../Generics'
 
 export class ContextBuilder {
@@ -12,10 +13,9 @@ export class ContextBuilder {
             return ctx
         }
 
-        const Provider: React.FC<{ children: React.ReactNode; value?: T }> = ({
-            children,
-            value,
-        }) => <Context.Provider value={value ?? initialContext}>{children}</Context.Provider>
+        const Provider: FC<{ children: ReactNode; value?: T }> = ({ children, value }) => (
+            <Context.Provider value={value ?? initialContext}>{children}</Context.Provider>
+        )
 
         return { Context, Provider, Use }
     }

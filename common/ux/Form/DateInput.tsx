@@ -5,6 +5,7 @@ import { Const } from '@common-ux'
 import { Arrays } from '@common-utils'
 import { FieldValues } from './Form.types'
 import { DateInputUtils } from './DateInput.utils'
+import type { KeyboardEvent } from 'react'
 import type { Nullable } from '@common-utils'
 import type { AccessibleProps } from '../index.types'
 import './Form.styles.css'
@@ -163,7 +164,7 @@ export const DateInput = <T extends FieldValues>({
     }
 
     const handleKeyDown = (
-        e: React.KeyboardEvent,
+        e: KeyboardEvent,
         daysInMonth: number,
         onChange: (val: string) => void,
     ) => {
@@ -200,7 +201,7 @@ export const DateInput = <T extends FieldValues>({
         }
     }
 
-    const handleInputKeyDown = (e: React.KeyboardEvent) => {
+    const handleInputKeyDown = (e: KeyboardEvent) => {
         if (e.key === 'Escape') {
             setOpen(false)
             setYearPickerOpen(false)

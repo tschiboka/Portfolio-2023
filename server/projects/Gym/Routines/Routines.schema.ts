@@ -1,4 +1,4 @@
-﻿import Joi from 'joi'
+﻿import Joi, { ValidationResult } from 'joi'
 import { ROUTINE_SOURCES } from '../../../../common/types'
 import type { RoutineValidationInput } from './Routines.types'
 
@@ -22,6 +22,6 @@ const schema = Joi.object({
 
 export const RoutinesSchema = {
     schema,
-    validate: (routine: RoutineValidationInput): Joi.ValidationResult<RoutineValidationInput> =>
+    validate: (routine: RoutineValidationInput): ValidationResult<RoutineValidationInput> =>
         schema.validate(routine),
 }

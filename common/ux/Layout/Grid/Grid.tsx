@@ -1,5 +1,6 @@
 import { isDefined } from '@common-utils'
 import { StackSelectors } from '../Stack/Stack.selectors'
+import type { CSSProperties } from 'react'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
 import './Grid.styles.css'
 
@@ -37,7 +38,7 @@ export const Grid = ({
         .filter(Boolean)
         .join(' ')
 
-    const inlineStyle: React.CSSProperties = {
+    const inlineStyle: CSSProperties = {
         display: 'grid',
         gridTemplateColumns:
             isDefined(columns) && !responsive ? `repeat(${columns}, 1fr)` : undefined,

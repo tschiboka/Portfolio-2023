@@ -1,6 +1,7 @@
 import { registrar as noEmptyRowInJsxRegistrar } from './no-empty-row-in-jsx/NoEmptyRowInJsx.registrar.js'
 import { registrar as noEmptyRowInObjectRegistrar } from './no-empty-row-in-object/NoEmptyRowInObject.registrar.js'
 import { registrar as noRawSemanticJsxRegistrar } from './no-raw-semantic-jsx/NoRawSemanticJsx.registrar.js'
+import { registrar as noQualifiedTypeRegistrar } from './no-qualified-type/NoQualifiedType.registrar.js'
 import { registrar as noAdHocFileSuffixRegistrar } from './no-ad-hoc-file-suffix/NoAdHocFileSuffix.registrar.js'
 import { registrar as noMisnamedPrimaryFileRegistrar } from './no-misnamed-primary-file/NoMisnamedPrimaryFile.registrar.js'
 import { registrar as exactlyOneExportRegistrar } from './exactly-one-export/ExactlyOneExport.registrar.js'
@@ -32,4 +33,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     exportOrderRegistrar,
     noRawZindexRegistrar,
     noRawColorRegistrar,
+    noQualifiedTypeRegistrar,
 ].map(withPrefixedReports)

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Storage } from '@common-utils'
 import { AppContext } from './App.context'
+import type { ReactNode } from 'react'
 import type { AppContextValues, LocalStorage } from './App.types'
 
 const APP_KEY = 'tschiboka'
 
 type AppProviderProps = {
-    children: React.ReactNode
+    children: ReactNode
     initialState?: Partial<AppContextValues>
 }
 
@@ -17,7 +18,7 @@ const readTheme = (): string => {
     return 'dark'
 }
 
-export const AppProvider: React.FC<AppProviderProps> = ({ children, initialState }) => {
+export const AppProvider = ({ children, initialState }: AppProviderProps) => {
     const [themeMode, setThemeMode] = useState(initialState?.themeMode ?? readTheme())
     const [mainMenuVisible, setMainMenuVisible] = useState(initialState?.mainMenuVisible ?? true)
     const [mobileMenuVisible, setMobileMenuVisible] = useState(
@@ -25,7 +26,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children, initialState
     )
     const [subMenuVisible, setSubMenuVisible] = useState(initialState?.subMenuVisible ?? false)
     const [overlayVisible, setOverlayVisible] = useState(initialState?.overlayVisible ?? false)
-    const [overlayContent, setOverlayContent] = useState<React.ReactNode>(
+    const [overlayContent, setOverlayContent] = useState<ReactNode>(
         initialState?.overlayContent ?? null,
     )
 

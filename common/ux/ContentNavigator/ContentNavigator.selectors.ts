@@ -1,4 +1,5 @@
 import { Arrays, Browser, hasLength } from '@common-utils'
+import type { RefObject } from 'react'
 import type { VisibilityEntry } from '@common-utils/Browser'
 
 const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
@@ -12,7 +13,7 @@ const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
         .filter(({ text }) => hasLength(text.trim()))
 
 const getHeadingNodes = (
-    contentRef: React.RefObject<HTMLDivElement | null>,
+    contentRef: RefObject<HTMLDivElement | null>,
     depth: number,
 ): Element[] => {
     if (!contentRef.current) return []

@@ -1,5 +1,6 @@
 import Joi from 'joi'
 import { SettingsConstants } from './Settings.constants'
+import type { ValidationResult } from 'joi'
 import type { SettingsInput } from './Settings.types'
 
 const schema = Joi.object({
@@ -26,7 +27,7 @@ const schema = Joi.object({
 })
 
 export const SettingsSchema = {
-    validate: (settings: SettingsInput): Joi.ValidationResult<SettingsInput> =>
+    validate: (settings: SettingsInput): ValidationResult<SettingsInput> =>
         schema.validate(settings),
     schema,
 }

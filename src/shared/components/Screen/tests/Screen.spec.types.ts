@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { MemoryRouterProps } from 'react-router-dom'
 import { RenderOptions } from '@testing-library/react'
 import type { Buildable } from '@common-ux/Test/Server'
@@ -13,7 +14,7 @@ export type ScreenRenderOptions = {
 
 export type ScreenSetupOptions = ScreenRenderOptions & {
     path: string | AppRoute
-    children?: React.ReactElement
+    children?: ReactElement
     handlers?: Buildable[]
     beforeRender?: () => void
 }

@@ -4,12 +4,13 @@ import { Table } from '@common-ux/Table/Table'
 import { BreakdownPreviewStyles } from '../BreakdownPreview.styles'
 import { BreakdownPreviewColumns } from '../BreakdownPreview.columns'
 import { BreakdownPreviewTransformers } from '../BreakdownPreview.transformers'
+import type { JSX } from 'react'
 import type { SectionData } from '../BreakdownPreview.types'
 
 type DataSectionProps = {
     title: string
     data: SectionData
-    icon: React.JSX.Element
+    icon: JSX.Element
 }
 
 const StatCard = ({ label, value }: Option<number>) => (

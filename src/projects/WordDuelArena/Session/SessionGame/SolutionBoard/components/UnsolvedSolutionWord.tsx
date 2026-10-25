@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react'
 import type { UnsolvedLevelWord } from '../../../Session.types'
 
 type UnsolvedSolutionWordProps = {
@@ -19,7 +20,7 @@ export const UnsolvedSolutionWord = ({ playableWord, letterSize }: UnsolvedSolut
                             width: letterSize,
                             height: letterSize,
                             '--letter-size': `${letterSize}px`,
-                        } as React.CSSProperties
+                        } as CSSProperties
                     }
                 >
                     {char}

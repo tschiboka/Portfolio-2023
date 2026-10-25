@@ -1,9 +1,10 @@
+import type { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
 import '../Button/Button.styles.css'
 import './Form.styles.css'
 
 type ButtonProps = AccessibleProps & {
-    children: React.ReactNode
+    children: ReactNode
     type?: 'submit' | 'button' | 'reset'
     variant?: 'primary' | 'secondary'
     disabled?: boolean

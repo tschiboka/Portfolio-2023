@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react'
 import { Session } from '../SessionContext/SessionContext.types'
 
 export type LocalStorage = { theme: string; session?: Session }
@@ -15,5 +15,5 @@ export type AppContextValues = {
     setMobileMenuVisible: (visible: boolean) => void
     setSubMenuVisible: (visible: boolean) => void
     setOverlayVisible: (visible: boolean) => void
-    setOverlayContent: (content: React.ReactNode) => void
+    setOverlayContent: (content: ReactNode) => void
 }

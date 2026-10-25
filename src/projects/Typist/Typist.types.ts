@@ -1,3 +1,4 @@
+import { Dispatch } from 'react'
 import { Keystroke as SharedKeystroke, RoundResponse, TypingStats } from '@common-types'
 import { EditorWord } from './Editor/Character/Character.types'
 
@@ -28,5 +29,5 @@ export type EditorAction =
 export type TypistContextValues = {
     editorState: TypistEditorState
     isLoading?: boolean
-    dispatch: React.Dispatch<EditorAction>
+    dispatch: Dispatch<EditorAction>
 }

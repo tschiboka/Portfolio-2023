@@ -1,10 +1,11 @@
 import * as yup from 'yup'
 import { Const } from '@common-ux'
 import { Icons } from './components/Icons'
+import type { ObjectSchema } from 'yup'
 import type { CategoryFormData } from './Categories.types'
 
 export const CategoriesSchema = {
-    schema: (parentOptions: string[]): yup.ObjectSchema<CategoryFormData> =>
+    schema: (parentOptions: string[]): ObjectSchema<CategoryFormData> =>
         yup.object({
             name: yup.string().required().max(20),
             description: yup.string().required().min(10).max(255),

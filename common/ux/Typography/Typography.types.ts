@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import type { AccessibleProps, InteractiveProps } from '../index.types'
 
 export type TypographyElement =
@@ -44,7 +44,7 @@ type TypographyBaseProps = Pick<AccessibleProps, 'ariaLabel' | 'className'> &
         decoration?: TypographyDecoration
         transform?: TypographyTransform
         includeInTableOfContents?: boolean
-        children: React.ReactNode
+        children: ReactNode
     }
 
 export type TypographyProps = TypographyBaseProps & { as?: TypographyElement }
@@ -64,7 +64,7 @@ export type ListItem =
     | string
     | number
     | {
-          content: React.ReactNode
+          content: ReactNode
           key?: string
           className?: string
       }

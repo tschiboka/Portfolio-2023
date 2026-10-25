@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, useRef } from 'react'
 import { Const } from '@common-ux'
+import type { ReactNode } from 'react'
 
 interface XmasFormCanvasProps {
     children: ReactNode
@@ -15,11 +16,11 @@ interface Light {
     baseOpacity: number
 }
 
-export const XmasFormCanvas: React.FC<XmasFormCanvasProps> = ({
+export const XmasFormCanvas = ({
     children,
     lightCount = 50,
     lightSize = 8,
-}) => {
+}: XmasFormCanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const animationRef = useRef<number>(0)

@@ -1,4 +1,5 @@
-﻿import type { default as mongoose, Document } from 'mongoose'
+﻿import type { ObjectId } from 'mongodb'
+import type { Document } from 'mongoose'
 import type { Nullable } from '@common-utils'
 import type {
     GetCategoryResponse,
@@ -10,14 +11,14 @@ import type {
 /** Mongoose document shape for a category. */
 export interface ICategory extends Document {
     name: string
-    userId: mongoose.Types.ObjectId
+    userId: ObjectId
     description: string
     icon?: string
     color?: string
     status: string
     created_at: Date
     isParent: boolean
-    parentId: Nullable<mongoose.Types.ObjectId>
+    parentId: Nullable<ObjectId>
 }
 
 /** The category shape submitted for validation/creation. */

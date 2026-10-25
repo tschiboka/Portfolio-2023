@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { BaseSyntheticEvent, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
@@ -40,7 +40,7 @@ export const Contact = ({ pageName, path }: ContactProps) => {
             setSubmitErrorMessage(errorMessage(error, ClientMessage.Failure.Send('message'))),
     })
 
-    const submitHandler = (data: ContactFormData, event?: React.BaseSyntheticEvent) => {
+    const submitHandler = (data: ContactFormData, event?: BaseSyntheticEvent) => {
         event?.preventDefault()
         sendMessage.mutate(data)
     }

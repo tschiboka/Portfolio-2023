@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
 import { StackGap, StackAlign, StackJustify } from '../Stack/Stack.types'
 import { AccessibleProps, InteractiveProps } from '../../index.types'
+import type { JSX, ReactNode } from 'react'
 
 export type GridColumns = 1 | 2 | 3 | 4 | 5 | 6 | 12
 
@@ -12,7 +12,7 @@ export type ResponsiveColumns = { base: GridColumns } & Partial<
 
 export type GridProps = AccessibleProps &
     InteractiveProps & {
-        as?: keyof React.JSX.IntrinsicElements
+        as?: keyof JSX.IntrinsicElements
         children: ReactNode
         columns?: GridColumns | ResponsiveColumns
         gap?: StackGap

@@ -1,9 +1,10 @@
+import { Dispatch } from 'react'
 import { EditorSelectors } from './Editor.selectors'
 import { TypistEditorState, EditorAction } from '../Typist.types'
 
 type EditorHandlerArgs = {
     editorState: TypistEditorState
-    dispatch: React.Dispatch<EditorAction>
+    dispatch: Dispatch<EditorAction>
 }
 
 const create =

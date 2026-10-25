@@ -1,9 +1,9 @@
-import * as yup from 'yup'
+import yup, { ObjectSchema } from 'yup'
 import { Regexp, ValidationMessage } from '@common-utils'
 import { XmasConstants } from './Xmas.constants'
 import { XmasFormData } from './Xmas.types'
 
-export const XmasSchema: yup.ObjectSchema<XmasFormData> = yup.object({
+export const XmasSchema: ObjectSchema<XmasFormData> = yup.object({
     name: yup
         .string()
         .required(ValidationMessage.Required('Name'))

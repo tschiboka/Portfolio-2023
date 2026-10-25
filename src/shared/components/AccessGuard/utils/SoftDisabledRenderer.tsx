@@ -1,4 +1,4 @@
-import { ReactNode, useState, useCallback, useRef } from 'react'
+import { KeyboardEvent, ReactNode, useState, useCallback, useRef } from 'react'
 import { Const, Overlay } from '@common-ux'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
 import { GuardAction } from '../AccessGuard.types'
@@ -30,7 +30,7 @@ export const SoftDisabledRenderer = ({
     const handleDismiss = useCallback(() => setShowPopup(false), [])
 
     const handleKeyDown = useCallback(
-        (e: React.KeyboardEvent) => {
+        (e: KeyboardEvent) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault()
                 handleInteraction()

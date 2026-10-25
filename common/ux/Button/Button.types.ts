@@ -1,4 +1,4 @@
-import type { ComponentType } from 'react'
+import type { ComponentType, ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary'
@@ -6,7 +6,7 @@ export type ButtonSize = 'sm' | 'md'
 export type ButtonType = 'submit' | 'button' | 'reset'
 
 type CommonProps = AccessibleProps & {
-    children: React.ReactNode
+    children: ReactNode
     variant?: ButtonVariant
     size?: ButtonSize
 }

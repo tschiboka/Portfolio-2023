@@ -1,4 +1,4 @@
-﻿import type mongoose from 'mongoose'
+﻿import type { ObjectId } from 'mongodb'
 import type { Document } from 'mongoose'
 import type { Request } from 'express'
 import type {
@@ -16,14 +16,14 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a user. `Document<ObjectId>` types `_id`, which defaults to `any`. */
-export interface IUser extends Document<mongoose.Types.ObjectId> {
+export interface IUser extends Document<ObjectId> {
     fullName: string
     userName: string
     email: string
     password: string
     isAdmin: boolean
     capabilities: string[]
-    avatarId?: mongoose.Types.ObjectId
+    avatarId?: ObjectId
     verified: boolean
     active: boolean
     created: Date

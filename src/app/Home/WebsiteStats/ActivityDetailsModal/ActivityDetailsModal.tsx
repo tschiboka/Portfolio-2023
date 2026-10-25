@@ -1,4 +1,5 @@
 import { Overlay, Code, Stack, Text, CodeText, Box } from '@common-ux'
+import type { ReactNode } from 'react'
 import type { Optional } from '@common-utils'
 import type {
     BreakdownRow,
@@ -11,7 +12,12 @@ type ActivityDetailsModalProps = {
     onClose: () => void
 }
 
-const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
+type FieldProps = {
+    label: string
+    children: ReactNode
+}
+
+const Field = ({ label, children }: FieldProps) => (
     <Stack.Horizontal gap="12" align="start">
         <Box style={{ minWidth: 80, flexShrink: 0 }}>
             <Text weight="semibold" tone="muted" truncate>

@@ -1,4 +1,4 @@
-﻿import type mongoose from 'mongoose'
+﻿import type { ObjectId } from 'mongodb'
 import type { Document } from 'mongoose'
 import type { Dictionary, WithoutId } from '@common-utils'
 import type {
@@ -15,11 +15,11 @@ import type {
 export interface IGymRoutine extends Document {
     name: string
     entries: {
-        exerciseId: mongoose.Types.ObjectId
+        exerciseId: ObjectId
         order: number
     }[]
     source: 'user' | 'system'
-    ownerId?: mongoose.Types.ObjectId
+    ownerId?: ObjectId
 }
 
 export type RoutineValidationInput = WithoutId<GymRoutineResource> & { source: GymRoutineSource }

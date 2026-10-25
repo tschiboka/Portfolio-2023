@@ -1,4 +1,5 @@
-﻿import {
+﻿import { CSSProperties } from 'react'
+import {
     Box,
     Code,
     CodeText,
@@ -24,7 +25,7 @@ import './Layouts.styles.css'
 
 type LayoutsProps = { path: string }
 
-const cell = (height?: number): React.CSSProperties => ({
+const cell = (height?: number): CSSProperties => ({
     padding: '8px 16px',
     background: 'var(--black-3)',
     border: '1px solid var(--accent-dark-3)',

@@ -1,4 +1,5 @@
 import { SessionHooks } from '../../../Session.hooks'
+import type { CSSProperties } from 'react'
 import type { SolvedLevelWord } from '../../../Session.types'
 
 type SolvedSolutionWordProps = {
@@ -22,7 +23,7 @@ export const SolvedSolutionWord = ({ playableWord, letterSize }: SolvedSolutionW
                             width: letterSize,
                             height: letterSize,
                             '--letter-size': `${letterSize}px`,
-                        } as React.CSSProperties
+                        } as CSSProperties
                     }
                 >
                     {char}

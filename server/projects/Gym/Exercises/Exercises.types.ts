@@ -1,4 +1,4 @@
-﻿import type mongoose from 'mongoose'
+﻿import type { ObjectId } from 'mongodb'
 import type { Document } from 'mongoose'
 import type { Dictionary, WithoutId } from '@common-utils'
 import type {
@@ -31,7 +31,7 @@ export interface IGymExercise extends Document {
     video?: string
     url?: string
     source: GymExerciseSource
-    ownerId?: mongoose.Types.ObjectId
+    ownerId?: ObjectId
 }
 
 /** The subset of an exercise a permission check relies on. */

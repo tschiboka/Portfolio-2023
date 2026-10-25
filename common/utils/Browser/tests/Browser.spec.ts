@@ -1,3 +1,4 @@
+import { MutableRefObject } from 'react'
 import { renderHook, act } from '@testing-library/react'
 import { Browser, BrowserHooks } from '..'
 import type { MockInstance } from 'vitest'
@@ -288,7 +289,7 @@ describe('Browser', () => {
             // Attach a mock element to the ref
             const el = document.createElement('div')
             el.requestFullscreen = requestFullscreen
-            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current = el
+            ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el
 
             act(() => {
                 result.current.enterFullScreen()
@@ -303,8 +304,7 @@ describe('Browser', () => {
 
             const el = document.createElement('div') as unknown as FullScreenElement
             el.webkitRequestFullscreen = webkitRequestFullscreen
-            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current =
-                el as HTMLDivElement
+            ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el as HTMLDivElement
 
             act(() => {
                 result.current.enterFullScreen()
@@ -319,8 +319,7 @@ describe('Browser', () => {
 
             const el = document.createElement('div') as unknown as FullScreenElement
             el.msRequestFullscreen = msRequestFullscreen
-            ;(result.current.ref as React.MutableRefObject<HTMLDivElement>).current =
-                el as HTMLDivElement
+            ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el as HTMLDivElement
 
             act(() => {
                 result.current.enterFullScreen()

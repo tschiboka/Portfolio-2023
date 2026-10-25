@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { BaseSyntheticEvent, useState } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Screen } from '@shared-components/Screen/Screen'
 import { ClientMessage, Paths, errorMessage } from '@common-utils'
@@ -44,7 +44,7 @@ export const Register = ({ path, pageName }: RegisterProps) => {
             ),
     })
 
-    const submitHandler = (data: RegistrationFormData, event?: React.BaseSyntheticEvent) => {
+    const submitHandler = (data: RegistrationFormData, event?: BaseSyntheticEvent) => {
         event?.preventDefault()
         registerRequest.mutate(data)
     }

@@ -1,12 +1,13 @@
 import * as yup from 'yup'
 import { ValidationMessage } from '@common-utils'
 import { RegisterConstants } from './Register.constants'
-import { RegistrationFormData } from './Register.types'
+import type { ObjectSchema } from 'yup'
+import type { RegistrationFormData } from './Register.types'
 
 const { fieldLimits, fullNamePattern, passwordRules } = RegisterConstants
 const { fullName, userName, email, password } = fieldLimits
 
-export const RegisterSchema: yup.ObjectSchema<RegistrationFormData> = yup.object({
+export const RegisterSchema: ObjectSchema<RegistrationFormData> = yup.object({
     fullName: yup
         .string()
         .required(ValidationMessage.Required('full name'))

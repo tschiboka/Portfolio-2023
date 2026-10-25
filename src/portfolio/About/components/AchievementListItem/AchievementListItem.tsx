@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { TbCertificate, TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'
 import { ZoomedImage } from '@shared-components/ZoomedImage'
@@ -26,7 +27,7 @@ export const AchievementListItem = ({ achievement }: Props) => {
         setMainMenuVisible(false)
         setSubMenuVisible(false)
 
-        const content: React.ReactNode = (
+        const content: ReactNode = (
             <ZoomedImage handleClick={closeZoom} handleEscKeyPress={closeZoom}>
                 <img src={image} alt="Certificate" />
                 <TbZoomOutFilled className="Figure__icon Figure__icon--close" />

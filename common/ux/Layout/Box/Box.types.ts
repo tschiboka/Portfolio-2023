@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
 import { AccessibleProps, InteractiveProps } from '../../index.types'
+import type { JSX, ReactNode } from 'react'
 
 export type BoxSpacing =
     | '0'
@@ -21,7 +21,7 @@ export type BoxDisplay = 'block' | 'flex' | 'inline' | 'inline-flex'
 
 export type BoxProps = AccessibleProps &
     InteractiveProps & {
-        as?: keyof React.JSX.IntrinsicElements
+        as?: keyof JSX.IntrinsicElements
         children: ReactNode
         padding?: BoxSpacing
         paddingX?: BoxSpacing

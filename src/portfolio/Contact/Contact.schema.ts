@@ -1,8 +1,9 @@
 import * as yup from 'yup'
-import { ContactFormData } from './Contact.types'
 import { ContactConstants } from './Contact.constants'
+import type { ObjectSchema } from 'yup'
+import type { ContactFormData } from './Contact.types'
 
-export const ContactSchema: yup.ObjectSchema<ContactFormData> = yup.object({
+export const ContactSchema: ObjectSchema<ContactFormData> = yup.object({
     name: yup
         .string()
         .required()

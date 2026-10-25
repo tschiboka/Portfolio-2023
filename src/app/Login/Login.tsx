@@ -8,6 +8,7 @@ import { Session } from '@shared-context'
 import { ClientMessage, Paths, errorMessage } from '@common-utils'
 import { LoginSchema } from './Login.schema'
 import { LoginQueries } from './Login.queries'
+import type { BaseSyntheticEvent } from 'react'
 import type { PostLoginRequest } from '@common-types'
 
 type LoginProps = {
@@ -42,7 +43,7 @@ export const Login = ({ path, pageName }: LoginProps) => {
             setLoginErrorMessage(errorMessage(error, ClientMessage.Failure.Login())),
     })
 
-    const submitHandler = (data: PostLoginRequest, event?: React.BaseSyntheticEvent) => {
+    const submitHandler = (data: PostLoginRequest, event?: BaseSyntheticEvent) => {
         event?.preventDefault()
         loginRequest.mutate(data)
     }

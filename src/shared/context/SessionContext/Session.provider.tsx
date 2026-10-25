@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { SessionContext } from './Session.context'
 import { SessionStorage } from './Session.storage'
 import { SessionQueries } from './Session.queries'
+import type { ReactNode } from 'react'
 import type { Session, SessionContextValues } from './SessionContext.types'
 
 type SessionProviderProps = {
-    children: React.ReactNode
+    children: ReactNode
 }
 
-export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
+export const SessionProvider = ({ children }: SessionProviderProps) => {
     const [session, setSession] = useState<Session>()
     const localSession = SessionStorage.getInstance().get() || {}
 

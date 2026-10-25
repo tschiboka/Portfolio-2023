@@ -1,11 +1,12 @@
-import type { Document, Types } from 'mongoose'
+import type { ObjectId } from 'mongodb'
+import type { Document } from 'mongoose'
 
 /** A single Xmas message document. */
 export interface IXmasMessage extends Document {
     name: string
     message: string
     isRead: boolean
-    userId: Types.ObjectId
+    userId: ObjectId
     createdAt: Date
 }
 

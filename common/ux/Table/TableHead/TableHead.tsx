@@ -1,7 +1,7 @@
 import { useCallback, useRef } from 'react'
 import { TableHeadUtils } from './TableHead.utils'
 import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
-import type { ReactNode, MouseEvent } from 'react'
+import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
 import './TableHead.styles.css'
 
@@ -53,7 +53,7 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
     }
 
     const onResizeStart = useCallback(
-        (e: MouseEvent, leftIndex: number) => {
+        (e: ReactMouseEvent, leftIndex: number) => {
             e.preventDefault()
             const handle = e.currentTarget as HTMLElement
             const th = handle.parentElement as HTMLTableCellElement
@@ -87,7 +87,7 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
                 tableWidth,
             }
 
-            const onMouseMove = (ev: globalThis.MouseEvent) => {
+            const onMouseMove = (ev: MouseEvent) => {
                 if (!resizing.current) return
                 const rc = resizing.current
                 const diff = ev.clientX - rc.startX

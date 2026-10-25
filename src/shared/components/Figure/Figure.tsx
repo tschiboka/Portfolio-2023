@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'
 import { Figure as UxFigure } from '@common-ux'
@@ -44,7 +45,7 @@ export const Figure = ({
             setSubMenuVisible(false)
         }
 
-        const content: React.ReactNode = (
+        const content: ReactNode = (
             <ZoomedImage handleClick={closeZoom} handleEscKeyPress={closeZoom} bgColor={bgColor}>
                 <img src={image} alt={alt} />
                 <TbZoomOutFilled className="Figure__icon Figure__icon--close" />
