@@ -4,19 +4,13 @@
     left: 0;
     width: 100%;
     height: 4rem;
-    padding: 0 1rem;
+    padding: 0 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--black-1);
     overflow: hidden;
     user-select: none;
-}
-
-@media (min-width: 168px) {
-    .Header {
-        padding: 0 1.2rem;
-    }
 }
 
 @media (min-width: 992px) {

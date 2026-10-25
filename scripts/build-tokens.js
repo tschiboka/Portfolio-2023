@@ -299,7 +299,10 @@ export const buildScss = () => {
     ].join('\n')
 }
 
-/** The token names a rule can check a loose name against: the layers, and every colour. */
+/**
+ * The token values a rule can check a loose value against: the layers by name, every colour
+ * name, and the breakpoints' pixel values.
+ */
 export const buildRules = () => {
     const names = Object.keys(tokens['z-index'])
         .map((name) => `'${name}'`)
@@ -312,6 +315,14 @@ export const buildRules = () => {
     const colours = colourPairs()
         .map(([name]) => `'${name}'`)
         .join(', ')
+
+    const breakpoints = Object.entries(tokens.breakpoint)
+        .map(([name, value]) =>
+            value === null
+                ? `    ${keyOf(name)}: Infinity,`
+                : `    ${keyOf(name)}: ${Number.parseInt(value, 10)},`,
+        )
+        .join('\n')
 
     return [
         '// Generated from tokens.json by `npm run build:tokens` — do not edit.',
@@ -326,8 +337,10 @@ export const buildRules = () => {
         `export const ColorTokens = [${colours}] as const`,
         '',
         'export type ColorToken = (typeof ColorTokens)[number]',
-        '',
-    ].join('\n')
+        '',        'export const Breakpoints = {',
+        breakpoints,
+        '} as const',
+        '',    ].join('\n')
 }
 
 const targets = [

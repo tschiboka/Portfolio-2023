@@ -179,17 +179,23 @@ not.
           stylesheet line into one JavaScript declaration, so the same rule reads both surfaces
     - [x] Step 7.3: Record the choice in §3 — Steps 8–10 cannot land without it
 - [ ] Step 8: Rule — a media query uses a named breakpoint
-    - [ ] Step 8.1: Build `rules/no-magic-breakpoint/`
-    - [ ] Step 8.2: Flag a px value in `@media` that is not in `Const.Breakpoint`
-    - [ ] Step 8.3: Accept `max-width` forms as the token minus one — `max-width: 767px` is `md`
-    - [ ] Step 8.4: Scope to `common/**/*.css` and `src/**/*.{css,scss}`
-    - [ ] Step 8.5: Register as `severity: 'error'`
-    - [ ] Step 8.6: Add `tests/NoMagicBreakpoint.spec.ts`
-    - [ ] Step 8.7: Run `rules sync`, then verify the generated config
-    - [ ] Step 8.8: Fix `ContentNavigator.styles.css:35` — `1024px` is not a token
-    - [ ] Step 8.9: Fix `Region.styles.css:132` — `168px` is not a token
-    - [ ] Step 8.10: Sweep the remaining `@media` blocks — 80 across 11 files
-    - [ ] Step 8.11: Confirm a green `tsc`, lint, and test run
+    - [x] Step 8.1: Build `rules/no-magic-breakpoint/`
+    - [x] Step 8.2: Flag a px value in `@media` that is not in `Const.Breakpoint`
+    - [x] Step 8.3: Accept `max-width` forms as the token minus one — `max-width: 767px` is `md`
+    - [x] Step 8.4: Scope to `common/**/*.css` and `src/**/*.{css,scss}`
+    - [x] Step 8.5: Register as `severity: 'error'`
+    - [x] Step 8.6: Add `tests/NoMagicBreakpoint.spec.ts` — fourteen cases over the marker the
+          processor emits, since a media query only reaches a rule once it is a `Property`
+    - [x] Step 8.7: Run `rules sync`, then verify the generated config
+    - [x] Step 8.8: Fix `ContentNavigator.styles.css:35` — `1024px` is not a token; it and line
+          103 now read `992px`, the `lg` layer, which moves the table of contents into the
+          992–1023px band where it used to be absent
+    - [x] Step 8.9: Fix `Region.styles.css:132` — `168px` is not a token, and `375px` was no
+          better: 168 guards nothing real, so the step folded into the base rule instead, and
+          `Nav.styles.css` with it
+    - [x] Step 8.10: Sweep the remaining `@media` blocks — 97 width clauses over 17 files, all
+          already tokens once the four sites above were fixed
+    - [x] Step 8.11: Confirm a green `tsc`, lint, and test run
 - [x] Step 9: Rule — a colour comes from `Const.Color`
     - [x] Step 9.1: Build `rules/no-raw-color/`
     - [x] Step 9.2: Flag a hex, `rgb()` or `hsl()` value that is not in the palette
@@ -442,22 +448,12 @@ not.
           regex rather than a five-minute run
     - [x] Step 27.10: Verify the refusals — `[]`, `[0000]` and `[0009] -` each fail in about a
           second, before any lint or compile work starts
-- [ ] Step 28: Rule — a type is imported, never reached through a namespace
-    - [x] Step 28.1: Build `rules/no-qualified-type/`
-    - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
-          `React.ReactNode`, `React.CSSProperties`
-    - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-    'react'`, then `(e: FormEvent)`
-    - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
-          `React.StrictMode` are calls, not types
-    - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
-          default one is espree and cannot parse a qualified type
-    - [x] Step 28.6: Register as `severity: 'error'`
-    - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts`
-    - [ ] Step 28.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
-          roughly 55 sit in type position and the rest are values
-    - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 28: Rule — a type is imported, never reached through a namespace - [x] Step 28.1: Build `rules/no-qualified-type/` - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
+      `React.ReactNode`, `React.CSSProperties` - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
+'react'`, then `(e: FormEvent)` - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
+      `React.StrictMode` are calls, not types - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
+      default one is espree and cannot parse a qualified type - [x] Step 28.6: Register as `severity: 'error'` - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts` - [ ] Step 28.8: Run `rules sync`, then verify the generated config - [ ] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
+      roughly 55 sit in type position and the rest are values - [ ] Step 28.10: Confirm a green `tsc`, lint, and test run
 - [x] Step 29: Rule — the import block is closed by a blank line, and the first export opened by one — **configured, not built** - [x] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
       already expresses does not need a registry entry, a registrar and a spec - [x] Step 29.2: Require at least one blank line between the last import and the statement
       after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25 - [x] Step 29.3: Require a blank line before the first export, including when code sits

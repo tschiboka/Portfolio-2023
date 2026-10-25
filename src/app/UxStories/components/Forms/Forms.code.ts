@@ -159,7 +159,6 @@ export const FormsCode = {
     options={options}
     buttonIcon="arrow"
     highlightMatch
-    colorSelection
     onSelect={(option) => setValue('type', option.label)}
 />`,
     },

@@ -42,8 +42,18 @@ describe('styleProcessor', () => {
         expect(read('.Submenu {')).toBeUndefined()
     })
 
-    it('should not read an at-rule as a declaration', () => {
-        expect(read('@media (max-width: 768px) {')).toBeUndefined()
+    it('should read a media query as an at-rule marker', () => {
+        expect(read('@media (max-width: 768px) {')).toEqual({ '@media': '(max-width: 768px)' })
+    })
+
+    it('should read a media query that names a screen and a range', () => {
+        expect(read('@media screen and (min-width: 992px) {')).toEqual({
+            '@media': 'screen and (min-width: 992px)',
+        })
+    })
+
+    it('should not read another at-rule as a media query', () => {
+        expect(read('@keyframes fade {')).toBeUndefined()
     })
 
     it('should not read a closing brace as a declaration', () => {

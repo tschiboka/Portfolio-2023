@@ -1,7 +1,8 @@
-import yup, { ObjectSchema } from 'yup'
+import * as yup from 'yup'
 import { Regexp, ValidationMessage } from '@common-utils'
 import { XmasConstants } from './Xmas.constants'
-import { XmasFormData } from './Xmas.types'
+import type { ObjectSchema } from 'yup'
+import type { XmasFormData } from './Xmas.types'
 
 export const XmasSchema: ObjectSchema<XmasFormData> = yup.object({
     name: yup

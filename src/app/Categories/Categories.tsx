@@ -132,7 +132,6 @@ export const Categories = ({ path }: CategoriesProps) => {
                                 onSelect={(option: SearchInputOption) => {
                                     setValue('color', option.label)
                                 }}
-                                colorSelection={true}
                             />
                         </Form.Fieldset>
                         <LoadingIndicator show={categoryPostRequest.isPending} />

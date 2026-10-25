@@ -15,7 +15,6 @@ type SearchInputProps<TValue extends string, TFieldValues extends FieldValues> =
     buttonIcon?: SearchInputOptionButtonIcons
     icon?: ReactNode
     showIconWithInput?: boolean
-    colorSelection?: boolean
     control: Control<TFieldValues>
     placeholder?: string
     highlightMatch?: boolean

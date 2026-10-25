@@ -67,3 +67,17 @@ describe('the bare gray', () => {
         expect(buildTs()).toContain(`        0: '#666',`)
     })
 })
+
+describe('the breakpoints the rule mirror carries', () => {
+    it('should map each name to its pixel value', () => {
+        expect(buildRules()).toContain("    md: 768,")
+    })
+
+    it('should quote a name that cannot start an identifier', () => {
+        expect(buildRules()).toContain("    '2xl': 1580,")
+    })
+
+    it('should read an open ended breakpoint as Infinity', () => {
+        expect(buildRules()).toContain('    accordion: Infinity,')
+    })
+})
