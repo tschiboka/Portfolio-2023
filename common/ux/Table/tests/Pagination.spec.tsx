@@ -7,7 +7,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Pagination', () => {
     describe('Basic rendering', () => {
-        it('renders pagination navigation', () => {
+        it('should render pagination navigation', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -22,12 +22,12 @@ describe('Table — Pagination', () => {
             expect(Test.Table('test').Get.pagination()).toBeInTheDocument()
         })
 
-        it('does not render pagination when prop is omitted', () => {
+        it('should not render pagination when prop is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             expect(Test.Table('test').Has.pagination()).toBe(false)
         })
 
-        it('renders page buttons for the window', () => {
+        it('should render page buttons for the window', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -47,7 +47,7 @@ describe('Table — Pagination', () => {
     })
 
     describe('Page navigation', () => {
-        it('calls onPageChange with page number when page button is clicked', async () => {
+        it('should call onPageChange with page number when page button is clicked', async () => {
             const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -64,7 +64,7 @@ describe('Table — Pagination', () => {
             expect(onPageChange).toHaveBeenCalledWith(2)
         })
 
-        it('calls onPageChange(1) when First page is clicked', async () => {
+        it('should call onPageChange(1) when First page is clicked', async () => {
             const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -81,7 +81,7 @@ describe('Table — Pagination', () => {
             expect(onPageChange).toHaveBeenCalledWith(1)
         })
 
-        it('calls onPageChange(page-1) when Previous page is clicked', async () => {
+        it('should call onPageChange(page-1) when Previous page is clicked', async () => {
             const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -98,7 +98,7 @@ describe('Table — Pagination', () => {
             expect(onPageChange).toHaveBeenCalledWith(2)
         })
 
-        it('calls onPageChange(page+1) when Next page is clicked', async () => {
+        it('should call onPageChange(page+1) when Next page is clicked', async () => {
             const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -115,7 +115,7 @@ describe('Table — Pagination', () => {
             expect(onPageChange).toHaveBeenCalledWith(4)
         })
 
-        it('calls onPageChange(totalPages) when Last page is clicked', async () => {
+        it('should call onPageChange(totalPages) when Last page is clicked', async () => {
             const onPageChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -134,7 +134,7 @@ describe('Table — Pagination', () => {
     })
 
     describe('First/Last page disabled states', () => {
-        it('disables First and Previous on page 1', () => {
+        it('should disable First and Previous on page 1', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -153,7 +153,7 @@ describe('Table — Pagination', () => {
             expect(table.Get.lastPage()).not.toBeDisabled()
         })
 
-        it('disables Next and Last on last page', () => {
+        it('should disable Next and Last on last page', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -172,7 +172,7 @@ describe('Table — Pagination', () => {
             expect(table.Get.lastPage()).toBeDisabled()
         })
 
-        it('all nav buttons disabled when there is only one page', () => {
+        it('should disable every nav button with a single page', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -193,7 +193,7 @@ describe('Table — Pagination', () => {
     })
 
     describe('Current page highlighting', () => {
-        it('active page button has "active" class', () => {
+        it('should give the active page button the "active" class', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -208,7 +208,7 @@ describe('Table — Pagination', () => {
             expect(Test.Table('test').Get.pageButton(2)).toHaveClass('active')
         })
 
-        it('non-active page buttons do not have "active" class', () => {
+        it('should leave non-active page buttons without the "active" class', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -227,7 +227,7 @@ describe('Table — Pagination', () => {
     })
 
     describe('Total items info', () => {
-        it('shows item range and total when totalItems is provided', () => {
+        it('should show item range and total when totalItems is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -244,7 +244,7 @@ describe('Table — Pagination', () => {
             expect(screen.getByText('87')).toBeInTheDocument()
         })
 
-        it('does not show item info when totalItems is not provided', () => {
+        it('should not show item info when totalItems is not provided', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -260,7 +260,7 @@ describe('Table — Pagination', () => {
             expect(info?.textContent).toBe('')
         })
 
-        it('caps the end at totalItems on the last page', () => {
+        it('should cap the end at totalItems on the last page', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,

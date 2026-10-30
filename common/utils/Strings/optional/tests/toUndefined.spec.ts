@@ -10,7 +10,7 @@ describe('Strings.Optional.toUndefined', () => {
         ['   ', '   '],
         [null, undefined],
         [undefined, undefined],
-    ])('toUndefined(%j) should return %j', (value, expected) => {
+    ])('should return %j for toUndefined(%j)', (value, expected) => {
         expect(toUndefined(value)).toBe(expected)
     })
 })

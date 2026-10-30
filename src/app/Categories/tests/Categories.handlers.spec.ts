@@ -20,7 +20,7 @@ const formData: CategoryFormData = {
 }
 
 describe('CategoriesHandlers.submit', () => {
-    it('posts the form data mapping the parent label to its id', async () => {
+    it('should post the form data, mapping the parent label to its id', async () => {
         const postCategory = vi.fn().mockResolvedValue(undefined)
         const handler = CategoriesHandlers.submit({ parentOptions, postCategory })
 
@@ -35,7 +35,7 @@ describe('CategoriesHandlers.submit', () => {
         })
     })
 
-    it('posts with an undefined parentId when no parent is selected', async () => {
+    it('should post with an undefined parentId when no parent is selected', async () => {
         const postCategory = vi.fn().mockResolvedValue(undefined)
         const handler = CategoriesHandlers.submit({ parentOptions, postCategory })
 

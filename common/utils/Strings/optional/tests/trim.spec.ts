@@ -11,7 +11,7 @@ describe('Strings.Optional.trim', () => {
         [null, undefined],
         [undefined, undefined],
         [123, '123'],
-    ])('trim(%j) should return %j', (value, expected) => {
+    ])('should return %j for trim(%j)', (value, expected) => {
         expect(trim(value)).toBe(expected)
     })
 })

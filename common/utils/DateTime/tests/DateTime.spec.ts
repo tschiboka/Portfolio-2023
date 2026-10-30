@@ -24,7 +24,7 @@ describe('DateTime', () => {
             ['fromHour', 3_600_000],
             ['fromDay', 86_400_000],
             ['fromWeek', 604_800_000],
-        ] as const)('%s() default should return %i ms', (fn, expected) => {
+        ] as const)('should default %s() to %i ms', (fn, expected) => {
             expect(Units.Ms[fn]()).toBe(expected)
         })
 
@@ -74,8 +74,8 @@ describe('DateTime', () => {
                     [0.5, 302_400_000],
                 ],
             ],
-        ] as const)('Ms.%s', (fn, cases) => {
-            it.each(cases)(`${fn}(%d) should return %d ms`, (input: number, expected: number) => {
+        ] as const)('should define Ms.%s', (fn, cases) => {
+            it.each(cases)(`should return %d ms for ${fn}(%d)`, (input: number, expected: number) => {
                 expect(Units.Ms[fn](input)).toBe(expected)
             })
         })
@@ -86,7 +86,7 @@ describe('DateTime', () => {
                 ['1 hour = 60 min', Units.Ms.fromHour(1), Units.Ms.fromMin(60)],
                 ['1 day = 24 hours', Units.Ms.fromDay(1), Units.Ms.fromHour(24)],
                 ['1 week = 7 days', Units.Ms.fromWeek(1), Units.Ms.fromDay(7)],
-            ])('%s', (_, actual, expected) => {
+            ])('should preserve %s', (_, actual, expected) => {
                 expect(actual).toBe(expected)
             })
         })

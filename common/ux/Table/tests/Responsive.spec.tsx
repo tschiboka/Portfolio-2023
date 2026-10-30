@@ -9,7 +9,7 @@ describe('Table — Responsive / Breakpoints', () => {
     const table = () => Test.Table('test')
 
     describe('Expand button', () => {
-        it('renders expand buttons when columns have breakpoints', () => {
+        it('should render expand buttons when columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -21,14 +21,14 @@ describe('Table — Responsive / Breakpoints', () => {
             expect(table().Get.expandButtons()).toHaveLength(rows.length)
         })
 
-        it('does not render expand buttons when no columns have breakpoints', () => {
+        it('should not render expand buttons when no columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             expect(table().Has.expandButton()).toBe(false)
         })
     })
 
     describe('Row expansion', () => {
-        it('shows expanded row details after clicking expand', async () => {
+        it('should show expanded row details after clicking expand', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -41,7 +41,7 @@ describe('Table — Responsive / Breakpoints', () => {
             expect(table().Get.expandedRow(1)).toBeInTheDocument()
         })
 
-        it('expanded row shows hidden column headers and values', async () => {
+        it('should show the hidden column headers and values in the expanded row', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'Alpha', value: '10', status: 'active', note: '' }],
@@ -55,7 +55,7 @@ describe('Table — Responsive / Breakpoints', () => {
             expect(within(expandedRow).getByText('Status')).toBeInTheDocument()
         })
 
-        it('hides expanded row after clicking collapse', async () => {
+        it('should hide expanded row after clicking collapse', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -69,7 +69,7 @@ describe('Table — Responsive / Breakpoints', () => {
             expect(table().Has.expandedRow(1)).toBe(false)
         })
 
-        it('multiple rows can be expanded simultaneously', async () => {
+        it('should expand multiple rows simultaneously', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -86,7 +86,7 @@ describe('Table — Responsive / Breakpoints', () => {
     })
 
     describe('Breakpoint class on cells', () => {
-        it('adds breakpoint class to cells', () => {
+        it('should add breakpoint class to cells', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -101,7 +101,7 @@ describe('Table — Responsive / Breakpoints', () => {
             expect(statusCell).toHaveClass('lg')
         })
 
-        it('adds breakpoint class to header', () => {
+        it('should add breakpoint class to header', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),

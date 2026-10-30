@@ -7,7 +7,7 @@ const { filterDefs } = TableHooksMocks
 const { setup, setupWithUrl } = TableHooksTestUtils
 
 describe('useTableController', () => {
-    it('initializes with default filters, sort, and paging', () => {
+    it('should initializ with default filters, sort, and paging', () => {
         const { result } = setup({ filters: filterDefs })
         expect(result.current.state.filters).toEqual({
             search: undefined,
@@ -18,7 +18,7 @@ describe('useTableController', () => {
         expect(result.current.state.pagination).toEqual({ pageNumber: 1, pageSize: 10 })
     })
 
-    it('respects configured default sort and pageSize', () => {
+    it('should respect configured default sort and pageSize', () => {
         const { result } = setup({
             sorting: { default: { column: 'name', direction: 'desc' } },
             pagination: { pageSize: 25 },
@@ -27,7 +27,7 @@ describe('useTableController', () => {
         expect(result.current.state.pagination.pageSize).toBe(25)
     })
 
-    it('applies filters and resets page to 1', () => {
+    it('should apply filters and resets page to 1', () => {
         const { result } = setup({ filters: filterDefs })
         act(() => result.current.pagination.onPageChange(3))
         act(() => result.current.filtering.onFilter({ search: 'ada', active: true }))
@@ -36,7 +36,7 @@ describe('useTableController', () => {
         expect(result.current.state.pagination.pageNumber).toBe(1)
     })
 
-    it('changes sort and resets page to 1', () => {
+    it('should change sort and resets page to 1', () => {
         const { result } = setup()
         act(() => result.current.pagination.onPageChange(2))
         const direction: SortDirection = 'desc'
@@ -45,13 +45,13 @@ describe('useTableController', () => {
         expect(result.current.state.pagination.pageNumber).toBe(1)
     })
 
-    it('changes page without resetting to 1', () => {
+    it('should change page without resetting to 1', () => {
         const { result } = setup()
         act(() => result.current.pagination.onPageChange(4))
         expect(result.current.state.pagination.pageNumber).toBe(4)
     })
 
-    it('changes pageSize and resets page to 1', () => {
+    it('should change pageSize and resets page to 1', () => {
         const { result } = setup()
         act(() => result.current.pagination.onPageChange(3))
         act(() => result.current.pagination.onPageSizeChange(50))
@@ -59,7 +59,7 @@ describe('useTableController', () => {
         expect(result.current.state.pagination.pageNumber).toBe(1)
     })
 
-    it('exposes filter inputs derived from filter definitions', () => {
+    it('should expose filter inputs derived from filter definitions', () => {
         const { result } = setup({ filters: filterDefs })
         expect(result.current.filtering.inputs).toEqual([
             { key: 'search', label: 'Search', type: 'text' },
@@ -68,7 +68,7 @@ describe('useTableController', () => {
         ])
     })
 
-    it('calls toParams with the current state', () => {
+    it('should call toParams with the current state', () => {
         const { result, toParams } = setup()
         expect(toParams).toHaveBeenCalledWith(result.current.state)
     })
@@ -79,14 +79,14 @@ describe('useTableController', () => {
 // URL → state on mount, and URL → state on external changes.
 
 describe('useTableController — URL persistence round-trip', () => {
-    it('persists an applied filter to the URL', () => {
+    it('should persist an applied filter to the URL', () => {
         const { controllers, state } = setupWithUrl()
         act(() => controllers[0].current.filtering.onFilter({ search: 'ada' }))
         expect(state.search).toContain('search=ada')
         expect(controllers[0].current.state.filters.search).toBe('ada')
     })
 
-    it('persists sort and paging to the URL, omitting defaults', () => {
+    it('should persist sort and paging to the URL, omitting defaults', () => {
         const { controllers, state } = setupWithUrl()
         act(() => controllers[0].current.sorting.onSortChange('name', 'desc'))
         act(() => controllers[0].current.pagination.onPageChange(4))
@@ -98,14 +98,14 @@ describe('useTableController — URL persistence round-trip', () => {
         expect(controllers[0].current.state.pagination.pageNumber).toBe(4)
     })
 
-    it('hydrates state from the URL on mount', () => {
+    it('should hydrate state from the URL on mount', () => {
         const { controllers } = setupWithUrl('search=grace&sortBy=name&dir=asc&pageNumber=3')
         expect(controllers[0].current.state.filters.search).toBe('grace')
         expect(controllers[0].current.state.sorting).toEqual({ column: 'name', direction: 'asc' })
         expect(controllers[0].current.state.pagination.pageNumber).toBe(3)
     })
 
-    it('resets the table when the URL params are cleared externally', () => {
+    it('should reset the table when the URL params are cleared externally', () => {
         const { controllers, state } = setupWithUrl()
         act(() => controllers[0].current.filtering.onFilter({ search: 'ada' }))
         expect(state.search).toContain('search=ada')
@@ -115,7 +115,7 @@ describe('useTableController — URL persistence round-trip', () => {
         expect(controllers[0].current.state.filters.search).toBeUndefined()
     })
 
-    it('keeps namespaced tables on one page from colliding', () => {
+    it('should keep namespaced tables on one page from colliding', () => {
         const { controllers, state } = setupWithUrl('', 2)
         act(() => controllers[0].current.filtering.onFilter({ search: 'A' }))
         expect(state.search).toContain('table0.search=A')

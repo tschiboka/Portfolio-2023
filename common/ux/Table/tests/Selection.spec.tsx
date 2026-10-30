@@ -9,7 +9,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Selection', () => {
     describe('Multiple selection', () => {
-        it('renders checkbox for every row', () => {
+        it('should render checkbox for every row', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -26,7 +26,7 @@ describe('Table — Selection', () => {
             })
         })
 
-        it('renders "Select all rows" header checkbox', () => {
+        it('should render "Select all rows" header checkbox', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -40,7 +40,7 @@ describe('Table — Selection', () => {
             expect(Test.Table('test').Get.selectAll()).toBeInTheDocument()
         })
 
-        it('calls onChange with row id when a row checkbox is clicked', async () => {
+        it('should call onChange with row id when a row checkbox is clicked', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -56,7 +56,7 @@ describe('Table — Selection', () => {
             expect(onChange).toHaveBeenCalledWith(['Alpha'])
         })
 
-        it('calls onChange removing id when already selected row is deselected', async () => {
+        it('should call onChange removing id when already selected row is deselected', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -72,7 +72,7 @@ describe('Table — Selection', () => {
             expect(onChange).toHaveBeenCalledWith([])
         })
 
-        it('select-all selects all rows', async () => {
+        it('should select every row from the select-all box', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -88,7 +88,7 @@ describe('Table — Selection', () => {
             expect(onChange).toHaveBeenCalledWith(rows.map((r) => r.name))
         })
 
-        it('select-all deselects all when all are selected', async () => {
+        it('should deselect every row from the select-all box when all are selected', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -104,7 +104,7 @@ describe('Table — Selection', () => {
             expect(onChange).toHaveBeenCalledWith([])
         })
 
-        it('select-all checkbox is checked when all rows are selected', () => {
+        it('should check the select-all box when all rows are selected', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -118,7 +118,7 @@ describe('Table — Selection', () => {
             expect(Test.Table('test').Get.selectAll()).toBeChecked()
         })
 
-        it('select-all checkbox is unchecked when not all rows are selected', () => {
+        it('should leave the select-all box unchecked when not all rows are selected', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -132,7 +132,7 @@ describe('Table — Selection', () => {
             expect(Test.Table('test').Get.selectAll()).not.toBeChecked()
         })
 
-        it('row checkbox is checked when its id is in selectedRowIds', () => {
+        it('should check a row box whose id is in selectedRowIds', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -148,7 +148,7 @@ describe('Table — Selection', () => {
             expect(table.Get.selectRow(1)).not.toBeChecked()
         })
 
-        it('adds to existing selection when selecting another row', async () => {
+        it('should add to existing selection when selecting another row', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -166,7 +166,7 @@ describe('Table — Selection', () => {
     })
 
     describe('Single selection', () => {
-        it('does not render select-all checkbox', () => {
+        it('should not render select-all checkbox', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -183,7 +183,7 @@ describe('Table — Selection', () => {
             ).not.toBeInTheDocument()
         })
 
-        it('selects only the clicked row', async () => {
+        it('should select only the clicked row', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -200,7 +200,7 @@ describe('Table — Selection', () => {
             expect(onChange).toHaveBeenCalledWith(['Alpha'])
         })
 
-        it('deselects the row when clicking already selected', async () => {
+        it('should deselect the row when clicking already selected', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -219,7 +219,7 @@ describe('Table — Selection', () => {
     })
 
     describe('isRowSelectable', () => {
-        it('disables checkbox for non-selectable rows', () => {
+        it('should disable checkbox for non-selectable rows', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -235,7 +235,7 @@ describe('Table — Selection', () => {
             expect(Test.Table('test').Get.selectRow(2)).toBeDisabled()
         })
 
-        it('enables checkbox for selectable rows', () => {
+        it('should enable checkbox for selectable rows', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -252,7 +252,7 @@ describe('Table — Selection', () => {
             expect(table.Get.selectRow(3)).not.toBeDisabled()
         })
 
-        it('select-all only selects selectable rows', async () => {
+        it('should only select selectable rows from the select-all box', async () => {
             const onChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -273,7 +273,7 @@ describe('Table — Selection', () => {
             )
         })
 
-        it('select-all is disabled when no rows are selectable', () => {
+        it('should disable the select-all box when no rows are selectable', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -302,12 +302,12 @@ describe('Table — Selection', () => {
             onChange: vi.fn(),
         }
 
-        it('getSelectableRows returns all rows when no isRowSelectable', () => {
+        it('should return all rows from getSelectableRows when no isRowSelectable', () => {
             const result = getSelectableRows({ data, selection: baseSelection })
             expect(result).toEqual(data)
         })
 
-        it('getSelectableRows filters based on isRowSelectable', () => {
+        it('should filter by isRowSelectable in getSelectableRows', () => {
             const result = getSelectableRows({
                 data,
                 selection: {
@@ -319,7 +319,7 @@ describe('Table — Selection', () => {
             expect(result.map((r) => r.name)).toEqual(['A', 'C'])
         })
 
-        it('getSelectableIds returns ids of selectable rows', () => {
+        it('should return the ids of selectable rows from getSelectableIds', () => {
             const result = getSelectableIds({
                 data,
                 selection: {
@@ -330,7 +330,7 @@ describe('Table — Selection', () => {
             expect(result).toEqual(['A', 'C'])
         })
 
-        it('getAllSelected returns true when all selectable rows are selected', () => {
+        it('should return true from getAllSelected when every selectable row is selected', () => {
             const result = getAllSelected({
                 data,
                 selection: {
@@ -342,7 +342,7 @@ describe('Table — Selection', () => {
             expect(result).toBe(true)
         })
 
-        it('getAllSelected returns false when not all selectable rows are selected', () => {
+        it('should return false from getAllSelected when some rows are unselected', () => {
             const result = getAllSelected({
                 data,
                 selection: {
@@ -354,7 +354,7 @@ describe('Table — Selection', () => {
             expect(result).toBe(false)
         })
 
-        it('getAllSelected returns false when no rows are selectable', () => {
+        it('should return false from getAllSelected when no rows are selectable', () => {
             const result = getAllSelected({
                 data,
                 selection: {

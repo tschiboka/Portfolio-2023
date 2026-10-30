@@ -114,7 +114,7 @@ Feature/
 | `Feature.types.ts`                                   | NO                             | no behavior                                                                 |
 | `Feature.utils.ts`                                   | YES                            | pure util spec                                                              |
 
-## 2. Server
+## 2. Backend
 
 ### 2.1 File structure
 

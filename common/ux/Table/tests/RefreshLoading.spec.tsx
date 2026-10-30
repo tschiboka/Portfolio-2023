@@ -7,7 +7,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Refresh & Loading', () => {
     describe('Refresh button', () => {
-        it('renders refresh button when onRefresh is provided', () => {
+        it('should render refresh button when onRefresh is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -18,7 +18,7 @@ describe('Table — Refresh & Loading', () => {
             expect(Test.Table('T').Get.refreshButton()).toBeInTheDocument()
         })
 
-        it('does not render refresh button when onRefresh is omitted', () => {
+        it('should not render refresh button when onRefresh is omitted', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -27,7 +27,7 @@ describe('Table — Refresh & Loading', () => {
             expect(screen.queryByRole('button', { name: 'Refresh data' })).not.toBeInTheDocument()
         })
 
-        it('calls onRefresh when clicked', async () => {
+        it('should call onRefresh when clicked', async () => {
             const onRefresh = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -40,7 +40,7 @@ describe('Table — Refresh & Loading', () => {
             expect(onRefresh).toHaveBeenCalledTimes(1)
         })
 
-        it('refresh button contributes to header visibility', () => {
+        it('should count the refresh button towards header visibility', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -53,7 +53,7 @@ describe('Table — Refresh & Loading', () => {
     })
 
     describe('Loading skeleton', () => {
-        it('renders skeleton rows when isLoading is true', () => {
+        it('should render skeleton rows when isLoading is true', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [],
@@ -71,7 +71,7 @@ describe('Table — Refresh & Loading', () => {
             expect(table.Has.skeleton()).toBe(true)
         })
 
-        it('renders correct number of skeleton rows based on pageSize', () => {
+        it('should render correct number of skeleton rows based on pageSize', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [],
@@ -89,7 +89,7 @@ describe('Table — Refresh & Loading', () => {
             expect(skeletonRows).toHaveLength(3)
         })
 
-        it('renders correct number of skeleton columns', () => {
+        it('should render correct number of skeleton columns', () => {
             const cols = 4
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -113,7 +113,7 @@ describe('Table — Refresh & Loading', () => {
             expect(skeletonRow?.children).toHaveLength(cols)
         })
 
-        it('does not render skeleton when isLoading is false', () => {
+        it('should not render skeleton when isLoading is false', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -123,7 +123,7 @@ describe('Table — Refresh & Loading', () => {
             expect(document.querySelector('.table-skeleton-row')).not.toBeInTheDocument()
         })
 
-        it('does not render skeleton when isLoading is undefined', () => {
+        it('should not render skeleton when isLoading is undefined', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -132,7 +132,7 @@ describe('Table — Refresh & Loading', () => {
             expect(document.querySelector('.table-skeleton-row')).not.toBeInTheDocument()
         })
 
-        it('hides data rows while loading', () => {
+        it('should hide data rows while loading', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -144,7 +144,7 @@ describe('Table — Refresh & Loading', () => {
             expect(screen.queryByText('Beta')).not.toBeInTheDocument()
         })
 
-        it('defaults skeleton rows to 5 when no pagination provided', () => {
+        it('should default skeleton rows to 5 when no pagination provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [],
@@ -155,7 +155,7 @@ describe('Table — Refresh & Loading', () => {
             expect(skeletonRows).toHaveLength(5)
         })
 
-        it('skeleton rows are aria-hidden', () => {
+        it('should mark skeleton rows aria-hidden', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [],
@@ -168,7 +168,7 @@ describe('Table — Refresh & Loading', () => {
     })
 
     describe('Refresh + Loading interaction', () => {
-        it('can refresh while loading', async () => {
+        it('should refresh while loading', async () => {
             const onRefresh = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',

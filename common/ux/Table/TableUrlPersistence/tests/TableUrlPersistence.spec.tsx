@@ -11,29 +11,29 @@ const { setup } = TableUrlPersistenceTestUtils
 
 describe('useTableUrlPersistence', () => {
     describe('enabled', () => {
-        it('is off inside a router when config is omitted (opt-in)', () => {
+        it('should be off inside a router when config is omitted (opt-in)', () => {
             const { result } = setup({ config: undefined })
             expect(result.current.enabled).toBe(false)
         })
 
-        it('is on inside a router when config is declared (even empty)', () => {
+        it('should be on inside a router when config is declared (even empty)', () => {
             const { result } = setup({ config: {} })
             expect(result.current.enabled).toBe(true)
         })
 
-        it('is true inside a router when config.enabled is true', () => {
+        it('should be true inside a router when config.enabled is true', () => {
             const { result } = setup({ config: { enabled: true } })
             expect(result.current.enabled).toBe(true)
         })
 
-        it('is false when config.enabled is false', () => {
+        it('should be false when config.enabled is false', () => {
             const { result } = setup({ config: { enabled: false } })
             expect(result.current.enabled).toBe(false)
         })
     })
 
     describe('outside a router', () => {
-        it('is disabled, exposes null state, and persist is a no-op', () => {
+        it('should be disabled, exposes null state, and persist is a no-op', () => {
             const { result } = renderHook(() =>
                 TableUrlPersistenceHooks.useUrlState<Filters>({
                     filters: filterDefs,
@@ -56,7 +56,7 @@ describe('useTableUrlPersistence', () => {
     })
 
     describe('hydration (state from URL)', () => {
-        it('reads filters, sort, and paging from the URL', () => {
+        it('should read filters, sort, and paging from the URL', () => {
             const url =
                 '/?search=ada&min=5&active=true&sortBy=name&dir=desc&pageNumber=3&pageSize=25'
             const { result } = setup({ initialEntries: [url], config: {} })
@@ -67,7 +67,7 @@ describe('useTableUrlPersistence', () => {
             })
         })
 
-        it('falls back to defaults for missing sort and paging params', () => {
+        it('should fall back to defaults for missing sort and paging params', () => {
             const { result } = setup({ initialEntries: ['/'], config: {} })
             expect(result.current.state).toEqual({
                 filters: makeFilterState(),
@@ -76,7 +76,7 @@ describe('useTableUrlPersistence', () => {
             })
         })
 
-        it('falls back to default paging for non-numeric page/pageSize', () => {
+        it('should fall back to default paging for non-numeric page/pageSize', () => {
             const { result } = setup({
                 initialEntries: ['/?pageNumber=abc&pageSize=xyz'],
                 config: {},
@@ -84,17 +84,17 @@ describe('useTableUrlPersistence', () => {
             expect(result.current.state?.pagination).toEqual(defaultPaging)
         })
 
-        it('decodes filters through the per-type codec', () => {
+        it('should decode filters through the per-type codec', () => {
             const { result } = setup({ initialEntries: ['/?active=true'], config: {} })
             expect(result.current.state?.filters.active).toBe(true)
         })
 
-        it('omits empty/missing filters', () => {
+        it('should omit empty/missing filters', () => {
             const { result } = setup({ initialEntries: ['/?search='] })
             expect(result.current.state?.filters.search).toBeUndefined()
         })
 
-        it('reads namespaced params when a namespace is configured', () => {
+        it('should read namespaced params when a namespace is configured', () => {
             const url =
                 '/?ns.search=ada&ns.pageNumber=2&ns.sortBy=created&ns.dir=asc&ns.pageSize=50'
             const { result } = setup({ initialEntries: [url], config: { namespace: 'ns' } })
@@ -105,7 +105,7 @@ describe('useTableUrlPersistence', () => {
             })
         })
 
-        it('returns empty filters when no filter definitions are given', () => {
+        it('should return empty filters when no filter definitions are given', () => {
             const { result } = setup({
                 filters: undefined,
                 initialEntries: ['/?sortBy=name&pageNumber=4'],
@@ -118,7 +118,7 @@ describe('useTableUrlPersistence', () => {
     })
 
     describe('persist', () => {
-        it('writes filters, sort, and paging to the URL', () => {
+        it('should write filters, sort, and paging to the URL', () => {
             const { result, search } = setup({})
             act(() =>
                 result.current.persist(
@@ -138,7 +138,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).toContain('pageSize=25')
         })
 
-        it('omits empty filter values and sortBy when there is no column', () => {
+        it('should omit empty filter values and sortBy when there is no column', () => {
             const { result, search } = setup({})
             act(() =>
                 result.current.persist(
@@ -154,7 +154,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).not.toContain('sortBy=')
         })
 
-        it('removes previously-set keys when a value resets to empty', () => {
+        it('should remove previously-set keys when a value resets to empty', () => {
             const { result, search } = setup({ initialEntries: ['/?search=ada&min=5'] })
             act(() =>
                 result.current.persist(
@@ -167,7 +167,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).not.toContain('min=')
         })
 
-        it('removes sortBy when sorting column resets to empty', () => {
+        it('should remove sortBy when sorting column resets to empty', () => {
             const { result, search } = setup({ initialEntries: ['/?sortBy=name'] })
             act(() =>
                 result.current.persist(
@@ -179,7 +179,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).not.toContain('sortBy=')
         })
 
-        it('merges unrelated existing params instead of dropping them', () => {
+        it('should merge unrelated existing params instead of dropping them', () => {
             const { result, search } = setup({ initialEntries: ['/?tab=recent'] })
             act(() =>
                 result.current.persist(
@@ -194,7 +194,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).toContain('pageNumber=2')
         })
 
-        it('applies a namespace to written keys and omits defaults', () => {
+        it('should apply a namespace to written keys and omits defaults', () => {
             const { result, search } = setup({ config: { namespace: 'ns' } })
             act(() =>
                 result.current.persist(
@@ -211,7 +211,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).not.toContain('ns.pageSize=')
         })
 
-        it('omits values equal to the defaults and keeps only differences', () => {
+        it('should omit values equal to the defaults and keeps only differences', () => {
             const { result, search } = setup({
                 config: {},
                 sort: defaultSort,
@@ -239,7 +239,7 @@ describe('useTableUrlPersistence', () => {
             expect(search.current).not.toContain('pageSize=')
         })
 
-        it('replaces the current entry when replace is the default', () => {
+        it('should replace the current entry when replace is the default', () => {
             const { result, search } = setup({})
             act(() =>
                 result.current.persist(

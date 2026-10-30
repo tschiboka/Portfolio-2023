@@ -60,7 +60,7 @@ describe('Table — Combined Features', () => {
         },
     ]
 
-    it('renders table with title, description, legend, data, actions, selection, sorting, filtering, download, and pagination', () => {
+    it('should render table with title, description, legend, data, actions, selection, sorting, filtering, download, and pagination', () => {
         Test.Table.Set.mock<FullRow>({
             id: 'full-table',
             ariaLabel: 'Full feature table',
@@ -148,7 +148,7 @@ describe('Table — Combined Features', () => {
         expect(table.Get.expandButtons()).toHaveLength(fullData.length)
     })
 
-    it('selection works alongside actions — selecting rows does not affect action menus', async () => {
+    it('should leave the action menus unaffected when rows are selected', async () => {
         const onChange = vi.fn()
         const onEdit = vi.fn()
 
@@ -176,7 +176,7 @@ describe('Table — Combined Features', () => {
         expect(onEdit).toHaveBeenCalledWith(expect.objectContaining({ row: fullData[1] }))
     })
 
-    it('sorting and selection preserve selected state', () => {
+    it('should preserve the selected state through sorting', () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: fullData,
@@ -202,7 +202,7 @@ describe('Table — Combined Features', () => {
         expect(table.Get.selectRow(2)).not.toBeChecked()
     })
 
-    it('filter action hides actions only for matching rows in combined table', async () => {
+    it('should hide the action only for matching rows when the filter applies', async () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: fullData.slice(0, 2),
@@ -226,7 +226,7 @@ describe('Table — Combined Features', () => {
         expect(table.Get.menuItem('Edit')).toBeInTheDocument()
     })
 
-    it('isActionDisabled disables entire menu when column condition is met', () => {
+    it('should disable every menu when the isActionDisabled condition is met', () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: [fullData[2]], // Charlie, inactive
@@ -242,7 +242,7 @@ describe('Table — Combined Features', () => {
         expect(Test.Table('test').Get.actionButton()).toBeDisabled()
     })
 
-    it('expanded row shows hidden column with defaultValue when value is empty', async () => {
+    it('should show the hidden column in the expanded row using defaultValue', async () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: [fullData[1]], // Bob, note is empty
@@ -262,7 +262,7 @@ describe('Table — Combined Features', () => {
         expect(within(expandedRow).getByText('N/A')).toBeInTheDocument()
     })
 
-    it('selection with isRowSelectable and actions work together', async () => {
+    it('should honour isRowSelectable alongside actions', async () => {
         const onChange = vi.fn()
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
@@ -287,7 +287,7 @@ describe('Table — Combined Features', () => {
         expect(table.Get.menuItem('Edit')).toBeInTheDocument()
     })
 
-    it('row variant + column variant + cell variant: column function variant wins', () => {
+    it('should let the column function variant win over the row and cell variants', () => {
         const { container } = Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: [fullData[0]],
@@ -308,7 +308,7 @@ describe('Table — Combined Features', () => {
         expect(cells[1]).toHaveClass('variant-danger')
     })
 
-    it('download receives correct data even when pagination is used', async () => {
+    it('should give download the current data while paging', async () => {
         const onDownload = vi.fn()
         const pageData = fullData.slice(0, 3)
         Test.Table.Set.mock<FullRow>({
@@ -333,7 +333,7 @@ describe('Table — Combined Features', () => {
         expect(onDownload).toHaveBeenCalledWith(pageData)
     })
 
-    it('combined: sorting headers + selection header + expand + action column all render correctly', () => {
+    it('should render sorting, selection, expand and action columns together', () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: fullData.slice(0, 2),
@@ -362,7 +362,7 @@ describe('Table — Combined Features', () => {
         expect(headers[headers.length - 1]).toHaveAttribute('aria-label', 'Actions')
     })
 
-    it('filter panel + pagination + sorting all visible simultaneously', async () => {
+    it('should show the filter panel, pagination and sorting at once', async () => {
         Test.Table.Set.mock<FullRow>({
             ariaLabel: 'test',
             data: fullData,
@@ -396,7 +396,7 @@ describe('Table — Combined Features', () => {
         expect(table.Get.pagination()).toBeInTheDocument()
     })
 
-    it('empty data with all features shows empty state and still renders header/pagination', () => {
+    it('should keep the header and pagination while showing the empty state', () => {
         Test.Table.Set.mock<FullRow>({
             id: 'empty-table',
             ariaLabel: 'test',

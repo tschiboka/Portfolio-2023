@@ -15,7 +15,7 @@ describe('Numbers.truncateTo', () => {
         [-0.001, 2, -0],
         [999.9999, 2, 999.99],
         [1.005, 2, 1],
-    ])('truncateTo(%f, %i) should return %f', (value, places, expected) => {
+    ])('should truncate %f to %i places, giving %f', (value, places, expected) => {
         expect(Numbers.truncateTo(value, places)).toBe(expected)
     })
 })

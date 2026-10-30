@@ -12,11 +12,11 @@ const makeState = (overrides: Partial<TableState<Filters>> = {}): TableState<Fil
 })
 
 describe('statesEqual', () => {
-    it('is true for identical states', () => {
+    it('should be true for identical states', () => {
         expect(TableUrlPersistenceUtils.statesEqual(makeState(), makeState())).toBe(true)
     })
 
-    it('is false when pagination differs', () => {
+    it('should be false when pagination differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 makeState(),
@@ -25,7 +25,7 @@ describe('statesEqual', () => {
         ).toBe(false)
     })
 
-    it('is false when sorting differs', () => {
+    it('should be false when sorting differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 makeState(),
@@ -34,7 +34,7 @@ describe('statesEqual', () => {
         ).toBe(false)
     })
 
-    it('is false when a filter value differs', () => {
+    it('should be false when a filter value differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 makeState(),
@@ -43,7 +43,7 @@ describe('statesEqual', () => {
         ).toBe(false)
     })
 
-    it('is false when one state has an extra filter key', () => {
+    it('should be false when one state has an extra filter key', () => {
         const a = makeState()
         const b = makeState({
             filters: { search: 'ada', min: 5, active: true, extra: 1 } as Filters,
@@ -51,7 +51,7 @@ describe('statesEqual', () => {
         expect(TableUrlPersistenceUtils.statesEqual(a, b)).toBe(false)
     })
 
-    it('is true when both states have the same undefined filter values', () => {
+    it('should be true when both states have the same undefined filter values', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 makeState({ filters: { search: undefined, min: undefined, active: false } }),

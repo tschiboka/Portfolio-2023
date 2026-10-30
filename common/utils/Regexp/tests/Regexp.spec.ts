@@ -4,7 +4,7 @@ describe('Regexp.ObjectId', () => {
     /** Valid 24-char lowercase hex ObjectId string. */
     const HEX = '64b000000000000000000000'
 
-    it('matches exactly 24 lowercase hex characters', () => {
+    it('should match exactly 24 lowercase hex characters', () => {
         expect(Regexp.ObjectId.test(HEX)).toBe(true)
     })
 
@@ -13,21 +13,21 @@ describe('Regexp.ObjectId', () => {
             ['23 chars', '64b00000000000000000000'],
             ['25 chars', `${HEX}0`],
             ['empty', ''],
-        ])('rejects %s', (_label, value) => {
+        ])('should reject %s', (_label, value) => {
             expect(Regexp.ObjectId.test(value)).toBe(false)
         })
     })
 
     describe('case sensitivity (lowercase-only, no i flag)', () => {
-        it('matches 0-9', () => {
+        it('should match 0-9', () => {
             expect(Regexp.ObjectId.test('000000000000000000000000')).toBe(true)
         })
 
-        it('matches a-f', () => {
+        it('should match a-f', () => {
             expect(Regexp.ObjectId.test('ffffffffffffffffffffffff')).toBe(true)
         })
 
-        it('rejects uppercase A-F', () => {
+        it('should reject uppercase A-F', () => {
             expect(Regexp.ObjectId.test('64B000000000000000000000')).toBe(false)
             expect(Regexp.ObjectId.test('64b0000000000000000000FF')).toBe(false)
             expect(Regexp.ObjectId.test('64b0000000000000000000A0')).toBe(false)
@@ -35,12 +35,12 @@ describe('Regexp.ObjectId', () => {
     })
 
     describe('hexadecimal alphabet', () => {
-        it.each(['g', 'z', 'Z'])('rejects a %s in the 24th position', (char) => {
+        it.each(['g', 'z', 'Z'])('should reject a %s in the 24th position', (char) => {
             expect(Regexp.ObjectId.test(`${HEX.slice(0, 23)}${char}`)).toBe(false)
         })
 
         it.each(['_', '-', '/', '\\', '.', ' ', ':'])(
-            'rejects punctuation %p in the 24th position',
+            'should reject punctuation %p in the 24th position',
             (char) => {
                 expect(Regexp.ObjectId.test(`${HEX.slice(0, 23)}${char}`)).toBe(false)
             },
@@ -56,58 +56,58 @@ describe('Regexp.ObjectId', () => {
             ['two concatenated valid ObjectIds', `${HEX}${HEX}`],
             ['a newline before a valid ObjectId', `\n${HEX}`],
             ['a newline after a valid ObjectId', `${HEX}\n`],
-        ])('rejects %s', (_label, value) => {
+        ])('should reject %s', (_label, value) => {
             expect(Regexp.ObjectId.test(value)).toBe(false)
         })
     })
 
-    it('rejects whitespace embedded among otherwise-valid hex', () => {
+    it('should reject whitespace embedded among otherwise-valid hex', () => {
         expect(Regexp.ObjectId.test('64b0000000000000000 00000')).toBe(false)
         expect(Regexp.ObjectId.test('64b0000000000000000\t00000')).toBe(false)
     })
 
-    it('rejects a 0x prefix', () => {
+    it('should reject a 0x prefix', () => {
         expect(Regexp.ObjectId.test(`0x${HEX}`)).toBe(false)
     })
 
-    it('rejects hyphenated and UUID-shaped strings', () => {
+    it('should reject hyphenated and UUID-shaped strings', () => {
         expect(Regexp.ObjectId.test('64b00000-0000-4000-8000-000000000000')).toBe(false)
         expect(Regexp.ObjectId.test('64b00000-0000-0000-0000-000000000000')).toBe(false)
     })
 })
 
 describe('Regexp.exactWord', () => {
-    it('matches the exact word case-insensitively', () => {
+    it('should match the exact word case-insensitively', () => {
         expect(Regexp.exactWord('push').test('push')).toBe(true)
         expect(Regexp.exactWord('push').test('PUSH')).toBe(true)
         expect(Regexp.exactWord('push').test('Push')).toBe(true)
     })
 
-    it('anchors to the whole string (no substring match)', () => {
+    it('should anchor to the whole string (no substring match)', () => {
         expect(Regexp.exactWord('push').test('push-up')).toBe(false)
         expect(Regexp.exactWord('push').test('xpush')).toBe(false)
         expect(Regexp.exactWord('push').test('push ')).toBe(false)
         expect(Regexp.exactWord('push').test(' push')).toBe(false)
     })
 
-    it('handles regex-special characters as literals within the word', () => {
+    it('should handle regex-special characters as literals within the word', () => {
         expect(Regexp.exactWord('a.b').test('a.b')).toBe(true)
         expect(Regexp.exactWord('a.b').test('axb')).toBe(false)
     })
 })
 
 describe('Regexp.escape', () => {
-    it('escapes regex-special characters', () => {
+    it('should escape regex-special characters', () => {
         expect(Regexp.escape('a.b')).toBe('a\\.b')
         expect(Regexp.escape('x*y')).toBe('x\\*y')
     })
 
-    it('leaves plain alphanumeric strings unchanged', () => {
+    it('should leave plain alphanumeric strings unchanged', () => {
         expect(Regexp.escape('hello')).toBe('hello')
         expect(Regexp.escape('push12')).toBe('push12')
     })
 
-    it('escapes every character in the regex metacharacter set', () => {
+    it('should escape every character in the regex metacharacter set', () => {
         expect(Regexp.escape('.+*?^${}()[]|\\')).toBe(String.raw`\.\+\*\?\^\$\{\}\(\)\[\]\|\\`)
     })
 })

@@ -6,7 +6,7 @@ const { rows } = TableMocks
 
 describe('Table — Variants', () => {
     describe('Static column variant', () => {
-        it('applies variant class to cells in that column', () => {
+        it('should apply variant class to cells in that column', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -20,7 +20,7 @@ describe('Table — Variants', () => {
         })
 
         it.each(['primary', 'secondary', 'danger', 'disabled'] as const)(
-            'applies variant-%s class',
+            'should apply the variant-%s class',
             (variant) => {
                 const { container } = Test.Table.Set.mock<Row>({
                     ariaLabel: 'test',
@@ -34,7 +34,7 @@ describe('Table — Variants', () => {
     })
 
     describe('Function column variant', () => {
-        it('applies variant class based on cell value', () => {
+        it('should apply variant class based on cell value', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [
@@ -54,7 +54,7 @@ describe('Table — Variants', () => {
             expect(cells[1]).toHaveClass('variant-danger')
         })
 
-        it('applies no variant class when function returns undefined', () => {
+        it('should apply no variant class when function returns undefined', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -72,7 +72,7 @@ describe('Table — Variants', () => {
     })
 
     describe('Row variant', () => {
-        it('applies row variant to all cells in a row', () => {
+        it('should apply row variant to all cells in a row', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'A', value: '1', status: 'inactive', note: '' }],
@@ -88,7 +88,7 @@ describe('Table — Variants', () => {
             })
         })
 
-        it('row variant does not override column variant (column variant wins)', () => {
+        it('should let the column variant win over the row variant', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'A', value: '1', status: 'inactive', note: '' }],
@@ -106,7 +106,7 @@ describe('Table — Variants', () => {
             expect(cells[1]).toHaveClass('variant-danger')
         })
 
-        it('function column variant takes priority over row variant', () => {
+        it('should give the column function variant priority over the row variant', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'A', value: '1', status: 'x', note: '' }],
@@ -123,7 +123,7 @@ describe('Table — Variants', () => {
             expect(cell).toHaveClass('variant-secondary')
         })
 
-        it('row variant undefined does not add variant class', () => {
+        it('should add no variant class when the row variant is undefined', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),

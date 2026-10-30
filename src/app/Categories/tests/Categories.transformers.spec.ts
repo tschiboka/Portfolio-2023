@@ -13,7 +13,7 @@ const categoryStub = (overrides: Partial<GetCategoryResponse> = {}): GetCategory
     }) as GetCategoryResponse
 
 describe('CategoriesTransformers.fromApi', () => {
-    it('maps each category to a SearchInputOption', () => {
+    it('should map each category to a SearchInputOption', () => {
         const result = CategoriesTransformers.fromApi([categoryStub()])
         expect(result).toHaveLength(1)
         expect(result[0]).toMatchObject({
@@ -24,7 +24,7 @@ describe('CategoriesTransformers.fromApi', () => {
         expect(result[0].icon).toBeDefined()
     })
 
-    it('handles multiple categories', () => {
+    it('should handle multiple categories', () => {
         const result = CategoriesTransformers.fromApi([
             categoryStub({ _id: 'a', name: 'Work' }),
             categoryStub({ _id: 'b', name: 'Personal', icon: 'heart', color: 'red' }),
@@ -33,7 +33,7 @@ describe('CategoriesTransformers.fromApi', () => {
         expect(result[1]).toMatchObject({ label: 'Personal', value: 'b', iconColor: 'red' })
     })
 
-    it('returns an empty array for no categories', () => {
+    it('should return an empty array for no categories', () => {
         expect(CategoriesTransformers.fromApi([])).toEqual([])
     })
 })

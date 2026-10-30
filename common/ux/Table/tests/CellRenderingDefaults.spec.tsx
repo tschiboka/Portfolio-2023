@@ -8,7 +8,7 @@ const { getCellContent } = TableUtils
 
 describe('Table — Cell Rendering & Defaults', () => {
     describe('Default cell rendering', () => {
-        it('renders raw value when no cell function or defaultValue', () => {
+        it('should render raw value when no cell function or defaultValue', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: 'Foo', value: '42', status: 'ok', note: 'hi' }],
@@ -17,7 +17,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(screen.getByText('Foo')).toBeInTheDocument()
         })
 
-        it('renders dash "-" for empty string when no defaultValue', () => {
+        it('should render dash "-" for empty string when no defaultValue', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: '', value: '', status: '', note: '' }],
@@ -26,7 +26,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(screen.getByText('-')).toBeInTheDocument()
         })
 
-        it('renders custom defaultValue for empty cells', () => {
+        it('should render custom defaultValue for empty cells', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: '', value: '', status: '', note: '' }],
@@ -35,7 +35,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(screen.getByText('N/A')).toBeInTheDocument()
         })
 
-        it('renders custom defaultValue as ReactNode', () => {
+        it('should render custom defaultValue as ReactNode', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: '', value: '', status: '', note: '' }],
@@ -52,7 +52,7 @@ describe('Table — Cell Rendering & Defaults', () => {
     })
 
     describe('Custom cell renderer', () => {
-        it('calls cell function with value and meta', () => {
+        it('should call cell function with value and meta', () => {
             const cellFn = vi.fn((val) => <strong>{String(val).toUpperCase()}</strong>)
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -63,7 +63,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(screen.getByText('ALPHA')).toBeInTheDocument()
         })
 
-        it('cell function receives correct meta fields', () => {
+        it('should give the cell function the correct meta fields', () => {
             const cellFn = vi.fn((_val, meta: CellMeta<Row>) => <span>{meta.index}</span>)
             const data = [{ name: 'A', value: '1', status: 'x', note: '' }]
             Test.Table.Set.mock<Row>({
@@ -78,7 +78,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(meta.cell).toBe('A')
         })
 
-        it('cell function receives context when provided', () => {
+        it('should give the cell function the context when provided', () => {
             const cellFn = vi.fn((_val, meta: CellMeta<Row, string>) => (
                 <span>{String(meta.context)}</span>
             ))
@@ -91,7 +91,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(cellFn.mock.calls[0][1].context).toBe('my-context')
         })
 
-        it('custom cell overrides defaultValue even for empty cells', () => {
+        it('should let a custom cell override defaultValue for empty cells', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [{ name: '', value: '', status: '', note: '' }],
@@ -110,7 +110,7 @@ describe('Table — Cell Rendering & Defaults', () => {
     })
 
     describe('getCellContent utility', () => {
-        it('returns raw value for non-empty cells without cell function', () => {
+        it('should return raw value for non-empty cells without cell function', () => {
             const result = getCellContent({
                 col: { header: 'Name', accessor: 'name' },
                 row: { name: 'Test', value: '1', status: 'ok', note: '' },
@@ -120,7 +120,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(result).toBe('Test')
         })
 
-        it('returns dash for empty string without defaultValue', () => {
+        it('should return dash for empty string without defaultValue', () => {
             const result = getCellContent({
                 col: { header: 'Name', accessor: 'name' },
                 row: { name: '', value: '1', status: 'ok', note: '' },
@@ -130,7 +130,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(result).toBe('-')
         })
 
-        it('returns defaultValue for empty string', () => {
+        it('should return defaultValue for empty string', () => {
             const result = getCellContent({
                 col: { header: 'Name', accessor: 'name', defaultValue: 'N/A' },
                 row: { name: '', value: '1', status: 'ok', note: '' },
@@ -140,7 +140,7 @@ describe('Table — Cell Rendering & Defaults', () => {
             expect(result).toBe('N/A')
         })
 
-        it('uses cell function when provided', () => {
+        it('should use cell function when provided', () => {
             const result = getCellContent({
                 col: { header: 'Name', accessor: 'name', cell: (v) => `[${v}]` },
                 row: { name: 'X', value: '1', status: 'ok', note: '' },

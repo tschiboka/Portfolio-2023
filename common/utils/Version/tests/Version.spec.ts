@@ -100,7 +100,7 @@ describe('useVersionCheck', () => {
     })
 
     describe('should not update state for invalid responses', () => {
-        it('when fetch is not ok', async () => {
+        it('should handle a fetch response that is not ok', async () => {
             mockFetch(mockVersion(), false)
             const { result } = renderHook(() => useVersionCheck())
 
@@ -114,7 +114,7 @@ describe('useVersionCheck', () => {
             ['empty sha', ''],
             ['short sha', 'abc123'],
             ['invalid chars', 'z'.repeat(40)],
-        ])('when sha is %s', async (_label: string, sha: string) => {
+        ])('should not update state when sha is %s', async (_label: string, sha: string) => {
             mockFetch(mockVersion({ sha }))
             const { result } = renderHook(() => useVersionCheck())
 

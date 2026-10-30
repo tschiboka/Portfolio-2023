@@ -6,7 +6,7 @@ describe('Booleans.Optional.toString', () => {
     it.each<[boolean, Optional<string>]>([
         [true, 'true'],
         [false, undefined],
-    ])('toString(%j) should return %j', (value, expected) => {
+    ])('should return %j for toString(%j)', (value, expected) => {
         expect(toString(value)).toBe(expected)
     })
 })

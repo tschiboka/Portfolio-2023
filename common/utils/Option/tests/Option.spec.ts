@@ -3,20 +3,20 @@ import { Option } from '..'
 import type { Option as OptionT } from '..'
 
 describe('Option type', () => {
-    it('requires value and label', () => {
+    it('should require value and label', () => {
         // An `Option<string>` is assignable from { value, label }.
         const option: OptionT<string> = { value: 'x', label: 'X' }
         expect(option).toEqual({ value: 'x', label: 'X' })
     })
 
-    it('supports non-string values via the generic', () => {
+    it('should support non-string values via the generic', () => {
         const numberOption: OptionT<number> = { value: 1, label: 'One' }
         const boolOption: OptionT<boolean> = { value: true, label: 'True' }
         expect(numberOption).toEqual({ value: 1, label: 'One' })
         expect(boolOption).toEqual({ value: true, label: 'True' })
     })
 
-    it('accepts options with extra properties via structural typing', () => {
+    it('should accept options with extra properties via structural typing', () => {
         const withExtras = { value: 'x', label: 'X', icon: null, iconColor: 'red' }
         const option: OptionT<string> = withExtras
         expect(option.value).toBe('x')
@@ -24,15 +24,15 @@ describe('Option type', () => {
 })
 
 describe('Option.getValues — runtime invariants', () => {
-    it('returns an empty array for empty options', () => {
+    it('should return an empty array for empty options', () => {
         expect(Option.getValues([])).toEqual([])
     })
 
-    it('returns a single value for a single option', () => {
+    it('should return a single value for a single option', () => {
         expect(Option.getValues([{ value: 'a', label: 'A' }])).toEqual(['a'])
     })
 
-    it('preserves input order', () => {
+    it('should preserve input order', () => {
         expect(
             Option.getValues([
                 { value: 'c', label: 'C' },
@@ -41,7 +41,7 @@ describe('Option.getValues — runtime invariants', () => {
         ).toEqual(['c', 'a'])
     })
 
-    it('does not sort values', () => {
+    it('should not sort values', () => {
         expect(
             Option.getValues([
                 { value: 3, label: 'C' },
@@ -50,7 +50,7 @@ describe('Option.getValues — runtime invariants', () => {
         ).toEqual([3, 1])
     })
 
-    it('preserves duplicate values and their positions', () => {
+    it('should preserve duplicate values and their positions', () => {
         const result = Option.getValues([
             { value: 'a', label: 'A1' },
             { value: 'b', label: 'B' },
@@ -59,20 +59,20 @@ describe('Option.getValues — runtime invariants', () => {
         expect(result).toEqual(['a', 'b', 'a'])
     })
 
-    it('ignores labels entirely — same value with different labels yields the same output', () => {
+    it('should ignore labels entirely — same value with different labels yields the same output', () => {
         const a = Option.getValues([{ value: 'x', label: 'One' }])
         const b = Option.getValues([{ value: 'x', label: 'Two' }])
         expect(a).toEqual(b)
     })
 
-    it('preserves primitive values unchanged, including falsy ones', () => {
+    it('should preserve primitive values unchanged, including falsy ones', () => {
         expect(Option.getValues([{ value: 0, label: 'zero' }])).toEqual([0])
         expect(Option.getValues([{ value: '', label: 'empty' }])).toEqual([''])
         expect(Option.getValues([{ value: false, label: 'false' }])).toEqual([false])
         expect(Option.getValues([{ value: NaN, label: 'nan' }])).toEqual([NaN])
     })
 
-    it('preserves object/array references (shallow extraction, no cloning)', () => {
+    it('should preserve object/array references (shallow extraction, no cloning)', () => {
         const obj = { id: 1 }
         const arr = [1, 2]
         const options: OptionT<{ id: number } | number[]>[] = [
@@ -84,7 +84,7 @@ describe('Option.getValues — runtime invariants', () => {
         expect(output[1]).toBe(arr)
     })
 
-    it('does not mutate the input options array', () => {
+    it('should not mutate the input options array', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -94,7 +94,7 @@ describe('Option.getValues — runtime invariants', () => {
         expect(options).toEqual(snapshot)
     })
 
-    it('returns a new array, independent of the input collection', () => {
+    it('should return a new array, independent of the input collection', () => {
         const options = [{ value: 'a', label: 'A' }]
         const output = Option.getValues(options)
         expect(output).not.toBe(options)
@@ -102,7 +102,7 @@ describe('Option.getValues — runtime invariants', () => {
         expect(options[0].value).toBe('a')
     })
 
-    it('reflects a replaced option value on a subsequent call', () => {
+    it('should reflect a replaced option value on a subsequent call', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         const first = Option.getValues(options)
         expect(first).toEqual(['a'])
@@ -110,14 +110,14 @@ describe('Option.getValues — runtime invariants', () => {
         expect(Option.getValues(options)).toEqual(['b'])
     })
 
-    it('does not use option.label', () => {
+    it('should not use option.label', () => {
         const output = Option.getValues([{ value: 'a', label: 'anything' }])
         expect(output).toEqual(['a'])
     })
 })
 
 describe('Option.getLabels', () => {
-    it('returns the label of each option in order', () => {
+    it('should return the label of each option in order', () => {
         expect(
             Option.getLabels([
                 { value: 'a', label: 'A' },
@@ -126,11 +126,11 @@ describe('Option.getLabels', () => {
         ).toEqual(['A', 'B'])
     })
 
-    it('returns an empty array for empty options', () => {
+    it('should return an empty array for empty options', () => {
         expect(Option.getLabels([])).toEqual([])
     })
 
-    it('preserves duplicate labels', () => {
+    it('should preserve duplicate labels', () => {
         expect(
             Option.getLabels([
                 { value: 'a', label: 'X' },
@@ -139,7 +139,7 @@ describe('Option.getLabels', () => {
         ).toEqual(['X', 'X'])
     })
 
-    it('preserves input order and does not sort', () => {
+    it('should preserve input order and does not sort', () => {
         expect(
             Option.getLabels([
                 { value: 'c', label: 'Zebra' },
@@ -148,7 +148,7 @@ describe('Option.getLabels', () => {
         ).toEqual(['Zebra', 'Alpha'])
     })
 
-    it('returns a new, independent array', () => {
+    it('should return a new, independent array', () => {
         const options = [{ value: 'a', label: 'A' }]
         const output = Option.getLabels(options)
         expect(output).not.toBe(options)
@@ -156,7 +156,7 @@ describe('Option.getLabels', () => {
         expect(options[0].label).toBe('A')
     })
 
-    it('does not depend on values (incl. non-string values)', () => {
+    it('should not depend on values (incl. non-string values)', () => {
         expect(
             Option.getLabels([
                 { value: 1, label: 'One' },
@@ -167,7 +167,7 @@ describe('Option.getLabels', () => {
 })
 
 describe('Option.getLabelByValue', () => {
-    it('returns the label for a matching value', () => {
+    it('should return the label for a matching value', () => {
         expect(
             Option.getLabelByValue(
                 [
@@ -179,15 +179,15 @@ describe('Option.getLabelByValue', () => {
         ).toBe('B')
     })
 
-    it('returns undefined when no option matches the value', () => {
+    it('should return undefined when no option matches the value', () => {
         expect(Option.getLabelByValue([{ value: 'a', label: 'A' }], 'z')).toBeUndefined()
     })
 
-    it('returns undefined for an empty collection', () => {
+    it('should return undefined for an empty collection', () => {
         expect(Option.getLabelByValue([], 'a')).toBeUndefined()
     })
 
-    it('supports non-string values', () => {
+    it('should support non-string values', () => {
         expect(
             Option.getLabelByValue(
                 [
@@ -199,7 +199,7 @@ describe('Option.getLabelByValue', () => {
         ).toBe('Two')
     })
 
-    it('supports object values by reference equality', () => {
+    it('should support object values by reference equality', () => {
         const target = { id: 2 }
         const options = [
             { value: { id: 1 }, label: 'First' },
@@ -210,7 +210,7 @@ describe('Option.getLabelByValue', () => {
         expect(Option.getLabelByValue(options, { id: 2 })).toBeUndefined()
     })
 
-    it('matches the first option when values are duplicated', () => {
+    it('should match the first option when values are duplicated', () => {
         expect(
             Option.getLabelByValue(
                 [
@@ -222,16 +222,16 @@ describe('Option.getLabelByValue', () => {
         ).toBe('First')
     })
 
-    it("returns an empty string label as '', not undefined (empty label is a valid result)", () => {
+    it("should return an empty string label as '', not undefined (empty label is a valid result)", () => {
         expect(Option.getLabelByValue([{ value: 'a', label: '' }], 'a')).toBe('')
     })
 
-    it('uses strict equality: NaN never matches, -0 matches 0', () => {
+    it('should use strict equality: NaN never matches, -0 matches 0', () => {
         expect(Option.getLabelByValue([{ value: NaN, label: 'nan' }], NaN)).toBeUndefined()
         expect(Option.getLabelByValue([{ value: 0, label: 'zero' }], -0)).toBe('zero')
     })
 
-    it('distinguishes null from undefined and strict types', () => {
+    it('should distinguish null from undefined and strict types', () => {
         const options: OptionT<null | undefined | string>[] = [
             { value: null, label: 'null' },
             { value: undefined, label: 'undefined' },
@@ -244,7 +244,7 @@ describe('Option.getLabelByValue', () => {
 })
 
 describe('Option.getValueByLabel', () => {
-    it('returns the value for a matching label', () => {
+    it('should return the value for a matching label', () => {
         expect(
             Option.getValueByLabel(
                 [
@@ -256,15 +256,15 @@ describe('Option.getValueByLabel', () => {
         ).toBe('b')
     })
 
-    it('returns undefined when no option matches the label', () => {
+    it('should return undefined when no option matches the label', () => {
         expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'z')).toBeUndefined()
     })
 
-    it('returns undefined for an empty collection', () => {
+    it('should return undefined for an empty collection', () => {
         expect(Option.getValueByLabel([], 'A')).toBeUndefined()
     })
 
-    it('matches the first option when labels are duplicated', () => {
+    it('should match the first option when labels are duplicated', () => {
         expect(
             Option.getValueByLabel(
                 [
@@ -276,13 +276,13 @@ describe('Option.getValueByLabel', () => {
         ).toBe('first')
     })
 
-    it('uses strict equality: matching is case-sensitive and whitespace-significant', () => {
+    it('should use strict equality: matching is case-sensitive and whitespace-significant', () => {
         expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'a')).toBeUndefined()
         expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], ' A')).toBeUndefined()
         expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'A ')).toBeUndefined()
     })
 
-    it('does not mistake falsy values for "no result"', () => {
+    it('should not mistake falsy values for "no result"', () => {
         const options: OptionT<string | number | boolean | null>[] = [
             { value: '', label: 'empty-string' },
             { value: 0, label: 'zero' },
@@ -295,7 +295,7 @@ describe('Option.getValueByLabel', () => {
         expect(Option.getValueByLabel(options, 'null')).toBe(null)
     })
 
-    it('is ambiguous for undefined-valued matches: cannot distinguish no-match from undefined value', () => {
+    it('should be ambiguous for undefined-valued matches: cannot distinguish no-match from undefined value', () => {
         const options: OptionT<string | undefined>[] = [{ value: undefined, label: 'undef' }]
         // both the no-match and the matched-undefined cases return undefined:
         expect(Option.getValueByLabel(options, 'undef')).toBeUndefined()
@@ -304,14 +304,14 @@ describe('Option.getValueByLabel', () => {
 })
 
 describe('Option.getLabelByValue — type-level', () => {
-    it('returns string | undefined', () => {
+    it('should return string | undefined', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<string | undefined>()
     })
 })
 
 describe('Option.getValueByLabel — type-level', () => {
-    it('returns T | undefined, preserving the value union', () => {
+    it('should return T | undefined, preserving the value union', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -321,14 +321,14 @@ describe('Option.getValueByLabel — type-level', () => {
 })
 
 describe('Option.getLabels — type-level', () => {
-    it('returns string[]', () => {
+    it('should return string[]', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         expectTypeOf(Option.getLabels(options)).toEqualTypeOf<string[]>()
     })
 })
 
 describe('Option.getValues — type-level contract', () => {
-    it('infers T from the supplied options', () => {
+    it('should infer T from the supplied options', () => {
         const options: OptionT<string>[] = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -336,7 +336,7 @@ describe('Option.getValues — type-level contract', () => {
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<string[]>()
     })
 
-    it('preserves the literal union for as-const options', () => {
+    it('should preserve the literal union for as-const options', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -344,7 +344,7 @@ describe('Option.getValues — type-level contract', () => {
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<('a' | 'b')[]>()
     })
 
-    it('preserves numeric literals', () => {
+    it('should preserve numeric literals', () => {
         const options = [
             { value: 1, label: 'One' },
             { value: 2, label: 'Two' },
@@ -352,7 +352,7 @@ describe('Option.getValues — type-level contract', () => {
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<(1 | 2)[]>()
     })
 
-    it('preserves boolean literals', () => {
+    it('should preserve boolean literals', () => {
         const options = [
             { value: true, label: 'T' },
             { value: false, label: 'F' },
@@ -360,7 +360,7 @@ describe('Option.getValues — type-level contract', () => {
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<boolean[]>()
     })
 
-    it('preserves object literal value shapes (no widening to object)', () => {
+    it('should preserve object literal value shapes (no widening to object)', () => {
         const options: OptionT<{ id: number }>[] = [
             { value: { id: 1 }, label: 'A' },
             { value: { id: 2 }, label: 'B' },
@@ -368,7 +368,7 @@ describe('Option.getValues — type-level contract', () => {
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<{ id: number }[]>()
     })
 
-    it('accepts readonly arrays and returns a mutable array', () => {
+    it('should accept readonly arrays and returns a mutable array', () => {
         const options: readonly OptionT<string>[] = [{ value: 'a', label: 'A' }]
         const output = Option.getValues(options)
         expectTypeOf(output).toEqualTypeOf<string[]>()
@@ -376,14 +376,14 @@ describe('Option.getValues — type-level contract', () => {
         expect(output).toEqual(['a', 'b'])
     })
 
-    it('widens to string[] when the caller has already widened the value type', () => {
+    it('should widen to string[] when the caller has already widened the value type', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         expectTypeOf(Option.getValues(options)).toEqualTypeOf<string[]>()
     })
 })
 
 describe('Option — literal-union compile-time behaviour', () => {
-    it('getLabelByValue with a literal value in the union is valid and returns string | undefined', () => {
+    it('should accept a literal value in the union in getLabelByValue', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -392,7 +392,7 @@ describe('Option — literal-union compile-time behaviour', () => {
         expectTypeOf(Option.getLabelByValue(options, 'b')).toEqualTypeOf<string | undefined>()
     })
 
-    it('accepts getValueByLabel with any string label (label is always string)', () => {
+    it('should accept getValueByLabel with any string label (label is always string)', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
@@ -409,19 +409,19 @@ describe('Option — readonly inputs accepted by all helpers', () => {
         { value: 'b', label: 'B' },
     ]
 
-    it('getValues accepts readonly input', () => {
+    it('should accept readonly input in getValues', () => {
         expect(Option.getValues(readonlyOptions)).toEqual(['a', 'b'])
     })
 
-    it('getLabels accepts readonly input', () => {
+    it('should accept readonly input in getLabels', () => {
         expect(Option.getLabels(readonlyOptions)).toEqual(['A', 'B'])
     })
 
-    it('getLabelByValue accepts readonly input', () => {
+    it('should accept readonly input in getLabelByValue', () => {
         expect(Option.getLabelByValue(readonlyOptions, 'b')).toBe('B')
     })
 
-    it('getValueByLabel accepts readonly input', () => {
+    it('should accept readonly input in getValueByLabel', () => {
         expect(Option.getValueByLabel(readonlyOptions, 'B')).toBe('b')
     })
 })
@@ -432,7 +432,7 @@ describe('Option — cross-helper consistency', () => {
         { value: 'b', label: 'B' },
     ]
 
-    it('getValues/getLabels align positionally with the source options', () => {
+    it('should align getValues and getLabels positionally with the source options', () => {
         const values = Option.getValues(options)
         const labels = Option.getLabels(options)
         options.forEach((option, index) => {
@@ -441,21 +441,21 @@ describe('Option — cross-helper consistency', () => {
         })
     })
 
-    it('round-trips a value → label → value through the lookups when values and labels are unique', () => {
+    it('should round-trip a value → label → value through the lookups when values and labels are unique', () => {
         for (const option of options) {
             const label = Option.getLabelByValue(options, option.value)
             expect(Option.getValueByLabel(options, label as string)).toBe(option.value)
         }
     })
 
-    it('round-trips a label → value → label through the lookups when values and labels are unique', () => {
+    it('should round-trip a label → value → label through the lookups when values and labels are unique', () => {
         for (const option of options) {
             const value = Option.getValueByLabel(options, option.label)
             expect(Option.getLabelByValue(options, value as string)).toBe(option.label)
         }
     })
 
-    it('is not an inverse when values are duplicated (first-match wins)', () => {
+    it('should be not an inverse when values are duplicated (first-match wins)', () => {
         const dup = [
             { value: 'x', label: 'First' },
             { value: 'x', label: 'Second' },

@@ -10,7 +10,7 @@ describe('HttpStatus', () => {
             ['SWITCHING_PROTOCOLS', 101],
             ['PROCESSING', 102],
             ['EARLY_HINTS', 103],
-        ])('%s should be %i', (key: string, value: number) => {
+        ])('should map %s to %i', (key: string, value: number) => {
             expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
@@ -27,7 +27,7 @@ describe('HttpStatus', () => {
             ['MULTI_STATUS', 207],
             ['ALREADY_REPORTED', 208],
             ['IM_USED', 226],
-        ])('%s should be %i', (key: string, value: number) => {
+        ])('should map %s to %i', (key: string, value: number) => {
             expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
@@ -41,7 +41,7 @@ describe('HttpStatus', () => {
             ['NOT_MODIFIED', 304],
             ['TEMPORARY_REDIRECT', 307],
             ['PERMANENT_REDIRECT', 308],
-        ])('%s should be %i', (key: string, value: number) => {
+        ])('should map %s to %i', (key: string, value: number) => {
             expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
@@ -77,7 +77,7 @@ describe('HttpStatus', () => {
             ['TOO_MANY_REQUESTS', 429],
             ['REQUEST_HEADER_FIELDS_TOO_LARGE', 431],
             ['UNAVAILABLE_FOR_LEGAL_REASONS', 451],
-        ])('%s should be %i', (key: string, value: number) => {
+        ])('should map %s to %i', (key: string, value: number) => {
             expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })
@@ -95,7 +95,7 @@ describe('HttpStatus', () => {
             ['LOOP_DETECTED', 508],
             ['NOT_EXTENDED', 510],
             ['NETWORK_AUTHENTICATION_REQUIRED', 511],
-        ])('%s should be %i', (key: string, value: number) => {
+        ])('should map %s to %i', (key: string, value: number) => {
             expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
         })
     })

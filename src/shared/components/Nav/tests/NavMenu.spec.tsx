@@ -17,14 +17,14 @@ const defaultProps: NavMenuProps = {
 
 describe('NavMenu', () => {
     describe('Rendering', () => {
-        it('renders all menu items as links', () => {
+        it('should render all menu items as links', () => {
             TestNav.Set.mockMenu(defaultProps)
 
             const links = screen.getAllByRole('link')
             expect(links).toHaveLength(3)
         })
 
-        it('renders each item label', () => {
+        it('should render each item label', () => {
             TestNav.Set.mockMenu(defaultProps)
 
             expect(screen.getByText('Home')).toBeInTheDocument()
@@ -32,7 +32,7 @@ describe('NavMenu', () => {
             expect(screen.getByText('Projects')).toBeInTheDocument()
         })
 
-        it('links point to the correct paths', () => {
+        it('should point to the correct paths', () => {
             TestNav.Set.mockMenu(defaultProps)
 
             const links = screen.getAllByRole('link')
@@ -43,14 +43,14 @@ describe('NavMenu', () => {
     })
 
     describe('Active highlighting', () => {
-        it('applies "active" class to the current page item', () => {
+        it('should apply the "active" class to the current page item', () => {
             TestNav.Set.mockMenu({ ...defaultProps, pageName: 'About' })
 
             const aboutItem = screen.getByText('About').closest('li')
             expect(aboutItem).toHaveClass('active')
         })
 
-        it('does not apply "active" class to non-current items', () => {
+        it('should not apply the "active" class to non-current items', () => {
             TestNav.Set.mockMenu({ ...defaultProps, pageName: 'About' })
 
             const homeItem = screen.getByText('Home').closest('li')
@@ -59,14 +59,14 @@ describe('NavMenu', () => {
     })
 
     describe('Loading state', () => {
-        it('renders empty nav when isLoading is true', () => {
+        it('should render an empty nav when isLoading is true', () => {
             TestNav.Set.mockMenu({ ...defaultProps, isLoading: true })
 
             expect(screen.queryByText('Home')).not.toBeInTheDocument()
             expect(screen.queryByText('About')).not.toBeInTheDocument()
         })
 
-        it('renders items when isLoading is false', () => {
+        it('should render items when isLoading is false', () => {
             TestNav.Set.mockMenu({ ...defaultProps, isLoading: false })
 
             expect(screen.getByText('Home')).toBeInTheDocument()
@@ -74,7 +74,7 @@ describe('NavMenu', () => {
     })
 
     describe('Interactions', () => {
-        it('calls onItemClick with the clicked item', async () => {
+        it('should call onItemClick with the clicked item', async () => {
             const onItemClick = vi.fn()
             TestNav.Set.mockMenu({ ...defaultProps, onItemClick })
 
@@ -83,7 +83,7 @@ describe('NavMenu', () => {
             expect(onItemClick).toHaveBeenCalledWith(baseItems[1])
         })
 
-        it('renders submenu toggle and calls onSubmenuToggle when clicked', async () => {
+        it('should render a submenu toggle and call onSubmenuToggle when clicked', async () => {
             const itemsWithToggle: MenuItem[] = [
                 ...baseItems,
                 { label: 'toggle', showSubmenuToggle: true },
@@ -105,7 +105,7 @@ describe('NavMenu', () => {
     })
 
     describe('Images', () => {
-        it('renders image when renderImage is provided and item has image', () => {
+        it('should render an image when renderImage is provided and the item has an image', () => {
             const itemsWithImage: MenuItem[] = [{ label: 'Home', path: '/', image: 'home-icon' }]
             const renderImage = vi.fn((name: string) => <img src={`/${name}.png`} alt={name} />)
 
@@ -121,7 +121,7 @@ describe('NavMenu', () => {
     })
 
     describe('Submenu chevrons', () => {
-        it('renders a chevron-down for items with submenu', () => {
+        it('should render a chevron-down for items with submenu', () => {
             const itemsWithSub: MenuItem[] = [
                 {
                     label: 'Projects',

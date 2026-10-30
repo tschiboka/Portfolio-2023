@@ -399,12 +399,12 @@ describe('RequestBuilder', () => {
     })
 
     describe('HTTP methods', () => {
-        it('get should call axios.get with url and config', async () => {
+        it('should call axios.get with url and config', async () => {
             await new RequestBuilder('Login').build().get()
             expect(mockedAxios.get).toHaveBeenCalledTimes(1)
         })
 
-        it('post should call axios.post with url, payload, and config', async () => {
+        it('should call axios.post with url, payload, and config', async () => {
             const payload = { email: 'a@b.com', password: '123' }
             await new RequestBuilder('Login').build().post(payload)
             expect(mockedAxios.post).toHaveBeenCalledWith(
@@ -414,7 +414,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('put should call axios.put with url, payload, and config', async () => {
+        it('should call axios.put with url, payload, and config', async () => {
             const payload = { candle1: true }
             await new RequestBuilder('Gym')
                 .setSubpath('/candles')
@@ -430,7 +430,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('patch should call axios.patch with url, payload, and config', async () => {
+        it('should call axios.patch with url, payload, and config', async () => {
             const payload = { name: 'updated' }
             await new RequestBuilder('Login').build().patch(payload)
             expect(mockedAxios.patch).toHaveBeenCalledWith(
@@ -440,7 +440,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('delete should call axios.delete with url and config', async () => {
+        it('should call axios.delete with url and config', async () => {
             await new RequestBuilder('Login').build().delete()
             expect(mockedAxios.delete).toHaveBeenCalledWith(
                 'http://localhost:5000/api/login',
@@ -448,7 +448,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('head should call axios.head with url and config', async () => {
+        it('should call axios.head with url and config', async () => {
             await new RequestBuilder('Login').build().head()
             expect(mockedAxios.head).toHaveBeenCalledWith(
                 'http://localhost:5000/api/login',
@@ -456,7 +456,7 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('options should call axios.options with url and config', async () => {
+        it('should call axios.options with url and config', async () => {
             await new RequestBuilder('Login').build().options()
             expect(mockedAxios.options).toHaveBeenCalledWith(
                 'http://localhost:5000/api/login',

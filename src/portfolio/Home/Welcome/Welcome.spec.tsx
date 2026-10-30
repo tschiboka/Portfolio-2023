@@ -14,7 +14,7 @@ function renderComponent() {
 }
 
 describe('Welcome', () => {
-    test('Should Render a Headshot Image', () => {
+    it('should render a headshot image', () => {
         renderComponent()
 
         const image = screen.getByRole('img', { name: /headshot/i })
@@ -22,14 +22,14 @@ describe('Welcome', () => {
         expect(image).toHaveClass('headshot')
     })
 
-    test('Should Render an Element with Name', () => {
+    it('should render an element with name', () => {
         renderComponent()
 
         const name = screen.getByText(/tivadar debnar/i)
         expect(name).toBeInTheDocument()
     })
 
-    test('Should Render a Title Element', () => {
+    it('should render a title element', () => {
         renderComponent()
 
         const title = screen.getByText(/web developer/i)

@@ -13,7 +13,7 @@ describe('Numbers.Optional.toNumber', () => {
         ['abc', undefined],
         [null, undefined],
         [undefined, undefined],
-    ])('toNumber(%j) should return %j', (value, expected) => {
+    ])('should return %j for toNumber(%j)', (value, expected) => {
         expect(toNumber(value)).toBe(expected)
     })
 })

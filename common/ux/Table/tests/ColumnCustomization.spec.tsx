@@ -6,7 +6,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Column Customization', () => {
     describe('Column resize', () => {
-        it('renders resize handles when enableColumnResize is true', () => {
+        it('should render resize handles when enableColumnResize is true', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -20,7 +20,7 @@ describe('Table — Column Customization', () => {
             })
         })
 
-        it('does not render resize handles when enableColumnResize is omitted', () => {
+        it('should not render resize handles when enableColumnResize is omitted', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -29,7 +29,7 @@ describe('Table — Column Customization', () => {
             expect(document.querySelector('.th-resize-handle')).not.toBeInTheDocument()
         })
 
-        it('renders a resize line indicator inside each handle', () => {
+        it('should render a resize line indicator inside each handle', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -42,7 +42,7 @@ describe('Table — Column Customization', () => {
             })
         })
 
-        it('sets table-layout to fixed on the table when resize enabled', () => {
+        it('should set table-layout to fixed on the table when resize enabled', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -53,7 +53,7 @@ describe('Table — Column Customization', () => {
             expect(table.Get.table().style.tableLayout).toBe('fixed')
         })
 
-        it('does not set table-layout to fixed when resize disabled', () => {
+        it('should not set table-layout to fixed when resize disabled', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -65,7 +65,7 @@ describe('Table — Column Customization', () => {
     })
 
     describe('Column reorder', () => {
-        it('renders reorder buttons when enableColumnReorder is true', () => {
+        it('should render reorder buttons when enableColumnReorder is true', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -80,7 +80,7 @@ describe('Table — Column Customization', () => {
             })
         })
 
-        it('does not render reorder buttons when enableColumnReorder is omitted', () => {
+        it('should not render reorder buttons when enableColumnReorder is omitted', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -89,7 +89,7 @@ describe('Table — Column Customization', () => {
             expect(document.querySelector('.th-reorder-btn')).not.toBeInTheDocument()
         })
 
-        it('disables left button on first column', () => {
+        it('should disable left button on first column', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -100,7 +100,7 @@ describe('Table — Column Customization', () => {
             expect(firstLeftBtn).toBeDisabled()
         })
 
-        it('disables right button on last column', () => {
+        it('should disable right button on last column', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -111,7 +111,7 @@ describe('Table — Column Customization', () => {
             expect(lastRightBtn).toBeDisabled()
         })
 
-        it('moves column left when clicking left reorder button', async () => {
+        it('should move column left when clicking left reorder button', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -130,7 +130,7 @@ describe('Table — Column Customization', () => {
             expect(headersAfter[1]).toHaveTextContent('Name')
         })
 
-        it('moves column right when clicking right reorder button', async () => {
+        it('should move column right when clicking right reorder button', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -147,7 +147,7 @@ describe('Table — Column Customization', () => {
             expect(headersAfter[2]).toHaveTextContent('Value')
         })
 
-        it('left button on first column is disabled and does not move', async () => {
+        it('should disable the left button on the first column and not move', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -166,7 +166,7 @@ describe('Table — Column Customization', () => {
             })
         })
 
-        it('right button on last column is disabled and does not move', async () => {
+        it('should disable the right button on the last column and not move', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -185,7 +185,7 @@ describe('Table — Column Customization', () => {
             })
         })
 
-        it('adds has-reorder class to header cells', () => {
+        it('should add has-reorder class to header cells', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -200,7 +200,7 @@ describe('Table — Column Customization', () => {
     })
 
     describe('Resize + Reorder combined', () => {
-        it('renders both resize handles and reorder buttons when both enabled', () => {
+        it('should render both resize handles and reorder buttons when both enabled', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,

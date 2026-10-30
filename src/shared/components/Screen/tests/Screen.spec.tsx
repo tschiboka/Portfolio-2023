@@ -37,7 +37,7 @@ beforeEach(() => {
 
 describe('Screen', () => {
     describe('Document title', () => {
-        it('sets the document title on mount', () => {
+        it('should set the document title on mount', () => {
             Test.Screen.Do.render({
                 path: '/test',
                 children: (
@@ -52,7 +52,7 @@ describe('Screen', () => {
     })
 
     describe('Content', () => {
-        it('renders children', () => {
+        it('should render children', () => {
             Test.Screen.Do.render({
                 path: '/test',
                 children: (
@@ -67,7 +67,7 @@ describe('Screen', () => {
     })
 
     describe('CSS class', () => {
-        it('has the base Screen class', () => {
+        it('should have the base Screen class', () => {
             const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
@@ -80,7 +80,7 @@ describe('Screen', () => {
             expect(container.querySelector('.Screen')).toBeInTheDocument()
         })
 
-        it('applies custom className', () => {
+        it('should apply custom className', () => {
             const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
@@ -93,7 +93,7 @@ describe('Screen', () => {
             expect(container.querySelector('.Screen')).toHaveClass('CustomScreen')
         })
 
-        it('adds submenu-open class when subMenuVisible is true', () => {
+        it('should add the submenu-open class when subMenuVisible is true', () => {
             const { container } = Test.Screen.Do.render({
                 path: '/test',
                 children: (
@@ -109,7 +109,7 @@ describe('Screen', () => {
     })
 
     describe('Visit recording', () => {
-        it('records a visit for the screen path', async () => {
+        it('should record a visit for the screen path', async () => {
             Test.Screen.Do.render({
                 path: '/home',
                 children: (
@@ -124,7 +124,7 @@ describe('Screen', () => {
     })
 
     describe('Login redirect', () => {
-        it('redirects to /api/login when loginRequired and not authenticated', () => {
+        it('should redirect to /api/login when loginRequired and not authenticated', () => {
             Test.Screen.Do.render({
                 path: '/admin',
                 children: (
@@ -138,7 +138,7 @@ describe('Screen', () => {
             expect(Test.Screen.Get.navigatedTo()).toBe(Paths.Client.Login)
         })
 
-        it('does not redirect when loginRequired and authenticated', () => {
+        it('should not redirect when loginRequired and authenticated', () => {
             Test.Screen.Do.render({
                 path: '/admin',
                 children: (
@@ -153,7 +153,7 @@ describe('Screen', () => {
             expect(Accessor.screen.getByText('Protected')).toBeInTheDocument()
         })
 
-        it('does not redirect when loginRequired is false (default)', () => {
+        it('should not redirect when loginRequired is false (default)', () => {
             Test.Screen.Do.render({
                 path: '/public',
                 children: (
@@ -170,7 +170,7 @@ describe('Screen', () => {
     })
 
     describe('Scroll', () => {
-        it('scrolls to top on mount', () => {
+        it('should scroll to top on mount', () => {
             Test.Screen.Do.render({
                 path: '/test',
                 children: (

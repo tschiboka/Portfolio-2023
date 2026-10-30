@@ -41,7 +41,7 @@ Does not decide what a feature should do, and does not score code quality — th
 - **Built-in accessors first** — a hand-rolled query against a component with a contract is a bug in the spec.
 - **Branches, edge cases and value matrices are covered** — the suite documents behaviour and makes refactoring safe.
 - **Every test sits inside a `describe`**, named for the feature or subfeature in PascalCase.
-- **Tests are named `it('should <verb> …')`** — never a bare declarative.
+- **Tests are named `it('should <verb> …')`** — never a bare declarative, and never `test(…)`, which is the same function under a name this codebase does not use.
 - **Everything above `describe`** belongs in `Feature.spec.utils.ts`, never in the spec body.
 - **Specs render through the page-level harness** — `Test.Screen.Do.render({ path, handlers, session })`, with `Test` imported from `@shared-components/Screen/tests`.
 

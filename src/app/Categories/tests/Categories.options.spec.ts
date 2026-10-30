@@ -5,11 +5,11 @@ import { Icons } from '../components/Icons'
 
 describe('CategoriesOptions', () => {
     describe('iconOptions', () => {
-        it('builds one option per icon key', () => {
+        it('should build one option per icon key', () => {
             expect(CategoriesOptions.iconOptions).toHaveLength(Object.keys(Icons).length)
         })
 
-        it('maps every icon key to an option with label/value/icon', () => {
+        it('should map every icon key to an option with label/value/icon', () => {
             for (const key of Object.keys(Icons)) {
                 const option = CategoriesOptions.iconOptions.find((o) => o.value === key)
                 expect(option).toBeDefined()
@@ -18,18 +18,18 @@ describe('CategoriesOptions', () => {
             }
         })
 
-        it('is sorted by label ascending', () => {
+        it('should sort by label ascending', () => {
             const labels = CategoriesOptions.iconOptions.map((o) => o.label)
             expect(labels).toEqual([...labels].sort())
         })
     })
 
     describe('colorOptions', () => {
-        it('builds one option per ColorSign key', () => {
+        it('should build one option per ColorSign key', () => {
             expect(CategoriesOptions.colorOptions).toHaveLength(Object.keys(Const.ColorSign).length)
         })
 
-        it('maps every color key to an option', () => {
+        it('should map every color key to an option', () => {
             for (const key of Object.keys(Const.ColorSign)) {
                 const option = CategoriesOptions.colorOptions.find((o) => o.value === key)
                 expect(option).toBeDefined()
@@ -37,7 +37,7 @@ describe('CategoriesOptions', () => {
             }
         })
 
-        it('is sorted by label ascending', () => {
+        it('should sort by label ascending', () => {
             const labels = CategoriesOptions.colorOptions.map((o) => o.label)
             expect(labels).toEqual([...labels].sort())
         })

@@ -15,19 +15,19 @@ describe('ClientMessage.Success', () => {
         ['Registered', 'account', 'Account registered'],
         ['LoggedIn', 'user', 'User logged in'],
         ['LoggedOut', 'user', 'User logged out'],
-    ] as const)('%s capitalises the resource', (key, resource, expected) => {
+    ] as const)('should capitalise the resource for %s', (key, resource, expected) => {
         expect(ClientMessage.Success[key](resource)).toBe(expected)
     })
 
-    it('leaves an already-capitalised resource unchanged', () => {
+    it('should leave an already-capitalised resource unchanged', () => {
         expect(ClientMessage.Success.Created('Category')).toBe('Category created')
     })
 
-    it('handles a multi-word resource', () => {
+    it('should handle a multi-word resource', () => {
         expect(ClientMessage.Success.Verified('email address')).toBe('Email address verified')
     })
 
-    it.each(['', '   '])('returns the suffix only for an empty-ish resource: %j', (resource) => {
+    it.each(['', '   '])('should return the suffix only for an empty-ish resource: %j', (resource) => {
         expect(ClientMessage.Success.Created(resource)).toBe(`${resource} created`)
     })
 })
@@ -45,18 +45,18 @@ describe('ClientMessage.Failure', () => {
         ['Submit', 'form', 'Failed to submit form'],
         ['Join', 'session', 'Failed to join session'],
         ['Handle', 'message', 'Failed to handle message'],
-    ] as const)('%s lowercases the resource', (key, resource, expected) => {
+    ] as const)('should lowercase the resource for %s', (key, resource, expected) => {
         expect(ClientMessage.Failure[key](resource)).toBe(expected)
     })
 
-    it('lowercases an already-capitalised resource', () => {
+    it('should lowercase an already-capitalised resource', () => {
         expect(ClientMessage.Failure.Create('Category')).toBe('Failed to create category')
     })
 
     it.each([
         ['Login', 'Failed to log in'],
         ['Logout', 'Failed to log out'],
-    ] as const)('%s takes no resource', (key, expected) => {
+    ] as const)('should take no resource for %s', (key, expected) => {
         expect(ClientMessage.Failure[key]()).toBe(expected)
     })
 })
@@ -73,13 +73,13 @@ describe('ClientMessage.Progress', () => {
         ['Fetching', 'visits', 'Fetching visits…'],
         ['Submitting', 'form', 'Submitting form…'],
     ] as const)(
-        '%s lowercases the resource and ends with an ellipsis',
+        'should lowercase the resource for %s and end with an ellipsis',
         (key, resource, expected) => {
             expect(ClientMessage.Progress[key](resource)).toBe(expected)
         },
     )
 
-    it('always ends with the ellipsis character', () => {
+    it('should always end with the ellipsis character', () => {
         expect(ClientMessage.Progress.Loading('categories').endsWith('…')).toBe(true)
     })
 })
@@ -88,27 +88,27 @@ describe('ClientMessage.Empty', () => {
     it.each([
         ['NoResults', 'categories', 'No categories found'],
         ['NothingYet', 'messages', 'No messages yet'],
-    ] as const)('%s lowercases the resource', (key, resource, expected) => {
+    ] as const)('should lowercase the resource for %s', (key, resource, expected) => {
         expect(ClientMessage.Empty[key](resource)).toBe(expected)
     })
 
     it.each([
         ['NotSelected', 'Nothing selected'],
         ['NoItems', 'No items to display'],
-    ] as const)('%s takes no resource', (key, expected) => {
+    ] as const)('should take no resource for %s', (key, expected) => {
         expect(ClientMessage.Empty[key]()).toBe(expected)
     })
 
     it.each([
         ['adding a category', 'Start by adding a category'],
         ['Creating A Category', 'Start by creating a category'],
-    ])('StartBy lowercases the action: %s', (action, expected) => {
+    ])('should lowercase the action for StartBy: %s', (action, expected) => {
         expect(ClientMessage.Empty.StartBy(action)).toBe(expected)
     })
 })
 
 describe('ClientMessage.Confirm', () => {
-    it('lowercases the resource in Delete', () => {
+    it('should lowercase the resource in Delete', () => {
         expect(ClientMessage.Confirm.Delete('Category')).toBe('Delete this category?')
     })
 
@@ -116,7 +116,7 @@ describe('ClientMessage.Confirm', () => {
         ['Discard', 'Discard your changes?'],
         ['Unsaved', 'You have unsaved changes'],
         ['CannotBeUndone', 'This action cannot be undone'],
-    ] as const)('%s takes no resource', (key, expected) => {
+    ] as const)('should take no resource for %s', (key, expected) => {
         expect(ClientMessage.Confirm[key]()).toBe(expected)
     })
 })
@@ -130,7 +130,7 @@ describe('ClientMessage.Network', () => {
         ['TryAgainLater', 'Please try again later'],
         ['SessionExpired', 'Your session has expired'],
         ['Unauthorised', 'You do not have access to this'],
-    ] as const)('%s returns fixed wording', (key, expected) => {
+    ] as const)('should return fixed wording for %s', (key, expected) => {
         expect(ClientMessage.Network[key]()).toBe(expected)
     })
 })
@@ -138,16 +138,16 @@ describe('ClientMessage.Network', () => {
 describe('ClientMessage shape', () => {
     const groups = Object.keys(ClientMessage)
 
-    it('exposes the expected groups', () => {
+    it('should expose the expected groups', () => {
         expect(groups).toEqual(['Success', 'Failure', 'Progress', 'Empty', 'Confirm', 'Network'])
     })
 
-    it.each(groups)('%s contains only functions', (group) => {
+    it.each(groups)('should expose only functions in %s', (group) => {
         const members = Object.values(ClientMessage[group as keyof typeof ClientMessage])
         expect(members.every((member) => typeof member === 'function')).toBe(true)
     })
 
-    it('never returns an empty string', () => {
+    it('should never return an empty string', () => {
         const renders = [
             ClientMessage.Success.Created('x'),
             ClientMessage.Failure.Create('x'),

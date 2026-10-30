@@ -7,7 +7,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Download', () => {
     describe('Single download', () => {
-        it('renders download button', () => {
+        it('should render download button', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -17,7 +17,7 @@ describe('Table — Download', () => {
             expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
-        it('calls onDownload with current data', async () => {
+        it('should call onDownload with current data', async () => {
             const onDownload = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -29,7 +29,7 @@ describe('Table — Download', () => {
             expect(onDownload).toHaveBeenCalledWith(rows)
         })
 
-        it('renders label text when label is provided', () => {
+        it('should render label text when label is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -39,7 +39,7 @@ describe('Table — Download', () => {
             expect(screen.getByText('Export CSV')).toBeInTheDocument()
         })
 
-        it('does not render label text when label is omitted', () => {
+        it('should not render label text when label is omitted', () => {
             const { container } = Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -51,7 +51,7 @@ describe('Table — Download', () => {
     })
 
     describe('Multi-format download', () => {
-        it('renders dropdown trigger', () => {
+        it('should render dropdown trigger', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -67,7 +67,7 @@ describe('Table — Download', () => {
             expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
-        it('shows options when dropdown is opened', async () => {
+        it('should show options when dropdown is opened', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -85,7 +85,7 @@ describe('Table — Download', () => {
             expect(screen.getByRole('option', { name: 'PDF' })).toBeInTheDocument()
         })
 
-        it('calls onDownload with selected format and data', async () => {
+        it('should call onDownload with selected format and data', async () => {
             const onDownload = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -106,7 +106,7 @@ describe('Table — Download', () => {
     })
 
     describe('Download without title', () => {
-        it('renders download button even without a title', () => {
+        it('should render download button even without a title', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,

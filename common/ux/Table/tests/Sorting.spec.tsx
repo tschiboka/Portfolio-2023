@@ -8,7 +8,7 @@ const { rows } = TableMocks
 
 describe('Table — Sorting', () => {
     describe('Sortable headers', () => {
-        it('renders sort button for sortable columns', () => {
+        it('should render sort button for sortable columns', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -25,7 +25,7 @@ describe('Table — Sorting', () => {
             expect(Test.Table('test').Get.sortButton('Name')).toBeInTheDocument()
         })
 
-        it('does not render sort button for non-sortable columns', () => {
+        it('should not render sort button for non-sortable columns', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -42,7 +42,7 @@ describe('Table — Sorting', () => {
             expect(Test.Table('test').Has.sortButton('Value')).toBe(false)
         })
 
-        it('renders non-sortable column header as plain text', () => {
+        it('should render non-sortable column header as plain text', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -65,7 +65,7 @@ describe('Table — Sorting', () => {
     })
 
     describe('Sort interactions', () => {
-        it('calls onSortChange when a sortable header is clicked', async () => {
+        it('should call onSortChange when a sortable header is clicked', async () => {
             const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -84,7 +84,7 @@ describe('Table — Sorting', () => {
             expect(onSortChange).toHaveBeenCalledTimes(1)
         })
 
-        it('toggles to desc when clicking the currently asc-sorted column', async () => {
+        it('should toggle to desc when clicking the currently asc-sorted column', async () => {
             const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -100,7 +100,7 @@ describe('Table — Sorting', () => {
             expect(onSortChange).toHaveBeenCalledWith('name', 'desc')
         })
 
-        it('sorts asc when clicking a different column', async () => {
+        it('should sort asc when clicking a different column', async () => {
             const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -119,7 +119,7 @@ describe('Table — Sorting', () => {
             expect(onSortChange).toHaveBeenCalledWith('value', 'asc')
         })
 
-        it('sorts asc when clicking current column that is desc', async () => {
+        it('should sort asc when clicking current column that is desc', async () => {
             const onSortChange = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -137,7 +137,7 @@ describe('Table — Sorting', () => {
     })
 
     describe('Sort header styling classes', () => {
-        it('adds sorted and sorted-asc class to the active ascending column', () => {
+        it('should add sorted and sorted-asc class to the active ascending column', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -153,7 +153,7 @@ describe('Table — Sorting', () => {
             expect(th).toHaveClass('sorted-asc')
         })
 
-        it('adds sorted and sorted-desc class for descending', () => {
+        it('should add sorted and sorted-desc class for descending', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -169,7 +169,7 @@ describe('Table — Sorting', () => {
             expect(th).toHaveClass('sorted-desc')
         })
 
-        it('does not add sorted class to inactive sortable column', () => {
+        it('should not add sorted class to inactive sortable column', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -189,19 +189,19 @@ describe('Table — Sorting', () => {
     })
 
     describe('getNextSortDirection utility', () => {
-        it('returns desc when current column is same and direction is asc', () => {
+        it('should return desc when current column is same and direction is asc', () => {
             expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'name')).toBe('desc')
         })
 
-        it('returns asc when current column is same and direction is desc', () => {
+        it('should return asc when current column is same and direction is desc', () => {
             expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'name')).toBe('asc')
         })
 
-        it('returns asc when target column is different', () => {
+        it('should return asc when target column is different', () => {
             expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'value')).toBe('asc')
         })
 
-        it('returns asc when target column is different and current is desc', () => {
+        it('should return asc when target column is different and current is desc', () => {
             expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'value')).toBe('asc')
         })
     })

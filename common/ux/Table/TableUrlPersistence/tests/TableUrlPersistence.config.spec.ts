@@ -3,7 +3,7 @@ import { TableUrlPersistenceConfig } from '..'
 import type { FilterConfig } from '../../TableFilter'
 
 describe('buildCodec', () => {
-    it('resolves string codecs (text/search/date/option) to the same string behavior', () => {
+    it('should resolve string codecs (text/search/date/option) to the same string behavior', () => {
         for (const type of ['text', 'search', 'date', 'option'] as const) {
             const codec = TableUrlPersistenceConfig.buildCodec({
                 type,
@@ -15,7 +15,7 @@ describe('buildCodec', () => {
         }
     })
 
-    it('resolves a number codec that encodes to string and decodes to number', () => {
+    it('should resolve a number codec that encodes to string and decodes to number', () => {
         const codec = TableUrlPersistenceConfig.buildCodec({ type: 'number', label: 'count' })
         expect(codec.encode(42)).toBe('42')
         expect(codec.encode(NaN)).toBeUndefined()
@@ -23,7 +23,7 @@ describe('buildCodec', () => {
         expect(codec.decode('abc')).toBeUndefined()
     })
 
-    it('resolves a checkbox codec to boolean', () => {
+    it('should resolve a checkbox codec to boolean', () => {
         const codec = TableUrlPersistenceConfig.buildCodec({ type: 'checkbox', label: 'active' })
         expect(codec.encode(true)).toBe('true')
         expect(codec.encode(false)).toBeUndefined()
@@ -31,21 +31,21 @@ describe('buildCodec', () => {
         expect(codec.decode(null)).toBe(false)
     })
 
-    it('uses a config encode override, falling back to the type default for decode', () => {
+    it('should use a config encode override, falling back to the type default for decode', () => {
         const encode = () => 'OVERRIDE'
         const codec = TableUrlPersistenceConfig.buildCodec({ type: 'text', label: 'p', encode })
         expect(codec.encode('anything')).toBe('OVERRIDE')
         expect(codec.decode('hi')).toBe('hi')
     })
 
-    it('uses a config decode override, falling back to the type default for encode', () => {
+    it('should use a config decode override, falling back to the type default for encode', () => {
         const decode = () => 'OVERRIDE'
         const codec = TableUrlPersistenceConfig.buildCodec({ type: 'text', label: 'p', decode })
         expect(codec.encode('  hi  ')).toBe('hi')
         expect(codec.decode('anything')).toBe('OVERRIDE')
     })
 
-    it('uses both encode and decode overrides when provided', () => {
+    it('should use both encode and decode overrides when provided', () => {
         const encode = () => 'E'
         const decode = () => 'D'
         const codec = TableUrlPersistenceConfig.buildCodec({

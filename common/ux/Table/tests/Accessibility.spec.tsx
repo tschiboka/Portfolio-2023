@@ -9,12 +9,12 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Accessibility', () => {
     describe('Region wrapper', () => {
-        it('renders a region role on the container', () => {
+        it('should render a region role on the container', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'Users', data: rows, columns: basicColumns })
             expect(Test.Table('Users').Get.tagName()).toBeDefined()
         })
 
-        it('sets aria-label from the ariaLabel prop', () => {
+        it('should set aria-label from the ariaLabel prop', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'Custom label',
                 data: rows,
@@ -23,7 +23,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('Custom label').Get.attribute('aria-label')).toBe('Custom label')
         })
 
-        it('sets aria-labelledby pointing to the title when title is provided', () => {
+        it('should set aria-labelledby pointing to the title when title is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -35,14 +35,14 @@ describe('Table — Accessibility', () => {
             expect(table.Get.attribute('aria-labelledby')).toBe(heading.id)
         })
 
-        it('does not set aria-labelledby when no title is given', () => {
+        it('should not set aria-labelledby when no title is given', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'No title', data: rows, columns: basicColumns })
             expect(Test.Table('No title').Get.attribute('aria-labelledby')).toBeNull()
         })
     })
 
     describe('id prop', () => {
-        it('sets the DOM id on the wrapper', () => {
+        it('should set the DOM id on the wrapper', () => {
             Test.Table.Set.mock<Row>({
                 id: 'my-table',
                 ariaLabel: 'test',
@@ -52,7 +52,7 @@ describe('Table — Accessibility', () => {
             expect(document.getElementById('my-table')).toBeInTheDocument()
         })
 
-        it('links title id to the table via aria-labelledby when id is provided', () => {
+        it('should link the title id to the table via aria-labelledby when id is provided', () => {
             Test.Table.Set.mock<Row>({
                 id: 'custom-id',
                 ariaLabel: 'test',
@@ -65,7 +65,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.table()).toHaveAttribute('aria-labelledby', heading.id)
         })
 
-        it('generates an auto-id for aria-labelledby when no id prop is given but title exists', () => {
+        it('should generate an auto-id for aria-labelledby when no id prop is given but title exists', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -80,7 +80,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('className prop', () => {
-        it('appends className to the wrapper', () => {
+        it('should append className to the wrapper', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 className: 'custom-class',
@@ -90,7 +90,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.className()).toContain('custom-class')
         })
 
-        it('keeps the base table-container class alongside custom class', () => {
+        it('should keep the base table-container class alongside custom class', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 className: 'my-table',
@@ -102,14 +102,14 @@ describe('Table — Accessibility', () => {
             expect(table.Get.className()).toContain('my-table')
         })
 
-        it('renders without extra classes when className is omitted', () => {
+        it('should render without extra classes when className is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             expect(Test.Table('test').Get.className()).toContain('table-container')
         })
     })
 
     describe('style prop', () => {
-        it('applies inline styles to the wrapper', () => {
+        it('should apply inline styles to the wrapper', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 style: { border: `2px solid ${Const.Color.Black[3]}` },
@@ -122,12 +122,12 @@ describe('Table — Accessibility', () => {
     })
 
     describe('table element', () => {
-        it('renders a <table> element', () => {
+        it('should render a <table> element', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             expect(Test.Table('test').Get.table()).toBeInTheDocument()
         })
 
-        it('links table via aria-labelledby to the title heading', () => {
+        it('should link the table to the title heading via aria-labelledby', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -141,7 +141,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Column headers', () => {
-        it('renders th elements with scope="col"', () => {
+        it('should render th elements with scope="col"', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             Test.Table('test')
                 .Get.columnHeaders()
@@ -150,7 +150,7 @@ describe('Table — Accessibility', () => {
                 })
         })
 
-        it('renders column header text for each column', () => {
+        it('should render column header text for each column', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             const table = Test.Table('test')
             expect(table.Get.byText('Name')).toBeInTheDocument()
@@ -158,7 +158,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.byText('Status')).toBeInTheDocument()
         })
 
-        it('renders expand column header with aria-label "Expand" when breakpoints are present', () => {
+        it('should render expand column header with aria-label "Expand" when breakpoints are present', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -172,7 +172,7 @@ describe('Table — Accessibility', () => {
             ).toBeInTheDocument()
         })
 
-        it('renders action column header with aria-label "Actions" when actions are present', () => {
+        it('should render action column header with aria-label "Actions" when actions are present', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -184,7 +184,7 @@ describe('Table — Accessibility', () => {
             ).toBeInTheDocument()
         })
 
-        it('renders select column header with aria-label "Select" for single selection', () => {
+        it('should render select column header with aria-label "Select" for single selection', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -203,7 +203,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('rowAriaLabel', () => {
-        it('sets aria-label on each body row', () => {
+        it('should set aria-label on each body row', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 rowAriaLabel: 'Data row',
@@ -216,7 +216,7 @@ describe('Table — Accessibility', () => {
             expect(bodyRows).toHaveLength(rows.length)
         })
 
-        it('does not set aria-label on rows when rowAriaLabel is omitted', () => {
+        it('should not set aria-label on rows when rowAriaLabel is omitted', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             const bodyRows = Accessor.screen.getAllByRole('row')
             const labeled = bodyRows.filter((row) => row.hasAttribute('aria-label'))
@@ -225,7 +225,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Expand/Collapse row buttons', () => {
-        it('renders "Expand row" buttons when breakpoints hide columns', () => {
+        it('should render "Expand row" buttons when breakpoints hide columns', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -237,7 +237,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.expandButtons()).toHaveLength(rows.length)
         })
 
-        it('changes aria-label to "Collapse row" after expanding', async () => {
+        it('should change aria-label to "Collapse row" after expanding', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -252,7 +252,7 @@ describe('Table — Accessibility', () => {
             expect(btn).toHaveAttribute('aria-label', 'Collapse row')
         })
 
-        it('toggles back to "Expand row" after collapsing', async () => {
+        it('should toggle back to "Expand row" after collapsing', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -269,7 +269,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Expanded row details', () => {
-        it('renders expanded row with aria-label "Expanded details for row N"', async () => {
+        it('should render expanded row with aria-label "Expanded details for row N"', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -283,7 +283,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.expandedRow(1)).toBeInTheDocument()
         })
 
-        it('expanded row contains aria-hidden spacer cells', async () => {
+        it('should give the expanded row aria-hidden spacer cells', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -300,7 +300,7 @@ describe('Table — Accessibility', () => {
             expect(ariaHidden.length).toBeGreaterThanOrEqual(1)
         })
 
-        it('renders expanded row with correct index for non-first rows', async () => {
+        it('should render expanded row with correct index for non-first rows', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -316,7 +316,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Action menu ARIA', () => {
-        it('renders action button with aria-label "Row actions"', () => {
+        it('should render action button with aria-label "Row actions"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -326,7 +326,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.actionButtons()).toHaveLength(rows.length)
         })
 
-        it('action button has aria-haspopup="true"', () => {
+        it('should give the action button aria-haspopup="true"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -336,7 +336,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.actionButton()).toHaveAttribute('aria-haspopup', 'true')
         })
 
-        it('action button starts with aria-expanded="false"', () => {
+        it('should start the action button with aria-expanded="false"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -346,7 +346,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.actionButton()).toHaveAttribute('aria-expanded', 'false')
         })
 
-        it('action button toggles aria-expanded to "true" when opened', async () => {
+        it('should toggle aria-expanded to "true" on the action button when opened', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -359,7 +359,7 @@ describe('Table — Accessibility', () => {
             expect(btn).toHaveAttribute('aria-expanded', 'true')
         })
 
-        it('dropdown list has role="menu" and aria-label "Row actions menu"', async () => {
+        it('should give the dropdown list role="menu" and an aria-label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -372,7 +372,7 @@ describe('Table — Accessibility', () => {
             ).toBeInTheDocument()
         })
 
-        it('action items have role="menuitem" with aria-label matching the action label', async () => {
+        it('should give the action items role="menuitem" with a matching aria-label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -388,7 +388,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.menuItem('Delete')).toBeInTheDocument()
         })
 
-        it('list items wrapping menuitems have role="none"', async () => {
+        it('should give the list items wrapping menuitems role="none"', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -404,7 +404,7 @@ describe('Table — Accessibility', () => {
             })
         })
 
-        it('disables action button when all actions are filtered out', () => {
+        it('should disable action button when all actions are filtered out', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -419,7 +419,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Selection ARIA', () => {
-        it('renders "Select all rows" checkbox in header for multiple mode', () => {
+        it('should render "Select all rows" checkbox in header for multiple mode', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -433,7 +433,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.selectAll()).toBeInTheDocument()
         })
 
-        it('does not render "Select all rows" checkbox for single mode', () => {
+        it('should not render "Select all rows" checkbox for single mode', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -450,7 +450,7 @@ describe('Table — Accessibility', () => {
             ).not.toBeInTheDocument()
         })
 
-        it('renders per-row checkboxes with "Select row N" aria-labels', () => {
+        it('should render per-row checkboxes with "Select row N" aria-labels', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -467,7 +467,7 @@ describe('Table — Accessibility', () => {
             })
         })
 
-        it('disabled rows have disabled checkbox', () => {
+        it('should give disabled rows a disabled checkbox', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -486,7 +486,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Sorting ARIA', () => {
-        it('sortable column has aria-sort="ascending" when sorted asc', () => {
+        it('should give the sortable column aria-sort="ascending" when sorted ascending', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -506,7 +506,7 @@ describe('Table — Accessibility', () => {
             )
         })
 
-        it('sortable column has aria-sort="descending" when sorted desc', () => {
+        it('should give the sortable column aria-sort="descending" when sorted descending', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -526,7 +526,7 @@ describe('Table — Accessibility', () => {
             )
         })
 
-        it('non-sorted sortable column does not have aria-sort', () => {
+        it('should leave a non-sorted sortable column without aria-sort', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -545,7 +545,7 @@ describe('Table — Accessibility', () => {
             ).not.toHaveAttribute('aria-sort')
         })
 
-        it('sort buttons have aria-label "Sort by {header}"', () => {
+        it('should give the sort buttons a "Sort by {header}" aria-label', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -564,7 +564,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.sortButton('Value')).toBeInTheDocument()
         })
 
-        it('sort icon has aria-hidden="true"', () => {
+        it('should give the sort icon aria-hidden="true"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -582,17 +582,17 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Empty state ARIA', () => {
-        it('empty cell has role="status"', () => {
+        it('should give the empty cell role="status"', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
             expect(Test.Table('test').Get.emptyState()).toBeInTheDocument()
         })
 
-        it('empty cell shows default "No data" text', () => {
+        it('should show the default "No data" text in the empty cell', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
             expect(Test.Table('test').Get.byText('No data')).toBeInTheDocument()
         })
 
-        it('empty cell shows custom emptyState content', () => {
+        it('should show the custom emptyState content in the empty cell', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: [],
@@ -602,7 +602,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.byText('Nothing here')).toBeInTheDocument()
         })
 
-        it('empty cell colspan spans all columns', () => {
+        it('should span every column with the empty cell colspan', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: [], columns: basicColumns })
             expect(Test.Table('test').Get.emptyState()).toHaveAttribute(
                 'colspan',
@@ -612,7 +612,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Filter panel ARIA', () => {
-        it('filter toggle button has aria-label "Toggle filters"', () => {
+        it('should give the filter toggle button a "Toggle filters" aria-label', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -625,7 +625,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.filterToggle()).toBeInTheDocument()
         })
 
-        it('filter toggle starts with aria-expanded="false"', () => {
+        it('should start the filter toggle with aria-expanded="false"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -638,7 +638,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.filterToggle()).toHaveAttribute('aria-expanded', 'false')
         })
 
-        it('filter toggle sets aria-expanded="true" when open', async () => {
+        it('should set aria-expanded="true" on the filter toggle when open', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -653,7 +653,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.filterToggle()).toHaveAttribute('aria-expanded', 'true')
         })
 
-        it('filter panel has role="search" and aria-label "Table filters"', async () => {
+        it('should give the filter panel role="search" and a "Table filters" aria-label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -668,7 +668,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.filterPanel()).toBeInTheDocument()
         })
 
-        it('filter inputs have associated labels', async () => {
+        it('should give the filter inputs associated labels', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -689,7 +689,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Pagination ARIA', () => {
-        it('pagination wrapper has role="navigation" and aria-label "Table pagination"', () => {
+        it('should give the pagination wrapper role="navigation" and an aria-label', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -704,7 +704,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.pagination()).toBeInTheDocument()
         })
 
-        it('page buttons have aria-label "Page N"', () => {
+        it('should give the page buttons a "Page N" aria-label', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -722,7 +722,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.pageButton(3)).toBeInTheDocument()
         })
 
-        it('current page button has aria-current="page"', () => {
+        it('should give the current page button aria-current="page"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -737,7 +737,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.pageButton(2)).toHaveAttribute('aria-current', 'page')
         })
 
-        it('non-current page buttons do not have aria-current', () => {
+        it('should leave non-current page buttons without aria-current', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -752,7 +752,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.pageButton(1)).not.toHaveAttribute('aria-current')
         })
 
-        it('first/previous/next/last buttons have correct aria-labels', () => {
+        it('should give the first/previous/next/last buttons correct aria-labels', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -771,7 +771,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.lastPage()).toBeInTheDocument()
         })
 
-        it('first/previous buttons are disabled on page 1', () => {
+        it('should disable the first/previous buttons on page 1', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -788,7 +788,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.prevPage()).toBeDisabled()
         })
 
-        it('next/last buttons are disabled on last page', () => {
+        it('should disable the next/last buttons on the last page', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -805,7 +805,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.lastPage()).toBeDisabled()
         })
 
-        it('shows item range when totalItems is provided', () => {
+        it('should show item range when totalItems is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -825,7 +825,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Download ARIA', () => {
-        it('single download button has aria-label "Download" by default', () => {
+        it('should give the single download button a "Download" aria-label by default', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -835,7 +835,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
-        it('single download button uses custom label as aria-label', () => {
+        it('should use the custom label as aria-label on the single download button', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -845,7 +845,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.downloadButton('Export CSV')).toBeInTheDocument()
         })
 
-        it('multi-option download trigger has aria-label "Download"', () => {
+        it('should give the multi-option download trigger a "Download" aria-label', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -861,7 +861,7 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
         })
 
-        it('multi-option dropdown has aria-haspopup="listbox"', () => {
+        it('should give the multi-option dropdown aria-haspopup="listbox"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -882,7 +882,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Info button ARIA', () => {
-        it('renders info button with aria-label "More information"', () => {
+        it('should render info button with aria-label "More information"', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -894,7 +894,7 @@ describe('Table — Accessibility', () => {
             expect(table.Get.infoButton()).toBeInTheDocument()
         })
 
-        it('does not render info button when infoText is not provided', () => {
+        it('should not render info button when infoText is not provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -908,7 +908,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Table aria-label fallback', () => {
-        it('table element uses aria-label when no title is provided', () => {
+        it('should use aria-label on the table element when no title is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'Fallback label',
                 data: rows,
@@ -920,7 +920,7 @@ describe('Table — Accessibility', () => {
             )
         })
 
-        it('table element does not have aria-label when title provides aria-labelledby', () => {
+        it('should leave the table element without aria-label when the title labels it', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -932,7 +932,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Description ARIA', () => {
-        it('renders description text in the header slot', () => {
+        it('should render description text in the header slot', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -942,14 +942,14 @@ describe('Table — Accessibility', () => {
             expect(Test.Table('test').Get.byText('A helpful description')).toBeInTheDocument()
         })
 
-        it('table does not have aria-describedby when no description', () => {
+        it('should leave the table without aria-describedby when there is no description', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             expect(Test.Table('test').Get.table()).not.toHaveAttribute('aria-describedby')
         })
     })
 
     describe('Filter aria-controls', () => {
-        it('filter toggle has aria-controls pointing to the filter panel id', async () => {
+        it('should point the filter toggle aria-controls at the filter panel', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -968,7 +968,7 @@ describe('Table — Accessibility', () => {
             expect(panel).toHaveAttribute('id', controlsId)
         })
 
-        it('filter reset button has aria-label "Reset filters"', async () => {
+        it('should give the filter reset button a "Reset filters" aria-label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -985,7 +985,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Action menu aria-controls', () => {
-        it('action button has aria-haspopup and opens portaled menu', async () => {
+        it('should give the action button aria-haspopup and open a portaled menu', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -1005,7 +1005,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Dropdown aria-controls', () => {
-        it('multi-option download trigger has aria-controls linking to the listbox', async () => {
+        it('should link the multi-option aria-controls to the listbox', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -1031,7 +1031,7 @@ describe('Table — Accessibility', () => {
     })
 
     describe('Escape key handling', () => {
-        it('pressing Escape closes the action menu', async () => {
+        it('should close the action menu when Escape is pressed', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows.slice(0, 1),
@@ -1046,7 +1046,7 @@ describe('Table — Accessibility', () => {
             expect(btn).toHaveAttribute('aria-expanded', 'false')
         })
 
-        it('pressing Escape closes the dropdown', async () => {
+        it('should close the dropdown when Escape is pressed', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,

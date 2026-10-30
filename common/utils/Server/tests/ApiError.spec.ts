@@ -2,17 +2,17 @@ import { describe, it, expect } from 'vitest'
 import { ApiError, HttpStatus } from '..'
 
 describe('ApiError', () => {
-    it('is an instance of Error', () => {
+    it('should be an instance of Error', () => {
         const error = new ApiError(HttpStatus.NOT_FOUND, 'Exercise not found')
         expect(error).toBeInstanceOf(Error)
     })
 
-    it('sets the message from the constructor', () => {
+    it('should set the message from the constructor', () => {
         const error = new ApiError(HttpStatus.BAD_REQUEST, 'Bad Content')
         expect(error.message).toBe('Bad Content')
     })
 
-    it('defaults the name to "ApiError"', () => {
+    it('should default the name to "ApiError"', () => {
         const error = new ApiError(HttpStatus.NOT_FOUND, 'Exercise not found')
         expect(error.name).toBe('ApiError')
     })
@@ -24,13 +24,13 @@ describe('ApiError', () => {
         [HttpStatus.NOT_FOUND, 'Not found'],
         [HttpStatus.CONFLICT, 'Conflict'],
         [HttpStatus.INTERNAL_SERVER_ERROR, 'Internal error'],
-    ])('carries the correct status code %i', (status, message) => {
+    ])('should carry the correct status code %i', (status, message) => {
         const error = new ApiError(status, message)
         expect(error.status).toBe(status)
         expect(error.status).toBeTypeOf('number')
     })
 
-    it('is catchable as an Error via throw', () => {
+    it('should be catchable as an Error via throw', () => {
         let caught: unknown
         try {
             throw new ApiError(HttpStatus.NOT_FOUND, 'Exercise not found')

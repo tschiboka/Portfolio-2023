@@ -15,7 +15,7 @@ describe('Numbers.Optional.toString', () => {
         [NaN, undefined],
         [null, undefined],
         [undefined, undefined],
-    ])('toString(%j) should return %j', (value, expected) => {
+    ])('should return %j for toString(%j)', (value, expected) => {
         expect(toString(value)).toBe(expected)
     })
 })

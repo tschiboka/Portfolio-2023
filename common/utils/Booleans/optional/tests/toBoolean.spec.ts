@@ -11,7 +11,7 @@ describe('Booleans.Optional.toBoolean', () => {
         ['true ', false],
         [null, false],
         [undefined, false],
-    ])('toBoolean(%j) should return %j', (value, expected) => {
+    ])('should return %j for toBoolean(%j)', (value, expected) => {
         expect(toBoolean(value)).toBe(expected)
     })
 })

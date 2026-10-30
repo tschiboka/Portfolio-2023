@@ -81,24 +81,24 @@ describe('CacheKeyBuilder', () => {
     })
 
     describe('chaining combinations', () => {
-        it('feature + byId should produce [key, feature, id]', () => {
+        it('should produce [key, feature, id] for feature + byId', () => {
             const result = new CacheKeyBuilder('users').feature('detail').byId('abc').build()
             expect(result).toEqual(['users', 'detail', 'abc'])
         })
 
-        it('feature + byFilters should produce [key, feature, filters]', () => {
+        it('should produce [key, feature, filters] for feature + byFilters', () => {
             const filters = { sort: 'name' }
             const result = new CacheKeyBuilder('users').feature('list').byFilters(filters).build()
             expect(result).toEqual(['users', 'list', filters])
         })
 
-        it('byId + byFilters should produce [key, id, filters]', () => {
+        it('should produce [key, id, filters] for byId + byFilters', () => {
             const filters = { include: 'posts' }
             const result = new CacheKeyBuilder('users').byId(7).byFilters(filters).build()
             expect(result).toEqual(['users', 7, filters])
         })
 
-        it('feature + byId + byFilters should produce [key, feature, id, filters]', () => {
+        it('should produce [key, feature, id, filters] for feature + byId + byFilters', () => {
             const filters = { expand: true }
             const result = new CacheKeyBuilder('users')
                 .feature('detail')
@@ -108,7 +108,7 @@ describe('CacheKeyBuilder', () => {
             expect(result).toEqual(['users', 'detail', 99, filters])
         })
 
-        it('order of chaining should not matter', () => {
+        it('should not depend on the order of chaining', () => {
             const filters = { expand: true }
             const a = new CacheKeyBuilder('x').byFilters(filters).byId(1).feature('f').build()
             const b = new CacheKeyBuilder('x').feature('f').byId(1).byFilters(filters).build()
@@ -127,7 +127,7 @@ describe('CacheKeyBuilder', () => {
             expect(withId.build()).toEqual(['items', 5])
         })
 
-        it('branching from the same builder should produce independent keys', () => {
+        it('should produce independent keys when branching from the same builder', () => {
             const base = new CacheKeyBuilder('items').feature('detail')
             const branchA = base.byId(1)
             const branchB = base.byId(2)
@@ -136,7 +136,7 @@ describe('CacheKeyBuilder', () => {
             expect(branchB.build()).toEqual(['items', 'detail', 2])
         })
 
-        it('adding filters to one branch should not affect the other', () => {
+        it('should not affect the other branch when filters are added to one', () => {
             const base = new CacheKeyBuilder('items').byId(1)
             const withFilters = base.byFilters({ active: true })
 
@@ -191,7 +191,7 @@ describe('QueryKey', () => {
     }
 
     describe('each key should return a CacheKeyBuilder with the correct base key', () => {
-        it.each(Object.entries(expectedKeys))('%s → ["%s"]', (property, baseKey) => {
+        it.each(Object.entries(expectedKeys))('should expose %s as ["%s"]', (property, baseKey) => {
             const builder = QueryKey[property as Key<typeof QueryKey>]
             expect(builder).toBeInstanceOf(CacheKeyBuilder)
             expect(builder.build()).toEqual([baseKey])
@@ -205,7 +205,7 @@ describe('QueryKey', () => {
             expect(a).not.toBe(b)
         })
 
-        it('chaining on one access should not affect the next access', () => {
+        it('should not affect the next access when chaining on one', () => {
             const withId = QueryKey.Level.byId('fire')
             const fresh = QueryKey.Level
 
@@ -215,32 +215,32 @@ describe('QueryKey', () => {
     })
 
     describe('real-world usage patterns', () => {
-        it('simple key build', () => {
+        it('should build a simple key', () => {
             expect(QueryKey.AppSettings.build()).toEqual(['app-settings'])
         })
 
-        it('key with byId (string)', () => {
+        it('should build a key with byId from a string', () => {
             expect(QueryKey.Level.byId('forest').build()).toEqual(['level', 'forest'])
         })
 
-        it('key with byId (number)', () => {
+        it('should build a key with byId from a number', () => {
             expect(QueryKey.Level.byId(3).build()).toEqual(['level', 3])
         })
 
-        it('key with byId (undefined) should omit id', () => {
+        it('should omit the id when byId is undefined', () => {
             expect(QueryKey.RehydrateSession.byId(undefined).build()).toEqual(['rehydrate-session'])
         })
 
-        it('key with feature', () => {
+        it('should build a key with a feature', () => {
             expect(QueryKey.Categories.feature('tree').build()).toEqual(['categories', 'tree'])
         })
 
-        it('key with byFilters', () => {
+        it('should build a key with byFilters', () => {
             const filters = { difficulty: 'hard' }
             expect(QueryKey.LevelNames.byFilters(filters).build()).toEqual(['level-names', filters])
         })
 
-        it('key with feature + byId + byFilters', () => {
+        it('should build a key with feature + byId + byFilters', () => {
             const filters = { includeArchived: true }
             const result = QueryKey.WordFrequencies.feature('search')
                 .byId(42)
@@ -249,7 +249,7 @@ describe('QueryKey', () => {
             expect(result).toEqual(['word-frequencies', 'search', 42, filters])
         })
 
-        it('invalidation pattern — partial key match', () => {
+        it('should match a partial key as the invalidation pattern', () => {
             const allLevels = QueryKey.Level.build()
             const specificLevel = QueryKey.Level.byId('fire').build()
 

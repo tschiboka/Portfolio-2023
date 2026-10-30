@@ -18,29 +18,29 @@ const defaultProps: SideMenuProps = { items: mockItems }
 
 describe('SideMenu', () => {
     describe('Visibility', () => {
-        it('renders the aside element when visible (default)', () => {
+        it('should render the aside element when visible (default)', () => {
             Test.SideMenu.Set.mock(defaultProps)
             expect(Test.SideMenu().Get.tagName()).toBe('ASIDE')
         })
 
-        it('returns null when visible is false', () => {
+        it('should return null when visible is false', () => {
             Test.SideMenu.Set.mock({ ...defaultProps, visible: false })
             expect(Accessor.screen.queryByRole('complementary')).not.toBeInTheDocument()
         })
     })
 
     describe('Accessibility', () => {
-        it('uses default aria-label "Side menu" when not specified', () => {
+        it('should use default aria-label "Side menu" when not specified', () => {
             Test.SideMenu.Set.mock(defaultProps)
             expect(Test.SideMenu().Get.attribute('aria-label')).toBe('Side menu')
         })
 
-        it('applies custom aria-label', () => {
+        it('should apply custom aria-label', () => {
             Test.SideMenu.Set.mock({ ...defaultProps, ariaLabel: 'Tools' })
             expect(Test.SideMenu('Tools').Get.attribute('aria-label')).toBe('Tools')
         })
 
-        it('sets title attribute on each item', () => {
+        it('should set title attribute on each item', () => {
             Test.SideMenu.Set.mock(defaultProps)
             expect(Test.SideMenu().Has.item('Home')).toBe(true)
             expect(Test.SideMenu().Has.item('Settings')).toBe(true)
@@ -49,7 +49,7 @@ describe('SideMenu', () => {
     })
 
     describe('Styling', () => {
-        it('applies custom className alongside SideMenu class', () => {
+        it('should apply custom className alongside SideMenu class', () => {
             Test.SideMenu.Set.mock({ ...defaultProps, className: 'CustomSide' })
             const menu = Test.SideMenu()
 
@@ -57,19 +57,19 @@ describe('SideMenu', () => {
             expect(menu.Get.className()).toContain('CustomSide')
         })
 
-        it('applies inline style', () => {
+        it('should apply inline style', () => {
             Test.SideMenu.Set.mock({ ...defaultProps, style: { width: '60px' } })
             expect(Test.SideMenu().Get.style().width).toBe('60px')
         })
 
-        it('applies highlighted class to highlighted items', () => {
+        it('should apply highlighted class to highlighted items', () => {
             Test.SideMenu.Set.mock(defaultProps)
             expect(Test.SideMenu().Has.highlighted()).toBe(true)
         })
     })
 
     describe('Content', () => {
-        it('renders icons for each item', () => {
+        it('should render icons for each item', () => {
             Test.SideMenu.Set.mock(defaultProps)
 
             expect(Accessor.screen.getByTestId('icon-home')).toBeInTheDocument()
@@ -77,7 +77,7 @@ describe('SideMenu', () => {
             expect(Accessor.screen.getByTestId('icon-notifications')).toBeInTheDocument()
         })
 
-        it('renders badge when item has a badge', () => {
+        it('should render badge when item has a badge', () => {
             Test.SideMenu.Set.mock(defaultProps)
             const menu = Test.SideMenu()
 
@@ -85,14 +85,14 @@ describe('SideMenu', () => {
             expect(menu.Get.badge()).toHaveTextContent('3')
         })
 
-        it('does not render badge when item has no badge', () => {
+        it('should not render badge when item has no badge', () => {
             const noBadgeItems: SideMenuItem[] = [{ icon: <span />, label: 'Home' }]
             Test.SideMenu.Set.mock({ items: noBadgeItems })
 
             expect(Test.SideMenu().Has.badge()).toBe(false)
         })
 
-        it('renders CounterBadge when CounterBadge is used as badge', () => {
+        it('should render CounterBadge when CounterBadge is used as badge', () => {
             const items: SideMenuItem[] = [
                 { icon: <span />, label: 'Views', badge: <CounterBadge count={42} /> },
             ]
@@ -105,18 +105,18 @@ describe('SideMenu', () => {
     })
 
     describe('Close button', () => {
-        it('renders close button when onClose is provided', () => {
+        it('should render close button when onClose is provided', () => {
             const onClose = vi.fn()
             Test.SideMenu.Set.mock({ ...defaultProps, onClose })
             expect(Test.SideMenu().Has.closeButton()).toBe(true)
         })
 
-        it('does not render close button when onClose is not provided', () => {
+        it('should not render close button when onClose is not provided', () => {
             Test.SideMenu.Set.mock(defaultProps)
             expect(Test.SideMenu().Has.closeButton()).toBe(false)
         })
 
-        it('calls onClose when close button is clicked', async () => {
+        it('should call onClose when close button is clicked', async () => {
             const onClose = vi.fn()
             Test.SideMenu.Set.mock({ ...defaultProps, onClose })
 
@@ -126,7 +126,7 @@ describe('SideMenu', () => {
     })
 
     describe('Item interactions', () => {
-        it('calls onClick when an item is clicked', async () => {
+        it('should call onClick when an item is clicked', async () => {
             const onClick = vi.fn()
             const items: SideMenuItem[] = [{ icon: <span />, label: 'Files', onClick }]
             Test.SideMenu.Set.mock({ items })
@@ -135,7 +135,7 @@ describe('SideMenu', () => {
             expect(onClick).toHaveBeenCalledTimes(1)
         })
 
-        it('does not throw when clicking an item without onClick', async () => {
+        it('should not throw when clicking an item without onClick', async () => {
             const items: SideMenuItem[] = [{ icon: <span />, label: 'Files' }]
             Test.SideMenu.Set.mock({ items })
             await expect(Test.SideMenu().Do.clickItem('Files')).resolves.not.toThrow()

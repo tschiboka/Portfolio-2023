@@ -6,7 +6,7 @@ const { rows, basicColumns } = TableMocks
 
 describe('Table — Filtering', () => {
     describe('Filter toggle', () => {
-        it('renders filter button when filtering is provided', () => {
+        it('should render filter button when filtering is provided', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -20,7 +20,7 @@ describe('Table — Filtering', () => {
             expect(table.Get.filterToggle()).toBeInTheDocument()
         })
 
-        it('does not show filter panel initially', () => {
+        it('should not show filter panel initially', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -34,7 +34,7 @@ describe('Table — Filtering', () => {
             expect(table.Has.filterPanel()).toBe(false)
         })
 
-        it('shows filter panel after clicking toggle', async () => {
+        it('should show filter panel after clicking toggle', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -49,7 +49,7 @@ describe('Table — Filtering', () => {
             expect(table.Get.filterPanel()).toBeInTheDocument()
         })
 
-        it('hides filter panel when toggled off', async () => {
+        it('should hide filter panel when toggled off', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -65,7 +65,7 @@ describe('Table — Filtering', () => {
             expect(table.Has.filterPanel()).toBe(false)
         })
 
-        it('adds active class when filter panel is open', async () => {
+        it('should add active class when filter panel is open', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -82,7 +82,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Text filter input', () => {
-        it('renders text input with label', async () => {
+        it('should render text input with label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -106,7 +106,7 @@ describe('Table — Filtering', () => {
             expect(input).toHaveAttribute('placeholder', 'Enter name…')
         })
 
-        it('calls onFilter with text value on input', async () => {
+        it('should call onFilter with text value on input', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -126,7 +126,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Number filter input', () => {
-        it('renders number input with min/max', async () => {
+        it('should render number input with min/max', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -144,7 +144,7 @@ describe('Table — Filtering', () => {
             expect(input).toHaveAttribute('max', '100')
         })
 
-        it('calls onFilter with numeric value', async () => {
+        it('should call onFilter with numeric value', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -164,7 +164,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Search filter input', () => {
-        it('renders search input', async () => {
+        it('should render search input', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -181,7 +181,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Date filter input', () => {
-        it('renders date input with min/max', async () => {
+        it('should render date input with min/max', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -209,7 +209,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Checkbox filter input', () => {
-        it('renders checkbox input', async () => {
+        it('should render checkbox input', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -227,7 +227,7 @@ describe('Table — Filtering', () => {
             )
         })
 
-        it('calls onFilter with boolean value', async () => {
+        it('should call onFilter with boolean value', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -245,7 +245,7 @@ describe('Table — Filtering', () => {
             expect(onFilter).toHaveBeenLastCalledWith(expect.objectContaining({ active: true }))
         })
 
-        it('toggles checkbox back to false', async () => {
+        it('should toggle checkbox back to false', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -267,7 +267,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Option (select) filter input', () => {
-        it('renders dropdown trigger with aria-label', async () => {
+        it('should render dropdown trigger with aria-label', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -292,7 +292,7 @@ describe('Table — Filtering', () => {
             expect(Accessor.screen.getByRole('button', { name: 'Status' })).toBeInTheDocument()
         })
 
-        it('shows options including "All" when dropdown is opened', async () => {
+        it('should show options including "All" when dropdown is opened', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -322,7 +322,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Multiple filter inputs combined', () => {
-        it('renders all filter inputs in a single panel', async () => {
+        it('should render all filter inputs in a single panel', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -343,7 +343,7 @@ describe('Table — Filtering', () => {
             expect(Accessor.screen.getByLabelText('Active')).toBeInTheDocument()
         })
 
-        it('onFilter receives all current filter values', async () => {
+        it('should give onFilter every current filter value', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -371,7 +371,7 @@ describe('Table — Filtering', () => {
     })
 
     describe('Reset button', () => {
-        it('shows Reset button only when filter panel is open', async () => {
+        it('should show Reset button only when filter panel is open', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
                 data: rows,
@@ -387,7 +387,7 @@ describe('Table — Filtering', () => {
             expect(table.Get.resetFilters()).toBeInTheDocument()
         })
 
-        it('resets filter values when Reset is clicked', async () => {
+        it('should reset filter values when Reset is clicked', async () => {
             const onFilter = vi.fn()
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',

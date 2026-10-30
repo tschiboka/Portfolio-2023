@@ -151,7 +151,7 @@ describe('Browser', () => {
             return document.createElement('div')
         }
 
-        it('observes multiple elements', () => {
+        it('should observe multiple elements', () => {
             const el1 = createElement()
             const el2 = createElement()
 
@@ -161,7 +161,7 @@ describe('Browser', () => {
             expect(observer.observe).toHaveBeenCalledTimes(2)
         })
 
-        it('updates visibility when element intersects', () => {
+        it('should update visibility when element intersects', () => {
             const el1 = createElement()
             const el2 = createElement()
 
@@ -181,7 +181,7 @@ describe('Browser', () => {
             expect(result.current[0]).toEqual({ element: el1, isVisible: true })
         })
 
-        it('tracks multiple elements independently', () => {
+        it('should track multiple elements independently', () => {
             const el1 = createElement()
             const el2 = createElement()
 
@@ -208,7 +208,7 @@ describe('Browser', () => {
             ])
         })
 
-        it('disconnects on unmount', () => {
+        it('should disconnect on unmount', () => {
             const el1 = createElement()
 
             const { unmount } = renderHook(() => useIsVisible([el1]))
