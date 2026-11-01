@@ -1,44 +1,20 @@
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import axios from 'axios'
+import { FeatureQueryTestUtils } from './FeatureQuery.spec.utils'
 import { FeatureQuery } from '..'
-import type { MockInstance } from 'vitest'
-import type { AxiosRequestConfig } from 'axios'
-import type { CacheKey } from '../QueryKey'
+import type { FeatureQueryChainer } from '../FeatureQuery.types'
 
-const mockedAxios = axios as unknown as {
-    get: MockInstance
-    post: MockInstance
-    put: MockInstance
-    patch: MockInstance
-    delete: MockInstance
-}
-
-const TEST_TOKEN = 'test-session-token'
-const TEST_PATH = 'Login'
-const TEST_URL = 'http://localhost:5000/api/login'
-const TEST_QUERY_KEY: CacheKey = ['login']
-
-type BuiltQuery = ReturnType<ReturnType<typeof FeatureQuery>['build']>
-
-/** The axios config of the nth call, typed so header assertions stay safe. */
-const callConfig = (verb: 'get' | 'post' | 'put' | 'patch' | 'delete', index = 0) =>
-    mockedAxios[verb].mock.calls[index] as [string, AxiosRequestConfig?, AxiosRequestConfig?]
-
-/** Runs the query function of a built `Get` and returns the promise. */
-const runGet = (query: BuiltQuery) => {
-    const { queryFn } = query.Get<string>(TEST_QUERY_KEY)
-    if (typeof queryFn !== 'function') throw new Error('FeatureQuery: Get has no queryFn')
-
-    return queryFn({} as never)
-}
-
-/** Runs the mutation function of a built verb and returns the promise. */
-const runMutation = <TPayload>(options: { mutationFn?: unknown }, payload: TPayload) => {
-    const { mutationFn } = options
-    if (typeof mutationFn !== 'function') throw new Error('FeatureQuery: verb has no mutationFn')
-
-    return (mutationFn as (variables: TPayload) => Promise<unknown>)(payload)
-}
+const {
+    mockedAxios,
+    TEST_TOKEN,
+    TEST_PATH,
+    TEST_URL,
+    TEST_QUERY_KEY,
+    callConfig,
+    runGet,
+    runMutation,
+    axiosVerbOf,
+} = FeatureQueryTestUtils
 
 describe('FeatureQuery', () => {
     beforeEach(() => {
@@ -56,10 +32,10 @@ describe('FeatureQuery', () => {
 
     describe('chaining', () => {
         it.each([
-            ['path', (query: ReturnType<typeof FeatureQuery>) => query.path(TEST_PATH)],
-            ['subpath', (query: ReturnType<typeof FeatureQuery>) => query.subpath('nested')],
-            ['token', (query: ReturnType<typeof FeatureQuery>) => query.token(TEST_TOKEN)],
-            ['token with undefined', (query: ReturnType<typeof FeatureQuery>) => query.token()],
+            ['path', (query: FeatureQueryChainer) => query.path(TEST_PATH)],
+            ['subpath', (query: FeatureQueryChainer) => query.subpath('nested')],
+            ['token', (query: FeatureQueryChainer) => query.token(TEST_TOKEN)],
+            ['token with undefined', (query: FeatureQueryChainer) => query.token()],
         ])('should return the builder from %s', (_name, chain) => {
             const query = FeatureQuery()
             expect(chain(query)).toBe(query)
@@ -191,13 +167,11 @@ describe('FeatureQuery', () => {
     })
 
     describe.each(['Post', 'Put', 'Patch'] as const)('%s', (verb) => {
-        const axiosVerb = verb.toLowerCase() as 'post' | 'put' | 'patch'
-
         it('should send the payload to the resolved URL', async () => {
             const query = FeatureQuery().path(TEST_PATH).build()
             await runMutation(query[verb]<{ name: string }>({}), { name: 'legs' })
 
-            expect(mockedAxios[axiosVerb]).toHaveBeenCalledWith(
+            expect(mockedAxios[axiosVerbOf(verb)]).toHaveBeenCalledWith(
                 TEST_URL,
                 { name: 'legs' },
                 expect.any(Object),
@@ -205,7 +179,7 @@ describe('FeatureQuery', () => {
         })
 
         it('should unwrap the axios response data', async () => {
-            mockedAxios[axiosVerb].mockResolvedValue({ data: { id: '1' } })
+            mockedAxios[axiosVerbOf(verb)].mockResolvedValue({ data: { id: '1' } })
             const query = FeatureQuery().path(TEST_PATH).build()
 
             await expect(
@@ -214,7 +188,7 @@ describe('FeatureQuery', () => {
         })
 
         it('should reject when the request fails', async () => {
-            mockedAxios[axiosVerb].mockRejectedValue(new Error('network down'))
+            mockedAxios[axiosVerbOf(verb)].mockRejectedValue(new Error('network down'))
             const query = FeatureQuery().path(TEST_PATH).build()
 
             await expect(

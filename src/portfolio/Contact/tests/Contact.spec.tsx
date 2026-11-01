@@ -1,20 +1,8 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Test } from '@shared-components/Screen/tests'
-import { ContactMockHandlers } from './Contact.mockHandlers'
 import { ContactTestUtils } from './Contact.spec.utils'
-import { Contact } from '../Contact'
 
-const { form: FORM, fields, buttons, errors } = ContactTestUtils.labels
-
-const setupContact = () => {
-    Test.Screen.Do.render({
-        path: '/contact',
-        children: <Contact pageName="Contact" path="/contact" />,
-        handlers: ContactMockHandlers.Defaults,
-    })
-
-    return { form: Test.Form(FORM) }
-}
+const { fields, buttons, errors } = ContactTestUtils.labels
 
 describe('Contact', () => {
     beforeEach(() => {
@@ -23,50 +11,50 @@ describe('Contact', () => {
 
     describe('Layout', () => {
         it('should render heading', () => {
-            setupContact()
+            ContactTestUtils.render()
             expect(screen.getByRole('heading', { name: 'Get in Touch!' })).toBeInTheDocument()
         })
 
         it('should render the name input with label', () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             expect(form.Input(fields.name).Get.value()).toBeDefined()
         })
 
         it('should render the email input with label', () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             expect(form.Input(fields.email).Get.value()).toBeDefined()
         })
 
         it('should render the phone input with label', () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             expect(form.Input(fields.phone).Get.value()).toBeDefined()
         })
 
         it('should render the message textarea with label', () => {
-            setupContact()
+            ContactTestUtils.render()
             expect(screen.getByLabelText(fields.message)).toBeInTheDocument()
         })
 
         it('should render the send button', () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             expect(form.Button(buttons.send).Get.textContent()).toMatch(buttons.send)
         })
 
         it('should render the form with accessible label', () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             expect(form).toBeDefined()
         })
     })
 
     describe('Form validation', () => {
         it('should show validation errors when form is empty on submit', async () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error for invalid name characters', async () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             await form.Input(fields.name).Do.type('John@Doe')
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.message).Do.type('This is a valid message text')
@@ -75,7 +63,7 @@ describe('Contact', () => {
         })
 
         it('should show validation error when email is invalid', async () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             await form.Input(fields.name).Do.type('John Doe')
             await form.Input(fields.email).Do.type('invalid')
             await form.Input(fields.message).Do.type('This is a valid message text')
@@ -84,7 +72,7 @@ describe('Contact', () => {
         })
 
         it('should show validation error when message is too short', async () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             await form.Input(fields.name).Do.type('John Doe')
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.message).Do.type('Short')
@@ -93,7 +81,7 @@ describe('Contact', () => {
         })
 
         it('should allow empty phone field', async () => {
-            const { form } = setupContact()
+            const { form } = ContactTestUtils.render()
             await form.Input(fields.name).Do.type('John Doe')
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.message).Do.type('This is a valid message text')
@@ -103,17 +91,8 @@ describe('Contact', () => {
     })
 
     describe('Successful submission', () => {
-        const fillAndSubmitForm = async () => {
-            const { form } = setupContact()
-            await form.Input(fields.name).Do.type('John Doe')
-            await form.Input(fields.email).Do.type('valid@email.com')
-            await form.Input(fields.message).Do.type('This is a valid message text')
-            await form.Do.submit()
-            return form
-        }
-
         it('should disable submit button after successful submission', async () => {
-            const form = await fillAndSubmitForm()
+            const form = await ContactTestUtils.fillAndSubmit()
             await waitFor(() => {
                 expect(form.Button(buttons.send).Get.isDisabled()).toBe(true)
             })
@@ -121,23 +100,13 @@ describe('Contact', () => {
     })
 
     describe('Failed submission', () => {
-        const fillAndSubmitInvalid = async () => {
-            const { form } = setupContact()
-            Test.Screen.Set.handlers(ContactMockHandlers.PostRejected)
-            await form.Input(fields.name).Do.type('John Doe')
-            await form.Input(fields.email).Do.type('valid@email.com')
-            await form.Input(fields.message).Do.type('This is a valid message text')
-            await form.Do.submit()
-            return form
-        }
-
         it('should display server error message on submission failure', async () => {
-            const form = await fillAndSubmitInvalid()
+            const form = await ContactTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.sendFailed)).toBeInTheDocument()
         })
 
         it('should not disable submit button on failure', async () => {
-            const form = await fillAndSubmitInvalid()
+            const form = await ContactTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.sendFailed)).toBeInTheDocument()
             expect(form.Button(buttons.send).Get.isDisabled()).toBe(false)
         })
@@ -145,7 +114,7 @@ describe('Contact', () => {
 
     describe('Loading state', () => {
         it('should not show loading indicator initially', () => {
-            setupContact()
+            ContactTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
         })
     })

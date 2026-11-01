@@ -1,5 +1,8 @@
+import { NavMocks } from './Nav.mocks'
 import { NavUtils } from '../Nav.utils'
 import type { MenuItem, SubmenuState } from '../Nav.types'
+
+const { projectsItem, aboutItem } = NavMocks
 
 describe('NavUtils.isArticle', () => {
     it('should return true for a blog path', () => {
@@ -39,9 +42,6 @@ describe('NavUtils.isActive', () => {
 })
 
 describe('NavUtils.isHighlighted', () => {
-    const item: MenuItem = { label: 'Projects', path: '/projects' }
-    const otherItem: MenuItem = { label: 'About', path: '/about' }
-
     it('should return "active" when submenu parentLabel matches item label', () => {
         const submenu: SubmenuState = {
             parentLabel: 'Projects',
@@ -49,7 +49,7 @@ describe('NavUtils.isHighlighted', () => {
             extended: false,
         }
 
-        expect(NavUtils.isHighlighted(item, 'Home', submenu)).toBe('active')
+        expect(NavUtils.isHighlighted(projectsItem, 'Home', submenu)).toBe('active')
     })
 
     it('should return an empty string when submenu parentLabel does not match', () => {
@@ -59,12 +59,12 @@ describe('NavUtils.isHighlighted', () => {
             extended: false,
         }
 
-        expect(NavUtils.isHighlighted(item, 'Home', submenu)).toBe('')
+        expect(NavUtils.isHighlighted(projectsItem, 'Home', submenu)).toBe('')
     })
 
     it('should fall back to isActive when no submenu is provided', () => {
-        expect(NavUtils.isHighlighted(item, 'Projects')).toBe('active')
-        expect(NavUtils.isHighlighted(item, 'Home')).toBe('')
+        expect(NavUtils.isHighlighted(projectsItem, 'Projects')).toBe('active')
+        expect(NavUtils.isHighlighted(projectsItem, 'Home')).toBe('')
     })
 
     it('should return an empty string for non-matching item when submenu is present', () => {
@@ -74,7 +74,7 @@ describe('NavUtils.isHighlighted', () => {
             extended: false,
         }
 
-        expect(NavUtils.isHighlighted(otherItem, 'About', submenu)).toBe('')
+        expect(NavUtils.isHighlighted(aboutItem, 'About', submenu)).toBe('')
     })
 })
 

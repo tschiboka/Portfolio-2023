@@ -1,37 +1,9 @@
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import axios from 'axios'
+import { RequestBuilderTestUtils } from './RequestBuilder.spec.utils'
 import { RequestBuilder } from '..'
-import type { MockInstance } from 'vitest'
-import type { AxiosRequestConfig } from 'axios'
 
-/** An axios method stubbed by `vi.spyOn`, recording its `(url, config)` arguments. */
-type AxiosMethodMock = MockInstance<(url: string, config?: AxiosRequestConfig) => unknown>
-
-const mockedAxios = axios as unknown as {
-    get: AxiosMethodMock
-    post: AxiosMethodMock
-    put: AxiosMethodMock
-    patch: AxiosMethodMock
-    delete: AxiosMethodMock
-    head: AxiosMethodMock
-    options: AxiosMethodMock
-}
-
-const TEST_TOKEN = 'test-session-token'
-
-function mockApiPathBuilder() {
-    const apiRoutes: Record<string, string> = {
-        Login: 'login',
-        Message: 'message',
-    }
-    const projectRoutes: Record<string, string> = {
-        Gym: 'projects/gym',
-    }
-    vi.spyOn(apiPathBuilderModule, 'apiPathBuilder').mockImplementation((pathName: string) => {
-        if (pathName in projectRoutes) return `http://localhost:5000/${projectRoutes[pathName]}`
-        return `http://localhost:5000/api/${apiRoutes[pathName]}`
-    })
-}
+const { mockedAxios, TEST_TOKEN, mockApiPathBuilder } = RequestBuilderTestUtils
 
 describe('RequestBuilder', () => {
     beforeEach(() => {

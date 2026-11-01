@@ -4,19 +4,9 @@ import { SettingsMocks, UserMocks } from '@common-mocks'
 import { LoginMocks } from './Login.mocks'
 import { LoginMockHandlers } from './Login.mockHandlers'
 import { LoginTestUtils } from './Login.spec.utils'
-import { AppRoutes } from '../../../app'
 
-const { form: FORM, fields, buttons, errors } = LoginTestUtils.labels
-
-const setupLogin = () => {
-    Test.Screen.Do.render({
-        path: AppRoutes.Login,
-        session: { setSession: LoginMocks.setSession },
-        handlers: LoginMockHandlers.Defaults,
-    })
-
-    return { form: Test.Form(FORM) }
-}
+const { fields, buttons, errors } = LoginTestUtils.labels
+const { setSession } = LoginMocks
 
 describe('Login', () => {
     beforeEach(() => {
@@ -25,41 +15,41 @@ describe('Login', () => {
 
     describe('Layout', () => {
         it('should render heading and subheading', () => {
-            setupLogin()
+            LoginTestUtils.render()
             expect(screen.getByRole('heading', { name: 'Login' })).toBeInTheDocument()
             expect(screen.getByText('Tschiboka Personal App')).toBeInTheDocument()
         })
 
         it('should render the email input with label', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             expect(form.Input(fields.email).Get.value()).toBeDefined()
         })
 
         it('should render the password input with label', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             expect(form.Input(fields.password).Get.value()).toBeDefined()
         })
 
         it('should render the login button', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             expect(form.Button(buttons.login).Get.textContent()).toMatch(buttons.login)
         })
 
         it('should render the form with accessible label', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             expect(form).toBeDefined()
         })
     })
 
     describe('Registration button', () => {
         it('should render the register button when registration is enabled', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             const button = await waitFor(() => form.Button(buttons.register))
             expect(button).toBeDefined()
         })
 
         it('should not render the register button when registration is disabled', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             Test.Screen.Set.handlers(
                 LoginMockHandlers.Settings.Get.updateResponse((builder) =>
                     builder.setValue('settings', {
@@ -74,7 +64,7 @@ describe('Login', () => {
         })
 
         it('should navigate to /api/register when register button is clicked', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             const button = await waitFor(() => form.Button(buttons.register))
 
             expect(button).toBeDefined()
@@ -85,27 +75,27 @@ describe('Login', () => {
 
     describe('Form validation', () => {
         it('should show validation error when email is empty on submit', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when email is too short', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             await form.Input(fields.email).Do.type('ab@c.co')
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
         })
 
         it('should show validation error when password is empty on submit', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Do.submit()
             expect(await form.Wait.errorMsg()).toBeInTheDocument()
         })
 
         it('should show validation error when password is too short', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             await form.Input(fields.email).Do.type('valid@email.com')
             await form.Input(fields.password).Do.type('short')
             await form.Do.submit()
@@ -113,26 +103,19 @@ describe('Login', () => {
         })
 
         it('should not call login API when form is invalid', async () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             await form.Do.submit()
             expect(await form.Wait.errorMsgs()).toBeDefined()
-            expect(LoginMocks.setSession).not.toHaveBeenCalled()
+            expect(setSession).not.toHaveBeenCalled()
             expect(Test.Screen.Has.navigated()).toBe(false)
         })
     })
 
     describe('Successful login', () => {
-        const fillAndSubmitForm = async () => {
-            const { form } = setupLogin()
-            await form.Input(fields.email).Do.type('valid@email.com')
-            await form.Input(fields.password).Do.type('validpassword1')
-            await form.Do.submit()
-        }
-
         it('should set session with token, user, and settings on success', async () => {
-            await fillAndSubmitForm()
+            await LoginTestUtils.fillAndSubmit()
             await waitFor(() => {
-                expect(LoginMocks.setSession).toHaveBeenCalledWith({
+                expect(setSession).toHaveBeenCalledWith({
                     token: 'mock-jwt-token',
                     user: UserMocks.build(),
                     settings: SettingsMocks.build(),
@@ -141,47 +124,38 @@ describe('Login', () => {
         })
 
         it('should navigate to /api/home on successful login', async () => {
-            await fillAndSubmitForm()
+            await LoginTestUtils.fillAndSubmit()
             await Test.Screen.Wait.navigatedTo('/api/home')
         })
     })
 
     describe('Failed login', () => {
-        const fillAndSubmitInvalid = async () => {
-            const { form } = setupLogin()
-            Test.Screen.Set.handlers(LoginMockHandlers.Login.PostRejected)
-            await form.Input(fields.email).Do.type('wrong@email.com')
-            await form.Input(fields.password).Do.type('wrongpassword1')
-            await form.Do.submit()
-            return form
-        }
-
         it('should display server error message on login failure', async () => {
-            const form = await fillAndSubmitInvalid()
+            const form = await LoginTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
         })
 
         it('should not navigate on login failure', async () => {
-            const form = await fillAndSubmitInvalid()
+            const form = await LoginTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
             expect(Test.Screen.Has.navigated()).toBe(false)
         })
 
         it('should not set session on login failure', async () => {
-            const form = await fillAndSubmitInvalid()
+            const form = await LoginTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.invalidCredentials)).toBeInTheDocument()
-            expect(LoginMocks.setSession).not.toHaveBeenCalled()
+            expect(setSession).not.toHaveBeenCalled()
         })
     })
 
     describe('Password reveal', () => {
         it('should render password field as type password by default', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             expect(form.Input(fields.password).Get.type()).toBe('password')
         })
 
         it('should toggle password visibility when reveal icon is clicked', () => {
-            const { form } = setupLogin()
+            const { form } = LoginTestUtils.render()
             const toggleBtn = form.Button(buttons.togglePassword)
             expect(toggleBtn.Get.textContent()).toBeDefined()
         })
@@ -189,7 +163,7 @@ describe('Login', () => {
 
     describe('Loading state', () => {
         it('should hide loading indicator once settings are loaded', async () => {
-            setupLogin()
+            LoginTestUtils.render()
             await waitFor(() => {
                 expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
             })

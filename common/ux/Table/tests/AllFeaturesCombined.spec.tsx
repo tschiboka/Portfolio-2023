@@ -1,65 +1,11 @@
 import { screen, within } from '@testing-library/react'
 import { Test } from '@common-ux/Test'
+import { TableMocks } from './Table.mocks'
+import type { FullRow } from './Table.spec.types'
+
+const { fullData, fullColumns } = TableMocks
 
 describe('Table — Combined Features', () => {
-    type FullRow = {
-        id: string
-        name: string
-        email: string
-        role: string
-        status: string
-        note: string
-    }
-
-    const fullData: FullRow[] = [
-        {
-            id: '1',
-            name: 'Alice',
-            email: 'alice@test.com',
-            role: 'Admin',
-            status: 'active',
-            note: 'Lead',
-        },
-        { id: '2', name: 'Bob', email: 'bob@test.com', role: 'Editor', status: 'active', note: '' },
-        {
-            id: '3',
-            name: 'Charlie',
-            email: 'charlie@test.com',
-            role: 'Viewer',
-            status: 'inactive',
-            note: 'On leave',
-        },
-        {
-            id: '4',
-            name: 'Diana',
-            email: 'diana@test.com',
-            role: 'Editor',
-            status: 'pending',
-            note: '',
-        },
-        {
-            id: '5',
-            name: 'Eve',
-            email: 'eve@test.com',
-            role: 'Viewer',
-            status: 'active',
-            note: 'New hire',
-        },
-    ]
-
-    const fullColumns = [
-        { header: 'Name', accessor: 'name' as const, isSortable: true },
-        { header: 'Email', accessor: 'email' as const, breakpoint: 'lg' as const },
-        { header: 'Role', accessor: 'role' as const, isSortable: true },
-        { header: 'Status', accessor: 'status' as const },
-        {
-            header: 'Note',
-            accessor: 'note' as const,
-            defaultValue: 'N/A',
-            breakpoint: 'xl' as const,
-        },
-    ]
-
     it('should render table with title, description, legend, data, actions, selection, sorting, filtering, download, and pagination', () => {
         Test.Table.Set.mock<FullRow>({
             id: 'full-table',

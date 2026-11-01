@@ -5,9 +5,6 @@ import { HiddenRenderer } from '../utils/HiddenRenderer'
 import { SoftDisabledRenderer } from '../utils/SoftDisabledRenderer'
 import { TooltipRenderer } from '../utils/TooltipRenderer'
 
-// jsdom does not implement window.scrollTo
-window.scrollTo = vi.fn()
-
 describe('HiddenRenderer', () => {
     it('should render nothing', () => {
         const { container } = render(<HiddenRenderer />)

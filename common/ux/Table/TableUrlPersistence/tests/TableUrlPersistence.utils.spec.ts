@@ -1,26 +1,25 @@
 import { describe, it, expect } from 'vitest'
+import { TableUrlPersistenceTestUtils } from './TableUrlPersistence.spec.utils'
 import { TableUrlPersistenceUtils } from '..'
-import type { TableState } from '../../Table.hooks.types'
-
-type Filters = { search?: string; min?: number; active?: boolean }
-
-const makeState = (overrides: Partial<TableState<Filters>> = {}): TableState<Filters> => ({
-    filters: { search: 'ada', min: 5, active: true },
-    sorting: { column: 'name', direction: 'desc' },
-    pagination: { pageNumber: 3, pageSize: 25 },
-    ...overrides,
-})
+import type { Filters } from './TableUrlPersistence.spec.types'
 
 describe('statesEqual', () => {
     it('should be true for identical states', () => {
-        expect(TableUrlPersistenceUtils.statesEqual(makeState(), makeState())).toBe(true)
+        expect(
+            TableUrlPersistenceUtils.statesEqual(
+                TableUrlPersistenceTestUtils.makeState(),
+                TableUrlPersistenceTestUtils.makeState(),
+            ),
+        ).toBe(true)
     })
 
     it('should be false when pagination differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
-                makeState(),
-                makeState({ pagination: { pageNumber: 4, pageSize: 25 } }),
+                TableUrlPersistenceTestUtils.makeState(),
+                TableUrlPersistenceTestUtils.makeState({
+                    pagination: { pageNumber: 4, pageSize: 25 },
+                }),
             ),
         ).toBe(false)
     })
@@ -28,8 +27,10 @@ describe('statesEqual', () => {
     it('should be false when sorting differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
-                makeState(),
-                makeState({ sorting: { column: 'name', direction: 'asc' } }),
+                TableUrlPersistenceTestUtils.makeState(),
+                TableUrlPersistenceTestUtils.makeState({
+                    sorting: { column: 'name', direction: 'asc' },
+                }),
             ),
         ).toBe(false)
     })
@@ -37,25 +38,28 @@ describe('statesEqual', () => {
     it('should be false when a filter value differs', () => {
         expect(
             TableUrlPersistenceUtils.statesEqual(
-                makeState(),
-                makeState({ filters: { search: 'grace', min: 5, active: true } }),
+                TableUrlPersistenceTestUtils.makeState(),
+                TableUrlPersistenceTestUtils.makeState({
+                    filters: { search: 'grace', min: 5, active: true },
+                }),
             ),
         ).toBe(false)
     })
 
     it('should be false when one state has an extra filter key', () => {
-        const a = makeState()
-        const b = makeState({
+        const a = TableUrlPersistenceTestUtils.makeState()
+        const b = TableUrlPersistenceTestUtils.makeState({
             filters: { search: 'ada', min: 5, active: true, extra: 1 } as Filters,
         })
         expect(TableUrlPersistenceUtils.statesEqual(a, b)).toBe(false)
     })
 
     it('should be true when both states have the same undefined filter values', () => {
+        const filters = { search: undefined, min: undefined, active: false }
         expect(
             TableUrlPersistenceUtils.statesEqual(
-                makeState({ filters: { search: undefined, min: undefined, active: false } }),
-                makeState({ filters: { search: undefined, min: undefined, active: false } }),
+                TableUrlPersistenceTestUtils.makeState({ filters }),
+                TableUrlPersistenceTestUtils.makeState({ filters }),
             ),
         ).toBe(true)
     })

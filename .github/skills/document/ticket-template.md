@@ -20,13 +20,30 @@ Include environment, links, or other essential metadata only when relevant. Keep
 
 Ordered, cascading implementation steps. Each step must be independently actionable and very short.
 
-- [ ] Step 1: Do task A
-- [ ] Step 2: Do task B
-    - [ ] Step 2.1: Do subtask
+- [ ] Step 1: Do task 1
+- [ ] Step 2: Do task 2
+    - [ ] Step 2.1: Do subtask 2.1
+    - [ ] Step 2.2: Do subtask 2.2
+
+Types of checkboxes:
+[ ] - Not done
+[*] - Currently addressing
+[x] - Done
+[-] - Wont do
+
+Note: Prefer deleting items rather than marking them with \*, after user user approval.
 
 ## 2.1. Task Details
 
 Additional information for a specific checklist step, only when the step cannot be understood without it.
+
+## 2.n. Address <Code Review|QA|Post-mortem> — Round <r>
+
+Raised by a review, a QA pass or a post-mortem. Opened as the round arrives and
+numbered after the last section. A closed round is never appended to, and no item
+here belongs in §2.
+
+- [ ] <What the round raised>
 
 ## 3. Decisions & Rationale
 

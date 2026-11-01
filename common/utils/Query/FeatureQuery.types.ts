@@ -1,7 +1,9 @@
 import type { AxiosError } from 'axios'
 import type { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query'
+import type { Dictionary } from '@common-utils'
 import type { CacheKey } from './QueryKey'
 import type { ErrorResponse } from './mergeStatus.types'
+import type { PathKey, ServerGroup } from '../Paths/Path.types'
 
 export type QueryOptions<TResponse> = Omit<
     UseQueryOptions<TResponse, AxiosError<ErrorResponse>>,
@@ -12,6 +14,19 @@ export type MutationOptions<TRequest, TResponse> = Omit<
     UseMutationOptions<TResponse, AxiosError<ErrorResponse>, TRequest>,
     'mutationFn'
 >
+
+/**
+ * The chainable builder `FeatureQuery()` returns — every configuration step hands the same object
+ * back, so a `.queries.ts` reads as one sentence until `build()`.
+ */
+export type FeatureQueryChainer = {
+    path: (value: PathKey) => FeatureQueryChainer
+    group: (value: ServerGroup) => FeatureQueryChainer
+    subpath: (value: string) => FeatureQueryChainer
+    token: (value?: string) => FeatureQueryChainer
+    query: (value: Dictionary) => FeatureQueryChainer
+    build: () => FeatureQueryBuilt
+}
 
 /**
  * The built feature query. Each verb returns hook *options*, so the single

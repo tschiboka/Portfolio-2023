@@ -1,21 +1,9 @@
-import { MemoryRouter } from 'react-router-dom'
-import { render, screen } from '@testing-library/react'
-import { AppProvider } from '@shared-context'
-import { Welcome } from './Welcome'
-
-function renderComponent() {
-    render(
-        <MemoryRouter>
-            <AppProvider>
-                <Welcome />
-            </AppProvider>
-        </MemoryRouter>,
-    )
-}
+import { screen } from '@testing-library/react'
+import { WelcomeTestUtils } from './Welcome.spec.utils'
 
 describe('Welcome', () => {
     it('should render a headshot image', () => {
-        renderComponent()
+        WelcomeTestUtils.render()
 
         const image = screen.getByRole('img', { name: /headshot/i })
         expect(image).toBeInTheDocument()
@@ -23,14 +11,14 @@ describe('Welcome', () => {
     })
 
     it('should render an element with name', () => {
-        renderComponent()
+        WelcomeTestUtils.render()
 
         const name = screen.getByText(/tivadar debnar/i)
         expect(name).toBeInTheDocument()
     })
 
     it('should render a title element', () => {
-        renderComponent()
+        WelcomeTestUtils.render()
 
         const title = screen.getByText(/web developer/i)
         expect(title).toBeInTheDocument()

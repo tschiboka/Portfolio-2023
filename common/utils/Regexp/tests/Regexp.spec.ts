@@ -1,9 +1,9 @@
+import { RegexpTestUtils } from './Regexp.spec.utils'
 import { Regexp } from '..'
 
-describe('Regexp.ObjectId', () => {
-    /** Valid 24-char lowercase hex ObjectId string. */
-    const HEX = '64b000000000000000000000'
+const { HEX } = RegexpTestUtils
 
+describe('Regexp.ObjectId', () => {
     it('should match exactly 24 lowercase hex characters', () => {
         expect(Regexp.ObjectId.test(HEX)).toBe(true)
     })

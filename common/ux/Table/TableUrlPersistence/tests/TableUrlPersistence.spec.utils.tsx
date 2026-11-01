@@ -5,7 +5,7 @@ import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import type { ReactNode } from 'react'
 import type { Filters } from './TableUrlPersistence.spec.types'
 import type { UseTableUrlPersistenceArgs } from '../TableUrlPersistence.types'
-import type { TableSortState, Paging } from '../../Table.hooks.types'
+import type { TableSortState, Paging, TableState } from '../../Table.hooks.types'
 import type { FilterDefinitions } from '../../TableFilter'
 
 const { filterDefs, defaultSort, defaultPaging } = TableUrlPersistenceMocks
@@ -53,4 +53,12 @@ const setup = (options: SetupOptions = {}) => {
     return { result, search }
 }
 
-export const TableUrlPersistenceTestUtils = { setup }
+/** Builds a table state, overriding whatever a case needs. */
+const makeState = (overrides: Partial<TableState<Filters>> = {}): TableState<Filters> => ({
+    filters: { search: 'ada', min: 5, active: true },
+    sorting: { column: 'name', direction: 'desc' },
+    pagination: { pageNumber: 3, pageSize: 25 },
+    ...overrides,
+})
+
+export const TableUrlPersistenceTestUtils = { setup, makeState }

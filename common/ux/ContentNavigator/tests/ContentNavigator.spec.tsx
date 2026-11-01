@@ -1,67 +1,8 @@
 import { screen } from '@testing-library/react'
-import { BrowserHooks } from '@common-utils'
 import { Test } from '@common-ux/Test'
+import { ContentNavigatorTestUtils } from './ContentNavigator.spec.utils'
 
-// Mock useIsVisible — return all elements as visible by default
-let mockVisibility: { element: Element; isVisible: boolean }[] = []
-vi.spyOn(BrowserHooks, 'useIsVisible').mockImplementation((elements: Element[]) => {
-    mockVisibility = elements.map((element) => ({ element, isVisible: true }))
-    return mockVisibility
-})
-
-// Mock IntersectionObserver (jsdom doesn't have it)
-const mockObserve = vi.fn()
-const mockUnobserve = vi.fn()
-const mockDisconnect = vi.fn()
-vi.stubGlobal(
-    'IntersectionObserver',
-    vi.fn(() => ({
-        observe: mockObserve,
-        unobserve: mockUnobserve,
-        disconnect: mockDisconnect,
-    })),
-)
-
-// scrollIntoView is not available in jsdom
-const mockScrollIntoView = vi.fn()
-Element.prototype.scrollIntoView = mockScrollIntoView
-
-const Set = {
-    navigator: (overrides: { depth?: number; showNavigator?: boolean; ariaLabel?: string } = {}) =>
-        Test.ContentNavigator.Set.mock({
-            ariaLabel: overrides.ariaLabel ?? 'TOC',
-            children: (
-                <>
-                    <h1 data-toc="">Introduction</h1>
-                    <p>Intro content</p>
-                    <h2 data-toc="">Getting Started</h2>
-                    <p>Getting started content</p>
-                    <h2 data-toc="">Advanced Usage</h2>
-                    <p>Advanced content</p>
-                    <h3 data-toc="">Configuration</h3>
-                    <p>Config content</p>
-                </>
-            ),
-            ...overrides,
-        }),
-    empty: (overrides: { ariaLabel?: string } = {}) =>
-        Test.ContentNavigator.Set.mock({
-            ariaLabel: overrides.ariaLabel ?? 'TOC',
-            children: <p>No headings here</p>,
-            ...overrides,
-        }),
-    noTocAttr: (overrides: { ariaLabel?: string } = {}) =>
-        Test.ContentNavigator.Set.mock({
-            ariaLabel: overrides.ariaLabel ?? 'TOC',
-            children: (
-                <>
-                    <h1>No data-toc</h1>
-                    <h2>Also no data-toc</h2>
-                </>
-            ),
-            ...overrides,
-        }),
-}
+const { Set, scrollIntoView } = ContentNavigatorTestUtils
 
 describe('ContentNavigator', () => {
     describe('rendering', () => {
@@ -242,7 +183,7 @@ describe('ContentNavigator', () => {
             const navigator = Test.ContentNavigator('TOC')
 
             await navigator.Do.clickLink(1)
-            expect(mockScrollIntoView).toHaveBeenCalled()
+            expect(scrollIntoView).toHaveBeenCalled()
         })
     })
 

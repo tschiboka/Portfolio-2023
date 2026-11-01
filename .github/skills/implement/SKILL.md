@@ -48,7 +48,8 @@ Always work on the **smallest next reviewable task**:
 
 1. Identify it.
 2. Offer it and wait for approval.
-3. Implement only that task.
+3. Implement only that task, and tick the ticket line it completes in the same
+   pass — naming both in the offer.
 4. Stop and inspect the result.
 5. Offer the next task.
 

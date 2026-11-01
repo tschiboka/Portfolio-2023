@@ -1,15 +1,13 @@
 import { Const } from '@common-ux/Const'
 import { SplitTestUtils } from './Split.spec.utils'
 import { SplitSelectors } from '../Split.selectors'
+import type { SplitRatio } from '../Split.types'
 
 const { Set } = SplitTestUtils
 
 describe('Split', () => {
     describe('selectRatio', () => {
-        const cases: {
-            input: Parameters<typeof SplitSelectors.selectRatio>[0]
-            expected: string
-        }[] = [
+        it.each<{ input: SplitRatio | undefined; expected: string }>([
             { input: '1/1', expected: '1fr 1fr' },
             { input: '1/2', expected: '1fr 2fr' },
             { input: '2/1', expected: '2fr 1fr' },
@@ -18,12 +16,8 @@ describe('Split', () => {
             { input: '1/4', expected: '1fr 4fr' },
             { input: '4/1', expected: '4fr 1fr' },
             { input: undefined, expected: '1fr 1fr' },
-        ]
-
-        cases.forEach(({ input, expected }) => {
-            it(`should map "${String(input)}" to "${expected}"`, () => {
-                expect(SplitSelectors.selectRatio(input)).toBe(expected)
-            })
+        ])('should map "$input" to "$expected"', ({ input, expected }) => {
+            expect(SplitSelectors.selectRatio(input)).toBe(expected)
         })
     })
 

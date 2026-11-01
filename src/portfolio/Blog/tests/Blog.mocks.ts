@@ -1,3 +1,4 @@
+import { blogArticles } from '@portfolio/Article'
 import type { GetLikeSummaryResponse, GetVisitSummaryResponse } from '@common-types'
 
 const visits: GetVisitSummaryResponse = {
@@ -32,4 +33,8 @@ const likes: GetLikeSummaryResponse = {
     },
 }
 
-export const BlogMocks = { visits, likes }
+const publishedArticles = blogArticles.filter((a) => !a.upcoming)
+
+const upcomingArticles = blogArticles.filter((a) => a.upcoming)
+
+export const BlogMocks = { visits, likes, publishedArticles, upcomingArticles }

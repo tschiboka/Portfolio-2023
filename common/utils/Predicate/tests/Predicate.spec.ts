@@ -1,3 +1,5 @@
+import { noop } from '@common-utils'
+import { PredicateTestUtils } from './Predicate.spec.utils'
 import {
     isDefined,
     isUndefined,
@@ -40,7 +42,7 @@ import {
 } from '../Predicate'
 import type { Nullish } from '../../Generics'
 
-const noop = (): void => {}
+const { objectIdHex: HEX, objectId, statuses } = PredicateTestUtils
 
 describe('isDefined', () => {
     it('should return true for non-null, non-undefined values', () => {
@@ -385,11 +387,6 @@ describe('isObject', () => {
 })
 
 describe('isObjectId', () => {
-    /** Valid 24-char lowercase hex ObjectId string. */
-    const HEX = '64b000000000000000000000'
-    /** Duck-typed Mongo ObjectId: an object whose String() form is the given value. */
-    const objectId = (asString: string) => ({ toString: () => asString })
-
     it('should return true for an object whose String() form is 24-char lowercase hex', () => {
         expect(isObjectId(objectId(HEX))).toBe(true)
     })
@@ -578,9 +575,6 @@ describe('isObjectId', () => {
 })
 
 describe('isValidObjectId', () => {
-    /** Valid 24-char lowercase hex ObjectId string. */
-    const HEX = '64b000000000000000000000'
-
     it('should return true for exactly 24 lowercase hex characters', () => {
         expect(isValidObjectId(HEX)).toBe(true)
         expect(isValidObjectId('000000000000000000000000')).toBe(true)
@@ -837,8 +831,6 @@ describe('hasValue', () => {
 })
 
 describe('isOneOf', () => {
-    const statuses = ['active', 'inactive'] as const
-
     it('should return true when value is in the options', () => {
         expect(isOneOf('active', statuses)).toBe(true)
         expect(isOneOf('inactive', statuses)).toBe(true)
@@ -1068,34 +1060,30 @@ describe('isThenable', () => {
 })
 
 describe('isAll', () => {
-    const allStrings = isAll(isString)
-
     it('should return true when all elements match', () => {
-        expect(allStrings(['a', 'b', 'c'])).toBe(true)
+        expect(isAll(isString)(['a', 'b', 'c'])).toBe(true)
     })
 
     it('should return false when any element does not match', () => {
-        expect(allStrings(['a', 1, 'c'])).toBe(false)
+        expect(isAll(isString)(['a', 1, 'c'])).toBe(false)
     })
 
     it('should return true for empty arrays', () => {
-        expect(allStrings([])).toBe(true)
+        expect(isAll(isString)([])).toBe(true)
     })
 })
 
 describe('isAny', () => {
-    const anyNumber = isAny(isNumber)
-
     it('should return true when at least one element matches', () => {
-        expect(anyNumber([1, 'a'])).toBe(true)
+        expect(isAny(isNumber)([1, 'a'])).toBe(true)
     })
 
     it('should return false when no elements match', () => {
-        expect(anyNumber(['a', 'b'])).toBe(false)
+        expect(isAny(isNumber)(['a', 'b'])).toBe(false)
     })
 
     it('should return false for empty arrays', () => {
-        expect(anyNumber([])).toBe(false)
+        expect(isAny(isNumber)([])).toBe(false)
     })
 })
 

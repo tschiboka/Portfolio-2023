@@ -1,20 +1,10 @@
+import { SideMenuMocks } from './SideMenu.mocks'
 import { Test, Accessor } from '../../Test'
 import { CounterBadge } from '../../CounterBadge/CounterBadge'
-import type { SideMenuItem, SideMenuProps } from '../SideMenu.types'
+import type { SideMenuItem } from '../SideMenu.types'
 import '@testing-library/jest-dom'
 
-const mockItems: SideMenuItem[] = [
-    { icon: <span data-testid="icon-home" />, label: 'Home' },
-    { icon: <span data-testid="icon-settings" />, label: 'Settings', onClick: vi.fn() },
-    {
-        icon: <span data-testid="icon-notifications" />,
-        label: 'Notifications',
-        highlighted: true,
-        badge: <span>3</span>,
-    },
-]
-
-const defaultProps: SideMenuProps = { items: mockItems }
+const { defaultProps } = SideMenuMocks
 
 describe('SideMenu', () => {
     describe('Visibility', () => {

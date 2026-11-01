@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest'
+import { isNonEmpty } from '@common-utils'
+import { ClientMessageTestUtils } from './ClientMessage.spec.utils'
 import { ClientMessage } from '..'
+
+const { groups } = ClientMessageTestUtils
 
 describe('ClientMessage.Success', () => {
     it.each([
@@ -27,9 +31,12 @@ describe('ClientMessage.Success', () => {
         expect(ClientMessage.Success.Verified('email address')).toBe('Email address verified')
     })
 
-    it.each(['', '   '])('should return the suffix only for an empty-ish resource: %j', (resource) => {
-        expect(ClientMessage.Success.Created(resource)).toBe(`${resource} created`)
-    })
+    it.each(['', '   '])(
+        'should return the suffix only for an empty-ish resource: %j',
+        (resource) => {
+            expect(ClientMessage.Success.Created(resource)).toBe(`${resource} created`)
+        },
+    )
 })
 
 describe('ClientMessage.Failure', () => {
@@ -136,14 +143,12 @@ describe('ClientMessage.Network', () => {
 })
 
 describe('ClientMessage shape', () => {
-    const groups = Object.keys(ClientMessage)
-
     it('should expose the expected groups', () => {
-        expect(groups).toEqual(['Success', 'Failure', 'Progress', 'Empty', 'Confirm', 'Network'])
+        expect(Object.keys(ClientMessage)).toEqual([...groups])
     })
 
     it.each(groups)('should expose only functions in %s', (group) => {
-        const members = Object.values(ClientMessage[group as keyof typeof ClientMessage])
+        const members = Object.values(ClientMessage[group])
         expect(members.every((member) => typeof member === 'function')).toBe(true)
     })
 
@@ -157,6 +162,6 @@ describe('ClientMessage shape', () => {
             ClientMessage.Network.Generic(),
         ]
 
-        expect(renders.every((message) => message.length > 0)).toBe(true)
+        expect(renders.every(isNonEmpty)).toBe(true)
     })
 })

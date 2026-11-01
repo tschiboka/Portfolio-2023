@@ -2,19 +2,10 @@ import { screen } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { Test } from '@shared-components/Screen/tests'
 import { blogArticles } from '@portfolio/Article'
-import { BlogMockHandlers } from './Blog.mockHandlers'
-import { Blog } from '../Blog'
+import { BlogMocks } from './Blog.mocks'
+import { BlogTestUtils } from './Blog.spec.utils'
 
-const publishedArticles = blogArticles.filter((a) => !a.upcoming)
-const upcomingArticles = blogArticles.filter((a) => a.upcoming)
-
-const setupBlogs = () => {
-    Test.Screen.Do.render({
-        path: '/blog',
-        children: <Blog pageName="blog" path="/blog" />,
-        handlers: BlogMockHandlers.Defaults,
-    })
-}
+const { publishedArticles, upcomingArticles } = BlogMocks
 
 describe('Blog', () => {
     beforeEach(() => {
@@ -23,12 +14,12 @@ describe('Blog', () => {
 
     describe('Layout', () => {
         it('should render the heading', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             expect(Test.Heading('Blog')).toBeDefined()
         })
 
         it('should render the description paragraphs', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             expect(
                 Test.Typography(/This blog is a way of documenting things I've learned/i),
             ).toBeDefined()
@@ -45,14 +36,14 @@ describe('Blog', () => {
         })
 
         it('should render the page side menu', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             expect(Test.SideMenu('Side menu')).toBeDefined()
         })
     })
 
     describe('Published articles', () => {
         it('should render all published article cards', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             publishedArticles.forEach((article) => {
                 expect(Test.Typography.byLabel(article.title)).toBeDefined()
             })
@@ -61,14 +52,14 @@ describe('Blog', () => {
 
     describe('Upcoming articles', () => {
         it('should render upcoming article cards when present', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             upcomingArticles.forEach((article) => {
                 expect(Test.Typography.byLabel(article.title)).toBeDefined()
             })
         })
 
         it('should show upcoming date on the card', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             upcomingArticles.forEach((article) => {
                 if (article.upcomingDate) {
                     expect(Test.Typography.byLabel(article.title)).toBeDefined()
@@ -79,7 +70,7 @@ describe('Blog', () => {
 
     describe('Article card content', () => {
         it('should render article images with correct alt text', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             blogArticles
                 .filter((a) => !a.upcoming)
                 .forEach((article) => {
@@ -93,7 +84,7 @@ describe('Blog', () => {
         })
 
         it('should render badges on article cards', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             const allBadges = new Set(
                 blogArticles.filter((a) => !a.upcoming).flatMap((a) => a.badges),
             )
@@ -103,7 +94,7 @@ describe('Blog', () => {
         })
 
         it('should render reading time on article cards', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             const articlesWithReadingTime = blogArticles.filter((a) => !a.upcoming && a.readingTime)
             articlesWithReadingTime.forEach((article) => {
                 const card = Test.Typography.byLabel(article.title)
@@ -112,7 +103,7 @@ describe('Blog', () => {
         })
 
         it('should navigate to article when a card is clicked', async () => {
-            setupBlogs()
+            BlogTestUtils.render()
             const article = publishedArticles[0]
             const card = Test.Typography.byLabel(article.title)
             await card.Do.click()
@@ -122,7 +113,7 @@ describe('Blog', () => {
 
     describe('Loading state', () => {
         it('should not show loading indicator', () => {
-            setupBlogs()
+            BlogTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
         })
     })

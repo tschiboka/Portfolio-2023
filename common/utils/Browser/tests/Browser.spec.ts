@@ -1,61 +1,26 @@
-import { MutableRefObject } from 'react'
 import { renderHook, act } from '@testing-library/react'
+import { BrowserTestUtils } from './Browser.spec.utils'
 import { Browser, BrowserHooks } from '..'
-import type { MockInstance } from 'vitest'
+import type { MutableRefObject } from 'react'
+import type { FullScreenDocument, FullScreenElement } from './Browser.spec.types'
 
 const { copyToClipboard } = Browser
 const { useFullScreen, useIsVisible, useOrientation } = BrowserHooks
-
-// Vendor-prefixed Fullscreen API types — mirrors the hook's interfaces
-interface FullScreenElement {
-    requestFullscreen?: () => Promise<void>
-    webkitRequestFullscreen?: () => Promise<void>
-    msRequestFullscreen?: () => Promise<void>
-}
-
-interface FullScreenDocument {
-    exitFullscreen?: () => Promise<void>
-    webkitExitFullscreen?: () => Promise<void>
-    msExitFullscreen?: () => Promise<void>
-    fullscreenElement?: Element | null
-}
-
-const observeMock = vi.fn()
-const unobserveMock = vi.fn()
-const disconnectMock = vi.fn()
-
-interface MockObserver {
-    observe: ReturnType<typeof vi.fn>
-    unobserve: ReturnType<typeof vi.fn>
-    disconnect: ReturnType<typeof vi.fn>
-    trigger: (entries: Partial<IntersectionObserverEntry>[]) => void
-}
-
-let latestInstance: MockObserver
-let instances: MockObserver[] = []
-
-const IntersectionObserverMock = vi.fn((callback: IntersectionObserverCallback) => {
-    latestInstance = {
-        observe: observeMock,
-        unobserve: unobserveMock,
-        disconnect: disconnectMock,
-        trigger: (entries: Partial<IntersectionObserverEntry>[]) => {
-            callback(
-                entries as IntersectionObserverEntry[],
-                latestInstance as unknown as IntersectionObserver,
-            )
-        },
-    }
-
-    return latestInstance
-})
-
-vi.stubGlobal('IntersectionObserver', IntersectionObserverMock)
+const {
+    reset,
+    latest,
+    createElement,
+    writeText,
+    execCommand,
+    mockClipboard,
+    mockExecCommand,
+    viewports,
+} = BrowserTestUtils
 
 describe('Browser', () => {
     describe('copyToClipboard', () => {
         beforeEach(() => {
-            instances = [] // Reset instances before each test
+            reset()
         })
 
         afterEach(() => {
@@ -63,19 +28,15 @@ describe('Browser', () => {
         })
 
         describe('when navigator.clipboard is available', () => {
-            const writeTextMock = vi.fn().mockResolvedValue(undefined)
-
             beforeEach(() => {
-                Object.assign(navigator, {
-                    clipboard: { writeText: writeTextMock },
-                })
+                mockClipboard()
             })
 
             it.each([['hello world'], [''], ['special chars: <>&"\''], ['multi\nline\ntext']])(
                 'should call navigator.clipboard.writeText with "%s"',
                 async (text: string) => {
                     await copyToClipboard(text)
-                    expect(writeTextMock).toHaveBeenCalledWith(text)
+                    expect(writeText).toHaveBeenCalledWith(text)
                 },
             )
 
@@ -85,32 +46,26 @@ describe('Browser', () => {
             })
 
             it('should propagate clipboard errors', async () => {
-                writeTextMock.mockRejectedValueOnce(new Error('Clipboard blocked'))
+                writeText.mockRejectedValueOnce(new Error('Clipboard blocked'))
                 await expect(copyToClipboard('fail')).rejects.toThrow('Clipboard blocked')
             })
         })
 
         describe('when navigator.clipboard is NOT available', () => {
-            let execCommandMock: MockInstance
-
             beforeEach(() => {
-                // Remove clipboard to trigger fallback
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-                delete (navigator as any).clipboard
-                execCommandMock = vi.fn().mockReturnValue(true)
-                document.execCommand = execCommandMock as unknown as typeof document.execCommand
+                mockExecCommand()
             })
 
             it.each([['hello world'], [''], ['special chars: <>&"\'']])(
                 'should fall back to document.execCommand for "%s"',
                 async (text: string) => {
                     await copyToClipboard(text)
-                    expect(execCommandMock).toHaveBeenCalledWith('copy', true, text)
+                    expect(execCommand).toHaveBeenCalledWith('copy', true, text)
                 },
             )
 
             it('should return the execCommand result', async () => {
-                execCommandMock.mockReturnValue(false)
+                execCommand.mockReturnValue(false)
                 const result = await copyToClipboard('test')
                 expect(result).toBe(false)
             })
@@ -122,34 +77,8 @@ describe('Browser', () => {
     // --------------------
     describe('useIsVisible', () => {
         beforeEach(() => {
-            instances = []
+            reset()
         })
-
-        class IntersectionObserverMock {
-            callback: IntersectionObserverCallback
-            observe = vi.fn()
-            unobserve = vi.fn()
-            disconnect = vi.fn()
-
-            constructor(callback: IntersectionObserverCallback) {
-                this.callback = callback
-                instances.push(this)
-            }
-
-            trigger(entries: Partial<IntersectionObserverEntry>[]) {
-                this.callback(
-                    entries as IntersectionObserverEntry[],
-                    this as unknown as IntersectionObserver,
-                )
-            }
-        }
-
-        globalThis.IntersectionObserver =
-            IntersectionObserverMock as unknown as typeof IntersectionObserver
-
-        function createElement() {
-            return document.createElement('div')
-        }
 
         it('should observe multiple elements', () => {
             const el1 = createElement()
@@ -157,7 +86,7 @@ describe('Browser', () => {
 
             renderHook(() => useIsVisible([el1, el2]))
 
-            const observer = instances[0]
+            const observer = latest()
             expect(observer.observe).toHaveBeenCalledTimes(2)
         })
 
@@ -167,7 +96,7 @@ describe('Browser', () => {
 
             const { result } = renderHook(() => useIsVisible([el1, el2]))
 
-            const observer = instances[0]
+            const observer = latest()
 
             act(() => {
                 observer.trigger([
@@ -187,7 +116,7 @@ describe('Browser', () => {
 
             const { result } = renderHook(() => useIsVisible([el1, el2]))
 
-            const observer = instances[0]
+            const observer = latest()
 
             act(() => {
                 observer.trigger([
@@ -213,7 +142,7 @@ describe('Browser', () => {
 
             const { unmount } = renderHook(() => useIsVisible([el1]))
 
-            const observer = instances[0]
+            const observer = latest()
 
             unmount()
 
@@ -427,57 +356,52 @@ describe('Browser', () => {
     // useOrientation tests
     // --------------------
     describe('useOrientation', () => {
-        const PORTRAIT = { innerWidth: 400, innerHeight: 800 }
-        const LANDSCAPE = { innerWidth: 1200, innerHeight: 800 }
-        const MOBILE = { innerWidth: 600, innerHeight: 900 }
-        const DESKTOP = { innerWidth: 1440, innerHeight: 900 }
-
         afterEach(() => {
             vi.restoreAllMocks()
         })
 
         it('should detect portrait orientation', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(PORTRAIT.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(PORTRAIT.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.portrait.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.portrait.innerHeight)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('portrait')
         })
 
         it('should detect landscape orientation', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.landscape.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.landscape.innerHeight)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('landscape')
         })
 
         it('should detect mobile width', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(MOBILE.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(MOBILE.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.mobile.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.mobile.innerHeight)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(true)
         })
 
         it('should detect desktop width', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(DESKTOP.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.desktop.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.desktop.innerHeight)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(false)
         })
 
         it('should update on resize event', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(LANDSCAPE.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(LANDSCAPE.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.landscape.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.landscape.innerHeight)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.orientation).toBe('landscape')
 
             // Change to portrait
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(PORTRAIT.innerWidth)
-            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(PORTRAIT.innerHeight)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.portrait.innerWidth)
+            vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.portrait.innerHeight)
 
             act(() => {
                 window.dispatchEvent(new Event('resize'))
@@ -487,13 +411,13 @@ describe('Browser', () => {
         })
 
         it('should update isMobile on resize', () => {
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(DESKTOP.innerWidth)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.desktop.innerWidth)
 
             const { result } = renderHook(() => useOrientation())
             expect(result.current.isMobile).toBe(false)
 
             // Resize to mobile width
-            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(MOBILE.innerWidth)
+            vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.mobile.innerWidth)
 
             act(() => {
                 window.dispatchEvent(new Event('resize'))

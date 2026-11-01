@@ -1,21 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import { Accessor } from '@common-ux/Test'
 import { Test } from '@shared-components/Screen/tests'
-import { XmasMocks } from './Xmas.mocks'
-import { XmasMockHandlers } from './Xmas.mockHandlers'
-import { Xmas } from '../Xmas'
-
-const setupXmas = () => {
-    Test.Screen.Do.render({
-        path: '/xmas2025',
-        children: <Xmas />,
-        handlers: XmasMockHandlers.Defaults,
-        session: {
-            isAuthenticated: true,
-            session: { user: XmasMocks.user },
-        },
-    })
-}
+import { XmasTestUtils } from './Xmas.spec.utils'
 
 describe('Xmas', () => {
     beforeEach(() => {
@@ -24,7 +10,7 @@ describe('Xmas', () => {
 
     describe('Layout', () => {
         it('should render the reindeer image', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(
                 new Accessor(
                     screen.getByRole('img', { name: /Reindeer Image/i }),
@@ -34,37 +20,37 @@ describe('Xmas', () => {
         })
 
         it('should render the form with name and message fields', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(Test.Typography.byLabel('Name')).toBeDefined()
             expect(Test.Typography.byLabel('Message')).toBeDefined()
         })
 
         it('should render the submit button', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(Test.Button('Submit')).toBeDefined()
         })
 
         it('should render the Candles heading', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(Test.Heading('Candles')).toBeDefined()
         })
 
         it('should render the candle panel description', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(
                 Test.Typography(/Click on a candle to mess up my candle settings/i),
             ).toBeDefined()
         })
 
         it('should render the page with main content', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(screen.getByRole('main')).toBeInTheDocument()
         })
     })
 
     describe('Candle panel', () => {
         it('should render four candles', async () => {
-            setupXmas()
+            XmasTestUtils.render()
             await waitFor(() => {
                 expect(screen.getAllByRole('img', { name: 'Candle' })).toHaveLength(4)
             })
@@ -72,17 +58,9 @@ describe('Xmas', () => {
     })
 
     describe('Form validation', () => {
-        const fillName = async (value: string) => {
-            const nameInput = screen.getByLabelText<HTMLInputElement>('Name')
-            await Accessor.user.type(nameInput, value, {
-                initialSelectionStart: 0,
-                initialSelectionEnd: nameInput.value.length,
-            })
-        }
-
         it('should show validation error when name is too short on submit', async () => {
-            setupXmas()
-            await fillName('ab')
+            XmasTestUtils.render()
+            await XmasTestUtils.fillName('ab')
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
@@ -91,8 +69,8 @@ describe('Xmas', () => {
         })
 
         it('should show validation error when message is empty on submit', async () => {
-            setupXmas()
-            await fillName('ValidName')
+            XmasTestUtils.render()
+            await XmasTestUtils.fillName('ValidName')
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
@@ -101,8 +79,8 @@ describe('Xmas', () => {
         })
 
         it('should show validation error when name contains special characters', async () => {
-            setupXmas()
-            await fillName('User@Name!')
+            XmasTestUtils.render()
+            await XmasTestUtils.fillName('User@Name!')
             await Test.Button('Submit').Do.click()
 
             await waitFor(() => {
@@ -111,8 +89,8 @@ describe('Xmas', () => {
         })
 
         it('should show validation error when message exceeds max length', async () => {
-            setupXmas()
-            await fillName('ValidName')
+            XmasTestUtils.render()
+            await XmasTestUtils.fillName('ValidName')
             const messageInput = screen.getByLabelText('Message')
             await Accessor.user.type(
                 messageInput,
@@ -128,7 +106,7 @@ describe('Xmas', () => {
 
     describe('Successful submission', () => {
         it('should show success message after submitting valid form', async () => {
-            setupXmas()
+            XmasTestUtils.render()
             const messageInput = screen.getByLabelText('Message')
 
             await Accessor.user.type(messageInput, 'Hello world')
@@ -142,7 +120,7 @@ describe('Xmas', () => {
 
     describe('Loading state', () => {
         it('should not show loading indicator initially', () => {
-            setupXmas()
+            XmasTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
         })
     })

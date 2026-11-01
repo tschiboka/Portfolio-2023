@@ -5,7 +5,7 @@ import { TableMocks } from './Table.mocks'
 import { TableCheckboxSelectors } from '../TableCheckbox/TableCheckbox.selectors'
 
 const { getSelectableRows, getSelectableIds, getAllSelected } = TableCheckboxSelectors
-const { rows, basicColumns } = TableMocks
+const { rows, basicColumns, selectorRows, baseSelection } = TableMocks
 
 describe('Table — Selection', () => {
     describe('Multiple selection', () => {
@@ -290,26 +290,14 @@ describe('Table — Selection', () => {
     })
 
     describe('Selection selectors (unit)', () => {
-        const data: Row[] = [
-            { name: 'A', value: '1', status: 'active', note: '' },
-            { name: 'B', value: '2', status: 'inactive', note: '' },
-            { name: 'C', value: '3', status: 'active', note: '' },
-        ]
-
-        const baseSelection = {
-            getRowId: (r: Row) => r.name,
-            selectedRowIds: [] as string[],
-            onChange: vi.fn(),
-        }
-
         it('should return all rows from getSelectableRows when no isRowSelectable', () => {
-            const result = getSelectableRows({ data, selection: baseSelection })
-            expect(result).toEqual(data)
+            const result = getSelectableRows({ data: selectorRows, selection: baseSelection })
+            expect(result).toEqual(selectorRows)
         })
 
         it('should filter by isRowSelectable in getSelectableRows', () => {
             const result = getSelectableRows({
-                data,
+                data: selectorRows,
                 selection: {
                     ...baseSelection,
                     isRowSelectable: ({ row }) => row.status === 'active',
@@ -321,7 +309,7 @@ describe('Table — Selection', () => {
 
         it('should return the ids of selectable rows from getSelectableIds', () => {
             const result = getSelectableIds({
-                data,
+                data: selectorRows,
                 selection: {
                     ...baseSelection,
                     isRowSelectable: ({ row }) => row.status === 'active',
@@ -332,7 +320,7 @@ describe('Table — Selection', () => {
 
         it('should return true from getAllSelected when every selectable row is selected', () => {
             const result = getAllSelected({
-                data,
+                data: selectorRows,
                 selection: {
                     ...baseSelection,
                     selectedRowIds: ['A', 'C'],
@@ -344,7 +332,7 @@ describe('Table — Selection', () => {
 
         it('should return false from getAllSelected when some rows are unselected', () => {
             const result = getAllSelected({
-                data,
+                data: selectorRows,
                 selection: {
                     ...baseSelection,
                     selectedRowIds: ['A'],
@@ -356,7 +344,7 @@ describe('Table — Selection', () => {
 
         it('should return false from getAllSelected when no rows are selectable', () => {
             const result = getAllSelected({
-                data,
+                data: selectorRows,
                 selection: {
                     ...baseSelection,
                     selectedRowIds: [],

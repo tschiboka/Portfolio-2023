@@ -8,11 +8,8 @@ import { PopupUtils } from '../Popup.utils'
 import type { Key } from '@common-utils'
 import type { ActionMenuItem } from '..'
 
-const { Set, mockAnchorRef } = OverlayTestUtils
+const { Set, mockAnchorRef, mockAnchorEl, mockPopupEl } = OverlayTestUtils
 const { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } = PopupUtils
-
-// jsdom does not implement window.scrollTo
-window.scrollTo = vi.fn()
 
 describe('Overlay.FullScreen', () => {
     it('should render children', () => {
@@ -300,13 +297,12 @@ describe('Overlay.Popup', () => {
     })
 
     describe('modes', () => {
-        const modes = ['primary', 'warning', 'danger', 'info'] as const
-
-        modes.forEach((mode) => {
-            it(`should apply ${mode} mode class`, () => {
+        it.each(['primary', 'warning', 'danger', 'info'] as const)(
+            'should apply %s mode class',
+            (mode) => {
                 expect(Set.popup({ mode }).popup.Get.className()).toContain(ModeClass[mode])
-            })
-        })
+            },
+        )
 
         it('should default to primary mode', () => {
             expect(Set.popup().popup.Get.className()).toContain(ModeClass.primary)
@@ -314,14 +310,10 @@ describe('Overlay.Popup', () => {
     })
 
     describe('sizes', () => {
-        const sizes = ['sm', 'md', 'lg'] as const
-
-        sizes.forEach((size) => {
-            it(`should apply ${size} size styles`, () => {
-                const { popup } = Set.popup({ size })
-                expect(popup.Get.style().minWidth).toBeDefined()
-                expect(popup.Get.style().maxWidth).toBeDefined()
-            })
+        it.each(['sm', 'md', 'lg'] as const)('should apply %s size styles', (size) => {
+            const { popup } = Set.popup({ size })
+            expect(popup.Get.style().minWidth).toBeDefined()
+            expect(popup.Get.style().maxWidth).toBeDefined()
         })
 
         it('should default to md size', () => {
@@ -507,40 +499,6 @@ describe('Overlay.Popup', () => {
 })
 
 describe('getAnchorPosition', () => {
-    const mockAnchorEl = (rect: Partial<DOMRect>) => {
-        const el = document.createElement('button')
-        el.getBoundingClientRect = () => ({
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            width: 0,
-            height: 0,
-            x: 0,
-            y: 0,
-            toJSON: () => ({}),
-            ...rect,
-        })
-        return el
-    }
-
-    const mockPopupEl = (rect: Partial<DOMRect>) => {
-        const el = document.createElement('div')
-        el.getBoundingClientRect = () => ({
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            width: 0,
-            height: 0,
-            x: 0,
-            y: 0,
-            toJSON: () => ({}),
-            ...rect,
-        })
-        return el
-    }
-
     beforeEach(() => {
         Object.defineProperty(document.documentElement, 'clientWidth', {
             value: 1024,
@@ -748,14 +706,12 @@ describe('ArrowClass', () => {
 })
 
 describe('ModeClass', () => {
-    const expected: Record<string, string> = {
+    Object.entries({
         primary: 'Overlay--popup--primary',
         warning: 'Overlay--popup--warning',
         danger: 'Overlay--popup--danger',
         info: 'Overlay--popup--info',
-    }
-
-    Object.entries(expected).forEach(([mode, cls]) => {
+    }).forEach(([mode, cls]) => {
         it(`should map "${mode}" to "${cls}"`, () => {
             expect(ModeClass[mode as Key<typeof ModeClass>]).toBe(cls)
         })
@@ -870,13 +826,12 @@ describe('Overlay.Modal', () => {
     })
 
     describe('modes', () => {
-        const modes = ['primary', 'warning', 'danger', 'info'] as const
-
-        modes.forEach((mode) => {
-            it(`should apply ${mode} mode class`, () => {
+        it.each(['primary', 'warning', 'danger', 'info'] as const)(
+            'should apply %s mode class',
+            (mode) => {
                 expect(Set.modal({ mode }).modal.Get.className()).toContain(ModeClass[mode])
-            })
-        })
+            },
+        )
 
         it('should default to primary mode', () => {
             expect(Set.modal().modal.Get.className()).toContain(ModeClass.primary)
@@ -884,14 +839,10 @@ describe('Overlay.Modal', () => {
     })
 
     describe('sizes', () => {
-        const sizes = ['sm', 'md', 'lg', 'xl'] as const
-
-        sizes.forEach((size) => {
-            it(`should apply ${size} size styles`, () => {
-                const { modal } = Set.modal({ size })
-                expect(modal.Get.style().minWidth).toBeDefined()
-                expect(modal.Get.style().maxWidth).toBeDefined()
-            })
+        it.each(['sm', 'md', 'lg', 'xl'] as const)('should apply %s size styles', (size) => {
+            const { modal } = Set.modal({ size })
+            expect(modal.Get.style().minWidth).toBeDefined()
+            expect(modal.Get.style().maxWidth).toBeDefined()
         })
 
         it('should default to md size', () => {

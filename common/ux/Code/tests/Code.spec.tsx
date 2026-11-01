@@ -1,12 +1,9 @@
 import { waitFor } from '@testing-library/react'
 import { Browser } from '@common-utils'
-import { Accessor, Test } from '@common-ux/Test'
+import { Test } from '@common-ux/Test'
+import { CodeTestUtils } from './Code.spec.utils'
 
-const LABEL = 'test-code'
-const codeBlock = () => Test.Code('test-code')
-const clickCopyIcon = async () => Accessor.user.click(codeBlock().Get.copyIcon())
-
-const mockCopyToClipboard = vi.fn().mockResolvedValue(undefined)
+const { LABEL, codeBlock, clickCopyIcon, mockCopyToClipboard } = CodeTestUtils
 
 describe('Code', () => {
     beforeEach(() => {

@@ -2,7 +2,12 @@ import { RequestBuilder } from './RequestBuilder'
 import { extractAxiosData } from './extractAxiosData'
 import type { AxiosError } from 'axios'
 import type { UseMutationOptions, UseQueryOptions } from '@tanstack/react-query'
-import type { FeatureQueryBuilt, MutationOptions, QueryOptions } from './FeatureQuery.types'
+import type {
+    FeatureQueryBuilt,
+    FeatureQueryChainer,
+    MutationOptions,
+    QueryOptions,
+} from './FeatureQuery.types'
 import type { CacheKey } from './QueryKey'
 import type { ErrorResponse } from './mergeStatus.types'
 import type { PathKey, ServerGroup } from '../Paths/Path.types'
@@ -40,7 +45,7 @@ export const FeatureQuery = () => {
             ...options,
         })
 
-    const featureQuery = {
+    const featureQuery: FeatureQueryChainer = {
         path(value: PathKey) {
             path = value
             return featureQuery

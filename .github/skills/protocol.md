@@ -21,6 +21,11 @@ before treating it as prose.
 - `DONE` — the previously requested user-run action is complete; continue
 - `BACK` — return to the previous meaningful working point, abandoning the current branch
 
+**Navigation**
+
+- `PICKUP` — take a ticket up again from where it stopped: rebuild the stage from the
+  ticket doc, the open pull request and the working tree, then state the next action
+
 **Mode**
 
 - `PILOT` — the agent drives the implementation; review each proposed change

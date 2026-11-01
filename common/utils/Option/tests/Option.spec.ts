@@ -1,6 +1,9 @@
 import { describe, it, expect, expectTypeOf } from 'vitest'
+import { OptionTestUtils } from './Option.spec.utils'
 import { Option } from '..'
 import type { Option as OptionT } from '..'
+
+const { readonlyOptions, options } = OptionTestUtils
 
 describe('Option type', () => {
     it('should require value and label', () => {
@@ -404,11 +407,6 @@ describe('Option — literal-union compile-time behaviour', () => {
 })
 
 describe('Option — readonly inputs accepted by all helpers', () => {
-    const readonlyOptions: readonly OptionT<string>[] = [
-        { value: 'a', label: 'A' },
-        { value: 'b', label: 'B' },
-    ]
-
     it('should accept readonly input in getValues', () => {
         expect(Option.getValues(readonlyOptions)).toEqual(['a', 'b'])
     })
@@ -427,11 +425,6 @@ describe('Option — readonly inputs accepted by all helpers', () => {
 })
 
 describe('Option — cross-helper consistency', () => {
-    const options = [
-        { value: 'a', label: 'A' },
-        { value: 'b', label: 'B' },
-    ]
-
     it('should align getValues and getLabels positionally with the source options', () => {
         const values = Option.getValues(options)
         const labels = Option.getLabels(options)

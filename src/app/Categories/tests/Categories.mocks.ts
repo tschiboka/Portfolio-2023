@@ -1,10 +1,14 @@
 /* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
 
 import type { GetCategoryResponse, PostCategoryRequest } from '@common-types'
+import type { SearchInputOption } from '@common-ux'
+import type { CategoryFormData } from '../Categories.types'
 
 export const CategoriesMocks: {
     categories: GetCategoryResponse[]
     postCategory: PostCategoryRequest
+    parentOptions: SearchInputOption[]
+    formData: CategoryFormData
 } = {
     /** Seed categories fetched by GET /api/categories — exercises the parent + table render. */
     categories: [
@@ -30,5 +34,19 @@ export const CategoriesMocks: {
         icon: 'circle',
         color: 'green',
         parentId: 'cat-work',
+    },
+    /** Parent choices offered by the parent search field. */
+    parentOptions: [
+        { label: 'Work', value: 'parent-work' },
+        { label: 'Personal', value: 'parent-personal' },
+    ],
+    /** A filled category form, ready for the submit handler. */
+    formData: {
+        name: 'Sub',
+        description: 'A sub category',
+        hasParent: true,
+        parent: 'Work',
+        icon: 'circle',
+        color: 'blue',
     },
 }

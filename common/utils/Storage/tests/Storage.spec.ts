@@ -1,9 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { StorageTestUtils } from './Storage.spec.utils'
 import { Storage } from '..'
 
-describe('Storage', () => {
-    const TEST_KEY = '__storage_test__'
+const { TEST_KEY } = StorageTestUtils
 
+describe('Storage', () => {
     beforeEach(() => {
         localStorage.clear()
     })

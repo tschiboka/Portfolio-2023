@@ -1,20 +1,30 @@
+import { AccessGuardMocks } from './AccessGuard.mocks'
 import { AccessGuardTestUtils } from './AccessGuard.spec.utils'
 import { AccessGuardUtils } from '../AccessGuard.utils'
-import { AccessMap, Guard, GuardCondition, ModeConfig } from '../AccessGuard.types'
+import { AccessMap, Guard, GuardCondition } from '../AccessGuard.types'
+import type { ChainCase, GuardCase, MultiFeatureCase } from './AccessGuard.spec.types'
 
 const { isConditionDenied, isGuardActive, resolveGuards } = AccessGuardUtils
 const { fullAccess, noAccess, partialAccess } = AccessGuardTestUtils
+const {
+    capabilityCondition,
+    featureCondition,
+    hiddenMode,
+    whenConditionTypes,
+    disabledMode,
+    unlessConditionTypes,
+    modeConfigs,
+    complexGuards,
+} = AccessGuardMocks
 
 describe('isConditionDenied', () => {
     describe('capability condition', () => {
-        const condition: GuardCondition = { type: 'capability', capabilities: ['admin'] }
-
         it('should return false when the user has the required capability', () => {
-            expect(isConditionDenied(condition, fullAccess)).toBe(false)
+            expect(isConditionDenied(capabilityCondition, fullAccess)).toBe(false)
         })
 
         it('should return true when the user lacks the required capability', () => {
-            expect(isConditionDenied(condition, noAccess)).toBe(true)
+            expect(isConditionDenied(capabilityCondition, noAccess)).toBe(true)
         })
 
         it('should return true when the user has only some of multiple required capabilities', () => {
@@ -35,22 +45,20 @@ describe('isConditionDenied', () => {
     })
 
     describe('feature condition', () => {
-        const condition: GuardCondition = { type: 'feature', features: ['xmas2025'] }
-
         it('should return false when the feature is enabled', () => {
-            expect(isConditionDenied(condition, fullAccess)).toBe(false)
+            expect(isConditionDenied(featureCondition, fullAccess)).toBe(false)
         })
 
         it('should return true when the feature is disabled', () => {
             const disabled: AccessMap = { capabilities: [], features: { xmas2025: false } }
-            expect(isConditionDenied(condition, disabled)).toBe(true)
+            expect(isConditionDenied(featureCondition, disabled)).toBe(true)
         })
 
         it('should return true when the feature is missing from the map', () => {
-            expect(isConditionDenied(condition, noAccess)).toBe(true)
+            expect(isConditionDenied(featureCondition, noAccess)).toBe(true)
         })
 
-        const multiFeaturesCases: { name: string; access: AccessMap; expected: boolean }[] = [
+        it.each<MultiFeatureCase>([
             {
                 name: 'all enabled',
                 access: { capabilities: [], features: { xmas2025: true, darkMode: true } },
@@ -71,17 +79,16 @@ describe('isConditionDenied', () => {
                 access: { capabilities: [], features: {} },
                 expected: true,
             },
-        ]
-
-        multiFeaturesCases.forEach(({ name, access, expected }) => {
-            it(`should return ${String(expected)} when multiple features required and ${name}`, () => {
+        ])(
+            'should return $expected when multiple features required and $name',
+            ({ access, expected }) => {
                 const multi: GuardCondition = {
                     type: 'feature',
                     features: ['xmas2025', 'darkMode'],
                 }
                 expect(isConditionDenied(multi, access)).toBe(expected)
-            })
-        })
+            },
+        )
 
         it('should return false when features array is empty (no requirement)', () => {
             const empty: GuardCondition = { type: 'feature', features: [] }
@@ -134,8 +141,6 @@ describe('isConditionDenied', () => {
 
 describe('isGuardActive', () => {
     describe('when clause', () => {
-        const hiddenMode: ModeConfig = { mode: 'hidden' }
-
         it('should be active when the condition is denied', () => {
             const guard: Guard = {
                 when: { type: 'capability', capabilities: ['admin'] },
@@ -152,32 +157,6 @@ describe('isGuardActive', () => {
             expect(isGuardActive(guard, fullAccess)).toBe(false)
         })
 
-        const whenConditionTypes: {
-            name: string
-            condition: GuardCondition
-            deniedAccess: AccessMap
-            grantedAccess: AccessMap
-        }[] = [
-            {
-                name: 'capability',
-                condition: { type: 'capability', capabilities: ['admin'] },
-                deniedAccess: noAccess,
-                grantedAccess: fullAccess,
-            },
-            {
-                name: 'feature',
-                condition: { type: 'feature', features: ['xmas2025'] },
-                deniedAccess: noAccess,
-                grantedAccess: fullAccess,
-            },
-            {
-                name: 'custom',
-                condition: { type: 'custom', predicate: (a) => a.capabilities.includes('admin') },
-                deniedAccess: noAccess,
-                grantedAccess: fullAccess,
-            },
-        ]
-
         whenConditionTypes.forEach(({ name, condition, deniedAccess, grantedAccess }) => {
             it(`should activate with "when" for ${name} condition when denied`, () => {
                 const guard: Guard = { when: condition, then: hiddenMode }
@@ -192,8 +171,6 @@ describe('isGuardActive', () => {
     })
 
     describe('unless clause', () => {
-        const disabledMode: ModeConfig = { mode: 'disabled', reason: 'Not allowed' }
-
         it('should be active when the "unless" condition is NOT denied (user has access)', () => {
             const guard: Guard = {
                 unless: { type: 'capability', capabilities: ['admin'] },
@@ -209,32 +186,6 @@ describe('isGuardActive', () => {
             }
             expect(isGuardActive(guard, noAccess)).toBe(false)
         })
-
-        const unlessConditionTypes: {
-            name: string
-            condition: GuardCondition
-            activeAccess: AccessMap
-            inactiveAccess: AccessMap
-        }[] = [
-            {
-                name: 'capability',
-                condition: { type: 'capability', capabilities: ['admin'] },
-                activeAccess: fullAccess,
-                inactiveAccess: noAccess,
-            },
-            {
-                name: 'feature',
-                condition: { type: 'feature', features: ['xmas2025'] },
-                activeAccess: fullAccess,
-                inactiveAccess: noAccess,
-            },
-            {
-                name: 'custom',
-                condition: { type: 'custom', predicate: (a) => a.capabilities.includes('admin') },
-                activeAccess: fullAccess,
-                inactiveAccess: noAccess,
-            },
-        ]
 
         unlessConditionTypes.forEach(({ name, condition, activeAccess, inactiveAccess }) => {
             it(`should activate with "unless" for ${name} condition when condition is denied`, () => {
@@ -306,27 +257,6 @@ describe('resolveGuards', () => {
     })
 
     describe('returns correct ModeConfig for each mode', () => {
-        const modeConfigs: { name: string; config: ModeConfig }[] = [
-            { name: 'hidden', config: { mode: 'hidden' } },
-            { name: 'visible', config: { mode: 'visible' } },
-            { name: 'disabled without reason', config: { mode: 'disabled' } },
-            {
-                name: 'disabled with reason',
-                config: { mode: 'disabled', reason: 'Upgrade required' },
-            },
-            { name: 'soft-disabled minimal', config: { mode: 'soft-disabled' } },
-            {
-                name: 'soft-disabled full',
-                config: {
-                    mode: 'soft-disabled',
-                    title: 'Locked',
-                    message: 'You need a subscription',
-                    actions: [{ label: 'Upgrade', onClick: vi.fn() }],
-                },
-            },
-            { name: 'tooltip', config: { mode: 'tooltip', text: 'Not available' } },
-        ]
-
         modeConfigs.forEach(({ name, config }) => {
             it(`should return "${name}" mode config`, () => {
                 const guards: Guard[] = [
@@ -422,12 +352,7 @@ describe('resolveGuards', () => {
     })
 
     describe('single guard scenarios', () => {
-        const singleGuardCases: {
-            name: string
-            guard: Guard
-            access: AccessMap
-            expected: ModeConfig | null
-        }[] = [
+        it.each<GuardCase>([
             {
                 name: 'hidden when no admin',
                 guard: {
@@ -473,38 +398,18 @@ describe('resolveGuards', () => {
                 access: fullAccess,
                 expected: null,
             },
-        ]
-
-        singleGuardCases.forEach(({ name, guard, access, expected }) => {
-            it(`should return ${expected ? `"${expected.mode}"` : 'null'} for: ${name}`, () => {
-                const result = resolveGuards([guard], access)
-                if (expected === null) {
-                    expect(result).toBeNull()
-                } else {
-                    expect(result).toEqual(expected)
-                }
-            })
+        ])('should resolve $name', ({ guard, access, expected }) => {
+            const result = resolveGuards([guard], access)
+            if (expected === null) {
+                expect(result).toBeNull()
+            } else {
+                expect(result).toEqual(expected)
+            }
         })
     })
 
     describe('complex guard chains', () => {
-        const guards: Guard[] = [
-            { when: { type: 'feature', features: ['beta'] }, then: { mode: 'hidden' } },
-            {
-                when: { type: 'capability', capabilities: ['admin'] },
-                then: { mode: 'disabled', reason: 'Admin only' },
-            },
-            {
-                unless: { type: 'feature', features: ['xmas2025'] },
-                then: { mode: 'tooltip', text: 'Enable xmas' },
-            },
-            {
-                when: { type: 'custom', predicate: () => false },
-                then: { mode: 'soft-disabled', title: 'Fallback' },
-            },
-        ]
-
-        const chainCases: { name: string; access: AccessMap; expectedMode: string | null }[] = [
+        it.each<ChainCase>([
             {
                 name: 'first guard matches (missing beta feature)',
                 access: { capabilities: ['admin'], features: { xmas2025: true } },
@@ -525,14 +430,10 @@ describe('resolveGuards', () => {
                 access: { capabilities: ['admin'], features: { beta: true, xmas2025: true } },
                 expectedMode: 'tooltip',
             },
-        ]
-
-        chainCases.forEach(({ name, access, expectedMode }) => {
-            it(`should match ${String(expectedMode)} when ${name}`, () => {
-                const result = resolveGuards(guards, access)
-                expect(result).not.toBeNull()
-                expect(result!.mode).toBe(expectedMode)
-            })
+        ])('should match $expectedMode when $name', ({ access, expectedMode }) => {
+            const result = resolveGuards(complexGuards, access)
+            expect(result).not.toBeNull()
+            expect(result!.mode).toBe(expectedMode)
         })
     })
 })

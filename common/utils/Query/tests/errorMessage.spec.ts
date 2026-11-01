@@ -1,13 +1,7 @@
+import { ErrorMessageTestUtils } from './errorMessage.spec.utils'
 import { errorMessage } from '..'
-import type { AxiosError } from 'axios'
-import type { ErrorResponse } from '../mergeStatus.types'
 
-const FALLBACK = 'Something went wrong'
-
-const axiosError = (data?: ErrorResponse): AxiosError<ErrorResponse> =>
-    ({
-        response: data === undefined ? undefined : { data },
-    }) as AxiosError<ErrorResponse>
+const { FALLBACK, axiosError } = ErrorMessageTestUtils
 
 describe('errorMessage', () => {
     it('should return the server message when the response carries one', () => {

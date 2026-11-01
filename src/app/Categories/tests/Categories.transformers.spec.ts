@@ -1,20 +1,10 @@
-/* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
 import { describe, expect, it } from 'vitest'
+import { CategoriesTestUtils } from './Categories.spec.utils'
 import { CategoriesTransformers } from '../Categories.transformers'
-import type { GetCategoryResponse } from '@common-types'
-
-const categoryStub = (overrides: Partial<GetCategoryResponse> = {}): GetCategoryResponse =>
-    ({
-        _id: 'cat-1',
-        name: 'Work',
-        icon: 'circle',
-        color: 'blue',
-        ...overrides,
-    }) as GetCategoryResponse
 
 describe('CategoriesTransformers.fromApi', () => {
     it('should map each category to a SearchInputOption', () => {
-        const result = CategoriesTransformers.fromApi([categoryStub()])
+        const result = CategoriesTransformers.fromApi([CategoriesTestUtils.categoryStub()])
         expect(result).toHaveLength(1)
         expect(result[0]).toMatchObject({
             label: 'Work',
@@ -26,8 +16,14 @@ describe('CategoriesTransformers.fromApi', () => {
 
     it('should handle multiple categories', () => {
         const result = CategoriesTransformers.fromApi([
-            categoryStub({ _id: 'a', name: 'Work' }),
-            categoryStub({ _id: 'b', name: 'Personal', icon: 'heart', color: 'red' }),
+            CategoriesTestUtils.categoryStub({ _id: 'a', name: 'Work' }),
+            CategoriesTestUtils.categoryStub({
+                _id: 'b',
+                name: 'Personal',
+                icon: 'heart',
+                // eslint-disable-next-line standards/no-raw-color -- the API field is `color`, and its values are database names
+                color: 'red',
+            }),
         ])
         expect(result).toHaveLength(2)
         expect(result[1]).toMatchObject({ label: 'Personal', value: 'b', iconColor: 'red' })

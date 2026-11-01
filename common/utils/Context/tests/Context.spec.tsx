@@ -1,25 +1,10 @@
 import { render, screen } from '@testing-library/react'
+import { ContextTestUtils } from './Context.spec.utils'
 import { ContextBuilder } from '../index'
 
+const { Provider, Consumer } = ContextTestUtils
+
 describe('ContextBuilder.CreateContext', () => {
-    interface TestCtx {
-        name: string
-        count: number
-    }
-
-    const initial: TestCtx = { name: 'default', count: 0 }
-    const { Provider, Use } = ContextBuilder.CreateContext<TestCtx>('Test', initial)
-
-    const Consumer = () => {
-        const ctx = Use()
-        return (
-            <div>
-                <span data-testid="name">{ctx.name}</span>
-                <span data-testid="count">{ctx.count}</span>
-            </div>
-        )
-    }
-
     describe('Provider', () => {
         it('should render children', () => {
             render(

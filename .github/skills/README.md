@@ -8,21 +8,22 @@ name matches its folder and the `name` field in its `SKILL.md`.
 The order work moves through. Each hands to or from its neighbours. The
 `document` skills run alongside the lot rather than in sequence.
 
-| Skill            | Use it to                                                                  |
-| ---------------- | -------------------------------------------------------------------------- |
-| `brief`          | resolve the minimum uncertainty before work begins, without making changes |
-| `implement`      | build agreed feature work in small, reviewable chunks                      |
-| `test`           | author specs and their fixtures                                            |
-| `review-file`    | review one file against the skill that owns its type                       |
-| `review-feature` | review a feature — one result per file, plus cross-file findings           |
-| `address`        | apply review feedback — correcting accepted work rather than improving it  |
-| `generalise`     | turn one review finding into a proposed rule                               |
-| `standardise`    | apply an accepted rule across the codebase                                 |
-| `debug`          | diagnose a defect and return to implement with the finding                 |
-| `document`       | maintain the ticket document as work progresses                            |
-| `document-new`   | create new ticket documentation — reference skill                          |
-| `document-done`  | mark a checklist item complete — reference skill                           |
-| `document-edit`  | update existing ticket information — reference skill                       |
+| Skill            | Use it to                                                                        |
+| ---------------- | -------------------------------------------------------------------------------- |
+| `pickup`         | take a ticket up again from where it stopped, by the prompt that brought it back |
+| `brief`          | resolve the minimum uncertainty before work begins, without making changes       |
+| `implement`      | build agreed feature work in small, reviewable chunks                            |
+| `test`           | author specs and their fixtures                                                  |
+| `review-file`    | review one file against the skill that owns its type                             |
+| `review-feature` | review a feature — one result per file, plus cross-file findings                 |
+| `address`        | apply review feedback — correcting accepted work rather than improving it        |
+| `generalise`     | turn one review finding into a proposed rule                                     |
+| `standardise`    | apply an accepted rule across the codebase                                       |
+| `debug`          | diagnose a defect and return to implement with the finding                       |
+| `document`       | maintain the ticket document as work progresses                                  |
+| `document-new`   | create new ticket documentation — reference skill                                |
+| `document-done`  | mark a checklist item complete — reference skill                                 |
+| `document-edit`  | update existing ticket information — reference skill                             |
 
 ## Front-end
 

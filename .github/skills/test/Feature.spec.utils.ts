@@ -4,10 +4,8 @@ import { Accessor, Test } from '@common-ux'
 import { TestMocks } from '@common-mocks'
 import { AppRoutes } from '@app'
 import { TestScreen } from '@shared-queries'
-
 import { FeatureMockHandlers } from './Feature.mocks'
 
-/** Everything the spec needs that is not imports or `describe`. */
 export const FeatureTestUtils = {
     labels: {
         heading1: 'Heading 1',

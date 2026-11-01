@@ -175,23 +175,23 @@ describe('CacheKeyBuilder', () => {
 })
 
 describe('QueryKey', () => {
-    const expectedKeys: Record<string, string> = {
-        AppSettings: 'app-settings',
-        Categories: 'categories',
-        RehydrateSession: 'rehydrate-session',
-        XmasPagePing: 'xmas-page-ping',
-        XmasMessage: 'xmas-message',
-        XmasCandles: 'xmas-candles',
-        TypistRound: 'typist-round',
-        LevelNames: 'level-names',
-        Level: 'level',
-        LevelCreate: 'level-create',
-        AnagramMap: 'word-anagram-map',
-        WordFrequencies: 'word-frequencies',
-    }
-
     describe('each key should return a CacheKeyBuilder with the correct base key', () => {
-        it.each(Object.entries(expectedKeys))('should expose %s as ["%s"]', (property, baseKey) => {
+        it.each(
+            Object.entries({
+                AppSettings: 'app-settings',
+                Categories: 'categories',
+                RehydrateSession: 'rehydrate-session',
+                XmasPagePing: 'xmas-page-ping',
+                XmasMessage: 'xmas-message',
+                XmasCandles: 'xmas-candles',
+                TypistRound: 'typist-round',
+                LevelNames: 'level-names',
+                Level: 'level',
+                LevelCreate: 'level-create',
+                AnagramMap: 'word-anagram-map',
+                WordFrequencies: 'word-frequencies',
+            }),
+        )('should expose %s as ["%s"]', (property, baseKey) => {
             const builder = QueryKey[property as Key<typeof QueryKey>]
             expect(builder).toBeInstanceOf(CacheKeyBuilder)
             expect(builder.build()).toEqual([baseKey])

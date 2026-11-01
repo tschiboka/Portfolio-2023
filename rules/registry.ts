@@ -17,6 +17,7 @@ import { registrar as noRawColorRegistrar } from './no-raw-color/NoRawColor.regi
 import { registrar as noMagicBreakpointRegistrar } from './no-magic-breakpoint/NoMagicBreakpoint.registrar.js'
 import { registrar as noRawFontSizeRegistrar } from './no-raw-font-size/NoRawFontSize.registrar.js'
 import { registrar as testNameVerbRegistrar } from './test-name-verb/TestNameVerb.registrar.js'
+import { registrar as noSpecLocalDeclarationRegistrar } from './no-spec-local-declaration/NoSpecLocalDeclaration.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -40,4 +41,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noMagicBreakpointRegistrar,
     noRawFontSizeRegistrar,
     testNameVerbRegistrar,
+    noSpecLocalDeclarationRegistrar,
 ].map(withPrefixedReports)

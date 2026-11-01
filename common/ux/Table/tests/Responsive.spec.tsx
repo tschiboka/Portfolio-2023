@@ -6,8 +6,6 @@ import { TableMocks } from './Table.mocks'
 const { rows, basicColumns } = TableMocks
 
 describe('Table — Responsive / Breakpoints', () => {
-    const table = () => Test.Table('test')
-
     describe('Expand button', () => {
         it('should render expand buttons when columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({
@@ -18,12 +16,12 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            expect(table().Get.expandButtons()).toHaveLength(rows.length)
+            expect(Test.Table('test').Get.expandButtons()).toHaveLength(rows.length)
         })
 
         it('should not render expand buttons when no columns have breakpoints', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            expect(table().Has.expandButton()).toBe(false)
+            expect(Test.Table('test').Has.expandButton()).toBe(false)
         })
     })
 
@@ -37,8 +35,8 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await table().Do.expandRow(0)
-            expect(table().Get.expandedRow(1)).toBeInTheDocument()
+            await Test.Table('test').Do.expandRow(0)
+            expect(Test.Table('test').Get.expandedRow(1)).toBeInTheDocument()
         })
 
         it('should show the hidden column headers and values in the expanded row', async () => {
@@ -50,8 +48,8 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await table().Do.expandRow(0)
-            const expandedRow = table().Get.expandedRow(1)
+            await Test.Table('test').Do.expandRow(0)
+            const expandedRow = Test.Table('test').Get.expandedRow(1)
             expect(within(expandedRow).getByText('Status')).toBeInTheDocument()
         })
 
@@ -64,9 +62,9 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await table().Do.expandRow(0)
+            await Test.Table('test').Do.expandRow(0)
             await Accessor.user.click(Accessor.screen.getByRole('button', { name: 'Collapse row' }))
-            expect(table().Has.expandedRow(1)).toBe(false)
+            expect(Test.Table('test').Has.expandedRow(1)).toBe(false)
         })
 
         it('should expand multiple rows simultaneously', async () => {
@@ -78,10 +76,10 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: '2xl' },
                 ],
             })
-            await table().Do.expandRow(0)
-            await table().Do.expandRow(0)
-            expect(table().Get.expandedRow(1)).toBeInTheDocument()
-            expect(table().Get.expandedRow(2)).toBeInTheDocument()
+            await Test.Table('test').Do.expandRow(0)
+            await Test.Table('test').Do.expandRow(0)
+            expect(Test.Table('test').Get.expandedRow(1)).toBeInTheDocument()
+            expect(Test.Table('test').Get.expandedRow(2)).toBeInTheDocument()
         })
     })
 
@@ -110,7 +108,7 @@ describe('Table — Responsive / Breakpoints', () => {
                     { header: 'Status', accessor: 'status', breakpoint: 'lg' },
                 ],
             })
-            const statusHeader = table()
+            const statusHeader = Test.Table('test')
                 .Get.columnHeaders()
                 .find((th) => th.textContent === 'Status')
             expect(statusHeader).toHaveClass('lg')

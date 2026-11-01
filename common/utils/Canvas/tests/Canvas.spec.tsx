@@ -1,71 +1,15 @@
-import { RefObject } from 'react'
 import { renderHook } from '@testing-library/react'
 import { Const } from '@common-ux/Const'
+import { CanvasTestUtils } from './Canvas.spec.utils'
 import { CanvasHooks } from '..'
-import type { Mock } from 'vitest'
 
-type MockCtx = {
-    beginPath: Mock
-    moveTo: Mock
-    lineTo: Mock
-    stroke: Mock
-    fill: Mock
-    arc: Mock
-    clearRect: Mock
-    strokeStyle: string
-    fillStyle: string
-    lineWidth: number
-}
-
-const createMockCtx = (): MockCtx => ({
-    beginPath: vi.fn(),
-    moveTo: vi.fn(),
-    lineTo: vi.fn(),
-    stroke: vi.fn(),
-    fill: vi.fn(),
-    arc: vi.fn(),
-    clearRect: vi.fn(),
-    strokeStyle: '',
-    fillStyle: '',
-    lineWidth: 0,
-})
-
-const createMockCanvas = (
-    overrides: {
-        parentWidth?: number
-        parentHeight?: number
-        ctx?: MockCtx | null
-        noParent?: boolean
-        noGrandparent?: boolean
-    } = {},
-) => {
-    const {
-        parentWidth = 400,
-        parentHeight = 200,
-        ctx = createMockCtx(),
-        noParent = false,
-        noGrandparent = false,
-    } = overrides
-
-    const grandparent = noGrandparent
-        ? undefined
-        : ({ clientWidth: parentWidth, clientHeight: parentHeight } as HTMLElement)
-
-    const parent = noParent ? undefined : ({ parentElement: grandparent } as HTMLElement)
-
-    const getContext = vi.fn().mockReturnValue(ctx)
-    const canvas = {
-        width: 0,
-        height: 0,
-        parentElement: parent,
-        getContext,
-    } as unknown as HTMLCanvasElement
-
-    return { canvas, getContext, ctx }
-}
-
-const makeRef = (canvas: HTMLCanvasElement | null): RefObject<HTMLCanvasElement> =>
-    ({ current: canvas }) as RefObject<HTMLCanvasElement>
+const {
+    createMockCtx,
+    createMockCanvas,
+    makeRef,
+    defaultParentWidth: parentWidth,
+    defaultParentHeight: parentHeight,
+} = CanvasTestUtils
 
 describe('CanvasHooks.useCanvas', () => {
     describe('when ref.current is null', () => {
@@ -128,9 +72,6 @@ describe('CanvasHooks.useCanvas', () => {
     })
 
     describe('when canvas is fully available', () => {
-        const parentWidth = 400
-        const parentHeight = 200
-
         it('should call getContext with "2d"', () => {
             const { canvas, getContext } = createMockCanvas({ parentWidth, parentHeight })
             const ref = makeRef(canvas)
@@ -203,9 +144,6 @@ describe('CanvasHooks.useCanvas', () => {
     })
 
     describe('line()', () => {
-        const parentWidth = 400
-        const parentHeight = 200
-
         it('should not throw when ctx is undefined (no-op)', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
@@ -330,9 +268,6 @@ describe('CanvasHooks.useCanvas', () => {
     })
 
     describe('circle()', () => {
-        const parentWidth = 400
-        const parentHeight = 200
-
         it('should not throw when ctx is undefined (no-op)', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
@@ -456,12 +391,13 @@ describe('CanvasHooks.useCanvas', () => {
     })
 
     describe('getPoint behaviour (tested via line/circle)', () => {
-        const parentWidth = 500
-        const parentHeight = 250
-
         it('should treat missing type as "px"', () => {
             const mockCtx = createMockCtx()
-            const { canvas } = createMockCanvas({ parentWidth, parentHeight, ctx: mockCtx })
+            const { canvas } = createMockCanvas({
+                parentWidth,
+                parentHeight,
+                ctx: mockCtx,
+            })
             const ref = makeRef(canvas)
             const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 

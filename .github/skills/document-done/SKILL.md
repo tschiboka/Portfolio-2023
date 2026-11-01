@@ -11,7 +11,8 @@ safety and command list this skill runs under.
 
 ## When to use
 
-- Checklist evidence shows an item is complete.
+- Checklist evidence shows an item is complete, and no approved change carries
+  the tick with it.
 
 ## Scope
 

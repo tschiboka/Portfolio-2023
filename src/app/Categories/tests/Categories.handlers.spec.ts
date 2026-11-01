@@ -1,23 +1,10 @@
 /* eslint-disable standards/no-raw-color -- the API field is `color`, and its values are database names */
 
 import { describe, expect, it, vi } from 'vitest'
+import { CategoriesMocks } from './Categories.mocks'
 import { CategoriesHandlers } from '../Categories.handlers'
-import type { SearchInputOption } from '@common-ux'
-import type { CategoryFormData } from '../Categories.types'
 
-const parentOptions: SearchInputOption[] = [
-    { label: 'Work', value: 'parent-work' },
-    { label: 'Personal', value: 'parent-personal' },
-]
-
-const formData: CategoryFormData = {
-    name: 'Sub',
-    description: 'A sub category',
-    hasParent: true,
-    parent: 'Work',
-    icon: 'circle',
-    color: 'blue',
-}
+const { formData, parentOptions } = CategoriesMocks
 
 describe('CategoriesHandlers.submit', () => {
     it('should post the form data, mapping the parent label to its id', async () => {

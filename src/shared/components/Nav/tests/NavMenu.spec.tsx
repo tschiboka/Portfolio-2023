@@ -1,31 +1,22 @@
 import { screen } from '@testing-library/react'
 import { NavTestUtils as TestNav } from './Nav.spec.utils'
+import { NavMocks } from './Nav.mocks'
 import type { MenuItem } from '../Nav.types'
-import type { NavMenuProps } from '../components'
 import '@testing-library/jest-dom'
 
-const baseItems: MenuItem[] = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Projects', path: '/projects' },
-]
-
-const defaultProps: NavMenuProps = {
-    items: baseItems,
-    pageName: 'Home',
-}
+const { menuItems, menuProps } = NavMocks
 
 describe('NavMenu', () => {
     describe('Rendering', () => {
         it('should render all menu items as links', () => {
-            TestNav.Set.mockMenu(defaultProps)
+            TestNav.Set.mockMenu(menuProps)
 
             const links = screen.getAllByRole('link')
             expect(links).toHaveLength(3)
         })
 
         it('should render each item label', () => {
-            TestNav.Set.mockMenu(defaultProps)
+            TestNav.Set.mockMenu(menuProps)
 
             expect(screen.getByText('Home')).toBeInTheDocument()
             expect(screen.getByText('About')).toBeInTheDocument()
@@ -33,7 +24,7 @@ describe('NavMenu', () => {
         })
 
         it('should point to the correct paths', () => {
-            TestNav.Set.mockMenu(defaultProps)
+            TestNav.Set.mockMenu(menuProps)
 
             const links = screen.getAllByRole('link')
             expect(links[0]).toHaveAttribute('href', '/')
@@ -44,14 +35,14 @@ describe('NavMenu', () => {
 
     describe('Active highlighting', () => {
         it('should apply the "active" class to the current page item', () => {
-            TestNav.Set.mockMenu({ ...defaultProps, pageName: 'About' })
+            TestNav.Set.mockMenu({ ...menuProps, pageName: 'About' })
 
             const aboutItem = screen.getByText('About').closest('li')
             expect(aboutItem).toHaveClass('active')
         })
 
         it('should not apply the "active" class to non-current items', () => {
-            TestNav.Set.mockMenu({ ...defaultProps, pageName: 'About' })
+            TestNav.Set.mockMenu({ ...menuProps, pageName: 'About' })
 
             const homeItem = screen.getByText('Home').closest('li')
             expect(homeItem).not.toHaveClass('active')
@@ -60,14 +51,14 @@ describe('NavMenu', () => {
 
     describe('Loading state', () => {
         it('should render an empty nav when isLoading is true', () => {
-            TestNav.Set.mockMenu({ ...defaultProps, isLoading: true })
+            TestNav.Set.mockMenu({ ...menuProps, isLoading: true })
 
             expect(screen.queryByText('Home')).not.toBeInTheDocument()
             expect(screen.queryByText('About')).not.toBeInTheDocument()
         })
 
         it('should render items when isLoading is false', () => {
-            TestNav.Set.mockMenu({ ...defaultProps, isLoading: false })
+            TestNav.Set.mockMenu({ ...menuProps, isLoading: false })
 
             expect(screen.getByText('Home')).toBeInTheDocument()
         })
@@ -76,21 +67,21 @@ describe('NavMenu', () => {
     describe('Interactions', () => {
         it('should call onItemClick with the clicked item', async () => {
             const onItemClick = vi.fn()
-            TestNav.Set.mockMenu({ ...defaultProps, onItemClick })
+            TestNav.Set.mockMenu({ ...menuProps, onItemClick })
 
             await TestNav().Do.clickLink('About')
 
-            expect(onItemClick).toHaveBeenCalledWith(baseItems[1])
+            expect(onItemClick).toHaveBeenCalledWith(menuItems[1])
         })
 
         it('should render a submenu toggle and call onSubmenuToggle when clicked', async () => {
             const itemsWithToggle: MenuItem[] = [
-                ...baseItems,
+                ...menuItems,
                 { label: 'toggle', showSubmenuToggle: true },
             ]
             const onSubmenuToggle = vi.fn()
             TestNav.Set.mockMenu({
-                ...defaultProps,
+                ...menuProps,
                 items: itemsWithToggle,
                 onSubmenuToggle,
             })
@@ -110,7 +101,7 @@ describe('NavMenu', () => {
             const renderImage = vi.fn((name: string) => <img src={`/${name}.png`} alt={name} />)
 
             TestNav.Set.mockMenu({
-                ...defaultProps,
+                ...menuProps,
                 items: itemsWithImage,
                 renderImage,
             })
@@ -131,7 +122,7 @@ describe('NavMenu', () => {
             ]
 
             const { container } = TestNav.Set.mockMenu({
-                ...defaultProps,
+                ...menuProps,
                 items: itemsWithSub,
             })
 

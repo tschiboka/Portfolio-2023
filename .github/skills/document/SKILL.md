@@ -24,6 +24,8 @@ unapproved decisions.
 ### Conduct
 
 - **Never write without explicit user approval.**
+- A tick rides on the change that completes it: offer the `[*]` when the work
+  starts and the `[x]` with the change, never as a second round. A line with no approved change behind it still asks.
 - Propose changes before making them.
 - Keep sentences and checklist steps short and actionable.
 - When updating, check whether the change affects other entries and update them
@@ -35,6 +37,9 @@ unapproved decisions.
 - One ticket = one document.
 - Never create additional documentation files.
 - Consult [`ticket-template.md`](ticket-template.md) for structure.
+- Review, QA and post-mortem items live in their own `2.n. Address <kind> — Round <r>`
+  section, numbered after the last. Never in the §2 dev checklist, and never
+  appended to a round that has closed.
 - Only document information that belongs to the ticket.
 
 ### Commands

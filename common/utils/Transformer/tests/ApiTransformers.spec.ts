@@ -1,16 +1,10 @@
 import { describe, it, expect } from 'vitest'
+import { ApiTransformersTestUtils } from './ApiTransformers.spec.utils'
 import { ApiTransformers } from '..'
+import type { TestResource } from './ApiTransformers.spec.types'
 import type { EmptyObject } from '../../Generics'
 
-/** Duck-typed Mongo ObjectId (its toString() is a 24-char hex string) — no mongoose dep in tests. */
-const objectId = (hex: string) => ({ toString: () => hex })
-
-type TestResource = {
-    _id: string
-    name: string
-    ownerId?: string
-    tags: string[]
-}
+const { objectId } = ApiTransformersTestUtils
 
 describe('ApiTransformers.toApiResource', () => {
     it('should convert a top-level ObjectId id to a string', () => {

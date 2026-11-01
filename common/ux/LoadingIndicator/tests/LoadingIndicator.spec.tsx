@@ -1,16 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import { Const } from '@common-ux/Const'
-import { Test } from '@common-ux/Test'
+import { LoadingIndicatorTestUtils } from './LoadingIndicator.spec.utils'
 import { LoadingIndicator } from '../LoadingIndicator'
 
-type Props = Partial<Parameters<typeof LoadingIndicator>[0]>
-
-const Set = {
-    loading: (props: Props = {}) => {
-        render(<LoadingIndicator show={true} {...props} />)
-        return Test.LoadingIndicator(props.ariaLabel)
-    },
-}
+const { Set } = LoadingIndicatorTestUtils
 
 describe('LoadingIndicator', () => {
     it('should render when show is true', () => {

@@ -20,5 +20,5 @@ export const Query = {
     RequestBuilder,
 }
 export type { CacheKey } from './QueryKey'
-export type { FeatureQueryBuilt } from './FeatureQuery.types'
+export type { FeatureQueryBuilt, FeatureQueryChainer } from './FeatureQuery.types'
 export type { ErrorResponse, MergedApiStatus } from './mergeStatus.types'

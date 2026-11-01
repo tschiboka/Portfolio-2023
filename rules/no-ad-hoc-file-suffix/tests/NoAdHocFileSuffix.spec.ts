@@ -78,5 +78,17 @@ ruleTester.run('no-ad-hoc-file-suffix', Rules.Eslint.NoAdHocFileSuffix9, {
             filename: 'a.spec.utils.x.tsx',
             errors: [{ message: messageFor('spec.utils.x.tsx') }],
         },
+        {
+            name: 'should throw for a test suffix',
+            code: '<></>',
+            filename: '/a/Thing.test.ts',
+            errors: [{ message: messageFor('test.ts') }],
+        },
+        {
+            name: 'should throw for a test suffix on a component',
+            code: '<></>',
+            filename: '/a/Thing.test.tsx',
+            errors: [{ message: messageFor('test.tsx') }],
+        },
     ],
 })

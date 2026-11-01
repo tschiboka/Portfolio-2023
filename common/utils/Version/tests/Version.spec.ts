@@ -1,26 +1,10 @@
 import { renderHook, waitFor } from '@testing-library/react'
 import { Functions } from '@common-utils'
+import { VersionTestUtils } from './Version.spec.utils'
 import { VersionHooks } from '..'
-import type { GetVersionResponse } from '../../../types'
 
 const { useVersionCheck } = VersionHooks
-
-const VALID_SHA = 'a'.repeat(40)
-const OTHER_SHA = 'b'.repeat(40)
-
-const mockVersion = (overrides: Partial<GetVersionResponse> = {}): GetVersionResponse => ({
-    sha: VALID_SHA,
-    message: 'initial commit',
-    date: '2026-01-01',
-    ...overrides,
-})
-
-const mockFetch = (body: GetVersionResponse, ok = true) => {
-    global.fetch = vi.fn().mockResolvedValue({
-        ok,
-        json: () => Promise.resolve(body),
-    })
-}
+const { VALID_SHA, OTHER_SHA, mockVersion, mockFetch } = VersionTestUtils
 
 describe('useVersionCheck', () => {
     beforeEach(() => {
