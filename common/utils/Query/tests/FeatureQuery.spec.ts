@@ -26,9 +26,7 @@ describe('FeatureQuery', () => {
         vi.spyOn(apiPathBuilderModule, 'apiPathBuilder').mockReturnValue(TEST_URL)
     })
 
-    afterEach(() => {
-        vi.restoreAllMocks()
-    })
+    afterEach(() => vi.restoreAllMocks())
 
     describe('chaining', () => {
         it.each([
@@ -49,15 +47,13 @@ describe('FeatureQuery', () => {
     })
 
     describe('build', () => {
-        it('should throw when path is not set', () => {
-            expect(() => FeatureQuery().build()).toThrow('FeatureQuery: path is required')
-        })
+        it('should throw when path is not set', () =>
+            expect(() => FeatureQuery().build()).toThrow('FeatureQuery: path is required'))
 
-        it('should still throw when only subpath and token are set', () => {
+        it('should still throw when only subpath and token are set', () =>
             expect(() => FeatureQuery().subpath('nested').token(TEST_TOKEN).build()).toThrow(
                 'FeatureQuery: path is required',
-            )
-        })
+            ))
 
         it.each(['Get', 'Post', 'Put', 'Patch', 'Delete'] as const)(
             'should expose a %s verb',
@@ -67,11 +63,10 @@ describe('FeatureQuery', () => {
             },
         )
 
-        it('should return an independent built query per call', () => {
+        it('should return an independent built query per call', () =>
             expect(FeatureQuery().path(TEST_PATH).build()).not.toBe(
                 FeatureQuery().path(TEST_PATH).build(),
-            )
-        })
+            ))
     })
 
     describe('Get', () => {

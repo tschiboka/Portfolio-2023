@@ -18,21 +18,19 @@ function getDefaultSessionState(id: string): SessionState {
 }
 
 function getSession(sessionId: string): Session {
-    if (!sessions[sessionId]) {
+    if (!sessions[sessionId])
         sessions[sessionId] = {
             id: sessionId,
             state: getDefaultSessionState(sessionId),
             connections: new Set(),
         }
-    }
+
     return sessions[sessionId]
 }
 
 function cleanupSessionIfEmpty(sessionId: string): void {
     const session = sessions[sessionId]
-    if (session && session.connections.size === 0) {
-        delete sessions[sessionId]
-    }
+    if (session && session.connections.size === 0) delete sessions[sessionId]
 }
 
 export const SessionRepository = {

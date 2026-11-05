@@ -5,9 +5,8 @@ import { Icons } from '../components/Icons'
 
 describe('CategoriesOptions', () => {
     describe('iconOptions', () => {
-        it('should build one option per icon key', () => {
-            expect(CategoriesOptions.iconOptions).toHaveLength(Object.keys(Icons).length)
-        })
+        it('should build one option per icon key', () =>
+            expect(CategoriesOptions.iconOptions).toHaveLength(Object.keys(Icons).length))
 
         it('should map every icon key to an option with label/value/icon', () => {
             for (const key of Object.keys(Icons)) {
@@ -25,9 +24,10 @@ describe('CategoriesOptions', () => {
     })
 
     describe('colorOptions', () => {
-        it('should build one option per ColorSign key', () => {
-            expect(CategoriesOptions.colorOptions).toHaveLength(Object.keys(Const.ColorSign).length)
-        })
+        it('should build one option per ColorSign key', () =>
+            expect(CategoriesOptions.colorOptions).toHaveLength(
+                Object.keys(Const.ColorSign).length,
+            ))
 
         it('should map every color key to an option', () => {
             for (const key of Object.keys(Const.ColorSign)) {

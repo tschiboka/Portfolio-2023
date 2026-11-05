@@ -24,24 +24,14 @@ export class OverlayAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            close: async () => {
-                await Accessor.user.click(this.Get.closeButton())
-            },
-            clickMenuItem: async (label: string) => {
-                await Accessor.user.click(this.Get.menuItem(label))
-            },
-            clickBackdrop: async () => {
-                await Accessor.user.click(this.Get.backdrop()!)
-            },
-            clickActionButton: async (label: string) => {
-                await Accessor.user.click(this.Get.byText(label))
-            },
-            dismiss: async () => {
-                await Accessor.user.keyboard('{Escape}')
-            },
-            clickOutside: async () => {
-                await Accessor.user.click(document.body)
-            },
+            close: async () => await Accessor.user.click(this.Get.closeButton()),
+            clickMenuItem: async (label: string) =>
+                await Accessor.user.click(this.Get.menuItem(label)),
+            clickBackdrop: async () => await Accessor.user.click(this.Get.backdrop()!),
+            clickActionButton: async (label: string) =>
+                await Accessor.user.click(this.Get.byText(label)),
+            dismiss: async () => await Accessor.user.keyboard('{Escape}'),
+            clickOutside: async () => await Accessor.user.click(document.body),
         }
     }
 }

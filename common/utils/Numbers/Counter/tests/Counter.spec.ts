@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { Numbers } from '../../Numbers'
 
-describe('Numbers.Counter.format', () => {
+describe('Numbers.Counter.format', () =>
     it.each<[number, string]>([
         // zero / non-positive
         [0, '0'],
@@ -44,7 +44,6 @@ describe('Numbers.Counter.format', () => {
 
         // decimal input — floors first
         [1999.9, '1.9K'],
-    ])('should format %i as %s', (input, expected) => {
-        expect(Numbers.Counter.format(input)).toBe(expected)
-    })
-})
+    ])('should format %i as %s', (input, expected) =>
+        expect(Numbers.Counter.format(input)).toBe(expected),
+    ))

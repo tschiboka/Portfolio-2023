@@ -10,11 +10,10 @@ const initialiseSession = (state: SessionState, deviceId: string): SessionState 
             draft.players.player2?.deviceId === deviceId
 
         if (isDeviceAlreadySeated) markAliveByDevice(draft, deviceId)
-        else if (!draft.players.player1) {
+        else if (!draft.players.player1)
             draft.players.player1 = { deviceId, lastActive, connected: true }
-        } else if (!draft.players.player2) {
+        else if (!draft.players.player2)
             draft.players.player2 = { deviceId, lastActive, connected: true }
-        }
 
         const hasTwoPlayers = draft.players.player1 && draft.players.player2
         if (hasTwoPlayers && draft.status) draft.status = SessionConstants.statuses.ACTIVE

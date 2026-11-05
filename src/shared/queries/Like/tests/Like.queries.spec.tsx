@@ -21,9 +21,7 @@ describe('LikeQueries', () => {
         it('should not request when the path is empty', () => {
             const likes = LikeQueriesTestUtils.trackRequests('/api/like')
 
-            LikeQueriesTestUtils.customRender(<Counter path="" />, [
-                LikeQueriesMockHandlers.Get,
-            ])
+            LikeQueriesTestUtils.customRender(<Counter path="" />, [LikeQueriesMockHandlers.Get])
             likes.stop()
 
             expect(likes.calls).toEqual([])
@@ -31,21 +29,19 @@ describe('LikeQueries', () => {
         })
     })
 
-    describe('Summary.useGet', () => {
+    describe('Summary.useGet', () =>
         it('should render a count for every path', async () => {
             LikeQueriesTestUtils.customRender(<Summary />, [LikeQueriesMockHandlers.GetSummary])
 
             const paths = Object.keys(LikeQueriesMocks.getLikeSummary.build().likes).length
 
             expect(await screen.findByText(`paths:${paths}`)).toBeDefined()
-        })
-    })
+        }))
 
-    describe('usePost', () => {
+    describe('usePost', () =>
         it('should report success when the post lands with a session', async () => {
             LikeQueriesTestUtils.customRender(<Poster path={Paths.Client.Home} />)
 
             expect(await screen.findByText('posted:true')).toBeDefined()
-        })
-    })
+        }))
 })

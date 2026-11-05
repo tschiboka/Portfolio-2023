@@ -11,7 +11,6 @@ import type { Buildable } from '@common-ux/Test/Server'
 /** Harness component: reads the like count for one path. */
 const Counter = ({ path }: { path: string }) => {
     const { data } = LikeQueries.useGet(path)
-
     return <span>{`count:${data ? data.likes : 'none'}`}</span>
 }
 
@@ -26,9 +25,7 @@ const Summary = () => {
 const Poster = ({ path }: { path: string }) => {
     const { mutate, isSuccess } = LikeQueries.usePost()
 
-    useEffect(() => {
-        mutate({ path })
-    }, [mutate, path])
+    useEffect(() => mutate({ path }), [mutate, path])
 
     return <span>{`posted:${isSuccess}`}</span>
 }

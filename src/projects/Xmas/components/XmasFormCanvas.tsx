@@ -36,24 +36,22 @@ export const XmasFormCanvas = ({
         const perimeter = 2 * (adjustedWidth + adjustedHeight)
         const distance = progress * perimeter
 
-        if (distance < adjustedWidth) {
-            return { x: sidePadding + distance, y: topPadding }
-        } else if (distance < adjustedWidth + adjustedHeight) {
+        if (distance < adjustedWidth) return { x: sidePadding + distance, y: topPadding }
+        else if (distance < adjustedWidth + adjustedHeight)
             return {
                 x: width - sidePadding,
                 y: topPadding + (distance - adjustedWidth),
             }
-        } else if (distance < 2 * adjustedWidth + adjustedHeight) {
+        else if (distance < 2 * adjustedWidth + adjustedHeight)
             return {
                 x: width - sidePadding - (distance - adjustedWidth - adjustedHeight),
                 y: height - bottomPadding,
             }
-        } else {
+        else
             return {
                 x: sidePadding,
                 y: height - bottomPadding - (distance - 2 * adjustedWidth - adjustedHeight),
             }
-        }
     }
 
     const initializeLights = (width: number, height: number) => {
@@ -167,9 +165,7 @@ export const XmasFormCanvas = ({
     useEffect(() => {
         resizeCanvas()
 
-        const handleResize = () => {
-            resizeCanvas()
-        }
+        const handleResize = () => resizeCanvas()
 
         window.addEventListener('resize', handleResize)
 
@@ -178,9 +174,7 @@ export const XmasFormCanvas = ({
 
         return () => {
             window.removeEventListener('resize', handleResize)
-            if (animationRef.current) {
-                cancelAnimationFrame(animationRef.current)
-            }
+            if (animationRef.current) cancelAnimationFrame(animationRef.current)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps -- the effect restarts on lightCount/lightSize by design; drawLights and resizeCanvas change identity every render, so listing them would tear down the listener and frame loop each pass
     }, [lightCount, lightSize])

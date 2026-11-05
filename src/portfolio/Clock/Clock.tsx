@@ -6,9 +6,7 @@ import './Clock.scss'
 export const Clock = () => {
     const [clock, setClock] = useState<Nullable<ClockData>>(null)
 
-    useEffect(() => {
-        ClockUtils.startLoop({ setClock })
-    }, [])
+    useEffect(() => void ClockUtils.startLoop({ setClock }), [])
 
     return (
         <div className="ClockWidget">

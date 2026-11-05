@@ -91,21 +91,17 @@ describe('Arrays.shuffleArray', () => {
 })
 
 describe('Arrays.times', () => {
-    it('should build an array of the given length', () => {
-        expect(Arrays.times(3, (index) => index)).toEqual([0, 1, 2])
-    })
+    it('should build an array of the given length', () =>
+        expect(Arrays.times(3, (index) => index)).toEqual([0, 1, 2]))
 
-    it('should pass the 0-based index to the builder', () => {
-        expect(Arrays.times(4, (index) => `h${index + 1}`)).toEqual(['h1', 'h2', 'h3', 'h4'])
-    })
+    it('should pass the 0-based index to the builder', () =>
+        expect(Arrays.times(4, (index) => `h${index + 1}`)).toEqual(['h1', 'h2', 'h3', 'h4']))
 
-    it('should return an empty array for a count of 0', () => {
-        expect(Arrays.times(0, (index) => index)).toEqual([])
-    })
+    it('should return an empty array for a count of 0', () =>
+        expect(Arrays.times(0, (index) => index)).toEqual([]))
 
-    it('should build heterogeneous values returned by the builder', () => {
-        expect(Arrays.times(2, (index) => ({ key: index }))).toEqual([{ key: 0 }, { key: 1 }])
-    })
+    it('should build heterogeneous values returned by the builder', () =>
+        expect(Arrays.times(2, (index) => ({ key: index }))).toEqual([{ key: 0 }, { key: 1 }]))
 
     it('should call the builder exactly once per index', () => {
         const build = vi.fn((index: number) => index)
@@ -115,19 +111,16 @@ describe('Arrays.times', () => {
         expect(build).toHaveBeenNthCalledWith(5, 4)
     })
 
-    it('should truncate a non-integer count down (ToLength)', () => {
-        expect(Arrays.times(2.9, (index) => index)).toEqual([0, 1])
-    })
+    it('should truncate a non-integer count down (ToLength)', () =>
+        expect(Arrays.times(2.9, (index) => index)).toEqual([0, 1]))
 
-    it('should return an empty array for a negative count (matches Array.from)', () => {
-        expect(Arrays.times(-1, (index) => index)).toEqual([])
-    })
+    it('should return an empty array for a negative count (matches Array.from)', () =>
+        expect(Arrays.times(-1, (index) => index)).toEqual([]))
 })
 
 describe('Arrays.random', () => {
-    it('should return a single element from a single-element array', () => {
-        expect(Arrays.random([42])).toBe(42)
-    })
+    it('should return a single element from a single-element array', () =>
+        expect(Arrays.random([42])).toBe(42))
 
     it('should return an element that is present in the array', () => {
         const input = ['a', 'b', 'c', 'd']
@@ -151,16 +144,14 @@ describe('Arrays.random', () => {
     it('should return any of multiple elements over many runs', () => {
         const input = [1, 2, 3]
         const seen = new Set<number>()
-        for (let i = 0; i < 100; i++) {
-            seen.add(Arrays.random(input) as number)
-        }
+        for (let i = 0; i < 100; i++) seen.add(Arrays.random(input) as number)
+
         // Over 100 draws from 3 values, we expect to hit all of them.
         expect(seen.size).toBe(3)
     })
 
-    it('should return undefined for an empty array', () => {
-        expect(Arrays.random([])).toBeUndefined()
-    })
+    it('should return undefined for an empty array', () =>
+        expect(Arrays.random([])).toBeUndefined())
 })
 
 describe('Arrays.unique', () => {
@@ -169,17 +160,13 @@ describe('Arrays.unique', () => {
         expect(Arrays.unique([1, 1, 2, 3, 3, 2])).toEqual([1, 2, 3])
     })
 
-    it('should return the input unchanged when already unique', () => {
-        expect(Arrays.unique([1, 2, 3])).toEqual([1, 2, 3])
-    })
+    it('should return the input unchanged when already unique', () =>
+        expect(Arrays.unique([1, 2, 3])).toEqual([1, 2, 3]))
 
-    it('should return an empty array for an empty input', () => {
-        expect(Arrays.unique([])).toEqual([])
-    })
+    it('should return an empty array for an empty input', () =>
+        expect(Arrays.unique([])).toEqual([]))
 
-    it('should handle a single-element array', () => {
-        expect(Arrays.unique([42])).toEqual([42])
-    })
+    it('should handle a single-element array', () => expect(Arrays.unique([42])).toEqual([42]))
 
     it('should not mutate the input array', () => {
         const input = ['a', 'b', 'a']
@@ -200,35 +187,29 @@ describe('Arrays.unique', () => {
         expect(Arrays.unique([a, { id: 1 }])).toHaveLength(2)
     })
 
-    it('should handle mixed duplicate runs', () => {
-        expect(Arrays.unique([1, 1, 1, 2, 1])).toEqual([1, 2])
-    })
+    it('should handle mixed duplicate runs', () =>
+        expect(Arrays.unique([1, 1, 1, 2, 1])).toEqual([1, 2]))
 
-    it('should deduplicate NaN (SameValueZero, unlike indexOf)', () => {
-        expect(Arrays.unique([NaN, NaN])).toEqual([NaN])
-    })
+    it('should deduplicate NaN (SameValueZero, unlike indexOf)', () =>
+        expect(Arrays.unique([NaN, NaN])).toEqual([NaN]))
 
-    it('should treat 0 and -0 as the same (SameValueZero)', () => {
-        expect(Arrays.unique([0, -0])).toEqual([0])
-    })
+    it('should treat 0 and -0 as the same (SameValueZero)', () =>
+        expect(Arrays.unique([0, -0])).toEqual([0]))
 
-    it('should preserve undefined and null as distinct elements', () => {
-        expect(Arrays.unique([undefined, undefined, null])).toEqual([undefined, null])
-    })
+    it('should preserve undefined and null as distinct elements', () =>
+        expect(Arrays.unique([undefined, undefined, null])).toEqual([undefined, null]))
 
-    it('should keep equal-looking values of different types distinct', () => {
-        expect(Arrays.unique([1, '1', true])).toEqual([1, '1', true])
-    })
+    it('should keep equal-looking values of different types distinct', () =>
+        expect(Arrays.unique([1, '1', true])).toEqual([1, '1', true]))
 
-    it('should preserve falsy values without coercion', () => {
+    it('should preserve falsy values without coercion', () =>
         expect(Arrays.unique([0, false, '', null, undefined])).toEqual([
             0,
             false,
             '',
             null,
             undefined,
-        ])
-    })
+        ]))
 })
 
 describe('Arrays.chunk', () => {
@@ -266,18 +247,16 @@ describe('Arrays.chunk', () => {
         expect(Arrays.chunk([], 1)).toEqual([])
     })
 
-    it('should return a single chunk when the size equals the array length', () => {
-        expect(Arrays.chunk([1, 2, 3], 3)).toEqual([[1, 2, 3]])
-    })
+    it('should return a single chunk when the size equals the array length', () =>
+        expect(Arrays.chunk([1, 2, 3], 3)).toEqual([[1, 2, 3]]))
 
     it('should return a single chunk when the size exceeds the array length', () => {
         expect(Arrays.chunk([1, 2, 3], 5)).toEqual([[1, 2, 3]])
         expect(Arrays.chunk([1, 2, 3], Number.MAX_SAFE_INTEGER)).toEqual([[1, 2, 3]])
     })
 
-    it('should return one element per chunk for a size of 1', () => {
-        expect(Arrays.chunk(['a', 'b', 'c'], 1)).toEqual([['a'], ['b'], ['c']])
-    })
+    it('should return one element per chunk for a size of 1', () =>
+        expect(Arrays.chunk(['a', 'b', 'c'], 1)).toEqual([['a'], ['b'], ['c']]))
 
     it('should handle a single-element array', () => {
         expect(Arrays.chunk([42], 2)).toEqual([[42]])
@@ -290,9 +269,8 @@ describe('Arrays.chunk', () => {
         expect(Arrays.chunk([], Number.MAX_SAFE_INTEGER)).toEqual([])
     })
 
-    it('should preserve duplicate primitive values and order', () => {
-        expect(Arrays.chunk([1, 1, 2, 2, 3], 2)).toEqual([[1, 1], [2, 2], [3]])
-    })
+    it('should preserve duplicate primitive values and order', () =>
+        expect(Arrays.chunk([1, 1, 2, 2, 3], 2)).toEqual([[1, 1], [2, 2], [3]]))
 
     it('should preserve falsy and special values', () => {
         // NaN, null, undefined, false, 0, '', Infinity all preserved exactly.
@@ -358,11 +336,10 @@ describe('Arrays.chunk', () => {
         [NaN, 'NaN'],
         [Infinity, 'Infinity'],
         [-Infinity, '-Infinity'],
-    ])('should throw a RangeError for invalid size %s', (size) => {
-        expect(() => Arrays.chunk([1, 2, 3], size)).toThrow(RangeError)
-    })
+    ])('should throw a RangeError for invalid size %s', (size) =>
+        expect(() => Arrays.chunk([1, 2, 3], size)).toThrow(RangeError),
+    )
 
-    it('should throw a RangeError mentioning the offending size', () => {
-        expect(() => Arrays.chunk([1, 2, 3], 0)).toThrow('size must be a positive integer, got 0')
-    })
+    it('should throw a RangeError mentioning the offending size', () =>
+        expect(() => Arrays.chunk([1, 2, 3], 0)).toThrow('size must be a positive integer, got 0'))
 })

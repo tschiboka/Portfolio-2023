@@ -59,19 +59,12 @@ const getAnchorPosition = (
     let top: number
     let left: number
 
-    if (arrow === 'bottom') {
-        top = anchor.bottom + ARROW_GAP
-    } else {
-        top = anchor.top - h - ARROW_GAP
-    }
+    if (arrow === 'bottom') top = anchor.bottom + ARROW_GAP
+    else top = anchor.top - h - ARROW_GAP
 
-    if (align === 'end') {
-        left = anchor.right - w
-    } else if (align === 'start') {
-        left = anchor.left
-    } else {
-        left = anchor.left + anchor.width / 2 - w / 2
-    }
+    if (align === 'end') left = anchor.right - w
+    else if (align === 'start') left = anchor.left
+    else left = anchor.left + anchor.width / 2 - w / 2
 
     // Clamp so the popup stays fully within the viewport
     top = Math.max(0, Math.min(top, vh - h))
@@ -92,21 +85,18 @@ const getAnchorPosition = (
         const anchorCenter = anchor.left + anchor.width / 2
         const menuCenter = left + w / 2
         const arrowOffset = anchorCenter - menuCenter
-        if (arrowOffset !== 0) {
-            arrowStyle.left = `calc(50% + ${arrowOffset}px)`
-        }
+        if (arrowOffset !== 0) arrowStyle.left = `calc(50% + ${arrowOffset}px)`
     }
 
     // Zero out the corner radius on the side where the arrow sits.
     // With align="end" the arrow is near the right edge, with "start" near the left.
     const cornerStyle: CSSProperties = {}
-    if (align === 'end') {
+    if (align === 'end')
         if (arrow === 'bottom') cornerStyle.borderTopRightRadius = 0
         else cornerStyle.borderBottomRightRadius = 0
-    } else if (align === 'start') {
+    else if (align === 'start')
         if (arrow === 'bottom') cornerStyle.borderTopLeftRadius = 0
         else cornerStyle.borderBottomLeftRadius = 0
-    }
 
     // Tighten maxWidth to the remaining space from final left
     const finalMaxWidth = vw - left
@@ -125,7 +115,7 @@ const getAnchorPosition = (
     }
 }
 
-const useScrollLock = () => {
+const useScrollLock = () =>
     useLayoutEffect(() => {
         const html = document.documentElement
         const prevBody = document.body.style.overflow
@@ -155,7 +145,6 @@ const useScrollLock = () => {
             document.removeEventListener('touchmove', preventScroll)
         }
     }, [])
-}
 
 export const PopupUtils = {
     SizeStyle,

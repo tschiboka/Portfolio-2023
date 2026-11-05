@@ -43,9 +43,9 @@ export async function initWebSocket(server: Server) {
         ws.deviceId = deviceId as string
         session.connections.add(ws)
 
-        routeMessage('join', { session, deviceId: deviceId as string }).catch((err) => {
-            console.error(ClientMessage.Failure.Join('session'), err)
-        })
+        routeMessage('join', { session, deviceId: deviceId as string }).catch((err) =>
+            console.error(ClientMessage.Failure.Join('session'), err),
+        )
 
         ws.on('message', (message: string) => {
             const request = JSON.parse(message.toString()) as DeviceWebSocketRequest
@@ -53,9 +53,7 @@ export async function initWebSocket(server: Server) {
                 session,
                 deviceId: ws.deviceId,
                 payload: request.payload,
-            }).catch((err) => {
-                console.error(ClientMessage.Failure.Handle('message'), err)
-            })
+            }).catch((err) => console.error(ClientMessage.Failure.Handle('message'), err))
         })
 
         ws.on('close', () => {

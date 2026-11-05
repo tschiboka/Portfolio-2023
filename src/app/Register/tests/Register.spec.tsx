@@ -8,9 +8,7 @@ const { fields, buttons, errors } = RegisterTestUtils.labels
 const { registerSuccess } = RegisterMocks
 
 describe('Register', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render heading and subheading', async () => {
@@ -60,13 +58,12 @@ describe('Register', () => {
         })
     })
 
-    describe('Login button', () => {
+    describe('Login button', () =>
         it('should navigate to /api/login when login button is clicked', async () => {
             const { form } = await RegisterTestUtils.render()
             await form.Button(buttons.login).Do.click()
             expect(Test.Screen.Get.navigatedTo()).toBe(Paths.Client.Login)
-        })
-    })
+        }))
 
     describe('Form validation', () => {
         it('should show validation error when full name is empty on submit', async () => {
@@ -127,9 +124,7 @@ describe('Register', () => {
 
         it('should disable submit button after successful registration', async () => {
             const form = await RegisterTestUtils.fillAndSubmit()
-            await waitFor(() => {
-                expect(form.Button(buttons.register).Get.isDisabled()).toBe(true)
-            })
+            await waitFor(() => expect(form.Button(buttons.register).Get.isDisabled()).toBe(true))
         })
     })
 
@@ -142,9 +137,7 @@ describe('Register', () => {
         it('should not disable submit button on registration failure', async () => {
             const form = await RegisterTestUtils.fillAndSubmitInvalid()
             expect(await form.Wait.byText(errors.registrationFailed)).toBeInTheDocument()
-            await waitFor(() => {
-                expect(form.Button(buttons.register).Get.isDisabled()).toBe(false)
-            })
+            await waitFor(() => expect(form.Button(buttons.register).Get.isDisabled()).toBe(false))
         })
     })
 
@@ -161,10 +154,9 @@ describe('Register', () => {
         })
     })
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator initially', async () => {
             await RegisterTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

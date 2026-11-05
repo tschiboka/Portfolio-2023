@@ -12,9 +12,7 @@ export const ScheduleAuth = {
      */
     cronOrAdmin: (req: Request, res: Response, next: NextFunction) => {
         const cronSecret = req.header('x-cron-secret')
-        if (cronSecret && cronSecret === process.env.CRON_SECRET) {
-            return next()
-        }
+        if (cronSecret && cronSecret === process.env.CRON_SECRET) return next()
 
         auth(req, res, () => admin(req, res, next))
     },

@@ -24,9 +24,7 @@ export class DateAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            toggleCalendar: async () => {
-                await Accessor.user.click(this.Get.icon())
-            },
+            toggleCalendar: async () => await Accessor.user.click(this.Get.icon()),
             selectDay: async (dayIndex: number) => {
                 const days = this.Get.days()
                 await Accessor.user.click(days[dayIndex])

@@ -4,13 +4,7 @@ import { fileURLToPath } from 'node:url'
 import type { Rule } from 'eslint'
 import { ESLint } from 'eslint'
 import { RuleRegistry } from './registry.js'
-import type {
-    LinterKind,
-    RuleRequirement,
-    RuleRegistrar,
-    RuleScope,
-    RuleSeverity,
-} from './types.js'
+import type { LinterKind, RuleRequirement, RuleRegistrar, RuleScope, RuleSetting } from './types.js'
 
 /** Installed version per linter, e.g. `{ eslint: '9.39.5' }`. Missing means unavailable. */
 export type LinterVersions = Partial<Record<LinterKind, string>>
@@ -19,7 +13,7 @@ export type LinterVersions = Partial<Record<LinterKind, string>>
 export type BuiltStandards = {
     pluginName: string
     rules: Record<string, Rule.RuleModule>
-    settings: Record<string, RuleSeverity>
+    settings: Record<string, RuleSetting>
     scopes: Record<string, RuleScope>
 }
 
@@ -73,14 +67,15 @@ export const ruleBuilder = {
                     .filter((rule) => isCompatible(rule.requires, versions))
                     .map((rule) => ({ registrar, rule: rule.rule })),
             )
-
         return {
             pluginName,
             rules: Object.fromEntries(enabled.map(({ registrar, rule }) => [registrar.id, rule])),
             settings: Object.fromEntries(
                 enabled.map(({ registrar }) => [
                     `${pluginName}/${registrar.id}`,
-                    registrar.severity,
+                    registrar.options?.length
+                        ? [registrar.severity, ...registrar.options]
+                        : registrar.severity,
                 ]),
             ),
             scopes: Object.fromEntries(
@@ -94,7 +89,6 @@ export const ruleBuilder = {
             ),
         }
     },
-
     /**
      * Writes the built standards as a module the eslint config can import.
      *
@@ -109,10 +103,8 @@ export const ruleBuilder = {
         const { rules, settings, scopes } = ruleBuilder.build(RuleRegistry, pluginName, {
             eslint: ESLint.version,
         })
-
         const relativeRegistry = './rules/registry.js'
         const ids = JSON.stringify(Object.keys(rules), null, 4)
-
         const source = [
             `import { RuleRegistry } from ${JSON.stringify(relativeRegistry)}`,
             `import { styleProcessor } from './rules/styleProcessor.js'`,
@@ -136,7 +128,6 @@ export const ruleBuilder = {
             `export const scopes = ${JSON.stringify(scopes, null, 4)}`,
             '',
         ].join('\n')
-
         writeFileSync(join(dirname(fileURLToPath(import.meta.url)), target), source)
     },
 }

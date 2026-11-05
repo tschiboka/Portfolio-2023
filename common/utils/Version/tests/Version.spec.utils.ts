@@ -10,11 +10,10 @@ const mockVersion = (overrides: Partial<GetVersionResponse> = {}): GetVersionRes
     ...overrides,
 })
 
-const mockFetch = (body: GetVersionResponse, ok = true) => {
-    global.fetch = vi.fn().mockResolvedValue({
+const mockFetch = (body: GetVersionResponse, ok = true) =>
+    (global.fetch = vi.fn().mockResolvedValue({
         ok,
         json: () => Promise.resolve(body),
-    })
-}
+    }))
 
 export const VersionTestUtils = { VALID_SHA, OTHER_SHA, mockVersion, mockFetch }

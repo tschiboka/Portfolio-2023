@@ -3,11 +3,10 @@
  *
  * @example slugify("Hello World!") // "hello-world"
  */
-export const slugify = (text: string) => {
-    return text
+export const slugify = (text: string) =>
+    text
         .toLowerCase()
         .trim()
         .replace(/[^\w\s-]/g, '')
         .replace(/[\s_]+/g, '-')
         .replace(/-+/g, '-')
-}

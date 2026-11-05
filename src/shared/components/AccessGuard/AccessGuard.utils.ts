@@ -36,11 +36,8 @@ const isGuardActive = (guard: Guard, access: AccessMap): boolean => {
  * Returns the first matching ModeConfig, or null if all guards pass (access granted).
  */
 const resolveGuards = (guards: Guard[], access: AccessMap): Nullable<ModeConfig> => {
-    for (const guard of guards) {
-        if (isGuardActive(guard, access)) {
-            return guard.then
-        }
-    }
+    for (const guard of guards) if (isGuardActive(guard, access)) return guard.then
+
     return null
 }
 

@@ -34,9 +34,7 @@ export const Xmas = () => {
         mode: 'onSubmit',
     })
 
-    useEffect(() => {
-        reset({ name: user?.userName || '' })
-    }, [user, reset])
+    useEffect(() => reset({ name: user?.userName || '' }), [user, reset])
 
     const { data: ping, ...pingResponse } = XmasQueries.PagePing.useGet()
     const { mutate: submitMessage, ...submitMessageResponse } = XmasQueries.Messages.usePost({
@@ -58,9 +56,7 @@ export const Xmas = () => {
     // Trigger canvas resize when form size changes due to error/success messages
     useEffect(() => {
         // Small delay to ensure DOM has updated before resize
-        const timer = setTimeout(() => {
-            window.dispatchEvent(new Event('resize'))
-        }, 100)
+        const timer = setTimeout(() => window.dispatchEvent(new Event('resize')), 100)
 
         return () => clearTimeout(timer)
     }, [

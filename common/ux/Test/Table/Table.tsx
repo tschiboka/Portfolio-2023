@@ -66,67 +66,35 @@ class TableAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            clickActionButton: async (index = 0) => {
-                await Accessor.user.click(this.Get.actionButton(index))
-            },
-            clickMenuItem: async (label: string) => {
-                await Accessor.user.click(this.Get.menuItem(label))
-            },
+            clickActionButton: async (index = 0) =>
+                await Accessor.user.click(this.Get.actionButton(index)),
+            clickMenuItem: async (label: string) =>
+                await Accessor.user.click(this.Get.menuItem(label)),
             clickAction: async (label: string, index = 0) => {
                 await Accessor.user.click(this.Get.actionButton(index))
                 await Accessor.user.click(this.Get.menuItem(label))
             },
-            toggleFilters: async () => {
-                await Accessor.user.click(this.Get.filterToggle())
-            },
-            resetFilters: async () => {
-                await Accessor.user.click(this.Get.resetFilters())
-            },
-            applyFilters: async () => {
-                await Accessor.user.click(this.Get.applyFilters())
-            },
-            expandRow: async (index = 0) => {
-                await Accessor.user.click(this.Get.expandButton(index))
-            },
-            selectRow: async (n: number) => {
-                await Accessor.user.click(this.Get.selectRow(n))
-            },
-            selectAll: async () => {
-                await Accessor.user.click(this.Get.selectAll())
-            },
-            sortBy: async (header: string) => {
-                await Accessor.user.click(this.Get.sortButton(header))
-            },
-            goToPage: async (n: number) => {
-                await Accessor.user.click(this.Get.pageButton(n))
-            },
-            goToFirstPage: async () => {
-                await Accessor.user.click(this.Get.firstPage())
-            },
-            goToPrevPage: async () => {
-                await Accessor.user.click(this.Get.prevPage())
-            },
-            goToNextPage: async () => {
-                await Accessor.user.click(this.Get.nextPage())
-            },
-            goToLastPage: async () => {
-                await Accessor.user.click(this.Get.lastPage())
-            },
-            clickInfoButton: async () => {
-                await Accessor.user.click(this.Get.infoButton())
-            },
-            refresh: async () => {
-                await Accessor.user.click(this.Get.refreshButton())
-            },
-            reorderLeft: async (header: string) => {
-                await Accessor.user.click(this.Get.reorderLeftButton(header))
-            },
-            reorderRight: async (header: string) => {
-                await Accessor.user.click(this.Get.reorderRightButton(header))
-            },
-            download: async (label?: string) => {
-                await Accessor.user.click(this.Get.downloadButton(label))
-            },
+            toggleFilters: async () => await Accessor.user.click(this.Get.filterToggle()),
+            resetFilters: async () => await Accessor.user.click(this.Get.resetFilters()),
+            applyFilters: async () => await Accessor.user.click(this.Get.applyFilters()),
+            expandRow: async (index = 0) => await Accessor.user.click(this.Get.expandButton(index)),
+            selectRow: async (n: number) => await Accessor.user.click(this.Get.selectRow(n)),
+            selectAll: async () => await Accessor.user.click(this.Get.selectAll()),
+            sortBy: async (header: string) =>
+                await Accessor.user.click(this.Get.sortButton(header)),
+            goToPage: async (n: number) => await Accessor.user.click(this.Get.pageButton(n)),
+            goToFirstPage: async () => await Accessor.user.click(this.Get.firstPage()),
+            goToPrevPage: async () => await Accessor.user.click(this.Get.prevPage()),
+            goToNextPage: async () => await Accessor.user.click(this.Get.nextPage()),
+            goToLastPage: async () => await Accessor.user.click(this.Get.lastPage()),
+            clickInfoButton: async () => await Accessor.user.click(this.Get.infoButton()),
+            refresh: async () => await Accessor.user.click(this.Get.refreshButton()),
+            reorderLeft: async (header: string) =>
+                await Accessor.user.click(this.Get.reorderLeftButton(header)),
+            reorderRight: async (header: string) =>
+                await Accessor.user.click(this.Get.reorderRightButton(header)),
+            download: async (label?: string) =>
+                await Accessor.user.click(this.Get.downloadButton(label)),
         }
     }
 }

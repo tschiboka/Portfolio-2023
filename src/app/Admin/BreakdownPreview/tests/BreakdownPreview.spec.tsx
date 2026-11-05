@@ -52,9 +52,8 @@ describe('BreakdownPreview', () => {
     describe('Breakdown table', () => {
         it('should render a row for each visited path', () => {
             const preview = BreakdownPreviewTestUtils.renderPreview()
-            for (const item of BreakdownPreviewMocks.breakdown.visits.today) {
+            for (const item of BreakdownPreviewMocks.breakdown.visits.today)
                 expect(preview.Get.allByText(item.path).length).toBeGreaterThan(0)
-            }
         })
 
         it('should render the today count for a path', () => {

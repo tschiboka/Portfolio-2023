@@ -15,9 +15,9 @@ describe('Table — Column Customization', () => {
             })
             const table = Test.Table('test')
             const headers = table.Get.columnHeaders()
-            headers.forEach((th) => {
-                expect(th.querySelector('.th-resize-handle')).toBeInTheDocument()
-            })
+            headers.forEach((th) =>
+                expect(th.querySelector('.th-resize-handle')).toBeInTheDocument(),
+            )
         })
 
         it('should not render resize handles when enableColumnResize is omitted', () => {
@@ -37,9 +37,9 @@ describe('Table — Column Customization', () => {
                 enableColumnResize: true,
             })
             const handles = document.querySelectorAll('.th-resize-handle')
-            handles.forEach((handle) => {
-                expect(handle.querySelector('.th-resize-line')).toBeInTheDocument()
-            })
+            handles.forEach((handle) =>
+                expect(handle.querySelector('.th-resize-line')).toBeInTheDocument(),
+            )
         })
 
         it('should set table-layout to fixed on the table when resize enabled', () => {
@@ -161,9 +161,9 @@ describe('Table — Column Customization', () => {
             await Test.Table('test').Do.reorderLeft('Name')
             const headersAfter = Test.Table('test').Get.columnHeaders()
             // Order unchanged
-            headersAfter.forEach((th, i) => {
-                expect(th.textContent).toBe(headersBefore[i].textContent)
-            })
+            headersAfter.forEach((th, i) =>
+                expect(th.textContent).toBe(headersBefore[i].textContent),
+            )
         })
 
         it('should disable the right button on the last column and not move', async () => {
@@ -180,9 +180,9 @@ describe('Table — Column Customization', () => {
             await Test.Table('test').Do.reorderRight('Status')
             const headersAfter = Test.Table('test').Get.columnHeaders()
             // Order unchanged
-            headersAfter.forEach((th, i) => {
-                expect(th.textContent).toBe(headersBefore[i].textContent)
-            })
+            headersAfter.forEach((th, i) =>
+                expect(th.textContent).toBe(headersBefore[i].textContent),
+            )
         })
 
         it('should add has-reorder class to header cells', () => {
@@ -193,13 +193,11 @@ describe('Table — Column Customization', () => {
                 enableColumnReorder: true,
             })
             const headers = Test.Table('test').Get.columnHeaders()
-            headers.forEach((th) => {
-                expect(th.classList.contains('has-reorder')).toBe(true)
-            })
+            headers.forEach((th) => expect(th.classList.contains('has-reorder')).toBe(true))
         })
     })
 
-    describe('Resize + Reorder combined', () => {
+    describe('Resize + Reorder combined', () =>
         it('should render both resize handles and reorder buttons when both enabled', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -216,6 +214,5 @@ describe('Table — Column Customization', () => {
             expect(document.querySelectorAll('.th-reorder-btn')).toHaveLength(
                 basicColumns.length * 2,
             )
-        })
-    })
+        }))
 })

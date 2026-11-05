@@ -8,9 +8,9 @@ const pageWindow = (): number[] => Arrays.times(PAGE_WINDOW_SIZE, (i) => i + 1)
 const getPageWindow = (pageNumber: number, totalPages: number): number[] => {
     if (totalPages <= PAGE_WINDOW_SIZE) return Arrays.times(totalPages, (i) => i + 1)
     if (pageNumber <= PAGE_WINDOW_HALF + 1) return pageWindow()
-    if (pageNumber >= totalPages - PAGE_WINDOW_HALF) {
+    if (pageNumber >= totalPages - PAGE_WINDOW_HALF)
         return Arrays.times(PAGE_WINDOW_SIZE, (i) => totalPages - PAGE_WINDOW_SIZE + 1 + i)
-    }
+
     return Arrays.times(PAGE_WINDOW_SIZE, (i) => pageNumber - PAGE_WINDOW_HALF + i)
 }
 

@@ -167,7 +167,7 @@ describe('Table — Refresh & Loading', () => {
         })
     })
 
-    describe('Refresh + Loading interaction', () => {
+    describe('Refresh + Loading interaction', () =>
         it('should refresh while loading', async () => {
             const onRefresh = vi.fn()
             Test.Table.Set.mock<Row>({
@@ -184,6 +184,5 @@ describe('Table — Refresh & Loading', () => {
             // Refresh still works while skeleton is shown
             await table.Do.refresh()
             expect(onRefresh).toHaveBeenCalledTimes(1)
-        })
-    })
+        }))
 })

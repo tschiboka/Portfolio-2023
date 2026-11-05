@@ -10,8 +10,8 @@ type OptionsComponent = FC<OptionsProps> & {
     Button: typeof OptionButton
 }
 
-export const Options: OptionsComponent = ({ children }) => {
-    return <div className="option-panel">{children}</div>
-}
+export const Options: OptionsComponent = ({ children }) => (
+    <div className="option-panel">{children}</div>
+)
 
 Options.Button = OptionButton

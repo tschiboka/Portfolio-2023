@@ -4,9 +4,7 @@ import { Test } from '@shared-components/Screen/tests'
 import { XmasTestUtils } from './Xmas.spec.utils'
 
 describe('Xmas', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render the reindeer image', () => {
@@ -48,44 +46,38 @@ describe('Xmas', () => {
         })
     })
 
-    describe('Candle panel', () => {
+    describe('Candle panel', () =>
         it('should render four candles', async () => {
             XmasTestUtils.render()
-            await waitFor(() => {
-                expect(screen.getAllByRole('img', { name: 'Candle' })).toHaveLength(4)
-            })
-        })
-    })
+            await waitFor(() =>
+                expect(screen.getAllByRole('img', { name: 'Candle' })).toHaveLength(4),
+            )
+        }))
 
     describe('Form validation', () => {
         it('should show validation error when name is too short on submit', async () => {
             XmasTestUtils.render()
             await XmasTestUtils.fillName('ab')
             await Test.Button('Submit').Do.click()
-
-            await waitFor(() => {
-                expect(Test.Typography(/Name must be at least 4 characters/)).toBeDefined()
-            })
+            await waitFor(() =>
+                expect(Test.Typography(/Name must be at least 4 characters/)).toBeDefined(),
+            )
         })
 
         it('should show validation error when message is empty on submit', async () => {
             XmasTestUtils.render()
             await XmasTestUtils.fillName('ValidName')
             await Test.Button('Submit').Do.click()
-
-            await waitFor(() => {
-                expect(Test.Typography(/Message is required/)).toBeDefined()
-            })
+            await waitFor(() => expect(Test.Typography(/Message is required/)).toBeDefined())
         })
 
         it('should show validation error when name contains special characters', async () => {
             XmasTestUtils.render()
             await XmasTestUtils.fillName('User@Name!')
             await Test.Button('Submit').Do.click()
-
-            await waitFor(() => {
-                expect(Test.Typography(/Name allows only alphanumerics/)).toBeDefined()
-            })
+            await waitFor(() =>
+                expect(Test.Typography(/Name allows only alphanumerics/)).toBeDefined(),
+            )
         })
 
         it('should show validation error when message exceeds max length', async () => {
@@ -98,30 +90,25 @@ describe('Xmas', () => {
             )
             await Test.Button('Submit').Do.click()
 
-            await waitFor(() => {
-                expect(Test.Typography(/Message must be under 50 characters/)).toBeDefined()
-            })
+            await waitFor(() =>
+                expect(Test.Typography(/Message must be under 50 characters/)).toBeDefined(),
+            )
         })
     })
 
-    describe('Successful submission', () => {
+    describe('Successful submission', () =>
         it('should show success message after submitting valid form', async () => {
             XmasTestUtils.render()
             const messageInput = screen.getByLabelText('Message')
 
             await Accessor.user.type(messageInput, 'Hello world')
             await Test.Button('Submit').Do.click()
+            await waitFor(() => expect(Test.Typography('Successful submission')).toBeDefined())
+        }))
 
-            await waitFor(() => {
-                expect(Test.Typography('Successful submission')).toBeDefined()
-            })
-        })
-    })
-
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator initially', () => {
             XmasTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

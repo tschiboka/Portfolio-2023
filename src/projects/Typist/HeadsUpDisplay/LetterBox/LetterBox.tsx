@@ -8,10 +8,8 @@ export const LetterBox = ({
 }: {
     letter: string
     proficiency?: ProficiencyLevel
-}) => {
-    return (
-        <div className={`LetterBox${proficiency ? ` proficiency-${proficiency}` : ''}`}>
-            <span>{letter}</span>
-        </div>
-    )
-}
+}) => (
+    <div className={`LetterBox${proficiency ? ` proficiency-${proficiency}` : ''}`}>
+        <span>{letter}</span>
+    </div>
+)

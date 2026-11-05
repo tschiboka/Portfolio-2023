@@ -263,17 +263,15 @@ export const AllFeaturesCombinedDemo = () => {
             columns={cols}
             isLoading={isLoading}
             onRefresh={handleRefresh}
-            onColumnResize={(index, width) => {
-                setColWidths((prev) => ({ ...prev, [index]: width }))
-            }}
-            onColumnReorder={(from, to) => {
+            onColumnResize={(index, width) => setColWidths((prev) => ({ ...prev, [index]: width }))}
+            onColumnReorder={(from, to) =>
                 setCols((prev) => {
                     const next = [...prev]
                     const [moved] = next.splice(from, 1)
                     next.splice(to, 0, moved)
                     return next
                 })
-            }}
+            }
             rowVariant={allFeaturesRowVariant}
             selection={{
                 getRowId: (row) => row.id,

@@ -18,25 +18,23 @@ export const RadioButton = <T extends FieldValues>({
     ariaLabel,
     className,
     style,
-}: RadioButtonProps<T>) => {
-    return (
-        <Controller
-            name={name}
-            control={control}
-            render={({ field: { value: fieldValue, onChange: onChangeFn } }) => (
-                <input
-                    type="radio"
-                    name={name}
-                    aria-label={ariaLabel}
-                    className={className}
-                    style={style}
-                    checked={fieldValue == value}
-                    onChange={() => {
-                        onChangeFn(value)
-                        onChange()
-                    }}
-                />
-            )}
-        />
-    )
-}
+}: RadioButtonProps<T>) => (
+    <Controller
+        name={name}
+        control={control}
+        render={({ field: { value: fieldValue, onChange: onChangeFn } }) => (
+            <input
+                type="radio"
+                name={name}
+                aria-label={ariaLabel}
+                className={className}
+                style={style}
+                checked={fieldValue == value}
+                onChange={() => {
+                    onChangeFn(value)
+                    onChange()
+                }}
+            />
+        )}
+    />
+)

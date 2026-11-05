@@ -53,13 +53,9 @@ describe('isDefined', () => {
         expect(isDefined({})).toBe(true)
     })
 
-    it('should return false for null', () => {
-        expect(isDefined(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(isDefined(null)).toBe(false))
 
-    it('should return false for undefined', () => {
-        expect(isDefined(undefined)).toBe(false)
-    })
+    it('should return false for undefined', () => expect(isDefined(undefined)).toBe(false))
 
     it('should work as a filter callback', () => {
         const items: Nullish<string>[] = ['a', null, 'b', undefined]
@@ -69,13 +65,9 @@ describe('isDefined', () => {
 })
 
 describe('isUndefined', () => {
-    it('should return true for undefined', () => {
-        expect(isUndefined(undefined)).toBe(true)
-    })
+    it('should return true for undefined', () => expect(isUndefined(undefined)).toBe(true))
 
-    it('should return false for null', () => {
-        expect(isUndefined(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(isUndefined(null)).toBe(false))
 
     it('should return false for other values', () => {
         expect(isUndefined(0)).toBe(false)
@@ -85,13 +77,9 @@ describe('isUndefined', () => {
 })
 
 describe('isNull', () => {
-    it('should return true for null', () => {
-        expect(isNull(null)).toBe(true)
-    })
+    it('should return true for null', () => expect(isNull(null)).toBe(true))
 
-    it('should return false for undefined', () => {
-        expect(isNull(undefined)).toBe(false)
-    })
+    it('should return false for undefined', () => expect(isNull(undefined)).toBe(false))
 
     it('should return false for other values', () => {
         expect(isNull(0)).toBe(false)
@@ -101,13 +89,9 @@ describe('isNull', () => {
 })
 
 describe('isNullish', () => {
-    it('should return true for null', () => {
-        expect(isNullish(null)).toBe(true)
-    })
+    it('should return true for null', () => expect(isNullish(null)).toBe(true))
 
-    it('should return true for undefined', () => {
-        expect(isNullish(undefined)).toBe(true)
-    })
+    it('should return true for undefined', () => expect(isNullish(undefined)).toBe(true))
 
     it('should return false for other values', () => {
         expect(isNullish(0)).toBe(false)
@@ -237,12 +221,10 @@ describe('isPositiveInteger', () => {
 
     it('should narrow the type to a positive integer when asserted', () => {
         const value: unknown = 5
-        if (isPositiveInteger(value)) {
+        if (isPositiveInteger(value))
             // value is narrowed to number here
             expect(value > 0).toBe(true)
-        } else {
-            throw new Error('expected 5 to be a positive integer')
-        }
+        else throw new Error('expected 5 to be a positive integer')
     })
 })
 
@@ -265,20 +247,14 @@ describe('isString', () => {
 describe('isDigits', () => {
     it.each(['0', '12345', '999000111222', '007'])(
         'should return true for digit-only strings: %s',
-        (value) => {
-            expect(isDigits(value)).toBe(true)
-        },
+        (value) => expect(isDigits(value)).toBe(true),
     )
 
-    it('should return false for the empty string', () => {
-        expect(isDigits('')).toBe(false)
-    })
+    it('should return false for the empty string', () => expect(isDigits('')).toBe(false))
 
     it.each(['12a45', '12 45', '12.5', '1-2', '1_2', '+12', '-12'])(
         'should return false for strings with non-digits: %s',
-        (value) => {
-            expect(isDigits(value)).toBe(false)
-        },
+        (value) => expect(isDigits(value)).toBe(false),
     )
 
     it('should return false for non-strings', () => {
@@ -331,9 +307,7 @@ describe('isFiniteNumber', () => {
         expect(isFiniteNumber(-1.5)).toBe(true)
     })
 
-    it('should return false for NaN', () => {
-        expect(isFiniteNumber(NaN)).toBe(false)
-    })
+    it('should return false for NaN', () => expect(isFiniteNumber(NaN)).toBe(false))
 
     it('should return false for Infinity', () => {
         expect(isFiniteNumber(Infinity)).toBe(false)
@@ -372,13 +346,9 @@ describe('isObject', () => {
         expect(isObject(/regex/)).toBe(true)
     })
 
-    it('should return false for arrays', () => {
-        expect(isObject([])).toBe(false)
-    })
+    it('should return false for arrays', () => expect(isObject([])).toBe(false))
 
-    it('should return false for null', () => {
-        expect(isObject(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(isObject(null)).toBe(false))
 
     it('should return false for primitives', () => {
         expect(isObject('string')).toBe(false)
@@ -387,13 +357,11 @@ describe('isObject', () => {
 })
 
 describe('isObjectId', () => {
-    it('should return true for an object whose String() form is 24-char lowercase hex', () => {
-        expect(isObjectId(objectId(HEX))).toBe(true)
-    })
+    it('should return true for an object whose String() form is 24-char lowercase hex', () =>
+        expect(isObjectId(objectId(HEX))).toBe(true))
 
-    it('should return false for a primitive 24-char hex string (it is the representation, not the object)', () => {
-        expect(isObjectId(HEX)).toBe(false)
-    })
+    it('should return false for a primitive 24-char hex string (it is the representation, not the object)', () =>
+        expect(isObjectId(HEX)).toBe(false))
 
     describe('primitive values', () => {
         it.each([
@@ -411,9 +379,9 @@ describe('isObjectId', () => {
             [false],
             [null],
             [undefined],
-        ])('should return false for primitive %p', (primitive) => {
-            expect(isObjectId(primitive)).toBe(false)
-        })
+        ])('should return false for primitive %p', (primitive) =>
+            expect(isObjectId(primitive)).toBe(false),
+        )
 
         it('should return false for BigInt and Symbol primitives', () => {
             expect(isObjectId(10n)).toBe(false)
@@ -428,9 +396,8 @@ describe('isObjectId', () => {
     })
 
     describe('hex-format boundaries', () => {
-        it('should return true for exactly 24 chars', () => {
-            expect(isObjectId(objectId(HEX))).toBe(true)
-        })
+        it('should return true for exactly 24 chars', () =>
+            expect(isObjectId(objectId(HEX))).toBe(true))
 
         it.each([
             ['shorter than 24', objectId('64b00000000000000000')],
@@ -446,9 +413,7 @@ describe('isObjectId', () => {
             ['leading 0x prefix', objectId(`0x${HEX}`)],
             ['hyphenated', objectId('64b00000-0000-0000-0000-000000000000')],
             ['uuid-shaped', objectId('64b00000-0000-4000-8000-000000000000')],
-        ])('should return false when %s', (_label, value) => {
-            expect(isObjectId(value)).toBe(false)
-        })
+        ])('should return false when %s', (_label, value) => expect(isObjectId(value)).toBe(false))
     })
 
     describe('hexadecimal alphabet (case-sensitive, lowercase-only)', () => {
@@ -483,13 +448,10 @@ describe('isObjectId', () => {
             ['Error', new Error('boom')],
             ['Map', new Map()],
             ['Set', new Set()],
-        ])('should return false for a %s', (_label, value) => {
-            expect(isObjectId(value)).toBe(false)
-        })
+        ])('should return false for a %s', (_label, value) => expect(isObjectId(value)).toBe(false))
 
-        it('should return true for a String wrapper object whose value is a valid ObjectId', () => {
-            expect(isObjectId(new String(HEX))).toBe(true)
-        })
+        it('should return true for a String wrapper object whose value is a valid ObjectId', () =>
+            expect(isObjectId(new String(HEX))).toBe(true))
 
         it('should return false for Number and Boolean wrapper objects', () => {
             expect(isObjectId(new Number(42))).toBe(false)
@@ -504,22 +466,19 @@ describe('isObjectId', () => {
     })
 
     describe('custom toString() / coercion', () => {
-        it('should return true for an object with an own custom toString() returning a valid ObjectId', () => {
-            expect(isObjectId(objectId(HEX))).toBe(true)
-        })
+        it('should return true for an object with an own custom toString() returning a valid ObjectId', () =>
+            expect(isObjectId(objectId(HEX))).toBe(true))
 
         it('should return true for an object inheriting a custom toString() returning a valid ObjectId', () => {
             const proto = Object.create({ toString: () => HEX }) as { toString(): string }
             expect(isObjectId(proto)).toBe(true)
         })
 
-        it('should return false for an object whose custom toString() is invalid', () => {
-            expect(isObjectId({ toString: () => 'not-an-id' })).toBe(false)
-        })
+        it('should return false for an object whose custom toString() is invalid', () =>
+            expect(isObjectId({ toString: () => 'not-an-id' })).toBe(false))
 
-        it('should coerce toString() returning a non-string via String()', () => {
-            expect(isObjectId({ toString: () => 42 })).toBe(false)
-        })
+        it('should coerce toString() returning a non-string via String()', () =>
+            expect(isObjectId({ toString: () => 42 })).toBe(false))
 
         it('should coerce a null-prototype object via String()', () => {
             const nullProto = Object.create(null) as { toString(): string }
@@ -566,12 +525,11 @@ describe('isObjectId', () => {
         })
     })
 
-    describe('core value use: the real mongoose ObjectId shape', () => {
+    describe('core value use: the real mongoose ObjectId shape', () =>
         it('should return true for an object mirroring mongoose ObjectId.toString()', () => {
             const fakeMongooseId = { toString: () => '64b000000000000000000000' }
             expect(isObjectId(fakeMongooseId)).toBe(true)
-        })
-    })
+        }))
 })
 
 describe('isValidObjectId', () => {
@@ -587,7 +545,7 @@ describe('isValidObjectId', () => {
         expect(isValidObjectId('64b0000000000000000000A0')).toBe(false)
     })
 
-    describe('non-string values', () => {
+    describe('non-string values', () =>
         it.each([
             ['undefined', undefined],
             ['null', null],
@@ -597,12 +555,11 @@ describe('isValidObjectId', () => {
             ['array', [HEX]],
             ['ObjectId-like object', { toString: () => HEX }],
             ['String wrapper', new String(HEX)],
-        ])('should return false for a %s', (_label, value) => {
-            expect(isValidObjectId(value)).toBe(false)
-        })
-    })
+        ])('should return false for a %s', (_label, value) =>
+            expect(isValidObjectId(value)).toBe(false),
+        ))
 
-    describe('invalid string representations', () => {
+    describe('invalid string representations', () =>
         it.each([
             ['empty', ''],
             ['shorter than 24', '64b00000000000000000000'],
@@ -613,10 +570,9 @@ describe('isValidObjectId', () => {
             ['embedded whitespace', '64b0000000000000000 00000'],
             ['0x prefix', `0x${HEX}`],
             ['uuid-shaped', '64b00000-0000-4000-8000-000000000000'],
-        ])('should return false when %s', (_label, value) => {
-            expect(isValidObjectId(value)).toBe(false)
-        })
-    })
+        ])('should return false when %s', (_label, value) =>
+            expect(isValidObjectId(value)).toBe(false),
+        ))
 })
 
 describe('isPlainObject', () => {
@@ -625,82 +581,49 @@ describe('isPlainObject', () => {
         expect(isPlainObject({ a: 1 })).toBe(true)
     })
 
-    it('should return true for Object.create(null)', () => {
-        expect(isPlainObject(Object.create(null))).toBe(true)
-    })
+    it('should return true for Object.create(null)', () =>
+        expect(isPlainObject(Object.create(null))).toBe(true))
 
     it('should return false for class instances', () => {
         expect(isPlainObject(new Date())).toBe(false)
         expect(isPlainObject(/regex/)).toBe(false)
     })
 
-    it('should return false for arrays', () => {
-        expect(isPlainObject([])).toBe(false)
-    })
+    it('should return false for arrays', () => expect(isPlainObject([])).toBe(false))
 
-    it('should return false for null', () => {
-        expect(isPlainObject(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(isPlainObject(null)).toBe(false))
 })
 
 describe('hasLength', () => {
-    it('should return true for non-empty arrays', () => {
-        expect(hasLength([1, 2, 3])).toBe(true)
-    })
+    it('should return true for non-empty arrays', () => expect(hasLength([1, 2, 3])).toBe(true))
 
-    it('should return false for empty arrays', () => {
-        expect(hasLength([])).toBe(false)
-    })
+    it('should return false for empty arrays', () => expect(hasLength([])).toBe(false))
 
-    it('should return true for non-empty strings', () => {
-        expect(hasLength('hello')).toBe(true)
-    })
+    it('should return true for non-empty strings', () => expect(hasLength('hello')).toBe(true))
 
-    it('should return false for empty strings', () => {
-        expect(hasLength('')).toBe(false)
-    })
+    it('should return false for empty strings', () => expect(hasLength('')).toBe(false))
 
-    it('should return false for null', () => {
-        expect(hasLength(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(hasLength(null)).toBe(false))
 
-    it('should return false for undefined', () => {
-        expect(hasLength(undefined)).toBe(false)
-    })
+    it('should return false for undefined', () => expect(hasLength(undefined)).toBe(false))
 })
 
 describe('isEmpty', () => {
-    it('should return true for empty arrays', () => {
-        expect(isEmpty([])).toBe(true)
-    })
+    it('should return true for empty arrays', () => expect(isEmpty([])).toBe(true))
 
-    it('should return false for non-empty arrays', () => {
-        expect(isEmpty([1])).toBe(false)
-    })
+    it('should return false for non-empty arrays', () => expect(isEmpty([1])).toBe(false))
 
-    it('should return true for empty strings', () => {
-        expect(isEmpty('')).toBe(true)
-    })
+    it('should return true for empty strings', () => expect(isEmpty('')).toBe(true))
 
-    it('should return false for non-empty strings', () => {
-        expect(isEmpty('hello')).toBe(false)
-    })
+    it('should return false for non-empty strings', () => expect(isEmpty('hello')).toBe(false))
 
-    it('should return true for empty objects', () => {
-        expect(isEmpty({})).toBe(true)
-    })
+    it('should return true for empty objects', () => expect(isEmpty({})).toBe(true))
 
-    it('should return false for non-empty objects', () => {
-        expect(isEmpty({ a: 1 })).toBe(false)
-    })
+    it('should return false for non-empty objects', () => expect(isEmpty({ a: 1 })).toBe(false))
 
-    it('should return true for null', () => {
-        expect(isEmpty(null)).toBe(true)
-    })
+    it('should return true for null', () => expect(isEmpty(null)).toBe(true))
 
-    it('should return true for undefined', () => {
-        expect(isEmpty(undefined)).toBe(true)
-    })
+    it('should return true for undefined', () => expect(isEmpty(undefined)).toBe(true))
 
     it('should return true for empty Sets and Maps', () => {
         expect(isEmpty(new Set())).toBe(true)
@@ -731,39 +654,27 @@ describe('isNonEmpty', () => {
         expect(isNonEmpty({ a: 1 })).toBe(true)
     })
 
-    it('should return false for null', () => {
-        expect(isNonEmpty(null)).toBe(false)
-    })
+    it('should return false for null', () => expect(isNonEmpty(null)).toBe(false))
 
-    it('should return false for undefined', () => {
-        expect(isNonEmpty(undefined)).toBe(false)
-    })
+    it('should return false for undefined', () => expect(isNonEmpty(undefined)).toBe(false))
 })
 
 describe('isNested', () => {
-    it('should return true for arrays with nested arrays', () => {
-        expect(isNested([1, [2]])).toBe(true)
-    })
+    it('should return true for arrays with nested arrays', () =>
+        expect(isNested([1, [2]])).toBe(true))
 
-    it('should return true for arrays with nested objects', () => {
-        expect(isNested([1, { a: 2 }])).toBe(true)
-    })
+    it('should return true for arrays with nested objects', () =>
+        expect(isNested([1, { a: 2 }])).toBe(true))
 
-    it('should return false for flat arrays', () => {
-        expect(isNested([1, 2, 3])).toBe(false)
-    })
+    it('should return false for flat arrays', () => expect(isNested([1, 2, 3])).toBe(false))
 
-    it('should return true for objects with nested objects', () => {
-        expect(isNested({ a: { b: 1 } })).toBe(true)
-    })
+    it('should return true for objects with nested objects', () =>
+        expect(isNested({ a: { b: 1 } })).toBe(true))
 
-    it('should return true for objects with nested arrays', () => {
-        expect(isNested({ a: [1] })).toBe(true)
-    })
+    it('should return true for objects with nested arrays', () =>
+        expect(isNested({ a: [1] })).toBe(true))
 
-    it('should return false for flat objects', () => {
-        expect(isNested({ a: 1, b: 2 })).toBe(false)
-    })
+    it('should return false for flat objects', () => expect(isNested({ a: 1, b: 2 })).toBe(false))
 
     it('should return false for empty collections', () => {
         expect(isNested([])).toBe(false)
@@ -772,17 +683,13 @@ describe('isNested', () => {
 })
 
 describe('hasProperty', () => {
-    it('should return true when object has the property', () => {
-        expect(hasProperty({ name: 'Alice' }, 'name')).toBe(true)
-    })
+    it('should return true when object has the property', () =>
+        expect(hasProperty({ name: 'Alice' }, 'name')).toBe(true))
 
-    it('should return false when object lacks the property', () => {
-        expect(hasProperty({ name: 'Alice' }, 'age')).toBe(false)
-    })
+    it('should return false when object lacks the property', () =>
+        expect(hasProperty({ name: 'Alice' }, 'age')).toBe(false))
 
-    it('should return false for null', () => {
-        expect(hasProperty(null, 'key')).toBe(false)
-    })
+    it('should return false for null', () => expect(hasProperty(null, 'key')).toBe(false))
 
     it('should return false for primitives', () => {
         expect(hasProperty('string', 'length')).toBe(false)
@@ -836,9 +743,8 @@ describe('isOneOf', () => {
         expect(isOneOf('inactive', statuses)).toBe(true)
     })
 
-    it('should return false when value is not in the options', () => {
-        expect(isOneOf('deleted', statuses)).toBe(false)
-    })
+    it('should return false when value is not in the options', () =>
+        expect(isOneOf('deleted', statuses)).toBe(false))
 
     it('should work with number arrays', () => {
         expect(isOneOf(1, [1, 2, 3])).toBe(true)
@@ -860,29 +766,23 @@ describe('isShallowEqual', () => {
         expect(isShallowEqual('a', 'b')).toBe(false)
     })
 
-    it('should return true for arrays with same elements', () => {
-        expect(isShallowEqual([1, 2], [1, 2])).toBe(true)
-    })
+    it('should return true for arrays with same elements', () =>
+        expect(isShallowEqual([1, 2], [1, 2])).toBe(true))
 
-    it('should return false for arrays with different elements', () => {
-        expect(isShallowEqual([1, 2], [1, 3])).toBe(false)
-    })
+    it('should return false for arrays with different elements', () =>
+        expect(isShallowEqual([1, 2], [1, 3])).toBe(false))
 
-    it('should return false for arrays with different lengths', () => {
-        expect(isShallowEqual([1, 2], [1, 2, 3])).toBe(false)
-    })
+    it('should return false for arrays with different lengths', () =>
+        expect(isShallowEqual([1, 2], [1, 2, 3])).toBe(false))
 
-    it('should return true for objects with same key-value pairs', () => {
-        expect(isShallowEqual({ a: 1, b: 2 }, { a: 1, b: 2 })).toBe(true)
-    })
+    it('should return true for objects with same key-value pairs', () =>
+        expect(isShallowEqual({ a: 1, b: 2 }, { a: 1, b: 2 })).toBe(true))
 
-    it('should return false for objects with different values', () => {
-        expect(isShallowEqual({ a: 1 }, { a: 2 })).toBe(false)
-    })
+    it('should return false for objects with different values', () =>
+        expect(isShallowEqual({ a: 1 }, { a: 2 })).toBe(false))
 
-    it('should do NOT deeply compare nested objects', () => {
-        expect(isShallowEqual({ a: { b: 1 } }, { a: { b: 1 } })).toBe(false)
-    })
+    it('should do NOT deeply compare nested objects', () =>
+        expect(isShallowEqual({ a: { b: 1 } }, { a: { b: 1 } })).toBe(false))
 
     it('should return false for different types', () => {
         expect(isShallowEqual(1, '1')).toBe(false)
@@ -897,39 +797,32 @@ describe('isEqual', () => {
         expect(isEqual(null, null)).toBe(true)
     })
 
-    it('should return true for deeply equal arrays', () => {
-        expect(isEqual([1, [2, 3]], [1, [2, 3]])).toBe(true)
-    })
+    it('should return true for deeply equal arrays', () =>
+        expect(isEqual([1, [2, 3]], [1, [2, 3]])).toBe(true))
 
-    it('should return false for deeply unequal arrays', () => {
-        expect(isEqual([1, [2, 3]], [1, [2, 4]])).toBe(false)
-    })
+    it('should return false for deeply unequal arrays', () =>
+        expect(isEqual([1, [2, 3]], [1, [2, 4]])).toBe(false))
 
-    it('should return true for deeply equal objects', () => {
-        expect(isEqual({ a: { b: 1 } }, { a: { b: 1 } })).toBe(true)
-    })
+    it('should return true for deeply equal objects', () =>
+        expect(isEqual({ a: { b: 1 } }, { a: { b: 1 } })).toBe(true))
 
-    it('should return false for deeply unequal objects', () => {
-        expect(isEqual({ a: { b: 1 } }, { a: { b: 2 } })).toBe(false)
-    })
+    it('should return false for deeply unequal objects', () =>
+        expect(isEqual({ a: { b: 1 } }, { a: { b: 2 } })).toBe(false))
 
     it('should handle mixed nested structures', () => {
         expect(isEqual({ a: [1, { b: 2 }] }, { a: [1, { b: 2 }] })).toBe(true)
         expect(isEqual({ a: [1, { b: 2 }] }, { a: [1, { b: 3 }] })).toBe(false)
     })
 
-    it('should return false for different types', () => {
-        expect(isEqual(1, '1')).toBe(false)
-    })
+    it('should return false for different types', () => expect(isEqual(1, '1')).toBe(false))
 
     it('should return false when one is null', () => {
         expect(isEqual(null, {})).toBe(false)
         expect(isEqual({}, null)).toBe(false)
     })
 
-    it('should return false for objects with different key counts', () => {
-        expect(isEqual({ a: 1 }, { a: 1, b: 2 })).toBe(false)
-    })
+    it('should return false for objects with different key counts', () =>
+        expect(isEqual({ a: 1 }, { a: 1, b: 2 })).toBe(false))
 })
 
 describe('isUnique', () => {
@@ -943,13 +836,9 @@ describe('isUnique', () => {
         expect(isUnique(['a', 'a'])).toBe(false)
     })
 
-    it('should return true for empty arrays', () => {
-        expect(isUnique([])).toBe(true)
-    })
+    it('should return true for empty arrays', () => expect(isUnique([])).toBe(true))
 
-    it('should return true for single-element arrays', () => {
-        expect(isUnique([1])).toBe(true)
-    })
+    it('should return true for single-element arrays', () => expect(isUnique([1])).toBe(true))
 })
 
 describe('isInstanceOf', () => {
@@ -964,9 +853,8 @@ describe('isInstanceOf', () => {
         expect(isInstanceOf(42, Date as never)).toBe(false)
     })
 
-    it('should return false for plain objects', () => {
-        expect(isInstanceOf({}, Date as never)).toBe(false)
-    })
+    it('should return false for plain objects', () =>
+        expect(isInstanceOf({}, Date as never)).toBe(false))
 })
 
 describe('isDate', () => {
@@ -975,9 +863,8 @@ describe('isDate', () => {
         expect(isDate(new Date('2024-01-01'))).toBe(true)
     })
 
-    it('should return false for invalid dates', () => {
-        expect(isDate(new Date('invalid'))).toBe(false)
-    })
+    it('should return false for invalid dates', () =>
+        expect(isDate(new Date('invalid'))).toBe(false))
 
     it('should return false for non-Date values', () => {
         expect(isDate('2024-01-01')).toBe(false)
@@ -993,9 +880,8 @@ describe('isError', () => {
         expect(isError(new RangeError('out'))).toBe(true)
     })
 
-    it('should return false for error-like objects', () => {
-        expect(isError({ message: 'fake' })).toBe(false)
-    })
+    it('should return false for error-like objects', () =>
+        expect(isError({ message: 'fake' })).toBe(false))
 
     it('should return false for non-errors', () => {
         expect(isError('error')).toBe(false)
@@ -1004,17 +890,12 @@ describe('isError', () => {
 })
 
 describe('isRegExp', () => {
-    it('should return true for regex literals', () => {
-        expect(isRegExp(/abc/)).toBe(true)
-    })
+    it('should return true for regex literals', () => expect(isRegExp(/abc/)).toBe(true))
 
-    it('should return true for RegExp constructor', () => {
-        expect(isRegExp(new RegExp('a'))).toBe(true)
-    })
+    it('should return true for RegExp constructor', () =>
+        expect(isRegExp(new RegExp('a'))).toBe(true))
 
-    it('should return false for strings', () => {
-        expect(isRegExp('abc')).toBe(false)
-    })
+    it('should return false for strings', () => expect(isRegExp('abc')).toBe(false))
 
     it('should return false for other values', () => {
         expect(isRegExp(null)).toBe(false)
@@ -1028,9 +909,8 @@ describe('isPromise', () => {
         expect(isPromise(new Promise(noop))).toBe(true)
     })
 
-    it('should return false for thenables that are not Promises', () => {
-        expect(isPromise({ then: noop })).toBe(false)
-    })
+    it('should return false for thenables that are not Promises', () =>
+        expect(isPromise({ then: noop })).toBe(false))
 
     it('should return false for non-promises', () => {
         expect(isPromise(42)).toBe(false)
@@ -1040,17 +920,13 @@ describe('isPromise', () => {
 })
 
 describe('isThenable', () => {
-    it('should return true for Promises', () => {
-        expect(isThenable(Promise.resolve(1))).toBe(true)
-    })
+    it('should return true for Promises', () => expect(isThenable(Promise.resolve(1))).toBe(true))
 
-    it('should return true for custom thenables', () => {
-        expect(isThenable({ then: noop })).toBe(true)
-    })
+    it('should return true for custom thenables', () =>
+        expect(isThenable({ then: noop })).toBe(true))
 
-    it('should return false when then is not a function', () => {
-        expect(isThenable({ then: 'not a function' })).toBe(false)
-    })
+    it('should return false when then is not a function', () =>
+        expect(isThenable({ then: 'not a function' })).toBe(false))
 
     it('should return false for non-objects', () => {
         expect(isThenable(42)).toBe(false)
@@ -1060,58 +936,44 @@ describe('isThenable', () => {
 })
 
 describe('isAll', () => {
-    it('should return true when all elements match', () => {
-        expect(isAll(isString)(['a', 'b', 'c'])).toBe(true)
-    })
+    it('should return true when all elements match', () =>
+        expect(isAll(isString)(['a', 'b', 'c'])).toBe(true))
 
-    it('should return false when any element does not match', () => {
-        expect(isAll(isString)(['a', 1, 'c'])).toBe(false)
-    })
+    it('should return false when any element does not match', () =>
+        expect(isAll(isString)(['a', 1, 'c'])).toBe(false))
 
-    it('should return true for empty arrays', () => {
-        expect(isAll(isString)([])).toBe(true)
-    })
+    it('should return true for empty arrays', () => expect(isAll(isString)([])).toBe(true))
 })
 
 describe('isAny', () => {
-    it('should return true when at least one element matches', () => {
-        expect(isAny(isNumber)([1, 'a'])).toBe(true)
-    })
+    it('should return true when at least one element matches', () =>
+        expect(isAny(isNumber)([1, 'a'])).toBe(true))
 
-    it('should return false when no elements match', () => {
-        expect(isAny(isNumber)(['a', 'b'])).toBe(false)
-    })
+    it('should return false when no elements match', () =>
+        expect(isAny(isNumber)(['a', 'b'])).toBe(false))
 
-    it('should return false for empty arrays', () => {
-        expect(isAny(isNumber)([])).toBe(false)
-    })
+    it('should return false for empty arrays', () => expect(isAny(isNumber)([])).toBe(false))
 })
 
 describe('includesAll', () => {
-    it('should return true when every required element is present', () => {
-        expect(includesAll(['a', 'b'], ['a', 'b', 'c'])).toBe(true)
-    })
+    it('should return true when every required element is present', () =>
+        expect(includesAll(['a', 'b'], ['a', 'b', 'c'])).toBe(true))
 
-    it('should return false when a required element is missing', () => {
-        expect(includesAll(['a', 'd'], ['a', 'b', 'c'])).toBe(false)
-    })
+    it('should return false when a required element is missing', () =>
+        expect(includesAll(['a', 'd'], ['a', 'b', 'c'])).toBe(false))
 
     it('should return true for an empty required list (empty is a subset of everything)', () => {
         expect(includesAll([], ['a', 'b'])).toBe(true)
         expect(includesAll([], [])).toBe(true)
     })
 
-    it('should return true when both lists are empty', () => {
-        expect(includesAll([], [])).toBe(true)
-    })
+    it('should return true when both lists are empty', () => expect(includesAll([], [])).toBe(true))
 
-    it('should return false when available is empty but required is not', () => {
-        expect(includesAll(['a'], [])).toBe(false)
-    })
+    it('should return false when available is empty but required is not', () =>
+        expect(includesAll(['a'], [])).toBe(false))
 
-    it('should handle duplicate required values against a single available value', () => {
-        expect(includesAll(['a', 'a'], ['a', 'b'])).toBe(true)
-    })
+    it('should handle duplicate required values against a single available value', () =>
+        expect(includesAll(['a', 'a'], ['a', 'b'])).toBe(true))
 
     it('should handle numbers', () => {
         expect(includesAll([1, 2], [1, 2, 3])).toBe(true)

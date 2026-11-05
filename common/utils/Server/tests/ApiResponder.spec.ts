@@ -42,59 +42,54 @@ describe('ApiResponder error methods', () => {
             ['null', null],
             ['a number', 42],
             ['a boolean', true],
-        ])('should throw when it cannot extract a message from %s', (_label, input) => {
+        ])('should throw when it cannot extract a message from %s', (_label, input) =>
             expect(() => ApiResponder.badRequest(input)).toThrow(
                 'ResolveErrorMessage: expected a string, an Error, or a validation result',
-            )
-        })
+            ),
+        )
     })
 
-    describe('notFound', () => {
+    describe('notFound', () =>
         it('should produce a 404 with capitalised resource wording', () => {
             const result = ApiResponder.notFound('exercise')
             expect(result).toBeInstanceOf(ApiError)
             expect(result.status).toBe(HttpStatus.NOT_FOUND)
             expect(result.message).toBe('Exercise not found')
-        })
-    })
+        }))
 
-    describe('invalidId', () => {
+    describe('invalidId', () =>
         it('should produce a 400 with "Invalid <resource> id"', () => {
             const result = ApiResponder.invalidId('exercise')
             expect(result).toBeInstanceOf(ApiError)
             expect(result.status).toBe(HttpStatus.BAD_REQUEST)
             expect(result.message).toBe('Invalid exercise id')
-        })
-    })
+        }))
 })
 
 describe('ApiResponder fixed-word error methods', () => {
-    describe('forbidden', () => {
+    describe('forbidden', () =>
         it('should build the error with the fixed wording', () => {
             const result = ApiResponder.forbidden()
             expect(result).toBeInstanceOf(ApiError)
             expect(result.status).toBe(HttpStatus.FORBIDDEN)
             expect(result.message).toBe('Forbidden: access denied!')
-        })
-    })
+        }))
 
-    describe('unauthorized', () => {
+    describe('unauthorized', () =>
         it('should carry the given message', () => {
             const result = ApiResponder.unauthorized('Token expired!')
             expect(result).toBeInstanceOf(ApiError)
             expect(result.status).toBe(HttpStatus.UNAUTHORIZED)
             expect(result.message).toBe('Token expired!')
-        })
-    })
+        }))
 
-    describe('conflict', () => {
+    describe('conflict', () =>
         it('should carry the given message', () => {
             const result = ApiResponder.conflict('Already exists')
             expect(result).toBeInstanceOf(ApiError)
             expect(result.status).toBe(HttpStatus.CONFLICT)
             expect(result.message).toBe('Already exists')
-        })
-    })
+        }))
 
     describe('internalServerError', () => {
         it('should default to the standard message', () => {
@@ -168,12 +163,11 @@ describe('ApiResponder success methods', () => {
         })
     })
 
-    describe('text', () => {
+    describe('text', () =>
         it('should emit a plain string body with 200', () => {
             const { captured, response } = createResponse()
             ApiResponder.text(response, '<<<OK>>>')
             expect(captured.statusCode).toBe(HttpStatus.OK)
             expect(captured.body).toBe('<<<OK>>>')
-        })
-    })
+        }))
 })

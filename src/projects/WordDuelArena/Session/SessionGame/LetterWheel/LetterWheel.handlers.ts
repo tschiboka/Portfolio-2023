@@ -21,9 +21,8 @@ const createHandleKeyPress =
             }))
         if (e.key === 'Backspace')
             setTouchState((prev) => ({ ...prev, touchedLetters: prev.touchedLetters.slice(0, -1) }))
-        if (LetterWheelUtils.isSubmitKeyStroke(e.key)) {
+        if (LetterWheelUtils.isSubmitKeyStroke(e.key))
             LetterWheelUtils.submitMove({ letters: touchState.touchedLetters, send, setTouchState })
-        }
     }
 
 type CreateHandleTouchProps = {

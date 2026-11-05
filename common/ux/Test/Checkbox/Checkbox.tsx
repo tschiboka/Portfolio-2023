@@ -16,9 +16,7 @@ export class CheckboxAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            toggle: async () => {
-                await Accessor.user.click(this.element)
-            },
+            toggle: async () => await Accessor.user.click(this.element),
         }
     }
 }

@@ -4,12 +4,12 @@ import type { PathKey } from '..'
 describe('getURL', () => {
     const originalHostname = window.location.hostname
 
-    afterEach(() => {
+    afterEach(() =>
         Object.defineProperty(window, 'location', {
             value: { hostname: originalHostname },
             writable: true,
-        })
-    })
+        }),
+    )
 
     it('should return localhost URL for localhost', () => {
         Object.defineProperty(window, 'location', {
@@ -37,7 +37,7 @@ describe('getURL', () => {
 })
 
 describe('Paths', () => {
-    it('should have Api endpoints with all keys', () => {
+    it('should have Api endpoints with all keys', () =>
         expect(Paths.Server.Api).toEqual({
             Login: 'api/user/login',
             Settings: 'api/settings',
@@ -51,37 +51,30 @@ describe('Paths', () => {
             Schedule: 'api/schedule',
             Breakdowns: 'api/breakdowns',
             Activity: 'api/activity',
-        })
-    })
+        }))
 
-    it('should have Projects endpoints with all keys', () => {
+    it('should have Projects endpoints with all keys', () =>
         expect(Paths.Server.Projects).toEqual({
             Xmas: 'projects/xmas_2025',
             Typist: 'projects/typist',
             WordDuelArena: 'projects/word_duel_arena',
             Gym: 'projects/gym',
-        })
-    })
+        }))
 
-    it('should have Client pages with all keys', () => {
+    it('should have Client pages with all keys', () =>
         expect(Paths.Client).toEqual({
             Login: '/api/login',
             Register: '/api/register',
             Home: '/api/home',
             EmailVerification: '/api/email-verification',
-        })
-    })
+        }))
 
     it('should give every Api endpoint a value', () => {
-        for (const value of Object.values(Paths.Server.Api)) {
-            expect(value).toBeTruthy()
-        }
+        for (const value of Object.values(Paths.Server.Api)) expect(value).toBeTruthy()
     })
 
     it('should give every Projects endpoint a value', () => {
-        for (const value of Object.values(Paths.Server.Projects)) {
-            expect(value).toBeTruthy()
-        }
+        for (const value of Object.values(Paths.Server.Projects)) expect(value).toBeTruthy()
     })
 })
 
@@ -100,7 +93,5 @@ describe('apiPathBuilder', () => {
         )
     })
 
-    it('should prepend the base URL', () => {
-        expect(apiPathBuilder('Login')).toMatch(/^https?:\/\//)
-    })
+    it('should prepend the base URL', () => expect(apiPathBuilder('Login')).toMatch(/^https?:\/\//))
 })

@@ -47,9 +47,8 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     const [validationError, setValidationError] = useState<string>('')
 
     useEffect(() => {
-        if (wordFrequencies && !frequencies) {
-            setFrequencies(wordFrequencies)
-        }
+        if (wordFrequencies && !frequencies) setFrequencies(wordFrequencies)
+
         if (frequencies && isEmpty(possibleWords) && anagramMap) {
             const newWordSet = WordUtils.transformAnagramMap(levelName, anagramMap).map((word) => ({
                 word,

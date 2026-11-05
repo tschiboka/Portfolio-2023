@@ -30,7 +30,7 @@
         "build:rules": "tsc -p rules/tsconfig.json && node rules/dist/rules/builder.js",
         "build:tokens": "node scripts/build-tokens.js",
         "check:tokens": "node scripts/build-tokens.js --check",
-        "lint": "npm run check:tokens && npm run build:rules && eslint src server common --report-unused-disable-directives --max-warnings 0",
+        "lint": "npm run check:tokens && npm run build:rules && eslint src server common rules scripts --report-unused-disable-directives --max-warnings 0",
         "preview": "vite preview",
         "test": "vitest",
         "test:run": "vitest run",

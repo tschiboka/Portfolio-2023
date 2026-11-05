@@ -10,9 +10,8 @@ interface Props {
     visitCount?: number
 }
 
-const getBreadCrumbPath = (breadcrumbs: string[], index: number) => {
-    return '/' + breadcrumbs.filter((_, i) => i <= index).join('/')
-}
+const getBreadCrumbPath = (breadcrumbs: string[], index: number) =>
+    '/' + breadcrumbs.filter((_, i) => i <= index).join('/')
 
 export const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
     const { data: visitsData } = VisitQueries.useGet(path)

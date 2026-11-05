@@ -63,21 +63,11 @@ export class Accessor {
     // Base actions available on every accessor — subclasses extend via: get Do() { return { ...super.Do, ... } }
     get Do() {
         return {
-            click: async () => {
-                await Accessor.user.click(this.element)
-            },
-            hover: async () => {
-                await Accessor.user.hover(this.element)
-            },
-            unhover: async () => {
-                await Accessor.user.unhover(this.element)
-            },
-            focus: () => {
-                this.element.focus()
-            },
-            keyboard: async (key: string) => {
-                await Accessor.user.keyboard(key)
-            },
+            click: async () => await Accessor.user.click(this.element),
+            hover: async () => await Accessor.user.hover(this.element),
+            unhover: async () => await Accessor.user.unhover(this.element),
+            focus: () => this.element.focus(),
+            keyboard: async (key: string) => await Accessor.user.keyboard(key),
         }
     }
 

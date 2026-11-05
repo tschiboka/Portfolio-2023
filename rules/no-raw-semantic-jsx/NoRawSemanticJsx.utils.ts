@@ -6,6 +6,7 @@ type TagNameString = {
     context: Rule.RuleContext
     node: TSESTree.JSXElement
 }
+
 export const getTagNameString = ({ context, node }: TagNameString) => {
     const nameTag = context.sourceCode.text.slice(...node.openingElement.name.range)
     const nameText = nameTag.replace(/[^a-z0-9]/gi, '')

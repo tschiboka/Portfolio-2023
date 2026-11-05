@@ -5,9 +5,7 @@ import '../Home.styles.scss'
 
 export const GuestHome = () => {
     const navigate = useNavigate()
-    const handleXmasClick = () => {
-        navigate('/projects/xmas2025')
-    }
+    const handleXmasClick = () => navigate('/projects/xmas2025')
 
     return (
         <div className="GuestHome">

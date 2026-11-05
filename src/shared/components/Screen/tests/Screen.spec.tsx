@@ -36,7 +36,7 @@ beforeEach(() => {
 })
 
 describe('Screen', () => {
-    describe('Document title', () => {
+    describe('Document title', () =>
         it('should set the document title on mount', () => {
             Test.Screen.Do.render({
                 path: '/test',
@@ -48,10 +48,9 @@ describe('Screen', () => {
             })
 
             expect(document.title).toBe('My Page')
-        })
-    })
+        }))
 
-    describe('Content', () => {
+    describe('Content', () =>
         it('should render children', () => {
             Test.Screen.Do.render({
                 path: '/test',
@@ -63,8 +62,7 @@ describe('Screen', () => {
             })
 
             expect(Accessor.screen.getByText('Hello World')).toBeInTheDocument()
-        })
-    })
+        }))
 
     describe('CSS class', () => {
         it('should have the base Screen class', () => {
@@ -108,7 +106,7 @@ describe('Screen', () => {
         })
     })
 
-    describe('Visit recording', () => {
+    describe('Visit recording', () =>
         it('should record a visit for the screen path', async () => {
             Test.Screen.Do.render({
                 path: '/home',
@@ -120,8 +118,7 @@ describe('Screen', () => {
             })
 
             await waitFor(() => expect(useRecordMock).toHaveBeenCalledWith('/home'))
-        })
-    })
+        }))
 
     describe('Login redirect', () => {
         it('should redirect to /api/login when loginRequired and not authenticated', () => {
@@ -169,7 +166,7 @@ describe('Screen', () => {
         })
     })
 
-    describe('Scroll', () => {
+    describe('Scroll', () =>
         it('should scroll to top on mount', () => {
             Test.Screen.Do.render({
                 path: '/test',
@@ -182,6 +179,5 @@ describe('Screen', () => {
 
             // eslint-disable-next-line @typescript-eslint/unbound-method -- window.scrollTo is a vi.fn() spy set in setupTests.ts, so no receiver can be lost
             expect(window.scrollTo).toHaveBeenCalledWith(0, 0)
-        })
-    })
+        }))
 })

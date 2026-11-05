@@ -17,7 +17,7 @@ export const TableDownloadButton = <TData extends Record<string, ReactNode>>({
     download,
     data,
 }: TableDownloadProps<TData>) => {
-    if (isSingleDownload(download)) {
+    if (isSingleDownload(download))
         return (
             <button
                 type="button"
@@ -29,7 +29,6 @@ export const TableDownloadButton = <TData extends Record<string, ReactNode>>({
                 {download.label && <span className="download-label">{download.label}</span>}
             </button>
         )
-    }
 
     return (
         <TableDropdown

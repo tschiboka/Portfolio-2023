@@ -116,9 +116,9 @@ export const Categories = ({ path }: CategoriesProps) => {
                                 options={CategoriesOptions.iconOptions}
                                 placeholder="Select an icon"
                                 highlightMatch
-                                onSelect={(option: SearchInputOption) => {
+                                onSelect={(option: SearchInputOption) =>
                                     setValue('icon', option.label)
-                                }}
+                                }
                             />
                         </Form.Fieldset>
                         <Form.Fieldset>
@@ -129,9 +129,9 @@ export const Categories = ({ path }: CategoriesProps) => {
                                 options={CategoriesOptions.colorOptions}
                                 placeholder="Select a color"
                                 highlightMatch
-                                onSelect={(option: SearchInputOption) => {
+                                onSelect={(option: SearchInputOption) =>
                                     setValue('color', option.label)
-                                }}
+                                }
                             />
                         </Form.Fieldset>
                         <LoadingIndicator show={categoryPostRequest.isPending} />

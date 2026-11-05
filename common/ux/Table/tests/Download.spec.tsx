@@ -105,7 +105,7 @@ describe('Table — Download', () => {
         })
     })
 
-    describe('Download without title', () => {
+    describe('Download without title', () =>
         it('should render download button even without a title', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -114,6 +114,5 @@ describe('Table — Download', () => {
                 download: { onDownload: vi.fn() },
             })
             expect(Test.Table('test').Get.downloadButton()).toBeInTheDocument()
-        })
-    })
+        }))
 })

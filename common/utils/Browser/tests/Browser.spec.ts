@@ -19,18 +19,12 @@ const {
 
 describe('Browser', () => {
     describe('copyToClipboard', () => {
-        beforeEach(() => {
-            reset()
-        })
+        beforeEach(() => reset())
 
-        afterEach(() => {
-            vi.restoreAllMocks()
-        })
+        afterEach(() => vi.restoreAllMocks())
 
         describe('when navigator.clipboard is available', () => {
-            beforeEach(() => {
-                mockClipboard()
-            })
+            beforeEach(() => mockClipboard())
 
             it.each([['hello world'], [''], ['special chars: <>&"\''], ['multi\nline\ntext']])(
                 'should call navigator.clipboard.writeText with "%s"',
@@ -52,9 +46,7 @@ describe('Browser', () => {
         })
 
         describe('when navigator.clipboard is NOT available', () => {
-            beforeEach(() => {
-                mockExecCommand()
-            })
+            beforeEach(() => mockExecCommand())
 
             it.each([['hello world'], [''], ['special chars: <>&"\'']])(
                 'should fall back to document.execCommand for "%s"',
@@ -76,9 +68,7 @@ describe('Browser', () => {
     // useIsVisible tests
     // --------------------
     describe('useIsVisible', () => {
-        beforeEach(() => {
-            reset()
-        })
+        beforeEach(() => reset())
 
         it('should observe multiple elements', () => {
             const el1 = createElement()
@@ -98,14 +88,14 @@ describe('Browser', () => {
 
             const observer = latest()
 
-            act(() => {
+            act(() =>
                 observer.trigger([
                     {
                         target: el1,
                         isIntersecting: true,
                     },
-                ])
-            })
+                ]),
+            )
 
             expect(result.current[0]).toEqual({ element: el1, isVisible: true })
         })
@@ -118,7 +108,7 @@ describe('Browser', () => {
 
             const observer = latest()
 
-            act(() => {
+            act(() =>
                 observer.trigger([
                     {
                         target: el1,
@@ -128,8 +118,8 @@ describe('Browser', () => {
                         target: el2,
                         isIntersecting: false,
                     },
-                ])
-            })
+                ]),
+            )
 
             expect(result.current).toEqual([
                 { element: el1, isVisible: true },
@@ -150,53 +140,43 @@ describe('Browser', () => {
         })
     })
     describe('slugify', () => {
-        it('should return an empty string for an empty input', () => {
-            expect(Browser.slugify('')).toBe('')
-        })
+        it('should return an empty string for an empty input', () =>
+            expect(Browser.slugify('')).toBe(''))
 
-        it('should replace non-word characters with empty string', () => {
-            expect(Browser.slugify('Hello World!')).toBe('hello-world')
-        })
+        it('should replace non-word characters with empty string', () =>
+            expect(Browser.slugify('Hello World!')).toBe('hello-world'))
 
         it('should replace spaces with dashes', () => {
             expect(Browser.slugify('Hello World!')).toBe('hello-world')
             expect(Browser.slugify('Hello-World!')).toBe('hello-world')
         })
 
-        it('should replace underscores with dashes', () => {
-            expect(Browser.slugify('Hello_World!')).toBe('hello-world')
-        })
+        it('should replace underscores with dashes', () =>
+            expect(Browser.slugify('Hello_World!')).toBe('hello-world'))
 
-        it('should replace multiple dashes with a single dash', () => {
-            expect(Browser.slugify('Hello---World!')).toBe('hello-world')
-        })
+        it('should replace multiple dashes with a single dash', () =>
+            expect(Browser.slugify('Hello---World!')).toBe('hello-world'))
     })
 
     describe('isLocalhost', () => {
-        it('should return true when hostname is localhost', () => {
-            expect(Browser.isLocalhost('localhost')).toBe(true)
-        })
+        it('should return true when hostname is localhost', () =>
+            expect(Browser.isLocalhost('localhost')).toBe(true))
 
-        it('should return true when hostname is 127.0.0.1', () => {
-            expect(Browser.isLocalhost('127.0.0.1')).toBe(true)
-        })
+        it('should return true when hostname is 127.0.0.1', () =>
+            expect(Browser.isLocalhost('127.0.0.1')).toBe(true))
 
-        it('should return false for other hostnames', () => {
-            expect(Browser.isLocalhost('example.com')).toBe(false)
-        })
+        it('should return false for other hostnames', () =>
+            expect(Browser.isLocalhost('example.com')).toBe(false))
 
-        it('should return false for production domain', () => {
-            expect(Browser.isLocalhost('tschiboka.com')).toBe(false)
-        })
+        it('should return false for production domain', () =>
+            expect(Browser.isLocalhost('tschiboka.com')).toBe(false))
     })
 
     // --------------------
     // useFullScreen tests
     // --------------------
     describe('useFullScreen', () => {
-        afterEach(() => {
-            vi.restoreAllMocks()
-        })
+        afterEach(() => vi.restoreAllMocks())
 
         it('should start with isFullscreen set to false', () => {
             const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
@@ -219,10 +199,7 @@ describe('Browser', () => {
             const el = document.createElement('div')
             el.requestFullscreen = requestFullscreen
             ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el
-
-            act(() => {
-                result.current.enterFullScreen()
-            })
+            act(() => void result.current.enterFullScreen())
 
             expect(requestFullscreen).toHaveBeenCalledTimes(1)
         })
@@ -234,10 +211,7 @@ describe('Browser', () => {
             const el = document.createElement('div') as unknown as FullScreenElement
             el.webkitRequestFullscreen = webkitRequestFullscreen
             ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el as HTMLDivElement
-
-            act(() => {
-                result.current.enterFullScreen()
-            })
+            act(() => void result.current.enterFullScreen())
 
             expect(webkitRequestFullscreen).toHaveBeenCalledTimes(1)
         })
@@ -250,21 +224,13 @@ describe('Browser', () => {
             el.msRequestFullscreen = msRequestFullscreen
             ;(result.current.ref as MutableRefObject<HTMLDivElement>).current = el as HTMLDivElement
 
-            act(() => {
-                result.current.enterFullScreen()
-            })
-
+            act(() => void result.current.enterFullScreen())
             expect(msRequestFullscreen).toHaveBeenCalledTimes(1)
         })
 
         it('should not throw when ref has no current element', () => {
             const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
-
-            expect(() => {
-                act(() => {
-                    result.current.enterFullScreen()
-                })
-            }).not.toThrow()
+            expect(() => act(() => void result.current.enterFullScreen())).not.toThrow()
         })
 
         it('should call exitFullscreen on the document when exitFullScreen is called', () => {
@@ -272,10 +238,7 @@ describe('Browser', () => {
             document.exitFullscreen = exitFullscreen
 
             const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
-
-            act(() => {
-                result.current.exitFullScreen()
-            })
+            act(() => void result.current.exitFullScreen())
 
             expect(exitFullscreen).toHaveBeenCalledTimes(1)
         })
@@ -288,9 +251,7 @@ describe('Browser', () => {
 
             const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
 
-            act(() => {
-                result.current.exitFullScreen()
-            })
+            act(() => void result.current.exitFullScreen())
 
             expect(webkitExitFullscreen).toHaveBeenCalledTimes(1)
         })
@@ -304,9 +265,7 @@ describe('Browser', () => {
 
             const { result } = renderHook(() => useFullScreen<HTMLDivElement>())
 
-            act(() => {
-                result.current.exitFullScreen()
-            })
+            act(() => void result.current.exitFullScreen())
 
             expect(msExitFullscreen).toHaveBeenCalledTimes(1)
         })
@@ -320,9 +279,7 @@ describe('Browser', () => {
                 get: () => document.createElement('div'),
             })
 
-            act(() => {
-                document.dispatchEvent(new Event('fullscreenchange'))
-            })
+            act(() => void document.dispatchEvent(new Event('fullscreenchange')))
 
             expect(result.current.isFullscreen).toBe(true)
 
@@ -332,9 +289,7 @@ describe('Browser', () => {
                 get: () => null,
             })
 
-            act(() => {
-                document.dispatchEvent(new Event('fullscreenchange'))
-            })
+            act(() => void document.dispatchEvent(new Event('fullscreenchange')))
 
             expect(result.current.isFullscreen).toBe(false)
         })
@@ -356,9 +311,7 @@ describe('Browser', () => {
     // useOrientation tests
     // --------------------
     describe('useOrientation', () => {
-        afterEach(() => {
-            vi.restoreAllMocks()
-        })
+        afterEach(() => vi.restoreAllMocks())
 
         it('should detect portrait orientation', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.portrait.innerWidth)
@@ -403,9 +356,7 @@ describe('Browser', () => {
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.portrait.innerWidth)
             vi.spyOn(window, 'innerHeight', 'get').mockReturnValue(viewports.portrait.innerHeight)
 
-            act(() => {
-                window.dispatchEvent(new Event('resize'))
-            })
+            act(() => void window.dispatchEvent(new Event('resize')))
 
             expect(result.current.orientation).toBe('portrait')
         })
@@ -419,9 +370,7 @@ describe('Browser', () => {
             // Resize to mobile width
             vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(viewports.mobile.innerWidth)
 
-            act(() => {
-                window.dispatchEvent(new Event('resize'))
-            })
+            act(() => void window.dispatchEvent(new Event('resize')))
 
             expect(result.current.isMobile).toBe(true)
         })

@@ -41,13 +41,13 @@ export const TableFilterPanel = forwardRef<TableFilterPanelHandle, TableFilterPa
         // Keep the form in sync when the applied filters change externally (URL hydration,
         // back/forward), without clobbering the user's in-progress draft (only committed
         // `filtering.values` changes trigger this).
-        useEffect(() => {
-            setValues(normalizeValues(filtering.inputs, filtering.values ?? {}))
-        }, [filtering.inputs, filtering.values])
+        useEffect(
+            () => setValues(normalizeValues(filtering.inputs, filtering.values ?? {})),
+            [filtering.inputs, filtering.values],
+        )
 
-        const handleChange = (key: string, value: unknown) => {
+        const handleChange = (key: string, value: unknown) =>
             setValues((prev) => ({ ...prev, [key]: value }))
-        }
 
         const handleReset = useCallback(() => {
             const defaults = buildDefaults(filtering.inputs)

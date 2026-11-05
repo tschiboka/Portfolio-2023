@@ -29,7 +29,6 @@ describe('CategoriesTransformers.fromApi', () => {
         expect(result[1]).toMatchObject({ label: 'Personal', value: 'b', iconColor: 'red' })
     })
 
-    it('should return an empty array for no categories', () => {
-        expect(CategoriesTransformers.fromApi([])).toEqual([])
-    })
+    it('should return an empty array for no categories', () =>
+        expect(CategoriesTransformers.fromApi([])).toEqual([]))
 })

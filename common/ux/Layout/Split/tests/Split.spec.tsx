@@ -6,7 +6,7 @@ import type { SplitRatio } from '../Split.types'
 const { Set } = SplitTestUtils
 
 describe('Split', () => {
-    describe('selectRatio', () => {
+    describe('selectRatio', () =>
         it.each<{ input: SplitRatio | undefined; expected: string }>([
             { input: '1/1', expected: '1fr 1fr' },
             { input: '1/2', expected: '1fr 2fr' },
@@ -16,10 +16,9 @@ describe('Split', () => {
             { input: '1/4', expected: '1fr 4fr' },
             { input: '4/1', expected: '4fr 1fr' },
             { input: undefined, expected: '1fr 1fr' },
-        ])('should map "$input" to "$expected"', ({ input, expected }) => {
-            expect(SplitSelectors.selectRatio(input)).toBe(expected)
-        })
-    })
+        ])('should map "$input" to "$expected"', ({ input, expected }) =>
+            expect(SplitSelectors.selectRatio(input)).toBe(expected),
+        ))
 
     describe('rendering', () => {
         it('should render left and right content', () => {

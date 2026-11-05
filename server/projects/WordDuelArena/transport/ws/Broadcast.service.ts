@@ -33,7 +33,7 @@ function broadcastSessionState(session: Session) {
 }
 
 function sendErrorToDevice(session: Session, deviceId: string, message: string) {
-    for (const ws of session.connections as Set<DeviceWebSocket>) {
+    for (const ws of session.connections as Set<DeviceWebSocket>)
         if (ws.deviceId === deviceId && ws.readyState === ws.OPEN) {
             const response: WdaWsResponse = {
                 type: WdaWsResponseTypes.ERROR,
@@ -42,7 +42,6 @@ function sendErrorToDevice(session: Session, deviceId: string, message: string) 
             ws.send(JSON.stringify(response))
             return
         }
-    }
 }
 
 function commitSessionState(session: Session, nextState: SessionState, deviceId?: string) {
@@ -52,9 +51,7 @@ function commitSessionState(session: Session, nextState: SessionState, deviceId?
     if (error) {
         console.log('Session state validation failed:', error.details[0].message)
 
-        if (deviceId) {
-            sendErrorToDevice(session, deviceId, error.details[0].message)
-        }
+        if (deviceId) sendErrorToDevice(session, deviceId, error.details[0].message)
 
         return
     }
@@ -68,9 +65,9 @@ function toPublicPlayer(player: Nullable<Player>): Nullable<WdaPublicPlayer> {
 }
 
 function toPlayableLevelWord(word: LevelWord): WdaPlayableLevelWord {
-    if (word.status === 'SOLVED') {
+    if (word.status === 'SOLVED')
         return { status: 'SOLVED', word: word.word, solvedBy: word.solvedBy }
-    }
+
     const mask = [...word.mask]
         .map((ch, i) => (word.hintIndices.includes(i) ? word.word[i] : ch))
         .join('')

@@ -7,17 +7,14 @@ const { baseMock, baseBuilder } = MockBuilderMocks
 
 describe('MockBuilder', () => {
     describe('build', () => {
-        it('should return the initial state', () => {
-            expect(MockBuilder(baseMock).build()).toEqual(baseMock)
-        })
+        it('should return the initial state', () =>
+            expect(MockBuilder(baseMock).build()).toEqual(baseMock))
 
-        it('should return an equivalent object for a plain state', () => {
-            expect(MockBuilder({ id: 1 }).build()).toEqual({ id: 1 })
-        })
+        it('should return an equivalent object for a plain state', () =>
+            expect(MockBuilder({ id: 1 }).build()).toEqual({ id: 1 }))
 
-        it('should return the state by reference, not a copy', () => {
-            expect(MockBuilder(baseMock).build()).toBe(baseMock)
-        })
+        it('should return the state by reference, not a copy', () =>
+            expect(MockBuilder(baseMock).build()).toBe(baseMock))
 
         it('should expose the internal state — mutating the result mutates the builder', () => {
             const builder = MockBuilder({ ...baseMock })
@@ -38,32 +35,28 @@ describe('MockBuilder', () => {
     })
 
     describe('modify', () => {
-        it('should leave the state unchanged for empty overrides', () => {
-            expect(baseBuilder.modify({}).build()).toEqual(baseMock)
-        })
+        it('should leave the state unchanged for empty overrides', () =>
+            expect(baseBuilder.modify({}).build()).toEqual(baseMock))
 
-        it('should shallow-merge overrides into the state', () => {
+        it('should shallow-merge overrides into the state', () =>
             expect(baseBuilder.modify({ name: 'bar', status: 'inactive' }).build()).toEqual({
                 ...baseMock,
                 name: 'bar',
                 status: 'inactive',
-            })
-        })
+            }))
 
         it('should not mutate the original state', () => {
             baseBuilder.modify({ name: 'bar' })
             expect(baseBuilder.build()).toEqual(baseMock)
         })
 
-        it('should replace a nested object wholesale', () => {
-            expect(baseBuilder.modify({ meta: { hits: 9 } }).build().meta).toEqual({ hits: 9 })
-        })
+        it('should replace a nested object wholesale', () =>
+            expect(baseBuilder.modify({ meta: { hits: 9 } }).build().meta).toEqual({ hits: 9 }))
     })
 
     describe('setValue', () => {
-        it('should replace a single property', () => {
-            expect(baseBuilder.setValue('name', 'bar').build().name).toBe('bar')
-        })
+        it('should replace a single property', () =>
+            expect(baseBuilder.setValue('name', 'bar').build().name).toBe('bar'))
 
         it('should not mutate the original state', () => {
             baseBuilder.setValue('id', 99)
@@ -74,9 +67,9 @@ describe('MockBuilder', () => {
             ['id', 7],
             ['name', 'baz'],
             ['status', 'archived'],
-        ] as const)('should set %s to %s', (key, value) => {
-            expect(baseBuilder.setValue(key, value).build()[key]).toBe(value)
-        })
+        ] as const)('should set %s to %s', (key, value) =>
+            expect(baseBuilder.setValue(key, value).build()[key]).toBe(value),
+        )
     })
 
     describe('set', () => {
@@ -121,9 +114,8 @@ describe('MockBuilder', () => {
             expect(result).toEqual({ id: 1, name: 'foo' })
         })
 
-        it('should return the full state when no keys are given', () => {
-            expect(baseBuilder.omit().build()).toEqual(baseMock)
-        })
+        it('should return the full state when no keys are given', () =>
+            expect(baseBuilder.omit().build()).toEqual(baseMock))
 
         it('should not mutate the original state', () => {
             baseBuilder.omit('name')
@@ -132,13 +124,11 @@ describe('MockBuilder', () => {
     })
 
     describe('pick', () => {
-        it('should keep only the named keys', () => {
-            expect(baseBuilder.pick('id', 'name').build()).toEqual({ id: 1, name: 'foo' })
-        })
+        it('should keep only the named keys', () =>
+            expect(baseBuilder.pick('id', 'name').build()).toEqual({ id: 1, name: 'foo' }))
 
-        it('should return an empty object when no keys are given', () => {
-            expect(baseBuilder.pick().build()).toEqual({})
-        })
+        it('should return an empty object when no keys are given', () =>
+            expect(baseBuilder.pick().build()).toEqual({}))
 
         it('should not mutate the original state', () => {
             baseBuilder.pick('id')
@@ -147,9 +137,8 @@ describe('MockBuilder', () => {
     })
 
     describe('asList', () => {
-        it('should wrap the state as a single-element array', () => {
-            expect(baseBuilder.asList().build()).toEqual([baseMock])
-        })
+        it('should wrap the state as a single-element array', () =>
+            expect(baseBuilder.asList().build()).toEqual([baseMock]))
 
         it('should append the built value of each extra builder', () => {
             const result = baseBuilder.asList(baseBuilder.modify({ id: 2 })).build()
@@ -174,9 +163,8 @@ describe('MockBuilder', () => {
             ])
         })
 
-        it('should return an empty array for no overrides', () => {
-            expect(baseBuilder.buildList([])).toEqual([])
-        })
+        it('should return an empty array for no overrides', () =>
+            expect(baseBuilder.buildList([])).toEqual([]))
 
         it('should leave the base state unchanged', () => {
             baseBuilder.buildList([{ id: 99 }])
@@ -186,13 +174,11 @@ describe('MockBuilder', () => {
 })
 
 describe('MockEntitiesBuilder', () => {
-    it('should wrap the list in an entities object', () => {
-        expect(MockEntitiesBuilder([baseMock]).build()).toEqual({ entities: [baseMock] })
-    })
+    it('should wrap the list in an entities object', () =>
+        expect(MockEntitiesBuilder([baseMock]).build()).toEqual({ entities: [baseMock] }))
 
-    it('should support an empty list', () => {
-        expect(MockEntitiesBuilder([]).build()).toEqual({ entities: [] })
-    })
+    it('should support an empty list', () =>
+        expect(MockEntitiesBuilder([]).build()).toEqual({ entities: [] }))
 
     it('should expose the builder API on the entities wrapper', () => {
         const result = MockEntitiesBuilder([baseMock])

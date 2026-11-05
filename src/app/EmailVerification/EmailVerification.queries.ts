@@ -35,11 +35,12 @@ const usePost = (token: string): UsePostResult => {
         }),
     })
 
-    useEffect(() => {
-        mutate({ token })
+    useEffect(
+        () => mutate({ token }),
         // Fires once on mount; the token is a route param and must not re-trigger the mutation.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        [],
+    )
 
     return { message, isPending }
 }

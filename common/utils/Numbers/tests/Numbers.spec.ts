@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { Numbers } from '..'
 
-describe('Numbers.truncateTo', () => {
+describe('Numbers.truncateTo', () =>
     it.each<[number, number, number]>([
         [3.14159, 2, 3.14],
         [3.14159, 4, 3.1415],
@@ -15,7 +15,6 @@ describe('Numbers.truncateTo', () => {
         [-0.001, 2, -0],
         [999.9999, 2, 999.99],
         [1.005, 2, 1],
-    ])('should truncate %f to %i places, giving %f', (value, places, expected) => {
-        expect(Numbers.truncateTo(value, places)).toBe(expected)
-    })
-})
+    ])('should truncate %f to %i places, giving %f', (value, places, expected) =>
+        expect(Numbers.truncateTo(value, places)).toBe(expected),
+    ))

@@ -45,9 +45,9 @@ export const unique = <T>(array: readonly T[]): T[] => Array.from(new Set(array)
  */
 export const chunk = <T>(items: readonly T[], size: number): T[][] => {
     const rawSize = size
-    if (!isPositiveInteger(size)) {
+    if (!isPositiveInteger(size))
         throw new RangeError(`chunk: size must be a positive integer, got ${rawSize}`)
-    }
+
     return Array.from({ length: Math.ceil(items.length / size) }, (_, i) =>
         items.slice(i * size, i * size + size),
     )

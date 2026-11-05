@@ -9,21 +9,19 @@ const readSession = (): Nullable<Session> => {
     return storage?.session ?? null
 }
 
-const writeSession = (session: Nullable<Session>): void => {
-    Storage.update<{ session?: Session }>(APP_KEY, (prev) => ({
+const writeSession = (session: Nullable<Session>): void =>
+    void Storage.update<{ session?: Session }>(APP_KEY, (prev) => ({
         ...prev,
         ...(session ? { session } : {}),
     }))
-}
 
-const removeSession = (): void => {
-    Storage.update<{ session?: Session }>(APP_KEY, (prev) => {
+const removeSession = (): void =>
+    void Storage.update<{ session?: Session }>(APP_KEY, (prev) => {
         if (!prev) return {}
         const { session: _removed, ...rest } = prev
         void _removed
         return rest
     })
-}
 
 export class SessionStorage {
     private static instance: Nullable<SessionStorage>
@@ -34,9 +32,8 @@ export class SessionStorage {
     }
 
     static getInstance(): SessionStorage {
-        if (!SessionStorage.instance) {
-            SessionStorage.instance = new SessionStorage()
-        }
+        if (!SessionStorage.instance) SessionStorage.instance = new SessionStorage()
+
         return SessionStorage.instance
     }
 

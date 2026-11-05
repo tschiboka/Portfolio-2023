@@ -4,9 +4,7 @@ import { Test } from '@shared-components/Screen/tests'
 import { ProjectsTestUtils } from './Projects.spec.utils'
 
 describe('Projects', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render the heading', async () => {
@@ -156,7 +154,7 @@ describe('Projects', () => {
         })
     })
 
-    describe('Clear filters', () => {
+    describe('Clear filters', () =>
         it('should reset all filters and show all projects when clear is clicked', async () => {
             await ProjectsTestUtils.render()
             const filterSection = Test.Section.byTitle(/Filter Projects/)
@@ -179,13 +177,11 @@ describe('Projects', () => {
                 const cards = screen.getAllByRole('heading', { level: 3 })
                 expect(cards.length).toBe(16)
             })
-        })
-    })
+        }))
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator', async () => {
             await ProjectsTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

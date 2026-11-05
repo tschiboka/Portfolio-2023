@@ -6,25 +6,17 @@ interface RemoteProps {
     path: string
 }
 
-export const Remote = ({ path }: RemoteProps) => {
-    return (
-        <Screen
-            title={'tschiboka | Remote'}
-            path={path}
-            loginRequired
-            variant="app"
-            pageName="Remote"
-        >
-            <Main>
-                <Section>
-                    <Heading as="h1">Remote</Heading>
-                    <Stack.Horizontal className="Remote__buttons" gap="16" align="start" wrap>
-                        <Button as="a" href="#/projects/gym">
-                            Gym
-                        </Button>
-                    </Stack.Horizontal>
-                </Section>
-            </Main>
-        </Screen>
-    )
-}
+export const Remote = ({ path }: RemoteProps) => (
+    <Screen title={'tschiboka | Remote'} path={path} loginRequired variant="app" pageName="Remote">
+        <Main>
+            <Section>
+                <Heading as="h1">Remote</Heading>
+                <Stack.Horizontal className="Remote__buttons" gap="16" align="start" wrap>
+                    <Button as="a" href="#/projects/gym">
+                        Gym
+                    </Button>
+                </Stack.Horizontal>
+            </Section>
+        </Main>
+    </Screen>
+)

@@ -19,12 +19,8 @@ class SideMenuAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            clickItem: async (title: string) => {
-                await Accessor.user.click(this.Get.item(title))
-            },
-            close: async () => {
-                await Accessor.user.click(this.Get.closeButton())
-            },
+            clickItem: async (title: string) => await Accessor.user.click(this.Get.item(title)),
+            close: async () => await Accessor.user.click(this.Get.closeButton()),
         }
     }
 }

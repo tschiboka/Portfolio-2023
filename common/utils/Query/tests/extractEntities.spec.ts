@@ -17,13 +17,11 @@ describe('Query.extractEntities', () => {
         expect(extractEntities(body, 'missing')).toEqual([])
     })
 
-    it('should return an empty array when the body is undefined', () => {
-        expect(extractEntities(undefined, 'difficulties')).toEqual([])
-    })
+    it('should return an empty array when the body is undefined', () =>
+        expect(extractEntities(undefined, 'difficulties')).toEqual([]))
 
-    it('should return an empty array when the body is null', () => {
-        expect(extractEntities(null, 'difficulties')).toEqual([])
-    })
+    it('should return an empty array when the body is null', () =>
+        expect(extractEntities(null, 'difficulties')).toEqual([]))
 
     it('should return an empty array when the value under the key is an empty array', () => {
         const body = { equipment: [] as { value: string }[] }

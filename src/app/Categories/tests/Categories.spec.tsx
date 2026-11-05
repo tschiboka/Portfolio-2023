@@ -48,13 +48,12 @@ describe('Categories', () => {
         })
     })
 
-    describe('Parent selection', () => {
+    describe('Parent selection', () =>
         it('should reveal the parent search input when Has Parent is checked', async () => {
             const { form } = await CategoriesTestUtils.customRender()
             await form.Checkbox(fields.hasParent).Do.click()
             expect(form.Search(fields.parent)).toBeDefined()
-        })
-    })
+        }))
 
     describe('Submission', () => {
         it('should show a success message after posting a category', async () => {

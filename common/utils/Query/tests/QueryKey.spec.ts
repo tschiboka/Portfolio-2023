@@ -3,9 +3,8 @@ import type { Key } from '@common-utils'
 
 describe('CacheKeyBuilder', () => {
     describe('build (base key only)', () => {
-        it('should return an array with just the key', () => {
-            expect(new CacheKeyBuilder('users').build()).toEqual(['users'])
-        })
+        it('should return an array with just the key', () =>
+            expect(new CacheKeyBuilder('users').build()).toEqual(['users']))
 
         it('should return a different array reference on every build call', () => {
             const builder = new CacheKeyBuilder('users')
@@ -17,13 +16,11 @@ describe('CacheKeyBuilder', () => {
     })
 
     describe('feature', () => {
-        it('should append the feature segment to the key', () => {
-            expect(new CacheKeyBuilder('users').feature('list').build()).toEqual(['users', 'list'])
-        })
+        it('should append the feature segment to the key', () =>
+            expect(new CacheKeyBuilder('users').feature('list').build()).toEqual(['users', 'list']))
 
-        it('should allow an empty string feature', () => {
-            expect(new CacheKeyBuilder('users').feature('').build()).toEqual(['users', ''])
-        })
+        it('should allow an empty string feature', () =>
+            expect(new CacheKeyBuilder('users').feature('').build()).toEqual(['users', '']))
 
         it('should override a previous feature when called twice', () => {
             const result = new CacheKeyBuilder('users').feature('list').feature('detail').build()
@@ -32,25 +29,20 @@ describe('CacheKeyBuilder', () => {
     })
 
     describe('byId', () => {
-        it('should append a string id', () => {
-            expect(new CacheKeyBuilder('users').byId('abc').build()).toEqual(['users', 'abc'])
-        })
+        it('should append a string id', () =>
+            expect(new CacheKeyBuilder('users').byId('abc').build()).toEqual(['users', 'abc']))
 
-        it('should append a numeric id', () => {
-            expect(new CacheKeyBuilder('users').byId(42).build()).toEqual(['users', 42])
-        })
+        it('should append a numeric id', () =>
+            expect(new CacheKeyBuilder('users').byId(42).build()).toEqual(['users', 42]))
 
-        it('should append id 0 (falsy but defined)', () => {
-            expect(new CacheKeyBuilder('users').byId(0).build()).toEqual(['users', 0])
-        })
+        it('should append id 0 (falsy but defined)', () =>
+            expect(new CacheKeyBuilder('users').byId(0).build()).toEqual(['users', 0]))
 
-        it('should omit id when undefined is passed', () => {
-            expect(new CacheKeyBuilder('users').byId(undefined).build()).toEqual(['users'])
-        })
+        it('should omit id when undefined is passed', () =>
+            expect(new CacheKeyBuilder('users').byId(undefined).build()).toEqual(['users']))
 
-        it('should omit id when called with no argument', () => {
-            expect(new CacheKeyBuilder('users').byId().build()).toEqual(['users'])
-        })
+        it('should omit id when called with no argument', () =>
+            expect(new CacheKeyBuilder('users').byId().build()).toEqual(['users']))
 
         it('should override a previous id when called twice', () => {
             const result = new CacheKeyBuilder('users').byId('first').byId('second').build()
@@ -67,9 +59,8 @@ describe('CacheKeyBuilder', () => {
             ])
         })
 
-        it('should append an empty filters object', () => {
-            expect(new CacheKeyBuilder('users').byFilters({}).build()).toEqual(['users', {}])
-        })
+        it('should append an empty filters object', () =>
+            expect(new CacheKeyBuilder('users').byFilters({}).build()).toEqual(['users', {}]))
 
         it('should override previous filters when called twice', () => {
             const result = new CacheKeyBuilder('users')
@@ -146,21 +137,17 @@ describe('CacheKeyBuilder', () => {
     })
 
     describe('edge cases', () => {
-        it('should handle a key with special characters', () => {
-            expect(new CacheKeyBuilder('my-complex_key.v2').build()).toEqual(['my-complex_key.v2'])
-        })
+        it('should handle a key with special characters', () =>
+            expect(new CacheKeyBuilder('my-complex_key.v2').build()).toEqual(['my-complex_key.v2']))
 
-        it('should handle an empty string key', () => {
-            expect(new CacheKeyBuilder('').build()).toEqual([''])
-        })
+        it('should handle an empty string key', () =>
+            expect(new CacheKeyBuilder('').build()).toEqual(['']))
 
-        it('should handle numeric id of 0', () => {
-            expect(new CacheKeyBuilder('k').byId(0).build()).toEqual(['k', 0])
-        })
+        it('should handle numeric id of 0', () =>
+            expect(new CacheKeyBuilder('k').byId(0).build()).toEqual(['k', 0]))
 
-        it('should handle empty string id', () => {
-            expect(new CacheKeyBuilder('k').byId('').build()).toEqual(['k', ''])
-        })
+        it('should handle empty string id', () =>
+            expect(new CacheKeyBuilder('k').byId('').build()).toEqual(['k', '']))
 
         it('should handle filters with nested objects', () => {
             const filters = { nested: { deep: { value: 42 } } }
@@ -175,7 +162,7 @@ describe('CacheKeyBuilder', () => {
 })
 
 describe('QueryKey', () => {
-    describe('each key should return a CacheKeyBuilder with the correct base key', () => {
+    describe('each key should return a CacheKeyBuilder with the correct base key', () =>
         it.each(
             Object.entries({
                 AppSettings: 'app-settings',
@@ -195,8 +182,7 @@ describe('QueryKey', () => {
             const builder = QueryKey[property as Key<typeof QueryKey>]
             expect(builder).toBeInstanceOf(CacheKeyBuilder)
             expect(builder.build()).toEqual([baseKey])
-        })
-    })
+        }))
 
     describe('getter freshness', () => {
         it('should return a new builder instance on every access', () => {
@@ -215,25 +201,22 @@ describe('QueryKey', () => {
     })
 
     describe('real-world usage patterns', () => {
-        it('should build a simple key', () => {
-            expect(QueryKey.AppSettings.build()).toEqual(['app-settings'])
-        })
+        it('should build a simple key', () =>
+            expect(QueryKey.AppSettings.build()).toEqual(['app-settings']))
 
-        it('should build a key with byId from a string', () => {
-            expect(QueryKey.Level.byId('forest').build()).toEqual(['level', 'forest'])
-        })
+        it('should build a key with byId from a string', () =>
+            expect(QueryKey.Level.byId('forest').build()).toEqual(['level', 'forest']))
 
-        it('should build a key with byId from a number', () => {
-            expect(QueryKey.Level.byId(3).build()).toEqual(['level', 3])
-        })
+        it('should build a key with byId from a number', () =>
+            expect(QueryKey.Level.byId(3).build()).toEqual(['level', 3]))
 
-        it('should omit the id when byId is undefined', () => {
-            expect(QueryKey.RehydrateSession.byId(undefined).build()).toEqual(['rehydrate-session'])
-        })
+        it('should omit the id when byId is undefined', () =>
+            expect(QueryKey.RehydrateSession.byId(undefined).build()).toEqual([
+                'rehydrate-session',
+            ]))
 
-        it('should build a key with a feature', () => {
-            expect(QueryKey.Categories.feature('tree').build()).toEqual(['categories', 'tree'])
-        })
+        it('should build a key with a feature', () =>
+            expect(QueryKey.Categories.feature('tree').build()).toEqual(['categories', 'tree']))
 
         it('should build a key with byFilters', () => {
             const filters = { difficulty: 'hard' }

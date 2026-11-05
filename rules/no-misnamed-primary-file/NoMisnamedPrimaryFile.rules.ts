@@ -19,7 +19,7 @@ const Eslint = {
             const [stem, ...rest] = file.split('.')
             if (rest.length > 1) return {}
 
-            if (stem !== parentFolder) {
+            if (stem !== parentFolder)
                 context.report({
                     message: [
                         ErrorMessage,
@@ -27,7 +27,7 @@ const Eslint = {
                     ].join('\n'),
                     loc: { line: 1, column: 0 },
                 })
-            }
+
             return {}
         },
     } satisfies Rule.RuleModule,

@@ -3,7 +3,7 @@ import { DateTime } from '..'
 const { Formats, Units, Format } = DateTime
 
 describe('DateTime', () => {
-    describe('Formats', () => {
+    describe('Formats', () =>
         it.each([
             ['DisplayDate', 'DD/MM/YYYY'],
             ['DisplayDateTime', 'DD/MM/YYYY HH:mm'],
@@ -12,10 +12,9 @@ describe('DateTime', () => {
             ['DisplayLongDate', 'ddd, DD. MMM. YYYY'],
             ['ApiDate', 'YYYY-MM-DD'],
             ['ApiDateTime', 'YYYY-MM-DDTHH:mm:ssZ'],
-        ] as const)('should have %s = "%s"', (key, expected) => {
-            expect(Formats[key]).toBe(expected)
-        })
-    })
+        ] as const)('should have %s = "%s"', (key, expected) =>
+            expect(Formats[key]).toBe(expected),
+        ))
 
     describe('Units', () => {
         it.each([
@@ -24,9 +23,9 @@ describe('DateTime', () => {
             ['fromHour', 3_600_000],
             ['fromDay', 86_400_000],
             ['fromWeek', 604_800_000],
-        ] as const)('should default %s() to %i ms', (fn, expected) => {
-            expect(Units.Ms[fn]()).toBe(expected)
-        })
+        ] as const)('should default %s() to %i ms', (fn, expected) =>
+            expect(Units.Ms[fn]()).toBe(expected),
+        )
 
         describe.each([
             [
@@ -74,22 +73,19 @@ describe('DateTime', () => {
                     [0.5, 302_400_000],
                 ],
             ],
-        ] as const)('should define Ms.%s', (fn, cases) => {
-            it.each(cases)(`should return %d ms for ${fn}(%d)`, (input: number, expected: number) => {
-                expect(Units.Ms[fn](input)).toBe(expected)
-            })
-        })
+        ] as const)('should define Ms.%s', (fn, cases) =>
+            it.each(cases)(`should return %d ms for ${fn}(%d)`, (input: number, expected: number) =>
+                expect(Units.Ms[fn](input)).toBe(expected),
+            ),
+        )
 
-        describe('chaining consistency', () => {
+        describe('chaining consistency', () =>
             it.each([
                 ['1 min = 60 sec', Units.Ms.fromMin(1), Units.Ms.fromSec(60)],
                 ['1 hour = 60 min', Units.Ms.fromHour(1), Units.Ms.fromMin(60)],
                 ['1 day = 24 hours', Units.Ms.fromDay(1), Units.Ms.fromHour(24)],
                 ['1 week = 7 days', Units.Ms.fromWeek(1), Units.Ms.fromDay(7)],
-            ])('should preserve %s', (_, actual, expected) => {
-                expect(actual).toBe(expected)
-            })
-        })
+            ])('should preserve %s', (_, actual, expected) => expect(actual).toBe(expected)))
     })
 
     describe('Format.to', () => {
@@ -114,31 +110,25 @@ describe('DateTime', () => {
                 expect(Format.to('DisplayDate', date.getTime())).toBe('06/08/2023')
             })
 
-            it('should format an ISO date string', () => {
-                expect(Format.to('DisplayDate', '2023-08-06')).toBe('06/08/2023')
-            })
+            it('should format an ISO date string', () =>
+                expect(Format.to('DisplayDate', '2023-08-06')).toBe('06/08/2023'))
 
-            it('should format a DD/MM/YYYY date string', () => {
-                expect(Format.to('DisplayDate', '06/08/2023')).toBe('06/08/2023')
-            })
+            it('should format a DD/MM/YYYY date string', () =>
+                expect(Format.to('DisplayDate', '06/08/2023')).toBe('06/08/2023'))
         })
 
         describe('edge cases', () => {
-            it('should return undefined for undefined', () => {
-                expect(Format.to('DisplayDate', undefined)).toBeUndefined()
-            })
+            it('should return undefined for undefined', () =>
+                expect(Format.to('DisplayDate', undefined)).toBeUndefined())
 
-            it('should return undefined for null', () => {
-                expect(Format.to('DisplayDate', null)).toBeUndefined()
-            })
+            it('should return undefined for null', () =>
+                expect(Format.to('DisplayDate', null)).toBeUndefined())
 
-            it('should return undefined for empty string', () => {
-                expect(Format.to('DisplayDate', '')).toBeUndefined()
-            })
+            it('should return undefined for empty string', () =>
+                expect(Format.to('DisplayDate', '')).toBeUndefined())
 
-            it('should return undefined for an unparseable string', () => {
-                expect(Format.to('DisplayDate', 'not-a-date')).toBeUndefined()
-            })
+            it('should return undefined for an unparseable string', () =>
+                expect(Format.to('DisplayDate', 'not-a-date')).toBeUndefined())
         })
     })
 
@@ -172,21 +162,16 @@ describe('DateTime', () => {
             expect(result!.getMonth()).toBe(7)
         })
 
-        it('should return undefined for undefined', () => {
-            expect(Format.parse(undefined)).toBeUndefined()
-        })
+        it('should return undefined for undefined', () =>
+            expect(Format.parse(undefined)).toBeUndefined())
 
-        it('should return undefined for null', () => {
-            expect(Format.parse(null)).toBeUndefined()
-        })
+        it('should return undefined for null', () => expect(Format.parse(null)).toBeUndefined())
 
-        it('should return undefined for empty string', () => {
-            expect(Format.parse('')).toBeUndefined()
-        })
+        it('should return undefined for empty string', () =>
+            expect(Format.parse('')).toBeUndefined())
 
-        it('should return undefined for an unparseable string', () => {
-            expect(Format.parse('not-a-date')).toBeUndefined()
-        })
+        it('should return undefined for an unparseable string', () =>
+            expect(Format.parse('not-a-date')).toBeUndefined())
     })
 
     describe('Format.ms', () => {
@@ -200,21 +185,14 @@ describe('DateTime', () => {
             expect(result).toBe(new Date(2023, 7, 6).getTime())
         })
 
-        it('should return 0 for undefined', () => {
-            expect(Format.ms(undefined)).toBe(0)
-        })
+        it('should return 0 for undefined', () => expect(Format.ms(undefined)).toBe(0))
 
-        it('should return 0 for null', () => {
-            expect(Format.ms(null)).toBe(0)
-        })
+        it('should return 0 for null', () => expect(Format.ms(null)).toBe(0))
 
-        it('should return 0 for empty string', () => {
-            expect(Format.ms('')).toBe(0)
-        })
+        it('should return 0 for empty string', () => expect(Format.ms('')).toBe(0))
 
-        it('should return 0 for an unparseable string', () => {
-            expect(Format.ms('not-a-date')).toBe(0)
-        })
+        it('should return 0 for an unparseable string', () =>
+            expect(Format.ms('not-a-date')).toBe(0))
     })
 
     describe('Format.toIso', () => {

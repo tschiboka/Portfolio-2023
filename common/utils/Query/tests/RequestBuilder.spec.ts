@@ -17,19 +17,15 @@ describe('RequestBuilder', () => {
         mockApiPathBuilder()
     })
 
-    afterEach(() => {
-        vi.restoreAllMocks()
-    })
+    afterEach(() => vi.restoreAllMocks())
 
-    describe('constructor', () => {
-        it('should throw when pathName is falsy', () => {
+    describe('constructor', () =>
+        it('should throw when pathName is falsy', () =>
             expect(() => new RequestBuilder('' as never)).toThrow(
                 'RequestBuilder: pathName is required',
-            )
-        })
-    })
+            )))
 
-    describe('build', () => {
+    describe('build', () =>
         it('should return all HTTP method helpers', () => {
             const api = new RequestBuilder('Login').build()
             expect(typeof api.get).toBe('function')
@@ -39,8 +35,7 @@ describe('RequestBuilder', () => {
             expect(typeof api.delete).toBe('function')
             expect(typeof api.head).toBe('function')
             expect(typeof api.options).toBe('function')
-        })
-    })
+        }))
 
     describe('URL resolution', () => {
         it('should build URL with /api prefix by default', async () => {
@@ -59,11 +54,10 @@ describe('RequestBuilder', () => {
             )
         })
 
-        it('should throw when pathName is falsy', () => {
+        it('should throw when pathName is falsy', () =>
             expect(() => new RequestBuilder(undefined as never)).toThrow(
                 'RequestBuilder: pathName is required',
-            )
-        })
+            ))
     })
 
     describe('setSubpath', () => {
@@ -155,7 +149,7 @@ describe('RequestBuilder', () => {
         })
     })
 
-    describe('removeQuery', () => {
+    describe('removeQuery', () =>
         it('should remove specified query params by key', async () => {
             await new RequestBuilder('Login')
                 .setQuery({ a: '1', b: '2', c: '3' })
@@ -166,10 +160,9 @@ describe('RequestBuilder', () => {
                 expect.any(String),
                 expect.objectContaining({ params: { b: '2' } }),
             )
-        })
-    })
+        }))
 
-    describe('resetQuery', () => {
+    describe('resetQuery', () =>
         it('should clear all query params', async () => {
             await new RequestBuilder('Login')
                 .setQuery({ a: '1', b: '2' })
@@ -178,8 +171,7 @@ describe('RequestBuilder', () => {
                 .get()
             const config = mockedAxios.get.mock.calls[0][1]
             expect(config).not.toHaveProperty('params')
-        })
-    })
+        }))
 
     describe('withAuthToken', () => {
         it('should set x-auth-token header from the provided token', async () => {
@@ -231,7 +223,7 @@ describe('RequestBuilder', () => {
         })
     })
 
-    describe('removeHeader', () => {
+    describe('removeHeader', () =>
         it('should remove a previously set header', async () => {
             await new RequestBuilder('Login')
                 .withHeader('x-one', '1')
@@ -245,16 +237,14 @@ describe('RequestBuilder', () => {
                     headers: { 'x-two': '2' },
                 }),
             )
-        })
-    })
+        }))
 
-    describe('resetHeaders', () => {
+    describe('resetHeaders', () =>
         it('should clear all custom headers', async () => {
             await new RequestBuilder('Login').withHeader('x-one', '1').resetHeaders().build().get()
             const config = mockedAxios.get.mock.calls[0][1]
             expect(config).not.toHaveProperty('headers')
-        })
-    })
+        }))
 
     describe('setParams', () => {
         it('should replace :key placeholders in the URL', async () => {
@@ -334,7 +324,7 @@ describe('RequestBuilder', () => {
         })
     })
 
-    describe('removeParams', () => {
+    describe('removeParams', () =>
         it('should remove specified path params by key', async () => {
             const mockBuilder = apiPathBuilderModule as { apiPathBuilder: ReturnType<typeof vi.fn> }
             mockBuilder.apiPathBuilder.mockReturnValueOnce('http://localhost:5000/api/:a/:b/:c')
@@ -348,10 +338,9 @@ describe('RequestBuilder', () => {
                 'http://localhost:5000/api/:a/2/:c',
                 expect.any(Object),
             )
-        })
-    })
+        }))
 
-    describe('resetParams', () => {
+    describe('resetParams', () =>
         it('should clear all path params', async () => {
             const mockBuilder = apiPathBuilderModule as { apiPathBuilder: ReturnType<typeof vi.fn> }
             mockBuilder.apiPathBuilder.mockReturnValueOnce(
@@ -367,8 +356,7 @@ describe('RequestBuilder', () => {
                 'http://localhost:5000/api/users/:userId',
                 expect.any(Object),
             )
-        })
-    })
+        }))
 
     describe('HTTP methods', () => {
         it('should call axios.get with url and config', async () => {

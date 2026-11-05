@@ -19,15 +19,13 @@ export const TableCheckboxCell = <TData extends Record<string, ReactNode>, TCont
     const isDisabled = isRowSelectable ? !isRowSelectable(meta) : false
 
     const handleToggle = () => {
-        if (mode === 'single') {
-            onChange(isSelected ? [] : [rowId])
-        } else {
+        if (mode === 'single') onChange(isSelected ? [] : [rowId])
+        else
             onChange(
                 isSelected
                     ? selectedRowIds.filter((id) => id !== rowId)
                     : [...selectedRowIds, rowId],
             )
-        }
     }
 
     return (

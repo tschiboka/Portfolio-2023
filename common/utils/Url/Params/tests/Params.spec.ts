@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { Params } from '..'
 import type { Optional } from '../../../Generics'
 
-describe('Params.build', () => {
+describe('Params.build', () =>
     it.each<[Optional<string>, string, string]>([
         // [namespace, key, expected]
         [undefined, 'key', 'key'],
@@ -10,10 +10,9 @@ describe('Params.build', () => {
         ['namespace', 'key', 'namespace.key'],
         ['namespace', '', 'namespace.'],
         ['a', 'b', 'a.b'],
-    ])('should return %j for build(%j, %j)', (namespace, key, expected) => {
-        expect(Params.build(namespace, key)).toBe(expected)
-    })
-})
+    ])('should return %j for build(%j, %j)', (namespace, key, expected) =>
+        expect(Params.build(namespace, key)).toBe(expected),
+    ))
 
 describe('Params.setIfDifferent', () => {
     it('should return a copy with the namespaced key set when the value differs from the fallback', () => {
@@ -37,28 +36,23 @@ describe('Params.setIfDifferent', () => {
 })
 
 describe('Params.toQueryString', () => {
-    it('should serialise an object of params to a ?key=value string', () => {
-        expect(Params.toQueryString({ a: '1', b: '2' })).toBe('?a=1&b=2')
-    })
+    it('should serialise an object of params to a ?key=value string', () =>
+        expect(Params.toQueryString({ a: '1', b: '2' })).toBe('?a=1&b=2'))
 
     it('should URL-encode values', () => {
         expect(Params.toQueryString({ q: 'x y' })).toBe('?q=x+y')
         expect(Params.toQueryString({ q: 'a&b' })).toBe('?q=a%26b')
     })
 
-    it('should return an empty string for an empty object', () => {
-        expect(Params.toQueryString({})).toBe('')
-    })
+    it('should return an empty string for an empty object', () =>
+        expect(Params.toQueryString({})).toBe(''))
 
-    it('should return an empty string for undefined', () => {
-        expect(Params.toQueryString(undefined)).toBe('')
-    })
+    it('should return an empty string for undefined', () =>
+        expect(Params.toQueryString(undefined)).toBe(''))
 
-    it('should preserve an empty-string value as a present-but-empty param', () => {
-        expect(Params.toQueryString({ a: '' })).toBe('?a=')
-    })
+    it('should preserve an empty-string value as a present-but-empty param', () =>
+        expect(Params.toQueryString({ a: '' })).toBe('?a='))
 
-    it('should preserve a zero (falsy) value', () => {
-        expect(Params.toQueryString({ a: '0' })).toBe('?a=0')
-    })
+    it('should preserve a zero (falsy) value', () =>
+        expect(Params.toQueryString({ a: '0' })).toBe('?a=0'))
 })

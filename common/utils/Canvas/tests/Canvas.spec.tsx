@@ -61,15 +61,14 @@ describe('CanvasHooks.useCanvas', () => {
         })
     })
 
-    describe('when getContext returns null', () => {
+    describe('when getContext returns null', () =>
         it('should return undefined ctx', () => {
             const { canvas } = createMockCanvas({ ctx: null })
             const ref = makeRef(canvas)
             const { result } = renderHook(() => CanvasHooks.useCanvas(ref))
 
             expect(result.current.ctx).toBeUndefined()
-        })
-    })
+        }))
 
     describe('when canvas is fully available', () => {
         it('should call getContext with "2d"', () => {

@@ -71,9 +71,7 @@ export const FeatureQuery = () => {
             return featureQuery
         },
         build(): FeatureQueryBuilt {
-            if (path === undefined) {
-                throw new Error('FeatureQuery: path is required')
-            }
+            if (path === undefined) throw new Error('FeatureQuery: path is required')
 
             const Get = <TResponse>(
                 queryKey: CacheKey,

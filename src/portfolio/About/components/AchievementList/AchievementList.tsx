@@ -7,14 +7,12 @@ interface Props {
     achievements: Achievement[]
 }
 
-export const AchievementList = ({ achievements }: Props) => {
-    return (
-        <List
-            className="AchievementList"
-            items={achievements.map((achievement) => ({
-                key: achievement.title,
-                content: <AchievementListItem achievement={achievement} />,
-            }))}
-        />
-    )
-}
+export const AchievementList = ({ achievements }: Props) => (
+    <List
+        className="AchievementList"
+        items={achievements.map((achievement) => ({
+            key: achievement.title,
+            content: <AchievementListItem achievement={achievement} />,
+        }))}
+    />
+)

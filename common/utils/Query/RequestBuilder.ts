@@ -70,9 +70,8 @@ export class RequestBuilder {
      * Removes one or more path parameters by key.
      */
     removeParams(...keys: string[]): this {
-        for (const key of keys) {
-            delete this.pathParams[key]
-        }
+        for (const key of keys) delete this.pathParams[key]
+
         return this
     }
 
@@ -112,9 +111,8 @@ export class RequestBuilder {
      * Removes one or more query-string parameters by key.
      */
     removeQuery(...keys: string[]): this {
-        for (const key of keys) {
-            delete this.queryParams[key]
-        }
+        for (const key of keys) delete this.queryParams[key]
+
         return this
     }
 
@@ -187,13 +185,9 @@ export class RequestBuilder {
 
         const config: AxiosRequestConfig = {}
 
-        if (hasLength(Object.keys(this.headers))) {
-            config.headers = this.headers
-        }
+        if (hasLength(Object.keys(this.headers))) config.headers = this.headers
 
-        if (hasLength(Object.keys(this.queryParams))) {
-            config.params = this.queryParams
-        }
+        if (hasLength(Object.keys(this.queryParams))) config.params = this.queryParams
 
         return {
             get: <T = unknown>() => axios.get<T>(finalUrl, config),

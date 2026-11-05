@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { trim } from '..'
 import type { Nullish, Optional, Primitive } from '../../../Generics'
 
-describe('Strings.Optional.trim', () => {
+describe('Strings.Optional.trim', () =>
     it.each<[Nullish<Primitive>, Optional<string>]>([
         ['  hi  ', 'hi'],
         ['hi', 'hi'],
@@ -11,7 +11,4 @@ describe('Strings.Optional.trim', () => {
         [null, undefined],
         [undefined, undefined],
         [123, '123'],
-    ])('should return %j for trim(%j)', (value, expected) => {
-        expect(trim(value)).toBe(expected)
-    })
-})
+    ])('should return %j for trim(%j)', (value, expected) => expect(trim(value)).toBe(expected)))

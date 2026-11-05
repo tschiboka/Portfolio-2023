@@ -19,9 +19,8 @@ const renderFooter = () => `
 `
 
 const renderRows = (today: PathBreakdownItem[], total: PathBreakdownItem[]) => {
-    if (!today.length) {
+    if (!today.length)
         return `<tr><td colspan="3" style="padding:8px 0; color:#888; font-style:italic; font-weight:300;">No data today</td></tr>`
-    }
 
     return today
         .map(

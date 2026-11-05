@@ -4,16 +4,15 @@ import { TableUrlPersistenceUtils } from '..'
 import type { Filters } from './TableUrlPersistence.spec.types'
 
 describe('statesEqual', () => {
-    it('should be true for identical states', () => {
+    it('should be true for identical states', () =>
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 TableUrlPersistenceTestUtils.makeState(),
                 TableUrlPersistenceTestUtils.makeState(),
             ),
-        ).toBe(true)
-    })
+        ).toBe(true))
 
-    it('should be false when pagination differs', () => {
+    it('should be false when pagination differs', () =>
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 TableUrlPersistenceTestUtils.makeState(),
@@ -21,10 +20,9 @@ describe('statesEqual', () => {
                     pagination: { pageNumber: 4, pageSize: 25 },
                 }),
             ),
-        ).toBe(false)
-    })
+        ).toBe(false))
 
-    it('should be false when sorting differs', () => {
+    it('should be false when sorting differs', () =>
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 TableUrlPersistenceTestUtils.makeState(),
@@ -32,10 +30,9 @@ describe('statesEqual', () => {
                     sorting: { column: 'name', direction: 'asc' },
                 }),
             ),
-        ).toBe(false)
-    })
+        ).toBe(false))
 
-    it('should be false when a filter value differs', () => {
+    it('should be false when a filter value differs', () =>
         expect(
             TableUrlPersistenceUtils.statesEqual(
                 TableUrlPersistenceTestUtils.makeState(),
@@ -43,8 +40,7 @@ describe('statesEqual', () => {
                     filters: { search: 'grace', min: 5, active: true },
                 }),
             ),
-        ).toBe(false)
-    })
+        ).toBe(false))
 
     it('should be false when one state has an extra filter key', () => {
         const a = TableUrlPersistenceTestUtils.makeState()

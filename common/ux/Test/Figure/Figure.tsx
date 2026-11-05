@@ -23,9 +23,7 @@ export class FigureAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            zoom: async () => {
-                await Accessor.user.click(this.element)
-            },
+            zoom: async () => await Accessor.user.click(this.element),
         }
     }
 }

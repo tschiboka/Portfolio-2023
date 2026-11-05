@@ -108,7 +108,7 @@ describe('Table — Accessibility', () => {
         })
     })
 
-    describe('style prop', () => {
+    describe('style prop', () =>
         it('should apply inline styles to the wrapper', () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -118,8 +118,7 @@ describe('Table — Accessibility', () => {
             })
             // jsdom normalises a hex colour to rgb()
             expect(Test.Table('test').Get.style().border).toBe('2px solid rgb(51, 51, 51)')
-        })
-    })
+        }))
 
     describe('table element', () => {
         it('should render a <table> element', () => {
@@ -145,9 +144,7 @@ describe('Table — Accessibility', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
             Test.Table('test')
                 .Get.columnHeaders()
-                .forEach((th) => {
-                    expect(th).toHaveAttribute('scope', 'col')
-                })
+                .forEach((th) => expect(th).toHaveAttribute('scope', 'col'))
         })
 
         it('should render column header text for each column', () => {
@@ -399,9 +396,7 @@ describe('Table — Accessibility', () => {
             await table.Do.clickActionButton()
             const menu = table.Get.menu()
             const listItems = menu.querySelectorAll('li')
-            listItems.forEach((li) => {
-                expect(li).toHaveAttribute('role', 'none')
-            })
+            listItems.forEach((li) => expect(li).toHaveAttribute('role', 'none'))
         })
 
         it('should disable action button when all actions are filtered out', () => {
@@ -462,9 +457,7 @@ describe('Table — Accessibility', () => {
                 },
             })
             const table = Test.Table('test')
-            rows.forEach((_, i) => {
-                expect(table.Get.selectRow(i + 1)).toBeInTheDocument()
-            })
+            rows.forEach((_, i) => expect(table.Get.selectRow(i + 1)).toBeInTheDocument())
         })
 
         it('should give disabled rows a disabled checkbox', () => {
@@ -984,7 +977,7 @@ describe('Table — Accessibility', () => {
         })
     })
 
-    describe('Action menu aria-controls', () => {
+    describe('Action menu aria-controls', () =>
         it('should give the action button aria-haspopup and open a portaled menu', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -1001,10 +994,9 @@ describe('Table — Accessibility', () => {
             expect(
                 Accessor.screen.getByRole('menu', { name: 'Row actions menu' }),
             ).toBeInTheDocument()
-        })
-    })
+        }))
 
-    describe('Dropdown aria-controls', () => {
+    describe('Dropdown aria-controls', () =>
         it('should link the multi-option aria-controls to the listbox', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -1027,8 +1019,7 @@ describe('Table — Accessibility', () => {
                 'id',
                 controlsId,
             )
-        })
-    })
+        }))
 
     describe('Escape key handling', () => {
         it('should close the action menu when Escape is pressed', async () => {

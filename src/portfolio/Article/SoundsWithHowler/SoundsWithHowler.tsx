@@ -41,31 +41,29 @@ interface Props {
     path: string
 }
 
-const audioObject = () => {
-    return {
-        E2: new Howl({ src: E2MP3, html5: true }),
-        F2: new Howl({ src: F2MP3, html5: true }),
-        Fs2: new Howl({ src: Fs2MP3, html5: true }),
-        G2: new Howl({ src: G2MP3, html5: true }),
-        Gs2: new Howl({ src: Gs2MP3, html5: true }),
-        A2: new Howl({ src: A2MP3, html5: true }),
-        As2: new Howl({ src: As2MP3, html5: true }),
-        B2: new Howl({ src: B2MP3, html5: true }),
-        C3: new Howl({ src: C3MP3, html5: true }),
-        Cs3: new Howl({ src: Cs3MP3, html5: true }),
-        D3: new Howl({ src: D3MP3, html5: true }),
-        Ds3: new Howl({ src: Ds3MP3, html5: true }),
-        E3: new Howl({ src: E3MP3, html5: true }),
-        G3: new Howl({ src: G3MP3, html5: true }),
-        B3: new Howl({ src: B3MP3, html5: true }),
-        E4: new Howl({ src: E4MP3, html5: true }),
-        A3: new Howl({ src: A3MP3, html5: true }),
-        C4: new Howl({ src: C4MP3, html5: true }),
-        D4: new Howl({ src: D4MP3, html5: true }),
-        Fs4: new Howl({ src: Fs4MP3, html5: true }),
-        G4: new Howl({ src: G4MP3, html5: true }),
-    }
-}
+const audioObject = () => ({
+    E2: new Howl({ src: E2MP3, html5: true }),
+    F2: new Howl({ src: F2MP3, html5: true }),
+    Fs2: new Howl({ src: Fs2MP3, html5: true }),
+    G2: new Howl({ src: G2MP3, html5: true }),
+    Gs2: new Howl({ src: Gs2MP3, html5: true }),
+    A2: new Howl({ src: A2MP3, html5: true }),
+    As2: new Howl({ src: As2MP3, html5: true }),
+    B2: new Howl({ src: B2MP3, html5: true }),
+    C3: new Howl({ src: C3MP3, html5: true }),
+    Cs3: new Howl({ src: Cs3MP3, html5: true }),
+    D3: new Howl({ src: D3MP3, html5: true }),
+    Ds3: new Howl({ src: Ds3MP3, html5: true }),
+    E3: new Howl({ src: E3MP3, html5: true }),
+    G3: new Howl({ src: G3MP3, html5: true }),
+    B3: new Howl({ src: B3MP3, html5: true }),
+    E4: new Howl({ src: E4MP3, html5: true }),
+    A3: new Howl({ src: A3MP3, html5: true }),
+    C4: new Howl({ src: C4MP3, html5: true }),
+    D4: new Howl({ src: D4MP3, html5: true }),
+    Fs4: new Howl({ src: Fs4MP3, html5: true }),
+    G4: new Howl({ src: G4MP3, html5: true }),
+})
 
 export const SoundsWithHowler = ({ pageName, path }: Props) => {
     const [audio, setAudio] = useState<Nullable<Record<string, Howl>>>(null)

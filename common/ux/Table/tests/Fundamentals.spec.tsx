@@ -248,9 +248,7 @@ describe('Table — Fundamentals', () => {
 
         it('should render all data rows', () => {
             Test.Table.Set.mock<Row>({ ariaLabel: 'test', data: rows, columns: basicColumns })
-            rows.forEach((row) => {
-                expect(screen.getByText(row.name)).toBeInTheDocument()
-            })
+            rows.forEach((row) => expect(screen.getByText(row.name)).toBeInTheDocument())
         })
     })
 })

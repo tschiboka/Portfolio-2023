@@ -5,35 +5,28 @@ const { Set, selectBackground, selectBorderRadius } = BoxTestUtils
 
 describe('Box', () => {
     describe('selectBackground', () => {
-        it('should return undefined when no background is provided', () => {
-            expect(selectBackground()).toBeUndefined()
-        })
+        it('should return undefined when no background is provided', () =>
+            expect(selectBackground()).toBeUndefined())
 
-        it('should map "surface" to --black-2', () => {
-            expect(selectBackground('surface')).toBe('var(--black-2)')
-        })
+        it('should map "surface" to --black-2', () =>
+            expect(selectBackground('surface')).toBe('var(--black-2)'))
 
-        it('should map "raised" to --black-3', () => {
-            expect(selectBackground('raised')).toBe('var(--black-3)')
-        })
+        it('should map "raised" to --black-3', () =>
+            expect(selectBackground('raised')).toBe('var(--black-3)'))
 
-        it('should map "transparent" to transparent', () => {
-            expect(selectBackground('transparent')).toBe('transparent')
-        })
+        it('should map "transparent" to transparent', () =>
+            expect(selectBackground('transparent')).toBe('transparent'))
     })
 
     describe('selectBorderRadius', () => {
-        it('should return undefined when no radius is provided', () => {
-            expect(selectBorderRadius()).toBeUndefined()
-        })
+        it('should return undefined when no radius is provided', () =>
+            expect(selectBorderRadius()).toBeUndefined())
 
-        it('should map "sm" to --radius-sm', () => {
-            expect(selectBorderRadius('sm')).toBe('var(--radius-sm)')
-        })
+        it('should map "sm" to --radius-sm', () =>
+            expect(selectBorderRadius('sm')).toBe('var(--radius-sm)'))
 
-        it('should map "full" to --radius-full', () => {
-            expect(selectBorderRadius('full')).toBe('var(--radius-full)')
-        })
+        it('should map "full" to --radius-full', () =>
+            expect(selectBorderRadius('full')).toBe('var(--radius-full)'))
     })
 
     describe('rendering', () => {

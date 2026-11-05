@@ -211,13 +211,12 @@ export const ContentNavigator = ({
         }
     }, [headings, yPositions, getX, activeIndices])
 
-    if (!showNavigator) {
+    if (!showNavigator)
         return (
             <div ref={contentRef} className="ContentNavigator__content--no-navigator">
                 {children}
             </div>
         )
-    }
 
     return (
         <div className="ContentNavigator" style={{ position: 'relative' }}>

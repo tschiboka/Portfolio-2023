@@ -4,18 +4,17 @@ import { HttpStatus } from '..'
 import type { Key } from '@common-utils'
 
 describe('HttpStatus', () => {
-    describe('1xx Informational', () => {
+    describe('1xx Informational', () =>
         it.each([
             ['CONTINUE', 100],
             ['SWITCHING_PROTOCOLS', 101],
             ['PROCESSING', 102],
             ['EARLY_HINTS', 103],
-        ])('should map %s to %i', (key: string, value: number) => {
-            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
-        })
-    })
+        ])('should map %s to %i', (key: string, value: number) =>
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value),
+        ))
 
-    describe('2xx Success', () => {
+    describe('2xx Success', () =>
         it.each([
             ['OK', 200],
             ['CREATED', 201],
@@ -27,12 +26,11 @@ describe('HttpStatus', () => {
             ['MULTI_STATUS', 207],
             ['ALREADY_REPORTED', 208],
             ['IM_USED', 226],
-        ])('should map %s to %i', (key: string, value: number) => {
-            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
-        })
-    })
+        ])('should map %s to %i', (key: string, value: number) =>
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value),
+        ))
 
-    describe('3xx Redirection', () => {
+    describe('3xx Redirection', () =>
         it.each([
             ['MULTIPLE_CHOICES', 300],
             ['MOVED_PERMANENTLY', 301],
@@ -41,12 +39,11 @@ describe('HttpStatus', () => {
             ['NOT_MODIFIED', 304],
             ['TEMPORARY_REDIRECT', 307],
             ['PERMANENT_REDIRECT', 308],
-        ])('should map %s to %i', (key: string, value: number) => {
-            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
-        })
-    })
+        ])('should map %s to %i', (key: string, value: number) =>
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value),
+        ))
 
-    describe('4xx Client Error', () => {
+    describe('4xx Client Error', () =>
         it.each([
             ['BAD_REQUEST', 400],
             ['UNAUTHORIZED', 401],
@@ -77,12 +74,11 @@ describe('HttpStatus', () => {
             ['TOO_MANY_REQUESTS', 429],
             ['REQUEST_HEADER_FIELDS_TOO_LARGE', 431],
             ['UNAVAILABLE_FOR_LEGAL_REASONS', 451],
-        ])('should map %s to %i', (key: string, value: number) => {
-            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
-        })
-    })
+        ])('should map %s to %i', (key: string, value: number) =>
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value),
+        ))
 
-    describe('5xx Server Error', () => {
+    describe('5xx Server Error', () =>
         it.each([
             ['INTERNAL_SERVER_ERROR', 500],
             ['NOT_IMPLEMENTED', 501],
@@ -95,10 +91,9 @@ describe('HttpStatus', () => {
             ['LOOP_DETECTED', 508],
             ['NOT_EXTENDED', 510],
             ['NETWORK_AUTHENTICATION_REQUIRED', 511],
-        ])('should map %s to %i', (key: string, value: number) => {
-            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value)
-        })
-    })
+        ])('should map %s to %i', (key: string, value: number) =>
+            expect(HttpStatus[key as Key<typeof HttpStatus>]).toBe(value),
+        ))
 
     describe('structural guarantees', () => {
         it('should have all values as numbers', () => {

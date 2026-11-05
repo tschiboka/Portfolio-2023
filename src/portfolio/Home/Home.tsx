@@ -8,19 +8,17 @@ interface Props {
     pageName: string
 }
 
-export const Home = ({ pageName }: Props) => {
-    return (
-        <Screen
-            title="tschiboka | Home"
-            path="/"
-            variant="portfolio"
-            pageName={pageName}
-            sideMenu={<PageSideMenu />}
-        >
-            <Welcome />
-            <Main>
-                <Intro />
-            </Main>
-        </Screen>
-    )
-}
+export const Home = ({ pageName }: Props) => (
+    <Screen
+        title="tschiboka | Home"
+        path="/"
+        variant="portfolio"
+        pageName={pageName}
+        sideMenu={<PageSideMenu />}
+    >
+        <Welcome />
+        <Main>
+            <Intro />
+        </Main>
+    </Screen>
+)

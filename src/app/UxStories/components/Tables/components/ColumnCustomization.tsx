@@ -49,17 +49,17 @@ export const ColumnCustomization = () => {
                     columns={cols}
                     enableColumnResize
                     enableColumnReorder
-                    onColumnResize={(index, width) => {
+                    onColumnResize={(index, width) =>
                         setColWidths((prev) => ({ ...prev, [index]: width }))
-                    }}
-                    onColumnReorder={(from, to) => {
+                    }
+                    onColumnReorder={(from, to) =>
                         setCols((prev) => {
                             const next = [...prev]
                             const [moved] = next.splice(from, 1)
                             next.splice(to, 0, moved)
                             return next
                         })
-                    }}
+                    }
                 />
                 {isNonEmpty(colWidths) && (
                     <Paragraph>

@@ -13,9 +13,7 @@ export class RadioAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            select: async () => {
-                await Accessor.user.click(this.element)
-            },
+            select: async () => await Accessor.user.click(this.element),
         }
     }
 }

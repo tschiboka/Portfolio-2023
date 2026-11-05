@@ -21,15 +21,10 @@ type ArgumentLike = {
  * through it rather than reading the row list as the name.
  */
 export const getTestName = (callee: CalleeLike): string | null => {
-    if (callee.type === 'CallExpression') {
-        return callee.callee ? getTestName(callee.callee) : null
-    }
+    if (callee.type === 'CallExpression') return callee.callee ? getTestName(callee.callee) : null
 
-    if (callee.type === 'MemberExpression') {
-        return callee.property?.name === 'each' && callee.object
-            ? getTestName(callee.object)
-            : null
-    }
+    if (callee.type === 'MemberExpression')
+        return callee.property?.name === 'each' && callee.object ? getTestName(callee.object) : null
 
     if (callee.type !== 'Identifier') return null
 

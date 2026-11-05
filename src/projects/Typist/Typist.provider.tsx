@@ -24,20 +24,18 @@ export const TypistProvider = ({ children }: TypistProviderProps) => {
         const justEnded =
             editorState.status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
 
-        if (isFreshlyLoaded || justEnded) {
+        if (isFreshlyLoaded || justEnded)
             postRound(
                 { keystrokes },
                 {
-                    onSuccess: (data: RoundResponse) => {
+                    onSuccess: (data: RoundResponse) =>
                         dispatch({
                             type: 'RESET',
                             text: data.text,
                             stats: data.stats,
-                        })
-                    },
+                        }),
                 },
             )
-        }
     }, [editorState.status, postRound])
 
     const contextValue: TypistContextValues = {

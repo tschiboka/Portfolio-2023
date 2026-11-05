@@ -5,40 +5,31 @@ import type { MenuItem, SubmenuState } from '../Nav.types'
 const { projectsItem, aboutItem } = NavMocks
 
 describe('NavUtils.isArticle', () => {
-    it('should return true for a blog path', () => {
-        expect(NavUtils.isArticle('/blog/my-article')).toBe(true)
-    })
+    it('should return true for a blog path', () =>
+        expect(NavUtils.isArticle('/blog/my-article')).toBe(true))
 
-    it('should return true for the blog root', () => {
-        expect(NavUtils.isArticle('/blog/')).toBe(true)
-    })
+    it('should return true for the blog root', () =>
+        expect(NavUtils.isArticle('/blog/')).toBe(true))
 
-    it('should return false for a non-blog path', () => {
-        expect(NavUtils.isArticle('/about')).toBe(false)
-    })
+    it('should return false for a non-blog path', () =>
+        expect(NavUtils.isArticle('/about')).toBe(false))
 
-    it('should return false for undefined', () => {
-        expect(NavUtils.isArticle(undefined)).toBe(false)
-    })
+    it('should return false for undefined', () => expect(NavUtils.isArticle(undefined)).toBe(false))
 
-    it('should return false for an empty string', () => {
-        expect(NavUtils.isArticle('')).toBe(false)
-    })
+    it('should return false for an empty string', () => expect(NavUtils.isArticle('')).toBe(false))
 })
 
 describe('NavUtils.isActive', () => {
-    it('should return "active" when label matches pageName', () => {
-        expect(NavUtils.isActive('Home', 'Home')).toBe('active')
-    })
+    it('should return "active" when label matches pageName', () =>
+        expect(NavUtils.isActive('Home', 'Home')).toBe('active'))
 
     it('should be case-insensitive', () => {
         expect(NavUtils.isActive('home', 'Home')).toBe('active')
         expect(NavUtils.isActive('HOME', 'home')).toBe('active')
     })
 
-    it('should return an empty string when label does not match', () => {
-        expect(NavUtils.isActive('About', 'Home')).toBe('')
-    })
+    it('should return an empty string when label does not match', () =>
+        expect(NavUtils.isActive('About', 'Home')).toBe(''))
 })
 
 describe('NavUtils.isHighlighted', () => {

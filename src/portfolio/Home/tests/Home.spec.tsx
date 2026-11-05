@@ -4,9 +4,7 @@ import { Test } from '@shared-components/Screen/tests'
 import { HomeTestUtils } from './Home.spec.utils'
 
 describe('Home', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render the Welcome section with a headshot image', () => {
@@ -117,15 +115,14 @@ describe('Home', () => {
         })
     })
 
-    describe('"Looking for a programming buddy?" section content', () => {
+    describe('"Looking for a programming buddy?" section content', () =>
         it('should show Codewars badge when expanded', async () => {
             HomeTestUtils.render()
             await Test.Section('Looking for a programming buddy?').Do.toggle()
             expect(screen.getByAltText('Codewars badge')).toBeInTheDocument()
-        })
-    })
+        }))
 
-    describe('Welcome navigation', () => {
+    describe('Welcome navigation', () =>
         it('should navigate to /api/login when headshot is clicked', async () => {
             HomeTestUtils.render()
             const headshot = new Accessor(
@@ -134,8 +131,7 @@ describe('Home', () => {
             )
             await headshot.Do.click()
             expect(Test.Screen.Get.navigatedTo()).toBe('./api/login')
-        })
-    })
+        }))
 
     describe('PageSideMenu interactions', () => {
         it('should open and close the share menu', async () => {
@@ -151,16 +147,13 @@ describe('Home', () => {
             HomeTestUtils.render()
             const menu = Test.SideMenu('Side menu')
             await menu.Do.clickItem('Like')
-            await waitFor(() => {
-                expect(menu.Get.highlighted()).toBeInTheDocument()
-            })
+            await waitFor(() => expect(menu.Get.highlighted()).toBeInTheDocument())
         })
     })
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator', () => {
             HomeTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

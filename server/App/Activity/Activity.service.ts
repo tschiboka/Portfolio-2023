@@ -34,37 +34,33 @@ export const ActivityService = {
         // Build each collection's rows in parallel, only for the requested type(s).
         const queries: Promise<ActivityEvent[]>[] = []
 
-        if (!type || type === 'visit') {
+        if (!type || type === 'visit')
             queries.push(
                 ActivityRepository.findVisits(pathFilter).then((docs) =>
                     docs.map(ActivityTransformers.visit),
                 ),
             )
-        }
 
-        if (!type || type === 'like') {
+        if (!type || type === 'like')
             queries.push(
                 ActivityRepository.findLikes(pathFilter).then((docs) =>
                     docs.map(ActivityTransformers.like),
                 ),
             )
-        }
 
-        if (!type || type === 'message') {
+        if (!type || type === 'message')
             queries.push(
                 ActivityRepository.findMessages(pathFilter).then((docs) =>
                     docs.map(ActivityTransformers.message),
                 ),
             )
-        }
 
-        if (!type || type === 'error') {
+        if (!type || type === 'error')
             queries.push(
                 ActivityRepository.findLogs(pathFilter).then((docs) =>
                     docs.map(ActivityTransformers.error),
                 ),
             )
-        }
 
         const results = await Promise.all(queries)
         let rows = results.flat()
@@ -72,14 +68,13 @@ export const ActivityService = {
         // Apply date-range filter (dateTo inclusive of the whole day).
         const fromMs = dateFrom ? new Date(dateFrom).getTime() : undefined
         const toMs = dateTo ? new Date(dateTo).getTime() + 86400000 : undefined
-        if (fromMs || toMs) {
+        if (fromMs || toMs)
             rows = rows.filter((row) => {
                 const time = new Date(row.datetime).getTime()
                 if (fromMs && time < fromMs) return false
                 if (toMs && time > toMs) return false
                 return true
             })
-        }
 
         // Sort by the requested field.
         const sortField = sortBy ?? 'datetime'

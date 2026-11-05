@@ -8,9 +8,7 @@ import { Test } from '../../Screen/tests'
 const { likesWithCount, visitsWithCount } = PageSideMenuMocks
 
 describe('PageSideMenu', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render the side menu', () => {
@@ -49,9 +47,7 @@ describe('PageSideMenu', () => {
             )
 
             const menu = PageSideMenuTestUtils.sideMenu()
-            await waitFor(() => {
-                expect(menu.Get.badge()).toBeInTheDocument()
-            })
+            await waitFor(() => expect(menu.Get.badge()).toBeInTheDocument())
         })
 
         it('should fetch and display visits count', async () => {
@@ -63,17 +59,13 @@ describe('PageSideMenu', () => {
             )
 
             const menu = PageSideMenuTestUtils.sideMenu()
-            await waitFor(() => {
-                expect(menu.Get.badge()).toBeInTheDocument()
-            })
+            await waitFor(() => expect(menu.Get.badge()).toBeInTheDocument())
         })
 
         it('should not show badge when likes and visits are zero', async () => {
             PageSideMenuTestUtils.render()
             const menu = PageSideMenuTestUtils.sideMenu()
-            await waitFor(() => {
-                expect(menu.Get.badges().length).toBe(0)
-            })
+            await waitFor(() => expect(menu.Get.badges().length).toBe(0))
         })
     })
 
@@ -103,10 +95,7 @@ describe('PageSideMenu', () => {
             PageSideMenuTestUtils.render()
             const menu = PageSideMenuTestUtils.sideMenu()
             await menu.Do.clickItem('Like')
-
-            await waitFor(() => {
-                expect(menu.Get.highlighted()).toBeInTheDocument()
-            })
+            await waitFor(() => expect(menu.Get.highlighted()).toBeInTheDocument())
         })
 
         it('should show like count badge after clicking', async () => {
@@ -119,10 +108,7 @@ describe('PageSideMenu', () => {
                 ),
             )
             await menu.Do.clickItem('Like')
-
-            await waitFor(() => {
-                expect(menu.Get.badge()).toBeInTheDocument()
-            })
+            await waitFor(() => expect(menu.Get.badge()).toBeInTheDocument())
         })
 
         it('should not highlight Like item before clicking', () => {
@@ -148,25 +134,18 @@ describe('Close menu', () => {
         const menu = PageSideMenuTestUtils.sideMenu()
         await menu.Do.close()
 
-        await waitFor(() => {
-            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument()
-        })
+        await waitFor(() =>
+            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument(),
+        )
     })
 
     it('should reopen the side menu when reopen button is clicked', async () => {
         PageSideMenuTestUtils.render()
         const menu = PageSideMenuTestUtils.sideMenu()
         await menu.Do.close()
-
-        await waitFor(() => {
-            expect(screen.queryByRole('complementary')).not.toBeInTheDocument()
-        })
-
+        await waitFor(() => expect(screen.queryByRole('complementary')).not.toBeInTheDocument())
         await Accessor.user.click(screen.getByRole('button', { name: 'Open Menu' }))
-
-        await waitFor(() => {
-            expect(screen.getByRole('complementary')).toBeInTheDocument()
-        })
+        await waitFor(() => expect(screen.getByRole('complementary')).toBeInTheDocument())
     })
 
     it('should hide reopen button when side menu is reopened', async () => {
@@ -174,21 +153,20 @@ describe('Close menu', () => {
         const menu = PageSideMenuTestUtils.sideMenu()
         await menu.Do.close()
 
-        await waitFor(() => {
-            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument()
-        })
+        await waitFor(() =>
+            expect(screen.getByRole('button', { name: 'Open Menu' })).toBeInTheDocument(),
+        )
 
         await Accessor.user.click(screen.getByRole('button', { name: 'Open Menu' }))
 
-        await waitFor(() => {
-            expect(screen.queryByRole('button', { name: 'Open Menu' })).not.toBeInTheDocument()
-        })
+        await waitFor(() =>
+            expect(screen.queryByRole('button', { name: 'Open Menu' })).not.toBeInTheDocument(),
+        )
     })
 })
 
-describe('Loading state', () => {
+describe('Loading state', () =>
     it('should not show loading indicator', () => {
         PageSideMenuTestUtils.render()
         expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-    })
-})
+    }))

@@ -19,15 +19,9 @@ export const HookPattern = ({ pageName, path }: Props) => {
     const [value, setValue] = useState<boolean>()
 
     console.log('******************************')
-    useEffect(() => {
-        console.log('1. Mount')
-    }, [])
-    useEffect(() => {
-        console.log('2. Mount and every state change')
-    })
-    useEffect(() => {
-        console.log('3. Value changes')
-    }, [value])
+    useEffect(() => console.log('1. Mount'), [])
+    useEffect(() => console.log('2. Mount and every state change'))
+    useEffect(() => console.log('3. Value changes'), [value])
     useEffect(() => console.log('4. Before unmount'))
     useEffect(() => () => console.log('5. Update or Unmount'), [value])
 

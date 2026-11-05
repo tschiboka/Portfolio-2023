@@ -20,9 +20,8 @@ describe('ResolveErrorMessage', () => {
         expect(ResolveErrorMessage(result)).toBe('Name is required')
     })
 
-    it('should extract the top-level error message when no details are present', () => {
-        expect(ResolveErrorMessage({ error: { message: 'Invalid token' } })).toBe('Invalid token')
-    })
+    it('should extract the top-level error message when no details are present', () =>
+        expect(ResolveErrorMessage({ error: { message: 'Invalid token' } })).toBe('Invalid token'))
 
     it('should prefer the details message over the top-level message', () => {
         const result = {
@@ -40,15 +39,14 @@ describe('ResolveErrorMessage', () => {
         ['an object without error', { foo: 'bar' }],
         ['an error with empty message', { error: { message: '' } }],
         ['details with empty message', { error: { details: [{ message: '' }] } }],
-    ])('should throw for %s with no extractable message', (_label, input) => {
+    ])('should throw for %s with no extractable message', (_label, input) =>
         expect(() => ResolveErrorMessage(input)).toThrow(
             'ResolveErrorMessage: expected a string, an Error, or a validation result',
-        )
-    })
+        ),
+    )
 
-    it('should throw for a validation result with details but no message on the item', () => {
-        expect(() => ResolveErrorMessage({ error: { details: [{ other: 'x' }] } })).toThrow()
-    })
+    it('should throw for a validation result with details but no message on the item', () =>
+        expect(() => ResolveErrorMessage({ error: { details: [{ other: 'x' }] } })).toThrow())
 
     it('should inspect only the first detail', () => {
         const result = { error: { details: [{ message: '' }, { message: 'Found later' }] } }

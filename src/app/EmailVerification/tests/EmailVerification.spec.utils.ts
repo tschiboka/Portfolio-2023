@@ -19,11 +19,10 @@ export const EmailVerificationTestUtils = {
     rejectedWithoutMessageHandlers: [
         EmailVerificationMockHandlers.Confirm.PostRejectedNoMessage,
     ] as Buildable[],
-    customRender: (handlers: Buildable[] = EmailVerificationMockHandlers.Defaults) => {
+    customRender: (handlers: Buildable[] = EmailVerificationMockHandlers.Defaults) =>
         Test.Screen.Do.render({
             path: AppRoutes.EmailVerification,
             route: [EmailVerificationTestUtils.route],
             handlers,
-        })
-    },
+        }),
 }

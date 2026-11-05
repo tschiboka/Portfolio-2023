@@ -24,13 +24,11 @@ const { auth } = UsersMiddleware
 const router = express.Router()
 
 type GetPingRes = TypedResponse<GetXmasPingResponse>
-router.get('/', (_req: TypedRequest, res: GetPingRes) => {
-    return ApiResponder.ok(res, { data: { message: ApiMessage.ok() } })
-})
+router.get('/', (_req: TypedRequest, res: GetPingRes) =>
+    ApiResponder.ok(res, { data: { message: ApiMessage.ok() } }),
+)
 
-router.get('/device', (_req: TypedRequest, res) => {
-    return ApiResponder.text(res, '<<<OK>>>')
-})
+router.get('/device', (_req: TypedRequest, res) => ApiResponder.text(res, '<<<OK>>>'))
 
 type PostMessageReq = TypedRequest<{ body: PostXmasMessageRequest }>
 type PostMessageRes = TypedResponse<PostXmasMessageResponse>
@@ -123,9 +121,7 @@ router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
 router.get('/candles/device', async (_req: TypedRequest, res) => {
     const candles = await XmasModel.Candle.find()
 
-    if (isEmpty(candles)) {
-        return ApiResponder.text(res, '<<<0000>>>')
-    }
+    if (isEmpty(candles)) return ApiResponder.text(res, '<<<0000>>>')
 
     const firstCandle = candles[0]
     const candleState = [

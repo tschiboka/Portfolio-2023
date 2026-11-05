@@ -95,7 +95,7 @@ describe('NavMenu', () => {
         })
     })
 
-    describe('Images', () => {
+    describe('Images', () =>
         it('should render an image when renderImage is provided and the item has an image', () => {
             const itemsWithImage: MenuItem[] = [{ label: 'Home', path: '/', image: 'home-icon' }]
             const renderImage = vi.fn((name: string) => <img src={`/${name}.png`} alt={name} />)
@@ -108,10 +108,9 @@ describe('NavMenu', () => {
 
             expect(renderImage).toHaveBeenCalledWith('home-icon')
             expect(screen.getByAltText('home-icon')).toBeInTheDocument()
-        })
-    })
+        }))
 
-    describe('Submenu chevrons', () => {
+    describe('Submenu chevrons', () =>
         it('should render a chevron-down for items with submenu', () => {
             const itemsWithSub: MenuItem[] = [
                 {
@@ -127,6 +126,5 @@ describe('NavMenu', () => {
             })
 
             expect(container.querySelector('.chevron')).toBeInTheDocument()
-        })
-    })
+        }))
 })

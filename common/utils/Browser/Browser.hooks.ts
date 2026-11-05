@@ -22,9 +22,7 @@ const useFullScreen = <T extends HTMLElement>() => {
     const [isFullscreen, setIsFullscreen] = useState(false)
 
     useEffect(() => {
-        const handleFullscreenChange = () => {
-            setIsFullscreen(!!document.fullscreenElement)
-        }
+        const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement)
 
         document.addEventListener('fullscreenchange', handleFullscreenChange)
         return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
@@ -58,9 +56,8 @@ const useFullScreen = <T extends HTMLElement>() => {
 const useStableElements = <T extends Element>(elements: T[]): T[] => {
     const ref = useRef(elements)
 
-    if (elements.length !== ref.current.length || elements.some((el, i) => el !== ref.current[i])) {
+    if (elements.length !== ref.current.length || elements.some((el, i) => el !== ref.current[i]))
         ref.current = elements
-    }
 
     return ref.current
 }
@@ -86,23 +83,22 @@ const useIsVisible = <T extends Element>(elements: T[]): VisibilityEntry<T>[] =>
     )
 
     useEffect(() => {
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver((entries) =>
             setVisibility((prev) => {
                 const next = prev.map((v) => ({ ...v }))
 
                 entries.forEach((entry) => {
                     const index = stableElements.indexOf(entry.target as T)
-                    if (index !== -1) {
+                    if (index !== -1)
                         next[index] = {
                             element: stableElements[index],
                             isVisible: entry.isIntersecting,
                         }
-                    }
                 })
 
                 return next
-            })
-        })
+            }),
+        )
 
         setVisibility(stableElements.map((element) => ({ element, isVisible: false })))
         stableElements.forEach((el) => observer.observe(el))

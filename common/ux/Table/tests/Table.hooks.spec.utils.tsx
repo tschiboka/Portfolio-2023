@@ -35,9 +35,7 @@ const setupWithUrl = (initialSearch = '', count: 1 | 2 = 1) => {
 
     const wrapper = ({ children }: { children: ReactNode }) => {
         const Probe = () => {
-            const { setUrl } = useRouterProbe((search) => {
-                state.search = search
-            })
+            const { setUrl } = useRouterProbe((search) => (state.search = search))
             state.setUrl = setUrl
             return null
         }

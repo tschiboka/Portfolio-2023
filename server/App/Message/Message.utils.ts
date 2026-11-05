@@ -39,10 +39,9 @@ const sendNotificationEmail = async (
             subject: 'New Message | tschiboka.com',
             html: notificationEmail(input),
         })
-        if (error) {
+        if (error)
             // TODO: [0004] - surface a mailbox/notification for failed notification emails.
             console.error(ApiMessage.failed('send notification email'), error)
-        }
     } catch (err) {
         console.error(ApiMessage.failed('send notification email'), err)
     }

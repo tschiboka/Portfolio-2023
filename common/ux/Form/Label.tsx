@@ -8,15 +8,13 @@ type LabelProps = AccessibleProps & {
     children?: ReactNode
 }
 
-export const Label = ({ for: htmlFor, children, ariaLabel, className, style }: LabelProps) => {
-    return (
-        <label
-            htmlFor={htmlFor}
-            aria-label={ariaLabel}
-            className={`form-label ${className || ''}`}
-            style={{ zIndex: Const.ZIndex.base, ...style }}
-        >
-            {children}
-        </label>
-    )
-}
+export const Label = ({ for: htmlFor, children, ariaLabel, className, style }: LabelProps) => (
+    <label
+        htmlFor={htmlFor}
+        aria-label={ariaLabel}
+        className={`form-label ${className || ''}`}
+        style={{ zIndex: Const.ZIndex.base, ...style }}
+    >
+        {children}
+    </label>
+)

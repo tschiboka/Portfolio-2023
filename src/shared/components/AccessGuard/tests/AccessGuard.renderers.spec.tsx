@@ -5,12 +5,11 @@ import { HiddenRenderer } from '../utils/HiddenRenderer'
 import { SoftDisabledRenderer } from '../utils/SoftDisabledRenderer'
 import { TooltipRenderer } from '../utils/TooltipRenderer'
 
-describe('HiddenRenderer', () => {
+describe('HiddenRenderer', () =>
     it('should render nothing', () => {
         const { container } = render(<HiddenRenderer />)
         expect(container.innerHTML).toBe('')
-    })
-})
+    }))
 
 describe('DisabledRenderer', () => {
     it('should render children', () => {

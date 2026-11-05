@@ -13,9 +13,7 @@ import { ShareMenu } from '../ShareMenu/ShareMenu'
 import type { SideMenuItem } from '@common-ux'
 import './PageSideMenu.css'
 
-const scrollToTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-}
+const scrollToTop = () => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
 
 export const PageSideMenu = () => {
     const [visible, setVisible] = useState(true)
@@ -49,7 +47,7 @@ export const PageSideMenu = () => {
             highlighted: liked,
             badge: likes > 0 ? <CounterBadge count={likes} /> : undefined,
             onClick: () => {
-                if (!liked) {
+                if (!liked)
                     doPostLike(
                         { path: pathname },
                         {
@@ -61,7 +59,6 @@ export const PageSideMenu = () => {
                             },
                         },
                     )
-                }
             },
         },
         {

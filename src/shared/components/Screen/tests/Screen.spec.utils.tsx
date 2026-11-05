@@ -53,20 +53,18 @@ export const ScreenTestUtils = {
         navigated: () => isNonEmpty(ScreenMocks.navigate.mock.calls),
     },
     Wait: {
-        navigatedTo: async (path: string) => {
+        navigatedTo: async (path: string) =>
             await waitFor(() => {
                 if (!ScreenMocks.navigate.mock.calls.some(([p]: unknown[]) => p === path)) {
                     const actual = ScreenMocks.navigate.mock.lastCall?.[0] as Optional<string>
                     throw TestError.navigation(path, actual)
                 }
-            })
-        },
+            }),
     },
     Set: {
-        handlers: (...handlers: Buildable[]) => {
+        handlers: (...handlers: Buildable[]) =>
             // eslint-disable-next-line react-hooks/rules-of-hooks
-            Server.use(...handlers.map((h) => h.build()))
-        },
+            Server.use(...handlers.map((h) => h.build())),
     },
     Do: {
         render: (options: ScreenSetupOptions) => {
@@ -74,10 +72,10 @@ export const ScreenTestUtils = {
             // ScreenTestUtils; clear it so a navigation assertion cannot read a previous test's call.
             ScreenMocks.navigate.mockClear()
 
-            if (options.handlers?.length) {
+            if (options.handlers?.length)
                 // eslint-disable-next-line react-hooks/rules-of-hooks
                 Server.use(...options.handlers.map((h) => h.build()))
-            }
+
             options.beforeRender?.()
             const Wrapper = withScreenProviders(options)
             const ui = resolveElement(options)

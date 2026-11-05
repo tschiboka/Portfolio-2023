@@ -471,9 +471,8 @@ const technologies: Technology[] = [
     },
 ]
 
-const getTechnologies = (technology: string) => {
-    return technologies.find((tech) => Strings.equalIgnoreCase(tech.name, technology))
-}
+const getTechnologies = (technology: string) =>
+    technologies.find((tech) => Strings.equalIgnoreCase(tech.name, technology))
 
 function getColourName(str: string): PillColor {
     switch (str.toLowerCase()) {

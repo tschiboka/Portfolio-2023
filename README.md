@@ -27,12 +27,11 @@ npm run lint     # ESLint
 ## Commit gate
 
 `.githooks/commit-msg` judges the message first — `[0009] - Message` or `[ABC-0009] - Message`,
-the number between 1 and 100000 — and only then lints the staged `.ts`/`.tsx`/`.css`/`.scss`
-files and runs `tsc` and the full suite. A bad message therefore costs one cheap check instead
-of a full run. Everything sits in `commit-msg` rather than `pre-commit` because git runs
-`pre-commit` first, where the message does not exist yet. `npm install` switches the hook on
-through the `prepare` script, which sets `core.hooksPath` to `.githooks`; to do it by hand in an
-existing clone:
+the number between 1 and 100000 — and only then runs `npm run lint`, `tsc` and the full suite.
+A bad message therefore costs one cheap check instead of a full run. Everything sits in
+`commit-msg` rather than `pre-commit` because git runs `pre-commit` first, where the message
+does not exist yet. `npm install` switches the hook on through the `prepare` script, which sets
+`core.hooksPath` to `.githooks`; to do it by hand in an existing clone:
 
 ```bash
 git config core.hooksPath .githooks

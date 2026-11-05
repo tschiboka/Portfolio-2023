@@ -81,9 +81,8 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
     )
 
     // Capitalisation
-    if (!TypistConstants.userSettings.allowCapitalLetters) {
+    if (!TypistConstants.userSettings.allowCapitalLetters)
         responseWords = responseWords.map((word: string) => word.toLowerCase())
-    }
 
     const calculateSpeed = () => {
         const firstTime = keystrokes[0]?.timestamp

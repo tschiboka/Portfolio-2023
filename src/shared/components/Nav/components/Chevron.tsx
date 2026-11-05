@@ -6,13 +6,10 @@ type ChevronProps = {
     submenu?: SubmenuState
 }
 
-export const Chevron = ({ item, submenu }: ChevronProps) => {
-    return (
-        item.submenu &&
-        (submenu?.parentLabel === item.label ? (
-            <BiChevronUp className="chevron" />
-        ) : (
-            <BiChevronDown className="chevron" />
-        ))
-    )
-}
+export const Chevron = ({ item, submenu }: ChevronProps) =>
+    item.submenu &&
+    (submenu?.parentLabel === item.label ? (
+        <BiChevronUp className="chevron" />
+    ) : (
+        <BiChevronDown className="chevron" />
+    ))

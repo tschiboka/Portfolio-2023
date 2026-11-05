@@ -5,9 +5,7 @@ import { ContactTestUtils } from './Contact.spec.utils'
 const { fields, buttons, errors } = ContactTestUtils.labels
 
 describe('Contact', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render heading', () => {
@@ -90,14 +88,11 @@ describe('Contact', () => {
         })
     })
 
-    describe('Successful submission', () => {
+    describe('Successful submission', () =>
         it('should disable submit button after successful submission', async () => {
             const form = await ContactTestUtils.fillAndSubmit()
-            await waitFor(() => {
-                expect(form.Button(buttons.send).Get.isDisabled()).toBe(true)
-            })
-        })
-    })
+            await waitFor(() => expect(form.Button(buttons.send).Get.isDisabled()).toBe(true))
+        }))
 
     describe('Failed submission', () => {
         it('should display server error message on submission failure', async () => {
@@ -112,10 +107,9 @@ describe('Contact', () => {
         })
     })
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator initially', () => {
             ContactTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

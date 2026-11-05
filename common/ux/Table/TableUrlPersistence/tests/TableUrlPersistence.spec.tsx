@@ -32,7 +32,7 @@ describe('useTableUrlPersistence', () => {
         })
     })
 
-    describe('outside a router', () => {
+    describe('outside a router', () =>
         it('should be disabled, exposes null state, and persist is a no-op', () => {
             const { result } = renderHook(() =>
                 TableUrlPersistenceHooks.useUrlState<Filters>({
@@ -52,8 +52,7 @@ describe('useTableUrlPersistence', () => {
                     }),
                 ),
             ).not.toThrow()
-        })
-    })
+        }))
 
     describe('hydration (state from URL)', () => {
         it('should read filters, sort, and paging from the URL', () => {

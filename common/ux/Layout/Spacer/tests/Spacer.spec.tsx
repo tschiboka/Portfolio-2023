@@ -52,10 +52,9 @@ describe('Spacer', () => {
         })
     })
 
-    describe('rendering', () => {
+    describe('rendering', () =>
         it('should render as div', () => {
             const spacer = Set.spacer({ ariaLabel: 'div' })
             expect(spacer.Get.tagName()).toBe('DIV')
-        })
-    })
+        }))
 })

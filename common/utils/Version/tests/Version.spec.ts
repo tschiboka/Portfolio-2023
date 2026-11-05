@@ -30,9 +30,9 @@ describe('useVersionCheck', () => {
         mockFetch(mockVersion())
         renderHook(() => useVersionCheck())
 
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledWith('/version.json', { cache: 'no-store' })
-        })
+        await waitFor(() =>
+            expect(global.fetch).toHaveBeenCalledWith('/version.json', { cache: 'no-store' }),
+        )
     })
 
     it('should log version info on first successful fetch', async () => {
@@ -52,33 +52,24 @@ describe('useVersionCheck', () => {
         mockFetch(mockVersion())
         const { result } = renderHook(() => useVersionCheck())
 
-        await waitFor(() => {
-            expect(console.log).toHaveBeenCalledWith('✅ App is up to date.')
-        })
+        await waitFor(() => expect(console.log).toHaveBeenCalledWith('✅ App is up to date.'))
 
         // Advance interval — same sha returned
         vi.advanceTimersByTime(600_000)
 
-        await waitFor(() => {
-            expect(result.current.isStale).toBe(false)
-        })
+        await waitFor(() => expect(result.current.isStale).toBe(false))
     })
 
     it('should set isStale when version changes', async () => {
         mockFetch(mockVersion())
         const { result } = renderHook(() => useVersionCheck())
-
-        await waitFor(() => {
-            expect(console.log).toHaveBeenCalledWith('✅ App is up to date.')
-        })
+        await waitFor(() => expect(console.log).toHaveBeenCalledWith('✅ App is up to date.'))
 
         // Return different sha on next poll
         mockFetch(mockVersion({ sha: OTHER_SHA }))
         vi.advanceTimersByTime(600_000)
 
-        await waitFor(() => {
-            expect(result.current.isStale).toBe(true)
-        })
+        await waitFor(() => expect(result.current.isStale).toBe(true))
         expect(console.warn).toHaveBeenCalledWith('🔄 New version available!')
         expect(console.info).toHaveBeenCalledWith('Please refresh the page to update.')
     })
@@ -88,9 +79,7 @@ describe('useVersionCheck', () => {
             mockFetch(mockVersion(), false)
             const { result } = renderHook(() => useVersionCheck())
 
-            await waitFor(() => {
-                expect(global.fetch).toHaveBeenCalled()
-            })
+            await waitFor(() => expect(global.fetch).toHaveBeenCalled())
             expect(result.current.isStale).toBe(false)
         })
 
@@ -102,9 +91,7 @@ describe('useVersionCheck', () => {
             mockFetch(mockVersion({ sha }))
             const { result } = renderHook(() => useVersionCheck())
 
-            await waitFor(() => {
-                expect(global.fetch).toHaveBeenCalled()
-            })
+            await waitFor(() => expect(global.fetch).toHaveBeenCalled())
             expect(result.current.isStale).toBe(false)
             expect(console.log).not.toHaveBeenCalledWith('✅ App is up to date.')
         })
@@ -114,12 +101,12 @@ describe('useVersionCheck', () => {
         global.fetch = vi.fn().mockRejectedValue(new Error('Network error'))
         const { result } = renderHook(() => useVersionCheck())
 
-        await waitFor(() => {
+        await waitFor(() =>
             expect(console.error).toHaveBeenCalledWith(
                 'Error checking app version:',
                 expect.any(Error),
-            )
-        })
+            ),
+        )
         expect(result.current.isStale).toBe(false)
     })
 
@@ -127,28 +114,20 @@ describe('useVersionCheck', () => {
         mockFetch(mockVersion())
         renderHook(() => useVersionCheck())
 
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledTimes(1)
-        })
+        await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1))
 
         vi.advanceTimersByTime(600_000)
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledTimes(2)
-        })
+        await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2))
 
         vi.advanceTimersByTime(600_000)
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledTimes(3)
-        })
+        await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(3))
     })
 
     it('should clear interval on unmount', async () => {
         mockFetch(mockVersion())
         const { unmount } = renderHook(() => useVersionCheck())
 
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledTimes(1)
-        })
+        await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(1))
 
         unmount()
         vi.advanceTimersByTime(600_000)

@@ -163,7 +163,7 @@ describe('Table — Filtering', () => {
         })
     })
 
-    describe('Search filter input', () => {
+    describe('Search filter input', () =>
         it('should render search input', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -177,10 +177,9 @@ describe('Table — Filtering', () => {
             const table = Test.Table('test')
             await table.Do.toggleFilters()
             expect(Accessor.screen.getByLabelText('Search')).toHaveAttribute('type', 'search')
-        })
-    })
+        }))
 
-    describe('Date filter input', () => {
+    describe('Date filter input', () =>
         it('should render date input with min/max', async () => {
             Test.Table.Set.mock<Row>({
                 ariaLabel: 'test',
@@ -205,8 +204,7 @@ describe('Table — Filtering', () => {
             expect(input).toHaveAttribute('type', 'date')
             expect(input).toHaveAttribute('min', '2020-01-01')
             expect(input).toHaveAttribute('max', '2026-12-31')
-        })
-    })
+        }))
 
     describe('Checkbox filter input', () => {
         it('should render checkbox input', async () => {

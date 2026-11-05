@@ -5,18 +5,16 @@ interface UpdateRecordsProps {
     path: string
 }
 
-export const UpdateRecords = ({ path }: UpdateRecordsProps) => {
-    return (
-        <Screen
-            title={'tschiboka | Update Records'}
-            path={path}
-            loginRequired
-            variant="app"
-            pageName="Update Records"
-        >
-            <Main>
-                <Heading as="h1">Update Records</Heading>
-            </Main>
-        </Screen>
-    )
-}
+export const UpdateRecords = ({ path }: UpdateRecordsProps) => (
+    <Screen
+        title={'tschiboka | Update Records'}
+        path={path}
+        loginRequired
+        variant="app"
+        pageName="Update Records"
+    >
+        <Main>
+            <Heading as="h1">Update Records</Heading>
+        </Main>
+    </Screen>
+)

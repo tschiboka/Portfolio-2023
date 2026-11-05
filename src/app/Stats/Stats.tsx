@@ -5,16 +5,8 @@ interface StatProps {
     path: string
 }
 
-export const Stats = ({ path }: StatProps) => {
-    return (
-        <Screen
-            title={'tschiboka | Stats'}
-            path={path}
-            loginRequired
-            variant="app"
-            pageName="Stats"
-        >
-            <Heading as="h1">Stats</Heading>
-        </Screen>
-    )
-}
+export const Stats = ({ path }: StatProps) => (
+    <Screen title={'tschiboka | Stats'} path={path} loginRequired variant="app" pageName="Stats">
+        <Heading as="h1">Stats</Heading>
+    </Screen>
+)

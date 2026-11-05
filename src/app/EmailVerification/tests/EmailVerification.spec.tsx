@@ -7,12 +7,11 @@ const { labels, messages, rejectedHandlers, rejectedWithoutMessageHandlers } =
     EmailVerificationTestUtils
 
 describe('EmailVerification', () => {
-    describe('Layout', () => {
+    describe('Layout', () =>
         it('should render the page heading', () => {
             EmailVerificationTestUtils.customRender()
             expect(screen.getByRole('heading', { name: labels.heading })).toBeDefined()
-        })
-    })
+        }))
 
     describe('Verification', () => {
         it('should show the success message once the token is confirmed', async () => {

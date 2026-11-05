@@ -8,13 +8,13 @@ type SerializableDocument = { toObject(): unknown }
 const toApiValue = (value: unknown): unknown => {
     if (isArray(value)) return value.map(toApiValue)
     if (isObjectId(value)) return value.toString()
-    if (isObject(value)) {
+    if (isObject(value))
         return Object.entries(value).reduce<Dictionary>((out, [key, item]) => {
             if (key === '__v' || key === '__t') return out
             out[key] = toApiValue(item)
             return out
         }, {})
-    }
+
     return value
 }
 

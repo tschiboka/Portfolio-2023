@@ -23,15 +23,14 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-11-01  |
+| Last updated | 2026-11-05  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
 Every step's "Run `rules sync`" substep means `npm run build:rules` — the script
 that compiles `rules/` and runs `builder.ts`. No `rules sync` command exists.
-`npm run lint` now runs `eslint src server common`, and `server/**` has left the
-top-level `ignores`, so the whole tree is linted. `rules/` and `scripts/` still are
-not.
+`npm run lint` runs `eslint src server common rules scripts`, so every tree the
+config owns is linted.
 
 ## 2. Feature Dev Checklist
 
@@ -484,7 +483,8 @@ not.
 - [x] Step 27: Gate a commit on `tsc`, lint and the tests
     - [x] Step 27.1: Pick the runner — no dependency: a tracked `.githooks/` folder and git's own
           `core.hooksPath`, after husky and lint-staged were considered
-    - [x] Step 27.2: Lint only the staged files, so the check costs what the commit touches
+    - [x] Step 27.2: Lint the whole tree with `npm run lint` — a staged file list cannot fit
+          a Windows command line, and the gate already runs whole-project `tsc` and tests
     - [x] Step 27.3: Run `tsc` over the whole project — it cannot be narrowed to a file without
           losing the cross-file errors the gate exists for
     - [x] Step 27.4: Run the full test suite, since a change breaks a spec it never names
@@ -611,6 +611,79 @@ not.
     - [ ] Step 33.8: Run `npm run build:rules`, then verify the generated config
     - [ ] Step 33.9: Sweep every site
     - [ ] Step 33.10: Confirm a green `tsc`, lint, and test run
+- [ ] Step 34: Rule — a control body takes braces only when it needs them
+    - [ ] Step 34.1: Give `RuleRegistrar` an optional `options`, emitted as
+          `[severity, ...options]` — the registry states severity alone today
+    - [ ] Step 34.2: Register ESLint's own `curly` at `['error', 'multi']`, so one list
+          still decides what is enforced
+    - [ ] Step 34.3: Build `rules/curly/` as a registrar only — there is no custom module
+          to write, the rule shipped with ESLint
+    - [ ] Step 34.4: Scope `include` to `**/*.{ts,tsx}`
+    - [ ] Step 34.5: Run `npm run build:rules`, then verify the emitted setting carries the
+          option array
+    - [ ] Step 34.6: Sweep with `eslint --fix` — `multi` removes braces from every
+          single-statement body, so the diff reaches most files
+    - [ ] Step 34.7: Confirm a green `tsc`, lint, and test run
+- [ ] Step 35: Rule — the React namespace is never bound
+    - [ ] Step 35.1: State the convention in `AGENTS.md` §1.2 — a React export is imported
+          by name
+    - [ ] Step 35.2: Build `rules/no-react-namespace/`
+    - [ ] Step 35.3: Flag `import React from 'react'` and `import * as React from 'react'` —
+          `jsx: react-jsx` compiles JSX without the binding
+    - [ ] Step 35.4: Flag every `React.X`, naming the import that replaces it — values
+          (`React.useState`) and types (`React.FormEvent`) alike
+    - [ ] Step 35.5: Leave every other module alone — `react-dom` and `react-hook-form` are
+          not this rule's business, and neither is the word `React` in prose
+    - [ ] Step 35.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [ ] Step 35.7: Register as `severity: 'error'`
+    - [ ] Step 35.8: Add `tests/NoReactNamespace.spec.ts` — both bindings and both reference
+          kinds reported; a named import, a foreign default import and prose left alone
+    - [ ] Step 35.9: Run `npm run build:rules`, then verify the generated config
+    - [ ] Step 35.10: Sweep the three files — `main.tsx` takes `StrictMode`,
+          `Form.spec.utils.tsx` takes `useEffect`, `ReactElement`, `ReactNode`, and
+          `Form.spec.tsx` takes `FormEvent`
+    - [ ] Step 35.11: Confirm a green `tsc`, lint, and test run
+- [ ] Step 36: Rule — a number other than 0 and 1 names itself
+    - [ ] Step 36.1: Register `@typescript-eslint/no-magic-numbers` — the plugin ships it,
+          reached the way `curly` reaches core's
+    - [ ] Step 36.2: Build `rules/no-magic-numbers/` as a registrar and a spec
+    - [ ] Step 36.3: Exempt 0 and 1 alone — presence and offset, never a bound
+    - [ ] Step 36.4: Exempt what already declares itself — an enum member, a numeric literal
+          type, a readonly class property
+    - [ ] Step 36.5: Exempt an array index — a position in a shape, not a value
+    - [ ] Step 36.6: Report the literal; the home is the nearest `<Feature>.constants.ts`,
+          a role `no-ad-hoc-file-suffix` already admits
+    - [ ] Step 36.7: Leave the four domain rules their own numbers — breakpoint, font size,
+          z-index and colour stay with the rule that names the token
+    - [ ] Step 36.8: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/`, `server/`,
+          excluding `**/*.code.{ts,tsx}` — a displayed sample keeps its literals
+    - [ ] Step 36.9: Register as `severity: 'warn'`; raise to `error` once the sweep is clean
+    - [ ] Step 36.10: Add `tests/NoMagicNumber.spec.ts` — 0, 1, an enum and a literal type
+          accepted; 2, 0.5 and 600_000 reported
+    - [ ] Step 36.11: Run `npm run build:rules`, then verify the generated config
+    - [ ] Step 36.12: Sweep every site, lifting each number into its constants file
+    - [ ] Step 36.13: Confirm a green `tsc`, lint, and test run
+- [ ] Step 37: Rule — a `.tsx` declares one type, and it is the component's props
+    - [ ] Step 37.1: Build `rules/single-tsx-type/`
+    - [ ] Step 37.2: Read the file's top-level `type`, `interface` and `enum` declarations
+    - [ ] Step 37.3: Take the expected name from `expectationFor`, which already maps a role
+          chain — `Checkbox.tsx` gives `CheckboxProps`, `Session.provider.tsx` gives
+          `SessionProviderProps`
+    - [ ] Step 37.4: Report the second declaration, and any declaration not named
+          `<Expected>Props`
+    - [ ] Step 37.5: Accept a file that declares none — a component may take no props
+    - [ ] Step 37.6: Point the message at `<Expected>.types.ts`, the role that takes the rest
+    - [ ] Step 37.7: Skip a file whose role chain carries `spec`, which `expectationFor`
+          already resolves
+    - [ ] Step 37.8: Scope `include` to `**/*.tsx` under `src/`, `common/`, `server/`,
+          excluding `**/*.spec.*.tsx` and `**/*.code.tsx`
+    - [ ] Step 37.9: Register as `severity: 'error'`
+    - [ ] Step 37.10: Add `tests/SingleTsxType.spec.ts` — a correctly named props type, and
+          no type, accepted; a second declaration, a bare `Props` and a misnamed one reported
+    - [ ] Step 37.11: Run `npm run build:rules`, then verify the generated config
+    - [ ] Step 37.12: Sweep the 69 declarations — a bare `Props` takes its stem, anything else
+          moves to `<Expected>.types.ts`
+    - [ ] Step 37.13: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 

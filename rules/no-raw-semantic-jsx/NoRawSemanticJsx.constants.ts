@@ -44,7 +44,6 @@ export const NoRawSemanticJsxConstants = {
         row('main', 'error', ['Main'], 'Use Main instead of main.'),
         row('aside', 'error', ['Sidebar'], 'Use Sidebar instead of aside.'),
     ],
-
     /** Several replacements — the element serves many layouts, so the choice is the writer's. */
     Warn: [
         row(

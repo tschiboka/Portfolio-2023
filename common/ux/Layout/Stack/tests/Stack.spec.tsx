@@ -8,19 +8,18 @@ const { Set } = StackTestUtils
 const { selectAlign, selectJustify } = StackSelectors
 
 describe('Stack', () => {
-    describe('selectAlign', () => {
+    describe('selectAlign', () =>
         it.each<{ input: StackAlign | undefined; expected: string | undefined }>([
             { input: 'start', expected: 'flex-start' },
             { input: 'center', expected: 'center' },
             { input: 'end', expected: 'flex-end' },
             { input: 'stretch', expected: 'stretch' },
             { input: undefined, expected: undefined },
-        ])('should map "$input" to "$expected"', ({ input, expected }) => {
-            expect(selectAlign(input)).toBe(expected)
-        })
-    })
+        ])('should map "$input" to "$expected"', ({ input, expected }) =>
+            expect(selectAlign(input)).toBe(expected),
+        ))
 
-    describe('selectJustify', () => {
+    describe('selectJustify', () =>
         it.each<{ input: StackJustify | undefined; expected: string | undefined }>([
             { input: 'start', expected: 'flex-start' },
             { input: 'center', expected: 'center' },
@@ -28,10 +27,9 @@ describe('Stack', () => {
             { input: 'between', expected: 'space-between' },
             { input: 'around', expected: 'space-around' },
             { input: undefined, expected: undefined },
-        ])('should map "$input" to "$expected"', ({ input, expected }) => {
-            expect(selectJustify(input)).toBe(expected)
-        })
-    })
+        ])('should map "$input" to "$expected"', ({ input, expected }) =>
+            expect(selectJustify(input)).toBe(expected),
+        ))
 
     describe('rendering', () => {
         it('should render children', () => {

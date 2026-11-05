@@ -57,7 +57,7 @@ describe('ContextBuilder.CreateContext', () => {
         })
     })
 
-    describe('multiple independent contexts', () => {
+    describe('multiple independent contexts', () =>
         it('should not leak between different contexts', () => {
             const ctxA = ContextBuilder.CreateContext('A', { label: 'A' })
             const ctxB = ContextBuilder.CreateContext('B', { label: 'B' })
@@ -82,6 +82,5 @@ describe('ContextBuilder.CreateContext', () => {
 
             expect(screen.getByTestId('a')).toHaveTextContent('A')
             expect(screen.getByTestId('b')).toHaveTextContent('B')
-        })
-    })
+        }))
 })

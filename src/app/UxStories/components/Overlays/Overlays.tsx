@@ -32,10 +32,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
 
     const open = (id: string) => setActivePopup(id)
     const close = () => setActivePopup(null)
-
-    const refFor = (id: string) => (el: HTMLButtonElement | null) => {
-        btnRefs.current[id] = el
-    }
+    const refFor = (id: string) => (el: HTMLButtonElement | null) => (btnRefs.current[id] = el)
     const anchorFor = (id: string) => ({ current: btnRefs.current[id] ?? null })
 
     const basicItems: ActionMenuItem[] = [

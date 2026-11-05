@@ -56,9 +56,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="difficulty"
                             control={control}
                             options={difficulties}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>
@@ -71,9 +69,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="primaryMuscleGroup1"
                             control={control}
                             options={muscleGroups}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>
@@ -82,9 +78,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="primaryMuscleGroup2"
                             control={control}
                             options={muscleGroups}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>
@@ -95,9 +89,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="secondaryMuscleGroup1"
                             control={control}
                             options={muscleGroups}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>
@@ -108,9 +100,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="secondaryMuscleGroup2"
                             control={control}
                             options={muscleGroups}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>
@@ -122,9 +112,7 @@ export const ExercisesSection = ({ exercises }: ExercisesSectionProps) => {
                             name="equipment"
                             control={control}
                             options={equipment}
-                            onSelect={() => {
-                                console.log('selected')
-                            }}
+                            onSelect={() => console.log('selected')}
                         />
                     </Form.Fieldset>
                     <Form.Fieldset>

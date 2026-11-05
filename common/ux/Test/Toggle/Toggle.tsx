@@ -12,9 +12,7 @@ export class ToggleAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            toggle: async (): Promise<void> => {
-                await Accessor.user.click(this.element)
-            },
+            toggle: async (): Promise<void> => await Accessor.user.click(this.element),
         }
     }
 }

@@ -2,21 +2,18 @@ import { describe, it, expect } from 'vitest'
 import { Paging } from '..'
 
 describe('Paging.parse', () => {
-    it('should fall back to shared defaults when params are absent', () => {
-        expect(Paging.parse(undefined, undefined)).toEqual({ pageNumber: 1, limit: 10, skip: 0 })
-    })
+    it('should fall back to shared defaults when params are absent', () =>
+        expect(Paging.parse(undefined, undefined)).toEqual({ pageNumber: 1, limit: 10, skip: 0 }))
 
-    it('should parse valid page and size', () => {
-        expect(Paging.parse('2', '25')).toEqual({ pageNumber: 2, limit: 25, skip: 25 })
-    })
+    it('should parse valid page and size', () =>
+        expect(Paging.parse('2', '25')).toEqual({ pageNumber: 2, limit: 25, skip: 25 }))
 
-    it('should clamp pageNumber to the minimum', () => {
+    it('should clamp pageNumber to the minimum', () =>
         expect(Paging.parse('0', '10', { pageNumberMin: 1 })).toEqual({
             pageNumber: 1,
             limit: 10,
             skip: 0,
-        })
-    })
+        }))
 
     it('should clamp pageSize within min/max bounds', () => {
         expect(Paging.parse('1', '5', { pageSizeMin: 1, pageSizeMax: 100 })).toEqual({
@@ -53,31 +50,30 @@ describe('Paging.parse', () => {
         expect(Paging.parse(' 2', '10')).toEqual({ pageNumber: 1, limit: 10, skip: 0 })
     })
 
-    it('should respect custom defaultPageNumber and defaultPageSize', () => {
+    it('should respect custom defaultPageNumber and defaultPageSize', () =>
         expect(
             Paging.parse(undefined, undefined, { defaultPageNumber: 3, defaultPageSize: 25 }),
-        ).toEqual({ pageNumber: 3, limit: 25, skip: 50 })
-    })
+        ).toEqual({ pageNumber: 3, limit: 25, skip: 50 }))
 
-    it('should leave pageSize unbounded when no max is given', () => {
-        expect(Paging.parse('1', '999999')).toEqual({ pageNumber: 1, limit: 999999, skip: 0 })
-    })
+    it('should leave pageSize unbounded when no max is given', () =>
+        expect(Paging.parse('1', '999999')).toEqual({ pageNumber: 1, limit: 999999, skip: 0 }))
 
-    it('should clamp pageSize to a custom minimum > 1', () => {
+    it('should clamp pageSize to a custom minimum > 1', () =>
         expect(Paging.parse('1', '5', { pageSizeMin: 10 })).toEqual({
             pageNumber: 1,
             limit: 10,
             skip: 0,
-        })
-    })
+        }))
 })
 
 describe('Paging.toMeta', () => {
-    it('should build PageMeta with totalPages', () => {
-        expect(Paging.toMeta(100, 25, 3)).toEqual({ totalItems: 100, totalPages: 4, pageNumber: 3 })
-    })
+    it('should build PageMeta with totalPages', () =>
+        expect(Paging.toMeta(100, 25, 3)).toEqual({
+            totalItems: 100,
+            totalPages: 4,
+            pageNumber: 3,
+        }))
 
-    it('should handle an empty result set', () => {
-        expect(Paging.toMeta(0, 10, 1)).toEqual({ totalItems: 0, totalPages: 0, pageNumber: 1 })
-    })
+    it('should handle an empty result set', () =>
+        expect(Paging.toMeta(0, 10, 1)).toEqual({ totalItems: 0, totalPages: 0, pageNumber: 1 }))
 })

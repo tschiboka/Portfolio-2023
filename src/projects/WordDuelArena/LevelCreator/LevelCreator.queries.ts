@@ -45,9 +45,7 @@ const usePostLevel = ({ onSuccess }: UsePostLevel) => {
 
     return useMutation<void, AxiosError<ErrorResponse>, Level>({
         mutationKey: QueryKey.LevelCreate.build(),
-        mutationFn: async (payload: Level) => {
-            await request.post(payload)
-        },
+        mutationFn: async (payload: Level) => void (await request.post(payload)),
         onSuccess,
     })
 }

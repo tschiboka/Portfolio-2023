@@ -63,9 +63,7 @@ export const DateInput = <T extends FieldValues>({
     useEffect(() => {
         if (yearPickerOpen && yearListRef.current) {
             const selected = yearListRef.current.querySelector('.selected')
-            if (selected) {
-                selected.scrollIntoView({ block: 'center' })
-            }
+            if (selected) selected.scrollIntoView({ block: 'center' })
         }
     }, [yearPickerOpen])
 
@@ -86,21 +84,19 @@ export const DateInput = <T extends FieldValues>({
         const isDeleting = digits.length < textValue.replace(/[^\d]/g, '').length
 
         let formatted = ''
-        if (isDeleting) {
+        if (isDeleting)
             // When deleting, just strip non-digits and reformat without auto-adding slashes
             for (let i = 0; i < digits.length && i < 8; i++) {
                 if (i === 2 || i === 4) formatted += '/'
                 formatted += digits[i]
             }
-        } else {
+        else {
             for (let i = 0; i < digits.length && i < 8; i++) {
                 if (i === 2 || i === 4) formatted += '/'
                 formatted += digits[i]
             }
             // Auto-add slash after 2nd and 4th digit when typing
-            if (digits.length === 2 || digits.length === 4) {
-                formatted += '/'
-            }
+            if (digits.length === 2 || digits.length === 4) formatted += '/'
         }
 
         setTextValue(formatted)
@@ -111,9 +107,7 @@ export const DateInput = <T extends FieldValues>({
             const [y, m] = iso.split('-').map(Number)
             setViewYear(y)
             setViewMonth(m - 1)
-        } else if (formatted === '') {
-            onChange('')
-        }
+        } else if (formatted === '') onChange('')
     }
 
     const handleDayClick = (day: number, onChange: (val: string) => void) => {
@@ -133,18 +127,14 @@ export const DateInput = <T extends FieldValues>({
         if (viewMonth === 0) {
             setViewMonth(11)
             setViewYear(viewYear - 1)
-        } else {
-            setViewMonth(viewMonth - 1)
-        }
+        } else setViewMonth(viewMonth - 1)
     }
 
     const handleNextMonth = () => {
         if (viewMonth === 11) {
             setViewMonth(0)
             setViewYear(viewYear + 1)
-        } else {
-            setViewMonth(viewMonth + 1)
-        }
+        } else setViewMonth(viewMonth + 1)
     }
 
     const handleToday = (onChange: (val: string) => void) => {

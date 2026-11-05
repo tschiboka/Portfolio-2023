@@ -9,9 +9,7 @@ const { fields, buttons, errors } = LoginTestUtils.labels
 const { setSession } = LoginMocks
 
 describe('Login', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render heading and subheading', () => {
@@ -58,9 +56,7 @@ describe('Login', () => {
                     }),
                 ),
             )
-            await waitFor(() => {
-                expect(form.Has.byText(buttons.register)).toBe(false)
-            })
+            await waitFor(() => expect(form.Has.byText(buttons.register)).toBe(false))
         })
 
         it('should navigate to /api/register when register button is clicked', async () => {
@@ -114,13 +110,13 @@ describe('Login', () => {
     describe('Successful login', () => {
         it('should set session with token, user, and settings on success', async () => {
             await LoginTestUtils.fillAndSubmit()
-            await waitFor(() => {
+            await waitFor(() =>
                 expect(setSession).toHaveBeenCalledWith({
                     token: 'mock-jwt-token',
                     user: UserMocks.build(),
                     settings: SettingsMocks.build(),
-                })
-            })
+                }),
+            )
         })
 
         it('should navigate to /api/home on successful login', async () => {
@@ -161,12 +157,9 @@ describe('Login', () => {
         })
     })
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should hide loading indicator once settings are loaded', async () => {
             LoginTestUtils.render()
-            await waitFor(() => {
-                expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-            })
-        })
-    })
+            await waitFor(() => expect(Test.LoadingIndicator.Has.isLoading()).toBe(false))
+        }))
 })

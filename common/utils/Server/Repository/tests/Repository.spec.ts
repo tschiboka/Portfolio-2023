@@ -140,7 +140,7 @@ describe('withQueries', () => {
     })
 })
 
-describe('duck typing', () => {
+describe('duck typing', () =>
     it('should work with a duck-typed document (no mongoose instance) for save/delete', async () => {
         FakeModel.resetDocs([])
         const repo = Repository.define(FakeModel)
@@ -153,8 +153,7 @@ describe('duck typing', () => {
             }
         expect(await repo.save(docish)).toBe('saved')
         expect(await repo.delete(docish)).toBe('deleted')
-    })
-})
+    }))
 
 describe('type-level inference', () => {
     it('should infer the doc type from the model findById return', () => {

@@ -6,7 +6,9 @@ set -e
 root=$(dirname "$0")/..
 
 node "$root/scripts/check-commit-message.js" "$1"
-node "$root/scripts/check-staged.js"
+
+echo "[commit] lint"
+npm run lint
 
 echo "[commit] tsc"
 npm run tsc

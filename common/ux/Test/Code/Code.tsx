@@ -22,9 +22,7 @@ class CodeAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            clickCopyIcon: async () => {
-                await Accessor.user.click(this.Get.copyIcon())
-            },
+            clickCopyIcon: async () => await Accessor.user.click(this.Get.copyIcon()),
         }
     }
 }

@@ -21,9 +21,7 @@ describe('Table — Selection', () => {
                 },
             })
             const table = Test.Table('test')
-            rows.forEach((_, i) => {
-                expect(table.Get.selectRow(i + 1)).toBeInTheDocument()
-            })
+            rows.forEach((_, i) => expect(table.Get.selectRow(i + 1)).toBeInTheDocument())
         })
 
         it('should render "Select all rows" header checkbox', () => {

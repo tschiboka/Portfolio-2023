@@ -10,7 +10,7 @@ export const Button = (props: ButtonProps) => {
         .filter(Boolean)
         .join(' ')
 
-    if (props.as === 'a') {
+    if (props.as === 'a')
         return (
             <a
                 className={cls}
@@ -24,14 +24,13 @@ export const Button = (props: ButtonProps) => {
                 {children}
             </a>
         )
-    }
 
     if (typeof props.as === 'function' || typeof props.as === 'object') {
         const Component = props.as
         const rest: Dictionary = {}
-        for (const key of Object.keys(props)) {
+        for (const key of Object.keys(props))
             if (!commonKeys.has(key)) rest[key] = (props as Dictionary)[key]
-        }
+
         return (
             <Component className={cls} aria-label={ariaLabel} style={style} {...rest}>
                 {children}

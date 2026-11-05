@@ -27,31 +27,27 @@ describe('Option type', () => {
 })
 
 describe('Option.getValues — runtime invariants', () => {
-    it('should return an empty array for empty options', () => {
-        expect(Option.getValues([])).toEqual([])
-    })
+    it('should return an empty array for empty options', () =>
+        expect(Option.getValues([])).toEqual([]))
 
-    it('should return a single value for a single option', () => {
-        expect(Option.getValues([{ value: 'a', label: 'A' }])).toEqual(['a'])
-    })
+    it('should return a single value for a single option', () =>
+        expect(Option.getValues([{ value: 'a', label: 'A' }])).toEqual(['a']))
 
-    it('should preserve input order', () => {
+    it('should preserve input order', () =>
         expect(
             Option.getValues([
                 { value: 'c', label: 'C' },
                 { value: 'a', label: 'A' },
             ]),
-        ).toEqual(['c', 'a'])
-    })
+        ).toEqual(['c', 'a']))
 
-    it('should not sort values', () => {
+    it('should not sort values', () =>
         expect(
             Option.getValues([
                 { value: 3, label: 'C' },
                 { value: 1, label: 'A' },
             ]),
-        ).toEqual([3, 1])
-    })
+        ).toEqual([3, 1]))
 
     it('should preserve duplicate values and their positions', () => {
         const result = Option.getValues([
@@ -120,36 +116,32 @@ describe('Option.getValues — runtime invariants', () => {
 })
 
 describe('Option.getLabels', () => {
-    it('should return the label of each option in order', () => {
+    it('should return the label of each option in order', () =>
         expect(
             Option.getLabels([
                 { value: 'a', label: 'A' },
                 { value: 'b', label: 'B' },
             ]),
-        ).toEqual(['A', 'B'])
-    })
+        ).toEqual(['A', 'B']))
 
-    it('should return an empty array for empty options', () => {
-        expect(Option.getLabels([])).toEqual([])
-    })
+    it('should return an empty array for empty options', () =>
+        expect(Option.getLabels([])).toEqual([]))
 
-    it('should preserve duplicate labels', () => {
+    it('should preserve duplicate labels', () =>
         expect(
             Option.getLabels([
                 { value: 'a', label: 'X' },
                 { value: 'b', label: 'X' },
             ]),
-        ).toEqual(['X', 'X'])
-    })
+        ).toEqual(['X', 'X']))
 
-    it('should preserve input order and does not sort', () => {
+    it('should preserve input order and does not sort', () =>
         expect(
             Option.getLabels([
                 { value: 'c', label: 'Zebra' },
                 { value: 'a', label: 'Alpha' },
             ]),
-        ).toEqual(['Zebra', 'Alpha'])
-    })
+        ).toEqual(['Zebra', 'Alpha']))
 
     it('should return a new, independent array', () => {
         const options = [{ value: 'a', label: 'A' }]
@@ -159,18 +151,17 @@ describe('Option.getLabels', () => {
         expect(options[0].label).toBe('A')
     })
 
-    it('should not depend on values (incl. non-string values)', () => {
+    it('should not depend on values (incl. non-string values)', () =>
         expect(
             Option.getLabels([
                 { value: 1, label: 'One' },
                 { value: 2, label: 'Two' },
             ]),
-        ).toEqual(['One', 'Two'])
-    })
+        ).toEqual(['One', 'Two']))
 })
 
 describe('Option.getLabelByValue', () => {
-    it('should return the label for a matching value', () => {
+    it('should return the label for a matching value', () =>
         expect(
             Option.getLabelByValue(
                 [
@@ -179,18 +170,15 @@ describe('Option.getLabelByValue', () => {
                 ],
                 'b',
             ),
-        ).toBe('B')
-    })
+        ).toBe('B'))
 
-    it('should return undefined when no option matches the value', () => {
-        expect(Option.getLabelByValue([{ value: 'a', label: 'A' }], 'z')).toBeUndefined()
-    })
+    it('should return undefined when no option matches the value', () =>
+        expect(Option.getLabelByValue([{ value: 'a', label: 'A' }], 'z')).toBeUndefined())
 
-    it('should return undefined for an empty collection', () => {
-        expect(Option.getLabelByValue([], 'a')).toBeUndefined()
-    })
+    it('should return undefined for an empty collection', () =>
+        expect(Option.getLabelByValue([], 'a')).toBeUndefined())
 
-    it('should support non-string values', () => {
+    it('should support non-string values', () =>
         expect(
             Option.getLabelByValue(
                 [
@@ -199,8 +187,7 @@ describe('Option.getLabelByValue', () => {
                 ],
                 2,
             ),
-        ).toBe('Two')
-    })
+        ).toBe('Two'))
 
     it('should support object values by reference equality', () => {
         const target = { id: 2 }
@@ -213,7 +200,7 @@ describe('Option.getLabelByValue', () => {
         expect(Option.getLabelByValue(options, { id: 2 })).toBeUndefined()
     })
 
-    it('should match the first option when values are duplicated', () => {
+    it('should match the first option when values are duplicated', () =>
         expect(
             Option.getLabelByValue(
                 [
@@ -222,12 +209,10 @@ describe('Option.getLabelByValue', () => {
                 ],
                 'x',
             ),
-        ).toBe('First')
-    })
+        ).toBe('First'))
 
-    it("should return an empty string label as '', not undefined (empty label is a valid result)", () => {
-        expect(Option.getLabelByValue([{ value: 'a', label: '' }], 'a')).toBe('')
-    })
+    it("should return an empty string label as '', not undefined (empty label is a valid result)", () =>
+        expect(Option.getLabelByValue([{ value: 'a', label: '' }], 'a')).toBe(''))
 
     it('should use strict equality: NaN never matches, -0 matches 0', () => {
         expect(Option.getLabelByValue([{ value: NaN, label: 'nan' }], NaN)).toBeUndefined()
@@ -247,7 +232,7 @@ describe('Option.getLabelByValue', () => {
 })
 
 describe('Option.getValueByLabel', () => {
-    it('should return the value for a matching label', () => {
+    it('should return the value for a matching label', () =>
         expect(
             Option.getValueByLabel(
                 [
@@ -256,18 +241,15 @@ describe('Option.getValueByLabel', () => {
                 ],
                 'B',
             ),
-        ).toBe('b')
-    })
+        ).toBe('b'))
 
-    it('should return undefined when no option matches the label', () => {
-        expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'z')).toBeUndefined()
-    })
+    it('should return undefined when no option matches the label', () =>
+        expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'z')).toBeUndefined())
 
-    it('should return undefined for an empty collection', () => {
-        expect(Option.getValueByLabel([], 'A')).toBeUndefined()
-    })
+    it('should return undefined for an empty collection', () =>
+        expect(Option.getValueByLabel([], 'A')).toBeUndefined())
 
-    it('should match the first option when labels are duplicated', () => {
+    it('should match the first option when labels are duplicated', () =>
         expect(
             Option.getValueByLabel(
                 [
@@ -276,8 +258,7 @@ describe('Option.getValueByLabel', () => {
                 ],
                 'X',
             ),
-        ).toBe('first')
-    })
+        ).toBe('first'))
 
     it('should use strict equality: matching is case-sensitive and whitespace-significant', () => {
         expect(Option.getValueByLabel([{ value: 'a', label: 'A' }], 'a')).toBeUndefined()
@@ -306,29 +287,26 @@ describe('Option.getValueByLabel', () => {
     })
 })
 
-describe('Option.getLabelByValue — type-level', () => {
+describe('Option.getLabelByValue — type-level', () =>
     it('should return string | undefined', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<string | undefined>()
-    })
-})
+    }))
 
-describe('Option.getValueByLabel — type-level', () => {
+describe('Option.getValueByLabel — type-level', () =>
     it('should return T | undefined, preserving the value union', () => {
         const options = [
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
         ] as const
         expectTypeOf(Option.getValueByLabel(options, 'A')).toEqualTypeOf<('a' | 'b') | undefined>()
-    })
-})
+    }))
 
-describe('Option.getLabels — type-level', () => {
+describe('Option.getLabels — type-level', () =>
     it('should return string[]', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
         expectTypeOf(Option.getLabels(options)).toEqualTypeOf<string[]>()
-    })
-})
+    }))
 
 describe('Option.getValues — type-level contract', () => {
     it('should infer T from the supplied options', () => {
@@ -407,21 +385,17 @@ describe('Option — literal-union compile-time behaviour', () => {
 })
 
 describe('Option — readonly inputs accepted by all helpers', () => {
-    it('should accept readonly input in getValues', () => {
-        expect(Option.getValues(readonlyOptions)).toEqual(['a', 'b'])
-    })
+    it('should accept readonly input in getValues', () =>
+        expect(Option.getValues(readonlyOptions)).toEqual(['a', 'b']))
 
-    it('should accept readonly input in getLabels', () => {
-        expect(Option.getLabels(readonlyOptions)).toEqual(['A', 'B'])
-    })
+    it('should accept readonly input in getLabels', () =>
+        expect(Option.getLabels(readonlyOptions)).toEqual(['A', 'B']))
 
-    it('should accept readonly input in getLabelByValue', () => {
-        expect(Option.getLabelByValue(readonlyOptions, 'b')).toBe('B')
-    })
+    it('should accept readonly input in getLabelByValue', () =>
+        expect(Option.getLabelByValue(readonlyOptions, 'b')).toBe('B'))
 
-    it('should accept readonly input in getValueByLabel', () => {
-        expect(Option.getValueByLabel(readonlyOptions, 'B')).toBe('b')
-    })
+    it('should accept readonly input in getValueByLabel', () =>
+        expect(Option.getValueByLabel(readonlyOptions, 'B')).toBe('b'))
 })
 
 describe('Option — cross-helper consistency', () => {

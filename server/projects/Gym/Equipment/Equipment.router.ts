@@ -5,8 +5,8 @@ import type { GetEquipmentOptionsRes, GetEquipmentReq } from './Equipment.types'
 
 const router = express.Router()
 
-router.get('/', (_: GetEquipmentReq, res: GetEquipmentOptionsRes) => {
-    ApiResponder.ok(res, { equipment: [...EquipmentOptions] })
-})
+router.get('/', (_: GetEquipmentReq, res: GetEquipmentOptionsRes) =>
+    ApiResponder.ok(res, { equipment: [...EquipmentOptions] }),
+)
 
 export { router as EquipmentRouter }

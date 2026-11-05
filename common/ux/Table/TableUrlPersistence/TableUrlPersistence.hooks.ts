@@ -34,12 +34,11 @@ const writeFilterValues = <TFilters extends Dictionary>(
         if (!isDefined(config)) return acc
         const builtKey = Url.Params.build(namespace, config.urlKey ?? key)
         const encoded = TableUrlPersistenceConfig.buildCodec(config).encode(value)
-        if (isDefined(encoded)) {
-            acc.set(builtKey, encoded)
-        } else {
+        if (isDefined(encoded)) acc.set(builtKey, encoded)
+        else
             // Empty/unset encodes to undefined — remove any stale key so a reset clears the URL.
             acc.delete(builtKey)
-        }
+
         return acc
     }, new URLSearchParams(params))
 }

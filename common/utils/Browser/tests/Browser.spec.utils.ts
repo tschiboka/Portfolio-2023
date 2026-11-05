@@ -3,9 +3,7 @@ import type { MockObserver, Viewport } from './Browser.spec.types'
 let instances: MockObserver[] = []
 
 /** Clears the observers created by previous tests. */
-const reset = (): void => {
-    instances = []
-}
+const reset = (): void => void (instances = [])
 
 /** The observer created most recently, which the test drives. */
 const latest = (): MockObserver => instances[0]
@@ -20,7 +18,10 @@ class IntersectionObserverMock {
     }
 
     trigger(entries: Partial<IntersectionObserverEntry>[]): void {
-        this.callback(entries as IntersectionObserverEntry[], this as unknown as IntersectionObserver)
+        this.callback(
+            entries as IntersectionObserverEntry[],
+            this as unknown as IntersectionObserver,
+        )
     }
 }
 

@@ -7,9 +7,8 @@ export class ContextBuilder {
         const Context = createContext<Optional<T>>(undefined)
         const Use = () => {
             const ctx = useContext(Context)
-            if (!ctx) {
-                throw new Error(`${key} context must be used within its Provider`)
-            }
+            if (!ctx) throw new Error(`${key} context must be used within its Provider`)
+
             return ctx
         }
 

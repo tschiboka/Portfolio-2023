@@ -18,31 +18,29 @@ export const Checkbox = <T extends FieldValues>({
     ariaLabel,
     className,
     style,
-}: CheckboxProps<T>) => {
-    return (
-        <Controller
-            name={name}
-            control={control}
-            render={({ field: { value, onChange: onChangeFn }, fieldState }) => (
-                <div className={`checkbox-field ${className ?? ''}`} style={style}>
-                    <input
-                        id={name}
-                        type="checkbox"
-                        aria-label={ariaLabel}
-                        checked={!!value}
-                        onChange={(e) => {
-                            onChangeFn(e.target.checked)
-                            onChange?.(e.target.checked)
-                        }}
-                    />
-                    <label htmlFor={name}>{label}</label>
-                    {fieldState.error && (
-                        <p className="error-msg" role="alert">
-                            *{fieldState.error.message}
-                        </p>
-                    )}
-                </div>
-            )}
-        />
-    )
-}
+}: CheckboxProps<T>) => (
+    <Controller
+        name={name}
+        control={control}
+        render={({ field: { value, onChange: onChangeFn }, fieldState }) => (
+            <div className={`checkbox-field ${className ?? ''}`} style={style}>
+                <input
+                    id={name}
+                    type="checkbox"
+                    aria-label={ariaLabel}
+                    checked={!!value}
+                    onChange={(e) => {
+                        onChangeFn(e.target.checked)
+                        onChange?.(e.target.checked)
+                    }}
+                />
+                <label htmlFor={name}>{label}</label>
+                {fieldState.error && (
+                    <p className="error-msg" role="alert">
+                        *{fieldState.error.message}
+                    </p>
+                )}
+            </div>
+        )}
+    />
+)

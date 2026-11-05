@@ -30,9 +30,7 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
     }
 
     useEffect(() => {
-        if (session) {
-            SessionStorage.getInstance().set({ ...session })
-        }
+        if (session) SessionStorage.getInstance().set({ ...session })
     }, [session])
 
     useEffect(() => {

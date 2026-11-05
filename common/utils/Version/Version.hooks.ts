@@ -39,11 +39,13 @@ const useVersionCheck = () => {
         checkVersion().catch((error: unknown) =>
             console.error('Error checking app version:', error),
         )
-        const id = setInterval(() => {
-            checkVersion().catch((error: unknown) =>
-                console.error('Error checking app version:', error),
-            )
-        }, DateTime.Units.Ms.fromMin(10))
+        const id = setInterval(
+            () =>
+                void checkVersion().catch((error: unknown) =>
+                    console.error('Error checking app version:', error),
+                ),
+            DateTime.Units.Ms.fromMin(10),
+        )
         return () => clearInterval(id)
     }, [])
 

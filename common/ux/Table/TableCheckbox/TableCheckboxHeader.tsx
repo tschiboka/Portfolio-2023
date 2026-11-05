@@ -26,11 +26,8 @@ export const TableCheckboxHeader = <TData extends Record<string, ReactNode>, TCo
     if (mode === 'single') return <th className="select-col" scope="col" aria-label="Select" />
 
     const handleToggleAll = () => {
-        if (allSelected) {
-            onChange(selectedRowIds.filter((id) => !selectableIds.includes(id)))
-        } else {
-            onChange([...new Set([...selectedRowIds, ...selectableIds])])
-        }
+        if (allSelected) onChange(selectedRowIds.filter((id) => !selectableIds.includes(id)))
+        else onChange([...new Set([...selectedRowIds, ...selectableIds])])
     }
 
     return (

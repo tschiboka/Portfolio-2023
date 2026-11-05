@@ -12,58 +12,48 @@ const { Set, mockAnchorRef, mockAnchorEl, mockPopupEl } = OverlayTestUtils
 const { getAnchorPosition, ArrowClass, ModeClass, SizeStyle } = PopupUtils
 
 describe('Overlay.FullScreen', () => {
-    it('should render children', () => {
-        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.byText('Content')).toBeInTheDocument()
-    })
+    it('should render children', () =>
+        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.byText('Content')).toBeInTheDocument())
 
-    it('should use the default "Overlay" class', () => {
-        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.className()).toContain('Overlay')
-    })
+    it('should use the default "Overlay" class', () =>
+        expect(Set.fullScreen(OverlayMocks.fullScreen).Get.className()).toContain('Overlay'))
 
-    it('should apply custom className', () => {
+    it('should apply custom className', () =>
         expect(
             Set.fullScreen({ ...OverlayMocks.fullScreen, className: 'custom' }).Get.className(),
-        ).toContain('custom')
-    })
+        ).toContain('custom'))
 
-    it('should apply ariaLabel', () => {
+    it('should apply ariaLabel', () =>
         expect(
             Set.fullScreen({ ...OverlayMocks.fullScreen, ariaLabel: 'overlay' }).Get.attribute(
                 'aria-label',
             ),
-        ).toBe('overlay')
-    })
+        ).toBe('overlay'))
 })
 
 describe('Overlay.ActionMenu', () => {
     describe('rendering', () => {
-        it('should render as a portal to document.body', () => {
-            expect(Set.actionMenu().menu.Get.menu().closest('body')).toBe(document.body)
-        })
+        it('should render as a portal to document.body', () =>
+            expect(Set.actionMenu().menu.Get.menu().closest('body')).toBe(document.body))
 
-        it('should render with role="menu"', () => {
-            expect(Set.actionMenu().menu.Get.menu()).toBeInTheDocument()
-        })
+        it('should render with role="menu"', () =>
+            expect(Set.actionMenu().menu.Get.menu()).toBeInTheDocument())
 
-        it('should use "Action menu" as default aria-label', () => {
-            expect(Set.actionMenu().menu.Get.attribute('aria-label')).toBe('Action menu')
-        })
+        it('should use "Action menu" as default aria-label', () =>
+            expect(Set.actionMenu().menu.Get.attribute('aria-label')).toBe('Action menu'))
 
-        it('should use custom ariaLabel when provided', () => {
+        it('should use custom ariaLabel when provided', () =>
             expect(
                 Set.actionMenu({ ariaLabel: 'User actions' }).menu.Get.attribute('aria-label'),
-            ).toBe('User actions')
-        })
+            ).toBe('User actions'))
 
-        it('should apply the Overlay--action-menu class', () => {
-            expect(Set.actionMenu().menu.Get.className()).toContain('Overlay--action-menu')
-        })
+        it('should apply the Overlay--action-menu class', () =>
+            expect(Set.actionMenu().menu.Get.className()).toContain('Overlay--action-menu'))
     })
 
     describe('items', () => {
-        it('should render all items as menuitems', () => {
-            expect(Set.actionMenu().menu.Get.menuItems()).toHaveLength(2)
-        })
+        it('should render all items as menuitems', () =>
+            expect(Set.actionMenu().menu.Get.menuItems()).toHaveLength(2))
 
         it('should render item labels', () => {
             const { menu } = Set.actionMenu()
@@ -86,9 +76,7 @@ describe('Overlay.ActionMenu', () => {
         it('should wrap items in li with role="none"', () => {
             const { menu } = Set.actionMenu()
             const listItems = menu.Get.menu().querySelectorAll('li')
-            listItems.forEach((li) => {
-                expect(li).toHaveAttribute('role', 'none')
-            })
+            listItems.forEach((li) => expect(li).toHaveAttribute('role', 'none'))
         })
 
         it('should render items as buttons', () => {
@@ -204,37 +192,31 @@ describe('Overlay.ActionMenu', () => {
 
 describe('Overlay.Popup', () => {
     describe('rendering', () => {
-        it('should render as a portal to document.body', () => {
-            expect(Set.popup().popup.Get.dialog().closest('body')).toBe(document.body)
-        })
+        it('should render as a portal to document.body', () =>
+            expect(Set.popup().popup.Get.dialog().closest('body')).toBe(document.body))
 
-        it('should render with role="dialog" and aria-modal="true"', () => {
-            expect(Set.popup().popup.Get.attribute('aria-modal')).toBe('true')
-        })
+        it('should render with role="dialog" and aria-modal="true"', () =>
+            expect(Set.popup().popup.Get.attribute('aria-modal')).toBe('true'))
 
-        it('should use title as aria-label by default', () => {
+        it('should use title as aria-label by default', () =>
             expect(Set.popup({ title: 'My Title' }).popup.Get.attribute('aria-label')).toBe(
                 'My Title',
-            )
-        })
+            ))
 
-        it('should prefer ariaLabel over title for aria-label', () => {
+        it('should prefer ariaLabel over title for aria-label', () =>
             expect(
                 Set.popup({ title: 'My Title', ariaLabel: 'Custom Label' }).popup.Get.attribute(
                     'aria-label',
                 ),
-            ).toBe('Custom Label')
-        })
+            ).toBe('Custom Label'))
     })
 
     describe('title', () => {
-        it('should render the title', () => {
-            expect(Set.popup({ title: 'Hello' }).popup.Get.byText('Hello')).toBeInTheDocument()
-        })
+        it('should render the title', () =>
+            expect(Set.popup({ title: 'Hello' }).popup.Get.byText('Hello')).toBeInTheDocument())
 
-        it('should render the title in an h3', () => {
-            expect(Set.popup({ title: 'Hello' }).popup.Get.heading().tagName).toBe('H3')
-        })
+        it('should render the title in an h3', () =>
+            expect(Set.popup({ title: 'Hello' }).popup.Get.heading().tagName).toBe('H3'))
 
         it('should not render a title when not provided', () => {
             const { ref, Wrapper } = mockAnchorRef()
@@ -248,19 +230,17 @@ describe('Overlay.Popup', () => {
     })
 
     describe('message', () => {
-        it('should render the message text', () => {
+        it('should render the message text', () =>
             expect(
                 Set.popup({ message: 'A message' }).popup.Get.byText('A message'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
-        it('should render ReactNode as message', () => {
+        it('should render ReactNode as message', () =>
             expect(
                 Set.popup({
                     message: <span data-testid="custom-msg">Rich</span>,
                 }).popup.Get.byTestId('custom-msg'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should not render message area when not provided', () => {
             Set.popup({ message: undefined })
@@ -268,45 +248,38 @@ describe('Overlay.Popup', () => {
         })
     })
 
-    describe('children', () => {
-        it('should render custom children', () => {
+    describe('children', () =>
+        it('should render custom children', () =>
             expect(
                 Set.popup({ children: <div data-testid="child">Custom</div> }).popup.Get.byTestId(
                     'child',
                 ),
-            ).toBeInTheDocument()
-        })
-    })
+            ).toBeInTheDocument()))
 
     describe('icon', () => {
-        it('should render default icon per mode', () => {
+        it('should render default icon per mode', () =>
             expect(
                 Set.popup({ mode: 'primary' })
                     .popup.Get.dialog()
                     .querySelector('.Overlay--popup__icon'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
-        it('should render custom icon when provided', () => {
+        it('should render custom icon when provided', () =>
             expect(
                 Set.popup({ icon: <span data-testid="custom-icon">★</span> }).popup.Get.byTestId(
                     'custom-icon',
                 ),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
     })
 
     describe('modes', () => {
         it.each(['primary', 'warning', 'danger', 'info'] as const)(
             'should apply %s mode class',
-            (mode) => {
-                expect(Set.popup({ mode }).popup.Get.className()).toContain(ModeClass[mode])
-            },
+            (mode) => expect(Set.popup({ mode }).popup.Get.className()).toContain(ModeClass[mode]),
         )
 
-        it('should default to primary mode', () => {
-            expect(Set.popup().popup.Get.className()).toContain(ModeClass.primary)
-        })
+        it('should default to primary mode', () =>
+            expect(Set.popup().popup.Get.className()).toContain(ModeClass.primary))
     })
 
     describe('sizes', () => {
@@ -316,15 +289,13 @@ describe('Overlay.Popup', () => {
             expect(popup.Get.style().maxWidth).toBeDefined()
         })
 
-        it('should default to md size', () => {
-            expect(Set.popup().popup.Get.dialog()).toBeInTheDocument()
-        })
+        it('should default to md size', () =>
+            expect(Set.popup().popup.Get.dialog()).toBeInTheDocument())
     })
 
     describe('close button (showClose)', () => {
-        it('should render close button by default', () => {
-            expect(Set.popup().popup.Has.closeButton()).toBe(true)
-        })
+        it('should render close button by default', () =>
+            expect(Set.popup().popup.Has.closeButton()).toBe(true))
 
         it('should call onClose when close button is clicked', async () => {
             const { onClose, popup } = Set.popup()
@@ -332,36 +303,32 @@ describe('Overlay.Popup', () => {
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
-        it('should hide close button when showClose is false', () => {
-            expect(Set.popup({ showClose: false }).popup.Has.closeButton()).toBe(false)
-        })
+        it('should hide close button when showClose is false', () =>
+            expect(Set.popup({ showClose: false }).popup.Has.closeButton()).toBe(false))
 
-        it('should append a Close action button when showClose is true', () => {
+        it('should append a Close action button when showClose is true', () =>
             expect(
                 Set.popup({ showClose: true, actions: [] }).popup.Get.byText('Close'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should not append Close action when showClose is false', () => {
             Set.popup({ showClose: false, actions: [] })
             expect(screen.queryByText('Close')).not.toBeInTheDocument()
         })
 
-        it('should render the auto-appended Close button as secondary variant', () => {
+        it('should render the auto-appended Close button as secondary variant', () =>
             expect(
                 Set.popup({ showClose: true, actions: [] }).popup.Get.byText('Close').className,
-            ).toContain('Overlay--popup__action-btn--secondary')
-        })
+            ).toContain('Overlay--popup__action-btn--secondary'))
     })
 
     describe('actions', () => {
-        it('should render action buttons', () => {
+        it('should render action buttons', () =>
             expect(
                 Set.popup({ actions: [{ label: 'Confirm', onClick: vi.fn() }] }).popup.Get.byText(
                     'Confirm',
                 ),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should call action onClick when clicked', async () => {
             const onClick = vi.fn()
@@ -372,21 +339,19 @@ describe('Overlay.Popup', () => {
             expect(onClick).toHaveBeenCalledTimes(1)
         })
 
-        it('should apply secondary variant class', () => {
+        it('should apply secondary variant class', () =>
             expect(
                 Set.popup({
                     actions: [{ label: 'Cancel', variant: 'secondary', onClick: vi.fn() }],
                 }).popup.Get.byText('Cancel').className,
-            ).toContain('Overlay--popup__action-btn--secondary')
-        })
+            ).toContain('Overlay--popup__action-btn--secondary'))
 
-        it('should not apply secondary class for primary variant', () => {
+        it('should not apply secondary class for primary variant', () =>
             expect(
                 Set.popup({
                     actions: [{ label: 'OK', variant: 'primary', onClick: vi.fn() }],
                 }).popup.Get.byText('OK').className,
-            ).not.toContain('Overlay--popup__action-btn--secondary')
-        })
+            ).not.toContain('Overlay--popup__action-btn--secondary'))
 
         it('should hide actions with when: false', () => {
             Set.popup({
@@ -395,13 +360,12 @@ describe('Overlay.Popup', () => {
             expect(screen.queryByText('Hidden')).not.toBeInTheDocument()
         })
 
-        it('should show actions with when: true', () => {
+        it('should show actions with when: true', () =>
             expect(
                 Set.popup({
                     actions: [{ label: 'Visible', when: true, onClick: vi.fn() }],
                 }).popup.Get.byText('Visible'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should render multiple actions in order', () => {
             const { popup } = Set.popup({
@@ -484,9 +448,10 @@ describe('Overlay.Popup', () => {
     })
 
     describe('custom className and style', () => {
-        it('should apply custom className', () => {
-            expect(Set.popup({ className: 'my-popup' }).popup.Get.className()).toContain('my-popup')
-        })
+        it('should apply custom className', () =>
+            expect(Set.popup({ className: 'my-popup' }).popup.Get.className()).toContain(
+                'my-popup',
+            ))
 
         it('should apply custom style', () => {
             const border = `2px solid ${Const.Color.Black[3]}`
@@ -558,7 +523,7 @@ describe('getAnchorPosition', () => {
         })
     })
 
-    describe('horizontal centering', () => {
+    describe('horizontal centering', () =>
         it('should center popup under anchor', () => {
             const anchor = mockAnchorEl({
                 top: 100,
@@ -571,8 +536,7 @@ describe('getAnchorPosition', () => {
             const result = getAnchorPosition(anchor, popup)
             // centered: anchor.left + anchor.width/2 - popup.width/2 = 400 + 50 - 100 = 350
             expect(result.style.left).toBe(350)
-        })
-    })
+        }))
 
     describe('viewport clamping', () => {
         it('should clamp left to 0 when popup would go off-screen left', () => {
@@ -688,87 +652,71 @@ describe('getAnchorPosition', () => {
 })
 
 describe('ArrowClass', () => {
-    it('should map "top" to arrow--bottom class (popup above, arrow points down)', () => {
-        expect(ArrowClass.top).toBe('Overlay--popup__arrow--bottom')
-    })
+    it('should map "top" to arrow--bottom class (popup above, arrow points down)', () =>
+        expect(ArrowClass.top).toBe('Overlay--popup__arrow--bottom'))
 
-    it('should map "bottom" to arrow--top class (popup below, arrow points up)', () => {
-        expect(ArrowClass.bottom).toBe('Overlay--popup__arrow--top')
-    })
+    it('should map "bottom" to arrow--top class (popup below, arrow points up)', () =>
+        expect(ArrowClass.bottom).toBe('Overlay--popup__arrow--top'))
 
-    it('should map "left" to arrow--right class', () => {
-        expect(ArrowClass.left).toBe('Overlay--popup__arrow--right')
-    })
+    it('should map "left" to arrow--right class', () =>
+        expect(ArrowClass.left).toBe('Overlay--popup__arrow--right'))
 
-    it('should map "right" to arrow--left class', () => {
-        expect(ArrowClass.right).toBe('Overlay--popup__arrow--left')
-    })
+    it('should map "right" to arrow--left class', () =>
+        expect(ArrowClass.right).toBe('Overlay--popup__arrow--left'))
 })
 
-describe('ModeClass', () => {
+describe('ModeClass', () =>
     Object.entries({
         primary: 'Overlay--popup--primary',
         warning: 'Overlay--popup--warning',
         danger: 'Overlay--popup--danger',
         info: 'Overlay--popup--info',
-    }).forEach(([mode, cls]) => {
-        it(`should map "${mode}" to "${cls}"`, () => {
-            expect(ModeClass[mode as Key<typeof ModeClass>]).toBe(cls)
-        })
-    })
-})
+    }).forEach(([mode, cls]) =>
+        it(`should map "${mode}" to "${cls}"`, () =>
+            expect(ModeClass[mode as Key<typeof ModeClass>]).toBe(cls)),
+    ))
 
 describe('SizeStyle', () => {
-    it('should define sm with minWidth 280 and maxWidth 360', () => {
-        expect(SizeStyle.sm).toEqual({ minWidth: 280, maxWidth: 360 })
-    })
+    it('should define sm with minWidth 280 and maxWidth 360', () =>
+        expect(SizeStyle.sm).toEqual({ minWidth: 280, maxWidth: 360 }))
 
-    it('should define md with minWidth 360 and maxWidth 480', () => {
-        expect(SizeStyle.md).toEqual({ minWidth: 360, maxWidth: 480 })
-    })
+    it('should define md with minWidth 360 and maxWidth 480', () =>
+        expect(SizeStyle.md).toEqual({ minWidth: 360, maxWidth: 480 }))
 
-    it('should define lg with minWidth 480 and maxWidth 640', () => {
-        expect(SizeStyle.lg).toEqual({ minWidth: 480, maxWidth: 640 })
-    })
+    it('should define lg with minWidth 480 and maxWidth 640', () =>
+        expect(SizeStyle.lg).toEqual({ minWidth: 480, maxWidth: 640 }))
 })
 
 describe('Overlay.Modal', () => {
     describe('rendering', () => {
-        it('should render as a portal to document.body', () => {
-            expect(Set.modal().modal.Get.dialog().closest('body')).toBe(document.body)
-        })
+        it('should render as a portal to document.body', () =>
+            expect(Set.modal().modal.Get.dialog().closest('body')).toBe(document.body))
 
-        it('should render with role="dialog" and aria-modal="true"', () => {
-            expect(Set.modal().modal.Get.attribute('aria-modal')).toBe('true')
-        })
+        it('should render with role="dialog" and aria-modal="true"', () =>
+            expect(Set.modal().modal.Get.attribute('aria-modal')).toBe('true'))
 
-        it('should use title as aria-label by default', () => {
+        it('should use title as aria-label by default', () =>
             expect(Set.modal({ title: 'My Title' }).modal.Get.attribute('aria-label')).toBe(
                 'My Title',
-            )
-        })
+            ))
 
-        it('should prefer ariaLabel over title for aria-label', () => {
+        it('should prefer ariaLabel over title for aria-label', () =>
             expect(
                 Set.modal({ title: 'My Title', ariaLabel: 'Custom Label' }).modal.Get.attribute(
                     'aria-label',
                 ),
-            ).toBe('Custom Label')
-        })
+            ).toBe('Custom Label'))
 
-        it('should have position relative for centered layout', () => {
-            expect(Set.modal().modal.Get.style().position).toBe('relative')
-        })
+        it('should have position relative for centered layout', () =>
+            expect(Set.modal().modal.Get.style().position).toBe('relative'))
     })
 
     describe('title', () => {
-        it('should render the title', () => {
-            expect(Set.modal({ title: 'Hello' }).modal.Get.byText('Hello')).toBeInTheDocument()
-        })
+        it('should render the title', () =>
+            expect(Set.modal({ title: 'Hello' }).modal.Get.byText('Hello')).toBeInTheDocument())
 
-        it('should render the title in an h3', () => {
-            expect(Set.modal({ title: 'Hello' }).modal.Get.heading().tagName).toBe('H3')
-        })
+        it('should render the title in an h3', () =>
+            expect(Set.modal({ title: 'Hello' }).modal.Get.heading().tagName).toBe('H3'))
 
         it('should not render a title when not provided', () => {
             render(<Overlay.Modal onClose={vi.fn()} message="Test message" />)
@@ -777,19 +725,17 @@ describe('Overlay.Modal', () => {
     })
 
     describe('message', () => {
-        it('should render the message text', () => {
+        it('should render the message text', () =>
             expect(
                 Set.modal({ message: 'A message' }).modal.Get.byText('A message'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
-        it('should render ReactNode as message', () => {
+        it('should render ReactNode as message', () =>
             expect(
                 Set.modal({
                     message: <span data-testid="custom-msg">Rich</span>,
                 }).modal.Get.byTestId('custom-msg'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should not render message area when not provided', () => {
             Set.modal({ message: undefined })
@@ -797,45 +743,38 @@ describe('Overlay.Modal', () => {
         })
     })
 
-    describe('children', () => {
-        it('should render custom children', () => {
+    describe('children', () =>
+        it('should render custom children', () =>
             expect(
                 Set.modal({ children: <div data-testid="child">Custom</div> }).modal.Get.byTestId(
                     'child',
                 ),
-            ).toBeInTheDocument()
-        })
-    })
+            ).toBeInTheDocument()))
 
     describe('icon', () => {
-        it('should render default icon per mode', () => {
+        it('should render default icon per mode', () =>
             expect(
                 Set.modal({ mode: 'primary' })
                     .modal.Get.dialog()
                     .querySelector('.Overlay--popup__icon'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
-        it('should render custom icon when provided', () => {
+        it('should render custom icon when provided', () =>
             expect(
                 Set.modal({ icon: <span data-testid="custom-icon">★</span> }).modal.Get.byTestId(
                     'custom-icon',
                 ),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
     })
 
     describe('modes', () => {
         it.each(['primary', 'warning', 'danger', 'info'] as const)(
             'should apply %s mode class',
-            (mode) => {
-                expect(Set.modal({ mode }).modal.Get.className()).toContain(ModeClass[mode])
-            },
+            (mode) => expect(Set.modal({ mode }).modal.Get.className()).toContain(ModeClass[mode]),
         )
 
-        it('should default to primary mode', () => {
-            expect(Set.modal().modal.Get.className()).toContain(ModeClass.primary)
-        })
+        it('should default to primary mode', () =>
+            expect(Set.modal().modal.Get.className()).toContain(ModeClass.primary))
     })
 
     describe('sizes', () => {
@@ -845,15 +784,13 @@ describe('Overlay.Modal', () => {
             expect(modal.Get.style().maxWidth).toBeDefined()
         })
 
-        it('should default to md size', () => {
-            expect(Set.modal().modal.Get.dialog()).toBeInTheDocument()
-        })
+        it('should default to md size', () =>
+            expect(Set.modal().modal.Get.dialog()).toBeInTheDocument())
     })
 
     describe('close button (showClose)', () => {
-        it('should render close button by default', () => {
-            expect(Set.modal().modal.Has.closeButton()).toBe(true)
-        })
+        it('should render close button by default', () =>
+            expect(Set.modal().modal.Has.closeButton()).toBe(true))
 
         it('should call onClose when close button is clicked', async () => {
             const { onClose, modal } = Set.modal()
@@ -861,15 +798,13 @@ describe('Overlay.Modal', () => {
             expect(onClose).toHaveBeenCalledTimes(1)
         })
 
-        it('should hide close button when showClose is false', () => {
-            expect(Set.modal({ showClose: false }).modal.Has.closeButton()).toBe(false)
-        })
+        it('should hide close button when showClose is false', () =>
+            expect(Set.modal({ showClose: false }).modal.Has.closeButton()).toBe(false))
 
-        it('should append a Close action button when showClose is true', () => {
+        it('should append a Close action button when showClose is true', () =>
             expect(
                 Set.modal({ showClose: true, actions: [] }).modal.Get.byText('Close'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should not append Close action when showClose is false', () => {
             Set.modal({ showClose: false, actions: [] })
@@ -878,13 +813,12 @@ describe('Overlay.Modal', () => {
     })
 
     describe('actions', () => {
-        it('should render action buttons', () => {
+        it('should render action buttons', () =>
             expect(
                 Set.modal({ actions: [{ label: 'Confirm', onClick: vi.fn() }] }).modal.Get.byText(
                     'Confirm',
                 ),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
 
         it('should call action onClick when clicked', async () => {
             const onClick = vi.fn()
@@ -902,13 +836,12 @@ describe('Overlay.Modal', () => {
             expect(screen.queryByText('Hidden')).not.toBeInTheDocument()
         })
 
-        it('should show actions with when: true', () => {
+        it('should show actions with when: true', () =>
             expect(
                 Set.modal({
                     actions: [{ label: 'Visible', when: true, onClick: vi.fn() }],
                 }).modal.Get.byText('Visible'),
-            ).toBeInTheDocument()
-        })
+            ).toBeInTheDocument())
     })
 
     describe('backdrop', () => {
@@ -958,9 +891,10 @@ describe('Overlay.Modal', () => {
     })
 
     describe('custom className and style', () => {
-        it('should apply custom className', () => {
-            expect(Set.modal({ className: 'my-modal' }).modal.Get.className()).toContain('my-modal')
-        })
+        it('should apply custom className', () =>
+            expect(Set.modal({ className: 'my-modal' }).modal.Get.className()).toContain(
+                'my-modal',
+            ))
 
         it('should apply custom style', () => {
             const border = `2px solid ${Const.Color.Black[3]}`

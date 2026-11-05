@@ -23,9 +23,8 @@ const getIsHintDue = (draft: SessionState, payload: MovePayload) => {
             .filter((move) => !previouslyFailedWords.has(move.word))
             .map((move) => move.word),
     )
-    if (!previouslyFailedWords.has(payload.attempt)) {
-        uniqueNewFailedWords.add(payload.attempt) // include current attempt (not yet pushed)
-    }
+    if (!previouslyFailedWords.has(payload.attempt)) uniqueNewFailedWords.add(payload.attempt) // include current attempt (not yet pushed)
+
     const failedAttemptsSinceLastHint = uniqueNewFailedWords.size
 
     return (

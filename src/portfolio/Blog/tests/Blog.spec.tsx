@@ -8,9 +8,7 @@ import { BlogTestUtils } from './Blog.spec.utils'
 const { publishedArticles, upcomingArticles } = BlogMocks
 
 describe('Blog', () => {
-    beforeEach(() => {
-        vi.clearAllMocks()
-    })
+    beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {
         it('should render the heading', () => {
@@ -41,29 +39,27 @@ describe('Blog', () => {
         })
     })
 
-    describe('Published articles', () => {
+    describe('Published articles', () =>
         it('should render all published article cards', () => {
             BlogTestUtils.render()
-            publishedArticles.forEach((article) => {
-                expect(Test.Typography.byLabel(article.title)).toBeDefined()
-            })
-        })
-    })
+            publishedArticles.forEach((article) =>
+                expect(Test.Typography.byLabel(article.title)).toBeDefined(),
+            )
+        }))
 
     describe('Upcoming articles', () => {
         it('should render upcoming article cards when present', () => {
             BlogTestUtils.render()
-            upcomingArticles.forEach((article) => {
-                expect(Test.Typography.byLabel(article.title)).toBeDefined()
-            })
+            upcomingArticles.forEach((article) =>
+                expect(Test.Typography.byLabel(article.title)).toBeDefined(),
+            )
         })
 
         it('should show upcoming date on the card', () => {
             BlogTestUtils.render()
             upcomingArticles.forEach((article) => {
-                if (article.upcomingDate) {
+                if (article.upcomingDate)
                     expect(Test.Typography.byLabel(article.title)).toBeDefined()
-                }
             })
         })
     })
@@ -73,14 +69,14 @@ describe('Blog', () => {
             BlogTestUtils.render()
             blogArticles
                 .filter((a) => !a.upcoming)
-                .forEach((article) => {
+                .forEach((article) =>
                     expect(
                         new Accessor(
                             screen.getByRole('img', { name: article.imageAlt }),
                             `Article image: ${article.imageAlt}`,
                         ),
-                    ).toBeDefined()
-                })
+                    ).toBeDefined(),
+                )
         })
 
         it('should render badges on article cards', () => {
@@ -88,9 +84,9 @@ describe('Blog', () => {
             const allBadges = new Set(
                 blogArticles.filter((a) => !a.upcoming).flatMap((a) => a.badges),
             )
-            allBadges.forEach((badge) => {
-                expect(screen.getAllByText(badge).length).toBeGreaterThan(0)
-            })
+            allBadges.forEach((badge) =>
+                expect(screen.getAllByText(badge).length).toBeGreaterThan(0),
+            )
         })
 
         it('should render reading time on article cards', () => {
@@ -111,10 +107,9 @@ describe('Blog', () => {
         })
     })
 
-    describe('Loading state', () => {
+    describe('Loading state', () =>
         it('should not show loading indicator', () => {
             BlogTestUtils.render()
             expect(Test.LoadingIndicator.Has.isLoading()).toBe(false)
-        })
-    })
+        }))
 })

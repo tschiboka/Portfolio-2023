@@ -4,10 +4,7 @@ import './Logout.scss'
 
 export const Logout = () => {
     const logout = LogoutHooks.useLogout()
-
-    useEffect(() => {
-        logout()
-    }, [logout])
+    useEffect(() => logout(), [logout])
 
     return <></>
 }

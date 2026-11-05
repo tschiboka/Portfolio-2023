@@ -73,12 +73,12 @@ type SubmitMoveParams = {
 }
 
 const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) => {
-    if (letters.length >= WordConstants.minLength) {
+    if (letters.length >= WordConstants.minLength)
         send({
             type: WebSocketRequestType.ATTEMPT_MOVE,
             payload: { attempt: letters },
         })
-    }
+
     setTouchState({ touchedIds: [], touchedLetters: '' })
 }
 
@@ -92,17 +92,16 @@ const getTouchState = (
 ): TouchState => {
     const indexInStack = prevIds.indexOf(id)
 
-    if (indexInStack === -1) {
+    if (indexInStack === -1)
         return {
             touchedIds: [...prevIds, id],
             touchedLetters: prevLetters + letter,
         }
-    } else if (indexInStack === prevIds.length - 2) {
+    else if (indexInStack === prevIds.length - 2)
         return {
             touchedIds: prevIds.slice(0, -1),
             touchedLetters: prevLetters.slice(0, -1),
         }
-    }
 
     return { touchedIds: prevIds, touchedLetters: prevLetters }
 }

@@ -83,9 +83,7 @@ describe('Table — Variants', () => {
                 rowVariant: ({ row }) => (row.status === 'inactive' ? 'disabled' : undefined),
             })
             const cells = container.querySelectorAll('tbody td')
-            cells.forEach((cell) => {
-                expect(cell).toHaveClass('variant-disabled')
-            })
+            cells.forEach((cell) => expect(cell).toHaveClass('variant-disabled'))
         })
 
         it('should let the column variant win over the row variant', () => {

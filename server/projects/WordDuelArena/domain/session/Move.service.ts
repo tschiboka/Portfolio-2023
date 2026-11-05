@@ -42,9 +42,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
 
         // End the match when all target words have been found
         const allTargetsSolved = targetWords.every((w: LevelWord) => w.status === 'SOLVED')
-        if (allTargetsSolved) {
-            draft.currentMatch.status = GameConstants.matchStatuses.FINISHED
-        }
+        if (allTargetsSolved) draft.currentMatch.status = GameConstants.matchStatuses.FINISHED
     }
 
     // Check if the attempt is an extra word
@@ -79,9 +77,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
             if (hintIndex !== undefined) {
                 const targetWord = draft.level.targetWords[hintIndex]
                 const nextIndex = targetWord.hintIndices.length // 0, 1, 2, ...
-                if (nextIndex < targetWord.word.length) {
-                    targetWord.hintIndices.push(nextIndex)
-                }
+                if (nextIndex < targetWord.word.length) targetWord.hintIndices.push(nextIndex)
             }
         }
     }

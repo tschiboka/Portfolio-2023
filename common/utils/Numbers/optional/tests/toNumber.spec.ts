@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { toNumber } from '..'
 import type { Nullish, Optional } from '../../../Generics'
 
-describe('Numbers.Optional.toNumber', () => {
+describe('Numbers.Optional.toNumber', () =>
     it.each<[Nullish<string>, Optional<number>]>([
         ['42', 42],
         ['  42  ', 42],
@@ -13,7 +13,6 @@ describe('Numbers.Optional.toNumber', () => {
         ['abc', undefined],
         [null, undefined],
         [undefined, undefined],
-    ])('should return %j for toNumber(%j)', (value, expected) => {
-        expect(toNumber(value)).toBe(expected)
-    })
-})
+    ])('should return %j for toNumber(%j)', (value, expected) =>
+        expect(toNumber(value)).toBe(expected),
+    ))

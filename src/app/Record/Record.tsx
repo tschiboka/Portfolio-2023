@@ -5,18 +5,16 @@ interface RecordProps {
     path: string
 }
 
-export const Record = ({ path }: RecordProps) => {
-    return (
-        <Screen
-            title={'tschiboka | View Records'}
-            path={path}
-            loginRequired
-            variant="app"
-            pageName="View Records"
-        >
-            <Main>
-                <Heading as="h1">View Records</Heading>
-            </Main>
-        </Screen>
-    )
-}
+export const Record = ({ path }: RecordProps) => (
+    <Screen
+        title={'tschiboka | View Records'}
+        path={path}
+        loginRequired
+        variant="app"
+        pageName="View Records"
+    >
+        <Main>
+            <Heading as="h1">View Records</Heading>
+        </Main>
+    </Screen>
+)

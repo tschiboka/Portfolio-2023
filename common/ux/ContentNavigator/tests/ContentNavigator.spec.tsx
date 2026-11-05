@@ -76,13 +76,12 @@ describe('ContentNavigator', () => {
         })
     })
 
-    describe('data-toc filtering', () => {
+    describe('data-toc filtering', () =>
         it('should not include headings without data-toc attribute', () => {
             Set.noTocAttr()
             const navigator = Test.ContentNavigator('TOC')
             expect(navigator.Get.links()).toHaveLength(0)
-        })
-    })
+        }))
 
     describe('showNavigator=false', () => {
         it('should not render the nav element', () => {
@@ -115,7 +114,7 @@ describe('ContentNavigator', () => {
         })
     })
 
-    describe('auto-generated IDs', () => {
+    describe('auto-generated IDs', () =>
         it('should generate slug IDs for headings without IDs', () => {
             Set.navigator()
             const navigator = Test.ContentNavigator('TOC')
@@ -124,20 +123,16 @@ describe('ContentNavigator', () => {
             expect(links[1].getAttribute('href')).toBe('#getting-started')
             expect(links[2].getAttribute('href')).toBe('#advanced-usage')
             expect(links[3].getAttribute('href')).toBe('#configuration')
-        })
-    })
+        }))
 
-    describe('active state', () => {
+    describe('active state', () =>
         it('should render data-active attribute on all links', () => {
             Set.navigator()
             const navigator = Test.ContentNavigator('TOC')
             const links = navigator.Get.links()
             // Every link should have the data-active attribute (either "true" or "false")
-            Array.from(links).forEach((link) => {
-                expect(link.hasAttribute('data-active')).toBe(true)
-            })
-        })
-    })
+            Array.from(links).forEach((link) => expect(link.hasAttribute('data-active')).toBe(true))
+        }))
 
     describe('close / open toggle', () => {
         it('should hide the nav when close button is clicked', async () => {
@@ -177,17 +172,16 @@ describe('ContentNavigator', () => {
         })
     })
 
-    describe('link interaction', () => {
+    describe('link interaction', () =>
         it('should call scrollIntoView when a link is clicked', async () => {
             Set.navigator()
             const navigator = Test.ContentNavigator('TOC')
 
             await navigator.Do.clickLink(1)
             expect(scrollIntoView).toHaveBeenCalled()
-        })
-    })
+        }))
 
-    describe('indentation', () => {
+    describe('indentation', () =>
         it('should indent deeper headings with paddingInlineStart', () => {
             Set.navigator()
             const navigator = Test.ContentNavigator('TOC')
@@ -199,6 +193,5 @@ describe('ContentNavigator', () => {
             expect((links[1] as HTMLElement).style.paddingInlineStart).toBe('16px')
             // h3 → 2 levels deeper → 32px
             expect((links[3] as HTMLElement).style.paddingInlineStart).toBe('32px')
-        })
-    })
+        }))
 })

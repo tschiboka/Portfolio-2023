@@ -8,9 +8,7 @@ import { Test, Accessor } from '../../Test'
 const { Set, FORM_LABEL } = FormTestUtils
 const { iconOptions } = FormTestMocks
 
-beforeAll(() => {
-    Element.prototype.scrollIntoView = vi.fn()
-})
+beforeAll(() => (Element.prototype.scrollIntoView = vi.fn()))
 
 describe('Input', () => {
     it('should render a text input', () => {
@@ -873,7 +871,7 @@ describe('DateInput', () => {
         })
     })
 
-    describe('Keyboard navigation', () => {
+    describe('Keyboard navigation', () =>
         it('should close calendar on Escape from input', async () => {
             Set.dateInput()
             const form = Test.Form(FORM_LABEL)
@@ -883,8 +881,7 @@ describe('DateInput', () => {
             const input = screen.getByPlaceholderText('dd/mm/yyyy')
             await Accessor.user.type(input, '{Escape}')
             expect(dateInput.Has.calendar()).toBe(false)
-        })
-    })
+        }))
 })
 
 describe('Error rendering', () => {

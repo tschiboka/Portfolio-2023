@@ -39,9 +39,7 @@ export const AchievementListItem = ({ achievement }: Props) => {
     return (
         <li
             className="AchievementListItem"
-            onClick={() => {
-                displayZoomOverlay(achievement?.certificate_img)
-            }}
+            onClick={() => displayZoomOverlay(achievement?.certificate_img)}
         >
             <img src={achievement.image} alt={achievement.image_alt} />
             <span>

@@ -19,7 +19,7 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
     const isApp = variant === 'app'
     const items = isApp ? NavDefaults.apiMenu : NavDefaults.portfolioMenu
 
-    const handleItemClick = (item: MenuItem) => {
+    const handleItemClick = (item: MenuItem) =>
         Maybe.fromNull(item.submenu).cata(
             () => setSubmenuStack([]),
             (sub) => {
@@ -34,7 +34,6 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
                     ])
             },
         )
-    }
 
     const sessionContext = Session.useContext()
     const isAuthLoading = isApp ? sessionContext.isAuthLoading : false

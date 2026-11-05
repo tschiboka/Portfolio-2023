@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { toBoolean } from '..'
 import type { Nullish } from '../../../Generics'
 
-describe('Booleans.Optional.toBoolean', () => {
+describe('Booleans.Optional.toBoolean', () =>
     it.each<[Nullish<string>, boolean]>([
         ['true', true],
         ['false', false],
@@ -11,7 +11,6 @@ describe('Booleans.Optional.toBoolean', () => {
         ['true ', false],
         [null, false],
         [undefined, false],
-    ])('should return %j for toBoolean(%j)', (value, expected) => {
-        expect(toBoolean(value)).toBe(expected)
-    })
-})
+    ])('should return %j for toBoolean(%j)', (value, expected) =>
+        expect(toBoolean(value)).toBe(expected),
+    ))

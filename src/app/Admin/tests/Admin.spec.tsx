@@ -19,7 +19,7 @@ describe('Admin', () => {
         })
     })
 
-    describe('Backfill', () => {
+    describe('Backfill', () =>
         it('should render the upserted count from the response', async () => {
             const { user } = AdminTestUtils.customRender()
 
@@ -32,6 +32,5 @@ describe('Admin', () => {
                     screen.getByText(String(AdminMocks.backfill.build().upserted)),
                 ).toBeDefined(),
             )
-        })
-    })
+        }))
 })

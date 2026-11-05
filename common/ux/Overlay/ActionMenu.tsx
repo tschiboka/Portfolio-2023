@@ -25,9 +25,7 @@ export const ActionMenu = ({
     useLayoutEffect(() => {
         const anchorEl = anchorRef?.current
         const menuEl = menuRef.current
-        if (anchorEl && menuEl) {
-            setAnchorResult(getAnchorPosition(anchorEl, menuEl, align))
-        }
+        if (anchorEl && menuEl) setAnchorResult(getAnchorPosition(anchorEl, menuEl, align))
     }, [anchorRef, align])
 
     useEffect(() => {

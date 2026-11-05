@@ -26,14 +26,10 @@ export const MobileMenu = ({
     const [submenuStack, setSubmenuStack] = useState<Array<string>>([])
 
     useEffect(() => {
-        if (mobileMenuVisible) {
-            document.body.style.overflow = 'hidden'
-        } else {
-            document.body.style.overflow = ''
-        }
-        return () => {
-            document.body.style.overflow = ''
-        }
+        if (mobileMenuVisible) document.body.style.overflow = 'hidden'
+        else document.body.style.overflow = ''
+
+        return () => void (document.body.style.overflow = '')
     }, [mobileMenuVisible])
 
     if (!mobileMenuVisible) return null

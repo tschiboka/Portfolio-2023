@@ -48,9 +48,7 @@ export const Popup = ({
     useLayoutEffect(() => {
         const anchorEl = anchorRef?.current
         const popupEl = popupRef.current
-        if (anchorEl && popupEl) {
-            setAnchorResult(getAnchorPosition(anchorEl, popupEl))
-        }
+        if (anchorEl && popupEl) setAnchorResult(getAnchorPosition(anchorEl, popupEl))
     }, [anchorRef])
 
     const measureStyle: CSSProperties = {

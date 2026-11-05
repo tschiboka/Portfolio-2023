@@ -19,13 +19,11 @@ const {
 
 describe('isConditionDenied', () => {
     describe('capability condition', () => {
-        it('should return false when the user has the required capability', () => {
-            expect(isConditionDenied(capabilityCondition, fullAccess)).toBe(false)
-        })
+        it('should return false when the user has the required capability', () =>
+            expect(isConditionDenied(capabilityCondition, fullAccess)).toBe(false))
 
-        it('should return true when the user lacks the required capability', () => {
-            expect(isConditionDenied(capabilityCondition, noAccess)).toBe(true)
-        })
+        it('should return true when the user lacks the required capability', () =>
+            expect(isConditionDenied(capabilityCondition, noAccess)).toBe(true))
 
         it('should return true when the user has only some of multiple required capabilities', () => {
             const multi: GuardCondition = { type: 'capability', capabilities: ['admin', 'admin'] }
@@ -45,18 +43,16 @@ describe('isConditionDenied', () => {
     })
 
     describe('feature condition', () => {
-        it('should return false when the feature is enabled', () => {
-            expect(isConditionDenied(featureCondition, fullAccess)).toBe(false)
-        })
+        it('should return false when the feature is enabled', () =>
+            expect(isConditionDenied(featureCondition, fullAccess)).toBe(false))
 
         it('should return true when the feature is disabled', () => {
             const disabled: AccessMap = { capabilities: [], features: { xmas2025: false } }
             expect(isConditionDenied(featureCondition, disabled)).toBe(true)
         })
 
-        it('should return true when the feature is missing from the map', () => {
-            expect(isConditionDenied(featureCondition, noAccess)).toBe(true)
-        })
+        it('should return true when the feature is missing from the map', () =>
+            expect(isConditionDenied(featureCondition, noAccess)).toBe(true))
 
         it.each<MultiFeatureCase>([
             {
@@ -202,9 +198,8 @@ describe('isGuardActive', () => {
 })
 
 describe('resolveGuards', () => {
-    it('should return null when guards array is empty', () => {
-        expect(resolveGuards([], fullAccess)).toBeNull()
-    })
+    it('should return null when guards array is empty', () =>
+        expect(resolveGuards([], fullAccess)).toBeNull())
 
     it('should return null when no guard is active', () => {
         const guards: Guard[] = [
@@ -256,8 +251,8 @@ describe('resolveGuards', () => {
         })
     })
 
-    describe('returns correct ModeConfig for each mode', () => {
-        modeConfigs.forEach(({ name, config }) => {
+    describe('returns correct ModeConfig for each mode', () =>
+        modeConfigs.forEach(({ name, config }) =>
             it(`should return "${name}" mode config`, () => {
                 const guards: Guard[] = [
                     { when: { type: 'capability', capabilities: ['admin'] }, then: config },
@@ -265,9 +260,8 @@ describe('resolveGuards', () => {
                 const result = resolveGuards(guards, noAccess)
                 expect(result).not.toBeNull()
                 expect(result!.mode).toBe(config.mode)
-            })
-        })
-    })
+            }),
+        ))
 
     describe('mixed when and unless guards', () => {
         it('should resolve "when" guard before "unless" guard based on array order', () => {
@@ -351,7 +345,7 @@ describe('resolveGuards', () => {
         })
     })
 
-    describe('single guard scenarios', () => {
+    describe('single guard scenarios', () =>
         it.each<GuardCase>([
             {
                 name: 'hidden when no admin',
@@ -400,15 +394,11 @@ describe('resolveGuards', () => {
             },
         ])('should resolve $name', ({ guard, access, expected }) => {
             const result = resolveGuards([guard], access)
-            if (expected === null) {
-                expect(result).toBeNull()
-            } else {
-                expect(result).toEqual(expected)
-            }
-        })
-    })
+            if (expected === null) expect(result).toBeNull()
+            else expect(result).toEqual(expected)
+        }))
 
-    describe('complex guard chains', () => {
+    describe('complex guard chains', () =>
         it.each<ChainCase>([
             {
                 name: 'first guard matches (missing beta feature)',
@@ -434,6 +424,5 @@ describe('resolveGuards', () => {
             const result = resolveGuards(complexGuards, access)
             expect(result).not.toBeNull()
             expect(result!.mode).toBe(expectedMode)
-        })
-    })
+        }))
 })

@@ -39,9 +39,8 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
                 if (!isString(event.data)) return
 
                 const data = JSON.parse(event.data) as WebSocketResponse
-                if (data.type === 'error') {
-                    setErrorMessage(data.message ?? 'Unknown error')
-                } else if (data.type === 'state_update' && data.payload) {
+                if (data.type === 'error') setErrorMessage(data.message ?? 'Unknown error')
+                else if (data.type === 'state_update' && data.payload) {
                     setSessionState?.(data.payload)
                     setErrorMessage(null)
                 }
@@ -49,9 +48,7 @@ export const SessionWebSocketProvider = ({ children }: Props) => {
         },
     )
 
-    const send = (msg: WebSocketRequest) => {
-        sendJsonMessage(msg)
-    }
+    const send = (msg: WebSocketRequest) => sendJsonMessage(msg)
 
     return (
         <SessionWebSocketContext.Provider

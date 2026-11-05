@@ -18,11 +18,9 @@ export const SessionOverlay = ({
     let message = errorMessage
     let mode: SessionOverlayModes = 'none'
 
-    if (!sessionState) {
-        mode = 'none'
-    } else if (!sessionState?.players || !sessionState.role) {
-        mode = 'connect'
-    } else {
+    if (!sessionState) mode = 'none'
+    else if (!sessionState?.players || !sessionState.role) mode = 'connect'
+    else {
         const player = sessionState.players[sessionState.role]
         const meConnected = player?.connected
         const opponentConnected =

@@ -8,6 +8,8 @@ export type RuleScope = {
 export type RuleSeverity = 'error' | 'warn'
 export type LinterKind = 'eslint' | 'oxc'
 
+export type RuleSetting = RuleSeverity | [RuleSeverity, ...unknown[]]
+
 export type RuleRequirement = {
     linter: LinterKind
     min: string
@@ -25,5 +27,7 @@ export type RuleRegistrar = {
     enabled: boolean
     scope: RuleScope
     severity: RuleSeverity
+    /** Passed to the rule after its severity. Absent means the rule takes none. */
+    options?: unknown[]
     rules: [RuleFunction]
 }

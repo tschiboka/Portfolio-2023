@@ -27,12 +27,9 @@ class NavAccessor extends Accessor {
     get Do() {
         return {
             ...super.Do,
-            toggle: async (title: string) => {
-                await Accessor.user.click(this.Get.burger(title))
-            },
-            clickLink: async (text: string | RegExp) => {
-                await Accessor.user.click(this.Get.byText(text))
-            },
+            toggle: async (title: string) => await Accessor.user.click(this.Get.burger(title)),
+            clickLink: async (text: string | RegExp) =>
+                await Accessor.user.click(this.Get.byText(text)),
         }
     }
 }

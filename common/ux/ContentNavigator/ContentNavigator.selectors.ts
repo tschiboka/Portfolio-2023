@@ -42,9 +42,9 @@ const getActiveHeaders = (elems: Element[]) => {
 
     // Current section: last heading scrolled past the top
     let sectionIdx = 0
-    for (let i = 0; i < elems.length; i++) {
+    for (let i = 0; i < elems.length; i++)
         if (elems[i].getBoundingClientRect().top <= 100) sectionIdx = i
-    }
+
     active.add(sectionIdx)
 
     // Also add all headings physically in the viewport

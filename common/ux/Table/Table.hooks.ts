@@ -50,13 +50,12 @@ const useTableController = <TFilters extends Dictionary, TParams = unknown>({
     // `replace` mirrors the URL history mode: filter apply/reset pushes (Back restores the
     // filtered state); sort/page replace (no granular history).
     const commit = useCallback(
-        (transition: (prev: TableState<TFilters>) => TableState<TFilters>, replace = true) => {
+        (transition: (prev: TableState<TFilters>) => TableState<TFilters>, replace = true) =>
             setState((prev) => {
                 const next = transition(prev)
                 if (urlPersistence.enabled) urlPersistence.persist(next, replace)
                 return next
-            })
-        },
+            }),
         [urlPersistence],
     )
 

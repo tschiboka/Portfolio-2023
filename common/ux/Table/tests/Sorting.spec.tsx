@@ -189,20 +189,16 @@ describe('Table — Sorting', () => {
     })
 
     describe('getNextSortDirection utility', () => {
-        it('should return desc when current column is same and direction is asc', () => {
-            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'name')).toBe('desc')
-        })
+        it('should return desc when current column is same and direction is asc', () =>
+            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'name')).toBe('desc'))
 
-        it('should return asc when current column is same and direction is desc', () => {
-            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'name')).toBe('asc')
-        })
+        it('should return asc when current column is same and direction is desc', () =>
+            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'name')).toBe('asc'))
 
-        it('should return asc when target column is different', () => {
-            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'value')).toBe('asc')
-        })
+        it('should return asc when target column is different', () =>
+            expect(TableHeadUtils.getNextSortDirection('name', 'asc', 'value')).toBe('asc'))
 
-        it('should return asc when target column is different and current is desc', () => {
-            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'value')).toBe('asc')
-        })
+        it('should return asc when target column is different and current is desc', () =>
+            expect(TableHeadUtils.getNextSortDirection('name', 'desc', 'value')).toBe('asc'))
     })
 })

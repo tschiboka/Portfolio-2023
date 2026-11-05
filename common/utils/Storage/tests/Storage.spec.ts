@@ -5,18 +5,12 @@ import { Storage } from '..'
 const { TEST_KEY } = StorageTestUtils
 
 describe('Storage', () => {
-    beforeEach(() => {
-        localStorage.clear()
-    })
+    beforeEach(() => localStorage.clear())
 
-    afterEach(() => {
-        vi.restoreAllMocks()
-    })
+    afterEach(() => vi.restoreAllMocks())
 
     describe('get', () => {
-        it('should return null for a missing key', () => {
-            expect(Storage.get(TEST_KEY)).toBeNull()
-        })
+        it('should return null for a missing key', () => expect(Storage.get(TEST_KEY)).toBeNull())
 
         it('should return the parsed value for an existing key', () => {
             localStorage.setItem(TEST_KEY, JSON.stringify({ a: 1, b: 2 }))
@@ -62,9 +56,8 @@ describe('Storage', () => {
             expect(localStorage.getItem(TEST_KEY)).toBeNull()
         })
 
-        it('should not throw when removing a missing key', () => {
-            expect(() => Storage.remove('nonexistent')).not.toThrow()
-        })
+        it('should not throw when removing a missing key', () =>
+            expect(() => Storage.remove('nonexistent')).not.toThrow())
     })
 
     describe('update', () => {

@@ -56,9 +56,8 @@ export const SearchInput = <
     }
 
     const handleClickOutside = (event: MouseEvent) => {
-        if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        if (containerRef.current && !containerRef.current.contains(event.target as Node))
             setOpen(false)
-        }
     }
 
     const filteredOptions = (text = '') =>
@@ -111,9 +110,7 @@ export const SearchInput = <
 
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside)
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
+        return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
     return (

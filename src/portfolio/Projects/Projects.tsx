@@ -29,18 +29,15 @@ export const Projects = ({ pageName }: Props) => {
         filteredProjectsByLanguage,
     )
 
-    const handleToggle = (language: string) => {
+    const handleToggle = (language: string) =>
         setSelectedLanguages((prev) => {
             const next = new Set(prev)
             if (next.has(language)) next.delete(language)
             else next.add(language)
             return next
         })
-    }
 
-    const handleFilter = (by: string) => {
-        setSelectedFilter(by)
-    }
+    const handleFilter = (by: string) => setSelectedFilter(by)
 
     const handleClearFilters = () => {
         setSelectedLanguages(new Set())

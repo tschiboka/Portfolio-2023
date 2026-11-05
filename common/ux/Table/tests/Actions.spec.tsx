@@ -66,7 +66,7 @@ describe('Table — Actions', () => {
         })
     })
 
-    describe('href action', () => {
+    describe('href action', () =>
         it('should navigate to the href computed from the meta', async () => {
             const originalHref = window.location.href
             Test.Table.Set.mock<Row>({
@@ -87,8 +87,7 @@ describe('Table — Actions', () => {
             expect(window.location.href).toContain('alpha')
             // Restore
             window.location.href = originalHref
-        })
-    })
+        }))
 
     describe('filter action', () => {
         it('should hide the action when the filter returns false', async () => {
@@ -208,7 +207,7 @@ describe('Table — Actions', () => {
         })
     })
 
-    describe('Action variants', () => {
+    describe('Action variants', () =>
         it.each(['primary', 'secondary', 'danger'] as const)(
             'should apply the %s variant class to the action item',
             async (variant) => {
@@ -223,8 +222,7 @@ describe('Table — Actions', () => {
                 const item = table.Get.menuItem('Action')
                 expect(item).toHaveClass(variant)
             },
-        )
-    })
+        ))
 
     describe('Action menu toggle', () => {
         it('should open the menu on click', async () => {
