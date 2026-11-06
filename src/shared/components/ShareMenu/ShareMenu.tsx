@@ -6,8 +6,8 @@ import {
     EmailShareButton,
     FacebookShareButton,
     LinkedinShareButton,
-    TwitterShareButton,
     WhatsappShareButton,
+    XShareButton,
 } from 'react-share'
 import './ShareMenu.scss'
 
@@ -26,9 +26,9 @@ export const ShareMenu = ({ path }: Props) => {
             <FacebookShareButton url={domain + path} className="ShareMenu__icon">
                 <ImFacebook2 />
             </FacebookShareButton>
-            <TwitterShareButton url={domain + path} className="ShareMenu__icon">
+            <XShareButton url={domain + path} className="ShareMenu__icon">
                 <BsTwitter />
-            </TwitterShareButton>
+            </XShareButton>
             <WhatsappShareButton url={domain + path} className="ShareMenu__icon">
                 <IoLogoWhatsapp />
             </WhatsappShareButton>

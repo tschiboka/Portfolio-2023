@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { createRef, useMemo, useState } from 'react'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import {
@@ -28,12 +28,30 @@ type OverlaysProps = { path: string }
 
 export const Overlays = ({ path }: OverlaysProps) => {
     const [activePopup, setActivePopup] = useState<Nullable<string>>(null)
-    const btnRefs = useRef<Record<string, HTMLButtonElement | null>>({})
+
+    // Every trigger owns a stable ref object, so no ref is read or written while rendering.
+    const loopAnchors = useMemo(
+        () =>
+            Object.fromEntries(
+                [
+                    ...modes.map((mode) => `mode-${mode}`),
+                    ...sizes.map((size) => `size-${size}`),
+                    ...aligns.map((align) => `am-align-${align}`),
+                ].map((id) => [id, createRef<HTMLButtonElement>()]),
+            ),
+        [],
+    )
 
     const open = (id: string) => setActivePopup(id)
     const close = () => setActivePopup(null)
-    const refFor = (id: string) => (el: HTMLButtonElement | null) => (btnRefs.current[id] = el)
-    const anchorFor = (id: string) => ({ current: btnRefs.current[id] ?? null })
+    const actionsAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const anchoredAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const customAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const basicAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const variantsAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const disabledAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const iconsAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
+    const ariaAnchor = useMemo(() => createRef<HTMLButtonElement>(), [])
 
     const basicItems: ActionMenuItem[] = [
         { id: 'edit', label: 'Edit', onClick: () => alert('Edit clicked') },
@@ -93,7 +111,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         {modes.map((mode) => (
                             <Button
                                 key={mode}
-                                ref={refFor(`mode-${mode}`)}
+                                ref={loopAnchors[`mode-${mode}`]}
                                 onClick={() => open(`mode-${mode}`)}
                             >
                                 {mode}
@@ -106,7 +124,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                                 <Overlay.Popup
                                     key={mode}
                                     mode={mode}
-                                    anchorRef={anchorFor(`mode-${mode}`)}
+                                    anchorRef={loopAnchors[`mode-${mode}`]}
                                     title={`${mode.charAt(0).toUpperCase()}${mode.slice(1)} Mode`}
                                     message={`This is a popup in ${mode} mode with its default icon.`}
                                     onClose={close}
@@ -123,7 +141,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         {sizes.map((size) => (
                             <Button
                                 key={size}
-                                ref={refFor(`size-${size}`)}
+                                ref={loopAnchors[`size-${size}`]}
                                 onClick={() => open(`size-${size}`)}
                             >
                                 {size}
@@ -136,7 +154,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                                 <Overlay.Popup
                                     key={size}
                                     size={size}
-                                    anchorRef={anchorFor(`size-${size}`)}
+                                    anchorRef={loopAnchors[`size-${size}`]}
                                     title={`Size: ${size}`}
                                     message={`This popup uses the "${size}" size preset.`}
                                     onClose={close}
@@ -150,13 +168,13 @@ export const Overlays = ({ path }: OverlaysProps) => {
                     <Paragraph>
                         Popups can have multiple action buttons, with conditional visibility:
                     </Paragraph>
-                    <Button ref={refFor('actions')} onClick={() => open('actions')}>
+                    <Button ref={actionsAnchor} onClick={() => open('actions')}>
                         Open with actions
                     </Button>
                     {activePopup === 'actions' && (
                         <Overlay.Popup
                             mode="info"
-                            anchorRef={anchorFor('actions')}
+                            anchorRef={actionsAnchor}
                             title="Action Demo"
                             message="The 'Hidden' button has when: false and won't appear."
                             onClose={close}
@@ -179,14 +197,14 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Popups anchor to the trigger button and auto-position above or below:
                     </Paragraph>
                     <Stack.Horizontal gap="24" wrap style={{ padding: '40px 0' }}>
-                        <Button ref={refFor('anchored')} onClick={() => open('anchored')}>
+                        <Button ref={anchoredAnchor} onClick={() => open('anchored')}>
                             Open anchored
                         </Button>
                     </Stack.Horizontal>
                     {activePopup === 'anchored' && (
                         <Overlay.Popup
                             mode="primary"
-                            anchorRef={anchorFor('anchored')}
+                            anchorRef={anchoredAnchor}
                             title="Anchored Popup"
                             message="This popup auto-positions based on available space."
                             onClose={close}
@@ -198,14 +216,14 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Custom Content</Heading>
                     <Paragraph>Popups accept children for fully custom body content:</Paragraph>
-                    <Button ref={refFor('custom')} onClick={() => open('custom')}>
+                    <Button ref={customAnchor} onClick={() => open('custom')}>
                         Open custom popup
                     </Button>
                     {activePopup === 'custom' && (
                         <Overlay.Popup
                             mode="warning"
                             title="Custom Content"
-                            anchorRef={anchorFor('custom')}
+                            anchorRef={customAnchor}
                             onClose={close}
                             size="lg"
                         >
@@ -238,12 +256,12 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Basic</Heading>
                     <Paragraph>A simple action menu with three items:</Paragraph>
-                    <Button ref={refFor('am-basic')} onClick={() => open('am-basic')}>
+                    <Button ref={basicAnchor} onClick={() => open('am-basic')}>
                         Open menu
                     </Button>
                     {activePopup === 'am-basic' && (
                         <Overlay.ActionMenu
-                            anchorRef={anchorFor('am-basic')}
+                            anchorRef={basicAnchor}
                             items={basicItems}
                             onClose={close}
                         />
@@ -261,7 +279,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         {aligns.map((align) => (
                             <Button
                                 key={align}
-                                ref={refFor(`am-align-${align}`)}
+                                ref={loopAnchors[`am-align-${align}`]}
                                 onClick={() => open(`am-align-${align}`)}
                             >
                                 align=&quot;{align}&quot;
@@ -273,7 +291,7 @@ export const Overlays = ({ path }: OverlaysProps) => {
                             activePopup === `am-align-${align}` && (
                                 <Overlay.ActionMenu
                                     key={align}
-                                    anchorRef={anchorFor(`am-align-${align}`)}
+                                    anchorRef={loopAnchors[`am-align-${align}`]}
                                     align={align}
                                     items={basicItems}
                                     onClose={close}
@@ -288,12 +306,12 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Items support colour variants: <CodeText>primary</CodeText>,{' '}
                         <CodeText>secondary</CodeText>, and <CodeText>danger</CodeText>.
                     </Paragraph>
-                    <Button ref={refFor('am-variants')} onClick={() => open('am-variants')}>
+                    <Button ref={variantsAnchor} onClick={() => open('am-variants')}>
                         Open with variants
                     </Button>
                     {activePopup === 'am-variants' && (
                         <Overlay.ActionMenu
-                            anchorRef={anchorFor('am-variants')}
+                            anchorRef={variantsAnchor}
                             items={variantItems}
                             onClose={close}
                         />
@@ -306,12 +324,12 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Items with <CodeText>disabled: true</CodeText> are greyed out and
                         unclickable:
                     </Paragraph>
-                    <Button ref={refFor('am-disabled')} onClick={() => open('am-disabled')}>
+                    <Button ref={disabledAnchor} onClick={() => open('am-disabled')}>
                         Open with disabled
                     </Button>
                     {activePopup === 'am-disabled' && (
                         <Overlay.ActionMenu
-                            anchorRef={anchorFor('am-disabled')}
+                            anchorRef={disabledAnchor}
                             items={disabledItems}
                             onClose={close}
                         />
@@ -321,12 +339,12 @@ export const Overlays = ({ path }: OverlaysProps) => {
                 <Section>
                     <Heading as="h3">Icons</Heading>
                     <Paragraph>Items can include an icon rendered before the label:</Paragraph>
-                    <Button ref={refFor('am-icons')} onClick={() => open('am-icons')}>
+                    <Button ref={iconsAnchor} onClick={() => open('am-icons')}>
                         Open with icons
                     </Button>
                     {activePopup === 'am-icons' && (
                         <Overlay.ActionMenu
-                            anchorRef={anchorFor('am-icons')}
+                            anchorRef={iconsAnchor}
                             items={iconItems}
                             onClose={close}
                         />
@@ -339,12 +357,12 @@ export const Overlays = ({ path }: OverlaysProps) => {
                         Override the default <CodeText>&quot;Action menu&quot;</CodeText> label for
                         screen readers:
                     </Paragraph>
-                    <Button ref={refFor('am-aria')} onClick={() => open('am-aria')}>
+                    <Button ref={ariaAnchor} onClick={() => open('am-aria')}>
                         Open with custom label
                     </Button>
                     {activePopup === 'am-aria' && (
                         <Overlay.ActionMenu
-                            anchorRef={anchorFor('am-aria')}
+                            anchorRef={ariaAnchor}
                             ariaLabel="User actions"
                             items={basicItems}
                             onClose={close}

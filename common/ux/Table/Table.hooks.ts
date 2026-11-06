@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import { isDefined, isEmpty, Objects, Table } from '@common-utils'
 import { TableUrlPersistenceHooks, TableUrlPersistenceUtils } from './TableUrlPersistence'
 import type { Dictionary } from '@common-utils'
@@ -65,6 +65,7 @@ const useTableController = <TFilters extends Dictionary, TParams = unknown>({
     // so `state` is not a dependency.
     useEffect(() => {
         if (!urlPersistence.enabled || !urlState) return
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- the URL is the external source of truth being mirrored in
         setState((prev) => (TableUrlPersistenceUtils.statesEqual(prev, urlState) ? prev : urlState))
     }, [urlState, urlPersistence.enabled, urlPersistence])
 

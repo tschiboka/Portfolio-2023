@@ -391,7 +391,7 @@ export class Accessor {
 
 **`within()` scoping** — Every accessor is bound to a specific DOM element. Queries search _inside_ that element only. Two forms on one page won't interfere — `form.Get.errorMsg()` only finds errors inside _that_ form.
 
-**Singleton `user`** — RTL's `userEvent.setup()` creates an independent input state (keyboard modifiers, pointer position, clipboard). Multiple instances cause desynced state. One singleton per test ensures coherent interaction sequences.
+**Singleton `user`** — RTL's `userEvent.setup()` creates an independent input state (keyboard modifiers, pointer position, clipboard). Multiple instances cause desynced state. One singleton per test ensures coherent interaction sequences. It is created with `delay: null`, because the default `delay: 0` still schedules a `setTimeout` per event and the suite makes hundreds of interactions.
 
 **`context`** — Hierarchical caller chain (e.g. `Form('Login').Input('Email')`). Factory methods pass context down, so error messages show the full accessor chain that led to the failure.
 

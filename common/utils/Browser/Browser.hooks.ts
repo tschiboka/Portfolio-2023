@@ -56,10 +56,13 @@ const useFullScreen = <T extends HTMLElement>() => {
 const useStableElements = <T extends Element>(elements: T[]): T[] => {
     const ref = useRef(elements)
 
+    /* eslint-disable react-hooks/refs -- caching the previous elements is the documented
+       use of a ref during render; it never feeds output on its own, it only keeps identity. */
     if (elements.length !== ref.current.length || elements.some((el, i) => el !== ref.current[i]))
         ref.current = elements
 
     return ref.current
+    /* eslint-enable react-hooks/refs */
 }
 
 /**
@@ -100,6 +103,7 @@ const useIsVisible = <T extends Element>(elements: T[]): VisibilityEntry<T>[] =>
             }),
         )
 
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- clears the flags when the observed set changes
         setVisibility(stableElements.map((element) => ({ element, isVisible: false })))
         stableElements.forEach((el) => observer.observe(el))
 

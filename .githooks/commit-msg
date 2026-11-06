@@ -15,3 +15,18 @@ npm run tsc
 
 echo "[commit] tests"
 npm run test:run
+
+# npm 12 returns nothing at all for --workspaces, so each manifest is asked directly.
+# Hoisted workspace dependencies come back as MISSING and npm's table always carries two
+# header rows, so only a row whose wanted version trails the latest is worth a line.
+stale=$(for manifest in . common server; do
+    npm outdated --prefix "$manifest" 2>/dev/null | awk -v manifest="$manifest" '
+        NR > 2 && $3 != $4 {
+            printf "  %-10s %-16s %s -> %s\n", manifest, $1, ($2 == "MISSING" ? $3 : $2), $4
+        }'
+done)
+
+if [ -n "$stale" ]; then
+    echo "[commit] dependency warnings"
+    printf '%s\n' "$stale"
+fi

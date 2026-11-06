@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { MemoryRouter, useLocation, useSearchParams } from 'react-router-dom'
 import { renderHook } from '@testing-library/react'
 import { Arrays } from '@common-utils'
@@ -36,7 +37,7 @@ const setupWithUrl = (initialSearch = '', count: 1 | 2 = 1) => {
     const wrapper = ({ children }: { children: ReactNode }) => {
         const Probe = () => {
             const { setUrl } = useRouterProbe((search) => (state.search = search))
-            state.setUrl = setUrl
+            useEffect(() => void (state.setUrl = setUrl))
             return null
         }
         return (

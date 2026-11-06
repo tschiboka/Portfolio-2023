@@ -18,8 +18,7 @@ import { registrar as noMagicBreakpointRegistrar } from './no-magic-breakpoint/N
 import { registrar as noRawFontSizeRegistrar } from './no-raw-font-size/NoRawFontSize.registrar.js'
 import { registrar as testNameVerbRegistrar } from './test-name-verb/TestNameVerb.registrar.js'
 import { registrar as noSpecLocalDeclarationRegistrar } from './no-spec-local-declaration/NoSpecLocalDeclaration.registrar.js'
-import { registrar as curlyRegistrar } from './curly/Curly.registrar.js'
-import { registrar as arrowBodyStyleRegistrar } from './arrow-body-style/ArrowBodyStyle.registrar.js'
+import { registrar as queriesExportShapeRegistrar } from './queries-export-shape/QueriesExportShape.registrar.js'
 import { registrar as noBracedArrowBodyRegistrar } from './no-braced-arrow-body/NoBracedArrowBody.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
@@ -45,7 +44,6 @@ export const RuleRegistry: RuleRegistrar[] = [
     noRawFontSizeRegistrar,
     testNameVerbRegistrar,
     noSpecLocalDeclarationRegistrar,
-    curlyRegistrar,
-    arrowBodyStyleRegistrar,
     noBracedArrowBodyRegistrar,
+    queriesExportShapeRegistrar,
 ].map(withPrefixedReports)

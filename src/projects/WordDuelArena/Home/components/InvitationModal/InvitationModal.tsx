@@ -32,7 +32,7 @@ export const InvitationModal = () => {
 
     const navigateToSession = () => {
         if (!sessionId) return
-        navigate(
+        void navigate(
             Navigation.createPath({
                 path: Navigation.SESSION,
                 params: { sessionId },

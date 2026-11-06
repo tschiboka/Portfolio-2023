@@ -17,6 +17,7 @@ export const CandlePanel = () => {
                 candles.candle3,
                 candles.candle4,
             ]
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- mirrors the candle state the server returned
             setCandles(newCandleState)
         }
     }, [candlesData])

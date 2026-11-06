@@ -24,13 +24,16 @@ export class Accessor {
     protected context: string // hierarchical caller chain for error messages
     private static _user: UserEvent // singleton user-event instance
 
+    // `delay: null` skips the per-event setTimeout hop that the default `0` still schedules.
+    private static readonly _userOptions = { delay: null }
+
     static get user(): UserEvent {
-        if (!Accessor._user) Accessor._user = userEvent.setup()
+        if (!Accessor._user) Accessor._user = userEvent.setup(Accessor._userOptions)
         return Accessor._user
     }
 
     static resetUser(): void {
-        Accessor._user = userEvent.setup()
+        Accessor._user = userEvent.setup(Accessor._userOptions)
     }
 
     constructor(element: Nullish<HTMLElement>, context = 'Accessor') {

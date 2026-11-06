@@ -38,6 +38,7 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
 
         if (token && sessionRehydrateResponse.isSuccess && response?.user) {
             const { user, settings } = response
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- adopts the session the rehydrate query returned
             setSession({ user, settings, token })
         }
     }, [token, sessionRehydrateResponse.isSuccess, sessionRehydrateData])

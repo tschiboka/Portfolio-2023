@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import type { RegionProps } from './Region.types'
 import './Region.styles.css'
 

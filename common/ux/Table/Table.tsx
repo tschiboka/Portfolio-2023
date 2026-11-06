@@ -57,7 +57,7 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     const [infoOpen, setInfoOpen] = useState(false)
     const [rowHeight, setRowHeight] = useState<Optional<number>>(undefined)
     const [filtersOpen, setFiltersOpen] = useState(false)
-    const columnsPropRef = useRef(columnsProp)
+    const [prevColumnsProp, setPrevColumnsProp] = useState(columnsProp)
     const tableRef = useRef<HTMLTableElement>(null)
     const filterPanelRef = useRef<TableFilterPanelHandle>(null)
 
@@ -86,8 +86,8 @@ export const Table = <TData extends Record<string, ReactNode>, TContext = unknow
     }, [isLoading, rowHeight])
 
     // Sync internal columns when the prop reference changes (e.g. new data load)
-    if (columnsProp !== columnsPropRef.current) {
-        columnsPropRef.current = columnsProp
+    if (columnsProp !== prevColumnsProp) {
+        setPrevColumnsProp(columnsProp)
         setColumns(columnsProp)
     }
 

@@ -27,7 +27,7 @@ describe('DateTime', () => {
             expect(Units.Ms[fn]()).toBe(expected),
         )
 
-        describe.each([
+        describe.each<[keyof typeof Units.Ms, [number, number][]]>([
             [
                 'fromSec',
                 [
@@ -73,8 +73,8 @@ describe('DateTime', () => {
                     [0.5, 302_400_000],
                 ],
             ],
-        ] as const)('should define Ms.%s', (fn, cases) =>
-            it.each(cases)(`should return %d ms for ${fn}(%d)`, (input: number, expected: number) =>
+        ])('should define Ms.%s', (fn, cases) =>
+            void it.each(cases)(`should return %d ms for ${fn}(%d)`, (input: number, expected: number) =>
                 expect(Units.Ms[fn](input)).toBe(expected),
             ),
         )

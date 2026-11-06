@@ -1,7 +1,7 @@
 import { TbListTree } from 'react-icons/tb'
 import { IoClose } from 'react-icons/io5'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
 import type { ContentNavigatorProps } from './ContentNavigator.types'
@@ -70,11 +70,9 @@ export const ContentNavigator = ({
 
     const scrollRef = useRef<HTMLDivElement>(null)
     const linkRefs = useRef<Map<number, HTMLAnchorElement>>(new Map())
-    const elementsRef = useRef(elements)
-    elementsRef.current = elements
     const [activeIndices, setActiveIndices] = useState<Set<number>>(new Set())
 
-    const computeActive = useCallback(() => getActiveHeaders(elementsRef.current), [])
+    const computeActive = useCallback(() => getActiveHeaders(elements), [elements])
 
     const scrollTo = useCallback((id: string) => {
         const el = document.getElementById(id)
@@ -102,7 +100,7 @@ export const ContentNavigator = ({
             }
 
             const container = scrollRef.current
-            const els = elementsRef.current
+            const els = elements
             if (!container || isEmpty(els)) return
 
             const active = computeActive()
@@ -125,7 +123,7 @@ export const ContentNavigator = ({
 
         window.addEventListener('scroll', onScroll, { passive: true })
         return () => window.removeEventListener('scroll', onScroll)
-    }, [computeActive])
+    }, [computeActive, elements])
 
     // SVG / layout constants
     const ROW = 28

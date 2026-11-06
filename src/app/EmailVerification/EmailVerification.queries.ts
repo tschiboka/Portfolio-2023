@@ -28,7 +28,7 @@ const usePost = (token: string): UsePostResult => {
         ...request.Post({
             onSuccess: () => {
                 setMessage(ClientMessage.Success.Verified('email'))
-                navigate(Paths.Client.Login)
+                void navigate(Paths.Client.Login)
             },
             onError: (error) =>
                 setMessage(errorMessage(error, ClientMessage.Failure.Verify('email'))),

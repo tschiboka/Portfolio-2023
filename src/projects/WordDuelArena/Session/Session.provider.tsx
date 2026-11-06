@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Storage } from '@common-utils'
 import { SessionConstants } from './Session.constants'
@@ -14,9 +14,9 @@ type SessionProviderProps = {
 export const SessionProvider = ({ children }: SessionProviderProps) => {
     const [sessionState, setSessionState] = useState<WebSocketSessionState>(SessionDefaults.state)
 
-    const deviceId = useRef(
-        Storage.get<DeviceIdStorage>(SessionConstants.WDA_KEY)?.deviceId ?? '',
-    ).current
+    const [deviceId] = useState(
+        () => Storage.get<DeviceIdStorage>(SessionConstants.WDA_KEY)?.deviceId ?? '',
+    )
     const { sessionId } = useParams()
 
     if (!sessionId) throw new Error('sessionId param is missing')

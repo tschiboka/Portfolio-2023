@@ -6,9 +6,11 @@ import type { ICategory } from './Category.types'
 export const CategoryRepository = Repository.define<typeof CategoryModel, ICategory>(
     CategoryModel,
 ).withQueries({
-    findByUser: (userId: unknown) => CategoryModel.find({ userId }),
-    findParentsByUser: (userId: unknown) => CategoryModel.find({ userId, isParent: true }),
-    findByUserAndName: (userId: unknown, name: string) =>
+    findByUser: (userId: ICategory['userId'] | string) => CategoryModel.find({ userId }),
+    findParentsByUser: (userId: ICategory['userId'] | string) =>
+        CategoryModel.find({ userId, isParent: true }),
+    findByUserAndName: (userId: ICategory['userId'] | string, name: string) =>
         CategoryModel.find({ userId, name: Regexp.exactWord(name) }),
-    findByIdAndUser: (id: string, userId: unknown) => CategoryModel.findOne({ _id: id, userId }),
+    findByIdAndUser: (id: string, userId: ICategory['userId'] | string) =>
+        CategoryModel.findOne({ _id: id, userId }),
 })

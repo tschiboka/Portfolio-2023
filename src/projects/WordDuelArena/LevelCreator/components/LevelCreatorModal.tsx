@@ -47,6 +47,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     const [validationError, setValidationError] = useState<string>('')
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- seeds local editing state from the loaded query data
         if (wordFrequencies && !frequencies) setFrequencies(wordFrequencies)
 
         if (frequencies && isEmpty(possibleWords) && anagramMap) {
@@ -69,6 +70,7 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
         if (error) {
             const errorMessage = error.response?.data?.message
             const errorText = errorMessage || 'An error occurred'
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- surfaces the mutation error for the form to show
             setValidationError(errorText)
         }
     }, [error])

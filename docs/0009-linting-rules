@@ -274,22 +274,24 @@ config owns is linted.
     - [x] Step 13.10: Move the seven `setup*` helpers into their `.spec.utils.ts` files
     - [x] Step 13.11: Sweep the remaining local builders and identity constants
     - [x] Step 13.12: Confirm a green `tsc`, lint, and test run
-- [ ] Step 14: Rule — no braces around a single-statement arrow body
-    - [ ] Step 14.1: Build `rules/no-braced-arrow-body/`
-    - [ ] Step 14.2: Flag an arrow body that is a block holding one expression statement and
+- [x] Step 14: Rule — no braces around a single-statement arrow body
+    - [x] Step 14.1: Build `rules/no-braced-arrow-body/`
+    - [x] Step 14.2: Flag an arrow body that is a block holding one expression statement and
           no return
-    - [ ] Step 14.3: Leave a body with an explicit `return` alone — it is a different shape,
-          not a brace to strip
-    - [ ] Step 14.4: Leave a body of one `await` with a discarded value alone, where dropping
-          the brace changes the return
-    - [ ] Step 14.5: Scope to `src/**`, `common/**`, `server/**` — a `.code.ts` sample is
-          displayed, not run
-    - [ ] Step 14.6: Register as `severity: 'warn'`
-    - [ ] Step 14.7: Add `tests/NoBracedArrowBody.spec.ts`
-    - [ ] Step 14.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 14.9: Sweep every offending arrow and fix or suppress each
-    - [ ] Step 14.10: Raise to `error` once the sweep is clean
-    - [ ] Step 14.11: Confirm a green `tsc`, lint, and test run
+    - [x] Step 14.3: Leave a body with an explicit `return` alone — `arrow-body-style` owns
+          that shape, registered at `['error', 'as-needed']`
+    - [x] Step 14.4: Flag a lone `await` — the arrow stays `async`, so the braces await nothing
+          the braceless form would not
+    - [x] Step 14.5: Scope to `**/*.{ts,tsx}`, excluding `**/*.code.{ts,tsx}` — a displayed
+          sample is not run
+    - [x] Step 14.6: Register as `severity: 'error'` — the sweep landed in the same commit, so
+          it never needed a `warn` phase
+    - [x] Step 14.7: Add `tests/NoBracedArrowBody.spec.ts`
+    - [x] Step 14.8: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 14.9: Sweep every offending arrow and fix or suppress each
+    - [x] Step 14.10: Fix a `: void` arrow with the `void` operator — it discards the value
+          the braces used to discard, and `void (x = [])` needs the parentheses
+    - [x] Step 14.11: Confirm a green `tsc`, lint, and test run
 - [ ] Step 15: Rule — a queries object exports `use*` leaves and PascalCase groups
     - [ ] Step 15.1: Build `rules/queries-export-shape/`
     - [ ] Step 15.2: Locate the exported `<Feature>Queries` object and read its keys
@@ -611,19 +613,21 @@ config owns is linted.
     - [ ] Step 33.8: Run `npm run build:rules`, then verify the generated config
     - [ ] Step 33.9: Sweep every site
     - [ ] Step 33.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 34: Rule — a control body takes braces only when it needs them
-    - [ ] Step 34.1: Give `RuleRegistrar` an optional `options`, emitted as
+- [x] Step 34: Rule — a control body takes braces only when it needs them
+    - [x] Step 34.1: Give `RuleRegistrar` an optional `options`, emitted as
           `[severity, ...options]` — the registry states severity alone today
-    - [ ] Step 34.2: Register ESLint's own `curly` at `['error', 'multi']`, so one list
+    - [x] Step 34.2: Register ESLint's own `curly` at `['error', 'multi']`, so one list
           still decides what is enforced
-    - [ ] Step 34.3: Build `rules/curly/` as a registrar only — there is no custom module
+    - [x] Step 34.3: Build `rules/curly/` as a registrar only — there is no custom module
           to write, the rule shipped with ESLint
-    - [ ] Step 34.4: Scope `include` to `**/*.{ts,tsx}`
-    - [ ] Step 34.5: Run `npm run build:rules`, then verify the emitted setting carries the
+    - [x] Step 34.4: Reach the rule through `new Linter({ configType: 'eslintrc' })` —
+          `@eslint/js` publishes its config, and `getRules()` throws under flat config
+    - [x] Step 34.5: Scope `include` to `**/*.{ts,tsx}`
+    - [x] Step 34.6: Run `npm run build:rules`, then verify the emitted setting carries the
           option array
-    - [ ] Step 34.6: Sweep with `eslint --fix` — `multi` removes braces from every
+    - [x] Step 34.7: Sweep with `eslint --fix` — `multi` removes braces from every
           single-statement body, so the diff reaches most files
-    - [ ] Step 34.7: Confirm a green `tsc`, lint, and test run
+    - [x] Step 34.8: Confirm a green `tsc`, lint, and test run
 - [ ] Step 35: Rule — the React namespace is never bound
     - [ ] Step 35.1: State the convention in `AGENTS.md` §1.2 — a React export is imported
           by name
@@ -1126,7 +1130,7 @@ shipping rules. `Already` means a rule covers it; `New` means no rule does;
 | 14  | `test` Rules             | Tests named `it('should <verb> …')`                              | Yes        | error    | Step 12 |
 | 15  | `test` Rules             | No raw `screen.getBy*` where an accessor exists                  | Yes        | error    | New     |
 | 16  | `test` Workflow          | A helper above `describe` lives in its role file                 | Partly     | error    | Step 13 |
-| 17  | `test` Workflow          | No braces around a single-statement arrow body                   | Yes        | warn     | New     |
+| 17  | `test` Workflow          | No braces around a single-statement arrow body                   | Yes        | error    | Step 14 |
 | 18  | `test` Workflow          | A mock lives in one of two homes only                            | Partly     | warn     | New     |
 | 19  | `test` spec example      | No single-character DOM variable names (`const s = …`)           | Yes        | warn     | New     |
 | 20  | `queries` Rules          | Never inline an error message — `errorMessage(...)`              | Yes        | error    | New     |

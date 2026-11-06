@@ -7,7 +7,7 @@ const { getTotalCols } = TableUtils
 // ═════════════════════════════════════════════════════════════════════════════
 
 describe('Table — Utility Functions', () =>
-    describe('getTotalCols', () => {
+    void describe('getTotalCols', () => {
         it('should return column count with no extras', () =>
             expect(getTotalCols(3, false, false, false)).toBe(3))
 

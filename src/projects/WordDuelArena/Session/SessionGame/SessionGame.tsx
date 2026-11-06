@@ -22,6 +22,7 @@ export const SessionGame = ({ enterFullScreen, isFullscreen }: SessionGameProps)
     useEffect(() => {
         if (levelName) {
             const shuffledLetters = Arrays.shuffleArray(levelName.split('')).join('')
+            // eslint-disable-next-line react-hooks/set-state-in-effect -- reshuffles the tray when the level changes
             setInputLetters(shuffledLetters)
         }
     }, [levelName])

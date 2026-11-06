@@ -2,7 +2,7 @@
     "compilerOptions": {
         "target": "ES2023",
         "module": "commonjs",
-        "lib": ["ES2023"],
+        "lib": ["ES2023", "DOM", "DOM.Iterable"],
         "allowJs": false,
         "checkJs": false,
         "outDir": "./dist",
@@ -10,6 +10,7 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
+        "noUncheckedSideEffectImports": false,
         "jsx": "react-jsx",
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,

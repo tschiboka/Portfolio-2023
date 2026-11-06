@@ -1,7 +1,7 @@
 /**
- * Every alias the project declares. The three files that declare them — `tsconfig.json`,
- * `vite.config.ts` and `jest.config.cjs` — each warn that a new one belongs here too. Both
- * ordering rules read this one list.
+ * Every alias the project declares. The two files that declare them — `tsconfig.json` and
+ * `vite.config.ts` — each warn that a new one belongs here too. Both ordering rules read this
+ * one list.
  */
 export const AliasPrefixes = [
     '@app',

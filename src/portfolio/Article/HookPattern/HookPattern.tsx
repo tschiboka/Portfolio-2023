@@ -26,7 +26,7 @@ export const HookPattern = ({ pageName, path }: Props) => {
     useEffect(() => () => console.log('5. Update or Unmount'), [value])
 
     const count = useRef(0)
-    console.log('Counter: ', count)
+    useEffect(() => console.log('Counter: ', count))
 
     const { themeMode, setThemeMode } = AppHooks.useContext()
 

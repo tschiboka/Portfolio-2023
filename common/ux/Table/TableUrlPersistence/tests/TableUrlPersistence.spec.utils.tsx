@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { MemoryRouter, useLocation } from 'react-router-dom'
 import { renderHook } from '@testing-library/react'
 import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
@@ -29,7 +30,8 @@ const setup = (options: SetupOptions = {}) => {
     const filters = 'filters' in options ? options.filters : filterDefs
     const search = { current: '' }
     const Probe = () => {
-        search.current = useSearchProbeResult()
+        const value = useSearchProbeResult()
+        useEffect(() => void (search.current = value))
         return null
     }
 

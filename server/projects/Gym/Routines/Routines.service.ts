@@ -3,6 +3,7 @@ import { ApiResponder, ApiTransformers, isValidObjectId } from '@common-utils'
 import { RoutinesRepository } from './Routines.repository'
 import { RoutinesPermissions } from './Routines.permissions'
 import { RoutinesSchema } from './Routines.schema'
+import type { RoutineValidationInput } from './Routines.types'
 import type {
     CurrentUser,
     GymRoutineResource,
@@ -54,7 +55,10 @@ export const RoutinesService = {
         if (!routine) throw ApiResponder.notFound('routine')
         RoutinesPermissions.requireUserCanModify(routine, user)
 
-        const { error } = RoutinesSchema.validate({ ...routine.toObject(), ...patch })
+        const { error } = RoutinesSchema.validate({
+            ...(routine.toObject() as RoutineValidationInput),
+            ...patch,
+        })
         if (error) throw ApiResponder.badRequest(error)
 
         routine.set(patch)

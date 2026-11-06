@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import { PopupUtils } from './Popup.utils'
 import type { CSSProperties } from 'react'
 import type { Optional } from '@common-utils'

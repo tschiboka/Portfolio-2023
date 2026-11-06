@@ -31,10 +31,7 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
         <QueryClientProvider client={queryClient}>
             <SessionContext.Provider value={sessionValue}>
                 <AppProvider initialState={appContext}>
-                    <MemoryRouter
-                        initialEntries={route}
-                        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-                    >
+                    <MemoryRouter initialEntries={route}>
                         {children}
                     </MemoryRouter>
                 </AppProvider>

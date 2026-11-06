@@ -1,5 +1,5 @@
 import { Control, Controller, Path } from 'react-hook-form'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import { FieldValues } from './Form.types'
 import type { AccessibleProps } from '../index.types'
 import './Form.styles.css'

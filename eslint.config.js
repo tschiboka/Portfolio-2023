@@ -72,6 +72,20 @@ export default tseslint.config(
             ],
         },
     },
+    // Test accessors are PascalCase factories over the DOM, not React components.
+    {
+        files: ['common/ux/Test/**/*.tsx'],
+        rules: { 'react-refresh/only-export-components': 'off' },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
+        rules: { curly: ['error', 'multi'] },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
+        ignores: ['**/*.code.{ts,tsx}'],
+        rules: { 'arrow-body-style': ['error', 'as-needed'] },
+    },
     {
         files: ['**/*.{js,cjs,mjs}', 'vite.config.ts', 'scripts/**/*.js'],
         languageOptions: {

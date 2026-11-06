@@ -7,8 +7,7 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "types": ["vitest/globals"],
-        /* WARNING! A new alias belongs in vite.config.ts, jest.config.cjs and
-           rules/aliases.ts too. */
+        /* WARNING! A new alias belongs in vite.config.ts and rules/aliases.ts too. */
         "paths": {
             "@app": ["./src/app"],
             "@app/*": ["./src/app/*"],

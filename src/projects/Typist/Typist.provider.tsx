@@ -11,15 +11,13 @@ type TypistProviderProps = { children: ReactNode }
 export const TypistProvider = ({ children }: TypistProviderProps) => {
     const [editorState, dispatch] = useReducer(EditorReducer, TypistDefaults.initialState)
     const prevStatusRef = useRef(editorState.status)
-    const editorStateRef = useRef(editorState)
-    editorStateRef.current = editorState
     const { mutate: postRound, isPending } = TypistQueries.usePost()
 
     useEffect(() => {
         const prevStatus = prevStatusRef.current
         prevStatusRef.current = editorState.status
 
-        const { lastEvent, keystrokes } = editorStateRef.current
+        const { lastEvent, keystrokes } = editorState
         const isFreshlyLoaded = editorState.status === 'idle' && lastEvent === 'none'
         const justEnded =
             editorState.status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
@@ -36,7 +34,7 @@ export const TypistProvider = ({ children }: TypistProviderProps) => {
                         }),
                 },
             )
-    }, [editorState.status, postRound])
+    }, [editorState, postRound])
 
     const contextValue: TypistContextValues = {
         editorState,

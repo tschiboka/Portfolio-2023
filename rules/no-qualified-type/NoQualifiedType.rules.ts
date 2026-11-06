@@ -1,4 +1,3 @@
-import type { TSESTree } from '@typescript-eslint/types'
 import type { Rule } from 'eslint'
 
 export const ErrorMessage = 'A type must be imported, not reached through a namespace.'
@@ -82,7 +81,7 @@ const Eslint = {
 
                     context.report({ node, message: ErrorMessage })
                 },
-                TSQualifiedName(node: TSESTree.TSQualifiedName) {
+                TSQualifiedName(node: Rule.Node) {
                     if (!isReportableName(node)) return
                     if (isImported(getRootName(node))) return
 

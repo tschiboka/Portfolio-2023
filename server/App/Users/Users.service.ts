@@ -5,6 +5,7 @@ import { UsersAuth } from './Users.auth'
 import { UsersUtils } from './Users.utils'
 import { SettingsService } from '../Settings/Settings.service'
 import { TokenModel } from '../Token'
+import type { IUser } from './Users.types'
 import type {
     CurrentUser,
     GetSessionResponse,
@@ -16,6 +17,9 @@ import type {
     User,
 } from '../../../common/types'
 
+/** Mongoose types `toObject()` as `any`; this is the one place that boundary is closed. */
+const toUser = (doc: IUser): User => doc.toObject() as User
+
 /** Business logic for users & auth - persistence via the repository, validation via the schema. */
 export const UsersService = {
     /** Lists all users (admin-facing). */
@@ -23,7 +27,7 @@ export const UsersService = {
         const users = await UsersRepository.find()
         if (isEmpty(users)) throw ApiResponder.notFound('users')
 
-        return users.map((user) => user.toObject())
+        return users.map(toUser)
     },
     /** Returns a single user by id. */
     get: async (id: string): Promise<User> => {
@@ -31,7 +35,7 @@ export const UsersService = {
         const user = await UsersRepository.findById(id)
 
         if (!user) throw ApiResponder.notFound('user')
-        return user.toObject()
+        return toUser(user)
     },
     /** Registers a new user, sending a confirmation email. */
     register: async (input: PostUserRequest): Promise<string> => {
@@ -112,7 +116,7 @@ export const UsersService = {
         const settings = await SettingsService.get()
         return {
             token,
-            user: { ...user.toObject(), id: String(_id) },
+            user: { ...toUser(user), id: String(_id) },
             settings: [settings],
         }
     },
@@ -122,6 +126,6 @@ export const UsersService = {
         if (!found) throw ApiResponder.notFound('user')
 
         const settings = await SettingsService.get()
-        return { user: { ...found.toObject(), id: String(found._id) }, settings }
+        return { user: { ...toUser(found), id: String(found._id) }, settings }
     },
 }

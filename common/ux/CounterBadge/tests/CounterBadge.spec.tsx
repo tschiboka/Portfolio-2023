@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { CounterBadge } from '../CounterBadge'
 
 describe('CounterBadge', () =>
-    describe('Layout', () => {
+    void describe('Layout', () => {
         it('should render the count text', () => {
             render(<CounterBadge count={42} />)
             const badge = document.querySelector('.CounterBadge')

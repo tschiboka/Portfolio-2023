@@ -1,10 +1,21 @@
-import type { TSESTree } from '@typescript-eslint/types'
 import type { Rule } from 'eslint'
 import { NoRawSemanticJsxConstants } from './NoRawSemanticJsx.constants.js'
 
+/**
+ * ESLint types no JSX visitor: `Rule.Node` is built from `@types/estree`, which omits JSX, so the
+ * shape a `JSXElement` listener receives has to be declared and narrowed rather than imported.
+ */
+export type JsxElementNode = {
+    type: 'JSXElement'
+    openingElement: { name: { range: [number, number] } }
+}
+
+export const isJsxElement = (node: Rule.Node): node is Rule.Node & JsxElementNode =>
+    (node.type as string) === 'JSXElement'
+
 type TagNameString = {
     context: Rule.RuleContext
-    node: TSESTree.JSXElement
+    node: JsxElementNode
 }
 
 export const getTagNameString = ({ context, node }: TagNameString) => {

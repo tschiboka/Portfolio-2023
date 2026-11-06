@@ -1,6 +1,5 @@
-import type { TSESTree } from '@typescript-eslint/types'
+import { getIsTagThrowError, getTagNameString, isJsxElement } from './NoRawSemanticJsx.utils.js'
 import type { Rule } from 'eslint'
-import { getIsTagThrowError, getTagNameString } from './NoRawSemanticJsx.utils.js'
 
 export const ErrorMessage =
     'A raw semantic element must not be used where a common/ux component exists.'
@@ -13,7 +12,9 @@ const Eslint = {
         },
         create(context) {
             return {
-                JSXElement(node: TSESTree.JSXElement) {
+                JSXElement(node: Rule.Node) {
+                    if (!isJsxElement(node)) return
+
                     const tagNameString = getTagNameString({ context, node })
                     const lintResult = getIsTagThrowError(tagNameString)
                     if (!lintResult) return

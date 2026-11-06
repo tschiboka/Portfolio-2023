@@ -314,7 +314,8 @@ describe('Fieldset', () => {
 
     it('should apply inline style', () => {
         const { container } = Set.fieldset({ style: { padding: '2rem' } })
-        expect(container.querySelector('fieldset')).toHaveStyle({ padding: '2rem' })
+        const fieldset = container.querySelector('fieldset') as HTMLElement
+        expect(fieldset.style.padding).toBe('2rem')
     })
 })
 

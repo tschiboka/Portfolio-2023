@@ -1,21 +1,37 @@
 import { http, HttpResponse } from 'msw'
 import { Server } from '@common-ux/Test/Server'
 import type { Dictionary } from '@common-utils'
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom/vitest'
 
 // Default handlers for common API routes — components like PageSideMenu fetch
 // likes and visits on mount. These ensure tests don't get MSW warnings for them.
+// jsdom enforces CORS on XHR, so every mocked response has to allow the test origin.
+const cors = { headers: { 'Access-Control-Allow-Origin': '*' } }
+
 const defaultHandlers = [
+    // msw 3 intercepts preflight too; without this the browser-level request aborts.
+    http.options(
+        /.*/,
+        () =>
+            new HttpResponse(null, {
+                status: 204,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Access-Control-Allow-Methods': '*',
+                },
+            }),
+    ),
     http.get('http://localhost:5000/api/visit', () =>
-        HttpResponse.json({ success: true, visits: 0 }),
+        HttpResponse.json({ success: true, visits: 0 }, cors),
     ),
     http.get('http://localhost:5000/api/like', () =>
-        HttpResponse.json({ success: true, likes: 0 }),
+        HttpResponse.json({ success: true, likes: 0 }, cors),
     ),
 ]
 
 // MSW server lifecycle
-beforeAll(() => Server.listen({ onUnhandledRequest: 'warn' }))
+beforeAll(() => Server.listen({ onUnhandledFrame: 'warn' }))
 beforeEach(() => defaultHandlers.forEach((h) => Server.use(h)))
 afterEach(() => Server.resetHandlers())
 afterAll(() => Server.close())
@@ -31,7 +47,7 @@ Object.defineProperty(document, 'fullscreenElement', {
     get: () => null,
 })
 
-// useNavigate calls navigate() which has no effect in happy-dom — provide a trackable mock
+// useNavigate is mocked so navigation can be asserted through globalThis.mockNavigate
 const mockNavigate = vi.hoisted(() => vi.fn())
 vi.mock('react-router-dom', async (importOriginal) => ({
     ...(await importOriginal<object>()),

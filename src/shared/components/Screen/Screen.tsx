@@ -37,7 +37,8 @@ export const Screen = ({
     }, [title])
 
     useEffect(() => {
-        if (loginRequired && !isAuthLoading && !isAuthenticated) navigate(Paths.Client.Login)
+        if (loginRequired && !isAuthLoading && !isAuthenticated)
+            void navigate(Paths.Client.Login)
     }, [loginRequired, isAuthenticated, isAuthLoading, navigate])
 
     const getClassName = () => {

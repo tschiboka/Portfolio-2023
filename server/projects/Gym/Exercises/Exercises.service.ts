@@ -39,7 +39,10 @@ export const ExercisesService = {
         if (!exercise) throw ApiResponder.notFound('exercise')
         ExercisesPermissions.requireUserCanModify(exercise, user)
 
-        const { error } = ExercisesSchema.validate({ ...exercise.toObject(), ...patch })
+        const { error } = ExercisesSchema.validate({
+            ...(exercise.toObject() as ExerciseValidationInput),
+            ...patch,
+        })
         if (error) throw ApiResponder.badRequest(error)
 
         exercise.set(patch)

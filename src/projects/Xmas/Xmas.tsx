@@ -1,5 +1,5 @@
 import Reindeer from '@projects/assets/xmas/reindeer.png'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
@@ -18,7 +18,6 @@ import './Xmas.styles.scss'
 
 export const Xmas = () => {
     const { user } = Session.useContext().session || {}
-    const [pagePingStatus, setPagePingStatus] = useState<string>('')
 
     const {
         control,
@@ -46,12 +45,11 @@ export const Xmas = () => {
     const submitHandler = (data: XmasFormData) =>
         user ? submitMessage(XmasTransformers.Post(data, user)) : logout()
 
-    useEffect(() => {
-        const loadingMessage = pingResponse.isLoading && 'LOADING...'
-        const errorMsg = pingResponse.error && `ERROR: ${pingResponse.error.message}`
-        const successMessage = pingResponse.isSuccess && ping?.data?.data?.message
-        setPagePingStatus(loadingMessage || errorMsg || successMessage || '')
-    }, [ping, pingResponse])
+    const pagePingStatus =
+        (pingResponse.isLoading && 'LOADING...') ||
+        (pingResponse.error && `ERROR: ${pingResponse.error.message}`) ||
+        (pingResponse.isSuccess && ping?.data?.data?.message) ||
+        ''
 
     // Trigger canvas resize when form size changes due to error/success messages
     useEffect(() => {

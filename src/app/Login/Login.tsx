@@ -37,7 +37,7 @@ export const Login = ({ path, pageName }: LoginProps) => {
             setLoginErrorMessage('')
             const { token, user, settings } = response
             setSession({ token, user, settings: settings[0] })
-            navigate(Paths.Client.Home)
+            void navigate(Paths.Client.Home)
         },
         onError: (error) =>
             setLoginErrorMessage(errorMessage(error, ClientMessage.Failure.Login())),

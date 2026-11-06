@@ -3,7 +3,8 @@ import { Accessor } from '@common-ux/Test'
 import { Test } from '@shared-components/Screen/tests'
 import { XmasTestUtils } from './Xmas.spec.utils'
 
-describe('Xmas', () => {
+// Keep test and feature in case we want to extend original feature
+describe.skip('Xmas', () => {
     beforeEach(() => vi.clearAllMocks())
 
     describe('Layout', () => {

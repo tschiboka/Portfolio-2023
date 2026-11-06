@@ -9,7 +9,7 @@ export const LogoutHooks = {
         return () => {
             SessionStorage.getInstance().drop()
             setSession(undefined)
-            navigate('/api/home')
+            void navigate('/api/home')
         }
     },
 }

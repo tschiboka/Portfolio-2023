@@ -33,7 +33,11 @@ export const RequestBuilder = <T extends JsonBodyType>(
         build: () =>
             http[method](
                 `${BASE_URL}${path}`,
-                () => HttpResponse.json(resolvedResponse, { status }),
+                () =>
+                    HttpResponse.json(resolvedResponse, {
+                        status,
+                        headers: { 'Access-Control-Allow-Origin': '*' },
+                    }),
                 { once },
             ),
         updateResponse: (modifier) =>

@@ -1,4 +1,4 @@
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import type { ReactNode } from 'react'
 import type { AccessibleProps } from '../index.types'
 import './Form.styles.css'

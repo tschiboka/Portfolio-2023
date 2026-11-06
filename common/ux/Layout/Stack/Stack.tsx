@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- A compound component carries its parts as statics; the rule only accepts a file whose exports are all bare components. */
 import { StackSelectors } from './Stack.selectors'
 import { StackDirection, StackProps } from './Stack.types'
 

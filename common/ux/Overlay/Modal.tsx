@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Const } from '@common-ux'
+import { Const } from '@common-ux/Const'
 import { isNonEmpty } from '@common-utils'
 import { PopupUtils } from './Popup.utils'
 import { Stack } from '../Layout'
