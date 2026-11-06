@@ -88,6 +88,13 @@ describe('ValidationMessage.Bound', () => {
         expect(ValidationMessage.Bound(field, count, unit, mode)).toBe(expected),
     )
 
+    it.each([
+        ['phone', 16, 'digits', 'at most', 'Phone must be at most 16 digits'],
+        ['name', 20, 'characters', 'at most', 'Name must be at most 20 characters'],
+    ] as const)('should bound %s in the at most direction', (field, count, unit, mode, expected) =>
+        expect(ValidationMessage.Bound(field, count, unit, mode)).toBe(expected),
+    )
+
     it('should render a zero count', () =>
         expect(ValidationMessage.Bound('name', 0, 'characters', 'at least')).toBe(
             'Name must be at least 0 characters',

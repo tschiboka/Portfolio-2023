@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { ValidationMessage } from '@common-utils'
 import { ContactConstants } from './Contact.constants'
 import type { ObjectSchema } from 'yup'
 import type { ContactFormData } from './Contact.types'
@@ -9,31 +10,36 @@ export const ContactSchema: ObjectSchema<ContactFormData> = yup.object({
         .required()
         .max(50)
         .matches(/^[a-z '-]+$/i, {
-            message: "Only letters, space, ' and - allowed.",
+            message: ValidationMessage.Allowed('name', "letters, space, ' and -"),
         }),
-    email: yup.string().required().min(6).max(255).email('Invalid email format'),
+    email: yup
+        .string()
+        .required()
+        .min(6)
+        .max(255)
+        .email(ValidationMessage.Invalid('email', 'a valid email address')),
     phone: yup
         .string()
         .defined()
         .default('')
-        .test('phone-format', 'Invalid phone format', (val) => {
+        .test('phone-format', ValidationMessage.Invalid('phone', 'a valid phone number'), (val) => {
             if (!val || val.length === 0) return true
             return /^[0-9]+$/.test(val)
         })
-        .test('phone-min', 'Phone must be at least 10 digits', (val) => {
+        .test('phone-min', ValidationMessage.Bound('phone', 10, 'digits', 'at least'), (val) => {
             if (!val || val.length === 0) return true
             return val.length >= 10
         })
-        .test('phone-max', 'Phone must be at most 16 digits', (val) => {
+        .test('phone-max', ValidationMessage.Bound('phone', 16, 'digits', 'at most'), (val) => {
             if (!val || val.length === 0) return true
             return val.length <= 16
         }),
     message: yup
         .string()
         .required()
-        .min(10, 'Min 10 characters')
+        .min(10, ValidationMessage.Bound('message', 10, 'characters', 'at least'))
         .max(ContactConstants.maxMessageCharacters)
         .matches(/^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"\-\s]*$/, {
-            message: 'Contains invalid characters',
+            message: ValidationMessage.Allowed('message', 'letters, numbers and punctuation'),
         }),
 })

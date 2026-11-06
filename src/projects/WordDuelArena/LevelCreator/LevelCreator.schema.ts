@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { ValidationMessage } from '@common-utils'
 import { WordConstants } from '../common/utils'
 
 const WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
@@ -30,5 +31,5 @@ export const LevelCreatorSchema = yup.object({
                 })
             },
         )
-        .required('Please select words'),
+        .required(ValidationMessage.Required('word list')),
 })

@@ -4,7 +4,7 @@ import { Strings } from '../../Strings'
 type Mode = 'contains' | 'only'
 
 /* Direction of a magnitude rule — the floor a field must reach, or its ceiling. */
-type BoundMode = 'at least' | 'under'
+type BoundMode = 'at least' | 'at most' | 'under'
 
 const allowed = (f: string, subject: string, mode: Mode): string =>
     mode === 'only'
@@ -15,10 +15,12 @@ const allowed = (f: string, subject: string, mode: Mode): string =>
    bound to the field that failed. Never a report on what the system did. */
 export const ValidationMessage = {
     Allowed: (f: string, subject: string, mode: Mode = 'only') => allowed(f, subject, mode),
-    Bound: (f: string, n: number, unit: string, mode: BoundMode) =>
-        mode === 'at least'
-            ? `${Strings.capitalise(f)} must be at least ${n} ${unit}`
-            : `${Strings.capitalise(f)} must be under ${n} ${unit}`,
+    Bound: (f: string, n: number, unit: string, mode: BoundMode) => {
+        if (mode === 'at least') return `${Strings.capitalise(f)} must be at least ${n} ${unit}`
+        if (mode === 'at most') return `${Strings.capitalise(f)} must be at most ${n} ${unit}`
+
+        return `${Strings.capitalise(f)} must be under ${n} ${unit}`
+    },
     Invalid: (f: string, subject?: string) =>
         subject
             ? `${Strings.capitalise(f)} must be ${subject}`

@@ -20,6 +20,7 @@ import { registrar as testNameVerbRegistrar } from './test-name-verb/TestNameVer
 import { registrar as noSpecLocalDeclarationRegistrar } from './no-spec-local-declaration/NoSpecLocalDeclaration.registrar.js'
 import { registrar as queriesExportShapeRegistrar } from './queries-export-shape/QueriesExportShape.registrar.js'
 import { registrar as noBracedArrowBodyRegistrar } from './no-braced-arrow-body/NoBracedArrowBody.registrar.js'
+import { registrar as validationMessageSourceRegistrar } from './validation-message-source/ValidationMessageSource.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -46,4 +47,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noSpecLocalDeclarationRegistrar,
     noBracedArrowBodyRegistrar,
     queriesExportShapeRegistrar,
+    validationMessageSourceRegistrar,
 ].map(withPrefixedReports)

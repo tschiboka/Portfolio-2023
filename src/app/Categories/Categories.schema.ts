@@ -1,5 +1,6 @@
 import * as yup from 'yup'
 import { Const } from '@common-ux'
+import { ValidationMessage } from '@common-utils'
 import { Icons } from './components/Icons'
 import type { ObjectSchema } from 'yup'
 import type { CategoryFormData } from './Categories.types'
@@ -12,7 +13,7 @@ export const CategoriesSchema = {
             hasParent: yup.boolean().required(),
             parent: yup
                 .string()
-                .test('is-valid-parent', 'Invalid option', (value) => {
+                .test('is-valid-parent', ValidationMessage.Invalid('option'), (value) => {
                     if (!value) return true
                     return parentOptions.includes(value)
                 })
@@ -20,12 +21,18 @@ export const CategoriesSchema = {
             icon: yup
                 .string()
                 .required()
-                .test('is-valid-icon', 'Invalid option', (value) => Boolean(Icons[value])),
+                .test(
+                    'is-valid-icon',
+                    ValidationMessage.Invalid('option'),
+                    (value) => Boolean(Icons[value]),
+                ),
             color: yup
                 .string()
                 .required()
-                .test('is-valid-color', 'Invalid option', (value) =>
-                    Boolean(Const.ColorSign[value]),
+                .test(
+                    'is-valid-color',
+                    ValidationMessage.Invalid('option'),
+                    (value) => Boolean(Const.ColorSign[value]),
                 ),
         }),
 }
