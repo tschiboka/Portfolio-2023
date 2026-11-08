@@ -292,22 +292,22 @@ config owns is linted.
     - [x] Step 14.10: Fix a `: void` arrow with the `void` operator — it discards the value
           the braces used to discard, and `void (x = [])` needs the parentheses
     - [x] Step 14.11: Confirm a green `tsc`, lint, and test run
-- [ ] Step 15: Rule — a queries object exports `use*` leaves and PascalCase groups
-    - [ ] Step 15.1: Build `rules/queries-export-shape/`
-    - [ ] Step 15.2: Locate the exported `<Feature>Queries` object and read its keys
-    - [ ] Step 15.3: Flag a depth-1 key that does not start with `use`
-    - [ ] Step 15.4: Flag a depth-1 key whose remainder is not PascalCase — `useGetActivityFeed`
-    - [ ] Step 15.5: Flag a depth-2 key that _does_ start with `use` — a group is PascalCase,
+- [x] Step 15: Rule — a queries object exports `use*` leaves and PascalCase groups
+    - [x] Step 15.1: Build `rules/queries-export-shape/`
+    - [x] Step 15.2: Locate the exported `<Feature>Queries` object and read its keys
+    - [x] Step 15.3: Flag a depth-1 key that does not start with `use`
+    - [x] Step 15.4: Flag a depth-1 key whose remainder is not PascalCase — `useGetActivityFeed`
+    - [x] Step 15.5: Flag a depth-2 key that _does_ start with `use` — a group is PascalCase,
           `Settings` not `useSettings`
-    - [ ] Step 15.6: Check the **key**, never the referenced function —
+    - [x] Step 15.6: Check the **key**, never the referenced function —
           `useGet: useGetActivityFeed` is correct
-    - [ ] Step 15.7: Allow leaves only at depth 2 — a group does not nest again
-    - [ ] Step 15.8: Scope `include` to `**/*.queries.ts`
-    - [ ] Step 15.9: Register as `severity: 'error'`
-    - [ ] Step 15.10: Add `tests/QueriesExportShape.spec.ts`
-    - [ ] Step 15.11: Run `rules sync`, then verify the generated config
-    - [ ] Step 15.12: Confirm no violation exists — 12 files, 23 hooks, 5 groups, all conforming
-    - [ ] Step 15.13: Confirm a green `tsc`, lint, and test run
+    - [x] Step 15.7: Allow leaves only at depth 2 — a group does not nest again
+    - [x] Step 15.8: Scope `include` to `**/*.queries.ts`
+    - [x] Step 15.9: Register as `severity: 'error'`
+    - [x] Step 15.10: Add `tests/QueriesExportShape.spec.ts`
+    - [x] Step 15.11: Run `rules sync`, then verify the generated config
+    - [x] Step 15.12: Confirm no violation exists — 12 files, 23 hooks, 5 groups, all conforming
+    - [x] Step 15.13: Confirm a green `tsc`, lint, and test run
 - [ ] Step 16: Rule — a validation bound or pattern comes from a constant
     - [ ] Step 16.1: Build `rules/no-inline-validation-literal/`
     - [ ] Step 16.2: Flag a numeric literal argument to `.min()` / `.max()` / `.length()`
@@ -329,26 +329,29 @@ config owns is linted.
     - [ ] Step 16.15: Fix `Exercises.schema.ts` — `.min(1)`, unless 16.5 exempts it
     - [ ] Step 16.16: Sweep the remaining schemas and fix or suppress each violation
     - [ ] Step 16.17: Confirm a green `tsc`, lint, and test run
-- [ ] Step 17: Rule — a validation message comes from `ValidationMessage`
-    - [ ] Step 17.1: Build `rules/validation-message-source/`
-    - [ ] Step 17.2: Flag a string literal passed as a yup method's message argument
-    - [ ] Step 17.3: Flag a string literal as a `.test()` second argument
-    - [ ] Step 17.4: Flag a `message:` property whose value is a string literal
-    - [ ] Step 17.5: Accept any `ValidationMessage.*` call — the set is six methods and may grow
-    - [ ] Step 17.6: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
-    - [ ] Step 17.7: Register as `severity: 'error'`
-    - [ ] Step 17.8: Add `tests/ValidationMessageSource.spec.ts`
-    - [ ] Step 17.9: Run `rules sync`, then verify the generated config
-    - [ ] Step 17.10: Design the catalogue entries the sweep needs — `Invalid('option')` covers
+- [x] Step 17: Rule — a validation message comes from `ValidationMessage`
+    - [x] Step 17.1: Build `rules/validation-message-source/`
+    - [x] Step 17.2: Flag a string literal passed as a yup method's message argument
+    - [x] Step 17.3: Flag a string literal as a `.test()` second argument
+    - [x] Step 17.4: Flag a `message:` property whose value is a string literal
+    - [x] Step 17.5: Accept any `ValidationMessage.*` call — the set is seven methods and may grow
+    - [x] Step 17.6: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
+    - [x] Step 17.7: Register as `severity: 'error'`
+    - [x] Step 17.8: Add `tests/ValidationMessageSource.spec.ts`
+    - [x] Step 17.9: Run `rules sync`, then verify the generated config
+    - [x] Step 17.10: Design the catalogue entries the sweep needs — `Invalid('option')` covers
           the three in `Categories.schema.ts`, and `Contact.schema.ts` needs a phone-format and
           a character-set entry, since no method names either
-    - [ ] Step 17.11: Fix `Categories.schema.ts` — three `.test()` message strings
-    - [ ] Step 17.12: Fix `Contact.schema.ts` — `.email()`, three `.test()` strings, two
+    - [x] Step 17.11: Fix `Categories.schema.ts` — three `.test()` message strings
+    - [x] Step 17.12: Fix `Contact.schema.ts` — `.email()`, three `.test()` strings, two
           `message:` blocks, `.min(10, …)`
-    - [ ] Step 17.13: Fix `LevelCreator.schema.ts` — `.required('Please select words')`
-    - [ ] Step 17.14: Sweep the remaining schemas and fix or suppress each violation
-    - [ ] Step 17.15: Confirm a green `tsc`, lint, and test run
-- [ ] Step 18: Rule — a schema file exports its own bound resolver
+    - [x] Step 17.13: Fix `LevelCreator.schema.ts` — `.required('Please select words')`
+    - [x] Step 17.14: Sweep the remaining schemas and fix or suppress each violation
+    - [x] Step 17.15: Confirm a green `tsc`, lint, and test run
+    - [x] Step 17.16: Flag a template that carries words, not only a bare string — a template of
+          nothing but substitutions still passes. Add `Selection` to `ValidationMessage` and fix
+          the three template messages in `LevelCreator.schema.ts`
+- [x] Step 18: Rule — a schema file exports its own bound resolver
     - [x] Step 18.1: Build `rules/resolver-in-schema/`
     - [x] Step 18.2: Flag a `yupResolver(...)` call outside a `*.schema.ts` file
     - [x] Step 18.3: Flag a `*.schema.ts` that declares a schema but exports no resolver
@@ -886,8 +889,12 @@ file's name describes what it augments, not a role, so`.d.ts` leaves scope.
   `errorMessage(error, ClientMessage.Failure.Create('x'))` was **dropped**, since
   it asserts that one function's second argument calls another function — a call
   target, which a refactor invalidates. Step 17 **asserts a value against a
-  closed set of six methods**, and a seventh method added later still satisfies
+  closed set of seven methods**, and an eighth method added later still satisfies
   it. Same subject, opposite verdicts.
+- A template carrying words is a written message even when it interpolates a
+  constant, so `LevelCreator.schema.ts` had to conform. `Selection` exists
+  because a count below a floor needs the live length, which yup prints from
+  `${value.length}` at validation time.
 - Step 17.10 is not a substitution step. `Contact.schema.ts` validates a phone
   format and a character set that no `ValidationMessage` method names, so the
   catalogue has to gain entries before those call sites can conform — the

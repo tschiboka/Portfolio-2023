@@ -106,6 +106,37 @@ describe('ValidationMessage.Bound', () => {
         ))
 })
 
+describe('ValidationMessage.Selection', () => {
+    it.each([
+        [
+            'word list',
+            15,
+            'words',
+            'at least',
+            'Word list must be at least 15 words. Currently selected: ${value.length}',
+        ],
+        [
+            'word list',
+            30,
+            'words',
+            'at most',
+            'Word list must be at most 30 words. Currently selected: ${value.length}',
+        ],
+    ] as const)('should name the bound and the count for %s', (field, count, unit, mode, expected) =>
+        expect(ValidationMessage.Selection(field, count, unit, mode)).toBe(expected),
+    )
+
+    it('should leave the count for yup to print', () =>
+        expect(ValidationMessage.Selection('words', 15, 'words', 'at least')).toContain(
+            '${value.length}',
+        ))
+
+    it('should capitalise only the first word of a multi-word field', () =>
+        expect(ValidationMessage.Selection('selected words', 15, 'words', 'at least')).toBe(
+            'Selected words must be at least 15 words. Currently selected: ${value.length}',
+        ))
+})
+
 describe('ValidationMessage.Matches', () => {
     it('should capitalise the field and lowercases the other', () =>
         expect(ValidationMessage.Matches('password', 'Confirmation')).toBe(
@@ -149,6 +180,7 @@ describe('ValidationMessage', () => {
             'Invalid',
             'Matches',
             'Required',
+            'Selection',
             'Unique',
         ]))
 

@@ -31,18 +31,21 @@ export const messageArgumentOf = (method: string): number | null => {
 }
 
 /**
- * Answers whether the value is a message written out rather than built: a string literal, or a
- * template with nothing substituted into it.
+ * Answers whether the value is a message written out rather than built: any string literal, or any
+ * template carrying text of its own. A template of nothing but substitutions carries no wording,
+ * so it is left alone.
  *
  * @example
  * isStringLiteral(literalOf("'Name is required'")) // true
- * isStringLiteral(literalOf('`Name is ${verb}`')) // false
+ * isStringLiteral(literalOf('`Name is ${verb}`')) // true
+ * isStringLiteral(literalOf('`${verb}`')) // false
  */
 export const isStringLiteral = (value: ValueLike | undefined): boolean => {
     if (value === undefined) return false
     if (value.type === 'Literal') return typeof value.value === 'string'
+    if (value.type !== 'TemplateLiteral') return false
 
-    return value.type === 'TemplateLiteral' && (value.expressions?.length ?? 0) === 0
+    return (value.quasis ?? []).some((quasi) => (quasi.value?.cooked ?? '').trim() !== '')
 }
 
 /**

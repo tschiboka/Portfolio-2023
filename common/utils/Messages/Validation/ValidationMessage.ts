@@ -11,16 +11,21 @@ const allowed = (f: string, subject: string, mode: Mode): string =>
         ? `${Strings.capitalise(f)} allows only ${subject}`
         : `${Strings.capitalise(f)} must contain ${subject}`
 
+const bound = (f: string, n: number, unit: string, mode: BoundMode): string => {
+    if (mode === 'at least') return `${Strings.capitalise(f)} must be at least ${n} ${unit}`
+    if (mode === 'at most') return `${Strings.capitalise(f)} must be at most ${n} ${unit}`
+
+    return `${Strings.capitalise(f)} must be under ${n} ${unit}`
+}
+
+/* yup reads this token at validation time and prints the length of the array under test. */
+const CountToken = '${value.length}'
+
 /* Field validation wording — addressed to the caller about their input, and
    bound to the field that failed. Never a report on what the system did. */
 export const ValidationMessage = {
     Allowed: (f: string, subject: string, mode: Mode = 'only') => allowed(f, subject, mode),
-    Bound: (f: string, n: number, unit: string, mode: BoundMode) => {
-        if (mode === 'at least') return `${Strings.capitalise(f)} must be at least ${n} ${unit}`
-        if (mode === 'at most') return `${Strings.capitalise(f)} must be at most ${n} ${unit}`
-
-        return `${Strings.capitalise(f)} must be under ${n} ${unit}`
-    },
+    Bound: bound,
     Invalid: (f: string, subject?: string) =>
         subject
             ? `${Strings.capitalise(f)} must be ${subject}`
@@ -28,6 +33,8 @@ export const ValidationMessage = {
     Matches: (f: string, other: string) =>
         `${Strings.capitalise(f)} must match ${other.toLowerCase()}`,
     Required: (f: string) => `${Strings.capitalise(f)} is required`,
+    Selection: (f: string, n: number, unit: string, mode: BoundMode) =>
+        `${bound(f, n, unit, mode)}. Currently selected: ${CountToken}`,
     Unique: (f: string) => `${Strings.capitalise(f)} must be unique`,
 } as const
 

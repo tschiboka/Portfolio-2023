@@ -41,8 +41,12 @@ ruleTester.run('validation-message-source', Rules.Eslint.ValidationMessageSource
             code: 'yup.string()[name](8, "Min 8 characters")',
         },
         {
-            name: 'should ignore a message built by a template with a value in it',
-            code: 'yup.string().min(8, `Min ${limit} characters`)',
+            name: 'should ignore a template that carries nothing but a value',
+            code: 'yup.string().min(8, `${limit}`)',
+        },
+        {
+            name: 'should ignore a template whose own text is only spacing',
+            code: 'yup.string().min(8, `  ${limit}  `)',
         },
         {
             name: 'should ignore a message that no yup call carries',
@@ -91,6 +95,16 @@ ruleTester.run('validation-message-source', Rules.Eslint.ValidationMessageSource
         {
             name: 'should throw for a message written as a template with nothing in it',
             code: 'yup.string().required(`Name is required`)',
+            errors: [{ message: MessageErrorMessage }],
+        },
+        {
+            name: 'should throw for a template message that carries words and a value',
+            code: 'yup.string().min(8, `Min ${limit} characters`)',
+            errors: [{ message: MessageErrorMessage }],
+        },
+        {
+            name: 'should throw for an options object message written as a template',
+            code: 'yup.string().test({ name: "phone", message: `Enter ${count} valid digits` })',
             errors: [{ message: MessageErrorMessage }],
         },
         {

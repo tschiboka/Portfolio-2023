@@ -9,7 +9,7 @@ export type KeyLike = {
 export type ValueLike = {
     type: string
     value?: unknown
-    expressions?: unknown[]
+    quasis?: { value?: { cooked?: string | null } }[]
 }
 
 /** A callee, narrowed to the member a call is made on. */

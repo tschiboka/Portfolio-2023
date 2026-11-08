@@ -10,15 +10,30 @@ const schema = yup.object({
         .array(yup.object({ word: yup.string().required() }).required())
         .min(
             WordConstants.minWordsPerLevel,
-            `Please select at least ${WordConstants.minWordsPerLevel} words. Currently selected: \${value.length}`,
+            ValidationMessage.Selection(
+                'word list',
+                WordConstants.minWordsPerLevel,
+                'words',
+                'at least',
+            ),
         )
         .max(
             WordConstants.maxWordsPerLevel,
-            `Please select no more than ${WordConstants.maxWordsPerLevel} words. Currently selected: \${value.length}`,
+            ValidationMessage.Selection(
+                'word list',
+                WordConstants.maxWordsPerLevel,
+                'words',
+                'at most',
+            ),
         )
         .test(
             'row-width',
-            `Combined length of words in a row must not exceed ${WordConstants.maxWordsInRowLength} characters`,
+            ValidationMessage.Bound(
+                'combined length of words in a row',
+                WordConstants.maxWordsInRowLength,
+                'characters',
+                'at most',
+            ),
             (value) => {
                 if (!value?.length) return true
 
