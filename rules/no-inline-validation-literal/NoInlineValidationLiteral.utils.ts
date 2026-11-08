@@ -2,7 +2,7 @@ import {
     BoundMethods,
     ComparingMethod,
     ComparisonOperators,
-    PresenceBound,
+    IdentityBounds,
 } from './NoInlineValidationLiteral.constants.js'
 import type { CalleeLike, ValueNode } from './NoInlineValidationLiteral.types.js'
 
@@ -56,11 +56,15 @@ export const numberValueOf = (value: ValueNode | undefined): number | null =>
     isNumberLiteral(value) ? Number(value?.value) : null
 
 /**
- * Answers whether the bound asserts presence rather than declaring a limit — `.min(1)`.
+ * Answers whether the bound asserts a base rather than declaring a limit — `.min(0)` for a first
+ * index, `.min(1)` for presence.
  *
  * @example
- * isPresenceBound('min', argumentOf('min(1)')) // true
- * isPresenceBound('max', argumentOf('max(1)')) // false
+ * isIdentityBound('min', argumentOf('min(1)')) // true
+ * isIdentityBound('max', argumentOf('max(1)')) // false
  */
-export const isPresenceBound = (method: string, value: ValueNode | undefined): boolean =>
-    method === 'min' && numberValueOf(value) === PresenceBound
+export const isIdentityBound = (method: string, value: ValueNode | undefined): boolean => {
+    const bound = numberValueOf(value)
+
+    return method === 'min' && bound !== null && IdentityBounds.includes(bound)
+}

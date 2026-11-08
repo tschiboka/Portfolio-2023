@@ -99,14 +99,15 @@ Feature/
 | `Feature.constants.ts` / `defaults.ts` / `config.ts` | NO                             | no behavior                                                                 |
 | `Feature.data.ts`                                    | NO                             | no behavior                                                                 |
 | `Feature.demos.tsx`                                  | NO                             | demo only                                                                   |
-| `Feature.filters.ts` / `selectors.ts` / `actions.ts` | NO — indirect                  | covered via feature/table spec                                              |
+| `Feature.filters.ts` / `actions.ts`                  | NO — indirect                  | covered via feature/table spec                                              |
 | `Feature.generated.ts`                               | NO                             | no behavior — build output                                                  |
 | `Feature.handlers.ts`                                | YES                            | pure handler spec (form → mutation)                                         |
 | `Feature.hooks.ts`                                   | NO — indirect                  | covered via the feature spec                                                |
 | `Feature.options.ts`                                 | YES                            | pure options spec                                                           |
 | `Feature.queries.ts`                                 | NO — indirect                  | covered by the feature spec's server harness (`Test.Screen` + MSW handlers) |
 | `Feature.reducer.ts`                                 | YES                            | pure reducer spec                                                           |
-| `Feature.schema.ts`                                  | NO — indirect                  | covered by feature-spec form submission                                     |
+| `Feature.schema.ts`                                  | YES                            | validation spec                                                             |
+| `Feature.selectors.ts`                               | YES                            | pure selector spec                                                          |
 | `Feature.states.ts`                                  | YES                            | pure transition spec                                                        |
 | `Feature.storage.ts`                                 | NO                             | no behavior                                                                 |
 | `Feature.styles.*` / `index.ts`                      | NO                             | no behavior                                                                 |

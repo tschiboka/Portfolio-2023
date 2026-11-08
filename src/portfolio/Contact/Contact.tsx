@@ -93,7 +93,7 @@ export const Contact = ({ pageName, path }: ContactProps) => {
                             <Form.TextArea
                                 name="message"
                                 control={control}
-                                maxLength={ContactConstants.maxMessageCharacters}
+                                maxLength={ContactConstants.fieldLimits.message.max}
                                 rows={5}
                             />
                         </Form.Fieldset>

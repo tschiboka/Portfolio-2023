@@ -1,22 +1,24 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Const } from '@common-ux'
-import { ValidationMessage } from '@common-utils'
+import { isEmpty, isString, ValidationMessage } from '@common-utils'
+import { CategoriesConstants } from './Categories.constants'
 import { Icons } from './components/Icons'
 import type { ObjectSchema } from 'yup'
 import type { CategoryFormData } from './Categories.types'
 
+const { name, description } = CategoriesConstants.fieldLimits
+
 const schema = (parentOptions: string[]): ObjectSchema<CategoryFormData> =>
     yup.object({
-        name: yup.string().required().max(20),
-        description: yup.string().required().min(10).max(255),
+        name: yup.string().required().max(name.max),
+        description: yup.string().required().min(description.min).max(description.max),
         hasParent: yup.boolean().required(),
         parent: yup
             .string()
-            .test('is-valid-parent', ValidationMessage.Invalid('option'), (value) => {
-                if (!value) return true
-                return parentOptions.includes(value)
-            })
+            .test('is-valid-parent', ValidationMessage.Invalid('option'), (value) =>
+                isEmpty(value) || (isString(value) && parentOptions.includes(value)),
+            )
             .optional(),
         icon: yup
             .string()

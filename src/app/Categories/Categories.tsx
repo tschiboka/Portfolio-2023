@@ -4,6 +4,7 @@ import { Form, Heading, LoadingIndicator, Main, Paragraph, Table } from '@common
 import { ClientMessage, errorMessage } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { CategoriesColumns } from './Categories.columns'
+import { CategoriesConstants } from './Categories.constants'
 import { CategoriesDefaults } from './Categories.defaults'
 import { CategoriesHandlers } from './Categories.handlers'
 import { CategoriesOptions } from './Categories.options'
@@ -75,7 +76,7 @@ export const Categories = ({ path }: CategoriesProps) => {
                                 name="description"
                                 control={control}
                                 placeholder="What do you use this category for"
-                                maxLength={255}
+                                maxLength={CategoriesConstants.fieldLimits.description.max}
                             />
                         </Form.Fieldset>
                         <Form.Fieldset>

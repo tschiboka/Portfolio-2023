@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { LevelConstants } from '../../../config/constants/Level.constants'
 
 interface LevelInput {
     name: string
@@ -7,9 +8,15 @@ interface LevelInput {
 }
 
 const schema = Joi.object({
-    name: Joi.string().required().min(4).max(16),
+    name: Joi.string()
+        .required()
+        .min(LevelConstants.name.min)
+        .max(LevelConstants.name.max),
     targetWords: Joi.array().items(Joi.string()).required(),
-    difficulty: Joi.number().min(1).max(10).required(),
+    difficulty: Joi.number()
+        .min(LevelConstants.difficulty.min)
+        .max(LevelConstants.difficulty.max)
+        .required(),
 })
 
 const validate = (level: LevelInput) => schema.validate(level)

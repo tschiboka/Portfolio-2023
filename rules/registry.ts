@@ -22,6 +22,7 @@ import { registrar as queriesExportShapeRegistrar } from './queries-export-shape
 import { registrar as noBracedArrowBodyRegistrar } from './no-braced-arrow-body/NoBracedArrowBody.registrar.js'
 import { registrar as validationMessageSourceRegistrar } from './validation-message-source/ValidationMessageSource.registrar.js'
 import { registrar as resolverInSchemaRegistrar } from './resolver-in-schema/ResolverInSchema.registrar.js'
+import { registrar as noInlineValidationLiteralRegistrar } from './no-inline-validation-literal/NoInlineValidationLiteral.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -50,4 +51,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     queriesExportShapeRegistrar,
     validationMessageSourceRegistrar,
     resolverInSchemaRegistrar,
+    noInlineValidationLiteralRegistrar,
 ].map(withPrefixedReports)

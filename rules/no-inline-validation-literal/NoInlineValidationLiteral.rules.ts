@@ -8,9 +8,9 @@ import {
     isBoundMethod,
     isComparingMethod,
     isComparisonOperator,
+    isIdentityBound,
     isNumberLiteral,
     isPatternMethod,
-    isPresenceBound,
     isRegexLiteral,
     methodNameOf,
 } from './NoInlineValidationLiteral.utils.js'
@@ -38,7 +38,7 @@ const Eslint = {
                 const bound = node.arguments[0]
                 if (bound === undefined) return
                 if (!isNumberLiteral(bound)) return
-                if (isPresenceBound(method, bound)) return
+                if (isIdentityBound(method, bound)) return
 
                 report(bound, BoundMessage)
             }

@@ -18,5 +18,5 @@ export const ComparisonOperators = ['<', '<=', '>', '>=']
 /** The method whose callback compares against a bound. */
 export const ComparingMethod = 'test'
 
-/** The one number that asserts presence rather than declaring a bound. */
-export const PresenceBound = 1
+/** The numbers that assert a base rather than declare a bound — presence, and a first index. */
+export const IdentityBounds = [0, 1]

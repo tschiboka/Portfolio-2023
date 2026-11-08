@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ValidationMessage } from '@common-utils'
+import { hasLength, isDefined, ValidationMessage } from '@common-utils'
 import { WordConstants } from '../common/utils'
 
 const WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
@@ -35,7 +35,7 @@ const schema = yup.object({
                 'at most',
             ),
             (value) => {
-                if (!value?.length) return true
+                if (!isDefined(value) || !hasLength(value)) return true
 
                 return value.every((word, i) => {
                     if (i >= WORDS_PER_COLUMN) return true

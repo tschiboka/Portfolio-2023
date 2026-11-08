@@ -4,6 +4,8 @@ export const Regexp = {
     Alphanumeric: /^[a-zA-Z0-9\s]*$/,
     /** Matches a message-like value of letters, digits, whitespace and basic punctuation. */
     MessageText: /^[a-zA-Z0-9\s.,?!]*$/,
+    /** Matches a name-like value of letters, space, apostrophe and hyphen only — no digits. */
+    NameText: /^[a-z '-]+$/i,
     /** Matches a Mongo `ObjectId`: exactly 24 lowercase hexadecimal characters. */
     ObjectId: /^[0-9a-f]{24}$/,
     /** Assertion that the value contains at least one digit. */

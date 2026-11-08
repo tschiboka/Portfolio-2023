@@ -1,46 +1,61 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { ValidationMessage } from '@common-utils'
+import { hasLength, isDigits, isString, Regexp, ValidationMessage } from '@common-utils'
 import { ContactConstants } from './Contact.constants'
 import type { ObjectSchema } from 'yup'
 import type { ContactFormData } from './Contact.types'
+
+const { fieldLimits, messagePattern } = ContactConstants
+const { name, email, phone, message } = fieldLimits
+
+/** A rule that only applies once something is typed — an empty phone is not a wrong one. */
+const whenFilled =
+    (rule: (value: string) => boolean) =>
+    (value?: string): boolean =>
+        isString(value) && hasLength(value) ? rule(value) : true
 
 const schema: ObjectSchema<ContactFormData> = yup.object({
     name: yup
         .string()
         .required()
-        .max(50)
-        .matches(/^[a-z '-]+$/i, {
+        .max(name.max)
+        .matches(Regexp.NameText, {
             message: ValidationMessage.Allowed('name', "letters, space, ' and -"),
         }),
     email: yup
         .string()
         .required()
-        .min(6)
-        .max(255)
+        .min(email.min)
+        .max(email.max)
         .email(ValidationMessage.Invalid('email', 'a valid email address')),
     phone: yup
         .string()
         .defined()
         .default('')
-        .test('phone-format', ValidationMessage.Invalid('phone', 'a valid phone number'), (val) => {
-            if (!val || val.length === 0) return true
-            return /^[0-9]+$/.test(val)
-        })
-        .test('phone-min', ValidationMessage.Bound('phone', 10, 'digits', 'at least'), (val) => {
-            if (!val || val.length === 0) return true
-            return val.length >= 10
-        })
-        .test('phone-max', ValidationMessage.Bound('phone', 16, 'digits', 'at most'), (val) => {
-            if (!val || val.length === 0) return true
-            return val.length <= 16
-        }),
+        .test(
+            'phone-format',
+            ValidationMessage.Invalid('phone', 'a valid phone number'),
+            whenFilled(isDigits),
+        )
+        .test(
+            'phone-min',
+            ValidationMessage.Bound('phone', phone.min, 'digits', 'at least'),
+            whenFilled((value) => value.length >= phone.min),
+        )
+        .test(
+            'phone-max',
+            ValidationMessage.Bound('phone', phone.max, 'digits', 'at most'),
+            whenFilled((value) => value.length <= phone.max),
+        ),
     message: yup
         .string()
         .required()
-        .min(10, ValidationMessage.Bound('message', 10, 'characters', 'at least'))
-        .max(ContactConstants.maxMessageCharacters)
-        .matches(/^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"\-\s]*$/, {
+        .min(
+            message.min,
+            ValidationMessage.Bound('message', message.min, 'characters', 'at least'),
+        )
+        .max(message.max)
+        .matches(messagePattern, {
             message: ValidationMessage.Allowed('message', 'letters, numbers and punctuation'),
         }),
 })

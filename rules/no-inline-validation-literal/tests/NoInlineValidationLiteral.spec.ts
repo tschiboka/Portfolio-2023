@@ -13,6 +13,10 @@ ruleTester.run('no-inline-validation-literal', Rules.Eslint.NoInlineValidationLi
             code: 'yup.string().min(1)',
         },
         {
+            name: 'should accept a floor of zero, which is a first index',
+            code: 'Joi.number().integer().min(0)',
+        },
+        {
             name: 'should accept a bound that names its constant',
             code: 'yup.string().min(PasswordConstants.minCharacters)',
         },

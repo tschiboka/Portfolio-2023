@@ -308,27 +308,31 @@ config owns is linted.
     - [x] Step 15.11: Run `rules sync`, then verify the generated config
     - [x] Step 15.12: Confirm no violation exists — 12 files, 23 hooks, 5 groups, all conforming
     - [x] Step 15.13: Confirm a green `tsc`, lint, and test run
-- [ ] Step 16: Rule — a validation bound or pattern comes from a constant
-    - [ ] Step 16.1: Build `rules/no-inline-validation-literal/`
-    - [ ] Step 16.2: Flag a numeric literal argument to `.min()` / `.max()` / `.length()`
-    - [ ] Step 16.3: Flag an inline regex literal in `.matches()`
-    - [ ] Step 16.4: Flag a numeric comparison in a `.test()` callback — `val.length >= 10`
-    - [ ] Step 16.5: Allow `.min(1)` — the identity case for presence, not a field bound
-    - [ ] Step 16.6: Point the message at the home the value needs — `Regexp` when shared,
-          `<Feature>.constants.ts` when the feature's own
-    - [ ] Step 16.7: Resolve the `server/**` ignore — `eslint.config.js` skips it, and the BE
-          schemas are in scope
-    - [ ] Step 16.8: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
-    - [ ] Step 16.9: Register as `severity: 'error'`
-    - [ ] Step 16.10: Add `tests/NoInlineValidationLiteral.spec.ts`
-    - [ ] Step 16.11: Run `rules sync`, then verify the generated config
-    - [ ] Step 16.12: Fix `Contact.schema.ts` — `.max(50)`, `.min(6)`, `.min(10)`, both
-          regexes, `>= 10`, `<= 16`
-    - [ ] Step 16.13: Fix `Categories.schema.ts` — `.max(20)`, `.min(10)`, `.max(255)`
-    - [ ] Step 16.14: Fix `Login.schema.ts` — `.min(8)`, `.max(255)`, `.min(8)`, `.max(40)`
-    - [ ] Step 16.15: Fix `Exercises.schema.ts` — `.min(1)`, unless 16.5 exempts it
-    - [ ] Step 16.16: Sweep the remaining schemas and fix or suppress each violation
-    - [ ] Step 16.17: Confirm a green `tsc`, lint, and test run
+- [x] Step 16: Rule — a validation bound or pattern comes from a constant
+    - [x] Step 16.1: Build `rules/no-inline-validation-literal/`
+    - [x] Step 16.2: Flag a numeric literal argument to `.min()` / `.max()` / `.length()`
+    - [x] Step 16.3: Flag an inline regex literal in `.matches()`
+    - [x] Step 16.4: Flag a numeric comparison in a `.test()` callback — `val.length >= 10`
+    - [x] Step 16.5: Allow `.min(0)` and `.min(1)` — a first index and presence, never a bound.
+          `IdentityBounds` holds both; `max(1)` still reports
+    - [x] Step 16.6: Point the message at the home the value needs — a bound at the feature's
+          `.constants.ts`, a shared pattern at `Regexp`
+    - [x] Step 16.7: Resolve the `server/**` ignore — both `Level.schema.ts` files reported, so
+          the BE schemas are reached
+    - [x] Step 16.8: Scope `include` to `**/*.schema.ts` under `src/`, `common/`, `server/`
+    - [x] Step 16.9: Register as `severity: 'error'`
+    - [x] Step 16.10: Add `tests/NoInlineValidationLiteral.spec.ts`
+    - [x] Step 16.11: Run `rules sync`, then verify the generated config
+    - [x] Step 16.12: Fix `Contact.schema.ts` — `fieldLimits` plus `messagePattern` in
+          `Contact.constants.ts`, `Regexp.NameText` for the name, `isDigits` for the phone
+    - [x] Step 16.13: Fix `Categories.schema.ts` — `CategoriesConstants.fieldLimits`, read by the
+          schema and by `Categories.tsx`'s `maxLength`
+    - [x] Step 16.14: Fix `Login.schema.ts` — `LoginConstants.fieldLimits`
+    - [x] Step 16.15: Fix `Exercises.schema.ts` — nothing to do, `.min(1)` is exempt
+    - [x] Step 16.16: Sweep the remaining schemas — `Register` and `Xmas` already conformed;
+          `LevelCreator` read `WordConstants`; the two server `Level.schema.ts` files were the
+          only sites left, and `Level.constants.ts` now holds their four bounds
+    - [x] Step 16.17: Confirm a green `tsc`, lint, and test run
 - [x] Step 17: Rule — a validation message comes from `ValidationMessage`
     - [x] Step 17.1: Build `rules/validation-message-source/`
     - [x] Step 17.2: Flag a string literal passed as a yup method's message argument
@@ -475,7 +479,7 @@ config owns is linted.
     - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
           own so each id names exactly what it covers
     - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-    './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
+'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either
     - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
           carry `export type` beside its value exports
     - [x] Step 26.4: Leave a local export alone — it names no source
@@ -514,7 +518,7 @@ config owns is linted.
     - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
           `React.ReactNode`, `React.CSSProperties`
     - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-    'react'`, then `(e: FormEvent)`
+'react'`, then `(e: FormEvent)`
     - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
           `React.StrictMode` are calls, not types
     - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
@@ -538,7 +542,7 @@ config owns is linted.
     - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
           `eslint.config.js`, not in `rules/registry.ts`
     - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
-    'import', next: 'import' }`, placed last because the last matching pair wins over
+'import', next: 'import' }`, placed last because the last matching pair wins over
           `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
           no fixer and only covered `src`, `common` and `server`
     - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports
@@ -696,6 +700,32 @@ config owns is linted.
     - [ ] Step 37.12: Sweep the 69 declarations — a bare `Props` takes its stem, anything else
           moves to `<Expected>.types.ts`
     - [ ] Step 37.13: Confirm a green `tsc`, lint, and test run
+- [ ] Step 38: Rule — a regular expression is registered in `Regexp`, never written elsewhere
+    - [ ] Step 38.1: Build `rules/regexp-registry/` as a registrar, a constants file and a spec
+    - [ ] Step 38.2: Flag any regex literal outside `common/utils/Regexp/Regexp.ts`, whatever the
+          file — one registry means a second copy is impossible rather than merely discouraged
+    - [ ] Step 38.3: Flag a pattern built from a string — `new RegExp('^[0-9]+$')` — while
+          accepting `Regexp.escape` and `Regexp.exactWord`, which build from a caller's value
+    - [ ] Step 38.4: Name each entry for what it matches, never for its caller — `NameText`,
+          `ContactMessage` — since one flat namespace now carries every pattern in the app
+    - [ ] Step 38.5: Exempt `**/*.code.{ts,tsx}` — a displayed sample keeps its literals — and
+          `**/*.spec.{ts,tsx}`, where a regex asserts on rendered text rather than governing input
+    - [ ] Step 38.6: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/` and `server/`,
+          leaving `rules/` alone: a rule's own detection sets are not app patterns
+    - [ ] Step 38.7: Register as `severity: 'error'`
+    - [ ] Step 38.8: Add `tests/RegexpRegistry.spec.ts` — the catalogue and a value-built regex
+          accepted; an inline literal, a `new RegExp('…')` and a pattern in a constants file
+          reported
+    - [ ] Step 38.9: Run `npm run build:rules`, then verify the generated config
+    - [ ] Step 38.10: Move `messagePattern` out of `Contact.constants.ts` into `Regexp`, and point
+          `Contact.schema.ts` at it — `Register.schema.ts` already reads `Regexp.NameText`
+    - [ ] Step 38.11: Sweep the remaining literals in `server/` and the schemas, registering each
+    - [ ] Step 38.12: Update the `form` skill — `SKILL.md`, `Feature.constants.ts` and
+          `Feature.schema.ts` say every pattern comes from `Regexp`, and a constants file holds
+          bounds alone
+    - [ ] Step 38.13: Rewrite Step 16.6, which still splits patterns between `Regexp` and the
+          feature's constants file: the pattern always comes from `Regexp`, the bound stays local
+    - [ ] Step 38.14: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 
@@ -879,8 +909,9 @@ file's name describes what it augments, not a role, so`.d.ts` leaves scope.
   `Gym.queries.ts` writes `Routines: { useGet: useGetGymUserRoutines }` — a
   conventional key over a feature-named function — and `Like.queries.ts` writes
   `usePost: usePostLike`. Checking the value would flag both, and both are right.
-- Step 16.5 exempts `.min(1)`. `1` asserts presence — at least one item — rather
-  than expressing a field's bound, so it has no constant to come from.
+- Step 16.5 exempts `.min(0)` and `.min(1)`. `0` is where a list of indices begins and `1`
+  asserts presence — at least one item — so neither expresses a field's bound, and neither
+  has a constant to come from.
 - Step 16 is the most heavily violated rule in this ticket: 14 hits across 5
   files. `Contact.schema.ts` shows why it earns its place — it declares
   `MAX_MESSAGE_CHARACTERS` and uses it on `message`, then writes `.max(50)` on
@@ -1173,6 +1204,7 @@ shipping rules. `Already` means a rule covers it; `New` means no rule does;
 | 45  | `router` Rules           | A fixed path is declared before a parameterised one              | Yes        | error    | New     |
 | 46  | `router` Rules           | A route's request/response typed as a named `Req`/`Res` pair     | Partly     | warn     | New     |
 | 47  | `router` App.constants   | No call site writes a port number                                | Yes        | error    | New     |
+| 48  | `form` Rules             | A regex is registered in `Regexp`, never written inline          | Yes        | error    | Step 38 |
 | 48  | `db` Rules               | A service never assembles a filter — repository only             | Partly     | warn     | New     |
 | 49  | `db` Rules               | A missing record is a thrown `ApiResponder`, never `undefined`   | Partly     | error    | New     |
 | 50  | `db` Rules               | Limits grouped by field and `as const`                           | Yes        | error    | New     |
