@@ -26,18 +26,24 @@ npm run lint     # ESLint
 
 ## Commit gate
 
-`.githooks/commit-msg` judges the message first — `[0009] - Message` or `[ABC-0009] - Message`,
-the number between 1 and 100000 — and only then runs `npm run lint`, `tsc` and the full suite.
-A bad message therefore costs one cheap check instead of a full run. Everything sits in
-`commit-msg` rather than `pre-commit` because git runs `pre-commit` first, where the message
-does not exist yet. `npm install` switches the hook on through the `prepare` script, which sets
-`core.hooksPath` to `.githooks`; to do it by hand in an existing clone:
+`.githooks/pre-commit` runs the gates that may change the commit: every change must be staged,
+and `package.json` must carry a bump, for which it offers PATCH, MINOR or MAJOR and writes the
+choice. It cannot live in `commit-msg` — git freezes the commit's contents the moment
+`pre-commit` returns, so a file staged later is left in the index instead of the commit.
+
+`.githooks/commit-msg` then judges the message — `[0009] - Message` or `[ABC-0009] - Message`,
+the number between 1 and 100000 — and only after that runs `npm run lint`, `tsc` and the full
+suite, so a bad message costs one cheap check instead of a full run. The step formatting both
+hooks print lives in `.githooks/step.sh`, which they source.
+
+`npm install` switches the hooks on through the `prepare` script, which sets `core.hooksPath` to
+`.githooks`; to do it by hand in an existing clone:
 
 ```bash
 git config core.hooksPath .githooks
 ```
 
-Bypass it deliberately with `git commit --no-verify`.
+Bypass them deliberately with `git commit --no-verify`.
 
 `.githooks/commit-msg` refuses a message that is not `[0009] - Message` or `[ABC-0009] - Message`:
 
