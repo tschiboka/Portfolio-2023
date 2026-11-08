@@ -26,15 +26,18 @@ npm run lint     # ESLint
 
 ## Commit gate
 
-`.githooks/pre-commit` runs the gates that may change the commit: every change must be staged,
-and `package.json` must carry a bump, for which it offers PATCH, MINOR or MAJOR and writes the
-choice. It cannot live in `commit-msg` — git freezes the commit's contents the moment
-`pre-commit` returns, so a file staged later is left in the index instead of the commit.
+`.githooks/pre-commit` runs the one gate that may change the commit: `package.json` must carry a
+bump, for which it offers PATCH, MINOR or MAJOR and writes the choice. It cannot live in
+`commit-msg` — git freezes the commit's contents the moment `pre-commit` returns, so a file staged
+later is left in the index instead of the commit.
 
-`.githooks/commit-msg` then judges the message — `[0009] - Message` or `[ABC-0009] - Message`,
-the number between 1 and 100000 — and only after that runs `npm run lint`, `tsc` and the full
-suite, so a bad message costs one cheap check instead of a full run. The step formatting both
-hooks print lives in `.githooks/step.sh`, which they source.
+`.githooks/commit-msg` then judges cheapest first: the commit's ticket is swept for TODOs of the
+same ticket or an earlier one, every change must be staged, and the subject must read
+`[0009] - Message` or `[ABC-0009] - Message`, the number between 1 and 100000. Only then do
+`npm run lint`, `tsc` and the full suite run, so a cheap problem costs one cheap check instead of a
+full run. A listed TODO is acknowledged with `y` at the prompt, or resolved before committing. What
+each reference form names is in [`docs/references/tickets.md`](docs/references/tickets.md). The step
+formatting both hooks print lives in `.githooks/step.sh`, which they source.
 
 `npm install` switches the hooks on through the `prepare` script, which sets `core.hooksPath` to
 `.githooks`; to do it by hand in an existing clone:
@@ -47,7 +50,7 @@ Bypass them deliberately with `git commit --no-verify`.
 
 `.githooks/commit-msg` refuses a message that is not `[0009] - Message` or `[ABC-0009] - Message`:
 
-- the ticket ref sits in brackets — 1 to 6 digits, or 1 to 5 capital letters, a dash, then digits;
+- the ticket ref sits in brackets — 1 to 6 digits, or 1 to 3 capital letters, a dash, then digits;
 - after `-` the message may hold mixed case, digits, spaces and ordinary punctuation.
 
 ## Documentation

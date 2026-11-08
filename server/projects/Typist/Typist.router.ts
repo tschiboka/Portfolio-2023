@@ -17,7 +17,7 @@ type PostRoundRes = TypedResponse<PostTypistRoundResponse>
 router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
     const { keystrokes } = req.body // fully typed now
 
-    // TODO: Extract the whole logic into designated service functions and clean up the route handler to just call those functions and return the response Calculate the error combination if practice mode is set to error
+    // TODO: [TYP-0005] Extract the whole logic into designated service functions and clean up the route handler to just call those functions and return the response Calculate the error combination if practice mode is set to error
     let errorCombinations: string[] = []
     if (TypistConstants.userSettings.practiceMode === 'error') {
         const seenErrorAtIndex = new Set<number>()

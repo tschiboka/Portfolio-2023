@@ -40,7 +40,7 @@ const sendNotificationEmail = async (
             html: notificationEmail(input),
         })
         if (error)
-            // TODO: [0004] - surface a mailbox/notification for failed notification emails.
+            // TODO: [0010] - surface a mailbox/notification for failed notification emails.
             console.error(ApiMessage.failed('send notification email'), error)
     } catch (err) {
         console.error(ApiMessage.failed('send notification email'), err)

@@ -8,6 +8,44 @@ root=$(dirname "$0")/..
 
 . "$(dirname "$0")/step.sh"
 
+# The ticket's own TODOs are judged first: reading tracked files costs far less than the gates below,
+# and a TODO this commit should have closed is the likeliest reason to stop here. A hook's stdin is
+# not a terminal, so the answer is read from the console device instead.
+printf '\033[36m%s\033[0m\n' "[commit-todos]"
+status=0
+node "$root/scripts/check-todo-refs.js" "$1" || status=$?
+
+if [ "$status" -eq 2 ]; then
+    while :; do
+        printf 'Continue anyway? (Y/N): '
+        if ! read -r answer < /dev/tty; then
+            printf '\033[31m%s no terminal to answer on\033[0m\n' "[commit-todos]"
+            exit 1
+        fi
+
+        case "$answer" in
+            y|Y|yes|YES) break ;;
+            ''|n|N|no|NO)
+                printf '\033[31m%s resolve the TODOs before committing\033[0m\n' "[commit-todos]"
+                exit 1
+                ;;
+            *) printf '\033[31m%s answer y or n\033[0m\n' "[commit-todos]" ;;
+        esac
+    done
+
+    status=0
+    node "$root/scripts/check-todo-refs.js" "$1" "$answer" || status=$?
+fi
+
+if [ "$status" -ne 0 ]; then
+    printf '\033[31m%s Failed ✗\033[0m\n' "[commit-todos]"
+    exit 1
+fi
+
+printf '\033[32m%s Successful ✓\033[0m\n' "[commit-todos]"
+
+step "[commit-staged]" node "$root/scripts/check-staged-changes.js"
+
 step "[commit-msg]" node "$root/scripts/check-commit-message.js" "$1"
 
 # npm 12 returns nothing at all for --workspaces, so each manifest is asked directly.

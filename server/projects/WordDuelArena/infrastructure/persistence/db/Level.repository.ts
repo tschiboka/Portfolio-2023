@@ -17,7 +17,7 @@ export const LevelRepository = {
             { new: true, upsert: true, runValidators: true },
         ),
     findForSession: async () => {
-        // TODO: Implement a better level selection logic based on player history
+        // TODO: [WDA-0043] - weight the level drawn for a session by the player's history
         const levels = await LevelModel.find().lean()
         if (isEmpty(levels)) return null
         return Arrays.random(levels) ?? null

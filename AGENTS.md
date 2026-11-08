@@ -54,5 +54,5 @@ Prefer declarative, pure functional style:
 
 - Restrict comments to a minimum explaining why.
 - Comment for documentation mainly on the main return using JSDoc.
-- No TODO comments; use the ticket doc for keeping a task list.
+- A `TODO` carries a ticket reference — `[0009]` or `[ABC-0009]` — per [`docs/references/tickets.md`](docs/references/tickets.md).
 - Do not use the ticket doc as a diary; keep it short.

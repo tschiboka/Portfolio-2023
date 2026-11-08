@@ -14,7 +14,7 @@ describe('parseCommitMessage', () => {
         expect(parseCommitMessage('[1] - X')).toEqual({ valid: true }))
 
     it('should accept the highest number and the longest keyed ref', () =>
-        expect(parseCommitMessage('[ABCDE-100000] - Feat: add (thing)')).toEqual({ valid: true }))
+        expect(parseCommitMessage('[ABC-100000] - Feat: add (thing)')).toEqual({ valid: true }))
 
     it('should accept padding zeros in the number', () =>
         expect(parseCommitMessage('[0001] - X')).toEqual({ valid: true }))
@@ -45,8 +45,8 @@ describe('parseCommitMessage', () => {
     it('should refuse more than six digits', () =>
         expect(parseCommitMessage('[1234567] - X').valid).toBe(false))
 
-    it('should refuse more than five letters in the keyed ref', () =>
-        expect(parseCommitMessage('[ABCDEF-1] - X').valid).toBe(false))
+    it('should refuse a keyed ref of four letters', () =>
+        expect(parseCommitMessage('[ABCD-1] - X').valid).toBe(false))
 
     it('should refuse a separator other than a spaced hyphen', () =>
         expect(parseCommitMessage('[0009] Fix it').valid).toBe(false))

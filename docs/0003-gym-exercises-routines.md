@@ -1,11 +1,5 @@
 # 0003 — Gym Exercises & Routines: finalise page features
 
-> **Status:** In progress
-> **Last updated:** 2026-08-23
-> **Created:** 2026-08-22
-
----
-
 ## 1. Description
 
 Finalise the `#/projects/gym` page by closing the gap between its existing UI/types and a real
@@ -13,6 +7,16 @@ write path. The page already has a full "Add Exercise" form, five GET-backed rea
 static option lists, and rich shared types — but the models only persist `name`, there are no
 POST/update/delete routes, and the form submit is not wired to anything. This feature makes
 exercises and routines actually read/write against the server and aligns models with types.
+
+The server half landed here. The frontend half continues in
+[GYM-0001](./GYM/0001-gym-write-path.md), which closes this ticket.
+
+## 1.1 Info
+
+| Status       | Done — continued in [GYM-0001](./GYM/0001-gym-write-path.md) |
+| ------------ | ------------------------------------------------------------ |
+| Last updated | 2026-11-08                                                   |
+| Created      | 2026-08-22                                                   |
 
 ## 2. Domain model: what is an Exercise vs a Routine
 
@@ -245,13 +249,12 @@ GymSystemRoutine`; `GetGymUserRoutinesResponse` uses it
 
 **Frontend**
 
-- [ ] Add mutation hooks in `Gym.queries.ts`
-- [ ] Wire "Add Exercise" submit + option `onSelect` (admin path for canonical exercises)
-- [ ] Wire "Create Routine" (references canonical exercises)
-- [ ] Remove `console.log` stubs
-- [ ] Verify page read/write end-to-end
+- [-] The frontend half — mutation hooks, both submit paths, the `console.log` stubs and the
+      end-to-end check — continues in [GYM-0001](./GYM/0001-gym-write-path.md)
 
 ## 11. Related docs / links
 
 - [`0002-util-reuse-sweep.md`](./0002-util-reuse-sweep.md) — generic-type/util consolidation the
   gym types should build on.
+- [`GYM/0001-gym-write-path.md`](./GYM/0001-gym-write-path.md) — the frontend half this ticket left
+  open; GYM carries the feature from there.

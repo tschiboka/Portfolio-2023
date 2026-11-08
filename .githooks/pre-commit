@@ -8,8 +8,6 @@ root=$(dirname "$0")/..
 
 . "$(dirname "$0")/step.sh"
 
-step "[commit-staged]" node "$root/scripts/check-staged-changes.js"
-
 # The bump gate answers 2 when it needs a decision. Git hands a hook a stdin that is not a
 # terminal, so the question is read from the console device instead. The bump stands if a later
 # gate fails: the retry finds a valid bump against HEAD and asks nothing.

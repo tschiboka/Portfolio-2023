@@ -64,7 +64,7 @@ export const EXERCISE_SOURCES = ['canonical', 'user'] as const
 export type GymRoutineEntry = {
     exerciseId: string
     order: number
-    // TODO: [0003] - sets / reps / rest to be added here when routine composition lands
+    // TODO: [GYM-0001] - sets / reps / rest to be added here when routine composition lands
 }
 
 export type GymRoutineSource = (typeof ROUTINE_SOURCES)[number]

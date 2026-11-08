@@ -3,10 +3,20 @@ import { pathToFileURL } from 'node:url'
 import { ansi } from './ansi.js'
 
 /** `[0009]` or `[ABC-0009]` — the ticket's own reference. */
-const RefPattern = /^\[(?:\d{1,6}|[A-Z]{1,5}-\d{1,6})\]$/
+const RefPattern = /^\[(?:\d{1,6}|[A-Z]{1,3}-\d{1,6})\]$/
 
 /** The digits that end the ref, which carry the ticket number. */
 const TrailingDigits = /(\d+)\]$/
+
+/** The reference a commit subject opens with, or `null` where it opens with none. */
+export const refIn = (message) => {
+    const separator = message.indexOf(Separator)
+    if (separator === -1) return null
+
+    const ref = message.slice(0, separator)
+
+    return RefPattern.test(ref) ? ref.slice(1, -1) : null
+}
 
 /** The subject: mixed case, digits, spaces and ordinary punctuation, opening with a word. */
 const SubjectPattern = /^[A-Za-z0-9][A-Za-z0-9 ().,:;_/&+-]*$/

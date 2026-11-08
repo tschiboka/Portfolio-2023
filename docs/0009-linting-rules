@@ -402,16 +402,29 @@ config owns is linted.
           `shuffleArray` alone, a reverse index pair whose partner depends on the previous swap
     - [x] Step 20.11: Confirm a green `tsc`, lint, and test run
 - [ ] Step 21: Rule — a `TODO` carries a ticket reference
-    - [ ] Step 21.1: Build `rules/todo-ticket-ref/`
-    - [ ] Step 21.2: Flag a `TODO` comment without a ticket reference
-    - [ ] Step 21.3: Check the reference is well formed and resolves to a `docs/` ticket
-    - [ ] Step 21.4: Scope `include` to `src/**`, `common/**`, `server/**`, `rules/**`
-    - [ ] Step 21.5: Register as `severity: 'error'`
-    - [ ] Step 21.6: Add `tests/TodoTicketRef.spec.ts`
-    - [ ] Step 21.7: Run `rules sync`, then verify the generated config
-    - [ ] Step 21.8: Fix the four bare `TODO`s — `Typist.routes.ts`, `move.ts`, `level.ts`,
-          `WebsiteStats.tsx`
-    - [ ] Step 21.9: Confirm a green `tsc`, lint, and test run
+    - [x] Step 21.1: Build `rules/todo-ticket-ref/` — constants, utils, rules, registrar and spec
+    - [x] Step 21.2: Flag a `TODO` whose reference does not open it — absent, or written after the
+          note instead of before it
+    - [x] Step 21.3: Check the reference is well formed — `[NNNN]` or `[ABC-NNNN]` — and
+          resolves to the ticket document: `docs/NNNN-…` for a core ticket, `docs/<ACRONYM>/NNNN-…`
+          for a project one. The format is [`docs/references/tickets.md`](references/tickets.md)
+    - [x] Step 21.4: Scope `include` to `src/**`, `common/**`, `server/**`, `rules/**`,
+          `exclude` the displayed samples and `rules/**` — a rule names a TODO in its own text
+    - [x] Step 21.5: Register as `severity: 'error'`
+    - [x] Step 21.6: Add `tests/TodoTicketRef.spec.ts`
+    - [x] Step 21.7: Run `rules sync`, then verify the generated config
+    - [x] Step 21.8: Point the bare `TODO`s at [`docs/0010-tech-debt.md`](0010-tech-debt.md), which
+          records each one — `WebsiteStats`, `Typist.router` and `Move.service`; the fourth had
+          already been resolved
+    - [x] Step 21.9: Confirm a green `tsc`, lint, and test run
+    - [x] Step 21.10: Document the format — core tickets are `[NNNN]`, a long-running project picks
+          an acronym and writes `[ABC-0009]`, in [`docs/references/tickets.md`](references/tickets.md)
+    - [x] Step 21.12: Give a project its own folder — `docs/GYM/0001-gym-write-path.md` — and read a
+          project reference from that folder rather than a filename prefix
+    - [x] Step 21.11: Add the same check to the commit — `scripts/check-todo-refs.js` runs first in
+          `commit-msg`, reading the subject's reference and listing every `TODO` of that ticket or
+          an earlier one, then asking `Continue anyway? (Y/N)`. `[commit-staged]` moved here behind
+          it, so `pre-commit` carries only the version gate
 - [ ] Step 22: Rule — a role file's stem is PascalCase
     - [ ] Step 22.1: Build `rules/role-file-pascal/`
     - [ ] Step 22.2: Flag a stem that does not start uppercase when a listed role
@@ -1195,7 +1208,7 @@ shipping rules. `Already` means a rule covers it; `New` means no rule does;
 | 62  | `AGENTS.md` §1.3         | No `for` / `while` loops                                         | Yes        | error    | New     |
 | 63  | `AGENTS.md` §1.3         | Never mutate arguments or shared state                           | Human      | —        | Human   |
 | 64  | `AGENTS.md` §1.4         | Barrel exports alphabetical, types last                          | Yes        | error    | New     |
-| 65  | `AGENTS.md` §3           | No TODO comments — the ticket doc carries the task list          | Yes        | error    | New     |
+| 65  | `AGENTS.md` §3           | A `TODO` opens with a ticket reference                           | Yes        | error    | Step 21 |
 | 66  | `AGENTS.md` §1.2         | An import is all values or all types, never both                 | Partly     | error    | Step 23 |
 | 67  | `AGENTS.md` §1.1         | A nullable union names its generic — `Nullable` / `Optional`     | Yes        | error    | Step 33 |
 

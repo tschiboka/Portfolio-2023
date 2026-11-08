@@ -16,7 +16,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
               ? 'player2'
               : undefined
 
-    // TODO: Handle case where deviceId is not associated with any player
+    // TODO: [WDA-0043] - Handle case where deviceId is not associated with any player
     if (!playerKey) {
         console.log('Device not associated with any player.')
         return
