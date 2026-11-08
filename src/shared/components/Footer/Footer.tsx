@@ -4,7 +4,7 @@ import { TbBrandGithubFilled } from 'react-icons/tb'
 import { TfiLinkedin } from 'react-icons/tfi'
 import { MdCopyright } from 'react-icons/md'
 import { Link, Paragraph } from '@common-ux'
-import { Breadcrumb } from './components'
+import { Breadcrumb, VersionBadge } from './components'
 import type { FooterProps } from './Footer.types'
 import './Footer.scss'
 
@@ -37,6 +37,8 @@ export const Footer = ({ path, visitsPreLoaded, visitCount, info }: FooterProps)
                 <time>
                     <Link href="#/clock">{year}</Link>
                 </time>
+                <span className="copyright__pipe">|</span>
+                <VersionBadge />
                 <span className="copyright__pipe">|</span>
                 Tivadar Debnar. All rights reserved.{' '}
             </Paragraph>

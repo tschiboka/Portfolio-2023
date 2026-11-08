@@ -1,4 +1,5 @@
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ValidationMessage } from '@common-utils'
 import { RegisterConstants } from './Register.constants'
 import type { ObjectSchema } from 'yup'
@@ -7,7 +8,7 @@ import type { RegistrationFormData } from './Register.types'
 const { fieldLimits, fullNamePattern, passwordRules } = RegisterConstants
 const { fullName, userName, email, password } = fieldLimits
 
-export const RegisterSchema: ObjectSchema<RegistrationFormData> = yup.object({
+const schema: ObjectSchema<RegistrationFormData> = yup.object({
     fullName: yup
         .string()
         .required(ValidationMessage.Required('full name'))
@@ -59,3 +60,5 @@ export const RegisterSchema: ObjectSchema<RegistrationFormData> = yup.object({
         .required(ValidationMessage.Required('password confirmation'))
         .oneOf([yup.ref('password')], ValidationMessage.Matches('password', 'confirmation')),
 })
+
+export const RegisterSchema = { schema, resolver: yupResolver(schema) }

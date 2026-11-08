@@ -28,6 +28,12 @@ const defaultHandlers = [
     http.get('http://localhost:5000/api/like', () =>
         HttpResponse.json({ success: true, likes: 0 }, cors),
     ),
+    http.get('/version.json', () =>
+        HttpResponse.json(
+            { version: '0.0.0', sha: '0'.repeat(40), message: 'test', date: '2026-01-01' },
+            cors,
+        ),
+    ),
 ]
 
 // MSW server lifecycle
@@ -69,19 +75,48 @@ const suppressedActPatterns = [
     'React Router Future Flag Warning',
 ]
 
+// The version check narrates every poll; filter just those lines so spec output stays readable.
+const suppressedVersionPatterns = [
+    'App is up to date.',
+    'New version available!',
+    'Please refresh the page to update.',
+    'Last version check ran at:',
+    '📌 Version:',
+    '📝 Message:',
+    '📅 Date:',
+    '❌ Current version:',
+]
+
+const isSuppressed = (patterns: string[], args: unknown[]) => {
+    const message = args.map(String).join(' ')
+
+    return patterns.some((pattern) => message.includes(pattern))
+}
+
 const originalConsoleError = console.error
 console.error = ((...args: unknown[]) => {
-    const message = args.map(String).join(' ')
-    if (suppressedActPatterns.some((p) => message.includes(p))) return
+    if (isSuppressed(suppressedActPatterns, args)) return
     originalConsoleError.call(console, ...args)
 }) as typeof console.error
 
 const originalConsoleWarn = console.warn
 console.warn = ((...args: unknown[]) => {
-    const message = args.map(String).join(' ')
-    if (suppressedActPatterns.some((p) => message.includes(p))) return
+    if (isSuppressed(suppressedActPatterns, args)) return
+    if (isSuppressed(suppressedVersionPatterns, args)) return
     originalConsoleWarn.call(console, ...args)
 }) as typeof console.warn
+
+const originalConsoleLog = console.log
+console.log = ((...args: unknown[]) => {
+    if (isSuppressed(suppressedVersionPatterns, args)) return
+    originalConsoleLog.call(console, ...args)
+}) as typeof console.log
+
+const originalConsoleInfo = console.info
+console.info = ((...args: unknown[]) => {
+    if (isSuppressed(suppressedVersionPatterns, args)) return
+    originalConsoleInfo.call(console, ...args)
+}) as typeof console.info
 
 // jsdom does not implement IntersectionObserver — provide a minimal stub
 // so any component that uses useIsVisible (e.g. ContentNavigator via Screen) won't crash.

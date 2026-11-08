@@ -12,8 +12,12 @@ try {
     const sha = execSync('git rev-parse HEAD').toString().trim()
     const message = execSync('git log -1 --pretty=%B').toString().trim()
     const date = execSync('git log -1 --pretty=%cI').toString().trim()
+    const { version: release } = JSON.parse(
+        fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'),
+    )
     
     const version = {
+        version: release,
         sha,
         message,
         date

@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { BaseSyntheticEvent, useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Screen } from '@shared-components/Screen/Screen'
 import { ClientMessage, Paths, errorMessage } from '@common-utils'
 import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
@@ -30,7 +29,7 @@ export const Register = ({ path, pageName }: RegisterProps) => {
             password: '',
             passwordConfirmation: '',
         },
-        resolver: yupResolver(RegisterSchema),
+        resolver: RegisterSchema.resolver,
     })
 
     const registerRequest = RegisterQueries.usePost({

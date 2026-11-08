@@ -1,0 +1,11 @@
+.StatusIcon {
+    vertical-align: middle;
+}
+
+.StatusIcon--success {
+    color: var(--success-dark-1);
+}
+
+.StatusIcon--error {
+    color: var(--error-dark-1);
+}

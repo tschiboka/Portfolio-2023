@@ -88,7 +88,8 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
     }
 
     const onSave = async () => {
-        const validation: Nullable<string> = await LevelCreatorSchema.validate({ selectedWords })
+        const validation: Nullable<string> = await LevelCreatorSchema.schema
+            .validate({ selectedWords })
             .then(() => null)
             .catch((error: Error) => error.message)
 

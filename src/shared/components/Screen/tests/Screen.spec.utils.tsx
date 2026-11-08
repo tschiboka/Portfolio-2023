@@ -2,7 +2,7 @@ import { createElement, Fragment, ReactNode } from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { render, waitFor } from '@testing-library/react'
-import { AppProvider, SessionContext } from '@shared-context'
+import { AppProvider, SessionContext, VersionContext } from '@shared-context'
 import { TestError, Server } from '@common-ux/Test'
 import { isString, isNonEmpty } from '@common-utils'
 import { ScreenSetupOptions } from './Screen.spec.types'
@@ -30,11 +30,18 @@ const withScreenProviders = (options: ScreenSetupOptions) => {
     const Providers = ({ children }: { children: ReactNode }) => (
         <QueryClientProvider client={queryClient}>
             <SessionContext.Provider value={sessionValue}>
-                <AppProvider initialState={appContext}>
-                    <MemoryRouter initialEntries={route}>
-                        {children}
-                    </MemoryRouter>
-                </AppProvider>
+                <VersionContext.Provider
+                    value={{
+                        isStale: false,
+                        build: null,
+                        checkedAt: null,
+                        refresh: () => undefined,
+                    }}
+                >
+                    <AppProvider initialState={appContext}>
+                        <MemoryRouter initialEntries={route}>{children}</MemoryRouter>
+                    </AppProvider>
+                </VersionContext.Provider>
             </SessionContext.Provider>
         </QueryClientProvider>
     )

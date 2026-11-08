@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { pathToFileURL } from 'node:url'
+import { ansi } from './ansi.js'
 
 /** `[0009]` or `[ABC-0009]` — the ticket's own reference. */
 const RefPattern = /^\[(?:\d{1,6}|[A-Z]{1,5}-\d{1,6})\]$/
@@ -57,8 +58,8 @@ if (invokedDirectly) {
     const { valid, reason } = parseCommitMessage(firstLine)
 
     if (!valid) {
-        console.error(`[commit-msg] Refused: "${firstLine}"`)
-        console.error(`[commit-msg] ${reason}.`)
+        console.error(ansi.red(`[commit-msg] Refused: "${firstLine}"`))
+        console.error(ansi.red(`[commit-msg] ${reason}.`))
         console.error('[commit-msg] Write "[0009] - Message" or "[ABC-0009] - Message".')
         process.exit(1)
     }

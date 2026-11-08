@@ -1,10 +1,11 @@
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Regexp, ValidationMessage } from '@common-utils'
 import { XmasConstants } from './Xmas.constants'
 import type { ObjectSchema } from 'yup'
 import type { XmasFormData } from './Xmas.types'
 
-export const XmasSchema: ObjectSchema<XmasFormData> = yup.object({
+const schema: ObjectSchema<XmasFormData> = yup.object({
     name: yup
         .string()
         .required(ValidationMessage.Required('Name'))
@@ -33,3 +34,5 @@ export const XmasSchema: ObjectSchema<XmasFormData> = yup.object({
             ValidationMessage.Allowed('Message', 'letters, numbers and punctuation'),
         ),
 })
+
+export const XmasSchema = { schema, resolver: yupResolver(schema) }

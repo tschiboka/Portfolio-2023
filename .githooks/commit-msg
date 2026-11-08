@@ -5,16 +5,54 @@ set -e
 
 root=$(dirname "$0")/..
 
-node "$root/scripts/check-commit-message.js" "$1"
+# One step per line: the label opens it, a green confirmation closes it. A failing step exits
+# before its confirmation, so a green line always means that step passed.
+step() {
+    label=$1
+    shift
+    printf '\033[36m%s\033[0m\n' "$label"
+    if ! "$@"; then
+        printf '\033[31m%s Failed ✗\033[0m\n' "$label"
+        exit 1
+    fi
+    printf '\033[32m%s Successful ✓\033[0m\n' "$label"
+}
 
-echo "[commit] lint"
-npm run lint
+step "[commit-staged]" node "$root/scripts/check-staged-changes.js"
 
-echo "[commit] tsc"
-npm run tsc
+step "[commit-msg]" node "$root/scripts/check-commit-message.js" "$1"
 
-echo "[commit] tests"
-npm run test:run
+# The bump gate answers 2 when it needs a decision. Git hands a hook a stdin that is not a
+# terminal, so the question is read from the console device instead.
+printf '\033[36m%s\033[0m\n' "[commit-version]"
+status=0
+node "$root/scripts/check-version-bump.js" || status=$?
+
+if [ "$status" -eq 2 ]; then
+    while :; do
+        printf 'Choose option: '
+        if ! read -r answer < /dev/tty; then
+            printf '\033[31m%s no terminal to answer on\033[0m\n' "[commit-version]"
+            exit 1
+        fi
+
+        case "$answer" in
+            1|2|3) break ;;
+            q|Q) exit 1 ;;
+            *) printf '\033[31m%s not a choice — 1, 2, 3 or q\033[0m\n' "[commit-version]" ;;
+        esac
+    done
+
+    status=0
+    node "$root/scripts/check-version-bump.js" "$answer" || status=$?
+fi
+
+if [ "$status" -ne 0 ]; then
+    printf '\033[31m%s Failed ✗\033[0m\n' "[commit-version]"
+    exit 1
+fi
+
+printf '\033[32m%s Successful ✓\033[0m\n' "[commit-version]"
 
 # npm 12 returns nothing at all for --workspaces, so each manifest is asked directly.
 # Hoisted workspace dependencies come back as MISSING and npm's table always carries two
@@ -22,7 +60,7 @@ npm run test:run
 stale=$(for manifest in . common server; do
     npm outdated --prefix "$manifest" 2>/dev/null | awk -v manifest="$manifest" '
         NR > 2 && $3 != $4 {
-            printf "  %-10s %-16s %s -> %s\n", manifest, $1, ($2 == "MISSING" ? $3 : $2), $4
+            printf "  %-8s %s %s -> %s\n", manifest, $1, ($2 == "MISSING" ? $3 : $2), $4
         }'
 done)
 
@@ -30,3 +68,9 @@ if [ -n "$stale" ]; then
     echo "[commit] dependency warnings"
     printf '%s\n' "$stale"
 fi
+
+step "[commit-lint]" npm run lint
+
+step "[commit-tsc]" npm run tsc
+
+step "[commit-tests]" npm run test:run

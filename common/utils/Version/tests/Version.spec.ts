@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import { Functions } from '@common-utils'
+import { DateTime, Functions } from '@common-utils'
 import { VersionTestUtils } from './Version.spec.utils'
 import { VersionHooks } from '..'
 
@@ -44,7 +44,10 @@ describe('useVersionCheck', () => {
             expect(console.log).toHaveBeenCalledWith('✅ App is up to date.')
             expect(console.log).toHaveBeenCalledWith('📌 Version:', VALID_SHA)
             expect(console.log).toHaveBeenCalledWith('📝 Message:', version.message)
-            expect(console.log).toHaveBeenCalledWith('📅 Date:', version.date)
+            expect(console.log).toHaveBeenCalledWith(
+                '📅 Date:',
+                DateTime.Format.to('DisplayTimeStamp', version.date),
+            )
         })
     })
 
@@ -97,17 +100,18 @@ describe('useVersionCheck', () => {
         })
     })
 
-    it('should handle fetch errors gracefully', async () => {
+    it('should swallow fetch errors without logging', async () => {
         global.fetch = vi.fn().mockRejectedValue(new Error('Network error'))
         const { result } = renderHook(() => useVersionCheck())
 
-        await waitFor(() =>
-            expect(console.error).toHaveBeenCalledWith(
-                'Error checking app version:',
-                expect.any(Error),
-            ),
-        )
+        await waitFor(() => expect(global.fetch).toHaveBeenCalled())
+        await new Promise((resolve) => setTimeout(resolve, 0))
+
         expect(result.current.isStale).toBe(false)
+        expect(console.error).not.toHaveBeenCalledWith(
+            'Error checking app version:',
+            expect.any(Error),
+        )
     })
 
     it('should poll every 10 minutes', async () => {

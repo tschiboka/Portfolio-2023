@@ -349,20 +349,21 @@ config owns is linted.
     - [ ] Step 17.14: Sweep the remaining schemas and fix or suppress each violation
     - [ ] Step 17.15: Confirm a green `tsc`, lint, and test run
 - [ ] Step 18: Rule — a schema file exports its own bound resolver
-    - [ ] Step 18.1: Build `rules/resolver-in-schema/`
-    - [ ] Step 18.2: Flag a `yupResolver(...)` call outside a `*.schema.ts` file
-    - [ ] Step 18.3: Flag a `*.schema.ts` that declares a schema but exports no resolver
-    - [ ] Step 18.4: Accept a schema built by a factory — `Categories.schema.ts` takes
-          options, so its resolver is a factory too
-    - [ ] Step 18.5: Scope `include` to `src/**/*.tsx` and `src/**/*.schema.ts`
-    - [ ] Step 18.6: Register as `severity: 'error'`
-    - [ ] Step 18.7: Add `tests/ResolverInSchema.spec.ts`
-    - [ ] Step 18.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 18.9: Fix `Login.tsx`, `Register.tsx`, `Contact.tsx`, `Xmas2025.tsx` — export a
-          resolver from each schema and read it
-    - [ ] Step 18.10: Fix `Categories.tsx` — the schema is a factory, so the resolver must be
-          one too
-    - [ ] Step 18.11: Confirm a green `tsc`, lint, and test run
+    - [x] Step 18.1: Build `rules/resolver-in-schema/`
+    - [x] Step 18.2: Flag a `yupResolver(...)` call outside a `*.schema.ts` file
+    - [x] Step 18.3: Flag a `*.schema.ts` that declares a schema but exports no resolver
+    - [x] Step 18.4: Accept a schema built by a factory — `Categories.schema.ts` takes
+          options, so its `resolver` takes them too and builds the schema per call
+    - [x] Step 18.5: Scope `include` to `src/**/*.tsx` and `src/**/*.schema.ts`
+    - [x] Step 18.6: Register as `severity: 'error'`
+    - [x] Step 18.7: Add `tests/ResolverInSchema.spec.ts`
+    - [x] Step 18.8: Run `rules sync`, then verify the generated config
+    - [x] Step 18.9: Fix `Login.tsx`, `Register.tsx`, `Contact.tsx`, `Xmas.tsx` — each schema
+          exports one `{ schema, resolver }` object and the component reads `.resolver`, since
+          `exactly-one-export` forbids a second export
+    - [x] Step 18.10: Fix `Categories.tsx` — the schema is a factory, so the resolver must be
+          one too; `LevelCreator.schema.ts` takes the same wrapper and its modal reads `.schema`
+    - [x] Step 18.11: Confirm a green `tsc`, lint, and test run
 - [x] Step 19: Rule — one import per path and kind
     - [x] Step 19.1: Build `rules/no-duplicate-import/` — constants, types, utils, rule
     - [x] Step 19.2: Flag two imports of one path with the same kind
@@ -471,7 +472,7 @@ config owns is linted.
     - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
           own so each id names exactly what it covers
     - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-          './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
+    './x'` beside `export { B } from './x'`, and `export * from './x'` beside either
     - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
           carry `export type` beside its value exports
     - [x] Step 26.4: Leave a local export alone — it names no source
@@ -506,7 +507,7 @@ config owns is linted.
     - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
           `React.ReactNode`, `React.CSSProperties`
     - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-          'react'`, then `(e: FormEvent)`
+    'react'`, then `(e: FormEvent)`
     - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
           `React.StrictMode` are calls, not types
     - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
@@ -530,7 +531,7 @@ config owns is linted.
     - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
           `eslint.config.js`, not in `rules/registry.ts`
     - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
-          'import', next: 'import' }`, placed last because the last matching pair wins over
+    'import', next: 'import' }`, placed last because the last matching pair wins over
           `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
           no fixer and only covered `src`, `common` and `server`
     - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports

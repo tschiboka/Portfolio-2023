@@ -13,6 +13,9 @@ export default defineConfig(() => {
         optimizeDeps: {
             exclude: ['msw', '@mswjs/interceptors'],
         },
+        legacy: {
+            inconsistentCjsInterop: true,
+        },
         resolve: {
             // WARNING! A new alias belongs in tsconfig.json and rules/aliases.ts too.
             alias: {

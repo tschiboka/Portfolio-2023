@@ -2,8 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { AppProvider, Session } from '@shared-context'
-import { VersionChecker } from '@shared-components/VersionChecker'
+import { AppProvider, Session, Version } from '@shared-context'
 import { router } from './routes'
 import './main.styles.scss'
 
@@ -14,8 +13,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <QueryClientProvider client={client}>
             <Session.Provider>
                 <AppProvider>
-                    <VersionChecker />
-                    <RouterProvider router={router} />
+                    <Version.Provider>
+                        <RouterProvider router={router} />
+                    </Version.Provider>
                 </AppProvider>
             </Session.Provider>
         </QueryClientProvider>

@@ -1,7 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Section, Spacer } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Session } from '@shared-context'
@@ -27,7 +26,7 @@ export const Login = ({ path, pageName }: LoginProps) => {
             email: '',
             password: '',
         },
-        resolver: yupResolver(LoginSchema),
+        resolver: LoginSchema.resolver,
     })
 
     const { data: settingsData, isLoading: settingIsLoading } = LoginQueries.Settings.useGet()

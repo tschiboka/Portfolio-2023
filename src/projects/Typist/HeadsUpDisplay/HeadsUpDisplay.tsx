@@ -14,7 +14,7 @@ export const HeadsUpDisplay = () => {
                 <div className="label">Lower keys</div>
                 <div className="content keys">
                     {lowercaseChars.map((char) => (
-                        <LetterBox letter={char} />
+                        <LetterBox key={char} letter={char} />
                     ))}
                 </div>
             </div>
@@ -22,7 +22,7 @@ export const HeadsUpDisplay = () => {
                 <div className="label">Upper keys</div>
                 <div className="content keys">
                     {uppercaseChars.map((char) => (
-                        <LetterBox letter={char} />
+                        <LetterBox key={char} letter={char} />
                     ))}
                 </div>
             </div>
@@ -30,7 +30,7 @@ export const HeadsUpDisplay = () => {
                 <div className="label">Numbers & Punctuation</div>
                 <div className="content keys">
                     {numbersAndPunctuation.map((char) => (
-                        <LetterBox letter={char} />
+                        <LetterBox key={char} letter={char} />
                     ))}
                 </div>
             </div>

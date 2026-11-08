@@ -13,7 +13,6 @@ export const Clock = () => {
             <div className="ClockContainer">
                 <div className="ClockFace">{clock && <ClockFaceCanvas clock={clock} />}</div>
             </div>
-            <footer></footer>
         </div>
     )
 }

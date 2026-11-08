@@ -272,6 +272,7 @@ export type PostSettingsResponse = {
 // VERSION TYPES
 // GET /version.json response
 export type GetVersionResponse = {
+    version?: string
     sha: string
     message: string
     date: string

@@ -285,7 +285,8 @@ describe('ButtonGroup', () => {
 
     it('should apply inline style', () => {
         const { container } = Set.buttonGroup({ style: { gap: '2rem' } })
-        expect(container.querySelector('.button-group')).toHaveStyle({ gap: '2rem' })
+
+        expect(container.querySelector('.button-group')).toHaveAttribute('style', 'gap: 2rem;')
     })
 })
 

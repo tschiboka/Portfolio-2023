@@ -1,10 +1,11 @@
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ValidationMessage } from '@common-utils'
 import { ContactConstants } from './Contact.constants'
 import type { ObjectSchema } from 'yup'
 import type { ContactFormData } from './Contact.types'
 
-export const ContactSchema: ObjectSchema<ContactFormData> = yup.object({
+const schema: ObjectSchema<ContactFormData> = yup.object({
     name: yup
         .string()
         .required()
@@ -43,3 +44,5 @@ export const ContactSchema: ObjectSchema<ContactFormData> = yup.object({
             message: ValidationMessage.Allowed('message', 'letters, numbers and punctuation'),
         }),
 })
+
+export const ContactSchema = { schema, resolver: yupResolver(schema) }

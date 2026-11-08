@@ -1,5 +1,8 @@
 export { AppProvider, AppHooks } from './AppContext'
 export { Session, SessionStorage } from './SessionContext'
 export { SessionContext } from './SessionContext/Session.context'
+export { Version } from './VersionContext'
+export { VersionContext } from './VersionContext/Version.context'
 export type { AppContextValues, LocalStorage } from './AppContext'
 export type { SessionContextValues } from './SessionContext/SessionContext.types'
+export type { VersionContextValues } from './VersionContext'

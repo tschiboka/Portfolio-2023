@@ -12,7 +12,12 @@ type UseGetActivityFeedOptions = {
 /** Reads a page of the activity feed for the website stats table. */
 const useGetActivityFeed = ({ params }: UseGetActivityFeedOptions) => {
     const token = Session.useContext().session?.token
-    const request = Query.FeatureQuery().path('Activity').subpath('admin').token(token).build()
+    const request = Query.FeatureQuery()
+        .path('Activity')
+        .subpath('admin')
+        .token(token)
+        .query(params)
+        .build()
 
     return useQuery<GetActivityFeedResponse, AxiosError<ErrorResponse>>({
         ...request.Get<GetActivityFeedResponse>(QueryKey.ActivityFeed.byFilters(params).build()),

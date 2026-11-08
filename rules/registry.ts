@@ -21,6 +21,7 @@ import { registrar as noSpecLocalDeclarationRegistrar } from './no-spec-local-de
 import { registrar as queriesExportShapeRegistrar } from './queries-export-shape/QueriesExportShape.registrar.js'
 import { registrar as noBracedArrowBodyRegistrar } from './no-braced-arrow-body/NoBracedArrowBody.registrar.js'
 import { registrar as validationMessageSourceRegistrar } from './validation-message-source/ValidationMessageSource.registrar.js'
+import { registrar as resolverInSchemaRegistrar } from './resolver-in-schema/ResolverInSchema.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -48,4 +49,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noBracedArrowBodyRegistrar,
     queriesExportShapeRegistrar,
     validationMessageSourceRegistrar,
+    resolverInSchemaRegistrar,
 ].map(withPrefixedReports)

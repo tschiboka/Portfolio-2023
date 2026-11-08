@@ -18,7 +18,8 @@ export const TypistProvider = ({ children }: TypistProviderProps) => {
         prevStatusRef.current = editorState.status
 
         const { lastEvent, keystrokes } = editorState
-        const isFreshlyLoaded = editorState.status === 'idle' && lastEvent === 'none'
+        const isFreshlyLoaded =
+            editorState.status === 'idle' && lastEvent === 'none' && !editorState.text
         const justEnded =
             editorState.status === 'idle' && lastEvent === 'ended' && prevStatus !== 'idle'
 

@@ -53,12 +53,6 @@ $clock-container-max-size: 600px;
         }
     }
 
-    header,
-    footer {
-        width: 100%;
-        height: 100%;
-    }
-
     @media (orientation: landscape) {
         flex-direction: row;
     }

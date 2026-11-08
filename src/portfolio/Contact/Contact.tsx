@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 import { BaseSyntheticEvent, useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Form, Heading, LoadingIndicator, Main, Paragraph, Section } from '@common-ux'
@@ -28,7 +27,7 @@ export const Contact = ({ pageName, path }: ContactProps) => {
             phone: '',
             message: '',
         },
-        resolver: yupResolver(ContactSchema),
+        resolver: ContactSchema.resolver,
     })
 
     const sendMessage = ContactQueries.usePost({

@@ -1,7 +1,6 @@
 import Reindeer from '@projects/assets/xmas/reindeer.png'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
 import { Session } from '@shared-context'
 import { Screen } from '@shared-components/Screen/Screen'
@@ -29,7 +28,7 @@ export const Xmas = () => {
             name: user?.userName || '',
             message: '',
         },
-        resolver: yupResolver(XmasSchema),
+        resolver: XmasSchema.resolver,
         mode: 'onSubmit',
     })
 

@@ -1,10 +1,11 @@
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ValidationMessage } from '@common-utils'
 import { WordConstants } from '../common/utils'
 
 const WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
 
-export const LevelCreatorSchema = yup.object({
+const schema = yup.object({
     selectedWords: yup
         .array(yup.object({ word: yup.string().required() }).required())
         .min(
@@ -33,3 +34,5 @@ export const LevelCreatorSchema = yup.object({
         )
         .required(ValidationMessage.Required('word list')),
 })
+
+export const LevelCreatorSchema = { schema, resolver: yupResolver(schema) }

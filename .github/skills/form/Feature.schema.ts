@@ -11,7 +11,7 @@ const { name, userName, password } = FeatureFieldLimits
 // Every pattern and bound comes from a constant — a shared pattern from `Regexp`, a
 // feature's own rule from `Feature.constants.ts`.
 // One builder per rule, so each reads as the rule it enforces.
-export const featureSchema = object({
+const schema = object({
     name: string()
         .required(ValidationMessage.Required('name'))
         .min(name.min, ValidationMessage.Bound('name', name.min, 'characters', 'at least'))
@@ -49,4 +49,4 @@ export const featureSchema = object({
 })
 
 // Bound once here, so the component wires the schema without restating the resolver.
-export const featureResolver = yupResolver(featureSchema)
+export const featureSchema = { schema, resolver: yupResolver(schema) }

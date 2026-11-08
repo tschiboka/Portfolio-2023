@@ -96,12 +96,15 @@ Rules:
 ### `<Feature>.schema.ts`
 
 Naming convention: `<Feature>.schema.ts`, beside the form.
-Return type: `<feature>Schema` plus the bound `<feature>Resolver`.
+Return type: one `<feature>Schema` export, holding the yup `schema` and the bound `resolver`.
 Example: [`Feature.schema.ts`](./Feature.schema.ts)
 Rules:
 
 - The single home for every validation rule.
 - Bind `yupResolver(schema)` here, so no component restates it.
+- One export only: `resolver` is a member of `<feature>Schema`, never a second export.
+- Where the schema takes an argument, `schema` and `resolver` are both factories —
+  `Categories.schema.ts` passes `parentOptions` to each.
 - Messages come from `ValidationMessage`, never a literal.
 - Patterns and bounds come from a constant, never an inline literal — a shared
   pattern from `Regexp`, a feature's own rule from `<Feature>.constants.ts`.

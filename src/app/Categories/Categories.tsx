@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Form, Heading, LoadingIndicator, Main, Paragraph, Table } from '@common-ux'
 import { ClientMessage, errorMessage } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
@@ -25,7 +24,7 @@ export const Categories = ({ path }: CategoriesProps) => {
 
     const { control, setValue, handleSubmit, reset, resetField } = useForm<CategoryFormData>({
         defaultValues: CategoriesDefaults,
-        resolver: yupResolver(CategoriesSchema.schema(parentOptions.map(({ label }) => label))),
+        resolver: CategoriesSchema.resolver(parentOptions.map(({ label }) => label)),
         mode: 'onChange',
     })
 

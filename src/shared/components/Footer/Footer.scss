@@ -62,6 +62,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-wrap: wrap;
         color: tokens.$black-5;
         font-family: monospace;
         font-size: font.$font_md;
@@ -83,12 +84,68 @@
             margin-right: 10px;
         }
     }
+    .additional-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        text-align: center;
+    }
     .additional-info p {
         margin-top: 1.5rem;
         font-family: monospace;
         color: tokens.$black-4;
         font-size: font.$font_md;
+        overflow-wrap: anywhere;
     }
+    .Footer__version {
+        height: auto;
+        padding: 0;
+        background: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        font-family: inherit;
+        font-size: font.$font_sm;
+        font-weight: 400;
+        font-variant: normal;
+    }
+    .Footer__version:hover,
+    .Footer__version:active {
+        background: none;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.VersionBadge-table thead {
+    display: none;
+}
+.VersionBadge-table table {
+    table-layout: auto;
+}
+.VersionBadge-table tbody td {
+    vertical-align: middle;
+}
+.VersionBadge-table tbody td:first-child {
+    width: 1px;
+    white-space: nowrap;
+    color: tokens.$accent-dark-3;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+.VersionBadge-table tbody td:last-child {
+    font-family: monospace;
+}
+
+.VersionBadge-copy,
+.VersionBadge-copy:hover {
+    height: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
 }
 
 .light {
