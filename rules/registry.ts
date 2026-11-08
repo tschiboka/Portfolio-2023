@@ -23,6 +23,7 @@ import { registrar as noBracedArrowBodyRegistrar } from './no-braced-arrow-body/
 import { registrar as validationMessageSourceRegistrar } from './validation-message-source/ValidationMessageSource.registrar.js'
 import { registrar as resolverInSchemaRegistrar } from './resolver-in-schema/ResolverInSchema.registrar.js'
 import { registrar as noInlineValidationLiteralRegistrar } from './no-inline-validation-literal/NoInlineValidationLiteral.registrar.js'
+import { registrar as noLoopStatementRegistrar } from './no-loop-statement/NoLoopStatement.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -52,4 +53,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     validationMessageSourceRegistrar,
     resolverInSchemaRegistrar,
     noInlineValidationLiteralRegistrar,
+    noLoopStatementRegistrar,
 ].map(withPrefixedReports)

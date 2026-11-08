@@ -69,13 +69,11 @@ describe('Paths', () => {
             EmailVerification: '/api/email-verification',
         }))
 
-    it('should give every Api endpoint a value', () => {
-        for (const value of Object.values(Paths.Server.Api)) expect(value).toBeTruthy()
-    })
+    it('should give every Api endpoint a value', () =>
+        Object.values(Paths.Server.Api).forEach((value) => expect(value).toBeTruthy()))
 
-    it('should give every Projects endpoint a value', () => {
-        for (const value of Object.values(Paths.Server.Projects)) expect(value).toBeTruthy()
-    })
+    it('should give every Projects endpoint a value', () =>
+        Object.values(Paths.Server.Projects).forEach((value) => expect(value).toBeTruthy()))
 })
 
 describe('apiPathBuilder', () => {

@@ -27,9 +27,9 @@ export const Button = (props: ButtonProps) => {
 
     if (typeof props.as === 'function' || typeof props.as === 'object') {
         const Component = props.as
-        const rest: Dictionary = {}
-        for (const key of Object.keys(props))
-            if (!commonKeys.has(key)) rest[key] = (props as Dictionary)[key]
+        const rest: Dictionary = Object.fromEntries(
+            Object.entries(props).filter(([key]) => !commonKeys.has(key)),
+        )
 
         return (
             <Component className={cls} aria-label={ariaLabel} style={style} {...rest}>

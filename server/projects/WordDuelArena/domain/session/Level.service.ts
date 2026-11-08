@@ -44,8 +44,7 @@ function getPossibleAnagrams(letters: string): string[] {
     function helper(path: string, remaining: string) {
         if (path.length >= 3) results.add(path.split('').sort().join(''))
 
-        for (let i = 0; i < remaining.length; i++)
-            helper(path + remaining[i], remaining.slice(i + 1))
+        Array.from(remaining).forEach((letter, i) => helper(path + letter, remaining.slice(i + 1)))
     }
 
     helper('', letters.split('').join(''))

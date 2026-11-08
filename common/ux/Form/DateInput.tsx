@@ -23,6 +23,20 @@ type DateInputProps<TFieldValues extends FieldValues = FieldValues> = Accessible
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 const CALENDAR_HEIGHT = 320
+const MAX_DIGITS = 8
+
+/** Writes the slashes in as the day and month fill up — `1203` becomes `12/03`. */
+const formatDigits = (digits: string, isDeleting: boolean): string => {
+    const opensSegment = (index: number) => index === 2 || index === 4
+
+    const written = Array.from(digits).reduce(
+        (formatted, digit, index) =>
+            opensSegment(index) ? `${formatted}/${digit}` : `${formatted}${digit}`,
+        '',
+    )
+
+    return !isDeleting && opensSegment(digits.length) ? `${written}/` : written
+}
 
 export const DateInput = <T extends FieldValues>({
     name,
@@ -80,24 +94,9 @@ export const DateInput = <T extends FieldValues>({
     }
 
     const handleTextChange = (value: string, onChange: (val: string) => void) => {
-        const digits = value.replace(/[^\d]/g, '')
+        const digits = value.replace(/[^\d]/g, '').slice(0, MAX_DIGITS)
         const isDeleting = digits.length < textValue.replace(/[^\d]/g, '').length
-
-        let formatted = ''
-        if (isDeleting)
-            // When deleting, just strip non-digits and reformat without auto-adding slashes
-            for (let i = 0; i < digits.length && i < 8; i++) {
-                if (i === 2 || i === 4) formatted += '/'
-                formatted += digits[i]
-            }
-        else {
-            for (let i = 0; i < digits.length && i < 8; i++) {
-                if (i === 2 || i === 4) formatted += '/'
-                formatted += digits[i]
-            }
-            // Auto-add slash after 2nd and 4th digit when typing
-            if (digits.length === 2 || digits.length === 4) formatted += '/'
-        }
+        const formatted = formatDigits(digits, isDeleting)
 
         setTextValue(formatted)
 

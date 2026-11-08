@@ -4,6 +4,7 @@ import type { Optional } from '../Generics'
 export const shuffleArray = <T>(array: T[]): T[] => {
     const shuffled = [...array]
 
+    // eslint-disable-next-line standards/no-loop-statement -- Fisher-Yates swaps an index pair as its window shrinks
     for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1))
         ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
@@ -48,9 +49,7 @@ export const chunk = <T>(items: readonly T[], size: number): T[][] => {
     if (!isPositiveInteger(size))
         throw new RangeError(`chunk: size must be a positive integer, got ${rawSize}`)
 
-    return Array.from({ length: Math.ceil(items.length / size) }, (_, i) =>
-        items.slice(i * size, i * size + size),
-    )
+    return times(Math.ceil(items.length / size), (i) => items.slice(i * size, i * size + size))
 }
 
 export const Arrays = {

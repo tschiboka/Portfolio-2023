@@ -28,22 +28,20 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
     return [node]
 }
 
+/** The display name a slot element carries, or `undefined` for anything that is not an element. */
+const slotNameOf = (node: ReactNode): string | undefined => {
+    if (!isValidElement(node)) return undefined
+
+    return ((node as ReactElement).type as { displayName?: string }).displayName
+}
+
 const extractSlot = (
     children: ReactNode,
     slotName: string,
 ): { slot: ReactNode; rest: ReactNode[] } => {
-    const slots: ReactNode[] = []
-    const rest: ReactNode[] = []
-
     const flat = flattenChildren(children)
-
-    for (const child of flat)
-        if (isValidElement(child)) {
-            const el = child as ReactElement
-            const type = el.type as { displayName?: string }
-            if (type.displayName === slotName) slots.push(child)
-            else rest.push(child)
-        } else rest.push(child)
+    const slots = flat.filter((child) => slotNameOf(child) === slotName)
+    const rest = flat.filter((child) => slotNameOf(child) !== slotName)
 
     return { slot: isNonEmpty(slots) ? slots[0] : undefined, rest }
 }

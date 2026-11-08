@@ -70,7 +70,7 @@ export class RequestBuilder {
      * Removes one or more path parameters by key.
      */
     removeParams(...keys: string[]): this {
-        for (const key of keys) delete this.pathParams[key]
+        keys.forEach((key) => delete this.pathParams[key])
 
         return this
     }
@@ -111,7 +111,7 @@ export class RequestBuilder {
      * Removes one or more query-string parameters by key.
      */
     removeQuery(...keys: string[]): this {
-        for (const key of keys) delete this.queryParams[key]
+        keys.forEach((key) => delete this.queryParams[key])
 
         return this
     }

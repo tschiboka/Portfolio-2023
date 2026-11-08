@@ -384,21 +384,23 @@ config owns is linted.
     - [x] Step 19.8: Run `rules sync`, then verify the generated config
     - [x] Step 19.9: Sweep every module and fix or suppress each violation
     - [x] Step 19.10: Confirm a green `tsc`, lint, and test run
-- [ ] Step 20: Rule — no `for` or `while` loop
-    - [ ] Step 20.1: Build `rules/no-loop-statement/`
-    - [ ] Step 20.2: Flag `ForStatement`, `WhileStatement`, `DoWhileStatement`, `ForOfStatement`
-          and `ForInStatement`
-    - [ ] Step 20.3: Exempt a displayed code sample — `*.code.ts`, `*.code.tsx`,
-          `codeSnippets.ts`, as in Steps 10 and 14
-    - [ ] Step 20.4: Review the 8 arithmetic sites individually — see §2.1, they may not convert
-    - [ ] Step 20.5: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 20.6: Register as `severity: 'error'`
-    - [ ] Step 20.7: Add `tests/NoLoopStatement.spec.ts`
-    - [ ] Step 20.8: Run `rules sync`, then verify the generated config
-    - [ ] Step 20.9: Convert the straightforward iterations — `.forEach` for side effects,
-          `reduce` where it accumulates
-    - [ ] Step 20.10: Sweep the remaining loophole or suppress each, with the reason recorded
-    - [ ] Step 20.11: Confirm a green `tsc`, lint, and test run
+- [x] Step 20: Rule — no `for` or `while` loop
+    - [x] Step 20.1: Build `rules/no-loop-statement/` — constants, rules, registrar and spec
+    - [x] Step 20.2: Flag `ForStatement`, `WhileStatement`, `DoWhileStatement`, `ForOfStatement`
+          and `ForInStatement` — one handler each, since `eslint` exports no `Node` to key on
+    - [x] Step 20.3: Exempt a displayed code sample — `**/*.code.{ts,tsx}` alone; no
+          `codeSnippets.ts` file exists, or is wanted
+    - [x] Step 20.4: Review the arithmetic sites individually — the shuffle keeps its loop, the
+          digit parse became `formatDigits`, and both `ContentNavigator` walks became `flatMap`
+    - [x] Step 20.5: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 20.6: Register as `severity: 'error'`
+    - [x] Step 20.7: Add `tests/NoLoopStatement.spec.ts`
+    - [x] Step 20.8: Run `rules sync`, then verify the generated config
+    - [x] Step 20.9: Convert the straightforward iterations — `.forEach` for side effects,
+          `reduce` where it accumulates, `Arrays.times` where only a count drives the walk
+    - [x] Step 20.10: Sweep the remaining loophole or suppress each, with the reason recorded —
+          `shuffleArray` alone, a reverse index pair whose partner depends on the previous swap
+    - [x] Step 20.11: Confirm a green `tsc`, lint, and test run
 - [ ] Step 21: Rule — a `TODO` carries a ticket reference
     - [ ] Step 21.1: Build `rules/todo-ticket-ref/`
     - [ ] Step 21.2: Flag a `TODO` comment without a ticket reference
@@ -475,21 +477,11 @@ config owns is linted.
     - [x] Step 25.9: Sweep every module and fix each violation — 30 files touched over three
           lint runs, most of them fixed by moving an exported type below its value
     - [x] Step 25.10: Confirm a green `tsc`, lint, and test run
-- [x] Step 26: Rule — one re-export per path and kind
-    - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
-          own so each id names exactly what it covers
-    - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
-'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either
-    - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
-          carry `export type` beside its value exports
-    - [x] Step 26.4: Leave a local export alone — it names no source
-    - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts`
-    - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [x] Step 26.7: Register as `severity: 'error'`
-    - [x] Step 26.8: Run `rules sync`, then verify the generated config
-    - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
-          nothing; every value-plus-type pair was legal under 26.3
-    - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 26: Rule — one re-export per path and kind - [x] Step 26.1: Build `rules/no-duplicate-export/` — the re-export half, a rule of its
+      own so each id names exactly what it covers - [x] Step 26.2: Flag two re-exports of one path with the same kind, `export { A } from
+'./x'` beside `export { B } from './x'`, and `export * from './x'` beside either - [x] Step 26.3: Allow one value and one type re-export of one path, so a barrel may
+      carry `export type` beside its value exports - [x] Step 26.4: Leave a local export alone — it names no source - [x] Step 26.5: Add `tests/NoDuplicateExport.spec.ts` - [x] Step 26.6: Scope `include` to `src/**`, `common/**`, `server/**` - [x] Step 26.7: Register as `severity: 'error'` - [x] Step 26.8: Run `rules sync`, then verify the generated config - [x] Step 26.9: Sweep every barrel and fix or suppress each violation — the sweep found
+      nothing; every value-plus-type pair was legal under 26.3 - [x] Step 26.10: Confirm a green `tsc`, lint, and test run
 - [x] Step 27: Gate a commit on `tsc`, lint and the tests
     - [x] Step 27.1: Pick the runner — no dependency: a tracked `.githooks/` folder and git's own
           `core.hooksPath`, after husky and lint-staged were considered
@@ -513,44 +505,25 @@ config owns is linted.
           the commit's contents when it returns and a file staged in `commit-msg` stays in the
           index. `commit-msg` keeps the message, the dependency warnings, lint, `tsc` and the
           tests. Both source `.githooks/step.sh` for the shared step formatting
-- [x] Step 28: Rule — a type is imported, never reached through a namespace
-    - [x] Step 28.1: Build `rules/no-qualified-type/`
-    - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
-          `React.ReactNode`, `React.CSSProperties`
-    - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
-'react'`, then `(e: FormEvent)`
-    - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
-          `React.StrictMode` are calls, not types
-    - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
-          default one is espree and cannot parse a qualified type
-    - [x] Step 28.6: Register as `severity: 'error'`
-    - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts`
-    - [x] Step 28.8: Run `rules sync`, then verify the generated config
-    - [x] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
-          roughly 55 sit in type position and the rest are values
-    - [x] Step 28.10: Confirm a green `tsc`, lint, and test run
+- [x] Step 28: Rule — a type is imported, never reached through a namespace - [x] Step 28.1: Build `rules/no-qualified-type/` - [x] Step 28.2: Flag a type reference whose name is qualified — `React.FormEvent`,
+      `React.ReactNode`, `React.CSSProperties` - [x] Step 28.3: Accept a direct type import, used bare — `import type { FormEvent } from
+'react'`, then `(e: FormEvent)` - [x] Step 28.4: Leave namespace **values** alone — `React.useState`, `React.createElement`,
+      `React.StrictMode` are calls, not types - [x] Step 28.5: Give `rules/config.ts` a second `RuleTester` on the TypeScript parser; the
+      default one is espree and cannot parse a qualified type - [x] Step 28.6: Register as `severity: 'error'` - [x] Step 28.7: Add `tests/NoQualifiedType.spec.ts` - [x] Step 28.8: Run `rules sync`, then verify the generated config - [x] Step 28.9: Sweep every qualified type — 82 `React.X` matches over 46 files, of which
+      roughly 55 sit in type position and the rest are values - [x] Step 28.10: Confirm a green `tsc`, lint, and test run
 - [x] Step 29: Rule — the import block is closed by a blank line, and the first export opened
-      by one — **configured, not built**
-    - [x] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
-          already expresses does not need a registry entry, a registrar and a spec
-    - [x] Step 29.2: Require at least one blank line between the last import and the statement
-          after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25
-    - [x] Step 29.3: Require a blank line before the first export, including when code sits
-          between the imports and it
-    - [x] Step 29.4: Leave a file with no import, or no export, alone — the two halves are
-          independent, and neither pair matches without both sides
-    - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
-          `eslint.config.js`, not in `rules/registry.ts`
-    - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
+      by one — **configured, not built** - [x] Step 29.1: Use ESLint's own `padding-line-between-statements`; a convention the linter
+      already expresses does not need a registry entry, a registrar and a spec - [x] Step 29.2: Require at least one blank line between the last import and the statement
+      after it — the rule counts from one, so "exactly one" was dropped on 2026-10-25 - [x] Step 29.3: Require a blank line before the first export, including when code sits
+      between the imports and it - [x] Step 29.4: Leave a file with no import, or no export, alone — the two halves are
+      independent, and neither pair matches without both sides - [x] Step 29.5: Register as `severity: 'error'` in the `**/*.{ts,tsx}` block of
+      `eslint.config.js`, not in `rules/registry.ts` - [x] Step 29.6: Forbid a blank row inside the import block with `{ blankLine: 'never', prev:
 'import', next: 'import' }`, placed last because the last matching pair wins over
-          `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
-          no fixer and only covered `src`, `common` and `server`
-    - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports
-    - [x] Step 29.8: Confirm a green `tsc`, lint, and test run
-    - [x] Step 29.9: Quiet the test run with `reporters: ['dot']` in the `test` block of
-          `vite.config.ts`, so 129 per-file lines become one dot stream. Not `minimal` — its
-          `printTestModule` returns early for every module that passed, so `console.warn` from a
-          green test is dropped, and a warning nobody sees is the one that bites
+      `next: '*'` — this retires `no-newline-in-imports`, which reported once at line 1 with
+      no fixer and only covered `src`, `common` and `server` - [x] Step 29.7: Sweep with `eslint --fix`, which the rule supports - [x] Step 29.8: Confirm a green `tsc`, lint, and test run - [x] Step 29.9: Quiet the test run with `reporters: ['dot']` in the `test` block of
+      `vite.config.ts`, so 129 per-file lines become one dot stream. Not `minimal` — its
+      `printTestModule` returns early for every module that passed, so `console.warn` from a
+      green test is dropped, and a warning nobody sees is the one that bites
 - [x] Step 30: Rule — an object holds no empty row between its properties
     - [x] Step 30.1: Build `rules/no-empty-row-in-object/`, the family's third member after
           `no-empty-row-in-jsx` and the `no-newline-in-imports` Step 29.6 retired. No core rule

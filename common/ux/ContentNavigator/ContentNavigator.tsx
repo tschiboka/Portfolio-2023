@@ -142,14 +142,17 @@ export const ContentNavigator = ({
     const getX = useCallback((level: number) => 1 + (level - baseLevel) * INDENT_STEP, [baseLevel])
 
     // Compute y positions: ROW height + GAP between all, extra gap for level changes
-    const yPositions = useMemo(() => {
-        const positions = [0]
-        for (let i = 1; i < headings.length; i++) {
-            const extra = headings[i].level !== headings[i - 1].level ? TRANSITION_EXTRA : 0
-            positions.push(positions[i - 1] + ROW + GAP + extra)
-        }
-        return positions
-    }, [headings])
+    const yPositions = useMemo(
+        () =>
+            headings.reduce<number[]>((positions, heading, i) => {
+                if (i === 0) return [0]
+
+                const extra = heading.level !== headings[i - 1].level ? TRANSITION_EXTRA : 0
+
+                return [...positions, positions[i - 1] + ROW + GAP + extra]
+            }, []),
+        [headings],
+    )
 
     // Margin-top for each link to match yPositions spacing
     const linkGaps = useMemo(
@@ -168,45 +171,40 @@ export const ContentNavigator = ({
     const { treePath, activePath } = useMemo(() => {
         if (isEmpty(headings)) return { treePath: '', activePath: '' }
 
-        const segments: string[] = []
+        const boundsOf = (index: number) => ({
+            bottom: yPositions[index] + ROW - PAD,
+            top: yPositions[index] + PAD,
+            x: getX(headings[index].level),
+        })
 
-        for (let i = 0; i < headings.length; i++) {
-            const x = getX(headings[i].level)
-            const top = yPositions[i] + PAD
-            const bottom = yPositions[i] + ROW - PAD
+        const treePath = headings
+            .flatMap((_, i) => {
+                const { bottom, top, x } = boundsOf(i)
+                const next = headings[i + 1]
+                const connector = next
+                    ? [`L${getX(next.level)} ${yPositions[i + 1] + PAD}`]
+                    : []
 
-            if (i === 0) segments.push(`M${x} ${top}`)
+                return [...(i === 0 ? [`M${x} ${top}`] : []), `L${x} ${bottom}`, ...connector]
+            })
+            .join(' ')
 
-            segments.push(`L${x} ${bottom}`)
+        const activePath = headings
+            .flatMap((_, i) => {
+                if (!activeIndices.has(i)) return []
 
-            if (i < headings.length - 1) {
-                const nextX = getX(headings[i + 1].level)
-                const nextTop = yPositions[i + 1] + PAD
-                segments.push(`L${nextX} ${nextTop}`)
-            }
-        }
+                const { bottom, top, x } = boundsOf(i)
+                const next = headings[i + 1]
+                const connector =
+                    next && activeIndices.has(i + 1)
+                        ? [`M${x} ${bottom} L${getX(next.level)} ${yPositions[i + 1] + PAD}`]
+                        : []
 
-        // Active: all active vertical segments + connectors between consecutive active headings
-        const activeSegments: string[] = []
-        for (let i = 0; i < headings.length; i++) {
-            if (!activeIndices.has(i)) continue
+                return [`M${x} ${top} L${x} ${bottom}`, ...connector]
+            })
+            .join(' ')
 
-            const x = getX(headings[i].level)
-            const top = yPositions[i] + PAD
-            const bottom = yPositions[i] + ROW - PAD
-            activeSegments.push(`M${x} ${top} L${x} ${bottom}`)
-
-            if (i < headings.length - 1 && activeIndices.has(i + 1)) {
-                const nextX = getX(headings[i + 1].level)
-                const nextTop = yPositions[i + 1] + PAD
-                activeSegments.push(`M${x} ${bottom} L${nextX} ${nextTop}`)
-            }
-        }
-
-        return {
-            treePath: segments.join(' '),
-            activePath: activeSegments.join(' '),
-        }
+        return { treePath, activePath }
     }, [headings, yPositions, getX, activeIndices])
 
     if (!showNavigator)

@@ -2,6 +2,9 @@ import { Arrays, Browser, hasLength } from '@common-utils'
 import type { RefObject } from 'react'
 import type { VisibilityEntry } from '@common-utils/Browser'
 
+/** How far down the page a heading counts as scrolled past, so it opens its section. */
+const HEADER_OFFSET = 100
+
 const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
     entries
         .map(({ element, isVisible }) => ({
@@ -37,23 +40,16 @@ const getHeadingNodes = (
 const getActiveHeaders = (elems: Element[]) => {
     if (!hasLength(elems)) return new Set<number>()
 
-    const active = new Set<number>()
     const vh = window.innerHeight
+    const tops = elems.map((element) => element.getBoundingClientRect().top)
 
     // Current section: last heading scrolled past the top
-    let sectionIdx = 0
-    for (let i = 0; i < elems.length; i++)
-        if (elems[i].getBoundingClientRect().top <= 100) sectionIdx = i
-
-    active.add(sectionIdx)
+    const sectionIndex = tops.reduce((last, top, i) => (top <= HEADER_OFFSET ? i : last), 0)
 
     // Also add all headings physically in the viewport
-    for (let i = 0; i < elems.length; i++) {
-        const top = elems[i].getBoundingClientRect().top
-        if (top >= 0 && top <= vh) active.add(i)
-    }
+    const visibleIndices = tops.flatMap((top, i) => (top >= 0 && top <= vh ? [i] : []))
 
-    return active
+    return new Set([sectionIndex, ...visibleIndices])
 }
 
 export const ContentNavigatorSelectors = {

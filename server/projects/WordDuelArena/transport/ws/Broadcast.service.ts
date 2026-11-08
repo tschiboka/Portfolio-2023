@@ -21,27 +21,32 @@ interface DeviceWebSocket extends WebSocket {
 }
 
 function broadcastSessionState(session: Session) {
-    for (const ws of session.connections as Set<DeviceWebSocket>) {
-        if (ws.readyState !== ws.OPEN) continue
+    const connections = session.connections as Set<DeviceWebSocket>
+
+    connections.forEach((ws) => {
+        if (ws.readyState !== ws.OPEN) return
+
         const payload: WdaWsResponse = {
             type: WdaWsResponseTypes.STATE_UPDATE,
             payload: transformSessionForClient(session.state, ws.deviceId),
         }
 
         ws.send(JSON.stringify(payload))
-    }
+    })
 }
 
 function sendErrorToDevice(session: Session, deviceId: string, message: string) {
-    for (const ws of session.connections as Set<DeviceWebSocket>)
-        if (ws.deviceId === deviceId && ws.readyState === ws.OPEN) {
-            const response: WdaWsResponse = {
-                type: WdaWsResponseTypes.ERROR,
-                message,
-            }
-            ws.send(JSON.stringify(response))
-            return
-        }
+    const connections = Array.from(session.connections as Set<DeviceWebSocket>)
+    const target = connections.find((ws) => ws.deviceId === deviceId && ws.readyState === ws.OPEN)
+
+    if (!target) return
+
+    const response: WdaWsResponse = {
+        type: WdaWsResponseTypes.ERROR,
+        message,
+    }
+
+    target.send(JSON.stringify(response))
 }
 
 function commitSessionState(session: Session, nextState: SessionState, deviceId?: string) {

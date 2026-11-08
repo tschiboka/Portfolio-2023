@@ -3,17 +3,13 @@ import { TableUrlPersistenceConfig } from '..'
 import type { FilterConfig } from '../../TableFilter'
 
 describe('buildCodec', () => {
-    it('should resolve string codecs (text/search/date/option) to the same string behavior', () => {
-        for (const type of ['text', 'search', 'date', 'option'] as const) {
-            const codec = TableUrlPersistenceConfig.buildCodec({
-                type,
-                label: type,
-            } as FilterConfig)
+    it('should resolve string codecs (text/search/date/option) to the same string behavior', () =>
+        (['text', 'search', 'date', 'option'] as const).forEach((type) => {
+            const codec = TableUrlPersistenceConfig.buildCodec({ type, label: type } as FilterConfig)
             expect(codec.encode('  hi  ')).toBe('hi')
             expect(codec.encode('')).toBeUndefined()
             expect(codec.decode(null)).toBeUndefined()
-        }
-    })
+        }))
 
     it('should resolve a number codec that encodes to string and decodes to number', () => {
         const codec = TableUrlPersistenceConfig.buildCodec({ type: 'number', label: 'count' })

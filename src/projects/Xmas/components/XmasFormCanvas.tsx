@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react'
+import { Arrays } from '@common-utils'
 import { Const } from '@common-ux'
+import { XmasFormCanvasConstants } from './XmasFormCanvas.constants'
+import { XmasFormCanvasDefaults } from './XmasFormCanvas.defaults'
 import type { ReactNode } from 'react'
 
 interface XmasFormCanvasProps {
@@ -18,59 +21,56 @@ interface Light {
 
 export const XmasFormCanvas = ({
     children,
-    lightCount = 50,
-    lightSize = 8,
+    lightCount = XmasFormCanvasDefaults.lightCount,
+    lightSize = XmasFormCanvasDefaults.lightSize,
 }: XmasFormCanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const containerRef = useRef<HTMLDivElement>(null)
     const animationRef = useRef<number>(0)
     const lightsRef = useRef<Light[]>([])
 
-    const getPositionOnBorder = (progress: number, width: number, height: number) => {
-        const topPadding = 20
-        const sidePadding = 20
-        const bottomPadding = 10
+    const { bottom, side, top } = XmasFormCanvasConstants.padding
+    const containerPadding = `${top}px ${side}px ${bottom}px ${side}px`
 
-        const adjustedWidth = width - 2 * sidePadding
-        const adjustedHeight = height - topPadding - bottomPadding
+    const getPositionOnBorder = (progress: number, width: number, height: number) => {
+        const adjustedWidth = width - 2 * side
+        const adjustedHeight = height - top - bottom
         const perimeter = 2 * (adjustedWidth + adjustedHeight)
         const distance = progress * perimeter
 
-        if (distance < adjustedWidth) return { x: sidePadding + distance, y: topPadding }
+        if (distance < adjustedWidth) return { x: side + distance, y: top }
         else if (distance < adjustedWidth + adjustedHeight)
             return {
-                x: width - sidePadding,
-                y: topPadding + (distance - adjustedWidth),
+                x: width - side,
+                y: top + (distance - adjustedWidth),
             }
         else if (distance < 2 * adjustedWidth + adjustedHeight)
             return {
-                x: width - sidePadding - (distance - adjustedWidth - adjustedHeight),
-                y: height - bottomPadding,
+                x: width - side - (distance - adjustedWidth - adjustedHeight),
+                y: height - bottom,
             }
         else
             return {
-                x: sidePadding,
-                y: height - bottomPadding - (distance - 2 * adjustedWidth - adjustedHeight),
+                x: side,
+                y: height - bottom - (distance - 2 * adjustedWidth - adjustedHeight),
             }
     }
 
-    const initializeLights = (width: number, height: number) => {
-        const lights: Light[] = []
-
-        for (let i = 0; i < lightCount; i++) {
+    const createLights = (width: number, height: number): Light[] =>
+        Arrays.times(lightCount, (i) => {
+            const { initialOpacity, palette } = XmasFormCanvasConstants
+            const colors = [palette.red, palette.green]
             const progress = i / lightCount
             const position = getPositionOnBorder(progress, width, height)
-            lights.push({
+
+            return {
                 x: position.x,
                 y: position.y,
-                color: i % 2 === 0 ? '#ff0000' : '#00ff00', // Initial alternating red and green
-                phase: (i / lightCount) * Math.PI * 2, // Stagger the twinkling
-                baseOpacity: 0.1 + Math.random() * 0.9, // Random base brightness
-            })
-        }
-
-        lightsRef.current = lights
-    }
+                color: colors[i % colors.length],
+                phase: progress * Math.PI * 2,
+                baseOpacity: initialOpacity.floor + Math.random() * initialOpacity.range,
+            }
+        })
 
     const drawLights = (time: number) => {
         const canvas = canvasRef.current
@@ -79,54 +79,60 @@ export const XmasFormCanvas = ({
         const ctx = canvas.getContext('2d')
         if (!ctx) return
 
+        const {
+            colorCycleMs,
+            coreOpacity,
+            glowScale,
+            highlightOffsetScale,
+            highlightOpacity,
+            highlightScale,
+            palette,
+            twinkle,
+        } = XmasFormCanvasConstants
+
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         lightsRef.current.forEach((light, index) => {
-            // Create twinkling effect with different speeds for each light
-            const twinkleSpeed = 0.003 + (index % 3) * 0.001
-            const twinkle = Math.sin(time * twinkleSpeed + light.phase) * 0.3 + 0.7
-            const opacity = light.baseOpacity * twinkle
+            const twinkleSpeed = twinkle.baseSpeed + (index % twinkle.speedCycle) * twinkle.speedStep
+            const twinkleAmount =
+                Math.sin(time * twinkleSpeed + light.phase) * twinkle.amplitude + twinkle.floor
+            const opacity = light.baseOpacity * twinkleAmount
 
-            // Alternate colors every 1 second (1000ms)
-            const colorCycleTime = Math.floor(time / 1000) % 2
+            const colorCycle = Math.floor(time / colorCycleMs) % 2
             const isInitiallyRed = index % 2 === 0
-            const currentColor = (colorCycleTime === 0) === isInitiallyRed ? '#ff0000' : '#00ff00'
+            const currentColor = (colorCycle === 0) === isInitiallyRed ? palette.red : palette.green
 
-            // Draw the light with glow effect
             ctx.globalAlpha = opacity
 
-            // Outer glow
             const gradient = ctx.createRadialGradient(
                 light.x,
                 light.y,
                 0,
                 light.x,
                 light.y,
-                lightSize * 2,
+                lightSize * glowScale,
             )
             gradient.addColorStop(0, currentColor)
             gradient.addColorStop(1, 'transparent')
 
             ctx.fillStyle = gradient
             ctx.beginPath()
-            ctx.arc(light.x, light.y, lightSize * 2, 0, Math.PI * 2)
+            ctx.arc(light.x, light.y, lightSize * glowScale, 0, Math.PI * 2)
             ctx.fill()
 
-            // Inner bright core
-            ctx.globalAlpha = opacity * 1.5
+            ctx.globalAlpha = opacity * coreOpacity
             ctx.fillStyle = currentColor
             ctx.beginPath()
             ctx.arc(light.x, light.y, lightSize, 0, Math.PI * 2)
             ctx.fill()
 
-            // Highlight spot
-            ctx.globalAlpha = opacity * 0.8
-            ctx.fillStyle = '#ffffff'
+            ctx.globalAlpha = opacity * highlightOpacity
+            ctx.fillStyle = palette.highlight
             ctx.beginPath()
             ctx.arc(
-                light.x - lightSize * 0.3,
-                light.y - lightSize * 0.3,
-                lightSize * 0.4,
+                light.x - lightSize * highlightOffsetScale,
+                light.y - lightSize * highlightOffsetScale,
+                lightSize * highlightScale,
                 0,
                 Math.PI * 2,
             )
@@ -156,10 +162,10 @@ export const XmasFormCanvas = ({
         canvas.style.height = `${containerRect.height}px`
 
         // But lights should be positioned around the content area
-        const paddedWidth = contentRect.width + 40 // 20px left + 20px right
-        const paddedHeight = contentRect.height + 30 // 20px top + 10px bottom
+        const paddedWidth = contentRect.width + 2 * side
+        const paddedHeight = contentRect.height + top + bottom
 
-        initializeLights(paddedWidth, paddedHeight)
+        lightsRef.current = createLights(paddedWidth, paddedHeight)
     }
 
     useEffect(() => {
@@ -185,7 +191,7 @@ export const XmasFormCanvas = ({
             style={{
                 position: 'relative',
                 display: 'inline-block',
-                padding: '20px 20px 10px 20px', // top right bottom left
+                padding: containerPadding,
             }}
         >
             {' '}

@@ -10,7 +10,7 @@ const getWordGroups = (words: LevelWord[] = []) =>
         .map((words) => words.sort())
 
 const getWordLengthGroups = () =>
-    Array.from({ length: WordConstants.maxLength - 2 }, (_, i) => WordConstants.maxLength - i)
+    Arrays.times(WordConstants.maxLength - 2, (i) => WordConstants.maxLength - i)
 
 const transformAnagramMap = (input: string, anagramMap: AnagramMapType): string[] => {
     const anagrams = getPossibleAnagrams(input)
@@ -24,8 +24,7 @@ function getPossibleAnagrams(letters: string) {
     function helper(path: string, remaining: string[]) {
         if (path.length >= 3) results.add(path.split('').sort().join(''))
 
-        for (let i = 0; i < remaining.length; i++)
-            helper(path + remaining[i], remaining.slice(i + 1))
+        remaining.forEach((word, i) => helper(path + word, remaining.slice(i + 1)))
     }
 
     helper('', letters.split(''))

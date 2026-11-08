@@ -56,21 +56,19 @@ describe('Arrays.shuffleArray', () => {
     it('should produce a uniformly distributed permutation over many runs', () => {
         const input = [1, 2, 3, 4]
         const runs = 10_000
-        const counts = new Map<string, number>()
-
-        for (let i = 0; i < runs; i++) {
-            const key = Arrays.shuffleArray(input).join(',')
-            counts.set(key, (counts.get(key) ?? 0) + 1)
-        }
+        const counts = Arrays.times(runs, () => Arrays.shuffleArray(input).join(',')).reduce(
+            (tally, key) => tally.set(key, (tally.get(key) ?? 0) + 1),
+            new Map<string, number>(),
+        )
 
         const totalPermutations = 24 // 4!
         const expected = runs / totalPermutations
         const tolerance = expected * 0.5 // allow 50% deviation
 
-        for (const count of counts.values()) {
+        counts.forEach((count) => {
             expect(count).toBeGreaterThan(expected - tolerance)
             expect(count).toBeLessThan(expected + tolerance)
-        }
+        })
     })
 
     it('should produce different orderings (likely not the same as input)', () => {
@@ -143,8 +141,7 @@ describe('Arrays.random', () => {
 
     it('should return any of multiple elements over many runs', () => {
         const input = [1, 2, 3]
-        const seen = new Set<number>()
-        for (let i = 0; i < 100; i++) seen.add(Arrays.random(input) as number)
+        const seen = new Set(Arrays.times(100, () => Arrays.random(input) as number))
 
         // Over 100 draws from 3 values, we expect to hit all of them.
         expect(seen.size).toBe(3)

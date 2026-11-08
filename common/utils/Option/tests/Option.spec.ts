@@ -408,19 +408,17 @@ describe('Option — cross-helper consistency', () => {
         })
     })
 
-    it('should round-trip a value → label → value through the lookups when values and labels are unique', () => {
-        for (const option of options) {
+    it('should round-trip a value → label → value through the lookups when values and labels are unique', () =>
+        options.forEach((option) => {
             const label = Option.getLabelByValue(options, option.value)
             expect(Option.getValueByLabel(options, label as string)).toBe(option.value)
-        }
-    })
+        }))
 
-    it('should round-trip a label → value → label through the lookups when values and labels are unique', () => {
-        for (const option of options) {
+    it('should round-trip a label → value → label through the lookups when values and labels are unique', () =>
+        options.forEach((option) => {
             const value = Option.getValueByLabel(options, option.label)
             expect(Option.getLabelByValue(options, value as string)).toBe(option.label)
-        }
-    })
+        }))
 
     it('should be not an inverse when values are duplicated (first-match wins)', () => {
         const dup = [
