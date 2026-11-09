@@ -1,4 +1,4 @@
-import type { ApiStatus, ErrorResponse, MergedApiStatus } from './mergeStatus.types'
+import type { ApiStatus, ErrorResponse, MergedApiStatus } from './MergeStatus.types'
 
 export const mergeApiStatuses = <TError = ErrorResponse>(
     statuses: ApiStatus<TError>[],

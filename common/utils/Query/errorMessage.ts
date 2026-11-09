@@ -1,5 +1,5 @@
 import type { AxiosError } from 'axios'
-import type { ErrorResponse } from './mergeStatus.types'
+import type { ErrorResponse } from './MergeStatus.types'
 
 /**
  * The message to show for a failed request: the server's, falling back to a

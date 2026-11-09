@@ -1,5 +1,5 @@
-import { toBoolean } from './optional/toBoolean'
-import { toString } from './optional/toString'
+import { toBoolean } from './optional/ToBoolean'
+import { toString } from './optional/ToString'
 
 export const Booleans = {
     Optional: {

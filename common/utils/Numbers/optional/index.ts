@@ -1,2 +1,2 @@
-export { toNumber } from './toNumber'
-export { toString } from './toString'
+export { toNumber } from './ToNumber'
+export { toString } from './ToString'

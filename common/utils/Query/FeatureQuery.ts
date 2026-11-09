@@ -9,7 +9,7 @@ import type {
     QueryOptions,
 } from './FeatureQuery.types'
 import type { CacheKey } from './QueryKey'
-import type { ErrorResponse } from './mergeStatus.types'
+import type { ErrorResponse } from './MergeStatus.types'
 import type { PathKey, ServerGroup } from '../Paths/Path.types'
 
 /**

@@ -425,23 +425,23 @@ config owns is linted.
           `commit-msg`, reading the subject's reference and listing every `TODO` of that ticket or
           an earlier one, then asking `Continue anyway? (Y/N)`. `[commit-staged]` moved here behind
           it, so `pre-commit` carries only the version gate
-- [ ] Step 22: Rule — a role file's stem is PascalCase
-    - [ ] Step 22.1: Build `rules/role-file-pascal/`
-    - [ ] Step 22.2: Flag a stem that does not start uppercase when a listed role
-          follows it — the files that motivated the step are resolved, so re-measure
-          the offender list before building it
-    - [ ] Step 22.3: Read the roles from `no-ad-hoc-file-suffix`'s `AllowedRoles`, so
-          one list decides both what a role is and how its file is named
-    - [ ] Step 22.4: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 22.5: Register as `severity: 'error'`
-    - [ ] Step 22.6: Add `tests/RoleFilePascal.spec.ts`
-    - [ ] Step 22.7: Run `rules sync`, then verify the generated config
-    - [ ] Step 22.8: Rename whatever the re-measure finds, so each offender comes back
-          into `role-export-name`'s reach — the three files this step once named are
-          settled: the controller's `useTableController.mocks.ts` and
-          `useTableController.spec.utils.tsx` are gone (their specs are now the
-          role-named `Table.hooks.*`), and `src/router.routes.tsx` no longer exists
-    - [ ] Step 22.9: Confirm a green `tsc`, lint, and test run
+- [x] Step 22: Rule — a role file's stem is PascalCase
+    - [x] Step 22.1: Build `rules/role-file-pascal/` — constants, utils, rules, registrar and spec
+    - [x] Step 22.2: Flag a stem that does not start uppercase when a listed role
+          follows it — re-measured before building: one offender stood, `Query/mergeStatus.types.ts`
+    - [x] Step 22.3: Read the roles from `no-ad-hoc-file-suffix`'s `AllowedRoles`, so
+          one list decides both what a role is and how its file is named — its
+          `AllowedBareNames` carries `index`, `main` and `setupTests` through
+    - [x] Step 22.4: Scope `include` to `src/**`, `common/**`, `server/**` — written as three
+          roots, so `scripts/` and `rules/` are out by construction rather than by exclusion
+    - [x] Step 22.5: Register as `severity: 'error'`
+    - [x] Step 22.6: Add `tests/RoleFilePascal.spec.ts` — nine cases, each carrying a filename
+    - [x] Step 22.7: Run `rules sync`, then verify the generated config
+    - [x] Step 22.8: Rename whatever the re-measure finds — `mergeStatus.types.ts` became
+          `MergeStatus.types.ts` with its six importers, and the underscore-free module specs took
+          their stem's case: `Trim.spec.ts`, `ToUndefined.spec.ts`, and the `Query` four
+    - [x] Step 22.9: Confirm a green `tsc`, lint, and test run — four role modules export the verb
+          they are named for, each carrying a suppression that says so
 - [x] Step 23: Rule — an import carries one kind, never both
     - [x] Step 23.1: Build `rules/no-mixed-import-kind/`
     - [x] Step 23.2: Flag an inline `type` specifier beside a value one —

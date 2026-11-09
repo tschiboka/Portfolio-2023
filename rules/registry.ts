@@ -25,6 +25,7 @@ import { registrar as resolverInSchemaRegistrar } from './resolver-in-schema/Res
 import { registrar as noInlineValidationLiteralRegistrar } from './no-inline-validation-literal/NoInlineValidationLiteral.registrar.js'
 import { registrar as noLoopStatementRegistrar } from './no-loop-statement/NoLoopStatement.registrar.js'
 import { registrar as todoTicketRefRegistrar } from './todo-ticket-ref/TodoTicketRef.registrar.js'
+import { registrar as roleFilePascalRegistrar } from './role-file-pascal/RoleFilePascal.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -56,4 +57,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noInlineValidationLiteralRegistrar,
     noLoopStatementRegistrar,
     todoTicketRefRegistrar,
+    roleFilePascalRegistrar,
 ].map(withPrefixedReports)

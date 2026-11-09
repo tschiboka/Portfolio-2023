@@ -1,2 +1,2 @@
-export { toBoolean } from './toBoolean'
-export { toString } from './toString'
+export { toBoolean } from './ToBoolean'
+export { toString } from './ToString'

@@ -1,4 +1,4 @@
-import { ErrorMessageTestUtils } from './errorMessage.spec.utils'
+import { ErrorMessageTestUtils } from './ErrorMessage.spec.utils'
 import { errorMessage } from '..'
 
 const { FALLBACK, axiosError } = ErrorMessageTestUtils
