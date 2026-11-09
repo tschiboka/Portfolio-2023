@@ -3,11 +3,11 @@ import { LetterPosition, TouchState } from './LetterWheel.types'
 import { LetterWheelHandlers } from './LetterWheel.handlers'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { WebSocketRequest } from '../../Session.types'
-import type { Dictionary } from '@common-utils'
+import type { Dictionary, Nullable } from '@common-utils'
 
 type UseListenersProps = {
-    containerRef: RefObject<HTMLDivElement | null>
-    wheelRef: RefObject<HTMLDivElement | null>
+    containerRef: RefObject<Nullable<HTMLDivElement>>
+    wheelRef: RefObject<Nullable<HTMLDivElement>>
     inputLetters: string
     allowKeyboardInput: boolean
     touchState: TouchState

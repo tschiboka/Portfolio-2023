@@ -1,13 +1,14 @@
 import { Const } from '@common-ux/Const'
 import { SplitTestUtils } from './Split.spec.utils'
 import { SplitSelectors } from '../Split.selectors'
+import type { Optional } from '@common-utils'
 import type { SplitRatio } from '../Split.types'
 
 const { Set } = SplitTestUtils
 
 describe('Split', () => {
     describe('selectRatio', () =>
-        it.each<{ input: SplitRatio | undefined; expected: string }>([
+        it.each<{ input: Optional<SplitRatio>; expected: string }>([
             { input: '1/1', expected: '1fr 1fr' },
             { input: '1/2', expected: '1fr 2fr' },
             { input: '2/1', expected: '2fr 1fr' },

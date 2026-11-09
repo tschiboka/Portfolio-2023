@@ -163,7 +163,7 @@ const allFeaturesActions: TableAction<AllFeaturesRow>[] = [
     },
 ]
 
-const sortRows = <T extends Record<string, Sortable>>(
+const sortRows = <T extends Dictionary<Sortable>>(
     data: T[],
     column: keyof T,
     direction: SortDirection,

@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react'
+import type { Dictionary } from '@common-utils'
 import type { TableAction } from '../Table.types'
 
 export type TableHeaderProps = {
@@ -18,5 +19,5 @@ export type TableLegendProps = {
 }
 
 export type TableActionsProps = {
-    actions: TableAction<Record<string, ReactNode>>[]
+    actions: TableAction<Dictionary<ReactNode>>[]
 }

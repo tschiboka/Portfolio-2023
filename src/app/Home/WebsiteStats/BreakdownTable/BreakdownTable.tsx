@@ -5,7 +5,7 @@ import { BreakdownTableActions } from './BreakdownTable.actions'
 import { ActivityTypeLegend } from '../ActivityTypePill/ActivityTypePill'
 import { ActivityDetailsModal } from '../ActivityDetailsModal/ActivityDetailsModal'
 import type { TableControl } from '@common-ux'
-import type { Nullable } from '@common-utils'
+import type { Nullable, VoidFunction } from '@common-utils'
 import type { ActivityFeedContext, PageMeta } from '@common-types'
 import type { BreakdownRow } from './BreakdownTable.types'
 
@@ -15,7 +15,7 @@ type BreakdownTableProps = {
     meta?: PageMeta
     context?: ActivityFeedContext
     isLoading: boolean
-    onRefresh: () => void
+    onRefresh: VoidFunction
 }
 
 export const BreakdownTable = ({

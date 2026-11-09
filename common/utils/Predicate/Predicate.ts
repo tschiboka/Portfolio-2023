@@ -1,12 +1,14 @@
 import { Regexp } from '../Regexp/index.js'
 import type {
     Defined,
+    Dictionary,
     Emptiable,
     Falsy,
     Nil,
     Nullish,
     Primitive,
     Truthy,
+    TypeGuard,
 } from '../Generics/index.js'
 
 /**
@@ -257,7 +259,7 @@ export const isArray = (value: unknown): value is unknown[] => Array.isArray(val
  * @param value - The value to check.
  * @returns `true` if the value is a plain object.
  */
-export const isObject = (value: unknown): value is Record<string, unknown> =>
+export const isObject = (value: unknown): value is Dictionary =>
     typeof value === 'object' && value !== null && !Array.isArray(value)
 
 /**
@@ -275,7 +277,7 @@ export const isObject = (value: unknown): value is Record<string, unknown> =>
  * @param value - The value to check.
  * @returns `true` if the value is a plain object.
  */
-export const isPlainObject = (value: unknown): value is Record<string, unknown> => {
+export const isPlainObject = (value: unknown): value is Dictionary => {
     if (typeof value !== 'object' || value === null || Array.isArray(value)) return false
     const proto: unknown = Object.getPrototypeOf(value)
     return proto === Object.prototype || proto === null
@@ -367,7 +369,7 @@ export const isNonEmpty = (value: Emptiable): boolean => !isEmpty(value)
  * @param value - The array or object to check.
  * @returns `true` if any element or value is an array or object.
  */
-export const isNested = (value: unknown[] | Record<string, unknown>): boolean => {
+export const isNested = (value: unknown[] | Dictionary): boolean => {
     const values = Array.isArray(value) ? value : Object.values(value)
     return values.some((v) => typeof v === 'object' && v !== null)
 }
@@ -406,7 +408,7 @@ export const hasProperty = <K extends PropertyKey>(
  * @returns `true` if the collection contains the value.
  */
 export const hasValue = (
-    collection: unknown[] | Record<string, unknown> | Set<unknown> | Map<unknown, unknown>,
+    collection: unknown[] | Dictionary | Set<unknown> | Map<unknown, unknown>,
     value: unknown,
 ): boolean => {
     if (Array.isArray(collection)) return collection.includes(value)
@@ -473,7 +475,7 @@ export const isShallowEqual = (a: unknown, b: unknown): boolean => {
         return (
             keysA.length === keysB.length &&
             keysA.every(
-                (k) => (a as Record<string, unknown>)[k] === (b as Record<string, unknown>)[k],
+                (k) => (a as Dictionary)[k] === (b as Dictionary)[k],
             )
         )
     }
@@ -508,7 +510,7 @@ export const isEqual = (a: unknown, b: unknown): boolean => {
         return (
             keysA.length === keysB.length &&
             keysA.every((k) =>
-                isEqual((a as Record<string, unknown>)[k], (b as Record<string, unknown>)[k]),
+                isEqual((a as Dictionary)[k], (b as Dictionary)[k]),
             )
         )
     }
@@ -615,7 +617,7 @@ export const isPromise = (value: unknown): value is Promise<unknown> => value in
 export const isThenable = (value: unknown): value is PromiseLike<unknown> =>
     typeof value === 'object' &&
     value !== null &&
-    typeof (value as Record<string, unknown>).then === 'function'
+    typeof (value as Dictionary).then === 'function'
 
 /**
  * Creates a predicate that checks if **all** elements in an array satisfy a type guard.
@@ -629,7 +631,7 @@ export const isThenable = (value: unknown): value is PromiseLike<unknown> =>
  * @returns A predicate for arrays where every element matches.
  */
 export const isAll =
-    <T>(predicate: (value: unknown) => value is T) =>
+    <T>(predicate: TypeGuard<unknown, T>) =>
     (values: unknown[]): values is T[] =>
         values.every(predicate)
 
@@ -645,6 +647,6 @@ export const isAll =
  * @returns A predicate that returns `true` if at least one element matches.
  */
 export const isAny =
-    <T>(predicate: (value: unknown) => value is T) =>
+    <T>(predicate: TypeGuard<unknown, T>) =>
     (values: unknown[]): boolean =>
         values.some(predicate)

@@ -4,6 +4,7 @@ import { Code, CodeText, Heading, Paragraph, Section, Table } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import { TablesConfig } from '../Tables.config'
 import { TablesCode } from '../Tables.code'
+import type { Nullable } from '@common-utils'
 import type { Row } from '../Tables.types'
 
 const { rows } = TablesMocks
@@ -51,9 +52,9 @@ export const CellRenderingDefaults = () => (
             </Paragraph>
             <Table<{
                 label: string
-                withDefault: string | null
-                noDefault: string | null
-                withRenderer: string | null
+                withDefault: Nullable<string>
+                noDefault: Nullable<string>
+                withRenderer: Nullable<string>
             }>
                 title="Default Values"
                 ariaLabel="Table demonstrating default value behaviour"

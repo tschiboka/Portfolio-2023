@@ -1,6 +1,7 @@
 import { Test, Accessor } from '@common-ux/Test'
 import { Row } from './Table.spec.types'
 import { TableMocks } from './Table.mocks'
+import type { Dictionary } from '@common-utils'
 
 const { rows, basicColumns } = TableMocks
 
@@ -359,10 +360,7 @@ describe('Table — Filtering', () => {
             await table.Do.toggleFilters()
             await Accessor.user.type(Accessor.screen.getByLabelText('Name'), 'X')
             await table.Do.applyFilters()
-            const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as Record<
-                string,
-                unknown
-            >
+            const lastCall = onFilter.mock.calls[onFilter.mock.calls.length - 1][0] as Dictionary
             expect(lastCall).toHaveProperty('name', 'X')
             expect(lastCall).toHaveProperty('active', false)
         })

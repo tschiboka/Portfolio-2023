@@ -1,7 +1,9 @@
-import type { Dictionary } from '../../Generics'
+import type { Dictionary, Nullable } from '../../Generics'
 
 /** The document type a model's `findById` resolves to (duck-typed, no mongoose dep). */
-export type DocFrom<M> = M extends { findById: (id: string) => Promise<infer D | null> } ? D : never
+export type DocFrom<M> = M extends { findById: (id: string) => Promise<Nullable<infer D>> }
+    ? D
+    : never
 
 /** A doc that supports `.save()` (duck-typed). */
 export type Saveable<D> = D & { save: () => Promise<unknown> }
@@ -15,8 +17,8 @@ export type Filter = Dictionary
 /** The generic CRUD methods every repository starts with. `D` is the document type. */
 export type CrudRepository<M, D = DocFrom<M>> = {
     find: (filter?: Filter) => Promise<D[]>
-    findById: (id: string) => Promise<D | null>
-    findOne: (filter?: Filter) => Promise<D | null>
+    findById: (id: string) => Promise<Nullable<D>>
+    findOne: (filter?: Filter) => Promise<Nullable<D>>
     count: (filter?: Filter) => Promise<number>
     create: (input: Partial<D>) => D
     save: (doc: Saveable<D>) => Promise<unknown>
@@ -26,8 +28,8 @@ export type CrudRepository<M, D = DocFrom<M>> = {
 /** A Mongoose-like model exposing the query methods the CRUD layer relies on. */
 export type ModelLike<D = unknown> = {
     find: (filter?: Filter) => Promise<D[]>
-    findById: (id: string) => Promise<D | null>
-    findOne: (filter?: Filter) => Promise<D | null>
+    findById: (id: string) => Promise<Nullable<D>>
+    findOne: (filter?: Filter) => Promise<Nullable<D>>
     countDocuments: (filter?: Filter) => Promise<number>
 }
 

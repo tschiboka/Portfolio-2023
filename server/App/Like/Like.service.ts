@@ -2,6 +2,7 @@
 import { LikeSchema } from './Like.schema'
 import { LikeRepository } from './Like.repository'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
+import type { Dictionary } from '@common-utils'
 import type { LikeInput } from './Like.types'
 import type {
     GetLikeSummaryResponse,
@@ -14,7 +15,7 @@ export const LikeService = {
     /** Returns likes grouped by path. */
     summary: async (): Promise<GetLikeSummaryResponse> => {
         const likes = await LikeRepository.find()
-        const likesByPath = likes.reduce<Record<string, number>>((grouped, like) => {
+        const likesByPath = likes.reduce<Dictionary<number>>((grouped, like) => {
             grouped[like.path] = (grouped[like.path] ?? 0) + 1
             return grouped
         }, {})

@@ -1,6 +1,7 @@
 import { isValidElement } from 'react'
 import { isBoolean, isNonEmpty, isNullish, isNumber, isString } from '@common-utils'
 import type { FC, ReactElement, ReactNode } from 'react'
+import type { Optional } from '@common-utils'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
 
@@ -13,9 +14,7 @@ const createSlot = <P extends object>(displayName: string, Component: FC<P>) => 
 /** Recursively flatten children, unwrapping fragments and arrays. */
 const flattenChildren = (node: ReactNode): ReactNode[] => {
     if (isNullish(node) || isString(node) || isNumber(node) || isBoolean(node)) return [node]
-
     if (Array.isArray(node)) return node.flatMap(flattenChildren)
-
     if (isValidElement(node) && (node.type as unknown) === FRAGMENT_TYPE)
         return flattenChildren(((node as ReactElement).props as { children?: ReactNode }).children)
 
@@ -23,9 +22,8 @@ const flattenChildren = (node: ReactNode): ReactNode[] => {
 }
 
 /** The display name a slot element carries, or `undefined` for anything that is not an element. */
-const slotNameOf = (node: ReactNode): string | undefined => {
+const slotNameOf = (node: ReactNode): Optional<string> => {
     if (!isValidElement(node)) return undefined
-
     return ((node as ReactElement).type as { displayName?: string }).displayName
 }
 

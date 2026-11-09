@@ -7,7 +7,7 @@ import type { Nullable } from '@common-utils'
 
 type CalculateLetterPositionsProps = {
     letters: string[]
-    containerRef: RefObject<HTMLElement | null>
+    containerRef: RefObject<Nullable<HTMLElement>>
 }
 
 const calculateLetterPositions = ({
@@ -61,7 +61,7 @@ const recalculatePositions = ({
     setPositions(newPositions)
 }
 
-const getLetterComponent = (target: Element | null): Nullable<HTMLElement> => {
+const getLetterComponent = (target: Nullable<Element>): Nullable<HTMLElement> => {
     const isLetter = target instanceof HTMLElement && isDefined(target.dataset.letterId)
     return isLetter ? target : null
 }

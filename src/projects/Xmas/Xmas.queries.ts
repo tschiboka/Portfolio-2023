@@ -10,6 +10,7 @@ import {
 } from '@common-types'
 import { QueryKey, Query } from '@common-utils'
 import { Session } from '@shared-context'
+import type { VoidFunction } from '@common-utils'
 
 const useGetPagePingData = () => {
     const request = new Query.RequestBuilder('Xmas', 'Projects').build()
@@ -20,7 +21,7 @@ const useGetPagePingData = () => {
     })
 }
 
-type UsePostMessage = { onSuccess: () => void }
+type UsePostMessage = { onSuccess: VoidFunction }
 const usePostMessage = ({ onSuccess }: UsePostMessage) => {
     const token = Session.useContext().session?.token
 

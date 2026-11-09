@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Session } from '@shared-context'
 import { Query, QueryKey } from '@common-utils'
 import { AnagramMapType, Level } from '../common/utils'
-import type { ErrorResponse } from '@common-utils'
+import type { ErrorResponse, VoidFunction } from '@common-utils'
 import type { LevelNameResponse } from '../common/utils/Types/Level.types'
 import type { FrequencyType } from '../common/utils/Types/Words.types'
 
@@ -35,7 +35,7 @@ const useGetLevel = (name: string) => {
     })
 }
 
-type UsePostLevel = { onSuccess: () => void }
+type UsePostLevel = { onSuccess: VoidFunction }
 const usePostLevel = ({ onSuccess }: UsePostLevel) => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')

@@ -12,12 +12,12 @@ import {
 import { TableActions } from '../TableActions/TableActions'
 import { TableCheckboxCell } from '../TableCheckbox/TableCheckboxCell'
 import { TableUtils } from '../Table.utils'
-import type { Optional } from '@common-utils'
+import type { Dictionary, Optional, VoidFunction } from '@common-utils'
 import './TableRow.styles.css'
 
 const { getCellContent } = TableUtils
 
-type TableRowProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableRowProps<TData extends Dictionary<ReactNode>, TContext> = {
     row: TData
     index: number
     data: TData[]
@@ -27,7 +27,7 @@ type TableRowProps<TData extends Record<string, ReactNode>, TContext> = {
     hasBreakpoints: boolean
     hiddenColumns: TableColumn<TData, TContext>[]
     isExpanded: boolean
-    onToggle: () => void
+    onToggle: VoidFunction
     totalCols: number
     actions?: TableAction<TData, TContext>[]
     meta: CellMeta<TData, TContext>
@@ -36,7 +36,7 @@ type TableRowProps<TData extends Record<string, ReactNode>, TContext> = {
     selection?: TableSelection<TData, TContext>
 }
 
-export const TableRow = <TData extends Record<string, ReactNode>, TContext>({
+export const TableRow = <TData extends Dictionary<ReactNode>, TContext>({
     row,
     index,
     data,

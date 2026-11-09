@@ -1,17 +1,18 @@
 import { ReactNode, useRef, useState } from 'react'
 import { hasLength } from '@common-utils'
 import { Overlay } from '../../Overlay'
+import type { Dictionary } from '@common-utils'
 import type { CellMeta, TableAction } from '../Table.types'
 import type { ActionMenuItem } from '../../Overlay'
 import './TableActions.styles.css'
 
-type TableActionsProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableActionsProps<TData extends Dictionary<ReactNode>, TContext> = {
     actions: TableAction<TData, TContext>[]
     meta: CellMeta<TData, TContext>
     disabled?: boolean
 }
 
-export const TableActions = <TData extends Record<string, ReactNode>, TContext>({
+export const TableActions = <TData extends Dictionary<ReactNode>, TContext>({
     actions,
     meta,
     disabled = false,

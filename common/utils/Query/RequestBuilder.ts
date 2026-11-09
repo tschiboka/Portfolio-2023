@@ -90,7 +90,7 @@ export class RequestBuilder {
      * Replaces all query-string parameters with the given key-value pairs.
      * `null` / `undefined` values are stripped out.
      */
-    setQuery(params: Record<string, unknown>): this {
+    setQuery(params: Dictionary): this {
         this.queryParams = this.clean(params)
         return this
     }
@@ -99,7 +99,7 @@ export class RequestBuilder {
      * Merges the given parameters into the existing query-string parameters.
      * `null` / `undefined` values are stripped out.
      */
-    appendQuery(params: Record<string, unknown>): this {
+    appendQuery(params: Dictionary): this {
         this.queryParams = {
             ...this.queryParams,
             ...this.clean(params),
@@ -228,7 +228,7 @@ export class RequestBuilder {
     /**
      * Returns a copy of the object with all `null` / `undefined` entries removed.
      */
-    private clean<T extends Record<string, unknown>>(params: T): T {
+    private clean<T extends Dictionary>(params: T): T {
         return Objects.fromEntries<T>(Object.entries(params).filter(([, v]) => isDefined(v)))
     }
 }

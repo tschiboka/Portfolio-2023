@@ -2,6 +2,7 @@
 import { VisitRepository } from './Visit.repository'
 import { VisitSchema } from './Visit.schema'
 import { BreakdownModel } from '../Breakdown/Breakdown.model'
+import type { Dictionary } from '@common-utils'
 import type { VisitInput } from './Visit.types'
 import type {
     GetVisitSummaryResponse,
@@ -14,7 +15,7 @@ export const VisitService = {
     /** Returns visits grouped by path, plus the paths that have at least one visit. */
     summary: async (): Promise<GetVisitSummaryResponse> => {
         const visits = await VisitRepository.find()
-        const visitsByPath = visits.reduce<Record<string, number>>((grouped, visit) => {
+        const visitsByPath = visits.reduce<Dictionary<number>>((grouped, visit) => {
             if (!visit.path) return grouped
             grouped[visit.path] = (grouped[visit.path] ?? 0) + 1
             return grouped

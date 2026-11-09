@@ -3,13 +3,14 @@ import { SessionOverlayModes } from './SessionOverlay.types'
 import { SessionOverlayHooks } from './SessionOverlay.hooks'
 import { SessionHooks } from '../Session.hooks'
 import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
+import type { VoidFunction } from '@common-utils'
 import './SessionOverlay.styles.css'
 
 export const SessionOverlay = ({
     enterFullScreen,
     isFullscreen,
 }: {
-    enterFullScreen: () => void
+    enterFullScreen: VoidFunction
     isFullscreen: boolean
 }) => {
     const { orientation, isMobile } = BrowserHooks.useOrientation()

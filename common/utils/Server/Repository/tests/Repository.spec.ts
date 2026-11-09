@@ -2,6 +2,7 @@ import { describe, it, expect, vi, expectTypeOf } from 'vitest'
 import { RepositoryTestUtils } from './Repository.spec.utils'
 import { Repository } from '..'
 import type { TestDoc } from './Repository.spec.types'
+import type { Nullable } from '../../../Generics'
 
 const { FakeModel } = RepositoryTestUtils
 
@@ -158,7 +159,7 @@ describe('duck typing', () =>
 describe('type-level inference', () => {
     it('should infer the doc type from the model findById return', () => {
         const repo = Repository.define(FakeModel)
-        expectTypeOf(repo.findById).returns.toEqualTypeOf<Promise<TestDoc | null>>()
+        expectTypeOf(repo.findById).returns.toEqualTypeOf<Promise<Nullable<TestDoc>>>()
         expectTypeOf(repo.find).returns.toEqualTypeOf<Promise<TestDoc[]>>()
     })
 

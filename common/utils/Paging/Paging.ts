@@ -1,10 +1,11 @@
 import { TableDefaults } from '../Table/Table.defaults'
 import { isDefined, isDigits } from '../Predicate'
 import type { PageMeta } from '@common-types'
+import type { Optional } from '@common-utils'
 import type { Paged, PagingBounds } from './Paging.types'
 
 /** Safe-integer parse: ignores non-digit strings / NaN via {@link isDigits}. */
-const parseSafeInt = (value: string | undefined, fallback: number): number =>
+const parseSafeInt = (value: Optional<string>, fallback: number): number =>
     isDefined(value) && isDigits(value) ? parseInt(value, 10) : fallback
 
 /**

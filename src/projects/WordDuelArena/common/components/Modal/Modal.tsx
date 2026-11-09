@@ -3,12 +3,13 @@ import { ModalDefaults } from './Modal.defaults'
 import { ModalHeader } from './components/ModalHeader'
 import { ModalBody } from './components/ModalBody'
 import { ModalActions } from './components/ModalActions'
+import type { VoidFunction } from '@common-utils'
 import type { ModalState } from './Modal.types'
 import './Modal.styles.css'
 
 type ModalProps = {
     modal: ModalState
-    onClose: () => void
+    onClose: VoidFunction
 }
 
 export const Modal = ({ modal, onClose }: ModalProps) => {

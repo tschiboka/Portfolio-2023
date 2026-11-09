@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react'
 import { Const } from '@common-ux/Const'
 import { StackTestUtils } from './Stack.spec.utils'
 import { StackSelectors } from '../Stack.selectors'
+import type { Optional } from '@common-utils'
 import type { StackAlign, StackJustify } from '../Stack.types'
 
 const { Set } = StackTestUtils
@@ -9,7 +10,7 @@ const { selectAlign, selectJustify } = StackSelectors
 
 describe('Stack', () => {
     describe('selectAlign', () =>
-        it.each<{ input: StackAlign | undefined; expected: string | undefined }>([
+        it.each<{ input: Optional<StackAlign>; expected: Optional<string> }>([
             { input: 'start', expected: 'flex-start' },
             { input: 'center', expected: 'center' },
             { input: 'end', expected: 'flex-end' },
@@ -20,7 +21,7 @@ describe('Stack', () => {
         ))
 
     describe('selectJustify', () =>
-        it.each<{ input: StackJustify | undefined; expected: string | undefined }>([
+        it.each<{ input: Optional<StackJustify>; expected: Optional<string> }>([
             { input: 'start', expected: 'flex-start' },
             { input: 'center', expected: 'center' },
             { input: 'end', expected: 'flex-end' },

@@ -1,5 +1,6 @@
 import { isString } from '@common-utils/Predicate'
 import { Accessor, TestError } from '../Accessor/Accessor'
+import type { Nullable } from '@common-utils'
 
 export class SearchAccessor extends Accessor {
     /** The SearchInput wrapper (`.wrapped-component`) — hosts the input + option dropdown. */
@@ -32,7 +33,7 @@ export class SearchAccessor extends Accessor {
             ...super.Do,
             clickIcon: async () => {
                 const wrapper = this.Get.icon()
-                const inner = wrapper.firstElementChild as HTMLElement | null
+                const inner = wrapper.firstElementChild as Nullable<HTMLElement>
                 await Accessor.user.click(inner ?? wrapper)
             },
             selectOption: async (typeText: string, optionName: string | RegExp) => {

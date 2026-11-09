@@ -1,5 +1,5 @@
 import { isDefined } from '../Predicate'
-import type { Dictionary, Key } from '../Generics'
+import type { Dictionary, Key, ReadonlyArrayable } from '../Generics'
 
 /**
  * Picks the given key(s) from an object, but only when the value is defined (not `null`/`undefined`).
@@ -11,7 +11,7 @@ import type { Dictionary, Key } from '../Generics'
  */
 export const pick = <T extends object>(
     source: T,
-    keys: string | readonly string[],
+    keys: ReadonlyArrayable<string>,
 ): Partial<Dictionary> => {
     const picked: Dictionary = {}
     ;(Array.isArray(keys) ? keys : [keys]).forEach((key: string) => {

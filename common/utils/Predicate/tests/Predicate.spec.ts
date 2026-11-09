@@ -40,7 +40,7 @@ import {
     isAll,
     isAny,
 } from '../Predicate'
-import type { Nullish } from '../../Generics'
+import type { Dictionary, Nullish } from '../../Generics'
 
 const { objectIdHex: HEX, objectId, statuses } = PredicateTestUtils
 
@@ -697,15 +697,12 @@ describe('hasProperty', () => {
     })
 
     it('should not match inherited properties', () => {
-        const obj: Record<string, unknown> = Object.create({ inherited: true }) as Record<
-            string,
-            unknown
-        >
+        const obj: Dictionary = Object.create({ inherited: true }) as Dictionary
         expect(hasProperty(obj, 'inherited')).toBe(false)
     })
 
     it('should match own properties on prototype-less objects', () => {
-        const obj = Object.create(null) as Record<string, unknown>
+        const obj = Object.create(null) as Dictionary
         obj.key = 'value'
         expect(hasProperty(obj, 'key')).toBe(true)
     })

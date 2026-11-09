@@ -1,6 +1,8 @@
+import type { VoidFunction } from '@common-utils'
+
 type OptionButtonProps = {
     label: string
-    onClick: () => void
+    onClick: VoidFunction
     disabled?: boolean
 }
 

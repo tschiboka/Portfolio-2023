@@ -12,12 +12,12 @@ import { TableSlots } from './TableSlots'
 import { TableSlotsUtils } from './TableSlots/TableSlots.utils'
 import { Overlay } from '../Overlay'
 import type { ReactNode } from 'react'
-import type { Optional } from '@common-utils'
+import type { Dictionary, Optional } from '@common-utils'
 import type { TableFilterPanelHandle } from './TableFilter'
 import type { Table as TableProps, TableColumns } from './Table.types'
 import './Table.styles.css'
 
-export const Table = <TData extends Record<string, ReactNode>, TContext = unknown>({
+export const Table = <TData extends Dictionary<ReactNode>, TContext = unknown>({
     id,
     title,
     data = [] as TData[],

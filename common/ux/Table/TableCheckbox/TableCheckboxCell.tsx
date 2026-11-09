@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react'
+import type { Dictionary } from '@common-utils'
 import type { CellMeta, TableSelection } from '../Table.types'
 import './TableCheckbox.styles.css'
 
-type TableCheckboxCellProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableCheckboxCellProps<TData extends Dictionary<ReactNode>, TContext> = {
     row: TData
     meta: CellMeta<TData, TContext>
     selection: TableSelection<TData, TContext>
 }
 
-export const TableCheckboxCell = <TData extends Record<string, ReactNode>, TContext>({
+export const TableCheckboxCell = <TData extends Dictionary<ReactNode>, TContext>({
     row,
     meta,
     selection,

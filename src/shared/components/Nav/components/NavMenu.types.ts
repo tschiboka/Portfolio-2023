@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { VoidFunction } from '@common-utils'
 import type { MenuItem, NavProps, SubmenuState } from '../Nav.types'
 
 export type NavMenuProps = Pick<
@@ -11,5 +12,5 @@ export type NavMenuProps = Pick<
     submenu?: SubmenuState
     renderImage?: (imageName: string) => ReactNode
     onItemClick?: (item: MenuItem) => void
-    onSubmenuToggle?: () => void
+    onSubmenuToggle?: VoidFunction
 }

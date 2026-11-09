@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode, RefObject } from 'react'
 import { AccessibleProps } from '../index.types'
+import type { Nullable, VoidFunction } from '@common-utils'
 
 export type OverlayProps = AccessibleProps & {
     children: ReactNode
@@ -23,7 +24,7 @@ export type PopupAction = {
     label: string
     variant?: 'primary' | 'secondary'
     when?: boolean
-    onClick: () => void
+    onClick: VoidFunction
 }
 
 export type PopupProps = AccessibleProps & {
@@ -33,10 +34,10 @@ export type PopupProps = AccessibleProps & {
     icon?: ReactNode
     size?: PopupSize
     mode?: PopupMode
-    anchorRef: RefObject<HTMLElement | null>
+    anchorRef: RefObject<Nullable<HTMLElement>>
     actions?: PopupAction[]
     showClose?: boolean
-    onClose: () => void
+    onClose: VoidFunction
 }
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl'
@@ -50,5 +51,5 @@ export type ModalProps = AccessibleProps & {
     mode?: PopupMode
     actions?: PopupAction[]
     showClose?: boolean
-    onClose: () => void
+    onClose: VoidFunction
 }

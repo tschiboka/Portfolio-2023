@@ -9,6 +9,7 @@ import { LikeQueries } from '@shared-queries'
 import { Card, Pill, Heading, Paragraph, Stack, Inline, Box, Text } from '@common-ux'
 import { ProjectsSelectors } from '../../../Projects/Projects.selectors'
 import type { MouseEvent } from 'react'
+import type { Dictionary } from '@common-utils'
 import './BlogCard.scss'
 
 interface Props {
@@ -22,8 +23,7 @@ interface Props {
     newest: boolean
 }
 
-const pillColorMap: Record<
-    string,
+const pillColorMap: Dictionary<
     'accent' | 'error' | 'success' | 'warning' | 'orange' | 'purple' | 'gray'
 > = {
     yellow: 'warning',

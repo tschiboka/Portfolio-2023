@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { VoidFunction } from '@common-utils'
 import type { AccessibleProps } from '../index.types'
 import '../Button/Button.styles.css'
 import './Form.styles.css'
@@ -8,7 +9,7 @@ type ButtonProps = AccessibleProps & {
     type?: 'submit' | 'button' | 'reset'
     variant?: 'primary' | 'secondary'
     disabled?: boolean
-    onClick?: () => void
+    onClick?: VoidFunction
 }
 
 export const Button = ({

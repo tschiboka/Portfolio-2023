@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { hasLength, isDigits, isString, Regexp, ValidationMessage } from '@common-utils'
 import { ContactConstants } from './Contact.constants'
 import type { ObjectSchema } from 'yup'
+import type { Predicate } from '@common-utils'
 import type { ContactFormData } from './Contact.types'
 
 const { fieldLimits, messagePattern } = ContactConstants
@@ -10,7 +11,7 @@ const { name, email, phone, message } = fieldLimits
 
 /** A rule that only applies once something is typed — an empty phone is not a wrong one. */
 const whenFilled =
-    (rule: (value: string) => boolean) =>
+    (rule: Predicate<string>) =>
     (value?: string): boolean =>
         isString(value) && hasLength(value) ? rule(value) : true
 

@@ -2,10 +2,11 @@ import { useCallback, useRef } from 'react'
 import { TableHeadUtils } from './TableHead.utils'
 import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
+import type { Dictionary, Nullable } from '@common-utils'
 import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
 import './TableHead.styles.css'
 
-type TableHeadProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableHeadProps<TData extends Dictionary<ReactNode>, TContext> = {
     columns: TableColumns<TData, TContext>
     hasBreakpoints: boolean
     hasActions: boolean
@@ -19,7 +20,7 @@ type TableHeadProps<TData extends Record<string, ReactNode>, TContext> = {
 
 const MIN_COL_WIDTH = 60
 
-export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
+export const TableHead = <TData extends Dictionary<ReactNode>, TContext>({
     columns,
     hasBreakpoints,
     hasActions,
@@ -30,7 +31,8 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
     onColumnResize,
     onColumnReorder,
 }: TableHeadProps<TData, TContext>) => {
-    const resizing = useRef<{
+    /** The columns and pointer state a resize drag carries between mousemove events. */
+    type ResizeState = {
         leftIndex: number
         rightIndex: number
         startX: number
@@ -40,7 +42,10 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
         rightTh: HTMLTableCellElement
         otherColsWidth: number
         tableWidth: number
-    } | null>(null)
+    }
+
+    /** The resizing state that a drag leaves on the ref, or `null` between drags. */
+    const resizing = useRef<Nullable<ResizeState>>(null)
 
     const handleSort = (accessor: keyof TData) => {
         if (!sorting) return
@@ -59,11 +64,11 @@ export const TableHead = <TData extends Record<string, ReactNode>, TContext>({
             const th = handle.parentElement as HTMLTableCellElement
             const isLeftHandle = handle.classList.contains('th-resize-handle--left')
             const leftTh = isLeftHandle
-                ? (th.previousElementSibling as HTMLTableCellElement | null)
+                ? (th.previousElementSibling as Nullable<HTMLTableCellElement>)
                 : th
             const rightTh = isLeftHandle
                 ? th
-                : (th.nextElementSibling as HTMLTableCellElement | null)
+                : (th.nextElementSibling as Nullable<HTMLTableCellElement>)
             if (!leftTh || !rightTh) return
 
             const table = th.closest('table') as HTMLTableElement

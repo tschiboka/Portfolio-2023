@@ -1,10 +1,11 @@
 import { LevelName } from '../../common/utils/Types/Level.types'
+import type { VoidFunction } from '@common-utils'
 
 type LevelListProps = {
     levels: LevelName[]
     setLevelName: (levelName: string) => void
     setModalOpen: (open: boolean) => void
-    enterFullScreen: () => void
+    enterFullScreen: VoidFunction
 }
 
 export const LevelList = ({

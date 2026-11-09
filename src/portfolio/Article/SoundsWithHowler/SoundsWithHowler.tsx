@@ -33,7 +33,7 @@ import { SoundsWithHowlerCode } from './SoundsWithHowler.code'
 import { getReferenceList } from '../References.data'
 import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
-import type { Nullable } from '@common-utils'
+import type { Dictionary, Nullable } from '@common-utils'
 import './SoundsWithHowler.scss'
 
 interface Props {
@@ -66,7 +66,7 @@ const audioObject = () => ({
 })
 
 export const SoundsWithHowler = ({ pageName, path }: Props) => {
-    const [audio, setAudio] = useState<Nullable<Record<string, Howl>>>(null)
+    const [audio, setAudio] = useState<Nullable<Dictionary<Howl>>>(null)
     const [firstAudio, setFirstAudio] = useState('') // First Audio will Play After useEffect[audio]
     const references = getReferenceList(path)
     const playAudio = (audioName: string) => {

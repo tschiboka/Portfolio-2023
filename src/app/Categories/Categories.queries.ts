@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { Query, QueryKey } from '@common-utils'
 import { Session } from '@shared-context'
 import type { AxiosError } from 'axios'
+import type { VoidFunction } from '@common-utils'
 import type { ErrorResponse, GetCategoryResponse, PostCategoryRequest } from '@common-types'
 
 /** Every category, for the parent selector and the table. */
@@ -14,7 +15,7 @@ const useGet = () => {
     )
 }
 
-type UsePost = { onSuccess: () => void }
+type UsePost = { onSuccess: VoidFunction }
 
 /** Creates a category. */
 const usePost = ({ onSuccess }: UsePost) => {

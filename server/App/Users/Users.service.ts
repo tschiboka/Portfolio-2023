@@ -5,6 +5,7 @@ import { UsersAuth } from './Users.auth'
 import { UsersUtils } from './Users.utils'
 import { SettingsService } from '../Settings/Settings.service'
 import { TokenModel } from '../Token'
+import type { Dictionary } from '@common-utils'
 import type { IUser } from './Users.types'
 import type {
     CurrentUser,
@@ -83,10 +84,10 @@ export const UsersService = {
         const token = await TokenModel.findOne({ token: input.token })
         if (!token) throw ApiResponder.notFound('verification token')
 
-        const decoded = UsersAuth.token.verify(token.token) as Record<string, unknown>
+        const decoded = UsersAuth.token.verify(token.token) as Dictionary
 
         const { _, __, ...userFields } = decoded
-        const activeUser: Record<string, unknown> = { ...userFields, verified: true, active: true }
+        const activeUser: Dictionary = { ...userFields, verified: true, active: true }
 
         const userNameExists = await UsersRepository.find({
             userName: activeUser.userName as string,

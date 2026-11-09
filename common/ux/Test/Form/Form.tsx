@@ -5,6 +5,7 @@ import { CheckboxAccessor } from '../Checkbox/Checkbox'
 import { RadioAccessor } from '../Radio/Radio'
 import { DateAccessor } from '../DateInput/DateInput'
 import { SearchAccessor } from '../SearchInput/SearchInput'
+import type { Nullable } from '@common-utils'
 
 class FormInstance extends Accessor {
     Button = (name: string | RegExp): ButtonAccessor => {
@@ -45,7 +46,7 @@ class FormInstance extends Accessor {
             errorMsgs: (): HTMLElement[] => this.scope.getAllByRole('alert'),
             fieldset: (name: string | RegExp): HTMLElement =>
                 this.scope.getByRole('group', { name }),
-            submitErrorMsg: (): HTMLElement | null =>
+            submitErrorMsg: (): Nullable<HTMLElement> =>
                 this.element.querySelector('.submit-error-message'),
         }
     }

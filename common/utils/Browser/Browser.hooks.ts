@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import type { Nullable } from '@common-utils'
 import type { Orientation, VisibilityEntry } from './Browser.types'
 
 const MOBILE_BREAKPOINT = 1024
@@ -14,7 +15,7 @@ interface FullScreenDocument {
     exitFullscreen?: () => Promise<void>
     webkitExitFullscreen?: () => Promise<void>
     msExitFullscreen?: () => Promise<void>
-    fullscreenElement?: Element | null
+    fullscreenElement?: Nullable<Element>
 }
 
 const useFullScreen = <T extends HTMLElement>() => {

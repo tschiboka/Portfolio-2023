@@ -1,3 +1,4 @@
+import type { ValueOf } from '@common-utils'
 import type { Paths } from './Paths'
 
 /** Every server endpoint group — the box a `PathKey` is looked up in. */
@@ -7,4 +8,4 @@ export type ServerGroup = keyof typeof Paths.Server
 export type PathKey = keyof (typeof Paths.Server)['Api'] | keyof (typeof Paths.Server)['Projects']
 
 /** Every page route the router serves. */
-export type ClientRoute = (typeof Paths.Client)[keyof typeof Paths.Client]
+export type ClientRoute = ValueOf<typeof Paths.Client>

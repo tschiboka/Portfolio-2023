@@ -1,3 +1,5 @@
+import type { Optional } from '@common-utils'
+
 /** Helper functions over {@link Option} collections. */
 export const Option = {
     /**
@@ -23,7 +25,7 @@ export const Option = {
      * Option.getLabelByValue([{ value: 'a', label: 'A' }], 'a') // 'A'
      * Option.getLabelByValue([{ value: 'a', label: 'A' }], 'z') // undefined
      */
-    getLabelByValue: <T>(options: readonly Option<T>[], value: T): string | undefined =>
+    getLabelByValue: <T>(options: readonly Option<T>[], value: T): Optional<string> =>
         options.find((option) => option.value === value)?.label,
     /**
      * Finds the value for a given label. Returns `undefined` when no option matches.
@@ -32,7 +34,7 @@ export const Option = {
      * Option.getValueByLabel([{ value: 'a', label: 'A' }], 'A') // 'a'
      * Option.getValueByLabel([{ value: 'a', label: 'A' }], 'z') // undefined
      */
-    getValueByLabel: <T>(options: readonly Option<T>[], label: string): T | undefined =>
+    getValueByLabel: <T>(options: readonly Option<T>[], label: string): Optional<T> =>
         options.find((option) => option.label === label)?.value,
 }
 

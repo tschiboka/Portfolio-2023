@@ -1,6 +1,6 @@
 ﻿import type { ObjectId } from 'mongodb'
 import type { Document } from 'mongoose'
-import type { Dictionary, WithoutId } from '@common-utils'
+import type { Dictionary, Nullable, WithoutId } from '@common-utils'
 import type {
     DifficultyLevel,
     EquipmentResource,
@@ -37,7 +37,7 @@ export interface IGymExercise extends Document {
 /** The subset of an exercise a permission check relies on. */
 export type ExerciseOwnership = {
     source: GymExerciseSource
-    ownerId?: { toString: () => string } | null
+    ownerId?: Nullable<{ toString: () => string }>
 }
 
 /** The exercise shape submitted for validation: no `_id`, source/owner inferred server-side. */

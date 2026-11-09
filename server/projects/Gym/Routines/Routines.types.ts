@@ -1,6 +1,6 @@
 ﻿import type { ObjectId } from 'mongodb'
 import type { Document } from 'mongoose'
-import type { Dictionary, WithoutId } from '@common-utils'
+import type { Dictionary, Nullable, WithoutId } from '@common-utils'
 import type {
     GetGymUserRoutinesResponse,
     GymRoutineSource,
@@ -27,7 +27,7 @@ export type RoutineValidationInput = WithoutId<GymRoutineResource> & { source: G
 /** The subset of a routine a permission check relies on. */
 export type RoutineOwnership = {
     source: GymRoutineSource
-    ownerId?: { toString: () => string } | null
+    ownerId?: Nullable<{ toString: () => string }>
 }
 
 export type GetRoutinesRes = TypedResponse<GetGymUserRoutinesResponse>

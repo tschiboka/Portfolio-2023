@@ -37,13 +37,14 @@ export * from './table'
 import type { Request, Response } from 'express'
 import type { ParamsDictionary } from 'express-serve-static-core'
 import type { ParsedQs } from 'qs'
+import type { Dictionary, Optional } from '@common-utils/Generics'
 
 export type TypedRequest<
     T extends {
-        params?: Record<string, string>
-        body?: Record<string, unknown>
-        query?: Record<string, string | undefined>
-    } = Record<string, never>,
+        params?: Dictionary<string>
+        body?: Dictionary
+        query?: Dictionary<Optional<string>>
+    } = Dictionary<never>,
 > = Request<
     T extends { params: infer P } ? P : ParamsDictionary,
     unknown,

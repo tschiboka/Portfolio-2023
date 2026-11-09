@@ -1,3 +1,4 @@
+import type { WithoutId } from '@common-utils/Generics'
 import type { SearchInputOption } from '@common-ux'
 
 // Shared types for the Gym project.
@@ -188,7 +189,7 @@ export type GetGymMuscleGroupOptionsResponse = {
 }
 
 /** Canonical exercise creation body (source is forced to 'canonical' server-side). */
-export type PostGymExerciseRequest = Omit<GymExerciseBase, '_id'>
+export type PostGymExerciseRequest = WithoutId<GymExerciseBase>
 
 /** Canonical exercise update body — all fields optional. */
-export type PatchGymExerciseRequest = Partial<Omit<GymExerciseBase, '_id'>>
+export type PatchGymExerciseRequest = Partial<WithoutId<GymExerciseBase>>

@@ -6,10 +6,11 @@ import { SolutionBoard } from './SolutionBoard/SolutionBoard'
 import { SessionOverlay } from '../SessionOverlay/SessionOverlay'
 import { SessionHeader } from '../SessionHeader/SessionHeader'
 import { SessionHooks } from '../Session.hooks'
+import type { VoidFunction } from '@common-utils'
 import './SessionGame.styles.css'
 
 type SessionGameProps = {
-    enterFullScreen: () => void
+    enterFullScreen: VoidFunction
     isFullscreen: boolean
 }
 

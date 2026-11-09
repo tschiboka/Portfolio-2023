@@ -598,22 +598,33 @@ config owns is linted.
     - [x] Step 32.7: Run `npm run build:rules`, then verify the generated config
     - [x] Step 32.8: Sweep every site — `ClientMessage.spec.ts` holds `message.length > 0`
     - [x] Step 32.9: Confirm a green `tsc`, lint, and test run
-- [ ] Step 33: Rule — a nullable union names its generic
-    - [ ] Step 33.1: Build `rules/nullable-union/`
-    - [ ] Step 33.2: Flag the three shapes a generic already names — `T | null` →
-          `Nullable<T>`, `T | undefined` → `Optional<T>`, `T | null | undefined` →
-          `Nullish<T>`
-    - [ ] Step 33.3: Leave every wider union alone — `string | null | number` has two
+- [x] Step 33: Rule — a written type shape names its generic
+    - [x] Step 33.1: Build `rules/alias-shape/` as one table of shape matchers, so every
+          generic is a row rather than a rule of its own
+    - [x] Step 33.2: Flag every shape a generic already names — the nullish family
+          (`Nil`, `Optional`, `Nullable`, `Nullish`), the unions (`Primitive`, `Sortable`,
+          `Falsy`, `Arrayable`, `ReadonlyArrayable`, `Awaitable`, `Emptiable`), the
+          references (`Dictionary`, `AnyObject`, `EmptyObject`, `Key`, `Defined`, `Truthy`,
+          `WithoutId`, `RequiredKeys`), the functions (`VoidFunction`, `AnyFunction`,
+          `AsyncFunction`, `Predicate`, `TypeGuard`), the intersections (`Merge`, `PartialBy`,
+          `RequiredBy`, `Brand`, `AtLeastOne`) and (`ValueOf`, `NonEmptyArray`, `OptionalKeys`,
+          `KeysOfType`). `DeepPartial`, `DeepReadonly` and `DeepMutable` get no row: each is a
+          recursive conditional over `infer`, and no source restates one inline
+    - [x] Step 33.3: Leave every wider union alone — `string | null | number` has two
           members beside the `null`, so no generic fits and guessing one would mistype it
-    - [ ] Step 33.4: Read the union whether it is annotated (`: T | null`), aliased
+    - [x] Step 33.4: Read the union whether it is annotated (`: T | null`), aliased
           (`type X = T | null`) or returned (`Promise<T | null>`)
-    - [ ] Step 33.5: Scope `include` to `src/**`, `common/**`, `server/**`, `rules/**`
-    - [ ] Step 33.6: Register as `severity: 'error'`
-    - [ ] Step 33.7: Add `tests/NullableUnion.spec.ts` — the three shapes reported in each
-          position, a three-member union and a bare `null` left alone
-    - [ ] Step 33.8: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 33.9: Sweep every site
-    - [ ] Step 33.10: Confirm a green `tsc`, lint, and test run
+    - [x] Step 33.5: Scope `include` to `src/**`, `common/**`, `server/**`, `rules/**`
+    - [x] Step 33.6: Register as `severity: 'error'`
+    - [x] Step 33.7: Add `tests/AliasShape.spec.ts` — every position a union is written in, the
+          aliases that must not be re-wrapped, the degenerate unions, and one message per row
+    - [x] Step 33.8: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 33.9: Sweep every site — across `common/`, `server/` and `src/`. Two lessons
+          worth keeping: `common/types` imports `@common-utils/Generics`, never the barrel,
+          because the barrel reaches `@common-types` and closes a cycle that hands back error
+          types; and a named type beats an object literal inside a call's type argument, which
+          is what `useRef<Nullable<{ … }>>` cost in `TableHead.tsx`
+    - [x] Step 33.10: Confirm a green `tsc`, lint, and test run
 - [x] Step 34: Rule — a control body takes braces only when it needs them
     - [x] Step 34.1: Give `RuleRegistrar` an optional `options`, emitted as
           `[severity, ...options]` — the registry states severity alone today

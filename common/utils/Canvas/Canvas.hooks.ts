@@ -1,7 +1,8 @@
 import type { RefObject } from 'react'
+import type { Nullable } from '@common-utils'
 import type { Canvas, Circle, Line, Point } from './Canvas.types'
 
-const useCanvas = (ref: RefObject<HTMLCanvasElement | null>): Canvas => {
+const useCanvas = (ref: RefObject<Nullable<HTMLCanvasElement>>): Canvas => {
     const createCanvas = () => {
         const canvas = ref.current
         if (!canvas) return

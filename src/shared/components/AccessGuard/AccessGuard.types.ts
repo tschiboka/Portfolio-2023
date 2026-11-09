@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 import { Capability } from '@common-types'
-import type { Dictionary, Predicate } from '@common-utils'
+import type { Dictionary, Predicate, VoidFunction } from '@common-utils'
 
 export type AccessMap = {
     capabilities: Capability[]
@@ -11,7 +11,7 @@ export type AccessDeniedMode = 'hidden' | 'visible' | 'disabled' | 'soft-disable
 
 export type GuardAction = {
     label: string
-    onClick: () => void
+    onClick: VoidFunction
     disabled?: boolean
     variant?: 'primary' | 'secondary' | 'danger'
 }

@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import type { TestDoc } from './Repository.spec.types'
-import type { Dictionary } from '../../../Generics'
+import type { Dictionary, Nullable } from '../../../Generics'
 
 /** A duck-typed model-like fixture: static query methods + a constructor that builds docs. */
 class FakeModel {
@@ -25,10 +25,10 @@ class FakeModel {
             ),
     )
     static findById = vi.fn(
-        (id: string): Promise<TestDoc | null> =>
+        (id: string): Promise<Nullable<TestDoc>> =>
             Promise.resolve(FakeModel.docs.find((d) => d._id === id) ?? null),
     )
-    static findOne = vi.fn(async (filter?: Dictionary): Promise<TestDoc | null> => {
+    static findOne = vi.fn(async (filter?: Dictionary): Promise<Nullable<TestDoc>> => {
         const all = await FakeModel.find(filter)
         return all[0] ?? null
     })

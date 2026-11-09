@@ -10,12 +10,12 @@ import {
 } from '../Table.types'
 import { TableRow } from '../TableRow/TableRow'
 import { TableUtils } from '../Table.utils'
-import type { Optional } from '@common-utils'
+import type { Dictionary, Optional } from '@common-utils'
 import './TableBody.styles.css'
 
 const { getTotalCols } = TableUtils
 
-type TableBodyProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableBodyProps<TData extends Dictionary<ReactNode>, TContext> = {
     data: TData[]
     columns: TableColumns<TData, TContext>
     context?: TContext
@@ -28,7 +28,7 @@ type TableBodyProps<TData extends Record<string, ReactNode>, TContext> = {
     selection?: TableSelection<TData, TContext>
 }
 
-export const TableBody = <TData extends Record<string, ReactNode>, TContext>({
+export const TableBody = <TData extends Dictionary<ReactNode>, TContext>({
     data,
     columns,
     context,

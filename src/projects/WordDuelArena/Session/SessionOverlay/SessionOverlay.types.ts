@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
+import type { VoidFunction } from '@common-utils'
 
 export type SessionOverlayActions = {
     label: string
-    onClick: () => void
+    onClick: VoidFunction
 }
 
 export type SessionOverlayConfigType = 'info' | 'warning' | 'error'

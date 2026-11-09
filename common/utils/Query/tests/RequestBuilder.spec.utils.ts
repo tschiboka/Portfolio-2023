@@ -1,6 +1,7 @@
 import * as apiPathBuilderModule from '../../Paths/apiPathBuilder'
 import axios from 'axios'
 import type { AxiosMethodMock } from './RequestBuilder.spec.types'
+import type { Dictionary } from '../../Generics'
 
 const mockedAxios = axios as unknown as {
     get: AxiosMethodMock
@@ -15,11 +16,11 @@ const mockedAxios = axios as unknown as {
 const TEST_TOKEN = 'test-session-token'
 
 const mockApiPathBuilder = () => {
-    const apiRoutes: Record<string, string> = {
+    const apiRoutes: Dictionary<string> = {
         Login: 'login',
         Message: 'message',
     }
-    const projectRoutes: Record<string, string> = {
+    const projectRoutes: Dictionary<string> = {
         Gym: 'projects/gym',
     }
     vi.spyOn(apiPathBuilderModule, 'apiPathBuilder').mockImplementation((pathName: string) => {

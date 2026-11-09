@@ -5,6 +5,7 @@ import { UsersModel } from './Users.model'
 import { UsersConstants } from './Users.constants'
 import { SettingsConstants } from '../Settings/Settings.constants'
 import type { Request } from 'express'
+import type { Nullable, Optional } from '@common-utils'
 import type { IUser, RegistrationPayload, UserToken } from './Users.types'
 import type { CurrentUser } from '../../../common/types'
 
@@ -33,7 +34,7 @@ const verifyToken = (token: string): unknown => {
 /** Builds a registration token payload with the settings' expiry, rejecting an invalid expiry. */
 const buildRegistration = (
     payload: RegistrationPayload,
-    expiresMs: number | undefined,
+    expiresMs: Optional<number>,
 ): UserToken => {
     const iat = Math.floor(DateTime.Units.Ms.toSec(Date.now()))
     if (
@@ -45,7 +46,7 @@ const buildRegistration = (
 }
 
 /** Resolves the full user document from the bearer token on the request. */
-const getUserToken = async (req: Request): Promise<IUser | null> => {
+const getUserToken = async (req: Request): Promise<Nullable<IUser>> => {
     const token = req.headers['x-auth-token'] as string
     const secret = process.env.JWT_PRIVATE_KEY
     if (!secret) throw Error(ApiMessage.jwtSecretMissing())

@@ -1,19 +1,20 @@
 import { type ReactNode } from 'react'
 import { BsDownload } from 'react-icons/bs'
 import { TableDropdown } from '../TableInputs'
+import type { Dictionary } from '@common-utils'
 import type { TableDownload } from '../Table.types'
 import './TableDownloadButton.styles.css'
 
-type TableDownloadProps<TData extends Record<string, ReactNode>> = {
+type TableDownloadProps<TData extends Dictionary<ReactNode>> = {
     download: TableDownload<TData>
     data: TData[]
 }
 
-const isSingleDownload = <TData extends Record<string, ReactNode>>(
+const isSingleDownload = <TData extends Dictionary<ReactNode>>(
     download: TableDownload<TData>,
 ): download is { onDownload: (data: TData[]) => void; label?: string } => !('options' in download)
 
-export const TableDownloadButton = <TData extends Record<string, ReactNode>>({
+export const TableDownloadButton = <TData extends Dictionary<ReactNode>>({
     download,
     data,
 }: TableDownloadProps<TData>) => {

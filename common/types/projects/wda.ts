@@ -1,4 +1,5 @@
 // Shared types for Word Duel Arena (identical on FE and BE)
+import type { Dictionary, Nullable, ValueOf } from '@common-utils/Generics'
 
 // --- WebSocket Session Status Constants ---
 
@@ -39,7 +40,7 @@ export const WdaWsResponseTypes = {
 } as const
 
 export type PlayerRole = 'player1' | 'player2'
-export type OptionalPlayerRole = PlayerRole | null
+export type OptionalPlayerRole = Nullable<PlayerRole>
 
 export type LastWordAttempt = {
     word: string
@@ -51,17 +52,16 @@ export type MovePayload = {
     attempt: string
 }
 
-export type WdaSessionStatus = (typeof WdaSessionStatuses)[keyof typeof WdaSessionStatuses]
-export type WdaMatchStatus = (typeof WdaMatchStatuses)[keyof typeof WdaMatchStatuses]
+export type WdaSessionStatus = ValueOf<typeof WdaSessionStatuses>
+export type WdaMatchStatus = ValueOf<typeof WdaMatchStatuses>
 
-export type WdaPlayerDerivedStatus =
-    (typeof WdaPlayerDerivedStatuses)[keyof typeof WdaPlayerDerivedStatuses]
+export type WdaPlayerDerivedStatus = ValueOf<typeof WdaPlayerDerivedStatuses>
 
-export type WdaLevelWordStatus = (typeof WdaLevelWordStatuses)[keyof typeof WdaLevelWordStatuses]
+export type WdaLevelWordStatus = ValueOf<typeof WdaLevelWordStatuses>
 
-export type WdaWsRequestType = (typeof WdaWsRequestTypes)[keyof typeof WdaWsRequestTypes]
+export type WdaWsRequestType = ValueOf<typeof WdaWsRequestTypes>
 
-export type WdaWsResponseType = (typeof WdaWsResponseTypes)[keyof typeof WdaWsResponseTypes]
+export type WdaWsResponseType = ValueOf<typeof WdaWsResponseTypes>
 
 export type WdaWsRequest =
     | { type: typeof WdaWsRequestTypes.PING }
@@ -129,11 +129,11 @@ export type WdaClientSessionState = {
     role?: OptionalPlayerRole
     status: WdaSessionStatus
     players?: {
-        player1?: WdaPublicPlayer | null
-        player2?: WdaPublicPlayer | null
+        player1?: Nullable<WdaPublicPlayer>
+        player2?: Nullable<WdaPublicPlayer>
     }
     level?: WdaPlayableLevel
-    currentMatch?: WdaMatch | null
+    currentMatch?: Nullable<WdaMatch>
     previousMatches?: WdaMatch[]
 }
 
@@ -187,7 +187,7 @@ export type GetWdaWordListResponse = {
 }
 
 // GET /word/anagrams
-export type GetWdaAnagramMapResponse = Record<string, string[]>
+export type GetWdaAnagramMapResponse = Dictionary<string[]>
 
 // GET /word/frequencies
-export type GetWdaFrequenciesResponse = Record<string, number>
+export type GetWdaFrequenciesResponse = Dictionary<number>

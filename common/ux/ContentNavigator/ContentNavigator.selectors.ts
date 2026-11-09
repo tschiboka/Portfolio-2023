@@ -1,5 +1,6 @@
 import { Arrays, Browser, hasLength } from '@common-utils'
 import type { RefObject } from 'react'
+import type { Nullable } from '@common-utils'
 import type { VisibilityEntry } from '@common-utils/Browser'
 
 /** How far down the page a heading counts as scrolled past, so it opens its section. */
@@ -16,7 +17,7 @@ const getVisibleHeaderEntries = (entries: VisibilityEntry<Element>[]) =>
         .filter(({ text }) => hasLength(text.trim()))
 
 const getHeadingNodes = (
-    contentRef: RefObject<HTMLDivElement | null>,
+    contentRef: RefObject<Nullable<HTMLDivElement>>,
     depth: number,
 ): Element[] => {
     if (!contentRef.current) return []

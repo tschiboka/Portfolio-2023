@@ -1,4 +1,5 @@
 import type { Mock } from 'vitest'
+import type { Nullable } from '@common-utils'
 
 export type MockCtx = {
     beginPath: Mock
@@ -16,7 +17,7 @@ export type MockCtx = {
 export type CanvasOverrides = {
     parentWidth?: number
     parentHeight?: number
-    ctx?: MockCtx | null
+    ctx?: Nullable<MockCtx>
     noParent?: boolean
     noGrandparent?: boolean
 }

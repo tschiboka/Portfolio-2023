@@ -1,18 +1,19 @@
 import { isEmpty } from '@common-utils'
 import { TableCheckboxSelectors } from './TableCheckbox.selectors'
 import type { ReactNode } from 'react'
+import type { Dictionary } from '@common-utils'
 import type { TableSelection } from '../Table.types'
 import './TableCheckbox.styles.css'
 
 const { getAllSelected, getSelectableIds } = TableCheckboxSelectors
 
-type TableCheckboxHeaderProps<TData extends Record<string, ReactNode>, TContext> = {
+type TableCheckboxHeaderProps<TData extends Dictionary<ReactNode>, TContext> = {
     data: TData[]
     selection: TableSelection<TData, TContext>
     context?: TContext
 }
 
-export const TableCheckboxHeader = <TData extends Record<string, ReactNode>, TContext>({
+export const TableCheckboxHeader = <TData extends Dictionary<ReactNode>, TContext>({
     data,
     selection,
     context,

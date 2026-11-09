@@ -1,5 +1,5 @@
 import type { WdaClientSessionState, WdaWsRequest, WdaWsResponse } from '@common-types'
-import type { Nullable } from '@common-utils'
+import type { Nullable, VoidFunction } from '@common-utils'
 
 // Re-export shared constants with local names
 export {
@@ -46,6 +46,6 @@ export type WebSocketContextType = {
     lastState?: WdaWsResponse
     readyState: number
     errorMessage: Nullable<string>
-    connect: () => void
+    connect: VoidFunction
     send: (msg: WdaWsRequest) => void
 }

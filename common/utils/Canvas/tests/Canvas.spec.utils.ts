@@ -1,4 +1,5 @@
 import type { RefObject } from 'react'
+import type { Nullable } from '@common-utils'
 import type { CanvasOverrides, MockCtx } from './Canvas.spec.types'
 
 const defaultParentWidth = 400
@@ -43,7 +44,7 @@ const createMockCanvas = (overrides: CanvasOverrides = {}) => {
     return { canvas, getContext, ctx }
 }
 
-const makeRef = (canvas: HTMLCanvasElement | null): RefObject<HTMLCanvasElement> =>
+const makeRef = (canvas: Nullable<HTMLCanvasElement>): RefObject<HTMLCanvasElement> =>
     ({ current: canvas }) as RefObject<HTMLCanvasElement>
 
 export const CanvasTestUtils = {

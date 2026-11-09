@@ -2,6 +2,7 @@ import { vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { ButtonTestUtils } from './Button.spec.utils'
 import { Button } from '../Button'
+import type { Dictionary } from '@common-utils'
 
 const { Set } = ButtonTestUtils
 
@@ -133,7 +134,7 @@ describe('Button', () => {
 
     describe('as custom component', () => {
         it('should render using a custom component', () => {
-            const CustomLink = (props: Record<string, unknown>) => (
+            const CustomLink = (props: Dictionary) => (
                 <a data-testid="custom" {...props} />
             )
             render(
@@ -147,7 +148,7 @@ describe('Button', () => {
         })
 
         it('should forward extra props to the custom component', () => {
-            const CustomLink = ({ to, ...rest }: { to: string } & Record<string, unknown>) => (
+            const CustomLink = ({ to, ...rest }: { to: string } & Dictionary) => (
                 <a href={to} {...rest} />
             )
             render(

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { VoidFunction } from '@common-utils'
 import type { AccessibleProps } from '../index.types'
 
 export type FigureSize = 'sm' | 'md' | 'lg' | 'full'
@@ -17,5 +18,5 @@ export type FigureProps = AccessibleProps & {
     size?: FigureSize
     sources?: FigureSource[]
     bgColor?: string
-    onZoom?: () => void
+    onZoom?: VoidFunction
 }

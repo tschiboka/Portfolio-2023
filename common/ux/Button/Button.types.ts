@@ -1,4 +1,5 @@
 import type { ComponentType, ReactNode } from 'react'
+import type { VoidFunction } from '@common-utils'
 import type { AccessibleProps } from '../index.types'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'tertiary'
@@ -15,7 +16,7 @@ export type AsButton = CommonProps & {
     as?: 'button'
     type?: ButtonType
     disabled?: boolean
-    onClick?: () => void
+    onClick?: VoidFunction
 }
 
 export type AsAnchor = CommonProps & {

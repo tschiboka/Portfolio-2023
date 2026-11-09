@@ -1,6 +1,7 @@
 import { describe, it, expect, expectTypeOf } from 'vitest'
 import { OptionTestUtils } from './Option.spec.utils'
 import { Option } from '..'
+import type { Nullish, Optional } from '@common-utils'
 import type { Option as OptionT } from '..'
 
 const { readonlyOptions, options } = OptionTestUtils
@@ -220,7 +221,7 @@ describe('Option.getLabelByValue', () => {
     })
 
     it('should distinguish null from undefined and strict types', () => {
-        const options: OptionT<null | undefined | string>[] = [
+        const options: OptionT<Nullish<string>>[] = [
             { value: null, label: 'null' },
             { value: undefined, label: 'undefined' },
         ]
@@ -280,7 +281,7 @@ describe('Option.getValueByLabel', () => {
     })
 
     it('should be ambiguous for undefined-valued matches: cannot distinguish no-match from undefined value', () => {
-        const options: OptionT<string | undefined>[] = [{ value: undefined, label: 'undef' }]
+        const options: OptionT<Optional<string>>[] = [{ value: undefined, label: 'undef' }]
         // both the no-match and the matched-undefined cases return undefined:
         expect(Option.getValueByLabel(options, 'undef')).toBeUndefined()
         expect(Option.getValueByLabel(options, 'missing')).toBeUndefined()
@@ -290,7 +291,7 @@ describe('Option.getValueByLabel', () => {
 describe('Option.getLabelByValue — type-level', () =>
     it('should return string | undefined', () => {
         const options: OptionT<string>[] = [{ value: 'a', label: 'A' }]
-        expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<string | undefined>()
+        expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<Optional<string>>()
     }))
 
 describe('Option.getValueByLabel — type-level', () =>
@@ -369,8 +370,8 @@ describe('Option — literal-union compile-time behaviour', () => {
             { value: 'a', label: 'A' },
             { value: 'b', label: 'B' },
         ] as const
-        expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<string | undefined>()
-        expectTypeOf(Option.getLabelByValue(options, 'b')).toEqualTypeOf<string | undefined>()
+        expectTypeOf(Option.getLabelByValue(options, 'a')).toEqualTypeOf<Optional<string>>()
+        expectTypeOf(Option.getLabelByValue(options, 'b')).toEqualTypeOf<Optional<string>>()
     })
 
     it('should accept getValueByLabel with any string label (label is always string)', () => {

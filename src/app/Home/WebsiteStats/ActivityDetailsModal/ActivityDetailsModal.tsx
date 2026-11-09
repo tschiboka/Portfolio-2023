@@ -1,6 +1,6 @@
 import { Overlay, Code, Stack, Text, CodeText, Box } from '@common-ux'
 import type { ReactNode } from 'react'
-import type { Optional } from '@common-utils'
+import type { Optional, VoidFunction } from '@common-utils'
 import type {
     BreakdownRow,
     ActivityMessageDetails,
@@ -9,7 +9,7 @@ import type {
 
 type ActivityDetailsModalProps = {
     row: BreakdownRow
-    onClose: () => void
+    onClose: VoidFunction
 }
 
 type FieldProps = {

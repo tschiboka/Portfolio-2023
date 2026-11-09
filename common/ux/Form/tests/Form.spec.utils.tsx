@@ -4,6 +4,7 @@ import { render } from '@testing-library/react'
 import { FormTestMocks } from './Form.spec.mocks'
 import { Form as FormExports } from '..'
 import type { Mock } from 'vitest'
+import type { VoidFunction } from '@common-utils'
 import type { FormValues } from './Form.spec.types'
 import type { SearchInputOption } from '..'
 
@@ -62,7 +63,7 @@ const TextAreaWrapper = (props: Partial<Parameters<typeof TextArea<FormValues>>[
     return <TextArea name="description" control={control} ariaLabel="Description" {...props} />
 }
 
-const RadioButtonWrapper = ({ onChange = vi.fn() }: { onChange?: () => void }) => {
+const RadioButtonWrapper = ({ onChange = vi.fn() }: { onChange?: VoidFunction }) => {
     const { control } = useForm<FormValues>({ defaultValues: { toggle: false } })
     return (
         <div>
@@ -232,7 +233,7 @@ const Set = {
     }) => renderInForm(<PasswordWrapper {...props} />),
     textArea: (props?: Partial<Parameters<typeof TextArea<FormValues>>[0]>) =>
         renderInForm(<TextAreaWrapper {...props} />),
-    radioButton: (props?: { onChange?: () => void }) =>
+    radioButton: (props?: { onChange?: VoidFunction }) =>
         renderInForm(<RadioButtonWrapper {...props} />),
     checkbox: (
         props?: Partial<Parameters<typeof Checkbox<FormValues>>[0]> & {

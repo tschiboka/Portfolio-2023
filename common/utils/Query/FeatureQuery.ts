@@ -11,6 +11,7 @@ import type {
 } from './FeatureQuery.types'
 import type { CacheKey } from './QueryKey'
 import type { ErrorResponse } from './MergeStatus.types'
+import type { Dictionary, Optional } from '../Generics'
 import type { PathKey, ServerGroup } from '../Paths/Path.types'
 
 /**
@@ -23,11 +24,11 @@ import type { PathKey, ServerGroup } from '../Paths/Path.types'
  * const { mutate } = useMutation(categories.Post({ onSuccess }))
  */
 export const FeatureQuery = () => {
-    let path: PathKey | undefined
+    let path: Optional<PathKey>
     let group: ServerGroup = 'Api'
-    let subpath: string | undefined
-    let token: string | undefined
-    let query: Record<string, unknown> = {}
+    let subpath: Optional<string>
+    let token: Optional<string>
+    let query: Dictionary = {}
 
     const buildRequest = () =>
         new RequestBuilder(path!, group)
@@ -67,7 +68,7 @@ export const FeatureQuery = () => {
          * Sets the query-string parameters the request is sent with.
          * These are not the cache key — pass filters to `Get`'s key as well.
          */
-        query(value: Record<string, unknown>) {
+        query(value: Dictionary) {
             query = value
             return featureQuery
         },

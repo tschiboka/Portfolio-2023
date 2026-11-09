@@ -30,6 +30,7 @@
 // See .github/skills/types/SKILL.md — the feature-type file shape, the worked
 // example, and the app-side statement of this same convention.
 
+import type { Dictionary, Nullable } from '@common-utils/Generics'
 import type { PaginatedResponse } from './index'
 
 export type Capability = 'admin'
@@ -138,7 +139,7 @@ export type DeleteLogResponse = {
 }
 
 // LIKE TYPES
-export type LikeSummary = Record<string, number>
+export type LikeSummary = Dictionary<number>
 
 // GET /api/like query params (path optional — no path returns summary)
 export type GetLikeQuery = {
@@ -199,7 +200,7 @@ export type ActivityType = 'visit' | 'like' | 'message' | 'error'
 export type ActivityMessageDetails = {
     name: string
     email: string
-    phone: string | null
+    phone: Nullable<string>
     message: string
     isRead: boolean
 }
@@ -279,7 +280,7 @@ export type GetVersionResponse = {
 }
 
 // VISIT TYPES
-export type VisitSummary = Record<string, number>
+export type VisitSummary = Dictionary<number>
 
 // GET /api/visit query params (path optional — no path returns summary)
 export type GetVisitQuery = {

@@ -1,7 +1,7 @@
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
 import { ProjectsSelectors } from '../Projects.selectors'
 import { ProjectsDefaults } from '../Projects.defaults'
-import type { Dictionary } from '@common-utils'
+import type { Dictionary, VoidFunction } from '@common-utils'
 import type { Technology } from '../Projects.types'
 import './ProjectFilter.scss'
 
@@ -12,7 +12,7 @@ interface Props {
     selectedFilter: string
     onToggle: (language: string) => void
     onFilter: (by: string) => void
-    onClear: () => void
+    onClear: VoidFunction
 }
 
 export const ProjectFilter = ({

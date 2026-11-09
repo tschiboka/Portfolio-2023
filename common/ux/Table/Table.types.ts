@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 import { PageMeta } from '@common-types'
-import type { Optional, Predicate } from '@common-utils'
+import type { Dictionary, Optional, Predicate, ValueOf, VoidFunction } from '@common-utils'
 import type { TableControl } from './Table.hooks.types'
 import type { DropdownOption } from './TableInputs'
 import type { AccessibleProps } from '../index.types'
 
 export type TableBreakpoint = '2xs' | 'xs' | 'sm' | 'mx' | 'md' | 'lg' | 'xl' | '2xl' | 'accordion'
-export type CellValue<TData extends Record<string, ReactNode>> = TData[keyof TData]
-export type CellMeta<TData extends Record<string, ReactNode>, TContext = unknown> = {
+export type CellValue<TData extends Dictionary<ReactNode>> = ValueOf<TData>
+export type CellMeta<TData extends Dictionary<ReactNode>, TContext = unknown> = {
     cell: CellValue<TData>
     index: number
     row: TData
@@ -18,7 +18,7 @@ export type CellMeta<TData extends Record<string, ReactNode>, TContext = unknown
 type Variant = 'primary' | 'secondary' | 'danger'
 
 export type CellVariant = Variant | 'disabled'
-export type TableColumn<TData extends Record<string, ReactNode>, TContext = unknown> = {
+export type TableColumn<TData extends Dictionary<ReactNode>, TContext = unknown> = {
     header: string
     accessor: keyof TData
     cell?: (cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => ReactNode
@@ -32,14 +32,14 @@ export type TableColumn<TData extends Record<string, ReactNode>, TContext = unkn
         | CellVariant
         | ((cell: CellValue<TData>, meta: CellMeta<TData, TContext>) => Optional<CellVariant>)
 }
-export type TableColumns<TData extends Record<string, ReactNode>, TContext = unknown> = TableColumn<
+export type TableColumns<TData extends Dictionary<ReactNode>, TContext = unknown> = TableColumn<
     TData,
     TContext
 >[]
 
 type TableActionVariant = Variant
 
-export type TableAction<TData extends Record<string, ReactNode>, TContext = unknown> = {
+export type TableAction<TData extends Dictionary<ReactNode>, TContext = unknown> = {
     id: string
     label: string
     icon?: ReactNode
@@ -52,7 +52,7 @@ export type TableAction<TData extends Record<string, ReactNode>, TContext = unkn
 
 export type TableSelectionMode = 'single' | 'multiple'
 
-export type TableSelection<TData extends Record<string, ReactNode>, TContext = unknown> = {
+export type TableSelection<TData extends Dictionary<ReactNode>, TContext = unknown> = {
     mode?: TableSelectionMode
     getRowId: (row: TData) => string
     selectedRowIds: string[]
@@ -62,13 +62,13 @@ export type TableSelection<TData extends Record<string, ReactNode>, TContext = u
 
 export type SortDirection = 'asc' | 'desc'
 
-export type TableSorting<TData extends Record<string, ReactNode>> = {
+export type TableSorting<TData extends Dictionary<ReactNode>> = {
     column: keyof TData
     direction: SortDirection
     onSortChange: (column: keyof TData, direction: SortDirection) => void
 }
 
-export type TableDownload<TData extends Record<string, ReactNode>> =
+export type TableDownload<TData extends Dictionary<ReactNode>> =
     | { onDownload: (data: TData[]) => void; label?: string }
     | {
           options: DropdownOption[]
@@ -126,8 +126,8 @@ export type TableFilteringInput =
 
 export type TableFiltering = {
     inputs: TableFilteringInput[]
-    values?: Record<string, unknown>
-    onFilter: (values: Record<string, unknown>) => void
+    values?: Dictionary
+    onFilter: (values: Dictionary) => void
 }
 
 export type TablePagination = {
@@ -141,7 +141,7 @@ export type TablePagination = {
 }
 
 export interface Table<
-    TData extends Record<string, ReactNode>,
+    TData extends Dictionary<ReactNode>,
     TContext = unknown,
 > extends AccessibleProps {
     id?: string
@@ -156,7 +156,7 @@ export interface Table<
     selection?: TableSelection<TData, TContext>
     download?: TableDownload<TData>
     rowVariant?: (meta: CellMeta<TData, TContext>) => Optional<CellVariant>
-    onRefresh?: () => void
+    onRefresh?: VoidFunction
     enableColumnResize?: boolean
     enableColumnReorder?: boolean
     onColumnResize?: (columnIndex: number, width: number) => void

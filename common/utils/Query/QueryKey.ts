@@ -20,7 +20,7 @@ export class CacheKeyBuilder {
         })
     }
 
-    byFilters(filters: Record<string, unknown>): CacheKeyBuilder {
+    byFilters(filters: Dictionary): CacheKeyBuilder {
         return Object.assign(new CacheKeyBuilder(this.state.key), {
             state: { ...this.state, filters },
         })
@@ -97,7 +97,7 @@ type CacheKeyState = {
     key: string
     feature?: string
     id?: string | number
-    filters?: Record<string, unknown>
+    filters?: Dictionary
 }
 
 export type CacheKey = Array<string | number | Dictionary>

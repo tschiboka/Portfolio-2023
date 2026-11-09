@@ -2,6 +2,7 @@ import { ReactNode } from 'react'
 import { render } from '@testing-library/react'
 import { Accessor } from '../Accessor/Accessor'
 import { Table as TableComponent } from '../../Table'
+import type { Dictionary } from '@common-utils'
 import type { Table as TableProps } from '../../Table/Table.types'
 
 class TableAccessor extends Accessor {
@@ -107,8 +108,8 @@ export const Table = Object.assign(
     },
     {
         Set: {
-            mock: <TData extends Record<string, ReactNode>, TContext = unknown>(
-                props: Partial<TableProps<TData, TContext>> & Record<string, unknown>,
+            mock: <TData extends Dictionary<ReactNode>, TContext = unknown>(
+                props: Partial<TableProps<TData, TContext>> & Dictionary,
             ) =>
                 render(
                     <TableComponent<TData, TContext> {...(props as TableProps<TData, TContext>)} />,

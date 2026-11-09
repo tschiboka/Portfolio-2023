@@ -1,11 +1,11 @@
 import { SessionOverlayConfig, SessionOverlayModes } from './SessionOverlay.types'
 import { SessionWebSocketHooks } from '../SessionWebSocket.hooks'
-import type { Nullable } from '@common-utils'
+import type { Nullable, VoidFunction } from '@common-utils'
 
 type UseConfigProps = {
     mode: SessionOverlayModes
     message: Nullable<string>
-    enterFullScreen: () => void
+    enterFullScreen: VoidFunction
 }
 
 const useConfig = ({ mode, message, enterFullScreen }: UseConfigProps) => {

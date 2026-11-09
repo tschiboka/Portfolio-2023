@@ -1,10 +1,11 @@
 import { ReactNode, useEffect } from 'react'
+import type { VoidFunction } from '@common-utils'
 import './ZoomedImage.scss'
 
 interface Props {
     children: ReactNode
-    handleClick: () => void
-    handleEscKeyPress: () => void
+    handleClick: VoidFunction
+    handleEscKeyPress: VoidFunction
     bgColor?: string
 }
 

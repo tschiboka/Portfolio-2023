@@ -2,10 +2,11 @@ import { ReactNode } from 'react'
 import { TableColumns } from '../Table.types'
 import { TableUtils } from '../Table.utils'
 import { Stack } from '../../Layout'
+import type { Dictionary } from '@common-utils'
 
 const { getCellContent } = TableUtils
 
-type ExpandedRowProps<TData extends Record<string, ReactNode>, TContext> = {
+type ExpandedRowProps<TData extends Dictionary<ReactNode>, TContext> = {
     row: TData
     index: number
     data: TData[]
@@ -15,7 +16,7 @@ type ExpandedRowProps<TData extends Record<string, ReactNode>, TContext> = {
     hasSelection: boolean
 }
 
-export const ExpandedRow = <TData extends Record<string, ReactNode>, TContext>({
+export const ExpandedRow = <TData extends Dictionary<ReactNode>, TContext>({
     row,
     index,
     data,

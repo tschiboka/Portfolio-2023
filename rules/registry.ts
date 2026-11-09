@@ -27,6 +27,7 @@ import { registrar as noLoopStatementRegistrar } from './no-loop-statement/NoLoo
 import { registrar as todoTicketRefRegistrar } from './todo-ticket-ref/TodoTicketRef.registrar.js'
 import { registrar as roleFilePascalRegistrar } from './role-file-pascal/RoleFilePascal.registrar.js'
 import { registrar as predicateCaseRegistrar } from './predicate-case/PredicateCase.registrar.js'
+import { registrar as aliasShapeRegistrar } from './alias-shape/AliasShape.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -60,4 +61,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     todoTicketRefRegistrar,
     roleFilePascalRegistrar,
     predicateCaseRegistrar,
+    aliasShapeRegistrar,
 ].map(withPrefixedReports)

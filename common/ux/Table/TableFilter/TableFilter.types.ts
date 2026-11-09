@@ -1,4 +1,4 @@
-import type { UrlDecode, UrlEncode } from '@common-utils'
+import type { UrlDecode, UrlEncode, VoidFunction } from '@common-utils'
 import type { DropdownOption } from '../TableInputs'
 
 type BaseFilterConfig = {
@@ -61,6 +61,6 @@ export type FilterDefinitions<TFilters> = {
 }
 
 export type TableFilterPanelHandle = {
-    submit: () => void
-    reset: () => void
+    submit: VoidFunction
+    reset: VoidFunction
 }
