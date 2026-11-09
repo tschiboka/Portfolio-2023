@@ -1,3 +1,4 @@
+import { isDefined } from '@common-utils'
 import { Pill, Inline } from '@common-ux'
 import type { PillColor } from '@common-ux'
 import type { ActivityType, ActivityFeedContext } from '@common-types'
@@ -29,7 +30,7 @@ export const ActivityTypeLegend = ({ summary }: LegendProps) => (
     <Inline gap="12" wrap className="ActivityTypeLegend">
         {(Object.entries(TYPE_COLORS) as [ActivityType, PillColor][]).map(([type, color]) => {
             const count = summary ? summary[SUMMARY_KEY[type]] : undefined
-            const label = count !== undefined ? `${type} (${count})` : type
+            const label = isDefined(count) ? `${type} (${count})` : type
             return <Pill key={type} label={label} color={color} variant="outlined" />
         })}
     </Inline>

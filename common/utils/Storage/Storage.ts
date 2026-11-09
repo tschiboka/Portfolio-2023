@@ -1,3 +1,4 @@
+import { isNull } from '@common-utils'
 import type { Nullable } from '../Generics'
 /**
  * Safe wrapper around localStorage with JSON serialisation.
@@ -8,7 +9,7 @@ import type { Nullable } from '../Generics'
 const get = <T = unknown>(key: string): Nullable<T> => {
     try {
         const raw = localStorage.getItem(key)
-        if (raw === null) return null
+        if (isNull(raw)) return null
         return JSON.parse(raw) as T
     } catch (e) {
         console.error(`Storage.get("${key}") failed:`, e)

@@ -23,7 +23,7 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-11-05  |
+| Last updated | 2026-11-09  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
@@ -401,7 +401,7 @@ config owns is linted.
     - [x] Step 20.10: Sweep the remaining loophole or suppress each, with the reason recorded —
           `shuffleArray` alone, a reverse index pair whose partner depends on the previous swap
     - [x] Step 20.11: Confirm a green `tsc`, lint, and test run
-- [ ] Step 21: Rule — a `TODO` carries a ticket reference
+- [x] Step 21: Rule — a `TODO` carries a ticket reference
     - [x] Step 21.1: Build `rules/todo-ticket-ref/` — constants, utils, rules, registrar and spec
     - [x] Step 21.2: Flag a `TODO` whose reference does not open it — absent, or written after the
           note instead of before it
@@ -581,20 +581,23 @@ config owns is linted.
           `public/projects/riffmaster/test/chords.test.js`, a shipped demo asset outside
           `src`, `common` and `server`, so it is out of scope rather than fixed
     - [x] Step 31.7: Confirm a green `tsc`, lint, and test run
-- [ ] Step 32: Rule — an exact predicate case calls `Predicate`
-    - [ ] Step 32.1: Build `rules/predicate-case/`
-    - [ ] Step 32.2: Flag only the three shapes a shared predicate already names —
-          `.length > 0` and `.length >= 1` → `isNonEmpty`, `.length === 0` and
-          `.length < 1` → `isEmpty`
-    - [ ] Step 32.3: Leave every other comparison alone — `length > 3` is a bound, not a
+- [x] Step 32: Rule — an exact predicate case calls `Predicate`
+    - [x] Step 32.1: Build `rules/predicate-case/` — constants, types, utils, rules, registrar, spec
+    - [x] Step 32.2: Flag only the three shapes a shared predicate already names —
+          `.length > 0` and `.length >= 1` → `isNonEmpty`, `.length === 0` and `.length < 1` →
+          `isEmpty` — and, because they are the same kind of restatement, `typeof x === 'number' |
+          'string' | 'boolean' | 'function'` → `isNumber`/`isString`/`isBoolean`/`isFunction`, and
+          `x === null` / `=== undefined` / `== null` → `isNull`/`isUndefined`/`isNullish`
+    - [x] Step 32.3: Leave every other comparison alone — `length > 3` is a bound, not a
           predicate, and guessing its meaning is how a rule teaches the wrong name
-    - [ ] Step 32.4: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 32.5: Register as `severity: 'error'`
-    - [ ] Step 32.6: Add `tests/PredicateCase.spec.ts` — the four shapes reported, a
-          non-zero bound and a length read outside a comparison both left alone
-    - [ ] Step 32.7: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 32.8: Sweep every site — `ClientMessage.spec.ts` holds `message.length > 0`
-    - [ ] Step 32.9: Confirm a green `tsc`, lint, and test run
+    - [x] Step 32.4: Scope `include` to `src/**`, `common/**`, `server/**`, excluding the
+          `Predicate` folder, which is where those guards are written
+    - [x] Step 32.5: Register as `severity: 'error'`
+    - [x] Step 32.6: Add `tests/PredicateCase.spec.ts` — the three families reported, a bound, a
+          bare length read, a `typeof null`-style case and a name-to-name comparison left alone
+    - [x] Step 32.7: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 32.8: Sweep every site — `ClientMessage.spec.ts` holds `message.length > 0`
+    - [x] Step 32.9: Confirm a green `tsc`, lint, and test run
 - [ ] Step 33: Rule — a nullable union names its generic
     - [ ] Step 33.1: Build `rules/nullable-union/`
     - [ ] Step 33.2: Flag the three shapes a generic already names — `T | null` →

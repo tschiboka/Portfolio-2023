@@ -1,4 +1,5 @@
 import { toUpper } from 'ramda'
+import { isNull } from '@common-utils'
 import { Code, CodeText, Heading, Paragraph, Section, Table } from '@common-ux'
 import { TablesMocks } from '../Tables.mocks'
 import { TablesConfig } from '../Tables.config'
@@ -88,7 +89,7 @@ export const CellRenderingDefaults = () => (
                         header: 'cell renderer',
                         accessor: 'withRenderer',
                         cell: (v) => (
-                            <em>{v === null ? '(null received)' : String(v) || '(empty)'}</em>
+                            <em>{isNull(v) ? '(null received)' : String(v) || '(empty)'}</em>
                         ),
                     },
                 ]}

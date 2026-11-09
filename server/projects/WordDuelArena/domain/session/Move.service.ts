@@ -1,4 +1,5 @@
-﻿import { PointsService } from './Points.service'
+﻿import { isDefined } from '@common-utils'
+import { PointsService } from './Points.service'
 import { HintService } from './Hint.service'
 import { GameConstants } from '../../config/constants/Game.constants'
 import type { Optional } from '@common-utils'
@@ -74,7 +75,7 @@ function getSolutionState(draft: SessionState, deviceId: string, payload: MovePa
         const isHintDue = HintService.GetIsHintDue(draft, payload)
         if (isHintDue) {
             const hintIndex = HintService.GetRandomUnsolvedWordIndex(draft)
-            if (hintIndex !== undefined) {
+            if (isDefined(hintIndex)) {
                 const targetWord = draft.level.targetWords[hintIndex]
                 const nextIndex = targetWord.hintIndices.length // 0, 1, 2, ...
                 if (nextIndex < targetWord.word.length) targetWord.hintIndices.push(nextIndex)

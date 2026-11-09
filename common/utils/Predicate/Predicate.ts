@@ -214,7 +214,7 @@ export const isPrimitive = (value: unknown): value is Nullish<Primitive> =>
  * @param value - The value to check.
  * @returns `true` if the value is a function.
  */
-export const isFunction = (value: unknown): value is (...args: unknown[]) => unknown =>
+export const isFunction = (value: unknown): value is (...args: never[]) => unknown =>
     typeof value === 'function'
 
 /**

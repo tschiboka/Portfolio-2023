@@ -1,3 +1,4 @@
+import { isDefined } from '@common-utils'
 import { RequestBuilder } from './RequestBuilder'
 import { extractAxiosData } from './extractAxiosData'
 import type { AxiosError } from 'axios'
@@ -71,7 +72,7 @@ export const FeatureQuery = () => {
             return featureQuery
         },
         build(): FeatureQueryBuilt {
-            if (path === undefined) throw new Error('FeatureQuery: path is required')
+            if (!isDefined(path)) throw new Error('FeatureQuery: path is required')
 
             const Get = <TResponse>(
                 queryKey: CacheKey,

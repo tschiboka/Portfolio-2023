@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { hasLength, isDefined } from '@common-utils'
+import { hasLength, isDefined, isFunction } from '@common-utils'
 import { ExpandedRow } from './ExpandedRow'
 import {
     CellMeta,
@@ -73,10 +73,9 @@ export const TableRow = <TData extends Record<string, ReactNode>, TContext>({
             {selection && <TableCheckboxCell row={row} meta={meta} selection={selection} />}
             {columns.map((col, colIndex) => {
                 const cellMeta = { cell: row[col.accessor], index, row, data, context }
-                const variant =
-                    typeof col.variant === 'function'
-                        ? col.variant(row[col.accessor], cellMeta)
-                        : (col.variant ?? rowVariant?.(cellMeta))
+                const variant = isFunction(col.variant)
+                    ? col.variant(row[col.accessor], cellMeta)
+                    : (col.variant ?? rowVariant?.(cellMeta))
                 const classes = [col.breakpoint, variant ? `variant-${variant}` : '']
                     .filter(Boolean)
                     .join(' ')

@@ -1,3 +1,4 @@
+import { isDefined } from '@common-utils'
 import { EditorWord, CharStatus } from './Character/Character.types'
 import { TypistUtils } from '../Typist.utils'
 import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
@@ -13,7 +14,7 @@ const updateCharStatus = (
         ...word,
         chars: word.chars.map((ch) => {
             if (ch.index === charIndex) return { ...ch, status }
-            if (nextPendingIndex !== undefined && ch.index === nextPendingIndex)
+            if (isDefined(nextPendingIndex) && ch.index === nextPendingIndex)
                 return { ...ch, status: 'pending' as const }
             if (ch.status === 'pending') return { ...ch, status: undefined }
             return ch

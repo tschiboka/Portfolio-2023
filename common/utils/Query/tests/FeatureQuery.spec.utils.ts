@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { isFunction } from '@common-utils'
 import type { AxiosRequestConfig } from 'axios'
 import type { MockInstance } from 'vitest'
 import type { FeatureQueryBuilt } from '../FeatureQuery.types'
@@ -25,7 +26,7 @@ const callConfig = (verb: 'get' | 'post' | 'put' | 'patch' | 'delete', index = 0
 /** Runs the query function of a built `Get` and returns the promise. */
 const runGet = (query: FeatureQueryBuilt) => {
     const { queryFn } = query.Get<string>(TEST_QUERY_KEY)
-    if (typeof queryFn !== 'function') throw new Error('FeatureQuery: Get has no queryFn')
+    if (!isFunction(queryFn)) throw new Error('FeatureQuery: Get has no queryFn')
 
     return queryFn({} as never)
 }
@@ -33,7 +34,7 @@ const runGet = (query: FeatureQueryBuilt) => {
 /** Runs the mutation function of a built verb and returns the promise. */
 const runMutation = <TPayload>(options: { mutationFn?: unknown }, payload: TPayload) => {
     const { mutationFn } = options
-    if (typeof mutationFn !== 'function') throw new Error('FeatureQuery: verb has no mutationFn')
+    if (!isFunction(mutationFn)) throw new Error('FeatureQuery: verb has no mutationFn')
 
     return (mutationFn as (variables: TPayload) => Promise<unknown>)(payload)
 }

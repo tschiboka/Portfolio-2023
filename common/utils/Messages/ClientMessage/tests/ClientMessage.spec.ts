@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { isNonEmpty } from '@common-utils'
+import { isFunction, isNonEmpty } from '@common-utils'
 import { ClientMessageTestUtils } from './ClientMessage.spec.utils'
 import { ClientMessage } from '..'
 
@@ -138,7 +138,7 @@ describe('ClientMessage shape', () => {
 
     it.each(groups)('should expose only functions in %s', (group) => {
         const members = Object.values(ClientMessage[group])
-        expect(members.every((member) => typeof member === 'function')).toBe(true)
+        expect(members.every((member) => isFunction(member))).toBe(true)
     })
 
     it('should never return an empty string', () => {

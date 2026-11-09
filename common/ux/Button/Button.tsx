@@ -25,6 +25,7 @@ export const Button = (props: ButtonProps) => {
             </a>
         )
 
+    // eslint-disable-next-line standards/predicate-case -- the typeof pair narrows props.as to ComponentType, which no predicate reproduces
     if (typeof props.as === 'function' || typeof props.as === 'object') {
         const Component = props.as
         const rest: Dictionary = Object.fromEntries(

@@ -1,5 +1,5 @@
 import { isValidElement } from 'react'
-import { isNonEmpty } from '@common-utils'
+import { isBoolean, isNonEmpty, isNullish, isNumber, isString } from '@common-utils'
 import type { FC, ReactElement, ReactNode } from 'react'
 
 const FRAGMENT_TYPE = Symbol.for('react.fragment')
@@ -12,13 +12,7 @@ const createSlot = <P extends object>(displayName: string, Component: FC<P>) => 
 
 /** Recursively flatten children, unwrapping fragments and arrays. */
 const flattenChildren = (node: ReactNode): ReactNode[] => {
-    if (
-        node == null ||
-        typeof node === 'string' ||
-        typeof node === 'number' ||
-        typeof node === 'boolean'
-    )
-        return [node]
+    if (isNullish(node) || isString(node) || isNumber(node) || isBoolean(node)) return [node]
 
     if (Array.isArray(node)) return node.flatMap(flattenChildren)
 

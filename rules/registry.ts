@@ -26,6 +26,7 @@ import { registrar as noInlineValidationLiteralRegistrar } from './no-inline-val
 import { registrar as noLoopStatementRegistrar } from './no-loop-statement/NoLoopStatement.registrar.js'
 import { registrar as todoTicketRefRegistrar } from './todo-ticket-ref/TodoTicketRef.registrar.js'
 import { registrar as roleFilePascalRegistrar } from './role-file-pascal/RoleFilePascal.registrar.js'
+import { registrar as predicateCaseRegistrar } from './predicate-case/PredicateCase.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -58,4 +59,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noLoopStatementRegistrar,
     todoTicketRefRegistrar,
     roleFilePascalRegistrar,
+    predicateCaseRegistrar,
 ].map(withPrefixedReports)

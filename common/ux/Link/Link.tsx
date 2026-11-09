@@ -8,6 +8,7 @@ export const Link = (props: LinkProps) => {
     const { children, className, style, ariaLabel, title, onClick } = props
     const cls = `link${className ? ` ${className}` : ''}`
 
+    // eslint-disable-next-line standards/predicate-case -- the comparison narrows props to LinkAsRoute, which props.target and props.rel rely on
     if ('to' in props && props.to !== undefined) {
         const target = props.target ?? (isExternal(props.to) ? '_blank' : undefined)
         const rel = props.rel ?? (isExternal(props.to) ? 'noopener noreferrer' : undefined)

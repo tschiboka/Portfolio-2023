@@ -1,3 +1,4 @@
+import { isString } from '@common-utils/Predicate'
 import { Accessor, TestError } from '../Accessor/Accessor'
 
 export class SearchAccessor extends Accessor {
@@ -18,7 +19,7 @@ export class SearchAccessor extends Accessor {
             option: (name: string | RegExp): HTMLElement => {
                 const option = Array.from(this.wrapper.querySelectorAll('.option')).find((el) => {
                     const text = (el as HTMLElement).textContent?.trim() ?? ''
-                    return typeof name === 'string' ? text === name : name.test(text)
+                    return isString(name) ? text === name : name.test(text)
                 })
                 if (!option) throw TestError.notFound(this.context, `option '${String(name)}'`)
                 return option as HTMLElement

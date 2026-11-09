@@ -1,3 +1,4 @@
+import { isNull } from '@common-utils'
 import { AccessGuardMocks } from './AccessGuard.mocks'
 import { AccessGuardTestUtils } from './AccessGuard.spec.utils'
 import { AccessGuardUtils } from '../AccessGuard.utils'
@@ -394,7 +395,7 @@ describe('resolveGuards', () => {
             },
         ])('should resolve $name', ({ guard, access, expected }) => {
             const result = resolveGuards([guard], access)
-            if (expected === null) expect(result).toBeNull()
+            if (isNull(expected)) expect(result).toBeNull()
             else expect(result).toEqual(expected)
         }))
 

@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { screen, within, waitFor } from '@testing-library/react'
-import { isDefined } from '@common-utils'
+import { isDefined, isFunction } from '@common-utils'
 import type { BoundFunctions, queries } from '@testing-library/react'
 import type { UserEvent } from '@testing-library/user-event'
 import type { Dictionary, Nullish } from '@common-utils'
@@ -83,7 +83,7 @@ export class Accessor {
             {},
             {
                 get: (_, prop: string) => {
-                    if (typeof get[prop] !== 'function') return undefined
+                    if (!isFunction(get[prop])) return undefined
                     return (...args: unknown[]) => {
                         try {
                             return isDefined(get[prop](...args))
@@ -106,7 +106,7 @@ export class Accessor {
             {},
             {
                 get: (_, prop: string) => {
-                    if (typeof get[prop] !== 'function') return undefined
+                    if (!isFunction(get[prop])) return undefined
                     return (...args: unknown[]) => waitFor(() => get[prop](...args))
                 },
             },

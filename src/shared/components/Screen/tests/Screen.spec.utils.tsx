@@ -17,7 +17,7 @@ const resolvePath = (path: string | AppRoute) => (isString(path) ? path : path.p
 
 const resolveElement = (options: ScreenSetupOptions) => {
     if (options.children) return options.children
-    if (typeof options.path !== 'string') return options.path.element
+    if (!isString(options.path)) return options.path.element
     return createElement(Fragment)
 }
 
