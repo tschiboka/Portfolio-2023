@@ -4,11 +4,11 @@ import { LikeQueries, VisitQueries } from '@shared-queries'
 import { BlogCard } from '../BlogCard/BlogCard'
 import './SuggestedArticles.scss'
 
-interface Props {
+type SuggestedArticlesProps = {
     articles?: string[]
 }
 
-export const SuggestedArticles = ({ articles }: Props) => {
+export const SuggestedArticles = ({ articles }: SuggestedArticlesProps) => {
     const { data: visitsData } = VisitQueries.Summary.useGet()
     const { data: likesData } = LikeQueries.Summary.useGet()
     const visits = visitsData?.visits ?? null

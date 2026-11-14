@@ -9,12 +9,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-interface Props {
+type HookPatternProps = {
     pageName: string
     path: string
 }
 
-export const HookPattern = ({ pageName, path }: Props) => {
+export const HookPattern = ({ pageName, path }: HookPatternProps) => {
     const references = getReferenceList(path)
     const [value, setValue] = useState<boolean>()
 

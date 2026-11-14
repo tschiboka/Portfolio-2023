@@ -7,12 +7,6 @@ import { BreakdownPreviewTransformers } from '../BreakdownPreview.transformers'
 import type { JSX } from 'react'
 import type { SectionData } from '../BreakdownPreview.types'
 
-type DataSectionProps = {
-    title: string
-    data: SectionData
-    icon: JSX.Element
-}
-
 const StatCard = ({ label, value }: Option<number>) => (
     <div style={BreakdownPreviewStyles.stat.card}>
         <div style={BreakdownPreviewStyles.stat.label}>{label}</div>
@@ -21,6 +15,12 @@ const StatCard = ({ label, value }: Option<number>) => (
         </div>
     </div>
 )
+
+type DataSectionProps = {
+    title: string
+    data: SectionData
+    icon: JSX.Element
+}
 
 export const DataSection = ({ title, data, icon }: DataSectionProps) => (
     <>

@@ -1,6 +1,6 @@
 import { BrowserHooks } from '@common-utils'
 import { Test } from '@common-ux/Test'
-import type { ContentNavigatorProps } from '../ContentNavigator.types'
+import type { Overrides } from './ContentNavigator.spec.types'
 
 const observe = vi.fn()
 const unobserve = vi.fn()
@@ -17,8 +17,6 @@ vi.stubGlobal(
 )
 
 Element.prototype.scrollIntoView = scrollIntoView
-
-type Overrides = Omit<ContentNavigatorProps, 'children'>
 
 const Set = {
     navigator: (overrides: Overrides = {}) =>

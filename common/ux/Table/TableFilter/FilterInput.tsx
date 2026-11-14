@@ -9,14 +9,14 @@ import {
 } from '../TableInputs'
 import type { TableFilteringInput } from '../Table.types'
 
+const asInputValue = (value: unknown): string =>
+    isString(value) || isNumber(value) ? String(value) : ''
+
 type FilterInputProps = {
     input: TableFilteringInput
     value: unknown
     onChange: (key: string, value: unknown) => void
 }
-
-const asInputValue = (value: unknown): string =>
-    isString(value) || isNumber(value) ? String(value) : ''
 
 export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
     const id = `filter-${input.key}`

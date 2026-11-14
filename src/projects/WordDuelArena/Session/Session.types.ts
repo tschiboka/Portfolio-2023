@@ -28,6 +28,8 @@ export type {
     WdaWsResponse as WebSocketResponse,
 } from '@common-types'
 
+export type SessionDefault = { state: WdaClientSessionState }
+
 // --- FE-only types ---
 
 export type SessionContextType = {

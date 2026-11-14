@@ -47,12 +47,12 @@ import { getReferenceList } from '../References.data'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import './RiffMaster.scss'
 
-interface Props {
+type RiffMasterProps = {
     pageName: string
     path: string
 }
 
-export const RiffMaster = ({ pageName, path }: Props) => {
+export const RiffMaster = ({ pageName, path }: RiffMasterProps) => {
     const references = getReferenceList(path)
     return (
         <Article path={path} pageName={pageName} title="Guitar Console">

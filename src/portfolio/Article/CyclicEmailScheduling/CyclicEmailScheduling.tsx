@@ -11,12 +11,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-type Props = {
+type CyclicEmailSchedulingProps = {
     pageName: string
     path: string
 }
 
-export const CyclicEmailScheduling = ({ pageName, path }: Props) => {
+export const CyclicEmailScheduling = ({ pageName, path }: CyclicEmailSchedulingProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="Cyclic Email Scheduling">

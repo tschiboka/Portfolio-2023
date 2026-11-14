@@ -2,7 +2,7 @@ import { Button, Heading, Main, Section, Stack } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import './Remote.styles.scss'
 
-interface RemoteProps {
+type RemoteProps = {
     path: string
 }
 

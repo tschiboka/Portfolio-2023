@@ -7,15 +7,7 @@ import {
 import { isTodo, isWellFormed, refOf, resolves } from './TodoTicketRef.utils.js'
 import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
-
-type CommentLike = {
-    value: string
-    loc?: Nullable<{
-        start: { line: number; column: number }
-        end: { line: number; column: number }
-    }>
-}
+import type { CommentLike } from './TodoTicketRef.types.js'
 
 const Eslint = {
     TodoTicketRef9: {

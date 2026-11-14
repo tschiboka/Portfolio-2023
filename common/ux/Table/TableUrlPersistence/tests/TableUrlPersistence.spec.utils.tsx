@@ -4,23 +4,13 @@ import { renderHook } from '@testing-library/react'
 import { TableUrlPersistenceMocks } from './TableUrlPersistence.mocks'
 import { TableUrlPersistenceHooks } from '../TableUrlPersistence.hooks'
 import type { ReactNode } from 'react'
-import type { Filters } from './TableUrlPersistence.spec.types'
-import type { UseTableUrlPersistenceArgs } from '../TableUrlPersistence.types'
-import type { TableSortState, Paging, TableState } from '../../Table.hooks.types'
-import type { FilterDefinitions } from '../../TableFilter'
+import type { Filters, SetupOptions } from './TableUrlPersistence.spec.types'
+import type { TableState } from '../../Table.hooks.types'
 
 const { filterDefs, defaultSort, defaultPaging } = TableUrlPersistenceMocks
 
 /** Captures the router's current search string from inside the router context. */
 const useSearchProbeResult = (): string => useLocation().search
-
-type SetupOptions = {
-    initialEntries?: string[]
-    filters?: FilterDefinitions<Filters>
-    config?: UseTableUrlPersistenceArgs<Filters>['config']
-    sort?: TableSortState
-    paging?: Paging
-}
 
 /** Renders the hook inside a MemoryRouter, exposing the live search string for assertions. */
 const setup = (options: SetupOptions = {}) => {

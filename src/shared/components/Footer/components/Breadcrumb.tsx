@@ -4,16 +4,16 @@ import { VisitQueries } from '@shared-queries'
 import { Link } from '@common-ux'
 import './Breadcrumb.css'
 
-interface Props {
+const getBreadCrumbPath = (breadcrumbs: string[], index: number) =>
+    '/' + breadcrumbs.filter((_, i) => i <= index).join('/')
+
+type BreadcrumbProps = {
     path: string
     visitsPreLoaded?: boolean
     visitCount?: number
 }
 
-const getBreadCrumbPath = (breadcrumbs: string[], index: number) =>
-    '/' + breadcrumbs.filter((_, i) => i <= index).join('/')
-
-export const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: Props) => {
+export const Breadcrumb = ({ path, visitsPreLoaded, visitCount }: BreadcrumbProps) => {
     const { data: visitsData } = VisitQueries.useGet(path)
     const visits = visitsPreLoaded ? (visitCount ?? 0) : (visitsData?.visits ?? 0)
     const noLeadingSlash = path.replace('/', '')

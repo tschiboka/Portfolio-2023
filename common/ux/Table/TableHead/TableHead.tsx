@@ -3,20 +3,8 @@ import { TableHeadUtils } from './TableHead.utils'
 import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import type { Dictionary, Nullable } from '@common-utils'
-import type { TableColumns, TableSelection, TableSorting } from '../Table.types'
+import type { ResizeState, TableHeadProps } from './TableHead.types'
 import './TableHead.styles.css'
-
-type TableHeadProps<TData extends Dictionary<ReactNode>, TContext> = {
-    columns: TableColumns<TData, TContext>
-    hasBreakpoints: boolean
-    hasActions: boolean
-    selection?: TableSelection<TData, TContext>
-    sorting?: TableSorting<TData>
-    data: TData[]
-    context?: TContext
-    onColumnResize?: (columnIndex: number, width: number) => void
-    onColumnReorder?: (fromIndex: number, toIndex: number) => void
-}
 
 const MIN_COL_WIDTH = 60
 
@@ -31,19 +19,6 @@ export const TableHead = <TData extends Dictionary<ReactNode>, TContext>({
     onColumnResize,
     onColumnReorder,
 }: TableHeadProps<TData, TContext>) => {
-    /** The columns and pointer state a resize drag carries between mousemove events. */
-    type ResizeState = {
-        leftIndex: number
-        rightIndex: number
-        startX: number
-        leftStartWidth: number
-        rightStartWidth: number
-        leftTh: HTMLTableCellElement
-        rightTh: HTMLTableCellElement
-        otherColsWidth: number
-        tableWidth: number
-    }
-
     /** The resizing state that a drag leaves on the ref, or `null` between drags. */
     const resizing = useRef<Nullable<ResizeState>>(null)
 

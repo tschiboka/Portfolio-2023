@@ -13,11 +13,12 @@ import {
 } from './NoSpecLocalDeclaration.utils.js'
 import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
-import type { OffendingKind, StatementLike } from './NoSpecLocalDeclaration.types.js'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type ProgramNode = Parameters<Defined<Rule.NodeListener['Program']>>[0]
-type StatementNode = ProgramNode['body'][number]
+import type {
+    OffendingKind,
+    ProgramNode,
+    StatementLike,
+    StatementNode,
+} from './NoSpecLocalDeclaration.types.js'
 
 const messages: Record<OffendingKind, string> = {
     helper: HelperErrorMessage,

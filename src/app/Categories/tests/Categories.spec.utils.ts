@@ -5,8 +5,7 @@ import { CategoriesMockHandlers } from './Categories.mockHandlers'
 import { AppRoutes } from '../../../app'
 import type { Buildable } from '@common-ux/Test/Server'
 import type { GetCategoryResponse } from '@common-types'
-
-type CategoriesForm = ReturnType<typeof Test.Form>
+import type { CategoriesForm } from './Categories.spec.types'
 
 export const CategoriesTestUtils = {
     labels: {

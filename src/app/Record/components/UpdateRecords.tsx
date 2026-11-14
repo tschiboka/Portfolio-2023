@@ -1,7 +1,7 @@
 import { Heading, Main } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
-interface UpdateRecordsProps {
+type UpdateRecordsProps = {
     path: string
 }
 

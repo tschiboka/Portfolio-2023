@@ -23,8 +23,6 @@ import { LayoutsCode } from './Layouts.code'
 import { StoryNav } from '../StoryNav/StoryNav'
 import './Layouts.styles.css'
 
-type LayoutsProps = { path: string }
-
 const cell = (height?: number): CSSProperties => ({
     padding: '8px 16px',
     background: 'var(--black-3)',
@@ -48,6 +46,8 @@ const wrapItems = [
     'Git',
     'Docker',
 ]
+
+type LayoutsProps = { path: string }
 
 export const Layouts = ({ path }: LayoutsProps) => (
     <Screen

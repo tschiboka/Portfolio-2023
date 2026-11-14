@@ -1,14 +1,12 @@
 ﻿import { WordRepository } from '../../../infrastructure/resources/Word.repository'
-import { TypedRequest, TypedResponse } from '../../../../../../common/types'
+import { TypedRequest } from '../../../../../../common/types'
 import { ApiResponder } from '../../../../../../common/utils/Server'
 import type {
-    WdaErrorResponse,
-    GetWdaWordListResponse,
-    GetWdaAnagramMapResponse,
-    GetWdaFrequenciesResponse,
-} from '../../../../../../common/types'
+    GetAnagramMapRes,
+    GetFrequenciesRes,
+    GetWordListRes,
+} from '../../../infrastructure/resources/Word.types'
 
-type GetWordListRes = TypedResponse<GetWdaWordListResponse | WdaErrorResponse>
 function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {
     const resources = WordRepository.Get()
     if (!resources) throw ApiResponder.unavailable('wordList')
@@ -17,7 +15,6 @@ function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {
     return ApiResponder.ok(res, { wordList })
 }
 
-type GetAnagramMapRes = TypedResponse<GetWdaAnagramMapResponse | WdaErrorResponse>
 function handleGetAnagramMap(_req: TypedRequest, res: GetAnagramMapRes) {
     const resources = WordRepository.Get()
     if (!resources) throw ApiResponder.unavailable('anagramMap')
@@ -26,7 +23,6 @@ function handleGetAnagramMap(_req: TypedRequest, res: GetAnagramMapRes) {
     return ApiResponder.ok(res, anagramMap)
 }
 
-type GetFrequenciesRes = TypedResponse<GetWdaFrequenciesResponse | WdaErrorResponse>
 function handleGetFrequencies(_req: TypedRequest, res: GetFrequenciesRes) {
     const resources = WordRepository.Get()
     if (!resources) throw ApiResponder.unavailable('frequency')

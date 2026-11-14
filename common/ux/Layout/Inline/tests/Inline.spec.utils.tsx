@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Inline } from '../Inline'
 import { Accessor } from '../../../Test'
-import type { InlineProps } from '../Inline.types'
-
-type SetProps = Partial<InlineProps> & { ariaLabel: string }
+import type { SetProps } from './Inline.spec.types'
 
 const Set = {
     inline: ({ children, ...props }: SetProps) => {

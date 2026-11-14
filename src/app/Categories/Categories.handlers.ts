@@ -1,11 +1,4 @@
-import type { SearchInputOption } from '@common-ux'
-import type { PostCategoryRequest } from '@common-types'
-import type { CategoryFormData } from './Categories.types'
-
-type SubmitDeps = {
-    parentOptions: SearchInputOption[]
-    postCategory: (payload: PostCategoryRequest) => Promise<void>
-}
+import type { CategoryFormData, SubmitDeps } from './Categories.types'
 
 export const CategoriesHandlers = {
     submit:

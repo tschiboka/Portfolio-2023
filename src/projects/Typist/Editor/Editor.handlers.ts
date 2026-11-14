@@ -1,11 +1,5 @@
-import { Dispatch } from 'react'
 import { EditorSelectors } from './Editor.selectors'
-import { TypistEditorState, EditorAction } from '../Typist.types'
-
-type EditorHandlerArgs = {
-    editorState: TypistEditorState
-    dispatch: Dispatch<EditorAction>
-}
+import type { EditorHandlerArgs } from './Editor.types'
 
 const create =
     ({ editorState, dispatch }: EditorHandlerArgs) =>

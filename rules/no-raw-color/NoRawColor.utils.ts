@@ -1,9 +1,7 @@
 import { ColorFamilies, ColorTokens } from '../tokens.generated.js'
 import { isDefined, isNull, isObject, isString } from '../../common/utils/Predicate/Predicate.js'
+import type { AstNode } from './NoRawColor.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
-
-/** An AST node seen as its type plus whatever fields the check reads. */
-type AstNode = { type: string; [field: string]: unknown }
 
 /** Built once: the generated sheets carry hundreds of colour names, so a scan per property would not do. */
 const KnownFamilies = new Set<string>(ColorFamilies)

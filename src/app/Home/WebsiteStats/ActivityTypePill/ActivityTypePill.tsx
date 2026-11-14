@@ -22,11 +22,11 @@ export const ActivityTypePill = ({ type }: { type: ActivityType }) => (
     <Pill label={type} color={TYPE_COLORS[type]} variant="outlined" />
 )
 
-type LegendProps = {
+type ActivityTypeLegendProps = {
     summary?: ActivityFeedContext
 }
 
-export const ActivityTypeLegend = ({ summary }: LegendProps) => (
+export const ActivityTypeLegend = ({ summary }: ActivityTypeLegendProps) => (
     <Inline gap="12" wrap className="ActivityTypeLegend">
         {(Object.entries(TYPE_COLORS) as [ActivityType, PillColor][]).map(([type, color]) => {
             const count = summary ? summary[SUMMARY_KEY[type]] : undefined

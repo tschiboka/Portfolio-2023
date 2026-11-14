@@ -1,11 +1,8 @@
 import moment from 'moment'
 import { Formats } from './Formats'
 import { isString, isNullish } from '../Predicate'
-import type { Optional, Nullish } from '../Generics'
-
-type FormatKey = keyof typeof Formats
-
-type InputValue = Nullish<string | number | Date>
+import type { FormatKey, InputValue } from './Format.types'
+import type { Optional } from '../Generics'
 
 /** The formats the app itself produces. A string is held to these exactly. */
 const DISPLAY_FORMATS = Object.values(Formats)

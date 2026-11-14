@@ -6,14 +6,14 @@ import { tschibokaDark } from './Code.theme'
 import type { AccessibleProps } from '../index.types'
 import './Code.styles.css'
 
-interface Props extends AccessibleProps {
+type CodeProps = AccessibleProps & {
     fileName?: string
     language: string
     content: string
     highlightRow?: [number]
 }
 
-export const Code = ({ fileName, language, content, ariaLabel, className, style }: Props) => {
+export const Code = ({ fileName, language, content, ariaLabel, className, style }: CodeProps) => {
     const [showCopyMessage, setShowCopyMessage] = useState(false)
     return (
         <div aria-label={ariaLabel} className={className ?? 'Code'} style={style}>

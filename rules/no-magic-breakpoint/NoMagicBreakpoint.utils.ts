@@ -1,5 +1,6 @@
 import { Breakpoints } from '../tokens.generated.js'
 import { isString } from '../../common/utils/Predicate/Predicate.js'
+import type { Width } from './NoMagicBreakpoint.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /** The widths the breakpoint tokens allow, which every bound has to name. */
@@ -27,9 +28,3 @@ export const getWidths = (query: string): Width[] =>
  */
 export const isTokenWidth = ({ bound, width }: Width): boolean =>
     TokenWidths.includes(bound === 'max' ? width + 1 : width)
-
-/** A bound and the width it states. */
-export type Width = {
-    bound: string
-    width: number
-}

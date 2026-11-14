@@ -1,14 +1,12 @@
 import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { MemberChain, NameChain, WithParent } from './NoQualifiedType.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 export const ErrorMessage = 'A type must be imported, not reached through a namespace.'
 
 /** The clauses that name a type while accepting an expression, so their name parses as a member. */
 const HeritageParents = new Set(['TSClassImplements', 'TSInterfaceHeritage'])
-
-/** A node whose parent may be absent, which is all the three questions below need. */
-type WithParent = { parent: Nullable<{ type: string }> }
 
 /** The parent's node type, or an empty string at the root, so no comparison has to guard. */
 const getParentType = (node: WithParent): string => node.parent?.type ?? ''
@@ -36,12 +34,6 @@ const isReportableName = (node: WithParent): boolean => {
  * A class `extends` clause is left alone: it names the superclass value, not a type.
  */
 const isReportableMember = (node: WithParent): boolean => HeritageParents.has(getParentType(node))
-
-/** A dotted chain, whose first name is the one that has to be imported. */
-type NameChain = { type: string; name?: string; left?: NameChain }
-
-/** A member chain, whose first name is the one that has to be imported. */
-type MemberChain = { type: string; name?: string; object?: MemberChain }
 
 /** The first name of a dotted chain — `React` for `React.FormEvent`, `A` for `A.B.C`. */
 const getRootName = (node: NameChain): Nullable<string> => {

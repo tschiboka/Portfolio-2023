@@ -1,9 +1,5 @@
 import { ContextBuilder } from '../index'
-
-type TestContext = {
-    name: string
-    count: number
-}
+import type { TestContext } from './Context.spec.types'
 
 const initial: TestContext = { name: 'default', count: 0 }
 

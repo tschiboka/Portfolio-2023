@@ -1,15 +1,7 @@
 import { isDefined } from '@common-utils'
 import type { ReactNode } from 'react'
 import type { Dictionary } from '@common-utils'
-import type { TableColumn } from './Table.types'
-
-type RenderCellArgs<TData extends Dictionary<ReactNode>, TContext> = {
-    col: TableColumn<TData, TContext>
-    row: TData
-    index: number
-    data: TData[]
-    context?: TContext
-}
+import type { RenderCellArgs } from './Table.types'
 
 const getCellContent = <TData extends Dictionary<ReactNode>, TContext>({
     col,

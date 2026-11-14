@@ -5,6 +5,8 @@ export type Row = {
     note: string
 }
 
+export type ControllerDemoFilters = { name?: string; role?: string; status?: string }
+
 export type BreakpointRow = {
     property: string
     '2xs': string

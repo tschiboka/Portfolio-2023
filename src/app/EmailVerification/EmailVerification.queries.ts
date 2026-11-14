@@ -4,11 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { ClientMessage, ErrorResponse, Paths, Query, QueryKey, errorMessage } from '@common-utils'
 import type { AxiosError } from 'axios'
 import type { PostConfirmRequest, PostConfirmResponse } from '@common-types'
-
-type UsePostResult = {
-    message: string
-    isPending: boolean
-}
+import type { UsePostResult } from './EmailVerification.types'
 
 /**
  * Confirms the token once on mount and returns what the screen renders. The

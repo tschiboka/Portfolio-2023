@@ -1,13 +1,8 @@
 import { hasLength, includesAll } from '@common-utils'
 import type { ReactNode } from 'react'
 import type { Dictionary, ValueOf } from '@common-utils'
-import type { CellMeta, TableSelection } from '../Table.types'
-
-type SelectionContext<TData extends Dictionary<ReactNode>, TContext> = {
-    data: TData[]
-    selection: TableSelection<TData, TContext>
-    context?: TContext
-}
+import type { SelectionContext } from './TableCheckbox.types'
+import type { CellMeta } from '../Table.types'
 
 const getSelectableRows = <TData extends Dictionary<ReactNode>, TContext>({
     data,

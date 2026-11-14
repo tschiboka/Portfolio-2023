@@ -11,12 +11,12 @@ import { BlogUtils } from './Blog.utils'
 import { BlogSortBy } from './Blog.types'
 import './Blog.scss'
 
-interface Props {
+type BlogProps = {
     pageName: string
     path: string
 }
 
-export const Blog = ({ pageName, path }: Props) => {
+export const Blog = ({ pageName, path }: BlogProps) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
     const [sortedBy, setSortedBy] = useState<BlogSortBy>('mostRelevant')
 

@@ -11,11 +11,11 @@ import {
 } from 'react-share'
 import './ShareMenu.scss'
 
-interface Props {
+type ShareMenuProps = {
     path: string
 }
 
-export const ShareMenu = ({ path }: Props) => {
+export const ShareMenu = ({ path }: ShareMenuProps) => {
     const domain = 'https://tschiboka.com/#'
 
     return (

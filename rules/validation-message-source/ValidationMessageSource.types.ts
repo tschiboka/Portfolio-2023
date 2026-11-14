@@ -1,4 +1,9 @@
 import { Nullable } from '../../common/utils/Generics/index.js'
+import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
+
+/** The call node the parser hands over, taken from the listener's own signature. */
+export type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
 
 /** A property key, narrowed to the name or the value that identifies it. */
 export type KeyLike = {

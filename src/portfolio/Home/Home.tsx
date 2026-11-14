@@ -4,11 +4,11 @@ import { Main } from '@common-ux'
 import { Welcome } from './Welcome/Welcome'
 import { Intro } from './Intro/Intro'
 
-interface Props {
+type HomeProps = {
     pageName: string
 }
 
-export const Home = ({ pageName }: Props) => (
+export const Home = ({ pageName }: HomeProps) => (
     <Screen
         title="tschiboka | Home"
         path="/"

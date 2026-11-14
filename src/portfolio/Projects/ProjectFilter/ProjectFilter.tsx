@@ -5,7 +5,7 @@ import type { Dictionary, VoidFunction } from '@common-utils'
 import type { Technology } from '../Projects.types'
 import './ProjectFilter.scss'
 
-interface Props {
+type ProjectFilterProps = {
     selectedLanguages: Set<string>
     totalCount: number
     filteredCount: number
@@ -23,7 +23,7 @@ export const ProjectFilter = ({
     totalCount,
     filteredCount,
     selectedFilter,
-}: Props) => {
+}: ProjectFilterProps) => {
     const hasFilter =
         selectedLanguages.size > 0 || selectedFilter !== ProjectsDefaults.defaultFilter
     const languageGroups = ProjectsSelectors.technologies.reduce(

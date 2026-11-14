@@ -1,9 +1,10 @@
 import { RefObject } from 'react'
 import { isDefined, isEmpty, isInstanceOf } from '@common-utils'
 import { LetterPosition, TouchState } from './LetterWheel.types'
-import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
+import { WebSocketRequestType } from '../../Session.types'
 import { WordConstants } from '../../../common/utils'
 import type { Nullable } from '@common-utils'
+import type { SubmitMoveParams } from './LetterWheel.types'
 
 type CalculateLetterPositionsProps = {
     letters: string[]
@@ -64,12 +65,6 @@ const recalculatePositions = ({
 const getLetterComponent = (target: Nullable<Element>): Nullable<HTMLElement> => {
     const isLetter = isInstanceOf(target, HTMLElement) && isDefined(target.dataset.letterId)
     return isLetter ? target : null
-}
-
-type SubmitMoveParams = {
-    letters: string
-    send: (msg: WebSocketRequest) => void
-    setTouchState: (state: TouchState) => void
 }
 
 const submitMove = ({ letters, send, setTouchState }: SubmitMoveParams) => {

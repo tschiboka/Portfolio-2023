@@ -12,14 +12,6 @@ import './Form.styles.css'
 
 const { getDaysInMonth, getFirstDayOfMonth, formatDate, parseDate, toISODate } = DateInputUtils
 
-type DateInputProps<TFieldValues extends FieldValues = FieldValues> = AccessibleProps & {
-    name: Path<TFieldValues>
-    control: Control<TFieldValues>
-    placeholder?: string
-    min?: string
-    max?: string
-}
-
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 const CALENDAR_HEIGHT = 320
@@ -36,6 +28,14 @@ const formatDigits = (digits: string, isDeleting: boolean): string => {
     )
 
     return !isDeleting && opensSegment(digits.length) ? `${written}/` : written
+}
+
+type DateInputProps<TFieldValues extends FieldValues = FieldValues> = AccessibleProps & {
+    name: Path<TFieldValues>
+    control: Control<TFieldValues>
+    placeholder?: string
+    min?: string
+    max?: string
 }
 
 export const DateInput = <T extends FieldValues>({

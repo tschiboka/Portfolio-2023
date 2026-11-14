@@ -4,3 +4,5 @@ export type Filters = {
     min: number
     active: boolean
 }
+
+export type UrlState = { search: string; setUrl: (search: string) => void }

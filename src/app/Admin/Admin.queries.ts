@@ -3,11 +3,7 @@ import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from 
 import { Query } from '@common-utils'
 import { Session } from '@shared-context'
 import type { AxiosError, AxiosResponse } from 'axios'
-
-type UsePost<TResponse> = {
-    onSuccess?: (response: AxiosResponse<TResponse>) => void
-    onError?: (error: AxiosError<ErrorResponse>) => void
-}
+import type { UsePost } from './Admin.types'
 
 /** Fires the daily-breakdown job and returns the raw response. */
 const useDailyBreakdown = ({ onSuccess, onError }: UsePost<PostDailyBreakdownResponse> = {}) => {

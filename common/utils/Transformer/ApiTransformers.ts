@@ -1,8 +1,6 @@
 import { isArray, isObject, isObjectId } from '../Predicate'
+import type { SerializableDocument } from './ApiTransformers.types'
 import type { Dictionary } from '../Generics'
-
-/** Any object that can serialise itself to a plain object via `toObject()` (e.g. a Mongoose document). */
-type SerializableDocument = { toObject(): unknown }
 
 /** Recursively convert `ObjectId`s → strings and strip Mongoose version keys (`__v`/`__t`). */
 const toApiValue = (value: unknown): unknown => {

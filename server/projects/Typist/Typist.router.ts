@@ -2,18 +2,11 @@
 import { Arrays, Strings, isTruthy, isNonEmpty, ApiResponder } from '@common-utils'
 import { TypistConstants } from './Typist.constants'
 import { WordRepository } from '../WordDuelArena/infrastructure/resources/Word.repository'
-import {
-    Keystroke,
-    PostTypistRoundRequest,
-    PostTypistRoundResponse,
-    TypedRequest,
-    TypedResponse,
-} from '../../../common/types'
+import { Keystroke } from '../../../common/types'
+import type { PostRoundReq, PostRoundRes } from './Typist.types'
 
 const router = express.Router()
 
-type PostRoundReq = TypedRequest<PostTypistRoundRequest>
-type PostRoundRes = TypedResponse<PostTypistRoundResponse>
 router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
     const { keystrokes } = req.body // fully typed now
 

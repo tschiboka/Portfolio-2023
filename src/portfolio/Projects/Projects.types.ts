@@ -15,7 +15,7 @@ export type Technology = {
     groupName?: string
 }
 
-export interface Project {
+export type Project = {
     title: string
     year: number
     type?: ProjectType

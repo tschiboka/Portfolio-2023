@@ -12,7 +12,7 @@ import type {
 } from '../../../../common/types'
 
 /** Mongoose document shape for a gym routine. */
-export interface IGymRoutine extends Document {
+export type IGymRoutine = Document & {
     name: string
     entries: {
         exerciseId: ObjectId

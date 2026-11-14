@@ -10,7 +10,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a like. */
-export interface ILike extends Document {
+export type ILike = Document & {
     path: string
     likeDate: Date
 }

@@ -12,6 +12,12 @@ import { Submenu } from '../Submenu'
 import { SubNav } from '../SubNav'
 import { NavDefaults } from '../Nav.defaults'
 import { NavUtils } from '../Nav.utils'
+import type { PageVariant } from './PageNav.types'
+
+type PageNavProps = {
+    variant: PageVariant
+    pageName: string
+}
 
 export const PageNav = ({ variant, pageName }: PageNavProps) => {
     const { mainMenuVisible, subMenuVisible, setSubMenuVisible } = AppHooks.useContext()
@@ -85,10 +91,3 @@ export const PageMobileMenu = ({ variant, pageName }: PageNavProps) => {
 }
 
 export const PageSubNav = () => <SubNav title={<SubNavTitle />} links={<SocialLinks />} />
-
-export type PageVariant = 'portfolio' | 'app'
-
-type PageNavProps = {
-    variant: PageVariant
-    pageName: string
-}

@@ -4,13 +4,13 @@ import { Query } from '@common-utils'
 import type { ErrorResponse } from '@common-utils'
 import type { PostUserRequest, PostUserResponse } from '@common-types'
 
-type UsePostOptions = {
+type UsePostProps = {
     onSuccess?: (response: PostUserResponse) => void
     onError?: (error: AxiosError<ErrorResponse>) => void
 }
 
 /** Registers a new user account. */
-const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+const usePost = ({ onSuccess, onError }: UsePostProps = {}) => {
     const request = Query.FeatureQuery().path('RegisterUser').build()
 
     return useMutation<PostUserResponse, AxiosError<ErrorResponse>, PostUserRequest>({

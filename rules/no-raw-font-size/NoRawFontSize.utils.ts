@@ -1,12 +1,11 @@
 import { isString } from '../../common/utils/Predicate/Predicate.js'
+import type { KeyLike } from './NoRawFontSize.types.js'
 
 /** The two names a font size is written under: the stylesheet and the TS styles object. */
 const FontSizeKeys = new Set(['font-size', 'fontSize'])
 
 /** An absolute length — px, a physical unit, or a rem that bypasses the scale. */
 const AbsoluteLength = /-?\d*\.?\d+(?:px|pt|pc|cm|mm|in|rem)\b/i
-
-type KeyLike = { type: string; name?: string; value?: unknown }
 
 /** Reads a property key, whether it is an identifier or a quoted string. */
 export const getKeyText = (key: KeyLike): string => {

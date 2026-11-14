@@ -1,7 +1,5 @@
 import { SessionStatuses } from './Session.types'
-import type { WebSocketSessionState } from './Session.types'
-
-type SessionDefault = { state: WebSocketSessionState }
+import type { SessionDefault } from './Session.types'
 
 export const SessionDefaults: SessionDefault = {
     state: {

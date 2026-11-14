@@ -10,6 +10,9 @@ export type TypistEvent = 'none' | 'started' | 'paused' | 'ended' | 'resumed' | 
 // FE extends shared Keystroke: actual is always present on the client
 export type Keystroke = SharedKeystroke & { actual: string }
 
+/** What a completed round sends back: the keystrokes the run recorded. */
+export type PostRoundRequest = { keystrokes: SharedKeystroke[] }
+
 export type TypistEditorState = {
     status: TypistStatus
     text: string

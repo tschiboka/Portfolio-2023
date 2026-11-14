@@ -2,13 +2,11 @@ import { StyleTokenPrefix } from './NoRawZIndex.constants.js'
 import { Css } from '../css.js'
 import { ZIndexTokens } from '../tokens.generated.js'
 import { isDefined, isNull, isObject, isString } from '../../common/utils/Predicate/Predicate.js'
+import type { AstNode } from './NoRawZIndex.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 const isLayer = (name: unknown): boolean =>
     isString(name) && (ZIndexTokens as readonly string[]).includes(name)
-
-/** An AST node seen as its type plus whatever fields the check reads. */
-type AstNode = { type: string; [field: string]: unknown }
 
 const asNode = (value: unknown): Nullable<AstNode> =>
     isObject(value) && 'type' in value ? (value as AstNode) : null

@@ -1,7 +1,6 @@
 import { truncateTo } from '../truncateTo'
 import { isFiniteNumber } from '../../Predicate'
-
-type Unit = { value: number; suffix: string }
+import type { Unit } from './Counter.types'
 
 const UNITS: readonly Unit[] = [
     { value: 1e12, suffix: 'T' },

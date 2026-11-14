@@ -1,8 +1,4 @@
-interface StoryEntry {
-    label: string
-    path: string
-    description?: string
-}
+import type { StoryEntry } from './UxStories.types'
 
 export const stories: StoryEntry[] = [
     {

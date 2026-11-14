@@ -3,12 +3,12 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { Link, Main, Paragraph, Heading } from '@common-ux'
 import './PrivacyPolicy.scss'
 
-interface Props {
+type PrivacyPolicyProps = {
     pageName: string
     path: string
 }
 
-export const PrivacyPolicy = ({ pageName, path }: Props) => (
+export const PrivacyPolicy = ({ pageName, path }: PrivacyPolicyProps) => (
     <Screen
         title="tschiboka | Privacy Policy"
         path={path}

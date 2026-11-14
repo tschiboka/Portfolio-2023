@@ -16,13 +16,13 @@ import { ProjectsSelectors } from '../Projects.selectors'
 import { Project, ProjectsDefaults } from '..'
 import './ProjectCard.scss'
 
-interface Props {
+type ProjectCardProps = {
     project: Project
 }
 
 export const ProjectCard = ({
     project: { title, image, description, badges, url, github, blog, year, openInNewTab, type },
-}: Props) => (
+}: ProjectCardProps) => (
     <Card className="ProjectCard">
         <Stack.Vertical gap="32" align="start" className="ProjectCard__stack">
             <Figure src={image} alt={title} size="full" className="ProjectCard__image" />

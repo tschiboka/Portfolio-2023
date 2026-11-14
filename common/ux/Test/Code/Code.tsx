@@ -1,9 +1,7 @@
-import { ComponentProps } from 'react'
 import { render } from '@testing-library/react'
 import { Accessor } from '../Accessor/Accessor'
 import { Code as CodeComponent } from '../../Code'
-
-type CodeProps = ComponentProps<typeof CodeComponent>
+import type { CodeProps } from './Code.types'
 
 class CodeAccessor extends Accessor {
     get Get() {

@@ -8,9 +8,9 @@ import type { ReactNode } from 'react'
 import type { Nullable } from '@common-utils'
 import type { WebSocketRequest, WebSocketResponse } from './Session.types'
 
-type Props = { children: ReactNode }
+type SessionWebSocketProviderProps = { children: ReactNode }
 
-export const SessionWebSocketProvider = ({ children }: Props) => {
+export const SessionWebSocketProvider = ({ children }: SessionWebSocketProviderProps) => {
     const { sessionId, deviceId, setSessionState } = SessionHooks.useContext()
     const [wsUrl, setWsUrl] = useState<Nullable<string>>(null)
     const [errorMessage, setErrorMessage] = useState<Nullable<string>>(null)

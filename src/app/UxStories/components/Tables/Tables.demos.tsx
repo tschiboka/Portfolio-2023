@@ -6,7 +6,13 @@ import { TablesConfig } from './Tables.config'
 import { TablesMocks } from './Tables.mocks'
 import type { SortDirection, TableColumns } from '@common-ux'
 import type { UrlPersistenceConfig } from '@common-ux/Table/Table.hooks.types'
-import type { AllFeaturesRow, PaginationRow, SelectionRow, SortingRow } from './Tables.types'
+import type {
+    AllFeaturesRow,
+    ControllerDemoFilters,
+    PaginationRow,
+    SelectionRow,
+    SortingRow,
+} from './Tables.types'
 
 const { selectionRows, allFeaturesData, allPaginationRows, paginationColumns, sortingRows } =
     TablesMocks
@@ -497,9 +503,6 @@ export const SortingWithPaginationDemo = () => {
 // ─── Controller + URL persistence demos ─────────────────────────────────────
 // A controller-driven table that reads/writes its state to the URL. `urlPersistence` is
 // opt-in: omitted → local state only; `{}` → root params; `{ namespace }` → namespaced params.
-
-type ControllerDemoFilters = { name?: string; role?: string; status?: string }
-
 const CONTROLLER_DEMO_COLUMNS: TableColumns<AllFeaturesRow> = [
     { header: 'Name', accessor: 'name', cell: toUpper, isSortable: true },
     { header: 'Role', accessor: 'role', breakpoint: 'sm', isSortable: true },

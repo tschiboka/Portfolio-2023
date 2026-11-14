@@ -6,10 +6,7 @@ import {
 import { isResolverCall, isSchemaCall, isSchemaFile } from './ResolverInSchema.utils.js'
 import type { Node } from 'estree'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
-type ProgramNode = Parameters<Defined<Rule.NodeListener['Program']>>[0]
+import type { CallNode, ProgramNode } from './ResolverInSchema.types.js'
 
 const Eslint = {
     ResolverInSchema9: {

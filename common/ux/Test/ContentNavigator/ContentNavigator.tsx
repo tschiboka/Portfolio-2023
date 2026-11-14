@@ -1,9 +1,7 @@
-import { ComponentProps } from 'react'
 import { render } from '@testing-library/react'
 import { Accessor } from '../Accessor/Accessor'
 import { ContentNavigator as ContentNavigatorComponent } from '../../ContentNavigator'
-
-type ContentNavigatorProps = ComponentProps<typeof ContentNavigatorComponent>
+import type { ContentNavigatorProps } from './ContentNavigator.types'
 
 class ContentNavigatorAccessor extends Accessor {
     get Get() {

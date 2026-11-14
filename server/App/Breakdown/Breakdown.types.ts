@@ -2,7 +2,7 @@
 import type { PostBackfillResponse, TypedRequest, TypedResponse } from '../../../common/types'
 
 /** Mongoose document shape for a daily visit/like breakdown (one per date+path). */
-export interface IBreakdown extends Document {
+export type IBreakdown = Document & {
     date: string
     path: string
     visits: number
@@ -15,20 +15,20 @@ export type BreakdownCountRow<TCount extends string> = Record<TCount, number> & 
 }
 
 /** Configures a count-by-(date,path) aggregation: source collection, its date field, and the count field. */
-export interface CountByDateAndPathProps<TCount extends string> {
+export type CountByDateAndPathProps<TCount extends string> = {
     collection: string
     dateField: string
     countField: TCount
 }
 
 /** Per-(date,path) visit + like counts produced by the backfill merge. */
-export interface BreakdownCounts {
+export type BreakdownCounts = {
     visits: number
     likes: number
 }
 
 /** One MongoDB bulk `updateOne` upsert operation in the backfill batch. */
-export interface BreakdownBulkOperation {
+export type BreakdownBulkOperation = {
     updateOne: {
         filter: { date: string; path: string }
         update: { $set: BreakdownCounts }

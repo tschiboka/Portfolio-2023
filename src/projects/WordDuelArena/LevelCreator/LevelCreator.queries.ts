@@ -35,8 +35,8 @@ const useGetLevel = (name: string) => {
     })
 }
 
-type UsePostLevel = { onSuccess: VoidFunction }
-const usePostLevel = ({ onSuccess }: UsePostLevel) => {
+type UsePostLevelProps = { onSuccess: VoidFunction }
+const usePostLevel = ({ onSuccess }: UsePostLevelProps) => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')
         .setSubpath('/level')

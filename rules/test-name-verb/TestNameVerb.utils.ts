@@ -1,19 +1,6 @@
+import { Nullable, Optional } from '../../common/utils/Generics/index.js'
 import { isString } from '../../common/utils/Predicate/Predicate.js'
-import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
-
-type CalleeLike = {
-    type: string
-    name?: string
-    callee?: CalleeLike
-    object?: CalleeLike
-    property?: CalleeLike
-}
-
-type ArgumentLike = {
-    type: string
-    value?: unknown
-    quasis?: { value?: { cooked?: Nullable<string> } }[]
-}
+import type { ArgumentLike, CalleeLike } from './TestNameVerb.types.js'
 
 /**
  * Reads the name a test block is declared under — `it`, `test`, or the `.each` form of either —

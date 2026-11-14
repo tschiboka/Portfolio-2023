@@ -1,4 +1,4 @@
-export interface BlogArticle {
+export type BlogArticle = {
     title: string
     image: string
     imageAlt: string

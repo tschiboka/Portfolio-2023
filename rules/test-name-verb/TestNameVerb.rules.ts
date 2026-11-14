@@ -2,9 +2,7 @@ import { getNameText, getTestName, isTestName } from './TestNameVerb.utils.js'
 import { AliasErrorMessage, ErrorMessage } from './TestNameVerb.constants.js'
 import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
+import type { CallNode } from './TestNameVerb.types.js'
 
 const Eslint = {
     TestNameVerb9: {

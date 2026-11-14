@@ -10,7 +10,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a visit. */
-export interface IVisit extends Document {
+export type IVisit = Document & {
     path: string
     visitDate: Date
 }

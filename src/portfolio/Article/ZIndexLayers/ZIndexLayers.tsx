@@ -7,12 +7,12 @@ import { getReferenceList } from '../References.data'
 import { Article } from '../Article'
 import type { Dictionary } from '@common-utils'
 
-interface Props {
+type ZIndexLayersProps = {
     pageName: string
     path: string
 }
 
-export const ZIndexLayers = ({ pageName, path }: Props) => {
+export const ZIndexLayers = ({ pageName, path }: ZIndexLayersProps) => {
     const references = getReferenceList(path)
     return (
         <Article

@@ -1,8 +1,6 @@
-import type { PillColor } from './Pill.types'
+import type { PillColor, PillVariant } from './Pill.types'
 import type { AccessibleProps, InteractiveProps } from '../index.types'
 import './Pill.styles.css'
-
-type PillVariant = 'outlined' | 'solid'
 
 type PillProps = AccessibleProps &
     InteractiveProps & {

@@ -5,13 +5,7 @@ import { LevelRepository } from '../../infrastructure/persistence/db/Level.repos
 import { GameConstants } from '../../config/constants/Game.constants'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
 import type { SessionState, Level, LevelWord } from '../../WordDuelArena.types'
-
-type DbLevel = {
-    _id: { toString(): string }
-    name: string
-    difficulty: number
-    targetWords: string[]
-}
+import type { DbLevelRecord } from '../../model/Level.types'
 
 async function initialiseLevel(state: SessionState): Promise<SessionState> {
     const hasTwoPlayers = isTruthy(state.players.player1) && isTruthy(state.players.player2)
@@ -65,7 +59,7 @@ const getExtraWords = (levelName: string, targetWords: string[]): string[] => {
     return uniqueWords.filter((word: string) => !targetWordSet.has(word))
 }
 
-const transformLevelFromDb = (level: DbLevel): Level => ({
+const transformLevelFromDb = (level: DbLevelRecord): Level => ({
     id: level._id.toString(),
     name: level.name,
     difficulty: level.difficulty,

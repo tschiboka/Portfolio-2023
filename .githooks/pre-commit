@@ -20,6 +20,39 @@ if ! git diff --cached --quiet -- common/ux/tokens.generated.css \
     printf '\033[36m%s\033[0m\n' "[commit-tokens] mirrors regenerated and staged"
 fi
 
+# A commit carries only what is staged, so the worktree is settled before any gate edits a file.
+# The gate answers 2 when it needs a decision, and the question is read from the console device,
+# since git hands a hook a stdin that is not a terminal.
+printf '\033[36m%s\033[0m\n' "[commit-staged]"
+status=0
+node "$root/scripts/check-staged-changes.js" || status=$?
+
+if [ "$status" -eq 2 ]; then
+    while :; do
+        printf 'Choose option: '
+        if ! read -r answer < /dev/tty; then
+            printf '\033[31m%s no terminal to answer on\033[0m\n' "[commit-staged]"
+            exit 1
+        fi
+
+        case "$answer" in
+            1) break ;;
+            q|Q) exit 1 ;;
+            *) printf '\033[31m%s not a choice — 1 or q\033[0m\n' "[commit-staged]" ;;
+        esac
+    done
+
+    status=0
+    node "$root/scripts/check-staged-changes.js" "$answer" || status=$?
+fi
+
+if [ "$status" -ne 0 ]; then
+    printf '\033[31m%s Failed ✗\033[0m\n' "[commit-staged]"
+    exit 1
+fi
+
+printf '\033[32m%s Successful ✓\033[0m\n' "[commit-staged]"
+
 # The installed tree is derived from the lockfile, so this gate repairs it before the gates
 # below read it, for the same reason the token mirrors above are repaired.
 step "[commit-dependency-install]" node "$root/scripts/check-dependency-install.js"

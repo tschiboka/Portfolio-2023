@@ -3,24 +3,24 @@
 export type PostDailyBreakdownReq = TypedRequest
 export type PostDailyBreakdownRes = TypedResponse<PostDailyBreakdownResponse>
 
-export interface PathBreakdownItem {
+export type PathBreakdownItem = {
     path: string
     count: number
 }
 
-export interface SectionData {
+export type SectionData = {
     today: PathBreakdownItem[]
     total: PathBreakdownItem[]
     todayCount: number
     totalCount: number
 }
 
-export interface Breakdown {
+export type Breakdown = {
     visits: SectionData
     likes: SectionData
 }
 
-export interface BreakdownAggregate {
+export type BreakdownAggregate = {
     _id: string
     visits: number
     likes: number

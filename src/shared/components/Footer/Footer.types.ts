@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-export interface FooterProps {
+export type FooterProps = {
     path: string
     visitsPreLoaded?: boolean
     visitCount?: number

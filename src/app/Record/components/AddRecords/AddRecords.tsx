@@ -2,11 +2,11 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { Main, Heading, Paragraph, List, Button } from '@common-ux'
 import './AddRecords.scss'
 
-interface AddRecordProps {
+type AddRecordsProps = {
     path: string
 }
 
-export const AddRecords = ({ path }: AddRecordProps) => (
+export const AddRecords = ({ path }: AddRecordsProps) => (
     <Screen
         title={'tschiboka | Add Records'}
         path={path}

@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Region } from '../Region'
 import { RegionAccessor } from '../../Test/Region/Region'
-import type { RegionProps } from '../Region.types'
-
-type Props = Partial<RegionProps> & { ariaLabel: string }
+import type { Props } from './Region.spec.types'
 
 const Set = {
     region: (props: Props) => {

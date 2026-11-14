@@ -1,9 +1,7 @@
 import { ErrorMessage } from './NoRawFontSize.constants.js'
 import { hasAbsoluteLength, isFontSize } from './NoRawFontSize.utils.js'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type PropertyNode = Parameters<Defined<Rule.NodeListener['Property']>>[0]
+import type { PropertyNode } from './NoRawFontSize.types.js'
 
 const Eslint = {
     NoRawFontSize9: {

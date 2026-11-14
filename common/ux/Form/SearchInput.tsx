@@ -4,11 +4,9 @@ import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import { Const } from '@common-ux/Const'
 import { hasLength } from '@common-utils'
 import { FieldValues } from './Form.types'
-import type { SearchInputOption } from './SearchInput.types'
+import type { SearchInputOption, SearchInputOptionButtonIcons } from './SearchInput.types'
 import type { AccessibleProps } from '../index.types'
 import './Form.styles.css'
-
-type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'
 
 type SearchInputProps<TValue extends string, TFieldValues extends FieldValues> = AccessibleProps & {
     name: Path<TFieldValues>

@@ -1,9 +1,9 @@
-export interface PathBreakdownItem {
+export type PathBreakdownItem = {
     path: string
     count: number
 }
 
-export interface SectionData {
+export type SectionData = {
     today: PathBreakdownItem[]
     total: PathBreakdownItem[]
     todayCount: number
@@ -16,11 +16,11 @@ export type BreakdownRow = {
     total: number
 }
 
-export interface Breakdown {
+export type Breakdown = {
     visits: SectionData
     likes: SectionData
 }
 
-export interface BreakdownPreviewProps {
+export type BreakdownPreviewProps = {
     breakdown: Breakdown
 }

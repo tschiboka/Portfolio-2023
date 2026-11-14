@@ -1,12 +1,5 @@
-import mongoose, { Document } from 'mongoose'
-
-interface ILevel extends Document {
-    name: string
-    targetWords: string[]
-    difficulty: number
-    createdAt: Date
-    updatedAt: Date
-}
+import mongoose from 'mongoose'
+import type { ILevel } from './Level.types'
 
 const levelSchema = new mongoose.Schema<ILevel>({
     name: {

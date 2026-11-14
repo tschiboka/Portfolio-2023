@@ -6,12 +6,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-interface Props {
+type DailyAnalyticsEmailProps = {
     pageName: string
     path: string
 }
 
-export const DailyAnalyticsEmail = ({ pageName, path }: Props) => {
+export const DailyAnalyticsEmail = ({ pageName, path }: DailyAnalyticsEmailProps) => {
     const references = getReferenceList(path)
     return (
         <Article

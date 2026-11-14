@@ -3,14 +3,14 @@ import { LikeQueries } from '@shared-queries'
 import { Paragraph } from '@common-ux'
 import './LikeButton.scss'
 
-interface Props {
+type LikeButtonProps = {
     path: string
     likes: number
     articleLiked: boolean
     setArticleLiked: (liked: boolean) => void
 }
 
-export const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: Props) => {
+export const LikeButton = ({ path, likes, articleLiked, setArticleLiked }: LikeButtonProps) => {
     const { mutate: doPostLike } = LikeQueries.usePost()
 
     return (

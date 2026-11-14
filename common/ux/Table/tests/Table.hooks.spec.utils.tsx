@@ -5,7 +5,7 @@ import { Arrays } from '@common-utils'
 import { TableHooksMocks } from './Table.hooks.mocks'
 import { TableHooks } from '../Table.hooks'
 import type { ReactNode } from 'react'
-import type { Filters } from './Table.hooks.spec.types'
+import type { Filters, UrlState } from './Table.hooks.spec.types'
 
 const { useTableController } = TableHooks
 const { filterDefs } = TableHooksMocks
@@ -16,8 +16,6 @@ const setup = (overrides?: Partial<Parameters<typeof useTableController<Filters>
     const { result } = renderHook(() => useTableController<Filters>({ ...overrides, toParams }))
     return { result, toParams }
 }
-
-type UrlState = { search: string; setUrl: (search: string) => void }
 
 /** Custom hook: exposes a `setUrl` to simulate external URL changes from inside the router. */
 const useRouterProbe = (onSearch: (search: string) => void) => {

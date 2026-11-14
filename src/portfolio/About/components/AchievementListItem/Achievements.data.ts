@@ -12,6 +12,7 @@ import DataStructures3Img from '@portfolio/assets/about/certificates/Mosh_Data_S
 import DataStructures1Img from '@portfolio/assets/about/certificates/Mosh_Data_Structures_Certificate_1.png'
 import FCCImg from '@portfolio/assets/about/certificates/FCC_Frontend_Certificate.png'
 import FCCAlgorithmsImg from '@portfolio/assets/about/certificates/FCC_Data_Structures_and_Algorithms.png'
+import type { Achievement } from './Achievements.types'
 
 export const academicAchievements: Achievement[] = [
     {
@@ -99,11 +100,4 @@ export const certificateAchievements: Achievement[] = [
     },
 ]
 
-export interface Achievement {
-    title: string
-    details?: string[]
-    year: number
-    image?: string
-    image_alt?: string
-    certificate_img?: string
-}
+export type { Achievement } from './Achievements.types'

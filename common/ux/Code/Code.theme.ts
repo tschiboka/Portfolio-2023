@@ -29,10 +29,7 @@
  *   meta.diff                → hljs-meta (diff)
  */
 
-import type { CSSProperties } from 'react'
-import type { Dictionary } from '@common-utils'
-
-type HljsStyle = Dictionary<CSSProperties>
+import type { HljsStyle } from './Code.theme.types'
 
 export const tschibokaDark: HljsStyle = {
     hljs: {

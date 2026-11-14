@@ -6,12 +6,12 @@ import { Article } from '../Article'
 import { getReferenceList } from '../References.data'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 
-interface Props {
+type JsDateValidationProps = {
     pageName: string
     path: string
 }
 
-export const JsDateValidation = ({ pageName, path }: Props) => {
+export const JsDateValidation = ({ pageName, path }: JsDateValidationProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="JS Date Validation">

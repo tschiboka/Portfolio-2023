@@ -2,14 +2,19 @@ import { ReactNode, useEffect } from 'react'
 import type { VoidFunction } from '@common-utils'
 import './ZoomedImage.scss'
 
-interface Props {
+type ZoomedImageProps = {
     children: ReactNode
+    bgColor?: string
     handleClick: VoidFunction
     handleEscKeyPress: VoidFunction
-    bgColor?: string
 }
 
-export const ZoomedImage = ({ children, handleClick, handleEscKeyPress, bgColor }: Props) => {
+export const ZoomedImage = ({
+    children,
+    handleClick,
+    handleEscKeyPress,
+    bgColor,
+}: ZoomedImageProps) => {
     useEffect(() => {
         const escHandler = (event: KeyboardEvent) => {
             if (event.key === 'Escape') handleEscKeyPress()

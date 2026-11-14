@@ -4,22 +4,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Const } from '@common-ux/Const'
 import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
-import type { ContentNavigatorProps } from './ContentNavigator.types'
+import type { ContentNavigatorProps, Heading } from './ContentNavigator.types'
 import './ContentNavigator.styles.css'
 
 const { getActiveHeaders, getHeadingNodes, getVisibleHeaderEntries } = ContentNavigatorSelectors
-
-/** Internal representation of a heading element extracted from the content. */
-interface Heading {
-    /** The element's `id` attribute (auto-generated if missing). */
-    id: string
-    /** Visible text content of the heading. */
-    text: string
-    /** Heading depth (1 for h1, 2 for h2, etc.). */
-    level: number
-    /** Whether the heading element is currently visible in the viewport. */
-    isVisible: boolean
-}
 
 /** Finds the lowest heading level present (e.g. 1 for h1). */
 function minLevel(headings: Heading[]) {
@@ -181,9 +169,7 @@ export const ContentNavigator = ({
             .flatMap((_, i) => {
                 const { bottom, top, x } = boundsOf(i)
                 const next = headings[i + 1]
-                const connector = next
-                    ? [`L${getX(next.level)} ${yPositions[i + 1] + PAD}`]
-                    : []
+                const connector = next ? [`L${getX(next.level)} ${yPositions[i + 1] + PAD}`] : []
 
                 return [...(i === 0 ? [`M${x} ${top}`] : []), `L${x} ${bottom}`, ...connector]
             })

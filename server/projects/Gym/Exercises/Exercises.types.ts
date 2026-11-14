@@ -16,7 +16,7 @@ import type {
 } from '../../../../common/types'
 
 /** Mongoose document shape for a gym exercise. */
-export interface IGymExercise extends Document {
+export type IGymExercise = Document & {
     name: string
     type: ExerciseType
     difficulty?: DifficultyLevel

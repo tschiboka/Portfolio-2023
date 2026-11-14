@@ -44,8 +44,6 @@ fi
 
 printf '\033[32m%s Successful ✓\033[0m\n' "[commit-todos]"
 
-step "[commit-staged]" node "$root/scripts/check-staged-changes.js"
-
 step "[commit-msg]" node "$root/scripts/check-commit-message.js" "$1"
 
 # npm 12 returns nothing at all for --workspaces, so each manifest is asked directly.

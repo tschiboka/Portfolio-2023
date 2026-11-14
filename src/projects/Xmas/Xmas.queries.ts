@@ -21,8 +21,8 @@ const useGetPagePingData = () => {
     })
 }
 
-type UsePostMessage = { onSuccess: VoidFunction }
-const usePostMessage = ({ onSuccess }: UsePostMessage) => {
+type UsePostMessageProps = { onSuccess: VoidFunction }
+const usePostMessage = ({ onSuccess }: UsePostMessageProps) => {
     const token = Session.useContext().session?.token
 
     const request = new Query.RequestBuilder('Xmas', 'Projects')
@@ -38,8 +38,8 @@ const usePostMessage = ({ onSuccess }: UsePostMessage) => {
     })
 }
 
-type UseGetMessages = { userId?: string }
-const useGetMessages = ({ userId }: UseGetMessages) => {
+type UseGetMessagesProps = { userId?: string }
+const useGetMessages = ({ userId }: UseGetMessagesProps) => {
     const token = Session.useContext().session?.token
     const request = new Query.RequestBuilder('Xmas', 'Projects')
         .setSubpath('/message')

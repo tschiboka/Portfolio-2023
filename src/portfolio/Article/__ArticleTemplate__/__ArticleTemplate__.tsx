@@ -15,12 +15,12 @@ import { Article } from '../Article'
 // Styles
 //import "./";
 
-interface Props {
+type __ArticleTemplate__Props = {
     pageName: string
     path: string
 }
 
-export const __ArticleTemplate__ = ({ pageName, path }: Props) => (
+export const __ArticleTemplate__ = ({ pageName, path }: __ArticleTemplate__Props) => (
     //const references = getReferenceList(path);
     <Article pageName={pageName} path={path} title="">
         <Heading as="h1">Template Header</Heading>

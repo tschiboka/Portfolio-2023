@@ -30,10 +30,10 @@ const getCharClass = ({ attempt, sessionState }: GetCharClassProps) => {
     return 'last-attempt-char invalid'
 }
 
-type GetWordCountsProps = {
+type GetHeaderInfoProps = {
     sessionState: WebSocketSessionState
 }
-const getHeaderInfo = ({ sessionState }: GetWordCountsProps) => {
+const getHeaderInfo = ({ sessionState }: GetHeaderInfoProps) => {
     if (!sessionState?.players || !sessionState.role) return null
 
     const { role } = sessionState

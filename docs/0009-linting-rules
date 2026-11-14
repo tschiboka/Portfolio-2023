@@ -670,27 +670,29 @@ config owns is linted.
     - [ ] Step 36.11: Run `npm run build:rules`, then verify the generated config
     - [ ] Step 36.12: Sweep every site, lifting each number into its constants file
     - [ ] Step 36.13: Confirm a green `tsc`, lint, and test run
-- [ ] Step 37: Rule — a `.tsx` declares one type, and it is the component's props
-    - [ ] Step 37.1: Build `rules/single-tsx-type/`
-    - [ ] Step 37.2: Read the file's top-level `type`, `interface` and `enum` declarations
-    - [ ] Step 37.3: Take the expected name from `expectationFor`, which already maps a role
-          chain — `Checkbox.tsx` gives `CheckboxProps`, `Session.provider.tsx` gives
-          `SessionProviderProps`
-    - [ ] Step 37.4: Report the second declaration, and any declaration not named
-          `<Expected>Props`
-    - [ ] Step 37.5: Accept a file that declares none — a component may take no props
-    - [ ] Step 37.6: Point the message at `<Expected>.types.ts`, the role that takes the rest
-    - [ ] Step 37.7: Skip a file whose role chain carries `spec`, which `expectationFor`
-          already resolves
-    - [ ] Step 37.8: Scope `include` to `**/*.tsx` under `src/`, `common/`, `server/`,
-          excluding `**/*.spec.*.tsx` and `**/*.code.tsx`
-    - [ ] Step 37.9: Register as `severity: 'error'`
-    - [ ] Step 37.10: Add `tests/SingleTsxType.spec.ts` — a correctly named props type, and
-          no type, accepted; a second declaration, a bare `Props` and a misnamed one reported
-    - [ ] Step 37.11: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 37.12: Sweep the 69 declarations — a bare `Props` takes its stem, anything else
-          moves to `<Expected>.types.ts`
-    - [ ] Step 37.13: Confirm a green `tsc`, lint, and test run
+- [x] Step 37: Rule — one local type at most, and it is the props of the function below
+    - [x] Step 37.1: Build `rules/single-local-type/`
+    - [x] Step 37.2: Read the file's top-level `type` and `enum` declarations
+    - [x] Step 37.3: Take the expected name from the function the declaration types, wherever
+          that function sits — a component or any other function, one suffix, `<Name>Props`
+    - [x] Step 37.4: Report a declaration that is not named `<Name>Props`, and one that does not
+          sit directly above its own function
+    - [x] Step 37.5: Accept a file that declares none — a function may take no props
+    - [x] Step 37.6: Point the message at `<Stem>.types.ts`, the file that takes the rest
+    - [x] Step 37.7: Resolve a spec file's home to `<Stem>.spec.types.ts`, dropping the
+          extension and a trailing `.utils`
+    - [x] Step 37.8: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/`, `server/` and
+          `rules/`, excluding `**/*.types.ts`, `common/types/**`, `**/*.code.*` and
+          `**/*.generated.*`
+    - [x] Step 37.9: Register as `severity: 'error'`
+    - [x] Step 37.10: Add `tests/SingleLocalType.spec.ts` — a correctly named props type, and
+          no declaration, accepted; a second declaration, a bare `Props`, a misnamed one and a
+          misplaced one reported
+    - [x] Step 37.11: Build `rules/no-interface/` — an `interface` is refused unless it sits in
+          an ambient `declare` block, since only a merge needs one
+    - [x] Step 37.12: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 37.13: Sweep every site across `src/`, `common/`, `server/` and `rules/`
+    - [x] Step 37.14: Confirm a green `tsc`, lint, and test run
 - [ ] Step 38: Rule — a regular expression is registered in `Regexp`, never written elsewhere
     - [ ] Step 38.1: Build `rules/regexp-registry/` as a registrar, a constants file and a spec
     - [ ] Step 38.2: Flag any regex literal outside `common/utils/Regexp/Regexp.ts`, whatever the

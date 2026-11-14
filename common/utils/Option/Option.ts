@@ -39,6 +39,7 @@ export const Option = {
 }
 
 /** A selectable choice: a display label paired with a value. */
+// eslint-disable-next-line standards/single-local-type -- merges with `Option` above into one exported name, so the two cannot be split across files.
 export type Option<T = string> = {
     value: T
     label: string

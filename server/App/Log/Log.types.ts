@@ -9,7 +9,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for an error log entry. */
-export interface ILog extends Document {
+export type ILog = Document & {
     timestamp: string
     name: string
     message: string

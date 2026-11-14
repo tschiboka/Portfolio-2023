@@ -4,11 +4,6 @@ import { Query, QueryKey } from '@common-utils'
 import type { ErrorResponse } from '@common-utils'
 import type { GetSettingsResponse, PostLoginRequest, PostLoginResponse } from '@common-types'
 
-type UsePostOptions = {
-    onSuccess?: (response: PostLoginResponse) => void
-    onError?: (error: AxiosError<ErrorResponse>) => void
-}
-
 /** Reads the app settings that gate the login screen. */
 const useGet = () =>
     useQuery<GetSettingsResponse, AxiosError<ErrorResponse>>({
@@ -18,8 +13,12 @@ const useGet = () =>
             .Get<GetSettingsResponse>(QueryKey.AppSettings.build()),
     })
 
+type UsePostProps = {
+    onSuccess?: (response: PostLoginResponse) => void
+    onError?: (error: AxiosError<ErrorResponse>) => void
+}
 /** Logs a user in, reporting the outcome through the caller's handlers. */
-const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+const usePost = ({ onSuccess, onError }: UsePostProps = {}) => {
     const request = Query.FeatureQuery().path('Login').build()
 
     return useMutation<PostLoginResponse, AxiosError<ErrorResponse>, PostLoginRequest>({

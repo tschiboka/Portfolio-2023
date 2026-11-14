@@ -4,9 +4,8 @@ import { FiDownload } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import { Button, Heading, Paragraph, Table, Stack } from '@common-ux'
 import type { TableColumns } from '@common-ux'
+import type { Skill } from './HireIntro.types'
 import './HireIntro.scss'
-
-type Skill = { area: string; technology: string; focus: string }
 
 const skills: Skill[] = [
     {

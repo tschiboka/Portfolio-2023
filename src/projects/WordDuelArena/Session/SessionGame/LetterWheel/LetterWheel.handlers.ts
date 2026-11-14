@@ -3,15 +3,16 @@ import { LetterWheelUtils } from './LetterWheel.utils'
 import { TouchState } from './LetterWheel.types'
 import { WebSocketRequest } from '../../Session.types'
 import { WordConstants } from '../../../common/utils'
+import type { CreateHandleTouchProps } from './LetterWheel.types'
 
-type HandleKeyPressDepsProps = {
+type CreateHandleKeyPressProps = {
     touchState: TouchState
     setTouchState: Dispatch<SetStateAction<TouchState>>
     send: (msg: WebSocketRequest) => void
 }
 
 const createHandleKeyPress =
-    ({ touchState, setTouchState, send }: HandleKeyPressDepsProps) =>
+    ({ touchState, setTouchState, send }: CreateHandleKeyPressProps) =>
     (e: KeyboardEvent) => {
         const isLetter = e.key.length === 1 && e.key.match(/[a-z]/i)
         if (isLetter && touchState.touchedLetters.length < WordConstants.maxLength)
@@ -24,10 +25,6 @@ const createHandleKeyPress =
         if (LetterWheelUtils.isSubmitKeyStroke(e.key))
             LetterWheelUtils.submitMove({ letters: touchState.touchedLetters, send, setTouchState })
     }
-
-type CreateHandleTouchProps = {
-    setTouchState: Dispatch<SetStateAction<TouchState>>
-}
 
 const createHandleTouchStart =
     ({ setTouchState }: CreateHandleTouchProps): EventListener =>

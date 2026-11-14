@@ -3,9 +3,7 @@ import { getQueryText, getWidths, isTokenWidth } from './NoMagicBreakpoint.utils
 import { MediaQueryKey } from '../styleProcessor.js'
 import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type PropertyNode = Parameters<Defined<Rule.NodeListener['Property']>>[0]
+import type { PropertyNode } from './NoMagicBreakpoint.types.js'
 
 /** Answers whether a property is the marker the style processor emits for `@media`. */
 const isMediaQuery = (node: PropertyNode): boolean =>

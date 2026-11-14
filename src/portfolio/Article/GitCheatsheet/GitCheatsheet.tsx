@@ -10,12 +10,12 @@ import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 import { Article } from '../Article'
 
-type Props = {
+type GitCheatsheetProps = {
     pageName: string
     path: string
 }
 
-export const GitCheatsheet = ({ pageName, path }: Props) => {
+export const GitCheatsheet = ({ pageName, path }: GitCheatsheetProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="Git Cheat Sheet">

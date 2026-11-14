@@ -7,14 +7,7 @@ import { LoopService } from '../../infrastructure/presence/Loop.service'
 import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
 import type { Server } from 'http'
-import type WebSocket from 'ws'
-
-interface DeviceWebSocket extends WebSocket {
-    sessionId: string
-    deviceId: string
-}
-
-type DeviceWebSocketRequest = { type: string; payload?: unknown }
+import type { DeviceWebSocket, DeviceWebSocketRequest } from './WS.types'
 
 export async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })

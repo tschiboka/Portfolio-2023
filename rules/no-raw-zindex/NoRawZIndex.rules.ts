@@ -7,9 +7,7 @@ import {
     keyTextOf,
 } from './NoRawZIndex.utils.js'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type PropertyNode = Parameters<Defined<Rule.NodeListener['Property']>>[0]
+import type { PropertyNode } from './NoRawZIndex.types.js'
 
 const Eslint = {
     NoRawZIndex9: {

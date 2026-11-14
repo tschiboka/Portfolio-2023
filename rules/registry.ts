@@ -29,6 +29,8 @@ import { registrar as roleFilePascalRegistrar } from './role-file-pascal/RoleFil
 import { registrar as predicateCaseRegistrar } from './predicate-case/PredicateCase.registrar.js'
 import { registrar as aliasShapeRegistrar } from './alias-shape/AliasShape.registrar.js'
 import { registrar as noReactNamespaceRegistrar } from './no-react-namespace/NoReactNamespace.registrar.js'
+import { registrar as singleLocalTypeRegistrar } from './single-local-type/SingleLocalType.registrar.js'
+import { registrar as noInterfaceRegistrar } from './no-interface/NoInterface.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -64,4 +66,6 @@ export const RuleRegistry: RuleRegistrar[] = [
     predicateCaseRegistrar,
     aliasShapeRegistrar,
     noReactNamespaceRegistrar,
+    singleLocalTypeRegistrar,
+    noInterfaceRegistrar,
 ].map(withPrefixedReports)

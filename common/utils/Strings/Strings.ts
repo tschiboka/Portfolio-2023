@@ -1,7 +1,7 @@
-import { trim } from './optional/trim'
-import { toUndefined } from './optional/toUndefined'
-import { isString, isEmpty } from '../Predicate'
-import type { Nullish } from '../Generics'
+import { trim } from './optional/trim.js'
+import { toUndefined } from './optional/toUndefined.js'
+import { isString, isEmpty } from '../Predicate/Predicate.js'
+import type { Nullish } from '../Generics/index.js'
 
 /** Case-insensitive equality: `true` when both strings are equal after lowercasing.
  * @example

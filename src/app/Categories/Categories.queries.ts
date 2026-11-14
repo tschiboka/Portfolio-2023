@@ -15,10 +15,10 @@ const useGet = () => {
     )
 }
 
-type UsePost = { onSuccess: VoidFunction }
+type UsePostProps = { onSuccess: VoidFunction }
 
 /** Creates a category. */
-const usePost = ({ onSuccess }: UsePost) => {
+const usePost = ({ onSuccess }: UsePostProps) => {
     const token = Session.useContext().session?.token
     const request = Query.FeatureQuery().path('Categories').token(token).build()
 

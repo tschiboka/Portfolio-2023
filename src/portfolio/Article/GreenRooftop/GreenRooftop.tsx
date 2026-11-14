@@ -34,12 +34,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-interface Props {
+type GreenRooftopProps = {
     pageName: string
     path: string
 }
 
-export const GreenRooftop = ({ pageName, path }: Props) => {
+export const GreenRooftop = ({ pageName, path }: GreenRooftopProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="Green Rooftop">

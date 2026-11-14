@@ -5,33 +5,29 @@ import { XmasModel } from './Xmas.model'
 import { XmasSchema } from './Xmas.schema'
 import { UsersMiddleware } from '../../App/Users/Users.middleware'
 import { UsersModel } from '../../App/Users/Users.model'
-import { TypedRequest, TypedResponse } from '../../../common/types'
+import { TypedRequest } from '../../../common/types'
 import type {
-    XmasMessage as XmasMessageEntity,
-    XmasCandles,
-    GetXmasCandlesResponse,
-    GetXmasMessagesQuery,
-    GetXmasMessagesResponse,
-    GetXmasPingResponse,
-    PostXmasMessageRequest,
-    PostXmasMessageResponse,
-    PutXmasCandlesRequest,
-    PutXmasCandlesResponse,
-} from '../../../common/types'
+    GetCandlesRes,
+    GetMessagesReq,
+    GetMessagesRes,
+    GetPingRes,
+    PostMessageReq,
+    PostMessageRes,
+    PutCandlesReq,
+    PutCandlesRes,
+} from './Xmas.types'
+import type { XmasMessage as XmasMessageEntity, XmasCandles } from '../../../common/types'
 
 const { auth } = UsersMiddleware
 
 const router = express.Router()
 
-type GetPingRes = TypedResponse<GetXmasPingResponse>
 router.get('/', (_req: TypedRequest, res: GetPingRes) =>
     ApiResponder.ok(res, { data: { message: ApiMessage.ok() } }),
 )
 
 router.get('/device', (_req: TypedRequest, res) => ApiResponder.text(res, '<<<OK>>>'))
 
-type PostMessageReq = TypedRequest<{ body: PostXmasMessageRequest }>
-type PostMessageRes = TypedResponse<PostXmasMessageResponse>
 router.post('/message', auth, async (req: PostMessageReq, res: PostMessageRes) => {
     const { error } = XmasSchema.Message.validate(req.body)
     if (error) throw ApiResponder.badRequest(error)
@@ -42,8 +38,6 @@ router.post('/message', auth, async (req: PostMessageReq, res: PostMessageRes) =
     return ApiResponder.created(res, { message: ApiMessage.sent('message') })
 })
 
-type GetMessagesReq = TypedRequest<{ query: GetXmasMessagesQuery }>
-type GetMessagesRes = TypedResponse<GetXmasMessagesResponse>
 router.get('/message', auth, async (req: GetMessagesReq, res: GetMessagesRes) => {
     const { userId } = req.query
     if (!userId) throw ApiResponder.badRequest(ApiMessage.required('userId'))
@@ -84,7 +78,6 @@ router.put('/message/device/markread', async (_req: TypedRequest, res) => {
     return ApiResponder.text(res, '<<<OK>>>')
 })
 
-type GetCandlesRes = TypedResponse<GetXmasCandlesResponse>
 router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
     const candles = await XmasModel.Candle.find().lean<XmasCandles[]>()
 
@@ -102,8 +95,6 @@ router.get('/candles', auth, async (_req: TypedRequest, res: GetCandlesRes) => {
     return ApiResponder.ok(res, { data: { candles: candles[0] } })
 })
 
-type PutCandlesReq = TypedRequest<{ body: PutXmasCandlesRequest }>
-type PutCandlesRes = TypedResponse<PutXmasCandlesResponse>
 router.put('/candles', auth, async (req: PutCandlesReq, res: PutCandlesRes) => {
     const { error } = XmasSchema.Candle.validate(req.body)
     if (error) throw ApiResponder.badRequest(error)

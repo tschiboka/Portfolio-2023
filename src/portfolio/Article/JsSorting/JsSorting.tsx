@@ -8,12 +8,12 @@ import { getReferenceList } from '../References.data'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import './JsSorting.scss'
 
-interface Props {
+type JsSortingProps = {
     pageName: string
     path: string
 }
 
-export const JsSorting = ({ pageName, path }: Props) => {
+export const JsSorting = ({ pageName, path }: JsSortingProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="JavaScript Sorting">

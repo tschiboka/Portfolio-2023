@@ -3,9 +3,8 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ESLint } from 'eslint'
 import { RuleRegistry } from './registry.js'
-import type { Rule } from 'eslint'
-import type { LinterKind, RuleRequirement, RuleRegistrar, RuleScope, RuleSetting } from './types.js'
-import type { Dictionary } from '../common/utils/Generics/Generics.types.js'
+import type { RuleRequirement, RuleRegistrar } from './types.js'
+import type { BuiltStandards, LinterVersions } from './builder.types.js'
 
 /**
  * Compares two `x.y.z` versions by numeric part.
@@ -123,14 +122,3 @@ export const ruleBuilder = {
 }
 
 ruleBuilder.emit('../standards.config.js', 'standards')
-
-/** Installed version per linter, e.g. `{ eslint: '9.39.5' }`. Missing means unavailable. */
-export type LinterVersions = Partial<Record<LinterKind, string>>
-
-/** The two config fragments derived from the registry, plus the plugin name they sit under. */
-export type BuiltStandards = {
-    pluginName: string
-    rules: Dictionary<Rule.RuleModule>
-    settings: Dictionary<RuleSetting>
-    scopes: Dictionary<RuleScope>
-}

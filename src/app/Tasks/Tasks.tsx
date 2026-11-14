@@ -3,11 +3,11 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { Form, Heading, Main, Paragraph } from '@common-ux'
 import './Tasks.scss'
 
-interface TaskProps {
+type TasksProps = {
     path: string
 }
 
-export const Tasks = ({ path }: TaskProps) => {
+export const Tasks = ({ path }: TasksProps) => {
     const { control } = useForm({
         defaultValues: {
             taskName: '',

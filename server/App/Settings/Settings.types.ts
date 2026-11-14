@@ -8,7 +8,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for application settings. */
-export interface ISetting extends Document {
+export type ISetting = Document & {
     maxUsers: number
     enableMaintenanceMode: boolean
     enableUserRegistration: boolean

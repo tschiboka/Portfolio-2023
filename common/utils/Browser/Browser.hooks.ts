@@ -1,22 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { Nullable } from '@common-utils'
-import type { Orientation, VisibilityEntry } from './Browser.types'
+import type {
+    FullScreenDocument,
+    FullScreenElement,
+    Orientation,
+    VisibilityEntry,
+} from './Browser.types'
 
 const MOBILE_BREAKPOINT = 1024
-
-// Vendor-prefixed Fullscreen API types
-interface FullScreenElement {
-    requestFullscreen?: () => Promise<void>
-    webkitRequestFullscreen?: () => Promise<void>
-    msRequestFullscreen?: () => Promise<void>
-}
-
-interface FullScreenDocument {
-    exitFullscreen?: () => Promise<void>
-    webkitExitFullscreen?: () => Promise<void>
-    msExitFullscreen?: () => Promise<void>
-    fullscreenElement?: Nullable<Element>
-}
 
 const useFullScreen = <T extends HTMLElement>() => {
     const ref = useRef<T>(null)

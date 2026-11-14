@@ -1,4 +1,11 @@
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
+import type { Rule } from 'eslint'
+import type { Defined, Nullable } from '../../common/utils/Generics/Generics.types.js'
+
+/** The program node the parser hands over, taken from the listener's own signature. */
+export type ProgramNode = Parameters<Defined<Rule.NodeListener['Program']>>[0]
+
+/** One statement of that program. */
+export type StatementNode = ProgramNode['body'][number]
 
 /** An AST node narrowed to the fields the placement reads. */
 export type NodeLike = {

@@ -7,12 +7,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-interface Props {
+type MaybeProps = {
     pageName: string
     path: string
 }
 
-export const Maybe = ({ pageName, path }: Props) => {
+export const Maybe = ({ pageName, path }: MaybeProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="Monet.js">

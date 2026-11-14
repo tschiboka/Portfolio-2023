@@ -4,19 +4,12 @@ import { Const } from '@common-ux'
 import { XmasFormCanvasConstants } from './XmasFormCanvas.constants'
 import { XmasFormCanvasDefaults } from './XmasFormCanvas.defaults'
 import type { ReactNode } from 'react'
+import type { Light } from './XmasFormCanvas.types'
 
-interface XmasFormCanvasProps {
+type XmasFormCanvasProps = {
     children: ReactNode
     lightCount?: number
     lightSize?: number
-}
-
-interface Light {
-    x: number
-    y: number
-    color: string
-    phase: number
-    baseOpacity: number
 }
 
 export const XmasFormCanvas = ({
@@ -93,7 +86,8 @@ export const XmasFormCanvas = ({
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
         lightsRef.current.forEach((light, index) => {
-            const twinkleSpeed = twinkle.baseSpeed + (index % twinkle.speedCycle) * twinkle.speedStep
+            const twinkleSpeed =
+                twinkle.baseSpeed + (index % twinkle.speedCycle) * twinkle.speedStep
             const twinkleAmount =
                 Math.sin(time * twinkleSpeed + light.phase) * twinkle.amplitude + twinkle.floor
             const opacity = light.baseOpacity * twinkleAmount

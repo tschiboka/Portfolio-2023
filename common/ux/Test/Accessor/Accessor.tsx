@@ -1,11 +1,9 @@
 import userEvent from '@testing-library/user-event'
 import { screen, within, waitFor } from '@testing-library/react'
 import { isDefined, isFunction } from '@common-utils'
-import type { BoundFunctions, queries } from '@testing-library/react'
 import type { UserEvent } from '@testing-library/user-event'
 import type { Dictionary, Nullish } from '@common-utils'
-
-type Scope = BoundFunctions<typeof queries>
+import type { Scope } from './Accessor.types'
 
 // Unified error factory — all accessor errors use this format: "Context: not found (detail)"
 export const TestError = {

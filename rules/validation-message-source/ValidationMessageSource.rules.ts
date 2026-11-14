@@ -8,9 +8,7 @@ import {
 import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Node, ObjectExpression } from 'estree'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
+import type { CallNode } from './ValidationMessageSource.types.js'
 
 const Eslint = {
     ValidationMessageSource9: {

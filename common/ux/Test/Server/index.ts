@@ -1,5 +1,5 @@
 export { Server } from './Server'
 export { MockBuilder, MockEntitiesBuilder } from './MockBuilder'
 export { RequestBuilder, HttpMethods } from './RequestBuilder'
-export type { MockBuilderType } from './MockBuilder'
+export type { MockBuilderType } from './MockBuilder.types'
 export type { Buildable, RequestBuilderResult } from './RequestBuilder.types'

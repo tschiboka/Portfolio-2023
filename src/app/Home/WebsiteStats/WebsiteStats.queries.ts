@@ -5,12 +5,12 @@ import { Session } from '@shared-context'
 import type { GetActivityFeedQuery, GetActivityFeedResponse } from '@common-types'
 import type { ErrorResponse } from '@common-utils'
 
-type UseGetActivityFeedOptions = {
+type UseGetActivityFeedProps = {
     params: GetActivityFeedQuery
 }
 
 /** Reads a page of the activity feed for the website stats table. */
-const useGetActivityFeed = ({ params }: UseGetActivityFeedOptions) => {
+const useGetActivityFeed = ({ params }: UseGetActivityFeedProps) => {
     const token = Session.useContext().session?.token
     const request = Query.FeatureQuery()
         .path('Activity')

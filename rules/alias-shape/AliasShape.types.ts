@@ -1,3 +1,8 @@
+import type { Rule } from 'eslint'
+
+/** ESLint's own node types are built from `@types/estree`, which omits every TS type node. */
+export type UnionNode = Rule.Node & TypeLike
+
 /** A type node, narrowed to the parts a written shape is read from. */
 export type TypeLike = {
     type: string

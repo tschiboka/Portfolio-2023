@@ -7,11 +7,6 @@ import type {
     ActivityErrorDetails,
 } from '../BreakdownTable/BreakdownTable.types'
 
-type ActivityDetailsModalProps = {
-    row: BreakdownRow
-    onClose: VoidFunction
-}
-
 type FieldProps = {
     label: string
     children: ReactNode
@@ -80,6 +75,11 @@ const ErrorContent = ({ details }: { details: ActivityErrorDetails }) => (
         )}
     </Stack.Vertical>
 )
+
+type ActivityDetailsModalProps = {
+    row: BreakdownRow
+    onClose: VoidFunction
+}
 
 export const ActivityDetailsModal = ({ row, onClose }: ActivityDetailsModalProps) => {
     const isMessage = row.type === 'message'

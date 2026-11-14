@@ -4,9 +4,9 @@ import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { PillsCode } from './Pills.code'
 import { StoryNav } from '../StoryNav/StoryNav'
 
-type PillsProps = { path: string }
-
 const colors = ['accent', 'error', 'success', 'warning', 'orange', 'purple', 'gray'] as const
+
+type PillsProps = { path: string }
 
 export const Pills = ({ path }: PillsProps) => (
     <Screen

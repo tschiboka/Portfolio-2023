@@ -3,7 +3,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { GymQueries } from './Gym.queries'
 import { ExercisesSection } from './components/ExercisesSection/ExercisesSection'
 
-interface GymProps {
+type GymProps = {
     path: string
 }
 

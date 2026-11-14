@@ -1,7 +1,7 @@
 import { Main, Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
-interface RecordProps {
+type RecordProps = {
     path: string
 }
 

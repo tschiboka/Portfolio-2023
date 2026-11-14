@@ -1,7 +1,7 @@
-﻿import WebSocket from 'ws'
-import { validateSession } from './validation/session/session'
+﻿import { validateSession } from './validation/session/session'
 import { WdaWsResponseTypes } from '../../../../../common/types/projects/wda'
 import type { Nullable } from '@common-utils'
+import type { DeviceWebSocket } from './WS.types'
 import type {
     Session,
     SessionState,
@@ -15,10 +15,6 @@ import type {
     WdaPlayableLevelWord,
     WdaWsResponse,
 } from '../../../../../common/types/projects/wda'
-
-interface DeviceWebSocket extends WebSocket {
-    deviceId: string
-}
 
 function broadcastSessionState(session: Session) {
     const connections = session.connections as Set<DeviceWebSocket>

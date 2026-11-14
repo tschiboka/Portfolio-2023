@@ -4,7 +4,7 @@ import { AccessGuard } from '@shared-components/AccessGuard'
 import { AdminHome } from './components/AdminHome'
 import { GuestHome } from './components/GuestHome'
 
-interface HomeProps {
+type HomeProps = {
     path: string
 }
 

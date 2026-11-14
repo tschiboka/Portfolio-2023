@@ -8,7 +8,7 @@ import type { Reference } from '../../../portfolio/Article/components/References
 import type { FigureSize } from '../../../../common/ux/Figure/Figure.types'
 import './Figure.scss'
 
-interface Props {
+type FigureProps = {
     image: string
     className?: string
     alt: string
@@ -28,7 +28,7 @@ export const Figure = ({
     reference,
     bgColor,
     size,
-}: Props) => {
+}: FigureProps) => {
     const { setOverlayVisible, setOverlayContent, setMainMenuVisible, setSubMenuVisible } =
         AppHooks.useContext()
 

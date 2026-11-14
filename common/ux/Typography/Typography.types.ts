@@ -78,7 +78,7 @@ export type ListProps = Pick<
         items: ListItem[]
     }
 
-export interface InlineReferenceSource {
+export type InlineReferenceSource = {
     title: string
     author: string
     source: string

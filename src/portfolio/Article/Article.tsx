@@ -12,7 +12,7 @@ import { BlogTimeStamp } from '../Blog/components/BlogTimeStamp/BlogTimeStamp'
 import { SuggestedArticles } from '../Blog/components/SuggestedArticles/SuggestedArticles'
 import './Articles.styles.scss'
 
-interface Props {
+type ArticleProps = {
     pageName: string
     path: string
     title: string
@@ -20,7 +20,13 @@ interface Props {
     hasContentNavigator?: boolean
 }
 
-export const Article = ({ pageName, path, title, children, hasContentNavigator = true }: Props) => {
+export const Article = ({
+    pageName,
+    path,
+    title,
+    children,
+    hasContentNavigator = true,
+}: ArticleProps) => {
     const article = blogArticles.find((article) => article.to === path)
     const [articleLiked, setArticleLiked] = useState(false)
     const references = getReferenceList(path)

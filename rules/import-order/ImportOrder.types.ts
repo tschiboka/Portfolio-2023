@@ -1,3 +1,9 @@
+import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
+
+/** The node the parser hands over, read from the listener's own signature rather than re-declared. */
+export type ImportNode = Parameters<Defined<Rule.NodeListener['ImportDeclaration']>>[0]
+
 /** An import statement, narrowed to what the ranks read. */
 export type ImportStatement = {
     source: { value?: unknown }

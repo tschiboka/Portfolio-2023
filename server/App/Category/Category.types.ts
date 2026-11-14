@@ -9,7 +9,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a category. */
-export interface ICategory extends Document {
+export type ICategory = Document & {
     name: string
     userId: ObjectId
     description: string

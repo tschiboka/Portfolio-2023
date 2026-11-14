@@ -11,12 +11,12 @@ import { Article } from '../Article'
 import { InlineReference } from '../components/InlineReference/InlineReference'
 import { getReferenceList } from '../References.data'
 
-interface Props {
+type ReactAnatomyProps = {
     pageName: string
     path: string
 }
 
-export const ReactAnatomy = ({ pageName, path }: Props) => {
+export const ReactAnatomy = ({ pageName, path }: ReactAnatomyProps) => {
     const references = getReferenceList(path)
     return (
         <Article pageName={pageName} path={path} title="Brief React Anatomy">

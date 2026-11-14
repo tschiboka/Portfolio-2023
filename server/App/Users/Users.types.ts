@@ -16,7 +16,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a user. `Document<ObjectId>` types `_id`, which defaults to `any`. */
-export interface IUser extends Document<ObjectId> {
+export type IUser = Document<ObjectId> & {
     fullName: string
     userName: string
     email: string
@@ -57,7 +57,7 @@ export type TokenInput = {
 }
 
 /** The JWT payload a signed auth token carries. */
-export interface UserToken {
+export type UserToken = {
     id?: string
     isAdmin: boolean
     [key: string]: unknown

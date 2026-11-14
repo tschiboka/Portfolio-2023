@@ -10,9 +10,7 @@ import {
 import { Css } from '../css.js'
 import { isDefined, isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type PropertyNode = Parameters<Defined<Rule.NodeListener['Property']>>[0]
+import type { PropertyNode } from './NoRawColor.types.js'
 
 /**
  * Every value already checked, mapped to whether it breaks the rule.

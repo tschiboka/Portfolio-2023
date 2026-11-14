@@ -1,9 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Grid } from '../Grid'
 import { Accessor } from '../../../Test'
-import type { GridProps } from '../Grid.types'
-
-type SetProps = Partial<GridProps> & { ariaLabel: string }
+import type { SetProps } from './Grid.spec.types'
 
 const Set = {
     grid: ({ children, ...props }: SetProps) => {

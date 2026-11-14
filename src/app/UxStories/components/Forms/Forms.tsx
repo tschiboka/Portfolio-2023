@@ -5,24 +5,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { FormsCode } from './Forms.code'
 import { StoryNav } from '../StoryNav/StoryNav'
-
-type FormsProps = { path: string }
-
-type DemoForm = {
-    name: string
-    email: string
-    password: string
-    age: string
-    dob: string
-    dobNative: string
-    bio: string
-    description: string
-    role: string
-    hasParent: boolean
-    terms: boolean
-    framework: string
-    language: string
-}
+import type { DemoForm } from './Forms.types'
 
 const defaults: DemoForm = {
     name: '',
@@ -55,6 +38,8 @@ const languageOptions = [
     { label: 'Rust', value: 'rust' },
     { label: 'Go', value: 'go' },
 ]
+
+type FormsProps = { path: string }
 
 export const Forms = ({ path }: FormsProps) => {
     const { control, setValue } = useForm<DemoForm>({ defaultValues: defaults })

@@ -1,12 +1,7 @@
 ﻿import fs from 'fs/promises'
 import path from 'path'
-import type { Nullable, Dictionary } from '@common-utils'
-
-type WordResources = {
-    wordList: string[]
-    anagramMap: Dictionary<string[]>
-    frequency: Dictionary<number>
-}
+import type { Dictionary, Nullable } from '@common-utils'
+import type { WordResources } from './Word.types'
 
 let resources: Nullable<WordResources> = null
 

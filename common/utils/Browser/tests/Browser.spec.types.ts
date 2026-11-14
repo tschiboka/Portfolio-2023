@@ -1,20 +1,20 @@
 import type { Nullable } from '@common-utils'
 
 /** Vendor-prefixed Fullscreen API types — mirrors the hook's interfaces. */
-export interface FullScreenElement {
+export type FullScreenElement = {
     requestFullscreen?: () => Promise<void>
     webkitRequestFullscreen?: () => Promise<void>
     msRequestFullscreen?: () => Promise<void>
 }
 
-export interface FullScreenDocument {
+export type FullScreenDocument = {
     exitFullscreen?: () => Promise<void>
     webkitExitFullscreen?: () => Promise<void>
     msExitFullscreen?: () => Promise<void>
     fullscreenElement?: Nullable<Element>
 }
 
-export interface MockObserver {
+export type MockObserver = {
     observe: ReturnType<typeof vi.fn>
     unobserve: ReturnType<typeof vi.fn>
     disconnect: ReturnType<typeof vi.fn>

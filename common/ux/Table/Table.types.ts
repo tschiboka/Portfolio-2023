@@ -140,10 +140,7 @@ export type TablePagination = {
     onPageSizeChange: (size: number) => void
 }
 
-export interface Table<
-    TData extends Dictionary<ReactNode>,
-    TContext = unknown,
-> extends AccessibleProps {
+export type Table<TData extends Dictionary<ReactNode>, TContext = unknown> = AccessibleProps & {
     id?: string
     data?: Array<TData>
     columns: TableColumns<TData, TContext>
@@ -167,4 +164,12 @@ export interface Table<
     filtering?: TableFiltering
     pagination?: TablePagination
     actions?: TableAction<TData, TContext>[]
+}
+
+export type RenderCellArgs<TData extends Dictionary<ReactNode>, TContext> = {
+    col: TableColumn<TData, TContext>
+    row: TData
+    index: number
+    data: TData[]
+    context?: TContext
 }

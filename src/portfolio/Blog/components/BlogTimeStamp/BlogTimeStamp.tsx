@@ -2,12 +2,12 @@ import { DateTime } from '@common-utils'
 import { Paragraph } from '@common-ux/Typography/Paragraph'
 import './BlogTimeStamp.scss'
 
-interface Props {
+type BlogTimeStampProps = {
     created: string
     updated?: string
 }
 
-export const BlogTimeStamp = ({ created, updated }: Props) => {
+export const BlogTimeStamp = ({ created, updated }: BlogTimeStampProps) => {
     const createdDisplay = DateTime.Format.to('DisplayLongDate', created) ?? created
     const updatedDisplay = updated
         ? (DateTime.Format.to('DisplayLongDate', updated) ?? updated)

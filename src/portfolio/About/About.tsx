@@ -11,12 +11,12 @@ import {
 } from './components/AchievementListItem/Achievements.data'
 import './About.scss'
 
-interface Props {
+type AboutProps = {
     pageName: string
     path: string
 }
 
-export const About = ({ pageName }: Props) => (
+export const About = ({ pageName }: AboutProps) => (
     <Screen
         title="tschiboka | About"
         path="/about"

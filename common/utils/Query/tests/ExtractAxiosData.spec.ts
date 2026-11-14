@@ -1,5 +1,6 @@
 import { extractAxiosData } from '..'
 import type { AxiosResponse } from 'axios'
+import type { User } from './ExtractAxiosData.spec.types'
 
 describe('extractAxiosData', () => {
     it('should extract data from a successful Axios response', () => {
@@ -36,11 +37,6 @@ describe('extractAxiosData', () => {
     })
 
     it('should preserve the response type through the generic', () => {
-        interface User {
-            id: number
-            email: string
-        }
-
         const response = {
             data: { id: 1, email: 'a@b.com' },
             status: 200,

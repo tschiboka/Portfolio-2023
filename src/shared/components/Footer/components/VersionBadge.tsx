@@ -5,13 +5,8 @@ import { Browser, BrowserHooks, DateTime } from '@common-utils'
 import { Version } from '@shared-context'
 import { StatusIcon } from '@shared-components/StatusIcon'
 import { VersionBadgeConstants } from './VersionBadge.constants'
-import type { ReactNode } from 'react'
 import type { TableColumns } from '@common-ux'
-
-type VersionRow = {
-    prop: string
-    value: ReactNode
-}
+import type { VersionRow } from './VersionBadge.types'
 
 const versionColumns: TableColumns<VersionRow> = [
     { header: '', accessor: 'prop' },
@@ -67,7 +62,9 @@ export const VersionBadge = () => {
         },
         {
             prop: 'Last checked',
-            value: checkedAt ? (DateTime.Format.to('DisplayTimeStamp', checkedAt) ?? checkedAt) : '—',
+            value: checkedAt
+                ? (DateTime.Format.to('DisplayTimeStamp', checkedAt) ?? checkedAt)
+                : '—',
         },
     ]
 

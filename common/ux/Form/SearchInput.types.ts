@@ -6,3 +6,5 @@ export type SearchInputOption<T extends string = string> = Option<T> & {
     icon?: ReactNode
     iconColor?: string
 }
+
+export type SearchInputOptionButtonIcons = 'arrow' | 'magnifyingglass'

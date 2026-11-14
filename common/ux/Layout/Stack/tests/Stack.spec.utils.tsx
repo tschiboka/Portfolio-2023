@@ -1,13 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Stack } from '../Stack'
 import { Accessor } from '../../../Test'
-import type { ReactNode } from 'react'
-import type { StackProps } from '../Stack.types'
-
-type SetProps = Omit<StackProps, 'ariaLabel' | 'children'> & {
-    ariaLabel: string
-    children?: ReactNode
-}
+import type { SetProps } from './Stack.spec.types'
 
 const Set = {
     stack: ({ children, ...props }: SetProps) => {

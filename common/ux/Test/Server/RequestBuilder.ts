@@ -1,28 +1,15 @@
 import { http, HttpResponse, JsonBodyType } from 'msw'
 import { HttpStatus } from '@common-utils'
-import { MockBuilder, MockBuilderType } from './MockBuilder'
-import type { RequestBuilderResult } from './RequestBuilder.types'
+import { MockBuilder } from './MockBuilder'
+import type { RequestBuilderProps, RequestBuilderResult } from './RequestBuilder.types'
+import type { MockBuilderType } from './MockBuilder.types'
 
-export enum HttpMethods {
-    GET = 'get',
-    POST = 'post',
-    PUT = 'put',
-    PATCH = 'patch',
-    DELETE = 'delete',
-}
-
-type RequestBuilderOptions<T extends JsonBodyType> = {
-    path: string
-    method: HttpMethods
-    response: MockBuilderType<T> | T
-    status?: number
-    once?: boolean
-}
+export { HttpMethods } from './RequestBuilder.types'
 
 const BASE_URL = process.env.VITE_API_BASE_URL ?? 'http://localhost:5000'
 
 export const RequestBuilder = <T extends JsonBodyType>(
-    options: RequestBuilderOptions<T>,
+    options: RequestBuilderProps<T>,
 ): RequestBuilderResult<T> => {
     const { path, method, response, status = HttpStatus.OK, once = false } = options
 

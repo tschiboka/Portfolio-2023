@@ -1,3 +1,9 @@
+import type {
+    TransformerVerb,
+    TransformerVerbs,
+    TransformerSurface,
+} from './ClientTransformers.types'
+
 /**
  * Builds a `<Domain>Transformer` — every verb is on the result, always:
  * `DomainTransformers.Get('visits')` and `.Post(payload)` both type-check.
@@ -21,22 +27,9 @@ export const ClientTransformers = <TInput, TOutput, TContext = never>(
     }
 }
 
-/** Verbs a transformer may implement. Every verb is always present on the result. */
-export type TransformerVerb = 'Get' | 'Post' | 'Put' | 'Patch' | 'Delete'
-
-/** One verb's transform. `TContext` carries whatever the transform needs beyond the payload. */
-export type TransformerFn<TInput, TOutput, TContext = never> = (
-    input: TInput,
-    context?: TContext,
-) => TOutput
-
-/** What a caller may supply — any subset of the verbs. */
-export type TransformerVerbs<TInput, TOutput, TContext = never> = Partial<
-    Record<TransformerVerb, TransformerFn<TInput, TOutput, TContext>>
->
-
-/** What a transformer always returns — every verb, each callable. */
-export type TransformerSurface<TInput, TOutput, TContext = never> = Record<
+export type {
+    TransformerFn,
+    TransformerSurface,
     TransformerVerb,
-    TransformerFn<TInput, TOutput, TContext>
->
+    TransformerVerbs,
+} from './ClientTransformers.types'

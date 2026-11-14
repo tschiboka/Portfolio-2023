@@ -5,11 +5,11 @@ import { ZoomedImage } from '@shared-components/ZoomedImage'
 import type { Achievement } from './Achievements.data'
 import './AchievementListItem.scss'
 
-interface Props {
+type AchievementListItemProps = {
     achievement: Achievement
 }
 
-export const AchievementListItem = ({ achievement }: Props) => {
+export const AchievementListItem = ({ achievement }: AchievementListItemProps) => {
     const { setOverlayVisible, setOverlayContent, setMainMenuVisible, setSubMenuVisible } =
         AppHooks.useContext()
 

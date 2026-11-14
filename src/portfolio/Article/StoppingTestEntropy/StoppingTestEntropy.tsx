@@ -2,12 +2,12 @@ import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@
 import { StoppingTestEntropyCode } from './StoppingTestEntropy.code'
 import { Article } from '../Article'
 
-interface Props {
+type StoppingTestEntropyProps = {
     pageName: string
     path: string
 }
 
-export const StoppingTestEntropy = ({ pageName, path }: Props) => (
+export const StoppingTestEntropy = ({ pageName, path }: StoppingTestEntropyProps) => (
     <Article pageName={pageName} path={path} title="Stopping Test Entropy" hasContentNavigator>
         <Section>
             <Heading as="h1">Stopping Test Entropy</Heading>

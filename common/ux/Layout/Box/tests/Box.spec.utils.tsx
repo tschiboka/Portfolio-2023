@@ -2,10 +2,9 @@ import { render, screen } from '@testing-library/react'
 import { Box } from '../Box'
 import { BoxSelectors } from '../Box.selectors'
 import { Accessor } from '../../../Test'
-import type { BoxProps } from '../Box.types'
+import type { SetProps } from './Box.spec.types'
 
 const { selectBackground, selectBorderRadius } = BoxSelectors
-type SetProps = Partial<BoxProps> & { ariaLabel: string }
 
 const Set = {
     box: ({ children, ...props }: SetProps) => {

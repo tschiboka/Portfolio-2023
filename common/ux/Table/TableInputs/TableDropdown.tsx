@@ -1,10 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { Const } from '@common-ux/Const'
 import type { ReactNode } from 'react'
-import type { DropdownOption } from './TableDropdown.types'
+import type { DropdownOption, DropdownVariant } from './TableDropdown.types'
 import './TableDropdown.styles.css'
-
-type DropdownVariant = 'default' | 'ghost'
 
 type TableDropdownProps = {
     options: DropdownOption[]

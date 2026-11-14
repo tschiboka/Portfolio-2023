@@ -14,3 +14,15 @@ export type ContentNavigatorProps = {
     depth?: number
     showNavigator?: boolean
 } & AccessibleProps
+
+/** Internal representation of a heading element extracted from the content. */
+export type Heading = {
+    /** The element's `id` attribute (auto-generated if missing). */
+    id: string
+    /** Visible text content of the heading. */
+    text: string
+    /** Heading depth (1 for h1, 2 for h2, etc.). */
+    level: number
+    /** Whether the heading element is currently visible in the viewport. */
+    isVisible: boolean
+}

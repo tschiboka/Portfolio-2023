@@ -1,4 +1,5 @@
 import { isDefined } from '../Predicate'
+import type { CacheKey, CacheKeyState } from './QueryKey.types'
 import type { Dictionary } from '../Generics'
 
 export class CacheKeyBuilder {
@@ -93,11 +94,4 @@ export const QueryKey = {
     },
 }
 
-type CacheKeyState = {
-    key: string
-    feature?: string
-    id?: string | number
-    filters?: Dictionary
-}
-
-export type CacheKey = Array<string | number | Dictionary>
+export type { CacheKey } from './QueryKey.types'

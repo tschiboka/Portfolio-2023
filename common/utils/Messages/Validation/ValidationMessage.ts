@@ -1,10 +1,5 @@
 import { Strings } from '../../Strings'
-
-/* Polarity of a validation rule — what the field forbids, or what it demands. */
-type Mode = 'contains' | 'only'
-
-/* Direction of a magnitude rule — the floor a field must reach, or its ceiling. */
-type BoundMode = 'at least' | 'at most' | 'under'
+import type { BoundMode, Mode } from './ValidationMessage.types'
 
 const allowed = (f: string, subject: string, mode: Mode): string =>
     mode === 'only'

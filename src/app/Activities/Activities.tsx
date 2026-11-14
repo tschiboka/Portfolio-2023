@@ -1,7 +1,7 @@
 import { Heading } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 
-interface ActivitiesProps {
+type ActivitiesProps = {
     path: string
 }
 

@@ -1,9 +1,7 @@
 import { render } from '@testing-library/react'
 import { Section } from '../Section'
 import { Test } from '../../Test'
-import type { SectionProps } from '../Region.types'
-
-type Props = Partial<SectionProps>
+import type { Props } from './Section.spec.types'
 
 const Set = {
     section: (props: Props = {}) => {

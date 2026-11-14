@@ -1,12 +1,5 @@
+import type { ValidationResult } from './ValidateDevice.types'
 import type { Session } from '../../../../WordDuelArena.types'
-
-type AllowedConnectionResult = { allowed: true }
-type DeniedConnectionResult = {
-    allowed: false
-    reason: string
-    message: string
-}
-type ValidationResult = AllowedConnectionResult | DeniedConnectionResult
 
 const validate = (session: Session, deviceId: string): ValidationResult => {
     const { player1, player2 } = session.state?.players ?? {}

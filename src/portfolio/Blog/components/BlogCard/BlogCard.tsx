@@ -12,17 +12,6 @@ import type { MouseEvent } from 'react'
 import type { Dictionary } from '@common-utils'
 import './BlogCard.scss'
 
-interface Props {
-    blogArticle: BlogArticle
-    visits: number
-    readingTime?: string
-    codeTime?: string
-    likes: number
-    path: string
-    upcoming?: boolean
-    newest: boolean
-}
-
 const pillColorMap: Dictionary<
     'accent' | 'error' | 'success' | 'warning' | 'orange' | 'purple' | 'gray'
 > = {
@@ -41,6 +30,17 @@ const pillColorMap: Dictionary<
 const toPillColor = (badge: string) =>
     pillColorMap[ProjectsSelectors.getColourName(badge)] ?? 'gray'
 
+type BlogCardProps = {
+    blogArticle: BlogArticle
+    visits: number
+    readingTime?: string
+    codeTime?: string
+    likes: number
+    path: string
+    upcoming?: boolean
+    newest: boolean
+}
+
 export const BlogCard = ({
     blogArticle,
     visits,
@@ -49,7 +49,7 @@ export const BlogCard = ({
     likes,
     path,
     newest,
-}: Props) => {
+}: BlogCardProps) => {
     const navigate = useNavigate()
     const [articleLiked, setArticleLiked] = useState(false)
     const { mutate: doPostLike } = LikeQueries.usePost()

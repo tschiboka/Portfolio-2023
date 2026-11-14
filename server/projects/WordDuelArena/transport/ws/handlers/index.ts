@@ -1,12 +1,7 @@
 import { MoveHandlers } from './Move.handlers'
 import { JoinHandlers } from './Join.handlers'
-import type { MoveHandlerParams, Session } from '../../../WordDuelArena.types'
-
-interface HandlerContext {
-    session: Session
-    deviceId: string
-    payload?: unknown
-}
+import type { HandlerContext } from '../WS.types'
+import type { MoveHandlerParams } from '../../../WordDuelArena.types'
 
 export async function routeMessage(type: string, ctx: HandlerContext) {
     switch (type) {

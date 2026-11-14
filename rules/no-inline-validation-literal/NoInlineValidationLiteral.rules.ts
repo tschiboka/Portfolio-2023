@@ -17,10 +17,7 @@ import {
 import { isNull, isUndefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Node } from 'estree'
 import type { Rule } from 'eslint'
-import type { Defined } from '../../common/utils/Generics/Generics.types.js'
-
-type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
-type BinaryNode = Parameters<Defined<Rule.NodeListener['BinaryExpression']>>[0]
+import type { BinaryNode, CallNode } from './NoInlineValidationLiteral.types.js'
 
 const Eslint = {
     NoInlineValidationLiteral9: {

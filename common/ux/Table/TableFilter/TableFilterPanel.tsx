@@ -1,11 +1,9 @@
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react'
 import { FilterInput } from './FilterInput'
-import type { Dictionary } from '@common-utils'
 import type { TableFilterPanelHandle } from './TableFilter.types'
-import type { TableFilteringInput, TableFiltering } from '../Table.types'
+import type { FilterValues, TableFilterPanelProps } from './TableFilterPanel.types'
+import type { TableFilteringInput } from '../Table.types'
 import './TableFilterPanel.styles.css'
-
-type FilterValues = Dictionary
 
 const getDefaultValue = (input: TableFilteringInput): unknown => {
     switch (input.type) {
@@ -26,11 +24,6 @@ const normalizeValues = (inputs: TableFilteringInput[], values: FilterValues): F
     Object.fromEntries(
         inputs.map((input) => [input.key, values[input.key] ?? getDefaultValue(input)]),
     )
-
-type TableFilterPanelProps = {
-    id?: string
-    filtering: TableFiltering
-}
 
 export const TableFilterPanel = forwardRef<TableFilterPanelHandle, TableFilterPanelProps>(
     ({ id, filtering }, ref) => {

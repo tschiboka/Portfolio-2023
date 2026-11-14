@@ -3,11 +3,11 @@ import { AchievementListItem } from '../AchievementListItem/AchievementListItem'
 import type { Achievement } from '../AchievementListItem/Achievements.data'
 import './AchievementList.scss'
 
-interface Props {
+type AchievementListProps = {
     achievements: Achievement[]
 }
 
-export const AchievementList = ({ achievements }: Props) => (
+export const AchievementList = ({ achievements }: AchievementListProps) => (
     <List
         className="AchievementList"
         items={achievements.map((achievement) => ({

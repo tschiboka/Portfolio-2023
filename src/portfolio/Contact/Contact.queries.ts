@@ -6,13 +6,13 @@ import type { ErrorResponse } from '@common-utils'
 import type { PostMessageResponse } from '@common-types'
 import type { ContactFormData } from './Contact.types'
 
-type UsePostOptions = {
+type UsePostProps = {
     onSuccess?: (response: PostMessageResponse) => void
     onError?: (error: AxiosError<ErrorResponse>) => void
 }
 
 /** Sends a contact message to the API. */
-const usePost = ({ onSuccess, onError }: UsePostOptions = {}) => {
+const usePost = ({ onSuccess, onError }: UsePostProps = {}) => {
     const request = new Query.RequestBuilder('Message').build()
 
     return useMutation<PostMessageResponse, AxiosError<ErrorResponse>, ContactFormData>({

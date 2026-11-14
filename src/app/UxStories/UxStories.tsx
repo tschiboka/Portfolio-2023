@@ -2,9 +2,8 @@ import { Link, Main, Heading, Paragraph, Stack, Table } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { stories } from './UxStories.data'
+import type { StoryRow } from './UxStories.types'
 import './UxStories.styles.css'
-
-type StoryRow = { name: string; description: string; path: string }
 
 const data: StoryRow[] = stories.map((s) => ({
     name: s.label,
@@ -12,7 +11,7 @@ const data: StoryRow[] = stories.map((s) => ({
     path: s.path,
 }))
 
-interface UxStoriesProps {
+type UxStoriesProps = {
     path: string
 }
 

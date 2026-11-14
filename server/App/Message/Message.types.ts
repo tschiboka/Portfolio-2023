@@ -7,7 +7,7 @@ import type {
 } from '../../../common/types'
 
 /** Mongoose document shape for a contact message. */
-export interface IMessage extends Document {
+export type IMessage = Document & {
     name: string
     email: string
     phone?: string

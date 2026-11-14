@@ -2,9 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { Split } from '../Split'
 import { SplitSelectors } from '../Split.selectors'
 import { Accessor } from '../../../Test'
-import type { SplitProps } from '../Split.types'
-
-type SetProps = Partial<SplitProps> & { ariaLabel: string }
+import type { SetProps } from './Split.spec.types'
 
 const Set = {
     split: (props: SetProps) => {

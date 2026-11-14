@@ -8,12 +8,12 @@ import { ProjectsDefaults, ProjectsSelectors } from '.'
 import { ProjectCard } from './ProjectCard/ProjectCard'
 import { ProjectFilter } from './ProjectFilter/ProjectFilter'
 
-interface Props {
+type ProjectsProps = {
     pageName: string
     path: string
 }
 
-export const Projects = ({ pageName }: Props) => {
+export const Projects = ({ pageName }: ProjectsProps) => {
     const [selectedLanguages, setSelectedLanguages] = useState<Set<string>>(new Set())
     const [selectedFilter, setSelectedFilter] = useState<string>(ProjectsDefaults.defaultFilter)
 
