@@ -1,6 +1,6 @@
 import { ExportStyleRanks } from './ExportOrder.constants.js'
 import { pathRankOf } from '../paths.js'
-import { isDefined, isString } from '../../common/utils/Predicate/Predicate.js'
+import { isDefined, isNull, isString } from '../../common/utils/Predicate/Predicate.js'
 import type { ExportRanks, ExportStatement } from './ExportOrder.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
@@ -32,7 +32,7 @@ export const styleRankOf = (statement: ExportStatement): number => {
     if (kindOf(statement) === 'type') return ExportStyleRanks.TypeOnly
     if (statement.type === 'ExportDefaultDeclaration') return ExportStyleRanks.DefaultDeclaration
     if (isLocalType(statement)) return ExportStyleRanks.TypeOnly
-    if (pathOf(statement) === null) return ExportStyleRanks.NamedDeclaration
+    if (isNull(pathOf(statement))) return ExportStyleRanks.NamedDeclaration
     if (statement.type === 'ExportAllDeclaration')
         return isDefined(statement.exported)
             ? ExportStyleRanks.NamespaceReExport
@@ -47,13 +47,13 @@ export const styleRankOf = (statement: ExportStatement): number => {
 export const ranksOf = (statement: ExportStatement): ExportRanks => {
     const path = pathOf(statement)
 
-    return { style: styleRankOf(statement), path: path === null ? null : pathRankOf(path) }
+    return { style: styleRankOf(statement), path: isNull(path) ? null : pathRankOf(path) }
 }
 
 /** Whether a statement sits above the one before it. Two local declarations carry no path. */
 export const isOutOfOrder = (previous: ExportRanks, current: ExportRanks): boolean => {
     if (previous.style !== current.style) return current.style < previous.style
-    if (previous.path === null || current.path === null) return false
+    if (isNull(previous.path) || isNull(current.path)) return false
 
     return current.path < previous.path
 }

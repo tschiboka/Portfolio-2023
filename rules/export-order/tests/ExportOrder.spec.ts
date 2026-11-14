@@ -1,7 +1,7 @@
 import { parser } from 'typescript-eslint'
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../ExportOrder.constants'
 import { Rules } from '../ExportOrder.rules'
+import { ruleTester } from '../../config'
 
 const fileName = '/a/Feature/index.ts'
 const typed = { languageOptions: { parser } }

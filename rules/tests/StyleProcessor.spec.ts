@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { styleProcessor } from '../styleProcessor'
 import { StyleProcessorTestUtils } from './StyleProcessor.spec.utils'
+import { styleProcessor } from '../styleProcessor'
 
 const { read } = StyleProcessorTestUtils
 

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { BaseSyntheticEvent, useState } from 'react'
 import { Screen } from '@shared-components/Screen/Screen'
-import { ClientMessage, Paths, errorMessage } from '@common-utils'
+import { ClientMessage, isTruthy, Paths, errorMessage } from '@common-utils'
 import { Form, Heading, LoadingIndicator, Main, Paragraph } from '@common-ux'
 import { RegisterSchema } from './Register.schema'
 import { RegistrationFormData } from './Register.types'
@@ -126,7 +126,7 @@ export const Register = ({ path, pageName }: RegisterProps) => {
                         >
                             Login
                         </Form.Button>
-                        <Form.Button type="submit" disabled={Boolean(successfulRegistration)}>
+                        <Form.Button type="submit" disabled={isTruthy(successfulRegistration)}>
                             Register
                         </Form.Button>
                     </Form.ButtonGroup>

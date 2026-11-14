@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { AppProvider, Session, Version } from '@shared-context'
@@ -8,8 +8,8 @@ import './main.styles.scss'
 
 const client = new QueryClient()
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
         <QueryClientProvider client={client}>
             <Session.Provider>
                 <AppProvider>
@@ -19,5 +19,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
                 </AppProvider>
             </Session.Provider>
         </QueryClientProvider>
-    </React.StrictMode>,
+    </StrictMode>,
 )

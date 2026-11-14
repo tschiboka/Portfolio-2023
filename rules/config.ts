@@ -1,6 +1,6 @@
 import { RuleTester } from 'eslint'
-import type { Linter } from 'eslint'
 import { parser } from 'typescript-eslint'
+import type { Linter } from 'eslint'
 
 const baseConfig: Linter.Config = {
     languageOptions: {

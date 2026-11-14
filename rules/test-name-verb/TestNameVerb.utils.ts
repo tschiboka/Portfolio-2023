@@ -1,3 +1,6 @@
+import { isString } from '../../common/utils/Predicate/Predicate.js'
+import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
+
 type CalleeLike = {
     type: string
     name?: string
@@ -9,7 +12,7 @@ type CalleeLike = {
 type ArgumentLike = {
     type: string
     value?: unknown
-    quasis?: { value?: { cooked?: string | null } }[]
+    quasis?: { value?: { cooked?: Nullable<string> } }[]
 }
 
 /**
@@ -20,7 +23,7 @@ type ArgumentLike = {
  * The `.each` form puts a call in the callee — `it.each(rows)(name, fn)` — so the search steps
  * through it rather than reading the row list as the name.
  */
-export const getTestName = (callee: CalleeLike): string | null => {
+export const getTestName = (callee: CalleeLike): Nullable<string> => {
     if (callee.type === 'CallExpression') return callee.callee ? getTestName(callee.callee) : null
 
     if (callee.type === 'MemberExpression')
@@ -38,9 +41,8 @@ export const getTestName = (callee: CalleeLike): string | null => {
  * its placeholders sit behind it. A name passed as a binding cannot be read at all, and a rule
  * that guessed would report correct code.
  */
-export const getNameText = (argument: ArgumentLike | undefined): string | null => {
-    if (argument?.type === 'Literal')
-        return typeof argument.value === 'string' ? argument.value : null
+export const getNameText = (argument: Optional<ArgumentLike>): Nullable<string> => {
+    if (argument?.type === 'Literal') return isString(argument.value) ? argument.value : null
 
     if (argument?.type === 'TemplateLiteral') return argument.quasis?.[0]?.value?.cooked ?? null
 

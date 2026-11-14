@@ -1,8 +1,10 @@
-import { AliasErrorMessage, ErrorMessage } from './TestNameVerb.constants.js'
 import { getNameText, getTestName, isTestName } from './TestNameVerb.utils.js'
+import { AliasErrorMessage, ErrorMessage } from './TestNameVerb.constants.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type CallNode = Parameters<NonNullable<Rule.NodeListener['CallExpression']>>[0]
+type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
 
 const Eslint = {
     TestNameVerb9: {
@@ -13,10 +15,10 @@ const Eslint = {
         create(context) {
             const check = (node: CallNode): void => {
                 const name = getNameText(node.arguments[0])
-                if (name === null) return
+                if (isNull(name)) return
 
                 const testName = getTestName(node.callee)
-                if (testName === null) return
+                if (isNull(testName)) return
 
                 if (testName !== 'it') {
                     context.report({ message: AliasErrorMessage, node })

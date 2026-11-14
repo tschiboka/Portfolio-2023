@@ -1,5 +1,5 @@
-import type { RuleRegistrar } from '../types.js'
 import { Rules } from './RoleExportName.rules.js'
+import type { RuleRegistrar } from '../types.js'
 
 export const registrar: RuleRegistrar = {
     id: 'role-export-name',

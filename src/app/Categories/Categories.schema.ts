@@ -1,7 +1,7 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Const } from '@common-ux'
-import { isEmpty, isString, ValidationMessage } from '@common-utils'
+import { isEmpty, isString, isTruthy, ValidationMessage } from '@common-utils'
 import { CategoriesConstants } from './Categories.constants'
 import { Icons } from './components/Icons'
 import type { ObjectSchema } from 'yup'
@@ -16,25 +16,23 @@ const schema = (parentOptions: string[]): ObjectSchema<CategoryFormData> =>
         hasParent: yup.boolean().required(),
         parent: yup
             .string()
-            .test('is-valid-parent', ValidationMessage.Invalid('option'), (value) =>
-                isEmpty(value) || (isString(value) && parentOptions.includes(value)),
+            .test(
+                'is-valid-parent',
+                ValidationMessage.Invalid('option'),
+                (value) => isEmpty(value) || (isString(value) && parentOptions.includes(value)),
             )
             .optional(),
         icon: yup
             .string()
             .required()
-            .test(
-                'is-valid-icon',
-                ValidationMessage.Invalid('option'),
-                (value) => Boolean(Icons[value]),
+            .test('is-valid-icon', ValidationMessage.Invalid('option'), (value) =>
+                isTruthy(Icons[value]),
             ),
         color: yup
             .string()
             .required()
-            .test(
-                'is-valid-color',
-                ValidationMessage.Invalid('option'),
-                (value) => Boolean(Const.ColorSign[value]),
+            .test('is-valid-color', ValidationMessage.Invalid('option'), (value) =>
+                isTruthy(Const.ColorSign[value]),
             ),
     })
 

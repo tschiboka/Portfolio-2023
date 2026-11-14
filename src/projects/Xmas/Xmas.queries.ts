@@ -8,7 +8,7 @@ import {
     PutXmasCandlesRequest,
     PutXmasCandlesResponse,
 } from '@common-types'
-import { QueryKey, Query } from '@common-utils'
+import { isTruthy, QueryKey, Query } from '@common-utils'
 import { Session } from '@shared-context'
 import type { VoidFunction } from '@common-utils'
 
@@ -50,7 +50,7 @@ const useGetMessages = ({ userId }: UseGetMessages) => {
     return useQuery({
         queryKey: QueryKey.XmasMessage.build(),
         queryFn: async () => await request.get<GetXmasMessagesResponse>(),
-        enabled: Boolean(userId),
+        enabled: isTruthy(userId),
     })
 }
 
@@ -64,7 +64,7 @@ const useGetCandles = () => {
     return useQuery({
         queryKey: QueryKey.XmasCandles.build(),
         queryFn: async () => await request.get<GetXmasCandlesResponse>(),
-        enabled: Boolean(request),
+        enabled: isTruthy(request),
     })
 }
 

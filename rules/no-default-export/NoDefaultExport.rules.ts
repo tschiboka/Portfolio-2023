@@ -1,6 +1,6 @@
-import type { Rule } from 'eslint'
-import { isString } from '../../common/utils/Predicate/Predicate.js'
 import { DefaultExportName, ErrorMessage } from './NoDefaultExport.constants.js'
+import { isString } from '../../common/utils/Predicate/Predicate.js'
+import type { Rule } from 'eslint'
 
 const nameOf = (exported: { name?: unknown; value?: unknown }): string =>
     isString(exported.name) ? exported.name : isString(exported.value) ? exported.value : ''

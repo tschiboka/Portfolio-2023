@@ -1,5 +1,6 @@
-import type { Rule } from 'eslint'
 import { ErrorMessage } from './NoMixedImportKind.constants.js'
+import { isNonEmpty } from '../../common/utils/Predicate/Predicate.js'
+import type { Rule } from 'eslint'
 
 /** A specifier's kind — `type` when the parser marks it, `value` otherwise. */
 const isType = (specifier: object): boolean =>
@@ -16,7 +17,7 @@ const Eslint = {
                 ImportDeclaration(node) {
                     const types = node.specifiers.filter(isType)
                     const values = node.specifiers.filter((specifier) => !isType(specifier))
-                    if (types.length > 0 && values.length > 0)
+                    if (isNonEmpty(types) && isNonEmpty(values))
                         context.report({ message: ErrorMessage, node })
                 },
             }

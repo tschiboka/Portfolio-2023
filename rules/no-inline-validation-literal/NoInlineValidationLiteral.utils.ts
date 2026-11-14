@@ -4,13 +4,15 @@ import {
     ComparisonOperators,
     IdentityBounds,
 } from './NoInlineValidationLiteral.constants.js'
+import { isDefined, isInstanceOf, isNumber } from '../../common/utils/Predicate/Predicate.js'
 import type { CalleeLike, ValueNode } from './NoInlineValidationLiteral.types.js'
+import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
 
 /**
  * Reads the method a call is made on — `min` from `yup.string().min(8)` — or `null` where the
  * callee is no named member. A computed key cannot be read, so it is left alone.
  */
-export const methodNameOf = (callee: CalleeLike): string | null => {
+export const methodNameOf = (callee: CalleeLike): Nullable<string> => {
     if (callee.type !== 'MemberExpression') return null
     if (callee.computed === true) return null
     if (callee.property?.type !== 'Identifier') return null
@@ -38,8 +40,8 @@ export const isComparisonOperator = (operator: string): boolean =>
  * isNumberLiteral(argumentOf('min(8)')) // true
  * isNumberLiteral(argumentOf('min(limit)')) // false
  */
-export const isNumberLiteral = (value: ValueNode | undefined): boolean =>
-    value?.type === 'Literal' && typeof value.value === 'number'
+export const isNumberLiteral = (value: Optional<ValueNode>): boolean =>
+    value?.type === 'Literal' && isNumber(value.value)
 
 /**
  * Answers whether the value is a pattern written in place rather than named.
@@ -48,11 +50,11 @@ export const isNumberLiteral = (value: ValueNode | undefined): boolean =>
  * isRegexLiteral(argumentOf('matches(/^[0-9]+$/)')) // true
  * isRegexLiteral(argumentOf('matches(Regexp.Alphanumeric)')) // false
  */
-export const isRegexLiteral = (value: ValueNode | undefined): boolean =>
-    value?.type === 'Literal' && (value.regex !== undefined || value.value instanceof RegExp)
+export const isRegexLiteral = (value: Optional<ValueNode>): boolean =>
+    value?.type === 'Literal' && (isDefined(value.regex) || isInstanceOf(value.value, RegExp))
 
 /** Reads the number a value writes out, or `null` where it writes none. */
-export const numberValueOf = (value: ValueNode | undefined): number | null =>
+export const numberValueOf = (value: Optional<ValueNode>): Nullable<number> =>
     isNumberLiteral(value) ? Number(value?.value) : null
 
 /**
@@ -63,8 +65,8 @@ export const numberValueOf = (value: ValueNode | undefined): number | null =>
  * isIdentityBound('min', argumentOf('min(1)')) // true
  * isIdentityBound('max', argumentOf('max(1)')) // false
  */
-export const isIdentityBound = (method: string, value: ValueNode | undefined): boolean => {
+export const isIdentityBound = (method: string, value: Optional<ValueNode>): boolean => {
     const bound = numberValueOf(value)
 
-    return method === 'min' && bound !== null && IdentityBounds.includes(bound)
+    return method === 'min' && isDefined(bound) && IdentityBounds.includes(bound)
 }

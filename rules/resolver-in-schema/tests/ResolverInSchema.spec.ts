@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ForeignResolverMessage, MissingResolverMessage } from '../ResolverInSchema.constants'
 import { Rules } from '../ResolverInSchema.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('resolver-in-schema', Rules.Eslint.ResolverInSchema9, {
     valid: [

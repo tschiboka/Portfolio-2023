@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { Query, QueryKey } from '@common-utils'
+import { isTruthy, Query, QueryKey } from '@common-utils'
 import type { ErrorResponse } from '@common-utils'
 import type { GetSessionResponse } from '@common-types'
 
@@ -12,7 +12,7 @@ const useGet = (token?: string) =>
             .token(token)
             .build()
             .Get<GetSessionResponse>(QueryKey.RehydrateSession.build()),
-        enabled: Boolean(token),
+        enabled: isTruthy(token),
     })
 
 export const SessionQueries = {

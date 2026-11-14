@@ -36,3 +36,14 @@ It's a tree-shaped representation of your source code that describes what the co
 | `JSXExpressionContainer` | JavaScript embedded inside JSX braces, e.g. `{user.name}`.                                       |
 | `JSXText`                | Plain text directly inside JSX, e.g. `Hello` in `<div>Hello</div>`.                              |
 | `JSXIdentifier`          | An identifier used within JSX, e.g. `Button` in `<Button />` or `disabled` in `disabled={true}`. |
+
+## Folder shape
+
+| File              | Holds                                                                   |
+| ----------------- | ----------------------------------------------------------------------- |
+| `X.constants.ts`  | The description and every message, as exported constants.               |
+| `X.types.ts`      | The structural node shapes — `<Name>Like` — and nothing else.           |
+| `X.utils.ts`      | The helpers the rule calls — predicates and getters — exported by name. |
+| `X.rules.ts`      | The rule module, `Rules.Eslint.<Rule>9`, and nothing else.              |
+| `X.registrar.ts`  | `id`, `description`, `scope`, `enabled`, `severity` and `rules`.        |
+| `tests/X.spec.ts` | The `ruleTester` cases, each named `should …`.                          |

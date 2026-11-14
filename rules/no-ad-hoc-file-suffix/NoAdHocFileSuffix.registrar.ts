@@ -1,5 +1,5 @@
-import type { RuleRegistrar } from '../types.js'
 import { Rules } from './NoAdHocFileSuffix.rules.js'
+import type { RuleRegistrar } from '../types.js'
 
 export const registrar: RuleRegistrar = {
     id: 'no-ad-hoc-file-suffix',

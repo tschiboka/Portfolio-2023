@@ -1,6 +1,7 @@
-import type { Rule } from 'eslint'
 import { basename } from 'node:path'
 import { SingleExportRoles } from '../constants.js'
+import { isNonEmpty } from '../../common/utils/Predicate/Predicate.js'
+import type { Rule } from 'eslint'
 
 export const ErrorMessage = 'A role file must export exactly one thing.'
 
@@ -42,7 +43,7 @@ const Eslint = {
                 ExportNamedDeclaration(node) {
                     const { declaration, specifiers } = node
 
-                    if (specifiers.length > 0) count += specifiers.length
+                    if (isNonEmpty(specifiers)) count += specifiers.length
                     else if (!declaration) return
                     else if (declaration.type === 'VariableDeclaration')
                         count += declaration.declarations.length

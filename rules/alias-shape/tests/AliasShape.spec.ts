@@ -1,4 +1,3 @@
-import { typescriptRuleTester } from '../../config'
 import {
     AnyFunctionMessage,
     AnyObjectMessage,
@@ -35,6 +34,7 @@ import {
     WithoutIdMessage,
 } from '../AliasShape.constants'
 import { Rules } from '../AliasShape.rules'
+import { typescriptRuleTester } from '../../config'
 
 typescriptRuleTester.run('alias-shape', Rules.Eslint.AliasShape9, {
     valid: [
@@ -248,7 +248,7 @@ typescriptRuleTester.run('alias-shape', Rules.Eslint.AliasShape9, {
         },
         {
             name: 'should accept every remaining generic by name',
-            code: "type All = VoidFunction | AnyFunction | AsyncFunction | Predicate<Item> | TypeGuard<Item, string> | Merge<A, B> | PartialBy<T, K> | RequiredBy<T, K> | ValueOf<T> | NonEmptyArray<Item>",
+            code: 'type All = VoidFunction | AnyFunction | AsyncFunction | Predicate<Item> | TypeGuard<Item, string> | Merge<A, B> | PartialBy<T, K> | RequiredBy<T, K> | ValueOf<T> | NonEmptyArray<Item>',
         },
         {
             name: 'should accept an `Omit` of another key',

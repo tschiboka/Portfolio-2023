@@ -1,5 +1,5 @@
 import { RefObject } from 'react'
-import { isDefined, isEmpty } from '@common-utils'
+import { isDefined, isEmpty, isInstanceOf } from '@common-utils'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 import { WebSocketRequest, WebSocketRequestType } from '../../Session.types'
 import { WordConstants } from '../../../common/utils'
@@ -62,7 +62,7 @@ const recalculatePositions = ({
 }
 
 const getLetterComponent = (target: Nullable<Element>): Nullable<HTMLElement> => {
-    const isLetter = target instanceof HTMLElement && isDefined(target.dataset.letterId)
+    const isLetter = isInstanceOf(target, HTMLElement) && isDefined(target.dataset.letterId)
     return isLetter ? target : null
 }
 

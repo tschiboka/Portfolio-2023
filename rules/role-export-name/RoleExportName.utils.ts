@@ -1,4 +1,4 @@
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
+import { RoleExportTokenMap } from '../constants.js'
 import {
     hasProperty,
     isDefined,
@@ -6,12 +6,12 @@ import {
     isNonEmpty,
     isString,
 } from '../../common/utils/Predicate/Predicate.js'
-import { RoleExportTokenMap } from '../constants.js'
 import type {
     DefaultExportDeclaration,
     ExportedName,
     RoleExpectation,
 } from './RoleExportName.types.js'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /** The message a report carries, naming the file, its role, what it must export and what it does. */
 export const messageFor = (fileName: string, role: string, expected: string, found: string[]) =>

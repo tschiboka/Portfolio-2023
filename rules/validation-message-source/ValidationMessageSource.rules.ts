@@ -5,10 +5,12 @@ import {
     methodNameOf,
     messageArgumentOf,
 } from './ValidationMessageSource.utils.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Node, ObjectExpression } from 'estree'
 import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type CallNode = Parameters<NonNullable<Rule.NodeListener['CallExpression']>>[0]
+type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
 
 const Eslint = {
     ValidationMessageSource9: {
@@ -31,10 +33,10 @@ const Eslint = {
 
             const checkCall = (node: CallNode): void => {
                 const method = methodNameOf(node.callee)
-                if (method === null) return
+                if (isNull(method)) return
 
                 const index = messageArgumentOf(method)
-                if (index === null) return
+                if (isNull(index)) return
 
                 const argument = node.arguments[index]
                 if (isStringLiteral(argument)) report(argument)

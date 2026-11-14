@@ -1,5 +1,5 @@
-import type { Rule } from 'eslint'
 import { NoAdHocFileSuffixConstants } from './NoAdHocFileSuffix.constants.js'
+import type { Rule } from 'eslint'
 
 export const ErrorMessage = 'A file must not have an ad-hoc suffix.'
 

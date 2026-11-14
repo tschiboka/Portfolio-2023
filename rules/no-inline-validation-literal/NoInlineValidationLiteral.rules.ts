@@ -14,11 +14,13 @@ import {
     isRegexLiteral,
     methodNameOf,
 } from './NoInlineValidationLiteral.utils.js'
+import { isNull, isUndefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Node } from 'estree'
 import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type CallNode = Parameters<NonNullable<Rule.NodeListener['CallExpression']>>[0]
-type BinaryNode = Parameters<NonNullable<Rule.NodeListener['BinaryExpression']>>[0]
+type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
+type BinaryNode = Parameters<Defined<Rule.NodeListener['BinaryExpression']>>[0]
 
 const Eslint = {
     NoInlineValidationLiteral9: {
@@ -27,8 +29,7 @@ const Eslint = {
             docs: { description: Description },
         },
         create(context) {
-            const report = (node: Node, message: string): void =>
-                context.report({ message, node })
+            const report = (node: Node, message: string): void => context.report({ message, node })
 
             let comparingDepth = 0
 
@@ -36,7 +37,7 @@ const Eslint = {
                 if (!isBoundMethod(method)) return
 
                 const bound = node.arguments[0]
-                if (bound === undefined) return
+                if (isUndefined(bound)) return
                 if (!isNumberLiteral(bound)) return
                 if (isIdentityBound(method, bound)) return
 
@@ -47,7 +48,7 @@ const Eslint = {
                 if (!isPatternMethod(method)) return
 
                 const pattern = node.arguments[0]
-                if (pattern === undefined) return
+                if (isUndefined(pattern)) return
                 if (!isRegexLiteral(pattern)) return
 
                 report(pattern, PatternMessage)
@@ -55,7 +56,7 @@ const Eslint = {
 
             const checkCall = (node: CallNode): void => {
                 const method = methodNameOf(node.callee)
-                if (method === null) return
+                if (isNull(method)) return
 
                 checkNumericBound(node, method)
                 checkPattern(node, method)
@@ -65,7 +66,7 @@ const Eslint = {
 
             const exitCall = (node: CallNode): void => {
                 const method = methodNameOf(node.callee)
-                if (method === null) return
+                if (isNull(method)) return
                 if (!isComparingMethod(method)) return
 
                 comparingDepth -= 1

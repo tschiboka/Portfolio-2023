@@ -1,5 +1,5 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage, Rules } from '../NoRawSemanticJsx.rules'
+import { ruleTester } from '../../config'
 
 const messageFor = (detail: string) => [ErrorMessage, detail].join(' ')
 

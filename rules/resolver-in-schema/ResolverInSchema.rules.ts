@@ -6,9 +6,10 @@ import {
 import { isResolverCall, isSchemaCall, isSchemaFile } from './ResolverInSchema.utils.js'
 import type { Node } from 'estree'
 import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type CallNode = Parameters<NonNullable<Rule.NodeListener['CallExpression']>>[0]
-type ProgramNode = Parameters<NonNullable<Rule.NodeListener['Program']>>[0]
+type CallNode = Parameters<Defined<Rule.NodeListener['CallExpression']>>[0]
+type ProgramNode = Parameters<Defined<Rule.NodeListener['Program']>>[0]
 
 const Eslint = {
     ResolverInSchema9: {
@@ -17,8 +18,7 @@ const Eslint = {
             docs: { description: Description },
         },
         create(context) {
-            const report = (node: Node, message: string): void =>
-                context.report({ message, node })
+            const report = (node: Node, message: string): void => context.report({ message, node })
 
             const schemaFile = isSchemaFile(context.filename)
 

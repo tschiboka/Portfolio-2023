@@ -4,7 +4,13 @@ import {
     LeafKeyMessage,
     NestingMessage,
 } from './QueriesExportShape.constants.js'
-import { isGroupName, isLeafName, propertyNameOf, queriesObjectOf } from './QueriesExportShape.utils.js'
+import {
+    isGroupName,
+    isLeafName,
+    propertyNameOf,
+    queriesObjectOf,
+} from './QueriesExportShape.utils.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Node, ObjectExpression, Property } from 'estree'
 import type { Rule } from 'eslint'
 
@@ -15,8 +21,7 @@ const Eslint = {
             docs: { description: Description },
         },
         create(context) {
-            const report = (node: Node, message: string): void =>
-                context.report({ message, node })
+            const report = (node: Node, message: string): void => context.report({ message, node })
 
             const checkGroup = (group: ObjectExpression): void =>
                 group.properties.forEach((property) => {
@@ -25,14 +30,14 @@ const Eslint = {
                         return report(property, NestingMessage)
 
                     const name = propertyNameOf(property)
-                    if (name === null || isLeafName(name)) return
+                    if (isNull(name) || isLeafName(name)) return
 
                     report(property, LeafKeyMessage)
                 })
 
             const checkProperty = (property: Property): void => {
                 const name = propertyNameOf(property)
-                if (name === null) return
+                if (isNull(name)) return
 
                 if (property.value.type === 'ObjectExpression') {
                     if (!isGroupName(name)) report(property, GroupKeyMessage)
@@ -45,7 +50,7 @@ const Eslint = {
             return {
                 ExportNamedDeclaration(node) {
                     const object = queriesObjectOf(node)
-                    if (object === null) return
+                    if (isNull(object)) return
 
                     object.properties.forEach((property) => {
                         if (property.type === 'Property') checkProperty(property)

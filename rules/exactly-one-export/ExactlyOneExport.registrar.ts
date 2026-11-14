@@ -1,5 +1,5 @@
-import type { RuleRegistrar } from '../types.js'
 import { Rules } from './ExactlyOneExport.rules.js'
+import type { RuleRegistrar } from '../types.js'
 
 export const registrar: RuleRegistrar = {
     id: 'exactly-one-export',

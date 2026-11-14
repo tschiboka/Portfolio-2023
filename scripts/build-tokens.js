@@ -330,17 +330,18 @@ export const buildRules = () => {
         ZIndexDoc,
         `export const ZIndexTokens = [${names}] as const`,
         '',
-        'export type ZIndexToken = (typeof ZIndexTokens)[number]',
-        '',
         `export const ColorFamilies = [${families}] as const`,
         '',
         `export const ColorTokens = [${colours}] as const`,
         '',
-        'export type ColorToken = (typeof ColorTokens)[number]',
-        '',        'export const Breakpoints = {',
+        'export const Breakpoints = {',
         breakpoints,
         '} as const',
-        '',    ].join('\n')
+        '',
+        'export type ZIndexToken = (typeof ZIndexTokens)[number]',
+        'export type ColorToken = (typeof ColorTokens)[number]',
+        '',
+    ].join('\n')
 }
 
 const targets = [

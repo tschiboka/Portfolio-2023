@@ -5,11 +5,16 @@ import {
     UnresolvedMessage,
 } from './TodoTicketRef.constants.js'
 import { isTodo, isWellFormed, refOf, resolves } from './TodoTicketRef.utils.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 type CommentLike = {
     value: string
-    loc?: { start: { line: number; column: number }; end: { line: number; column: number } } | null
+    loc?: Nullable<{
+        start: { line: number; column: number }
+        end: { line: number; column: number }
+    }>
 }
 
 const Eslint = {
@@ -32,7 +37,7 @@ const Eslint = {
                         if (!isTodo(comment.value)) return
 
                         const ref = refOf(comment.value)
-                        if (ref === null) return report(comment, MissingMessage)
+                        if (isNull(ref)) return report(comment, MissingMessage)
                         if (!isWellFormed(ref)) return report(comment, MalformedMessage)
                         if (!resolves(ref)) report(comment, UnresolvedMessage)
                     }),

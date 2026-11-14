@@ -64,6 +64,16 @@ const report = (issue, current, accepted) => {
     )
 }
 
+/** True while HEAD already sits on the published branch, where rewriting it needs its own bump. */
+const isPublished = () => {
+    try {
+        execSync('git merge-base --is-ancestor HEAD origin/main', { cwd: root, stdio: 'ignore' })
+        return true
+    } catch {
+        return false
+    }
+}
+
 /** Exit codes: 0 accepted, 1 refused, 2 the hook must ask which bump to apply. */
 const main = () => {
     const committed = readVersion('HEAD:package.json')
@@ -81,6 +91,9 @@ const main = () => {
               : 'rejected'
 
     if (!issue) return 0
+
+    // A commit not yet on the published branch may be amended without a second bump.
+    if (issue === 'unchanged' && !isPublished()) return 0
 
     if (answer === undefined) {
         report(issue, staged, accepted)

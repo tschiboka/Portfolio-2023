@@ -1,4 +1,5 @@
 import { lexer, parse } from 'css-tree'
+import { isDefined, isNull } from '../common/utils/Predicate/Predicate.js'
 import type { CssNode } from 'css-tree'
 import type { Nullable } from '../common/utils/Generics/Generics.types.js'
 
@@ -38,7 +39,7 @@ const parseValue = (value: string): Nullable<CssNode> => {
 }
 
 const getChildren = (node: CssNode): ReadonlyArray<CssNode> =>
-    'children' in node && typeof node.children === 'object' && node.children !== null
+    'children' in node && isDefined(node.children) && 'toArray' in node.children
         ? node.children.toArray()
         : []
 
@@ -48,7 +49,7 @@ const isColorNode = (node: CssNode): boolean => {
     if (node.type === 'Identifier')
         return (
             !AllowedKeywords.includes(node.name) &&
-            lexer.matchType('color', node.name).matched !== null
+            isDefined(lexer.matchType('color', node.name).matched)
         )
 
     return false
@@ -67,26 +68,24 @@ const hasColor = (value: string, depth: number = MaxDepth): boolean => {
 
     const ast = parseValue(value)
 
-    return ast !== null && holdsColor(ast, depth)
+    return isDefined(ast) && holdsColor(ast, depth)
 }
 
 const getVarName = (node: CssNode): Nullable<string> => {
     const children = getChildren(node)
     const [only] = children
 
-    return children.length === 1 && only !== undefined && only.type === 'Identifier'
-        ? only.name
-        : null
+    return children.length === 1 && isDefined(only) && only.type === 'Identifier' ? only.name : null
 }
 
 /** The `var(--name)` a value consists of, or `null` when it is more than that. */
 const getTokenName = (value: string): Nullable<string> => {
     const ast = parseValue(value)
-    const children = ast === null ? [] : getChildren(ast)
+    const children = isNull(ast) ? [] : getChildren(ast)
     const [only] = children
 
     return children.length === 1 &&
-        only !== undefined &&
+        isDefined(only) &&
         only.type === 'Function' &&
         only.name === 'var'
         ? getVarName(only)
@@ -98,11 +97,11 @@ const getColorKeyword = (value: string): Nullable<string> => {
     if (Scss.test(value)) return null
 
     const ast = parseValue(value)
-    const children = ast === null ? [] : getChildren(ast)
+    const children = isNull(ast) ? [] : getChildren(ast)
     const [only] = children
 
     return children.length === 1 &&
-        only !== undefined &&
+        isDefined(only) &&
         only.type === 'Identifier' &&
         isColorNode(only)
         ? only.name
@@ -118,10 +117,10 @@ const getTokenNames = (value: string): string[] =>
         ? []
         : [...value.matchAll(TokenNamePattern)]
               .map((match) => match[1])
-              .filter((name): name is string => name !== undefined)
+              .filter((name): name is string => isDefined(name))
 
 /** True for a value that is a palette token: a lone `var()` or an SCSS variable. */
-const isToken = (value: string): boolean => Scss.test(value) || getTokenName(value) !== null
+const isToken = (value: string): boolean => Scss.test(value) || isDefined(getTokenName(value))
 
 /** `backgroundColor` → `background-color`, so a React style object is judged like a stylesheet. */
 const toKebabCase = (name: string): string =>
@@ -129,7 +128,7 @@ const toKebabCase = (name: string): string =>
 
 /** True for a name a stylesheet or a React style object could declare. */
 const isProperty = (name: string): boolean =>
-    name.startsWith('--') || lexer.getProperty(toKebabCase(name)) !== null
+    name.startsWith('--') || isDefined(lexer.getProperty(toKebabCase(name)))
 
 /** CSS value questions the rule registry answers from the grammar rather than from patterns. */
 export const Css = {

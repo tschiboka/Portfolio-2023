@@ -1,33 +1,35 @@
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type {
     DeclaratorLike,
     NodeLike,
     OffendingKind,
     StatementLike,
 } from './NoSpecLocalDeclaration.types.js'
+import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
 
-const isIdentifier = (node: NodeLike | undefined, name: string): boolean =>
+const isIdentifier = (node: Optional<NodeLike>, name: string): boolean =>
     node?.type === 'Identifier' && node.name === name
 
 const isDescribe = (callee: NodeLike): boolean => {
     if (callee.type === 'CallExpression')
-        return callee.callee !== undefined && isDescribe(callee.callee)
+        return isDefined(callee.callee) && isDescribe(callee.callee)
     if (callee.type === 'MemberExpression')
-        return callee.object !== undefined && isDescribe(callee.object)
+        return isDefined(callee.object) && isDescribe(callee.object)
 
     return isIdentifier(callee, 'describe')
 }
 
-const isViMethod = (callee: NodeLike | undefined, viMethods: string[]): boolean =>
+const isViMethod = (callee: Optional<NodeLike>, viMethods: string[]): boolean =>
     callee?.type === 'MemberExpression' &&
     isIdentifier(callee.object, 'vi') &&
-    callee.property?.name !== undefined &&
+    isDefined(callee.property?.name) &&
     viMethods.includes(callee.property.name)
 
 /** Answers whether a statement opens a suite — the plain form or any member form, such as `.each`. */
 export const isSuiteStatement = (statement: StatementLike): boolean =>
     statement.type === 'ExpressionStatement' &&
     statement.expression?.type === 'CallExpression' &&
-    statement.expression.callee !== undefined &&
+    isDefined(statement.expression.callee) &&
     isDescribe(statement.expression.callee)
 
 /**
@@ -41,7 +43,7 @@ export const isSuiteStatement = (statement: StatementLike): boolean =>
 export const getDeclaratorKind = (
     declarator: DeclaratorLike,
     viMethods: string[],
-): OffendingKind | null => {
+): Nullable<OffendingKind> => {
     const { id, init } = declarator
 
     if (id?.type === 'ObjectPattern' || id?.type === 'ArrayPattern') return null
@@ -62,7 +64,7 @@ export const getDeclaratorKind = (
 export const getDeclarationKind = (
     statement: StatementLike,
     viMethods: string[],
-): OffendingKind | null => {
+): Nullable<OffendingKind> => {
     if (statement.type === 'ExportNamedDeclaration')
         return statement.declaration ? getDeclarationKind(statement.declaration, viMethods) : null
     if (statement.type === 'FunctionDeclaration') return 'helper'
@@ -85,7 +87,7 @@ export const getStatementKind = (
     statement: StatementLike,
     hooks: string[],
     viMethods: string[],
-): OffendingKind | null => {
+): Nullable<OffendingKind> => {
     if (statement.type !== 'ExpressionStatement') return getDeclarationKind(statement, viMethods)
 
     const expression = statement.expression

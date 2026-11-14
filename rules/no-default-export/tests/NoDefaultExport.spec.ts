@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoDefaultExport.constants'
 import { Rules } from '../NoDefaultExport.rules'
+import { ruleTester } from '../../config'
 
 const fileName = '/a/Feature/Blog.tsx'
 

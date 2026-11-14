@@ -8,6 +8,22 @@ root=$(dirname "$0")/..
 
 . "$(dirname "$0")/step.sh"
 
+# The mirrors are generated, so this gate repairs them before any later gate reads them.
+step "[commit-tokens]" node "$root/scripts/build-tokens.js"
+
+git add -- common/ux/tokens.generated.css common/ux/Const/Const.generated.ts \
+    src/shared/styles/tokens.generated.scss rules/tokens.generated.ts
+
+if ! git diff --cached --quiet -- common/ux/tokens.generated.css \
+    common/ux/Const/Const.generated.ts src/shared/styles/tokens.generated.scss \
+    rules/tokens.generated.ts; then
+    printf '\033[36m%s\033[0m\n' "[commit-tokens] mirrors regenerated and staged"
+fi
+
+# The installed tree is derived from the lockfile, so this gate repairs it before the gates
+# below read it, for the same reason the token mirrors above are repaired.
+step "[commit-dependency-install]" node "$root/scripts/check-dependency-install.js"
+
 # The bump gate answers 2 when it needs a decision. Git hands a hook a stdin that is not a
 # terminal, so the question is read from the console device instead. The bump stands if a later
 # gate fails: the retry finds a valid bump against HEAD and asks nothing.

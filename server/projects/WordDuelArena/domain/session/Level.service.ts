@@ -1,5 +1,5 @@
 ﻿import { produce } from 'immer'
-import { Arrays, isDefined } from '@common-utils'
+import { Arrays, isDefined, isTruthy } from '@common-utils'
 import { MatchService } from './Match.service'
 import { LevelRepository } from '../../infrastructure/persistence/db/Level.repository'
 import { GameConstants } from '../../config/constants/Game.constants'
@@ -14,7 +14,7 @@ type DbLevel = {
 }
 
 async function initialiseLevel(state: SessionState): Promise<SessionState> {
-    const hasTwoPlayers = Boolean(state.players.player1) && Boolean(state.players.player2)
+    const hasTwoPlayers = isTruthy(state.players.player1) && isTruthy(state.players.player2)
     const hasLevelAssigned = isDefined(state.level)
     const shouldInitialiseLevel = hasTwoPlayers && !hasLevelAssigned
 

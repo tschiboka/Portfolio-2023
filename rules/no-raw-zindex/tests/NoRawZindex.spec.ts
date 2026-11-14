@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoRawZIndex.constants'
 import { Rules } from '../NoRawZIndex.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-raw-zindex', Rules.Eslint.NoRawZIndex9, {
     valid: [

@@ -1,10 +1,6 @@
-import { ruleTester } from '../../config'
-import {
-    MalformedMessage,
-    MissingMessage,
-    UnresolvedMessage,
-} from '../TodoTicketRef.constants'
+import { MalformedMessage, MissingMessage, UnresolvedMessage } from '../TodoTicketRef.constants'
 import { Rules } from '../TodoTicketRef.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('todo-ticket-ref', Rules.Eslint.TodoTicketRef9, {
     valid: [

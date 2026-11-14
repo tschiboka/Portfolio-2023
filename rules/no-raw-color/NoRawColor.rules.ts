@@ -8,9 +8,11 @@ import {
     getString,
 } from './NoRawColor.utils.js'
 import { Css } from '../css.js'
+import { isDefined, isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type PropertyNode = Parameters<NonNullable<Rule.NodeListener['Property']>>[0]
+type PropertyNode = Parameters<Defined<Rule.NodeListener['Property']>>[0]
 
 /**
  * Every value already checked, mapped to whether it breaks the rule.
@@ -24,7 +26,7 @@ const CheckedValues = new Map<string, boolean>()
 const hasColourViolation = (value: string): boolean => {
     const keyword = Css.getColorKeyword(value)
 
-    if (keyword !== null) return !isPaletteName(keyword)
+    if (isDefined(keyword)) return !isPaletteName(keyword)
     if (Css.hasColor(value)) return true
 
     return Css.getTokenNames(value).some((token) => !isKnownColour(token))
@@ -32,7 +34,7 @@ const hasColourViolation = (value: string): boolean => {
 
 const shouldReport = (value: string): boolean => {
     const checked = CheckedValues.get(value)
-    if (checked !== undefined) return checked
+    if (isDefined(checked)) return checked
 
     const violation = hasColourViolation(value)
     CheckedValues.set(value, violation)
@@ -51,11 +53,11 @@ const Eslint = {
                 if (isShorthand(node) || isObjectPattern(node)) return
 
                 const property = getPropertyName(node)
-                if (property === null || !Css.isProperty(property)) return
+                if (isNull(property) || !Css.isProperty(property)) return
 
                 const value = getString(node.value)
 
-                if (value === null) return
+                if (isNull(value)) return
                 if (shouldReport(value)) context.report({ message: ErrorMessage, node })
             }
 

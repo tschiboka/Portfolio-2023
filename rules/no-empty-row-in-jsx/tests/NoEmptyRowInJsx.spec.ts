@@ -1,5 +1,5 @@
-import { ruleTester } from '../../config'
 import { Rules, ErrorMessage } from '../NoEmptyRowInJsx.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-newline-in-jsx', Rules.Eslint.Min9, {
     valid: [

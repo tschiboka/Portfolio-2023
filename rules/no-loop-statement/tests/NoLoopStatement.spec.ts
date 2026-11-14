@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoLoopStatement.constants'
 import { Rules } from '../NoLoopStatement.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-loop-statement', Rules.Eslint.NoLoopStatement9, {
     valid: [

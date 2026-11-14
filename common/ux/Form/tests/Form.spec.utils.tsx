@@ -1,8 +1,9 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { render } from '@testing-library/react'
 import { FormTestMocks } from './Form.spec.mocks'
 import { Form as FormExports } from '..'
+import type { ReactElement, ReactNode } from 'react'
 import type { Mock } from 'vitest'
 import type { VoidFunction } from '@common-utils'
 import type { FormValues } from './Form.spec.types'
@@ -28,7 +29,7 @@ const FormElement = FormExports
 
 const FORM_LABEL = 'Test form'
 
-const renderInForm = (ui: React.ReactElement) =>
+const renderInForm = (ui: ReactElement) =>
     render(<FormElement ariaLabel={FORM_LABEL}>{ui}</FormElement>)
 
 const InputWrapper = (props: Partial<Parameters<typeof Input<FormValues>>[0]>) => {
@@ -139,7 +140,7 @@ const DateInputWithValueWrapper = (props: Partial<Parameters<typeof DateInput<Fo
 
 const InputWithErrorWrapper = (props: Partial<Parameters<typeof Input<FormValues>>[0]>) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { text: '' } })
-    React.useEffect(() => setError('text', { message: 'Field is required' }), [setError])
+    useEffect(() => setError('text', { message: 'Field is required' }), [setError])
     return (
         <Input
             name="text"
@@ -164,7 +165,7 @@ const InputDateEmptyWrapper = () => {
 
 const TextAreaWithErrorWrapper = (props: Partial<Parameters<typeof TextArea<FormValues>>[0]>) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { description: '' } })
-    React.useEffect(() => setError('description', { message: 'Too long' }), [setError])
+    useEffect(() => setError('description', { message: 'Too long' }), [setError])
     return (
         <TextArea
             name="description"
@@ -178,7 +179,7 @@ const TextAreaWithErrorWrapper = (props: Partial<Parameters<typeof TextArea<Form
 
 const DateInputWithErrorWrapper = (props: Partial<Parameters<typeof DateInput<FormValues>>[0]>) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { dob: '' } })
-    React.useEffect(() => setError('dob', { message: 'Date is required' }), [setError])
+    useEffect(() => setError('dob', { message: 'Date is required' }), [setError])
     return <DateInput name="dob" control={control} ariaLabel="DOB" {...props} />
 }
 
@@ -186,7 +187,7 @@ const SearchInputWithErrorWrapper = (
     props: Partial<Parameters<typeof SearchInput<string, FormValues>>[0]> & { onSelectSpy?: Mock },
 ) => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { option: '' } })
-    React.useEffect(() => setError('option', { message: 'Selection required' }), [setError])
+    useEffect(() => setError('option', { message: 'Selection required' }), [setError])
     return (
         <SearchInput
             name="option"
@@ -202,7 +203,7 @@ const SearchInputWithErrorWrapper = (
 
 const CheckboxWithErrorWrapper = () => {
     const { control, setError } = useForm<FormValues>({ defaultValues: { accepted: false } })
-    React.useEffect(() => setError('accepted', { message: 'You must agree' }), [setError])
+    useEffect(() => setError('accepted', { message: 'You must agree' }), [setError])
     return <Checkbox name="accepted" control={control} label="Accept terms" />
 }
 
@@ -270,7 +271,7 @@ const Set = {
         renderInForm(<Fieldset {...{ children: <span>content</span>, ...props }} />),
     formElement: (
         props: Omit<Parameters<typeof FormElement>[0], 'children'> & {
-            children: React.ReactNode
+            children: ReactNode
         },
     ) => render(<FormElement {...props} />),
     // Error state helpers

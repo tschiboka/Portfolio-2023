@@ -1,5 +1,5 @@
-import type { RuleRegistrar } from '../types.js'
 import { Rules } from './ExportOrder.rules.js'
+import type { RuleRegistrar } from '../types.js'
 
 export const registrar: RuleRegistrar = {
     id: 'export-order',
@@ -12,6 +12,7 @@ export const registrar: RuleRegistrar = {
             'common/**/*.ts',
             'server/**/*.tsx',
             'server/**/*.ts',
+            'rules/**/*.{ts,tsx}',
         ],
         exclude: ['public/**', '**/*.d.ts'],
     },

@@ -1,8 +1,9 @@
-import type { Rule } from 'eslint'
 import { basename } from 'node:path'
-import { isDefined, isNonEmpty, isOneOf } from '../../common/utils/Predicate/Predicate.js'
 import { ErrorMessage } from './RoleExportName.constants.js'
 import { defaultNameOf, expectationFor, exportedName, messageFor } from './RoleExportName.utils.js'
+import { isDefined, isNonEmpty, isOneOf } from '../../common/utils/Predicate/Predicate.js'
+import type { Rule } from 'eslint'
+import type { Optional } from '../../common/utils/Generics/Generics.types.js'
 
 const Eslint = {
     RoleExportName9: {
@@ -16,7 +17,7 @@ const Eslint = {
             if (!isDefined(expectation)) return {}
 
             const found: string[] = []
-            let firstExportLine: number | undefined
+            let firstExportLine: Optional<number>
 
             return {
                 'Program:exit'() {

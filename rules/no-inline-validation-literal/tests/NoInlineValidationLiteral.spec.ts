@@ -1,10 +1,10 @@
-import { ruleTester } from '../../config'
 import {
     BoundMessage,
     ComparisonMessage,
     PatternMessage,
 } from '../NoInlineValidationLiteral.constants'
 import { Rules } from '../NoInlineValidationLiteral.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-inline-validation-literal', Rules.Eslint.NoInlineValidationLiteral9, {
     valid: [

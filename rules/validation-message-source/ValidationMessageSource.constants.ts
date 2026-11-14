@@ -1,3 +1,5 @@
+import { Dictionary } from '../../common/utils/Generics/index.js'
+
 export const Description = 'A validation message is built by ValidationMessage, never written out.'
 
 export const MessageErrorMessage =
@@ -9,7 +11,7 @@ export const MessageErrorMessage =
  * A method that names none is absent rather than defaulted to a position: `shape` takes fields,
  * `oneOf` takes a list, and guessing a slot for either would report correct code.
  */
-export const MessageArguments: Record<string, number> = {
+export const MessageArguments: Dictionary<number> = {
     defined: 0,
     email: 0,
     integer: 0,

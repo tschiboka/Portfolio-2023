@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { NoMisnamedPrimaryFileConstants } from '../NoMisnamedPrimaryFile.constants'
 import { ErrorMessage, Rules } from '../NoMisnamedPrimaryFile.rules'
+import { ruleTester } from '../../config'
 
 const messageFor = (file: string, folder: string, extension: string) =>
     [ErrorMessage, `Got ${file}, expected ${folder}.${extension}`].join('\n')

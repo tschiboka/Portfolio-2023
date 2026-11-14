@@ -1,7 +1,7 @@
 import { parser } from 'typescript-eslint'
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoDuplicateImport.constants'
 import { Rules } from '../NoDuplicateImport.rules'
+import { ruleTester } from '../../config'
 
 const fileName = '/a/Feature/Blog.tsx'
 const typed = { languageOptions: { parser } }

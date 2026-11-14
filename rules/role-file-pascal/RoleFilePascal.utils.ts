@@ -1,4 +1,6 @@
 import { NamedFile } from './RoleFilePascal.constants.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /**
  * Splits a filename into the stem and the role that follows it, or `null` where it carries neither.
@@ -7,9 +9,9 @@ import { NamedFile } from './RoleFilePascal.constants.js'
  * splitName('Contact.schema.ts') // { stem: 'Contact', role: 'schema' }
  * splitName('Contact.tsx') // null
  */
-export const splitName = (name: string): { stem: string; role: string } | null => {
+export const splitName = (name: string): Nullable<{ stem: string; role: string }> => {
     const match = NamedFile.exec(name)
-    if (match === null) return null
+    if (isNull(match)) return null
 
     return { stem: match[1] ?? '', role: match[2] ?? '' }
 }

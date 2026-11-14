@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoRawColor.constants'
 import { Rules } from '../NoRawColor.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-raw-color', Rules.Eslint.NoRawColor9, {
     valid: [

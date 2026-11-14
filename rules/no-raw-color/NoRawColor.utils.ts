@@ -1,4 +1,5 @@
 import { ColorFamilies, ColorTokens } from '../tokens.generated.js'
+import { isDefined, isNull, isObject, isString } from '../../common/utils/Predicate/Predicate.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /** An AST node seen as its type plus whatever fields the check reads. */
@@ -9,13 +10,13 @@ const KnownFamilies = new Set<string>(ColorFamilies)
 const KnownColours = new Set<string>(ColorTokens)
 
 const asNode = (value: unknown): Nullable<AstNode> =>
-    typeof value === 'object' && value !== null && 'type' in value ? (value as AstNode) : null
+    isObject(value) && 'type' in value ? (value as AstNode) : null
 
 /** The string a node carries, or `null` when it carries none. */
 export const getString = (node: unknown): Nullable<string> => {
     const value = asNode(node)
 
-    return value !== null && value.type === 'Literal' && typeof value.value === 'string'
+    return isDefined(value) && value.type === 'Literal' && isString(value.value)
         ? value.value
         : null
 }
@@ -29,7 +30,7 @@ export const isObjectPattern = (node: object): boolean => {
 
     const parent = asNode(node.parent)
 
-    return parent !== null && parent.type === 'ObjectPattern'
+    return isDefined(parent) && parent.type === 'ObjectPattern'
 }
 
 /**
@@ -50,8 +51,8 @@ export const isKnownColour = (name: string): boolean => {
 export const getPropertyName = (node: object): Nullable<string> => {
     const key = asNode('key' in node ? node.key : null)
 
-    if (key === null) return null
-    if (key.type === 'Identifier') return typeof key.name === 'string' ? key.name : null
+    if (isNull(key)) return null
+    if (key.type === 'Identifier') return isString(key.name) ? key.name : null
 
     return getString(key)
 }

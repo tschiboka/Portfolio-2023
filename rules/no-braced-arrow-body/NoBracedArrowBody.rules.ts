@@ -1,9 +1,6 @@
 import { Description, ErrorMessage } from './NoBracedArrowBody.constants.js'
-import {
-    dropsNoComment,
-    hasVoidReturn,
-    unwrappableStatementOf,
-} from './NoBracedArrowBody.utils.js'
+import { dropsNoComment, hasVoidReturn, unwrappableStatementOf } from './NoBracedArrowBody.utils.js'
+import { isNull } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
 
 const Eslint = {
@@ -23,7 +20,7 @@ const Eslint = {
                     if (body.type !== 'BlockStatement') return
 
                     const statement = unwrappableStatementOf(body)
-                    if (statement === null) return
+                    if (isNull(statement)) return
 
                     const fixable = !hasVoidReturn(node) && dropsNoComment(source, statement)
 
@@ -39,6 +36,5 @@ const Eslint = {
         },
     } satisfies Rule.RuleModule,
 }
-
 
 export const Rules = { Eslint }

@@ -23,7 +23,7 @@ export const Editor = () => {
             <div className="Editor__content">
                 {showOverlay && (
                     <div className="Editor__overlay">
-                        <LoadingIndicator show={Boolean(isLoading)} color="aqua" />
+                        <LoadingIndicator show={isTruthy(isLoading)} color="aqua" />
                         {editorState.status === 'paused' && (
                             <span>Paused — press Esc to resume</span>
                         )}

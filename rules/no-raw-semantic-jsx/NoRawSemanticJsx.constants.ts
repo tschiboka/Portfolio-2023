@@ -1,13 +1,5 @@
 import type { RuleSeverity } from '../types.js'
 
-/** One raw JSX element, and the `common/ux` components that replace it. */
-export type LintRegistration = {
-    tag: string
-    severity: RuleSeverity
-    replacements: string[]
-    message: string
-}
-
 const row = (
     tag: string,
     severity: RuleSeverity,
@@ -60,4 +52,12 @@ export const NoRawSemanticJsxConstants = {
         ),
         row('span', 'error', ['Text'], 'Use Text instead of span.'),
     ],
+}
+
+/** One raw JSX element, and the `common/ux` components that replace it. */
+export type LintRegistration = {
+    tag: string
+    severity: RuleSeverity
+    replacements: string[]
+    message: string
 }

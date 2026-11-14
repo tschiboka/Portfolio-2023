@@ -32,6 +32,9 @@ Prefer declarative, pure functional style:
 - Do not: `for`, `while`.
 - Never mutate arguments or shared state; compose immutable values instead.
 - Prose is British English, code is American English: comment `Colour`, name the property `color`.
+- Name a function for what it returns, verb first: `getLeafName`, `getParentType`.
+- Name a predicate `is…` or the clause it answers — `isReactModule`, `startsAtBinding` —
+  never a bare noun.
 
 ## 1.4 Structure
 

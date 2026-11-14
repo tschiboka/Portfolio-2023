@@ -1,5 +1,5 @@
-import { ruleTester } from '../../config'
 import { Rules, ErrorMessage } from '../NoEmptyRowInObject.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-empty-row-in-object', Rules.Eslint.Min9, {
     valid: [

@@ -28,6 +28,7 @@ import { registrar as todoTicketRefRegistrar } from './todo-ticket-ref/TodoTicke
 import { registrar as roleFilePascalRegistrar } from './role-file-pascal/RoleFilePascal.registrar.js'
 import { registrar as predicateCaseRegistrar } from './predicate-case/PredicateCase.registrar.js'
 import { registrar as aliasShapeRegistrar } from './alias-shape/AliasShape.registrar.js'
+import { registrar as noReactNamespaceRegistrar } from './no-react-namespace/NoReactNamespace.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -62,4 +63,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     roleFilePascalRegistrar,
     predicateCaseRegistrar,
     aliasShapeRegistrar,
+    noReactNamespaceRegistrar,
 ].map(withPrefixedReports)

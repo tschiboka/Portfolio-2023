@@ -6,7 +6,12 @@ export const registrar: RuleRegistrar = {
     id: 'alias-shape',
     description: Description,
     scope: {
-        include: ['src/**/*.{ts,tsx}', 'common/**/*.{ts,tsx}', 'server/**/*.{ts,tsx}'],
+        include: [
+            'src/**/*.{ts,tsx}',
+            'common/**/*.{ts,tsx}',
+            'server/**/*.{ts,tsx}',
+            'rules/**/*.{ts,tsx}',
+        ],
         exclude: ['**/*.code.{ts,tsx}', 'common/utils/Generics/**'],
     },
     enabled: true,

@@ -1,10 +1,6 @@
-import { ruleTester } from '../../config'
-import {
-    GroupKeyMessage,
-    LeafKeyMessage,
-    NestingMessage,
-} from '../QueriesExportShape.constants'
+import { GroupKeyMessage, LeafKeyMessage, NestingMessage } from '../QueriesExportShape.constants'
 import { Rules } from '../QueriesExportShape.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('queries-export-shape', Rules.Eslint.QueriesExportShape9, {
     valid: [

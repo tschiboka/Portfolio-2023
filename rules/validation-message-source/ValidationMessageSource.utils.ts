@@ -1,5 +1,7 @@
 import { MessageArguments, MessageProperty } from './ValidationMessageSource.constants.js'
+import { isString, isUndefined } from '../../common/utils/Predicate/Predicate.js'
 import type { CalleeLike, PropertyLike, ValueLike } from './ValidationMessageSource.types.js'
+import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
 
 /**
  * Reads the method a call is made on — `min` from `yup.string().min(8)` — or `null` where the
@@ -9,7 +11,7 @@ import type { CalleeLike, PropertyLike, ValueLike } from './ValidationMessageSou
  * methodNameOf(calleeOf('yup.string().min(8)')) // 'min'
  * methodNameOf(calleeOf('build(name)')) // null
  */
-export const methodNameOf = (callee: CalleeLike): string | null => {
+export const methodNameOf = (callee: CalleeLike): Nullable<string> => {
     if (callee.type !== 'MemberExpression') return null
     if (callee.computed === true) return null
     if (callee.property?.type !== 'Identifier') return null
@@ -24,7 +26,7 @@ export const methodNameOf = (callee: CalleeLike): string | null => {
  * messageArgumentOf('min') // 1
  * messageArgumentOf('shape') // null
  */
-export const messageArgumentOf = (method: string): number | null => {
+export const messageArgumentOf = (method: string): Nullable<number> => {
     const index = MessageArguments[method]
 
     return Number.isInteger(index) ? index : null
@@ -40,9 +42,9 @@ export const messageArgumentOf = (method: string): number | null => {
  * isStringLiteral(literalOf('`Name is ${verb}`')) // true
  * isStringLiteral(literalOf('`${verb}`')) // false
  */
-export const isStringLiteral = (value: ValueLike | undefined): boolean => {
-    if (value === undefined) return false
-    if (value.type === 'Literal') return typeof value.value === 'string'
+export const isStringLiteral = (value: Optional<ValueLike>): boolean => {
+    if (isUndefined(value)) return false
+    if (value.type === 'Literal') return isString(value.value)
     if (value.type !== 'TemplateLiteral') return false
 
     return (value.quasis ?? []).some((quasi) => (quasi.value?.cooked ?? '').trim() !== '')

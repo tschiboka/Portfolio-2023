@@ -1,5 +1,5 @@
-import { isString } from '../../common/utils/Predicate/Predicate.js'
 import { GroupPattern, LeafPattern, QueriesSuffix } from './QueriesExportShape.constants.js'
+import { isString } from '../../common/utils/Predicate/Predicate.js'
 import type { ExportNamedDeclaration, ObjectExpression, Property } from 'estree'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 

@@ -1,5 +1,5 @@
-import { typescriptRuleTester } from '../../config'
 import { Rules, ErrorMessage } from '../NoQualifiedType.rules'
+import { typescriptRuleTester } from '../../config'
 
 typescriptRuleTester.run('no-qualified-type', Rules.Eslint.Min9, {
     valid: [

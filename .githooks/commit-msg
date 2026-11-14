@@ -54,12 +54,12 @@ step "[commit-msg]" node "$root/scripts/check-commit-message.js" "$1"
 stale=$(for manifest in . common server; do
     npm outdated --prefix "$manifest" 2>/dev/null | awk -v manifest="$manifest" '
         NR > 2 && $3 != $4 {
-            printf "  %-8s %s %s -> %s\n", manifest, $1, ($2 == "MISSING" ? $3 : $2), $4
+            printf "  \033[35m%-8s\033[0m \033[33m%s\033[0m \033[1;35m%s -> %s\033[0m\n", manifest, $1, ($2 == "MISSING" ? $3 : $2), $4
         }'
 done)
 
 if [ -n "$stale" ]; then
-    echo "[commit] dependency warnings"
+    printf '\033[36m%s\033[0m\n' "[commit-dependency-warnings]"
     printf '%s\n' "$stale"
 fi
 

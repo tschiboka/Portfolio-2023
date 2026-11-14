@@ -26,6 +26,8 @@ unapproved decisions.
 - **Never write without explicit user approval.**
 - A tick rides on the change that completes it: offer the `[*]` when the work
   starts and the `[x]` with the change, never as a second round. A line with no approved change behind it still asks.
+- `[-]` marks a line that won't be done; it carries its reason in the same step, and
+  takes approval like any other tick.
 - Propose changes before making them.
 - Keep sentences and checklist steps short and actionable.
 - When updating, check whether the change affects other entries and update them

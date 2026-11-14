@@ -1,7 +1,7 @@
 ﻿import helmet from 'helmet'
 import compression from 'compression'
 import { Application } from 'express'
-import { ApiError, ApiMessage, DateTime, HttpStatus } from '@common-utils'
+import { ApiError, ApiMessage, DateTime, HttpStatus, isInstanceOf } from '@common-utils'
 import { LogModel } from './Log/Log.model'
 import type { Request, Response, NextFunction } from 'express'
 
@@ -25,7 +25,8 @@ export const AppMiddleware = {
 
         console.error(err)
 
-        if (err instanceof ApiError) return res.status(err.status).send({ message: err.message })
+        if (isInstanceOf(err, ApiError))
+            return res.status(err.status).send({ message: err.message })
         res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({
             message: ApiMessage.internalServerError(),
         })

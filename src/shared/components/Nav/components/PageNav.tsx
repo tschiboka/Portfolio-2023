@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Maybe } from 'monet'
+import { isNonEmpty } from '@common-utils'
 import { Session, AppHooks } from '@shared-context'
 import { Logo } from './Logo'
 import { NavMenu } from './NavMenu'
@@ -51,7 +52,7 @@ export const PageNav = ({ variant, pageName }: PageNavProps) => {
                 onSubmenuToggle={() => setSubMenuVisible(!subMenuVisible)}
                 logo={<Logo />}
             />
-            {isApp && Boolean(submenuStack.length) && (
+            {isApp && isNonEmpty(submenuStack) && (
                 <Submenu
                     key={submenuStack[0].parentLabel}
                     submenu={submenuStack[0]}

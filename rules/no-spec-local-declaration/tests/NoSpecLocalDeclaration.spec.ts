@@ -1,6 +1,6 @@
-import { ruleTester, typescriptRuleTester } from '../../config'
 import { DataErrorMessage, HelperErrorMessage } from '../NoSpecLocalDeclaration.constants'
 import { Rules } from '../NoSpecLocalDeclaration.rules'
+import { ruleTester, typescriptRuleTester } from '../../config'
 
 ruleTester.run('no-spec-local-declaration', Rules.Eslint.NoSpecLocalDeclaration9, {
     valid: [

@@ -1,4 +1,6 @@
+import { isDefined, isNull, isUndefined } from '../../common/utils/Predicate/Predicate.js'
 import type { TextOf, TypeLike } from './AliasShape.types.js'
+import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
 
 /**
  * The aliases that already allow absence, so `Nullable<T> | undefined` is `Nullish<T>` rather than
@@ -11,7 +13,7 @@ const isUndefinedKeyword = (node: TypeLike): boolean => node.type === 'TSUndefin
 const isNullKeyword = (node: TypeLike): boolean => node.type === 'TSNullKeyword'
 
 /** The name a type reference writes — `Optional` for `Optional<T>`, `null` for anything else. */
-const referencedName = (node: TypeLike): string | null =>
+const referencedName = (node: TypeLike): Nullable<string> =>
     node.type === 'TSTypeReference' ? (node.typeName?.name ?? null) : null
 
 /** The members a union writes, or `[]` where the node is no union. */
@@ -22,7 +24,7 @@ const unionMembersOf = (node: TypeLike): TypeLike[] =>
 const isNullableAlias = (node: TypeLike): boolean => {
     const name = referencedName(node)
 
-    return name !== null && NullableAliases.includes(name)
+    return isDefined(name) && NullableAliases.includes(name)
 }
 
 /**
@@ -106,18 +108,15 @@ export const isNullishOf = (node: TypeLike, _text: TextOf): boolean => {
 }
 
 /** The members of a type of a given size, or `null` where it writes another size. */
-const membersOf = (node: TypeLike, size: number): TypeLike[] | null => {
+const membersOf = (node: TypeLike, size: number): Nullable<TypeLike[]> => {
     const members = node.types ?? []
 
     return members.length === size ? members : null
 }
 
 /** Answers whether two members are written from the same source text. */
-const isWrittenAs = (
-    left: TypeLike | undefined,
-    right: TypeLike | undefined,
-    text: TextOf,
-): boolean => left !== undefined && right !== undefined && text(left) === text(right)
+const isWrittenAs = (left: Optional<TypeLike>, right: Optional<TypeLike>, text: TextOf): boolean =>
+    isDefined(left) && isDefined(right) && text(left) === text(right)
 
 /** Answers whether a union writes exactly the given members, in any order. */
 const hasWrittenSet = (node: TypeLike, text: TextOf, wanted: string[]): boolean => {
@@ -131,11 +130,11 @@ const hasWrittenSet = (node: TypeLike, text: TextOf, wanted: string[]): boolean 
 }
 
 /** The member that is a bare `T[]`, or `undefined` where the union writes none. */
-const bareArrayOf = (members: TypeLike[]): TypeLike | undefined =>
+const bareArrayOf = (members: TypeLike[]): Optional<TypeLike> =>
     members.find((member) => member.type === 'TSArrayType')
 
 /** The member that is a `readonly T[]`, or `undefined` where the union writes none. */
-const readonlyArrayOf = (members: TypeLike[]): TypeLike | undefined =>
+const readonlyArrayOf = (members: TypeLike[]): Optional<TypeLike> =>
     members.find(
         (member) =>
             member.type === 'TSTypeOperator' &&
@@ -144,27 +143,31 @@ const readonlyArrayOf = (members: TypeLike[]): TypeLike | undefined =>
     )
 
 /** The `T` a `Promise<T>` member writes, or `undefined` where the member is no promise. */
-const promiseArgumentOf = (node: TypeLike): TypeLike | undefined =>
+const promiseArgumentOf = (node: TypeLike): Optional<TypeLike> =>
     referencedName(node) === 'Promise' ? node.typeArguments?.params?.[0] : undefined
 
 /** Answers whether a union is `T | T[]`. */
 export const isArrayableOf = (node: TypeLike, text: TextOf): boolean => {
     const members = membersOf(node, 2)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     const array = bareArrayOf(members)
-    if (array === undefined) return false
+    if (isUndefined(array)) return false
 
-    return isWrittenAs(array.elementType, members.find((member) => member !== array), text)
+    return isWrittenAs(
+        array.elementType,
+        members.find((member) => member !== array),
+        text,
+    )
 }
 
 /** Answers whether a union is `T | readonly T[]`. */
 export const isReadonlyArrayableOf = (node: TypeLike, text: TextOf): boolean => {
     const members = membersOf(node, 2)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     const array = readonlyArrayOf(members)
-    if (array === undefined) return false
+    if (isUndefined(array)) return false
 
     return isWrittenAs(
         array.typeAnnotation?.elementType,
@@ -176,12 +179,16 @@ export const isReadonlyArrayableOf = (node: TypeLike, text: TextOf): boolean => 
 /** Answers whether a union is `T | Promise<T>`. */
 export const isAwaitableOf = (node: TypeLike, text: TextOf): boolean => {
     const members = membersOf(node, 2)
-    if (members === null) return false
+    if (isNull(members)) return false
 
-    const promised = members.find((member) => promiseArgumentOf(member) !== undefined)
-    if (promised === undefined) return false
+    const promised = members.find((member) => isDefined(promiseArgumentOf(member)))
+    if (isUndefined(promised)) return false
 
-    return isWrittenAs(promiseArgumentOf(promised), members.find((member) => member !== promised), text)
+    return isWrittenAs(
+        promiseArgumentOf(promised),
+        members.find((member) => member !== promised),
+        text,
+    )
 }
 
 /** The five keywords `Primitive` names. */
@@ -200,7 +207,7 @@ export const isFalsyOf = (node: TypeLike, text: TextOf): boolean =>
     hasWrittenSet(node, text, ['false', '0', "''", 'null', 'undefined'])
 
 /** The type arguments a reference writes, or `null` where it names another type. */
-const referenceArgsOf = (node: TypeLike, name: string): TypeLike[] | null =>
+const referenceArgsOf = (node: TypeLike, name: string): Nullable<TypeLike[]> =>
     referencedName(node) === name ? (node.typeArguments?.params ?? []) : null
 
 /** Answers whether the given members are written exactly as the given texts, in order. */
@@ -218,7 +225,7 @@ const isFalsyWrittenAs = (node: TypeLike, text: TextOf): boolean =>
 /** Answers whether a reference is `Record<string, T>`. */
 export const isDictionaryOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Record')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     return text(args[0]) === 'string'
 }
@@ -227,20 +234,20 @@ export const isDictionaryOf = (node: TypeLike, text: TextOf): boolean => {
 export const isAnyObjectOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Record')
 
-    return args !== null && areWrittenAs(args, ['PropertyKey', 'unknown'], text)
+    return isDefined(args) && areWrittenAs(args, ['PropertyKey', 'unknown'], text)
 }
 
 /** Answers whether a reference is `Record<never, never>`. */
 export const isEmptyObjectOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Record')
 
-    return args !== null && areWrittenAs(args, ['never', 'never'], text)
+    return isDefined(args) && areWrittenAs(args, ['never', 'never'], text)
 }
 
 /** Answers whether a reference is `Extract<keyof T, string>`. */
 export const isKeyOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Extract')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     const [keys, keyType] = args
 
@@ -253,7 +260,7 @@ export const isDefinedOf = (node: TypeLike, text: TextOf): boolean => {
         return (node.typeArguments?.params ?? []).length === 1
 
     const args = referenceArgsOf(node, 'Exclude')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     return isNilWrittenAs(args[1], text)
 }
@@ -261,7 +268,7 @@ export const isDefinedOf = (node: TypeLike, text: TextOf): boolean => {
 /** Answers whether a reference is `Exclude<T, Falsy>`. */
 export const isTruthyOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Exclude')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     return isFalsyWrittenAs(args[1], text)
 }
@@ -270,11 +277,11 @@ export const isTruthyOf = (node: TypeLike, text: TextOf): boolean => {
 const squeezed = (node: TypeLike, text: TextOf): string => text(node).replace(/\s+/g, '')
 
 /** The type a function type returns, unwrapped from the annotation that carries it. */
-const returnedTypeOf = (node: TypeLike): TypeLike | undefined => {
+const returnedTypeOf = (node: TypeLike): Optional<TypeLike> => {
     if (node.type !== 'TSFunctionType') return undefined
 
     const { returnType } = node
-    if (returnType === undefined) return undefined
+    if (isUndefined(returnType)) return undefined
 
     return returnType.type === 'TSTypeAnnotation' ? returnType.typeAnnotation : returnType
 }
@@ -282,7 +289,7 @@ const returnedTypeOf = (node: TypeLike): TypeLike | undefined => {
 /** Answers whether a function type is `() => void`. */
 export const isVoidFunctionOf = (node: TypeLike, text: TextOf): boolean => {
     const returned = returnedTypeOf(node)
-    if (returned === undefined || (node.params ?? []).length !== 0) return false
+    if (isUndefined(returned) || (node.params ?? []).length !== 0) return false
 
     return text(returned) === 'void'
 }
@@ -299,7 +306,7 @@ export const isAsyncFunctionOf = (node: TypeLike, text: TextOf): boolean =>
 export const isPredicateOf = (node: TypeLike, _text: TextOf): boolean => {
     const returned = returnedTypeOf(node)
     const params = node.params ?? []
-    if (returned === undefined || params.length !== 1) return false
+    if (isUndefined(returned) || params.length !== 1) return false
     if (params[0].type !== 'Identifier') return false
 
     return returned.type === 'TSBooleanKeyword'
@@ -308,23 +315,23 @@ export const isPredicateOf = (node: TypeLike, _text: TextOf): boolean => {
 /** Answers whether a function type is `(value: T) => value is S`. */
 export const isTypeGuardOf = (node: TypeLike, _text: TextOf): boolean => {
     const returned = returnedTypeOf(node)
-    if (returned === undefined || (node.params ?? []).length !== 1) return false
+    if (isUndefined(returned) || (node.params ?? []).length !== 1) return false
 
     return returned.type === 'TSTypePredicate'
 }
 
 /** The two members an intersection writes, or `null` where the node is no intersection of two. */
-const intersectionMembersOf = (node: TypeLike): TypeLike[] | null =>
+const intersectionMembersOf = (node: TypeLike): Nullable<TypeLike[]> =>
     node.type === 'TSIntersectionType' ? membersOf(node, 2) : null
 
 /** Answers whether an intersection is `Omit<A, keyof B> & B`. */
 export const isMergeOf = (node: TypeLike, text: TextOf): boolean => {
     const members = intersectionMembersOf(node)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     const args = referenceArgsOf(members[0], 'Omit')
-    if (args === null || args.length !== 2 || args[1].operator !== 'keyof') return false
-    if (args[1].typeAnnotation === undefined) return false
+    if (isNull(args) || args.length !== 2 || args[1].operator !== 'keyof') return false
+    if (isUndefined(args[1].typeAnnotation)) return false
 
     return text(members[1]) === text(args[1].typeAnnotation)
 }
@@ -332,16 +339,16 @@ export const isMergeOf = (node: TypeLike, text: TextOf): boolean => {
 /** Answers whether an intersection is `Omit<T, K> & Partial<Pick<T, K>>`, or with `Required`. */
 const isModifierBy = (node: TypeLike, text: TextOf, modifier: string): boolean => {
     const members = intersectionMembersOf(node)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     const args = referenceArgsOf(members[0], 'Omit')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     const [picked] = referenceArgsOf(members[1], modifier) ?? []
-    if (picked === undefined) return false
+    if (isUndefined(picked)) return false
 
     const pickArgs = referenceArgsOf(picked, 'Pick')
-    if (pickArgs === null || pickArgs.length !== 2) return false
+    if (isNull(pickArgs) || pickArgs.length !== 2) return false
 
     return text(pickArgs[0]) === text(args[0]) && text(pickArgs[1]) === text(args[1])
 }
@@ -359,9 +366,9 @@ export const isValueOfOf = (node: TypeLike, text: TextOf): boolean => {
     if (node.type !== 'TSIndexedAccessType') return false
 
     const { indexType, objectType } = node
-    if (indexType === undefined || objectType === undefined) return false
+    if (isUndefined(indexType) || isUndefined(objectType)) return false
     if (indexType.type !== 'TSTypeOperator' || indexType.operator !== 'keyof') return false
-    if (indexType.typeAnnotation === undefined) return false
+    if (isUndefined(indexType.typeAnnotation)) return false
 
     return text(indexType.typeAnnotation) === text(objectType)
 }
@@ -375,7 +382,7 @@ export const isNonEmptyArrayOf = (node: TypeLike, text: TextOf): boolean => {
 
     const [first, second] = elements
     const rest = second.type === 'TSRestType' ? second.typeAnnotation : undefined
-    if (rest?.type !== 'TSArrayType' || rest.elementType === undefined) return false
+    if (rest?.type !== 'TSArrayType' || isUndefined(rest.elementType)) return false
 
     return text(rest.elementType) === text(first)
 }
@@ -387,7 +394,7 @@ export const isEmptiableOf = (node: TypeLike, text: TextOf): boolean =>
 /** Answers whether a reference is `Omit<T, '_id'>`. */
 export const isWithoutIdOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Omit')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     return ["'_id'", '"_id"'].includes(squeezed(args[1], text))
 }
@@ -398,7 +405,7 @@ const BrandMember = /^\{readonly__brand:.+\}$/
 /** Answers whether an intersection is `T & { readonly __brand: Name }`. */
 export const isBrandOf = (node: TypeLike, text: TextOf): boolean => {
     const members = intersectionMembersOf(node)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     return members.some((member) => BrandMember.test(squeezed(member, text)))
 }
@@ -406,10 +413,10 @@ export const isBrandOf = (node: TypeLike, text: TextOf): boolean => {
 /** Answers whether an intersection is `Partial<T> & { [K in keyof T]: Pick<T, K> }[keyof T]`. */
 export const isAtLeastOneOf = (node: TypeLike, _text: TextOf): boolean => {
     const members = intersectionMembersOf(node)
-    if (members === null) return false
+    if (isNull(members)) return false
 
     const partial = referenceArgsOf(members[0], 'Partial')
-    if (partial === null || partial.length !== 1) return false
+    if (isNull(partial) || partial.length !== 1) return false
 
     const [indexed] = members.slice(1)
     if (indexed.type !== 'TSIndexedAccessType') return false
@@ -419,7 +426,7 @@ export const isAtLeastOneOf = (node: TypeLike, _text: TextOf): boolean => {
 
     const picked = indexed.objectType.typeAnnotation
 
-    return picked !== undefined && referencedName(picked) === 'Pick'
+    return isDefined(picked) && referencedName(picked) === 'Pick'
 }
 
 /** Answers whether a reference is a `keyof` over the mapped `unknown` that `OptionalKeys` writes. */
@@ -428,9 +435,9 @@ export const isOptionalKeysOf = (node: TypeLike, text: TextOf): boolean => {
 
     const mapped = node.typeAnnotation
     if (mapped?.type !== 'TSMappedType') return false
-    if (mapped.nameType === null || mapped.nameType === undefined) return false
+    if (isNull(mapped.nameType) || isUndefined(mapped.nameType)) return false
     if (mapped.nameType.type !== 'TSConditionalType') return false
-    if (mapped.typeAnnotation === undefined) return false
+    if (isUndefined(mapped.typeAnnotation)) return false
 
     return text(mapped.typeAnnotation) === 'unknown'
 }
@@ -438,7 +445,7 @@ export const isOptionalKeysOf = (node: TypeLike, text: TextOf): boolean => {
 /** Answers whether a reference is `Exclude<keyof T, OptionalKeys<T>>`. */
 export const isRequiredKeysOf = (node: TypeLike, _text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Exclude')
-    if (args === null || args.length !== 2) return false
+    if (isNull(args) || args.length !== 2) return false
 
     return referencedName(args[1]) === 'OptionalKeys'
 }
@@ -449,11 +456,11 @@ export const isKeysOfTypeOf = (node: TypeLike, text: TextOf): boolean => {
 
     const { indexType, objectType } = node
     if (indexType?.type !== 'TSTypeOperator' || indexType.operator !== 'keyof') return false
-    if (objectType?.type !== 'TSMappedType' || objectType.constraint === undefined) return false
+    if (objectType?.type !== 'TSMappedType' || isUndefined(objectType.constraint)) return false
     if (text(objectType.constraint) !== text(indexType)) return false
 
     const mapped = objectType.typeAnnotation
-    if (mapped?.type !== 'TSConditionalType' || mapped.falseType === undefined) return false
+    if (mapped?.type !== 'TSConditionalType' || isUndefined(mapped.falseType)) return false
 
     return text(mapped.falseType) === 'never'
 }

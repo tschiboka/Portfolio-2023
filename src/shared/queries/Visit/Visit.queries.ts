@@ -3,7 +3,7 @@ import { AxiosError } from 'axios'
 import { detectIncognito } from 'detectincognitojs'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { GetVisitResponse, GetVisitSummaryResponse, PostVisitResponse } from '@common-types'
-import { Browser, Query, QueryKey } from '@common-utils'
+import { Browser, isTruthy, Query, QueryKey } from '@common-utils'
 
 const postVisit = async (path: string): Promise<PostVisitResponse> => {
     const request = new Query.RequestBuilder('Visit').build()
@@ -44,7 +44,7 @@ const useGetVisits = (path: string) => {
             const res = await request.get<GetVisitResponse>()
             return res.data
         },
-        enabled: Boolean(path),
+        enabled: isTruthy(path),
     })
 }
 

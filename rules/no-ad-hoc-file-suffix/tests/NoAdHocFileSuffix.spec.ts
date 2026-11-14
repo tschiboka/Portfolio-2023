@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { NoAdHocFileSuffixConstants } from '../NoAdHocFileSuffix.constants'
 import { ErrorMessage, Rules } from '../NoAdHocFileSuffix.rules'
+import { ruleTester } from '../../config'
 
 const { AllowedBareNames, AllowedParentFolders, AllowedRoles } = NoAdHocFileSuffixConstants
 

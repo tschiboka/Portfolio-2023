@@ -1,6 +1,6 @@
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
-import { isString } from '../../common/utils/Predicate/Predicate.js'
+import { isNull, isString } from '../../common/utils/Predicate/Predicate.js'
 import type { ReExportStatement } from './NoDuplicateExport.types.js'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /** The specifier's source text, or `null` when the statement re-exports nothing. */
 export const pathOf = (statement: ReExportStatement): Nullable<string> =>
@@ -20,7 +20,7 @@ export const shapeOf = (statement: ReExportStatement): string =>
 /** The key a statement is counted under, or `null` when it re-exports nothing. */
 export const keyOf = (statement: ReExportStatement): Nullable<string> => {
     const path = pathOf(statement)
-    if (path === null) return null
+    if (isNull(path)) return null
 
     return `${kindOf(statement)}:${shapeOf(statement)}:${path}`
 }

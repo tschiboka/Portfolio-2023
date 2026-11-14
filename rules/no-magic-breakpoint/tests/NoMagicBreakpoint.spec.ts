@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoMagicBreakpoint.constants'
 import { Rules } from '../NoMagicBreakpoint.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-magic-breakpoint', Rules.Eslint.NoMagicBreakpoint9, {
     valid: [

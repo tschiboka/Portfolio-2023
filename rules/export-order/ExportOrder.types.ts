@@ -1,3 +1,5 @@
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
+
 /** One specifier of an export statement, narrowed to what the style rank reads. */
 export type ExportSpecifierShape = {
     type: string
@@ -7,16 +9,16 @@ export type ExportSpecifierShape = {
 /** An export statement, narrowed to what the ranks read. */
 export type ExportStatement = {
     type: string
-    source?: { value?: unknown } | null
+    source?: Nullable<{ value?: unknown }>
     imported?: unknown
     exportKind?: unknown
-    exported?: { name?: unknown; value?: unknown } | null
-    declaration?: { type: string } | null
+    exported?: Nullable<{ name?: unknown; value?: unknown }>
+    declaration?: Nullable<{ type: string }>
     specifiers?: ExportSpecifierShape[]
 }
 
 /** The two ranks a statement carries. `path` is `null` for a local declaration, which names none. */
 export type ExportRanks = {
     style: number
-    path: number | null
+    path: Nullable<number>
 }

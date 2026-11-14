@@ -1,3 +1,5 @@
+import type { Dictionary } from '../common/utils/Generics/Generics.types.js'
+
 /**
  * Folder names whose children are named for their subject rather than for a role or their parent.
  * A component in `components/`, a helper in `utils/`, a spec in `tests/` — the folder carries the
@@ -18,7 +20,7 @@ export const ViolationPrefix = 'TSCHIBOKA.COM - Coding Standards Violation: '
  * many shapes), `demos` (one component per export), `generated` (the generator decides the shape)
  * and `business` (a document, no code symbol).
  */
-export const RoleExportTokenMap: Record<string, string> = {
+export const RoleExportTokenMap: Dictionary<string> = {
     actions: 'Actions',
     auth: 'Auth',
     code: 'Code',

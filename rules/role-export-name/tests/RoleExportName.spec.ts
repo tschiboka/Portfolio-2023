@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
-import { Rules } from '../RoleExportName.rules'
 import { RoleExportNameTestUtils } from './RoleExportName.spec.utils'
+import { Rules } from '../RoleExportName.rules'
+import { ruleTester } from '../../config'
 
 const { messageFor, roleFile, fileName, expectedName, roleCases } = RoleExportNameTestUtils
 

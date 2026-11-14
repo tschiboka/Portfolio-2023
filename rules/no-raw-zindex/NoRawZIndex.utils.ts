@@ -1,26 +1,27 @@
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
+import { StyleTokenPrefix } from './NoRawZIndex.constants.js'
 import { Css } from '../css.js'
 import { ZIndexTokens } from '../tokens.generated.js'
-import { StyleTokenPrefix } from './NoRawZIndex.constants.js'
+import { isDefined, isNull, isObject, isString } from '../../common/utils/Predicate/Predicate.js'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 const isLayer = (name: unknown): boolean =>
-    typeof name === 'string' && (ZIndexTokens as readonly string[]).includes(name)
+    isString(name) && (ZIndexTokens as readonly string[]).includes(name)
 
 /** An AST node seen as its type plus whatever fields the check reads. */
 type AstNode = { type: string; [field: string]: unknown }
 
 const asNode = (value: unknown): Nullable<AstNode> =>
-    typeof value === 'object' && value !== null && 'type' in value ? (value as AstNode) : null
+    isObject(value) && 'type' in value ? (value as AstNode) : null
 
 const isIdentifierNamed = (node: Nullable<AstNode>, name: string): boolean =>
-    node !== null && node.type === 'Identifier' && node.name === name
+    isDefined(node) && node.type === 'Identifier' && node.name === name
 
 /** The property's key as text, whichever surface produced it — `zIndex` or `"z-index"`. */
 export const keyTextOf = (key: unknown): string => {
     const node = asNode(key)
-    if (node === null) return ''
-    if (typeof node.name === 'string') return node.name
-    if (typeof node.value === 'string') return node.value
+    if (isNull(node)) return ''
+    if (isString(node.name)) return node.name
+    if (isString(node.value)) return node.value
 
     return ''
 }
@@ -28,10 +29,10 @@ export const keyTextOf = (key: unknown): string => {
 /** True for `Const.ZIndex.<layer>` — the only value a TS styles object may carry. */
 export const isConstToken = (value: unknown): boolean => {
     const node = asNode(value)
-    if (node === null || node.type !== 'MemberExpression') return false
+    if (isNull(node) || node.type !== 'MemberExpression') return false
 
     const zIndex = asNode(node.object)
-    if (zIndex === null || zIndex.type !== 'MemberExpression') return false
+    if (isNull(zIndex) || zIndex.type !== 'MemberExpression') return false
 
     if (!isIdentifierNamed(asNode(zIndex.object), 'Const')) return false
     if (!isIdentifierNamed(asNode(zIndex.property), 'ZIndex')) return false
@@ -44,10 +45,10 @@ export const isConstToken = (value: unknown): boolean => {
 /** True for a `var(--z-<layer>)` string naming a real layer. */
 export const isStyleToken = (value: unknown): boolean => {
     const node = asNode(value)
-    if (node === null || node.type !== 'Literal' || typeof node.value !== 'string') return false
+    if (isNull(node) || node.type !== 'Literal' || !isString(node.value)) return false
 
     const name = Css.getTokenName(node.value)
-    if (name === null || !name.startsWith(StyleTokenPrefix)) return false
+    if (isNull(name) || !name.startsWith(StyleTokenPrefix)) return false
 
     return isLayer(name.slice(StyleTokenPrefix.length))
 }
@@ -61,5 +62,5 @@ export const isObjectPattern = (node: object): boolean => {
 
     const parent = asNode(node.parent)
 
-    return parent !== null && parent.type === 'ObjectPattern'
+    return isDefined(parent) && parent.type === 'ObjectPattern'
 }

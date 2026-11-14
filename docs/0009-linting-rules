@@ -23,7 +23,7 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 | Status       | In progress |
 | ------------ | ----------- |
-| Last updated | 2026-11-09  |
+| Last updated | 2026-11-14  |
 | Created      | 2026-09-25  |
 | Scope        | `rules/`    |
 
@@ -581,23 +581,14 @@ config owns is linted.
           `public/projects/riffmaster/test/chords.test.js`, a shipped demo asset outside
           `src`, `common` and `server`, so it is out of scope rather than fixed
     - [x] Step 31.7: Confirm a green `tsc`, lint, and test run
-- [x] Step 32: Rule — an exact predicate case calls `Predicate`
-    - [x] Step 32.1: Build `rules/predicate-case/` — constants, types, utils, rules, registrar, spec
-    - [x] Step 32.2: Flag only the three shapes a shared predicate already names —
-          `.length > 0` and `.length >= 1` → `isNonEmpty`, `.length === 0` and `.length < 1` →
-          `isEmpty` — and, because they are the same kind of restatement, `typeof x === 'number' |
-          'string' | 'boolean' | 'function'` → `isNumber`/`isString`/`isBoolean`/`isFunction`, and
-          `x === null` / `=== undefined` / `== null` → `isNull`/`isUndefined`/`isNullish`
-    - [x] Step 32.3: Leave every other comparison alone — `length > 3` is a bound, not a
-          predicate, and guessing its meaning is how a rule teaches the wrong name
-    - [x] Step 32.4: Scope `include` to `src/**`, `common/**`, `server/**`, excluding the
-          `Predicate` folder, which is where those guards are written
-    - [x] Step 32.5: Register as `severity: 'error'`
-    - [x] Step 32.6: Add `tests/PredicateCase.spec.ts` — the three families reported, a bound, a
-          bare length read, a `typeof null`-style case and a name-to-name comparison left alone
-    - [x] Step 32.7: Run `npm run build:rules`, then verify the generated config
-    - [x] Step 32.8: Sweep every site — `ClientMessage.spec.ts` holds `message.length > 0`
-    - [x] Step 32.9: Confirm a green `tsc`, lint, and test run
+- [x] Step 32: Rule — an exact predicate case calls `Predicate` - [x] Step 32.1: Build `rules/predicate-case/` — constants, types, utils, rules, registrar, spec - [x] Step 32.2: Flag only the three shapes a shared predicate already names —
+      `.length > 0` and `.length >= 1` → `isNonEmpty`, `.length === 0` and `.length < 1` →
+      `isEmpty` — and, because they are the same kind of restatement, `typeof x === 'number' |
+'string' | 'boolean' | 'function'` → `isNumber`/`isString`/`isBoolean`/`isFunction`, and
+      `x === null` / `=== undefined` / `== null` → `isNull`/`isUndefined`/`isNullish` - [x] Step 32.3: Leave every other comparison alone — `length > 3` is a bound, not a
+      predicate, and guessing its meaning is how a rule teaches the wrong name - [x] Step 32.4: Scope `include` to `src/**`, `common/**`, `server/**`, excluding the
+      `Predicate` folder, which is where those guards are written - [x] Step 32.5: Register as `severity: 'error'` - [x] Step 32.6: Add `tests/PredicateCase.spec.ts` — the three families reported, a bound, a
+      bare length read, a `typeof null`-style case and a name-to-name comparison left alone - [x] Step 32.7: Run `npm run build:rules`, then verify the generated config - [x] Step 32.8: Sweep every site — `ClientMessage.spec.ts` holds `message.length > 0` - [x] Step 32.9: Confirm a green `tsc`, lint, and test run
 - [x] Step 33: Rule — a written type shape names its generic
     - [x] Step 33.1: Build `rules/alias-shape/` as one table of shape matchers, so every
           generic is a row rather than a rule of its own
@@ -640,25 +631,25 @@ config owns is linted.
     - [x] Step 34.7: Sweep with `eslint --fix` — `multi` removes braces from every
           single-statement body, so the diff reaches most files
     - [x] Step 34.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 35: Rule — the React namespace is never bound
-    - [ ] Step 35.1: State the convention in `AGENTS.md` §1.2 — a React export is imported
-          by name
-    - [ ] Step 35.2: Build `rules/no-react-namespace/`
-    - [ ] Step 35.3: Flag `import React from 'react'` and `import * as React from 'react'` —
+- [x] Step 35: Rule — the React namespace is never bound
+    - [-] Step 35.1: State the convention in `AGENTS.md` §1.2 — wont do; the rule states it
+      and `AGENTS.md` is not a mirror of the registry
+    - [x] Step 35.2: Build `rules/no-react-namespace/`
+    - [x] Step 35.3: Flag `import React from 'react'` and `import * as React from 'react'` —
           `jsx: react-jsx` compiles JSX without the binding
-    - [ ] Step 35.4: Flag every `React.X`, naming the import that replaces it — values
+    - [x] Step 35.4: Flag every `React.X`, naming the import that replaces it — values
           (`React.useState`) and types (`React.FormEvent`) alike
-    - [ ] Step 35.5: Leave every other module alone — `react-dom` and `react-hook-form` are
+    - [x] Step 35.5: Leave every other module alone — `react-dom` and `react-hook-form` are
           not this rule's business, and neither is the word `React` in prose
-    - [ ] Step 35.6: Scope `include` to `src/**`, `common/**`, `server/**`
-    - [ ] Step 35.7: Register as `severity: 'error'`
-    - [ ] Step 35.8: Add `tests/NoReactNamespace.spec.ts` — both bindings and both reference
+    - [x] Step 35.6: Scope `include` to `src/**`, `common/**`, `server/**`
+    - [x] Step 35.7: Register as `severity: 'error'`
+    - [x] Step 35.8: Add `tests/NoReactNamespace.spec.ts` — both bindings and both reference
           kinds reported; a named import, a foreign default import and prose left alone
-    - [ ] Step 35.9: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 35.10: Sweep the three files — `main.tsx` takes `StrictMode`,
+    - [x] Step 35.9: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 35.10: Sweep the three files — `main.tsx` takes `StrictMode`,
           `Form.spec.utils.tsx` takes `useEffect`, `ReactElement`, `ReactNode`, and
           `Form.spec.tsx` takes `FormEvent`
-    - [ ] Step 35.11: Confirm a green `tsc`, lint, and test run
+    - [x] Step 35.11: Confirm a green `tsc`, lint, and test run
 - [ ] Step 36: Rule — a number other than 0 and 1 names itself
     - [ ] Step 36.1: Register `@typescript-eslint/no-magic-numbers` — the plugin ships it,
           reached the way `curly` reaches core's

@@ -1,5 +1,5 @@
 ﻿import express from 'express'
-import { ApiResponder } from '@common-utils'
+import { ApiResponder, isTruthy } from '@common-utils'
 import { CategoryService } from './Category.service'
 import { UsersAuth } from '../Users/Users.auth'
 import { UsersMiddleware } from '../Users/Users.middleware'
@@ -17,7 +17,7 @@ const router = express.Router()
 // GET /api/categories — the requesting user's categories (optionally parents only).
 router.get('/', [auth], async (req: GetCategoriesReq, res: GetCategoriesRes) => {
     const user = await UsersAuth.user.getCurrent(req)
-    const categories = await CategoryService.list(user, Boolean(req.query.isParent))
+    const categories = await CategoryService.list(user, isTruthy(req.query.isParent))
     ApiResponder.ok(res, { data: categories })
 })
 

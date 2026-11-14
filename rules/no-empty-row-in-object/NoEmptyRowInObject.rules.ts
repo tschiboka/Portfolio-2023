@@ -1,5 +1,5 @@
-import type { Rule } from 'eslint'
 import { Rows } from '../rows.js'
+import type { Rule } from 'eslint'
 
 export const ErrorMessage = 'An object must not contain an empty row between its properties.'
 

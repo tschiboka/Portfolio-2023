@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../RoleFilePascal.constants'
 import { Rules } from '../RoleFilePascal.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('role-file-pascal', Rules.Eslint.RoleFilePascal9, {
     valid: [

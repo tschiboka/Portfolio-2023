@@ -1,4 +1,6 @@
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 export const ErrorMessage = 'A type must be imported, not reached through a namespace.'
 
@@ -6,7 +8,7 @@ export const ErrorMessage = 'A type must be imported, not reached through a name
 const HeritageParents = new Set(['TSClassImplements', 'TSInterfaceHeritage'])
 
 /** A node whose parent may be absent, which is all the three questions below need. */
-type WithParent = { parent: { type: string } | null }
+type WithParent = { parent: Nullable<{ type: string }> }
 
 /** The parent's node type, or an empty string at the root, so no comparison has to guard. */
 const getParentType = (node: WithParent): string => node.parent?.type ?? ''
@@ -42,14 +44,14 @@ type NameChain = { type: string; name?: string; left?: NameChain }
 type MemberChain = { type: string; name?: string; object?: MemberChain }
 
 /** The first name of a dotted chain — `React` for `React.FormEvent`, `A` for `A.B.C`. */
-const getRootName = (node: NameChain): string | null => {
+const getRootName = (node: NameChain): Nullable<string> => {
     if (node.type === 'Identifier') return node.name ?? null
 
     return node.left ? getRootName(node.left) : null
 }
 
 /** The first name of a member chain — `React` for `React.Component`. */
-const getMemberRootName = (node: MemberChain): string | null => {
+const getMemberRootName = (node: MemberChain): Nullable<string> => {
     if (node.type === 'Identifier') return node.name ?? null
 
     return node.object ? getMemberRootName(node.object) : null
@@ -64,8 +66,8 @@ const Eslint = {
         create(context) {
             const importedNames = new Set<string>()
 
-            const isImported = (name: string | null): boolean =>
-                name !== null && importedNames.has(name)
+            const isImported = (name: Nullable<string>): boolean =>
+                isDefined(name) && importedNames.has(name)
 
             return {
                 ImportDeclaration(node: Rule.Node) {

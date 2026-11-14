@@ -1,4 +1,4 @@
-import { isNumber, isString } from '@common-utils'
+import { isNumber, isString, isTruthy } from '@common-utils'
 import {
     TableCheckboxInput,
     TableDateInput,
@@ -85,7 +85,7 @@ export const FilterInput = ({ input, value, onChange }: FilterInputProps) => {
                 <TableCheckboxInput
                     id={id}
                     label={input.label}
-                    checked={Boolean(value)}
+                    checked={isTruthy(value)}
                     onChange={(v) => onChange(input.key, v)}
                 />
             )

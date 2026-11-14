@@ -1,10 +1,13 @@
-import { ruleTester } from '../../config'
 import {
+    ArrayMessage,
+    InstanceMessage,
     LengthMessage,
     NullishMessage,
+    TruthyMessage,
     TypeofMessage,
 } from '../PredicateCase.constants'
 import { Rules } from '../PredicateCase.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('predicate-case', Rules.Eslint.PredicateCase9, {
     valid: [
@@ -15,10 +18,6 @@ ruleTester.run('predicate-case', Rules.Eslint.PredicateCase9, {
         {
             name: 'should accept a length read outside a comparison',
             code: 'const size = words.length',
-        },
-        {
-            name: 'should accept a typeof result no guard names',
-            code: "const object = typeof value === 'object'",
         },
         {
             name: 'should accept a comparison against zero',
@@ -53,16 +52,32 @@ ruleTester.run('predicate-case', Rules.Eslint.PredicateCase9, {
             code: "const symbol = typeof value === 'symbol'",
         },
         {
-            name: 'should accept a typeof result no guard names — undefined',
-            code: "const missing = typeof value === 'undefined'",
-        },
-        {
             name: 'should accept a NaN comparison, which no guard names',
             code: 'const nan = value === NaN',
         },
         {
             name: 'should accept a floor of zero, which asks nothing',
             code: 'const any = words.length >= 0',
+        },
+        {
+            name: 'should accept Boolean as a reference rather than a call',
+            code: 'const guard = Boolean',
+        },
+        {
+            name: 'should accept Array.isArray as a reference rather than a call',
+            code: 'const checker = Array.isArray',
+        },
+        {
+            name: 'should accept a typeof result no guard names — a bigint',
+            code: "const wide = typeof value === 'bigint'",
+        },
+        {
+            name: 'should accept a plain negation',
+            code: 'const empty = !items',
+        },
+        {
+            name: 'should accept an optional read that is no length',
+            code: 'const label = value?.name',
         },
     ],
     invalid: [
@@ -184,6 +199,61 @@ ruleTester.run('predicate-case', Rules.Eslint.PredicateCase9, {
         {
             name: 'should throw when a loose null is compared from the left',
             code: 'const absent = null != value',
+            errors: [{ message: NullishMessage }],
+        },
+        {
+            name: 'should throw for an object typeof comparison',
+            code: "const record = typeof value === 'object'",
+            errors: [{ message: TypeofMessage }],
+        },
+        {
+            name: 'should throw for an undefined typeof comparison',
+            code: "const missing = typeof value === 'undefined'",
+            errors: [{ message: TypeofMessage }],
+        },
+        {
+            name: 'should throw for an instance check',
+            code: 'const when = value instanceof Date',
+            errors: [{ message: InstanceMessage }],
+        },
+        {
+            name: 'should throw for an array check',
+            code: 'const list = Array.isArray(value)',
+            errors: [{ message: ArrayMessage }],
+        },
+        {
+            name: 'should throw for a Boolean cast',
+            code: 'const flag = Boolean(value)',
+            errors: [{ message: TruthyMessage }],
+        },
+        {
+            name: 'should throw once per shape in a joined expression',
+            code: 'const both = Boolean(value) && value instanceof Date',
+            errors: [{ message: TruthyMessage }, { message: InstanceMessage }],
+        },
+        {
+            name: 'should throw for a computed array check',
+            code: "const list = Array['isArray'](value)",
+            errors: [{ message: ArrayMessage }],
+        },
+        {
+            name: 'should throw for a negated length',
+            code: 'const empty = !items.length',
+            errors: [{ message: LengthMessage }],
+        },
+        {
+            name: 'should throw for a Boolean construction',
+            code: 'const flag = new Boolean(value)',
+            errors: [{ message: TruthyMessage }],
+        },
+        {
+            name: 'should throw for an optional length',
+            code: 'const filled = items?.length > 0',
+            errors: [{ message: LengthMessage }],
+        },
+        {
+            name: 'should throw for a void zero comparison',
+            code: 'const missing = value === void 0',
             errors: [{ message: NullishMessage }],
         },
     ],

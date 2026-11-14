@@ -1,3 +1,5 @@
+import { Nullable } from '../../common/utils/Generics/index.js'
+
 /** A property key, narrowed to the name or the value that identifies it. */
 export type KeyLike = {
     type: string
@@ -9,7 +11,7 @@ export type KeyLike = {
 export type ValueLike = {
     type: string
     value?: unknown
-    quasis?: { value?: { cooked?: string | null } }[]
+    quasis?: { value?: { cooked?: Nullable<string> } }[]
 }
 
 /** A callee, narrowed to the member a call is made on. */

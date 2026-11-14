@@ -1,7 +1,8 @@
 import { ErrorMessage } from './ExportOrder.constants.js'
 import { isOutOfOrder, ranksOf } from './ExportOrder.utils.js'
-import type { ExportRanks, ExportStatement } from './ExportOrder.types.js'
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
+import type { ExportRanks, ExportStatement } from './ExportOrder.types.js'
 import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 const Eslint = {
@@ -19,7 +20,7 @@ const Eslint = {
                 if (hasReported) return
 
                 const current = ranksOf(node)
-                if (previous !== null && isOutOfOrder(previous, current)) {
+                if (isDefined(previous) && isOutOfOrder(previous, current)) {
                     hasReported = true
                     context.report({ message: ErrorMessage, node })
 

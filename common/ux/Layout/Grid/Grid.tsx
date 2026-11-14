@@ -1,4 +1,4 @@
-import { isDefined } from '@common-utils'
+import { isDefined, isObject } from '@common-utils'
 import { StackSelectors } from '../Stack/Stack.selectors'
 import type { CSSProperties } from 'react'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
@@ -7,7 +7,7 @@ import './Grid.styles.css'
 const { selectAlign, selectJustify } = StackSelectors
 
 const isResponsive = (columns: GridProps['columns']): columns is ResponsiveColumns =>
-    typeof columns === 'object' && 'base' in columns
+    isObject(columns) && 'base' in columns
 
 const buildResponsiveClasses = (columns: ResponsiveColumns): string =>
     Object.entries(columns)

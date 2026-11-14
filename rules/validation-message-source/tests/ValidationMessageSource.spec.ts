@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { MessageErrorMessage } from '../ValidationMessageSource.constants'
 import { Rules } from '../ValidationMessageSource.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('validation-message-source', Rules.Eslint.ValidationMessageSource9, {
     valid: [

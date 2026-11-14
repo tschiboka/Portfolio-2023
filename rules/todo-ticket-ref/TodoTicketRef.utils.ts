@@ -2,14 +2,16 @@ import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { cwd } from 'node:process'
 import { DocumentsFolder, RefShape, TodoRef, TodoWord } from './TodoTicketRef.constants.js'
+import { Nullable } from '../../common/utils/Generics/index.js'
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 
-let documentKeys: string[] | null = null
+let documentKeys: Nullable<string[]> = null
 
 /** `ACRONYM:number`, with an empty acronym for core work — padding never matters. */
 const keyOf = (acronym: string, digits: string): string => `${acronym}:${Number(digits)}`
 
 /** The digits a document name opens with, or `null` where it opens with none. */
-const leadingDigitsOf = (name: string): string | null => /^(\d{1,6})-/.exec(name)?.[1] ?? null
+const leadingDigitsOf = (name: string): Nullable<string> => /^(\d{1,6})-/.exec(name)?.[1] ?? null
 
 /** Splits a reference into its acronym, empty for core work, and its digits. */
 const partsOf = (ref: string): { acronym: string; digits: string } => {
@@ -26,21 +28,19 @@ const partsOf = (ref: string): { acronym: string; digits: string } => {
  * acronym rather than the filename.
  */
 const ticketKeys = (): string[] => {
-    if (documentKeys !== null) return documentKeys
+    if (isDefined(documentKeys)) return documentKeys
 
     const folder = join(cwd(), DocumentsFolder)
     const keys: string[] = []
 
     try {
         readdirSync(folder, { withFileTypes: true }).forEach((entry) => {
-            const names = entry.isDirectory()
-                ? readdirSync(join(folder, entry.name))
-                : [entry.name]
+            const names = entry.isDirectory() ? readdirSync(join(folder, entry.name)) : [entry.name]
             const acronym = entry.isDirectory() ? entry.name : ''
 
             names.forEach((name) => {
                 const digits = leadingDigitsOf(name)
-                if (digits !== null) keys.push(keyOf(acronym, digits))
+                if (isDefined(digits)) keys.push(keyOf(acronym, digits))
             })
         })
     } catch {
@@ -63,7 +63,7 @@ export const isTodo = (comment: string): boolean => TodoWord.test(comment)
  * refOf('TODO: [0009] - add the rule') // '0009'
  * refOf('TODO: add the rule [0009]') // null
  */
-export const refOf = (comment: string): string | null => TodoRef.exec(comment)?.[1] ?? null
+export const refOf = (comment: string): Nullable<string> => TodoRef.exec(comment)?.[1] ?? null
 
 /**
  * Answers whether a reference is written the way the convention requires.

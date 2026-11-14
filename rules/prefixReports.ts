@@ -1,5 +1,5 @@
-import type { Rule } from 'eslint'
 import { ViolationPrefix } from './constants.js'
+import type { Rule } from 'eslint'
 import type { RuleRegistrar } from './types.js'
 
 /** Adds the prefix when the report carries a message; a `messageId` report passes through. */

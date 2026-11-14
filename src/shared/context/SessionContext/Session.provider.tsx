@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { isTruthy } from '@common-utils'
 import { SessionContext } from './Session.context'
 import { SessionStorage } from './Session.storage'
 import { SessionQueries } from './Session.queries'
@@ -20,7 +21,7 @@ export const SessionProvider = ({ children }: SessionProviderProps) => {
         !!token &&
         (sessionRehydrateResponse.isLoading || !session) &&
         !sessionRehydrateResponse.isError
-    const isAuthenticated = Boolean(session?.user)
+    const isAuthenticated = isTruthy(session?.user)
 
     const contextValues: SessionContextValues = {
         session,

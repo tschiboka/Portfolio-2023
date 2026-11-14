@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { AliasErrorMessage, ErrorMessage } from '../TestNameVerb.constants'
 import { Rules } from '../TestNameVerb.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('test-name-verb', Rules.Eslint.TestNameVerb9, {
     valid: [

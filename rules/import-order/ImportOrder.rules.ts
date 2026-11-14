@@ -1,11 +1,12 @@
-import type { Rule } from 'eslint'
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 import { ErrorMessage } from './ImportOrder.constants.js'
-import type { ImportRanks, ImportStatement } from './ImportOrder.types.js'
 import { isOutOfOrder, ranksOf } from './ImportOrder.utils.js'
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
+import type { Rule } from 'eslint'
+import type { ImportRanks, ImportStatement } from './ImportOrder.types.js'
+import type { Defined, Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /** The node the parser hands over, read from the listener's own signature rather than re-declared. */
-type ImportNode = Parameters<NonNullable<Rule.NodeListener['ImportDeclaration']>>[0]
+type ImportNode = Parameters<Defined<Rule.NodeListener['ImportDeclaration']>>[0]
 
 /** `importKind` is the one field the TypeScript parser adds at runtime and the node types omit. */
 const importKindOf = (node: object): unknown => ('importKind' in node ? node.importKind : null)
@@ -32,7 +33,7 @@ const Eslint = {
                     if (hasReported) return
 
                     const current = ranksOf(shapeOf(node))
-                    if (previous !== null && isOutOfOrder(previous, current)) {
+                    if (isDefined(previous) && isOutOfOrder(previous, current)) {
                         hasReported = true
                         context.report({ message: ErrorMessage, node })
 

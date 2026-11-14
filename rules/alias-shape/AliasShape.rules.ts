@@ -1,6 +1,6 @@
 import { AliasShapes, Description } from './AliasShape.constants.js'
-import type { TypeLike } from './AliasShape.types.js'
 import type { Rule } from 'eslint'
+import type { TypeLike } from './AliasShape.types.js'
 
 /** ESLint's own node types are built from `@types/estree`, which omits every TS type node. */
 type UnionNode = Rule.Node & TypeLike

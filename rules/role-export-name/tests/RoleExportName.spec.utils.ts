@@ -1,5 +1,5 @@
-import { RoleExportTokenMap } from '../../constants.js'
 import { messageFor } from '../RoleExportName.utils.js'
+import { RoleExportTokenMap } from '../../constants.js'
 
 const fileName = (role: string, stem = 'Blog', extension = 'ts') => `${stem}.${role}.${extension}`
 

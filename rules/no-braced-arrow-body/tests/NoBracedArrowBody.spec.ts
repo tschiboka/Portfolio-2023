@@ -1,6 +1,6 @@
-import { ruleTester, typescriptRuleTester } from '../../config'
 import { ErrorMessage } from '../NoBracedArrowBody.constants'
 import { Rules } from '../NoBracedArrowBody.rules'
+import { ruleTester, typescriptRuleTester } from '../../config'
 
 ruleTester.run('no-braced-arrow-body', Rules.Eslint.NoBracedArrowBody9, {
     valid: [

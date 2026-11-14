@@ -1,7 +1,7 @@
-import type { Rule } from 'eslint'
 import { ruleTester } from '../config'
 import { ViolationPrefix } from '../constants'
 import { withViolationPrefix } from '../prefixReports'
+import type { Rule } from 'eslint'
 
 /** Reports one message naming the file it ran against, so the context's passthrough shows. */
 const rule: Rule.RuleModule = {

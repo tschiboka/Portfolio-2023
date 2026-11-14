@@ -11,10 +11,12 @@ import {
     getStatementKind,
     isSuiteStatement,
 } from './NoSpecLocalDeclaration.utils.js'
+import { isDefined } from '../../common/utils/Predicate/Predicate.js'
 import type { Rule } from 'eslint'
 import type { OffendingKind, StatementLike } from './NoSpecLocalDeclaration.types.js'
+import type { Defined } from '../../common/utils/Generics/Generics.types.js'
 
-type ProgramNode = Parameters<NonNullable<Rule.NodeListener['Program']>>[0]
+type ProgramNode = Parameters<Defined<Rule.NodeListener['Program']>>[0]
 type StatementNode = ProgramNode['body'][number]
 
 const messages: Record<OffendingKind, string> = {
@@ -47,7 +49,7 @@ const Eslint = {
             const checkDeclarators = (statement: StatementLike): void =>
                 statement.declarations?.forEach((declarator) => {
                     const kind = getDeclaratorKind(declarator, AllowedViMethods)
-                    if (kind !== null) report(declarator, kind)
+                    if (isDefined(kind)) report(declarator, kind)
                 })
 
             const checkSuite = (statements: StatementNode[]): void =>
@@ -57,7 +59,7 @@ const Eslint = {
                     if (statement.type === 'VariableDeclaration') return checkDeclarators(statement)
 
                     const kind = getDeclarationKind(statement, AllowedViMethods)
-                    if (kind !== null) report(statement, kind)
+                    if (isDefined(kind)) report(statement, kind)
                 })
 
             return {
@@ -70,7 +72,7 @@ const Eslint = {
                             return checkDeclarators(statement)
 
                         const kind = getStatementKind(statement, AllowedHookNames, AllowedViMethods)
-                        if (kind !== null) report(statement, kind)
+                        if (isDefined(kind)) report(statement, kind)
                     })
 
                     node.body.slice(suite).forEach((statement) => {

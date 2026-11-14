@@ -1,6 +1,6 @@
-import { ruleTester } from '../../config'
 import { ErrorMessage } from '../NoRawFontSize.constants'
 import { Rules } from '../NoRawFontSize.rules'
+import { ruleTester } from '../../config'
 
 ruleTester.run('no-raw-font-size', Rules.Eslint.NoRawFontSize9, {
     valid: [

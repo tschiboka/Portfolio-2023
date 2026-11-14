@@ -1,8 +1,8 @@
 import { isDefined, isEmpty, isNonEmpty } from '../../common/utils/Predicate/Predicate.js'
 import type { Node } from 'estree'
 import type { SourceCode } from 'eslint'
-import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 import type { AnnotatedNode, StatementLike } from './NoBracedArrowBody.types.js'
+import type { Nullable } from '../../common/utils/Generics/Generics.types.js'
 
 /**
  * The one statement a block body holds when it can stand after the `=>`.
@@ -28,4 +28,3 @@ export const dropsNoComment = (source: SourceCode, statement: Node): boolean =>
 /** True when the arrow declares a `void` return, which the unwrapped expression would mistype. */
 export const hasVoidReturn = ({ returnType }: AnnotatedNode): boolean =>
     returnType?.typeAnnotation?.type === 'TSVoidKeyword'
-

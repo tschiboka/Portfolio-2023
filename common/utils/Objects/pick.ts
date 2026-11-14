@@ -1,4 +1,4 @@
-import { isDefined } from '../Predicate'
+import { isArray, isDefined } from '../Predicate'
 import type { Dictionary, Key, ReadonlyArrayable } from '../Generics'
 
 /**
@@ -14,8 +14,11 @@ export const pick = <T extends object>(
     keys: ReadonlyArrayable<string>,
 ): Partial<Dictionary> => {
     const picked: Dictionary = {}
-    ;(Array.isArray(keys) ? keys : [keys]).forEach((key: string) => {
+    const allKeys = (isArray(keys) ? keys : [keys]) as string[]
+
+    allKeys.forEach((key) => {
         if (isDefined(source[key as Key<T>])) picked[key] = source[key as Key<T>]
     })
+
     return picked
 }

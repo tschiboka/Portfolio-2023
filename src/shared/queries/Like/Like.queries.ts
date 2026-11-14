@@ -5,7 +5,7 @@ import {
     PostLikeRequest,
     PostLikeResponse,
 } from '@common-types'
-import { ErrorResponse, Query, QueryKey } from '@common-utils'
+import { ErrorResponse, isTruthy, Query, QueryKey } from '@common-utils'
 import { Session } from '@shared-context'
 import type { AxiosError } from 'axios'
 
@@ -26,7 +26,7 @@ const useGetLikes = (path: string) => {
 
     return useQuery<GetLikeResponse, AxiosError<ErrorResponse>>({
         ...request.Get<GetLikeResponse>(QueryKey.Likes.byFilters({ path }).build()),
-        enabled: Boolean(path),
+        enabled: isTruthy(path),
     })
 }
 

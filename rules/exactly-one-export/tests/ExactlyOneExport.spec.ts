@@ -1,7 +1,7 @@
-import { ruleTester } from '../../config'
-import { SingleExportRoles } from '../../constants'
-import { Rules } from '../ExactlyOneExport.rules'
 import { ExactlyOneExportTestUtils } from './ExactlyOneExport.spec.utils'
+import { Rules } from '../ExactlyOneExport.rules'
+import { SingleExportRoles } from '../../constants'
+import { ruleTester } from '../../config'
 
 const { messageFor, roleFile } = ExactlyOneExportTestUtils
 

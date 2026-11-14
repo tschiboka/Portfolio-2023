@@ -1,9 +1,9 @@
-import React from 'react'
 import { screen } from '@testing-library/react'
 import { Const } from '@common-ux/Const'
 import { FormTestUtils } from './Form.spec.utils'
 import { FormTestMocks } from './Form.spec.mocks'
 import { Test, Accessor } from '../../Test'
+import type { FormEvent } from 'react'
 
 const { Set, FORM_LABEL } = FormTestUtils
 const { iconOptions } = FormTestMocks
@@ -497,7 +497,7 @@ describe('FormElement', () => {
     })
 
     it('should call onSubmit when submitted', async () => {
-        const onSubmit = vi.fn((e: React.FormEvent) => e.preventDefault())
+        const onSubmit = vi.fn((e: FormEvent) => e.preventDefault())
         Set.formElement({
             onSubmit,
             children: <button type="submit">Submit</button>,

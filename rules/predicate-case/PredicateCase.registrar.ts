@@ -6,7 +6,12 @@ export const registrar: RuleRegistrar = {
     id: 'predicate-case',
     description: Description,
     scope: {
-        include: ['src/**/*.{ts,tsx}', 'common/**/*.{ts,tsx}', 'server/**/*.{ts,tsx}'],
+        include: [
+            'src/**/*.{ts,tsx}',
+            'common/**/*.{ts,tsx}',
+            'server/**/*.{ts,tsx}',
+            'rules/**/*.{ts,tsx}',
+        ],
         exclude: ['**/*.code.{ts,tsx}', 'common/utils/Predicate/**'],
     },
     enabled: true,

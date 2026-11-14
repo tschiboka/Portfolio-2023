@@ -1,6 +1,6 @@
-import type { Rule } from 'eslint'
 import { basename, dirname } from 'node:path'
 import { NoMisnamedPrimaryFileConstants } from './NoMisnamedPrimaryFile.constants.js'
+import type { Rule } from 'eslint'
 
 export const ErrorMessage = 'The primary file must be named after its folder.'
 
