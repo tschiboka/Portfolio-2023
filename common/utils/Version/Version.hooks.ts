@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { DateTime, Functions } from '@common-utils'
+import { DateTime, Functions, Regexp } from '@common-utils'
 import type { Nullable } from '@common-utils'
 import type { GetVersionResponse } from '../../types'
 
@@ -17,7 +17,7 @@ const useVersionCheck = () => {
         const payload = await (res.json() as Promise<GetVersionResponse>)
         const { sha, message, date } = payload
 
-        if (!sha || !/^[a-f0-9]{40}$/i.test(sha)) return
+        if (!sha || !Regexp.CommitSha.test(sha)) return
 
         const checked = DateTime.Format.toIso(new Date())
         const checkedLabel = DateTime.Format.to('DisplayTimeStamp', checked) ?? checked

@@ -1,8 +1,9 @@
 import { Link as RouterLink } from 'react-router-dom'
+import { Regexp } from '@common-utils'
 import type { LinkProps } from './Link.types'
 import './Link.styles.css'
 
-const isExternal = (url: string) => /^https?:\/\//.test(url)
+const isExternal = (url: string) => Regexp.ExternalUrl.test(url)
 
 export const Link = (props: LinkProps) => {
     const { children, className, style, ariaLabel, title, onClick } = props

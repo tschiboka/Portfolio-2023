@@ -2,6 +2,7 @@ import axios from 'axios'
 import { apiPathBuilder } from '../Paths/apiPathBuilder'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'
+import { Regexp } from '../Regexp/Regexp'
 import { PathKey } from '../Paths/Path.types'
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
 import type { ServerGroup } from '../Paths/Path.types'
@@ -38,7 +39,7 @@ export class RequestBuilder {
     setSubpath(subpath: string): this {
         if (!subpath) return this
 
-        this.subpath = `${this.subpath.replace(/\/$/, '')}/${subpath.replace(/^\/|\/$/g, '')}`
+        this.subpath = `${this.subpath.replace(Regexp.TrailingSlash, '')}/${subpath.replace(Regexp.SurroundingSlash, '')}`
         return this
     }
 
@@ -205,8 +206,8 @@ export class RequestBuilder {
     // -----------------------
     /** Combines `baseUrl` with the optional `subpath`. */
     private resolveUrl(): string {
-        const base = this.baseUrl.replace(/\/$/, '')
-        const sub = this.subpath ? `/${this.subpath.replace(/^\//, '')}` : ''
+        const base = this.baseUrl.replace(Regexp.TrailingSlash, '')
+        const sub = this.subpath ? `/${this.subpath.replace(Regexp.LeadingSlash, '')}` : ''
 
         return `${base}${sub}`
     }

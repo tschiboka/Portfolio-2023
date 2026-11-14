@@ -2,7 +2,7 @@ import { Control, Controller, Path } from 'react-hook-form'
 import { BsChevronBarDown, BsChevronBarUp, BsSearch } from 'react-icons/bs'
 import { ChangeEvent, ReactNode, useEffect, useRef, useState } from 'react'
 import { Const } from '@common-ux/Const'
-import { hasLength } from '@common-utils'
+import { hasLength, Regexp } from '@common-utils'
 import { FieldValues } from './Form.types'
 import type { SearchInputOption, SearchInputOptionButtonIcons } from './SearchInput.types'
 import type { AccessibleProps } from '../index.types'
@@ -63,8 +63,8 @@ export const SearchInput = <
         options.filter((option) =>
             (option.label || '')
                 .toUpperCase()
-                .replace(/\s/g, '')
-                .includes(text.replace(/\s/g, '').toUpperCase()),
+                .replace(Regexp.Whitespace, '')
+                .includes(text.replace(Regexp.Whitespace, '').toUpperCase()),
         )
 
     const getOptions = (options: SearchInputOption<TValue>[], input: string) =>

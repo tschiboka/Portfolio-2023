@@ -148,7 +148,7 @@ export const isString = (value: unknown): value is string => typeof value === 's
  * isDigits(12345)     // false (not a string)
  */
 export const isDigits = (value: unknown): value is string =>
-    typeof value === 'string' && /^\d+$/.test(value)
+    typeof value === 'string' && Regexp.Digits.test(value)
 
 /**
  * Type guard that checks whether a value is an object whose `String(value)` form is a valid
@@ -474,9 +474,7 @@ export const isShallowEqual = (a: unknown, b: unknown): boolean => {
         const keysB = Object.keys(b)
         return (
             keysA.length === keysB.length &&
-            keysA.every(
-                (k) => (a as Dictionary)[k] === (b as Dictionary)[k],
-            )
+            keysA.every((k) => (a as Dictionary)[k] === (b as Dictionary)[k])
         )
     }
     return false
@@ -509,9 +507,7 @@ export const isEqual = (a: unknown, b: unknown): boolean => {
         const keysB = Object.keys(b)
         return (
             keysA.length === keysB.length &&
-            keysA.every((k) =>
-                isEqual((a as Dictionary)[k], (b as Dictionary)[k]),
-            )
+            keysA.every((k) => isEqual((a as Dictionary)[k], (b as Dictionary)[k]))
         )
     }
     return false
@@ -615,9 +611,7 @@ export const isPromise = (value: unknown): value is Promise<unknown> => value in
  * @returns `true` if the value is thenable.
  */
 export const isThenable = (value: unknown): value is PromiseLike<unknown> =>
-    typeof value === 'object' &&
-    value !== null &&
-    typeof (value as Dictionary).then === 'function'
+    typeof value === 'object' && value !== null && typeof (value as Dictionary).then === 'function'
 
 /**
  * Creates a predicate that checks if **all** elements in an array satisfy a type guard.

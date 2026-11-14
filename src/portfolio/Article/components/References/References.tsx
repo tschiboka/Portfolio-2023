@@ -1,4 +1,5 @@
 import { Heading, Link, List } from '@common-ux'
+import { Regexp } from '@common-utils'
 import type { ReferencesProps } from './References.types'
 import './References.scss'
 
@@ -18,7 +19,7 @@ export const References = ({ references }: ReferencesProps) => {
                                     <span className="References__author">{reference.author}</span>
                                     <span className="References__title">{reference.title}</span>
                                 </span>
-                                {/^https?:\/\//.test(reference.source) ? (
+                                {Regexp.ExternalUrl.test(reference.source) ? (
                                     <Link href={reference.source}>{reference.source}</Link>
                                 ) : (
                                     <Link to={reference.source}>{reference.source}</Link>

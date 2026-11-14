@@ -1,4 +1,4 @@
-/** Everything the contact form alone fixes: its field limits, and the punctuation a message may carry. */
+/** Everything the contact form alone fixes: its field limits. */
 export const ContactConstants = {
     fieldLimits: {
         name: { max: 50 },
@@ -6,6 +6,4 @@ export const ContactConstants = {
         phone: { min: 10, max: 16 },
         message: { min: 10, max: 1000 },
     },
-    /** No second feature allows this punctuation set, so it stays out of the shared catalogue. */
-    messagePattern: /^[a-zA-Z0-9,.!?()&£$*\\[\]:;@'"\-\s]*$/,
 } as const

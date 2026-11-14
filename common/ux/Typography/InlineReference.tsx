@@ -1,8 +1,9 @@
+import { Regexp } from '@common-utils'
 import { Link } from '../Link/Link'
 import type { InlineReferenceProps } from './Typography.types'
 import './Typography.styles.css'
 
-const isExternal = (url: string) => /^https?:\/\//.test(url)
+const isExternal = (url: string) => Regexp.ExternalUrl.test(url)
 
 export const InlineReference = ({ reference, ariaLabel, className }: InlineReferenceProps) => {
     const cls = `typo-inline-ref${className ? ` ${className}` : ''}`

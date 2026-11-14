@@ -36,21 +36,52 @@ const lastAssistantText = (transcriptPath) => {
     return null
 }
 
+/** The protocol's text, or `null` where it cannot be read — a broken read must not trap a session. */
+const readProtocol = () => {
+    try {
+        return fs.readFileSync(PROTOCOL_PATH, 'utf8')
+    } catch {
+        return null
+    }
+}
+
 // Tokens are the backticked command names in protocol.md, above the ask-type section.
 const validTokens = () => {
     const tokens = new Set()
-    try {
-        const commands = fs
-            .readFileSync(PROTOCOL_PATH, 'utf8')
-            .split('## Agent directed question types')[0]
-        for (const match of commands.matchAll(/`([A-Z0-9]+)`/g)) tokens.add(match[1])
-    } catch {
-        // Unreadable protocol file: skip the token check rather than block on it.
-    }
+    const protocol = readProtocol()
+
+    if (!protocol) return tokens
+
+    const [commands] = protocol.split('## Agent directed question types')
+    for (const match of commands.matchAll(/`([A-Z0-9]+)`/g)) tokens.add(match[1])
+
     return tokens
 }
 
 const ASK_TYPES = ['Question', 'Decide', 'Check', 'Action', 'Document']
+
+// A repository path opens with one of these, or ends in a source extension.
+const ROOTED_PATH = /^(?:src|common|server|rules|scripts|docs|dark|public)\/[\w./-]+$/
+const SOURCE_FILE = /^[\w-]+\.(?:ts|tsx|js|cjs|mjs|json|md|scss|css)$/
+
+// Every reference the reply makes, once its markdown links are removed: a name left over
+// stands bare, so the reader cannot reach it.
+const unlinkedReferences = (body) => {
+    const withoutLinks = body.replace(/\[[^\]]*\]\([^)]*\)/g, '')
+    const tokens = withoutLinks.match(/[\w./-]+/g) ?? []
+
+    return [
+        ...new Set(tokens.filter((token) => ROOTED_PATH.test(token) || SOURCE_FILE.test(token))),
+    ]
+}
+
+// Every local link is a `file://` URI carrying the line it points at; a bare path leaves the
+// reader hunting, and a drive-letter path is what the client refuses to render.
+const malformedLinks = (body) =>
+    [...body.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)]
+        .map((match) => match[1])
+        .filter((target) => !/^(?:https?|mailto):/i.test(target))
+        .filter((target) => !target.startsWith('file://') || !/#L\d+$/.test(target))
 
 const violations = (text) => {
     const problems = []
@@ -73,6 +104,16 @@ const violations = (text) => {
     const known = validTokens()
     const unknown = known.size ? offered.filter((token) => !known.has(token)) : []
     if (unknown.length) problems.push(`offers unknown token(s): ${unknown.join(', ')}`)
+
+    const unlinked = unlinkedReferences(body)
+    if (unlinked.length) problems.push(`names ${unlinked.slice(0, 3).join(', ')} without a link`)
+
+    // A bare scheme in a code span renders as an empty link, so the sentence loses the word.
+    if (/`file:\/\/`/.test(body)) problems.push('writes a bare file scheme in a code span')
+
+    const unanchored = malformedLinks(body)
+    if (unanchored.length)
+        problems.push(`links ${unanchored.slice(0, 3).join(', ')} not absolute with a line`)
 
     return problems
 }

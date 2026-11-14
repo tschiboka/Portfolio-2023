@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Control, Controller, Path } from 'react-hook-form'
 import { BsCalendar3, BsChevronLeft, BsChevronRight, BsX } from 'react-icons/bs'
 import { Const } from '@common-ux/Const'
-import { Arrays } from '@common-utils'
+import { Arrays, Regexp } from '@common-utils'
 import { FieldValues } from './Form.types'
 import { DateInputUtils } from './DateInput.utils'
 import type { KeyboardEvent } from 'react'
@@ -94,8 +94,8 @@ export const DateInput = <T extends FieldValues>({
     }
 
     const handleTextChange = (value: string, onChange: (val: string) => void) => {
-        const digits = value.replace(/[^\d]/g, '').slice(0, MAX_DIGITS)
-        const isDeleting = digits.length < textValue.replace(/[^\d]/g, '').length
+        const digits = value.replace(Regexp.NonDigit, '').slice(0, MAX_DIGITS)
+        const isDeleting = digits.length < textValue.replace(Regexp.NonDigit, '').length
         const formatted = formatDigits(digits, isDeleting)
 
         setTextValue(formatted)

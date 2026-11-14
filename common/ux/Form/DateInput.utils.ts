@@ -1,3 +1,4 @@
+import { Regexp } from '@common-utils'
 import type { Nullable } from '@common-utils'
 
 function getDaysInMonth(year: number, month: number): number {
@@ -16,7 +17,7 @@ function formatDate(iso: string): string {
 }
 
 function parseDate(text: string): Nullable<string> {
-    const cleaned = text.replace(/\//g, '')
+    const cleaned = text.replace(Regexp.Slash, '')
     if (cleaned.length !== 8) return null
     const d = parseInt(cleaned.slice(0, 2), 10)
     const m = parseInt(cleaned.slice(2, 4), 10)

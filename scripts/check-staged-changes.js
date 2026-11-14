@@ -58,7 +58,7 @@ const main = () => {
 
     // Nothing staged at all leaves no commit to make, so there is no choice worth offering.
     if (!changes.some(isStaged)) {
-        console.error(ansi.red('nothing is staged — there is no commit to make yet:'))
+        console.error(ansi.red('Nothing is staged — there is no commit to make yet:'))
         list(unstaged)
         return 1
     }

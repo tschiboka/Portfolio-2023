@@ -31,6 +31,7 @@ import { registrar as aliasShapeRegistrar } from './alias-shape/AliasShape.regis
 import { registrar as noReactNamespaceRegistrar } from './no-react-namespace/NoReactNamespace.registrar.js'
 import { registrar as singleLocalTypeRegistrar } from './single-local-type/SingleLocalType.registrar.js'
 import { registrar as noInterfaceRegistrar } from './no-interface/NoInterface.registrar.js'
+import { registrar as regexpRegistryRegistrar } from './regexp-registry/RegexpRegistry.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -68,4 +69,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noReactNamespaceRegistrar,
     singleLocalTypeRegistrar,
     noInterfaceRegistrar,
+    regexpRegistryRegistrar,
 ].map(withPrefixedReports)

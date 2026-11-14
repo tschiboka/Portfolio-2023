@@ -1,4 +1,4 @@
-import { ClientTransformers } from '@common-utils'
+import { ClientTransformers, Regexp } from '@common-utils'
 import type { PostMessageRequest } from '@common-types'
 import type { ContactFormData } from './Contact.types'
 
@@ -6,7 +6,7 @@ import type { ContactFormData } from './Contact.types'
 const Post = (data: ContactFormData): PostMessageRequest => ({
     name: data.name,
     email: data.email.toLowerCase(),
-    phone: data.phone.replace(/\D/g, '') || undefined,
+    phone: data.phone.replace(Regexp.NonDigit, '') || undefined,
     message: data.message,
 })
 

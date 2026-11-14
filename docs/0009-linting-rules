@@ -693,32 +693,32 @@ config owns is linted.
     - [x] Step 37.12: Run `npm run build:rules`, then verify the generated config
     - [x] Step 37.13: Sweep every site across `src/`, `common/`, `server/` and `rules/`
     - [x] Step 37.14: Confirm a green `tsc`, lint, and test run
-- [ ] Step 38: Rule — a regular expression is registered in `Regexp`, never written elsewhere
-    - [ ] Step 38.1: Build `rules/regexp-registry/` as a registrar, a constants file and a spec
-    - [ ] Step 38.2: Flag any regex literal outside `common/utils/Regexp/Regexp.ts`, whatever the
+- [x] Step 38: Rule — a regular expression is registered in `Regexp`, never written elsewhere
+    - [x] Step 38.1: Build `rules/regexp-registry/` as a registrar, a constants file and a spec
+    - [x] Step 38.2: Flag any regex literal outside `common/utils/Regexp/Regexp.ts`, whatever the
           file — one registry means a second copy is impossible rather than merely discouraged
-    - [ ] Step 38.3: Flag a pattern built from a string — `new RegExp('^[0-9]+$')` — while
+    - [x] Step 38.3: Flag a pattern built from a string — `new RegExp('^[0-9]+$')` — while
           accepting `Regexp.escape` and `Regexp.exactWord`, which build from a caller's value
-    - [ ] Step 38.4: Name each entry for what it matches, never for its caller — `NameText`,
+    - [x] Step 38.4: Name each entry for what it matches, never for its caller — `NameText`,
           `ContactMessage` — since one flat namespace now carries every pattern in the app
-    - [ ] Step 38.5: Exempt `**/*.code.{ts,tsx}` — a displayed sample keeps its literals — and
+    - [x] Step 38.5: Exempt `**/*.code.{ts,tsx}` — a displayed sample keeps its literals — and
           `**/*.spec.{ts,tsx}`, where a regex asserts on rendered text rather than governing input
-    - [ ] Step 38.6: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/` and `server/`,
+    - [x] Step 38.6: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/` and `server/`,
           leaving `rules/` alone: a rule's own detection sets are not app patterns
-    - [ ] Step 38.7: Register as `severity: 'error'`
-    - [ ] Step 38.8: Add `tests/RegexpRegistry.spec.ts` — the catalogue and a value-built regex
+    - [x] Step 38.7: Register as `severity: 'error'`
+    - [x] Step 38.8: Add `tests/RegexpRegistry.spec.ts` — the catalogue and a value-built regex
           accepted; an inline literal, a `new RegExp('…')` and a pattern in a constants file
           reported
-    - [ ] Step 38.9: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 38.10: Move `messagePattern` out of `Contact.constants.ts` into `Regexp`, and point
+    - [x] Step 38.9: Run `npm run build:rules`, then verify the generated config
+    - [x] Step 38.10: Move `messagePattern` out of `Contact.constants.ts` into `Regexp`, and point
           `Contact.schema.ts` at it — `Register.schema.ts` already reads `Regexp.NameText`
-    - [ ] Step 38.11: Sweep the remaining literals in `server/` and the schemas, registering each
-    - [ ] Step 38.12: Update the `form` skill — `SKILL.md`, `Feature.constants.ts` and
+    - [x] Step 38.11: Sweep the remaining literals in `server/` and the schemas, registering each
+    - [x] Step 38.12: Update the `form` skill — `SKILL.md`, `Feature.constants.ts` and
           `Feature.schema.ts` say every pattern comes from `Regexp`, and a constants file holds
           bounds alone
-    - [ ] Step 38.13: Rewrite Step 16.6, which still splits patterns between `Regexp` and the
+    - [x] Step 38.13: Rewrite Step 16.6, which still splits patterns between `Regexp` and the
           feature's constants file: the pattern always comes from `Regexp`, the bound stays local
-    - [ ] Step 38.14: Confirm a green `tsc`, lint, and test run
+    - [x] Step 38.14: Confirm a green `tsc`, lint, and test run
 
 ## 2.1. Task Details
 

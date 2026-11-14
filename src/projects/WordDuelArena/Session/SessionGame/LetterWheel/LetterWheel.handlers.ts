@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
+import { Regexp } from '@common-utils'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { TouchState } from './LetterWheel.types'
 import { WebSocketRequest } from '../../Session.types'
@@ -14,7 +15,7 @@ type CreateHandleKeyPressProps = {
 const createHandleKeyPress =
     ({ touchState, setTouchState, send }: CreateHandleKeyPressProps) =>
     (e: KeyboardEvent) => {
-        const isLetter = e.key.length === 1 && e.key.match(/[a-z]/i)
+        const isLetter = e.key.length === 1 && Regexp.Letter.test(e.key)
         if (isLetter && touchState.touchedLetters.length < WordConstants.maxLength)
             setTouchState((prev) => ({
                 ...prev,

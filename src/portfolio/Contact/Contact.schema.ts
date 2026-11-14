@@ -6,7 +6,7 @@ import type { ObjectSchema } from 'yup'
 import type { Predicate } from '@common-utils'
 import type { ContactFormData } from './Contact.types'
 
-const { fieldLimits, messagePattern } = ContactConstants
+const { fieldLimits } = ContactConstants
 const { name, email, phone, message } = fieldLimits
 
 /** A rule that only applies once something is typed — an empty phone is not a wrong one. */
@@ -51,12 +51,9 @@ const schema: ObjectSchema<ContactFormData> = yup.object({
     message: yup
         .string()
         .required()
-        .min(
-            message.min,
-            ValidationMessage.Bound('message', message.min, 'characters', 'at least'),
-        )
+        .min(message.min, ValidationMessage.Bound('message', message.min, 'characters', 'at least'))
         .max(message.max)
-        .matches(messagePattern, {
+        .matches(Regexp.ContactMessage, {
             message: ValidationMessage.Allowed('message', 'letters, numbers and punctuation'),
         }),
 })

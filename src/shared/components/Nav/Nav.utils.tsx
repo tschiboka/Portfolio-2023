@@ -1,9 +1,9 @@
 import SantaHat from '@projects/assets/xmas/santa_hat.png'
-import { Strings } from '@common-utils'
+import { Regexp, Strings } from '@common-utils'
 import { MenuItem, SubmenuState } from './Nav.types'
 import type { Optional } from '@common-utils'
 
-const isArticle = (path: Optional<string>): boolean => /^\/blog\//.test(path || '')
+const isArticle = (path: Optional<string>): boolean => Regexp.BlogPath.test(path || '')
 
 const isActive = (label: string, pageName: string) =>
     Strings.equalIgnoreCase(label, pageName) ? 'active' : ''
