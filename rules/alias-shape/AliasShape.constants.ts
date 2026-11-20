@@ -47,7 +47,8 @@ export const NullableMessage = 'A nullable value is written `Nullable<T>`, never
 export const NullishMessage =
     'A value that may be absent or null is written `Nullish<T>`, never `T | null | undefined`.'
 
-export const ArrayableMessage = 'A value or an array of one is written `Arrayable<T>`, never `T | T[]`.'
+export const ArrayableMessage =
+    'A value or an array of one is written `Arrayable<T>`, never `T | T[]`.'
 
 export const ReadonlyArrayableMessage =
     'A value or a readonly array of one is written `ReadonlyArrayable<T>`, never `T | readonly T[]`.'
@@ -55,7 +56,8 @@ export const ReadonlyArrayableMessage =
 export const AwaitableMessage =
     'A value or a promise of one is written `Awaitable<T>`, never `T | Promise<T>`.'
 
-export const PrimitiveMessage = 'The primitive union is written `Primitive`, never its five members.'
+export const PrimitiveMessage =
+    'The primitive union is written `Primitive`, never its five members.'
 
 export const SortableMessage =
     'A comparable value is written `Sortable`, never the five primitives and `Date` spelled out.'
@@ -76,7 +78,8 @@ export const KeyMessage = 'A string key is written `Key<T>`, never `Extract<keyo
 export const DefinedMessage =
     'A value that is present is written `Defined<T>`, never `Exclude<T, Nil>` or `NonNullable<T>`.'
 
-export const TruthyMessage = 'A value that is truthy is written `Truthy<T>`, never `Exclude<T, Falsy>`.'
+export const TruthyMessage =
+    'A value that is truthy is written `Truthy<T>`, never `Exclude<T, Falsy>`.'
 
 export const VoidFunctionMessage =
     'A callback that returns nothing is written `VoidFunction`, never `() => void`.'
@@ -109,7 +112,8 @@ export const NonEmptyArrayMessage =
 export const EmptiableMessage =
     'A value that may be empty is written `Emptiable`, never its four members spelled out.'
 
-export const WithoutIdMessage = "An entity without its id is written `WithoutId<T>`, never `Omit<T, '_id'>`."
+export const WithoutIdMessage =
+    "An entity without its id is written `WithoutId<T>`, never `Omit<T, '_id'>`."
 
 export const BrandMessage =
     'A branded type is written `Brand<T, Name>`, never `T & { readonly __brand: Name }`.'

@@ -1,10 +1,11 @@
 import type { UrlDecode, UrlEncode, VoidFunction } from '@common-utils'
+import type { TableSpan } from '../Table.types'
 import type { DropdownOption } from '../TableInputs'
 
 type BaseFilterConfig = {
     label: string
     required?: boolean
-    span?: 1 | 2 | 3 | 4
+    span?: TableSpan
 }
 
 type UrlFilterConfig = {

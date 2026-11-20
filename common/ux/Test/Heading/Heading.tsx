@@ -1,4 +1,5 @@
 import { Accessor } from '../Accessor/Accessor'
+import type { HeadingLevel } from './Heading.types'
 
 export class HeadingAccessor extends Accessor {
     get Get() {
@@ -18,7 +19,7 @@ export class HeadingAccessor extends Accessor {
     }
 }
 
-export const Heading = (name: string | RegExp, level?: 1 | 2 | 3 | 4 | 5 | 6): HeadingAccessor => {
+export const Heading = (name: string | RegExp, level?: HeadingLevel): HeadingAccessor => {
     const element = Accessor.screen.getByRole('heading', { name, level })
     return new HeadingAccessor(element, `Heading('${String(name)}'${level ? `, ${level}` : ''})`)
 }

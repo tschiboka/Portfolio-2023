@@ -1,6 +1,6 @@
 import { isValidElement, useCallback, useEffect, useId, useRef, useState } from 'react'
 import { BsInfoCircle, BsSliders2, BsArrowClockwise } from 'react-icons/bs'
-import { hasLength, isNonEmpty } from '@common-utils'
+import { hasLength, isNonEmpty, TableConstants } from '@common-utils'
 import { TableHooks } from './Table.hooks'
 import { TableBody } from './TableBody/TableBody'
 import { TableHead } from './TableHead/TableHead'
@@ -209,7 +209,7 @@ export const Table = <TData extends Dictionary<ReactNode>, TContext = unknown>({
                         <tbody>
                             <TableSkeleton
                                 cols={columns.length}
-                                rows={pagination?.pageSize ?? 5}
+                                rows={pagination?.pageSize ?? TableConstants.skeletonRows}
                                 rowHeight={rowHeight}
                             />
                         </tbody>

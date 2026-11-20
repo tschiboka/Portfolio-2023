@@ -1,3 +1,4 @@
+import { SolutionBoardConstants } from './SolutionBoard.constants'
 import { PlayableLevelWord } from '../../Session.types'
 
 type GetColumnConfigProps = {
@@ -9,16 +10,12 @@ type GetColumnConfigProps = {
     containerHeight: number
 }
 
-const getColumnConfig = ({
-    columns,
-    containerWidth,
-    containerHeight,
-}: GetColumnConfigProps) => {
+const getColumnConfig = ({ columns, containerWidth, containerHeight }: GetColumnConfigProps) => {
     const { column1, column2 } = columns
     if (containerWidth === 0)
         return {
-            col1: { width: 50, letterSize: 20 },
-            col2: { width: 50, letterSize: 20 },
+            col1: { width: 50, letterSize: SolutionBoardConstants.fallbackLetterSize },
+            col2: { width: 50, letterSize: SolutionBoardConstants.fallbackLetterSize },
         }
 
     const getWordLength = (w: PlayableLevelWord) =>
@@ -29,8 +26,8 @@ const getColumnConfig = ({
     const total = maxCol1 + maxCol2
     if (total === 0)
         return {
-            col1: { width: 50, letterSize: 20 },
-            col2: { width: 50, letterSize: 20 },
+            col1: { width: 50, letterSize: SolutionBoardConstants.fallbackLetterSize },
+            col2: { width: 50, letterSize: SolutionBoardConstants.fallbackLetterSize },
         }
 
     const col1WidthPercent = (maxCol1 / total) * 100
@@ -45,9 +42,13 @@ const getColumnConfig = ({
 
     const letterMargin = 2 // margin: 0 1px = 1px each side = 2px total per letter
     const col1LetterSize =
-        maxCol1 > 0 ? Math.floor((col1PixelWidth - letterMargin * maxCol1) / maxCol1) : 20
+        maxCol1 > 0
+            ? Math.floor((col1PixelWidth - letterMargin * maxCol1) / maxCol1)
+            : SolutionBoardConstants.fallbackLetterSize
     const col2LetterSize =
-        maxCol2 > 0 ? Math.floor((col2PixelWidth - letterMargin * maxCol2) / maxCol2) : 20
+        maxCol2 > 0
+            ? Math.floor((col2PixelWidth - letterMargin * maxCol2) / maxCol2)
+            : SolutionBoardConstants.fallbackLetterSize
     const horizontalLetterSize = Math.min(col1LetterSize, col2LetterSize)
 
     // Also constrain by vertical space: each row is (letterSize + 6px) from padding/margin

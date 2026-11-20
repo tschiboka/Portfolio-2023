@@ -2,6 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ESLint } from 'eslint'
+import { EmittedJsonIndent } from './constants.js'
 import { RuleRegistry } from './registry.js'
 import type { RuleRequirement, RuleRegistrar } from './types.js'
 import type { BuiltStandards, LinterVersions } from './builder.types.js'
@@ -93,7 +94,7 @@ export const ruleBuilder = {
             eslint: ESLint.version,
         })
         const relativeRegistry = './rules/registry.js'
-        const ids = JSON.stringify(Object.keys(rules), null, 4)
+        const ids = JSON.stringify(Object.keys(rules), null, EmittedJsonIndent)
         const source = [
             `import { RuleRegistry } from ${JSON.stringify(relativeRegistry)}`,
             `import { styleProcessor } from './rules/styleProcessor.js'`,
@@ -112,9 +113,9 @@ export const ruleBuilder = {
             '    processors: { style: styleProcessor },',
             '}',
             '',
-            `export const settings = ${JSON.stringify(settings, null, 4)}`,
+            `export const settings = ${JSON.stringify(settings, null, EmittedJsonIndent)}`,
             '',
-            `export const scopes = ${JSON.stringify(scopes, null, 4)}`,
+            `export const scopes = ${JSON.stringify(scopes, null, EmittedJsonIndent)}`,
             '',
         ].join('\n')
         writeFileSync(join(dirname(fileURLToPath(import.meta.url)), target), source)

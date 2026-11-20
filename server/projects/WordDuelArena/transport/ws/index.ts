@@ -5,6 +5,7 @@ import { ValidateDeviceSchema } from './validation/connection/ValidateDevice.sch
 import { routeMessage } from './handlers'
 import { LoopService } from '../../infrastructure/presence/Loop.service'
 import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
+import { SessionConstants } from '../../config/constants/Session.constants'
 import { WordRepository } from '../../infrastructure/resources/Word.repository'
 import type { Server } from 'http'
 import type { DeviceWebSocket, DeviceWebSocketRequest } from './WS.types'
@@ -19,7 +20,7 @@ export async function initWebSocket(server: Server) {
         const { sessionId, deviceId } = url.parse(req.url || '', true).query
 
         if (!sessionId || !deviceId) {
-            ws.close(1008, 'Missing sessionId or deviceId')
+            ws.close(SessionConstants.closeCodes.missingIds, 'Missing sessionId or deviceId')
             return
         }
 
@@ -28,7 +29,7 @@ export async function initWebSocket(server: Server) {
 
         if (!result.allowed) {
             ws.send(JSON.stringify({ type: 'error', message: result.message }))
-            setTimeout(() => ws.close(4001, result.reason), 0)
+            setTimeout(() => ws.close(SessionConstants.closeCodes.invalidDevice, result.reason), 0)
             return
         }
 

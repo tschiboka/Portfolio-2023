@@ -1,6 +1,7 @@
 import { RefObject } from 'react'
 import { isDefined, isEmpty, isInstanceOf } from '@common-utils'
 import { LetterPosition, TouchState } from './LetterWheel.types'
+import { LetterWheelConstants } from './LetterWheel.constants'
 import { WebSocketRequestType } from '../../Session.types'
 import { WordConstants } from '../../../common/utils'
 import type { Nullable } from '@common-utils'
@@ -25,7 +26,7 @@ const calculateLetterPositions = ({
     const size = wheelRect.width // width === height for circular wheel
     const centerX = size / 2
     const centerY = size / 2
-    const radius = size / 2 - size / 7 // Leave space for letter size
+    const radius = size / 2 - size / LetterWheelConstants.radiusInsetDivisor // Leave space for letter size
     const n = letters.length
 
     return letters.map((letter, index) => {

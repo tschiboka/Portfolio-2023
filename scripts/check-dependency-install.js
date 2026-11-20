@@ -1,35 +1,60 @@
 #!/usr/bin/env node
 
 import { execSync } from 'node:child_process'
-import { statSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ansi } from './ansi.js'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const lockPath = join(root, 'package-lock.json')
-const installedPath = join(root, 'node_modules', '.package-lock.json')
 
-/** When a file was last written, or null where it is absent. */
-const getModifiedTime = (path) => {
-    try {
-        return statSync(path).mtimeMs
-    } catch {
-        return null
-    }
+/** Manifests whose pins must be installed, and the folders npm may hoist a package into. */
+const ManifestPaths = ['package.json', 'server/package.json']
+const ModuleFolders = ['node_modules', 'server/node_modules']
+
+const readJson = (path) => JSON.parse(readFileSync(path, 'utf8'))
+
+/** The version a spec asks for, reading through an `npm:` alias to the version it names. */
+const getPinnedVersion = (spec) => {
+    if (!spec.startsWith('npm:')) return spec
+
+    const aliased = spec.slice('npm:'.length)
+    return aliased.slice(aliased.lastIndexOf('@') + 1)
 }
 
+/**
+ * The version npm actually installed for a package, or null where it installed none.
+ *
+ * @example readInstalledVersion('eslint') // '10.15.0'
+ */
+const readInstalledVersion = (name) =>
+    ModuleFolders.map((folder) => {
+        try {
+            return readJson(join(root, folder, name, 'package.json')).version
+        } catch {
+            return null
+        }
+    }).find((version) => version !== null) ?? null
+
+/** Every dependency whose pin differs from the installed version. A range pin is left to npm. */
+const getStaleDependencies = () =>
+    ManifestPaths.flatMap((relative) => {
+        const manifest = readJson(join(root, relative))
+
+        return Object.entries({ ...manifest.dependencies, ...manifest.devDependencies })
+    }).filter(([name, spec]) => {
+        const pinned = getPinnedVersion(spec)
+        if (!/^\d/.test(pinned)) return false
+
+        return readInstalledVersion(name) !== pinned
+    })
+
 const main = () => {
-    const lockTime = getModifiedTime(lockPath)
+    const stale = getStaleDependencies()
 
-    // A repository without a lockfile has no installed tree to reconcile.
-    if (lockTime === null) return 0
+    if (stale.length === 0) return 0
 
-    // npm records the tree it installed here, so an older record means the tree is stale.
-    const installedTime = getModifiedTime(installedPath)
-    if (installedTime !== null && installedTime >= lockTime) return 0
-
-    console.log(ansi.cyan('node_modules is behind package-lock.json — installing'))
+    console.log(ansi.cyan(`${stale.length} dependencies differ from their pin — installing`))
 
     try {
         execSync('npm install', { cwd: root, stdio: 'inherit' })

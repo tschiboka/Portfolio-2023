@@ -1,4 +1,4 @@
-import { Arrays } from '@common-utils'
+import { Arrays, TableConstants } from '@common-utils'
 import './TableSkeleton.styles.css'
 
 type TableSkeletonProps = {
@@ -7,7 +7,11 @@ type TableSkeletonProps = {
     rowHeight?: number
 }
 
-export const TableSkeleton = ({ cols, rows = 5, rowHeight }: TableSkeletonProps) => (
+export const TableSkeleton = ({
+    cols,
+    rows = TableConstants.skeletonRows,
+    rowHeight,
+}: TableSkeletonProps) => (
     <>
         {Arrays.times(rows, (i) => i).map((_, rowIdx) => (
             <tr

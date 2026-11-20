@@ -6,6 +6,7 @@ import { LevelCreatorSchema } from '../LevelCreator.schema'
 import { WordOptionList } from '../components/WordOptionList/WordOptionList'
 import { LevelPreview } from '../components/LevelPreview/LevelPreview'
 import { LevelCreatorQueries } from '../LevelCreator.queries'
+import { LevelCreatorConstants } from '../LevelCreator.constants'
 import { Level, LevelWord } from '../../common/utils'
 import { WordUtils } from '../../common/utils/Word/Word.utils'
 import { FrequencyType } from '../../common/utils/Types/Words.types'
@@ -83,8 +84,10 @@ export const LevelCreatorModal = ({ levelName, setModalOpen }: LevelCreatorModal
 
     const avgDifficulty = () => {
         const avgFreq = averageFrequency() // 0–100%
-        const rawDifficulty = (100 - avgFreq) / 10 // e.g., 77 / 10 = 7.7
-        return Math.round(Math.max(1, Math.min(10, rawDifficulty)))
+        const rawDifficulty = (100 - avgFreq) / LevelCreatorConstants.difficultyScale // e.g., 77 / 10 = 7.7
+        return Math.round(
+            Math.max(1, Math.min(LevelCreatorConstants.difficultyScale, rawDifficulty)),
+        )
     }
 
     const onSave = async () => {

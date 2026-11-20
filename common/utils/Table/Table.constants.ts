@@ -9,4 +9,12 @@ const pageSizeOptions: number[] = [5, 10, 25, 50, 100]
 /** No column, ascending — applied when no sorting is configured. */
 const sortingDefaults: TableSortState = { column: '', direction: 'asc' }
 
-export const TableConstants = { pagingDefaults, pageSizeOptions, sortingDefaults }
+/** Rows the skeleton draws when no page size is known yet. */
+const skeletonRows = 5
+
+export const TableConstants = {
+    pagingDefaults,
+    pageSizeOptions,
+    sortingDefaults,
+    skeletonRows,
+}

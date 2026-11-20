@@ -14,4 +14,7 @@
  * Numbers.toDecimalPlaces(3.1, 2)       // 3.1
  * ```
  */
-export const truncateTo = (n: number, dp: number) => Math.trunc(n * 10 ** dp) / 10 ** dp
+const DECIMAL_BASE = 10
+
+export const truncateTo = (n: number, dp: number) =>
+    Math.trunc(n * DECIMAL_BASE ** dp) / DECIMAL_BASE ** dp

@@ -5,6 +5,7 @@ import { Const } from '@common-ux/Const'
 import { Arrays, Regexp } from '@common-utils'
 import { FieldValues } from './Form.types'
 import { DateInputUtils } from './DateInput.utils'
+import { DateInputConstants } from './DateInput.constants'
 import type { KeyboardEvent } from 'react'
 import type { Nullable } from '@common-utils'
 import type { AccessibleProps } from '../index.types'
@@ -15,11 +16,10 @@ const { getDaysInMonth, getFirstDayOfMonth, formatDate, parseDate, toISODate } =
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 const DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su']
 const CALENDAR_HEIGHT = 320
-const MAX_DIGITS = 8
 
 /** Writes the slashes in as the day and month fill up — `1203` becomes `12/03`. */
 const formatDigits = (digits: string, isDeleting: boolean): string => {
-    const opensSegment = (index: number) => index === 2 || index === 4
+    const opensSegment = (index: number) => DateInputConstants.segmentEnds.includes(index)
 
     const written = Array.from(digits).reduce(
         (formatted, digit, index) =>
@@ -94,7 +94,7 @@ export const DateInput = <T extends FieldValues>({
     }
 
     const handleTextChange = (value: string, onChange: (val: string) => void) => {
-        const digits = value.replace(Regexp.NonDigit, '').slice(0, MAX_DIGITS)
+        const digits = value.replace(Regexp.NonDigit, '').slice(0, DateInputConstants.digitCount)
         const isDeleting = digits.length < textValue.replace(Regexp.NonDigit, '').length
         const formatted = formatDigits(digits, isDeleting)
 
@@ -124,13 +124,13 @@ export const DateInput = <T extends FieldValues>({
 
     const handlePrevMonth = () => {
         if (viewMonth === 0) {
-            setViewMonth(11)
+            setViewMonth(DateInputConstants.monthCount - 1)
             setViewYear(viewYear - 1)
         } else setViewMonth(viewMonth - 1)
     }
 
     const handleNextMonth = () => {
-        if (viewMonth === 11) {
+        if (viewMonth === DateInputConstants.monthCount - 1) {
             setViewMonth(0)
             setViewYear(viewYear + 1)
         } else setViewMonth(viewMonth + 1)
@@ -172,11 +172,19 @@ export const DateInput = <T extends FieldValues>({
                 break
             case 'ArrowUp':
                 e.preventDefault()
-                setFocusedDay(current > 7 ? current - 7 : current + daysInMonth - 7)
+                setFocusedDay(
+                    current > DateInputConstants.daysPerWeek
+                        ? current - DateInputConstants.daysPerWeek
+                        : current + daysInMonth - DateInputConstants.daysPerWeek,
+                )
                 break
             case 'ArrowDown':
                 e.preventDefault()
-                setFocusedDay(current + 7 <= daysInMonth ? current + 7 : current - daysInMonth + 7)
+                setFocusedDay(
+                    current + DateInputConstants.daysPerWeek <= daysInMonth
+                        ? current + DateInputConstants.daysPerWeek
+                        : current - daysInMonth + DateInputConstants.daysPerWeek,
+                )
                 break
             case 'Enter':
                 e.preventDefault()
@@ -260,7 +268,12 @@ export const DateInput = <T extends FieldValues>({
                                 {yearPickerOpen ? (
                                     <div className="date-input__year-picker">
                                         <div className="date-input__year-list" ref={yearListRef}>
-                                            {Arrays.times(201, (i) => 1900 + i).map((y) => (
+                                            {Arrays.times(
+                                                DateInputConstants.maxYear -
+                                                    DateInputConstants.minYear +
+                                                    1,
+                                                (i) => DateInputConstants.minYear + i,
+                                            ).map((y) => (
                                                 <button
                                                     key={y}
                                                     type="button"
@@ -306,8 +319,10 @@ export const DateInput = <T extends FieldValues>({
                                                 const iso = toISODate(viewYear, viewMonth, day)
                                                 const isSelected = iso === selectedISO
                                                 const isToday = iso === todayISO
-                                                const dayOfWeek = (firstDay + i) % 7
-                                                const isWeekend = dayOfWeek >= 5
+                                                const dayOfWeek =
+                                                    (firstDay + i) % DateInputConstants.daysPerWeek
+                                                const isWeekend =
+                                                    dayOfWeek >= DateInputConstants.weekendStart
                                                 const isDisabled =
                                                     (min && iso < min) || (max && iso > max)
                                                 const isFocused = day === focusedDay

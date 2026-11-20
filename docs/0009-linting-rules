@@ -21,11 +21,11 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 ## 1.1 Info
 
-| Status       | In progress |
-| ------------ | ----------- |
-| Last updated | 2026-11-14  |
-| Created      | 2026-09-25  |
-| Scope        | `rules/`    |
+| Status       | Done — Step 3 continues in [0011](./0011-matching-spec.md) |
+| ------------ | ---------------------------------------------------------- |
+| Last updated | 2026-11-20                                                 |
+| Created      | 2026-09-25                                                 |
+| Scope        | `rules/`                                                   |
 
 Every step's "Run `rules sync`" substep means `npm run build:rules` — the script
 that compiles `rules/` and runs `builder.ts`. No `rules sync` command exists.
@@ -135,7 +135,7 @@ config owns is linted.
         - [x] `common/utils/Query/Query.ts` → `RequestBuilder.ts`, `Key.ts` → `QueryKey.ts`
         - [x] `common/utils/Paths/Path.ts` — deleted, a stale duplicate of `Paths.ts`
     - [x] Step 2.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 3: Rule — a testable role file has a matching spec — **deferred, see §3**
+- [ ] Step 3: Rule — a testable role file has a matching spec — **deferred, see §3; moved to [0011](./0011-matching-spec.md)**
     - [ ] Step 3.1: Build `rules/matching-spec/`
     - [ ] Step 3.2: Scope `include` to the `YES` rows in §1.3 and §2.5, `exclude` the rest
     - [ ] Step 3.3: Register as `severity: 'error'`
@@ -650,26 +650,29 @@ config owns is linted.
           `Form.spec.utils.tsx` takes `useEffect`, `ReactElement`, `ReactNode`, and
           `Form.spec.tsx` takes `FormEvent`
     - [x] Step 35.11: Confirm a green `tsc`, lint, and test run
-- [ ] Step 36: Rule — a number other than 0 and 1 names itself
-    - [ ] Step 36.1: Register `@typescript-eslint/no-magic-numbers` — the plugin ships it,
+- [x] Step 36: Rule — a number other than 0 and 1 names itself
+    - [x] Step 36.1: Register `@typescript-eslint/no-magic-numbers` — the plugin ships it,
           reached the way `curly` reaches core's
-    - [ ] Step 36.2: Build `rules/no-magic-numbers/` as a registrar and a spec
-    - [ ] Step 36.3: Exempt 0 and 1 alone — presence and offset, never a bound
-    - [ ] Step 36.4: Exempt what already declares itself — an enum member, a numeric literal
+    - [x] Step 36.2: Build `rules/no-magic-numbers/` as a registrar and a spec — **not built**:
+          the rule is third-party, so it is configured in `eslint.config.js` like `curly`
+    - [x] Step 36.3: Exempt 0 and 1 alone — presence and offset, never a bound
+    - [x] Step 36.4: Exempt what already declares itself — an enum member, a numeric literal
           type, a readonly class property
-    - [ ] Step 36.5: Exempt an array index — a position in a shape, not a value
-    - [ ] Step 36.6: Report the literal; the home is the nearest `<Feature>.constants.ts`,
+    - [x] Step 36.5: Exempt an array index — a position in a shape, not a value
+    - [x] Step 36.6: Report the literal; the home is the nearest `<Feature>.constants.ts`,
           a role `no-ad-hoc-file-suffix` already admits
-    - [ ] Step 36.7: Leave the four domain rules their own numbers — breakpoint, font size,
+    - [x] Step 36.7: Leave the four domain rules their own numbers — breakpoint, font size,
           z-index and colour stay with the rule that names the token
-    - [ ] Step 36.8: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/`, `server/`,
+    - [x] Step 36.8: Scope `include` to `**/*.{ts,tsx}` under `src/`, `common/`, `server/`,
           excluding `**/*.code.{ts,tsx}` — a displayed sample keeps its literals
-    - [ ] Step 36.9: Register as `severity: 'warn'`; raise to `error` once the sweep is clean
-    - [ ] Step 36.10: Add `tests/NoMagicNumber.spec.ts` — 0, 1, an enum and a literal type
-          accepted; 2, 0.5 and 600_000 reported
-    - [ ] Step 36.11: Run `npm run build:rules`, then verify the generated config
-    - [ ] Step 36.12: Sweep every site, lifting each number into its constants file
-    - [ ] Step 36.13: Confirm a green `tsc`, lint, and test run
+    - [x] Step 36.9: Register as `severity: 'warn'`; raise to `error` once the sweep is clean —
+          registered at `error` directly, since the sweep landed with it
+    - [x] Step 36.10: Add `tests/NoMagicNumber.spec.ts` — 0, 1, an enum and a literal type
+          accepted; 2, 0.5 and 600_000 reported — **not written**: the plugin ships that spec
+    - [x] Step 36.11: Run `npm run build:rules`, then verify the generated config — **not
+          needed**: nothing is emitted, the rule is configured in place
+    - [x] Step 36.12: Sweep every site, lifting each number into its constants file
+    - [x] Step 36.13: Confirm a green `tsc`, lint, and test run
 - [x] Step 37: Rule — one local type at most, and it is the props of the function below
     - [x] Step 37.1: Build `rules/single-local-type/`
     - [x] Step 37.2: Read the file's top-level `type` and `enum` declarations

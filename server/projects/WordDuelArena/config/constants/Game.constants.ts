@@ -10,4 +10,6 @@ export const GameConstants = {
     levelWordStatuses: WdaLevelWordStatuses,
     playerDerivedStatuses: WdaPlayerDerivedStatuses,
     hintsAfterFailedAttempts: 5,
+    targetWordMultiplier: 3,
+    minAnagramLength: 3,
 }

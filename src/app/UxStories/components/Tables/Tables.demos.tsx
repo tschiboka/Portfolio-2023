@@ -3,6 +3,7 @@ import { toUpper } from 'ramda'
 import { Table, TableHooks, TableFilterConfig, Pill } from '@common-ux'
 import { Strings } from '@common-utils'
 import { TablesConfig } from './Tables.config'
+import { TablesConstants } from './Tables.constants'
 import { TablesMocks } from './Tables.mocks'
 import type { SortDirection, TableColumns } from '@common-ux'
 import type { UrlPersistenceConfig } from '@common-ux/Table/Table.hooks.types'
@@ -120,7 +121,10 @@ export const SelectionWithActionsDemo = () => {
     )
 }
 
-const usePagination = (allRows: PaginationRow[], initialPageSize = 10) => {
+const usePagination = (
+    allRows: PaginationRow[],
+    initialPageSize = TablesConstants.defaultPageSize,
+) => {
     const [page, setPage] = useState(1)
     const [pageSize, setPageSize] = useState(initialPageSize)
     const totalItems = allRows.length
@@ -154,7 +158,7 @@ export const PaginationDemo = () => {
 }
 
 export const CustomPageSizeDemo = () => {
-    const p = usePagination(allPaginationRows, 5)
+    const p = usePagination(allPaginationRows, TablesConstants.customDemoPageSize)
     return (
         <Table<PaginationRow>
             ariaLabel="Table with custom page size options"
@@ -164,7 +168,7 @@ export const CustomPageSizeDemo = () => {
                 pageNumber: p.page,
                 totalPages: p.totalPages,
                 pageSize: p.pageSize,
-                pageSizeOptions: [5, 15, 30],
+                pageSizeOptions: TablesConstants.pageSizesWithThirty,
                 totalItems: p.totalItems,
                 onPageChange: p.setPage,
                 onPageSizeChange: p.onPageSizeChange,
@@ -175,7 +179,7 @@ export const CustomPageSizeDemo = () => {
 }
 
 export const SmallDatasetPaginationDemo = () => {
-    const rows = allPaginationRows.slice(0, 3)
+    const rows = allPaginationRows.slice(0, TablesConstants.previewRows)
     const p = usePagination(rows)
     return (
         <Table<PaginationRow>
@@ -217,7 +221,7 @@ export const NoTotalItemsDemo = () => {
 export const AllFeaturesCombinedDemo = () => {
     const [selected, setSelected] = useState<string[]>([])
     const [page, setPage] = useState(1)
-    const [pageSize, setPageSize] = useState(10)
+    const [pageSize, setPageSize] = useState(TablesConstants.defaultPageSize)
     const [sortColumn, setSortColumn] = useState<keyof AllFeaturesRow>('name')
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc')
     const [isLoading, setIsLoading] = useState(false)
@@ -256,7 +260,7 @@ export const AllFeaturesCombinedDemo = () => {
 
     const handleRefresh = () => {
         setIsLoading(true)
-        setTimeout(() => setIsLoading(false), 1500)
+        setTimeout(() => setIsLoading(false), TablesConstants.refreshLatencyMs)
     }
 
     return (
@@ -336,7 +340,7 @@ export const AllFeaturesCombinedDemo = () => {
                 pageNumber: page,
                 totalPages,
                 pageSize,
-                pageSizeOptions: [5, 10, 15],
+                pageSizeOptions: TablesConstants.pageSizes,
                 totalItems,
                 onPageChange: setPage,
                 onPageSizeChange: (size) => {
@@ -459,7 +463,7 @@ export const SortingWithPaginationDemo = () => {
     const [column, setColumn] = useState<keyof SortingRow>('name')
     const [direction, setDirection] = useState<SortDirection>('asc')
     const [page, setPage] = useState(1)
-    const [pageSize, setPageSize] = useState(3)
+    const [pageSize, setPageSize] = useState(TablesConstants.compactPageSize)
     const sorted = useMemo(() => sortRows(sortingRows, column, direction), [column, direction])
     const totalPages = Math.ceil(sorted.length / pageSize)
     const pageData = sorted.slice((page - 1) * pageSize, page * pageSize)
@@ -487,7 +491,7 @@ export const SortingWithPaginationDemo = () => {
                 pageNumber: page,
                 totalPages,
                 pageSize,
-                pageSizeOptions: [3, 5],
+                pageSizeOptions: TablesConstants.pageSizesShort,
                 totalItems: sorted.length,
                 onPageChange: setPage,
                 onPageSizeChange: (size) => {
@@ -544,7 +548,10 @@ const ControllerPersistenceDemo = ({
     const controller = TableHooks.useTableController<ControllerDemoFilters>({
         filters: CONTROLLER_DEMO_FILTERS,
         sorting: { default: { column: 'name', direction: 'asc' } },
-        pagination: { pageSize: 5, pageSizeOptions: [5, 10, 25] },
+        pagination: {
+            pageSize: TablesConstants.customDemoPageSize,
+            pageSizeOptions: TablesConstants.pageSizesWide,
+        },
         urlPersistence,
         toParams: (state) => state,
     })

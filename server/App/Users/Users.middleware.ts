@@ -1,5 +1,5 @@
 ﻿import jwt from 'jsonwebtoken'
-import { ApiMessage, ApiResponder, isError, isString } from '@common-utils'
+import { ApiMessage, ApiResponder, DateTime, isError, isString } from '@common-utils'
 import type { Request, Response, NextFunction } from 'express'
 import type { AuthedRequest, UserToken } from './Users.types'
 
@@ -10,10 +10,9 @@ const auth = (req: Request, res: Response, next: NextFunction): void => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY as string)
-        if (isString(decoded))
-            throw ApiResponder.unauthorized(ApiMessage.invalid('token'))
+        if (isString(decoded)) throw ApiResponder.unauthorized(ApiMessage.invalid('token'))
 
-        const expired = decoded.exp! <= Math.floor(Date.now() / 1000)
+        const expired = decoded.exp! <= Math.floor(DateTime.Units.Ms.toSec(Date.now()))
         if (expired) throw ApiResponder.unauthorized(ApiMessage.expired('token'))
         ;(req as AuthedRequest).user = decoded as unknown as UserToken
 

@@ -9,6 +9,8 @@ const router = express.Router()
 
 router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
     const { keystrokes } = req.body // fully typed now
+    const { scoring } = TypistConstants
+    const { charsPerWord, msPerMinute, oneDecimal, percentWithOneDecimal, scoreScale } = scoring
 
     // TODO: [TYP-0005] Extract the whole logic into designated service functions and clean up the route handler to just call those functions and return the response Calculate the error combination if practice mode is set to error
     let errorCombinations: string[] = []
@@ -82,12 +84,12 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
         const lastTime = keystrokes[keystrokes.length - 1]?.timestamp
         if (!firstTime || !lastTime) return { wpm: 0, cpm: 0 }
 
-        const totalMins = (lastTime - firstTime) / 60000
+        const totalMins = (lastTime - firstTime) / msPerMinute
         const totalCharsTyped = keystrokes.filter((k: Keystroke) => k.correct).length
 
         return {
-            wpm: Math.round((totalCharsTyped / 5 / totalMins) * 10) / 10,
-            cpm: Math.round((totalCharsTyped / totalMins) * 10) / 10,
+            wpm: Math.round((totalCharsTyped / charsPerWord / totalMins) * oneDecimal) / oneDecimal,
+            cpm: Math.round((totalCharsTyped / totalMins) * oneDecimal) / oneDecimal,
         }
     }
 
@@ -95,7 +97,8 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
         const totalTyped = keystrokes.length
         const totalErrors = keystrokes.filter((k: Keystroke) => !k.correct).length
         return totalTyped > 0
-            ? Math.round(((totalTyped - totalErrors) / totalTyped) * 1000) / 10
+            ? Math.round(((totalTyped - totalErrors) / totalTyped) * percentWithOneDecimal) /
+                  oneDecimal
             : 0
     }
 
@@ -112,7 +115,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
         const varietyScore = Math.min(uniqueChars.size / MAX_EXPECTED_UNIQUE, 1)
 
         // Factor 3: Derived from settings: words Ã— (avg word length + 1 for space separator)
-        const MAX_TEXT_LENGTH = 100 * 5
+        const MAX_TEXT_LENGTH = 100 * charsPerWord
         const textLength = keystrokes.filter((k: Keystroke) => k.correct).length
         const lengthScore = Math.min(textLength / MAX_TEXT_LENGTH, 1)
 
@@ -133,7 +136,7 @@ router.post('/round', [], async (req: PostRoundReq, res: PostRoundRes) => {
             WEIGHT.Length * lengthScore +
             WEIGHT.Speed * speedScore
 
-        return Math.round(weighted * 1000)
+        return Math.round(weighted * scoreScale)
     }
 
     return ApiResponder.ok(res, {

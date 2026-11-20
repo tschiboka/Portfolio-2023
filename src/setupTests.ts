@@ -1,5 +1,6 @@
 import { http, HttpResponse } from 'msw'
 import { Server } from '@common-ux/Test/Server'
+import { SetupTestsConstants } from './SetupTests.constants'
 import type { Dictionary } from '@common-utils'
 import '@testing-library/jest-dom/vitest'
 
@@ -30,7 +31,12 @@ const defaultHandlers = [
     ),
     http.get('/version.json', () =>
         HttpResponse.json(
-            { version: '0.0.0', sha: '0'.repeat(40), message: 'test', date: '2026-01-01' },
+            {
+                version: '0.0.0',
+                sha: '0'.repeat(SetupTestsConstants.shaLength),
+                message: 'test',
+                date: '2026-01-01',
+            },
             cors,
         ),
     ),

@@ -20,6 +20,7 @@ import { Arrays } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { LayoutsCode } from './Layouts.code'
+import { LayoutsConstants } from './Layouts.constants'
 import { StoryNav } from '../StoryNav/StoryNav'
 import './Layouts.styles.css'
 
@@ -198,9 +199,9 @@ export const Layouts = ({ path }: LayoutsProps) => (
                                 padding: 8,
                             }}
                         >
-                            <span style={cell(30)}>Short</span>
-                            <span style={cell(60)}>Tall</span>
-                            <span style={cell(40)}>Mid</span>
+                            <span style={cell(LayoutsConstants.cellHeights.short)}>Short</span>
+                            <span style={cell(LayoutsConstants.cellHeights.tall)}>Tall</span>
+                            <span style={cell(LayoutsConstants.cellHeights.mid)}>Mid</span>
                         </Stack.Horizontal>
                     </div>
                 ))}
@@ -310,13 +311,13 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 </Grid>
                 <Code language="tsx" content={LayoutsCode.Grid.basic} />
                 <Heading as="h3">Column Counts</Heading>
-                {([2, 3, 4] as const).map((cols) => (
+                {LayoutsConstants.columnCounts.map((cols) => (
                     <div key={cols} style={{ marginBottom: 16 }}>
                         <Paragraph>
                             <CodeText>columns={`{${cols}}`}</CodeText>
                         </Paragraph>
                         <Grid columns={cols} gap="8">
-                            {Arrays.times(6, (i) => (
+                            {Arrays.times(LayoutsConstants.cellCount, (i) => (
                                 <span key={i} style={cell()}>
                                     {i + 1}
                                 </span>
@@ -327,7 +328,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                 <Code language="tsx" content={LayoutsCode.Grid.columns} />
                 <Heading as="h3">Row &amp; Column Gap</Heading>
                 <Grid columns={3} rowGap="16" columnGap="4">
-                    {Arrays.times(6, (i) => (
+                    {Arrays.times(LayoutsConstants.cellCount, (i) => (
                         <span key={i} style={cell()}>
                             {i + 1}
                         </span>
@@ -343,7 +344,7 @@ export const Layouts = ({ path }: LayoutsProps) => (
                     override at their min-width.
                 </Paragraph>
                 <Grid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} gap="8">
-                    {Arrays.times(8, (i) => (
+                    {Arrays.times(LayoutsConstants.responsiveCellCount, (i) => (
                         <span key={i} style={cell()}>
                             {i + 1}
                         </span>

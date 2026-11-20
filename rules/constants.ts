@@ -10,6 +10,9 @@ export const AllowedParentFolders = ['components', 'common', 'src', 'tests', 'ut
 /** Prefixes every report, so an in-house violation is recognisable at a glance. */
 export const ViolationPrefix = 'TSCHIBOKA.COM - Coding Standards Violation: '
 
+/** Indent the builder writes into the emitted config, so it reads like the rest of the repo. */
+export const EmittedJsonIndent = 4
+
 /**
  * Every role a file may carry, with the token it contributes to the export name. A file's export
  * is its stem followed by one token per role segment, so `Word.queries.mocks.ts` reads

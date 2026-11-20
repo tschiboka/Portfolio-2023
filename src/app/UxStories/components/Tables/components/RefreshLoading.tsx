@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Code, CodeText, Heading, Paragraph, Section, Table } from '@common-ux'
-import { Functions } from '@common-utils'
+import { DateTime, Functions } from '@common-utils'
 import { TablesMocks } from '../Tables.mocks'
 import { TablesCode } from '../Tables.code'
 import { TablesConfig } from '../Tables.config'
@@ -18,7 +18,7 @@ export const RefreshLoading = () => {
         setTimeout(() => {
             setRefreshKey((k) => k + 1)
             setIsLoading(false)
-        }, 1500)
+        }, DateTime.Units.Ms.fromSec(2))
     }, [])
 
     return (

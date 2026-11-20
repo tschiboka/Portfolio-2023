@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Const } from '@common-ux/Const'
 import { BrowserHooks, isEmpty, isNonEmpty } from '@common-utils'
 import { ContentNavigatorSelectors } from './ContentNavigator.selectors'
+import { ContentNavigatorConstants } from './ContentNavigator.constants'
 import type { ContentNavigatorProps, Heading } from './ContentNavigator.types'
 import './ContentNavigator.styles.css'
 
@@ -43,7 +44,7 @@ function minLevel(headings: Heading[]) {
 export const ContentNavigator = ({
     children,
     showNavigator = true,
-    depth = 3,
+    depth = ContentNavigatorConstants.defaultDepth,
     ariaLabel,
     className,
     style,
@@ -228,7 +229,10 @@ export const ContentNavigator = ({
                     </button>
                 </span>
                 <div ref={scrollRef} className="ContentNavigator__scroll">
-                    <div className="ContentNavigator__links" style={{ paddingRight: SVG_W + 4 }}>
+                    <div
+                        className="ContentNavigator__links"
+                        style={{ paddingRight: SVG_W + ContentNavigatorConstants.scrollbarGap }}
+                    >
                         {headings.map(({ id, text, level }, i) => (
                             <a
                                 key={`${id}-${i}`}
@@ -240,7 +244,9 @@ export const ContentNavigator = ({
                                 data-active={activeIndices.has(i)}
                                 className="ContentNavigator__link"
                                 style={{
-                                    paddingInlineStart: (level - baseLevel) * 16,
+                                    paddingInlineStart:
+                                        (level - baseLevel) *
+                                        ContentNavigatorConstants.indentPerLevel,
                                     height: ROW,
                                     marginTop: linkGaps[i],
                                 }}

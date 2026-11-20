@@ -77,11 +77,13 @@ export type TableDownload<TData extends Dictionary<ReactNode>> =
 
 export type TableFilteringInputType = 'text' | 'number' | 'option' | 'search' | 'date' | 'checkbox'
 
+export type TableSpan = 1 | 2 | 3 | 4
+
 type FilteringInputBase = {
     key: string
     label: string
     required?: boolean
-    span?: 1 | 2 | 3 | 4
+    span?: TableSpan
 }
 
 type FilteringTextInput = FilteringInputBase & {

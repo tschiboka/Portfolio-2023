@@ -6,6 +6,7 @@ import { PageNav, PageMobileMenu, PageSubNav } from '@shared-components/Nav'
 import { Session, AppHooks } from '@shared-context'
 import { VisitQueries } from '@shared-queries'
 import { ScreenStyles } from './Screen.styles'
+import { ScreenConstants } from './Screen.constants'
 import { Overlay } from '../Overlay'
 import { Footer } from '../Footer'
 import type { ScreenProps } from './Screen.types'
@@ -23,7 +24,7 @@ export const Screen = ({
     hideFooter,
     footerProps,
     hasContentNavigator = false,
-    contentNavigatorDepth = 6,
+    contentNavigatorDepth = ScreenConstants.contentNavigatorDepth,
 }: ScreenProps) => {
     const { subMenuVisible } = AppHooks.useContext()
     const navigate = useNavigate()
@@ -37,8 +38,7 @@ export const Screen = ({
     }, [title])
 
     useEffect(() => {
-        if (loginRequired && !isAuthLoading && !isAuthenticated)
-            void navigate(Paths.Client.Login)
+        if (loginRequired && !isAuthLoading && !isAuthenticated) void navigate(Paths.Client.Login)
     }, [loginRequired, isAuthenticated, isAuthLoading, navigate])
 
     const getClassName = () => {

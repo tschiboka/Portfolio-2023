@@ -3,6 +3,8 @@ import { DateTime, Functions, Regexp } from '@common-utils'
 import type { Nullable } from '@common-utils'
 import type { GetVersionResponse } from '../../types'
 
+const POLL_INTERVAL_MINUTES = 10
+
 const useVersionCheck = () => {
     const [isStale, setIsStale] = useState(false)
     const [build, setBuild] = useState<Nullable<GetVersionResponse>>(null)
@@ -57,7 +59,7 @@ const useVersionCheck = () => {
             poll()
         }
 
-        const id = setInterval(poll, DateTime.Units.Ms.fromMin(10))
+        const id = setInterval(poll, DateTime.Units.Ms.fromMin(POLL_INTERVAL_MINUTES))
         return () => clearInterval(id)
     }, [checkVersion])
 

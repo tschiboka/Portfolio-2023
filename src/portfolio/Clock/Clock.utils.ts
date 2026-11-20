@@ -2,6 +2,7 @@ import moment from 'moment'
 import { CanvasType, Centre, DateTime, Line } from '@common-utils'
 import { Const } from '@common-ux/Const'
 import { ClockData } from '.'
+import { ClockConstants } from './Clock.constants'
 import type { Nullable } from '@common-utils'
 
 const getDateTime = (): ClockData => {
@@ -43,7 +44,7 @@ const getHands = ({ sec, min, hour }: ClockData) => [
     {
         radiusFactor: 0.7,
         color: Const.Color.Gray[1],
-        value: (hour % 12) + min * 60,
+        value: (hour % ClockConstants.hoursPerFace) + min * ClockConstants.minutesPerHour,
         degrees: 12,
         width: 4,
     },
@@ -111,17 +112,33 @@ const drawFromCentre = (
 const drawGrooves = (canvasObj: CanvasType) => {
     const { radius, centre, line } = canvasObj
 
-    const degreesMin = [...Array(60).keys()]
+    const degreesMin = [...Array(ClockConstants.minutesPerHour).keys()]
     degreesMin.map((degree) =>
-        drawLineFromCentre(centre, getAngle(degree, 60), radius, 1, '#333', line),
+        drawLineFromCentre(
+            centre,
+            getAngle(degree, ClockConstants.minutesPerHour),
+            radius,
+            1,
+            '#333',
+            line,
+        ),
     )
 
-    const degreesHour = [...Array(12).keys()].map((d) => d * 5)
+    const degreesHour = [...Array(ClockConstants.hoursPerFace).keys()].map(
+        (d) => d * (ClockConstants.minutesPerHour / ClockConstants.hoursPerFace),
+    )
     degreesHour.map((degree) =>
-        drawLineFromCentre(centre, getAngle(degree, 60), radius, 3, '#333', line),
+        drawLineFromCentre(
+            centre,
+            getAngle(degree, ClockConstants.minutesPerHour),
+            radius,
+            ClockConstants.hourTickWidth,
+            '#333',
+            line,
+        ),
     )
 
-    drawFromCentre(canvasObj, radius * 0.95, 1, '#0a0a0a', true)
+    drawFromCentre(canvasObj, radius * ClockConstants.glossRadiusFactor, 1, '#0a0a0a', true)
 }
 
 export const ClockUtils = { getDateTime, startLoop, drawHands, drawGrooves }

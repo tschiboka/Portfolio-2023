@@ -1,6 +1,7 @@
 import { Table, Code, CodeText, Heading, Paragraph, Section } from '@common-ux'
 import { Functions } from '@common-utils'
 import { TablesCode } from '../Tables.code'
+import { TablesConstants } from '../Tables.constants'
 import { TablesMocks } from '../Tables.mocks'
 import { ControllerSingleDemo, ControllerNamedDemo, ControllerOffDemo } from '../Tables.demos'
 import type { Row } from '../Tables.types'
@@ -36,7 +37,7 @@ export const Controller = () => (
             </Paragraph>
             <Table<Row>
                 ariaLabel="Controller demo"
-                data={rows.slice(0, 3)}
+                data={rows.slice(0, TablesConstants.previewRows)}
                 columns={[
                     { header: 'Name', accessor: 'name' },
                     { header: 'Value', accessor: 'value' },

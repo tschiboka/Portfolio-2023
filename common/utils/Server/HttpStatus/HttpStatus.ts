@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers -- the codes are the definitions; no constant can name an HTTP status. */
 export class HttpStatus {
     // 1xx Informational
     static CONTINUE = 100 as const

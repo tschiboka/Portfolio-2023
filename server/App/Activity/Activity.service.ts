@@ -1,4 +1,4 @@
-﻿import { Paging } from '@common-utils'
+﻿import { DateTime, Paging } from '@common-utils'
 import { ActivityRepository } from './Activity.repository'
 import { ActivityTransformers } from './Activity.transformers'
 import { ActivityConstants } from './Activity.constants'
@@ -67,7 +67,7 @@ export const ActivityService = {
 
         // Apply date-range filter (dateTo inclusive of the whole day).
         const fromMs = dateFrom ? new Date(dateFrom).getTime() : undefined
-        const toMs = dateTo ? new Date(dateTo).getTime() + 86400000 : undefined
+        const toMs = dateTo ? new Date(dateTo).getTime() + DateTime.Units.Ms.fromDay(1) : undefined
         if (fromMs || toMs)
             rows = rows.filter((row) => {
                 const time = new Date(row.datetime).getTime()

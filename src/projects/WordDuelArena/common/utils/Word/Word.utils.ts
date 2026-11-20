@@ -22,7 +22,7 @@ function getPossibleAnagrams(letters: string) {
     const results = new Set<string>()
 
     function helper(path: string, remaining: string[]) {
-        if (path.length >= 3) results.add(path.split('').sort().join(''))
+        if (path.length >= WordConstants.minLength) results.add(path.split('').sort().join(''))
 
         remaining.forEach((word, i) => helper(path + word, remaining.slice(i + 1)))
     }

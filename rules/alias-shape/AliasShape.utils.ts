@@ -99,7 +99,6 @@ export const isNullishOf = (node: TypeLike, _text: TextOf): boolean => {
     )
 
     return (
-        members.length === 3 &&
         nulls.length === 1 &&
         undefineds.length === 1 &&
         written.length === 1 &&

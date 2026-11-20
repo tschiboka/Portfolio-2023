@@ -83,6 +83,28 @@ export default tseslint.config(
     },
     {
         files: ['**/*.{ts,tsx}'],
+        ignores: [
+            '**/*.code.{ts,tsx}',
+            '**/*.constants.ts',
+            '**/*.mocks.ts',
+            '**/*.spec.{ts,tsx}',
+            '**/*.spec.utils.{ts,tsx}',
+        ],
+        rules: {
+            '@typescript-eslint/no-magic-numbers': [
+                'error',
+                {
+                    ignore: [-1, 0, 1, 2, 50, 100, 180, 360],
+                    ignoreArrayIndexes: true,
+                    ignoreEnums: true,
+                    ignoreNumericLiteralTypes: true,
+                    ignoreReadonlyClassProperties: true,
+                },
+            ],
+        },
+    },
+    {
+        files: ['**/*.{ts,tsx}'],
         ignores: ['**/*.code.{ts,tsx}'],
         rules: { 'arrow-body-style': ['error', 'as-needed'] },
     },
