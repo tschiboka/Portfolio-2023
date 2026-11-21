@@ -1,4 +1,5 @@
 import type { JsonBodyType, RequestHandler } from 'msw'
+import type { VoidFunction } from '@common-utils'
 import type { MockBuilderType } from './MockBuilder.types'
 
 export enum HttpMethods {
@@ -15,6 +16,7 @@ export type RequestBuilderProps<T extends JsonBodyType> = {
     response: MockBuilderType<T> | T
     status?: number
     once?: boolean
+    hold?: boolean
 }
 
 export type RequestBuilderResult<T extends JsonBodyType> = {
@@ -22,6 +24,7 @@ export type RequestBuilderResult<T extends JsonBodyType> = {
     updateResponse: (
         modifier: (builder: MockBuilderType<T>) => MockBuilderType<T>,
     ) => RequestBuilderResult<T>
+    release: VoidFunction
 }
 
 export type Buildable = Pick<RequestBuilderResult<JsonBodyType>, 'build'>

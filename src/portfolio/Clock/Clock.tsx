@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useEffect, useState } from 'react'
 import { ClockData, ClockFaceCanvas, ClockUtils } from '.'
 import type { Nullable } from '@common-utils'

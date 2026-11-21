@@ -32,6 +32,7 @@ import { registrar as noReactNamespaceRegistrar } from './no-react-namespace/NoR
 import { registrar as singleLocalTypeRegistrar } from './single-local-type/SingleLocalType.registrar.js'
 import { registrar as noInterfaceRegistrar } from './no-interface/NoInterface.registrar.js'
 import { registrar as regexpRegistryRegistrar } from './regexp-registry/RegexpRegistry.registrar.js'
+import { registrar as matchingSpecRegistrar } from './matching-spec/MatchingSpec.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -70,4 +71,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     singleLocalTypeRegistrar,
     noInterfaceRegistrar,
     regexpRegistryRegistrar,
+    matchingSpecRegistrar,
 ].map(withPrefixedReports)

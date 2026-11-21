@@ -1,4 +1,5 @@
-﻿import { produce } from 'immer'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import { produce } from 'immer'
 import { BroadcastService } from '../Broadcast.service'
 import { markAliveByDevice } from '../../../domain/session/session'
 import { SessionConstants } from '../../../config/constants/Session.constants'

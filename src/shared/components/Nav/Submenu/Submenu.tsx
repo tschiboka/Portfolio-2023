@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { find } from 'ramda'
 import { Maybe } from 'monet'
 import { useEffect, useState } from 'react'

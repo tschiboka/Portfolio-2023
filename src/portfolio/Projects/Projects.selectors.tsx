@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import riffMasterImg from '@portfolio/assets/projects/RiffMaster.png'
 import personalTrainerImg from '@portfolio/assets/projects/FrancescoLevo.png'
 import gradientGeneratorImg from '@portfolio/assets/projects/GradientGenerator.png'

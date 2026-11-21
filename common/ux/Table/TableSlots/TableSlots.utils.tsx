@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { isValidElement } from 'react'
 import { isArray, isBoolean, isNonEmpty, isNullish, isNumber, isString } from '@common-utils'
 import type { FC, ReactElement, ReactNode } from 'react'

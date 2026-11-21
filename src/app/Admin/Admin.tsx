@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { AxiosError } from 'axios'
 import { Button, Code, Heading, Main, Paragraph, Section, Spacer } from '@common-ux'
-import { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@common-types'
+import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { AdminQueries } from './Admin.queries'
 import { BreakdownPreview, BreakdownPreviewMocks } from './BreakdownPreview'
+import type { AxiosError } from 'axios'
+import type { ErrorResponse, PostBackfillResponse, PostDailyBreakdownResponse } from '@common-types'
 import type { Nullable } from '@common-utils'
 
 type AdminProps = {
@@ -20,7 +21,7 @@ export const Admin = ({ path }: AdminProps) => {
         onError: (error: AxiosError<ErrorResponse>) =>
             setResponse({
                 success: false,
-                error: error.response?.data?.message ?? error.message,
+                error: getErrorMessage(error, ClientMessage.Failure.Handle('daily breakdown')),
             }),
     })
 
@@ -56,7 +57,11 @@ export const Admin = ({ path }: AdminProps) => {
                                 triggering the daily breakdown. The actual response may vary based
                                 on the current state of the system and the data being processed.
                             </Paragraph>
-                            <Code language="json" content={JSON.stringify(response, null, 2)} />
+                            <Code
+                                language="json"
+                                ariaLabel="Daily breakdown response"
+                                content={JSON.stringify(response, null, 2)}
+                            />
                         </Section>
                     )}
                     <Section title="Email Preview" expandable defaultOpen={false}>
@@ -82,6 +87,7 @@ export const Admin = ({ path }: AdminProps) => {
                                 <Spacer size="16" />
                                 <Code
                                     language="json"
+                                    ariaLabel="Backfill response"
                                     content={JSON.stringify(backfillResult, null, 2)}
                                 />
                             </>

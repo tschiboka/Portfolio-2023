@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { HeadsUpMetrics } from './HeadsUpMetrics/HeadsUpMetrics'
 import { LetterBox } from './LetterBox/LetterBox'
 import './HeadsUpDisplay.styles.scss'

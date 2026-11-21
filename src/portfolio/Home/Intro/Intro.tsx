@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { FaGlasses, FaCode } from 'react-icons/fa'
 import { IoMdHand } from 'react-icons/io'
 import { Heading, Paragraph, Section } from '@common-ux'

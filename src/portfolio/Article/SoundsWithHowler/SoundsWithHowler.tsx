@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import E2MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/E2.mp3'
 import F2MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/F2.mp3'
 import Fs2MP3 from '@portfolio/assets/blog/files/sounds_with_howler/guitar-sounds/Fs2.mp3'

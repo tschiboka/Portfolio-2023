@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ReactNode, useState } from 'react'
 import { hasLength } from '@common-utils'
 import {

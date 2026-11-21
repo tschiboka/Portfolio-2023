@@ -81,6 +81,7 @@ before touching the file.
 | `Feature.transformers.ts`     | BE   | `db`                              |
 | `Feature.controller.ts`       | BE   | `db`                              |
 | `tests/*`                     | both | `test`                            |
+| `Feature.harness.ts`          | both | `test`                            |
 | `Feature.mockHandlers.ts`     | both | `test`                            |
 | `Feature.utils.ts`            | both | `implement`                       |
 | `Feature.constants.ts`        | both | `implement`                       |

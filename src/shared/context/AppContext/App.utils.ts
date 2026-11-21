@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Storage } from '@common-utils'
 import { AppConstants } from './App.constants'
 import type { LocalStorage } from './App.types'

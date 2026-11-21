@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import cyclicImg from '@portfolio/assets/blog/cyclic_email_scheduling/cyclic.png'
 import cronMenuOptionImg from '@portfolio/assets/blog/cyclic_email_scheduling/cron_menu_option.png'
 import newCronTaskImg from '@portfolio/assets/blog/cyclic_email_scheduling/new_cron_task.png'

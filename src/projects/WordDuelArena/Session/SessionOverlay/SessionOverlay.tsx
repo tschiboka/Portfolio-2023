@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { BrowserHooks } from '@common-utils'
 import { SessionOverlayModes } from './SessionOverlay.types'
 import { SessionOverlayHooks } from './SessionOverlay.hooks'

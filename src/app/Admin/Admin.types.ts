@@ -1,5 +1,5 @@
 import type { AxiosError, AxiosResponse } from 'axios'
-import type { ErrorResponse } from '@common-types'
+import type { ErrorResponse } from '@common-utils'
 
 export type UsePost<TResponse> = {
     onSuccess?: (response: AxiosResponse<TResponse>) => void

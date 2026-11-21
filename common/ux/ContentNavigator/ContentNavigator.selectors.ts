@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { Arrays, Browser, hasLength } from '@common-utils'
 import type { RefObject } from 'react'
 import type { Nullable } from '@common-utils'

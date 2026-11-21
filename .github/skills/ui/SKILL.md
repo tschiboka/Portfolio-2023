@@ -44,8 +44,7 @@ Does not own data or requests (`queries`), persistence (`db`), endpoints
 - Feature styling defaults to `<Feature>.styles.ts` with one styles object.
 - Common UI uses CSS. Do not introduce SCSS into `@common`.
 - SCSS is retiring. Add `<Feature>.styles.scss` only when CSS-in-TS cannot express the required selector, pseudo-class or media query.
-- Every value comes from `Const`, a styling index, or a justified literal.
-- Breakpoints come from `Const.Breakpoint`.
+- Every visual value — colour, font size, z-index, breakpoint — comes from `Const`, never a literal.
 - Feature SCSS uses a feature prefix and is imported by its consumer.
 
 ### Context
@@ -138,4 +137,4 @@ The barrel for the feature — nothing outside reaches past it into a sibling fi
 Example: [`index.ts`](./index.ts)
 Rules:
 
-- Exports are **alphabetical by exported symbol**, types last as `export type`.
+- Exports are **types last**, ordered by style then path — `export-order` decides that, so this is a pointer, not a check.

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import type { BoxBackground, BoxBorderRadius } from './Box.types'
 
 const BackgroundMap: Record<BoxBackground, string> = {

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { produce } from 'immer'
 import { SessionConstants } from '../../config/constants/Session.constants'
 import type { SessionState } from '../../WordDuelArena.types'

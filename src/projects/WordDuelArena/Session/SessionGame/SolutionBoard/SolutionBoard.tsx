@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { isEmpty } from '@common-utils'
 import { SolutionBoardUtils } from './SolutionBoard.utils'

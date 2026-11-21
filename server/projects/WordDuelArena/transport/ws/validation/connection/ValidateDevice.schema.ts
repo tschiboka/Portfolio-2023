@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import type { ValidationResult } from './ValidateDevice.types'
 import type { Session } from '../../../../WordDuelArena.types'
 

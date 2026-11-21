@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { useLayoutEffect } from 'react'
 import { FaExclamationCircle, FaExclamationTriangle, FaInfoCircle, FaLock } from 'react-icons/fa'
 import { PopupArrow, PopupMode, PopupSize, AnchorAlign, AnchorResult } from './Overlay.types'

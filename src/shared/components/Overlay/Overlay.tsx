@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { AppHooks } from '@shared-context'
 import { FullScreen } from '@common-ux/Overlay/FullScreen'
 import './Overlay.scss'

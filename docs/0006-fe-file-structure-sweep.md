@@ -1233,10 +1233,14 @@ SHARED
 
 ### 11.16.2 Review steps (definitive rubric in the skill)
 
-> **The strict review rubric now lives in `.github/skills/review/SKILL.md`**
+> **The strict review rubric now lives in `.github/skills/review-file/SKILL.md`**
 > (agent-invocable) — that file is the single source of truth. The ticket below
 > only records the key decisions and the review format; keep it in sync with
 > the skill when the rubric changes.
+>
+> This sweep runs alongside [0011](0011-matching-spec-fe.md): the matching-spec rule and the
+> page-object work land there, so a file with no spec is recorded as `TODO: [0011] …`, not
+> as a review finding.
 
 **Strict Requirement List for Auditing Source Files — Review Results.** Scores
 0.0–10.0 (0.0 = non-existent, 10.0 = impeccable). **GENERIC SCORE** = mean of
@@ -1248,8 +1252,8 @@ all in the skill.
 
 **Layer-aware (FE + BE):** a `LAYER: FE | BE` field selects the anchor set —
 Architecture §1 (FE) or §2 (BE). Most dimensions are identical; only EXTENSION
-(suffix set), IMPORTS (FE 4-tier vs BE 3-tier + §5.1 dependency check), and the
-RETURN example vary. BE is the canonical `Feature<Role>` anchor (§2.3).
+(suffix set) and the RETURN example vary. BE is the canonical `Feature<Role>`
+anchor (§2.3).
 
 **Review format (exact):**
 
@@ -1258,8 +1262,9 @@ FILE: <path>
 LAYER: <FE | BE>   # anchors from Architecture §1 (FE) or §2 (BE)
 VERDICT: <CONFORMS | DEVIATES | CHANGE-ACCEPTED | CHANGE-REJECTED>  <reason>
 GENERIC SCORE: <0.0-10.0>
-COHESIVENESS | LOCATION | EXTENSION | IMPORTS | NAMING | RETURN
-TYPED | ERRORFREE | STANDARD | TESTED:  <0.0-10.0 each, N/A allowed>
+COHESIVENESS | LOCATION | EXTENSION | NAMING | RETURN | TESTED:  <0.0-10.0 each, N/A allowed>
+VALIDITY: <PASS | FAIL | UNVERIFIED>   # read from `npm run lint` and `tsc`
+# IMPORTS, TYPED and STANDARD are no longer scored: 0009's registry decides them.
 IMPROVEMENTS: <MUST/SHOULD/COULD, or NONE>
 APPROVED: <YES|NO>   # optional — tracked sweep or on request
 STATUS: <NOT STARTED | WIP | PAUSED | DONE>
@@ -1276,8 +1281,8 @@ NOTES: <only on PAUSED - handover instructions>
   score + last-reviewed row.
 - **Severity floor** added — a mean hides a single broken axis.
 - **Anchor scale + N/A** added for reproducibility and fair non-code scoring.
-- **Layer-aware (FE + BE)** — one skill, `LAYER` field; EXTENSION/IMPORTS/RETURN
-  anchors carry both variants; keeps BE from needing a forked skill.
+- **Layer-aware (FE + BE)** — one skill, `LAYER` field; EXTENSION/RETURN anchors
+  carry both variants; keeps BE from needing a forked skill.
 
 **Run protocol:**
 
@@ -1295,29 +1300,39 @@ NOTES: <only on PAUSED - handover instructions>
 > provisional scores of conformance — not verified builds — until a real
 > build + regression pass. The severity floor stands: TESTED=0 ⇒ not passing.
 
-| #   | File                                                           | LAYER | VERDICT  | COH | LOC | EXT | IMP | NAM | RET | TYP | ERR | STD | TEST | **GEN** | IMPROVEMENTS                                                 | APPROVED | STATUS |
-| --- | -------------------------------------------------------------- | ----- | -------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---- | ------- | ------------------------------------------------------------ | -------- | ------ |
-| 1   | `src/app/Activities/Activities.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 10  | 9   | 8   | 8   | 10  | 8   | N/A  | **8.7** | N/A (TESTED) — placeholder leaf, not yet a feature           | YES      | DONE   |
-| 2   | `src/app/Admin/BreakdownPreview/BreakdownPreview.tsx`          | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0** | COULD — dedicated sub-component specs                        | YES      | DONE   |
-| 3   | `src/app/Admin/BreakdownPreview/BreakdownPreview.constants.ts` | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 9   | 9   | 9   | 9   | N/A  | **9.0** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
-| 4   | `src/app/Admin/BreakdownPreview/BreakdownPreview.styles.ts`    | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 8   | 8   | 9   | 9   | N/A  | **8.8** | COULD — residual `6px`/`10px`/rem literals (no shared const) | YES      | DONE   |
-| 5   | `src/app/Admin/BreakdownPreview/BreakdownPreview.types.ts`     | FE    | CONFORMS | 10  | 10  | 9   | N/A | 9   | 10  | 10  | 10  | 9   | N/A  | **9.6** | N/A (IMPORTS/TESTED)                                         | YES      | DONE   |
-| 6   | `src/app/Admin/BreakdownPreview/components/Header.tsx`         | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0** | COULD — dedicated spec                                       | YES      | DONE   |
-| 7   | `src/app/Admin/BreakdownPreview/components/DataSection.tsx`    | FE    | CONFORMS | 8   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 7    | **8.8** | COULD — dedicated spec                                       | YES      | DONE   |
-| 8   | `src/app/Admin/BreakdownPreview/Signature.tsx`                 | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 8   | 7    | **8.8** | COULD — dedicated spec; London-pinned time via shared util   | YES      | DONE   |
-| 9   | `src/app/Admin/BreakdownPreview/index.ts`                      | FE    | CONFORMS | 10  | 10  | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.3** | N/A (TESTED)                                                 | YES      | DONE   |
-| 10  | `src/app/Categories/Categories.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 8   | 9   | 9   | 8   | 10  | 9   | 9    | **8.8** | COULD — type-only import (done)                              | YES      | DONE   |
-| 11  | `src/app/Categories/Categories.columns.ts`                     | FE    | CONFORMS | 9   | 9   | 8   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **8.9** | N/A (TESTED) — indirect                                      | YES      | DONE   |
-| 12  | `src/app/Categories/Categories.defaults.ts`                    | FE    | CONFORMS | 10  | 9   | 9   | 10  | 10  | 10  | 10  | 10  | 10  | N/A  | **9.4** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
-| 13  | `src/app/Categories/Categories.handlers.ts`                    | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
-| 14  | `src/app/Categories/Categories.options.ts`                     | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
-| 15  | `src/app/Categories/Categories.queries.ts`                     | FE    | CONFORMS | 8   | 9   | 9   | 8   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8** | N/A (TESTED) — indirect via feature spec                     | YES      | DONE   |
-| 16  | `src/app/Categories/Categories.schema.ts`                      | FE    | CONFORMS | 9   | 9   | 9   | 7   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8** | N/A (TESTED) — indirect; IMPORTS minor                       | YES      | DONE   |
-| 17  | `src/app/Categories/Categories.transformers.ts`                | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0** | none                                                         | YES      | DONE   |
-| 18  | `src/app/Categories/Categories.types.ts`                       | FE    | CONFORMS | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.2** | N/A (TESTED) — no behaviour                                  | YES      | DONE   |
-| 19  | `src/app/Categories/tests/Categories.spec.utils.ts`            | FE    | CONFORMS | 9   | 9   | 9   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.0** | N/A (TESTED) — test support                                  | YES      | DONE   |
-| 20  | `src/app/Categories/tests/Categories.mockHandles.ts`           | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | N/A  | **9.1** | N/A (TESTED) — test support                                  | YES      | DONE   |
-| 21  | `src/app/Categories/tests/Categories.mocks.ts`                 | FE    | CONFORMS | 9   | 9   | 9   | 10  | 10  | 9   | 10  | 10  | 9   | N/A  | **9.4** | N/A (TESTED) — test support                                  | YES      | DONE   |
+| #   | File                                                           | LAYER | VERDICT  | COH | LOC | EXT | IMP | NAM | RET | TYP | ERR | STD | TEST | **GEN**  | IMPROVEMENTS                                                    | APPROVED | STATUS |
+| --- | -------------------------------------------------------------- | ----- | -------- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---- | -------- | --------------------------------------------------------------- | -------- | ------ |
+| 1   | `src/app/Activities/Activities.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 10  | 9   | 8   | 8   | 10  | 8   | N/A  | **8.7**  | N/A (TESTED) — placeholder leaf, not yet a feature              | YES      | DONE   |
+| 2   | `src/app/Admin/BreakdownPreview/BreakdownPreview.tsx`          | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0**  | COULD — dedicated sub-component specs                           | YES      | DONE   |
+| 3   | `src/app/Admin/BreakdownPreview/BreakdownPreview.constants.ts` | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 9   | 9   | 9   | 9   | N/A  | **9.0**  | N/A (TESTED) — no behaviour                                     | YES      | DONE   |
+| 4   | `src/app/Admin/BreakdownPreview/BreakdownPreview.styles.ts`    | FE    | CONFORMS | 9   | 10  | 9   | 8   | 9   | 8   | 8   | 9   | 9   | N/A  | **8.8**  | COULD — residual `6px`/`10px`/rem literals (no shared const)    | YES      | DONE   |
+| 5   | `src/app/Admin/BreakdownPreview/BreakdownPreview.types.ts`     | FE    | CONFORMS | 10  | 10  | 9   | N/A | 9   | 10  | 10  | 10  | 9   | N/A  | **9.6**  | N/A (IMPORTS/TESTED)                                            | YES      | DONE   |
+| 6   | `src/app/Admin/BreakdownPreview/components/Header.tsx`         | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 8    | **9.0**  | COULD — dedicated spec                                          | YES      | DONE   |
+| 7   | `src/app/Admin/BreakdownPreview/components/DataSection.tsx`    | FE    | CONFORMS | 8   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 7    | **8.8**  | COULD — dedicated spec                                          | YES      | DONE   |
+| 8   | `src/app/Admin/BreakdownPreview/Signature.tsx`                 | FE    | CONFORMS | 9   | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 8   | 7    | **8.8**  | COULD — dedicated spec; London-pinned time via shared util      | YES      | DONE   |
+| 9   | `src/app/Admin/BreakdownPreview/index.ts`                      | FE    | CONFORMS | 10  | 10  | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.3**  | N/A (TESTED)                                                    | YES      | DONE   |
+| 10  | `src/app/Categories/Categories.tsx`                            | FE    | CONFORMS | 8   | 9   | 9   | 8   | 9   | 9   | 8   | 10  | 9   | 9    | **8.8**  | COULD — type-only import (done)                                 | YES      | DONE   |
+| 11  | `src/app/Categories/Categories.columns.ts`                     | FE    | CONFORMS | 9   | 9   | 8   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **8.9**  | N/A (TESTED) — indirect                                         | YES      | DONE   |
+| 12  | `src/app/Categories/Categories.defaults.ts`                    | FE    | CONFORMS | 10  | 9   | 9   | 10  | 10  | 10  | 10  | 10  | 10  | N/A  | **9.4**  | N/A (TESTED) — no behaviour                                     | YES      | DONE   |
+| 13  | `src/app/Categories/Categories.handlers.ts`                    | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0**  | none                                                            | YES      | DONE   |
+| 14  | `src/app/Categories/Categories.options.ts`                     | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0**  | none                                                            | YES      | DONE   |
+| 15  | `src/app/Categories/Categories.queries.ts`                     | FE    | CONFORMS | 8   | 9   | 9   | 8   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8**  | N/A (TESTED) — indirect via feature spec                        | YES      | DONE   |
+| 16  | `src/app/Categories/Categories.schema.ts`                      | FE    | CONFORMS | 9   | 9   | 9   | 7   | 10  | 9   | 8   | 10  | 9   | N/A  | **8.8**  | N/A (TESTED) — indirect; IMPORTS minor                          | YES      | DONE   |
+| 17  | `src/app/Categories/Categories.transformers.ts`                | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | 8    | **9.0**  | none                                                            | YES      | DONE   |
+| 18  | `src/app/Categories/Categories.types.ts`                       | FE    | CONFORMS | 10  | 9   | 9   | 9   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.2**  | N/A (TESTED) — no behaviour                                     | YES      | DONE   |
+| 19  | `src/app/Categories/tests/Categories.spec.utils.ts`            | FE    | CONFORMS | 9   | 9   | 9   | 8   | 9   | 9   | 9   | 10  | 9   | N/A  | **9.0**  | N/A (TESTED) — test support                                     | YES      | DONE   |
+| 20  | `src/app/Categories/tests/Categories.mockHandles.ts`           | FE    | CONFORMS | 9   | 9   | 9   | 8   | 10  | 9   | 9   | 10  | 9   | N/A  | **9.1**  | N/A (TESTED) — test support                                     | YES      | DONE   |
+| 21  | `src/app/Categories/tests/Categories.mocks.ts`                 | FE    | CONFORMS | 9   | 9   | 9   | 10  | 10  | 9   | 10  | 10  | 9   | N/A  | **9.4**  | N/A (TESTED) — test support                                     | YES      | DONE   |
+| 22  | `src/app/Activities/Activities.tsx`                            | FE    | CONFORMS | 9   | 10  | 9   | —   | 9   | 10  | —   | —   | —   | N/A  | **9.4**  | SHOULD — content outside `<Main>`, so no `main` landmark        | YES      | DONE   |
+| 23  | `src/app/Activities/index.ts`                                  | FE    | CONFORMS | 10  | 10  | 10  | —   | 10  | 10  | —   | —   | —   | N/A  | **10.0** | none                                                            | YES      | DONE   |
+| 24  | `src/app/Admin/Admin.tsx`                                      | FE    | CONFORMS | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 10  | 9   | 8    | **9.1**  | COULD — section copy still inline                               | NO       | WIP    |
+| 25  | `src/app/Admin/Admin.queries.ts`                               | FE    | CONFORMS | 9   | 9   | 9   | 9   | 10  | 9   | 9   | 10  | 9   | N/A  | **9.2**  | N/A (TESTED) — indirect via feature spec                        | NO       | WIP    |
+| 26  | `src/app/Admin/Admin.types.ts`                                 | FE    | CONFORMS | 10  | 10  | 9   | N/A | 9   | 10  | 10  | 10  | 9   | N/A  | **9.6**  | N/A (IMPORTS/TESTED)                                            | NO       | WIP    |
+| 27  | `src/app/Admin/index.ts`                                       | FE    | CONFORMS | 10  | 10  | 10  | N/A | 10  | 10  | N/A | N/A | N/A | N/A  | **10.0** | none                                                            | NO       | WIP    |
+| 28  | `src/app/Admin/tests/Admin.harness.ts`                         | FE    | CONFORMS | 9   | 9   | 9   | 9   | 9   | 10  | 9   | 10  | 9   | N/A  | **9.2**  | N/A (TESTED) — owns `Render`, the element map and both flows    | NO       | WIP    |
+| 29  | `src/app/Admin/tests/Admin.mocks.ts`                           | FE    | CONFORMS | 9   | 9   | 9   | 10  | 10  | 9   | 10  | 10  | 9   | N/A  | **9.4**  | N/A (TESTED) — builders hoisted so `expected` derives from them | NO       | WIP    |
+| 30  | `src/app/Admin/tests/Admin.mockHandlers.ts`                    | FE    | CONFORMS | 9   | 9   | 9   | 9   | 10  | 9   | 9   | 10  | 9   | N/A  | **9.2**  | N/A (TESTED) — `Hold()` gives each case its own release         | NO       | WIP    |
+| 31  | `src/app/Admin/tests/Admin.spec.tsx`                           | FE    | CONFORMS | 9   | 9   | 9   | 9   | 9   | 9   | 9   | 10  | 9   | 8    | **9.0**  | COULD — no `spec.utils.ts`; the harness owns `Render`           | NO       | WIP    |
 
 `✱` = GENERIC 7.9 but **floor violated** (TESTED 0 ≤ 3) ⇒ not passing, WIP.
 
@@ -1337,6 +1352,15 @@ added so the rule is explicit). Test scaffold added: `AdminMocks` (MockBuilder),
 `AdminMockHandlers.Backfill.Post` + `Defaults`, `AdminTestUtils` umbrella, and a
 3-test feature spec (backfill happy path). **DONE** — spec green. Checklist
 `Admin` reviewed.
+
+**2026-11-21 — `Admin` group (rows 24–31):** reviewed against the harness era.
+`Admin.spec.utils.ts` is gone — `AdminHarness` owns `Render`, renders the route
+with its handlers and session, and holds the element map plus both flows. The
+two JSON blocks carry `ariaLabel`, so `Code` sits behind a `via` key rather than
+a hand query. Spec rewritten to six cases: one expansion behind the heading,
+both payloads, both rejections, and both in-flight states held open by
+`RequestBuilder`'s `hold`/`release`. No raw `expect` remains. **WIP** —
+`APPROVED=NO` until the suite is reported green.
 
 ### 11.16.4 Amendment — mock + test conventions (2026-09-12)
 

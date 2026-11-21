@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useEffect, useState } from 'react'
 import { BiChevronRight } from 'react-icons/bi'
 import { BsSun, BsMoonStars } from 'react-icons/bs'

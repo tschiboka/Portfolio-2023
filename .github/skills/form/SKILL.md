@@ -106,14 +106,14 @@ Rules:
 - Where the schema takes an argument, `schema` and `resolver` are both factories —
   `Categories.schema.ts` passes `parentOptions` to each.
 - Messages come from `ValidationMessage`, never a literal.
-- Patterns and bounds come from a constant, never an inline literal — a shared
-  pattern from `Regexp`, a feature's own rule from `<Feature>.constants.ts`.
+- Bounds come from `<Feature>.constants.ts`; every pattern comes from `Regexp`, since
+  a literal written anywhere else is refused.
 
 ### `<Feature>.constants.ts`
 
 Naming convention: `<Feature>.constants.ts`, beside the form.
-Return type: a `<Feature>FieldLimits` object, plus a pattern only where the rule
-is this feature's own.
+Return type: a `<Feature>FieldLimits` object — bounds alone, since every pattern
+lives in `Regexp`.
 Example: [`Feature.constants.ts`](./Feature.constants.ts)
 Rules:
 

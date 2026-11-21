@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ApiResponder } from '../ApiResponder'
 import type { CurrentUser } from '@common-types'
 import type { OwnedResource } from '.'

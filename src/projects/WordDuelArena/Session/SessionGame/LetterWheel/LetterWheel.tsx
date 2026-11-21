@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useRef, useState } from 'react'
 import { Letter } from './components/Letter'
 import { LetterLines } from './components/LetterLines'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ApiError } from '../ApiError'
 import { HttpStatus } from '../HttpStatus'
 import { ResolveErrorMessage } from '../ResolveErrorMessage'

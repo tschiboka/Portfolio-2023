@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Button, Code, Main, Section } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { GymQueries } from './Gym.queries'

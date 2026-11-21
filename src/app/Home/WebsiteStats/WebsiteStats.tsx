@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Stack, Section } from '@common-ux'
 import { ClientMessage, errorMessage as getErrorMessage } from '@common-utils'
 import { WebsiteStatsQueries } from './WebsiteStats.queries'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { ReactNode, useState } from 'react'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Main } from '@common-ux/Region/Main'

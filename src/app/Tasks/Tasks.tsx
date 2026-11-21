@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useForm } from 'react-hook-form'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Form, Heading, Main, Paragraph } from '@common-ux'

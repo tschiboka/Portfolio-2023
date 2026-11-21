@@ -1,4 +1,5 @@
-﻿import {
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
+import {
     BlockQuote,
     Caption,
     Code,

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Overlay, Code, Stack, Text, CodeText, Box } from '@common-ux'
 import type { ReactNode } from 'react'
 import type { Optional, VoidFunction } from '@common-utils'

@@ -1,6 +1,6 @@
 // @ts-nocheck — skill example, outside the tsconfig include.
 
-import type { Document } from 'mongoose'
+import type { Document, Types } from 'mongoose'
 import type { Optional } from '@common-utils'
 import type {
     GetFeatureResponse,
@@ -13,7 +13,7 @@ import type {
 // narrowing is deliberate.
 
 /** What the store returns — a Mongoose document, `_id` and all. */
-export interface IFeature extends Document {
+export type IFeature = Document<Types.ObjectId> & {
     path: string
     label: string
     userId: string

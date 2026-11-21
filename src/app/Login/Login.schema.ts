@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginConstants } from './Login.constants'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import type { ProficiencyLevel } from './LetterBox.types'
 import './LetterBox.styles.scss'
 

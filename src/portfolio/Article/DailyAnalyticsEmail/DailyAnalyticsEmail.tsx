@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import CronJobsImg from '@portfolio/assets/blog/resend_email_scheduling/cron_jobs.png'
 import { Code, CodeText, Heading, List, Paragraph, Section } from '@common-ux'
 import { Figure } from '@shared-components/Figure'

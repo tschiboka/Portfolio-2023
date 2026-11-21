@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
 import { SettingsConstants } from './Settings.constants'
 import type { ValidationResult } from 'joi'

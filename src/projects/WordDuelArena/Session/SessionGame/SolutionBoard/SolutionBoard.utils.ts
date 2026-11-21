@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { SolutionBoardConstants } from './SolutionBoard.constants'
 import { PlayableLevelWord } from '../../Session.types'
 

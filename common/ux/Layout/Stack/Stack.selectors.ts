@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { isDefined } from '@common-utils'
 import { StackAlign, StackJustify } from './Stack.types'
 

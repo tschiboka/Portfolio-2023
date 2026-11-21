@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Button, Heading, Main, Section, Stack } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import './Remote.styles.scss'

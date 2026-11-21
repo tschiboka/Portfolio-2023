@@ -20,6 +20,7 @@ const AllowedRoles = [
     'filters',
     'generated',
     'handlers',
+    'harness',
     'hooks',
     'middleware',
     'mocks',

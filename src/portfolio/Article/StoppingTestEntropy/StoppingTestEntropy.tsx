@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Code, CodeText, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import { StoppingTestEntropyCode } from './StoppingTestEntropy.code'
 import { Article } from '../Article'

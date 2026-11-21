@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import introImg from '@portfolio/assets/blog/greenRooftop/intro.png'
 import conceptImg from '@portfolio/assets/blog/greenRooftop/concept_sketch.png'
 import microcontrollerImg from '@portfolio/assets/blog/greenRooftop/microcontroller_selection.png'

@@ -1,4 +1,5 @@
-﻿import { Resend } from 'resend'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import { Resend } from 'resend'
 import { ApiMessage } from '@common-utils'
 import type { PostMessageRequest } from '../../../common/types'
 

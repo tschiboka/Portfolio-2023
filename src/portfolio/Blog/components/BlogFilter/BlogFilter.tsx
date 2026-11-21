@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
 import { BlogSortBy } from '../../Blog.types'
 import { ProjectsSelectors } from '../../../Projects/Projects.selectors'

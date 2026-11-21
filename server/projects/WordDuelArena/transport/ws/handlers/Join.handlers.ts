@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { BroadcastService } from '../Broadcast.service'
 import { initialiseSession } from '../../../domain/session/session'
 import { LevelService } from '../../../domain/session/Level.service'

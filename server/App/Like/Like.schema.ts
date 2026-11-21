@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
 import { LikeConstants } from './Like.constants'
 import type { LikeInput } from './Like.types'

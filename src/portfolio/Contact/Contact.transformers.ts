@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { ClientTransformers, Regexp } from '@common-utils'
 import type { PostMessageRequest } from '@common-types'
 import type { ContactFormData } from './Contact.types'

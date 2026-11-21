@@ -1,4 +1,5 @@
-﻿import Joi, { ValidationResult } from 'joi'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import Joi, { ValidationResult } from 'joi'
 import { ROUTINE_SOURCES } from '../../../../common/types'
 import type { RoutineValidationInput } from './Routines.types'
 

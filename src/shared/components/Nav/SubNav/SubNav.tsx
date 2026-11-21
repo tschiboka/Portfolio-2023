@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { AppHooks } from '@shared-context'
 import { Const, Toggle } from '@common-ux'

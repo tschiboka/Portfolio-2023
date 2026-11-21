@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import guitarImage from '@portfolio/assets/about/RiffMaster.png'
 import guitarAppImage from '@portfolio/assets/about/RiffMaster_App.png'
 import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'

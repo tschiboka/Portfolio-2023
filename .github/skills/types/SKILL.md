@@ -32,6 +32,10 @@ beyond the request/response contract (`router`).
 ### Placement
 
 - Generic, domain or local — by the table above. The test is who consumes it, not what it looks like.
+- An `interface` is refused: a shape is a `type` alias, and only an ambient `declare`
+  block may merge one.
+- A nullable or optional union names its generic — `Nullable<T>`, `Optional<T>` —
+  never written inline as `T | null` or `T | undefined`.
 - A domain type moves to `common/types/` on its **second** consumer, never in anticipation of one. A type shared "just in case" is a type nobody owns.
 - Never redeclare a shape a shared type already expresses.
 - Export from the folder's `index.ts`.

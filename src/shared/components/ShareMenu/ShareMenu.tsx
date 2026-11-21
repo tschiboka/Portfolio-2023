@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { MdEmail } from 'react-icons/md'
 import { BsTwitter } from 'react-icons/bs'
 import { IoLogoWhatsapp } from 'react-icons/io'

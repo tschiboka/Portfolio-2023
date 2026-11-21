@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ReactNode } from 'react'
 import { hasLength, isDefined, isFunction } from '@common-utils'
 import { ExpandedRow } from './ExpandedRow'

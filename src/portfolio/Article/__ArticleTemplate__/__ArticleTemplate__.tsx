@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Paragraph } from '@common-ux/Typography/Paragraph'
 import { Heading } from '@common-ux/Typography/Heading'
 import { Article } from '../Article'

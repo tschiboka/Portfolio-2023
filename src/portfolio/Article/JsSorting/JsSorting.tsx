@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import matryoshkaImg from '@portfolio/assets/blog/js_sorting/Matryoshka.png'
 import sortingAlgoComplexityImg from '@portfolio/assets/blog/js_sorting/SortingAlgoComplexities.png'
 import { Figure } from '@shared-components/Figure'

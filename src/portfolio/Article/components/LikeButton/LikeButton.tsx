@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { AiFillHeart } from 'react-icons/ai'
 import { LikeQueries } from '@shared-queries'
 import { Paragraph } from '@common-ux'

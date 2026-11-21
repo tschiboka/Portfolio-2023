@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { ReactNode } from 'react'
 import { TbZoomOutFilled } from 'react-icons/tb'
 import { AppHooks } from '@shared-context'

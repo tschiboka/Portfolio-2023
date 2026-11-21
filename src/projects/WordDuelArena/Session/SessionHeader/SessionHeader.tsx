@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Avatar } from './components/Avatar'
 import { Info } from './components/Info'
 import { LastAttempts } from './components/LastAttempts'

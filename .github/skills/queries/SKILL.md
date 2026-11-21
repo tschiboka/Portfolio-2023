@@ -110,6 +110,8 @@ Example: [`Feature.queries.ts`](./Feature.queries.ts)
 Rules:
 
 - Exports `<Feature>Queries` as one object — never the hooks individually.
+- A top-level key reads `use<Verb>` — `useGet`, `usePost`; a sub-resource is a
+  PascalCase group holding those, `Routines: { useGet: … }`.
 - The feature's own request is the top-level verb: `useGet`, `usePost`, `usePut`.
 - Any other request sits under a key named for its sub-resource, whose leaves are the verbs: `SubFeature: { useGet }`, `Form: { usePost }`. The leaf stays `useGet`/`usePost`, never `useGetSubfeature`, so the verb reads at the call site.
 - One file per feature; shared hooks live under `src/shared/queries/`.

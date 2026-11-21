@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import faceImg from '@portfolio/assets/home/headshot_placeholder.png'
 import { Button, Link, Paragraph, Section } from '@common-ux'
 import './Disclaimer.scss'

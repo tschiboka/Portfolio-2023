@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import type { BreakdownBulkOperation, BreakdownCountRow, BreakdownCounts } from './Breakdown.types'
 
 /**

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useLocation } from 'react-router-dom'
 import { BiChevronLeft, BiChevronRight, BiChevronsLeft } from 'react-icons/bi'
 import { Link } from '@common-ux'

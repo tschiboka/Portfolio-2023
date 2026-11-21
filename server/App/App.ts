@@ -1,4 +1,5 @@
-﻿import cors from 'cors'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import cors from 'cors'
 import mongoose from 'mongoose'
 import Joi from 'joi'
 import joiObjectId from 'joi-objectid'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import cv from '@portfolio/assets/home/Tivadar_Debnar_CV_2023.pdf'
 import { BiMessageDots } from 'react-icons/bi'
 import { FiDownload } from 'react-icons/fi'

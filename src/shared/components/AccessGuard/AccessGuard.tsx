@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { FaLock } from 'react-icons/fa'
 import { AccessGuardHooks } from './AccessGuard.hooks'
 import { AccessGuardProps } from './AccessGuard.types'

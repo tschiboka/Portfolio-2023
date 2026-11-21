@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { DateTime } from '@common-utils'
 import { Paragraph } from '@common-ux/Typography/Paragraph'
 import './BlogTimeStamp.scss'

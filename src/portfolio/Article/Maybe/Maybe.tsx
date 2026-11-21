@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import comicImg from '@portfolio/assets/blog/Maybe/comic.png'
 import monetCoverImg from '@portfolio/assets/blog/Maybe/monet-cover.jpg'
 import { Figure } from '@shared-components/Figure'

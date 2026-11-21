@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ResolveErrorMessageConstants } from './ResolveErrorMessage.constants'
 import { isString, isError, isObject } from '../../Predicate'
 import type { ValidationResultLike } from './ResolveErrorMessage.types'

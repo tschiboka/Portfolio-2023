@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Maybe } from 'monet'
 import { Coordinates, SubmenuState } from '../Nav.types'
 

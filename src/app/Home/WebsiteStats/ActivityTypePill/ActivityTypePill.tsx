@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { isDefined } from '@common-utils'
 import { Pill, Inline } from '@common-ux'
 import type { PillColor } from '@common-ux'

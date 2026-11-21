@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
 import { LevelConstants } from '../../../config/constants/Level.constants'
 import type { LevelInput } from '../../../model/Level.types'

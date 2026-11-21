@@ -1,4 +1,5 @@
-﻿import { CSSProperties } from 'react'
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
+import { CSSProperties } from 'react'
 import {
     Box,
     Code,

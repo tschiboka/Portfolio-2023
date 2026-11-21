@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Arrays } from '@common-utils'
 import { WordConstants } from './Word.constants'
 import type { AnagramMapType, LevelWord } from '../Types'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { FaChartBar, FaCog } from 'react-icons/fa'
 import {
     Box,

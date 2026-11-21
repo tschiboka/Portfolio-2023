@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
 import { MatchSchema } from './Match.schema'
 import { PlayerSchema } from './Player.schema'

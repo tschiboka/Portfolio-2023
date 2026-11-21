@@ -21,11 +21,11 @@ beside one — §5 holds the result. These twenty are the first pass; the remain
 
 ## 1.1 Info
 
-| Status       | Done — Step 3 continues in [0011](./0011-matching-spec.md) |
-| ------------ | ---------------------------------------------------------- |
-| Last updated | 2026-11-20                                                 |
-| Created      | 2026-09-25                                                 |
-| Scope        | `rules/`                                                   |
+| Status       | Done — Step 3 continues in [0011](./0011-matching-spec-fe.md) |
+| ------------ | ------------------------------------------------------------- |
+| Last updated | 2026-11-20                                                    |
+| Created      | 2026-09-25                                                    |
+| Scope        | `rules/`                                                      |
 
 Every step's "Run `rules sync`" substep means `npm run build:rules` — the script
 that compiles `rules/` and runs `builder.ts`. No `rules sync` command exists.
@@ -135,7 +135,7 @@ config owns is linted.
         - [x] `common/utils/Query/Query.ts` → `RequestBuilder.ts`, `Key.ts` → `QueryKey.ts`
         - [x] `common/utils/Paths/Path.ts` — deleted, a stale duplicate of `Paths.ts`
     - [x] Step 2.8: Confirm a green `tsc`, lint, and test run
-- [ ] Step 3: Rule — a testable role file has a matching spec — **deferred, see §3; moved to [0011](./0011-matching-spec.md)**
+- [ ] Step 3: Rule — a testable role file has a matching spec — **deferred, see §3; moved to [0011](./0011-matching-spec-fe.md)**
     - [ ] Step 3.1: Build `rules/matching-spec/`
     - [ ] Step 3.2: Scope `include` to the `YES` rows in §1.3 and §2.5, `exclude` the rest
     - [ ] Step 3.3: Register as `severity: 'error'`
@@ -1117,33 +1117,6 @@ to FakeModel.find …` — the leading method word was redundant and simply came
   `main` is the same run that proves it.
 
 ## 4. Open Questions
-
-- Step 1: does "only one value" mean one `export` statement, or one exported
-  binding where a type-only export alongside a value is allowed?
-  Status: Answered — the rule is driven by a list of filenames, not by the
-  language semantics of the export statement. A filename in the list must
-  export exactly one thing; `routes.tsx` is an entry decision, not an
-  exception carved into the rule.
-- Step 3: is a missing spec an `error` or a `warn` while the direct-spec gap is
-  still being closed?
-  Status: Answered — the step is deferred (§3), so the severity is settled when it resumes.
-- Step 4: where does an `export *` line sort? It has no symbol to sort by.
-  `common/ux/index.ts` mixes both forms.
-  Status: Answered by Step 25 — a plain `export *` is a star re-export (style 2) and
-  `export type *` carries `exportKind: 'type'`, so it ranks type-only and sorts last. Step 4
-  narrows to the alphabetical tie-break inside one style and path.
-- `file-structure.md` §1.2 says a component's props type sits above the component and is
-  "never moved to `.types.ts`". Step 25 requires exported types last, and the `common/ux` and
-  `shared/components` sweep put those props in `Component.types.ts` beside it.
-  Status: Open — the doc line needs correcting before another component copies the old shape.
-- Step 0: is the convention filename-based or folder-based? The `WordDuelArena`
-  server tree carries its role in the folder, and the `common/` and `rules/`
-  areas are 100% filename-conforming. Step 0.6 decides.
-  Status: Open
-- Step 0: do `service`, `middlewares` and `models` join the allowed role list, or
-  do the files rename to `middleware` and `model`? The list currently holds the
-  singular forms only.
-  Status: Open
 
 ## 5. Appendix — Skill lint audit
 

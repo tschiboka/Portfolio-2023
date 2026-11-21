@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { Resend } from 'resend'
 import { isEmpty } from '@common-utils'
 import type { Breakdown, PathBreakdownItem, SectionData } from './Schedule.types'

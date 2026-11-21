@@ -1,6 +1,6 @@
 import userEvent from '@testing-library/user-event'
 import { screen, within, waitFor } from '@testing-library/react'
-import { isDefined, isFunction } from '@common-utils'
+import { isDefined, isError, isFunction } from '@common-utils'
 import type { UserEvent } from '@testing-library/user-event'
 import type { Dictionary, Nullish } from '@common-utils'
 import type { Scope } from './Accessor.types'
@@ -9,6 +9,13 @@ import type { Scope } from './Accessor.types'
 export const TestError = {
     notFound: (context: string, detail?: string): Error =>
         new Error(`${context}: not found${detail ? ` (${detail})` : ''}`),
+    multiple: (context: string, detail: string): Error =>
+        new Error(`${context}: more than one match (${detail})`),
+    notRendered: (context: string): Error =>
+        new Error(`${context}: call Render() before using the harness`),
+    conflicting: (context: string, detail: string): Error => new Error(`${context}: ${detail}`),
+    failed: (context: string, error: unknown): Error =>
+        new Error(`${context}: ${isError(error) ? error.message : String(error)}`),
     navigation: (expected: string, actual?: string): Error =>
         new Error(
             `Expected navigation to "${expected}", actual: ${actual ? `"${actual}"` : 'none'}`,
@@ -39,6 +46,11 @@ export class Accessor {
         this.element = element
         this.scope = within(element)
         this.context = context
+    }
+
+    /** The element this accessor is bound to, so a holder can assert on it without querying again. */
+    get node(): HTMLElement {
+        return this.element
     }
 
     // querySelector + throw if null — for elements that must exist

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Screen } from '@shared-components/Screen/Screen'
 import { Link, Main, Paragraph, Heading } from '@common-ux'

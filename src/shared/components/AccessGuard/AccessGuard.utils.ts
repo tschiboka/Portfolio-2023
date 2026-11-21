@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { includesAll } from '@common-utils'
 import { AccessMap, Guard, GuardCondition, ModeConfig } from './AccessGuard.types'
 import type { Nullable } from '@common-utils'

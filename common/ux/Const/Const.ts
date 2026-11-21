@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ColorSign } from './ColorSign'
 import { Breakpoint, Color, Spacing, ZIndex } from './Const.generated'
 

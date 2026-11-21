@@ -2,7 +2,7 @@
 import { object, ref, string } from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Regexp, ValidationMessage } from '@common-utils'
-import { FeatureFieldLimits, NAME_PATTERN } from './Feature.constants'
+import { FeatureFieldLimits } from './Feature.constants'
 
 const { name, userName, password } = FeatureFieldLimits
 
@@ -16,7 +16,7 @@ const schema = object({
         .required(ValidationMessage.Required('name'))
         .min(name.min, ValidationMessage.Bound('name', name.min, 'characters', 'at least'))
         .max(name.max, ValidationMessage.Bound('name', name.max, 'characters', 'under'))
-        .matches(NAME_PATTERN, ValidationMessage.Allowed('name', "letters, space, ' and -")),
+        .matches(Regexp.NameText, ValidationMessage.Allowed('name', "letters, space, ' and -")),
     userName: string()
         .required(ValidationMessage.Required('user name'))
         .min(

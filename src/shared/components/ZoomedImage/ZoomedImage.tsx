@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { ReactNode, useEffect } from 'react'
 import type { VoidFunction } from '@common-utils'
 import './ZoomedImage.scss'

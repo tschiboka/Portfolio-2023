@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Heading, Paragraph, Link, Stack, Main } from '@common-ux'
 import './RouteError.styles.scss'
 

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import moment from 'moment'
 import { ClientTransformers, DateTime } from '@common-utils'
 import type { PostXmasMessageRequest, User, XmasMessage } from '@common-types'

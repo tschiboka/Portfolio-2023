@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { isDefined, Table } from '@common-utils'
 import { TableDropdown } from '../TableInputs'
 import type { TablePagination as TablePaginationProps } from '../Table.types'

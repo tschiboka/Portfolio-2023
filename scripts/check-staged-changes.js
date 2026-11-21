@@ -20,13 +20,17 @@ const isMerging = () => {
     }
 }
 
+/** A rename is reported as `old -> new`; the path that can be staged is the destination. */
+const destinationOf = (path) =>
+    path.includes(' -> ') ? path.slice(path.indexOf(' -> ') + 4) : path
+
 /** Each path git reports, with the two status columns it reports them by. */
 const getChanges = () =>
     execSync('git status --porcelain', { cwd: root })
         .toString()
         .split('\n')
         .filter(Boolean)
-        .map((line) => ({ status: line.slice(0, 2), path: line.slice(3).trim() }))
+        .map((line) => ({ status: line.slice(0, 2), path: destinationOf(line.slice(3).trim()) }))
 
 /** True where the worktree holds something the index does not. */
 const isUnstaged = ({ status }) => status === '??' || status[1] !== ' '

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useForm } from 'react-hook-form'
 import { GymExerciseResource } from '@common-types'
 import { Code, Form, LoadingIndicator, Section } from '@common-ux'

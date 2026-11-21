@@ -1,4 +1,5 @@
-﻿import Joi from 'joi'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import Joi from 'joi'
 import { isDigits } from '@common-utils'
 import { MessageConstants } from './Message.constants'
 import type { MessageInput } from './Message.types'

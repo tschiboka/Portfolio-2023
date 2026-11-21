@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import placeholder_image from '@portfolio/assets/projects/GradientGenerator.png'
 import { Code, CodeText, Heading, Main, Paragraph, Section, Stack } from '@common-ux'
 import { Figure } from '@shared-components/Figure'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Screen } from '@shared-components/Screen/Screen'
 import { Main, Heading, Paragraph, List, Button } from '@common-ux'
 import './AddRecords.scss'

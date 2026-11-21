@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import TreeImg from '@portfolio/assets/blog/git_cheatsheet/tree.jpg'
 import centralisedVsDistributedImg from '@portfolio/assets/blog/git_cheatsheet/centrallised-distributed-version-control.png'
 import GitStorage1Img from '@portfolio/assets/blog/git_cheatsheet/git-storage-1.png'

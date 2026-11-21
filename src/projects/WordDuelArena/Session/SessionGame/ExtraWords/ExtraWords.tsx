@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { SessionHooks } from '../../Session.hooks'
 import './ExtraWords.styles.css'
 

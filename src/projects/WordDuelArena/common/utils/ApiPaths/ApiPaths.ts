@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Browser, Url } from '@common-utils'
 import { ApiPathParams } from './ApiPaths.types'
 

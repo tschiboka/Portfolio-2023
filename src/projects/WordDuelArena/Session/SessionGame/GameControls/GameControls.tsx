@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { FaBook, FaShuffle } from 'react-icons/fa6'
 import { shuffleArray } from '@common-utils'
 import { LetterWheel } from '../LetterWheel/LetterWheel'

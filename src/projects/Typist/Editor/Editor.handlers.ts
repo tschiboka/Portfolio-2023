@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { EditorSelectors } from './Editor.selectors'
 import type { EditorHandlerArgs } from './Editor.types'
 

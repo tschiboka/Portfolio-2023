@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AiFillHeart, AiFillStar } from 'react-icons/ai'

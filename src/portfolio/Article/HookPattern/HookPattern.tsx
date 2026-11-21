@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import CoverImg from '@portfolio/assets/blog/hook_pattern/cover.png'
 import ErrorImg from '@portfolio/assets/blog/hook_pattern/error_message.png'
 import { useState, useEffect, useRef } from 'react'

@@ -136,6 +136,8 @@ Example: [`Feature.types.ts`](./Feature.types.ts)
 Rules:
 
 - Four roles, kept apart: `I<Domain>` is the document the store returns, `<Domain>Input` is what arrives for validation, and `<Verb><Domain>Req` / `Res` are the route pair.
+- The document carries its id type — `Document<Types.ObjectId>`, never a bare
+  `Document`, which makes every `_id` read `any` and trips the unsafe rules.
 - The route pair wraps `TypedRequest` / `TypedResponse` from `@common-types` — the request and response types come from `common/types`, not from here.
 - `Input` never carries the document's generated fields; a caller cannot pass an `_id`.
 

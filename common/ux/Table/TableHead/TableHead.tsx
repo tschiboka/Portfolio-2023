@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { useCallback, useRef } from 'react'
 import { TableHeadUtils } from './TableHead.utils'
 import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'

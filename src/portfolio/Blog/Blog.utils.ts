@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { DateTime, isEmpty } from '@common-utils'
 import { blogArticles, BlogArticle } from '@portfolio/Article'
 import { BlogSortBy } from './Blog.types'

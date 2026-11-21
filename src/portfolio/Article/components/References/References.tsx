@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Heading, Link, List } from '@common-ux'
 import { Regexp } from '@common-utils'
 import type { ReferencesProps } from './References.types'

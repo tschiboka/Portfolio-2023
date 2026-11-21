@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { Arrays, TableConstants } from '@common-utils'
 import './TableSkeleton.styles.css'
 

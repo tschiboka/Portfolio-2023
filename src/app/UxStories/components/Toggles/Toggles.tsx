@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useState } from 'react'
 import { BsSun, BsMoonStars } from 'react-icons/bs'
 import { Functions } from '@common-utils'

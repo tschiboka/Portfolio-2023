@@ -27,6 +27,7 @@ import { Typography } from './Typography/Typography'
 import { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 
 export { Accessor, TestError } from './Accessor/Accessor'
+export { Harness } from './Harness/Harness'
 export { Server, MockBuilder, RequestBuilder, HttpMethods } from './Server'
 export const Test = {
     Box,
@@ -58,3 +59,10 @@ export const Test = {
     RequestBuilder,
     HttpMethods,
 }
+export type {
+    AccessorRecipe,
+    ElementEntry,
+    ElementMap,
+    ElementRecipe,
+    HarnessFlow,
+} from './Harness/Harness.types'

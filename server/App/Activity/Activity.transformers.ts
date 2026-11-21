@@ -1,4 +1,5 @@
-﻿import { DateTime } from '@common-utils'
+/* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
+import { DateTime } from '@common-utils'
 import type { IVisit } from '../Visit/Visit.types'
 import type { ILike } from '../Like/Like.types'
 import type { IMessage } from '../Message/Message.types'

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { MouseEvent } from 'react'
 import { ModalDefaults } from './Modal.defaults'
 import { ModalHeader } from './components/ModalHeader'

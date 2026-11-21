@@ -1,7 +1,7 @@
 ---
 name: test
 access: write
-stack: 'jest, testing-library, msw'
+stack: 'vitest, testing-library, msw'
 description: 'Authoring feature and unit specs, mock data, fixtures, MSW handlers, and TestScreen rendering.'
 ---
 
@@ -39,11 +39,15 @@ Does not decide what a feature should do, and does not score code quality — th
 - **`HttpMethods` and `HttpStatus` are never spelled as strings or numbers.**
 - **`response` takes the builder**, not `.build()` of it.
 - **Built-in accessors first** — a hand-rolled query against a component with a contract is a bug in the spec.
+- **A spec drives its feature through its harness** — `const Admin = AdminHarness.Render({ handlers })`, then `Admin.Get.backfill()`, `Admin.Flow.runBackfill()`, `Admin.Expect.text.heading('Admin')`.
+- **`Do` is one gesture, `Flow` is the journey.** `click`, `fill`, `pick` act on one element; a sequence that spans several — expand, then trigger, then settle — is declared in `Flow` and built from those actions.
+- **`Render` comes first in every test.** A harness throws `call Render() before using the harness` on any call before it, and again once the document is cleared.
+- **The harness owns the query and the assertion.** A `screen.getBy…` or `expect(element)…` left in a spec is a gap in the harness, not a shortcut.
 - **Branches, edge cases and value matrices are covered** — the suite documents behaviour and makes refactoring safe.
 - **Every test sits inside a `describe`**, named for the feature or subfeature in PascalCase.
 - **Tests are named `it('should <verb> …')`** — never a bare declarative, and never `test(…)`, which is the same function under a name this codebase does not use.
-- **Everything above `describe`** belongs in `Feature.spec.utils.ts`, never in the spec body.
-- **Specs render through the page-level harness** — `Test.Screen.Do.render({ path, handlers, session })`, with `Test` imported from `@shared-components/Screen/tests`.
+- **Everything above `describe`** belongs in `Feature.spec.utils.ts` — and only what the harness cannot know: a label shared by several cases, a handler set a case replaces. The harness owns `Render`, so no element query lives there.
+- **A harness is tested like any other code** — `common/ux/Test/Harness/tests/` holds one spec per channel, over a fixture harness that mounts plain markup.
 
 ## Workflow
 
@@ -112,17 +116,15 @@ Feature spec: `tests/Feature.spec.tsx` — renders through `Test.Screen.Do.rende
 
 Role spec: `tests/Feature.<role>.spec.ts` — only where the role has pure, isolated behaviour.
 
-Every `it` reads `it('should <verb> …')` — `should render`, `should not render`, `should navigate`. Never a bare declarative.
-
 No braces around a single-statement arrow body: `waitFor(() => expect(…))`, not `waitFor(() => { expect(…) })`.
 
 Use table-driven `it.each` where behaviour is a matrix of the same shape. Cover every meaningful branch, edge case and value.
 
 Reference: `Feature.spec.tsx` — the describe shape and assertion style.
 
-### Use the built-in accessors
+### Use the harness first, then the accessors
 
-`common/ux/Test/` exposes an accessor per component. Always reach for one before writing a raw `screen.getByRole(...)`. A raw query guesses at the DOM; the accessor is the contract.
+A spec reaches its feature through `FeatureHarness.Render()` and never touches the document directly. Under that, `common/ux/Test/` exposes an accessor per component — reach for one before writing a raw `screen.getByRole(...)`. A raw query guesses at the DOM; the accessor is the contract, and the harness declares the key.
 
 | Instead of                                | Use                                          |
 | ----------------------------------------- | -------------------------------------------- |
@@ -143,7 +145,9 @@ Feature/
 ├── tests/
 │   ├── Feature.spec.tsx
 │   ├── Feature.mocks.ts
-│   ├── Feature.spec.utils.ts
+│   ├── Feature.mockHandlers.ts
+│   ├── Feature.harness.ts        ← elements, flows and `Render`
+│   ├── Feature.spec.utils.ts     ← only when a label or handler set is shared
 │   └── Feature.<role>.spec.ts
 common/mocks/
 ├── index.ts
@@ -151,4 +155,4 @@ common/mocks/
 └── <Type>.mocks.ts
 ```
 
-The page-level harness lives at `@shared-components/Screen/tests/Screen.spec.utils.tsx` and exports `ScreenTestUtils`. The `index.ts` beside it merges that harness with the common toolkit, so a spec imports `Test` from that barrel and reads one vocabulary throughout — `Test.Button`, `Test.Form`, `Test.Screen`.
+The render helper lives at `@shared-components/Screen/tests/Screen.spec.utils.tsx` and exports `ScreenTestUtils`. The `index.ts` beside it merges that harness with the common toolkit, so a spec imports `Test` from that barrel and reads one vocabulary throughout — `Test.Button`, `Test.Form`, `Test.Screen`. A feature's `Render` calls it; a spec does not.

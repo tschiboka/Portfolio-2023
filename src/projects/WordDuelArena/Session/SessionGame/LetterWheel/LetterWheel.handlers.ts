@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
 import { Regexp } from '@common-utils'
 import { LetterWheelUtils } from './LetterWheel.utils'

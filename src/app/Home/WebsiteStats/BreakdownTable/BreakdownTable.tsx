@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useState } from 'react'
 import { Table } from '@common-ux'
 import { BreakdownTableColumns as defaultColumns } from './BreakdownTable.columns'

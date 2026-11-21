@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import ReactTitleImg from '@portfolio/assets/blog/react_anatomy/react.jpg'
 import DOMImg from '@portfolio/assets/blog/react_anatomy/DOM.png'
 import VDOMImg from '@portfolio/assets/blog/react_anatomy/virtual-dom.png'

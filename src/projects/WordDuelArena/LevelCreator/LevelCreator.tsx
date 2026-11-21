@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { ChangeEvent, useState } from 'react'
 import { BrowserHooks } from '@common-utils'
 import { LoadingIndicator } from '@common-ux'

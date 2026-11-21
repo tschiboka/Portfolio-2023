@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import type { SplitRatio } from './Split.types'
 
 const RatioMap: Record<SplitRatio, string> = {

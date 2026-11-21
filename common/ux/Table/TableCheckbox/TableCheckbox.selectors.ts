@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { hasLength, includesAll } from '@common-utils'
 import type { ReactNode } from 'react'
 import type { Dictionary, ValueOf } from '@common-utils'

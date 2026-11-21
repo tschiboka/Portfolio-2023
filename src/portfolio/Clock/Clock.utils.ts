@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import moment from 'moment'
 import { CanvasType, Centre, DateTime, Line } from '@common-utils'
 import { Const } from '@common-ux/Const'

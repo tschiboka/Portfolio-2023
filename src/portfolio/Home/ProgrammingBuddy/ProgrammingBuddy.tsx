@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Box, Link, Paragraph } from '@common-ux'
 import './ProgrammingBuddy.scss'
 

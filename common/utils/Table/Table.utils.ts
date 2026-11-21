@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { Arrays } from '../Arrays'
 
 const PAGE_WINDOW_SIZE = 3

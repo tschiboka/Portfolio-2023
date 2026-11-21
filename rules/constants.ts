@@ -36,6 +36,7 @@ export const RoleExportTokenMap: Dictionary<string> = {
     errors: 'Errors',
     filters: 'Filters',
     handlers: 'Handlers',
+    harness: 'Harness',
     hooks: 'Hooks',
     middleware: 'Middleware',
     mockHandlers: 'MockHandlers',

@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { EditorWord } from './Editor/Character/Character.types'
 
 const textToWords = (text: string, cursorPosition: number = 0): EditorWord[] =>

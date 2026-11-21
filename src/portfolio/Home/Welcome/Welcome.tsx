@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import headshot from '@portfolio/assets/home/headshot_placeholder.png'
 import { useNavigate } from 'react-router-dom'
 import { AppHooks } from '@shared-context'

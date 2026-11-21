@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { ReactNode, useRef, useState } from 'react'
 import { hasLength } from '@common-utils'
 import { Overlay } from '../../Overlay'

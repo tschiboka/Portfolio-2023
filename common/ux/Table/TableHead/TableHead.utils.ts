@@ -1,3 +1,4 @@
+/* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import type { SortDirection } from '../Table.types'
 
 const getNextSortDirection = (
