@@ -1,14 +1,10 @@
 ﻿import { ApiResponder, DateTime } from '@common-utils'
 import { LikeSchema } from './Like.schema'
 import { LikeRepository } from './Like.repository'
-import { BreakdownModel } from '../Breakdown/Breakdown.model'
+import { BreakdownModel } from '../Breakdown'
 import type { Dictionary } from '@common-utils'
+import type { GetLikeSummaryResponse, GetLikeResponse, PostLikeResponse } from '@common-types'
 import type { LikeInput } from './Like.types'
-import type {
-    GetLikeSummaryResponse,
-    GetLikeResponse,
-    PostLikeResponse,
-} from '../../../common/types'
 
 /** Business logic for likes - persistence via the repository, validation via the schema. */
 export const LikeService = {

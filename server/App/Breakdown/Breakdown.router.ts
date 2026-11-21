@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiResponder } from '@common-utils'
 import { BreakdownService } from './Breakdown.service'
-import { UsersMiddleware } from '../Users/Users.middleware'
+import { UsersMiddleware } from '../Users'
 import type { PostBackfillReq, PostBackfillRes } from './Breakdown.types'
 
 const { auth, admin } = UsersMiddleware

@@ -1,9 +1,9 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Main } from '@common-ux/Region/Main'
 import { Screen } from '@shared-components/Screen/Screen'
-import { Editor } from './Editor/Editor'
+import { Editor } from './Editor'
 import { TypistProvider } from './Typist.provider'
-import { HeadsUpDisplay } from './HeadsUpDisplay/HeadsUpDisplay'
+import { HeadsUpDisplay } from './HeadsUpDisplay'
 import type { ScreenProps } from '@shared-components/Screen'
 
 export const Typist = ({ pageName }: Pick<ScreenProps, 'pageName' | 'path'>) => (

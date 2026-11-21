@@ -1,6 +1,6 @@
 import express from 'express'
-import { LevelController } from '../handlers/Level.controller'
-import { UsersMiddleware } from '../../../../../App/Users/Users.middleware'
+import { LevelController } from '../handlers'
+import { UsersMiddleware } from '../../../../../App/Users'
 
 const router = express.Router()
 const { auth } = UsersMiddleware

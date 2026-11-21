@@ -3,7 +3,7 @@ import type {
     PostTypistRoundResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 export type PostRoundReq = TypedRequest<PostTypistRoundRequest>
 

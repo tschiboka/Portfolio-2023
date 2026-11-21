@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 
 export class RadioAccessor extends Accessor {
     get Get() {

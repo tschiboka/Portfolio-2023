@@ -2,7 +2,7 @@
 import { Button, Code, Main, Section } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { GymQueries } from './Gym.queries'
-import { ExercisesSection } from './components/ExercisesSection/ExercisesSection'
+import { ExercisesSection } from './components/ExercisesSection'
 
 type GymProps = {
     path: string

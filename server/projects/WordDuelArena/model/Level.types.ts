@@ -8,7 +8,7 @@ import type {
     TypedResponse,
     WdaErrorResponse,
     WdaLevel,
-} from '../../../../common/types'
+} from '@common-types'
 
 export type ILevel = Document & {
     name: string

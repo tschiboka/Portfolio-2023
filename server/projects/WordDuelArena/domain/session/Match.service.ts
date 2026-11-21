@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import { GameConstants } from '../../config/constants/Game.constants'
+import { GameConstants } from '../../config/constants'
 import type { Match, MatchPlayerStatus } from '../../WordDuelArena.types'
 
 const defaultPlayer: MatchPlayerStatus = {

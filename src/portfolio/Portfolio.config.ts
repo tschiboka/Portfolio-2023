@@ -1,9 +1,9 @@
-import { Home } from './Home/Home'
-import { About } from './About/About'
-import { Projects } from './Projects/Projects'
-import { Blog } from './Blog/Blog'
-import { Contact } from './Contact/Contact'
-import { PrivacyPolicy } from './PrivacyPolicy/PrivacyPolicy'
+import { Home } from './Home'
+import { About } from './About'
+import { Projects } from './Projects'
+import { Blog } from './Blog'
+import { Contact } from './Contact'
+import { PrivacyPolicy } from './PrivacyPolicy'
 import {
     CyclicEmailScheduling,
     DailyAnalyticsEmail,

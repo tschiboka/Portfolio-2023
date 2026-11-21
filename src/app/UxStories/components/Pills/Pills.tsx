@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Main, Paragraph, Pill, Section, Stack } from '
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { PillsCode } from './Pills.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 const colors = ['accent', 'error', 'success', 'warning', 'orange', 'purple', 'gray'] as const
 

@@ -1,10 +1,10 @@
-import { Accessor, TestError } from '../Accessor/Accessor'
-import { InputAccessor } from '../Input/Input'
-import { ButtonAccessor } from '../Button/Button'
-import { CheckboxAccessor } from '../Checkbox/Checkbox'
-import { RadioAccessor } from '../Radio/Radio'
-import { DateAccessor } from '../DateInput/DateInput'
-import { SearchAccessor } from '../SearchInput/SearchInput'
+import { Accessor, TestError } from '../Accessor'
+import { InputAccessor } from '../Input'
+import { ButtonAccessor } from '../Button'
+import { CheckboxAccessor } from '../Checkbox'
+import { RadioAccessor } from '../Radio'
+import { DateAccessor } from '../DateInput'
+import { SearchAccessor } from '../SearchInput'
 import type { Nullable } from '@common-utils'
 
 class FormInstance extends Accessor {

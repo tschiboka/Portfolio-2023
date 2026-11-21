@@ -5,11 +5,11 @@ import guitarAppImageSm from '@portfolio/assets/about/RiffMaster_App_Mobile.png'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Heading, Paragraph, Link, Main, Figure, Stack, Spacer } from '@common-ux'
-import { AchievementList } from './components/AchievementList/AchievementList'
+import { AchievementList } from './components/AchievementList'
 import {
     academicAchievements,
     certificateAchievements,
-} from './components/AchievementListItem/Achievements.data'
+} from './components/AchievementListItem'
 import './About.scss'
 
 type AboutProps = {

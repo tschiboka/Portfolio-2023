@@ -11,7 +11,7 @@ import type {
     WdaLevelWordStatus,
     WdaMatchPlayerStatus,
     WdaMatchEndReason,
-} from '../../../common/types/projects/wda'
+} from '@common-types/projects/wda'
 
 export type { PlayerRole, OptionalPlayerRole, LastWordAttempt }
 

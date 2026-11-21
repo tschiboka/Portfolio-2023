@@ -2,11 +2,9 @@
 import { ChangeEvent, useState } from 'react'
 import { BrowserHooks } from '@common-utils'
 import { LoadingIndicator } from '@common-ux'
+import { WordUtils, WordConstants } from '@projects/WordDuelArena/common'
 import { LevelCreatorQueries } from './LevelCreator.queries'
-import { LevelList } from './components/LevelList'
-import { LevelCreatorModal } from './components/LevelCreatorModal'
-import { WordUtils } from '../common/utils/Word/Word.utils'
-import { WordConstants } from '../common/utils/Word/Word.constants'
+import { LevelList, LevelCreatorModal } from './components'
 import './LevelCreator.styles.css'
 import '../WordDuelArena.styles.css'
 

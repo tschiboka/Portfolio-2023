@@ -1,7 +1,7 @@
 ﻿import { Arrays, isDefined, isEmpty } from '@common-utils'
+import { MovePayload } from '@common-types'
 import { SessionState } from '../../WordDuelArena.types'
-import { GameConstants } from '../../config/constants/Game.constants'
-import { MovePayload } from '../../../../../common/types'
+import { GameConstants } from '../../config/constants'
 import type { Optional } from '@common-utils'
 
 const getIsHintDue = (draft: SessionState, payload: MovePayload) => {

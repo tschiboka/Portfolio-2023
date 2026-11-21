@@ -2,7 +2,7 @@
 import compression from 'compression'
 import { Application } from 'express'
 import { ApiError, ApiMessage, DateTime, HttpStatus, isInstanceOf } from '@common-utils'
-import { LogModel } from './Log/Log.model'
+import { LogModel } from './Log'
 import type { Request, Response, NextFunction } from 'express'
 
 // Register process-level fatal handlers at startup, not per-request inside the middleware.

@@ -1,4 +1,4 @@
-import { LevelName } from '../../common/utils/Types/Level.types'
+import { LevelName } from '@projects/WordDuelArena/common'
 import type { VoidFunction } from '@common-utils'
 
 type LevelListProps = {

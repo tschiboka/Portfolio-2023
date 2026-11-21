@@ -1,6 +1,11 @@
 import { PropsSuffix } from './SingleLocalType.constants.js'
 import { Strings } from '../../common/utils/Strings/Strings.js'
-import { isDefined, isNonEmpty, isString } from '../../common/utils/Predicate/Predicate.js'
+import {
+    isDefined,
+    isNonEmpty,
+    isString,
+    isUndefined,
+} from '../../common/utils/Predicate/Predicate.js'
 import type { NodeLike } from './SingleLocalType.types.js'
 import type { Optional } from '../../common/utils/Generics/Generics.types.js'
 
@@ -8,22 +13,21 @@ const FunctionNodeTypes = ['FunctionDeclaration', 'ArrowFunctionExpression', 'Fu
 const WrapperNodeTypes = ['ExportNamedDeclaration', 'ExportDefaultDeclaration']
 
 /** The statement a node was exported by, or the node itself where it stands alone. */
-export const getStatementOf = (node: NodeLike): NodeLike =>
-    isDefined(node.parent) &&
-    WrapperNodeTypes.includes(node.parent.type) &&
-    isDefined(node.parent.declaration)
-        ? node.parent
-        : node
+export const getStatementOf = (node: NodeLike): NodeLike => {
+    const parent = node.parent
+    if (isUndefined(parent)) return node
+
+    const isWrapper = WrapperNodeTypes.includes(parent.type) && isDefined(parent.declaration)
+
+    return isWrapper ? parent : node
+}
 
 /** The functions a statement declares, by name, whichever declarator carries them. */
 export const getFunctionNamesOf = (statement: Optional<NodeLike>): string[] => {
-    if (!isDefined(statement)) return []
+    if (isUndefined(statement)) return []
 
-    const declaration =
-        WrapperNodeTypes.includes(statement.type) && isDefined(statement.declaration)
-            ? statement.declaration
-            : statement
-
+    const wrapped = WrapperNodeTypes.includes(statement.type) ? statement.declaration : undefined
+    const declaration = isUndefined(wrapped) ? statement : wrapped
     const declaredName = declaration.id?.name
 
     if (declaration.type === 'FunctionDeclaration')
@@ -33,10 +37,11 @@ export const getFunctionNamesOf = (statement: Optional<NodeLike>): string[] => {
 
     return (declaration.declarations ?? []).flatMap((declarator) => {
         const name = declarator.id?.name
+        const init = declarator.init
 
-        if (!isDefined(declarator.init) || !isString(name)) return []
+        if (isUndefined(init) || !isString(name)) return []
 
-        return FunctionNodeTypes.includes(declarator.init.type) ? [name] : []
+        return FunctionNodeTypes.includes(init.type) ? [name] : []
     })
 }
 

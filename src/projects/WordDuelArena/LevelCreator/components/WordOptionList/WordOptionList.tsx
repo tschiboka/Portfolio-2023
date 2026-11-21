@@ -1,7 +1,5 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
-import { LevelWord } from '../../../common/utils'
-import { WordUtils } from '../../../common/utils/Word/Word.utils'
-import { WordConstants } from '../../../common/utils/Word/Word.constants'
+import { LevelWord, WordUtils, WordConstants } from '@projects/WordDuelArena/common'
 import './WordOptionList.styles.css'
 
 type WordOptionListProps = {

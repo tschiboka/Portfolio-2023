@@ -5,7 +5,7 @@ import { Figure } from '@shared-components/Figure'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { FiguresCode } from './Figures.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type FiguresProps = { path: string }
 

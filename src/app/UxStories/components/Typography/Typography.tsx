@@ -17,7 +17,7 @@ import {
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { TypographyCode } from './Typography.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type TypographyProps = { path: string }
 

@@ -1,4 +1,4 @@
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 
 export class InputAccessor extends Accessor {
     get Get() {

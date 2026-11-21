@@ -1,8 +1,8 @@
 ﻿import express from 'express'
 import { Arrays, Strings, isTruthy, isNonEmpty, ApiResponder } from '@common-utils'
+import { Keystroke } from '@common-types'
 import { TypistConstants } from './Typist.constants'
-import { WordRepository } from '../WordDuelArena/infrastructure/resources/Word.repository'
-import { Keystroke } from '../../../common/types'
+import { WordRepository } from '../WordDuelArena'
 import type { PostRoundReq, PostRoundRes } from './Typist.types'
 
 const router = express.Router()

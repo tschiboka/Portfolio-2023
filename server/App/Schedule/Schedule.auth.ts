@@ -1,4 +1,4 @@
-import { UsersMiddleware } from '../Users/Users.middleware'
+import { UsersMiddleware } from '../Users'
 import type { Request, Response, NextFunction } from 'express'
 
 const { auth, admin } = UsersMiddleware

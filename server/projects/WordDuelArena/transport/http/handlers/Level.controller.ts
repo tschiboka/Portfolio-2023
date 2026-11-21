@@ -1,17 +1,16 @@
-﻿import { isEmpty } from '@common-utils'
-import { LevelSchema } from '../validation/Level.schema'
-import { LevelRepository } from '../../../infrastructure/persistence/db/Level.repository'
-import { TypedRequest } from '../../../../../../common/types'
-import { ApiResponder, ApiMessage } from '../../../../../../common/utils'
-import { ApiTransformers } from '../../../../../../common/utils/Transformer'
+﻿import { isEmpty, ApiResponder, ApiMessage } from '@common-utils'
+import { TypedRequest } from '@common-types'
+import { ApiTransformers } from '@common-utils/Transformer'
+import { LevelSchema } from '../validation'
+import { LevelRepository } from '../../../infrastructure/persistence/db'
+import type { WdaLevel } from '@common-types'
 import type {
     GetLevelReq,
     GetLevelRes,
     GetLevelsRes,
     PostLevelReq,
     PostLevelRes,
-} from '../../../model/Level.types'
-import type { WdaLevel } from '../../../../../../common/types'
+} from '../../../model'
 
 async function handleListLevels(_req: TypedRequest, res: GetLevelsRes) {
     const levels = await LevelRepository.findAll()

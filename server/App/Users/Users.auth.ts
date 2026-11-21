@@ -3,11 +3,11 @@ import bcrypt from 'bcrypt'
 import { ApiMessage, ApiResponder, DateTime, isUndefined } from '@common-utils'
 import { UsersModel } from './Users.model'
 import { UsersConstants } from './Users.constants'
-import { SettingsConstants } from '../Settings/Settings.constants'
+import { SettingsConstants } from '../Settings'
 import type { Request } from 'express'
 import type { Nullable, Optional } from '@common-utils'
+import type { CurrentUser } from '@common-types'
 import type { IUser, RegistrationPayload, UserToken } from './Users.types'
-import type { CurrentUser } from '../../../common/types'
 
 /** Hashes a plain-text password with bcrypt. */
 const hashPassword = (plain: string): Promise<string> =>

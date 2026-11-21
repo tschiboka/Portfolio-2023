@@ -4,7 +4,7 @@ import type {
     PostMessageResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a contact message. */
 export type IMessage = Document & {

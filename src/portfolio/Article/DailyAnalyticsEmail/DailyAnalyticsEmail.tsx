@@ -4,7 +4,7 @@ import { Code, CodeText, Heading, List, Paragraph, Section } from '@common-ux'
 import { Figure } from '@shared-components/Figure'
 import { DailyAnaliticsEmailCode } from './DailyAnaliticsEmail.code'
 import { Article } from '../Article'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import { getReferenceList } from '../References.data'
 
 type DailyAnalyticsEmailProps = {

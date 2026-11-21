@@ -12,11 +12,9 @@
  */
 
 import { Icon } from '@common-ux'
-import { DataSection } from './components/DataSection'
+import { DataSection, Header, Signature } from './components'
 import { BreakdownPreviewConstants } from './BreakdownPreview.constants'
-import { Header } from './components/Header'
 import { BreakdownPreviewStyles } from './BreakdownPreview.styles'
-import { Signature } from './components/Signature'
 import type { BreakdownPreviewProps } from './BreakdownPreview.types'
 
 export const BreakdownPreview = ({ breakdown }: BreakdownPreviewProps) => (

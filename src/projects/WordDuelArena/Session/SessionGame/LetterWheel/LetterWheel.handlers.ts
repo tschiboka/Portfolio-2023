@@ -1,10 +1,10 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Dispatch, SetStateAction, TouchEvent } from 'react'
 import { Regexp } from '@common-utils'
+import { WordConstants } from '@projects/WordDuelArena/common'
 import { LetterWheelUtils } from './LetterWheel.utils'
 import { TouchState } from './LetterWheel.types'
 import { WebSocketRequest } from '../../Session.types'
-import { WordConstants } from '../../../common/utils'
 import type { CreateHandleTouchProps } from './LetterWheel.types'
 
 type CreateHandleKeyPressProps = {

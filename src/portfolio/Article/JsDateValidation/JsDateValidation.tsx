@@ -5,7 +5,7 @@ import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { JsDateValidationCode } from './JsDateValidation.code'
 import { Article } from '../Article'
 import { getReferenceList } from '../References.data'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 
 type JsDateValidationProps = {
     pageName: string

@@ -17,7 +17,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Guards } from './AccessGuards.data'
 import { AccessGuardsCode } from './AccessGuards.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 const { hiddenGuard, visibleGuard, disabledGuard, softDisabledGuard, tooltipGuard } = Guards
 

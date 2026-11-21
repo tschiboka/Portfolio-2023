@@ -1,11 +1,11 @@
 ﻿import { produce } from 'immer'
 import { Arrays, isDefined, isTruthy } from '@common-utils'
 import { MatchService } from './Match.service'
-import { LevelRepository } from '../../infrastructure/persistence/db/Level.repository'
-import { GameConstants } from '../../config/constants/Game.constants'
-import { WordRepository } from '../../infrastructure/resources/Word.repository'
+import { LevelRepository } from '../../infrastructure/persistence/db'
+import { GameConstants } from '../../config/constants'
+import { WordRepository } from '../../infrastructure/resources'
 import type { SessionState, Level, LevelWord } from '../../WordDuelArena.types'
-import type { DbLevelRecord } from '../../model/Level.types'
+import type { DbLevelRecord } from '../../model'
 
 async function initialiseLevel(state: SessionState): Promise<SessionState> {
     const hasTwoPlayers = isTruthy(state.players.player1) && isTruthy(state.players.player2)

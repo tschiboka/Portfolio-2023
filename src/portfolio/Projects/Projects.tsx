@@ -5,8 +5,8 @@ import { Heading, Paragraph, Main, Section } from '@common-ux'
 import { isEmpty } from '@common-utils'
 import { Screen } from '@shared-components/Screen/Screen'
 import { ProjectsDefaults, ProjectsSelectors } from '.'
-import { ProjectCard } from './ProjectCard/ProjectCard'
-import { ProjectFilter } from './ProjectFilter/ProjectFilter'
+import { ProjectCard } from './ProjectCard'
+import { ProjectFilter } from './ProjectFilter'
 
 type ProjectsProps = {
     pageName: string

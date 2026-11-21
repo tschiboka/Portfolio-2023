@@ -1,7 +1,7 @@
 import { waitFor, within } from '@testing-library/react'
 import { isDefined, isFunction } from '@common-utils'
 import { HarnessUtils } from './Harness.utils'
-import { Accessor, TestError } from '../Accessor/Accessor'
+import { Accessor, TestError } from '../Accessor'
 import type { Arrayable, Dictionary, Nullable, Optional, VoidFunction } from '@common-utils'
 import type {
     AccessorRecipe,

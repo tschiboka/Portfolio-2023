@@ -8,7 +8,7 @@ import type {
     ActivityFeedContext,
     GetActivityFeedQuery,
     GetActivityFeedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /**
  * Business logic for the activity feed - aggregates the latest activity across visits, likes,

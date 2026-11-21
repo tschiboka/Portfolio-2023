@@ -1,9 +1,9 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { Pill, Overline, Text, Button, Inline, Stack, Spacer, Section } from '@common-ux'
 import { BlogSortBy } from '../../Blog.types'
-import { ProjectsSelectors } from '../../../Projects/Projects.selectors'
+import { ProjectsSelectors } from '../../../Projects'
 import type { Dictionary, VoidFunction } from '@common-utils'
-import type { Technology } from '../../../Projects/Projects.types'
+import type { Technology } from '../../../Projects'
 import './BlogFilter.scss'
 
 type BlogFilterProps = {

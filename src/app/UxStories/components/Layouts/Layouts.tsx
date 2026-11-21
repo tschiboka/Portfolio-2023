@@ -22,7 +22,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { LayoutsCode } from './Layouts.code'
 import { LayoutsConstants } from './Layouts.constants'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 import './Layouts.styles.css'
 
 const cell = (height?: number): CSSProperties => ({

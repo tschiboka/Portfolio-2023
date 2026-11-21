@@ -1,6 +1,6 @@
 import { CodeText } from '@common-ux'
 import { DateTime } from '@common-utils'
-import { ActivityTypePill } from '../ActivityTypePill/ActivityTypePill'
+import { ActivityTypePill } from '../ActivityTypePill'
 import type { TableColumns } from '@common-ux'
 import type { ActivityType } from '@common-types'
 import type { BreakdownRow } from './BreakdownTable.types'

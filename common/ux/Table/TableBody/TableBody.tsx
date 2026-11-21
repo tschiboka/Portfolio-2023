@@ -9,7 +9,7 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { TableRow } from '../TableRow/TableRow'
+import { TableRow } from '../TableRow'
 import { TableUtils } from '../Table.utils'
 import type { Dictionary, Optional } from '@common-utils'
 import './TableBody.styles.css'

@@ -1,6 +1,6 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { isDefined } from '@common-utils'
-import { EditorWord, CharStatus } from './Character/Character.types'
+import { EditorWord, CharStatus } from './Character'
 import { TypistUtils } from '../Typist.utils'
 import { TypistEditorState, EditorAction, Keystroke } from '../Typist.types'
 import type { Optional } from '@common-utils'

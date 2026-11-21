@@ -1,10 +1,10 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { RefObject } from 'react'
 import { isDefined, isEmpty, isInstanceOf } from '@common-utils'
+import { WordConstants } from '@projects/WordDuelArena/common'
 import { LetterPosition, TouchState } from './LetterWheel.types'
 import { LetterWheelConstants } from './LetterWheel.constants'
 import { WebSocketRequestType } from '../../Session.types'
-import { WordConstants } from '../../../common/utils'
 import type { Nullable } from '@common-utils'
 import type { SubmitMoveParams } from './LetterWheel.types'
 

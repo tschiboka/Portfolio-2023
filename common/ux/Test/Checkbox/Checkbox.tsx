@@ -1,4 +1,4 @@
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 
 export class CheckboxAccessor extends Accessor {
     get Get() {

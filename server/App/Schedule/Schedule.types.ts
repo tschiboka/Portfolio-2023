@@ -1,4 +1,4 @@
-﻿import type { PostDailyBreakdownResponse, TypedRequest, TypedResponse } from '../../../common/types'
+﻿import type { PostDailyBreakdownResponse, TypedRequest, TypedResponse } from '@common-types'
 
 export type PostDailyBreakdownReq = TypedRequest
 export type PostDailyBreakdownRes = TypedResponse<PostDailyBreakdownResponse>

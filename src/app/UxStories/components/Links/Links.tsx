@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Inline, Link, Main, Paragraph, Section, Stack 
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { LinksCode } from './Links.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type LinksProps = { path: string }
 

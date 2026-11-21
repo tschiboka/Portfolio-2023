@@ -1,6 +1,6 @@
 import { Dispatch } from 'react'
 import { Keystroke as SharedKeystroke, RoundResponse, TypingStats } from '@common-types'
-import { EditorWord } from './Editor/Character/Character.types'
+import { EditorWord } from './Editor/Character'
 
 export type { RoundResponse, TypingStats }
 

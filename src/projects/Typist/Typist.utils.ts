@@ -1,5 +1,5 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
-import { EditorWord } from './Editor/Character/Character.types'
+import { EditorWord } from './Editor/Character'
 
 const textToWords = (text: string, cursorPosition: number = 0): EditorWord[] =>
     text.split(' ').reduce<{ words: EditorWord[]; offset: number }>(

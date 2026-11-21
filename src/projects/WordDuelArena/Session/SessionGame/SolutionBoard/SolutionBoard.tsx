@@ -1,12 +1,11 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { isEmpty } from '@common-utils'
+import { WordConstants } from '@projects/WordDuelArena/common'
 import { SolutionBoardUtils } from './SolutionBoard.utils'
-import { SolvedSolutionWord } from './components/SolvedSolutionWord'
-import { UnsolvedSolutionWord } from './components/UnsolvedSolutionWord'
+import { SolvedSolutionWord, UnsolvedSolutionWord } from './components'
 import { SessionHooks } from '../../Session.hooks'
 import { PlayableLevelWord } from '../../Session.types'
-import { WordConstants } from '../../../common/utils'
 import './SolutionBoard.styles.css'
 
 const MAX_WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2

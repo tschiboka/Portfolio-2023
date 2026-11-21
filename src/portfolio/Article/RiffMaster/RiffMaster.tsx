@@ -45,7 +45,7 @@ import { Figure } from '@shared-components/Figure'
 import { RiffMasterCode } from './RiffMaster.code'
 import { Article } from '../Article'
 import { getReferenceList } from '../References.data'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import './RiffMaster.scss'
 
 type RiffMasterProps = {

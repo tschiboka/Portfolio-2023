@@ -1,6 +1,6 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import type { SearchInputOption } from '@common-ux/Form/SearchInput.types'
-import type { DifficultyLevel } from '../../../../common/types'
+import type { DifficultyLevel } from '@common-types'
 
 export const DifficultyOptions: SearchInputOption<DifficultyLevel>[] = [
     { value: 'beginner', label: 'Beginner' },

@@ -1,9 +1,9 @@
 import { lazy } from 'react'
 import { Xmas } from './Xmas'
-import { WordDuelArena } from './WordDuelArena/WordDuelArena'
-import { Session } from './WordDuelArena/Session/Session'
-import { Typist } from './Typist/Typist'
-import { Gym } from './Gym/Gym'
+import { WordDuelArena } from './WordDuelArena'
+import { Session } from './WordDuelArena/Session'
+import { Typist } from './Typist'
+import { Gym } from './Gym'
 import type { Dictionary } from '@common-utils'
 import type { ProjectRouteConfig } from './Projects.types'
 

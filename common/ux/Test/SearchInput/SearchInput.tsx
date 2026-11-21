@@ -1,5 +1,5 @@
 import { isString } from '@common-utils/Predicate'
-import { Accessor, TestError } from '../Accessor/Accessor'
+import { Accessor, TestError } from '../Accessor'
 import type { Nullable } from '@common-utils'
 
 export class SearchAccessor extends Accessor {

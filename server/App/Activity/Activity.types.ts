@@ -3,7 +3,7 @@
     GetActivityFeedResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 export type GetActivityFeedReq = TypedRequest<{ query: GetActivityFeedQuery }>
 export type GetActivityFeedRes = TypedResponse<GetActivityFeedResponse>

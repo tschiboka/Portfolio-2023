@@ -1,2 +1,2 @@
-export type { Level, LevelWord } from './Level.types'
-export type { AnagramMapType } from './Words.types'
+export type { Level, LevelName, LevelNameResponse, LevelWord } from './Level.types'
+export type { AnagramMapType, FrequencyType } from './Words.types'

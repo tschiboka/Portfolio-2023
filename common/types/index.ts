@@ -28,10 +28,7 @@
 // example, and the server-side statement of this same convention.
 
 export * from './app'
-export * from './projects/typist'
-export * from './projects/wda'
-export * from './projects/xmas'
-export * from './projects/gym'
+export * from './projects'
 export * from './table'
 
 import type { Request, Response } from 'express'

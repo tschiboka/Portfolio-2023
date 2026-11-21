@@ -19,7 +19,7 @@ import {
     Accessibility,
     AllFeaturesCombined,
 } from './components'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type TablesProps = {
     path: string

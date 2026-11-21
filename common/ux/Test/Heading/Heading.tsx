@@ -1,4 +1,4 @@
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 import type { HeadingLevel } from './Heading.types'
 
 export class HeadingAccessor extends Accessor {

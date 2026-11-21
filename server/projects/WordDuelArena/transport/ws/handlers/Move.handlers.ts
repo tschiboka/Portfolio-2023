@@ -1,11 +1,9 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { produce } from 'immer'
+import { MovePayload } from '@common-types'
 import { BroadcastService } from '../Broadcast.service'
-import { markAliveByDevice } from '../../../domain/session/session'
-import { SessionConstants } from '../../../config/constants/Session.constants'
-import { GameConstants } from '../../../config/constants/Game.constants'
-import { MoveService } from '../../../domain/session/Move.service'
-import { MovePayload } from '../../../../../../common/types'
+import { markAliveByDevice, MoveService } from '../../../domain/session'
+import { GameConstants, SessionConstants } from '../../../config/constants'
 import type { MoveHandlerParams, SessionState } from '../../../WordDuelArena.types'
 
 const moveHandler = ({ session, deviceId, payload }: MoveHandlerParams) => {

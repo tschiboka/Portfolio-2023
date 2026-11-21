@@ -1,4 +1,4 @@
-import { OptionButton } from './components/OptionButton'
+import { OptionButton } from './components'
 import type { FC, ReactNode } from 'react'
 
 export type OptionsProps = {

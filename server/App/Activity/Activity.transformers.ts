@@ -1,10 +1,10 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { DateTime } from '@common-utils'
-import type { IVisit } from '../Visit/Visit.types'
-import type { ILike } from '../Like/Like.types'
-import type { IMessage } from '../Message/Message.types'
-import type { ILog } from '../Log/Log.types'
-import type { ActivityEvent } from '../../../common/types'
+import type { ActivityEvent } from '@common-types'
+import type { IVisit } from '../Visit'
+import type { ILike } from '../Like'
+import type { IMessage } from '../Message'
+import type { ILog } from '../Log'
 
 /** Maps a raw visit doc to an {@link ActivityEvent}. */
 const visit = (doc: IVisit): ActivityEvent => ({

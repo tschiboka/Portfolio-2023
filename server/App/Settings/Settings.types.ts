@@ -5,7 +5,7 @@ import type {
     PostSettingsResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for application settings. */
 export type ISetting = Document & {

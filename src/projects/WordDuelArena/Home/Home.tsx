@@ -1,5 +1,5 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
-import { HomeOptions } from './components/HomeOptions'
+import { HomeOptions } from './components'
 
 export const Home = () => (
     <>

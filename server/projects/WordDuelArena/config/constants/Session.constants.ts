@@ -1,5 +1,5 @@
 ﻿import { DateTime } from '@common-utils'
-import { WdaSessionStatuses } from '../../../../../common/types/projects/wda'
+import { WdaSessionStatuses } from '@common-types/projects/wda'
 
 /** Session statuses and the presence-loop timing, each in its own unit. */
 export const SessionConstants = {

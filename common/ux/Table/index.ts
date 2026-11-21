@@ -11,3 +11,4 @@ export type {
     TableState,
 } from './Table.hooks.types'
 export type * from './Table.types'
+export type { Table as TableProps } from './Table.types'

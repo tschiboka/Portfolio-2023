@@ -2,8 +2,7 @@ import { Application } from 'express'
 import { XmasRouter } from './Xmas'
 import { TypistRouter } from './Typist'
 import { GymRouter } from './Gym'
-import { LevelRouter } from './WordDuelArena/transport/http/routes/Level.router'
-import { WordRouter } from './WordDuelArena/transport/http/routes/Word.router'
+import { LevelRouter, WordRouter } from './WordDuelArena/transport/http/routes'
 
 export const ProjectsRoutes = {
     register: (app: Application) => {

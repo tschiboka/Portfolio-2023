@@ -1,6 +1,6 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { produce } from 'immer'
-import { SessionConstants } from '../../config/constants/Session.constants'
+import { SessionConstants } from '../../config/constants'
 import type { SessionState } from '../../WordDuelArena.types'
 
 const initialiseSession = (state: SessionState, deviceId: string): SessionState =>

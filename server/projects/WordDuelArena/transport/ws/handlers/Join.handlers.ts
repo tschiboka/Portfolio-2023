@@ -1,7 +1,6 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import { BroadcastService } from '../Broadcast.service'
-import { initialiseSession } from '../../../domain/session/session'
-import { LevelService } from '../../../domain/session/Level.service'
+import { initialiseSession, LevelService } from '../../../domain/session'
 import type { Session } from '../../../WordDuelArena.types'
 
 async function joinHandler({ session, deviceId }: { session: Session; deviceId: string }) {

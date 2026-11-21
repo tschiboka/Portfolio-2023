@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef } from 'react'
 import { TypistContext } from './Typist.context'
 import { TypistDefaults } from './Typist.defaults'
 import { TypistQueries } from './Typist.queries'
-import { EditorReducer } from './Editor/Editor.reducer'
+import { EditorReducer } from './Editor'
 import type { ReactNode } from 'react'
 import type { RoundResponse, TypistContextValues } from './Typist.types'
 

@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { apiPathBuilder } from '../Paths/apiPathBuilder'
+import { apiPathBuilder } from '../Paths'
 import { Objects } from '../Objects'
 import { hasLength, isDefined } from '../Predicate'
-import { Regexp } from '../Regexp/Regexp'
-import { PathKey } from '../Paths/Path.types'
+import { Regexp } from '../Regexp'
 import type { AxiosRequestConfig, AxiosResponse } from 'axios'
-import type { ServerGroup } from '../Paths/Path.types'
+import type { PathKey, ServerGroup } from '../Paths'
 import type { Dictionary } from '../Generics'
 
 export class RequestBuilder {

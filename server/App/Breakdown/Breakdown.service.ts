@@ -2,7 +2,7 @@
 import { BreakdownRepository } from './Breakdown.repository'
 import { BreakdownConstants } from './Breakdown.constants'
 import { BreakdownUtils } from './Breakdown.utils'
-import type { PostBackfillResponse } from '../../../common/types'
+import type { PostBackfillResponse } from '@common-types'
 
 /**
  * Business logic for daily breakdowns - aggregates all existing visit and like records by

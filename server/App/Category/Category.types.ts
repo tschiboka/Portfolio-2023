@@ -6,7 +6,7 @@ import type {
     PostCategoryRequest,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a category. */
 export type ICategory = Document & {

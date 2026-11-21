@@ -6,7 +6,7 @@ import { Code, Heading, List, Paragraph, Section } from '@common-ux'
 import { JsSortingCode } from './JsSorting.code'
 import { Article } from '../Article'
 import { getReferenceList } from '../References.data'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import './JsSorting.scss'
 
 type JsSortingProps = {

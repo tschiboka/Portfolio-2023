@@ -9,7 +9,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Button, CounterBadge, SideMenu } from '@common-ux'
 import { LikeQueries, VisitQueries } from '@shared-queries'
 import { QueryKey } from '@common-utils'
-import { ShareMenu } from '../ShareMenu/ShareMenu'
+import { ShareMenu } from '../ShareMenu'
 import type { SideMenuItem } from '@common-ux'
 import './PageSideMenu.css'
 

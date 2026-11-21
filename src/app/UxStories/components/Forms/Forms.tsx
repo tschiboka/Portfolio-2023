@@ -5,7 +5,7 @@ import { Code, CodeText, Form, Heading, Main, Paragraph, Section } from '@common
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { FormsCode } from './Forms.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 import type { DemoForm } from './Forms.types'
 
 const defaults: DemoForm = {

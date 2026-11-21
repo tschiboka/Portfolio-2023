@@ -1,5 +1,5 @@
 import { isDefined, isObject } from '@common-utils'
-import { StackSelectors } from '../Stack/Stack.selectors'
+import { StackSelectors } from '../Stack'
 import type { CSSProperties } from 'react'
 import type { GridProps, ResponsiveColumns } from './Grid.types'
 import './Grid.styles.css'

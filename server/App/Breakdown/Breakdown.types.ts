@@ -1,5 +1,5 @@
 ﻿import type { Document } from 'mongoose'
-import type { PostBackfillResponse, TypedRequest, TypedResponse } from '../../../common/types'
+import type { PostBackfillResponse, TypedRequest, TypedResponse } from '@common-types'
 
 /** Mongoose document shape for a daily visit/like breakdown (one per date+path). */
 export type IBreakdown = Document & {

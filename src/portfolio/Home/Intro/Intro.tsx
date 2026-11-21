@@ -2,9 +2,9 @@
 import { FaGlasses, FaCode } from 'react-icons/fa'
 import { IoMdHand } from 'react-icons/io'
 import { Heading, Paragraph, Section } from '@common-ux'
-import { HireIntro } from '../HireIntro/HireIntro'
-import { ProgrammingBuddy } from '../ProgrammingBuddy/ProgrammingBuddy'
-import { GetToKnowMe } from '../GetToKnowMe/GetToKnowMe'
+import { HireIntro } from '../HireIntro'
+import { ProgrammingBuddy } from '../ProgrammingBuddy'
+import { GetToKnowMe } from '../GetToKnowMe'
 import './Intro.scss'
 
 export const Intro = () => (

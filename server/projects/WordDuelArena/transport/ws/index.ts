@@ -1,14 +1,14 @@
 import url from 'url'
 import { WebSocketServer } from 'ws'
 import { ClientMessage } from '@common-utils'
-import { ValidateDeviceSchema } from './validation/connection/ValidateDevice.schema'
+import { ValidateDeviceSchema } from './validation'
 import { routeMessage } from './handlers'
-import { LoopService } from '../../infrastructure/presence/Loop.service'
-import { SessionRepository } from '../../infrastructure/persistence/server/Session.repository'
-import { SessionConstants } from '../../config/constants/Session.constants'
-import { WordRepository } from '../../infrastructure/resources/Word.repository'
+import { LoopService, SessionRepository, WordRepository } from '../../infrastructure'
+import { SessionConstants } from '../../config'
 import type { Server } from 'http'
 import type { DeviceWebSocket, DeviceWebSocketRequest } from './WS.types'
+
+export { BroadcastService } from './Broadcast.service'
 
 export async function initWebSocket(server: Server) {
     const wss = new WebSocketServer({ server })

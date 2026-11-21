@@ -1,9 +1,7 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { MouseEvent } from 'react'
 import { ModalDefaults } from './Modal.defaults'
-import { ModalHeader } from './components/ModalHeader'
-import { ModalBody } from './components/ModalBody'
-import { ModalActions } from './components/ModalActions'
+import { ModalHeader, ModalBody, ModalActions } from './components'
 import type { VoidFunction } from '@common-utils'
 import type { ModalState } from './Modal.types'
 import './Modal.styles.css'

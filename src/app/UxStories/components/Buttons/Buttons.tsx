@@ -4,7 +4,7 @@ import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Functions } from '@common-utils'
 import { ButtonsCode } from './Buttons.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type ButtonsProps = { path: string }
 

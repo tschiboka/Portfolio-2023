@@ -7,7 +7,7 @@ import { AppHooks } from '@shared-context'
 import { Button, Code, CodeText, Heading, Paragraph, Section, Stack, Typography } from '@common-ux'
 import { HookPatternCode } from './HookPattern.code'
 import { Article } from '../Article'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import { getReferenceList } from '../References.data'
 
 type HookPatternProps = {

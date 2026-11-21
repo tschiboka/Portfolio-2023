@@ -32,7 +32,7 @@ import { Figure } from '@shared-components/Figure'
 import { Code, Heading, Link, Paragraph, Section } from '@common-ux'
 import { GreenRooftopCode } from './GreenRooftop.code'
 import { Article } from '../Article'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import { getReferenceList } from '../References.data'
 
 type GreenRooftopProps = {

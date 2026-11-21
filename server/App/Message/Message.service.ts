@@ -2,7 +2,7 @@
 import { MessageRepository } from './Message.repository'
 import { MessageSchema } from './Message.schema'
 import { MessageUtils } from './Message.utils'
-import type { PostMessageRequest, PostMessageResponse } from '../../../common/types'
+import type { PostMessageRequest, PostMessageResponse } from '@common-types'
 
 /** Business logic for contact messages - persistence via the repository, validation via the schema. */
 export const MessageService = {

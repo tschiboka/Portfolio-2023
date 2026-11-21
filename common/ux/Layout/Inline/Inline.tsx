@@ -1,4 +1,4 @@
-import { StackSelectors } from '../Stack/Stack.selectors'
+import { StackSelectors } from '../Stack'
 import type { InlineProps } from './Inline.types'
 
 const { selectAlign, selectJustify } = StackSelectors

@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import { render } from '@testing-library/react'
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 import { Table as TableComponent } from '../../Table'
 import type { Dictionary } from '@common-utils'
-import type { Table as TableProps } from '../../Table/Table.types'
+import type { TableProps } from '../../Table'
 
 class TableAccessor extends Accessor {
     get Get() {

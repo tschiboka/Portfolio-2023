@@ -33,6 +33,7 @@ import { registrar as singleLocalTypeRegistrar } from './single-local-type/Singl
 import { registrar as noInterfaceRegistrar } from './no-interface/NoInterface.registrar.js'
 import { registrar as regexpRegistryRegistrar } from './regexp-registry/RegexpRegistry.registrar.js'
 import { registrar as matchingSpecRegistrar } from './matching-spec/MatchingSpec.registrar.js'
+import { registrar as noDeepImportRegistrar } from './no-deep-import/NoDeepImport.registrar.js'
 import { withPrefixedReports } from './prefixReports.js'
 import { RuleRegistrar } from './types.js'
 
@@ -72,4 +73,5 @@ export const RuleRegistry: RuleRegistrar[] = [
     noInterfaceRegistrar,
     regexpRegistryRegistrar,
     matchingSpecRegistrar,
+    noDeepImportRegistrar,
 ].map(withPrefixedReports)

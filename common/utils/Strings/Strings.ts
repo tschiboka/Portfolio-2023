@@ -1,7 +1,8 @@
+/* eslint-disable standards/no-deep-import -- TODO [0006] this file is compiled into the node ESM rules build, which needs an extension */
 import { trim } from './optional/trim.js'
 import { toUndefined } from './optional/toUndefined.js'
 import { isString, isEmpty } from '../Predicate/Predicate.js'
-import type { Nullish } from '../Generics/index.js'
+import type { Nullish } from '../Generics/Generics.types.js'
 
 /** Case-insensitive equality: `true` when both strings are equal after lowercasing.
  * @example

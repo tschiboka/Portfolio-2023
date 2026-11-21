@@ -1,5 +1,5 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
-import { OptionButton } from './components/OptionButton'
+import { OptionButton } from './components'
 import type { OptionsComponent } from './Options.types'
 import './Options.css'
 

@@ -1,5 +1,5 @@
 import { Regexp } from '@common-utils'
-import { Link } from '../Link/Link'
+import { Link } from '../Link'
 import type { InlineReferenceProps } from './Typography.types'
 import './Typography.styles.css'
 

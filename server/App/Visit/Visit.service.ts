@@ -1,14 +1,10 @@
 ﻿import { ApiResponder, DateTime } from '@common-utils'
 import { VisitRepository } from './Visit.repository'
 import { VisitSchema } from './Visit.schema'
-import { BreakdownModel } from '../Breakdown/Breakdown.model'
+import { BreakdownModel } from '../Breakdown'
 import type { Dictionary } from '@common-utils'
+import type { GetVisitSummaryResponse, GetVisitResponse, PostVisitResponse } from '@common-types'
 import type { VisitInput } from './Visit.types'
-import type {
-    GetVisitSummaryResponse,
-    GetVisitResponse,
-    PostVisitResponse,
-} from '../../../common/types'
 
 /** Business logic for visits - persistence via the repository, validation via the schema. */
 export const VisitService = {

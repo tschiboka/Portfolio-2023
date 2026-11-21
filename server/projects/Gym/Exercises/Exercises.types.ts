@@ -13,7 +13,7 @@ import type {
     PostGymExerciseRequest,
     TypedRequest,
     TypedResponse,
-} from '../../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a gym exercise. */
 export type IGymExercise = Document & {

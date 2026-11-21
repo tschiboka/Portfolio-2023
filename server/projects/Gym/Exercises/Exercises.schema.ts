@@ -1,7 +1,7 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
+import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '@common-types'
 import { ExercisesConstants } from './Exercises.constants'
-import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
 import type { ValidationResult } from 'joi'
 import type { ExerciseValidationInput } from './Exercises.types'
 

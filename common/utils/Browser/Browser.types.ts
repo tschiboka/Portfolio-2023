@@ -1,4 +1,4 @@
-import type { Nullable } from '../Generics/index.js'
+import type { Nullable } from '../Generics'
 
 /** Pairs a DOM element with its current intersection-observer visibility state. */
 export type VisibilityEntry<T extends Element> = {

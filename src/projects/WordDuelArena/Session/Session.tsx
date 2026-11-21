@@ -1,7 +1,7 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { BrowserHooks } from '@common-utils'
 import { SessionProvider } from './Session.provider'
-import { SessionGame } from './SessionGame/SessionGame'
+import { SessionGame } from './SessionGame'
 import { SessionWebSocketProvider } from './SessionWebSocket.provider'
 import './Sessions.styles.css'
 

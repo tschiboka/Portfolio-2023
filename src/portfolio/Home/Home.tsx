@@ -1,8 +1,8 @@
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { Main } from '@common-ux'
-import { Welcome } from './Welcome/Welcome'
-import { Intro } from './Intro/Intro'
+import { Welcome } from './Welcome'
+import { Intro } from './Intro'
 
 type HomeProps = {
     pageName: string

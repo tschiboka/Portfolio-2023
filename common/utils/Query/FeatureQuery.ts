@@ -12,7 +12,7 @@ import type {
 import type { CacheKey } from './QueryKey'
 import type { ErrorResponse } from './MergeStatus.types'
 import type { Dictionary, Optional } from '../Generics'
-import type { PathKey, ServerGroup } from '../Paths/Path.types'
+import type { PathKey, ServerGroup } from '../Paths'
 
 /**
  * Chainable builder for a feature's `.queries.ts` — configures the request and

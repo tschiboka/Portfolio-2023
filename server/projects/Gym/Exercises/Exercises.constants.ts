@@ -1,6 +1,6 @@
 ﻿import { Option } from '@common-utils'
-import { MuscleGroupOptions } from '../MuscleGroup/MuscleGroup.options'
-import { EQUIPMENT_OPTIONS } from '../../../../common/types'
+import { EQUIPMENT_OPTIONS } from '@common-types'
+import { MuscleGroupOptions } from '../MuscleGroup'
 
 const muscleGroupValues = Option.getValues(MuscleGroupOptions)
 const equipmentValues = Option.getValues(EQUIPMENT_OPTIONS)

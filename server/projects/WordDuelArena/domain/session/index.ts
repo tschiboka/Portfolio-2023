@@ -1,0 +1,7 @@
+export { HintService } from "./Hint.service"
+export { LevelService } from "./Level.service"
+export { MatchService } from "./Match.service"
+export { MoveService } from "./Move.service"
+export { PointsService } from "./Points.service"
+export { PresenceService } from "./Presence.service"
+export { initialiseSession, markAliveByDevice } from "./session"

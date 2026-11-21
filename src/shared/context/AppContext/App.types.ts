@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import { Session } from '../SessionContext/SessionContext.types'
+import type { SessionContextValues } from '../SessionContext'
 
-export type LocalStorage = { theme: string; session?: Session }
+export type LocalStorage = { theme: string; session?: SessionContextValues['session'] }
 
 export type AppContextValues = {
     themeMode: string

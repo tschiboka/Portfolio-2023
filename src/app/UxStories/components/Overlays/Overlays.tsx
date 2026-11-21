@@ -16,7 +16,7 @@ import {
 } from '@common-ux'
 import { PopupMode, PopupSize } from '@common-ux/Overlay/Overlay.types'
 import { OverlaysCode } from './Overlays.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 import type { ActionMenuItem } from '@common-ux'
 import type { Nullable } from '@common-utils'
 import './Overlays.styles.css'

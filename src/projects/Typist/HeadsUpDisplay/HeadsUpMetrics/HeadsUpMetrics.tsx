@@ -1,5 +1,5 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
-import { LetterBox } from '../LetterBox/LetterBox'
+import { LetterBox } from '../LetterBox'
 import { TypistContext } from '../../Typist.context'
 import './HeadsUpMetrics.scss'
 

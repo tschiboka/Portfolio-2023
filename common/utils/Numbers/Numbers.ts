@@ -1,7 +1,6 @@
 import { Counter } from './Counter'
 import { truncateTo } from './truncateTo'
-import { toNumber } from './optional/ToNumber'
-import { toString } from './optional/ToString'
+import { toNumber, toString } from './optional'
 
 export const Numbers = {
     Counter,

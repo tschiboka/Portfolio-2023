@@ -33,7 +33,7 @@ import { Figure } from '@shared-components/Figure'
 import { SoundsWithHowlerCode } from './SoundsWithHowler.code'
 import { getReferenceList } from '../References.data'
 import { Article } from '../Article'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import type { Dictionary, Nullable } from '@common-utils'
 import './SoundsWithHowler.scss'
 

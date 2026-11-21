@@ -3,13 +3,13 @@ import { ApiResponder, ApiTransformers, isValidObjectId } from '@common-utils'
 import { RoutinesRepository } from './Routines.repository'
 import { RoutinesPermissions } from './Routines.permissions'
 import { RoutinesSchema } from './Routines.schema'
-import type { RoutineValidationInput } from './Routines.types'
 import type {
     CurrentUser,
     GymRoutineResource,
     PatchGymRoutineRequest,
     PostGymRoutineRequest,
-} from '../../../../common/types'
+} from '@common-types'
+import type { RoutineValidationInput } from './Routines.types'
 
 /** Business logic for routines - persistence via the repository, authorisation via permissions. */
 export const RoutinesService = {

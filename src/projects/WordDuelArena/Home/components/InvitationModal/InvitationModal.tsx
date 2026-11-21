@@ -2,9 +2,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
+import { Modal, Navigation } from '@projects/WordDuelArena/common'
 import { ModalAction } from '@projects/WordDuelArena/common/components/Modal/Modal.types'
-import { Modal } from '../../../common/components'
-import { Navigation } from '../../../common/utils/Navigation'
 import './InvitationModal.styles.css'
 
 export const InvitationModal = () => {

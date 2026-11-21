@@ -16,7 +16,7 @@ import { Table } from '@common-ux/Table/Table'
 import { TestAccessorCode } from './TestAccessor.code'
 import { TestAccessorColumns } from './TestAccessor.columns'
 import { TestAccessorData } from './TestAccessor.data'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 import './TestAccessor.styles.css'
 
 type TestAccessorProps = { path: string }

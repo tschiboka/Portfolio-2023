@@ -13,7 +13,7 @@ import type {
     PostUserResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a user. `Document<ObjectId>` types `_id`, which defaults to `any`. */
 export type IUser = Document<ObjectId> & {

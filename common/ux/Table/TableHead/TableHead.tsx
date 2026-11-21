@@ -1,7 +1,7 @@
 /* eslint-disable standards/matching-spec -- TODO [0012] check the convention */
 import { useCallback, useRef } from 'react'
 import { TableHeadUtils } from './TableHead.utils'
-import { TableCheckboxHeader } from '../TableCheckbox/TableCheckboxHeader'
+import { TableCheckboxHeader } from '../TableCheckbox'
 import type { MouseEvent as ReactMouseEvent, ReactNode } from 'react'
 import type { Dictionary, Nullable } from '@common-utils'
 import type { ResizeState, TableHeadProps } from './TableHead.types'

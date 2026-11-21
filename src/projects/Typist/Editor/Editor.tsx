@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { isTruthy } from '@common-utils'
 import { LoadingIndicator } from '@common-ux'
-import { Character } from './Character/Character'
+import { Character } from './Character'
 import { EditorHandlers } from './Editor.handlers'
 import { TypistContext } from '../Typist.context'
 import './Editor.styles.scss'

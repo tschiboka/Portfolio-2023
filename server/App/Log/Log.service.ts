@@ -6,7 +6,7 @@ import type {
     GetLogResponse,
     DeleteLogResponse,
     Log,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Business logic for logs - persistence via the repository. */
 export const LogService = {

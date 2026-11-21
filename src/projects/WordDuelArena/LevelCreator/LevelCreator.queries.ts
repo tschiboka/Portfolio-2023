@@ -2,10 +2,9 @@ import { AxiosError } from 'axios'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { Session } from '@shared-context'
 import { Query, QueryKey } from '@common-utils'
-import { AnagramMapType, Level } from '../common/utils'
+import { AnagramMapType, Level } from '@projects/WordDuelArena/common'
 import type { ErrorResponse, VoidFunction } from '@common-utils'
-import type { LevelNameResponse } from '../common/utils/Types/Level.types'
-import type { FrequencyType } from '../common/utils/Types/Words.types'
+import type { LevelNameResponse, FrequencyType } from '@projects/WordDuelArena/common'
 
 const useGetLevelNames = () => {
     const request = new Query.RequestBuilder('WordDuelArena', 'Projects')

@@ -1,4 +1,5 @@
-import { Regexp } from '../Regexp/index.js'
+/* eslint-disable standards/no-deep-import -- TODO [0006] this file is compiled into the node ESM rules build, which needs an extension */
+import { Regexp } from '../Regexp/Regexp.js'
 import type {
     Defined,
     Dictionary,
@@ -9,7 +10,7 @@ import type {
     Primitive,
     Truthy,
     TypeGuard,
-} from '../Generics/index.js'
+} from '../Generics/Generics.types.js'
 
 /**
  * Type guard that checks whether a value is neither `null` nor `undefined`.

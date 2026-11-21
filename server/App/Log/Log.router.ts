@@ -1,7 +1,7 @@
 ﻿import express from 'express'
 import { ApiResponder, isEmpty } from '@common-utils'
 import { LogService } from './Log.service'
-import { UsersMiddleware } from '../Users/Users.middleware'
+import { UsersMiddleware } from '../Users'
 import type { DeleteLogReq, DeleteLogRes, GetLogReq, GetLogRes } from './Log.types'
 
 const { auth, admin } = UsersMiddleware

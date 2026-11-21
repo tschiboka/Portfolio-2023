@@ -1,8 +1,8 @@
 ﻿import { DateTime } from '@common-utils'
 import { ScheduleUtils } from './Schedule.utils'
-import { BreakdownModel } from '../Breakdown/Breakdown.model'
+import { BreakdownModel } from '../Breakdown'
+import type { PostDailyBreakdownResponse } from '@common-types'
 import type { Breakdown, BreakdownAggregate } from './Schedule.types'
-import type { PostDailyBreakdownResponse } from '../../../common/types'
 
 /** Business logic for the daily-breakdown schedule — builds and sends the report email. */
 export const ScheduleService = {

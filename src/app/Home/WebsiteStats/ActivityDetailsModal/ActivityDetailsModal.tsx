@@ -6,7 +6,7 @@ import type {
     BreakdownRow,
     ActivityMessageDetails,
     ActivityErrorDetails,
-} from '../BreakdownTable/BreakdownTable.types'
+} from '../BreakdownTable'
 
 type FieldProps = {
     label: string

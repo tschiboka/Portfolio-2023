@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react'
-import { Accessor } from '../Accessor/Accessor'
+import { Accessor } from '../Accessor'
 import { Code as CodeComponent } from '../../Code'
 import type { CodeProps } from './Code.types'
 

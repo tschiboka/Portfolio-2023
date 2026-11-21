@@ -7,7 +7,7 @@ import type {
     PostLikeResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a like. */
 export type ILike = Document & {

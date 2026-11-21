@@ -1,8 +1,8 @@
 import { produce } from 'immer'
-import { SessionRepository } from '../persistence/server/Session.repository'
-import { BroadcastService } from '../../transport/ws/Broadcast.service'
-import { SessionConstants } from '../../config/constants/Session.constants'
-import { PresenceService } from '../../domain/session/Presence.service'
+import { SessionRepository } from '../persistence/server'
+import { BroadcastService } from '../../transport/ws'
+import { SessionConstants } from '../../config/constants'
+import { PresenceService } from '../../domain/session'
 import type { Session, SessionState } from '../../WordDuelArena.types'
 
 function startPresenceLoop() {

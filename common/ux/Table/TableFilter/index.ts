@@ -1,4 +1,5 @@
 export { TableFilterConfig } from './TableFilter.config'
+export { TableFilterPanel } from './TableFilterPanel'
 export type {
     TextFilterConfig,
     SelectFilterConfig,

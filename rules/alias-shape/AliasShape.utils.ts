@@ -1,4 +1,4 @@
-import { isDefined, isNull, isUndefined } from '../../common/utils/Predicate/Predicate.js'
+import { isDefined, isNull, isString, isUndefined } from '../../common/utils/Predicate/Predicate.js'
 import type { TextOf, TypeLike } from './AliasShape.types.js'
 import type { Nullable, Optional } from '../../common/utils/Generics/Generics.types.js'
 
@@ -24,7 +24,7 @@ const unionMembersOf = (node: TypeLike): TypeLike[] =>
 const isNullableAlias = (node: TypeLike): boolean => {
     const name = referencedName(node)
 
-    return isDefined(name) && NullableAliases.includes(name)
+    return isString(name) && NullableAliases.includes(name)
 }
 
 /**
@@ -114,8 +114,15 @@ const membersOf = (node: TypeLike, size: number): Nullable<TypeLike[]> => {
 }
 
 /** Answers whether two members are written from the same source text. */
-const isWrittenAs = (left: Optional<TypeLike>, right: Optional<TypeLike>, text: TextOf): boolean =>
-    isDefined(left) && isDefined(right) && text(left) === text(right)
+const isWrittenAs = (
+    left: Optional<TypeLike>,
+    right: Optional<TypeLike>,
+    text: TextOf,
+): boolean => {
+    if (isUndefined(left) || isUndefined(right)) return false
+
+    return text(left) === text(right)
+}
 
 /** Answers whether a union writes exactly the given members, in any order. */
 const hasWrittenSet = (node: TypeLike, text: TextOf, wanted: string[]): boolean => {
@@ -233,14 +240,14 @@ export const isDictionaryOf = (node: TypeLike, text: TextOf): boolean => {
 export const isAnyObjectOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Record')
 
-    return isDefined(args) && areWrittenAs(args, ['PropertyKey', 'unknown'], text)
+    return isNull(args) ? false : areWrittenAs(args, ['PropertyKey', 'unknown'], text)
 }
 
 /** Answers whether a reference is `Record<never, never>`. */
 export const isEmptyObjectOf = (node: TypeLike, text: TextOf): boolean => {
     const args = referenceArgsOf(node, 'Record')
 
-    return isDefined(args) && areWrittenAs(args, ['never', 'never'], text)
+    return isNull(args) ? false : areWrittenAs(args, ['never', 'never'], text)
 }
 
 /** Answers whether a reference is `Extract<keyof T, string>`. */
@@ -425,7 +432,7 @@ export const isAtLeastOneOf = (node: TypeLike, _text: TextOf): boolean => {
 
     const picked = indexed.objectType.typeAnnotation
 
-    return isDefined(picked) && referencedName(picked) === 'Pick'
+    return isUndefined(picked) ? false : referencedName(picked) === 'Pick'
 }
 
 /** Answers whether a reference is a `keyof` over the mapped `unknown` that `OptionalKeys` writes. */

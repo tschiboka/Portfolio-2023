@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Const } from '@common-ux'
 import { isEmpty, isString, isTruthy, ValidationMessage } from '@common-utils'
 import { CategoriesConstants } from './Categories.constants'
-import { Icons } from './components/Icons'
+import { Icons } from './components'
 import type { ObjectSchema } from 'yup'
 import type { CategoryFormData } from './Categories.types'
 

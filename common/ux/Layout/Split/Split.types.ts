@@ -1,4 +1,4 @@
-import { StackGap } from '../Stack/Stack.types'
+import { StackGap } from '../Stack'
 import { AccessibleProps, InteractiveProps } from '../../index.types'
 import type { JSX, ReactNode } from 'react'
 

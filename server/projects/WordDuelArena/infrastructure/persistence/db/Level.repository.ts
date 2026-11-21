@@ -1,6 +1,6 @@
 ﻿import { Arrays, isEmpty } from '@common-utils'
-import { LevelModel } from '../../../model/Level.model'
-import type { DbLevel } from '../../../model/Level.types'
+import { LevelModel } from '../../../model'
+import type { DbLevel } from '../../../model'
 
 export const LevelRepository = {
     findAll: async () => LevelModel.find().sort({ createdAt: -1 }),

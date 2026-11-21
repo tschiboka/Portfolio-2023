@@ -1,6 +1,6 @@
 ﻿import mongoose from 'mongoose'
+import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '@common-types'
 import { ExercisesConstants } from './Exercises.constants'
-import { DIFFICULTY_LEVELS, EXERCISE_SOURCES, EXERCISE_TYPES } from '../../../../common/types'
 import type { IGymExercise } from './Exercises.types'
 
 const schema = new mongoose.Schema<IGymExercise>({

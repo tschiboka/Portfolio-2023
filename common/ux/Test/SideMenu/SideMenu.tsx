@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { Accessor } from '../Accessor/Accessor'
-import { SideMenu as SideMenuComponent } from '../../SideMenu/SideMenu'
-import type { SideMenuProps } from '../../SideMenu/SideMenu.types'
+import { Accessor } from '../Accessor'
+import { SideMenu as SideMenuComponent } from '../../SideMenu'
+import type { SideMenuProps } from '../../SideMenu'
 
 class SideMenuAccessor extends Accessor {
     get Get() {

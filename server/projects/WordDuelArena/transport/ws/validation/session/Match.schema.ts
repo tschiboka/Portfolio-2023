@@ -1,6 +1,6 @@
 /* eslint-disable standards/matching-spec -- TODO [0013] check the convention */
 import Joi from 'joi'
-import { GameConstants } from '../../../../config/constants/Game.constants'
+import { GameConstants } from '../../../../config/constants'
 
 const LastWordAttemptSchema = Joi.object({
     word: Joi.string().required(),

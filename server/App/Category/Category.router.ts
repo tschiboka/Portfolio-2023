@@ -1,8 +1,7 @@
 ﻿import express from 'express'
 import { ApiResponder, isTruthy } from '@common-utils'
 import { CategoryService } from './Category.service'
-import { UsersAuth } from '../Users/Users.auth'
-import { UsersMiddleware } from '../Users/Users.middleware'
+import { UsersAuth, UsersMiddleware } from '../Users'
 import type {
     GetCategoriesReq,
     GetCategoriesRes,

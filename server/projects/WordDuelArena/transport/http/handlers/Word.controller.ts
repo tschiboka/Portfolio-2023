@@ -1,11 +1,7 @@
-﻿import { WordRepository } from '../../../infrastructure/resources/Word.repository'
-import { TypedRequest } from '../../../../../../common/types'
-import { ApiResponder } from '../../../../../../common/utils/Server'
-import type {
-    GetAnagramMapRes,
-    GetFrequenciesRes,
-    GetWordListRes,
-} from '../../../infrastructure/resources/Word.types'
+﻿import { TypedRequest } from '@common-types'
+import { ApiResponder } from '@common-utils/Server'
+import { WordRepository } from '../../../infrastructure'
+import type { GetAnagramMapRes, GetFrequenciesRes, GetWordListRes } from '../../../infrastructure'
 
 function handleGetWordList(_req: TypedRequest, res: GetWordListRes) {
     const resources = WordRepository.Get()

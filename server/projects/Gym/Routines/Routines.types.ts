@@ -9,7 +9,7 @@ import type {
     PostGymRoutineRequest,
     TypedRequest,
     TypedResponse,
-} from '../../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a gym routine. */
 export type IGymRoutine = Document & {

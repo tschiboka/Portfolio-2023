@@ -1,7 +1,7 @@
 /* eslint-disable standards/matching-spec -- TODO [0011] check the convention */
 import { List } from '@common-ux/Typography/List'
-import { AchievementListItem } from '../AchievementListItem/AchievementListItem'
-import type { Achievement } from '../AchievementListItem/Achievements.data'
+import { AchievementListItem } from '../AchievementListItem'
+import type { Achievement } from '../AchievementListItem'
 import './AchievementList.scss'
 
 type AchievementListProps = {

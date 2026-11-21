@@ -7,7 +7,7 @@ import type {
     PostVisitResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for a visit. */
 export type IVisit = Document & {

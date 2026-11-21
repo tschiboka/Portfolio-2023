@@ -2,7 +2,7 @@
     WdaLevelWordStatuses,
     WdaMatchStatuses,
     WdaPlayerDerivedStatuses,
-} from '../../../../../common/types/projects/wda'
+} from '@common-types/projects/wda'
 
 /** The match, level-word and derived-status enums, plus the hint threshold. */
 export const GameConstants = {

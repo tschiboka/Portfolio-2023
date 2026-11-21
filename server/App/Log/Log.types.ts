@@ -6,7 +6,7 @@ import type {
     GetLogTableResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 /** Mongoose document shape for an error log entry. */
 export type ILog = Document & {

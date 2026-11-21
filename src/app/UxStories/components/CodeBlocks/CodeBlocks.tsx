@@ -3,7 +3,7 @@ import { Code, CodeText, Heading, Main, Paragraph, Section } from '@common-ux'
 import { Screen } from '@shared-components/Screen/Screen'
 import { PageSideMenu } from '@shared-components/PageSideMenu'
 import { CodeBlocksCode } from './CodeBlocks.code'
-import { StoryNav } from '../StoryNav/StoryNav'
+import { StoryNav } from '../StoryNav'
 
 type CodeBlocksProps = { path: string }
 

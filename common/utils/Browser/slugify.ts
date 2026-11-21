@@ -1,4 +1,4 @@
-import { Regexp } from '../Regexp/Regexp'
+import { Regexp } from '../Regexp'
 
 /**
  * Generates a URL-safe slug from text.

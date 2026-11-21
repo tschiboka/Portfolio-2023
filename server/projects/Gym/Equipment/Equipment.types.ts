@@ -2,7 +2,7 @@
     GetGymEquipmentOptionsResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../../common/types'
+} from '@common-types'
 
 export type GetEquipmentOptionsRes = TypedResponse<GetGymEquipmentOptionsResponse>
 

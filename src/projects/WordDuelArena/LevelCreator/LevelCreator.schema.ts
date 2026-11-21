@@ -2,7 +2,7 @@
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { hasLength, isDefined, ValidationMessage } from '@common-utils'
-import { WordConstants } from '../common/utils'
+import { WordConstants } from '@projects/WordDuelArena/common'
 
 const WORDS_PER_COLUMN = WordConstants.maxWordsPerLevel / 2
 

@@ -9,7 +9,7 @@ import { Figure } from '@shared-components/Figure'
 import { Code, Heading, Paragraph, Section } from '@common-ux'
 import { CyclicEmailSchedulingCode } from './CyclicEmailScheduling.code'
 import { Article } from '../Article'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import { getReferenceList } from '../References.data'
 
 type CyclicEmailSchedulingProps = {

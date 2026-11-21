@@ -1,6 +1,12 @@
-﻿import { validateSession } from './validation/session/session'
-import { WdaWsResponseTypes } from '../../../../../common/types/projects/wda'
+﻿import { WdaWsResponseTypes } from '@common-types/projects/wda'
+import { validateSession } from './validation'
 import type { Nullable } from '@common-utils'
+import type {
+    WdaClientSessionState,
+    WdaPublicPlayer,
+    WdaPlayableLevelWord,
+    WdaWsResponse,
+} from '@common-types/projects/wda'
 import type { DeviceWebSocket } from './WS.types'
 import type {
     Session,
@@ -9,12 +15,6 @@ import type {
     PlayerRole,
     LevelWord,
 } from '../../WordDuelArena.types'
-import type {
-    WdaClientSessionState,
-    WdaPublicPlayer,
-    WdaPlayableLevelWord,
-    WdaWsResponse,
-} from '../../../../../common/types/projects/wda'
 
 function broadcastSessionState(session: Session) {
     const connections = session.connections as Set<DeviceWebSocket>

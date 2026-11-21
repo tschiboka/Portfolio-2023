@@ -1,2 +1,2 @@
-export { LikeQueries } from './Like/Like.queries.ts'
-export { VisitQueries } from './Visit/Visit.queries.ts'
+export { LikeQueries } from './Like'
+export { VisitQueries } from './Visit'

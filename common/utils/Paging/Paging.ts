@@ -1,4 +1,4 @@
-import { TableDefaults } from '../Table/Table.defaults'
+import { TableDefaults } from '../Table'
 import { isDefined, isDigits } from '../Predicate'
 import type { PageMeta } from '@common-types'
 import type { Optional } from '@common-utils'

@@ -7,7 +7,7 @@ import SnapshotVsDeltaImg from '@portfolio/assets/blog/git_cheatsheet/snapshot-v
 import { Figure } from '@shared-components/Figure'
 import { Code, Heading, List, Paragraph, Section, Typography } from '@common-ux'
 import { GitCheatSheetCode } from './GitCheatSheet.code'
-import { InlineReference } from '../components/InlineReference/InlineReference'
+import { InlineReference } from '../components/InlineReference'
 import { getReferenceList } from '../References.data'
 import { Article } from '../Article'
 

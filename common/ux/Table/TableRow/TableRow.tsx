@@ -10,8 +10,8 @@ import {
     TableColumns,
     TableSelection,
 } from '../Table.types'
-import { TableActions } from '../TableActions/TableActions'
-import { TableCheckboxCell } from '../TableCheckbox/TableCheckboxCell'
+import { TableActions } from '../TableActions'
+import { TableCheckboxCell } from '../TableCheckbox'
 import { TableUtils } from '../Table.utils'
 import type { Dictionary, Optional, VoidFunction } from '@common-utils'
 import './TableRow.styles.css'

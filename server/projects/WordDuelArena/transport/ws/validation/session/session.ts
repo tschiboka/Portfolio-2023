@@ -3,7 +3,7 @@ import Joi from 'joi'
 import { MatchSchema } from './Match.schema'
 import { PlayerSchema } from './Player.schema'
 import { LevelSchema } from './Level.schema'
-import { SessionConstants } from '../../../../config/constants/Session.constants'
+import { SessionConstants } from '../../../../config/constants'
 import type { SessionState } from '../../../../WordDuelArena.types'
 
 const SessionStateSchema = Joi.object({

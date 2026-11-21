@@ -2,7 +2,7 @@
 import { Heading } from '@common-ux'
 import { blogArticles } from '@portfolio/Article'
 import { LikeQueries, VisitQueries } from '@shared-queries'
-import { BlogCard } from '../BlogCard/BlogCard'
+import { BlogCard } from '../BlogCard'
 import './SuggestedArticles.scss'
 
 type SuggestedArticlesProps = {

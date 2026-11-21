@@ -1,11 +1,11 @@
 ﻿import express from 'express'
 import { last } from 'ramda'
 import { ApiResponder, ApiMessage, isEmpty } from '@common-utils'
+import { TypedRequest } from '@common-types'
 import { XmasModel } from './Xmas.model'
 import { XmasSchema } from './Xmas.schema'
-import { UsersMiddleware } from '../../App/Users/Users.middleware'
-import { UsersModel } from '../../App/Users/Users.model'
-import { TypedRequest } from '../../../common/types'
+import { UsersMiddleware, UsersModel } from '../../App/Users'
+import type { XmasMessage as XmasMessageEntity, XmasCandles } from '@common-types'
 import type {
     GetCandlesRes,
     GetMessagesReq,
@@ -16,7 +16,6 @@ import type {
     PutCandlesReq,
     PutCandlesRes,
 } from './Xmas.types'
-import type { XmasMessage as XmasMessageEntity, XmasCandles } from '../../../common/types'
 
 const { auth } = UsersMiddleware
 

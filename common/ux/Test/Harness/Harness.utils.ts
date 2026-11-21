@@ -1,9 +1,9 @@
 import { isDefined, isRegExp, isString, isUndefined } from '@common-utils'
-import { TestError } from '../Accessor/Accessor'
+import { TestError } from '../Accessor'
 import type { Matcher } from '@testing-library/react'
 import type { Dictionary, Nullable } from '@common-utils'
 import type { ElementRecipe } from './Harness.types'
-import type { Scope } from '../Accessor/Accessor.types'
+import type { Scope } from '../Accessor'
 
 /** The `All` member of each query family, so one path serves every kind and `index` always applies. */
 const QueryFamilies: Dictionary<string> = {

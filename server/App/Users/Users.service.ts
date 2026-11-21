@@ -3,10 +3,9 @@ import { UsersRepository } from './Users.repository'
 import { UsersSchema } from './Users.schema'
 import { UsersAuth } from './Users.auth'
 import { UsersUtils } from './Users.utils'
-import { SettingsService } from '../Settings/Settings.service'
+import { SettingsService } from '../Settings'
 import { TokenModel } from '../Token'
 import type { Dictionary } from '@common-utils'
-import type { IUser } from './Users.types'
 import type {
     CurrentUser,
     GetSessionResponse,
@@ -16,7 +15,8 @@ import type {
     PostLoginResponse,
     PostUserRequest,
     User,
-} from '../../../common/types'
+} from '@common-types'
+import type { IUser } from './Users.types'
 
 /** Mongoose types `toObject()` as `any`; this is the one place that boundary is closed. */
 const toUser = (doc: IUser): User => doc.toObject() as User

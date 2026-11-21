@@ -1,0 +1,6 @@
+export { AttemptWord } from './AttemptWord'
+export { Avatar } from './Avatar'
+export { Info } from './Info'
+export { LastAttempts } from './LastAttempts'
+export { MomentumBar } from './MomentumBar'
+export type { PlayerSlot } from './Avatar.types'

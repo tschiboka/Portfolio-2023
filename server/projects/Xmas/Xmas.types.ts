@@ -11,7 +11,7 @@ import type {
     PutXmasCandlesResponse,
     TypedRequest,
     TypedResponse,
-} from '../../../common/types'
+} from '@common-types'
 
 export type GetPingRes = TypedResponse<GetXmasPingResponse>
 export type PostMessageReq = TypedRequest<{ body: PostXmasMessageRequest }>

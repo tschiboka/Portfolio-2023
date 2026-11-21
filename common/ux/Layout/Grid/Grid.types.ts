@@ -1,4 +1,4 @@
-import { StackGap, StackAlign, StackJustify } from '../Stack/Stack.types'
+import { StackGap, StackAlign, StackJustify } from '../Stack'
 import { AccessibleProps, InteractiveProps } from '../../index.types'
 import type { JSX, ReactNode } from 'react'
 

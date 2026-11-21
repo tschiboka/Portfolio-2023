@@ -45,6 +45,9 @@ Prefer declarative, pure functional style:
 - Group related helpers under a namespace object when they form a cohesive concern: `DateTime`.
 - Namespaces may nest when the path reads as a sentence: `Strings.Optional.trim`.
 - Short leaf names are the point: the namespace carries the context: `Url.Codecs.text`.
+- Anything consumed from outside its folder leaves through that folder's `index.ts` — a
+  consumer never reaches across a folder boundary by file path, and a folder missing its barrel
+  gains one. A `tests/` folder is the exception: it needs no barrel, and a spec reaches it by file.
 - Barrel exports sort by style, then path — values first, types last.
 
 # 2. Skills

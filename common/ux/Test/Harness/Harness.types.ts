@@ -1,7 +1,7 @@
 import { Dictionary, Nullable } from '@common-utils/Generics/Generics.types'
 import type { ByRoleMatcher, Matcher } from '@testing-library/react'
 import type { VoidFunction } from '@common-utils'
-import type { Accessor } from '../Accessor/Accessor'
+import type { Accessor } from '../Accessor'
 
 /** What any recipe may add to the query it names. */
 export type RecipeModifiers = {

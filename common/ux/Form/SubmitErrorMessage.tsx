@@ -1,5 +1,5 @@
 import type { AccessibleProps } from '../index.types'
-import '../Button/Button.styles.css'
+import '../Button'
 import './Form.styles.css'
 
 type SubmitErrorMessageProps = AccessibleProps & {
